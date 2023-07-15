@@ -1,0 +1,25 @@
+{
+  "name": "@schedule-x/date-picker",
+  "version": "0.0.1",
+  "description": "Schedule-X date picker component",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
+  "module": "./dist/core.js",
+  "main": "./dist/core.cjs.js",
+  "umd": "./dist/core.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "preact": "^10.16.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/date-picker"
+  }
+}

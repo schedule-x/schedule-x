@@ -1,0 +1,51 @@
+{
+  "name": "schedule-x",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "build": "npm run clean:build && rollup -c && lerna run build",
+    "format": "prettier . --write",
+    "lint": "eslint -c eslintrc.cjs . --ext .ts",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix",
+    "clean:deps": "lerna clean",
+    "clean:build": "rm -rf ./packages/*/dist"
+  },
+  "dependencies": {
+    "preact": "^10.15.1"
+  },
+  "devDependencies": {
+    "@atomico/rollup-plugin-sizes": "^1.1.4",
+    "@lerna/batch-packages": "^3.16.0",
+    "@lerna/filter-packages": "^6.4.1",
+    "@lerna/project": "^6.4.1",
+    "@preact/preset-vite": "^2.5.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.2",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@testing-library/preact": "^3.2.3",
+    "@types/jsdom": "^21.1.1",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "@vitest/coverage-istanbul": "^0.33.0",
+    "@vitest/coverage-v8": "^0.33.0",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "jsdom": "^22.1.0",
+    "lerna": "^7.1.4",
+    "minimist": "^1.2.8",
+    "prettier": "^3.0.0",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "sass": "^1.63.6",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0",
+    "vitest": "^0.33.0"
+  }
+}
