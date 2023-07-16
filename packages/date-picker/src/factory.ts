@@ -1,27 +1,32 @@
-import DatePickerConfig from './interfaces/config.interface'
+import DatePickerConfig from './utils/stateful/config/config.interface'
 import DatePickerApp from './date-picker.app'
-import DatePickerStateBuilder from '../../../shared/utils/stateful/date-picker-state/date-picker-state.builder'
 import TimeUnitsBuilder from '../../../shared/utils/stateful/time-units/time-units.builder'
-import AppSingleton from '../../../shared/interfaces/app-singleton.interface'
-import createStore from '../../../shared/utils/stateful/store/createStore'
-import { StoreModuleName } from '../../../shared/enums/store-module-name.enum'
+import DatePickerAppSingleton from './utils/stateful/app-singleton/date-picker-app.singleton'
+import { createDatePickerState } from '../../../shared/utils/stateful/date-picker-state/date-picker-state.impl'
+import DatePickerAppSingletonBuilder from './utils/stateful/app-singleton/date-picker-app-singleton.builder'
+import { ConfigBuilder } from './utils/stateful/config/config.builder'
 
 export const createDatePicker = (config: DatePickerConfig, el: HTMLElement) => {
-  const $app = {
-    datePickerState: createStore(
-      new DatePickerStateBuilder().build(),
-      StoreModuleName.DATE_PICKER_STATE
-    ),
-    timeUnitsImpl: new TimeUnitsBuilder().build(),
-  }
+  const internalConfig = new ConfigBuilder()
+    .withFirstDayOfWeek(config.firstDayOfWeek)
+    .withLocale(config.locale)
+    .build()
+  const $app: DatePickerAppSingleton = new DatePickerAppSingletonBuilder()
+    .withConfig(internalConfig)
+    .withDatePickerState(createDatePickerState())
+    .withTimeUnitsImpl(
+      new TimeUnitsBuilder()
+        .withFirstDayOfWeek(internalConfig.firstDayOfWeek)
+        .build()
+    )
+    .build()
 
-  return new DatePickerApp($app, config, el)
+  return new DatePickerApp($app, el)
 }
 
 export const createDatePickerInternal = (
-  $app: AppSingleton,
-  config: DatePickerConfig,
+  $app: DatePickerAppSingleton,
   el: HTMLElement
 ) => {
-  return new DatePickerApp($app, config, el)
+  return new DatePickerApp($app, el)
 }

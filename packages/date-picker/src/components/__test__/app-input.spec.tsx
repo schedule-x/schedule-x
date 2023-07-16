@@ -9,25 +9,16 @@ import {
 } from '../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { render, fireEvent, screen, waitFor } from '@testing-library/preact'
 
-import DatePickerInput from '../date-picker-input'
+import AppInput from '../app-input'
 import { AppContext } from '../../utils/stateful/app-context'
-import DatePickerSingleton from '../../interfaces/app-singleton.interface'
-import DatePickerStateBuilder from '../../../../../shared/utils/stateful/date-picker-state/date-picker-state.builder'
-import createStore from '../../../../../shared/utils/stateful/store/createStore'
-import { StoreModuleName } from '../../../../../shared/enums/store-module-name.enum'
-import TimeUnitsBuilder from '../../../../../shared/utils/stateful/time-units/time-units.builder'
+import DatePickerAppSingleton from '../../utils/stateful/app-singleton/date-picker-app.singleton'
+import { __createDatePickerAppSingleton__ } from '../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 
 describe('date picker input', () => {
-  let $app: DatePickerSingleton | undefined
+  let $app: DatePickerAppSingleton | undefined
 
   beforeEach(() => {
-    $app = {
-      datePickerState: createStore(
-        new DatePickerStateBuilder().build(),
-        StoreModuleName.DATE_PICKER_STATE
-      ),
-      timeUnitsImpl: new TimeUnitsBuilder().build(),
-    }
+    $app = __createDatePickerAppSingleton__()
   })
 
   afterEach(() => {
@@ -37,7 +28,7 @@ describe('date picker input', () => {
   it('should toggle date-picker open status when clicking input', async () => {
     const { container } = render(
       <AppContext.Provider value={$app!}>
-        <DatePickerInput />
+        <AppInput />
       </AppContext.Provider>
     )
     const datePickerIsOpenToggleSpy = spyOn($app?.datePickerState!, 'toggle')

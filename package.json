@@ -17,6 +17,7 @@
     "clean:build": "rm -rf ./packages/*/dist"
   },
   "dependencies": {
+    "@preact/signals": "^1.1.5",
     "preact": "^10.15.1"
   },
   "devDependencies": {

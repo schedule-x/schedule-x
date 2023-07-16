@@ -1,1 +1,35 @@
-{  "name": "@schedule-x/theme-basic",  "version": "0.1.0",  "license": "MIT",  "author": {    "name": "Tom Österlund",    "email": "tom@oesterlund.de",    "url": "https://github.com/tomosterlund"  },  "scripts": {    "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css"  },  "exports": {    "./dist/index.css": {      "import": "./dist/index.css",      "require": "./dist/index.css"    },    "./dist/date-picker.css": {      "import": "./dist/date-picker.css",      "require": "./dist/date-picker.css"    }  },  "files": [    "dist"  ],  "workspaces": [    "packages/*"  ],  "gitHead": "93f5603681f3ed45bf152d328e5570dd6d49807d",  "repository": {    "type": "git",    "url": "https://github.com/schedule-x/schedule-x",    "directory": "packages/theme-default"  }}
+{
+  "name": "@schedule-x/theme-basic",
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
+  "scripts": {
+    "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css"
+  },
+  "exports": {
+    "./dist/index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    },
+    "./dist/date-picker.css": {
+      "import": "./dist/date-picker.css",
+      "require": "./dist/date-picker.css"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "workspaces": [
+    "packages/*"
+  ],
+  "gitHead": "93f5603681f3ed45bf152d328e5570dd6d49807d",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/theme-default"
+  }
+}

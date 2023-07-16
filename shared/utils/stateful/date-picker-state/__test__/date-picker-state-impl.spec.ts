@@ -3,63 +3,73 @@ import {
   expect,
   it,
 } from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
-import DatePickerStateBuilder from '../date-picker-state.builder'
-import DatePickerStateImpl from '../date-picker-state.impl'
+
+import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum.ts'
+import { createDatePickerState } from '../date-picker-state.impl.ts'
 
 describe('DatePickerStateImpl', () => {
   const defaultSelectedDate = '2023-01-01'
 
-  it('should create an instance of DatePickerStateImpl', () => {
-    const underTest = new DatePickerStateBuilder(defaultSelectedDate).build()
-    expect(underTest).toBeInstanceOf(DatePickerStateImpl)
-  })
-
   it('should set isOpen to true', () => {
-    const underTest = new DatePickerStateBuilder(defaultSelectedDate).build()
+    const underTest = createDatePickerState(defaultSelectedDate)
 
     underTest.open()
 
-    expect(underTest.isOpen).toBe(true)
+    expect(underTest.isOpen.value).toBe(true)
   })
 
   it('should set isOpen to false', () => {
-    const underTest = new DatePickerStateBuilder(defaultSelectedDate).build()
+    const underTest = createDatePickerState(defaultSelectedDate)
     underTest.open()
-    expect(underTest.isOpen).toBe(true)
+    expect(underTest.isOpen.value).toBe(true)
 
     underTest.close()
 
-    expect(underTest.isOpen).toBe(false)
+    expect(underTest.isOpen.value).toBe(false)
   })
 
   it('should toggle isOpen', () => {
-    const underTest = new DatePickerStateBuilder(defaultSelectedDate).build()
-    expect(underTest.isOpen).toBe(false)
+    const underTest = createDatePickerState(defaultSelectedDate)
+    expect(underTest.isOpen.value).toBe(false)
 
     underTest.toggle()
 
-    expect(underTest.isOpen).toBe(true)
+    expect(underTest.isOpen.value).toBe(true)
 
     underTest.toggle()
 
-    expect(underTest.isOpen).toBe(false)
+    expect(underTest.isOpen.value).toBe(false)
   })
 
   it('should set selected date', () => {
-    const underTest = new DatePickerStateBuilder(defaultSelectedDate).build()
-    expect(underTest.selectedDate).toBe(defaultSelectedDate)
+    const underTest = createDatePickerState(defaultSelectedDate)
+    expect(underTest.selectedDate.value).toBe(defaultSelectedDate)
   })
 
   it('should set a default selected date', () => {
-    const underTest = new DatePickerStateBuilder().build()
+    const underTest = createDatePickerState()
     const today = new Date()
     const expectedYear = today.getFullYear()
-    const expectedMonth = today.getMonth()
+    const expectedMonth = today.getMonth() + 1
     const expectedDate = today.getDate()
     const fullExpectedDate = `${expectedYear}-${
       expectedMonth < 10 ? '0' + expectedMonth : expectedMonth
     }-${expectedDate < 10 ? '0' + expectedDate : expectedDate}`
 
-    expect(underTest.selectedDate).toBe(fullExpectedDate)
+    expect(underTest.selectedDate.value).toBe(fullExpectedDate)
+  })
+
+  it('should set month-days view as default', () => {
+    const underTest = createDatePickerState(defaultSelectedDate)
+    expect(underTest.datePickerView.value).toBe(DatePickerView.MONTH_DAYS)
+  })
+
+  it('should set view', () => {
+    const underTest = createDatePickerState(defaultSelectedDate)
+    expect(underTest.datePickerView.value).toBe(DatePickerView.MONTH_DAYS)
+
+    underTest.setView(DatePickerView.YEARS)
+
+    expect(underTest.datePickerView.value).toBe(DatePickerView.YEARS)
   })
 })

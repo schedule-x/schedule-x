@@ -1,7 +1,7 @@
 import { useContext } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
 
-export default function DatePickerInput() {
+export default function AppInput() {
   const $app = useContext(AppContext)
 
   return (

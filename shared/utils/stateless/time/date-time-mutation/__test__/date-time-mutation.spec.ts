@@ -3,7 +3,12 @@ import {
   it,
   expect,
 } from '../../../testing/unit/unit-testing-library.impl.ts'
-import { doubleDigit } from '../date-time-mutation'
+import {
+  doubleDigit,
+  getFirstDayOfNextMonth,
+  getFirstDayOPreviousMonth,
+  setDateOfMonth,
+} from '../date-time-mutation'
 import { NumberRangeError } from '../../../errors/number-range.error'
 
 describe('date time mutation', () => {
@@ -51,5 +56,40 @@ describe('date time mutation', () => {
         expect(doubleDigit(inputValue)).toBe(outputValue)
       }
     )
+  })
+
+  describe('getting first day of previous month', () => {
+    const underTest = getFirstDayOPreviousMonth
+
+    it.each([
+      ['2020-01-01', '2019-12-01'],
+      ['2023-07-23', '2023-06-01'],
+    ])('should get first day of previous month', (date, expectedResult) => {
+      expect(underTest(date)).toBe(expectedResult)
+    })
+  })
+
+  describe('getting first day of next month', () => {
+    const underTest = getFirstDayOfNextMonth
+
+    it.each([
+      ['2020-01-01', '2020-02-01'],
+      ['2023-07-23', '2023-08-01'],
+    ])('should get first day of next month', (date, expectedResult) => {
+      expect(underTest(date)).toBe(expectedResult)
+    })
+  })
+
+  describe('setting date of month', () => {
+    it.each([
+      ['2020-01-01', 1, '2020-01-01'],
+      ['2020-01-01', 2, '2020-01-02'],
+      ['2023-12-31', 1, '2023-12-01'],
+      ['2023-12-01', 31, '2023-12-31'],
+      ['2023-12-01 22:56', 31, '2023-12-31 22:56'],
+      ['2000-02-01 00:00', 29, '2000-02-29 00:00'],
+    ])(`should set date of month`, (dateString, date, expectedResult) => {
+      expect(setDateOfMonth(dateString, date)).toBe(expectedResult)
+    })
   })
 })
