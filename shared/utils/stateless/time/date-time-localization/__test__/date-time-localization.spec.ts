@@ -2,14 +2,14 @@ import {
   describe,
   expect,
   it,
-} from '../../../testing/unit/unit-testing-library.impl.ts'
+} from '../../../testing/unit/unit-testing-library.impl'
 import {
   getOneLetterDayNames,
   toLocalizedMonth,
-} from '../date-time-localization.ts'
-import { Month } from '../../../../../enums/time/month.enum.ts'
-import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder.ts'
-import { WeekDay } from '../../../../../enums/time/week-day.enum.ts'
+} from '../date-time-localization'
+import { Month } from '../../../../../enums/time/month.enum'
+import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder'
+import { WeekDay } from '../../../../../enums/time/week-day.enum'
 
 describe('get localized month', () => {
   it.each([

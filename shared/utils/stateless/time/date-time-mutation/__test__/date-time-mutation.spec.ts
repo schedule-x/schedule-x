@@ -2,7 +2,7 @@ import {
   describe,
   it,
   expect,
-} from '../../../testing/unit/unit-testing-library.impl.ts'
+} from '../../../testing/unit/unit-testing-library.impl'
 import {
   doubleDigit,
   getFirstDayOfNextMonth,

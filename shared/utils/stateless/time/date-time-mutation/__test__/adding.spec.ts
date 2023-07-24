@@ -2,8 +2,8 @@ import {
   describe,
   it,
   expect,
-} from '../../../testing/unit/unit-testing-library.impl.ts'
-import { addMonths } from '../adding.ts'
+} from '../../../testing/unit/unit-testing-library.impl'
+import { addMonths } from '../adding'
 
 describe('adding adding time to time specifications', () => {
   it.each([

@@ -1,5 +1,5 @@
-import { DateFormats } from '../../../../values/date-formats.ts'
-import { InvalidDateTimeError } from '../../errors/invalid-date-time.error.ts'
+import { DateFormats } from '../../../../values/date-formats'
+import { InvalidDateTimeError } from '../../errors/invalid-date-time.error'
 
 export const toJSDate = (dateTimeSpecification: string): Date => {
   if (

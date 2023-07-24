@@ -1,11 +1,11 @@
 import {
   describe,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
-import TimeUnitsBuilder from '../time-units.builder.ts'
-import { Month } from '../../../../enums/time/month.enum.ts'
-import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils.ts'
-import { WeekDay } from '../../../../enums/time/week-day.enum.ts'
+} from '../../../stateless/testing/unit/unit-testing-library.impl'
+import TimeUnitsBuilder from '../time-units.builder'
+import { Month } from '../../../../enums/time/month.enum'
+import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils'
+import { WeekDay } from '../../../../enums/time/week-day.enum'
 
 describe('get week', () => {
   it('should get week starting on Monday, for 2023-07-01', () => {

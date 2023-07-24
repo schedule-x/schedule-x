@@ -2,10 +2,10 @@ import {
   describe,
   expect,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
+} from '../../../stateless/testing/unit/unit-testing-library.impl'
 
-import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum.ts'
-import { createDatePickerState } from '../date-picker-state.impl.ts'
+import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum'
+import { createDatePickerState } from '../date-picker-state.impl'
 
 describe('DatePickerStateImpl', () => {
   const defaultSelectedDate = '2023-01-01'

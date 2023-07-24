@@ -1,5 +1,5 @@
 import { NumberRangeError } from '../../errors/number-range.error'
-import { addMonths } from './adding.ts'
+import { addMonths } from './adding'
 
 export const doubleDigit = (number: number): string => {
   if (number < 0 || number > 99) throw new NumberRangeError(0, 99)

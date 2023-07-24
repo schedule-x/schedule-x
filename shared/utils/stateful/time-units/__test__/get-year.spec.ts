@@ -2,10 +2,10 @@ import {
   describe,
   expect,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
-import TimeUnitsBuilder from '../time-units.builder.ts'
-import { Month } from '../../../../enums/time/month.enum.ts'
-import { NoYearZeroError } from '../../../stateless/errors/no-year-zero.error.ts'
+} from '../../../stateless/testing/unit/unit-testing-library.impl'
+import TimeUnitsBuilder from '../time-units.builder'
+import { Month } from '../../../../enums/time/month.enum'
+import { NoYearZeroError } from '../../../stateless/errors/no-year-zero.error'
 
 describe('get year', () => {
   it.each([[-100], [-1], [1], [2023], [2024], [5000]])(

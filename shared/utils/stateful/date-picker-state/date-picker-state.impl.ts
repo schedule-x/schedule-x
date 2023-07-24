@@ -1,7 +1,7 @@
 import DatePickerState from './date-picker-state.interface'
 import ExtendedDateImpl from '../time/extended-date/extended-date.impl'
 import { doubleDigit } from '../../stateless/time/date-time-mutation/date-time-mutation'
-import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum.ts'
+import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum'
 import { signal } from '@preact/signals'
 
 export const createDatePickerState = (

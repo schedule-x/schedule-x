@@ -2,9 +2,9 @@ import {
   describe,
   expect,
   it,
-} from '../../../testing/unit/unit-testing-library.impl.ts'
-import { toIntegers, toJSDate } from '../format-conversion.ts'
-import { InvalidDateTimeError } from '../../../errors/invalid-date-time.error.ts'
+} from '../../../testing/unit/unit-testing-library.impl'
+import { toIntegers, toJSDate } from '../format-conversion'
+import { InvalidDateTimeError } from '../../../errors/invalid-date-time.error'
 
 describe('date time format-conversion', () => {
   it.each([
