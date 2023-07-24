@@ -1,6 +1,6 @@
 import { createContext } from 'preact'
-import DatePickerSingleton from '../../interfaces/app-singleton.interface'
+import DatePickerAppSingleton from './app-singleton/date-picker-app.singleton'
 
-export const AppContext = createContext<DatePickerSingleton>(
-  {} as DatePickerSingleton
+export const AppContext = createContext<DatePickerAppSingleton>(
+  {} as DatePickerAppSingleton
 )

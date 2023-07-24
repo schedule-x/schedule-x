@@ -1,20 +1,17 @@
 import { createElement, render } from 'preact'
-import DatePickerWrapper from './components/date-picker-wrapper'
-import DatePickerConfig from './interfaces/config.interface'
-import DatePickerSingleton from './interfaces/app-singleton.interface'
+import AppWrapper from './components/app-wrapper'
+import DatePickerAppSingleton from './utils/stateful/app-singleton/date-picker-app.singleton'
 
 export default class DatePickerApp {
   constructor(
-    private $app: DatePickerSingleton,
-    private config: DatePickerConfig,
+    private $app: DatePickerAppSingleton,
     private el: HTMLElement
   ) {}
 
   bootstrap(): void {
     render(
-      createElement(DatePickerWrapper, {
+      createElement(AppWrapper, {
         $app: this.$app,
-        config: this.config,
       }),
       this.el
     )
