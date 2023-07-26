@@ -29,11 +29,11 @@ describe('AppPopup', () => {
       </AppContext.Provider>
     )
 
-    const monthYear = container.querySelector(
+    const toggleViewElement = container.querySelector(
       '.sx__date-picker__month-view-header__month-year'
     )
-    if (!monthYear) throw new Error('monthYear is null')
-    monthYear.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+    if (!toggleViewElement) throw new Error('monthYear is null')
+    toggleViewElement.dispatchEvent(new MouseEvent('click', { bubbles: true }))
 
     const yearsView = await screen.findByTestId('years-view')
 
