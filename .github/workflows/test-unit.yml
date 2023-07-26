@@ -1,0 +1,64 @@
+name: Unit tests
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test_london:
+    name: Test London
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ✅
+        uses: actions/checkout@v3
+      - name: Set Timezone 🌍🌎🌏
+        uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: "Europe/London"
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies 🛠️
+        run: npm i
+      - name: Run Vitest 🧪
+        run: npx vitest run --silent
+
+  test_mountain_view:
+    name: Test Mountain View
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ✅
+        uses: actions/checkout@v3
+      - name: Set Timezone 🌍🌎🌏
+        uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: "US/Pacific"
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies 🛠️
+        run: npm i
+      - name: Run Vitest 🧪
+        run: npx vitest run --silent
+
+  test_tokyo:
+    name: Test Tokyo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ✅
+        uses: actions/checkout@v3
+      - name: Set Timezone 🌍🌎🌏
+        uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: "Asia/Tokyo"
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies 🛠️
+        run: npm i
+      - name: Run Vitest 🧪
+        run: npx vitest run --silent

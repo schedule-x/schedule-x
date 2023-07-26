@@ -1,9 +1,15 @@
 import { YEARS_VIEW } from '../constants/test-ids'
 
-export default function YearsView() {
+type props = {
+  setMonthView: () => void
+}
+
+export default function YearsView({ setMonthView }: props) {
   return (
     <>
-      <div data-testid={YEARS_VIEW} class="sx__date-picker-popup" />
+      <div data-testid={YEARS_VIEW} onClick={() => setMonthView()}>
+        YearsView
+      </div>
     </>
   )
 }

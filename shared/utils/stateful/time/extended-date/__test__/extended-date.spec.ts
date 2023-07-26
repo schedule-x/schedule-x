@@ -2,10 +2,10 @@ import {
   describe,
   it,
   expect,
-} from '../../../../stateless/testing/unit/unit-testing-library.impl.ts'
-import ExtendedDateImpl from '../extended-date.impl.ts'
-import { Month } from '../../../../../enums/time/month.enum.ts'
-import { NoYearZeroError } from '../../../../stateless/errors/no-year-zero.error.ts'
+} from '../../../../stateless/testing/unit/unit-testing-library.impl'
+import ExtendedDateImpl from '../extended-date.impl'
+import { Month } from '../../../../../enums/time/month.enum'
+import { NoYearZeroError } from '../../../../stateless/errors/no-year-zero.error'
 
 describe('ExtendedDateImpl', () => {
   it('should be able to destructure an extended date into year, month and date', () => {

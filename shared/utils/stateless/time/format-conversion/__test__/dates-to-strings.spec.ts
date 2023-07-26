@@ -1,9 +1,9 @@
-import { expect, it } from '../../../testing/unit/unit-testing-library.impl.ts'
+import { expect, it } from '../../../testing/unit/unit-testing-library.impl'
 import {
   toDateString,
   toDateTimeString,
   toTimeString,
-} from '../date-to-strings.ts'
+} from '../date-to-strings'
 
 it.each([
   [new Date(2000, 0, 1, 0, 0), '00:00'],

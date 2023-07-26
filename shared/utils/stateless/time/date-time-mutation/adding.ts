@@ -1,8 +1,8 @@
-import { toIntegers } from '../format-conversion/format-conversion.ts'
+import { toIntegers } from '../format-conversion/format-conversion'
 import {
   toDateString,
   toDateTimeString,
-} from '../format-conversion/date-to-strings.ts'
+} from '../format-conversion/date-to-strings'
 
 export const addMonths = (to: string, nMonths: number): string => {
   const { year, month, date, hours, minutes } = toIntegers(to)

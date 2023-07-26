@@ -7,7 +7,11 @@ import { toJSDate } from '../../../../shared/utils/stateless/time/format-convers
 import { MonthWithDates } from '../../../../shared/types/time'
 import MonthViewWeek from './month-view-week'
 
-export default function MonthView() {
+type props = {
+  seatYearsView: () => void
+}
+
+export default function MonthView({ seatYearsView }: props) {
   const $app = useContext(AppContext)
   const [month, setMonth] = useState<MonthWithDates>([])
 
@@ -29,7 +33,7 @@ export default function MonthView() {
   return (
     <>
       <div data-testid={MONTH_VIEW} class="sx__date-picker__month-view">
-        <MonthViewHeader />
+        <MonthViewHeader setYearsView={seatYearsView} />
 
         <DayNames />
 

@@ -3,10 +3,10 @@ import {
   it,
   expect,
 } from '../../../stateless/testing/unit/unit-testing-library.impl'
-import { WeekDay } from '../../../../enums/time/week-day.enum.ts'
-import TimeUnitsBuilder from '../time-units.builder.ts'
-import { Month } from '../../../../enums/time/month.enum.ts'
-import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils.ts'
+import { WeekDay } from '../../../../enums/time/week-day.enum'
+import TimeUnitsBuilder from '../time-units.builder'
+import { Month } from '../../../../enums/time/month.enum'
+import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils'
 
 describe('get month', () => {
   it('should get month with trailing and leading days, for 2023-07', () => {

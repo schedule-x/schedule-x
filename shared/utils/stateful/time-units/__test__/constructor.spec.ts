@@ -2,9 +2,9 @@ import {
   describe,
   expect,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
-import { WeekDay } from '../../../../enums/time/week-day.enum.ts'
-import TimeUnitsBuilder from '../time-units.builder.ts'
+} from '../../../stateless/testing/unit/unit-testing-library.impl'
+import { WeekDay } from '../../../../enums/time/week-day.enum'
+import TimeUnitsBuilder from '../time-units.builder'
 
 describe('constructor', () => {
   it('should set first day of week', () => {
