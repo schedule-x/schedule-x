@@ -11,8 +11,8 @@
     "preview": "vite preview",
     "build": "npm run clean:build && rollup -c && lerna run build",
     "format": "prettier . --write",
-    "lint": "eslint -c eslintrc.cjs . --ext .ts",
-    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix",
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
     "clean:deps": "lerna clean",
     "clean:build": "rm -rf ./packages/*/dist"
   },

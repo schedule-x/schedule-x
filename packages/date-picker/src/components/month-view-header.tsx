@@ -10,7 +10,11 @@ import {
   getFirstDayOPreviousMonth,
 } from '../../../../shared/utils/stateless/time/date-time-mutation/date-time-mutation'
 
-export default function MonthViewHeader() {
+type props = {
+  setYearsView: () => void
+}
+
+export default function MonthViewHeader({ setYearsView }: props) {
   const $app = useContext(AppContext)
   const dateStringToLocalizedMonthName = (selectedDate: string) => {
     const selectedDateJS = toJSDate(selectedDate)
@@ -53,7 +57,12 @@ export default function MonthViewHeader() {
     <>
       <header class="sx__date-picker__month-view-header">
         <button onClick={() => setPreviousMonth()}>prev</button>
-        <span>{selectedDateMonthName + ' ' + datePickerYear}</span>
+        <span
+          class="sx__date-picker__month-view-header__month-year"
+          onClick={() => setYearsView()}
+        >
+          {selectedDateMonthName + ' ' + datePickerYear}
+        </span>
         <button onClick={() => setNextMonth()}>next</button>
       </header>
     </>

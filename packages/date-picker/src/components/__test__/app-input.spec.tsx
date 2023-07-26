@@ -26,12 +26,15 @@ describe('date picker input', () => {
   })
 
   it('should toggle date-picker open status when clicking input', async () => {
-    const { container } = render(
-      <AppContext.Provider value={$app!}>
+    render(
+      <AppContext.Provider value={$app as DatePickerAppSingleton}>
         <AppInput />
       </AppContext.Provider>
     )
-    const datePickerIsOpenToggleSpy = spyOn($app?.datePickerState!, 'toggle')
+    const datePickerIsOpenToggleSpy = spyOn(
+      ($app as DatePickerAppSingleton).datePickerState,
+      'toggle'
+    )
 
     fireEvent.click(screen.getByTestId('date-picker-input'))
 

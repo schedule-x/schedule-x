@@ -23,23 +23,22 @@ describe('date picker wrapper', () => {
   })
 
   it('should not display popup on render', () => {
-    render(<AppWrapper $app={$app!} />)
+    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
 
     expect(screen.queryByTestId('date-picker-popup')).toBeNull()
   })
 
   it('should display popup on render', () => {
-    $app!.datePickerState.open()
-    render(<AppWrapper $app={$app!} />)
+    ;($app as DatePickerAppSingleton).datePickerState.open()
+    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
 
     expect(screen.queryByTestId('date-picker-popup')).not.toBeNull()
   })
 
   it('should display popup when datePickerState changes and isOpen is true', async () => {
-    render(<AppWrapper $app={$app!} />)
+    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
     expect(screen.queryByTestId('date-picker-popup')).toBeNull()
-
-    $app!.datePickerState.open()
+    ;($app as DatePickerAppSingleton).datePickerState.open()
 
     await waitFor(() => {
       expect(screen.queryByTestId('date-picker-popup')).not.toBeNull()
