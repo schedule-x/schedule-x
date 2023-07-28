@@ -29,7 +29,7 @@ describe('date picker wrapper', () => {
   })
 
   it('should display popup on render', () => {
-    ($app as DatePickerAppSingleton).datePickerState.open()
+    ;($app as DatePickerAppSingleton).datePickerState.open()
     render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
 
     expect(screen.queryByTestId('date-picker-popup')).not.toBeNull()
