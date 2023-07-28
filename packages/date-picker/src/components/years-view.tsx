@@ -24,7 +24,10 @@ export default function YearsView({ setMonthView }: props) {
 
   return (
     <>
-      <ul data-testid={YEARS_VIEW}>
+      <ul
+        class="sx__date-picker__years-view"
+        data-testid={YEARS_VIEW}
+      >
         {years.map((year) => (
           <YearsViewAccordion
             year={year}

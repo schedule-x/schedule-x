@@ -21,7 +21,7 @@ export default function YearsViewAccordion({
 
   return (
     <>
-      <li>
+      <li class={isExpanded ? 'sx__is-expanded' : ''}>
         <button
           class="sx__date-picker__years-accordion__expand-button"
           onClick={() => expand(year)}

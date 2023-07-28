@@ -4,6 +4,8 @@
   left: 50%;
   transform: translateX(-50%);
   width: 300px; // TODO: change
+  max-height: 400px;
+  overflow: scroll;
   box-shadow: var(--sx-box-shadow-thin);
   padding: 0.5em;
 }
