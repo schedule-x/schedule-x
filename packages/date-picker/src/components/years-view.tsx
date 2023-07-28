@@ -10,7 +10,7 @@ type props = {
 
 export default function YearsView({ setMonthView }: props) {
   const $app = useContext(AppContext)
-  const years = [...Array(26).keys()].map((_, i) => i + 2000)
+  const years = [...Array(26).keys()].map((_, i) => i + 2000) // TODO: set by config option
   const [expandedYear, setExpandedYear] = useState<number>(
     new Date().getFullYear()
   )
