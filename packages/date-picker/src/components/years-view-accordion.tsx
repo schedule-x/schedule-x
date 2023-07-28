@@ -30,7 +30,7 @@ export default function YearsViewAccordion({
         </button>
         {isExpanded && (
           <div class="sx__date-picker__years-view-accordion__panel">
-            {yearWithDates.map((month, i) => (
+            {yearWithDates.map(month => (
               <button
                 class="sx__date-picker__years-view-accordion__month"
                 onClick={() => setYearAndMonth(year, month.getMonth())}

@@ -58,7 +58,7 @@ describe('YearsViewAccordion', () => {
 
     it('should display the year in a button', () => {
       const $app = __createDatePickerAppSingleton__(undefined, 'en-US')
-      let expectedYear = 2023
+      const expectedYear = 2023
       render(
         <AppContext.Provider value={$app}>
           <YearsViewAccordion
