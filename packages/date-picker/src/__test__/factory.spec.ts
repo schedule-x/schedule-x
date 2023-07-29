@@ -14,6 +14,8 @@ describe('date picker factory', () => {
     const config = new ConfigBuilder()
       .withFirstDayOfWeek(0)
       .withLocale('en')
+      .withMin('2020-01-01')
+      .withMax('2020-12-31')
       .build()
 
     const app = underTest(config, document.createElement('div'))

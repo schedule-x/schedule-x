@@ -13,6 +13,7 @@ export default function MonthViewWeek({ week }: props) {
 
   const selectDate = (date: Date) => {
     $app.datePickerState.selectedDate.value = toDateString(date)
+    $app.datePickerState.close()
   }
 
   return (

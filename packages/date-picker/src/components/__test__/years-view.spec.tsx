@@ -35,7 +35,6 @@ describe('YearsView', () => {
     ['2021'],
     ['2022'],
     ['2024'],
-    ['2025'],
   ])('should expand year %s', async (year) => {
     render(
       <AppContext.Provider value={__createDatePickerAppSingleton__()}>
@@ -55,5 +54,36 @@ describe('YearsView', () => {
         )
       ).toHaveLength(12)
     })
+  })
+
+  it('should display default years', () => {
+    const $app = __createDatePickerAppSingleton__()
+
+    render(
+      <AppContext.Provider value={$app}>
+        <YearsView setMonthView={mockFn} />
+      </AppContext.Provider>)
+
+    const currentYear = new Date().getFullYear()
+
+    expect(screen.queryByText('1969')).toBeNull()
+    expect(screen.queryByText('1970')).not.toBeNull()
+    expect(screen.queryByText(currentYear + 1)).not.toBeNull()
+    expect(screen.queryByText(currentYear + 2)).toBeNull()
+  })
+
+  it('should display years based on min- & max dates in config', () => {
+    const $app = __createDatePickerAppSingleton__(undefined, undefined,
+      '2020-01-01', '2021-01-01')
+
+    render(
+      <AppContext.Provider value={$app}>
+        <YearsView setMonthView={mockFn} />
+      </AppContext.Provider>)
+
+    expect(screen.queryByText('2019')).toBeNull()
+    expect(screen.queryByText('2020')).not.toBeNull()
+    expect(screen.queryByText('2021')).not.toBeNull()
+    expect(screen.queryByText('2022')).toBeNull()
   })
 })

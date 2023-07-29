@@ -1,7 +1,7 @@
 import {
   describe,
   it,
-  expect, beforeEach,
+  expect, beforeEach, spyOn,
 } from '../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, render, screen } from '@testing-library/preact'
 import MonthViewWeek from '../month-view-week'
@@ -52,5 +52,19 @@ describe('MonthViewWeek', () => {
     screen.getByText(dateOfMonth).click()
 
     expect($app.datePickerState.selectedDate.value).toBe(expectedResult)
+  })
+
+  it('should close date picker', () => {
+    const $app = __createDatePickerAppSingleton__()
+    $app.datePickerState.isOpen.value = true
+    const closeSpy = spyOn($app.datePickerState, 'close')
+    render(<AppContext.Provider value={$app}>
+      <MonthViewWeek week={timeUnitsImpl.getWeekFor(new Date(2023, Month.JULY, 23))} />
+    </AppContext.Provider>)
+    expect($app.datePickerState.isOpen.value).toBe(true)
+
+    screen.getByText('17').click()
+
+    expect($app.datePickerState.isOpen.value).toBe(false)
   })
 })

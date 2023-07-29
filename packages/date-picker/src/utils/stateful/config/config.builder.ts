@@ -6,9 +6,16 @@ import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
 export class ConfigBuilder implements Builder<DatePickerConfig> {
   locale: string | undefined
   firstDayOfWeek: WeekDay | undefined
+  min: string | undefined
+  max: string | undefined
 
   build(): DatePickerConfig {
-    return new ConfigImpl(this.locale, this.firstDayOfWeek)
+    return new ConfigImpl(
+      this.locale,
+      this.firstDayOfWeek,
+      this.min,
+      this.max
+    )
   }
 
   withLocale(locale: string): ConfigBuilder {
@@ -19,6 +26,18 @@ export class ConfigBuilder implements Builder<DatePickerConfig> {
 
   withFirstDayOfWeek(firstDayOfWeek: WeekDay): ConfigBuilder {
     this.firstDayOfWeek = firstDayOfWeek
+
+    return this
+  }
+
+  withMin(min: string): ConfigBuilder {
+    this.min = min
+
+    return this
+  }
+
+  withMax(max: string): ConfigBuilder {
+    this.max = max
 
     return this
   }
