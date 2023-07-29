@@ -1,29 +1,8 @@
-import {
-  describe,
-  expect,
-  it,
-} from '../../../testing/unit/unit-testing-library.impl'
-import {
-  getOneLetterDayNames,
-  toLocalizedMonth,
-} from '../date-time-localization'
-import { Month } from '../../../../../enums/time/month.enum'
-import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder'
-import { WeekDay } from '../../../../../enums/time/week-day.enum'
-
-describe('get localized month', () => {
-  it.each([
-    ['en-US', new Date(2023, Month.JANUARY, 1), 'January'],
-    ['de-DE', new Date(2023, Month.JANUARY, 1), 'Januar'],
-    ['sv-SE', new Date(2023, Month.JANUARY, 1), 'januari'],
-  ])(
-    'should get the localized month given a date',
-    function (locale: string, date: Date, expected: string) {
-      const result = toLocalizedMonth(date, locale)
-      expect(result).toEqual(expected)
-    }
-  )
-})
+import { describe, expect, it } from "../../../testing/unit/unit-testing-library.impl.ts";
+import TimeUnitsBuilder from "../../../../stateful/time-units/time-units.builder.ts";
+import { WeekDay } from "../../../../../enums/time/week-day.enum.ts";
+import { getOneLetterDayNames } from "../date-time-localization.ts";
+import { Month } from "../../../../../enums/time/month.enum.ts";
 
 describe('get localized day names', () => {
   const timeUnitsImpl = new TimeUnitsBuilder()

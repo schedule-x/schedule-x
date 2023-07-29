@@ -2,6 +2,14 @@ export const toLocalizedMonth = (date: Date, locale: string): string => {
   return date.toLocaleString(locale, { month: 'long' })
 }
 
+export const toLocalizedDate = (date: Date, locale: string): string => {
+  return date.toLocaleString(locale, {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
+
 export const getOneLetterDayNames = (
   week: Date[],
   locale: string
