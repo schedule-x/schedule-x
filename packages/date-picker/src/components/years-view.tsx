@@ -1,6 +1,6 @@
 import { YEARS_VIEW } from '../constants/test-ids'
 import YearsViewAccordion from './years-view-accordion'
-import { useContext, useState } from 'preact/compat'
+import { useContext, useEffect, useState } from 'preact/compat'
 import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
 import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from "../../../../shared/utils/stateless/time/format-conversion/format-conversion";
@@ -27,6 +27,17 @@ export default function YearsView({ setMonthView }: props) {
     )
     setMonthView()
   }
+
+  useEffect(() => {
+    const initiallyExpandedYear = document
+      .querySelector('.sx__date-picker__years-view')
+      ?.querySelector('.sx__is-expanded')
+    if (!initiallyExpandedYear) return
+
+    initiallyExpandedYear.scrollIntoView({
+      block: 'center',
+    })
+  }, [])
 
   return (
     <>

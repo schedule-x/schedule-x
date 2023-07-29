@@ -13,6 +13,7 @@ import { __createDatePickerAppSingleton__ } from '../../../../../shared/utils/st
 describe('YearsView', () => {
   beforeEach(() => {
     cleanup()
+    window.HTMLElement.prototype.scrollIntoView = mockFn();
   })
 
   it('should call setMonthView', () => {
