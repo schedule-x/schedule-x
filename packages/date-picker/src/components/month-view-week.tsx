@@ -11,6 +11,12 @@ type props = {
 export default function MonthViewWeek({ week }: props) {
   const $app = useContext(AppContext)
 
+  const isDateSelectable = (date: Date) => {
+    const dateString = toDateString(date)
+
+    return dateString >= $app.config.min && dateString <= $app.config.max
+  }
+
   const selectDate = (date: Date) => {
     $app.datePickerState.selectedDate.value = toDateString(date)
     $app.datePickerState.close()
@@ -21,6 +27,7 @@ export default function MonthViewWeek({ week }: props) {
       <div data-testid={DATE_PICKER_WEEK} class="sx__date-picker__week">
         {week.map((day) => (
           <button
+            disabled={!isDateSelectable(day)}
             class="sx__date-picker__day"
             onClick={() => selectDate(day)}
           >
