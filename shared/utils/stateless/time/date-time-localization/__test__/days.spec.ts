@@ -1,8 +1,12 @@
-import { describe, expect, it } from "../../../testing/unit/unit-testing-library.impl.ts";
-import TimeUnitsBuilder from "../../../../stateful/time-units/time-units.builder.ts";
-import { WeekDay } from "../../../../../enums/time/week-day.enum.ts";
-import { getOneLetterDayNames } from "../date-time-localization.ts";
-import { Month } from "../../../../../enums/time/month.enum.ts";
+import {
+  describe,
+  expect,
+  it,
+} from '../../../testing/unit/unit-testing-library.impl.ts'
+import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder.ts'
+import { WeekDay } from '../../../../../enums/time/week-day.enum.ts'
+import { getOneLetterDayNames } from '../date-time-localization.ts'
+import { Month } from '../../../../../enums/time/month.enum.ts'
 
 describe('get localized day names', () => {
   const timeUnitsImpl = new TimeUnitsBuilder()

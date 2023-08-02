@@ -13,7 +13,7 @@ import { __createDatePickerAppSingleton__ } from '../../../../../shared/utils/st
 describe('YearsView', () => {
   beforeEach(() => {
     cleanup()
-    window.HTMLElement.prototype.scrollIntoView = mockFn();
+    window.HTMLElement.prototype.scrollIntoView = mockFn()
   })
 
   it('should call setMonthView', () => {
@@ -29,33 +29,29 @@ describe('YearsView', () => {
     expect(callbackToTest).toHaveBeenCalled()
   })
 
-  it.each([
-    ['2015'],
-    ['2019'],
-    ['2020'],
-    ['2021'],
-    ['2022'],
-    ['2024'],
-  ])('should expand year %s', async (year) => {
-    render(
-      <AppContext.Provider value={__createDatePickerAppSingleton__()}>
-        <YearsView setMonthView={mockFn} />
-      </AppContext.Provider>
-    )
+  it.each([['2015'], ['2019'], ['2020'], ['2021'], ['2022'], ['2024']])(
+    'should expand year %s',
+    async (year) => {
+      render(
+        <AppContext.Provider value={__createDatePickerAppSingleton__()}>
+          <YearsView setMonthView={mockFn} />
+        </AppContext.Provider>
+      )
 
-    screen.getByText(year).click()
+      screen.getByText(year).click()
 
-    await waitFor(() => {
-      const currentExpandedYear = screen.getByText('Januar').closest('li')
-      if (!currentExpandedYear) throw new Error('currentExpandedYear is null')
-      expect(currentExpandedYear.textContent).toContain(year)
-      expect(
-        currentExpandedYear.querySelectorAll(
-          '.sx__date-picker__years-view-accordion__month'
-        )
-      ).toHaveLength(12)
-    })
-  })
+      await waitFor(() => {
+        const currentExpandedYear = screen.getByText('Januar').closest('li')
+        if (!currentExpandedYear) throw new Error('currentExpandedYear is null')
+        expect(currentExpandedYear.textContent).toContain(year)
+        expect(
+          currentExpandedYear.querySelectorAll(
+            '.sx__date-picker__years-view-accordion__month'
+          )
+        ).toHaveLength(12)
+      })
+    }
+  )
 
   it('should display default years', () => {
     const $app = __createDatePickerAppSingleton__()
@@ -63,7 +59,8 @@ describe('YearsView', () => {
     render(
       <AppContext.Provider value={$app}>
         <YearsView setMonthView={mockFn} />
-      </AppContext.Provider>)
+      </AppContext.Provider>
+    )
 
     const currentYear = new Date().getFullYear()
 
@@ -74,13 +71,18 @@ describe('YearsView', () => {
   })
 
   it('should display years based on min- & max dates in config', () => {
-    const $app = __createDatePickerAppSingleton__(undefined, undefined,
-      '2020-01-01', '2021-01-01')
+    const $app = __createDatePickerAppSingleton__(
+      undefined,
+      undefined,
+      '2020-01-01',
+      '2021-01-01'
+    )
 
     render(
       <AppContext.Provider value={$app}>
         <YearsView setMonthView={mockFn} />
-      </AppContext.Provider>)
+      </AppContext.Provider>
+    )
 
     expect(screen.queryByText('2019')).toBeNull()
     expect(screen.queryByText('2020')).not.toBeNull()

@@ -1,16 +1,15 @@
 import {
   describe,
   it,
-  expect, beforeEach, spyOn,
+  expect,
+  beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, render, screen } from '@testing-library/preact'
 import MonthViewWeek from '../../month-view-week'
 import TimeUnitsBuilder from '../../../../../../shared/utils/stateful/time-units/time-units.builder'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
-import {
-  __createDatePickerAppSingleton__
-} from "../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton";
-import { AppContext } from "../../../utils/stateful/app-context";
+import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
+import { AppContext } from '../../../utils/stateful/app-context'
 
 describe('MonthViewWeek', () => {
   const timeUnitsImpl = new TimeUnitsBuilder().build()
@@ -22,9 +21,11 @@ describe('MonthViewWeek', () => {
   it('should render week', () => {
     const date = new Date(2023, Month.JULY, 23)
     const week = timeUnitsImpl.getWeekFor(date)
-    const { container } = render(<AppContext.Provider value={__createDatePickerAppSingleton__()}>
-      <MonthViewWeek week={week} />
-    </AppContext.Provider>)
+    const { container } = render(
+      <AppContext.Provider value={__createDatePickerAppSingleton__()}>
+        <MonthViewWeek week={week} />
+      </AppContext.Provider>
+    )
 
     expect(container.textContent).toContain('17')
     expect(container.textContent).toContain('18')
@@ -47,9 +48,11 @@ describe('MonthViewWeek', () => {
     const $app = __createDatePickerAppSingleton__()
     const date = new Date(2023, Month.JULY, 23)
     const week = timeUnitsImpl.getWeekFor(date)
-    render(<AppContext.Provider value={$app}>
-      <MonthViewWeek week={week} />
-    </AppContext.Provider>)
+    render(
+      <AppContext.Provider value={$app}>
+        <MonthViewWeek week={week} />
+      </AppContext.Provider>
+    )
 
     screen.getByText(dateOfMonth).click()
 

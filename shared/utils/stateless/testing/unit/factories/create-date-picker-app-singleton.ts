@@ -2,7 +2,7 @@ import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder
 import DatePickerAppSingleton from '@schedule-x/date-picker/src/utils/stateful/app-singleton/date-picker-app.singleton'
 import { createDatePickerState } from '../../../../stateful/date-picker-state/date-picker-state.impl'
 import { ConfigBuilder } from '@schedule-x/date-picker/src/utils/stateful/config/config.builder'
-import { toDateString } from "../../../time/format-conversion/date-to-strings.ts";
+import { toDateString } from '../../../time/format-conversion/date-to-strings.ts'
 
 export const __createDatePickerAppSingleton__: (
   selectedDate?: string,

@@ -9,7 +9,7 @@ import AppPopup from '../../app-popup'
 import { MONTH_VIEW } from '../../../constants/test-ids'
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { factory } from "./utils";
+import { factory } from './utils'
 
 describe('AppPopup', () => {
   beforeEach(() => {

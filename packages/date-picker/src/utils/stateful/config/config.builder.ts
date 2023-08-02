@@ -10,12 +10,7 @@ export class ConfigBuilder implements Builder<DatePickerConfig> {
   max: string | undefined
 
   build(): DatePickerConfig {
-    return new ConfigImpl(
-      this.locale,
-      this.firstDayOfWeek,
-      this.min,
-      this.max
-    )
+    return new ConfigImpl(this.locale, this.firstDayOfWeek, this.min, this.max)
   }
 
   withLocale(locale: string): ConfigBuilder {
