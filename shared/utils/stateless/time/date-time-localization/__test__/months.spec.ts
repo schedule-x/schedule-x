@@ -3,9 +3,7 @@ import {
   expect,
   it,
 } from '../../../testing/unit/unit-testing-library.impl'
-import {
-  toLocalizedMonth,
-} from '../date-time-localization'
+import { toLocalizedMonth } from '../date-time-localization'
 import { Month } from '../../../../../enums/time/month.enum'
 
 describe('get localized month', () => {
@@ -21,4 +19,3 @@ describe('get localized month', () => {
     }
   )
 })
-

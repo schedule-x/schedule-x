@@ -10,6 +10,8 @@ export const createDatePicker = (config: DatePickerConfig, el: HTMLElement) => {
   const internalConfig = new ConfigBuilder()
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .withLocale(config.locale)
+    .withMin(config.min)
+    .withMax(config.max)
     .build()
   const $app: DatePickerAppSingleton = new DatePickerAppSingletonBuilder()
     .withConfig(internalConfig)

@@ -2,14 +2,26 @@ import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder
 import DatePickerAppSingleton from '@schedule-x/date-picker/src/utils/stateful/app-singleton/date-picker-app.singleton'
 import { createDatePickerState } from '../../../../stateful/date-picker-state/date-picker-state.impl'
 import { ConfigBuilder } from '@schedule-x/date-picker/src/utils/stateful/config/config.builder'
+import { toDateString } from '../../../time/format-conversion/date-to-strings.ts'
 
 export const __createDatePickerAppSingleton__: (
   selectedDate?: string,
-  locale?: string
-) => DatePickerAppSingleton = (selectedDate?: string, locale = 'de-DE') => {
+  locale?: string,
+  min?: string,
+  max?: string
+) => DatePickerAppSingleton = (
+  selectedDate?: string,
+  locale = 'de-DE',
+  min = '1970-01-01',
+  max = toDateString(new Date(new Date().getFullYear() + 1, 11, 31))
+) => {
   return {
     datePickerState: createDatePickerState(selectedDate),
     timeUnitsImpl: new TimeUnitsBuilder().build(),
-    config: new ConfigBuilder().withLocale(locale).build(),
+    config: new ConfigBuilder()
+      .withLocale(locale)
+      .withMin(min)
+      .withMax(max)
+      .build(),
   }
 }
