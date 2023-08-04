@@ -18,25 +18,27 @@ export default function AppInput() {
     setDisplayedValue(getLocalizedDate($app.datePickerState.selectedDate.value))
   }, [$app.datePickerState.selectedDate.value])
 
-  const [inputClasses, setInputClasses] = useState<string[]>([
-    'sx__date-input'
+  const [wrapperClasses, setWrapperClasses] = useState<string[]>([
+
   ])
 
   useEffect(() => {
-    setInputClasses([
-      'sx__date-input',
+    setWrapperClasses([
+      'sx__date-input-wrapper',
       $app.datePickerState.isOpen.value ? 'sx__date-input--active' : ''
     ])
   }, [$app.datePickerState.isOpen.value])
 
   return (
     <>
-      <div class="sx__date-input-wrapper">
+      <div class={wrapperClasses.join(' ')}>
+        <label class="sx__date-input-label">Date</label>
+
         <input
           value={displayedValue}
           data-testid="date-picker-input"
           readonly
-          class={inputClasses.join(' ')}
+          class="sx__date-input"
           onClick={() => $app.datePickerState.toggle()}
           type="text"
         />

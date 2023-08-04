@@ -11,6 +11,10 @@
   height: 1rem;
   pointer-events: none;
   transition: transform 0.2s ease-in-out;
+
+  .sx__date-input--active & {
+    transform: translateY(-50%) rotate(180deg);
+  }
 }
 
 .sx__date-input {
@@ -22,12 +26,26 @@
   cursor: pointer;
   font-family: inherit; // todo: move to HTML-overrides file
 
-  &.sx__date-input--active {
+  .sx__date-input--active & {
     border-color: var(--sx-color-primary);
     outline: 1px solid var(--sx-color-primary);
+  }
+}
 
-    + .sx__date-input-chevron {
-      transform: translateY(-50%) rotate(180deg);
-    }
+.sx__date-input-label {
+  position: absolute;
+  top: 0;
+  left: 1em;
+  padding: 0 0.5rem;
+  background-color: var(--sx-color-background);
+  font-size: 0.75rem;
+  color: var(--sx-color-outline);
+  line-height: 1rem;
+  transform: translateY(-50%) translateX(-0.5rem);
+  transition: transform 0.2s ease-in-out;
+  pointer-events: none;
+
+  .sx__date-input--active & {
+    color: var(--sx-color-primary);
   }
 }

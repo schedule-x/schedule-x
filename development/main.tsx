@@ -8,8 +8,8 @@ const datePicker = createDatePicker(
   {
     locale: 'en-US',
     firstDayOfWeek: 0,
-    min: '2021-03-01',
-    max: '2021-03-31',
+    // min: '2021-03-01',
+    // max: '2021-03-31',
   },
   document.querySelector('#app') as HTMLElement
 )
