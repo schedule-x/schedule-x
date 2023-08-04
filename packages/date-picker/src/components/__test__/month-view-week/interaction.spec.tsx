@@ -29,6 +29,7 @@ describe('MonthViewWeek', () => {
 
     screen.getByText('17').click()
 
+    expect(closeSpy).toHaveBeenCalled()
     expect($app.datePickerState.isOpen.value).toBe(false)
   })
 })
