@@ -22,6 +22,8 @@
   },
   "devDependencies": {
     "@atomico/rollup-plugin-sizes": "^1.1.4",
+    "@fontsource/open-sans": "^5.0.7",
+    "@fontsource/roboto-condensed": "^5.0.7",
     "@lerna/batch-packages": "^3.16.0",
     "@lerna/filter-packages": "^6.4.1",
     "@lerna/project": "^6.4.1",

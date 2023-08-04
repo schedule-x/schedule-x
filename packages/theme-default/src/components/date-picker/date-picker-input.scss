@@ -1,7 +1,33 @@
+.sx__date-input-wrapper {
+  position: relative;
+}
+
+.sx__date-input-chevron {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  transition: transform 0.2s ease-in-out;
+}
+
 .sx__date-input {
   font-size: 1rem;
-  padding: 0.5rem 1rem;
-  border: var(--sx-form-field-border);
+  padding: 0.5rem 2rem;
+  border: 1px solid var(--sx-color-outline-variant);
   border-radius: 4px;
   outline: none;
+  cursor: pointer;
+  font-family: inherit; // todo: move to HTML-overrides file
+
+  &.sx__date-input--active {
+    border-color: var(--sx-color-primary);
+    outline: 1px solid var(--sx-color-primary);
+
+    + .sx__date-input-chevron {
+      transform: translateY(-50%) rotate(180deg);
+    }
+  }
 }
