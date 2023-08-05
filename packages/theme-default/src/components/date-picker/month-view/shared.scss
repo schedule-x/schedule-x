@@ -1,0 +1,12 @@
+@mixin date-picker-month-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-bottom: 0.5em;
+
+  .sx__date-picker__day,
+  .sx__date-picker__day-name {
+    flex: 1;
+    text-align: center;
+  }
+}

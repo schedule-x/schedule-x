@@ -10,5 +10,6 @@
 @import 'components/date-picker/app-input';
 @import 'components/date-picker/app-popup';
 @import 'components/date-picker/years-view';
-@import 'components/date-picker/month-view';
-@import 'components/date-picker/month-view-header';
+@import 'components/date-picker/month-view/month-view';
+@import 'components/date-picker/month-view/month-view-header';
+@import 'components/date-picker/month-view/month-view-week';
