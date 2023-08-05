@@ -32,13 +32,6 @@ html {
   --sx-color-shadow: #000000;
   --sx-color-surface-tint: #6750A4;
 
-  --sx-color-neutral: var(--sx-color-surface);
-  --sx-color-neutral-variant: var(--sx-color-surface-dim);
-
-  //
-  //--sx-color-primary-text: #212121;
-  //--sx-color-secondary-text: #757575;
-  //
-  //--sx-color-divider: #bdbdbd;
-  //--sx-color-text-and-icons: #ffffff;
+  --sx-color-neutral: var(--sx-color-outline);
+  --sx-color-neutral-variant: var(--sx-color-outline-variant);
 }

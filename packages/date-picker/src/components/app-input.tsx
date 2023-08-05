@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
 import { toLocalizedDate } from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
-import chevronIcon from '../assets/chevron-down.svg'
+import chevronIcon from '../assets/chevron-input.svg'
 
 export default function AppInput() {
   const $app = useContext(AppContext)

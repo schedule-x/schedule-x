@@ -19,12 +19,11 @@
 
 .sx__date-input {
   font-size: 1rem;
-  padding: 0.5rem 2rem;
+  padding: var(--sx-spacing-padding4);
   border: 1px solid var(--sx-color-outline-variant);
   border-radius: 4px;
   outline: none;
   cursor: pointer;
-  font-family: inherit; // todo: move to HTML-overrides file
 
   .sx__date-input--active & {
     border-color: var(--sx-color-primary);
@@ -39,7 +38,7 @@
   padding: 0 0.5rem;
   background-color: var(--sx-color-background);
   font-size: 0.75rem;
-  color: var(--sx-color-outline);
+  color: var(--sx-color-neutral);
   line-height: 1rem;
   transform: translateY(-50%) translateX(-0.5rem);
   transition: transform 0.2s ease-in-out;

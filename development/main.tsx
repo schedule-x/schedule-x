@@ -1,4 +1,8 @@
 import "@fontsource/open-sans"
+import "@fontsource/open-sans/300.css"
+import "@fontsource/open-sans/500-italic.css"
+import "@fontsource/open-sans/700.css"
+import "@fontsource/open-sans/700-italic.css"
 import "@fontsource/roboto-condensed"
 import './app.css'
 import '../packages/theme-default/src/date-picker.scss'

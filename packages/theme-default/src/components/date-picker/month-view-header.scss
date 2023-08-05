@@ -1,0 +1,39 @@
+.sx__date-picker__month-view-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1em;
+
+  button {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.sx__date-picker__month-view-header__month-year {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.sx__date-picker__chevron {
+  cursor: pointer;
+  width: 1.5rem;
+  color: #000;
+  transition: color 0.2s ease-in-out;
+  border-radius: 50%;
+  padding: var(--sx-spacing-padding2);
+
+  &:hover {
+    background-color: var(--sx-color-surface-dim);
+  }
+}
+
+.sx__date-picker__chevron--previous {
+  transform: rotate(90deg);
+  margin-inline-start: calc(var(--sx-spacing-padding1) * -1);
+}
+
+.sx__date-picker__chevron--next {
+  transform: rotate(-90deg);
+  margin-inline-end: calc(var(--sx-spacing-padding1) * -1);
+}
