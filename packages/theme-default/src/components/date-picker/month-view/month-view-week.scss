@@ -17,3 +17,8 @@
     background-color: var(--sx-color-surface-dim);
   }
 }
+
+.sx__date-picker__day--today {
+  background-color: var(--sx-color-primary);
+  color: var(--sx-color-on-primary);
+}
