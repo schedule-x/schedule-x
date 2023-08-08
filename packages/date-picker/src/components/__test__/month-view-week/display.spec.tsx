@@ -7,10 +7,8 @@ import {
 import { cleanup } from '@testing-library/preact'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
-import { toDateString } from "../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings";
-import { factory } from "./utils";
-
-
+import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+import { factory } from './utils'
 
 describe('MonthViewWeek', () => {
   beforeEach(() => {
@@ -18,7 +16,7 @@ describe('MonthViewWeek', () => {
   })
 
   it('should render week', () => {
-    const $app = __createDatePickerAppSingleton__();
+    const $app = __createDatePickerAppSingleton__()
     const date = new Date(2023, Month.JULY, 23)
     const week = $app.timeUnitsImpl.getWeekFor(date)
     const { container } = factory($app, week)
@@ -57,7 +55,7 @@ describe('MonthViewWeek', () => {
     expect(selectedDay).toBeNull()
   })
 
-  it('should display today\'s date', () => {
+  it("should display today's date", () => {
     const today = new Date()
     const expectedTodaysDate = today.getDate()
     const $app = __createDatePickerAppSingleton__(toDateString(today))

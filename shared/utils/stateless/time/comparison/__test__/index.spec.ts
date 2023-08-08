@@ -1,5 +1,9 @@
-import { describe, it, expect } from "../../../testing/unit/unit-testing-library.impl.ts";
-import { isToday } from "../index.ts";
+import {
+  describe,
+  it,
+  expect,
+} from '../../../testing/unit/unit-testing-library.impl.ts'
+import { isToday } from '../index.ts'
 
 describe('comparison of time', () => {
   it('should return true if date is today', () => {

@@ -6,7 +6,10 @@ import { createDatePickerState } from '../../../shared/utils/stateful/date-picke
 import DatePickerAppSingletonBuilder from './utils/stateful/app-singleton/date-picker-app-singleton.builder'
 import { ConfigBuilder } from './utils/stateful/config/config.builder'
 
-export const createDatePicker = (config: DatePickerConfigExternal, el: HTMLElement) => {
+export const createDatePicker = (
+  config: DatePickerConfigExternal,
+  el: HTMLElement
+) => {
   const internalConfig = new ConfigBuilder()
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .withLocale(config.locale)
@@ -15,7 +18,7 @@ export const createDatePicker = (config: DatePickerConfigExternal, el: HTMLEleme
     .build()
   const timeUnitsImpl = new TimeUnitsBuilder()
     .withFirstDayOfWeek(internalConfig.firstDayOfWeek)
-    .build();
+    .build()
   const $app: DatePickerAppSingleton = new DatePickerAppSingletonBuilder()
     .withConfig(internalConfig)
     .withDatePickerState(createDatePickerState())

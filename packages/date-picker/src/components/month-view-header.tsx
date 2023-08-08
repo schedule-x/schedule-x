@@ -57,9 +57,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
   return (
     <>
       <header class="sx__date-picker__month-view-header">
-        <button
-          onClick={() => setPreviousMonth()}
-        >
+        <button onClick={() => setPreviousMonth()}>
           <img
             class="sx__date-picker__chevron sx__date-picker__chevron--previous"
             src={chevronIcon}
@@ -72,9 +70,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
         >
           {selectedDateMonthName + ' ' + datePickerYear}
         </span>
-        <button
-          onClick={() => setNextMonth()}
-        >
+        <button onClick={() => setNextMonth()}>
           <img
             class="sx__date-picker__chevron sx__date-picker__chevron--next"
             src={chevronIcon}

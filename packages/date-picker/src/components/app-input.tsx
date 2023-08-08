@@ -18,14 +18,12 @@ export default function AppInput() {
     setDisplayedValue(getLocalizedDate($app.datePickerState.selectedDate.value))
   }, [$app.datePickerState.selectedDate.value])
 
-  const [wrapperClasses, setWrapperClasses] = useState<string[]>([
-
-  ])
+  const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
   useEffect(() => {
     setWrapperClasses([
       'sx__date-input-wrapper',
-      $app.datePickerState.isOpen.value ? 'sx__date-input--active' : ''
+      $app.datePickerState.isOpen.value ? 'sx__date-input--active' : '',
     ])
   }, [$app.datePickerState.isOpen.value])
 
@@ -43,10 +41,7 @@ export default function AppInput() {
           type="text"
         />
 
-        <img
-          class="sx__date-input-chevron"
-          src={chevronIcon}
-        />
+        <img class="sx__date-input-chevron" src={chevronIcon} />
       </div>
     </>
   )

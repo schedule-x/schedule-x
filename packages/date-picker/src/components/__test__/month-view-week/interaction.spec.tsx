@@ -2,12 +2,13 @@ import {
   describe,
   it,
   expect,
-  spyOn, beforeEach,
+  spyOn,
+  beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { cleanup, screen } from '@testing-library/preact'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
-import { factory } from "./utils";
+import { factory } from './utils'
 
 describe('MonthViewWeek', () => {
   beforeEach(() => {

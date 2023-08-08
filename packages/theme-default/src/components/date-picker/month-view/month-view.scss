@@ -1,6 +1,7 @@
 @use './shared' as *;
 
-.sx__date-picker__month-view {}
+.sx__date-picker__month-view {
+}
 
 .sx__date-picker__day-names {
   @include date-picker-month-row;

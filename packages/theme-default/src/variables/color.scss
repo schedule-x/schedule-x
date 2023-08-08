@@ -1,36 +1,36 @@
 html {
-  --sx-color-primary: #6750A4;
+  --sx-color-primary: #6750a4;
   --sx-color-on-primary: #ffffff;
-  --sx-color-primary-container: #EADDFF;
-  --sx-color-on-primary-container: #21005E;
+  --sx-color-primary-container: #eaddff;
+  --sx-color-on-primary-container: #21005e;
 
-  --sx-color-secondary: #625B71;
+  --sx-color-secondary: #625b71;
   --sx-color-on-secondary: #ffffff;
-  --sx-color-secondary-container: #E8DEF8;
-  --sx-color-on-secondary-container: #1E192B;
+  --sx-color-secondary-container: #e8def8;
+  --sx-color-on-secondary-container: #1e192b;
 
-  --sx-color-tertiary: #7D5260;
+  --sx-color-tertiary: #7d5260;
   --sx-color-on-tertiary: #ffffff;
-  --sx-color-tertiary-container: #FFD8E4;
-  --sx-color-on-tertiary-container: #370B1E;
+  --sx-color-tertiary-container: #ffd8e4;
+  --sx-color-on-tertiary-container: #370b1e;
 
-  --sx-color-surface: #FEF7FF;
-  --sx-color-surface-dim: #DED8E1;
-  --sx-color-surface-bright: #FEF7FF;
-  --sx-color-on-surface: #1C1B1F;
+  --sx-color-surface: #fef7ff;
+  --sx-color-surface-dim: #ded8e1;
+  --sx-color-surface-bright: #fef7ff;
+  --sx-color-on-surface: #1c1b1f;
 
-  --sx-color-surface-container: #F3EDF7;
-  --sx-color-surface-container-low: #F7F2FA;
-  --sx-color-surface-container-high: #ECE6F0;
+  --sx-color-surface-container: #f3edf7;
+  --sx-color-surface-container-low: #f7f2fa;
+  --sx-color-surface-container-high: #ece6f0;
 
-  --sx-color-background: #FFF; // deviation from material 3, which would be #FEF7FF
-  --sx-color-on-background: #1C1B1F;
+  --sx-color-background: #fff; // deviation from material 3, which would be #FEF7FF
+  --sx-color-on-background: #1c1b1f;
 
-  --sx-color-outline: #79747E;
-  --sx-color-outline-variant: #C4C7C5;
+  --sx-color-outline: #79747e;
+  --sx-color-outline-variant: #c4c7c5;
 
   --sx-color-shadow: #000000;
-  --sx-color-surface-tint: #6750A4;
+  --sx-color-surface-tint: #6750a4;
 
   --sx-color-neutral: var(--sx-color-outline);
   --sx-color-neutral-variant: var(--sx-color-outline-variant);

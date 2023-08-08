@@ -5,6 +5,5 @@ export default interface DatePickerConfigInternal extends Config {
   max: string
 }
 
-export interface DatePickerConfigExternal extends Partial<DatePickerConfigInternal> {
-
-}
+export interface DatePickerConfigExternal
+  extends Partial<DatePickerConfigInternal> {}
