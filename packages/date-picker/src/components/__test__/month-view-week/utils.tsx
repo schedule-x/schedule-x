@@ -10,3 +10,15 @@ export const factory = ($app: DatePickerAppSingleton, week: Date[]) => {
     </AppContext.Provider>
   )
 }
+
+export const getSelectedDay = (container: Element) => {
+  return container.querySelector(
+    '.sx__date-picker__day.sx__date-picker__day--selected'
+  )
+}
+
+export const getToday = (container: Element) => {
+  return container.querySelector(
+    '.sx__date-picker__day.sx__date-picker__day--today'
+  )
+}

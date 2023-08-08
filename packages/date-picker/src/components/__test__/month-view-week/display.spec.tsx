@@ -8,7 +8,7 @@ import { cleanup } from '@testing-library/preact'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
-import { factory } from './utils'
+import { factory, getSelectedDay, getToday } from './utils'
 
 describe('MonthViewWeek', () => {
   beforeEach(() => {
@@ -21,13 +21,9 @@ describe('MonthViewWeek', () => {
     const week = $app.timeUnitsImpl.getWeekFor(date)
     const { container } = factory($app, week)
 
-    expect(container.textContent).toContain('17')
-    expect(container.textContent).toContain('18')
-    expect(container.textContent).toContain('19')
-    expect(container.textContent).toContain('20')
-    expect(container.textContent).toContain('21')
-    expect(container.textContent).toContain('22')
-    expect(container.textContent).toContain('23')
+    ;['17', '18', '19', '20', '21', '22', '23'].forEach(day => {
+      expect(container.textContent).toContain(day)
+    })
   })
 
   it('should display selected date', () => {
@@ -36,9 +32,7 @@ describe('MonthViewWeek', () => {
     const week = $app.timeUnitsImpl.getWeekFor(date)
     const { container } = factory($app, week)
 
-    const selectedDay = container.querySelector(
-      '.sx__date-picker__day.sx__date-picker__day--selected'
-    )
+    const selectedDay = getSelectedDay(container)
     expect(selectedDay).not.toBeNull()
     expect(selectedDay?.textContent).toBe('8')
   })
@@ -49,9 +43,7 @@ describe('MonthViewWeek', () => {
     const week = $app.timeUnitsImpl.getWeekFor(date)
     const { container } = factory($app, week)
 
-    const selectedDay = container.querySelector(
-      '.sx__date-picker__day.sx__date-picker__day--selected'
-    )
+    const selectedDay = getSelectedDay(container)
     expect(selectedDay).toBeNull()
   })
 
@@ -62,9 +54,7 @@ describe('MonthViewWeek', () => {
     const week = $app.timeUnitsImpl.getWeekFor(today)
     const { container } = factory($app, week)
 
-    const todaysDate = container.querySelector(
-      '.sx__date-picker__day.sx__date-picker__day--today'
-    )
+    const todaysDate = getToday(container)
 
     expect(todaysDate).not.toBeNull()
     expect(todaysDate?.textContent).toBe(expectedTodaysDate.toString())
