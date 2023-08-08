@@ -45,6 +45,7 @@
     "prettier": "^3.0.0",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-svg": "^2.0.0",
     "rollup-plugin-typescript2": "^0.35.0",
     "sass": "^1.63.6",
     "typescript": "^5.0.2",
