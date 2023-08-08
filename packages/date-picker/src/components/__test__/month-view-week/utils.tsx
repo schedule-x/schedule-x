@@ -1,5 +1,5 @@
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
-import { render } from '@testing-library/preact'
+import { render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../utils/stateful/app-context'
 import MonthViewWeek from '../../month-view-week'
 
@@ -21,4 +21,8 @@ export const getToday = (container: Element) => {
   return container.querySelector(
     '.sx__date-picker__day.sx__date-picker__day--today'
   )
+}
+
+export const clickByDate = (date: string) => {
+  screen.getByText(date).click()
 }

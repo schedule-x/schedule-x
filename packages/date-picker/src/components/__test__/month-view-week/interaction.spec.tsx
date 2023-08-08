@@ -8,7 +8,7 @@ import {
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { cleanup, screen } from '@testing-library/preact'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
-import { factory } from './utils'
+import { clickByDate, factory } from './utils'
 
 describe('MonthViewWeek', () => {
   beforeEach(() => {
@@ -42,7 +42,7 @@ describe('MonthViewWeek', () => {
     const week = $app.timeUnitsImpl.getWeekFor(date)
     factory($app, week)
 
-    screen.getByText(dateOfMonth).click()
+    clickByDate(dateOfMonth)
 
     expect($app.datePickerState.selectedDate.value).toBe(expectedResult)
   })
