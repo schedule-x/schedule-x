@@ -18,6 +18,11 @@
   }
 }
 
+.sx__date-picker__day--selected {
+  background-color: var(--sx-color-primary-container);
+  color: var(--sx-color-on-primary-container);
+}
+
 .sx__date-picker__day--today {
   background-color: var(--sx-color-primary);
   color: var(--sx-color-on-primary);

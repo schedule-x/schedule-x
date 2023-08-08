@@ -4,28 +4,24 @@ import {
   expect,
   beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, render, screen } from '@testing-library/preact'
-import MonthViewWeek from '../../month-view-week'
-import TimeUnitsBuilder from '../../../../../../shared/utils/stateful/time-units/time-units.builder'
+import { cleanup } from '@testing-library/preact'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
-import { AppContext } from '../../../utils/stateful/app-context'
+import { toDateString } from "../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings";
+import { factory } from "./utils";
+
+
 
 describe('MonthViewWeek', () => {
-  const timeUnitsImpl = new TimeUnitsBuilder().build()
-
   beforeEach(() => {
     cleanup()
   })
 
   it('should render week', () => {
+    const $app = __createDatePickerAppSingleton__();
     const date = new Date(2023, Month.JULY, 23)
-    const week = timeUnitsImpl.getWeekFor(date)
-    const { container } = render(
-      <AppContext.Provider value={__createDatePickerAppSingleton__()}>
-        <MonthViewWeek week={week} />
-      </AppContext.Provider>
-    )
+    const week = $app.timeUnitsImpl.getWeekFor(date)
+    const { container } = factory($app, week)
 
     expect(container.textContent).toContain('17')
     expect(container.textContent).toContain('18')
@@ -36,26 +32,43 @@ describe('MonthViewWeek', () => {
     expect(container.textContent).toContain('23')
   })
 
-  it.each([
-    ['17', '2023-07-17'],
-    ['18', '2023-07-18'],
-    ['19', '2023-07-19'],
-    ['20', '2023-07-20'],
-    ['21', '2023-07-21'],
-    ['22', '2023-07-22'],
-    ['23', '2023-07-23'],
-  ])('should set new selected date', (dateOfMonth, expectedResult) => {
-    const $app = __createDatePickerAppSingleton__()
-    const date = new Date(2023, Month.JULY, 23)
-    const week = timeUnitsImpl.getWeekFor(date)
-    render(
-      <AppContext.Provider value={$app}>
-        <MonthViewWeek week={week} />
-      </AppContext.Provider>
+  it('should display selected date', () => {
+    const date = new Date(2023, Month.AUGUST, 8)
+    const $app = __createDatePickerAppSingleton__(toDateString(date))
+    const week = $app.timeUnitsImpl.getWeekFor(date)
+    const { container } = factory($app, week)
+
+    const selectedDay = container.querySelector(
+      '.sx__date-picker__day.sx__date-picker__day--selected'
+    )
+    expect(selectedDay).not.toBeNull()
+    expect(selectedDay?.textContent).toBe('8')
+  })
+
+  it('should not display any selected date', () => {
+    const date = new Date(2023, Month.AUGUST, 8)
+    const $app = __createDatePickerAppSingleton__('2020-01-01')
+    const week = $app.timeUnitsImpl.getWeekFor(date)
+    const { container } = factory($app, week)
+
+    const selectedDay = container.querySelector(
+      '.sx__date-picker__day.sx__date-picker__day--selected'
+    )
+    expect(selectedDay).toBeNull()
+  })
+
+  it('should display today\'s date', () => {
+    const today = new Date()
+    const expectedTodaysDate = today.getDate()
+    const $app = __createDatePickerAppSingleton__(toDateString(today))
+    const week = $app.timeUnitsImpl.getWeekFor(today)
+    const { container } = factory($app, week)
+
+    const todaysDate = container.querySelector(
+      '.sx__date-picker__day.sx__date-picker__day--today'
     )
 
-    screen.getByText(dateOfMonth).click()
-
-    expect($app.datePickerState.selectedDate.value).toBe(expectedResult)
+    expect(todaysDate).not.toBeNull()
+    expect(todaysDate?.textContent).toBe(expectedTodaysDate.toString())
   })
 })

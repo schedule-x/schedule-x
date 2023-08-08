@@ -1,6 +1,6 @@
 import { WeekWithDates } from '../../../../shared/types/time'
 import { DATE_PICKER_WEEK } from '../constants/test-ids'
-import { useContext, useEffect, useState } from 'preact/compat'
+import { useContext } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
 import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
 import { isToday } from "../../../../shared/utils/stateless/time/comparison";
@@ -17,19 +17,16 @@ export default function MonthViewWeek({ week }: props) {
     classes: string[]
   }
 
-  const [weekDays, setWeekDays] = useState<WeekDay[]>([])
+  const weekDays: WeekDay[] = week.map(day => {
+    const classes = ['sx__date-picker__day']
+    if (isToday(day)) classes.push('sx__date-picker__day--today')
+    if (toDateString(day) === $app.datePickerState.selectedDate.value) classes.push('sx__date-picker__day--selected')
 
-  useEffect(() => {
-    setWeekDays(week.map(day => {
-      const classes = ['sx__date-picker__day']
-      if (isToday(day)) classes.push('sx__date-picker__day--today')
-
-      return {
-        day,
-        classes,
-      }
-    }))
-  }, [$app.datePickerState.datePickerDate.value, $app.datePickerState.selectedDate.value])
+    return {
+      day,
+      classes,
+    }
+  })
 
   const isDateSelectable = (date: Date) => {
     const dateString = toDateString(date)

@@ -1,4 +1,4 @@
-import DatePickerConfigInternal, { DatePickerConfigExternal } from './utils/stateful/config/config.interface'
+import { DatePickerConfigExternal } from './utils/stateful/config/config.interface'
 import DatePickerApp from './date-picker.app'
 import TimeUnitsBuilder from '../../../shared/utils/stateful/time-units/time-units.builder'
 import DatePickerAppSingleton from './utils/stateful/app-singleton/date-picker-app.singleton'
