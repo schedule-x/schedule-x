@@ -21,10 +21,9 @@ export default function AppInput() {
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
   useEffect(() => {
-    setWrapperClasses([
-      'sx__date-input-wrapper',
-      $app.datePickerState.isOpen.value ? 'sx__date-input--active' : '',
-    ])
+    const newClasses = ['sx__date-input-wrapper'];
+    if ($app.datePickerState.isOpen.value) newClasses.push('sx__date-input--active')
+    setWrapperClasses(newClasses)
   }, [$app.datePickerState.isOpen.value])
 
   return (
@@ -41,7 +40,7 @@ export default function AppInput() {
           type="text"
         />
 
-        <img class="sx__date-input-chevron" src={chevronIcon} />
+        <img class="sx__date-input-chevron" src={chevronIcon} alt="" />
       </div>
     </>
   )
