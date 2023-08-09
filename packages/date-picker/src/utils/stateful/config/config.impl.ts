@@ -1,4 +1,4 @@
-import DatePickerConfig from './config.interface'
+import DatePickerConfigInternal from './config.interface'
 import {
   DEFAULT_FIRST_DAY_OF_WEEK,
   DEFAULT_LOCALE,
@@ -6,7 +6,7 @@ import {
 import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
 import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
 
-export class ConfigImpl implements DatePickerConfig {
+export class ConfigImpl implements DatePickerConfigInternal {
   constructor(
     public locale: string = DEFAULT_LOCALE,
     public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,

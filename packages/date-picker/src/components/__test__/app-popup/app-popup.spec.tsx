@@ -4,11 +4,8 @@ import {
   expect,
   beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, render, screen, waitFor } from '@testing-library/preact'
-import AppPopup from '../../app-popup'
+import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { MONTH_VIEW } from '../../../constants/test-ids'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
-import { AppContext } from '../../../utils/stateful/app-context'
 import { factory } from './utils'
 
 describe('AppPopup', () => {

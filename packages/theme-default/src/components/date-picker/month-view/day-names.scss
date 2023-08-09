@@ -1,0 +1,8 @@
+@use './shared' as *;
+
+.sx__date-picker__day-names {
+  @include date-picker-month-row;
+
+  font-weight: 700;
+  color: var(--sx-color-neutral-variant);
+}

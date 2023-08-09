@@ -1,0 +1,12 @@
+.sx__date-picker-popup {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; // TODO: change
+  max-height: 400px;
+  overflow: scroll;
+  box-shadow: var(--sx-box-shadow-level3);
+  padding: var(--sx-spacing-modal-padding);
+  border-radius: var(--sx-rounding-extra-large);
+}

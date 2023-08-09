@@ -1,0 +1,26 @@
+@use './shared' as *;
+
+.sx__date-picker__week {
+  @include date-picker-month-row;
+}
+
+.sx__date-picker__day {
+  background-color: transparent;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  &:hover {
+    background-color: var(--sx-color-surface-dim);
+  }
+}
+
+.sx__date-picker__day--selected {
+  background-color: var(--sx-color-primary-container);
+  color: var(--sx-color-on-primary-container);
+}
+
+.sx__date-picker__day--today {
+  background-color: var(--sx-color-primary);
+  color: var(--sx-color-on-primary);
+}

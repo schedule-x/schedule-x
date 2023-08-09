@@ -13,6 +13,8 @@
     "format": "prettier . --write",
     "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
     "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "lint:scss": "npx stylelint \"**/*.scss\"",
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "clean:deps": "lerna clean",
     "clean:build": "rm -rf ./packages/*/dist"
   },
@@ -22,6 +24,8 @@
   },
   "devDependencies": {
     "@atomico/rollup-plugin-sizes": "^1.1.4",
+    "@fontsource/open-sans": "^5.0.7",
+    "@fontsource/roboto-condensed": "^5.0.7",
     "@lerna/batch-packages": "^3.16.0",
     "@lerna/filter-packages": "^6.4.1",
     "@lerna/project": "^6.4.1",
@@ -43,8 +47,11 @@
     "prettier": "^3.0.0",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-svg": "^2.0.0",
     "rollup-plugin-typescript2": "^0.35.0",
     "sass": "^1.63.6",
+    "stylelint": "^15.10.2",
+    "stylelint-config-standard-scss": "^10.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.0",
     "vitest": "^0.33.0"

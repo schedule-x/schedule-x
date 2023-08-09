@@ -1,0 +1,13 @@
+// Spec: https://m3.material.io/foundations/layout/understanding-layout/spacing#5893f0f7-ac4a-41fc-a109-00f0daafd82a
+@function md-padding($increments: 1) {
+  @return $increments * 4px;
+}
+
+:root {
+  --sx-spacing-padding1: #{md-padding()};
+  --sx-spacing-padding2: #{md-padding(2)};
+  --sx-spacing-padding3: #{md-padding(3)};
+  --sx-spacing-padding4: #{md-padding(4)};
+  --sx-spacing-padding6: #{md-padding(6)};
+  --sx-spacing-modal-padding: #{md-padding(4)};
+}

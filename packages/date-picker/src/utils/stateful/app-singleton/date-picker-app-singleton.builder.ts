@@ -3,14 +3,14 @@ import Builder from '../../../../../../shared/interfaces/builder.interface'
 import DatePickerAppSingleton from './date-picker-app.singleton'
 import DatePickerAppSingletonImpl from './date-picker-app-singleton.impl'
 import DatePickerState from '../../../../../../shared/utils/stateful/date-picker-state/date-picker-state.interface'
-import DatePickerConfig from '../config/config.interface'
+import DatePickerConfigInternal from '../config/config.interface'
 import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
 
 export default class DatePickerAppSingletonBuilder
   implements Builder<DatePickerAppSingleton>
 {
   private datePickerState: DatePickerState | undefined
-  private config: DatePickerConfig | undefined
+  private config: DatePickerConfigInternal | undefined
   private timeUnitsImpl: TimeUnits | undefined
 
   build(): DatePickerAppSingleton {
@@ -28,7 +28,7 @@ export default class DatePickerAppSingletonBuilder
     return this
   }
 
-  withConfig(config: DatePickerConfig): DatePickerAppSingletonBuilder {
+  withConfig(config: DatePickerConfigInternal): DatePickerAppSingletonBuilder {
     this.config = config
     return this
   }

@@ -1,9 +1,15 @@
-// This file exists parallel to index.scss, merely to allow a small stylesheet for anyone importing
-// only the date picker
-@import './variables/box-model';
-@import './variables/color';
+@import './user-agent-overrides/index';
 
-@import 'components/date-picker/date-picker-wrapper';
-@import 'components/date-picker/date-picker-input';
-@import 'components/date-picker/date-picker-popup';
-@import 'components/date-picker/date-picker-years-view';
+// Variables
+@import './variables/color';
+@import './variables/spacing';
+@import './variables/box-model';
+
+// Components
+@import 'components/date-picker/app-wrapper';
+@import 'components/date-picker/app-input';
+@import 'components/date-picker/app-popup';
+@import 'components/date-picker/years-view';
+@import 'components/date-picker/month-view/day-names';
+@import 'components/date-picker/month-view/month-view-header';
+@import 'components/date-picker/month-view/month-view-week';
