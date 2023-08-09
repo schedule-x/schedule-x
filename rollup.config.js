@@ -5,7 +5,6 @@ import minimist from 'minimist'
 import { Project } from '@lerna/project'
 import { filterPackages } from '@lerna/filter-packages'
 import batchPackages from '@lerna/batch-packages'
-import sourcemaps from 'rollup-plugin-sourcemaps'
 import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
@@ -45,7 +44,6 @@ async function build(commandLineArgs) {
     const { name, main, umd, module } = pkg.toJSON()
 
     const basePlugins = [
-      sourcemaps(),
       resolve(),
       commonjs(),
       babel({
@@ -63,20 +61,17 @@ async function build(commandLineArgs) {
           name,
           file: path.join(basePath, umd),
           format: 'umd',
-          sourcemap: true,
         },
         {
           name,
           file: path.join(basePath, main),
           format: 'cjs',
-          sourcemap: true,
           exports: 'auto',
         },
         {
           name,
           file: path.join(basePath, module),
           format: 'es',
-          sourcemap: true,
         },
       ],
       plugins: [
