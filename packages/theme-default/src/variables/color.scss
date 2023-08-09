@@ -1,37 +1,29 @@
 :root {
   --sx-color-primary: #6750a4;
-  --sx-color-on-primary: #ffffff;
+  --sx-color-on-primary: #fff;
   --sx-color-primary-container: #eaddff;
   --sx-color-on-primary-container: #21005e;
-
   --sx-color-secondary: #625b71;
-  --sx-color-on-secondary: #ffffff;
+  --sx-color-on-secondary: #fff;
   --sx-color-secondary-container: #e8def8;
   --sx-color-on-secondary-container: #1e192b;
-
   --sx-color-tertiary: #7d5260;
-  --sx-color-on-tertiary: #ffffff;
+  --sx-color-on-tertiary: #fff;
   --sx-color-tertiary-container: #ffd8e4;
   --sx-color-on-tertiary-container: #370b1e;
-
   --sx-color-surface: #fef7ff;
   --sx-color-surface-dim: #ded8e1;
   --sx-color-surface-bright: #fef7ff;
   --sx-color-on-surface: #1c1b1f;
-
   --sx-color-surface-container: #f3edf7;
   --sx-color-surface-container-low: #f7f2fa;
   --sx-color-surface-container-high: #ece6f0;
-
   --sx-color-background: #fff; // deviation from material 3, which would be #FEF7FF
   --sx-color-on-background: #1c1b1f;
-
   --sx-color-outline: #79747e;
   --sx-color-outline-variant: #c4c7c5;
-
-  --sx-color-shadow: #000000;
+  --sx-color-shadow: #000;
   --sx-color-surface-tint: #6750a4;
-
   --sx-color-neutral: var(--sx-color-outline);
   --sx-color-neutral-variant: var(--sx-color-outline-variant);
 }

@@ -1,11 +1,11 @@
-// This file exists parallel to index.scss, merely to allow a small stylesheet for anyone importing
-// only the date picker
 @import './user-agent-overrides/index';
 
+// Variables
 @import './variables/color';
 @import './variables/spacing';
 @import './variables/box-model';
 
+// Components
 @import 'components/date-picker/app-wrapper';
 @import 'components/date-picker/app-input';
 @import 'components/date-picker/app-popup';
