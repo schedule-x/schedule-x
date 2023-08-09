@@ -16,7 +16,10 @@
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "clean:deps": "lerna clean",
-    "clean:build": "rm -rf ./packages/*/dist"
+    "clean:build": "rm -rf ./packages/*/dist",
+    "release": "npm run build && lerna publish --no-commit-hooks",
+    "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
+    "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease"
   },
   "dependencies": {
     "@preact/signals": "^1.1.5",
