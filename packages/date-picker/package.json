@@ -10,7 +10,7 @@
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
-  "types": "dist/index.d.ts",
+  "types": "./dist/packages/date-picker/src/index.d.ts",
   "files": [
     "dist"
   ],
