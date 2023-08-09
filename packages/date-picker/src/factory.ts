@@ -21,7 +21,7 @@ export const createDatePicker = (
     .build()
   const $app: DatePickerAppSingleton = new DatePickerAppSingletonBuilder()
     .withConfig(configInternal)
-    .withDatePickerState(createDatePickerState())
+    .withDatePickerState(createDatePickerState(config.selectedDate))
     .withTimeUnitsImpl(timeUnitsImpl)
     .build()
 
