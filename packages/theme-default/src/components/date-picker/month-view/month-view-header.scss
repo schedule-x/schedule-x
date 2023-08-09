@@ -3,11 +3,6 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1em;
-
-  button {
-    display: flex;
-    align-items: center;
-  }
 }
 
 .sx__date-picker__month-view-header__month-year {
@@ -16,9 +11,9 @@
 }
 
 .sx__date-picker__chevron {
-  cursor: pointer;
+  display: flex;
+  align-items: center;
   width: 1.5rem;
-  color: #000;
   transition: color 0.2s ease-in-out;
   border-radius: 50%;
   padding: var(--sx-spacing-padding2);

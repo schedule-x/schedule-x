@@ -20,9 +20,8 @@
 .sx__date-input {
   font-size: 1rem;
   padding: var(--sx-spacing-padding4);
-  border: 1px solid var(--sx-color-outline-variant);
+  border: var(--sx-border);
   border-radius: 4px;
-  outline: none;
   cursor: pointer;
 
   .sx__date-input--active & {

@@ -2,14 +2,14 @@
 // only the date picker
 @import './user-agent-overrides/index';
 
-@import './variables/box-model';
 @import './variables/color';
 @import './variables/spacing';
+@import './variables/box-model';
 
 @import 'components/date-picker/app-wrapper';
 @import 'components/date-picker/app-input';
 @import 'components/date-picker/app-popup';
 @import 'components/date-picker/years-view';
-@import 'components/date-picker/month-view/month-view';
+@import 'components/date-picker/month-view/day-names';
 @import 'components/date-picker/month-view/month-view-header';
 @import 'components/date-picker/month-view/month-view-week';

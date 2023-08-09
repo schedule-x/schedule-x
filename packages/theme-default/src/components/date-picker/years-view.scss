@@ -1,16 +1,15 @@
 .sx__date-picker__years-view {
-  list-style: none;
   margin: 0;
 }
 
 .sx__date-picker__years-accordion__expand-button {
   width: 100%;
   border: 0;
-  border-bottom: 1px solid gray;
+  border-bottom: var(--sx-border);
   border-radius: 0;
   background-color: transparent;
   font-size: 1rem;
-  padding: 0.5em;
+  padding: 1em;
   transition: background-color 0.2s ease-in-out;
 
   .sx__is-expanded & {
@@ -35,6 +34,5 @@
   &:hover {
     background-color: var(--sx-color-primary);
     color: var(--sx-color-on-primary);
-    cursor: pointer;
   }
 }
