@@ -1,6 +1,6 @@
 {
-  "name": "@schedule-x/theme-basic",
-  "version": "0.1.0",
+  "name": "@schedule-x/theme-default",
+  "version": "0.0.1",
   "license": "MIT",
   "author": {
     "name": "Tom Österlund",
