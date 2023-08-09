@@ -15,5 +15,7 @@ jobs:
           node-version: 'lts/*'
       - name: Install dependencies 🛠️
         run: npm i
-      - name: Build
+      - name: Lint TS 🧹
         run: npm run lint
+      - name: Lint SCSS
+        run: npm run lint:scss
