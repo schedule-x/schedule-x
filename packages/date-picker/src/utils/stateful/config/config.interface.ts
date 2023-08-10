@@ -6,4 +6,6 @@ export default interface DatePickerConfigInternal extends Config {
 }
 
 export interface DatePickerConfigExternal
-  extends Partial<DatePickerConfigInternal> {}
+  extends Partial<DatePickerConfigInternal> {
+  selectedDate?: string
+}

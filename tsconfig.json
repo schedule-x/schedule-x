@@ -5,6 +5,7 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
+    "types": ["vite/client", "cypress"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -21,6 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["packages", "development", "shared"],
+  "include": ["packages", "development", "shared", "cypress/**/*.cy.ts", "cypress"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 coverage
+cypress/snapshots/mac/diff
+cypress/snapshots/mac/actual

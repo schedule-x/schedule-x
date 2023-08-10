@@ -1,0 +1,20 @@
+name: Record snapshots
+on: workflow_dispatch
+
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          start: npm run dev
+          env: type=base
+          config: screenshotsFolder=cypress/snapshots/linux/base
+      - uses: actions/upload-artifact@v3
+        if: success()
+        with:
+          name: visual-regression-diff
+          path: cypress/snapshots
+          retention-days: 14
