@@ -21,7 +21,7 @@ describe('MonthViewWeek', () => {
     const week = $app.timeUnitsImpl.getWeekFor(date)
     const { container } = factory($app, week)
 
-    ;['17', '18', '19', '20', '21', '22', '23'].forEach(day => {
+    ;['17', '18', '19', '20', '21', '22', '23'].forEach((day) => {
       expect(container.textContent).toContain(day)
     })
   })

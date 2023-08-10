@@ -1,5 +1,5 @@
-import { cypressPageUrls } from "../../pages/urls.ts";
-import { createDatePickerPageObject } from "../../page-objects/date-picker.page-object.ts";
+import { cypressPageUrls } from '../../pages/urls.ts'
+import { createDatePickerPageObject } from '../../page-objects/date-picker.page-object.ts'
 
 describe('Date Picker - screenshots', () => {
   const datePicker = createDatePickerPageObject()

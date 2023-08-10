@@ -7,6 +7,7 @@ import {
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { MONTH_VIEW } from '../../../constants/test-ids'
 import { factory } from './utils'
+import { Placement } from '../../../enums/placement.enum'
 
 describe('AppPopup', () => {
   beforeEach(() => {
@@ -54,4 +55,20 @@ describe('AppPopup', () => {
       expect(screen.queryByTestId(MONTH_VIEW)).not.toBeNull()
     })
   })
+
+  it.each([
+    Placement.TOP,
+    Placement.TOP_START,
+    Placement.TOP_END,
+    Placement.BOTTOM,
+    Placement.BOTTOM_START,
+    Placement.BOTTOM_END,
+  ])(
+    'should render with different placement classes',
+    (placement: Placement) => {
+      factory(placement)
+      const popup = screen.getByTestId('date-picker-popup')
+      expect(popup.classList.contains(placement)).toBe(true)
+    }
+  )
 })

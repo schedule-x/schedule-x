@@ -22,6 +22,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["packages", "development", "shared", "cypress/**/*.cy.ts", "cypress"],
+  "include": [
+    "packages",
+    "development",
+    "shared",
+    "cypress/**/*.cy.ts",
+    "cypress"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

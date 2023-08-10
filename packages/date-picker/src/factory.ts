@@ -5,6 +5,7 @@ import DatePickerAppSingleton from './utils/stateful/app-singleton/date-picker-a
 import { createDatePickerState } from '../../../shared/utils/stateful/date-picker-state/date-picker-state.impl'
 import DatePickerAppSingletonBuilder from './utils/stateful/app-singleton/date-picker-app-singleton.builder'
 import { ConfigBuilder } from './utils/stateful/config/config.builder'
+import { Placement } from './enums/placement.enum'
 
 export const createDatePicker = (
   config: DatePickerConfigExternal,
@@ -15,6 +16,7 @@ export const createDatePicker = (
     .withLocale(config.locale)
     .withMin(config.min)
     .withMax(config.max)
+    .withPlacement(config.placement as Placement)
     .build()
   const timeUnitsImpl = new TimeUnitsBuilder()
     .withFirstDayOfWeek(configInternal.firstDayOfWeek)

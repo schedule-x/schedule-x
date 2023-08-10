@@ -5,6 +5,7 @@ import {
 } from '../../../../../../shared/values'
 import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
 import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+import { Placement } from '../../../enums/placement.enum'
 
 export class ConfigImpl implements DatePickerConfigInternal {
   constructor(
@@ -13,6 +14,7 @@ export class ConfigImpl implements DatePickerConfigInternal {
     public min: string = toDateString(new Date(1970, 0, 1)),
     public max: string = toDateString(
       new Date(new Date().getFullYear() + 1, 11, 31)
-    )
+    ),
+    public placement: Placement = Placement.BOTTOM
   ) {}
 }

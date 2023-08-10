@@ -3,17 +3,20 @@ import DatePickerAppSingleton from '@schedule-x/date-picker/src/utils/stateful/a
 import { createDatePickerState } from '../../../../stateful/date-picker-state/date-picker-state.impl'
 import { ConfigBuilder } from '@schedule-x/date-picker/src/utils/stateful/config/config.builder'
 import { toDateString } from '../../../time/format-conversion/date-to-strings.ts'
+import { Placement } from '@schedule-x/date-picker/src/enums/placement.enum.ts'
 
 export const __createDatePickerAppSingleton__: (
   selectedDate?: string,
   locale?: string,
   min?: string,
-  max?: string
+  max?: string,
+  placement?: Placement
 ) => DatePickerAppSingleton = (
   selectedDate?: string,
   locale = 'de-DE',
   min = '1970-01-01',
-  max = toDateString(new Date(new Date().getFullYear() + 1, 11, 31))
+  max = toDateString(new Date(new Date().getFullYear() + 1, 11, 31)),
+  placement = Placement.BOTTOM
 ) => {
   return {
     datePickerState: createDatePickerState(selectedDate),
@@ -22,6 +25,7 @@ export const __createDatePickerAppSingleton__: (
       .withLocale(locale)
       .withMin(min)
       .withMax(max)
+      .withPlacement(placement)
       .build(),
   }
 }

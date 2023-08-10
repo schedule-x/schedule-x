@@ -9,4 +9,34 @@
   box-shadow: var(--sx-box-shadow-level3);
   padding: var(--sx-spacing-modal-padding);
   border-radius: var(--sx-rounding-extra-large);
+
+  $top-placement-bottom-value: calc(100% + 1rem);
+
+  &.bottom-start {
+    left: 0;
+    transform: translateX(0);
+  }
+
+  &.bottom-end {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+  }
+
+  &.top {
+    top: auto;
+    bottom: $top-placement-bottom-value;
+  }
+
+  &.top-start {
+    top: auto;
+    bottom: $top-placement-bottom-value;
+    left: 0;
+    transform: translateX(0);
+  }
+
+  &.top-end {
+    inset: auto 0 $top-placement-bottom-value auto;
+    transform: translateX(0);
+  }
 }

@@ -19,10 +19,12 @@ export default function MonthView({ seatYearsView }: props) {
     const newDatePickerDate = toJSDate(
       $app.datePickerState.datePickerDate.value
     )
-    setMonth($app.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
-      newDatePickerDate.getFullYear(),
-      newDatePickerDate.getMonth()
-    ))
+    setMonth(
+      $app.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
+        newDatePickerDate.getFullYear(),
+        newDatePickerDate.getMonth()
+      )
+    )
   }
 
   useEffect(() => {

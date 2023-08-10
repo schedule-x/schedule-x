@@ -4,5 +4,5 @@ export const cypressPageUrls = Object.freeze({
     navigateYears: '/cypress/pages/date-picker/002-navigate-years.html',
     selectDates: '/cypress/pages/date-picker/003-select-dates.html',
     screenshots: '/cypress/pages/date-picker/100-screenshots.html',
-  }
+  },
 })
