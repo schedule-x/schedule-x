@@ -19,6 +19,11 @@ export default function YearsViewAccordion({
 
   const yearWithDates = $app.timeUnitsImpl.getMonthsFor(year)
 
+  const handleClickOnMonth = (event: MouseEvent, month: Date) => {
+    event.stopPropagation()
+    setYearAndMonth(year, month.getMonth())
+  }
+
   return (
     <>
       <li class={isExpanded ? 'sx__is-expanded' : ''}>
@@ -33,7 +38,7 @@ export default function YearsViewAccordion({
             {yearWithDates.map((month) => (
               <button
                 class="sx__date-picker__years-view-accordion__month"
-                onClick={() => setYearAndMonth(year, month.getMonth())}
+                onClick={(event) => handleClickOnMonth(event, month)}
               >
                 {toLocalizedMonth(month, $app.config.locale)}
               </button>
