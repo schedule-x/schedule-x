@@ -1,0 +1,24 @@
+name: End-to-end tests
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          start: npm run dev
+          env: type=actual # for screenshot testing
+          config: screenshotsFolder=cypress/snapshots/linux/actual
+      - uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: visual-regression-diff
+          path: cypress/snapshots
+          retention-days: 14
