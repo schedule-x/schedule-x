@@ -54,6 +54,11 @@ export default function MonthViewHeader({ setYearsView }: props) {
     setDatePickerYear(getYearFrom($app.datePickerState.datePickerDate.value))
   }, [$app.datePickerState.datePickerDate.value])
 
+  const handleOpenYearsView = (e: MouseEvent) => {
+    e.stopPropagation()
+    setYearsView()
+  }
+
   return (
     <>
       <header class="sx__date-picker__month-view-header">
@@ -67,7 +72,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
         </button>
         <button
           class="sx__date-picker__month-view-header__month-year"
-          onClick={() => setYearsView()}
+          onClick={event => handleOpenYearsView(event)}
         >
           {selectedDateMonthName + ' ' + datePickerYear}
         </button>
