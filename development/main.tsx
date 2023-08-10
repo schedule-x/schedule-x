@@ -12,6 +12,7 @@ const datePicker = createDatePicker(
   {
     locale: 'en-US',
     firstDayOfWeek: 0,
+    // placement: 'top-end',
     // min: '2021-03-01',
     // max: '2021-03-31',
   },

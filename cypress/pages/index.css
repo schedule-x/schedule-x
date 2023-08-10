@@ -1,12 +1,12 @@
 :root {
-    font-family: Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 body {
-    margin: 24px auto;
+  margin: 24px auto;
 }
 
 .sx__date-picker-wrapper {
-    width: fit-content;
-    margin: 0 auto;
+  width: fit-content;
+  margin: 0 auto;
 }

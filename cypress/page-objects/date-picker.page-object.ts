@@ -1,5 +1,4 @@
 class DatePickerPageObject {
-
   goToNextMonth() {
     cy.get('.sx__date-picker__chevron--next').click()
   }
@@ -29,7 +28,9 @@ class DatePickerPageObject {
   }
 
   clickYear(year: number) {
-    cy.get('.sx__date-picker__years-accordion__expand-button').contains(year).click()
+    cy.get('.sx__date-picker__years-accordion__expand-button')
+      .contains(year)
+      .click()
   }
 
   clickDateByText(day: string) {

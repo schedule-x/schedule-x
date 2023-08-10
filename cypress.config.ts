@@ -1,8 +1,8 @@
-import { defineConfig } from 'cypress';
-import getCompareSnapshotsPlugin from "cypress-visual-regression/dist/plugin";
-import { getPlatformForCypressSnapshots } from "./cypress/utils/platform";
+import { defineConfig } from 'cypress'
+import getCompareSnapshotsPlugin from 'cypress-visual-regression/dist/plugin'
+import { getPlatformForCypressSnapshots } from './cypress/utils/platform'
 
-const platformForCypressSnapshots = getPlatformForCypressSnapshots();
+const platformForCypressSnapshots = getPlatformForCypressSnapshots()
 
 export default defineConfig({
   video: false,
@@ -16,7 +16,7 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:5173',
     setupNodeEvents(on, config) {
-      getCompareSnapshotsPlugin(on, config);
+      getCompareSnapshotsPlugin(on, config)
     },
   },
-});
+})

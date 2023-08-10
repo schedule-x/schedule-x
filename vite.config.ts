@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import preact from '@preact/preset-vite'
-import { resolve } from "path";
+import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -18,8 +18,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        datePicker001: resolve(__dirname, 'cypress/pages/date-picker/001-navigate.html'),
-      }
-    }
-  }
+        datePicker001: resolve(
+          __dirname,
+          'cypress/pages/date-picker/001-navigate.html'
+        ),
+      },
+    },
+  },
 })
