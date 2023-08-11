@@ -60,14 +60,12 @@ describe('date picker input', () => {
     )
 
     const inputElement = screen.getByTestId(DATE_PICKER_INPUT)
-    expect(screen.getByDisplayValue('January 1, 2021') === inputElement).toBe(
-      true
-    )
+    expect(screen.getByDisplayValue('1/1/2021') === inputElement).toBe(true)
   })
 
   it('should update displayed selected date', async () => {
-    const expectedInitialDate = 'January 1, 2021'
-    const expectedUpdatedDate = 'January 2, 2021'
+    const expectedInitialDate = '1/1/2021'
+    const expectedUpdatedDate = '1/2/2021'
     const $app = __createDatePickerAppSingleton__('2021-01-01', 'en-US')
     render(
       <AppContext.Provider value={$app}>
