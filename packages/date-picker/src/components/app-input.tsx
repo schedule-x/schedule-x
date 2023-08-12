@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
-import { toLocalizedDate } from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
+import { toLocalizedDateString } from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
 import chevronIcon from '../assets/chevron-input.svg'
+import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-format/to-date-string'
 
 export default function AppInput() {
   const $app = useContext(AppContext)
   const getLocalizedDate = (dateString: string) => {
-    return toLocalizedDate(toJSDate(dateString), $app.config.locale)
+    return toLocalizedDateString(toJSDate(dateString), $app.config.locale)
   }
 
   const [displayedValue, setDisplayedValue] = useState<string>(
@@ -27,6 +28,31 @@ export default function AppInput() {
     setWrapperClasses(newClasses)
   }, [$app.datePickerState.isOpen.value])
 
+  const handleKeyUp = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') handleInputValue(event)
+  }
+
+  const handleInputValue = (event: Event) => {
+    event.stopPropagation() // prevent date picker from closing
+
+    try {
+      const newSelectedDate = toDateString(
+        (event.target as HTMLInputElement).value,
+        $app.config.locale
+      ) as string
+      $app.datePickerState.selectedDate.value = newSelectedDate
+      $app.datePickerState.datePickerDate.value = newSelectedDate
+      $app.datePickerState.close()
+    } catch (e) {
+      // nothing to do
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('change', handleInputValue) // Preact onChange triggers on every input
+    return () => document.removeEventListener('change', handleInputValue)
+  })
+
   return (
     <>
       <div class={wrapperClasses.join(' ')}>
@@ -35,9 +61,9 @@ export default function AppInput() {
         <input
           value={displayedValue}
           data-testid="date-picker-input"
-          readonly
           class="sx__date-input"
           onClick={() => $app.datePickerState.toggle()}
+          onKeyUp={handleKeyUp}
           type="text"
         />
 

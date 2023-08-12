@@ -10,7 +10,7 @@ import { createDatePicker } from '../packages/date-picker/src'
 
 const datePicker = createDatePicker(
   {
-    locale: 'en-US',
+    locale: 'de-DE',
     firstDayOfWeek: 0,
     // placement: 'top-end',
     // min: '2021-03-01',
