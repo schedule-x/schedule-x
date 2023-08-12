@@ -47,13 +47,18 @@ describe('date format conversion', () => {
   it.each([
     ['en-GB', '31/02/'],
     ['en-GB', '31/02/20'],
+    ['en-GB', '31.2.2020'],
     ['en-US', '02/31/'],
     ['en-US', '02/31/20'],
+    ['en-US', '2.31.2020'],
     ['de-DE', '31.02.'],
     ['de-DE', '31.02.20'],
+    ['de-DE', '2/31/2020'],
     ['sv-SE', '2020-02-'],
     ['sv-SE', '2020-02-3'],
     ['sv-SE', '2020-02-3'],
+    ['sv-SE', '31.2.2020'],
+    ['sv-SE', '31/2/2020'],
   ])(
     'should throw invalid date format error for locale %s and format %s',
     (locale: string, format: string) => {

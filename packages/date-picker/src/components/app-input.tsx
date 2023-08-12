@@ -33,12 +33,11 @@ export default function AppInput() {
   }
 
   const handleInputValue = (event: Event) => {
-    event.stopPropagation()
-    const input = event.target as HTMLInputElement
+    event.stopPropagation() // prevent date picker from closing
 
     try {
       const newSelectedDate = toDateString(
-        input.value,
+        (event.target as HTMLInputElement).value,
         $app.config.locale
       ) as string
       $app.datePickerState.selectedDate.value = newSelectedDate
@@ -50,7 +49,7 @@ export default function AppInput() {
   }
 
   useEffect(() => {
-    document.addEventListener('change', handleInputValue)
+    document.addEventListener('change', handleInputValue) // Preact onChange triggers on every input
     return () => document.removeEventListener('change', handleInputValue)
   })
 

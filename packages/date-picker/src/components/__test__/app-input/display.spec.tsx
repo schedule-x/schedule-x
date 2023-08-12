@@ -11,21 +11,17 @@ import { screen, waitFor, cleanup } from '@testing-library/preact'
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { factory } from './utils'
 
-const DATE_PICKER_INPUT = 'date-picker-input'
+const DATE_PICKER_INPUT_TEST_ID = 'date-picker-input'
 
 describe('date picker input', () => {
   beforeEach(() => {
     cleanup()
   })
 
-  afterEach(() => {
-    clearAllMocks()
-  })
-
   it('should display selected date', () => {
     factory(__createDatePickerAppSingleton__('2021-01-01', 'en-US'))
 
-    const inputElement = screen.getByTestId(DATE_PICKER_INPUT)
+    const inputElement = screen.getByTestId(DATE_PICKER_INPUT_TEST_ID)
     expect(screen.getByDisplayValue('1/1/2021') === inputElement).toBe(true)
   })
 
@@ -34,7 +30,7 @@ describe('date picker input', () => {
     const expectedUpdatedDate = '1/2/2021'
     const $app = __createDatePickerAppSingleton__('2021-01-01', 'en-US')
     factory($app)
-    const inputElement = screen.getByTestId(DATE_PICKER_INPUT)
+    const inputElement = screen.getByTestId(DATE_PICKER_INPUT_TEST_ID)
     expect(screen.getByDisplayValue(expectedInitialDate) === inputElement).toBe(
       true
     )
