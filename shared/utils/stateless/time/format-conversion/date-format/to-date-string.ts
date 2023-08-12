@@ -1,11 +1,11 @@
-import { dateFormatLocalizedRules } from './date-format-localized-rules.ts'
+import { dateFormatLocalizedRules } from './date-format-localized-rules'
 import {
   DateFormatDelimiter as Delimiter,
   DateFormatOrder as Order,
-} from '../../../../../enums/time/date-format.ts'
-import { doubleDigit } from '../../date-time-mutation/date-time-mutation.ts'
-import { LocaleNotSupportedError } from '../../../errors/locale-not-supported.error.ts'
-import { InvalidDateFormatError } from '../../../errors/invalid-date-format.error.ts'
+} from '../../../../../enums/time/date-format'
+import { doubleDigit } from '../../date-time-mutation/date-time-mutation'
+import { LocaleNotSupportedError } from '../../../errors/locale-not-supported.error'
+import { InvalidDateFormatError } from '../../../errors/invalid-date-format.error'
 
 const _getMatchesOrThrow = (
   format: string,

@@ -1,7 +1,7 @@
 import {
   DateFormatDelimiter,
   DateFormatOrder,
-} from '../../../../../enums/time/date-format.ts'
+} from '../../../../../enums/time/date-format'
 
 type DateFormatRule = {
   delimiter: DateFormatDelimiter

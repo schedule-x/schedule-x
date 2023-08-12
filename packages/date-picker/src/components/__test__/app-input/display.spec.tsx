@@ -3,8 +3,6 @@ import {
   it,
   expect,
   beforeEach,
-  afterEach,
-  clearAllMocks,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { screen, waitFor, cleanup } from '@testing-library/preact'
 
