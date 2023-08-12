@@ -4,7 +4,7 @@ import '../../../packages/theme-default/src/date-picker.scss'
 const el = document.getElementById('app')
 const datePicker = createDatePicker(
   {
-    selectedDate: '2023-08-09',
+    selectedDate: '2022-08-09',
   },
   el as HTMLElement
 )
