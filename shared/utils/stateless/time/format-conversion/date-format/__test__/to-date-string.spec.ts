@@ -4,8 +4,8 @@ import {
   expect,
 } from '../../../../testing/unit/unit-testing-library.impl'
 import { toDateString } from '../to-date-string'
-import { LocaleNotSupportedError } from "../../../../errors/locale-not-supported.error.ts";
-import { InvalidDateFormatError } from "../../../../errors/invalid-date-format.error.ts";
+import { LocaleNotSupportedError } from '../../../../errors/locale-not-supported.error.ts'
+import { InvalidDateFormatError } from '../../../../errors/invalid-date-format.error.ts'
 
 describe('date format conversion', () => {
   it.each([
@@ -31,17 +31,18 @@ describe('date format conversion', () => {
     ['sv-SE', false, '2020-02-31'],
     ['en-CA', true, '31/02/2020'],
     ['xx-XX', true, '31/02/2020'],
-  ])('should throw error if locale is not supported, for locale %s', (
-    locale: string,
-    shouldThrow: boolean,
-    format: string
-  ) => {
-    if (shouldThrow) {
-      expect(() => toDateString(format, locale)).toThrow(LocaleNotSupportedError)
-    } else {
-      expect(() => toDateString(format, locale)).not.toThrow()
+  ])(
+    'should throw error if locale is not supported, for locale %s',
+    (locale: string, shouldThrow: boolean, format: string) => {
+      if (shouldThrow) {
+        expect(() => toDateString(format, locale)).toThrow(
+          LocaleNotSupportedError
+        )
+      } else {
+        expect(() => toDateString(format, locale)).not.toThrow()
+      }
     }
-  })
+  )
 
   it.each([
     ['en-GB', '31/02/'],
@@ -52,10 +53,22 @@ describe('date format conversion', () => {
     ['de-DE', '31.02.20'],
     ['sv-SE', '2020-02-'],
     ['sv-SE', '2020-02-3'],
-  ])('should throw invalid date format error for locale %s and format %s', (
-    locale: string,
-    format: string
-  ) => {
-    expect(() => toDateString(format, locale)).toThrow(InvalidDateFormatError)
-  })
+    ['sv-SE', '2020-02-3'],
+  ])(
+    'should throw invalid date format error for locale %s and format %s',
+    (locale: string, format: string) => {
+      expect(() => toDateString(format, locale)).toThrow(InvalidDateFormatError)
+    }
+  )
+
+  it.each([
+    ['en-GB', '2020-02-31'],
+    ['en-US', '2020-02-31'],
+    ['de-DE', '2020-02-31'],
+  ])(
+    'should allow international format also for locales using other formats',
+    (locale: string, format: string) => {
+      expect(toDateString(format, locale)).toBe(format)
+    }
+  )
 })

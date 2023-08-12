@@ -1,10 +1,7 @@
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
-import {
-  toLocalizedDate,
-  toLocalizedDateString,
-} from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
+import { toLocalizedDateString } from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
 import chevronIcon from '../assets/chevron-input.svg'
 import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-format/to-date-string'
 
@@ -36,15 +33,26 @@ export default function AppInput() {
   }
 
   const handleInputValue = (event: Event) => {
+    event.stopPropagation()
     const input = event.target as HTMLInputElement
 
     try {
-      const newSelectedDate = toDateString(input.value, $app.config.locale)
-      $app.datePickerState.selectedDate.value = newSelectedDate as string
-      $app.datePickerState.datePickerDate.value = newSelectedDate as string
+      const newSelectedDate = toDateString(
+        input.value,
+        $app.config.locale
+      ) as string
+      $app.datePickerState.selectedDate.value = newSelectedDate
+      $app.datePickerState.datePickerDate.value = newSelectedDate
       $app.datePickerState.close()
-    } catch (e) {}
+    } catch (e) {
+      // nothing to do
+    }
   }
+
+  useEffect(() => {
+    document.addEventListener('change', handleInputValue)
+    return () => document.removeEventListener('change', handleInputValue)
+  })
 
   return (
     <>
@@ -56,8 +64,7 @@ export default function AppInput() {
           data-testid="date-picker-input"
           class="sx__date-input"
           onClick={() => $app.datePickerState.toggle()}
-          onKeyUp={(event) => handleKeyUp(event)}
-          onBlur={(event) => handleInputValue(event)}
+          onKeyUp={handleKeyUp}
           type="text"
         />
 

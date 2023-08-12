@@ -1,23 +1,24 @@
 import { dateFormatLocalizedRules } from './date-format-localized-rules.ts'
 import {
-  DateFormatDelimiter,
-  DateFormatOrder,
+  DateFormatDelimiter as Delimiter,
+  DateFormatOrder as Order,
 } from '../../../../../enums/time/date-format.ts'
 import { doubleDigit } from '../../date-time-mutation/date-time-mutation.ts'
-import { LocaleNotSupportedError } from "../../../errors/locale-not-supported.error.ts";
-import { InvalidDateFormatError } from "../../../errors/invalid-date-format.error.ts";
+import { LocaleNotSupportedError } from '../../../errors/locale-not-supported.error.ts'
+import { InvalidDateFormatError } from '../../../errors/invalid-date-format.error.ts'
 
 export const toDateString = (format: string, locale: string) => {
-  const pattern224Slashed = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
-  const pattern224Dotted = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
-  const localeDateFormatRule = dateFormatLocalizedRules.get(locale)
+  const internationalFormat = /^\d{4}-\d{2}-\d{2}$/
+  if (internationalFormat.test(format)) return format // allow international format regardless of locale
 
+  const localeDateFormatRule = dateFormatLocalizedRules.get(locale)
   if (!localeDateFormatRule) throw new LocaleNotSupportedError(locale)
 
-  if (
-    localeDateFormatRule.order === DateFormatOrder.DMY &&
-    localeDateFormatRule.delimiter === DateFormatDelimiter.SLASH
-  ) {
+  const { order, delimiter } = localeDateFormatRule
+  const pattern224Slashed = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+  const pattern224Dotted = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
+
+  if (order === Order.DMY && delimiter === Delimiter.SLASH) {
     const matches = format.match(pattern224Slashed)
     if (!matches) throw new InvalidDateFormatError(format, locale)
 
@@ -25,10 +26,7 @@ export const toDateString = (format: string, locale: string) => {
     return `${year}-${doubleDigit(+month)}-${doubleDigit(+day)}`
   }
 
-  if (
-    localeDateFormatRule.order === DateFormatOrder.MDY &&
-    localeDateFormatRule.delimiter === DateFormatDelimiter.SLASH
-  ) {
+  if (order === Order.MDY && delimiter === Delimiter.SLASH) {
     const matches = format.match(pattern224Slashed)
     if (!matches) throw new InvalidDateFormatError(format, locale)
 
@@ -36,10 +34,7 @@ export const toDateString = (format: string, locale: string) => {
     return `${year}-${doubleDigit(+month)}-${doubleDigit(+day)}`
   }
 
-  if (
-    localeDateFormatRule.order === DateFormatOrder.DMY &&
-    localeDateFormatRule.delimiter === DateFormatDelimiter.PERIOD
-  ) {
+  if (order === Order.DMY && delimiter === Delimiter.PERIOD) {
     const matches = format.match(pattern224Dotted)
     if (!matches) throw new InvalidDateFormatError(format, locale)
 
@@ -47,12 +42,5 @@ export const toDateString = (format: string, locale: string) => {
     return `${year}-${doubleDigit(+month)}-${doubleDigit(+day)}`
   }
 
-  if (
-    localeDateFormatRule.order === DateFormatOrder.YMD &&
-    localeDateFormatRule.delimiter === DateFormatDelimiter.DASH
-  ) {
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(format)) throw new InvalidDateFormatError(format, locale)
-
-    return format
-  }
+  throw new InvalidDateFormatError(format, locale)
 }
