@@ -17,19 +17,19 @@ const setup = (date: Date) => {
 }
 
 describe('MonthViewWeek', () => {
-  it('should contain 5 leading dates', () => {
+  it('should contain 5 leading dates for July 2023', () => {
     const container = setup(new Date(2023, Month.JULY, 1))
     const leadingOrTrailingDates = container.querySelectorAll(SELECTOR)
     expect(leadingOrTrailingDates.length).toBe(5)
   })
 
-  it('should not contain any trailing or leading dates', () => {
+  it('should not contain any trailing or leading dates for July 2023', () => {
     const container = setup(new Date(2023, Month.JULY, 16))
     const leadingOrTrailingDates = container.querySelectorAll(SELECTOR)
     expect(leadingOrTrailingDates.length).toBe(0)
   })
 
-  it('should contain 6 trailing dates', () => {
+  it('should contain 6 trailing dates for July 2023', () => {
     const container = setup(new Date(2023, Month.JULY, 31))
     const leadingOrTrailingDates = container.querySelectorAll(SELECTOR)
     expect(leadingOrTrailingDates.length).toBe(6)
