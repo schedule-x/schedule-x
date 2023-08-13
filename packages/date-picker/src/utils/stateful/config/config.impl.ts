@@ -15,6 +15,6 @@ export class ConfigImpl implements DatePickerConfigInternal {
     public max: string = toDateString(
       new Date(new Date().getFullYear() + 1, 11, 31)
     ),
-    public placement: Placement = Placement.BOTTOM_START
+    public placement?: Placement
   ) {}
 }

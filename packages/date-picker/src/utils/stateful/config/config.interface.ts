@@ -4,7 +4,7 @@ import { Placement } from '../../../enums/placement.enum'
 export default interface DatePickerConfigInternal extends Config {
   min: string
   max: string
-  placement: Placement
+  placement?: Placement
 }
 
 export interface DatePickerConfigExternal

@@ -7,13 +7,7 @@ import { Placement } from '../enums/placement.enum'
 
 const POPUP_CLASS_NAME = 'sx__date-picker-popup'
 
-export default function AppPopup() {
-  const $app = useContext(AppContext)
-
-  const [datePickerView, setDatePickerView] = useState<DatePickerView>(
-    DatePickerView.MONTH_DAYS
-  )
-
+function getDynamicPopupPlacement() {
   const inputElement = document.querySelector('.sx__date-input') as HTMLInputElement
   const inputDomRect = inputElement?.getBoundingClientRect()
   const POPUP_MAX_HEIGHT = 400
@@ -28,17 +22,26 @@ export default function AppPopup() {
   const shouldPositionToTop = !shouldPositionBelow
 
   if (shouldPositionBelow && shouldPositionToRight) {
-    $app.config.placement = Placement.BOTTOM_START
+    return Placement.BOTTOM_START
   } else if (shouldPositionBelow) {
-    $app.config.placement = Placement.BOTTOM_END
+    return Placement.BOTTOM_END
   } else if (shouldPositionToTop && shouldPositionToRight) {
-    $app.config.placement = Placement.TOP_START
+    return Placement.TOP_START
   } else {
-    $app.config.placement = Placement.TOP_END
+    return Placement.TOP_END
   }
+}
 
+export default function AppPopup() {
+  const $app = useContext(AppContext)
 
-  const popupClasses = [POPUP_CLASS_NAME, $app.config.placement]
+  const [datePickerView, setDatePickerView] = useState<DatePickerView>(
+    DatePickerView.MONTH_DAYS
+  )
+
+  let popupPlacement: Placement | undefined = $app.config.placement
+  if (!popupPlacement) popupPlacement = getDynamicPopupPlacement()
+  const popupClasses = [POPUP_CLASS_NAME, popupPlacement]
 
   const clickOutsideListener = (event: Event) => {
     const target = event.target as HTMLElement
