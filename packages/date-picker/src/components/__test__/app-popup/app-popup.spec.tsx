@@ -57,10 +57,8 @@ describe('AppPopup', () => {
   })
 
   it.each([
-    Placement.TOP,
     Placement.TOP_START,
     Placement.TOP_END,
-    Placement.BOTTOM,
     Placement.BOTTOM_START,
     Placement.BOTTOM_END,
   ])(

@@ -16,7 +16,7 @@ export const __createDatePickerAppSingleton__: (
   locale = 'de-DE',
   min = '1970-01-01',
   max = toDateString(new Date(new Date().getFullYear() + 1, 11, 31)),
-  placement = Placement.BOTTOM
+  placement = Placement.BOTTOM_START
 ) => {
   return {
     datePickerState: createDatePickerState(selectedDate),
