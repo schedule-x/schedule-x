@@ -18,8 +18,7 @@ describe('MonthViewWeek', () => {
   it('should render week', () => {
     const $app = __createDatePickerAppSingleton__()
     const date = new Date(2023, Month.JULY, 23)
-    const week = $app.timeUnitsImpl.getWeekFor(date)
-    const { container } = factory($app, week)
+    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
 
     ;['17', '18', '19', '20', '21', '22', '23'].forEach((day) => {
       expect(container.textContent).toContain(day)
@@ -29,8 +28,7 @@ describe('MonthViewWeek', () => {
   it('should display selected date', () => {
     const date = new Date(2023, Month.AUGUST, 8)
     const $app = __createDatePickerAppSingleton__(toDateString(date))
-    const week = $app.timeUnitsImpl.getWeekFor(date)
-    const { container } = factory($app, week)
+    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
 
     const selectedDay = getSelectedDay(container)
     expect(selectedDay).not.toBeNull()
@@ -40,8 +38,7 @@ describe('MonthViewWeek', () => {
   it('should not display any selected date', () => {
     const date = new Date(2023, Month.AUGUST, 8)
     const $app = __createDatePickerAppSingleton__('2020-01-01')
-    const week = $app.timeUnitsImpl.getWeekFor(date)
-    const { container } = factory($app, week)
+    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
 
     const selectedDay = getSelectedDay(container)
     expect(selectedDay).toBeNull()
@@ -51,8 +48,7 @@ describe('MonthViewWeek', () => {
     const today = new Date()
     const expectedTodaysDate = today.getDate()
     const $app = __createDatePickerAppSingleton__(toDateString(today))
-    const week = $app.timeUnitsImpl.getWeekFor(today)
-    const { container } = factory($app, week)
+    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(today))
 
     const todaysDate = getToday(container)
 

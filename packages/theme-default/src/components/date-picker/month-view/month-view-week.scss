@@ -13,6 +13,10 @@
   &:hover {
     background-color: var(--sx-color-surface-dim);
   }
+
+  &.is-leading-or-trailing {
+    color: var(--sx-color-neutral-variant);
+  }
 }
 
 .sx__date-picker__day--selected {
