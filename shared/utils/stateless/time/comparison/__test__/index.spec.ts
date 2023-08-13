@@ -3,7 +3,7 @@ import {
   it,
   expect,
 } from '../../../testing/unit/unit-testing-library.impl.ts'
-import { isToday } from '../index.ts'
+import { isSameMonth, isToday } from '../index.ts'
 
 describe('comparison of time', () => {
   it('should return true if date is today', () => {
@@ -22,4 +22,16 @@ describe('comparison of time', () => {
     tomorrow.setDate(tomorrow.getDate() + 1)
     expect(isToday(tomorrow)).toBe(false)
   })
+
+  it.each([
+    [new Date(2000, 0, 1), new Date(2000, 0, 1), true],
+    [new Date(2000, 0, 1), new Date(2000, 0, 31), true],
+    [new Date(2000, 0, 1), new Date(2000, 1, 1), false],
+    [new Date(2000, 0, 1), new Date(2001, 0, 1), false],
+  ])(
+    'should return true if two dates are in the same month',
+    (date1: Date, date2: Date, isTrue: boolean) => {
+      expect(isSameMonth(date1, date2)).toBe(isTrue)
+    }
+  )
 })

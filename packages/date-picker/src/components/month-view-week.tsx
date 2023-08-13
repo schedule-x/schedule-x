@@ -3,7 +3,11 @@ import { DATE_PICKER_WEEK } from '../constants/test-ids'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
 import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
-import { isToday } from '../../../../shared/utils/stateless/time/comparison'
+import {
+  isSameMonth,
+  isToday,
+} from '../../../../shared/utils/stateless/time/comparison'
+import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
 
 type props = {
   week: WeekWithDates
@@ -22,6 +26,8 @@ export default function MonthViewWeek({ week }: props) {
     if (isToday(day)) classes.push('sx__date-picker__day--today')
     if (toDateString(day) === $app.datePickerState.selectedDate.value)
       classes.push('sx__date-picker__day--selected')
+    if (!isSameMonth(day, toJSDate($app.datePickerState.datePickerDate.value)))
+      classes.push('is-leading-or-trailing')
 
     return {
       day,
