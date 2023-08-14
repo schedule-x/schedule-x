@@ -12,10 +12,10 @@ const datePicker = createDatePicker(
   {
     locale: 'de-DE',
     firstDayOfWeek: 0,
-    // placement: 'top-start',
+    // placement: 'top-end',
     // min: '2021-03-01',
     // max: '2021-03-31',
   },
-  document.querySelector('.date-picker') as HTMLElement
+  document.querySelector('#app') as HTMLElement
 )
 datePicker.bootstrap()
