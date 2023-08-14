@@ -21,9 +21,6 @@ describe('date picker wrapper', () => {
   beforeEach(() => {
     $app = undefined
     $app = __createDatePickerAppSingleton__()
-    const inputMock = document.createElement('div')
-    inputMock.classList.add('sx__date-input')
-    document.body.appendChild(inputMock)
   })
 
   afterEach(() => {

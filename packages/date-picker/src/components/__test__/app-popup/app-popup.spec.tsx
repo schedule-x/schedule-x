@@ -12,9 +12,6 @@ import { Placement } from '../../../enums/placement.enum'
 describe('AppPopup', () => {
   beforeEach(() => {
     cleanup()
-    const inputMock = document.createElement('div')
-    inputMock.classList.add('sx__date-input')
-    document.body.appendChild(inputMock)
   })
 
   it('should render month view as default view', () => {

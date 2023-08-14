@@ -3,7 +3,6 @@ import { DatePickerView } from '../enums/date-picker-view.enum'
 import MonthView from './month-view'
 import YearsView from './years-view'
 import { AppContext } from '../utils/stateful/app-context'
-import { Placement } from '../enums/placement.enum'
 
 const POPUP_CLASS_NAME = 'sx__date-picker-popup'
 
