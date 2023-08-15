@@ -21,8 +21,8 @@ describe('date picker input', () => {
     'should display selected date for locale %s',
     (selectedDate: string, locale: string, expectedDisplayedDate: string) => {
       factory(__createDatePickerAppSingleton__(selectedDate, locale))
-
       const inputElement = getInputElement()
+
       expect(
         screen.getByDisplayValue(expectedDisplayedDate) === inputElement
       ).toBe(true)
@@ -36,8 +36,8 @@ describe('date picker input', () => {
     'should display placeholder %s for locale %swhen selected date is an empty string',
     (placeholder: string, locale: string) => {
       factory(__createDatePickerAppSingleton__('', locale))
-
       const inputElement = getInputElement()
+
       expect(screen.getByDisplayValue(placeholder) === inputElement).toBe(true)
     }
   )
