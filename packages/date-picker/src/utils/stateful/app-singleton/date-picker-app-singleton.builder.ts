@@ -5,6 +5,7 @@ import DatePickerAppSingletonImpl from './date-picker-app-singleton.impl'
 import DatePickerState from '../../../../../../shared/utils/stateful/date-picker-state/date-picker-state.interface'
 import DatePickerConfigInternal from '../config/config.interface'
 import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
+import { TranslateFn } from '@schedule-x/translations'
 
 export default class DatePickerAppSingletonBuilder
   implements Builder<DatePickerAppSingleton>
@@ -12,12 +13,14 @@ export default class DatePickerAppSingletonBuilder
   private datePickerState: DatePickerState | undefined
   private config: DatePickerConfigInternal | undefined
   private timeUnitsImpl: TimeUnits | undefined
+  private translate: TranslateFn | undefined
 
   build(): DatePickerAppSingleton {
     return new DatePickerAppSingletonImpl(
       this.datePickerState!,
       this.config!,
-      this.timeUnitsImpl!
+      this.timeUnitsImpl!,
+      this.translate!
     )
   }
 
@@ -35,6 +38,11 @@ export default class DatePickerAppSingletonBuilder
 
   withTimeUnitsImpl(timeUnitsImpl: TimeUnits): DatePickerAppSingletonBuilder {
     this.timeUnitsImpl = timeUnitsImpl
+    return this
+  }
+
+  withTranslate(translate: TranslateFn): DatePickerAppSingletonBuilder {
+    this.translate = translate
     return this
   }
 }
