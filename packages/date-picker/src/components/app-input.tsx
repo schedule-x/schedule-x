@@ -56,7 +56,7 @@ export default function AppInput() {
   return (
     <>
       <div class={wrapperClasses.join(' ')}>
-        <label class="sx__date-input-label">{ $app.translate('Date') }</label>
+        <label class="sx__date-input-label">{$app.translate('Date')}</label>
 
         <input
           value={displayedValue}

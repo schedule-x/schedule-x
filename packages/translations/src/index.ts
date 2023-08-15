@@ -6,22 +6,14 @@ import { translate } from './translator/translate'
 
 const translations = {
   deDE,
-  enUS
+  enUS,
 }
 
 const datePickerTranslations = {
   deDE: datePickerDeDE,
-  enUS: datePickerEnUS
+  enUS: datePickerEnUS,
 }
 
 export type TranslateFn = (key: string) => string
 
-export {
-  translate,
-
-  translations,
-  datePickerTranslations,
-
-  deDE,
-  enUS,
-}
+export { translate, translations, datePickerTranslations, deDE, enUS }
