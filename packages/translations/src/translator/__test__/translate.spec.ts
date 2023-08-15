@@ -78,4 +78,24 @@ describe('translate', () => {
       }
     }
   )
+
+  /**
+   * Background: if replacing the hyphen of the param "locale", instead of saving the result in a variable, this results
+   * in unwanted mutation of the locale param for all calls but the first, leading to an error when de-DE becomes deDE etc.
+   * */
+  it('should be able to call the translate return value repeatedly', () => {
+    const locale = 'en-US'
+    const translations = {
+      hello: 'world',
+    }
+    const key = 'hello'
+
+    const underTest = translate(locale, { enUS: translations })
+
+    const firstCall = underTest(key)
+    const secondCall = underTest(key)
+
+    expect(firstCall).toEqual(translations[key])
+    expect(secondCall).toEqual(translations[key])
+  })
 })

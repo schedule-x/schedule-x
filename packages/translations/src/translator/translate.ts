@@ -6,8 +6,8 @@ export const translate =
     if (!/^[a-z]{2}-[A-Z]{2}$/.test(locale))
       throw new InvalidLocaleError(locale)
 
-    locale = locale.replace('-', '')
-    const language = languages[locale]
+    const deHyphenatedLocale = locale.replace('-', '')
+    const language = languages[deHyphenatedLocale]
     if (!language) return key
 
     return language[key as keyof typeof language] || key
