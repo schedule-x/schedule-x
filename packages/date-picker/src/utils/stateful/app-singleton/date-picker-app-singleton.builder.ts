@@ -5,7 +5,7 @@ import DatePickerAppSingletonImpl from './date-picker-app-singleton.impl'
 import DatePickerState from '../../../../../../shared/utils/stateful/date-picker-state/date-picker-state.interface'
 import DatePickerConfigInternal from '../config/config.interface'
 import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
-import { TranslateFn } from '@schedule-x/translations'
+import { TranslateFn } from '@schedule-x/translations/src'
 
 export default class DatePickerAppSingletonBuilder
   implements Builder<DatePickerAppSingleton>

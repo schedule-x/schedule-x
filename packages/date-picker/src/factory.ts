@@ -6,7 +6,7 @@ import { createDatePickerState } from '../../../shared/utils/stateful/date-picke
 import DatePickerAppSingletonBuilder from './utils/stateful/app-singleton/date-picker-app-singleton.builder'
 import { ConfigBuilder } from './utils/stateful/config/config.builder'
 import { Placement } from './enums/placement.enum'
-import { translate, translations } from '@schedule-x/translations'
+import { translations, translate } from '@schedule-x/translations/src'
 
 export const createDatePicker = (
   config: DatePickerConfigExternal,
