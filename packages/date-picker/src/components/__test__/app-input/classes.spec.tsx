@@ -19,19 +19,27 @@ describe('date picker input', () => {
   it('should not have active class upon rendering', () => {
     factory(__createDatePickerAppSingleton__('2021-01-01', 'en-US'))
 
-    const wrapperElement = document.querySelector(('.sx__date-input-wrapper')) as HTMLDivElement
-    expect(wrapperElement.classList.contains('sx__date-input--active')).toBe(false)
+    const wrapperElement = document.querySelector(
+      '.sx__date-input-wrapper'
+    ) as HTMLDivElement
+    expect(wrapperElement.classList.contains('sx__date-input--active')).toBe(
+      false
+    )
   })
 
   it('should have active class when focused', async () => {
     factory(__createDatePickerAppSingleton__('2021-01-01', 'en-US'))
 
-    const wrapperElement = document.querySelector(('.sx__date-input-wrapper')) as HTMLDivElement
+    const wrapperElement = document.querySelector(
+      '.sx__date-input-wrapper'
+    ) as HTMLDivElement
     const inputElement = screen.getByTestId(DATE_PICKER_INPUT_TEST_ID)
     inputElement.click()
 
     await waitFor(() => {
-      expect(wrapperElement.classList.contains('sx__date-input--active')).toBe(true)
+      expect(wrapperElement.classList.contains('sx__date-input--active')).toBe(
+        true
+      )
     })
   })
 })

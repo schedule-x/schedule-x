@@ -3,7 +3,6 @@ import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
 import { toLocalizedDateString } from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
 import chevronIcon from '../assets/chevron-input.svg'
-import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-format/to-date-string'
 
 export default function AppInput() {
   const $app = useContext(AppContext)
@@ -13,7 +12,9 @@ export default function AppInput() {
   }
 
   useEffect(() => {
-    $app.datePickerState.inputDisplayedValue.value = getLocalizedDate($app.datePickerState.selectedDate.value)
+    $app.datePickerState.inputDisplayedValue.value = getLocalizedDate(
+      $app.datePickerState.selectedDate.value
+    )
   }, [$app.datePickerState.selectedDate.value])
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
@@ -33,9 +34,13 @@ export default function AppInput() {
     event.stopPropagation() // prevent date picker from closing
 
     try {
-      $app.datePickerState.inputDisplayedValue.value = (event.target as HTMLInputElement).value
+      $app.datePickerState.inputDisplayedValue.value = (
+        event.target as HTMLInputElement
+      ).value
       $app.datePickerState.close()
-    } catch (e) {}
+    } catch (e) {
+      // nothing to do
+    }
   }
 
   useEffect(() => {

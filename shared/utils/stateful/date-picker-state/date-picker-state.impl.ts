@@ -1,12 +1,12 @@
 import DatePickerState from './date-picker-state.interface'
 import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum'
 import { effect, signal } from '@preact/signals'
-import { toDateString as formatToDateString } from '../../stateless/time/format-conversion/date-format/to-date-string.ts'
-import { toDateString as dateToDateString } from '../../stateless/time/format-conversion/date-to-strings.ts'
+import { toDateString as formatToDateString } from '../../stateless/time/format-conversion/date-format/to-date-string'
+import { toDateString as dateToDateString } from '../../stateless/time/format-conversion/date-to-strings'
 
 export const createDatePickerState = (
   locale: string,
-  selectedDateParam?: string,
+  selectedDateParam?: string
 ): DatePickerState => {
   const currentDayDateString = dateToDateString(new Date())
   const initialSelectedDate =
@@ -22,10 +22,15 @@ export const createDatePickerState = (
   const inputDisplayedValue = signal(selectedDateParam || '')
   effect(() => {
     try {
-      const newValue = formatToDateString(inputDisplayedValue.value, locale) as string
+      const newValue = formatToDateString(
+        inputDisplayedValue.value,
+        locale
+      ) as string
       selectedDate.value = newValue
       datePickerDate.value = newValue
-    } catch (e) {}
+    } catch (e) {
+      // nothing to do
+    }
   })
 
   return {

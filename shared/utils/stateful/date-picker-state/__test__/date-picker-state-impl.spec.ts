@@ -85,7 +85,7 @@ describe('DatePickerStateImpl', () => {
   })
 
   it('should set month-days view as default', () => {
-    const underTest = createDatePickerState(DEFAULT_LOCALE ,defaultSelectedDate)
+    const underTest = createDatePickerState(DEFAULT_LOCALE, defaultSelectedDate)
     expect(underTest.datePickerView.value).toBe(DatePickerView.MONTH_DAYS)
   })
 

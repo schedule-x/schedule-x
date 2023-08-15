@@ -28,6 +28,6 @@ export const __createDatePickerAppSingleton__: (
       .withMax(max)
       .withPlacement(placement)
       .build(),
-    translate: translate(locale, translations)
+    translate: translate(locale, translations),
   }
 }
