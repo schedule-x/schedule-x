@@ -92,10 +92,7 @@ describe('translate', () => {
 
     const underTest = translate(locale, { enUS: translations })
 
-    const firstCall = underTest(key)
-    const secondCall = underTest(key)
-
-    expect(firstCall).toEqual(translations[key])
-    expect(secondCall).toEqual(translations[key])
+    expect(underTest(key)).toEqual(translations[key])
+    expect(underTest(key)).toEqual(translations[key])
   })
 })
