@@ -14,9 +14,6 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "preact": "^10.16.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
