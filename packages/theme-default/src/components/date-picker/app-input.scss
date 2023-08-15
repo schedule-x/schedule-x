@@ -33,8 +33,8 @@
 .sx__date-input-label {
   position: absolute;
   top: 0;
-  left: 1em;
-  padding: 0 0.5rem;
+  left: 21px; // align with input padding
+  padding: 0 var(--sx-spacing-padding1);
   background-color: var(--sx-color-background);
   font-size: 0.75rem;
   color: var(--sx-color-neutral);
