@@ -20,15 +20,15 @@ describe('date picker input', () => {
   it('should toggle date-picker open status when clicking input', async () => {
     const $app = __createDatePickerAppSingleton__()
     factory($app)
-    const datePickerIsOpenToggleSpy = spyOn(
+    const datePickerOpenSpy = spyOn(
       ($app as DatePickerAppSingleton).datePickerState,
-      'toggle'
+      'open'
     )
 
     fireEvent.click(screen.getByTestId(DATE_PICKER_INPUT))
 
     await waitFor(() => {
-      expect(datePickerIsOpenToggleSpy).toHaveBeenCalled()
+      expect(datePickerOpenSpy).toHaveBeenCalled()
     })
   })
 

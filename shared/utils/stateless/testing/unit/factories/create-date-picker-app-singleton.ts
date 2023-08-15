@@ -4,6 +4,7 @@ import { createDatePickerState } from '../../../../stateful/date-picker-state/da
 import { ConfigBuilder } from '@schedule-x/date-picker/src/utils/stateful/config/config.builder'
 import { toDateString } from '../../../time/format-conversion/date-to-strings.ts'
 import { Placement } from '@schedule-x/date-picker/src/enums/placement.enum.ts'
+import { translate, translations } from '@schedule-x/translations/src'
 
 export const __createDatePickerAppSingleton__: (
   selectedDate?: string,
@@ -19,7 +20,7 @@ export const __createDatePickerAppSingleton__: (
   placement = Placement.BOTTOM_START
 ) => {
   return {
-    datePickerState: createDatePickerState(selectedDate),
+    datePickerState: createDatePickerState(locale, selectedDate),
     timeUnitsImpl: new TimeUnitsBuilder().build(),
     config: new ConfigBuilder()
       .withLocale(locale)
@@ -27,6 +28,6 @@ export const __createDatePickerAppSingleton__: (
       .withMax(max)
       .withPlacement(placement)
       .build(),
-    translate: (key: string) => key,
+    translate: translate(locale, translations)
   }
 }

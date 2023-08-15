@@ -6,7 +6,7 @@ import { toJSDate } from '../../../../shared/utils/stateless/time/format-convers
 export default function DayNames() {
   const $app = useContext(AppContext)
   const aWeek = $app.timeUnitsImpl.getWeekFor(
-    toJSDate($app.datePickerState.selectedDate.value)
+    toJSDate($app.datePickerState.datePickerDate.value)
   )
   const dayNames = getOneLetterDayNames(aWeek, $app.config.locale)
 

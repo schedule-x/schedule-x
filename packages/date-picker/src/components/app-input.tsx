@@ -8,15 +8,12 @@ import { toDateString } from '../../../../shared/utils/stateless/time/format-con
 export default function AppInput() {
   const $app = useContext(AppContext)
   const getLocalizedDate = (dateString: string) => {
+    if (dateString === '') return $app.translate('MM/DD/YYYY')
     return toLocalizedDateString(toJSDate(dateString), $app.config.locale)
   }
 
-  const [displayedValue, setDisplayedValue] = useState<string>(
-    getLocalizedDate($app.datePickerState.selectedDate.value)
-  )
-
   useEffect(() => {
-    setDisplayedValue(getLocalizedDate($app.datePickerState.selectedDate.value))
+    $app.datePickerState.inputDisplayedValue.value = getLocalizedDate($app.datePickerState.selectedDate.value)
   }, [$app.datePickerState.selectedDate.value])
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
@@ -36,16 +33,9 @@ export default function AppInput() {
     event.stopPropagation() // prevent date picker from closing
 
     try {
-      const newSelectedDate = toDateString(
-        (event.target as HTMLInputElement).value,
-        $app.config.locale
-      ) as string
-      $app.datePickerState.selectedDate.value = newSelectedDate
-      $app.datePickerState.datePickerDate.value = newSelectedDate
+      $app.datePickerState.inputDisplayedValue.value = (event.target as HTMLInputElement).value
       $app.datePickerState.close()
-    } catch (e) {
-      // nothing to do
-    }
+    } catch (e) {}
   }
 
   useEffect(() => {
@@ -53,16 +43,21 @@ export default function AppInput() {
     return () => document.removeEventListener('change', handleInputValue)
   })
 
+  const handleClick = (event: Event) => {
+    handleInputValue(event)
+    $app.datePickerState.open()
+  }
+
   return (
     <>
       <div class={wrapperClasses.join(' ')}>
         <label class="sx__date-input-label">{$app.translate('Date')}</label>
 
         <input
-          value={displayedValue}
+          value={$app.datePickerState.inputDisplayedValue.value}
           data-testid="date-picker-input"
           class="sx__date-input"
-          onClick={() => $app.datePickerState.toggle()}
+          onClick={handleClick}
           onKeyUp={handleKeyUp}
           type="text"
         />
