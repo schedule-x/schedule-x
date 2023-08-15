@@ -8,9 +8,7 @@ import {
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { cleanup, fireEvent, screen, waitFor } from '@testing-library/preact'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
-import { factory } from './utils'
-
-const DATE_PICKER_INPUT = 'date-picker-input'
+import { factory, getInputElement } from './utils'
 
 describe('date picker input', () => {
   beforeEach(() => {
@@ -25,7 +23,7 @@ describe('date picker input', () => {
       'open'
     )
 
-    fireEvent.click(screen.getByTestId(DATE_PICKER_INPUT))
+    fireEvent.click(getInputElement())
 
     await waitFor(() => {
       expect(datePickerOpenSpy).toHaveBeenCalled()
@@ -35,7 +33,7 @@ describe('date picker input', () => {
   it('should not update selected date on entering a date without pressing enter', () => {
     const $app = __createDatePickerAppSingleton__('2021-01-01', 'en-US')
     factory($app)
-    const inputElement = screen.getByTestId(DATE_PICKER_INPUT)
+    const inputElement = getInputElement()
 
     fireEvent.input(inputElement, { target: { value: '1/2/2021' } })
     fireEvent.keyUp(inputElement, { key: ' ' })
@@ -46,7 +44,7 @@ describe('date picker input', () => {
   it('should update selected date on entering a date and pressing enter', () => {
     const $app = __createDatePickerAppSingleton__('2021-01-01', 'en-US')
     factory($app)
-    const inputElement = screen.getByTestId(DATE_PICKER_INPUT)
+    const inputElement = getInputElement()
 
     fireEvent.input(inputElement, { target: { value: '1/2/2021' } })
     fireEvent.keyUp(inputElement, { key: 'Enter' })
