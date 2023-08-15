@@ -1,5 +1,6 @@
 import { describe, expect, it } from '../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { translate } from '../translate'
+import { InvalidLocaleError } from '../../../../../shared/utils/stateless/errors/InvalidLocale.error'
 
 describe('translate', () => {
   it('should return the key if the locale is en-US', () => {
@@ -48,5 +49,26 @@ describe('translate', () => {
     const underTest = translate(locale, { enUS: translations })
 
     expect(underTest(key)).toEqual(key)
+  })
+
+  it.each([
+    ['enUS', true],
+    ['en_US', true],
+    ['en-us', true],
+    ['en-US', false],
+    ['en', true] // TODO: write alias map for short locale -> long locale and change this to false
+  ])('should throw if called with a faulty locale format %s', (locale, shouldThrow) => {
+    const translations = {
+      'hello': 'world'
+    }
+    const key = 'hello'
+
+    const underTest = translate(locale, { enUS: translations })
+
+    if (shouldThrow) {
+      expect(() => underTest(key)).toThrow(InvalidLocaleError)
+    } else {
+      expect(() => underTest(key)).not.toThrow()
+    }
   })
 })
