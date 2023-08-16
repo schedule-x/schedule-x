@@ -6,7 +6,7 @@ import {
   beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
-import { cleanup, fireEvent, screen, waitFor } from '@testing-library/preact'
+import { cleanup, fireEvent, waitFor } from '@testing-library/preact'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
 import { factory, getInputElement } from './utils'
 
