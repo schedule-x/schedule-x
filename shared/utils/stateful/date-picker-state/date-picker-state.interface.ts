@@ -4,6 +4,7 @@ import { Signal } from '@preact/signals'
 export default interface DatePickerState {
   isOpen: Signal<boolean>
   selectedDate: Signal<string>
+  inputDisplayedValue: Signal<string>
   datePickerDate: Signal<string>
   datePickerView: Signal<DatePickerView>
 

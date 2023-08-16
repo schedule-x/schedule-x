@@ -1,34 +1,44 @@
 import DatePickerState from './date-picker-state.interface'
-import ExtendedDateImpl from '../time/extended-date/extended-date.impl'
-import { doubleDigit } from '../../stateless/time/date-time-mutation/date-time-mutation'
 import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum'
-import { signal } from '@preact/signals'
+import { effect, signal } from '@preact/signals'
+import { toDateString as formatToDateString } from '../../stateless/time/format-conversion/date-format/to-date-string'
+import { toDateString as dateToDateString } from '../../stateless/time/format-conversion/date-to-strings'
 
 export const createDatePickerState = (
+  locale: string,
   selectedDateParam?: string
 ): DatePickerState => {
+  const currentDayDateString = dateToDateString(new Date())
   const initialSelectedDate =
-    selectedDateParam ||
-    (() => {
-      const { year, month, date } = new ExtendedDateImpl(
-        new Date().getFullYear(),
-        new Date().getMonth(),
-        new Date().getDate()
-      )
-
-      return `${year}-${doubleDigit(month + 1)}-${doubleDigit(date)}`
-    })()
+    typeof selectedDateParam === 'string'
+      ? selectedDateParam
+      : currentDayDateString
 
   const isOpen = signal(false)
   const datePickerView = signal(DatePickerView.MONTH_DAYS)
   const selectedDate = signal(initialSelectedDate)
-  const datePickerDate = signal(initialSelectedDate)
+  const datePickerDate = signal(initialSelectedDate || currentDayDateString)
+
+  const inputDisplayedValue = signal(selectedDateParam || '')
+  effect(() => {
+    try {
+      const newValue = formatToDateString(
+        inputDisplayedValue.value,
+        locale
+      ) as string
+      selectedDate.value = newValue
+      datePickerDate.value = newValue
+    } catch (e) {
+      // nothing to do
+    }
+  })
 
   return {
     isOpen,
     datePickerView,
     selectedDate,
     datePickerDate,
+    inputDisplayedValue,
     open: () => (isOpen.value = true),
     close: () => (isOpen.value = false),
     toggle: () => (isOpen.value = !isOpen.value),

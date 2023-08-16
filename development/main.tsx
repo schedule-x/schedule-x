@@ -10,8 +10,11 @@ import { createDatePicker } from '../packages/date-picker/src'
 
 const datePicker = createDatePicker(
   {
-    locale: 'de-DE',
+    // locale: 'de-DE',
+    locale: 'en-US',
     firstDayOfWeek: 0,
+    selectedDate: '',
+    // selectedDate: '1991-07-13',
     // placement: 'top-end',
     // min: '2021-03-01',
     // max: '2021-03-31',
