@@ -8,7 +8,7 @@ import { DEFAULT_LOCALE } from '../../../../values'
 
 describe('date picker state impl - input displayed value', () => {
   it('should default to the value of selected date param if given', () => {
-    const expectedResult = ''
+    const expectedResult = '2000-01-01'
     const underTest = createDatePickerState(DEFAULT_LOCALE, expectedResult)
     expect(underTest.inputDisplayedValue.value).toBe(expectedResult)
   })
