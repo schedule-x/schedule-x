@@ -12,6 +12,7 @@ const datePicker = createDatePicker(
   {
     // locale: 'de-DE',
     locale: 'en-US',
+    // locale: 'sv-SE',
     firstDayOfWeek: 0,
     selectedDate: '',
     // selectedDate: '1991-07-13',
@@ -22,3 +23,12 @@ const datePicker = createDatePicker(
   document.querySelector('#app') as HTMLElement
 )
 datePicker.bootstrap()
+
+// document.addEventListener('dblclick', () => {
+//   console.log(datePicker.value)
+// })
+//
+// const changeValueBtn = document.querySelector('#change-value-btn') as HTMLElement
+// changeValueBtn.addEventListener('click', () => {
+//   datePicker.value = '2021-03-15'
+// })

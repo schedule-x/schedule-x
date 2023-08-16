@@ -8,28 +8,33 @@ import { ConfigBuilder } from './utils/stateful/config/config.builder'
 import { Placement } from './enums/placement.enum'
 import { translations, translate } from '../../translations/src'
 
-export const createDatePicker = (
-  config: DatePickerConfigExternal,
-  el: HTMLElement
-) => {
+export const createAppSingleton = (config: DatePickerConfigExternal) => {
   const configInternal = new ConfigBuilder()
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .withLocale(config.locale)
     .withMin(config.min)
     .withMax(config.max)
     .withPlacement(config.placement as Placement)
+    .withListeners(config.listeners)
     .build()
   const timeUnitsImpl = new TimeUnitsBuilder()
     .withFirstDayOfWeek(configInternal.firstDayOfWeek)
     .build()
-  const $app: DatePickerAppSingleton = new DatePickerAppSingletonBuilder()
+  return new DatePickerAppSingletonBuilder()
     .withConfig(configInternal)
     .withDatePickerState(
-      createDatePickerState(configInternal.locale, config.selectedDate)
+      createDatePickerState(configInternal, config.selectedDate)
     )
     .withTimeUnitsImpl(timeUnitsImpl)
     .withTranslate(translate(configInternal.locale, translations))
     .build()
+}
+
+export const createDatePicker = (
+  config: DatePickerConfigExternal,
+  el: HTMLElement
+) => {
+  const $app = createAppSingleton(config)
 
   return new DatePickerApp($app, el)
 }

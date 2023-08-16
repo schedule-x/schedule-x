@@ -6,7 +6,8 @@ export default class DatePickerApp {
   constructor(
     private $app: DatePickerAppSingleton,
     private el: HTMLElement
-  ) {}
+  ) {
+  }
 
   bootstrap(): void {
     render(
@@ -15,5 +16,13 @@ export default class DatePickerApp {
       }),
       this.el
     )
+  }
+
+  get value() {
+    return this.$app.datePickerState.selectedDate.value
+  }
+
+  set value(value: string) {
+    this.$app.datePickerState.selectedDate.value = value
   }
 }

@@ -3,9 +3,10 @@ import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-vi
 import { effect, signal } from '@preact/signals'
 import { toDateString as formatToDateString } from '../../stateless/time/format-conversion/date-format/to-date-string'
 import { toDateString as dateToDateString } from '../../stateless/time/format-conversion/date-to-strings'
+import DatePickerConfigInternal from '@schedule-x/date-picker/src/utils/stateful/config/config.interface.ts'
 
 export const createDatePickerState = (
-  locale: string,
+  config: DatePickerConfigInternal,
   selectedDateParam?: string
 ): DatePickerState => {
   const currentDayDateString = dateToDateString(new Date())
@@ -24,13 +25,17 @@ export const createDatePickerState = (
     try {
       const newValue = formatToDateString(
         inputDisplayedValue.value,
-        locale
+        config.locale
       ) as string
       selectedDate.value = newValue
       datePickerDate.value = newValue
     } catch (e) {
       // nothing to do
     }
+  })
+
+  effect(() => {
+    if (config.listeners?.onChange) config.listeners.onChange(selectedDate.value)
   })
 
   return {
