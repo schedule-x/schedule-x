@@ -1,4 +1,8 @@
-import { describe, expect, it } from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
+import {
+  describe,
+  expect,
+  it,
+} from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
 import { createDatePickerState } from '../date-picker-state.impl.ts'
 import { DEFAULT_LOCALE } from '../../../../values'
 
@@ -22,20 +26,23 @@ describe('date picker state impl - input displayed value', () => {
     ['de-DE', '01.01.2021', '2021-01-01'],
     ['de-DE', '20.03.2025', '2025-03-20'],
     ['de-DE', '20.03.', false],
-  ])('should update selected date and date picker date when input displayed value changes', (
-    locale: string,
-    inputDisplayedValue: string,
-    expectedNewSelectedDate: string | boolean,
-  ) => {
-    const selectedDateParam = ''
-    const underTest = createDatePickerState(locale, selectedDateParam)
-    underTest.inputDisplayedValue.value = inputDisplayedValue
+  ])(
+    'should update selected date and date picker date when input displayed value changes',
+    (
+      locale: string,
+      inputDisplayedValue: string,
+      expectedNewSelectedDate: string | boolean
+    ) => {
+      const selectedDateParam = ''
+      const underTest = createDatePickerState(locale, selectedDateParam)
+      underTest.inputDisplayedValue.value = inputDisplayedValue
 
-    if (expectedNewSelectedDate) {
-      expect(underTest.selectedDate.value).toBe(expectedNewSelectedDate)
-      expect(underTest.datePickerDate.value).toBe(expectedNewSelectedDate)
-    } else {
-      expect(underTest.selectedDate.value).toBe(selectedDateParam)
+      if (expectedNewSelectedDate) {
+        expect(underTest.selectedDate.value).toBe(expectedNewSelectedDate)
+        expect(underTest.datePickerDate.value).toBe(expectedNewSelectedDate)
+      } else {
+        expect(underTest.selectedDate.value).toBe(selectedDateParam)
+      }
     }
-  })
+  )
 })

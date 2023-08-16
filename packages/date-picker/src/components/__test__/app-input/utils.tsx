@@ -12,9 +12,7 @@ export const factory = ($app: DatePickerAppSingleton) => {
 }
 
 export const getInputWrapperElement = () => {
-  return document.querySelector(
-    '.sx__date-input-wrapper'
-  ) as HTMLDivElement
+  return document.querySelector('.sx__date-input-wrapper') as HTMLDivElement
 }
 
 export const getInputElement = () => screen.getByTestId('date-picker-input')
