@@ -19,6 +19,11 @@ const datePicker = createDatePicker(
     // placement: 'top-end',
     // min: '2021-03-01',
     // max: '2021-03-31',
+    listeners: {
+      onChange: (value) => {
+        console.log('onChange', value)
+      }
+    }
   },
   document.querySelector('#app') as HTMLElement
 )

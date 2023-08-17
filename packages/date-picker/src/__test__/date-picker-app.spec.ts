@@ -9,11 +9,16 @@ import { vi } from 'vitest'
 import DatePickerApp from '../date-picker.app'
 import { createElement, render } from 'preact'
 import { createAppSingleton } from '../factory'
+import { DatePickerListeners } from '../utils/stateful/config/listeners.interface'
 
-const createApp = (initialSelectedDate?: string) => {
+const createApp = (
+  initialSelectedDate?: string,
+  listeners?: DatePickerListeners,
+) => {
   const underTest = DatePickerApp
   const $app = createAppSingleton({
     selectedDate: initialSelectedDate,
+    listeners: listeners || {},
   })
   const el = document.createElement('div')
   const app = new underTest($app, el)
@@ -54,5 +59,16 @@ describe('date picker app', () => {
     app.value = expectedNewValue
 
     expect(app.value).toBe(expectedNewValue)
+  })
+
+  it('should call on change callback when value changes', () => {
+    const onChangeSpy = mockFn()
+    const app = createApp(undefined, { onChange: onChangeSpy })
+
+    const expectedNewValue = '1999-12-31'
+    expect(onChangeSpy).not.toHaveBeenCalledWith(expectedNewValue)
+    app.value = expectedNewValue
+
+    expect(onChangeSpy).toHaveBeenCalledWith(expectedNewValue)
   })
 })

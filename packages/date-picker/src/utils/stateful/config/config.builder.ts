@@ -19,7 +19,8 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
       this.firstDayOfWeek,
       this.min,
       this.max,
-      this.placement
+      this.placement,
+      this.listeners,
     )
   }
 
