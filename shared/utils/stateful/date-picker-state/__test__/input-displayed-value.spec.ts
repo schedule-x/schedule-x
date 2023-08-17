@@ -4,18 +4,18 @@ import {
   it,
 } from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
 import { createDatePickerState } from '../date-picker-state.impl.ts'
-import { DEFAULT_LOCALE } from '../../../../values'
+import { __createInternalConfig__ as config } from '../../../stateless/testing/unit/factories/create-internal-config.ts'
 
 describe('date picker state impl - input displayed value', () => {
   it('should default to the value of selected date param if given', () => {
     const expectedResult = '2000-01-01'
-    const underTest = createDatePickerState(DEFAULT_LOCALE, expectedResult)
+    const underTest = createDatePickerState(config(), expectedResult)
     expect(underTest.inputDisplayedValue.value).toBe(expectedResult)
   })
 
   it('should default to empty string if no selected date param is given', () => {
     const expectedResult = ''
-    const underTest = createDatePickerState(DEFAULT_LOCALE)
+    const underTest = createDatePickerState(config())
     expect(underTest.inputDisplayedValue.value).toBe(expectedResult)
   })
 
@@ -34,7 +34,7 @@ describe('date picker state impl - input displayed value', () => {
       expectedNewSelectedDate: string | boolean
     ) => {
       const selectedDateParam = ''
-      const underTest = createDatePickerState(locale, selectedDateParam)
+      const underTest = createDatePickerState(config(locale), selectedDateParam)
       underTest.inputDisplayedValue.value = inputDisplayedValue
 
       if (expectedNewSelectedDate) {

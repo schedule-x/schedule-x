@@ -16,4 +16,12 @@ export default class DatePickerApp {
       this.el
     )
   }
+
+  get value() {
+    return this.$app.datePickerState.selectedDate.value
+  }
+
+  set value(value: string) {
+    this.$app.datePickerState.selectedDate.value = value
+  }
 }

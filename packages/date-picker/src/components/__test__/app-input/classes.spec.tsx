@@ -15,7 +15,7 @@ describe('date picker input', () => {
   })
 
   it('should not have active class upon rendering', () => {
-    factory(__createDatePickerAppSingleton__('2021-01-01', 'en-US'))
+    factory(__createDatePickerAppSingleton__())
     const wrapperElement = getInputWrapperElement()
 
     expect(wrapperElement.classList.contains('sx__date-input--active')).toBe(
@@ -24,7 +24,7 @@ describe('date picker input', () => {
   })
 
   it('should have active class when focused', async () => {
-    factory(__createDatePickerAppSingleton__('2021-01-01', 'en-US'))
+    factory(__createDatePickerAppSingleton__())
     const wrapperElement = getInputWrapperElement()
     const inputElement = getInputElement()
 

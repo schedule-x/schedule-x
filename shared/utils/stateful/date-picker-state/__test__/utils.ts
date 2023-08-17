@@ -5,6 +5,7 @@ export const getCurrentDayDateString = () => {
   const expectedMonth = today.getMonth() + 1
   const expectedDate = today.getDate()
 
+  /* istanbul ignore next @preserve */
   return `${expectedYear}-${
     expectedMonth < 10 ? '0' + expectedMonth : expectedMonth
   }-${expectedDate < 10 ? '0' + expectedDate : expectedDate}`
