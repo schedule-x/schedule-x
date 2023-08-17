@@ -6,8 +6,8 @@ import {
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { screen, waitFor, cleanup } from '@testing-library/preact'
 
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { factory, getInputElement } from './utils'
+import { createAppSingleton } from '../../../factory'
 
 describe('date picker input', () => {
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('date picker input', () => {
   ])(
     'should display selected date for locale %s',
     (selectedDate: string, locale: string, expectedDisplayedDate: string) => {
-      factory(__createDatePickerAppSingleton__(selectedDate, locale))
+      factory(createAppSingleton({ selectedDate, locale }))
       const inputElement = getInputElement()
 
       expect(
@@ -35,7 +35,7 @@ describe('date picker input', () => {
   ])(
     'should display placeholder %s for locale %swhen selected date is an empty string',
     (placeholder: string, locale: string) => {
-      factory(__createDatePickerAppSingleton__('', locale))
+      factory(createAppSingleton({ selectedDate: '', locale }))
       const inputElement = getInputElement()
 
       expect(screen.getByDisplayValue(placeholder) === inputElement).toBe(true)
@@ -45,7 +45,7 @@ describe('date picker input', () => {
   it('should update displayed selected date', async () => {
     const expectedInitialDate = '1/1/2021'
     const expectedUpdatedDate = '1/2/2021'
-    const $app = __createDatePickerAppSingleton__('2021-01-01', 'en-US')
+    const $app = createAppSingleton({ selectedDate: '2021-01-01' })
     factory($app)
     const inputElement = getInputElement()
     expect(screen.getByDisplayValue(expectedInitialDate) === inputElement).toBe(

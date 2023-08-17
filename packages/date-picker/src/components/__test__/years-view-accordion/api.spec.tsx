@@ -6,10 +6,10 @@ import {
   mockFn,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, render, screen } from '@testing-library/preact'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { AppContext } from '../../../utils/stateful/app-context'
 import YearsViewAccordion from '../../years-view-accordion'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
+import { createAppSingleton } from '../../../factory'
 
 describe('YearsViewAccordion', () => {
   describe('api', () => {
@@ -19,7 +19,7 @@ describe('YearsViewAccordion', () => {
 
     it('should call expand with the correct year', () => {
       const expandSpy = mockFn()
-      const $app = __createDatePickerAppSingleton__(undefined, 'en-US')
+      const $app = createAppSingleton()
       const year = 2023
       render(
         <AppContext.Provider value={$app}>
@@ -54,7 +54,7 @@ describe('YearsViewAccordion', () => {
       'should call setYearAndMonth with year 2023 and month of %s',
       (monthName, month) => {
         const setYearAndMonthSpy = mockFn()
-        const $app = __createDatePickerAppSingleton__(undefined, 'en-US')
+        const $app = createAppSingleton()
         const year = 2023
         render(
           <AppContext.Provider value={$app}>

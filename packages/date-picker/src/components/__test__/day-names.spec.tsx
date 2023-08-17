@@ -6,12 +6,12 @@ import {
 import { render, screen } from '@testing-library/preact'
 import DayNames from '../day-names'
 import { AppContext } from '../../utils/stateful/app-context'
-import { __createDatePickerAppSingleton__ } from '../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
+import { appSingletonWithGerman } from '../../utils/stateless/testing/create-app-singleton'
 
 describe('DayNames', () => {
   it('should render day names', () => {
     render(
-      <AppContext.Provider value={__createDatePickerAppSingleton__()}>
+      <AppContext.Provider value={appSingletonWithGerman()}>
         <DayNames />
       </AppContext.Provider>
     )

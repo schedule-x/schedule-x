@@ -5,10 +5,10 @@ import {
   spyOn,
   beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { cleanup, screen } from '@testing-library/preact'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
 import { clickByDate, factory } from './utils'
+import { createAppSingleton } from '../../../factory'
 
 describe('MonthViewWeek', () => {
   beforeEach(() => {
@@ -16,7 +16,7 @@ describe('MonthViewWeek', () => {
   })
 
   it('should close date picker', () => {
-    const $app = __createDatePickerAppSingleton__()
+    const $app = createAppSingleton()
     $app.datePickerState.isOpen.value = true
     const closeSpy = spyOn($app.datePickerState, 'close')
     factory($app, $app.timeUnitsImpl.getWeekFor(new Date(2023, Month.JULY, 23)))
@@ -37,7 +37,7 @@ describe('MonthViewWeek', () => {
     ['22', '2023-07-22'],
     ['23', '2023-07-23'],
   ])('should set new selected date', (dateOfMonth, expectedResult) => {
-    const $app = __createDatePickerAppSingleton__()
+    const $app = createAppSingleton()
     const date = new Date(2023, Month.JULY, 23)
     const week = $app.timeUnitsImpl.getWeekFor(date)
     factory($app, week)

@@ -9,6 +9,7 @@ import '../packages/theme-default/src/date-picker.scss'
 import { createDatePicker } from '../packages/date-picker/src'
 
 const datePicker = createDatePicker(
+  document.querySelector('#app') as HTMLElement,
   {
     // locale: 'de-DE',
     locale: 'en-US',
@@ -24,8 +25,7 @@ const datePicker = createDatePicker(
         console.log('onChange', value)
       },
     },
-  },
-  document.querySelector('#app') as HTMLElement
+  }
 )
 datePicker.bootstrap()
 

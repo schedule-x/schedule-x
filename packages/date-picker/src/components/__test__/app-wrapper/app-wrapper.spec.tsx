@@ -7,20 +7,20 @@ import {
 import { render, screen, cleanup } from '@testing-library/preact'
 import AppWrapper from '../../app-wrapper'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import {
   assertIsNotShowingPopup,
   assertIsShowingPopup,
   DATE_PICKER_POPUP_TEST_ID,
   renderWithOpenPopup,
 } from './utils'
+import { createAppSingleton } from '../../../factory'
 
 describe('date picker wrapper', () => {
   let $app: DatePickerAppSingleton | undefined
 
   beforeEach(() => {
     $app = undefined
-    $app = __createDatePickerAppSingleton__()
+    $app = createAppSingleton()
   })
 
   afterEach(() => {
