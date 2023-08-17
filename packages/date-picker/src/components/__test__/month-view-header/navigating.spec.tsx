@@ -2,11 +2,8 @@ import {
   describe,
   expect,
   it,
-  mockFn,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { fireEvent, render, waitFor } from '@testing-library/preact'
-import { AppContext } from '../../../utils/stateful/app-context'
-import MonthViewHeader from '../../month-view-header'
+import { fireEvent, waitFor } from '@testing-library/preact'
 import { createAppSingleton } from '../../../factory'
 import { factory } from './utils'
 

@@ -25,7 +25,7 @@ const datePicker = createDatePicker(
         console.log('onChange', value)
       },
     },
-  },
+  }
 )
 datePicker.bootstrap()
 

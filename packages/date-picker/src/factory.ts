@@ -32,7 +32,7 @@ export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
 
 export const createDatePicker = (
   el: HTMLElement,
-  config?: DatePickerConfigExternal,
+  config?: DatePickerConfigExternal
 ) => {
   const $app = createAppSingleton(config)
 

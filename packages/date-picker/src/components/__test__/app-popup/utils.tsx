@@ -9,7 +9,7 @@ export const factory = (placement?: Placement) => {
     <AppContext.Provider
       value={createAppSingleton({
         placement,
-        locale: 'en-US'
+        locale: 'en-US',
       })}
     >
       <AppPopup />

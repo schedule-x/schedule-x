@@ -5,7 +5,7 @@ import {
   beforeEach,
   mockFn,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, fireEvent, render } from '@testing-library/preact'
+import { cleanup, fireEvent } from '@testing-library/preact'
 import { createAppSingleton } from '../../../factory'
 import { factory } from './utils'
 

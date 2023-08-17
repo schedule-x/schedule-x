@@ -1,5 +1,9 @@
 import { describe } from 'vitest'
-import { createAppSingleton, createDatePicker, createDatePickerInternal } from '../factory'
+import {
+  createAppSingleton,
+  createDatePicker,
+  createDatePickerInternal,
+} from '../factory'
 import {
   expect,
   it,

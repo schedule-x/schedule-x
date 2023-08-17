@@ -3,11 +3,8 @@ import {
   it,
   expect,
   afterEach,
-  mockFn,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, render, waitFor } from '@testing-library/preact'
-import MonthViewHeader from '../../month-view-header'
-import { AppContext } from '../../../utils/stateful/app-context'
+import { cleanup, waitFor } from '@testing-library/preact'
 import { createAppSingleton } from '../../../factory'
 import { factory } from './utils'
 
