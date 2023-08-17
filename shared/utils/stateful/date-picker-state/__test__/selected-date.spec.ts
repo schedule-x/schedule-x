@@ -2,11 +2,11 @@ import {
   describe,
   expect,
   it,
+  mockFn,
 } from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
 import { createDatePickerState } from '../date-picker-state.impl.ts'
 import { __createInternalConfig__ as config } from '../../../stateless/testing/unit/factories/create-internal-config.ts'
 import { getCurrentDayDateString } from './utils.ts'
-import { vi } from 'vitest'
 
 describe('selected date in date picker state impl', () => {
   const defaultSelectedDate = '2023-01-01'
@@ -29,7 +29,7 @@ describe('selected date in date picker state impl', () => {
   })
 
   it('should call on change listener when selected date changes', () => {
-    const onChangeSpy = vi.fn()
+    const onChangeSpy = mockFn()
     const appConfig = {
       ...config(),
       listeners: { onChange: onChangeSpy },

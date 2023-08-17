@@ -19,24 +19,17 @@ export const __createDatePickerAppSingleton__: (
   max = toDateString(new Date(new Date().getFullYear() + 1, 11, 31)),
   placement = Placement.BOTTOM_START
 ) => {
+  const config = new ConfigBuilder()
+    .withLocale(locale)
+    .withMin(min)
+    .withMax(max)
+    .withPlacement(placement)
+    .build()
+
   return {
-    datePickerState: createDatePickerState(
-      {
-        locale,
-        min,
-        max,
-        placement,
-        firstDayOfWeek: 1,
-      },
-      selectedDate
-    ),
+    datePickerState: createDatePickerState(config, selectedDate),
     timeUnitsImpl: new TimeUnitsBuilder().build(),
-    config: new ConfigBuilder()
-      .withLocale(locale)
-      .withMin(min)
-      .withMax(max)
-      .withPlacement(placement)
-      .build(),
+    config,
     translate: translate(locale, translations),
   }
 }

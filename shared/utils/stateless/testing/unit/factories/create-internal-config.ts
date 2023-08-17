@@ -9,5 +9,6 @@ export const __createInternalConfig__ = (locale?: string) => {
     max: '2024-12-31',
     placement: Placement.BOTTOM_START,
     firstDayOfWeek: WeekDay.MONDAY,
+    listeners: {},
   }
 }

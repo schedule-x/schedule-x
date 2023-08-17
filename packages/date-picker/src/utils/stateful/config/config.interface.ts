@@ -6,7 +6,7 @@ export default interface DatePickerConfigInternal extends Config {
   min: string
   max: string
   placement: Placement
-  listeners?: DatePickerListeners
+  listeners: DatePickerListeners
 }
 
 export interface DatePickerConfigExternal
