@@ -9,18 +9,18 @@ const datePickerBottomRight = document.querySelector(
 )
 
 createDatePicker(
+  datePickerTopLeft as HTMLElement,
   { placement: 'bottom-start' },
-  datePickerTopLeft as HTMLElement
 ).bootstrap()
 createDatePicker(
+  datePickerTopRight as HTMLElement,
   { placement: 'bottom-end' },
-  datePickerTopRight as HTMLElement
 ).bootstrap()
 createDatePicker(
+  datePickerBottomLeft as HTMLElement,
   { placement: 'top-start' },
-  datePickerBottomLeft as HTMLElement
 ).bootstrap()
 createDatePicker(
+  datePickerBottomRight as HTMLElement,
   { placement: 'top-end' },
-  datePickerBottomRight as HTMLElement
 ).bootstrap()

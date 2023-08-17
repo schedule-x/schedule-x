@@ -8,7 +8,7 @@ import { ConfigBuilder } from './utils/stateful/config/config.builder'
 import { Placement } from './enums/placement.enum'
 import { translations, translate } from '../../translations/src'
 
-export const createAppSingleton = (config: DatePickerConfigExternal) => {
+export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
   const configInternal = new ConfigBuilder()
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .withLocale(config.locale)
@@ -31,8 +31,8 @@ export const createAppSingleton = (config: DatePickerConfigExternal) => {
 }
 
 export const createDatePicker = (
-  config: DatePickerConfigExternal,
-  el: HTMLElement
+  el: HTMLElement,
+  config?: DatePickerConfigExternal,
 ) => {
   const $app = createAppSingleton(config)
 

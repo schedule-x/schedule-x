@@ -5,10 +5,10 @@ import {
   mockFn,
   beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { cleanup, render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../utils/stateful/app-context'
 import YearsViewAccordion from '../../years-view-accordion'
+import { createAppSingleton } from '../../../factory'
 
 describe('YearsViewAccordion', () => {
   describe('display', () => {
@@ -17,7 +17,7 @@ describe('YearsViewAccordion', () => {
     })
 
     it('should not display any months when not expanded', () => {
-      const $app = __createDatePickerAppSingleton__(undefined, 'en-US')
+      const $app = createAppSingleton()
       render(
         <AppContext.Provider value={$app}>
           <YearsViewAccordion
@@ -37,7 +37,7 @@ describe('YearsViewAccordion', () => {
     })
 
     it('should display all months when expanded', () => {
-      const $app = __createDatePickerAppSingleton__(undefined, 'en-US')
+      const $app = createAppSingleton()
       render(
         <AppContext.Provider value={$app}>
           <YearsViewAccordion
@@ -57,7 +57,7 @@ describe('YearsViewAccordion', () => {
     })
 
     it('should display the year in a button', () => {
-      const $app = __createDatePickerAppSingleton__(undefined, 'en-US')
+      const $app = createAppSingleton()
       const expectedYear = 2023
       render(
         <AppContext.Provider value={$app}>

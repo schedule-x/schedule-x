@@ -3,15 +3,15 @@ import {
   expect,
   it,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
 import { factory } from './utils'
 import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+import { createAppSingleton } from '../../../factory'
 
 const SELECTOR = '.sx__date-picker__day.is-leading-or-trailing'
 
 const setup = (date: Date) => {
-  const $app = __createDatePickerAppSingleton__(toDateString(date))
+  const $app = createAppSingleton({ selectedDate: toDateString(date) })
   const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
   return container
 }

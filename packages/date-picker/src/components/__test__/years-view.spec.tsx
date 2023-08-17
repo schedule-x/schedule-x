@@ -8,7 +8,8 @@ import {
 import { cleanup, render, screen, waitFor } from '@testing-library/preact'
 import YearsView from '../years-view'
 import { AppContext } from '../../utils/stateful/app-context'
-import { __createDatePickerAppSingleton__ } from '../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
+import { createAppSingleton } from '../../factory'
+import { appSingletonWithGerman } from '../../utils/stateless/testing/create-app-singleton'
 
 describe('YearsView', () => {
   beforeEach(() => {
@@ -19,7 +20,7 @@ describe('YearsView', () => {
   it('should call setMonthView', () => {
     const callbackToTest = mockFn()
     render(
-      <AppContext.Provider value={__createDatePickerAppSingleton__()}>
+      <AppContext.Provider value={appSingletonWithGerman()}>
         <YearsView setMonthView={callbackToTest} />
       </AppContext.Provider>
     )
@@ -33,7 +34,7 @@ describe('YearsView', () => {
     'should expand year %s',
     async (year) => {
       render(
-        <AppContext.Provider value={__createDatePickerAppSingleton__()}>
+        <AppContext.Provider value={appSingletonWithGerman()}>
           <YearsView setMonthView={mockFn} />
         </AppContext.Provider>
       )
@@ -54,7 +55,7 @@ describe('YearsView', () => {
   )
 
   it('should display default years', () => {
-    const $app = __createDatePickerAppSingleton__()
+    const $app = createAppSingleton()
 
     render(
       <AppContext.Provider value={$app}>
@@ -71,12 +72,10 @@ describe('YearsView', () => {
   })
 
   it('should display years based on min- & max dates in config', () => {
-    const $app = __createDatePickerAppSingleton__(
-      undefined,
-      undefined,
-      '2020-01-01',
-      '2021-01-01'
-    )
+    const $app = createAppSingleton({
+      min: '2020-01-01',
+      max: '2021-01-01',
+    })
 
     render(
       <AppContext.Provider value={$app}>

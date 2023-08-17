@@ -8,7 +8,8 @@ import {
 import { cleanup, render, waitFor } from '@testing-library/preact'
 import MonthViewHeader from '../../month-view-header'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
+import { createAppSingleton } from '../../../factory'
+import { factory } from './utils'
 
 describe('month view header', () => {
   describe('displaying month and year', () => {
@@ -25,13 +26,12 @@ describe('month view header', () => {
       (languageName, locale, januaryName) => {
         const selectedDate = '2021-01-01'
         const expectedMonthName = januaryName
-        const $app = __createDatePickerAppSingleton__(selectedDate, locale)
+        const $app = createAppSingleton({
+          selectedDate,
+          locale,
+        })
 
-        const { container } = render(
-          <AppContext.Provider value={$app}>
-            <MonthViewHeader setYearsView={mockFn} />
-          </AppContext.Provider>
-        )
+        const { container } = factory($app)
 
         expect(container.textContent).toContain(expectedMonthName)
       }
@@ -40,13 +40,9 @@ describe('month view header', () => {
     it('should display the year when rendering', () => {
       const selectedDate = '2021-01-01'
       const expectedYear = '2021'
-      const $app = __createDatePickerAppSingleton__(selectedDate)
+      const $app = createAppSingleton({ selectedDate })
 
-      const { container } = render(
-        <AppContext.Provider value={$app}>
-          <MonthViewHeader setYearsView={mockFn} />
-        </AppContext.Provider>
-      )
+      const { container } = factory($app)
 
       expect(container.textContent).toContain(expectedYear)
     })
@@ -54,13 +50,9 @@ describe('month view header', () => {
     it('should update month name when selected date changes', async () => {
       const selectedDate = '2021-01-01'
       const expectedMonthName = 'February'
-      const $app = __createDatePickerAppSingleton__(selectedDate, 'en-US')
+      const $app = createAppSingleton({ selectedDate })
 
-      const { container } = render(
-        <AppContext.Provider value={$app}>
-          <MonthViewHeader setYearsView={mockFn} />
-        </AppContext.Provider>
-      )
+      const { container } = factory($app)
 
       $app.datePickerState.datePickerDate.value = '2021-02-01'
 

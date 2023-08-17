@@ -4,12 +4,11 @@ import {
   expect,
   beforeEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { __createDatePickerAppSingleton__ } from '../../../../../../shared/utils/stateless/testing/unit/factories/create-date-picker-app-singleton'
-import { cleanup, render } from '@testing-library/preact'
-import { AppContext } from '../../../utils/stateful/app-context'
-import MonthViewWeek from '../../month-view-week'
+import { cleanup } from '@testing-library/preact'
 import TimeUnitsBuilder from '../../../../../../shared/utils/stateful/time-units/time-units.builder'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
+import { createAppSingleton } from '../../../factory'
+import { factory } from './utils'
 
 describe('MonthViewWeek', () => {
   beforeEach(() => {
@@ -27,18 +26,8 @@ describe('MonthViewWeek', () => {
       expectedDisabledDatesCount: number,
       expectedEnabledDatesCount: number
     ) => {
-      const $app = __createDatePickerAppSingleton__(
-        undefined,
-        undefined,
-        '2023-01-01'
-      )
-      render(
-        <AppContext.Provider value={$app}>
-          <MonthViewWeek
-            week={new TimeUnitsBuilder().build().getWeekFor(date)}
-          />
-        </AppContext.Provider>
-      )
+      const $app = createAppSingleton({ min: '2023-01-01' })
+      factory($app, new TimeUnitsBuilder().build().getWeekFor(date))
 
       const disabledButtons = document.querySelectorAll('button:disabled')
       expect(disabledButtons.length).toBe(expectedDisabledDatesCount)
@@ -58,19 +47,8 @@ describe('MonthViewWeek', () => {
       expectedDisabledDatesCount: number,
       expectedEnabledDatesCount: number
     ) => {
-      const $app = __createDatePickerAppSingleton__(
-        undefined,
-        undefined,
-        undefined,
-        '2022-12-31'
-      )
-      render(
-        <AppContext.Provider value={$app}>
-          <MonthViewWeek
-            week={new TimeUnitsBuilder().build().getWeekFor(date)}
-          />
-        </AppContext.Provider>
-      )
+      const $app = createAppSingleton({ max: '2022-12-31' })
+      factory($app, new TimeUnitsBuilder().build().getWeekFor(date))
 
       const disabledButtons = document.querySelectorAll('button:disabled')
       expect(disabledButtons.length).toBe(expectedDisabledDatesCount)

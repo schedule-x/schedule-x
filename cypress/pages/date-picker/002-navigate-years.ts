@@ -3,9 +3,9 @@ import '../../../packages/theme-default/src/date-picker.scss'
 
 const el = document.getElementById('app')
 const datePicker = createDatePicker(
+  el as HTMLElement,
   {
     selectedDate: '2023-03-16',
   },
-  el as HTMLElement
 )
 datePicker.bootstrap()
