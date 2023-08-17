@@ -13,7 +13,7 @@ import { DatePickerListeners } from '../utils/stateful/config/listeners.interfac
 
 const createApp = (
   initialSelectedDate?: string,
-  listeners?: DatePickerListeners,
+  listeners?: DatePickerListeners
 ) => {
   const underTest = DatePickerApp
   const $app = createAppSingleton({

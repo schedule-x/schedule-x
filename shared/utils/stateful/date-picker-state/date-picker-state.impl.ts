@@ -3,7 +3,7 @@ import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-vi
 import { effect, signal } from '@preact/signals'
 import { toDateString as formatToDateString } from '../../stateless/time/format-conversion/date-format/to-date-string'
 import { toDateString as dateToDateString } from '../../stateless/time/format-conversion/date-to-strings'
-import DatePickerConfigInternal from '@schedule-x/date-picker/src/utils/stateful/config/config.interface.ts'
+import DatePickerConfigInternal from '@schedule-x/date-picker/src/utils/stateful/config/config.interface'
 
 export const createDatePickerState = (
   config: DatePickerConfigInternal,
@@ -35,7 +35,8 @@ export const createDatePickerState = (
   })
 
   effect(() => {
-    if (config.listeners?.onChange) config.listeners.onChange(selectedDate.value)
+    if (config.listeners?.onChange)
+      config.listeners.onChange(selectedDate.value)
   })
 
   return {

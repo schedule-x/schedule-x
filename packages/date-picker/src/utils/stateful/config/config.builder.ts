@@ -20,7 +20,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
       this.min,
       this.max,
       this.placement,
-      this.listeners,
+      this.listeners
     )
   }
 

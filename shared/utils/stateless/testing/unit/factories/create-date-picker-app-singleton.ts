@@ -20,13 +20,16 @@ export const __createDatePickerAppSingleton__: (
   placement = Placement.BOTTOM_START
 ) => {
   return {
-    datePickerState: createDatePickerState({
-      locale,
-      min,
-      max,
-      placement,
-      firstDayOfWeek: 1,
-    }, selectedDate),
+    datePickerState: createDatePickerState(
+      {
+        locale,
+        min,
+        max,
+        placement,
+        firstDayOfWeek: 1,
+      },
+      selectedDate
+    ),
     timeUnitsImpl: new TimeUnitsBuilder().build(),
     config: new ConfigBuilder()
       .withLocale(locale)

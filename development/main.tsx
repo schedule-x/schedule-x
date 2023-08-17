@@ -22,8 +22,8 @@ const datePicker = createDatePicker(
     listeners: {
       onChange: (value) => {
         console.log('onChange', value)
-      }
-    }
+      },
+    },
   },
   document.querySelector('#app') as HTMLElement
 )

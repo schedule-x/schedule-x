@@ -6,8 +6,7 @@ export default class DatePickerApp {
   constructor(
     private $app: DatePickerAppSingleton,
     private el: HTMLElement
-  ) {
-  }
+  ) {}
 
   bootstrap(): void {
     render(
