@@ -11,7 +11,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 import sizes from '@atomico/rollup-plugin-sizes'
 import autoExternal from 'rollup-plugin-auto-external'
-import svg from 'rollup-plugin-svg'
+import image from '@rollup/plugin-image'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -51,7 +51,7 @@ async function build(commandLineArgs) {
         exclude: 'node_modules/**',
       }),
       sizes(),
-      svg(),
+      image(),
     ]
 
     config.push({

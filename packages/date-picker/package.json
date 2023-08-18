@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/date-picker",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Schedule-X date picker component",
   "author": {
     "name": "Tom Österlund",
@@ -15,8 +15,8 @@
     "dist"
   ],
   "dependencies": {
-    "preact": "^10.16.0",
-    "@schedule-x/translations": "^0.1.0-alpha.1"
+    "@schedule-x/translations": "^0.1.0-alpha.2",
+    "preact": "^10.16.0"
   },
   "repository": {
     "type": "git",
