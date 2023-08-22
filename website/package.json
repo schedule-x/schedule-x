@@ -18,6 +18,8 @@
     "@docusaurus/core": "2.4.1",
     "@docusaurus/preset-classic": "2.4.1",
     "@mdx-js/react": "^1.6.22",
+    "@schedule-x/date-picker": "^0.1.0-alpha.2",
+    "@schedule-x/theme-default": "^0.1.0-alpha.2",
     "clsx": "^1.2.1",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",

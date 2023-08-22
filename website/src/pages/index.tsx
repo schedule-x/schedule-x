@@ -18,7 +18,13 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Schedule-X tutorial - 5min ⏱️
+            Tutorial - 5min ⏱️
+          </Link>
+
+          <Link
+            className="button button--secondary button--lg"
+            to="/demo/date-picker">
+            Date picker demo 📅
           </Link>
         </div>
       </div>
@@ -33,9 +39,9 @@ export default function Home(): JSX.Element {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
+      {/*<main>*/}
+        {/*<HomepageFeatures />*/}
+      {/*</main>*/}
     </Layout>
   );
 }

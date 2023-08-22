@@ -1,0 +1,43 @@
+---
+sidebar_position: 2
+---
+
+# Configuration
+
+The `createDatePicker` function accepts a configuration object as its second argument. This object can contain the following properties:
+
+## Properties table
+
+| Property       | Type                        | Purpose                                                                                             | Default                                    |
+|----------------|-----------------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------|
+| `selectedDate` | string                      | The date that should be selected when the date picker is opened. Needs format YYYY-MM-DD            | current date                               |
+| `placement`    | string                      | Place popup relative to input. Accepts values: `bottom-start`, `bottom-end`, `top-start`, `top-end` | `bottom-start`                             |
+| `min`          | string                      | The minimum date that can be selected. Needs format YYYY-MM-DD                                      | `'1970-01-01'`                             |
+| `max`          | string                      | The maximum date that can be selected. Needs format YYYY-MM-DD                                      | December 31st of next year, as date string |
+| `listeners`    | [See listeners](#listeners) | Allow defining functions to be called upon certain events                                           | `{}`                                       |
+
+### Listeners
+
+Currently only one listener is supported: `onChange`. This listener is called when the selected date changes. It receives the selected date as a string in the format YYYY-MM-DD.
+
+```ts
+type listeners = {
+  onChange: (selectedDate: string) => void;
+}
+```
+
+## Example
+
+```js
+import { createDatePicker } from '@schedule-x/date-picker'
+import '@schedule-x/theme-default/dist/date-picker.css'
+
+const el = document.querySelector('#your-date-picker')
+const datePicker = createDatePicker(el, {
+  selectedDate: '2021-12-24',
+  placement: 'top-start',
+  min: '2021-01-01',
+  max: '2022-12-31'
+})
+datePicker.bootstrap()
+```
