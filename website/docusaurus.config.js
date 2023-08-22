@@ -14,7 +14,7 @@ const config = {
   url: 'https://tranquil-scone-6e5d89.netlify.app',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<21projectName>/'
-  baseUrl: '/website',
+  baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
