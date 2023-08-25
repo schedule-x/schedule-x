@@ -6,8 +6,8 @@ on:
       - master
 
 jobs:
-  release:
-    name: Build
+  build_library:
+    name: Build library
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
@@ -20,3 +20,18 @@ jobs:
         run: npm i
       - name: Build
         run: npm run build
+  build_website:
+    name: Build website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ✅
+        uses: actions/checkout@v3
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v3
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies 🛠️
+        run: npm i
+      - name: Build
+        run: cd website && npm run build
+
