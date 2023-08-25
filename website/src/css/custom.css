@@ -33,3 +33,8 @@
 .hero--primary {
   flex: 1;
 }
+
+.blog-wrapper ul {
+  list-style: initial;
+  padding-left: var(--ifm-list-left-padding);
+}
