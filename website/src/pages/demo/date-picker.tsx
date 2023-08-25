@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 import { createDatePicker } from '@schedule-x/date-picker'
 import '@schedule-x/theme-default/dist/date-picker.css'
 
-import styles from '../index.module.css';
+import '../index.module.css';
 
 export default function DatePicker(): JSX.Element {
   const [datePicker, setDatePicker] = React.useState(null)

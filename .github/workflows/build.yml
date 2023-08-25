@@ -31,7 +31,9 @@ jobs:
         with:
           node-version: 'lts/*'
       - name: Install dependencies 🛠️
+        working-directory: ./website
         run: npm i
       - name: Build
-        run: cd website && npm run build
+        working-directory: ./website
+        run: npm run build
 
