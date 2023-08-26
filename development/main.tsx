@@ -37,3 +37,10 @@ datePicker.bootstrap()
 // changeValueBtn.addEventListener('click', () => {
 //   datePicker.value = '2021-03-15'
 // })
+
+// set a listener to theme-toggle element, when clicked, set an is-dark class on the body
+// or remove it if it already exists
+const themeToggle = document.querySelector('#theme-toggle') as HTMLElement
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('is-dark')
+})

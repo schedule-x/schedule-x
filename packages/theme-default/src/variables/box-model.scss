@@ -6,3 +6,7 @@
   --sx-rounding-extra-large: 28px;
   --sx-border: 1px solid var(--sx-color-outline-variant);
 }
+
+.is-dark {
+  --sx-border: 1px solid transparent;
+}

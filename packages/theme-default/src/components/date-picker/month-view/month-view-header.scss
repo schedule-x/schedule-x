@@ -10,25 +10,37 @@
   font-weight: 300;
 }
 
-.sx__date-picker__chevron {
-  display: flex;
-  align-items: center;
-  width: 1.5rem;
-  transition: color 0.2s ease-in-out;
+.sx__date-picker__chevron-wrapper {
+  position: relative;
   border-radius: 50%;
-  padding: var(--sx-spacing-padding2);
+  height: 2.5rem;
+  width: 2.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 0;
 
   &:hover {
-    background-color: var(--sx-color-surface-dim);
+      background-color: var(--sx-color-surface-dim);
+  }
+
+  .sx__date-picker__chevron {
+    position: absolute;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-width: 0.2rem 0.2rem 0 0;
+    border-style: solid;
+    border-color: var(--sx-color-text);
   }
 }
 
+
 .sx__date-picker__chevron--previous {
-  transform: rotate(90deg);
-  margin-inline-start: calc(var(--sx-spacing-padding1) * -1);
+  left: calc(50% + 0.125rem);
+  transform: translate(-50%, -50%) rotate(225deg);
 }
 
 .sx__date-picker__chevron--next {
-  transform: rotate(-90deg);
-  margin-inline-end: calc(var(--sx-spacing-padding1) * -1);
+  left: calc(50% - 0.125rem);
+  transform: translate(-50%, -50%) rotate(45deg);
 }

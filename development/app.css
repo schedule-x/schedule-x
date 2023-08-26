@@ -4,3 +4,13 @@
   padding: 2rem;
   font-family: 'Open Sans', sans-serif;
 }
+
+.is-dark {
+  background-color: var(--sx-color-background);
+  color: #fff;
+}
+
+.is-dark #theme-toggle {
+  background-color: var(--sx-color-background);
+  color: #fff;
+}

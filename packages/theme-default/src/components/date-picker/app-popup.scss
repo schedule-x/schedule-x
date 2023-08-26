@@ -8,6 +8,10 @@
   padding: var(--sx-spacing-modal-padding);
   background-color: var(--sx-color-background);
 
+  .is-dark & {
+    background-color: var(--sx-color-surface-container-high);
+  }
+
   $top-placement-bottom-value: calc(100% + 1rem);
 
   &.bottom-end {

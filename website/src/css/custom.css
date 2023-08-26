@@ -34,7 +34,7 @@
   flex: 1;
 }
 
-.blog-wrapper ul {
+.blog-wrapper main ul {
   list-style: initial;
   padding-left: var(--ifm-list-left-padding);
 }
