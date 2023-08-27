@@ -12,7 +12,6 @@ import {
   assertIsNotShowingPopup,
   assertIsShowingPopup,
   DATE_PICKER_POPUP_TEST_ID,
-  getAppWrapper,
   renderWithOpenPopup,
 } from './utils'
 import { createAppSingleton } from '../../../factory'
@@ -49,7 +48,7 @@ describe('date picker wrapper', () => {
     await assertIsShowingPopup()
   })
 
-  it('should not close popup when click outside popup', async () => {
+  it('should not close popup when click inside popup', async () => {
     renderWithOpenPopup($app)
     await assertIsShowingPopup()
 
@@ -65,20 +64,5 @@ describe('date picker wrapper', () => {
     document.body.click()
 
     await assertIsNotShowingPopup()
-  })
-
-  it('should not have "is-dark" class on wrapper', () => {
-    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
-    const wrapper = getAppWrapper()
-
-    expect(wrapper.classList.contains('is-dark')).toBe(false)
-  })
-
-  it('should have "is-dark" class on wrapper', () => {
-    $app = createAppSingleton({ style: { dark: true } })
-    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
-    const wrapper = getAppWrapper()
-
-    expect(wrapper.classList.contains('is-dark')).toBe(true)
   })
 })

@@ -10,6 +10,7 @@ type props = {
 export default function AppWrapper({ $app }: props) {
   const classes = ['sx__date-picker-wrapper']
   if ($app.config.style?.dark) classes.push('is-dark')
+  if ($app.config.style?.fullWidth) classes.push('has-full-width')
 
   return (
     <>
