@@ -2,7 +2,8 @@ import {
   describe,
   it,
   beforeEach,
-  afterEach, expect,
+  afterEach,
+  expect,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { render, screen, cleanup } from '@testing-library/preact'
 import AppWrapper from '../../app-wrapper'
@@ -10,7 +11,8 @@ import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-p
 import {
   assertIsNotShowingPopup,
   assertIsShowingPopup,
-  DATE_PICKER_POPUP_TEST_ID, getAppWrapper,
+  DATE_PICKER_POPUP_TEST_ID,
+  getAppWrapper,
   renderWithOpenPopup,
 } from './utils'
 import { createAppSingleton } from '../../../factory'

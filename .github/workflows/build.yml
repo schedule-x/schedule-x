@@ -36,4 +36,3 @@ jobs:
       - name: Build
         working-directory: ./website
         run: npm run build
-

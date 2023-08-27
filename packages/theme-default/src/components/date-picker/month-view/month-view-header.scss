@@ -20,7 +20,7 @@
   font-size: 0;
 
   &:hover {
-      background-color: var(--sx-color-surface-dim);
+    background-color: var(--sx-color-surface-dim);
   }
 
   .sx__date-picker__chevron {
@@ -33,7 +33,6 @@
     border-color: var(--sx-color-text);
   }
 }
-
 
 .sx__date-picker__chevron--previous {
   left: calc(50% + 0.125rem);

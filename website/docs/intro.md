@@ -14,5 +14,3 @@ This library is still in a pre-release state. While it is usable, its API might 
 If you use it, consider pinning your dependency to a specific version.
 
 :::
-
-

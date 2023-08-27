@@ -9,7 +9,6 @@ import {
   getFirstDayOfNextMonth,
   getFirstDayOPreviousMonth,
 } from '../../../../shared/utils/stateless/time/date-time-mutation/date-time-mutation'
-import chevronIcon from '../assets/chevron-navigation.svg'
 
 type props = {
   setYearsView: () => void
@@ -62,7 +61,10 @@ export default function MonthViewHeader({ setYearsView }: props) {
   return (
     <>
       <header class="sx__date-picker__month-view-header">
-        <button className="sx__date-picker__chevron-wrapper" onClick={() => setPreviousMonth()}>
+        <button
+          className="sx__date-picker__chevron-wrapper"
+          onClick={() => setPreviousMonth()}
+        >
           <i class="sx__date-picker__chevron sx__date-picker__chevron--previous">
             {$app.translate('Previous month')}
           </i>
@@ -73,7 +75,10 @@ export default function MonthViewHeader({ setYearsView }: props) {
         >
           {selectedDateMonthName + ' ' + datePickerYear}
         </button>
-        <button className="sx__date-picker__chevron-wrapper" onClick={() => setNextMonth()}>
+        <button
+          className="sx__date-picker__chevron-wrapper"
+          onClick={() => setNextMonth()}
+        >
           <i class="sx__date-picker__chevron sx__date-picker__chevron--next">
             {$app.translate('Next month')}
           </i>

@@ -29,10 +29,10 @@ const sidebars = {
           type: 'link',
           label: 'Demo',
           href: '/demo/date-picker',
-        }
+        },
       ],
-    }
+    },
   ],
-};
+}
 
-module.exports = sidebars;
+module.exports = sidebars
