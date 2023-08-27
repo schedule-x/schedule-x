@@ -19,7 +19,6 @@ describe('date format conversion', () => {
     ['sv-SE', '2023-02-01', '2023-02-01'],
     ['zh-CN', '2020/02/31', '2020-02-31'],
     ['zh-CN', '2023/02/01', '2023-02-01'],
-
   ])(
     'should convert %s date string %s to international format %s',
     (locale: string, format: string, expected: string) => {

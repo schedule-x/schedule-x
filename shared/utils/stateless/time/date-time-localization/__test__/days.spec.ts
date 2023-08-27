@@ -5,7 +5,10 @@ import {
 } from '../../../testing/unit/unit-testing-library.impl.ts'
 import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder.ts'
 import { WeekDay } from '../../../../../enums/time/week-day.enum.ts'
-import { getDayNamesShort, getOneLetterDayNames } from '../date-time-localization.ts'
+import {
+  getDayNamesShort,
+  getOneLetterDayNames,
+} from '../date-time-localization.ts'
 import { Month } from '../../../../../enums/time/month.enum.ts'
 
 describe('get localized day names', () => {

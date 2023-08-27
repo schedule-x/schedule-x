@@ -2,7 +2,7 @@ import { useContext } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
 import {
   getDayNamesShort,
-  getOneLetterDayNames
+  getOneLetterDayNames,
 } from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
 import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
 

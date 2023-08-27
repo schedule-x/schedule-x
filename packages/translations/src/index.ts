@@ -28,4 +28,13 @@ const datePickerTranslations = {
 
 export type TranslateFn = (key: string) => string
 
-export { translate, translations, datePickerTranslations, deDE, enUS, enGB, svSE, zhCN }
+export {
+  translate,
+  translations,
+  datePickerTranslations,
+  deDE,
+  enUS,
+  enGB,
+  svSE,
+  zhCN,
+}

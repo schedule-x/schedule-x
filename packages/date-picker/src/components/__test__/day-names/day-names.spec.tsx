@@ -1,10 +1,14 @@
 import {
   describe,
   it,
-  expect, afterEach,
+  expect,
+  afterEach,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
-import { appSingletonWithGerman, appSingletonWithLocale } from '../../../utils/stateless/testing/create-app-singleton'
+import {
+  appSingletonWithGerman,
+  appSingletonWithLocale,
+} from '../../../utils/stateless/testing/create-app-singleton'
 import { assertDayNames, factory } from './utils'
 
 describe('DayNames', () => {
