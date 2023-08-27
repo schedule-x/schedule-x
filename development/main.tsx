@@ -12,7 +12,7 @@ const datePicker = createDatePicker(
   document.querySelector('#app') as HTMLElement,
   {
     // locale: 'de-DE',
-    locale: 'en-US',
+    locale: 'ja-JP',
     // locale: 'sv-SE',
     firstDayOfWeek: 0,
     selectedDate: '',

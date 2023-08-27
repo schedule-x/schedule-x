@@ -5,7 +5,7 @@ import {
 } from '../../../testing/unit/unit-testing-library.impl.ts'
 import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder.ts'
 import { WeekDay } from '../../../../../enums/time/week-day.enum.ts'
-import { getOneLetterDayNames } from '../date-time-localization.ts'
+import { getDayNamesShort, getOneLetterDayNames } from '../date-time-localization.ts'
 import { Month } from '../../../../../enums/time/month.enum.ts'
 
 describe('get localized day names', () => {
@@ -62,5 +62,21 @@ describe('get localized day names', () => {
     expect(result[4]).toBe('T')
     expect(result[5]).toBe('F')
     expect(result[6]).toBe('S')
+  })
+
+  it('should get short day names in Chinese', () => {
+    const underTest = getDayNamesShort
+    const date = new Date(2023, Month.JANUARY, 1)
+    const week = timeUnitsImpl.getWeekFor(date)
+
+    const result = underTest(week, 'zh-CN')
+
+    expect(result[0]).toBe('周一')
+    expect(result[1]).toBe('周二')
+    expect(result[2]).toBe('周三')
+    expect(result[3]).toBe('周四')
+    expect(result[4]).toBe('周五')
+    expect(result[5]).toBe('周六')
+    expect(result[6]).toBe('周日')
   })
 })
