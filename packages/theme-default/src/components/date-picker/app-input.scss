@@ -23,6 +23,11 @@
   border: var(--sx-border);
   border-radius: 4px;
   cursor: pointer;
+  background-color: var(--sx-color-background);
+
+  .is-dark & {
+    background-color: var(--sx-color-surface-container-high);
+  }
 
   .sx__date-input--active & {
     border-color: var(--sx-color-primary);
@@ -45,5 +50,9 @@
 
   .sx__date-input--active & {
     color: var(--sx-color-primary);
+  }
+
+  .is-dark & {
+    display: none;
   }
 }

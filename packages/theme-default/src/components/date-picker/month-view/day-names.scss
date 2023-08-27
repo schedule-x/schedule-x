@@ -2,7 +2,9 @@
 
 .sx__date-picker__day-names {
   @include date-picker-month-row;
+}
 
+.sx__date-picker__day-name {
   font-weight: 700;
   color: var(--sx-color-neutral-variant);
 }

@@ -16,6 +16,10 @@
     background-color: var(--sx-color-surface-container);
     border-bottom: 0;
   }
+
+  &:hover {
+    background-color: var(--sx-color-surface-dim);
+  }
 }
 
 .sx__date-picker__years-view-accordion__panel {

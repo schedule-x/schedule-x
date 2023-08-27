@@ -1,9 +1,8 @@
 ---
 slug: welcome-to-schedule-x
 title: Welcome to Schedule-X
-authors: [ oesterlund ]
+authors: [oesterlund]
 ---
-
 
 _At the moment, there is not much to see here. But here's some background and vision for the project:_
 
@@ -24,9 +23,9 @@ had a couple of basic problems:
 
 This library is an attempt to fix all the 4 above problems. So the vision of this project is:
 
-* to create a library with scheduling components, all adhering to material design 3 
-* to offer these components to implementers using different web frontend frameworks 
-* to make the components extensible, allowing massive control for the implementer
+- to create a library with scheduling components, all adhering to material design 3
+- to offer these components to implementers using different web frontend frameworks
+- to make the components extensible, allowing massive control for the implementer
 
 Does this mean a complete rewrite of Qalendar? Yes, it does. But it also means that the components might be useful to a
 greater number of people.

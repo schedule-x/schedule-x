@@ -1,12 +1,14 @@
 import Config from '../../../../../../shared/interfaces/config.interface'
 import { Placement } from '../../../enums/placement.enum'
 import { DatePickerListeners } from './listeners.interface'
+import { DatePickerStyle } from './style.interface'
 
 export default interface DatePickerConfigInternal extends Config {
   min: string
   max: string
   placement: Placement
   listeners: DatePickerListeners
+  style: DatePickerStyle
 }
 
 export interface DatePickerConfigExternal
