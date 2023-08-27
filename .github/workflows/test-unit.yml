@@ -7,7 +7,7 @@ on:
 
 jobs:
   test_london:
-    name: Test London
+    name: London time
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
@@ -26,7 +26,7 @@ jobs:
         run: npx vitest run --silent
 
   test_mountain_view:
-    name: Test Mountain View
+    name: Mountain View time
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
@@ -45,7 +45,7 @@ jobs:
         run: npx vitest run --silent
 
   test_tokyo:
-    name: Test Tokyo
+    name: Tokyo time
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅

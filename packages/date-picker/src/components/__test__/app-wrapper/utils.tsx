@@ -25,7 +25,5 @@ export const renderWithOpenPopup = (
 }
 
 export const getAppWrapper = () => {
-  const wrapper = document.querySelector('.sx__date-picker-wrapper')
-  if (!wrapper) throw new Error('wrapper not found')
-  return wrapper
+  return document.querySelector('.sx__date-picker-wrapper') as HTMLElement
 }

@@ -3,20 +3,35 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import { createDatePicker } from '@schedule-x/date-picker'
 import '@schedule-x/theme-default/dist/date-picker.css'
+import { useColorMode } from '@docusaurus/theme-common';
+import styles from './date-picker.module.css';
 
 import '../index.module.css'
 
-export default function DatePicker(): JSX.Element {
+function DatePickerComponent(): JSX.Element {
   const [datePicker, setDatePicker] = React.useState(null)
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
     const datePickerElement = document.getElementById('date-picker')
-    setDatePicker(createDatePicker(datePickerElement))
-  }, [])
+    setDatePicker(createDatePicker(datePickerElement, {
+      style: {
+        dark: colorMode === 'dark',
+      }
+    }))
+  }, [colorMode])
 
   useEffect(() => {
     datePicker?.bootstrap()
   }, [datePicker])
+
+
+  return (
+    <div id="date-picker"/>
+  )
+}
+
+export default function DatePicker(): JSX.Element {
 
   const { siteConfig } = useDocusaurusContext()
   return (
@@ -24,15 +39,8 @@ export default function DatePicker(): JSX.Element {
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      <main
-        style={{
-          display: 'flex',
-          marginTop: '200px',
-          justifyContent: 'center',
-          flex: 1,
-        }}
-      >
-        <div id="date-picker" />
+      <main className={styles.mainWrapper}>
+        <DatePickerComponent />
       </main>
     </Layout>
   )

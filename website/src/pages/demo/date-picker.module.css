@@ -1,0 +1,12 @@
+.mainWrapper {
+    display: flex;
+    margin-top: 200px;
+    justify-content: center;
+    flex: 1;
+}
+
+@media screen and (width <= 996px) {
+    .mainWrapper {
+        margin-top: 100px;
+    }
+}

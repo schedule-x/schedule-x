@@ -12,7 +12,9 @@ const datePicker = createDatePicker(
   document.querySelector('#app') as HTMLElement,
   {
     // locale: 'de-DE',
-    locale: 'en-US',
+    // locale: 'zh-CN',
+    // russian
+    locale: 'zh-CN',
     // locale: 'sv-SE',
     firstDayOfWeek: 0,
     selectedDate: '',
@@ -20,11 +22,11 @@ const datePicker = createDatePicker(
     // placement: 'top-end',
     // min: '2021-03-01',
     // max: '2021-03-31',
-    listeners: {
-      onChange: (value) => {
-        console.log('onChange', value)
-      },
-    },
+    // listeners: {
+    //   onChange: (value) => {
+    //     console.log('onChange', value)
+    //   },
+    // },
   }
 )
 datePicker.bootstrap()
