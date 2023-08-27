@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_library:
-    name: Build library
+    name: Library
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: npm run build
   build_website:
-    name: Build website
+    name: Website
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
