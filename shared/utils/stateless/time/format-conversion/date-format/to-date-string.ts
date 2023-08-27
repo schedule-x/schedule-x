@@ -27,6 +27,7 @@ export const toDateString = (format: string, locale: string) => {
   const { order, delimiter } = localeDateFormatRule
   const pattern224Slashed = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
   const pattern224Dotted = /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/
+  const pattern442Slashed = /^(\d{4})\/(\d{1,2})\/(\d{1,2})$/
 
   if (order === Order.DMY && delimiter === Delimiter.SLASH) {
     const matches = _getMatchesOrThrow(format, pattern224Slashed, locale)
@@ -37,6 +38,12 @@ export const toDateString = (format: string, locale: string) => {
   if (order === Order.MDY && delimiter === Delimiter.SLASH) {
     const matches = _getMatchesOrThrow(format, pattern224Slashed, locale)
     const [, month, day, year] = matches
+    return `${year}-${doubleDigit(+month)}-${doubleDigit(+day)}`
+  }
+
+  if (order === Order.YMD && delimiter === Delimiter.SLASH) {
+    const matches = _getMatchesOrThrow(format, pattern442Slashed, locale)
+    const [, year, month, day] = matches
     return `${year}-${doubleDigit(+month)}-${doubleDigit(+day)}`
   }
 
