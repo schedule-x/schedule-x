@@ -8,9 +8,12 @@ type props = {
 }
 
 export default function AppWrapper({ $app }: props) {
+  const classes = ['sx__date-picker-wrapper']
+  if ($app.config.style?.dark) classes.push('is-dark')
+
   return (
     <>
-      <div class="sx__date-picker-wrapper">
+      <div class={classes.join(' ')}>
         <AppContext.Provider value={$app}>
           <AppInput />
 

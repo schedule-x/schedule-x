@@ -4,6 +4,7 @@ import { ConfigImpl } from './config.impl'
 import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
 import { Placement } from '../../../enums/placement.enum'
 import { DatePickerListeners } from './listeners.interface'
+import { DatePickerStyle } from './style.interface'
 
 export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   locale: string | undefined
@@ -12,6 +13,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   max: string | undefined
   placement: Placement | undefined
   listeners: DatePickerListeners | undefined
+  style: DatePickerStyle | undefined
 
   build(): DatePickerConfigInternal {
     return new ConfigImpl(
@@ -20,7 +22,8 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
       this.min,
       this.max,
       this.placement,
-      this.listeners
+      this.listeners,
+      this.style
     )
   }
 
@@ -56,6 +59,12 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
 
   withListeners(listeners: DatePickerListeners | undefined): ConfigBuilder {
     this.listeners = listeners
+
+    return this
+  }
+
+  withStyle(style: DatePickerStyle | undefined): ConfigBuilder {
+    this.style = style
 
     return this
   }

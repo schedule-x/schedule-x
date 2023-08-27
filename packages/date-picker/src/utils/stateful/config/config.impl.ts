@@ -7,6 +7,7 @@ import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
 import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
 import { Placement } from '../../../enums/placement.enum'
 import { DatePickerListeners } from './listeners.interface'
+import { DatePickerStyle } from './style.interface'
 
 export class ConfigImpl implements DatePickerConfigInternal {
   constructor(
@@ -17,6 +18,7 @@ export class ConfigImpl implements DatePickerConfigInternal {
       new Date(new Date().getFullYear() + 1, 11, 31)
     ),
     public placement: Placement = Placement.BOTTOM_START,
-    public listeners: DatePickerListeners = {}
+    public listeners: DatePickerListeners = {},
+    public style: DatePickerStyle = {}
   ) {}
 }

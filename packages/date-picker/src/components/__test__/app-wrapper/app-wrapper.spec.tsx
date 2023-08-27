@@ -2,7 +2,7 @@ import {
   describe,
   it,
   beforeEach,
-  afterEach,
+  afterEach, expect,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { render, screen, cleanup } from '@testing-library/preact'
 import AppWrapper from '../../app-wrapper'
@@ -10,7 +10,7 @@ import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-p
 import {
   assertIsNotShowingPopup,
   assertIsShowingPopup,
-  DATE_PICKER_POPUP_TEST_ID,
+  DATE_PICKER_POPUP_TEST_ID, getAppWrapper,
   renderWithOpenPopup,
 } from './utils'
 import { createAppSingleton } from '../../../factory'
@@ -63,5 +63,20 @@ describe('date picker wrapper', () => {
     document.body.click()
 
     await assertIsNotShowingPopup()
+  })
+
+  it('should not have "is-dark" class on wrapper', () => {
+    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
+    const wrapper = getAppWrapper()
+
+    expect(wrapper.classList.contains('is-dark')).toBe(false)
+  })
+
+  it('should have "is-dark" class on wrapper', () => {
+    $app = createAppSingleton({ style: { dark: true } })
+    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
+    const wrapper = getAppWrapper()
+
+    expect(wrapper.classList.contains('is-dark')).toBe(true)
   })
 })

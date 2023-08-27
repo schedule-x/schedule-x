@@ -23,3 +23,9 @@ export const renderWithOpenPopup = (
   ;($app as DatePickerAppSingleton).datePickerState.open()
   render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
 }
+
+export const getAppWrapper = () => {
+  const wrapper = document.querySelector('.sx__date-picker-wrapper')
+  if (!wrapper) throw new Error('wrapper not found')
+  return wrapper
+}
