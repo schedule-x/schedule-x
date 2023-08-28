@@ -1,6 +1,9 @@
 name: End-to-end tests
 on:
-  pull_request:
+  workflow_run:
+    workflows: ["Unit tests"]
+    types:
+      - completed
   push:
     branches:
       - master
@@ -8,6 +11,7 @@ on:
 jobs:
   chrome:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v4

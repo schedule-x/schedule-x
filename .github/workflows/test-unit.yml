@@ -1,6 +1,9 @@
 name: Unit tests
 on:
-  pull_request:
+  workflow_run:
+    workflows: [ "Build" ]
+    types:
+      - completed
   push:
     branches:
       - master
@@ -9,6 +12,7 @@ jobs:
   test_london:
     name: London time
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v3
@@ -28,6 +32,7 @@ jobs:
   test_mountain_view:
     name: Mountain View time
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v3
@@ -47,6 +52,7 @@ jobs:
   test_tokyo:
     name: Tokyo time
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v3
