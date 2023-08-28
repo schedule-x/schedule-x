@@ -1,12 +1,17 @@
 .mainWrapper {
     display: flex;
+    flex-direction: column;
     margin-top: 200px;
-    justify-content: center;
+    align-items: center;
     flex: 1;
 }
 
 @media screen and (width <= 996px) {
     .mainWrapper {
-        margin-top: 100px;
+        margin-top: 50px;
+    }
+
+    .datePicker {
+        width: 90%;
     }
 }
