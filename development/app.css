@@ -1,7 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
 #app {
-  width: fit-content;
+  width: 400px;
+  max-width: 100%;
   margin: 300px auto 0;
-  padding: 2rem;
+  padding: 1rem;
   font-family: 'Open Sans', sans-serif;
 }
 

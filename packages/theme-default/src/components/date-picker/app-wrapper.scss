@@ -1,8 +1,14 @@
 .sx__date-picker-wrapper {
   position: relative;
   color: var(--sx-color-on-background);
+  width: fit-content;
+
+  &.has-full-width {
+    width: 100%;
+  }
 
   * {
     color: var(--sx-color-on-background);
+    box-sizing: border-box;
   }
 }

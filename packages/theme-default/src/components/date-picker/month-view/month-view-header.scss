@@ -13,8 +13,8 @@
 .sx__date-picker__chevron-wrapper {
   position: relative;
   border-radius: 50%;
-  height: 2.5rem;
-  width: 2.5rem;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   font-size: 0;

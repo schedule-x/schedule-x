@@ -11,10 +11,10 @@ import { createDatePicker } from '../packages/date-picker/src'
 const datePicker = createDatePicker(
   document.querySelector('#app') as HTMLElement,
   {
-    // locale: 'de-DE',
-    // locale: 'zh-CN',
-    // russian
-    locale: 'zh-CN',
+    locale: 'de-DE',
+    style: {
+      fullWidth: true,
+    },
     // locale: 'sv-SE',
     firstDayOfWeek: 0,
     selectedDate: '',

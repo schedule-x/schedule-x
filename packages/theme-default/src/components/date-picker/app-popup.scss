@@ -1,7 +1,8 @@
 .sx__date-picker-popup {
   position: absolute;
   top: calc(100% + 1px); // 1px to account for outline
-  width: 300px; // TODO: change
+  width: 20.75rem;
+  max-width: 500px;
   max-height: 400px;
   overflow: scroll;
   box-shadow: var(--sx-box-shadow-level3);
