@@ -1,5 +1,6 @@
 name: Unit tests
 on:
+  pull_request:
   workflow_run:
     workflows: [ "Build" ]
     types: [completed]

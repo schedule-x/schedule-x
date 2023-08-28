@@ -1,5 +1,6 @@
 name: End-to-end tests
 on:
+  pull_request:
   workflow_run:
     workflows: ["Unit tests"]
     types: [completed]
