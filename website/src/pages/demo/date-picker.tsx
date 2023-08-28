@@ -3,8 +3,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import { createDatePicker } from '@schedule-x/date-picker'
 import '@schedule-x/theme-default/dist/date-picker.css'
-import { useColorMode } from '@docusaurus/theme-common';
-import styles from './date-picker.module.css';
+import { useColorMode } from '@docusaurus/theme-common'
+import styles from './date-picker.module.css'
 
 import '../index.module.css'
 
@@ -17,6 +17,7 @@ function DatePickerComponent(): JSX.Element {
     setDatePicker(createDatePicker(datePickerElement, {
       style: {
         dark: colorMode === 'dark',
+        fullWidth: true,
       }
     }))
   }, [colorMode])
@@ -27,7 +28,7 @@ function DatePickerComponent(): JSX.Element {
 
 
   return (
-    <div id="date-picker"/>
+    <div id="date-picker" className={styles.datePicker}/>
   )
 }
 
