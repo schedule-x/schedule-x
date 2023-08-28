@@ -2,8 +2,7 @@ name: End-to-end tests
 on:
   workflow_run:
     workflows: ["Unit tests"]
-    types:
-      - completed
+    types: [completed]
   push:
     branches:
       - master

@@ -2,8 +2,7 @@ name: Unit tests
 on:
   workflow_run:
     workflows: [ "Build" ]
-    types:
-      - completed
+    types: [completed]
   push:
     branches:
       - master
