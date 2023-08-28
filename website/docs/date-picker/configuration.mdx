@@ -9,7 +9,7 @@ The `createDatePicker` function accepts a configuration object as its second arg
 ## Properties table
 
 | Property       | Type                        | Purpose                                                                                             | Default                                    |
-|----------------|-----------------------------|-----------------------------------------------------------------------------------------------------|--------------------------------------------|
+| -------------- | --------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------ |
 | `locale`       | string                      | Localize text and input. Currently accepted values: `en-US`, `en-GB`, `de-DE`, `sv-SE` and `zh-CN`  | `en-US`                                    |
 | `selectedDate` | string                      | The date that should be selected when the date picker is opened. Needs format YYYY-MM-DD            | current date                               |
 | `placement`    | string                      | Place popup relative to input. Accepts values: `bottom-start`, `bottom-end`, `top-start`, `top-end` | `bottom-start`                             |
@@ -51,7 +51,7 @@ const datePicker = createDatePicker(el, {
   min: '2021-01-01',
   max: '2022-12-31',
   style: {
-    dark: true
+    dark: true,
   },
 })
 datePicker.bootstrap()

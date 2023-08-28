@@ -10,30 +10,28 @@ import '../index.module.css'
 
 function DatePickerComponent(): JSX.Element {
   const [datePicker, setDatePicker] = React.useState(null)
-  const { colorMode } = useColorMode();
+  const { colorMode } = useColorMode()
 
   useEffect(() => {
     const datePickerElement = document.getElementById('date-picker')
-    setDatePicker(createDatePicker(datePickerElement, {
-      style: {
-        dark: colorMode === 'dark',
-        fullWidth: true,
-      }
-    }))
+    setDatePicker(
+      createDatePicker(datePickerElement, {
+        style: {
+          dark: colorMode === 'dark',
+          fullWidth: true,
+        },
+      })
+    )
   }, [colorMode])
 
   useEffect(() => {
     datePicker?.bootstrap()
   }, [datePicker])
 
-
-  return (
-    <div id="date-picker" className={styles.datePicker}/>
-  )
+  return <div id="date-picker" className={styles.datePicker} />
 }
 
 export default function DatePicker(): JSX.Element {
-
   const { siteConfig } = useDocusaurusContext()
   return (
     <Layout

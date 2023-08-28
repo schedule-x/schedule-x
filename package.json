@@ -10,7 +10,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "build": "npm run clean:build && rollup -c && lerna run build",
-    "test:unit": "vitest",
+    "test:unit": "vitest run",
     "test:e2e": "cypress open -- --e2e",
     "test:e2e:ci": "./node_modules/.bin/cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",
     "test:e2e:record": "./node_modules/.bin/cypress run --env type=base --config screenshotsFolder=cypress/snapshots/mac/base",
@@ -23,7 +23,8 @@
     "clean:build": "rm -rf ./packages/*/dist",
     "release": "npm run build && lerna publish --no-commit-hooks",
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
-    "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease"
+    "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@preact/signals": "^1.1.5",
@@ -51,6 +52,7 @@
     "cypress-visual-regression": "^3.0.0",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
     "jsdom": "^22.1.0",
     "lerna": "^7.1.4",
     "minimist": "^1.2.8",
