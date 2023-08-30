@@ -12,7 +12,6 @@ import { translate, translations } from '@schedule-x/translations/src'
 
 const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const internalConfig = new CalendarConfigBuilder()
-    .withDatePickerConfig(config.datePickerConfig)
     .withLocale(config.locale)
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .build()
@@ -24,16 +23,16 @@ const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const datePickerConfig = new DatePickerConfigBuilder()
     .withLocale(internalConfig.locale)
     .withFirstDayOfWeek(internalConfig.firstDayOfWeek)
-    .withMin(internalConfig.datePickerConfig.min)
-    .withMax(internalConfig.datePickerConfig.max)
-    .withPlacement(internalConfig.datePickerConfig.placement as Placement)
-    .withListeners(internalConfig.datePickerConfig.listeners)
-    .withStyle(internalConfig.datePickerConfig.style)
+    .withMin(config.datePicker?.min)
+    .withMax(config.datePicker?.max)
+    .withPlacement(config.datePicker?.placement as Placement)
+    .withListeners(config.datePicker?.listeners)
+    .withStyle(config.datePicker?.style)
     .build()
 
   const datePickerState = createDatePickerState(
     datePickerConfig,
-    config.datePickerConfig?.selectedDate
+    config.datePicker?.selectedDate
   )
 
   return new CalendarAppSingletonBuilder()

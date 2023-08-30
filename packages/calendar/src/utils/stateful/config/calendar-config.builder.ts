@@ -7,23 +7,11 @@ import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
 {
-  datePickerConfig: DatePickerConfigExternal | undefined
   locale: string | undefined
   firstDayOfWeek: WeekDay | undefined
 
   build(): CalendarConfigInternal {
-    return new CalendarConfigImpl(
-      this.locale!,
-      this.firstDayOfWeek!,
-      this.datePickerConfig!
-    )
-  }
-
-  withDatePickerConfig(
-    datePickerConfig: DatePickerConfigExternal | undefined
-  ): CalendarConfigBuilder {
-    this.datePickerConfig = datePickerConfig
-    return this
+    return new CalendarConfigImpl(this.locale!, this.firstDayOfWeek!)
   }
 
   withLocale(locale: string | undefined): CalendarConfigBuilder {

@@ -9,7 +9,6 @@ import { DatePickerConfigExternal } from '@schedule-x/date-picker/src/utils/stat
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   constructor(
     public locale: string = DEFAULT_LOCALE,
-    public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
-    public datePickerConfig: DatePickerConfigExternal = {}
+    public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK
   ) {}
 }
