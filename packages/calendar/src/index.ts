@@ -1,5 +1,5 @@
 import { createCalendar } from './factory'
-import { CalendarConfigExternal } from './utils/stateful/config/calendar-config'
+import { CalendarConfigExternal as CalendarConfig } from './utils/stateful/config/calendar-config'
 
-export type { CalendarConfigExternal }
+export type { CalendarConfig }
 export { createCalendar }

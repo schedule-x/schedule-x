@@ -1,7 +1,5 @@
 import CalendarApp from './calendar.app'
-import CalendarConfigInternal, {
-  CalendarConfigExternal,
-} from './utils/stateful/config/calendar-config'
+import { CalendarConfigExternal } from './utils/stateful/config/calendar-config'
 import CalendarConfigBuilder from './utils/stateful/config/calendar-config.builder'
 import CalendarAppSingletonBuilder from './utils/stateful/app-singleton/calendar-app-singleton.builder'
 import TimeUnitsBuilder from '../../../shared/utils/stateful/time-units/time-units.builder'
