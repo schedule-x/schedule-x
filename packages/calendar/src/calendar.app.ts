@@ -5,10 +5,10 @@ import CalendarAppSingleton from './utils/stateful/app-singleton/calendar-app-si
 export default class CalendarApp {
   constructor(
     private el: HTMLElement,
-    $app: CalendarAppSingleton
+    private $app: CalendarAppSingleton
   ) {}
 
   bootstrap(): void {
-    render(createElement(CalendarWrapper, {}), this.el)
+    render(createElement(CalendarWrapper, { $app: this.$app }), this.el)
   }
 }

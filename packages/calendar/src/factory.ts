@@ -7,36 +7,43 @@ import { createDatePickerState } from '../../../shared/utils/stateful/date-picke
 import { ConfigBuilder as DatePickerConfigBuilder } from '@schedule-x/date-picker/src/utils/stateful/config/config.builder'
 import { Placement } from '@schedule-x/date-picker/src/enums/placement.enum'
 import { translate, translations } from '@schedule-x/translations/src'
+import { createCalendarState } from './utils/stateful/calendar-state/calendar-state.impl'
 
 const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const internalConfig = new CalendarConfigBuilder()
     .withLocale(config.locale)
     .withFirstDayOfWeek(config.firstDayOfWeek)
+    .withDefaultView(config.defaultView)
     .build()
 
   const timeUnitsImpl = new TimeUnitsBuilder()
     .withFirstDayOfWeek(internalConfig.firstDayOfWeek)
     .build()
 
+  const calendarState = createCalendarState(internalConfig, timeUnitsImpl)
+
+  const dateSelectionCallback = (date: string) => {
+    calendarState.handleDateSelection(date)
+  }
+
   const datePickerConfig = new DatePickerConfigBuilder()
-    .withLocale(internalConfig.locale)
-    .withFirstDayOfWeek(internalConfig.firstDayOfWeek)
+    .withLocale(config.locale)
+    .withFirstDayOfWeek(config.firstDayOfWeek)
     .withMin(config.datePicker?.min)
     .withMax(config.datePicker?.max)
-    .withPlacement(config.datePicker?.placement as Placement)
-    .withListeners(config.datePicker?.listeners)
     .withStyle(config.datePicker?.style)
+    .withPlacement(Placement.BOTTOM_END)
+    .withListeners({ onChange: dateSelectionCallback })
     .build()
-
-  const datePickerState = createDatePickerState(
-    datePickerConfig,
-    config.datePicker?.selectedDate
-  )
 
   return new CalendarAppSingletonBuilder()
     .withConfig(internalConfig)
     .withTimeUnitsImpl(timeUnitsImpl)
-    .withDatePickerState(datePickerState)
+    .withDatePickerState(
+      createDatePickerState(datePickerConfig, config.datePicker?.selectedDate)
+    )
+    .withDatePickerConfig(datePickerConfig)
+    .withCalendarState(calendarState)
     .withTranslate(translate(internalConfig.locale, translations))
     .build()
 }
