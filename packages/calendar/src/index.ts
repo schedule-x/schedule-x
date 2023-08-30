@@ -1,3 +1,5 @@
-import Calendar from './calendar.app'
+import { createCalendar } from './factory'
+import { CalendarConfigExternal } from './utils/stateful/config/calendar-config'
 
-export { Calendar as Calendar }
+export type { CalendarConfigExternal }
+export { createCalendar }

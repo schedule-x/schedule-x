@@ -1,11 +1,11 @@
 import { createElement, render } from 'preact'
 import CalendarWrapper from './components/calendar-wrapper'
-import AppSingleton from '../../../shared/interfaces/app-singleton.interface'
+import CalendarAppSingleton from './utils/stateful/app-singleton/calendar-app-singleton'
 
 export default class CalendarApp {
   constructor(
     private el: HTMLElement,
-    $app: AppSingleton
+    $app: CalendarAppSingleton
   ) {}
 
   bootstrap(): void {

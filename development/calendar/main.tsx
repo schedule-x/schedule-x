@@ -1,4 +1,4 @@
-import { createCalendar } from '../../packages/calendar/src/factory.ts'
+import { createCalendar } from '../../packages/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
 
