@@ -2,7 +2,7 @@ import { default as DatePickerWrapper } from '@schedule-x/date-picker/src/compon
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import DatePickerAppSingletonBuilder from '@schedule-x/date-picker/src/utils/stateful/app-singleton/date-picker-app-singleton.builder'
-import PeriodHeading from './period-heading'
+import RangeHeading from './range-heading'
 import TodayButton from './today-button'
 
 export default function CalendarHeader() {
@@ -20,7 +20,7 @@ export default function CalendarHeader() {
       <div class={'sx__calendar-header-content'}>
         <TodayButton />
 
-        <PeriodHeading />
+        <RangeHeading />
       </div>
 
       <DatePickerWrapper $app={datePickerAppSingleton}></DatePickerWrapper>

@@ -9,7 +9,9 @@ import { Placement } from '@schedule-x/date-picker/src/enums/placement.enum'
 import { translate, translations } from '@schedule-x/translations/src'
 import { createCalendarState } from './utils/stateful/calendar-state/calendar-state.impl'
 
-const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
+export const createCalendarAppSingleton = (
+  config: CalendarConfigExternal = {}
+) => {
   const internalConfig = new CalendarConfigBuilder()
     .withLocale(config.locale)
     .withFirstDayOfWeek(config.firstDayOfWeek)
