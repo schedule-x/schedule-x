@@ -23,8 +23,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
   }
 
   const getYearFrom = (datePickerDate: string) => {
-    const { year } = toIntegers(datePickerDate)
-    return year
+    return toIntegers(datePickerDate).year
   }
 
   const [selectedDateMonthName, setSelectedDateMonthName] = useState(
@@ -62,7 +61,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
     <>
       <header class="sx__date-picker__month-view-header">
         <button
-          className="sx__date-picker__chevron-wrapper"
+          className="sx__date-picker__chevron-wrapper sx__ripple"
           onClick={() => setPreviousMonth()}
         >
           <i class="sx__date-picker__chevron sx__date-picker__chevron--previous">
@@ -76,7 +75,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
           {selectedDateMonthName + ' ' + datePickerYear}
         </button>
         <button
-          className="sx__date-picker__chevron-wrapper"
+          className="sx__date-picker__chevron-wrapper sx__ripple"
           onClick={() => setNextMonth()}
         >
           <i class="sx__date-picker__chevron sx__date-picker__chevron--next">

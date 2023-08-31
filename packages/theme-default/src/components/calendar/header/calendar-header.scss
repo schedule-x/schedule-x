@@ -1,0 +1,18 @@
+.sx__calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: {
+    inset: var(--sx-spacing-padding4) var(--sx-spacing-padding4) 0 var(--sx-spacing-padding4);
+  }
+
+  .sx__date-input {
+    padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
+  }
+}
+
+.sx__calendar-header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-spacing-padding4);
+}

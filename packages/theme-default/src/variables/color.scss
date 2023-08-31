@@ -26,6 +26,9 @@
   --sx-color-surface-tint: #6750a4;
   --sx-color-neutral: var(--sx-color-outline);
   --sx-color-neutral-variant: var(--sx-color-outline-variant);
+
+  // internally defined colors, not belonging to the material design spec
+  --sx-internal-color-gray-rippe-background: #e0e0e0;
 }
 
 .is-dark {

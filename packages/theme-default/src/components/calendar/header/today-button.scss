@@ -1,0 +1,17 @@
+.sx__today-button {
+  position: relative;
+  height: fit-content;
+  border: var(--sx-border);
+  padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
+  border-radius: var(--sx-rounding-extra-small);
+  font-size: 0.875rem;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #fafafa;
+  }
+
+  &:active {
+    background-color: var(--sx-internal-color-gray-rippe-background);
+  }
+}

@@ -11,7 +11,7 @@ import '../app.css'
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar(calendarElement, {
-  locale: 'de-DE',
+  locale: 'en-US',
 })
 
 calendar.bootstrap()

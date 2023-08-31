@@ -1,0 +1,82 @@
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.16;
+  }
+
+  40% {
+    width: 100px;
+    height: 100px;
+    opacity: 0.08;
+  }
+
+  100% {
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+  }
+}
+
+@mixin ripple {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: currentcolor;
+    opacity: 0.1;
+    visibility: hidden;
+    z-index: 2;
+  }
+
+  &:active::before {
+    visibility: visible;
+  }
+}
+
+.sx__ripple {
+  @include ripple;
+
+  &:not(:active)::before {
+    animation: ripple 0.4s cubic-bezier(0, 0.1, 0.8, 1);
+    transition: visibility 0.4s step-end;
+  }
+}
+
+@keyframes ripple-wide {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.16;
+  }
+
+  40% {
+    width: 300px;
+    height: 100px;
+    opacity: 0.08;
+  }
+
+  100% {
+    width: 450px;
+    height: 150px;
+    opacity: 0;
+  }
+}
+
+.sx__ripple--wide {
+  @include ripple;
+
+  &::before {
+    border-radius: var(--sx-rounding-extra-large);
+  }
+
+  &:not(:active)::before {
+    animation: ripple-wide 0.4s cubic-bezier(0, 0.1, 0.8, 1);
+    transition: visibility 0.4s step-end;
+  }
+}
