@@ -2,9 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: start;
-  padding: {
-    inset: var(--sx-spacing-padding4) var(--sx-spacing-padding4) 0 var(--sx-spacing-padding4);
-  }
+  padding: var(--sx-spacing-padding4) var(--sx-spacing-padding4) 0
+    var(--sx-spacing-padding4);
 
   .sx__date-input {
     padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
