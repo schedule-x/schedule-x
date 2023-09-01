@@ -1,0 +1,14 @@
+.sx__today-button {
+  border: var(--sx-border);
+  padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
+  border-radius: var(--sx-rounding-extra-small);
+  font-size: var(--sx-calendar-header-input-font-size);
+
+  &:hover {
+    background-color: var(--sx-internal-color-light-gray);
+  }
+
+  &:active {
+    background-color: var(--sx-internal-color-gray-ripple-background);
+  }
+}

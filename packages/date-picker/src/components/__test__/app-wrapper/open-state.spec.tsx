@@ -3,7 +3,6 @@ import {
   it,
   beforeEach,
   afterEach,
-  expect,
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { render, screen, cleanup } from '@testing-library/preact'
 import AppWrapper from '../../app-wrapper'

@@ -1,5 +1,6 @@
-@import './user-agent-overrides/index';
-@import './variables/index';
+@import 'user-agent-overrides/index';
+@import 'variables/index';
+@import 'util/index';
 
 // Components
 @import 'components/date-picker/app-wrapper';

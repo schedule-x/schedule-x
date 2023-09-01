@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Builder from '../../../../../../shared/interfaces/builder.interface'
 import CalendarAppSingleton from './calendar-app-singleton'
 import CalendarAppSingletonImpl from './calendar-app-singleton.impl'
@@ -5,6 +6,8 @@ import DatePickerState from '../../../../../../shared/utils/stateful/date-picker
 import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
 import { TranslateFn } from '@schedule-x/translations/src'
 import CalendarConfigInternal from '../config/calendar-config'
+import CalendarState from '../calendar-state/calendar-state.interface'
+import DatePickerConfigInternal from '@schedule-x/date-picker/src/utils/stateful/config/config.interface'
 
 export default class CalendarAppSingletonBuilder
   implements Builder<CalendarAppSingleton>
@@ -12,14 +15,18 @@ export default class CalendarAppSingletonBuilder
   private config: CalendarConfigInternal | undefined
   private timeUnitsImpl: TimeUnits | undefined
   private datePickerState: DatePickerState | undefined
+  private calendarState: CalendarState | undefined
   private translate: TranslateFn | undefined
+  private datePickerConfig: DatePickerConfigInternal | undefined
 
   build(): CalendarAppSingleton {
     return new CalendarAppSingletonImpl(
       this.config!,
       this.timeUnitsImpl!,
+      this.calendarState!,
       this.datePickerState!,
-      this.translate!
+      this.translate!,
+      this.datePickerConfig!
     )
   }
 
@@ -40,8 +47,20 @@ export default class CalendarAppSingletonBuilder
     return this
   }
 
+  withCalendarState(calendarState: CalendarState): CalendarAppSingletonBuilder {
+    this.calendarState = calendarState
+    return this
+  }
+
   withTranslate(translate: TranslateFn): CalendarAppSingletonBuilder {
     this.translate = translate
+    return this
+  }
+
+  withDatePickerConfig(
+    datePickerConfig: DatePickerConfigInternal
+  ): CalendarAppSingletonBuilder {
+    this.datePickerConfig = datePickerConfig
     return this
   }
 }

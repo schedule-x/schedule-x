@@ -32,6 +32,8 @@
   },
   "devDependencies": {
     "@atomico/rollup-plugin-sizes": "^1.1.4",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
     "@fontsource/open-sans": "^5.0.7",
     "@fontsource/roboto-condensed": "^5.0.7",
     "@lerna/batch-packages": "^3.16.0",
@@ -66,5 +68,10 @@
     "typescript": "^5.0.2",
     "vite": "^4.4.0",
     "vitest": "^0.33.0"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }

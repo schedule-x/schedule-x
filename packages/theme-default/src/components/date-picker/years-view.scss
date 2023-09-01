@@ -20,6 +20,10 @@
   &:hover {
     background-color: var(--sx-color-surface-dim);
   }
+
+  &:active {
+    background-color: var(--sx-internal-color-gray-ripple-background);
+  }
 }
 
 .sx__date-picker__years-view-accordion__panel {

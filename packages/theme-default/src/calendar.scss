@@ -1,9 +1,14 @@
 // Setup
 @import 'user-agent-overrides/index';
 @import 'variables/index';
+@import 'variables/calendar-only';
+@import 'util/index';
 
 // External components
 @import 'date-picker';
 
 // Internal components
-@import 'components/calendar/calendar-wrapper';
+@import 'components/calendar/header/calendar-wrapper';
+@import 'components/calendar/header/calendar-header';
+@import 'components/calendar/header/range-heading';
+@import 'components/calendar/header/today-button';
