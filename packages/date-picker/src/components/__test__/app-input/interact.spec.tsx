@@ -7,7 +7,11 @@ import {
 } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, fireEvent, waitFor } from '@testing-library/preact'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
-import { factory, getInputElement } from './utils'
+import {
+  factory,
+  getInputElement,
+  setNewInputValueAndPressEnter,
+} from './utils'
 import { createAppSingleton } from '../../../factory'
 
 describe('date picker input', () => {
@@ -45,10 +49,8 @@ describe('date picker input', () => {
   it('should update selected date on entering a date and pressing enter', () => {
     const $app = createAppSingleton({ selectedDate: '2021-01-01' })
     factory($app)
-    const inputElement = getInputElement()
 
-    fireEvent.input(inputElement, { target: { value: '1/2/2021' } })
-    fireEvent.keyUp(inputElement, { key: 'Enter' })
+    setNewInputValueAndPressEnter('1/2/2021')
 
     expect($app.datePickerState.selectedDate.value).toBe('2021-01-02')
   })

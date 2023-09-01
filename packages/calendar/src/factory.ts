@@ -52,7 +52,7 @@ export const createCalendarAppSingleton = (
 
 export const createCalendar = (
   el: HTMLElement,
-  config: CalendarConfigExternal
+  config: CalendarConfigExternal = {}
 ) => {
   const $app = createCalendarAppSingleton(config)
 

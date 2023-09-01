@@ -17,8 +17,6 @@ export const createCalendarState = (
 
   const handleDateSelection = (date: string) => {
     if (view.value === DefaultView.Week) {
-      console.log('handle setting a new week as calendar range')
-      console.log(date)
       const weekForDate = timeUnitsImpl.getWeekFor(toJSDate(date))
       const newRangeStart = toDateTimeString(weekForDate[0])
       const newRangeEnd = toDateTimeString(weekForDate[weekForDate.length - 1])
