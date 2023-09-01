@@ -5,12 +5,12 @@ import {
   DEFAULT_LOCALE,
 } from '../../../../../../shared/values'
 import { View } from '../../../types/view'
-import { DefaultView } from '../../../enums/default-view.enum'
+import { InternalView } from '../../../enums/internal-view.enum'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   constructor(
     public locale: string = DEFAULT_LOCALE,
     public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
-    public defaultView: View = DefaultView.Week
+    public defaultView: View = InternalView.Week
   ) {}
 }

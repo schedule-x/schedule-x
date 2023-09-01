@@ -1,3 +1,3 @@
-import { DefaultView } from '../enums/default-view.enum'
+import { InternalView } from '../enums/internal-view.enum'
 
-export const DEFAULT_VIEW = DefaultView.Week
+export const DEFAULT_VIEW = InternalView.Week

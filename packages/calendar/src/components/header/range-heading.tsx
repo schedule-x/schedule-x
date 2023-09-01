@@ -6,49 +6,50 @@ import { DateRange } from '../../types/date-range'
 export default function RangeHeading() {
   const $app = useContext(AppContext)
 
-  const [currentMonthOrMonths, setCurrentMonthOrMonths] = useState<string>(
-    '' as string
-  )
+  const [currentHeading, setCurrentHeading] = useState<string>('' as string)
 
   useEffect(() => {
     const firstDate = ($app.calendarState.range.value as DateRange).start
     const secondDate = ($app.calendarState.range.value as DateRange).end
-
-    const firstDateMonth = toJSDate(firstDate).toLocaleString(
+    const localeStringMonthArgs = [
       $app.config.locale,
-      { month: 'long' }
+      { month: 'long' },
+    ] as const
+    const localeStringYearArgs = [
+      $app.config.locale,
+      { year: 'numeric' },
+    ] as const
+    const firstDateMonth = toJSDate(firstDate).toLocaleString(
+      ...localeStringMonthArgs
     )
     const firstDateYear = toJSDate(firstDate).toLocaleString(
-      $app.config.locale,
-      { year: 'numeric' }
+      ...localeStringYearArgs
     )
     const secondDateMonth = toJSDate(secondDate).toLocaleString(
-      $app.config.locale,
-      { month: 'long' }
+      ...localeStringMonthArgs
     )
     const secondDateYear = toJSDate(secondDate).toLocaleString(
-      $app.config.locale,
-      { year: 'numeric' }
+      ...localeStringYearArgs
     )
 
     if (
       firstDateMonth === secondDateMonth &&
       firstDateYear === secondDateYear
     ) {
-      setCurrentMonthOrMonths(`${firstDateMonth} ${firstDateYear}`)
+      setCurrentHeading(`${firstDateMonth} ${firstDateYear}`)
     } else if (
       firstDateMonth !== secondDateMonth &&
       firstDateYear === secondDateYear
     ) {
-      setCurrentMonthOrMonths(
+      setCurrentHeading(
         `${firstDateMonth} – ${secondDateMonth} ${firstDateYear}`
       )
     } else {
-      setCurrentMonthOrMonths(
+      setCurrentHeading(
         `${firstDateMonth} ${firstDateYear} – ${secondDateMonth} ${secondDateYear}`
       )
     }
   }, [$app.calendarState.range.value])
 
-  return <span className={'sx__range-heading'}>{currentMonthOrMonths}</span>
+  return <span className={'sx__range-heading'}>{currentHeading}</span>
 }

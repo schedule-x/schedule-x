@@ -1,5 +1,5 @@
 // This enum is used to represent names of all internally built views of the calendar
-export enum DefaultView {
+export enum InternalView {
   Day = 'day',
   Week = 'week',
   Month = 'month',

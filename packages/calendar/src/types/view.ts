@@ -1,4 +1,4 @@
-import { DefaultView } from '../enums/default-view.enum'
+import { InternalView } from '../enums/internal-view.enum'
 
-// Since implementers can use custom views, we need to have a type that combines the default views with these custom views
-export type View = DefaultView | string
+// Since implementers can use custom views, we need to have a type that combines the internal views with these custom views
+export type View = InternalView | string
