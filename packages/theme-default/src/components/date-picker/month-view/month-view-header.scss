@@ -18,7 +18,6 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   font-size: 0;
-  overflow: hidden;
 
   &:hover {
     background-color: var(--sx-color-surface-dim);

@@ -18,7 +18,10 @@
   }
 }
 
-@mixin ripple {
+@mixin ripple-element {
+  position: relative;
+  overflow: hidden;
+
   &::before {
     content: '';
     position: absolute;
@@ -40,7 +43,7 @@
 }
 
 .sx__ripple {
-  @include ripple;
+  @include ripple-element;
 
   &:not(:active)::before {
     animation: ripple 0.4s cubic-bezier(0, 0.1, 0.8, 1);
@@ -69,10 +72,10 @@
 }
 
 .sx__ripple--wide {
-  @include ripple;
+  @include ripple-element;
 
   &::before {
-    border-radius: var(--sx-rounding-extra-large);
+    border-radius: var(--sx-rounding-small);
   }
 
   &:not(:active)::before {

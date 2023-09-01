@@ -3,7 +3,6 @@
 }
 
 .sx__date-picker__years-accordion__expand-button {
-  position: relative;
   width: 100%;
   border: 0;
   border-bottom: var(--sx-border);
@@ -12,7 +11,6 @@
   font-size: 1rem;
   padding: 1em;
   transition: background-color 0.2s ease-in-out;
-  overflow: hidden;
 
   .sx__is-expanded & {
     background-color: var(--sx-color-surface-container);
