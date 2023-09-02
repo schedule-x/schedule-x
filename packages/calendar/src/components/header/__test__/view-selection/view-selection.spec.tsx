@@ -1,30 +1,11 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/preact'
-import { AppContext } from '../../../utils/stateful/app-context'
-import ViewSelection from '../view-selection'
-import { createCalendarAppSingleton } from '../../../factory'
+import { cleanup, screen, waitFor } from '@testing-library/preact'
 import {
   describe,
   it,
   expect,
   beforeEach,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { viewDay, viewWeek, viewMonth } from '../../../index'
-
-const factory = () => {
-  const $app = createCalendarAppSingleton({
-    views: [viewDay, viewWeek, viewMonth],
-  })
-
-  return render(
-    <AppContext.Provider value={$app}>
-      <ViewSelection />
-    </AppContext.Provider>
-  )
-}
-
-function queryDropdown() {
-  return screen.queryByTestId('view-selection-items')
-}
+} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+import { factory, queryDropdown } from './utils'
 
 describe('ViewSelection', () => {
   beforeEach(() => {
@@ -32,8 +13,6 @@ describe('ViewSelection', () => {
   })
 
   it('should close on click outside', async () => {
-    const otherElement = document.createElement('div')
-    document.body.appendChild(otherElement)
     factory()
     expect(queryDropdown()).toBeNull()
 
@@ -42,7 +21,7 @@ describe('ViewSelection', () => {
       expect(queryDropdown()).not.toBeNull()
     })
 
-    otherElement.click()
+    document.body.click()
 
     await waitFor(() => {
       expect(queryDropdown()).toBeNull()
