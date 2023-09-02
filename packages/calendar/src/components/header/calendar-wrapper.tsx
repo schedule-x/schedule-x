@@ -13,19 +13,14 @@ export default function CalendarWrapper({ $app }: props) {
   const [currentView, setCurrentView] = useState<View | null>()
 
   useEffect(() => {
-    console.log($app.calendarState.view.value)
-    console.log($app.config.views)
     const newView = $app.config.views.find(
       (view) => view.name === $app.calendarState.view.value
     )
     const viewElement = document.getElementById(viewContainerId)
-    console.log('newView: ' + newView)
-    console.log('viewElement: ' + viewElement)
     if (!newView || !viewElement) return
 
     if (currentView) currentView.destroy()
 
-    console.log('set view to:' + newView.name)
     setCurrentView(newView)
     newView.render(viewElement, $app)
   }, [$app.calendarState.view.value])
