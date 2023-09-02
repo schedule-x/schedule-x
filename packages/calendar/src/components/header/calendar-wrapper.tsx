@@ -17,10 +17,10 @@ export default function CalendarWrapper({ $app }: props) {
       (view) => view.name === $app.calendarState.view.value
     )
     const viewElement = document.getElementById(viewContainerId)
+
     if (!newView || !viewElement) return
 
     if (currentView) currentView.destroy()
-
     setCurrentView(newView)
     newView.render(viewElement, $app)
   }, [$app.calendarState.view.value])

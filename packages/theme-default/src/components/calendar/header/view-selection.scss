@@ -1,0 +1,43 @@
+.sx__view-selection {
+  position: relative;
+  font-size: var(--sx-calendar-header-input-font-size);
+}
+
+.sx__view-selection-selected-item {
+  height: 100%;
+  width: 100%;
+  padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
+  cursor: pointer;
+  border-radius: var(--sx-rounding-extra-small);
+  border: var(--sx-border);
+
+  &:hover {
+    background-color: var(--sx-internal-color-light-gray);
+  }
+}
+
+.sx__view-selection-items {
+  position: absolute;
+  top: 100%;
+  box-shadow: var(--sx-box-shadow-level3);
+  margin: 0;
+}
+
+.sx__view-selection-item {
+  padding: var(--sx-spacing-padding4) var(--sx-spacing-padding6);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--sx-color-primary);
+    color: var(--sx-color-on-primary);
+  }
+
+  &.is-selected {
+    background-color: var(--sx-color-surface-dim);
+
+    &:hover {
+      background-color: var(--sx-color-primary);
+      color: var(--sx-color-on-primary);
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { AppContext } from '../../utils/stateful/app-context'
 import DatePickerAppSingletonBuilder from '@schedule-x/date-picker/src/utils/stateful/app-singleton/date-picker-app-singleton.builder'
 import RangeHeading from './range-heading'
 import TodayButton from './today-button'
+import ViewSelection from './view-selection'
 
 export default function CalendarHeader() {
   const $app = useContext(AppContext)
@@ -23,7 +24,11 @@ export default function CalendarHeader() {
         <RangeHeading />
       </div>
 
-      <DatePickerWrapper $app={datePickerAppSingleton}></DatePickerWrapper>
+      <div className={'sx__calendar-header-content'}>
+        <ViewSelection />
+
+        <DatePickerWrapper $app={datePickerAppSingleton}></DatePickerWrapper>
+      </div>
     </header>
   )
 }

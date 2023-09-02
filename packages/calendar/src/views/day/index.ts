@@ -1,9 +1,5 @@
 import { createPreactView } from '../../utils/stateful/preact-view/preact-view'
 import { InternalViewName } from '../../enums/internal-view.enum'
-import { MonthWrapper } from './month-wrapper'
+import { DayWrapper } from './day-wrapper'
 
-export const viewMonth = createPreactView(
-  InternalViewName.Month,
-  'Month',
-  MonthWrapper
-)
+export const viewDay = createPreactView(InternalViewName.Day, 'Day', DayWrapper)
