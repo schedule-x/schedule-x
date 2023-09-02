@@ -1,4 +1,9 @@
-import { InternalView } from '../enums/internal-view.enum'
+import { ViewName } from './view-name'
+import CalendarAppSingleton from '../utils/stateful/app-singleton/calendar-app-singleton'
 
-// Since implementers can use custom views, we need to have a type that combines the internal views with these custom views
-export type View = InternalView | string
+export type View = {
+  name: ViewName // identifier for the view
+  label: string // text that will be displayed in the view dropdown
+  render(onElement: HTMLElement, $app: CalendarAppSingleton): void
+  destroy(): void
+}

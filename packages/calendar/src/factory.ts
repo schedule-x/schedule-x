@@ -16,6 +16,7 @@ export const createCalendarAppSingleton = (
     .withLocale(config.locale)
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .withDefaultView(config.defaultView)
+    .withViews(config.views)
     .build()
 
   const timeUnitsImpl = new TimeUnitsBuilder()
