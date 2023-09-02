@@ -4,7 +4,7 @@ import { DateRange } from '../../types/date-range'
 import { InternalViewName } from '../../enums/internal-view.enum'
 import {
   getMonthAndYearForSelectedDate,
-  getRangeHeadingForWeekView,
+  getMonthAndYearForDateRange,
 } from '../../utils/stateless/range-heading'
 
 export default function RangeHeading() {
@@ -15,7 +15,7 @@ export default function RangeHeading() {
   useEffect(() => {
     if ($app.calendarState.view.value === InternalViewName.Week) {
       setCurrentHeading(
-        getRangeHeadingForWeekView(
+        getMonthAndYearForDateRange(
           $app,
           ($app.calendarState.range.value as DateRange).start,
           ($app.calendarState.range.value as DateRange).end

@@ -17,19 +17,17 @@ export default function ViewSelection() {
 
   const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
-    if (!isOpen) return
-
-    const listener = (event: MouseEvent) => {
-      event.stopPropagation()
-      const target = event.target as HTMLElement
-      if (!target.closest('.sx__view-selection')) {
-        setIsOpen(false)
-      }
+  const clickOutsideListener = (event: MouseEvent) => {
+    const target = event.target as HTMLElement
+    if (!target.closest('.sx__view-selection')) {
+      setIsOpen(false)
     }
-    document.addEventListener('click', listener)
-    return () => document.removeEventListener('click', listener)
-  }, [isOpen])
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', clickOutsideListener)
+    return () => document.removeEventListener('click', clickOutsideListener)
+  }, [])
 
   const handleClickOnSelectionItem = (viewName: ViewName) => {
     setIsOpen(false)
@@ -44,9 +42,12 @@ export default function ViewSelection() {
       >
         {selectedViewLabel}
       </div>
-      <ul className="sx__view-selection-items">
-        {isOpen &&
-          $app.config.views.map((view) => (
+      {isOpen && (
+        <ul
+          data-testid="view-selection-items"
+          className="sx__view-selection-items"
+        >
+          {$app.config.views.map((view) => (
             <li
               className={
                 'sx__view-selection-item' +
@@ -59,7 +60,8 @@ export default function ViewSelection() {
               {$app.translate(view.label)}
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </div>
   )
 }

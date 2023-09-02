@@ -9,21 +9,21 @@ const getLocaleStringYearArgs = ($app: CalendarAppSingleton) => {
   return [$app.config.locale, { year: 'numeric' }] as const
 }
 
-export const getRangeHeadingForWeekView = (
+export const getMonthAndYearForDateRange = (
   $app: CalendarAppSingleton,
-  startDate: string,
-  endDate: string
+  rangeStart: string,
+  rangeEnd: string
 ): string => {
-  const startDateMonth = toJSDate(startDate).toLocaleString(
+  const startDateMonth = toJSDate(rangeStart).toLocaleString(
     ...getLocaleStringMonthArgs($app)
   )
-  const startDateYear = toJSDate(startDate).toLocaleString(
+  const startDateYear = toJSDate(rangeStart).toLocaleString(
     ...getLocaleStringYearArgs($app)
   )
-  const endDateMonth = toJSDate(endDate).toLocaleString(
+  const endDateMonth = toJSDate(rangeEnd).toLocaleString(
     ...getLocaleStringMonthArgs($app)
   )
-  const endDateYear = toJSDate(endDate).toLocaleString(
+  const endDateYear = toJSDate(rangeEnd).toLocaleString(
     ...getLocaleStringYearArgs($app)
   )
 
