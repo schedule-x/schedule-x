@@ -3,6 +3,7 @@ import Builder from '../../../../../../shared/interfaces/builder.interface'
 import CalendarConfigInternal from './calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
 import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
+import { ViewName } from '../../../types/view-name'
 import { View } from '../../../types/view'
 
 export default class CalendarConfigBuilder
@@ -10,13 +11,15 @@ export default class CalendarConfigBuilder
 {
   locale: string | undefined
   firstDayOfWeek: WeekDay | undefined
-  defaultView: View | undefined
+  defaultView: ViewName | undefined
+  views: View[] | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
       this.locale!,
       this.firstDayOfWeek!,
-      this.defaultView!
+      this.defaultView!,
+      this.views!
     )
   }
 
@@ -32,8 +35,13 @@ export default class CalendarConfigBuilder
     return this
   }
 
-  withDefaultView(defaultView: View | undefined): CalendarConfigBuilder {
+  withDefaultView(defaultView: ViewName | undefined): CalendarConfigBuilder {
     this.defaultView = defaultView
+    return this
+  }
+
+  withViews(views: View[] | undefined): CalendarConfigBuilder {
+    this.views = views
     return this
   }
 }

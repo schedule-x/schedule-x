@@ -1,9 +1,11 @@
 import Config from '../../../../../../shared/interfaces/config.interface'
 import { DatePickerConfigExternal } from '@schedule-x/date-picker/src/utils/stateful/config/config.interface'
+import { ViewName } from '../../../types/view-name'
 import { View } from '../../../types/view'
 
 export default interface CalendarConfigInternal extends Config {
-  defaultView: View
+  defaultView: ViewName
+  views: View[]
 }
 
 interface CalendarDatePickerConfigExternal
