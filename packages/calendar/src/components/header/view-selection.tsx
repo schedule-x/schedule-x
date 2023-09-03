@@ -18,8 +18,11 @@ export default function ViewSelection() {
   const [isOpen, setIsOpen] = useState(false)
 
   const clickOutsideListener = (event: MouseEvent) => {
-    const target = event.target as HTMLElement
-    if (!target.closest('.sx__view-selection')) {
+    const target = event.target
+    if (
+      target instanceof HTMLElement &&
+      !target.closest('.sx__view-selection')
+    ) {
       setIsOpen(false)
     }
   }
