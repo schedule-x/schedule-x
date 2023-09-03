@@ -2,9 +2,10 @@ import { View } from '../../../types/view'
 import { PreactViewComponent } from '../../../types/preact-view-component'
 import { createElement, render as renderPreact } from 'preact'
 import CalendarAppSingleton from '../app-singleton/calendar-app-singleton'
+import { randomStringId } from '../../../../../../shared/utils/stateless/strings/random'
 
 class PreactView implements View {
-  private randomId = Math.random().toString(36).substring(7)
+  private randomId = randomStringId()
 
   constructor(
     public name: string,

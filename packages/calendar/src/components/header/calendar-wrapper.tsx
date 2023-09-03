@@ -3,13 +3,14 @@ import CalendarAppSingleton from '../../utils/stateful/app-singleton/calendar-ap
 import { AppContext } from '../../utils/stateful/app-context'
 import { useEffect, useState } from 'preact/compat'
 import { View } from '../../types/view'
+import { randomStringId } from '../../../../../shared/utils/stateless/strings/random'
 
 type props = {
   $app: CalendarAppSingleton
 }
 
 export default function CalendarWrapper({ $app }: props) {
-  const viewContainerId = Math.random().toString(36).substring(2, 11)
+  const viewContainerId = randomStringId()
   const [currentView, setCurrentView] = useState<View | null>()
 
   useEffect(() => {
