@@ -28,7 +28,7 @@ describe('CalendarHeader', () => {
       const expectedRangeHeadingBeforeChange = 'December 2009 – January 2010'
       expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeTruthy()
 
-      screen.getByText('Week').click() // open view menu
+      openViewSelection()
 
       await waitFor(() => {
         screen.getByText('Month').click() // select month view
