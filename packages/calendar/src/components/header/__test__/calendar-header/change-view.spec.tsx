@@ -10,6 +10,7 @@ import { factory } from './utils'
 import { viewDay } from '../../../../views/day'
 import { viewWeek } from '../../../../views/week'
 import { viewMonth } from '../../../../views/month'
+import { openViewSelection } from '../../../../utils/stateless/testing/page-objects/view-selection'
 
 describe('CalendarHeader', () => {
   beforeEach(() => {
@@ -50,7 +51,7 @@ describe('CalendarHeader', () => {
       const expectedRangeHeadingBeforeChange = 'January 2010'
       expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeTruthy()
 
-      screen.getByText('Day').click() // open view menu
+      openViewSelection()
 
       await waitFor(() => {
         screen.getByText('Week').click() // select week view

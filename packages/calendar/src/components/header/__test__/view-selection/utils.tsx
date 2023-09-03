@@ -17,7 +17,3 @@ export const factory = () => {
     </AppContext.Provider>
   )
 }
-
-export function queryDropdown() {
-  return screen.queryByTestId('view-selection-items')
-}

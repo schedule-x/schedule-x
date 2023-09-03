@@ -5,7 +5,11 @@ import {
   expect,
   beforeEach,
 } from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { factory, queryDropdown } from './utils'
+import { factory } from './utils'
+import {
+  isDropdownOpen,
+  openViewSelection,
+} from '../../../../utils/stateless/testing/page-objects/view-selection'
 
 describe('ViewSelection', () => {
   beforeEach(() => {
@@ -14,33 +18,33 @@ describe('ViewSelection', () => {
 
   it('should close on click outside', async () => {
     factory()
-    expect(queryDropdown()).toBeNull()
+    expect(isDropdownOpen()).toBe(false)
 
-    screen.getByText('Week').click()
+    openViewSelection()
     await waitFor(() => {
-      expect(queryDropdown()).not.toBeNull()
+      expect(isDropdownOpen()).toBe(true)
     })
 
     document.body.click()
 
     await waitFor(() => {
-      expect(queryDropdown()).toBeNull()
+      expect(isDropdownOpen()).toBe(false)
     })
   })
 
   it('should close on selecting a new view', async () => {
     factory()
-    expect(queryDropdown()).toBeNull()
+    expect(isDropdownOpen()).toBe(false)
 
-    screen.getByText('Week').click()
+    openViewSelection()
     await waitFor(() => {
-      expect(queryDropdown()).not.toBeNull()
+      expect(isDropdownOpen()).toBe(true)
     })
 
     screen.getByText('Day').click()
 
     await waitFor(() => {
-      expect(queryDropdown()).toBeNull()
+      expect(isDropdownOpen()).toBe(false)
     })
   })
 
@@ -49,7 +53,7 @@ describe('ViewSelection', () => {
     expect(screen.queryByText('Week')).toBeTruthy()
     expect(screen.queryByText('Day')).toBeFalsy()
 
-    screen.getByText('Week').click() // open dropdown
+    openViewSelection()
 
     await waitFor(() => {
       screen.getByText('Day').click() // select day view

@@ -9,6 +9,7 @@ import { createCalendarAppSingleton } from '../../../../factory'
 import { factory, isDayView, isWeekView } from './utils'
 import { viewWeek } from '../../../../views/week'
 import { viewDay } from '../../../../views/day'
+import { openViewSelection } from '../../../../utils/stateless/testing/page-objects/view-selection'
 
 describe('CalendarWrapper', () => {
   afterEach(() => {
@@ -23,7 +24,7 @@ describe('CalendarWrapper', () => {
       factory($app)
       expect(isWeekView()).toBe(true)
 
-      screen.getByText('Week').click() // open view selection
+      openViewSelection()
       await waitFor(() => {
         screen.getByText('Day').click() // change to day view
       })
