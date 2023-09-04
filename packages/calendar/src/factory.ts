@@ -8,6 +8,7 @@ import { ConfigBuilder as DatePickerConfigBuilder } from '@schedule-x/date-picke
 import { Placement } from '@schedule-x/date-picker/src/enums/placement.enum'
 import { translate, translations } from '@schedule-x/translations/src'
 import { createCalendarState } from './utils/stateful/calendar-state/calendar-state.impl'
+import { createCalendarEventsImpl } from './utils/stateful/calendar-events/calendar-events.impl'
 
 export const createCalendarAppSingleton = (
   config: CalendarConfigExternal = {}
@@ -44,6 +45,9 @@ export const createCalendarAppSingleton = (
     .withTimeUnitsImpl(timeUnitsImpl)
     .withDatePickerState(
       createDatePickerState(datePickerConfig, config.datePicker?.selectedDate)
+    )
+    .withCalendarEvents(
+      createCalendarEventsImpl(config.events || [], internalConfig)
     )
     .withDatePickerConfig(datePickerConfig)
     .withCalendarState(calendarState)
