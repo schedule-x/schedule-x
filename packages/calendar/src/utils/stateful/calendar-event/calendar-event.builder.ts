@@ -1,0 +1,55 @@
+import {
+  CalendarEventInternal,
+  CalendarEventTime,
+} from './calendar-event.interface'
+import Builder from '../../../../../../shared/interfaces/builder.interface'
+import CalendarEventImpl from './calendar-event.impl'
+import { EventId } from '../../../types/event-id'
+import CalendarConfigInternal from '../config/calendar-config'
+
+export default class CalendarEventBuilder
+  implements Builder<CalendarEventInternal>
+{
+  private people: string[] | undefined
+  private location: string | undefined
+  private description: string | undefined
+  private title: string | undefined
+
+  constructor(
+    private _config: CalendarConfigInternal,
+    private id: EventId,
+    private time: CalendarEventTime
+  ) {}
+
+  build(): CalendarEventInternal {
+    return new CalendarEventImpl(
+      this._config,
+      this.id,
+      this.time,
+      this.title,
+      this.people,
+      this.location,
+      this.description
+    )
+  }
+
+  withTitle(title: string | undefined): CalendarEventBuilder {
+    this.title = title
+    return this
+  }
+
+  withPeople(people: string[] | undefined): CalendarEventBuilder {
+    this.people = people
+    return this
+  }
+
+  withLocation(location: string | undefined): CalendarEventBuilder {
+    this.location = location
+    return this
+  }
+
+  withDescription(description: string | undefined): CalendarEventBuilder {
+    this.description = description
+    return this
+  }
+}

@@ -8,6 +8,7 @@ import { TranslateFn } from '@schedule-x/translations/src'
 import CalendarConfigInternal from '../config/calendar-config'
 import CalendarState from '../calendar-state/calendar-state.interface'
 import DatePickerConfigInternal from '@schedule-x/date-picker/src/utils/stateful/config/config.interface'
+import CalendarEvents from '../calendar-events/calendar-events.interface'
 
 export default class CalendarAppSingletonBuilder
   implements Builder<CalendarAppSingleton>
@@ -18,6 +19,7 @@ export default class CalendarAppSingletonBuilder
   private calendarState: CalendarState | undefined
   private translate: TranslateFn | undefined
   private datePickerConfig: DatePickerConfigInternal | undefined
+  private calendarEvents: CalendarEvents | undefined
 
   build(): CalendarAppSingleton {
     return new CalendarAppSingletonImpl(
@@ -26,7 +28,8 @@ export default class CalendarAppSingletonBuilder
       this.calendarState!,
       this.datePickerState!,
       this.translate!,
-      this.datePickerConfig!
+      this.datePickerConfig!,
+      this.calendarEvents!
     )
   }
 
@@ -61,6 +64,13 @@ export default class CalendarAppSingletonBuilder
     datePickerConfig: DatePickerConfigInternal
   ): CalendarAppSingletonBuilder {
     this.datePickerConfig = datePickerConfig
+    return this
+  }
+
+  withCalendarEvents(
+    calendarEvents: CalendarEvents
+  ): CalendarAppSingletonBuilder {
+    this.calendarEvents = calendarEvents
     return this
   }
 }
