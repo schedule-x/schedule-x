@@ -2,7 +2,7 @@ import { createCalendarAppSingleton } from '../../../../factory'
 import { viewDay } from '../../../../views/day'
 import { viewWeek } from '../../../../views/week'
 import { viewMonth } from '../../../../views/month'
-import { render, screen } from '@testing-library/preact'
+import { render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import ViewSelection from '../../view-selection'
 

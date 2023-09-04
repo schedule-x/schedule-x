@@ -4,7 +4,7 @@ import {
   expect,
   it,
 } from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, fireEvent, render, screen } from '@testing-library/preact'
+import { cleanup } from '@testing-library/preact'
 import { toDateString } from '../../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
 import {
   clickTodayButton,
