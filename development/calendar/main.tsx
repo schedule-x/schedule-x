@@ -20,6 +20,10 @@ const calendar = createCalendar(calendarElement, {
   // locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'week',
+  // dayBoundaries: {
+  //   start: '08:30',
+  //   end: '18:00',
+  // }
 })
 
 calendar.bootstrap()
