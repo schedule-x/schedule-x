@@ -12,18 +12,18 @@ export default interface CalendarEventExternal {
   people?: string[]
   location?: string
   description?: string
+  [key: string]: any
 }
 
-export enum EventDuration {
-  SingleDayTimed = 'single-day-timed',
-  SingleDayFullDay = 'single-day-full-day',
-  SingleHybridDayTimed = 'single-hybrid-day-timed',
-  MultiDayTimed = 'multi-day-timed',
-  MultiDayFullDay = 'multi-day-full-day',
-}
+export type EventOriginal = CalendarEventExternal & Record<string, unknown>
 
 export interface CalendarEventInternal extends CalendarEventExternal {
-  _duration: EventDuration | undefined
+  _isSingleDayTimed: boolean
+  _isSingleDayFullDay: boolean
+  _isSingleHybridDayTimed: boolean
+  _isMultiDayTimed: boolean
+  _isMultiDayFullDay: boolean
+
   _previousConcurrentEvents: number | undefined
   _totalConcurrentEvents: number | undefined
 }

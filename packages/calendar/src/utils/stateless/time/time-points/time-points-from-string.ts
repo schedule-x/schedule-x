@@ -9,9 +9,8 @@ export const timePointsFromString = (timeString: string): number => {
   const [hoursInt, minutesInt] = timeString
     .split(':')
     .map((time) => parseInt(time, 10))
-  const minutePoints = (minutesInt * minuteTimePointMultiplier)
-    .toString()
-    .padStart(2, '0')
+  let minutePoints = (minutesInt * minuteTimePointMultiplier).toString()
+  if (minutePoints.split('.')[0].length < 2) minutePoints = `0${minutePoints}`
 
   return Number(hoursInt + minutePoints)
 }
