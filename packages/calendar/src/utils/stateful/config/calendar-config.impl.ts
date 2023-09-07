@@ -18,4 +18,12 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public views: View[] = [],
     public dayBoundaries: DayBoundariesInternal = DEFAULT_DAY_BOUNDARIES
   ) {}
+
+  get isHybridDay(): boolean {
+    return (
+      this.dayBoundaries.start > this.dayBoundaries.end ||
+      (this.dayBoundaries.start !== 0 &&
+        this.dayBoundaries.start === this.dayBoundaries.end)
+    )
+  }
 }

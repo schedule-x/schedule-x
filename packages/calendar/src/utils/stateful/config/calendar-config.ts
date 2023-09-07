@@ -12,13 +12,14 @@ export default interface CalendarConfigInternal extends Config {
   defaultView: ViewName
   views: View[]
   dayBoundaries: DayBoundariesInternal
+  isHybridDay: boolean
 }
 
 interface CalendarDatePickerConfigExternal
   extends Omit<DatePickerConfigExternal, 'listeners' | 'placement'> {}
 
 interface ReducedCalendarConfigInternal
-  extends Omit<CalendarConfigInternal, 'dayBoundaries'> {}
+  extends Omit<CalendarConfigInternal, 'dayBoundaries' | 'isHybridDay'> {}
 
 export interface CalendarConfigExternal
   extends Partial<ReducedCalendarConfigInternal> {

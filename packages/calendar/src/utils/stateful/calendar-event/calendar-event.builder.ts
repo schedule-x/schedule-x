@@ -14,6 +14,7 @@ export default class CalendarEventBuilder
   private location: string | undefined
   private description: string | undefined
   private title: string | undefined
+  private _foreignProperties: Record<string, unknown> = {}
 
   constructor(
     private _config: CalendarConfigInternal,
@@ -29,7 +30,8 @@ export default class CalendarEventBuilder
       this.title,
       this.people,
       this.location,
-      this.description
+      this.description,
+      this._foreignProperties
     )
   }
 
@@ -50,6 +52,13 @@ export default class CalendarEventBuilder
 
   withDescription(description: string | undefined): CalendarEventBuilder {
     this.description = description
+    return this
+  }
+
+  withForeignProperties(
+    foreignProperties: Record<string, unknown>
+  ): CalendarEventBuilder {
+    this._foreignProperties = foreignProperties
     return this
   }
 }
