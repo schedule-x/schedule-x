@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -25,7 +26,7 @@ describe('CalendarEventImpl', () => {
       },
       {
         start: '2020-01-01 05:00',
-        end: '2020-01-01 05:59',
+        end: '2020-01-01 06:00',
       },
       {
         start: '2020-01-01 12:00',
@@ -79,14 +80,35 @@ describe('CalendarEventImpl', () => {
         start: '2020-01-01 11:59',
         end: '2020-01-01 12:00',
       },
-    ])('should not be classified as a single hybrid day event', (eventTime) => {
-      const calendarEvent = createEvent(eventTime)
+    ])(
+      'should not be classified as a single hybrid day event, only as single day timed',
+      (eventTime) => {
+        const calendarEvent = createEvent(eventTime)
 
-      expect(calendarEvent._isSingleDayTimed).toBe(true)
-      expect(calendarEvent._isSingleDayFullDay).toBe(false)
-      expect(calendarEvent._isMultiDayTimed).toBe(false)
-      expect(calendarEvent._isMultiDayFullDay).toBe(false)
-      expect(calendarEvent._isSingleHybridDayTimed).toBe(false)
-    })
+        expect(calendarEvent._isSingleDayTimed).toBe(true)
+        expect(calendarEvent._isSingleDayFullDay).toBe(false)
+        expect(calendarEvent._isMultiDayTimed).toBe(false)
+        expect(calendarEvent._isMultiDayFullDay).toBe(false)
+        expect(calendarEvent._isSingleHybridDayTimed).toBe(false)
+      }
+    )
+
+    it.each([
+      {
+        start: '2020-01-01 23:00',
+        end: '2020-01-03 01:00',
+      },
+    ])(
+      'should not be classified as a single hybrid day event, only as multi day timed',
+      (eventTime) => {
+        const calendarEvent = createEvent(eventTime)
+
+        expect(calendarEvent._isSingleDayTimed).toBe(false)
+        expect(calendarEvent._isSingleDayFullDay).toBe(false)
+        expect(calendarEvent._isMultiDayTimed).toBe(true)
+        expect(calendarEvent._isMultiDayFullDay).toBe(false)
+        expect(calendarEvent._isSingleHybridDayTimed).toBe(false)
+      }
+    )
   })
 })

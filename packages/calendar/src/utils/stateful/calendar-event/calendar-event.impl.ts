@@ -85,10 +85,10 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
     return (
       (eventStartTimePoints >= dayBoundaries.start &&
-        (eventEndTimePoints < dayBoundaries.end ||
+        (eventEndTimePoints <= dayBoundaries.end ||
           eventEndTimePoints > eventStartTimePoints)) ||
       (eventStartTimePoints < dayBoundaries.end &&
-        eventEndTimePoints < dayBoundaries.end)
+        eventEndTimePoints <= dayBoundaries.end)
     )
   }
 }
