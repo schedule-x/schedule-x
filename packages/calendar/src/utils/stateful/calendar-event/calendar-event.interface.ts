@@ -15,8 +15,6 @@ export default interface CalendarEventExternal {
   [key: string]: any
 }
 
-export type EventOriginal = CalendarEventExternal & Record<string, unknown>
-
 export interface CalendarEventInternal extends CalendarEventExternal {
   _isSingleDayTimed: boolean
   _isSingleDayFullDay: boolean

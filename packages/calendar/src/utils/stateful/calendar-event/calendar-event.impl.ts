@@ -1,7 +1,4 @@
-import {
-  CalendarEventInternal,
-  EventOriginal,
-} from './calendar-event.interface'
+import { CalendarEventInternal } from './calendar-event.interface'
 import { EventId } from '../../../types/event-id'
 import CalendarConfigInternal from '../config/calendar-config'
 import {

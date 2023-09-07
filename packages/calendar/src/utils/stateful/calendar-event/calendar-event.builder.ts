@@ -1,7 +1,6 @@
 import {
   CalendarEventInternal,
   CalendarEventTime,
-  EventOriginal,
 } from './calendar-event.interface'
 import Builder from '../../../../../../shared/interfaces/builder.interface'
 import CalendarEventImpl from './calendar-event.impl'
