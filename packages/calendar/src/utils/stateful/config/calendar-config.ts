@@ -8,11 +8,16 @@ import {
   DayBoundariesInternal,
 } from '../../../types/config/day-boundaries'
 
+export type WeekOptions = {
+  weekGridHeight: number
+}
+
 export default interface CalendarConfigInternal extends Config {
   defaultView: ViewName
   views: View[]
   dayBoundaries: DayBoundariesInternal
   isHybridDay: boolean
+  weekOptions: WeekOptions
 }
 
 interface CalendarDatePickerConfigExternal

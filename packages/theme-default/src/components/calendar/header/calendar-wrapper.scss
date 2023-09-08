@@ -1,6 +1,19 @@
 .sx__calendar-wrapper {
   width: 100%;
   height: 100%;
+  display: flex;
+}
+
+.sx__calendar {
+  flex: 1;
+  height: 100%;
   border: var(--sx-border);
   border-radius: var(--sx-rounding-small);
+  display: flex;
+  flex-flow: column;
+}
+
+.sx__view-container {
+  position: relative;
+  flex: 1;
 }

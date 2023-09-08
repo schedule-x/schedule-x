@@ -8,6 +8,14 @@
     padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
     font-size: var(--sx-calendar-header-input-font-size);
   }
+
+  .sx__date-picker-popup {
+    z-index: 2;
+  }
+
+  .sx__view-selection-items {
+    z-index: var(--sx-calendar-header-popup-z-index);
+  }
 }
 
 .sx__calendar-header-content {

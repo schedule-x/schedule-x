@@ -1,0 +1,25 @@
+.sx__week-grid__time-axis {
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  right: 0;
+  width: calc(100% - 60px);
+}
+
+.sx__week-grid__hour {
+  position: relative;
+  height: calc(var(--sx-week-grid-height) / 24);
+  border-top: var(--sx-border);
+  font-size: var(--sx-font-extra-small);
+
+  &:first-child {
+    visibility: hidden;
+  }
+}
+
+.sx__week-grid__hour-text {
+  position: absolute;
+  left: -43px;
+  top: -0.75em;
+  color: var(--sx-color-neutral);
+}

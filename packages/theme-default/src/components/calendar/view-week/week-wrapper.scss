@@ -1,0 +1,37 @@
+$grid-padding-left: 75px;
+
+.sx__week-grid-wrapper {
+  position: relative;
+}
+
+.sx__week-grid {
+  position: relative;
+  width: 100%;
+  padding-left: $grid-padding-left;
+  display: flex;
+  height: var(--sx-week-grid-height);
+}
+
+.sx__week-header {
+  position: sticky;
+  top: 0;
+  background-color: var(--sx-color-background);
+  z-index: 1;
+
+  .sx__week-header-content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sx__week-header-border {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    content: '';
+    border-bottom: var(--sx-border);
+    border-left: 250px solid transparent;
+  }
+}

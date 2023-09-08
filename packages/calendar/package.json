@@ -15,6 +15,7 @@
     "dist"
   ],
   "dependencies": {
+    "perfect-scrollbar": "^1.5.5",
     "preact": "^10.16.0"
   },
   "repository": {

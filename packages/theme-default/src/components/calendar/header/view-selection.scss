@@ -21,6 +21,8 @@
   top: 100%;
   box-shadow: var(--sx-box-shadow-level3);
   margin: 0;
+  background-color: var(--sx-color-background);
+  z-index: var(--sx-calendar-header-popup-z-index);
 }
 
 .sx__view-selection-item {

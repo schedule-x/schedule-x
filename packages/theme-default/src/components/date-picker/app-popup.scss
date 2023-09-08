@@ -1,5 +1,6 @@
 .sx__date-picker-popup {
   position: absolute;
+  z-index: 1;
   top: calc(100% + 1px); // 1px to account for outline
   width: 20.75rem;
   max-width: 500px;

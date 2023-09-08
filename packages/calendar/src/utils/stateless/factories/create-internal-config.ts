@@ -8,5 +8,6 @@ export const createInternalConfig = (config: CalendarConfigExternal) => {
     .withDefaultView(config.defaultView)
     .withViews(config.views)
     .withDayBoundaries(config.dayBoundaries)
+    .withWeekOptions(config.weekOptions)
     .build()
 }
