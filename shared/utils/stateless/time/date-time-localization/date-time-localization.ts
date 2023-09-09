@@ -27,8 +27,9 @@ export const getOneLetterDayNames = (
   })
 }
 
+export const getDayNameShort = (date: Date, locale: string) =>
+  date.toLocaleString(locale, { weekday: 'short' })
+
 export const getDayNamesShort = (week: Date[], locale: string): string[] => {
-  return week.map((date) => {
-    return date.toLocaleString(locale, { weekday: 'short' })
-  })
+  return week.map((date) => getDayNameShort(date, locale))
 }

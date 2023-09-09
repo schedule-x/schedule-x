@@ -1,0 +1,42 @@
+.sx__week-grid__date-axis {
+  padding-left: var(--sx-calendar-week-grid-padding-left);
+  display: flex;
+}
+
+.sx__week-grid__date {
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: var(--sx-spacing-padding3) 0;
+  gap: var(--sx-spacing-padding1);
+}
+
+.sx__week-grid__day-name {
+  text-transform: uppercase;
+  font-size: var(--sx-font-extra-small);
+  color: var(--sx-color-neutral);
+  font-weight: 500;
+
+  .sx__week-grid__date--is-today & {
+    color: var(--sx-color-secondary);
+    font-weight: 700;
+  }
+}
+
+.sx__week-grid__date-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--sx-font-extra-large);
+  font-weight: 500;
+  color: var(--sx-color-neutral);
+  height: 2em;
+  width: 2em;
+
+  .sx__week-grid__date--is-today & {
+    background-color: var(--sx-color-secondary);
+    color: var(--sx-color-on-secondary);
+    border-radius: 50%;
+  }
+}
