@@ -3,12 +3,13 @@
   flex-flow: column;
   position: absolute;
   right: 0;
+  top: var(--sx-week-grid-offset-top);
   width: calc(100% - 60px);
 }
 
 .sx__week-grid__hour {
   position: relative;
-  height: calc(var(--sx-week-grid-height) / 24);
+  height: var(--sx-week-grid-hour-height);
   border-top: var(--sx-border);
   font-size: var(--sx-font-extra-small);
 

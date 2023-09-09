@@ -11,9 +11,6 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
     '--sx-week-grid-height',
     `${$app.config.weekOptions.weekGridHeight}px`
   )
-  useEffect(() => {
-    const weekHeight = $app.config.weekOptions.weekGridHeight
-  }, [])
 
   const [week, setWeek] = useState<WeekWithDates>([])
 
@@ -30,7 +27,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   return (
     <>
       <AppContext.Provider value={$app}>
-        <div className="sx__week-grid-wrapper" id={id}>
+        <div className="sx__week-wrapper" id={id}>
           <div className="sx__week-header">
             <div className="sx__week-header-content">
               hello

@@ -1,88 +1,41 @@
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
+import { getTimeAxisHours } from '../../utils/stateless/time/time-axis/time-axis'
+import { timePointsPerDay } from '../../utils/stateless/time/time-points/time-points-per-day'
 
 export default function TimeAxis() {
   const $app = useContext(AppContext)
 
-  // const [hours, setHours] = useState<number[]>([])
-
-  // useEffect(() => {}, [])
+  const [hours, setHours] = useState<number[]>([])
+  useEffect(() => {
+    setHours(
+      getTimeAxisHours($app.config.dayBoundaries, $app.config.isHybridDay)
+    )
+    const hoursPerDay =
+      timePointsPerDay(
+        $app.config.dayBoundaries.start,
+        $app.config.dayBoundaries.end,
+        $app.config.isHybridDay
+      ) / 100
+    const pixelsPerHour = $app.config.weekOptions.weekGridHeight / hoursPerDay
+    document.documentElement.style.setProperty(
+      '--sx-week-grid-hour-height',
+      `${pixelsPerHour}px`
+    )
+  }, [])
 
   return (
     <>
       <div className="sx__week-grid__time-axis">
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">0 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">1 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">2 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">3 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">4 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">5 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">6 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">7 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">8 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">9 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">10 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">11 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">12 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">13 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">14 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">15 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">16 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">17 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">18 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">19 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">20 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">21 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">22 Uhr</span>
-        </div>
-        <div className="sx__week-grid__hour">
-          <span className="sx__week-grid__hour-text">23 Uhr</span>
-        </div>
+        {hours.map((hour) => (
+          <div className="sx__week-grid__hour">
+            <span className="sx__week-grid__hour-text">
+              {new Date(0, 0, 0, hour).toLocaleTimeString($app.config.locale, {
+                hour: 'numeric',
+              })}
+            </span>
+          </div>
+        ))}
       </div>
     </>
   )

@@ -21,8 +21,8 @@ const calendar = createCalendar(calendarElement, {
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'week',
   // dayBoundaries: {
-  //   start: '08:30',
-  //   end: '18:00',
+  //   start: '00:00',
+  //   end: '00:00',
   // }
 })
 
