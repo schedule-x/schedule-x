@@ -5,7 +5,6 @@ import { useEffect, useState } from 'preact/compat'
 import { View } from '../types/view'
 import { randomStringId } from '../../../../shared/utils/stateless/strings/random'
 import PerfectScrollbar from 'perfect-scrollbar'
-import 'perfect-scrollbar/css/perfect-scrollbar.css'
 
 type props = {
   $app: CalendarAppSingleton

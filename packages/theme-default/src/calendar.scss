@@ -1,13 +1,16 @@
-// Setup
+// 3rd party
+@import 'perfect-scrollbar/css/perfect-scrollbar.css';
+
+// Internal setup
 @import 'user-agent-overrides/index';
 @import 'variables/index';
 @import 'variables/calendar-only';
 @import 'util/index';
 
-// External components
+// Other components
 @import 'date-picker';
 
-// Internal components
+// Calendar components
 @import 'components/calendar/header/calendar-wrapper';
 @import 'components/calendar/header/calendar-header';
 @import 'components/calendar/header/range-heading';
