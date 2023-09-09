@@ -5,6 +5,7 @@ import { WeekWithDates } from '../../../../../shared/types/time'
 import WeekDay from '../../components/week-grid/week-day'
 import TimeAxis from '../../components/week-grid/time-axis'
 import { AppContext } from '../../utils/stateful/app-context'
+import DateAxis from '../../components/week-grid/date-axis'
 
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
@@ -30,7 +31,8 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
         <div className="sx__week-wrapper" id={id}>
           <div className="sx__week-header">
             <div className="sx__week-header-content">
-              hello
+              <DateAxis week={week} />
+
               <div className="sx__week-header-border" />
             </div>
           </div>
