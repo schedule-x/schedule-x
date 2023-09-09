@@ -4,7 +4,6 @@
 
 .sx__week-grid {
   position: relative;
-  width: 100%;
   padding-left: var(--sx-calendar-week-grid-padding-left);
   display: flex;
   height: var(--sx-week-grid-height);
@@ -13,13 +12,12 @@
 .sx__week-header {
   position: sticky;
   top: 0;
-  background-color: var(--sx-color-background);
   z-index: 1;
+  background-color: var(--sx-color-background);
 }
 
 .sx__week-header-content {
   position: relative;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
