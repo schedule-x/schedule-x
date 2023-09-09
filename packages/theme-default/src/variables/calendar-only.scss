@@ -1,3 +1,5 @@
 :root {
   --sx-calendar-header-input-font-size: clamp(12px, 0.875rem, 28px);
+  --sx-calendar-header-popup-z-index: 2;
+  --sx-calendar-week-grid-padding-left: 75px;
 }

@@ -16,13 +16,14 @@ import '../app.css'
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar(calendarElement, {
-  locale: 'de-DE',
+  // locale: 'de-DE',
+  locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'week',
   // dayBoundaries: {
-  //   start: '08:30',
-  //   end: '18:00',
+  //   start: '00:00',
+  //   end: '00:00',
   // }
 })
 

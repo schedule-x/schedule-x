@@ -1,5 +1,5 @@
 import { createElement, render } from 'preact'
-import CalendarWrapper from './components/header/calendar-wrapper'
+import CalendarWrapper from './components/calendar-wrapper'
 import CalendarAppSingleton from './utils/stateful/app-singleton/calendar-app-singleton'
 
 export default class CalendarApp {

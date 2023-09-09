@@ -1,0 +1,32 @@
+.sx__week-wrapper {
+  position: relative;
+}
+
+.sx__week-grid {
+  position: relative;
+  padding-left: var(--sx-calendar-week-grid-padding-left);
+  display: flex;
+  height: var(--sx-week-grid-height);
+}
+
+.sx__week-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--sx-color-background);
+}
+
+.sx__week-header-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sx__week-header-border {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  border-bottom: var(--sx-border);
+  border-left: 250px solid transparent;
+}

@@ -1,5 +1,5 @@
 import CalendarAppSingleton from '../../../../utils/stateful/app-singleton/calendar-app-singleton'
-import CalendarWrapper from '../../calendar-wrapper'
+import CalendarWrapper from '../../../calendar-wrapper'
 import { render } from '@testing-library/preact'
 
 export const factory = ($app: CalendarAppSingleton) => {

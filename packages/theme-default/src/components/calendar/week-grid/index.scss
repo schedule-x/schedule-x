@@ -1,0 +1,9 @@
+@import 'time-axis';
+@import 'week-day';
+
+:root {
+  --sx-week-grid-height: 0;
+  --sx-time-axis-height: 0;
+  --sx-week-grid-hour-height: 0;
+  --sx-week-grid-offset-top: 0;
+}

@@ -18,7 +18,7 @@
     "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
     "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
-    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact",
     "clean:deps": "lerna clean",
     "clean:build": "rm -rf ./packages/*/dist",
     "release": "npm run build && lerna publish --no-commit-hooks",
