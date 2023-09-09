@@ -10,10 +10,6 @@
   }
 
   .sx__date-picker-popup {
-    z-index: 2;
-  }
-
-  .sx__view-selection-items {
     z-index: var(--sx-calendar-header-popup-z-index);
   }
 }

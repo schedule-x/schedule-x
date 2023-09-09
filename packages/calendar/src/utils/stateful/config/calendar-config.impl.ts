@@ -21,7 +21,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public views: View[] = [],
     public dayBoundaries: DayBoundariesInternal = DEFAULT_DAY_BOUNDARIES,
     public weekOptions: WeekOptions = {
-      weekGridHeight: DEFAULT_WEEK_GRID_HEIGHT,
+      gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
     }
   ) {}
 

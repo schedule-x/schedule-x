@@ -17,7 +17,7 @@ export default function TimeAxis() {
         $app.config.dayBoundaries.end,
         $app.config.isHybridDay
       ) / 100
-    const pixelsPerHour = $app.config.weekOptions.weekGridHeight / hoursPerDay
+    const pixelsPerHour = $app.config.weekOptions.gridHeight / hoursPerDay
     document.documentElement.style.setProperty(
       '--sx-week-grid-hour-height',
       `${pixelsPerHour}px`

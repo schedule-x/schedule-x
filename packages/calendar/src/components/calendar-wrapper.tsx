@@ -14,7 +14,7 @@ export default function CalendarWrapper({ $app }: props) {
   const viewContainerId = randomStringId()
   const [currentView, setCurrentView] = useState<View | null>()
 
-  useEffect(() => {
+  const changeView = () => {
     const newView = $app.config.views.find(
       (view) => view.name === $app.calendarState.view.value
     )
@@ -25,14 +25,16 @@ export default function CalendarWrapper({ $app }: props) {
     if (currentView) currentView.destroy()
     setCurrentView(newView)
     newView.render(viewElement, $app)
-  }, [$app.calendarState.view.value])
+  }
+  useEffect(changeView, [$app.calendarState.view.value])
 
-  useEffect(() => {
+  const initScrollbar = () => {
     const scrollContainer = document.querySelector('.sx__view-container')
     if (!scrollContainer) return
     const ps = new PerfectScrollbar(scrollContainer)
     return () => ps.destroy()
-  }, [])
+  }
+  useEffect(initScrollbar, [])
 
   return (
     <>

@@ -9,7 +9,7 @@ import { AppContext } from '../../utils/stateful/app-context'
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
     '--sx-week-grid-height',
-    `${$app.config.weekOptions.weekGridHeight}px`
+    `${$app.config.weekOptions.gridHeight}px`
   )
 
   const [week, setWeek] = useState<WeekWithDates>([])

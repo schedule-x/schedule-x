@@ -9,7 +9,7 @@ import {
 } from '../../../types/config/day-boundaries'
 
 export type WeekOptions = {
-  weekGridHeight: number
+  gridHeight: number
 }
 
 export default interface CalendarConfigInternal extends Config {
