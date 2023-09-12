@@ -21,10 +21,44 @@ const calendar = createCalendar(calendarElement, {
   // locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'week',
-  // dayBoundaries: {
-  //   start: '00:00',
-  //   end: '00:00',
-  // }
+  dayBoundaries: {
+    start: '06:00',
+    end: '03:00',
+  },
+  events: [
+    {
+      id: '1',
+      title: 'Event 1',
+      time: {
+        start: '2023-09-11 09:00',
+        end: '2023-09-11 11:00',
+      },
+    },
+    {
+      id: '2',
+      title: 'Event 2',
+      time: {
+        start: '2023-09-12 00:20',
+        end: '2023-09-12 01:20',
+      },
+    },
+    {
+      id: '3',
+      title: 'Event 3',
+      time: {
+        start: '2023-09-11',
+        end: '2023-09-11',
+      },
+    },
+    {
+      id: '4',
+      title: 'Event 4',
+      time: {
+        start: '2023-09-16 13:00',
+        end: '2023-09-16 16:00',
+      },
+    },
+  ],
 })
 
 calendar.bootstrap()
