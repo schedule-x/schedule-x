@@ -5,16 +5,15 @@ import CalendarAppSingleton from '../../../stateful/app-singleton/calendar-app-s
 import { DateRange } from '../../../../types/date-range'
 
 export const getWeekDayContexts = ($app: CalendarAppSingleton) => {
-  const weekDaysMap: WeekDayContexts = {}
-  $app.timeUnitsImpl
+  return $app.timeUnitsImpl
     .getWeekFor(toJSDate(($app.calendarState.range.value as DateRange).start))
-    .forEach((day) => {
-      const dateString = toDateString(day)
-      weekDaysMap[dateString] = {
+    .reduce((acc, date) => {
+      const dateString = toDateString(date)
+      acc[dateString] = {
         date: dateString,
         calendarEvents: [],
       }
-    })
 
-  return weekDaysMap
+      return acc
+    }, {} as WeekDayContexts)
 }

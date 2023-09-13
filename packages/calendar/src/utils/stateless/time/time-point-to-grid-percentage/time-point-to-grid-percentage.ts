@@ -5,9 +5,8 @@ export const timePointToPercentage = (
   dayBoundaries: DayBoundariesInternal,
   timePoint: number
 ) => {
-  const firstDayTimePoints = 2400 - dayBoundaries.start
-
   if (timePoint < dayBoundaries.start) {
+    const firstDayTimePoints = 2400 - dayBoundaries.start
     return ((timePoint + firstDayTimePoints) / timePointsInDay) * 100
   }
 
