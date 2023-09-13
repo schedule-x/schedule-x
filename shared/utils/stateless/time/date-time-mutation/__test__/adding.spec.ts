@@ -3,7 +3,7 @@ import {
   it,
   expect,
 } from '../../../testing/unit/unit-testing-library.impl'
-import { addMonths } from '../adding'
+import { addDays, addMonths } from '../adding'
 
 describe('adding adding time to time specifications', () => {
   it.each([
@@ -29,6 +29,17 @@ describe('adding adding time to time specifications', () => {
     'should add months to date strings & date time strings',
     (timeSpecification, add, expectedResult) => {
       expect(addMonths(timeSpecification, add)).toBe(expectedResult)
+    }
+  )
+
+  it.each([
+    ['2020-01-01', 1, '2020-01-02'],
+    ['2020-01-01', -1, '2019-12-31'],
+    ['2020-01-31 00:00', 1, '2020-02-01 00:00'],
+  ])(
+    'should add days to date strings & date time strings',
+    (oldDate, daysPlus, newDate) => {
+      expect(addDays(oldDate, daysPlus)).toBe(newDate)
     }
   )
 })
