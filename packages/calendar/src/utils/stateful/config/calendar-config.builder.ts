@@ -9,7 +9,7 @@ import {
   DayBoundariesExternal,
   DayBoundariesInternal,
 } from '../../../types/config/day-boundaries'
-import { timePointsFromString } from '../../stateless/time/time-points/time-points-from-string'
+import { timePointsFromString } from '../../stateless/time/time-points/string-conversion'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
