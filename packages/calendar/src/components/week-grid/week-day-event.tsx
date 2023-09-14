@@ -71,7 +71,7 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
         )}
 
         <div className="sx__week-day-event-time">
-          <TimeIcon fillColor={eventCSSVariables.iconStroke} />
+          <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
           {getEventTime(calendarEvent.time)}
         </div>
 
