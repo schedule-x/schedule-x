@@ -38,7 +38,7 @@ export default function WeekDay({ calendarEvents }: props) {
           }}
           key={event.id}
         >
-          {event.title}
+          <div className="sx__week-day-event-title">{event.title}</div>
         </div>
       ))}
     </div>

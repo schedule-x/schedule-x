@@ -2,6 +2,13 @@
   width: 100%;
   padding: var(--sx-spacing-padding1);
   position: absolute;
-  background-color: var(--sx-color-secondary);
-  color: var(--sx-color-on-secondary);
+  border-radius: var(--sx-rounding-extra-small);
+  background-color: var(--sx-color-primary-container);
+  color: var(--sx-color-on-primary-container);
+  border-left: 4px solid var(--sx-color-primary);
+  font-size: var(--sx-font-extra-small);
+}
+
+.sx__week-day-event-title {
+  font-weight: 600;
 }
