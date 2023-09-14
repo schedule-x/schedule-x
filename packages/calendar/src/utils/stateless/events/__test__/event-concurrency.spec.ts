@@ -49,5 +49,41 @@ describe('Event concurrency', () => {
       expect(result[3]._totalConcurrentEvents).toBe(undefined)
       expect(result[3]._previousConcurrentEvents).toBe(undefined)
     })
+
+    it('should not be concurrent, if event1 ends at the same time event2 starts', () => {
+      const event1 = createEvent({
+        start: '2020-01-01 00:00',
+        end: '2020-01-01 01:00',
+      })
+      const event2 = createEvent({
+        start: '2020-01-01 01:00',
+        end: '2020-01-01 02:00',
+      })
+
+      const result = handleEventConcurrency([event1, event2])
+
+      expect(result[0]._totalConcurrentEvents).toBe(undefined)
+      expect(result[0]._previousConcurrentEvents).toBe(undefined)
+      expect(result[1]._totalConcurrentEvents).toBe(undefined)
+      expect(result[1]._previousConcurrentEvents).toBe(undefined)
+    })
+
+    it('should be concurrent, if event1 overlaps event2 by 1 minute', () => {
+      const event1 = createEvent({
+        start: '2020-01-01 00:00',
+        end: '2020-01-01 01:01',
+      })
+      const event2 = createEvent({
+        start: '2020-01-01 01:00',
+        end: '2020-01-01 02:00',
+      })
+
+      const result = handleEventConcurrency([event1, event2])
+
+      expect(result[0]._totalConcurrentEvents).toBe(2)
+      expect(result[0]._previousConcurrentEvents).toBe(0)
+      expect(result[1]._totalConcurrentEvents).toBe(2)
+      expect(result[1]._previousConcurrentEvents).toBe(1)
+    })
   })
 })
