@@ -4,7 +4,7 @@ import {
   it,
 } from '../../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 import { timePointsPerDay } from '../time-points-per-day'
-import { timePointsFromString } from '../time-points-from-string'
+import { timePointsFromString } from '../string-conversion'
 
 describe('Getting number of time points per day', () => {
   describe('a hybrid day', () => {

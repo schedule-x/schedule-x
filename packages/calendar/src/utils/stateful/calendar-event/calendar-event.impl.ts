@@ -7,7 +7,7 @@ import {
 } from '../../../../../../shared/utils/stateless/time/validation/regex'
 import { toJSDate } from '../../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
 import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
-import { timePointsFromString } from '../../stateless/time/time-points/time-points-from-string'
+import { timePointsFromString } from '../../stateless/time/time-points/string-conversion'
 import {
   dateFromDateTime,
   timeFromDateTime,

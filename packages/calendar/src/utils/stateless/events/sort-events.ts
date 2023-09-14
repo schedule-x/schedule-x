@@ -2,7 +2,7 @@ import {
   dateFromDateTime,
   timeFromDateTime,
 } from '../../../../../../shared/utils/stateless/time/format-conversion/string-to-string'
-import { timePointsFromString } from '../time/time-points/time-points-from-string'
+import { timePointsFromString } from '../time/time-points/string-conversion'
 import { addDays } from '../../../../../../shared/utils/stateless/time/date-time-mutation/adding'
 import { CalendarEventInternal } from '../../stateful/calendar-event/calendar-event.interface'
 import CalendarAppSingleton from '../../stateful/app-singleton/calendar-app-singleton'
