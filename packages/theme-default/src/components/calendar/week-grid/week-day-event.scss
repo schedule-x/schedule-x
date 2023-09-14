@@ -1,14 +1,23 @@
 .sx__week-day-event {
-  width: 100%;
+  width: calc(100% - 10px);
   padding: var(--sx-spacing-padding1);
   position: absolute;
   border-radius: var(--sx-rounding-extra-small);
-  background-color: var(--sx-color-primary-container);
-  color: var(--sx-color-on-primary-container);
-  border-left: 4px solid var(--sx-color-primary);
   font-size: var(--sx-font-extra-small);
 }
 
 .sx__week-day-event-title {
   font-weight: 600;
+}
+
+.sx__week-day-event-time,
+.sx__week-day-event-people {
+  display: flex;
+  align-items: center;
+}
+
+.sx__event-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: var(--sx-spacing-padding2);
 }

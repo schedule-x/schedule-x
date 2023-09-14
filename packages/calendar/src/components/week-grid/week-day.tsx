@@ -2,10 +2,7 @@ import { CalendarEventInternal } from '../../utils/stateful/calendar-event/calen
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { timePointsPerDay } from '../../utils/stateless/time/time-points/time-points-per-day'
-import {
-  getEventHeight,
-  getEventTop,
-} from '../../utils/stateless/events/event-placement'
+import WeekDayEvent from './week-day-event'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -22,24 +19,7 @@ export default function WeekDay({ calendarEvents }: props) {
   return (
     <div className="sx__week-day">
       {calendarEvents.map((event) => (
-        <div
-          className="sx__week-day-event"
-          style={{
-            top: `${getEventTop(
-              event.time,
-              $app.config.dayBoundaries,
-              pointsPerDay
-            )}%`,
-            height: `${getEventHeight(
-              event.time,
-              $app.config.dayBoundaries,
-              pointsPerDay
-            )}%`,
-          }}
-          key={event.id}
-        >
-          <div className="sx__week-day-event-title">{event.title}</div>
-        </div>
+        <WeekDayEvent calendarEvent={event} timePoints={pointsPerDay} />
       ))}
     </div>
   )

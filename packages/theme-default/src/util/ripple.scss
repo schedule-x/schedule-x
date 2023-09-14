@@ -46,8 +46,8 @@
   @include ripple-element;
 
   &:not(:active)::before {
-    animation: ripple 0.4s cubic-bezier(0, 0.1, 0.8, 1);
-    transition: visibility 0.4s step-end;
+    animation: ripple 0.75s cubic-bezier(0, 0.1, 0.8, 1);
+    transition: visibility 0.75s step-end;
   }
 }
 
@@ -79,7 +79,7 @@
   }
 
   &:not(:active)::before {
-    animation: ripple-wide 0.4s cubic-bezier(0, 0.1, 0.8, 1);
-    transition: visibility 0.4s step-end;
+    animation: ripple-wide 0.75s cubic-bezier(0, 0.1, 0.8, 1);
+    transition: visibility 0.75s step-end;
   }
 }
