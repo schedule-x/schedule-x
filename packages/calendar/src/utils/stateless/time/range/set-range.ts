@@ -17,10 +17,9 @@ const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
   date: Date
 ) => {
-  const dayStartTimeString = timeStringFromTimePoints(
+  return `${toDateString(date)} ${timeStringFromTimePoints(
     calendarConfig.dayBoundaries.start
-  )
-  return `${toDateString(date)} ${dayStartTimeString}`
+  )}`
 }
 
 const getRangeEndGivenDayBoundaries = (
@@ -47,18 +46,13 @@ export const setRangeForWeek = (
   range: Signal<DateRange | null>
 ) => {
   const weekForDate = timeUnitsImpl.getWeekFor(toJSDate(date))
-  const newRangeStart = getRangeStartGivenDayBoundaries(
-    calendarConfig,
-    weekForDate[0]
-  )
-  const newRangeEnd = getRangeEndGivenDayBoundaries(
-    calendarConfig,
-    weekForDate[weekForDate.length - 1]
-  )
 
   range.value = {
-    start: newRangeStart,
-    end: newRangeEnd,
+    start: getRangeStartGivenDayBoundaries(calendarConfig, weekForDate[0]),
+    end: getRangeEndGivenDayBoundaries(
+      calendarConfig,
+      weekForDate[weekForDate.length - 1]
+    ),
   }
 }
 
@@ -72,14 +66,13 @@ export const setRangeForMonth = (
     year,
     month
   )
-  const newRangeStart = toDateTimeString(monthForDate[0][0])
   const newRangeEndDate = toDateString(
     monthForDate[monthForDate.length - 1][
       monthForDate[monthForDate.length - 1].length - 1
     ]
   )
   range.value = {
-    start: newRangeStart,
+    start: toDateTimeString(monthForDate[0][0]),
     end: `${newRangeEndDate} 23:59`,
   }
 }
