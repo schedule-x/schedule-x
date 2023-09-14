@@ -3,9 +3,12 @@ import {
   CalendarEventTime,
 } from '../../utils/stateful/calendar-event/calendar-event.interface'
 import {
+  getBorderTopRule,
   getEventHeight,
   getEventTop,
-} from '../../utils/stateless/events/event-placement'
+  getLeftRule,
+  getWidthRule,
+} from '../../utils/stateless/events/event-styles'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
@@ -43,6 +46,8 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
     iconStroke: `var(--sx-color-on-${calendarEvent._color}-container)`,
   } as const
 
+  const leftRule = getLeftRule(calendarEvent)
+
   return (
     <>
       <div
@@ -58,7 +63,10 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
             $app.config.dayBoundaries,
             timePoints
           )}%`,
+          left: `${leftRule}%`,
+          width: `${getWidthRule(leftRule)}%`,
           backgroundColor: eventCSSVariables.backgroundColor,
+          borderTop: getBorderTopRule(calendarEvent),
           color: eventCSSVariables.textColor,
           borderLeft: eventCSSVariables.borderLeft,
         }}
