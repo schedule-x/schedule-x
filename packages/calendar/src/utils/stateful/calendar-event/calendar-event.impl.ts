@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { CalendarEventInternal } from './calendar-event.interface'
 import { EventId } from '../../../types/event-id'
 import CalendarConfigInternal from '../config/calendar-config'
@@ -12,6 +13,7 @@ import {
   dateFromDateTime,
   timeFromDateTime,
 } from '../../../../../../shared/utils/stateless/time/format-conversion/string-to-string'
+import { DEFAULT_EVENT_COLOR_NAME } from '../../../constants'
 
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined
@@ -91,5 +93,17 @@ export default class CalendarEventImpl implements CalendarEventInternal {
       (eventStartTimePoints < dayBoundaries.end &&
         eventEndTimePoints <= dayBoundaries.end)
     )
+  }
+
+  get _color(): string {
+    if (
+      this.calendarId &&
+      this._config.calendars &&
+      this.calendarId in this._config.calendars
+    ) {
+      return this._config.calendars[this.calendarId].color
+    }
+
+    return DEFAULT_EVENT_COLOR_NAME
   }
 }

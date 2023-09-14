@@ -25,4 +25,6 @@ export interface CalendarEventInternal extends CalendarEventExternal {
 
   _previousConcurrentEvents: number | undefined
   _totalConcurrentEvents: number | undefined
+
+  _color: string
 }

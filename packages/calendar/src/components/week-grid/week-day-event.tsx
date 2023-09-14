@@ -36,22 +36,11 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
 
   const getEventPeople = (people: string[]) => people.join(', ')
 
-  // TODO: get event color from its calendar color
-  let eventColor = 'primary'
-
-  if (
-    calendarEvent.calendarId &&
-    $app.config.calendars &&
-    calendarEvent.calendarId in $app.config.calendars
-  ) {
-    eventColor = $app.config.calendars[calendarEvent.calendarId].color
-  }
-
   const eventCSSVariables = {
-    borderLeft: `4px solid var(--sx-color-${eventColor})`,
-    textColor: `var(--sx-color-on-${eventColor}-container)`,
-    backgroundColor: `var(--sx-color-${eventColor}-container)`,
-    iconStroke: `var(--sx-color-on-${eventColor}-container)`,
+    borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
+    textColor: `var(--sx-color-on-${calendarEvent._color}-container)`,
+    backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
+    iconStroke: `var(--sx-color-on-${calendarEvent._color}-container)`,
   } as const
 
   return (
