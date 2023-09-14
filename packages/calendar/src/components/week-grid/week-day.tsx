@@ -19,7 +19,11 @@ export default function WeekDay({ calendarEvents }: props) {
   return (
     <div className="sx__week-day">
       {calendarEvents.map((event) => (
-        <WeekDayEvent calendarEvent={event} timePoints={pointsPerDay} />
+        <WeekDayEvent
+          key={event.id}
+          calendarEvent={event}
+          timePoints={pointsPerDay}
+        />
       ))}
     </div>
   )

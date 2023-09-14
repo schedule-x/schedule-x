@@ -28,17 +28,13 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
     const localizedStartTime = toJSDate(time.start).toLocaleTimeString(
       ...localizeArgs
     )
-
     const localizedEndTime = toJSDate(time.end).toLocaleTimeString(
       ...localizeArgs
     )
-
     return `${localizedStartTime} – ${localizedEndTime}`
   }
 
-  const getEventPeople = (people: string[]) => {
-    return people.join(', ')
-  }
+  const getEventPeople = (people: string[]) => people.join(', ')
 
   // TODO: get event color from its calendar color
   const eventColor = 'primary'
@@ -69,7 +65,6 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
           color: eventCSSVariables.textColor,
           borderLeft: eventCSSVariables.borderLeft,
         }}
-        key={calendarEvent.id}
       >
         {calendarEvent.title && (
           <div className="sx__week-day-event-title">{calendarEvent.title}</div>
