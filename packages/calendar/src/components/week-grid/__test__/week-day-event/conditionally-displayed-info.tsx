@@ -32,16 +32,17 @@ describe('WeekDayEvent', () => {
     })
 
     it('should contain a title element if the event has a title', () => {
+      const expectedTitle = 'Coffee with Paul'
       const calendarEvent = new CalendarEventBuilder($app.config, '1', {
         start: '2020-12-01 10:00',
         end: '2020-12-01 11:00',
       })
-        .withTitle('Coffee with Paul')
+        .withTitle(expectedTitle)
         .build()
       factory($app, calendarEvent)
 
       expect(document.querySelector('.sx__week-day-event-title')).not.toBeNull()
-      expect(screen.queryByText('Coffee with Paul')).toBeTruthy()
+      expect(screen.queryByText(expectedTitle)).toBeTruthy()
     })
 
     it('should not display any people info if the event has no people', () => {
