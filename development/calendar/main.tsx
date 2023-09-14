@@ -17,22 +17,23 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar(calendarElement, {
   // locale: 'de-DE',
-  locale: 'en-US',
-  // locale: 'zh-CN',
+  // locale: 'en-US',
+  locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'week',
-  dayBoundaries: {
-    start: '06:00',
-    end: '03:00',
-  },
+  // dayBoundaries: {
+  //   start: '06:00',
+  //   end: '03:00',
+  // },
   events: [
     {
       id: '1',
       title: 'Event 1',
       time: {
         start: '2023-09-11 09:00',
-        end: '2023-09-11 11:00',
+        end: '2023-09-11 09:50',
       },
+      people: ['John Doe', 'Jane Doe'],
     },
     {
       id: '2',
