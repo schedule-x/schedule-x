@@ -12,6 +12,7 @@ export default interface CalendarEventExternal {
   people?: string[]
   location?: string
   description?: string
+  calendarId?: string
   [key: string]: any
 }
 

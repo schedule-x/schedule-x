@@ -25,6 +25,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     public people?: string[],
     public location?: string,
     public description?: string,
+    public calendarId?: string,
     private _foreignProperties: Record<string, unknown> = {}
   ) {}
 

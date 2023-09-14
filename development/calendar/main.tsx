@@ -25,10 +25,19 @@ const calendar = createCalendar(calendarElement, {
   //   start: '06:00',
   //   end: '03:00',
   // },
+  calendars: {
+    personal: {
+      color: 'primary',
+    },
+    work: {
+      color: 'tertiary',
+    },
+  },
   events: [
     {
       id: '1',
       title: 'Event 1',
+      calendarId: 'work',
       time: {
         start: '2023-09-11 09:00',
         end: '2023-09-11 09:50',

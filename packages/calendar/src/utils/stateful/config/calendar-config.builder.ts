@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Builder from '../../../../../../shared/interfaces/builder.interface'
-import CalendarConfigInternal, { WeekOptions } from './calendar-config'
+import CalendarConfigInternal, {
+  CalendarType,
+  WeekOptions,
+} from './calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
 import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
 import { ViewName } from '../../../types/view-name'
@@ -20,14 +23,17 @@ export default class CalendarConfigBuilder
   views: View[] | undefined
   dayBoundaries: DayBoundariesInternal | undefined
   weekOptions: WeekOptions | undefined
+  calendars: Record<string, CalendarType> | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
-      this.locale!,
-      this.firstDayOfWeek!,
-      this.defaultView!,
-      this.views!,
-      this.dayBoundaries!
+      this.locale,
+      this.firstDayOfWeek,
+      this.defaultView,
+      this.views,
+      this.dayBoundaries,
+      this.weekOptions,
+      this.calendars
     )
   }
 
@@ -67,6 +73,13 @@ export default class CalendarConfigBuilder
 
   withWeekOptions(weekOptions: WeekOptions | undefined): CalendarConfigBuilder {
     this.weekOptions = weekOptions
+    return this
+  }
+
+  withCalendars(
+    calendars: Record<string, CalendarType> | undefined
+  ): CalendarConfigBuilder {
+    this.calendars = calendars
     return this
   }
 }

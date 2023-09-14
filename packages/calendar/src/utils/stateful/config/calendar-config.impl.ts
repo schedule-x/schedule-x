@@ -22,7 +22,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public dayBoundaries: DayBoundariesInternal = DEFAULT_DAY_BOUNDARIES,
     public weekOptions: WeekOptions = {
       gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
-    }
+    },
+    public calendars = {}
   ) {}
 
   get isHybridDay(): boolean {
