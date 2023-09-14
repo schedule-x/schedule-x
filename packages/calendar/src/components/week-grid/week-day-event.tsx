@@ -45,7 +45,6 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
     calendarEvent.calendarId in $app.config.calendars
   ) {
     eventColor = $app.config.calendars[calendarEvent.calendarId].color
-    console.log(eventColor)
   }
 
   const eventCSSVariables = {
