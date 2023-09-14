@@ -12,12 +12,18 @@ export type WeekOptions = {
   gridHeight: number
 }
 
+// Extend with field "label" when implementing calendar picker
+export type CalendarType = {
+  color: string
+}
+
 export default interface CalendarConfigInternal extends Config {
   defaultView: ViewName
   views: View[]
   dayBoundaries: DayBoundariesInternal
   isHybridDay: boolean
   weekOptions: WeekOptions
+  calendars?: Record<string, CalendarType>
 }
 
 interface CalendarDatePickerConfigExternal

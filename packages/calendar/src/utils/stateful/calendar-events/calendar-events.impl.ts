@@ -26,6 +26,7 @@ export const createCalendarEventsImpl = (
         .withDescription(description)
         .withLocation(location)
         .withPeople(people)
+        .withCalendarId(event.calendarId)
         .withForeignProperties(foreignProperties)
         .build()
     })

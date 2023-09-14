@@ -12,6 +12,7 @@ export default interface CalendarEventExternal {
   people?: string[]
   location?: string
   description?: string
+  calendarId?: string
   [key: string]: any
 }
 
@@ -24,4 +25,6 @@ export interface CalendarEventInternal extends CalendarEventExternal {
 
   _previousConcurrentEvents: number | undefined
   _totalConcurrentEvents: number | undefined
+
+  _color: string
 }
