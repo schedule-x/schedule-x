@@ -56,7 +56,7 @@ export const getWidthRule = (leftRule: number) => {
   return 100 - leftRule
 }
 
-export const getBorderTopRule = (calendarEvent: CalendarEventInternal) => {
+export const getBorderRule = (calendarEvent: CalendarEventInternal) => {
   if (!calendarEvent._previousConcurrentEvents) return 0
   return '1px solid #fff'
 }

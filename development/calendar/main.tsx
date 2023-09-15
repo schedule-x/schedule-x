@@ -73,7 +73,7 @@ const calendar = createCalendar(calendarElement, {
       title: 'Event 5',
       time: {
         start: '2023-09-17 13:30',
-        end: '2023-09-17 14:30',
+        end: '2023-09-17 16:55',
       },
     },
     {
@@ -81,7 +81,7 @@ const calendar = createCalendar(calendarElement, {
       title: 'Event 6',
       time: {
         start: '2023-09-17 14:00',
-        end: '2023-09-17 15:00',
+        end: '2023-09-17 15:15',
       },
     },
     {
