@@ -3,7 +3,7 @@ import {
   CalendarEventTime,
 } from '../../utils/stateful/calendar-event/calendar-event.interface'
 import {
-  getBorderTopRule,
+  getBorderRule,
   getEventHeight,
   getEventTop,
   getLeftRule,
@@ -47,6 +47,7 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
   } as const
 
   const leftRule = getLeftRule(calendarEvent)
+  const borderRule = getBorderRule(calendarEvent)
 
   return (
     <>
@@ -66,8 +67,8 @@ export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
           left: `${leftRule}%`,
           width: `${getWidthRule(leftRule)}%`,
           backgroundColor: eventCSSVariables.backgroundColor,
-          borderTop: getBorderTopRule(calendarEvent),
           color: eventCSSVariables.textColor,
+          border: borderRule,
           borderLeft: eventCSSVariables.borderLeft,
         }}
       >

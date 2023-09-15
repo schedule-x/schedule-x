@@ -14,14 +14,14 @@ export const sortEventsForWeekView = (
 ) => {
   const headerEvents: CalendarEventInternal[] = []
 
-  $app.calendarEvents.list.value.forEach((event) => {
+  for (const event of $app.calendarEvents.list.value) {
     const isWeekGridEvent =
       event._isSingleDayTimed || event._isSingleHybridDayTimed
-    const isInRange =
+    const isSingleDayTimedInRange =
       event.time.start >= $app.calendarState.range.value!.start &&
       event.time.end < $app.calendarState.range.value!.end
 
-    if (isWeekGridEvent && isInRange) {
+    if (isWeekGridEvent && isSingleDayTimedInRange) {
       let date = dateFromDateTime(event.time.start)
       const timeFromStart = timeFromDateTime(event.time.start)
       if (
@@ -30,10 +30,21 @@ export const sortEventsForWeekView = (
         date = addDays(date, -1)
       }
       updatedWeekDayContexts[date].calendarEvents.push(event)
-    } else if (isInRange) {
+      continue
+    }
+
+    const isMultiDayTimedInRange =
+      event.time.start > $app.calendarState.range.value!.start &&
+      event.time.start < $app.calendarState.range.value!.end
+    if (isMultiDayTimedInRange && event._isMultiDayTimed) {
+      headerEvents.push(event)
+      continue
+    }
+
+    if (event._isSingleDayFullDay || event._isMultiDayFullDay) {
       headerEvents.push(event)
     }
-  })
+  }
 
   return { updatedWeekDayContexts, headerEvents }
 }

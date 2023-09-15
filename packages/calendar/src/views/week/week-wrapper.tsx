@@ -9,6 +9,7 @@ import { WeekDayContext } from '../../types/week-day-context'
 import { toJSDate } from '../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../utils/stateless/events/sort-events'
 import { getWeekDayContexts } from '../../utils/stateless/views/week/get-week-day-contexts'
+import HeaderEvents from '../../components/week-grid/header-events'
 
 type WeekDayContexts = Record<string, WeekDayContext>
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
@@ -27,7 +28,6 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
       $app,
       newContexts
     )
-
     setWeekDayContexts(updatedWeekDayContexts)
     setHeaderEvents(headerEvents)
   }
@@ -55,6 +55,8 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
                   toJSDate(context.date)
                 )}
               />
+
+              <HeaderEvents calendarEvents={headerEvents} />
 
               <div className="sx__week-header-border" />
             </div>
