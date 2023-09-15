@@ -17,8 +17,8 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar(calendarElement, {
   // locale: 'de-DE',
-  // locale: 'en-US',
-  locale: 'zh-CN',
+  locale: 'en-US',
+  // locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'week',
   // dayBoundaries: {
@@ -65,7 +65,31 @@ const calendar = createCalendar(calendarElement, {
       title: 'Event 4',
       time: {
         start: '2023-09-17 13:00',
-        end: '2023-09-17 16:00',
+        end: '2023-09-17 14:00',
+      },
+    },
+    {
+      id: '5',
+      title: 'Event 5',
+      time: {
+        start: '2023-09-17 13:30',
+        end: '2023-09-17 14:30',
+      },
+    },
+    {
+      id: '6',
+      title: 'Event 6',
+      time: {
+        start: '2023-09-17 14:00',
+        end: '2023-09-17 15:00',
+      },
+    },
+    {
+      id: '7',
+      title: 'Event 7',
+      time: {
+        start: '2023-09-17 15:30',
+        end: '2023-09-17 16:30',
       },
     },
   ],

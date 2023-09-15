@@ -4,6 +4,7 @@
   position: absolute;
   border-radius: var(--sx-rounding-extra-small);
   font-size: var(--sx-font-extra-small);
+  overflow: hidden;
 }
 
 .sx__week-day-event-title {
@@ -14,10 +15,13 @@
 .sx__week-day-event-people {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .sx__event-icon {
-  width: 15px;
-  height: 15px;
+  min-width: 15px;
+  min-height: 15px;
+  max-width: 15px;
+  max-height: 15px;
   margin-inline-end: var(--sx-spacing-padding2);
 }

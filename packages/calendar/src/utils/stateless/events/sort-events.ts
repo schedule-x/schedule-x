@@ -37,3 +37,12 @@ export const sortEventsForWeekView = (
 
   return { updatedWeekDayContexts, headerEvents }
 }
+
+export const sortEventsByStart = (
+  a: CalendarEventInternal,
+  b: CalendarEventInternal
+) => {
+  if (a.time.start < b.time.start) return -1
+  if (a.time.start > b.time.start) return 1
+  return 0
+}
