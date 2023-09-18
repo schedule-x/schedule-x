@@ -27,3 +27,15 @@
   border-bottom: var(--sx-border);
   border-left: 250px solid transparent;
 }
+
+.sx__date-grid {
+  display: flex;
+  padding-left: var(--sx-calendar-week-grid-padding-left);
+}
+
+.sx__date-grid-day {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+}

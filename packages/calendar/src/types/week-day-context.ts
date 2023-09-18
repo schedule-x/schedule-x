@@ -1,8 +1,9 @@
 import { CalendarEventInternal } from '../utils/stateful/calendar-event/calendar-event.interface'
 
-export type WeekDayContext = {
+type WeekDayContext = {
   date: string
-  calendarEvents: CalendarEventInternal[]
+  timeGridEvents: CalendarEventInternal[]
+  dateGridEvents: (CalendarEventInternal | null | 'blocker')[]
 }
 
 export type WeekDayContexts = Record<string, WeekDayContext>

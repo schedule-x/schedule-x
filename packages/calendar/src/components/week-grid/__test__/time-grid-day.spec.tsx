@@ -7,7 +7,7 @@ import {
 import { createCalendarAppSingleton } from '../../../factory'
 import CalendarAppSingleton from '../../../utils/stateful/app-singleton/calendar-app-singleton'
 import { cleanup, render } from '@testing-library/preact'
-import WeekDay from '../week-day'
+import TimeGridDay from '../time-grid-day'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { CalendarEventInternal } from '../../../utils/stateful/calendar-event/calendar-event.interface'
 import CalendarEventBuilder from '../../../utils/stateful/calendar-event/calendar-event.builder'
@@ -18,12 +18,12 @@ const factory = (
 ) => {
   render(
     <AppContext.Provider value={$app}>
-      <WeekDay calendarEvents={calendarEvents} />
+      <TimeGridDay calendarEvents={calendarEvents} />
     </AppContext.Provider>
   )
 }
 
-describe('WeekDay', () => {
+describe('TimeGridDay', () => {
   afterEach(() => {
     cleanup()
   })

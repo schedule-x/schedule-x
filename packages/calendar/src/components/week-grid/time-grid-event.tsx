@@ -20,7 +20,7 @@ type props = {
   timePoints: number
 }
 
-export default function WeekDayEvent({ calendarEvent, timePoints }: props) {
+export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
   const $app = useContext(AppContext)
 
   const localizeArgs = [
