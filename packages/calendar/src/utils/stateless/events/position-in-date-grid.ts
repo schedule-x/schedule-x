@@ -1,6 +1,7 @@
 import { CalendarEventInternal } from '../../stateful/calendar-event/calendar-event.interface'
 import { WeekDayContexts } from '../../../types/week-day-context'
 import { dateFromDateTime } from '../../../../../../shared/utils/stateless/time/format-conversion/string-to-string'
+import { DATE_GRID_BLOCKER } from '../../../constants'
 
 /**
  * Create a table-like representation of the week, where each cell can hold a full-day event or multiple-day-timed event.
@@ -57,7 +58,7 @@ export const positionInDateGrid = (
         event._nDaysInGrid = eventDays.length
         eventDay.dateGridEvents[indexInWeekForEvent] = event
       } else {
-        eventDay.dateGridEvents[indexInWeekForEvent] = 'blocker'
+        eventDay.dateGridEvents[indexInWeekForEvent] = DATE_GRID_BLOCKER
       }
     }
   }
