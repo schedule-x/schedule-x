@@ -12,7 +12,7 @@ export const getWeekDayContexts = ($app: CalendarAppSingleton) => {
       acc[dateString] = {
         date: dateString,
         timeGridEvents: [],
-        dateGridEvents: [],
+        dateGridEvents: {},
       }
 
       return acc

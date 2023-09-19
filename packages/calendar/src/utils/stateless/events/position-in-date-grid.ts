@@ -42,23 +42,30 @@ export const positionInDateGrid = (
       }
     )
 
-    let indexInWeekForEvent
-    let testIndex = 0
+    let propertyInWeekForEvent
+    let testLevel = 0
 
-    while (indexInWeekForEvent === undefined) {
-      const isIndexFree = eventDays.every((weekDayContext) => {
-        return !weekDayContext.dateGridEvents[testIndex]
+    while (propertyInWeekForEvent === undefined) {
+      const isLevelFree = eventDays.every((weekDayContext) => {
+        return !weekDayContext.dateGridEvents[testLevel]
       })
-      if (isIndexFree) indexInWeekForEvent = testIndex
-      else testIndex++
+      if (isLevelFree) propertyInWeekForEvent = testLevel
+      else testLevel++
     }
 
     for (const [eventDayIndex, eventDay] of eventDays.entries()) {
       if (eventDayIndex === 0) {
         event._nDaysInGrid = eventDays.length
-        eventDay.dateGridEvents[indexInWeekForEvent] = event
+        eventDay.dateGridEvents[propertyInWeekForEvent] = event
       } else {
-        eventDay.dateGridEvents[indexInWeekForEvent] = DATE_GRID_BLOCKER
+        eventDay.dateGridEvents[propertyInWeekForEvent] = DATE_GRID_BLOCKER
+      }
+    }
+
+    // make sure empty levels are filled with undefined
+    for (const [, dayContext] of Object.entries(weekDayContexts)) {
+      if (!dayContext.dateGridEvents[propertyInWeekForEvent]) {
+        dayContext.dateGridEvents[propertyInWeekForEvent] = undefined
       }
     }
   }
