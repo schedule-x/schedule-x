@@ -12,4 +12,5 @@ module.exports = {
     'max-lines': ['error', 100],
     '@typescript-eslint/no-empty-interface': 'off',
   },
+  ignorePatterns: ['**/dist/**'],
 }

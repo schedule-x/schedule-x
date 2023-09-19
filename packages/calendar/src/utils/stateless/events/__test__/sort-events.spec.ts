@@ -6,7 +6,7 @@ import {
 import { CalendarEventTime } from '../../../stateful/calendar-event/calendar-event.interface'
 import CalendarEventBuilder from '../../../stateful/calendar-event/calendar-event.builder'
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
-import { sortEventsByStart } from '../sort-events'
+import { sortEventsByStart } from '../sort-by-start-date'
 
 describe('sorting events based on time', () => {
   const config = new CalendarConfigBuilder().build()
