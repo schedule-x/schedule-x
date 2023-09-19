@@ -32,7 +32,7 @@ export const positionInDateGrid = (
       let lastDateOfEvent = event.time.end
       if (event.time.end > lastDateOfWeek) lastDateOfEvent = lastDateOfWeek
 
-      const relevantDayContexts = Object.values(weekDayContexts).filter(
+      const eventDays = Object.values(weekDayContexts).filter(
         (weekDayContext) => {
           return (
             weekDayContext.date >= firstDateOfEvent &&
@@ -45,21 +45,19 @@ export const positionInDateGrid = (
       let testIndex = 0
 
       while (indexInWeekForEvent === undefined) {
-        const isIndexFree = relevantDayContexts.every((weekDayContext) => {
+        const isIndexFree = eventDays.every((weekDayContext) => {
           return !weekDayContext.dateGridEvents[testIndex]
         })
         if (isIndexFree) indexInWeekForEvent = testIndex
         else testIndex++
       }
 
-      for (const [
-        relevantDayIndex,
-        relevantDay,
-      ] of relevantDayContexts.entries()) {
-        if (relevantDayIndex === 0) {
-          relevantDay.dateGridEvents[indexInWeekForEvent] = event
+      for (const [eventDayIndex, eventDay] of eventDays.entries()) {
+        if (eventDayIndex === 0) {
+          event._nDaysInGrid = eventDays.length
+          eventDay.dateGridEvents[indexInWeekForEvent] = event
         } else {
-          relevantDay.dateGridEvents[indexInWeekForEvent] = 'blocker'
+          eventDay.dateGridEvents[indexInWeekForEvent] = 'blocker'
         }
       }
     }
@@ -67,16 +65,3 @@ export const positionInDateGrid = (
 
   return weekDayContexts
 }
-
-// delete later
-// Object.values(weekDayContexts).forEach((weekDayContext, index) => {
-//   if (index === 0) {
-//     weekDayContext.dateGridEvents.push(sortedDateGridEvents[0] || null)
-//     weekDayContext.dateGridEvents.push(sortedDateGridEvents[0] || null)
-//   }
-//
-//   if (index === 1) {
-//     weekDayContext.dateGridEvents.push('blocker')
-//     weekDayContext.dateGridEvents.push('blocker')
-//   }
-// })

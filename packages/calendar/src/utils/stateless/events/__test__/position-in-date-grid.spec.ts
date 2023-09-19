@@ -117,5 +117,63 @@ describe('positioning events in the date grid of a week or day', () => {
       expect(contexts['2023-09-17'].dateGridEvents[0]).toBeUndefined()
       expect(contexts['2023-09-17'].dateGridEvents[1]).toBeUndefined()
     })
+
+    it('should position events that start before the week and end after the week', () => {
+      const dateGridEvents = [
+        new CalendarEventBuilder($app.config, 1, {
+          start: '2023-09-09',
+          end: '2023-09-19',
+        }).build(),
+
+        new CalendarEventBuilder($app.config, 2, {
+          start: '2023-09-10',
+          end: '2023-09-11',
+        }).build(),
+
+        new CalendarEventBuilder($app.config, 3, {
+          start: '2023-09-16',
+          end: '2023-09-17',
+        }).build(),
+
+        new CalendarEventBuilder($app.config, 4, {
+          start: '2023-09-17',
+          end: '2023-09-18',
+        }).build(),
+      ]
+      const weekDayContexts = getWeekDayContexts($app)
+      const eventWithId = (id: number) =>
+        dateGridEvents.find((e) => e.id === id)
+
+      const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
+
+      // Monday
+      expect(contexts['2023-09-11'].dateGridEvents[0]).toEqual(eventWithId(1))
+      expect(contexts['2023-09-11'].dateGridEvents[1]).toEqual(eventWithId(2))
+
+      // Tuesday
+      expect(contexts['2023-09-12'].dateGridEvents[0]).toEqual('blocker')
+      expect(contexts['2023-09-12'].dateGridEvents[1]).toBeUndefined()
+
+      // Wednesday
+      expect(contexts['2023-09-13'].dateGridEvents[0]).toEqual('blocker')
+      expect(contexts['2023-09-13'].dateGridEvents[1]).toBeUndefined()
+
+      // Thursday
+      expect(contexts['2023-09-14'].dateGridEvents[0]).toEqual('blocker')
+      expect(contexts['2023-09-14'].dateGridEvents[1]).toBeUndefined()
+
+      // Friday
+      expect(contexts['2023-09-15'].dateGridEvents[0]).toEqual('blocker')
+      expect(contexts['2023-09-15'].dateGridEvents[1]).toBeUndefined()
+
+      // Saturday
+      expect(contexts['2023-09-16'].dateGridEvents[0]).toEqual('blocker')
+      expect(contexts['2023-09-16'].dateGridEvents[1]).toEqual(eventWithId(3))
+
+      // Sunday
+      expect(contexts['2023-09-17'].dateGridEvents[0]).toEqual('blocker')
+      expect(contexts['2023-09-17'].dateGridEvents[1]).toEqual('blocker')
+      expect(contexts['2023-09-17'].dateGridEvents[2]).toEqual(eventWithId(4))
+    })
   })
 })

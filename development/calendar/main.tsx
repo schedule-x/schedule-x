@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import '@fontsource/open-sans'
 import '@fontsource/open-sans/300.css'
 import '@fontsource/open-sans/500-italic.css'
@@ -39,8 +40,8 @@ const calendar = createCalendar(calendarElement, {
       title: 'Event 1',
       calendarId: 'work',
       time: {
-        start: '2023-09-11 09:00',
-        end: '2023-09-11 09:50',
+        start: '2023-09-18 09:00',
+        end: '2023-09-18 09:50',
       },
       people: ['John Doe', 'Jane Doe'],
     },
@@ -48,48 +49,73 @@ const calendar = createCalendar(calendarElement, {
       id: '2',
       title: 'Event 2',
       time: {
-        start: '2023-09-12 00:20',
-        end: '2023-09-12 01:20',
+        start: '2023-09-19 00:20',
+        end: '2023-09-19 01:20',
       },
     },
     {
       id: '3',
       title: 'Event 3',
       time: {
-        start: '2023-09-11',
-        end: '2023-09-11',
+        start: '2023-09-18',
+        end: '2023-09-19',
+      },
+    },
+    {
+      id: '20',
+      title: 'Event 20',
+      time: {
+        start: '2023-09-19',
+        end: '2023-09-21',
+      },
+      calendarId: 'work',
+    },
+    {
+      id: '30',
+      title: 'Event 30',
+      time: {
+        start: '2023-09-19',
+        end: '2023-09-26',
+      },
+    },
+    {
+      id: '21',
+      title: 'Event 21',
+      time: {
+        start: '2023-09-20',
+        end: '2023-09-21',
       },
     },
     {
       id: '4',
       title: 'Event 4',
       time: {
-        start: '2023-09-17 13:00',
-        end: '2023-09-17 14:00',
+        start: '2023-09-24 13:00',
+        end: '2023-09-24 14:00',
       },
     },
     {
       id: '5',
       title: 'Event 5',
       time: {
-        start: '2023-09-17 13:30',
-        end: '2023-09-17 16:55',
+        start: '2023-09-24 13:30',
+        end: '2023-09-24 16:55',
       },
     },
     {
       id: '6',
       title: 'Event 6',
       time: {
-        start: '2023-09-17 14:00',
-        end: '2023-09-17 15:15',
+        start: '2023-09-24 14:00',
+        end: '2023-09-24 15:15',
       },
     },
     {
       id: '7',
       title: 'Event 7',
       time: {
-        start: '2023-09-17 15:30',
-        end: '2023-09-17 16:30',
+        start: '2023-09-24 15:30',
+        end: '2023-09-24 16:30',
       },
     },
   ],

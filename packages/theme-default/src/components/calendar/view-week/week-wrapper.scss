@@ -38,4 +38,17 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
+  grid-gap: 2px;
+}
+
+.sx__date-grid-event {
+  display: flex;
+  align-items: center;
+  padding: var(--sx-spacing-padding1);
+  font-size: clamp(12px, var(--sx-font-extra-small), 14px);
+  font-weight: 600;
+}
+
+.sx__date-grid-cell {
+  height: clamp(20px, 1.25rem, 24px);
 }

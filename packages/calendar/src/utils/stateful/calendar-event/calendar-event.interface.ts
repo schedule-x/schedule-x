@@ -17,14 +17,19 @@ export default interface CalendarEventExternal {
 }
 
 export interface CalendarEventInternal extends CalendarEventExternal {
+  // event duration
   _isSingleDayTimed: boolean
   _isSingleDayFullDay: boolean
   _isSingleHybridDayTimed: boolean
   _isMultiDayTimed: boolean
   _isMultiDayFullDay: boolean
 
+  // week time grid
   _previousConcurrentEvents: number | undefined
   _totalConcurrentEvents: number | undefined
+
+  // week date grid
+  _nDaysInGrid: number | undefined
 
   _color: string
 }
