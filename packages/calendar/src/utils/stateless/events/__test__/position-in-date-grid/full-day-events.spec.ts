@@ -3,14 +3,14 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { getWeekDayContexts } from '../../views/week/get-week-day-contexts'
-import { createCalendarAppSingleton } from '../../../../factory'
-import CalendarEventBuilder from '../../../stateful/calendar-event/calendar-event.builder'
-import { positionInDateGrid } from '../position-in-date-grid'
+} from '../../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+import { getWeekDayContexts } from '../../../views/week/get-week-day-contexts'
+import { createCalendarAppSingleton } from '../../../../../factory'
+import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
+import { positionInDateGrid } from '../../position-in-date-grid'
 
 describe('positioning events in the date grid of a week or day', () => {
-  describe('a week with 7 days', () => {
+  describe('positioning full day events', () => {
     const selectedDate = '2023-09-17'
     const $app = createCalendarAppSingleton({
       datePicker: {

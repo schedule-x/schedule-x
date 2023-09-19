@@ -45,6 +45,7 @@
   display: flex;
   align-items: center;
   padding: var(--sx-spacing-padding1);
+  border-radius: var(--sx-rounding-extra-small);
   font-size: clamp(12px, var(--sx-font-extra-small), 14px);
   font-weight: 600;
 }
