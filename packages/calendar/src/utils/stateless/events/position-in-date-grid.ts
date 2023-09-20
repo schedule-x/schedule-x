@@ -5,13 +5,19 @@ import { DATE_GRID_BLOCKER } from '../../../constants'
 
 /**
  * Create a table-like representation of the week, where each cell can hold a full-day event or multiple-day-timed event.
- * Each event has the possibility to stretch out to cover multiple cells, if they are longer than a day.
+ * If an event lasts more than one day, it creates blockers in the grid for its subsequent days, so that events don't collide.
+ * For example:
+ *
+ * |  Mo    | Tue    |   We   |  Thu   |  Fri   | Sat    | Sun    |
+ * | e1     | blocker| blocker| blocker| blocker| blocker| blocker|
+ * |        |  e2    | blocker|        |        |        |        |
+ * |        |        |  e3    |        |        |        |        |
  * */
 export const positionInDateGrid = (
   sortedDateGridEvents: CalendarEventInternal[],
   weekDayContexts: WeekDayContexts
 ) => {
-  const weekDates = Object.keys(weekDayContexts)
+  const weekDates = Object.keys(weekDayContexts).sort()
   const firstDateOfWeek = weekDates[0]
   const lastDateOfWeek = weekDates[weekDates.length - 1]
   const occupiedLevels = new Set<number>()
