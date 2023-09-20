@@ -10,7 +10,7 @@ import { DATE_GRID_BLOCKER } from '../../../constants'
  *
  * |  Mo    | Tue    |   We   |  Thu   |  Fri   | Sat    | Sun    |
  * | e1     | blocker| blocker| blocker| blocker| blocker| blocker|
- * |        |  e2    | blocker|        |        |        |        |
+ * |        |  e2    | blocker|        |  e4    |        |        |
  * |        |        |  e3    |        |        |        |        |
  * */
 export const positionInDateGrid = (
@@ -40,8 +40,8 @@ export const positionInDateGrid = (
     const firstDateOfEvent = isEventStartInWeek
       ? eventStartDate
       : firstDateOfWeek
-    let lastDateOfEvent = eventEndDate
-    if (eventEndDate > lastDateOfWeek) lastDateOfEvent = lastDateOfWeek
+    const lastDateOfEvent =
+      eventEndDate <= lastDateOfWeek ? eventEndDate : lastDateOfWeek
 
     const eventDays = Object.values(weekDayContexts).filter(
       (weekDayContext) => {
@@ -52,15 +52,15 @@ export const positionInDateGrid = (
       }
     )
 
-    let propertyInWeekForEvent
+    let levelInWeekForEvent
     let testLevel = 0
 
-    while (propertyInWeekForEvent === undefined) {
+    while (levelInWeekForEvent === undefined) {
       const isLevelFree = eventDays.every((weekDayContext) => {
         return !weekDayContext.dateGridEvents[testLevel]
       })
       if (isLevelFree) {
-        propertyInWeekForEvent = testLevel
+        levelInWeekForEvent = testLevel
         occupiedLevels.add(testLevel)
       } else testLevel++
     }
@@ -68,9 +68,9 @@ export const positionInDateGrid = (
     for (const [eventDayIndex, eventDay] of eventDays.entries()) {
       if (eventDayIndex === 0) {
         event._nDaysInGrid = eventDays.length
-        eventDay.dateGridEvents[propertyInWeekForEvent] = event
+        eventDay.dateGridEvents[levelInWeekForEvent] = event
       } else {
-        eventDay.dateGridEvents[propertyInWeekForEvent] = DATE_GRID_BLOCKER
+        eventDay.dateGridEvents[levelInWeekForEvent] = DATE_GRID_BLOCKER
       }
     }
   }
