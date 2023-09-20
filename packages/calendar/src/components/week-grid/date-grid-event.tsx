@@ -16,7 +16,7 @@ export default function DateGridEvent({ calendarEvent, gridRow }: props) {
     <div
       className="sx__date-grid-event sx__date-grid-cell"
       style={{
-        width: `calc(${calendarEvent._nDaysInGrid! * 100}% - 2px)`,
+        width: `calc(${calendarEvent._nDaysInGrid! * 100}% - 2px)`, // 2px for leaving some space between events
         gridRow,
         ...eventCSSVariables,
       }}
