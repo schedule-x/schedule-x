@@ -26,9 +26,10 @@ export const positionInDateGrid = (
     const eventStartDate = dateFromDateTime(event.time.start)
     const eventEndDate = dateFromDateTime(event.time.end)
 
-    let isEventInWeek = !!weekDayContexts[eventStartDate]
+    const isEventStartInWeek = !!weekDayContexts[eventStartDate]
+    let isEventInWeek = isEventStartInWeek
     if (
-      !isEventInWeek &&
+      !isEventStartInWeek &&
       eventStartDate < firstDateOfWeek &&
       eventEndDate >= firstDateOfWeek
     ) {
@@ -36,7 +37,9 @@ export const positionInDateGrid = (
     }
     if (!isEventInWeek) continue
 
-    const firstDateOfEvent = isEventInWeek ? eventStartDate : firstDateOfWeek
+    const firstDateOfEvent = isEventStartInWeek
+      ? eventStartDate
+      : firstDateOfWeek
     let lastDateOfEvent = eventEndDate
     if (eventEndDate > lastDateOfWeek) lastDateOfEvent = lastDateOfWeek
 
