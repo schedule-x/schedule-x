@@ -47,7 +47,6 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
   } as const
 
   const leftRule = getLeftRule(calendarEvent)
-  const borderRule = getBorderRule(calendarEvent)
 
   return (
     <>
@@ -68,7 +67,7 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
           width: `${getWidthRule(leftRule)}%`,
           backgroundColor: eventCSSVariables.backgroundColor,
           color: eventCSSVariables.textColor,
-          border: borderRule,
+          border: getBorderRule(calendarEvent),
           borderLeft: eventCSSVariables.borderLeft,
         }}
       >
