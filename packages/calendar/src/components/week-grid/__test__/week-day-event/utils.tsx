@@ -2,7 +2,7 @@ import CalendarAppSingleton from '../../../../utils/stateful/app-singleton/calen
 import { CalendarEventInternal } from '../../../../utils/stateful/calendar-event/calendar-event.interface'
 import { render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
-import WeekDayEvent from '../../week-day-event'
+import TimeGridEvent from '../../time-grid-event'
 
 export const factory = (
   $app: CalendarAppSingleton,
@@ -10,7 +10,7 @@ export const factory = (
 ) => {
   render(
     <AppContext.Provider value={$app}>
-      <WeekDayEvent calendarEvent={calendarEvent} timePoints={2400} />
+      <TimeGridEvent calendarEvent={calendarEvent} timePoints={2400} />
     </AppContext.Provider>
   )
 }

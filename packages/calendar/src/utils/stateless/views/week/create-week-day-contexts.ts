@@ -4,14 +4,15 @@ import { WeekDayContexts } from '../../../../types/week-day-context'
 import CalendarAppSingleton from '../../../stateful/app-singleton/calendar-app-singleton'
 import { DateRange } from '../../../../types/date-range'
 
-export const getWeekDayContexts = ($app: CalendarAppSingleton) => {
+export const createWeekDayContexts = ($app: CalendarAppSingleton) => {
   return $app.timeUnitsImpl
     .getWeekFor(toJSDate(($app.calendarState.range.value as DateRange).start))
     .reduce((acc, date) => {
       const dateString = toDateString(date)
       acc[dateString] = {
         date: dateString,
-        calendarEvents: [],
+        timeGridEvents: [],
+        dateGridEvents: {},
       }
 
       return acc

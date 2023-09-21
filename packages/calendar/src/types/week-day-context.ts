@@ -1,8 +1,12 @@
 import { CalendarEventInternal } from '../utils/stateful/calendar-event/calendar-event.interface'
+import { DATE_GRID_BLOCKER } from '../constants'
 
-export type WeekDayContext = {
+type WeekDayContext = {
   date: string
-  calendarEvents: CalendarEventInternal[]
+  timeGridEvents: CalendarEventInternal[]
+  dateGridEvents: {
+    [key: string]: CalendarEventInternal | typeof DATE_GRID_BLOCKER | undefined
+  }
 }
 
 export type WeekDayContexts = Record<string, WeekDayContext>

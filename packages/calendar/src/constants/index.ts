@@ -10,3 +10,5 @@ export const DEFAULT_DAY_BOUNDARIES = {
 export const DEFAULT_WEEK_GRID_HEIGHT = 1600
 
 export const DEFAULT_EVENT_COLOR_NAME = 'primary'
+
+export const DATE_GRID_BLOCKER = 'blocker'

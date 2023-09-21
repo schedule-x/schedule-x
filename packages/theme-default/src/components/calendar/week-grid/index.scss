@@ -1,7 +1,8 @@
 @import 'time-axis';
-@import 'week-day';
+@import 'time-grid-day';
 @import 'date-axis';
-@import 'week-day-event';
+@import 'time-grid-event';
+@import 'date-grid';
 
 :root {
   --sx-week-grid-height: 0;
