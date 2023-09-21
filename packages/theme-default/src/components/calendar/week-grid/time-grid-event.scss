@@ -1,4 +1,4 @@
-.sx__week-day-event {
+.sx__time-grid-event {
   width: calc(100% - 10px);
   padding: var(--sx-spacing-padding1);
   position: absolute;
@@ -7,12 +7,12 @@
   overflow: hidden;
 }
 
-.sx__week-day-event-title {
+.sx__time-grid-event-title {
   font-weight: 600;
 }
 
-.sx__week-day-event-time,
-.sx__week-day-event-people {
+.sx__time-grid-event-time,
+.sx__time-grid-event-people {
   display: flex;
   align-items: center;
   white-space: nowrap;

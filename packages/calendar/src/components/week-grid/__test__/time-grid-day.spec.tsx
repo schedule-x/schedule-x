@@ -44,7 +44,7 @@ describe('TimeGridDay', () => {
 
       expect(
         document
-          .querySelector('.sx__week-day-event')
+          .querySelector('.sx__time-grid-event')
           ?.attributes.getNamedItem('style')?.value
       ).toContain('top: 0%')
     })
@@ -60,7 +60,7 @@ describe('TimeGridDay', () => {
 
       expect(
         document
-          .querySelector('.sx__week-day-event')
+          .querySelector('.sx__time-grid-event')
           ?.attributes.getNamedItem('style')?.value
       ).toContain('top: 75%')
     })
@@ -86,7 +86,7 @@ describe('TimeGridDay', () => {
 
       expect(
         document
-          .querySelector('.sx__week-day-event')
+          .querySelector('.sx__time-grid-event')
           ?.attributes.getNamedItem('style')?.value
       ).toContain('top: 50%')
     })

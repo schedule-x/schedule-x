@@ -22,7 +22,7 @@ export default function TimeGridDay({ calendarEvents }: props) {
   const eventsWithConcurrency = handleEventConcurrency(sortedEvents)
 
   return (
-    <div className="sx__week-day">
+    <div className="sx__time-grid-day">
       {eventsWithConcurrency.map((event) => (
         <TimeGridEvent
           key={event.id}

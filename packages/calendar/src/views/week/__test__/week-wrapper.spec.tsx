@@ -42,7 +42,7 @@ describe('WeekWrapper', () => {
       factory($app)
 
       const renderedEvent = document.querySelector(
-        '.sx__week-day-event'
+        '.sx__time-grid-event'
       ) as HTMLDivElement
       expect(renderedEvent?.attributes.getNamedItem('style')?.value).toContain(
         'top: 50%'

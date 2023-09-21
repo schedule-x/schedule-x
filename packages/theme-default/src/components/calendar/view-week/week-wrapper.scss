@@ -27,29 +27,3 @@
   border-bottom: var(--sx-border);
   border-left: 250px solid transparent;
 }
-
-.sx__date-grid {
-  display: flex;
-  padding-left: var(--sx-calendar-week-grid-padding-left);
-}
-
-.sx__date-grid-day {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(auto-fit, minmax(0, 1fr));
-  grid-gap: 2px;
-}
-
-.sx__date-grid-event {
-  display: flex;
-  align-items: center;
-  padding: var(--sx-spacing-padding1);
-  border-radius: var(--sx-rounding-extra-small);
-  font-size: clamp(12px, var(--sx-font-extra-small), 14px);
-  font-weight: 600;
-}
-
-.sx__date-grid-cell {
-  height: clamp(20px, 1.25rem, 24px);
-}

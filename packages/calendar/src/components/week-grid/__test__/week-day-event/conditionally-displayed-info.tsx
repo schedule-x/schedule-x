@@ -28,7 +28,7 @@ describe('WeekDayEvent', () => {
       }).build()
       factory($app, calendarEvent)
 
-      expect(document.querySelector('.sx__week-day-event-title')).toBeNull()
+      expect(document.querySelector('.sx__time-grid-event-title')).toBeNull()
     })
 
     it('should contain a title element if the event has a title', () => {
@@ -41,7 +41,9 @@ describe('WeekDayEvent', () => {
         .build()
       factory($app, calendarEvent)
 
-      expect(document.querySelector('.sx__week-day-event-title')).not.toBeNull()
+      expect(
+        document.querySelector('.sx__time-grid-event-title')
+      ).not.toBeNull()
       expect(screen.queryByText(expectedTitle)).toBeTruthy()
     })
 
@@ -52,7 +54,7 @@ describe('WeekDayEvent', () => {
       }).build()
       factory($app, calendarEvent)
 
-      expect(document.querySelector('.sx__week-day-event-people')).toBeNull()
+      expect(document.querySelector('.sx__time-grid-event-people')).toBeNull()
     })
 
     it('should display people info if the event has people', () => {
@@ -65,7 +67,7 @@ describe('WeekDayEvent', () => {
       factory($app, calendarEvent)
 
       expect(
-        document.querySelector('.sx__week-day-event-people')
+        document.querySelector('.sx__time-grid-event-people')
       ).not.toBeNull()
       expect(screen.queryByText('Paul, John')).toBeTruthy()
     })

@@ -13,7 +13,12 @@ export default function DateGridDay({ calendarEvents }: props) {
     <div className="sx__date-grid-day">
       {Object.values(calendarEvents).map((event, index) => {
         if (event === DATE_GRID_BLOCKER || !event)
-          return <div className="sx__date-grid-cell"></div>
+          return (
+            <div
+              className="sx__date-grid-cell"
+              style={{ gridRow: index + 1 }}
+            ></div>
+          )
 
         return <DateGridEvent calendarEvent={event} gridRow={index + 1} />
       })}

@@ -51,7 +51,7 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
   return (
     <>
       <div
-        className="sx__week-day-event"
+        className="sx__time-grid-event"
         style={{
           top: `${getEventTop(
             calendarEvent.time,
@@ -72,16 +72,16 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
         }}
       >
         {calendarEvent.title && (
-          <div className="sx__week-day-event-title">{calendarEvent.title}</div>
+          <div className="sx__time-grid-event-title">{calendarEvent.title}</div>
         )}
 
-        <div className="sx__week-day-event-time">
+        <div className="sx__time-grid-event-time">
           <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
           {getEventTime(calendarEvent.time)}
         </div>
 
         {calendarEvent.people && (
-          <div className="sx__week-day-event-people">
+          <div className="sx__time-grid-event-people">
             <UserIcon strokeColor={eventCSSVariables.iconStroke} />
             {getEventPeople(calendarEvent.people)}
           </div>
