@@ -14,11 +14,10 @@ export const positionInTimeGrid = (
   $app: CalendarAppSingleton
 ) => {
   for (const event of timeGridEvents) {
-    const isSingleDayTimedInRange =
+    if (
       event.time.start >= $app.calendarState.range.value!.start &&
       event.time.end < $app.calendarState.range.value!.end
-
-    if (isSingleDayTimedInRange) {
+    ) {
       let date = dateFromDateTime(event.time.start)
       const timeFromStart = timeFromDateTime(event.time.start)
       if (
