@@ -4,7 +4,7 @@ import {
   expect,
   it,
 } from '../../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
-import { getWeekDayContexts } from '../../../views/week/get-week-day-contexts'
+import { createWeekDayContexts } from '../../../views/week/create-week-day-contexts'
 import { createCalendarAppSingleton } from '../../../../../factory'
 import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
 import { positionInDateGrid } from '../../position-in-date-grid'
@@ -26,7 +26,7 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-17',
         }).build(),
       ]
-      const weekDayContexts = getWeekDayContexts($app)
+      const weekDayContexts = createWeekDayContexts($app)
 
       const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
 
@@ -60,7 +60,7 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-16',
         }).build(),
       ]
-      const weekDayContexts = getWeekDayContexts($app)
+      const weekDayContexts = createWeekDayContexts($app)
 
       const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
 
@@ -92,7 +92,7 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-15',
         }).build(),
       ]
-      const weekDayContexts = getWeekDayContexts($app)
+      const weekDayContexts = createWeekDayContexts($app)
 
       const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
 
@@ -159,7 +159,7 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-18',
         }).build(),
       ]
-      const weekDayContexts = getWeekDayContexts($app)
+      const weekDayContexts = createWeekDayContexts($app)
       const eventWithId = (id: number) =>
         dateGridEvents.find((e) => e.id === id)
 

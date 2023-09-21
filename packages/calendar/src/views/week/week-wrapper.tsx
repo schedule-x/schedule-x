@@ -7,7 +7,7 @@ import DateAxis from '../../components/week-grid/date-axis'
 import { WeekDayContexts } from '../../types/week-day-context'
 import { toJSDate } from '../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../utils/stateless/events/sort-events-for-week'
-import { getWeekDayContexts } from '../../utils/stateless/views/week/get-week-day-contexts'
+import { createWeekDayContexts } from '../../utils/stateless/views/week/create-week-day-contexts'
 import { positionInTimeGrid } from '../../utils/stateless/events/position-in-time-grid'
 import { positionInDateGrid } from '../../utils/stateless/events/position-in-date-grid'
 import { sortEventsByStart } from '../../utils/stateless/events/sort-by-start-date'
@@ -22,7 +22,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   const [weekDayContexts, setWeekDayContexts] = useState<WeekDayContexts>({})
 
   const sortEventsIntoDateAndTimeGrids = () => {
-    let contexts = getWeekDayContexts($app)
+    let contexts = createWeekDayContexts($app)
     const { dateGridEvents, timeGridEvents } = sortEventsForWeekView(
       $app.calendarEvents.list.value
     )
