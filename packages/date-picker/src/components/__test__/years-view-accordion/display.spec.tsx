@@ -4,7 +4,7 @@ import {
   expect,
   mockFn,
   beforeEach,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../utils/stateful/app-context'
 import YearsViewAccordion from '../../years-view-accordion'

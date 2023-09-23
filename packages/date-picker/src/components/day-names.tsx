@@ -3,8 +3,8 @@ import { AppContext } from '../utils/stateful/app-context'
 import {
   getDayNamesShort,
   getOneLetterDayNames,
-} from '../../../../shared/utils/stateless/time/date-time-localization/date-time-localization'
-import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
+} from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 export default function DayNames() {
   const $app = useContext(AppContext)

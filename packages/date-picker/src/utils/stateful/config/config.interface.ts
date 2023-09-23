@@ -1,4 +1,4 @@
-import Config from '../../../../../../shared/interfaces/config.interface'
+import Config from '@schedule-x/shared/src/interfaces/config.interface'
 import { Placement } from '../../../enums/placement.enum'
 import { DatePickerListeners } from './listeners.interface'
 import { DatePickerStyle } from './style.interface'

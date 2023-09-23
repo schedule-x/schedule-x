@@ -3,7 +3,7 @@ import {
   it,
   expect,
   afterEach,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, waitFor } from '@testing-library/preact'
 import { createAppSingleton } from '../../../factory'
 import { factory } from './utils'

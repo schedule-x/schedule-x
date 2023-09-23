@@ -11,7 +11,7 @@ import {
 } from '../../utils/stateless/events/event-styles'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
-import { toJSDate } from '../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '../icons/user-icon'
 import TimeIcon from '../icons/time-icon'
 

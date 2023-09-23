@@ -4,7 +4,7 @@ import { ViewName } from '../../../types/view-name'
 import { DateRange } from '../../../types/date-range'
 import CalendarConfigInternal from '../config/calendar-config'
 import { InternalViewName } from '../../../enums/internal-view.enum'
-import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
+import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import {
   setRangeForDay,
   setRangeForMonth,

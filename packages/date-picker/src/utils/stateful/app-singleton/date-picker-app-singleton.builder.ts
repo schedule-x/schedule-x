@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import Builder from '../../../../../../shared/interfaces/builder.interface'
+import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import DatePickerAppSingleton from './date-picker-app.singleton'
 import DatePickerAppSingletonImpl from './date-picker-app-singleton.impl'
-import DatePickerState from '../../../../../../shared/utils/stateful/date-picker-state/date-picker-state.interface'
+import DatePickerState from '../date-picker-state/date-picker-state.interface'
 import DatePickerConfigInternal from '../config/config.interface'
-import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
-import { TranslateFn } from '../../../../../translations/src'
+import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
+import { TranslateFn } from '@schedule-x/translations/src'
 
 export default class DatePickerAppSingletonBuilder
   implements Builder<DatePickerAppSingleton>

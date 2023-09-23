@@ -2,9 +2,9 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { translate } from '../translate'
-import { InvalidLocaleError } from '../../../../../shared/utils/stateless/errors/InvalidLocale.error'
+import { InvalidLocaleError } from '@schedule-x/shared/src/utils/stateless/errors/InvalidLocale.error'
 
 describe('translate', () => {
   it('should return the key if the locale is en-US', () => {

@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../calendar-event.builder'
 import CalendarConfigBuilder from '../../config/calendar-config.builder'
 import { CalendarEventTime } from '../calendar-event.interface'

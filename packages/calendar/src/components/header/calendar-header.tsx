@@ -1,4 +1,4 @@
-import { default as DatePickerWrapper } from '@schedule-x/date-picker/src/components/app-wrapper'
+import AppWrapper from '@schedule-x/date-picker/src/components/app-wrapper'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import DatePickerAppSingletonBuilder from '@schedule-x/date-picker/src/utils/stateful/app-singleton/date-picker-app-singleton.builder'
@@ -27,7 +27,7 @@ export default function CalendarHeader() {
       <div className={'sx__calendar-header-content'}>
         <ViewSelection />
 
-        <DatePickerWrapper $app={datePickerAppSingleton}></DatePickerWrapper>
+        <AppWrapper $app={datePickerAppSingleton}></AppWrapper>
       </div>
     </header>
   )

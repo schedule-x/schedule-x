@@ -2,9 +2,9 @@ import DatePickerConfigInternal from './config.interface'
 import {
   DEFAULT_FIRST_DAY_OF_WEEK,
   DEFAULT_LOCALE,
-} from '../../../../../../shared/values'
-import { WeekDay } from '../../../../../../shared/enums/time/week-day.enum'
-import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+} from '@schedule-x/shared/src/values'
+import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
+import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { Placement } from '../../../enums/placement.enum'
 import { DatePickerListeners } from './listeners.interface'
 import { DatePickerStyle } from './style.interface'

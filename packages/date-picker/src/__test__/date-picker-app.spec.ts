@@ -4,7 +4,7 @@ import {
   expect,
   beforeEach,
   mockFn,
-} from '../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { vi } from 'vitest'
 import DatePickerApp from '../date-picker.app'
 import { createElement, render } from 'preact'

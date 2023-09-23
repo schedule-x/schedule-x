@@ -3,7 +3,7 @@ import CalendarAppSingleton from '../utils/stateful/app-singleton/calendar-app-s
 import { AppContext } from '../utils/stateful/app-context'
 import { useEffect, useState } from 'preact/compat'
 import { View } from '../types/view'
-import { randomStringId } from '../../../../shared/utils/stateless/strings/random'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import PerfectScrollbar from 'perfect-scrollbar'
 
 type props = {
