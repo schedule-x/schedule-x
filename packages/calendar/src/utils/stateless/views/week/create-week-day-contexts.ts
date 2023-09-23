@@ -1,5 +1,5 @@
-import { toJSDate } from '../../../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
-import { toDateString } from '../../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+import { toJSDate } from '../../../../../../shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { toDateString } from '../../../../../../shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { WeekDayContexts } from '../../../../types/week-day-context'
 import CalendarAppSingleton from '../../../stateful/app-singleton/calendar-app-singleton'
 import { DateRange } from '../../../../types/date-range'

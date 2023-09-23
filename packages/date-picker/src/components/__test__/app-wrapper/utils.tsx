@@ -1,4 +1,4 @@
-import { expect } from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+import { expect } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { render, screen, waitFor } from '@testing-library/preact'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
 import AppWrapper from '../../app-wrapper'

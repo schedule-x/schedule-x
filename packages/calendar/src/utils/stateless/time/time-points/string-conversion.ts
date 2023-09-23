@@ -1,6 +1,6 @@
-import { InvalidTimeStringError } from '../../../../../../../shared/utils/stateless/errors/invalid-time-string.error'
-import { timeStringRegex } from '../../../../../../../shared/utils/stateless/time/validation/regex'
-import { doubleDigit } from '../../../../../../../shared/utils/stateless/time/date-time-mutation/date-time-mutation'
+import { InvalidTimeStringError } from '../../../../../../shared/src/utils/stateless/errors/invalid-time-string.error'
+import { timeStringRegex } from '../../../../../../shared/src/utils/stateless/time/validation/regex'
+import { doubleDigit } from '../../../../../../shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 
 const minuteTimePointMultiplier = 1.6666666666666667 // 100 / 60
 

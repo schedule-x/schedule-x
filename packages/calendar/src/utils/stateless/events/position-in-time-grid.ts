@@ -4,9 +4,9 @@ import CalendarAppSingleton from '../../stateful/app-singleton/calendar-app-sing
 import {
   dateFromDateTime,
   timeFromDateTime,
-} from '../../../../../../shared/utils/stateless/time/format-conversion/string-to-string'
+} from '../../../../../shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { timePointsFromString } from '../time/time-points/string-conversion'
-import { addDays } from '../../../../../../shared/utils/stateless/time/date-time-mutation/adding'
+import { addDays } from '../../../../../shared/src/utils/stateless/time/date-time-mutation/adding'
 
 export const positionInTimeGrid = (
   timeGridEvents: CalendarEventInternal[],

@@ -5,14 +5,14 @@ import CalendarConfigInternal from '../config/calendar-config'
 import {
   dateStringRegex,
   dateTimeStringRegex,
-} from '../../../../../../shared/utils/stateless/time/validation/regex'
-import { toJSDate } from '../../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
-import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+} from '../../../../../shared/src/utils/stateless/time/validation/regex'
+import { toJSDate } from '../../../../../shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { toDateString } from '../../../../../shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { timePointsFromString } from '../../stateless/time/time-points/string-conversion'
 import {
   dateFromDateTime,
   timeFromDateTime,
-} from '../../../../../../shared/utils/stateless/time/format-conversion/string-to-string'
+} from '../../../../../shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DEFAULT_EVENT_COLOR_NAME } from '../../../constants'
 
 export default class CalendarEventImpl implements CalendarEventInternal {

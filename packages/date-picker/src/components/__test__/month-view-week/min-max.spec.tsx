@@ -3,10 +3,10 @@ import {
   it,
   expect,
   beforeEach,
-} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup } from '@testing-library/preact'
-import TimeUnitsBuilder from '../../../../../../shared/utils/stateful/time-units/time-units.builder'
-import { Month } from '../../../../../../shared/enums/time/month.enum'
+import TimeUnitsBuilder from '@schedule-x/shared/src/utils/stateful/time-units/time-units.builder'
+import { Month } from '@schedule-x/shared/src/enums/time/month.enum'
 import { createAppSingleton } from '../../../factory'
 import { factory } from './utils'
 

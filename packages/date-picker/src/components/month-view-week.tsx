@@ -1,13 +1,13 @@
-import { WeekWithDates } from '../../../../shared/types/time'
+import { WeekWithDates } from '@schedule-x/shared/src/types/time'
 import { DATE_PICKER_WEEK } from '../constants/test-ids'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
-import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import {
   isSameMonth,
   isToday,
-} from '../../../../shared/utils/stateless/time/comparison'
-import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
+} from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 type props = {
   week: WeekWithDates

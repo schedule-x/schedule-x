@@ -3,8 +3,8 @@ import MonthViewHeader from './month-view-header'
 import DayNames from './day-names'
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../utils/stateful/app-context'
-import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
-import { MonthWithDates } from '../../../../shared/types/time'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { MonthWithDates } from '@schedule-x/shared/src/types/time'
 import MonthViewWeek from './month-view-week'
 
 type props = {

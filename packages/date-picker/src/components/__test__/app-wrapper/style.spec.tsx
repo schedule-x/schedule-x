@@ -4,7 +4,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, render } from '@testing-library/preact'
 import AppWrapper from '../../app-wrapper'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'

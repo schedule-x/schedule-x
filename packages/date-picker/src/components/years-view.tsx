@@ -1,9 +1,9 @@
 import { YEARS_VIEW } from '../constants/test-ids'
 import YearsViewAccordion from './years-view-accordion'
 import { useContext, useEffect, useState } from 'preact/compat'
-import { toDateString } from '../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { AppContext } from '../utils/stateful/app-context'
-import { toJSDate } from '../../../../shared/utils/stateless/time/format-conversion/format-conversion'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 type props = {
   setMonthView: () => void

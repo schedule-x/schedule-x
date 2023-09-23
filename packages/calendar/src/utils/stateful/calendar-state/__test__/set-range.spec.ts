@@ -5,7 +5,7 @@ import {
 } from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendarState } from '../calendar-state.impl'
 import CalendarConfigBuilder from '../../config/calendar-config.builder'
-import TimeUnitsBuilder from '../../../../../../../shared/utils/stateful/time-units/time-units.builder'
+import TimeUnitsBuilder from '../../../../../../shared/src/utils/stateful/time-units/time-units.builder'
 import { InternalViewName } from '../../../../enums/internal-view.enum'
 
 describe('calendar state', () => {

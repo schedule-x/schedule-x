@@ -7,7 +7,7 @@ import {
 import {
   expect,
   it,
-} from '../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { ConfigBuilder } from '../utils/stateful/config/config.builder'
 import DatePickerApp from '../date-picker.app'
 

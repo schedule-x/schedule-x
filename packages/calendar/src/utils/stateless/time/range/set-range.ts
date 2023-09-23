@@ -1,17 +1,17 @@
-import TimeUnits from '../../../../../../../shared/utils/stateful/time-units/time-units.interface'
+import TimeUnits from '../../../../../../shared/src/utils/stateful/time-units/time-units.interface'
 import CalendarConfigInternal from '../../../stateful/config/calendar-config'
 import { Signal } from '@preact/signals'
 import { DateRange } from '../../../../types/date-range'
 import {
   toIntegers,
   toJSDate,
-} from '../../../../../../../shared/utils/stateless/time/format-conversion/format-conversion'
+} from '../../../../../../shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { timeStringFromTimePoints } from '../time-points/string-conversion'
 import {
   toDateString,
   toDateTimeString,
-} from '../../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
-import { addDays } from '../../../../../../../shared/utils/stateless/time/date-time-mutation/adding'
+} from '../../../../../../shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import { addDays } from '../../../../../../shared/src/utils/stateless/time/date-time-mutation/adding'
 
 const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,

@@ -3,7 +3,7 @@ import {
   it,
   expect,
   mockFn,
-} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createDatePickerState } from '../date-picker-state.impl'
 import { __createInternalConfig__ as config } from '../../../stateless/testing/factories/create-internal-config'
 import { getCurrentDayDateString } from './utils'

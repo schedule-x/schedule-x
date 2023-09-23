@@ -5,7 +5,7 @@ import {
   describe,
   it,
   expect,
-} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 
 describe('date picker date in date picker state impl', () => {
   it('should set datePickerDate to initial selected date', () => {

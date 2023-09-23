@@ -1,5 +1,5 @@
-import { WeekDay } from '../../../../../../../shared/enums/time/week-day.enum'
-import { DEFAULT_LOCALE } from '../../../../../../../shared/values'
+import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
+import { DEFAULT_LOCALE } from '@schedule-x/shared/src/values'
 import { Placement } from '../../../../enums/placement.enum'
 
 export const __createInternalConfig__ = (locale?: string) => {

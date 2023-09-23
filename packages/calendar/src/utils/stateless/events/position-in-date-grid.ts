@@ -1,6 +1,6 @@
 import { CalendarEventInternal } from '../../stateful/calendar-event/calendar-event.interface'
 import { WeekDayContexts } from '../../../types/week-day-context'
-import { dateFromDateTime } from '../../../../../../shared/utils/stateless/time/format-conversion/string-to-string'
+import { dateFromDateTime } from '../../../../../shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DATE_GRID_BLOCKER } from '../../../constants'
 
 /**

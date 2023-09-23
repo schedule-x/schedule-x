@@ -7,7 +7,7 @@ import {
   timePointsFromString,
   timeStringFromTimePoints,
 } from '../string-conversion'
-import { InvalidTimeStringError } from '../../../../../../../../shared/utils/stateless/errors/invalid-time-string.error'
+import { InvalidTimeStringError } from '../../../../../../../shared/src/utils/stateless/errors/invalid-time-string.error'
 
 describe('TimePointsFromString', () => {
   describe('turning a string into a time point', () => {

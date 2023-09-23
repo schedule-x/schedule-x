@@ -4,7 +4,7 @@ import {
   it,
   expect,
   beforeEach,
-} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { factory } from './utils'
 import {
   isDropdownOpen,

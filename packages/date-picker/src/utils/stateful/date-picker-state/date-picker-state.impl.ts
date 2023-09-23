@@ -1,8 +1,8 @@
 import DatePickerState from './date-picker-state.interface'
 import { DatePickerView } from '../../../enums/date-picker-view.enum'
 import { effect, signal } from '@preact/signals'
-import { toDateString as formatToDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-format/to-date-string'
-import { toDateString as dateToDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
+import { toDateString as formatToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-format/to-date-string'
+import { toDateString as dateToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import DatePickerConfigInternal from '../config/config.interface'
 
 export const createDatePickerState = (

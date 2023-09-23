@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 
 import { DatePickerView } from '../../../../enums/date-picker-view.enum'
 import { createDatePickerState } from '../date-picker-state.impl'

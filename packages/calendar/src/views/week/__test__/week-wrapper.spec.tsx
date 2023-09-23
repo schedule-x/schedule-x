@@ -3,7 +3,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarAppSingleton from '../../../utils/stateful/app-singleton/calendar-app-singleton'
 import { cleanup, render } from '@testing-library/preact'
 import { AppContext } from '../../../utils/stateful/app-context'

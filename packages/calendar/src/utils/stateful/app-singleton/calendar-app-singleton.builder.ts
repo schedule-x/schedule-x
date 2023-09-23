@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import Builder from '../../../../../../shared/interfaces/builder.interface'
+import Builder from '../../../../../shared/src/interfaces/builder.interface'
 import CalendarAppSingleton from './calendar-app-singleton'
 import CalendarAppSingletonImpl from './calendar-app-singleton.impl'
 import DatePickerState from '@schedule-x/date-picker/src/utils/stateful/date-picker-state/date-picker-state.interface'
-import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
+import TimeUnits from '../../../../../shared/src/utils/stateful/time-units/time-units.interface'
 import { TranslateFn } from '@schedule-x/translations/src'
 import CalendarConfigInternal from '../config/calendar-config'
 import CalendarState from '../calendar-state/calendar-state.interface'

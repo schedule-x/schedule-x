@@ -4,7 +4,7 @@ import {
   expect,
   it,
   mockFn,
-} from '../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, render, screen, waitFor } from '@testing-library/preact'
 import YearsView from '../years-view'
 import { AppContext } from '../../utils/stateful/app-context'
