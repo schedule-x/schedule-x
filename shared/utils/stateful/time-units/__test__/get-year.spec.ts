@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import TimeUnitsBuilder from '../time-units.builder'
 import { Month } from '../../../../enums/time/month.enum'
 import { NoYearZeroError } from '../../../stateless/errors/no-year-zero.error'

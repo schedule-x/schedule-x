@@ -1,7 +1,7 @@
 import {
   describe,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import TimeUnitsBuilder from '../time-units.builder'
 import { Month } from '../../../../enums/time/month.enum'
 import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils'

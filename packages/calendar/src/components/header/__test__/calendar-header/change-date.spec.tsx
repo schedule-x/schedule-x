@@ -3,7 +3,7 @@ import {
   it,
   expect,
   beforeEach,
-} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendarAppSingleton } from '../../../../factory'
 import { factory } from './utils'
 import { setNewInputValueAndPressEnter } from '@schedule-x/date-picker/src/components/__test__/app-input/utils'

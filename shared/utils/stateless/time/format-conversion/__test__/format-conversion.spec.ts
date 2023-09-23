@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import { toIntegers, toJSDate } from '../format-conversion'
 import { InvalidDateTimeError } from '../../../errors/invalid-date-time.error'
 
@@ -30,7 +30,7 @@ describe('date time format-conversion', () => {
       '2024-12-31 23:59',
       { year: 2024, month: 11, day: 31, hour: 23, minute: 59 },
     ],
-    ['2023-03-26 03:00', { year: 2023, month: 2, day: 26, hour: 3, minute: 0 }],
+    ['2023-03-26 04:00', { year: 2023, month: 2, day: 26, hour: 4, minute: 0 }],
     ['2023-10-29 03:00', { year: 2023, month: 9, day: 29, hour: 3, minute: 0 }],
   ])(
     `should convert the date time string %s to a JS Date object`,

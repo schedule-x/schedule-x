@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../utils/stateful/app-context'
 import DayNames from '../../day-names'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
-import { expect } from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+import { expect } from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 
 export const factory = (app: DatePickerAppSingleton) => {
   render(

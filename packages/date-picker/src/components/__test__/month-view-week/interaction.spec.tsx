@@ -4,7 +4,7 @@ import {
   expect,
   spyOn,
   beforeEach,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
 import { clickByDate, factory } from './utils'

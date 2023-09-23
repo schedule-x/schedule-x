@@ -3,7 +3,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup } from '@testing-library/preact'
 import { toDateString } from '../../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'
 import {

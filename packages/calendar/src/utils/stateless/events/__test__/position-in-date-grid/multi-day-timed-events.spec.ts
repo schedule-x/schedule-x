@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendarAppSingleton } from '../../../../../factory'
 import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
 import { createWeekDayContexts } from '../../../views/week/create-week-day-contexts'

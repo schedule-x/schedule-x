@@ -3,7 +3,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import TimeUnitsImpl from '../../../../../../shared/utils/stateful/time-units/time-units.impl'
 import TimeUnitsBuilder from '../../../../../../shared/utils/stateful/time-units/time-units.builder'
 import { Month } from '../../../../../../shared/enums/time/month.enum'

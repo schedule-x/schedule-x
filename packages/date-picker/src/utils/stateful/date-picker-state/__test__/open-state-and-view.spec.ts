@@ -2,11 +2,11 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 
 import { DatePickerView } from '../../../../enums/date-picker-view.enum'
 import { createDatePickerState } from '../date-picker-state.impl'
-import { __createInternalConfig__ as config } from '../../../../../../../shared/utils/stateless/testing/unit/factories/create-internal-config'
+import { __createInternalConfig__ as config } from '../../../stateless/testing/factories/create-internal-config'
 
 describe('DatePickerStateImpl', () => {
   it('should set isOpen to true', () => {

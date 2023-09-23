@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { translate } from '../translate'
 import { InvalidLocaleError } from '../../../../../shared/utils/stateless/errors/InvalidLocale.error'
 

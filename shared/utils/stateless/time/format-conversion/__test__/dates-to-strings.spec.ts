@@ -1,4 +1,7 @@
-import { expect, it } from '../../../testing/unit/unit-testing-library.impl'
+import {
+  expect,
+  it,
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import {
   toDateString,
   toDateTimeString,

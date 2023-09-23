@@ -4,7 +4,7 @@ import {
   expect,
   beforeEach,
   mockFn,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, fireEvent } from '@testing-library/preact'
 import { createAppSingleton } from '../../../factory'
 import { factory } from './utils'

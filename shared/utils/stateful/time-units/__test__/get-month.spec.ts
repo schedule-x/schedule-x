@@ -2,7 +2,7 @@ import {
   describe,
   it,
   expect,
-} from '../../../stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import { WeekDay } from '../../../../enums/time/week-day.enum'
 import TimeUnitsBuilder from '../time-units.builder'
 import { Month } from '../../../../enums/time/month.enum'

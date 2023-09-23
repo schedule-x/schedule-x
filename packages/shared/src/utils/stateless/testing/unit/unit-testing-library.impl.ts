@@ -16,6 +16,5 @@ export const beforeEach = viBeforeEach
 export const afterEach = viAfterEach
 export const beforeAll = viBeforeAll
 export const afterAll = viAfterAll
-export const clearAllMocks = vi.clearAllMocks
 export const mockFn = vi.fn
 export const spyOn = vi.spyOn

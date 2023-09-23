@@ -2,7 +2,7 @@ import {
   describe,
   it,
   expect,
-} from '../../../testing/unit/unit-testing-library.impl.ts'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import { isSameMonth, isToday } from '../index.ts'
 
 describe('comparison of time', () => {

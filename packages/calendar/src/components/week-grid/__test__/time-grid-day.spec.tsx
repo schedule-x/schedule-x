@@ -3,7 +3,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendarAppSingleton } from '../../../factory'
 import CalendarAppSingleton from '../../../utils/stateful/app-singleton/calendar-app-singleton'
 import { cleanup, render } from '@testing-library/preact'

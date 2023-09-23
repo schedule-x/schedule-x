@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "@schedule-x/translations": "^0.1.0-alpha.4",
+    "@schedule-x/shared": "^0.1.0-alpha.4",
     "preact": "^10.16.0"
   },
   "repository": {

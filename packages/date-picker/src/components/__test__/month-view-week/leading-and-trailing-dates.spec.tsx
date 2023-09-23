@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { Month } from '../../../../../../shared/enums/time/month.enum'
 import { factory } from './utils'
 import { toDateString } from '../../../../../../shared/utils/stateless/time/format-conversion/date-to-strings'

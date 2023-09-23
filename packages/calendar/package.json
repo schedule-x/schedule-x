@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "@schedule-x/date-picker": "^0.1.0-alpha.4",
+    "@schedule-x/shared": "^0.1.0-alpha.4",
     "perfect-scrollbar": "^1.5.5",
     "preact": "^10.16.0"
   },

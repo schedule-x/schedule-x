@@ -2,7 +2,7 @@ import {
   describe,
   it,
   expect,
-} from '../../../../testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import { toDateString } from '../to-date-string'
 import { LocaleNotSupportedError } from '../../../../errors/locale-not-supported.error.ts'
 import { InvalidDateFormatError } from '../../../../errors/invalid-date-format.error.ts'

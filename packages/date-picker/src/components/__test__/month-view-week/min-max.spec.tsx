@@ -3,7 +3,7 @@ import {
   it,
   expect,
   beforeEach,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup } from '@testing-library/preact'
 import TimeUnitsBuilder from '../../../../../../shared/utils/stateful/time-units/time-units.builder'
 import { Month } from '../../../../../../shared/enums/time/month.enum'

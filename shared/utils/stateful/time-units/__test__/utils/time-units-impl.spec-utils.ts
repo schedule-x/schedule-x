@@ -1,5 +1,5 @@
 import { WeekWithDates } from '../../../../../types/time'
-import { expect } from '../../../../stateless/testing/unit/unit-testing-library.impl'
+import { expect } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 
 export const expectWeekDatesToBe = (
   week: WeekWithDates,

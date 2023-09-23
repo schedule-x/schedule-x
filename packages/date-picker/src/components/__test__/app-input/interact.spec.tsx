@@ -4,7 +4,7 @@ import {
   expect,
   spyOn,
   beforeEach,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, fireEvent, waitFor } from '@testing-library/preact'
 import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
 import {

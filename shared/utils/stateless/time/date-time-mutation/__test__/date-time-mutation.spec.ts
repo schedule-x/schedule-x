@@ -2,7 +2,7 @@ import {
   describe,
   it,
   expect,
-} from '../../../testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl.ts'
 import {
   doubleDigit,
   getFirstDayOfNextMonth,

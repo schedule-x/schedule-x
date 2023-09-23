@@ -3,7 +3,7 @@ import {
   it,
   expect,
   beforeEach,
-} from '../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { screen, waitFor, cleanup } from '@testing-library/preact'
 
 import { factory, getInputElement } from './utils'
