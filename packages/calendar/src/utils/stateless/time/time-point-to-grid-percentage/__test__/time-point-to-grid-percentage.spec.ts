@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { timePointsFromString } from '../../time-points/string-conversion'
 import { timePointToPercentage } from '../time-point-to-grid-percentage'
 

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import Builder from '../../../../../shared/src/interfaces/builder.interface'
+import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarConfigInternal, {
   CalendarType,
   WeekOptions,
 } from './calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
-import { WeekDay } from '../../../../../shared/src/enums/time/week-day.enum'
+import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { ViewName } from '../../../types/view-name'
 import { View } from '../../../types/view'
 import {

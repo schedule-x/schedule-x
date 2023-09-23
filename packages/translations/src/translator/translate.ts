@@ -1,4 +1,4 @@
-import { InvalidLocaleError } from '../../../shared/src/utils/stateless/errors/InvalidLocale.error'
+import { InvalidLocaleError } from '@schedule-x/shared/src/utils/stateless/errors/InvalidLocale.error'
 
 export const translate =
   (locale: string, languages: Record<string, object>) =>

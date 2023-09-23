@@ -2,7 +2,7 @@ import {
   describe,
   expect,
   it,
-} from '../../../../../../shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendarAppSingleton } from '../../../../factory'
 import { factory } from './utils'
 import { screen } from '@testing-library/preact'

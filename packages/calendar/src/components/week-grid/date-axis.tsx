@@ -1,8 +1,8 @@
-import { WeekWithDates } from '../../../../shared/src/types/time'
-import { getDayNameShort } from '../../../../shared/src/utils/stateless/time/date-time-localization/date-time-localization'
+import { WeekWithDates } from '@schedule-x/shared/src/types/time'
+import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
-import { isToday } from '../../../../shared/src/utils/stateless/time/comparison'
+import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 type props = {
   week: WeekWithDates

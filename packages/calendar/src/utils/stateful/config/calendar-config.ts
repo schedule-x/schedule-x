@@ -1,4 +1,4 @@
-import Config from '../../../../../shared/src/interfaces/config.interface'
+import Config from '@schedule-x/shared/src/interfaces/config.interface'
 import { DatePickerConfigExternal } from '@schedule-x/date-picker/src/utils/stateful/config/config.interface'
 import { ViewName } from '../../../types/view-name'
 import { View } from '../../../types/view'

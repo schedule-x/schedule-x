@@ -1,9 +1,9 @@
 import CalendarConfigInternal, { WeekOptions } from './calendar-config'
-import { WeekDay } from '../../../../../shared/src/enums/time/week-day.enum'
+import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import {
   DEFAULT_FIRST_DAY_OF_WEEK,
   DEFAULT_LOCALE,
-} from '../../../../../shared/src/values'
+} from '@schedule-x/shared/src/values'
 import { ViewName } from '../../../types/view-name'
 import { InternalViewName } from '../../../enums/internal-view.enum'
 import { View } from '../../../types/view'

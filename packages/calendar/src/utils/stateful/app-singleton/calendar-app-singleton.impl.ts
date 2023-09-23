@@ -1,6 +1,6 @@
 import CalendarAppSingleton from './calendar-app-singleton'
 import CalendarConfigInternal from '../config/calendar-config'
-import TimeUnits from '../../../../../shared/src/utils/stateful/time-units/time-units.interface'
+import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import DatePickerState from '@schedule-x/date-picker/src/utils/stateful/date-picker-state/date-picker-state.interface'
 import { TranslateFn } from '@schedule-x/translations/src'
 import CalendarState from '../calendar-state/calendar-state.interface'

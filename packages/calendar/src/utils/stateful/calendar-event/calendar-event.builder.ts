@@ -2,7 +2,7 @@ import {
   CalendarEventInternal,
   CalendarEventTime,
 } from './calendar-event.interface'
-import Builder from '../../../../../shared/src/interfaces/builder.interface'
+import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarEventImpl from './calendar-event.impl'
 import { EventId } from '../../../types/event-id'
 import CalendarConfigInternal from '../config/calendar-config'
