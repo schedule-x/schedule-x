@@ -1,10 +1,10 @@
 import {
   describe,
-  expect,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
-import { createDatePickerState } from '../date-picker-state.impl.ts'
-import { __createInternalConfig__ as config } from '../../../stateless/testing/unit/factories/create-internal-config.ts'
+  expect,
+} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
+import { createDatePickerState } from '../date-picker-state.impl'
+import { __createInternalConfig__ as config } from '../../../../../../../shared/utils/stateless/testing/unit/factories/create-internal-config'
 
 describe('date picker state impl - input displayed value', () => {
   it('should default to the value of selected date param if given', () => {

@@ -10,5 +10,6 @@ export const __createInternalConfig__ = (locale?: string) => {
     placement: Placement.BOTTOM_START,
     firstDayOfWeek: WeekDay.MONDAY,
     listeners: {},
+    style: {},
   }
 }

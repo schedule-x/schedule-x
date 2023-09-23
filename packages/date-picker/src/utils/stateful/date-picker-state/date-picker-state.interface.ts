@@ -1,4 +1,4 @@
-import { DatePickerView } from '@schedule-x/date-picker/src/enums/date-picker-view.enum'
+import { DatePickerView } from '../../../enums/date-picker-view.enum'
 import { Signal } from '@preact/signals'
 
 export default interface DatePickerState {

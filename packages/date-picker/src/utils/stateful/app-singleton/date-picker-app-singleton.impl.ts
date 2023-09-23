@@ -1,4 +1,4 @@
-import DatePickerState from '../../../../../../shared/utils/stateful/date-picker-state/date-picker-state.interface'
+import DatePickerState from '../date-picker-state/date-picker-state.interface'
 import DatePickerConfigInternal from '../config/config.interface'
 import TimeUnits from '../../../../../../shared/utils/stateful/time-units/time-units.interface'
 import DatePickerAppSingleton from './date-picker-app.singleton'

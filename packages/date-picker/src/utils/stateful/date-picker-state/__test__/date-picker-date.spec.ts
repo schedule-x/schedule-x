@@ -1,11 +1,11 @@
+import { createDatePickerState } from '../date-picker-state.impl'
+import { __createInternalConfig__ as config } from '../../../../../../../shared/utils/stateless/testing/unit/factories/create-internal-config'
+import { getCurrentDayDateString } from './utils'
 import {
   describe,
-  expect,
   it,
-} from '../../../stateless/testing/unit/unit-testing-library.impl.ts'
-import { createDatePickerState } from '../date-picker-state.impl.ts'
-import { __createInternalConfig__ as config } from '../../../stateless/testing/unit/factories/create-internal-config.ts'
-import { getCurrentDayDateString } from './utils.ts'
+  expect,
+} from '../../../../../../../shared/utils/stateless/testing/unit/unit-testing-library.impl'
 
 describe('date picker date in date picker state impl', () => {
   it('should set datePickerDate to initial selected date', () => {
