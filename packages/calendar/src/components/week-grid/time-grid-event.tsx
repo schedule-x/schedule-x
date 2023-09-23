@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   CalendarEventInternal,
   CalendarEventTime,
@@ -48,9 +49,21 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
 
   const leftRule = getLeftRule(calendarEvent)
 
+  const handleMouseDown = (e: MouseEvent) => {
+    if (!e.target) return
+    if (!$app.config.plugins.dragAndDrop) return
+
+    // todo: check if this assertion is correct
+    const dragHandler =
+      $app.config.plugins.dragAndDrop.createTimeGridDragHandler($app, e)
+
+    console.log(dragHandler)
+  }
+
   return (
     <>
       <div
+        onMouseDown={handleMouseDown}
         className="sx__time-grid-event"
         style={{
           top: `${getEventTop(
