@@ -5,6 +5,7 @@ import TimeGridDragHandler from './time-grid-drag-handler'
 export default interface DragAndDropPlugin extends Plugin {
   createTimeGridDragHandler(
     $app: CalendarAppSingleton,
-    event: MouseEvent
+    event: MouseEvent,
+    calendarEventId: string | number | symbol
   ): TimeGridDragHandler
 }

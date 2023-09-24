@@ -55,7 +55,11 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
 
     // todo: check if this assertion is correct
     const dragHandler =
-      $app.config.plugins.dragAndDrop.createTimeGridDragHandler($app, e)
+      $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
+        $app,
+        e,
+        calendarEvent.id
+      )
 
     console.log(dragHandler)
   }

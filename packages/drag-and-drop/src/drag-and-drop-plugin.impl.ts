@@ -8,9 +8,10 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
 
   createTimeGridDragHandler(
     $app: CalendarAppSingleton,
-    event: MouseEvent
+    event: MouseEvent,
+    calendarEventId: string | number | symbol
   ): TimeGridDragHandler {
-    return new TimeGridDragHandler($app, event)
+    return new TimeGridDragHandler($app, event, calendarEventId)
   }
 }
 
