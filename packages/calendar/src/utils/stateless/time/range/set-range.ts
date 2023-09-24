@@ -6,7 +6,7 @@ import {
   toIntegers,
   toJSDate,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { timeStringFromTimePoints } from '../time-points/string-conversion'
+import { timeStringFromTimePoints } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import {
   toDateString,
   toDateTimeString,

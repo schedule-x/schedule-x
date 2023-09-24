@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { getTimeAxisHours } from '../time-axis'
-import { timePointsFromString } from '../../time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
 describe('TimeAxis', () => {
   describe('getting hours for hybrid days', () => {

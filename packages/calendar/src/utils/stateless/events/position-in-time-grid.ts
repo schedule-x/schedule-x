@@ -5,7 +5,7 @@ import {
   dateFromDateTime,
   timeFromDateTime,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import { timePointsFromString } from '../time/time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 export const positionInTimeGrid = (

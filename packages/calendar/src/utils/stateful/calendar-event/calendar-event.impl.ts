@@ -8,7 +8,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import { timePointsFromString } from '../../stateless/time/time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import {
   dateFromDateTime,
   timeFromDateTime,

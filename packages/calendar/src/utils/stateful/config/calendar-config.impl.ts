@@ -12,7 +12,7 @@ import {
   DEFAULT_DAY_BOUNDARIES,
   DEFAULT_WEEK_GRID_HEIGHT,
 } from '../../../constants'
-import { timePointsPerDay } from '../../stateless/time/time-points/time-points-per-day'
+import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   constructor(

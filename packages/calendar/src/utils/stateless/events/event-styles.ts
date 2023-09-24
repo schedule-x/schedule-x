@@ -4,7 +4,7 @@ import {
 } from '../../stateful/calendar-event/calendar-event.interface'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { timePointToPercentage } from '../time/time-point-to-grid-percentage/time-point-to-grid-percentage'
-import { timePointsFromString } from '../time/time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { DayBoundariesInternal } from '../../../types/config/day-boundaries'
 
 export const getEventHeight = (

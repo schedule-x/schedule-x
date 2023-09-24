@@ -14,7 +14,7 @@ import {
   DayBoundariesExternal,
   DayBoundariesInternal,
 } from '../../../types/config/day-boundaries'
-import { timePointsFromString } from '../../stateless/time/time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import Plugin from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { DragAndDropPlugin } from '@schedule-x/drag-and-drop/src'

@@ -1,6 +1,6 @@
-import { InvalidTimeStringError } from '@schedule-x/shared/src/utils/stateless/errors/invalid-time-string.error'
-import { timeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
-import { doubleDigit } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
+import { InvalidTimeStringError } from '../../errors/invalid-time-string.error'
+import { timeStringRegex } from '../validation/regex'
+import { doubleDigit } from '../date-time-mutation/date-time-mutation'
 
 const minuteTimePointMultiplier = 1.6666666666666667 // 100 / 60
 

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { getTimeAxisHours } from '../../utils/stateless/time/time-axis/time-axis'
-import { timePointsPerDay } from '../../utils/stateless/time/time-points/time-points-per-day'
+import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
 
 export default function TimeAxis() {
   const $app = useContext(AppContext)

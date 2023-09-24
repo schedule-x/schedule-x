@@ -1,13 +1,13 @@
 import {
   describe,
-  expect,
   it,
-} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+  expect,
+} from '../../../testing/unit/unit-testing-library.impl'
 import {
   timePointsFromString,
   timeStringFromTimePoints,
 } from '../string-conversion'
-import { InvalidTimeStringError } from '@schedule-x/shared/src/utils/stateless/errors/invalid-time-string.error'
+import { InvalidTimeStringError } from '../../../errors/invalid-time-string.error'
 
 describe('TimePointsFromString', () => {
   describe('turning a string into a time point', () => {
