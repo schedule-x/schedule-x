@@ -49,6 +49,10 @@ export default class TimeGridDragHandler {
     this.lastChangeInIntervals = currentChangeInIntervals
     const pointsToAdd =
       currentChangeInIntervals * CHANGE_THRESHOLD_IN_TIME_POINTS
+    this.updateTimeForEventCopy(pointsToAdd)
+  }
+
+  private updateTimeForEventCopy(pointsToAdd: number) {
     this.eventCopy.time.start = addTimePointsToDateTime(
       this.originalStart,
       pointsToAdd
