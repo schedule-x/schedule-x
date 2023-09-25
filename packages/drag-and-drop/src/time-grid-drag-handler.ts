@@ -36,7 +36,6 @@ export default class TimeGridDragHandler {
   }
 
   private handleMouseMove = (e: MouseEvent) => {
-    // console.log('mousemove')
     if (typeof this.startY === 'undefined')
       throw new Error('startY is undefined')
 
@@ -48,7 +47,6 @@ export default class TimeGridDragHandler {
     if (currentChangeInIntervals === this.lastChangeInIntervals) return
 
     this.lastChangeInIntervals = currentChangeInIntervals
-
     const pointsToAdd =
       currentChangeInIntervals * CHANGE_THRESHOLD_IN_TIME_POINTS
     this.eventCopy.time.start = addTimePointsToDateTime(
@@ -59,29 +57,27 @@ export default class TimeGridDragHandler {
       this.originalEnd,
       pointsToAdd
     )
-
-    console.log('set copy with new start time: ', this.eventCopy.time.start)
     this.updateCopy(this.eventCopy)
-
-    // pass reference to event to update and update it here (also save as reactive state in component, so it updates automatically)
   }
 
   private handleMouseUp = (_e: MouseEvent) => {
     document.removeEventListener('mousemove', this.handleMouseMove)
-
-    if (this.lastChangeInIntervals !== 0) {
-      const eventToUpdate = this.$app.calendarEvents.list.value.find(
-        (event) => event.id === this.eventCopy.id
-      )
-      if (!eventToUpdate) throw new Error('eventToUpdate is undefined')
-
-      eventToUpdate.time.start = this.eventCopy.time.start
-      eventToUpdate.time.end = this.eventCopy.time.end
-      this.$app.calendarEvents.list.value = [
-        ...this.$app.calendarEvents.list.value,
-      ]
-    }
-
+    this.updateOriginalEvent()
     this.updateCopy(undefined)
+  }
+
+  private updateOriginalEvent() {
+    if (this.lastChangeInIntervals === 0) return
+
+    const eventToUpdate = this.$app.calendarEvents.list.value.find(
+      (event) => event.id === this.eventCopy.id
+    )
+    if (!eventToUpdate) throw new Error('eventToUpdate is undefined')
+
+    eventToUpdate.time.start = this.eventCopy.time.start
+    eventToUpdate.time.end = this.eventCopy.time.end
+    this.$app.calendarEvents.list.value = [
+      ...this.$app.calendarEvents.list.value,
+    ]
   }
 }
