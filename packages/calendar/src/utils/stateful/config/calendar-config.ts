@@ -2,7 +2,7 @@ import Config from '@schedule-x/shared/src/interfaces/config.interface'
 import { DatePickerConfigExternal } from '@schedule-x/date-picker/src/utils/stateful/config/config.interface'
 import { ViewName } from '../../../types/view-name'
 import { View } from '../../../types/view'
-import CalendarEventExternal from '../calendar-event/calendar-event.interface'
+import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import {
   DayBoundariesExternal,
   DayBoundariesInternal,

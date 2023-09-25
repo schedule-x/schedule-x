@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarConfigBuilder from '../../config/calendar-config.builder'
-import { CalendarEventTime } from '../calendar-event.interface'
+import { CalendarEventTime } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import CalendarEventBuilder from '../calendar-event.builder'
 
 describe('CalendarEventImpl', () => {

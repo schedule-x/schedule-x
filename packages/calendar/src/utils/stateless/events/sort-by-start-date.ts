@@ -1,4 +1,4 @@
-import { CalendarEventInternal } from '../../stateful/calendar-event/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 
 export const sortEventsByStart = (
   a: CalendarEventInternal,

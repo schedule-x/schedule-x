@@ -1,4 +1,4 @@
-import { CalendarEventInternal } from '../../utils/stateful/calendar-event/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 
 type props = {
   calendarEvent: CalendarEventInternal

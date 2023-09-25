@@ -1,7 +1,7 @@
 import {
   CalendarEventInternal,
   CalendarEventTime,
-} from '../../stateful/calendar-event/calendar-event.interface'
+} from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { timePointToPercentage } from '../time/time-point-to-grid-percentage/time-point-to-grid-percentage'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'

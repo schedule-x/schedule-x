@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
-import { CalendarEventInternal } from './calendar-event.interface'
-import { EventId } from '../../../types/event-id'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
+import { EventId } from '@schedule-x/shared/src/types/event-id'
 import CalendarConfigInternal from '../config/calendar-config'
 import {
   dateStringRegex,
@@ -106,5 +106,9 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     }
 
     return DEFAULT_EVENT_COLOR_NAME
+  }
+
+  __getForeignProperties(): Record<string, unknown> {
+    return this._foreignProperties
   }
 }

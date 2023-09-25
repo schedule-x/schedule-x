@@ -1,4 +1,4 @@
-import { CalendarEventInternal } from '../../utils/stateful/calendar-event/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'

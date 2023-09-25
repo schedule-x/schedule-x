@@ -43,6 +43,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   }, [
     $app.calendarState.range.value?.start,
     $app.calendarState.range.value?.end,
+    $app.calendarEvents.list.value,
   ])
 
   return (

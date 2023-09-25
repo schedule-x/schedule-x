@@ -1,5 +1,5 @@
 import { WeekDayContexts } from '../../../types/week-day-context'
-import { CalendarEventInternal } from '../../stateful/calendar-event/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import CalendarAppSingleton from '../../stateful/app-singleton/calendar-app-singleton'
 import {
   dateFromDateTime,

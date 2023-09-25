@@ -5,6 +5,10 @@
   border-radius: var(--sx-rounding-extra-small);
   font-size: var(--sx-font-extra-small);
   overflow: hidden;
+
+  &.is-dragging {
+    user-select: none;
+  }
 }
 
 .sx__time-grid-event-title {
