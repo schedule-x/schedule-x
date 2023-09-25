@@ -1,6 +1,11 @@
+/* eslint-disable max-lines */
 import CalendarAppSingleton from '@schedule-x/calendar/src/utils/stateful/app-singleton/calendar-app-singleton'
-import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
+import {
+  addTimePointsToDateTime,
+  timePointsFromString,
+} from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
+import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 
 const CHANGE_THRESHOLD_IN_TIME_POINTS = 25 // changes are registered in 15 minute intervals
 
@@ -44,8 +49,13 @@ export default class TimeGridDragHandler {
     const currentChangeInIntervals = Math.round(
       timePointsChangeY / CHANGE_THRESHOLD_IN_TIME_POINTS
     )
-    if (currentChangeInIntervals === this.lastChangeInIntervals) return
 
+    if (currentChangeInIntervals !== this.lastChangeInIntervals) {
+      this.handleVerticalChange(currentChangeInIntervals)
+    }
+  }
+
+  private handleVerticalChange(currentChangeInIntervals: number) {
     this.lastChangeInIntervals = currentChangeInIntervals
     const pointsToAdd =
       currentChangeInIntervals * CHANGE_THRESHOLD_IN_TIME_POINTS
@@ -53,6 +63,25 @@ export default class TimeGridDragHandler {
   }
 
   private updateTimeForEventCopy(pointsToAdd: number) {
+    if (!this.$app.config.isHybridDay) {
+      const currentStartTimePoints = timePointsFromString(
+        timeFromDateTime(this.originalStart)
+      )
+      if (
+        currentStartTimePoints + pointsToAdd <
+        this.$app.config.dayBoundaries.start
+      )
+        return
+      const currentEndTimePoints = timePointsFromString(
+        timeFromDateTime(this.originalEnd)
+      )
+      if (
+        currentEndTimePoints + pointsToAdd >
+        this.$app.config.dayBoundaries.end
+      )
+        return
+    }
+
     this.eventCopy.time.start = addTimePointsToDateTime(
       this.originalStart,
       pointsToAdd
