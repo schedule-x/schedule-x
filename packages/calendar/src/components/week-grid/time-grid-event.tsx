@@ -10,20 +10,25 @@ import {
   getLeftRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
-import { useContext, useEffect, useState } from 'preact/compat'
+import { useContext, useState } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '../icons/user-icon'
 import TimeIcon from '../icons/time-icon'
-import CalendarEventBuilder from '../../utils/stateful/calendar-event/calendar-event.builder'
 import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
+import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 
 type props = {
   calendarEvent: CalendarEventInternal
   timePoints: number
+  dayBoundariesDateTime?: DayBoundariesDateTime
 }
 
-export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
+export default function TimeGridEvent({
+  calendarEvent,
+  timePoints,
+  dayBoundariesDateTime,
+}: props) {
   const $app = useContext(AppContext)
 
   const [eventCopy, setEventCopy] = useState<CalendarEventInternal>()
@@ -59,6 +64,8 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
   const leftRule = getLeftRule(calendarEvent)
 
   const handleMouseDown = (e: MouseEvent) => {
+    console.log('hey')
+    if (!dayBoundariesDateTime) return // this can only happen in eventCopy
     if (!e.target) return
     if (!$app.config.plugins.dragAndDrop) return
 
@@ -70,7 +77,8 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
         $app,
         e,
         eventCopy,
-        updateCopy
+        updateCopy,
+        dayBoundariesDateTime
       )
   }
 

@@ -1,11 +1,8 @@
 /* eslint-disable max-lines */
 import CalendarAppSingleton from '@schedule-x/calendar/src/utils/stateful/app-singleton/calendar-app-singleton'
-import {
-  addTimePointsToDateTime,
-  timePointsFromString,
-} from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
+import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
-import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
+import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 
 const CHANGE_THRESHOLD_IN_TIME_POINTS = 25 // changes are registered in 15 minute intervals
 
@@ -19,7 +16,8 @@ export default class TimeGridDragHandler {
     private $app: CalendarAppSingleton,
     private event: MouseEvent,
     private eventCopy: CalendarEventInternal,
-    private updateCopy: (newCopy: CalendarEventInternal | undefined) => void
+    private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
+    private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
     this.originalStart = this.eventCopy.time.start
     this.originalEnd = this.eventCopy.time.end
@@ -34,7 +32,6 @@ export default class TimeGridDragHandler {
   }
 
   private init = () => {
-    console.log('createTimeGridDragHandler')
     this.startY = this.event.clientY
     document.addEventListener('mousemove', this.handleMouseMove)
     document.addEventListener('mouseup', this.handleMouseUp, { once: true })
@@ -63,33 +60,13 @@ export default class TimeGridDragHandler {
   }
 
   private updateTimeForEventCopy(pointsToAdd: number) {
-    if (!this.$app.config.isHybridDay) {
-      const currentStartTimePoints = timePointsFromString(
-        timeFromDateTime(this.originalStart)
-      )
-      if (
-        currentStartTimePoints + pointsToAdd <
-        this.$app.config.dayBoundaries.start
-      )
-        return
-      const currentEndTimePoints = timePointsFromString(
-        timeFromDateTime(this.originalEnd)
-      )
-      if (
-        currentEndTimePoints + pointsToAdd >
-        this.$app.config.dayBoundaries.end
-      )
-        return
-    }
+    const newStart = addTimePointsToDateTime(this.originalStart, pointsToAdd)
+    const newEnd = addTimePointsToDateTime(this.originalEnd, pointsToAdd)
+    if (newStart < this.dayBoundariesDateTime.start) return
+    if (newEnd > this.dayBoundariesDateTime.end) return
 
-    this.eventCopy.time.start = addTimePointsToDateTime(
-      this.originalStart,
-      pointsToAdd
-    )
-    this.eventCopy.time.end = addTimePointsToDateTime(
-      this.originalEnd,
-      pointsToAdd
-    )
+    this.eventCopy.time.start = newStart
+    this.eventCopy.time.end = newEnd
     this.updateCopy(this.eventCopy)
   }
 
