@@ -3,14 +3,18 @@ import CalendarAppSingleton from '@schedule-x/calendar/src/utils/stateful/app-si
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
+import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 const CHANGE_THRESHOLD_IN_TIME_POINTS = 25 // changes are registered in 15 minute intervals
 
 export default class TimeGridDragHandler {
   private readonly originalStart: string
   private readonly originalEnd: string
-  private startY: number | undefined = 0
+  private readonly dayWidth: number
+  private startY = 0 // todo: see if start point should be undefined
+  private startX = 0 // todo: see if start point should be undefined
   private lastChangeInIntervals = 0
+  private lastChangeInDays = 0
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -19,6 +23,9 @@ export default class TimeGridDragHandler {
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
+    this.dayWidth = (
+      document.querySelector('.sx__time-grid-day') as HTMLDivElement
+    ).clientWidth
     this.originalStart = this.eventCopy.time.start
     this.originalEnd = this.eventCopy.time.end
     this.init()
@@ -33,6 +40,7 @@ export default class TimeGridDragHandler {
 
   private init = () => {
     this.startY = this.event.clientY
+    this.startX = this.event.clientX
     document.addEventListener('mousemove', this.handleMouseMove)
     document.addEventListener('mouseup', this.handleMouseUp, { once: true })
   }
@@ -42,14 +50,20 @@ export default class TimeGridDragHandler {
       throw new Error('startY is undefined')
 
     const pixelChangeY = e.clientY - this.startY
+    const pixelChangeX = e.clientX - this.startX
     const timePointsChangeY = pixelChangeY * this.timePointsPerPixel
     const currentChangeInIntervals = Math.round(
       timePointsChangeY / CHANGE_THRESHOLD_IN_TIME_POINTS
     )
+    const currentChangeInDays = Math.round(pixelChangeX / this.dayWidth)
 
     if (currentChangeInIntervals !== this.lastChangeInIntervals) {
       this.handleVerticalChange(currentChangeInIntervals)
     }
+
+    // if (currentChangeInDays !== this.lastChangeInDays) {
+    //   this.handleHorizontalChange(currentChangeInDays)
+    // }
   }
 
   private handleVerticalChange(currentChangeInIntervals: number) {
@@ -69,6 +83,8 @@ export default class TimeGridDragHandler {
     this.eventCopy.time.end = newEnd
     this.updateCopy(this.eventCopy)
   }
+
+  // private handleHorizontalChange(changeInDays: number) {}
 
   private handleMouseUp = (_e: MouseEvent) => {
     document.removeEventListener('mousemove', this.handleMouseMove)
