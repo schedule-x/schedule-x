@@ -68,22 +68,35 @@ export default class TimeGridDragHandler {
   private handleVerticalMouseMove(currentChangeInIntervals: number) {
     if (currentChangeInIntervals === this.lastChangeInIntervals) return
 
-    this.lastChangeInIntervals = currentChangeInIntervals
     const pointsToAdd =
-      currentChangeInIntervals * CHANGE_THRESHOLD_IN_TIME_POINTS
+      currentChangeInIntervals > this.lastChangeInIntervals
+        ? CHANGE_THRESHOLD_IN_TIME_POINTS
+        : -CHANGE_THRESHOLD_IN_TIME_POINTS
     this.setTimeForEventCopy(pointsToAdd)
+    this.lastChangeInIntervals = currentChangeInIntervals
   }
 
   private setTimeForEventCopy(pointsToAdd: number) {
-    const newStart = addTimePointsToDateTime(this.originalStart, pointsToAdd)
-    const newEnd = addTimePointsToDateTime(this.originalEnd, pointsToAdd)
-    if (newStart < this.dayBoundariesDateTime.start) return
-    if (newEnd > this.dayBoundariesDateTime.end) return
+    const newStart = addTimePointsToDateTime(
+      this.eventCopy.time.start,
+      pointsToAdd
+    )
+    console.log(newStart)
+    const newEnd = addTimePointsToDateTime(this.eventCopy.time.end, pointsToAdd)
+    if (
+      newStart <
+      addDays(this.dayBoundariesDateTime.start, this.lastTotalChangeInDays)
+    )
+      return
+    if (
+      newEnd >
+      addDays(this.dayBoundariesDateTime.end, this.lastTotalChangeInDays)
+    )
+      return
 
     this.eventCopy.time.start = newStart
     this.eventCopy.time.end = newEnd
     this.updateCopy(this.eventCopy)
-    console.log('updated event time')
   }
 
   private handleHorizontalMouseMove(totalChangeInDays: number) {
@@ -116,7 +129,6 @@ export default class TimeGridDragHandler {
     this.eventCopy.time.start = newStart
     this.eventCopy.time.end = newEnd
     this.updateCopy(this.eventCopy)
-    console.log('updated event date')
   }
 
   private transformEventCopyPosition(totalChangeInDays: number) {
@@ -145,7 +157,6 @@ export default class TimeGridDragHandler {
 
     eventToUpdate.time.start = this.eventCopy.time.start
     eventToUpdate.time.end = this.eventCopy.time.end
-    console.log('updated event to', eventToUpdate)
     this.$app.calendarEvents.list.value = [
       ...this.$app.calendarEvents.list.value,
     ]

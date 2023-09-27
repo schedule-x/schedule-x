@@ -67,7 +67,6 @@ export default function TimeGridEvent({
   const leftRule = getLeftRule(calendarEvent)
 
   const handleMouseDown = (e: MouseEvent) => {
-    console.log('hey')
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
     if (!e.target) return
     if (!$app.config.plugins.dragAndDrop) return
