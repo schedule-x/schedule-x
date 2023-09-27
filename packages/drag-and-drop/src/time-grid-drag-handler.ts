@@ -15,8 +15,8 @@ export default class TimeGridDragHandler {
   private readonly originalStart: string
   private readonly originalEnd: string
   private readonly dayWidth: number
-  private startY = 0 // todo: see if start point should be undefined
-  private startX = 0 // todo: see if start point should be undefined
+  private readonly startY: number
+  private readonly startX
   private lastChangeInIntervals = 0
   private lastTotalChangeInDays = 0
 
@@ -32,6 +32,8 @@ export default class TimeGridDragHandler {
     ).clientWidth
     this.originalStart = this.eventCopy.time.start
     this.originalEnd = this.eventCopy.time.end
+    this.startY = this.event.clientY
+    this.startX = this.event.clientX
     this.init()
   }
 
@@ -42,9 +44,7 @@ export default class TimeGridDragHandler {
     )
   }
 
-  private init = () => {
-    this.startY = this.event.clientY
-    this.startX = this.event.clientX
+  private init() {
     document.addEventListener('mousemove', this.handleMouseMove)
     document.addEventListener('mouseup', this.handleMouseUp, { once: true })
   }
@@ -81,7 +81,6 @@ export default class TimeGridDragHandler {
       this.eventCopy.time.start,
       pointsToAdd
     )
-    console.log(newStart)
     const newEnd = addTimePointsToDateTime(this.eventCopy.time.end, pointsToAdd)
     if (
       newStart <

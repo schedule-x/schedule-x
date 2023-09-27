@@ -8,12 +8,19 @@ import {
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
+const resetEventConcurrencyProperties = (event: CalendarEventInternal) => {
+  event._previousConcurrentEvents = undefined
+  event._totalConcurrentEvents = undefined
+}
+
 export const positionInTimeGrid = (
   timeGridEvents: CalendarEventInternal[],
   weekDayContexts: WeekDayContexts,
   $app: CalendarAppSingleton
 ) => {
   for (const event of timeGridEvents) {
+    resetEventConcurrencyProperties(event)
+
     if (
       event.time.start >= $app.calendarState.range.value!.start &&
       event.time.end < $app.calendarState.range.value!.end

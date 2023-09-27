@@ -75,6 +75,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
               <TimeGridDay
                 calendarEvents={dayContext.timeGridEvents}
                 date={dayContext.date}
+                key={dayContext.date + new Date().getTime()}
               />
             ))}
           </div>
