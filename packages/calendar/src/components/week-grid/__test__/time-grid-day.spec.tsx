@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   afterEach,
   describe,
@@ -14,11 +15,12 @@ import CalendarEventBuilder from '../../../utils/stateful/calendar-event/calenda
 
 const factory = (
   $app: CalendarAppSingleton,
-  calendarEvents: CalendarEventInternal[]
+  calendarEvents: CalendarEventInternal[],
+  date: string
 ) => {
   render(
     <AppContext.Provider value={$app}>
-      <TimeGridDay calendarEvents={calendarEvents} />
+      <TimeGridDay calendarEvents={calendarEvents} date={date} />
     </AppContext.Provider>
   )
 }
@@ -38,9 +40,11 @@ describe('TimeGridDay', () => {
         start: '2023-09-11 00:00',
         end: '2023-09-11 01:00',
       }
-      factory($app, [
-        new CalendarEventBuilder($app.config, '1', eventTime).build(),
-      ])
+      factory(
+        $app,
+        [new CalendarEventBuilder($app.config, '1', eventTime).build()],
+        '2023-09-11'
+      )
 
       expect(
         document
@@ -54,9 +58,11 @@ describe('TimeGridDay', () => {
         start: '2023-09-11 18:00',
         end: '2023-09-11 19:00',
       }
-      factory($app, [
-        new CalendarEventBuilder($app.config, '1', eventTime).build(),
-      ])
+      factory(
+        $app,
+        [new CalendarEventBuilder($app.config, '1', eventTime).build()],
+        '2023-09-11'
+      )
 
       expect(
         document
@@ -80,9 +86,11 @@ describe('TimeGridDay', () => {
         start: '2023-09-12 00:00',
         end: '2023-09-12 01:00',
       }
-      factory($app, [
-        new CalendarEventBuilder($app.config, '1', eventTime).build(),
-      ])
+      factory(
+        $app,
+        [new CalendarEventBuilder($app.config, '1', eventTime).build()],
+        '2023-09-12'
+      )
 
       expect(
         document
