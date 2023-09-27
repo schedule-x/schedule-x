@@ -39,6 +39,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
     const rangeEnd = $app.calendarState.range.value?.end
     if (!rangeStart || !rangeEnd) return
 
+    console.log('sort events anew')
     sortEventsIntoDateAndTimeGrids()
   }, [
     $app.calendarState.range.value?.start,

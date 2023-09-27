@@ -4,6 +4,10 @@ import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { DateRange } from '@schedule-x/calendar/src/types/date-range'
+import { setDateInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
+import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
+import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 
 const CHANGE_THRESHOLD_IN_TIME_POINTS = 25 // changes are registered in 15 minute intervals
 
@@ -14,7 +18,7 @@ export default class TimeGridDragHandler {
   private startY = 0 // todo: see if start point should be undefined
   private startX = 0 // todo: see if start point should be undefined
   private lastChangeInIntervals = 0
-  private lastChangeInDays = 0
+  private lastTotalChangeInDays = 0
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -50,30 +54,27 @@ export default class TimeGridDragHandler {
       throw new Error('startY is undefined')
 
     const pixelChangeY = e.clientY - this.startY
-    const pixelChangeX = e.clientX - this.startX
     const timePointsChangeY = pixelChangeY * this.timePointsPerPixel
     const currentChangeInIntervals = Math.round(
       timePointsChangeY / CHANGE_THRESHOLD_IN_TIME_POINTS
     )
-    const currentChangeInDays = Math.round(pixelChangeX / this.dayWidth)
+    const pixelChangeX = e.clientX - this.startX
+    const currentTotalChangeInDays = Math.round(pixelChangeX / this.dayWidth)
 
-    if (currentChangeInIntervals !== this.lastChangeInIntervals) {
-      this.handleVerticalChange(currentChangeInIntervals)
-    }
-
-    // if (currentChangeInDays !== this.lastChangeInDays) {
-    //   this.handleHorizontalChange(currentChangeInDays)
-    // }
+    this.handleVerticalMouseMove(currentChangeInIntervals)
+    this.handleHorizontalMouseMove(currentTotalChangeInDays)
   }
 
-  private handleVerticalChange(currentChangeInIntervals: number) {
+  private handleVerticalMouseMove(currentChangeInIntervals: number) {
+    if (currentChangeInIntervals === this.lastChangeInIntervals) return
+
     this.lastChangeInIntervals = currentChangeInIntervals
     const pointsToAdd =
       currentChangeInIntervals * CHANGE_THRESHOLD_IN_TIME_POINTS
-    this.updateTimeForEventCopy(pointsToAdd)
+    this.setTimeForEventCopy(pointsToAdd)
   }
 
-  private updateTimeForEventCopy(pointsToAdd: number) {
+  private setTimeForEventCopy(pointsToAdd: number) {
     const newStart = addTimePointsToDateTime(this.originalStart, pointsToAdd)
     const newEnd = addTimePointsToDateTime(this.originalEnd, pointsToAdd)
     if (newStart < this.dayBoundariesDateTime.start) return
@@ -82,9 +83,50 @@ export default class TimeGridDragHandler {
     this.eventCopy.time.start = newStart
     this.eventCopy.time.end = newEnd
     this.updateCopy(this.eventCopy)
+    console.log('updated event time')
   }
 
-  // private handleHorizontalChange(changeInDays: number) {}
+  private handleHorizontalMouseMove(totalChangeInDays: number) {
+    if (totalChangeInDays === this.lastTotalChangeInDays) return
+
+    const newStartDate = addDays(
+      dateFromDateTime(this.originalStart),
+      totalChangeInDays
+    )
+    const newEndDate = addDays(
+      dateFromDateTime(this.originalEnd),
+      totalChangeInDays
+    )
+    const newStart = setDateInDateTimeString(
+      this.eventCopy.time.start,
+      newStartDate
+    )
+    const newEnd = setDateInDateTimeString(this.eventCopy.time.end, newEndDate)
+
+    if (newStart < (this.$app.calendarState.range.value as DateRange).start)
+      return
+    if (newEnd > (this.$app.calendarState.range.value as DateRange).end) return
+
+    this.setDateForEventCopy(newStart, newEnd)
+    this.transformEventCopyPosition(totalChangeInDays)
+    this.lastTotalChangeInDays = totalChangeInDays
+  }
+
+  private setDateForEventCopy(newStart: string, newEnd: string) {
+    this.eventCopy.time.start = newStart
+    this.eventCopy.time.end = newEnd
+    this.updateCopy(this.eventCopy)
+    console.log('updated event date')
+  }
+
+  private transformEventCopyPosition(totalChangeInDays: number) {
+    const el = document.getElementById(
+      getTimeGridEventCopyElementId(this.eventCopy.id)
+    )
+    if (!el) throw 'no event copy found to transition' // todo: custom error or no error?
+
+    el.style.transform = `translateX(${totalChangeInDays * 100}%)`
+  }
 
   private handleMouseUp = (_e: MouseEvent) => {
     document.removeEventListener('mousemove', this.handleMouseMove)
@@ -93,7 +135,8 @@ export default class TimeGridDragHandler {
   }
 
   private updateOriginalEvent() {
-    if (this.lastChangeInIntervals === 0) return
+    if (this.lastChangeInIntervals === 0 && this.lastTotalChangeInDays === 0)
+      return
 
     const eventToUpdate = this.$app.calendarEvents.list.value.find(
       (event) => event.id === this.eventCopy.id
@@ -102,6 +145,7 @@ export default class TimeGridDragHandler {
 
     eventToUpdate.time.start = this.eventCopy.time.start
     eventToUpdate.time.end = this.eventCopy.time.end
+    console.log('updated event to', eventToUpdate)
     this.$app.calendarEvents.list.value = [
       ...this.$app.calendarEvents.list.value,
     ]

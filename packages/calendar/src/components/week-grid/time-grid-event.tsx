@@ -17,17 +17,20 @@ import UserIcon from '../icons/user-icon'
 import TimeIcon from '../icons/time-icon'
 import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
+import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 
 type props = {
   calendarEvent: CalendarEventInternal
   timePoints: number
   dayBoundariesDateTime?: DayBoundariesDateTime
+  isCopy?: boolean
 }
 
 export default function TimeGridEvent({
   calendarEvent,
   timePoints,
   dayBoundariesDateTime,
+  isCopy,
 }: props) {
   const $app = useContext(AppContext)
 
@@ -85,6 +88,9 @@ export default function TimeGridEvent({
   return (
     <>
       <div
+        id={
+          isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
+        }
         onMouseDown={handleMouseDown}
         className={'sx__time-grid-event' + (eventCopy ? ' is-dragging' : '')}
         style={{
@@ -125,7 +131,11 @@ export default function TimeGridEvent({
       </div>
 
       {eventCopy && (
-        <TimeGridEvent calendarEvent={eventCopy} timePoints={timePoints} />
+        <TimeGridEvent
+          calendarEvent={eventCopy}
+          timePoints={timePoints}
+          isCopy={true}
+        />
       )}
     </>
   )

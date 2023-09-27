@@ -2,6 +2,7 @@ import { NumberRangeError } from '../../errors/number-range.error'
 import { addMonths } from './adding'
 import { toDateString } from '../format-conversion/date-to-strings'
 import { toJSDate } from '../format-conversion/format-conversion'
+import { timeFromDateTime } from '../format-conversion/string-to-string'
 
 export const doubleDigit = (number: number): string => {
   if (number < 0 || number > 99) throw new NumberRangeError(0, 99)
@@ -32,4 +33,13 @@ export const setTimeInDateTimeString = (
   const date = toDateString(toJSDate(dateTimeString))
 
   return `${date} ${newTime}`
+}
+
+export const setDateInDateTimeString = (
+  dateTimeString: string,
+  newDate: string
+): string => {
+  const time = timeFromDateTime(dateTimeString)
+
+  return `${newDate} ${time}`
 }
