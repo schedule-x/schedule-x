@@ -17,11 +17,7 @@ type props = {
 
 export default function TimeGridDay({ calendarEvents, date }: props) {
   const $app = useContext(AppContext)
-  const pointsPerDay = timePointsPerDay(
-    $app.config.dayBoundaries.start,
-    $app.config.dayBoundaries.end,
-    $app.config.isHybridDay
-  )
+  const pointsPerDay = $app.config.timePointsPerDay
 
   const timeStringFromDayBoundary = timeStringFromTimePoints(
     $app.config.dayBoundaries.start

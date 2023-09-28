@@ -108,7 +108,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     return DEFAULT_EVENT_COLOR_NAME
   }
 
-  __getForeignProperties(): Record<string, unknown> {
+  _getForeignProperties(): Record<string, unknown> {
     return this._foreignProperties
   }
 }

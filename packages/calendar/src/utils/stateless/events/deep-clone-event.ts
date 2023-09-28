@@ -13,7 +13,7 @@ export const deepCloneEvent = (
     .withPeople(calendarEvent.people)
     .withCalendarId(calendarEvent.calendarId)
     .withForeignProperties(
-      JSON.parse(JSON.stringify(calendarEvent.__getForeignProperties()))
+      JSON.parse(JSON.stringify(calendarEvent._getForeignProperties()))
     )
     .withLocation(calendarEvent.location)
     .withDescription(calendarEvent.description)

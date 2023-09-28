@@ -33,5 +33,5 @@ export interface CalendarEventInternal extends CalendarEventExternal {
 
   _color: string
 
-  __getForeignProperties(): Record<string, unknown>
+  _getForeignProperties(): Record<string, unknown>
 }
