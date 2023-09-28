@@ -130,35 +130,31 @@ export default class TimeGridDragHandler {
   }
 
   private transformEventCopyPosition(totalChangeInDays: number) {
-    const el = document.getElementById(
+    const copyElement = document.getElementById(
       getTimeGridEventCopyElementId(this.eventCopy.id)
-    )
-    if (!el) throw 'no event copy found to transition' // todo: custom error or no error?
+    ) as HTMLDivElement
+    if (!copyElement) throw 'no event copy found to transition' // todo: custom error or no error?
 
-    el.style.transform = `translateX(calc(${
+    copyElement.style.transform = `translateX(calc(${
       totalChangeInDays * 100
     }% + ${totalChangeInDays}px))`
   }
 
   private handleMouseUp = (_e: MouseEvent) => {
     document.removeEventListener('mousemove', this.handleMouseMove)
-    this.updateOriginalEvent()
     this.updateCopy(undefined)
+    this.updateOriginalEvent()
   }
 
   private updateOriginalEvent() {
     if (this.lastChangeInIntervals === 0 && this.lastTotalChangeInDays === 0)
       return
 
-    const eventToUpdate = this.$app.calendarEvents.list.value.find(
+    const indexOfEventToUpdate = this.$app.calendarEvents.list.value.findIndex(
       (event) => event.id === this.eventCopy.id
     )
-    if (!eventToUpdate) throw new Error('eventToUpdate is undefined')
-
-    eventToUpdate.time.start = this.eventCopy.time.start
-    eventToUpdate.time.end = this.eventCopy.time.end
-    this.$app.calendarEvents.list.value = [
-      ...this.$app.calendarEvents.list.value,
-    ]
+    const updatedList = [...this.$app.calendarEvents.list.value]
+    updatedList.splice(indexOfEventToUpdate, 1, this.eventCopy)
+    this.$app.calendarEvents.list.value = updatedList
   }
 }
