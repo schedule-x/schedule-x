@@ -30,16 +30,16 @@ export const setTimeInDateTimeString = (
   dateTimeString: string,
   newTime: string
 ): string => {
-  const date = toDateString(toJSDate(dateTimeString))
+  const dateCache = toDateString(toJSDate(dateTimeString))
 
-  return `${date} ${newTime}`
+  return `${dateCache} ${newTime}`
 }
 
 export const setDateInDateTimeString = (
   dateTimeString: string,
   newDate: string
 ): string => {
-  const time = timeFromDateTime(dateTimeString)
+  const timeCache = timeFromDateTime(dateTimeString)
 
-  return `${newDate} ${time}`
+  return `${newDate} ${timeCache}`
 }

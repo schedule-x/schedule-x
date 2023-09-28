@@ -8,7 +8,7 @@ import {
   DayBoundariesInternal,
 } from '../../../types/config/day-boundaries'
 import { DragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
-import Plugin from '@schedule-x/shared/src/interfaces/plugin.interface'
+import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -50,5 +50,5 @@ export interface CalendarConfigExternal
   datePicker?: CalendarDatePickerConfigExternal
   events?: CalendarEventExternal[]
   dayBoundaries?: DayBoundariesExternal
-  plugins?: Plugin[]
+  plugins?: PluginBase[]
 }

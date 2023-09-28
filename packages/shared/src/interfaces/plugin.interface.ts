@@ -1,3 +1,3 @@
-export default interface Plugin {
+export default interface PluginBase {
   name: string
 }
