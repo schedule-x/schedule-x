@@ -21,14 +21,12 @@ import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stat
 
 type props = {
   calendarEvent: CalendarEventInternal
-  timePoints: number
   dayBoundariesDateTime?: DayBoundariesDateTime
   isCopy?: boolean
 }
 
 export default function TimeGridEvent({
   calendarEvent,
-  timePoints,
   dayBoundariesDateTime,
   isCopy,
 }: props) {
@@ -97,12 +95,12 @@ export default function TimeGridEvent({
           top: `${getEventTop(
             calendarEvent.time,
             $app.config.dayBoundaries,
-            timePoints
+            $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
             calendarEvent.time,
             $app.config.dayBoundaries,
-            timePoints
+            $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
           width: `${getWidthRule(leftRule)}%`,
@@ -129,13 +127,7 @@ export default function TimeGridEvent({
         )}
       </div>
 
-      {eventCopy && (
-        <TimeGridEvent
-          calendarEvent={eventCopy}
-          timePoints={timePoints}
-          isCopy={true}
-        />
-      )}
+      {eventCopy && <TimeGridEvent calendarEvent={eventCopy} isCopy={true} />}
     </>
   )
 }
