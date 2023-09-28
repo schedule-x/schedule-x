@@ -8,6 +8,8 @@ import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundari
 class DragAndDropPluginImpl implements DragAndDropPlugin {
   name = PluginName.DragAndDrop
 
+  constructor(private minutesPerInterval: number) {}
+
   createTimeGridDragHandler(
     $app: CalendarAppSingleton,
     event: MouseEvent,
@@ -20,9 +22,17 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
       event,
       eventCopy,
       updateCopy,
-      dayBoundariesDateTime
+      dayBoundariesDateTime,
+      this.getTimePointsForIntervalConfig()
     )
+  }
+
+  private getTimePointsForIntervalConfig(): number {
+    if (this.minutesPerInterval === 60) return 100
+    if (this.minutesPerInterval === 30) return 50
+    return 25
   }
 }
 
-export const createDragAndDropPlugin = () => new DragAndDropPluginImpl()
+export const createDragAndDropPlugin = (minutesPerInterval = 15) =>
+  new DragAndDropPluginImpl(minutesPerInterval)

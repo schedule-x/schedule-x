@@ -9,8 +9,6 @@ import { setDateInDateTimeString } from '@schedule-x/shared/src/utils/stateless/
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 
-const CHANGE_THRESHOLD_IN_TIME_POINTS = 25 // changes are registered in 15 minute intervals
-
 export default class TimeGridDragHandler {
   private readonly originalStart: string
   private readonly originalEnd: string
@@ -25,7 +23,8 @@ export default class TimeGridDragHandler {
     private event: MouseEvent,
     private eventCopy: CalendarEventInternal,
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
-    private dayBoundariesDateTime: DayBoundariesDateTime
+    private dayBoundariesDateTime: DayBoundariesDateTime,
+    private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number
   ) {
     this.dayWidth = (
       document.querySelector('.sx__time-grid-day') as HTMLDivElement
@@ -56,7 +55,7 @@ export default class TimeGridDragHandler {
     const pixelChangeY = e.clientY - this.startY
     const timePointsChangeY = pixelChangeY * this.timePointsPerPixel
     const currentChangeInIntervals = Math.round(
-      timePointsChangeY / CHANGE_THRESHOLD_IN_TIME_POINTS
+      timePointsChangeY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
     )
     const pixelChangeX = e.clientX - this.startX
     const currentTotalChangeInDays = Math.round(pixelChangeX / this.dayWidth)
@@ -70,8 +69,8 @@ export default class TimeGridDragHandler {
 
     const pointsToAdd =
       currentChangeInIntervals > this.lastChangeInIntervals
-        ? CHANGE_THRESHOLD_IN_TIME_POINTS
-        : -CHANGE_THRESHOLD_IN_TIME_POINTS
+        ? this.CHANGE_THRESHOLD_IN_TIME_POINTS
+        : -this.CHANGE_THRESHOLD_IN_TIME_POINTS
     this.setTimeForEventCopy(pointsToAdd)
     this.lastChangeInIntervals = currentChangeInIntervals
   }
@@ -136,7 +135,9 @@ export default class TimeGridDragHandler {
     )
     if (!el) throw 'no event copy found to transition' // todo: custom error or no error?
 
-    el.style.transform = `translateX(${totalChangeInDays * 100}%)`
+    el.style.transform = `translateX(calc(${
+      totalChangeInDays * 100
+    }% + ${totalChangeInDays}px))`
   }
 
   private handleMouseUp = (_e: MouseEvent) => {
