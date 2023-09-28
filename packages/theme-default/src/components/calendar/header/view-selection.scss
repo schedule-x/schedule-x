@@ -5,7 +5,7 @@
 
 .sx__view-selection-selected-item {
   height: 100%;
-  width: 100%;
+  width: fit-content;
   padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
   cursor: pointer;
   border-radius: var(--sx-rounding-extra-small);

@@ -91,9 +91,9 @@ export default function TimeGridEvent({
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
         onMouseDown={handleMouseDown}
-        className={'sx__time-grid-event' + (eventCopy ? ' is-dragging' : '')}
+        className={'sx__time-grid-event' + (isCopy ? ' is-dragging' : '')}
         style={{
-          opacity: eventCopy ? 0.5 : 1,
+          // opacity: eventCopy ? 0.5 : 1,
           top: `${getEventTop(
             calendarEvent.time,
             $app.config.dayBoundaries,

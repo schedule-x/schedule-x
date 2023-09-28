@@ -5,9 +5,10 @@
   border-radius: var(--sx-rounding-extra-small);
   font-size: var(--sx-font-extra-small);
   overflow: hidden;
+  user-select: none;
 
   &.is-dragging {
-    user-select: none;
+    opacity: 0.5;
   }
 }
 

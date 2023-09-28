@@ -19,4 +19,5 @@ export default defineConfig({
       getCompareSnapshotsPlugin(on, config)
     },
   },
+  scrollBehavior: false,
 })
