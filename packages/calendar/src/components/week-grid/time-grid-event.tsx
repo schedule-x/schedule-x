@@ -72,14 +72,13 @@ export default function TimeGridEvent({
     const eventCopy = deepCloneEvent(calendarEvent, $app)
     setEventCopy(eventCopy)
 
-    const dragHandler =
-      $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
-        $app,
-        e,
-        eventCopy,
-        updateCopy,
-        dayBoundariesDateTime
-      )
+    $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
+      $app,
+      e,
+      eventCopy,
+      updateCopy,
+      dayBoundariesDateTime
+    )
   }
 
   return (
@@ -89,9 +88,8 @@ export default function TimeGridEvent({
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
         onMouseDown={handleMouseDown}
-        className={'sx__time-grid-event' + (isCopy ? ' is-dragging' : '')}
+        className={'sx__time-grid-event' + (isCopy ? ' is-event-copy' : '')}
         style={{
-          // opacity: eventCopy ? 0.5 : 1,
           top: `${getEventTop(
             calendarEvent.time,
             $app.config.dayBoundaries,

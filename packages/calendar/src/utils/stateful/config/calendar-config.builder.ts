@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable max-lines */
 import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarConfigInternal, {

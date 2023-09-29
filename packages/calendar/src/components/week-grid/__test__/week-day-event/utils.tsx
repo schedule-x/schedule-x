@@ -10,7 +10,7 @@ export const factory = (
 ) => {
   render(
     <AppContext.Provider value={$app}>
-      <TimeGridEvent calendarEvent={calendarEvent} timePoints={2400} />
+      <TimeGridEvent calendarEvent={calendarEvent} />
     </AppContext.Provider>
   )
 }
