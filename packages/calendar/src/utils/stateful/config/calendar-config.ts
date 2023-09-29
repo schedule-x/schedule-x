@@ -7,7 +7,7 @@ import {
   DayBoundariesExternal,
   DayBoundariesInternal,
 } from '../../../types/config/day-boundaries'
-import { DragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-and-drop-plugin.interface'
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 
 export type WeekOptions = {

@@ -16,7 +16,7 @@ import {
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
-import { DragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-and-drop-plugin.interface'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>

@@ -8,8 +8,9 @@ import { DateRange } from '@schedule-x/calendar/src/types/date-range'
 import { setDateInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
+import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
 
-export default class TimeGridDragHandler {
+export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly originalStart: string
   private readonly originalEnd: string
   private readonly dayWidth: number
@@ -36,13 +37,6 @@ export default class TimeGridDragHandler {
     this.init()
   }
 
-  get timePointsPerPixel(): number {
-    return (
-      this.$app.config.timePointsPerDay /
-      this.$app.config.weekOptions.gridHeight
-    )
-  }
-
   private init() {
     document.addEventListener('mousemove', this.handleMouseMove)
     document.addEventListener('mouseup', this.handleMouseUp, { once: true })
@@ -53,7 +47,7 @@ export default class TimeGridDragHandler {
       throw new Error('startY is undefined')
 
     const pixelChangeY = e.clientY - this.startY
-    const timePointsChangeY = pixelChangeY * this.timePointsPerPixel
+    const timePointsChangeY = pixelChangeY * this.timePointsPerPixel()
     const currentChangeInIntervals = Math.round(
       timePointsChangeY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
     )
@@ -62,6 +56,13 @@ export default class TimeGridDragHandler {
 
     this.handleVerticalMouseMove(currentChangeInIntervals)
     this.handleHorizontalMouseMove(currentTotalChangeInDays)
+  }
+
+  private timePointsPerPixel(): number {
+    return (
+      this.$app.config.timePointsPerDay /
+      this.$app.config.weekOptions.gridHeight
+    )
   }
 
   private handleVerticalMouseMove(currentChangeInIntervals: number) {
