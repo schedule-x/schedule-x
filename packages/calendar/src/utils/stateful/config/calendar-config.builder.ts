@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable max-lines */
 import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarConfigInternal, {
   CalendarType,
+  Plugins,
   WeekOptions,
 } from './calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
@@ -12,7 +13,10 @@ import {
   DayBoundariesExternal,
   DayBoundariesInternal,
 } from '../../../types/config/day-boundaries'
-import { timePointsFromString } from '../../stateless/time/time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
+import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
+import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
+import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-and-drop-plugin.interface'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -24,6 +28,7 @@ export default class CalendarConfigBuilder
   dayBoundaries: DayBoundariesInternal | undefined
   weekOptions: WeekOptions | undefined
   calendars: Record<string, CalendarType> | undefined
+  plugins: Plugins = {}
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -33,7 +38,8 @@ export default class CalendarConfigBuilder
       this.views,
       this.dayBoundaries,
       this.weekOptions,
-      this.calendars
+      this.calendars,
+      this.plugins
     )
   }
 
@@ -80,6 +86,16 @@ export default class CalendarConfigBuilder
     calendars: Record<string, CalendarType> | undefined
   ): CalendarConfigBuilder {
     this.calendars = calendars
+    return this
+  }
+
+  withPlugins(plugins: PluginBase[] | undefined): CalendarConfigBuilder {
+    const dragAndDropPlugin = plugins?.find(
+      (plugin) => plugin.name === PluginName.DragAndDrop
+    )
+    if (dragAndDropPlugin) {
+      this.plugins.dragAndDrop = dragAndDropPlugin as DragAndDropPlugin
+    }
     return this
   }
 }

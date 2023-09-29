@@ -1,8 +1,8 @@
 import {
   describe,
-  expect,
   it,
-} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+  expect,
+} from '../../../testing/unit/unit-testing-library.impl'
 import { timePointsPerDay } from '../time-points-per-day'
 import { timePointsFromString } from '../string-conversion'
 

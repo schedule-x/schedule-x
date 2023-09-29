@@ -1,6 +1,6 @@
 import CalendarEventExternal, {
   CalendarEventInternal,
-} from '../calendar-event/calendar-event.interface'
+} from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import CalendarEvents from './calendar-events.interface'
 import { signal } from '@preact/signals'
 import CalendarConfigInternal from '../config/calendar-config'

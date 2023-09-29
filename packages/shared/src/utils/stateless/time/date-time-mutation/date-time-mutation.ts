@@ -1,5 +1,8 @@
 import { NumberRangeError } from '../../errors/number-range.error'
 import { addMonths } from './adding'
+import { toDateString } from '../format-conversion/date-to-strings'
+import { toJSDate } from '../format-conversion/format-conversion'
+import { timeFromDateTime } from '../format-conversion/string-to-string'
 
 export const doubleDigit = (number: number): string => {
   if (number < 0 || number > 99) throw new NumberRangeError(0, 99)
@@ -21,4 +24,22 @@ export const getFirstDayOPreviousMonth = (dateString: string): string => {
 export const getFirstDayOfNextMonth = (dateString: string): string => {
   dateString = addMonths(dateString, 1)
   return setDateOfMonth(dateString, 1)
+}
+
+export const setTimeInDateTimeString = (
+  dateTimeString: string,
+  newTime: string
+): string => {
+  const dateCache = toDateString(toJSDate(dateTimeString))
+
+  return `${dateCache} ${newTime}`
+}
+
+export const setDateInDateTimeString = (
+  dateTimeString: string,
+  newDate: string
+): string => {
+  const timeCache = timeFromDateTime(dateTimeString)
+
+  return `${newDate} ${timeCache}`
 }

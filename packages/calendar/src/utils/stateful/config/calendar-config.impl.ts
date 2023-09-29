@@ -12,6 +12,7 @@ import {
   DEFAULT_DAY_BOUNDARIES,
   DEFAULT_WEEK_GRID_HEIGHT,
 } from '../../../constants'
+import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   constructor(
@@ -23,7 +24,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public weekOptions: WeekOptions = {
       gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
     },
-    public calendars = {}
+    public calendars = {},
+    public plugins = {}
   ) {}
 
   get isHybridDay(): boolean {
@@ -31,6 +33,14 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
       this.dayBoundaries.start > this.dayBoundaries.end ||
       (this.dayBoundaries.start !== 0 &&
         this.dayBoundaries.start === this.dayBoundaries.end)
+    )
+  }
+
+  get timePointsPerDay(): number {
+    return timePointsPerDay(
+      this.dayBoundaries.start,
+      this.dayBoundaries.end,
+      this.isHybridDay
     )
   }
 }

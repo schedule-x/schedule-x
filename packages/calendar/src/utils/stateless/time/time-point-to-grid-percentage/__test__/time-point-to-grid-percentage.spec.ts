@@ -3,7 +3,7 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { timePointsFromString } from '../../time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { timePointToPercentage } from '../time-point-to-grid-percentage'
 
 describe('getting percentage into grid for a time point', () => {

@@ -6,4 +6,7 @@ export const cypressPageUrls = Object.freeze({
     popupPlacement: '/cypress/pages/date-picker/004-popup-placement.html',
     screenshots: '/cypress/pages/date-picker/100-screenshots.html',
   },
+  calendar: {
+    dragAndDrop: '/cypress/pages/calendar/001-drag-and-drop.html',
+  },
 })

@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { getTimeAxisHours } from '../../utils/stateless/time/time-axis/time-axis'
-import { timePointsPerDay } from '../../utils/stateless/time/time-points/time-points-per-day'
 
 export default function TimeAxis() {
   const $app = useContext(AppContext)
@@ -11,12 +10,7 @@ export default function TimeAxis() {
     setHours(
       getTimeAxisHours($app.config.dayBoundaries, $app.config.isHybridDay)
     )
-    const hoursPerDay =
-      timePointsPerDay(
-        $app.config.dayBoundaries.start,
-        $app.config.dayBoundaries.end,
-        $app.config.isHybridDay
-      ) / 100
+    const hoursPerDay = $app.config.timePointsPerDay / 100
     const pixelsPerHour = $app.config.weekOptions.gridHeight / hoursPerDay
     document.documentElement.style.setProperty(
       '--sx-week-grid-hour-height',

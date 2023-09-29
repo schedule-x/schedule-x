@@ -1,12 +1,17 @@
 import { WeekDayContexts } from '../../../types/week-day-context'
-import { CalendarEventInternal } from '../../stateful/calendar-event/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import CalendarAppSingleton from '../../stateful/app-singleton/calendar-app-singleton'
 import {
   dateFromDateTime,
   timeFromDateTime,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import { timePointsFromString } from '../time/time-points/string-conversion'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+
+const resetEventConcurrencyProperties = (event: CalendarEventInternal) => {
+  event._previousConcurrentEvents = undefined
+  event._totalConcurrentEvents = undefined
+}
 
 export const positionInTimeGrid = (
   timeGridEvents: CalendarEventInternal[],
@@ -14,6 +19,8 @@ export const positionInTimeGrid = (
   $app: CalendarAppSingleton
 ) => {
   for (const event of timeGridEvents) {
+    resetEventConcurrencyProperties(event)
+
     if (
       event.time.start >= $app.calendarState.range.value!.start &&
       event.time.end < $app.calendarState.range.value!.end

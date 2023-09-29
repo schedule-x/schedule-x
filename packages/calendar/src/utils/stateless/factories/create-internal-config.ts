@@ -10,5 +10,6 @@ export const createInternalConfig = (config: CalendarConfigExternal) => {
     .withDayBoundaries(config.dayBoundaries)
     .withWeekOptions(config.weekOptions)
     .withCalendars(config.calendars)
+    .withPlugins(config.plugins)
     .build()
 }

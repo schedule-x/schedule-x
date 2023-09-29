@@ -1,4 +1,4 @@
-import { EventId } from '../../../types/event-id'
+import { EventId } from '../types/event-id'
 
 export type CalendarEventTime = {
   start: string
@@ -32,4 +32,6 @@ export interface CalendarEventInternal extends CalendarEventExternal {
   _nDaysInGrid: number | undefined
 
   _color: string
+
+  _getForeignProperties(): Record<string, unknown>
 }

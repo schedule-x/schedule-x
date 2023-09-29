@@ -1,7 +1,8 @@
+/* eslint-disable max-lines */
 import {
   CalendarEventInternal,
   CalendarEventTime,
-} from '../../utils/stateful/calendar-event/calendar-event.interface'
+} from '@schedule-x/shared/src/interfaces/calendar-event.interface'
 import {
   getBorderRule,
   getEventHeight,
@@ -9,19 +10,34 @@ import {
   getLeftRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
-import { useContext } from 'preact/compat'
+import { useContext, useState } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '../icons/user-icon'
 import TimeIcon from '../icons/time-icon'
+import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
+import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
+import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 
 type props = {
   calendarEvent: CalendarEventInternal
-  timePoints: number
+  dayBoundariesDateTime?: DayBoundariesDateTime
+  isCopy?: boolean
 }
 
-export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
+export default function TimeGridEvent({
+  calendarEvent,
+  dayBoundariesDateTime,
+  isCopy,
+}: props) {
   const $app = useContext(AppContext)
+
+  const [eventCopy, setEventCopy] = useState<CalendarEventInternal>()
+  const updateCopy = (newCopy: CalendarEventInternal | undefined) => {
+    if (!newCopy) return setEventCopy(undefined)
+
+    setEventCopy(deepCloneEvent(newCopy, $app))
+  }
 
   const localizeArgs = [
     $app.config.locale,
@@ -48,20 +64,41 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
 
   const leftRule = getLeftRule(calendarEvent)
 
+  const handleMouseDown = (e: MouseEvent) => {
+    if (!dayBoundariesDateTime) return // this can only happen in eventCopy
+    if (!e.target) return
+    if (!$app.config.plugins.dragAndDrop) return
+
+    const eventCopy = deepCloneEvent(calendarEvent, $app)
+    setEventCopy(eventCopy)
+
+    $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
+      $app,
+      e,
+      eventCopy,
+      updateCopy,
+      dayBoundariesDateTime
+    )
+  }
+
   return (
     <>
       <div
-        className="sx__time-grid-event"
+        id={
+          isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
+        }
+        onMouseDown={handleMouseDown}
+        className={'sx__time-grid-event' + (isCopy ? ' is-event-copy' : '')}
         style={{
           top: `${getEventTop(
             calendarEvent.time,
             $app.config.dayBoundaries,
-            timePoints
+            $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
             calendarEvent.time,
             $app.config.dayBoundaries,
-            timePoints
+            $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
           width: `${getWidthRule(leftRule)}%`,
@@ -87,6 +124,8 @@ export default function TimeGridEvent({ calendarEvent, timePoints }: props) {
           </div>
         )}
       </div>
+
+      {eventCopy && <TimeGridEvent calendarEvent={eventCopy} isCopy={true} />}
     </>
   )
 }

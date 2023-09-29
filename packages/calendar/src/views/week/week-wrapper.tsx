@@ -43,6 +43,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   }, [
     $app.calendarState.range.value?.start,
     $app.calendarState.range.value?.end,
+    $app.calendarEvents.list.value,
   ])
 
   return (
@@ -71,7 +72,11 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
             <TimeAxis />
 
             {Object.values(weekDayContexts).map((dayContext) => (
-              <TimeGridDay calendarEvents={dayContext.timeGridEvents} />
+              <TimeGridDay
+                calendarEvents={dayContext.timeGridEvents}
+                date={dayContext.date}
+                key={dayContext.date + new Date().getTime()}
+              />
             ))}
           </div>
         </div>
