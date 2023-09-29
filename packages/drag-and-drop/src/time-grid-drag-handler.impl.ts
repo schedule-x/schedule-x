@@ -16,8 +16,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number
   private readonly startY: number
   private readonly startX
-  private lastChangeInIntervals = 0
-  private lastTotalChangeInDays = 0
+  private lastIntervalDiff = 0
+  private lastDaysDiff = 0
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -43,19 +43,16 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private handleMouseMove = (e: MouseEvent) => {
-    if (typeof this.startY === 'undefined')
-      throw new Error('startY is undefined')
-
-    const pixelChangeY = e.clientY - this.startY
-    const timePointsChangeY = pixelChangeY * this.timePointsPerPixel()
-    const currentChangeInIntervals = Math.round(
-      timePointsChangeY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
+    const pixelDiffY = e.clientY - this.startY
+    const timePointsDiffY = pixelDiffY * this.timePointsPerPixel()
+    const currentIntervalDiff = Math.round(
+      timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
     )
-    const pixelChangeX = e.clientX - this.startX
-    const currentTotalChangeInDays = Math.round(pixelChangeX / this.dayWidth)
+    const pixelDiffX = e.clientX - this.startX
+    const currentDaysDiff = Math.round(pixelDiffX / this.dayWidth)
 
-    this.handleVerticalMouseMove(currentChangeInIntervals)
-    this.handleHorizontalMouseMove(currentTotalChangeInDays)
+    this.handleVerticalMouseMove(currentIntervalDiff)
+    this.handleHorizontalMouseMove(currentDaysDiff)
   }
 
   private timePointsPerPixel(): number {
@@ -65,15 +62,15 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     )
   }
 
-  private handleVerticalMouseMove(currentChangeInIntervals: number) {
-    if (currentChangeInIntervals === this.lastChangeInIntervals) return
+  private handleVerticalMouseMove(currentIntervalDiff: number) {
+    if (currentIntervalDiff === this.lastIntervalDiff) return
 
     const pointsToAdd =
-      currentChangeInIntervals > this.lastChangeInIntervals
+      currentIntervalDiff > this.lastIntervalDiff
         ? this.CHANGE_THRESHOLD_IN_TIME_POINTS
         : -this.CHANGE_THRESHOLD_IN_TIME_POINTS
     this.setTimeForEventCopy(pointsToAdd)
-    this.lastChangeInIntervals = currentChangeInIntervals
+    this.lastIntervalDiff = currentIntervalDiff
   }
 
   private setTimeForEventCopy(pointsToAdd: number) {
@@ -82,15 +79,9 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
       pointsToAdd
     )
     const newEnd = addTimePointsToDateTime(this.eventCopy.time.end, pointsToAdd)
-    if (
-      newStart <
-      addDays(this.dayBoundariesDateTime.start, this.lastTotalChangeInDays)
-    )
+    if (newStart < addDays(this.dayBoundariesDateTime.start, this.lastDaysDiff))
       return
-    if (
-      newEnd >
-      addDays(this.dayBoundariesDateTime.end, this.lastTotalChangeInDays)
-    )
+    if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff))
       return
 
     this.eventCopy.time.start = newStart
@@ -98,16 +89,16 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     this.updateCopy(this.eventCopy)
   }
 
-  private handleHorizontalMouseMove(totalChangeInDays: number) {
-    if (totalChangeInDays === this.lastTotalChangeInDays) return
+  private handleHorizontalMouseMove(totalDaysDiff: number) {
+    if (totalDaysDiff === this.lastDaysDiff) return
 
     const newStartDate = addDays(
       dateFromDateTime(this.originalStart),
-      totalChangeInDays
+      totalDaysDiff
     )
     const newEndDate = addDays(
       dateFromDateTime(this.originalEnd),
-      totalChangeInDays
+      totalDaysDiff
     )
     const newStart = setDateInDateTimeString(
       this.eventCopy.time.start,
@@ -120,8 +111,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     if (newEnd > (this.$app.calendarState.range.value as DateRange).end) return
 
     this.setDateForEventCopy(newStart, newEnd)
-    this.transformEventCopyPosition(totalChangeInDays)
-    this.lastTotalChangeInDays = totalChangeInDays
+    this.transformEventCopyPosition(totalDaysDiff)
+    this.lastDaysDiff = totalDaysDiff
   }
 
   private setDateForEventCopy(newStart: string, newEnd: string) {
@@ -130,15 +121,13 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     this.updateCopy(this.eventCopy)
   }
 
-  private transformEventCopyPosition(totalChangeInDays: number) {
+  private transformEventCopyPosition(totalDaysDiff: number) {
     const copyElement = document.getElementById(
       getTimeGridEventCopyElementId(this.eventCopy.id)
     ) as HTMLDivElement
-    if (!copyElement) throw 'no event copy found to transition' // todo: custom error or no error?
-
     copyElement.style.transform = `translateX(calc(${
-      totalChangeInDays * 100
-    }% + ${totalChangeInDays}px))`
+      totalDaysDiff * 100
+    }% + ${totalDaysDiff}px))`
   }
 
   private handleMouseUp = (_e: MouseEvent) => {
@@ -148,8 +137,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private updateOriginalEvent() {
-    if (this.lastChangeInIntervals === 0 && this.lastTotalChangeInDays === 0)
-      return
+    if (this.lastIntervalDiff === 0 && this.lastDaysDiff === 0) return
 
     const indexOfEventToUpdate = this.$app.calendarEvents.list.value.findIndex(
       (event) => event.id === this.eventCopy.id
