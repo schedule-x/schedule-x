@@ -1,12 +1,16 @@
-/* eslint-disable max-lines */
 import {
   describe,
-  expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarConfigBuilder from '../../config/calendar-config.builder'
 import { CalendarEventTime } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarEventBuilder from '../calendar-event.builder'
+import {
+  assertIsMultiDayTimed,
+  assertIsSingleDayTimed,
+  assertIsSingleDayTimedAndHybridDayTimed,
+  assertIsSingleHybridTimedAndMultipleDayTimed,
+} from './utils'
 
 describe('CalendarEventImpl', () => {
   describe('the event time type in a hybrid day', () => {
@@ -35,13 +39,7 @@ describe('CalendarEventImpl', () => {
     ])(
       'should be classified as a single hybrid day timed event and a single day timed event',
       (eventTime) => {
-        const calendarEvent = createEvent(eventTime)
-
-        expect(calendarEvent._isSingleDayTimed).toBe(true)
-        expect(calendarEvent._isSingleDayFullDay).toBe(false)
-        expect(calendarEvent._isMultiDayTimed).toBe(false)
-        expect(calendarEvent._isMultiDayFullDay).toBe(false)
-        expect(calendarEvent._isSingleHybridDayTimed).toBe(true)
+        assertIsSingleDayTimedAndHybridDayTimed(createEvent(eventTime))
       }
     )
 
@@ -57,13 +55,7 @@ describe('CalendarEventImpl', () => {
     ])(
       'should be classified as a single hybrid day event and a multi day timed event',
       (eventTime) => {
-        const calendarEvent = createEvent(eventTime)
-
-        expect(calendarEvent._isSingleDayTimed).toBe(false)
-        expect(calendarEvent._isSingleDayFullDay).toBe(false)
-        expect(calendarEvent._isMultiDayTimed).toBe(true)
-        expect(calendarEvent._isMultiDayFullDay).toBe(false)
-        expect(calendarEvent._isSingleHybridDayTimed).toBe(true)
+        assertIsSingleHybridTimedAndMultipleDayTimed(createEvent(eventTime))
       }
     )
 
@@ -83,13 +75,7 @@ describe('CalendarEventImpl', () => {
     ])(
       'should not be classified as a single hybrid day event, only as single day timed',
       (eventTime) => {
-        const calendarEvent = createEvent(eventTime)
-
-        expect(calendarEvent._isSingleDayTimed).toBe(true)
-        expect(calendarEvent._isSingleDayFullDay).toBe(false)
-        expect(calendarEvent._isMultiDayTimed).toBe(false)
-        expect(calendarEvent._isMultiDayFullDay).toBe(false)
-        expect(calendarEvent._isSingleHybridDayTimed).toBe(false)
+        assertIsSingleDayTimed(createEvent(eventTime))
       }
     )
 
@@ -101,13 +87,7 @@ describe('CalendarEventImpl', () => {
     ])(
       'should not be classified as a single hybrid day event, only as multi day timed',
       (eventTime) => {
-        const calendarEvent = createEvent(eventTime)
-
-        expect(calendarEvent._isSingleDayTimed).toBe(false)
-        expect(calendarEvent._isSingleDayFullDay).toBe(false)
-        expect(calendarEvent._isMultiDayTimed).toBe(true)
-        expect(calendarEvent._isMultiDayFullDay).toBe(false)
-        expect(calendarEvent._isSingleHybridDayTimed).toBe(false)
+        assertIsMultiDayTimed(createEvent(eventTime))
       }
     )
   })
