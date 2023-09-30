@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
-import CalendarConfigInternal from '../config/calendar-config'
+import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import {
   dateStringRegex,
   dateTimeStringRegex,

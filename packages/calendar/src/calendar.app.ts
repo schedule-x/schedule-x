@@ -1,6 +1,6 @@
 import { createElement, render } from 'preact'
 import CalendarWrapper from './components/calendar-wrapper'
-import CalendarAppSingleton from './utils/stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 export default class CalendarApp {
   constructor(

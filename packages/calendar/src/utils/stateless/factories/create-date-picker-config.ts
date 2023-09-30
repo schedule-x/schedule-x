@@ -1,6 +1,6 @@
-import { CalendarConfigExternal } from '../../stateful/config/calendar-config'
+import { CalendarConfigExternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { ConfigBuilder as DatePickerConfigBuilder } from '@schedule-x/date-picker/src/utils/stateful/config/config.builder'
-import { Placement } from '@schedule-x/date-picker/src/enums/placement.enum'
+import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 
 export const createDatePickerConfig = (
   config: CalendarConfigExternal,

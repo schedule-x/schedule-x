@@ -1,5 +1,5 @@
 import CalendarApp from './calendar.app'
-import { CalendarConfigExternal } from './utils/stateful/config/calendar-config'
+import { CalendarConfigExternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarAppSingletonBuilder from './utils/stateful/app-singleton/calendar-app-singleton.builder'
 import { createDatePickerState } from '@schedule-x/date-picker/src/utils/stateful/date-picker-state/date-picker-state.impl'
 import { translate, translations } from '@schedule-x/translations/src'

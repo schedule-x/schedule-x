@@ -1,4 +1,4 @@
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import TimeGridEvent from './time-grid-event'

@@ -1,5 +1,5 @@
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
-import CalendarConfigInternal from '../../../stateful/config/calendar-config'
+import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { Signal } from '@preact/signals'
 import { DateRange } from '../../../../types/date-range'
 import {

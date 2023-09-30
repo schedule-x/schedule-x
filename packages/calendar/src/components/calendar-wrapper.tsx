@@ -1,5 +1,5 @@
 import CalendarHeader from './header/calendar-header'
-import CalendarAppSingleton from '../utils/stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { AppContext } from '../utils/stateful/app-context'
 import { useEffect, useState } from 'preact/compat'
 import { View } from '../types/view'

@@ -4,7 +4,7 @@ import CalendarConfigInternal, {
   CalendarType,
   Plugins,
   WeekOptions,
-} from './calendar-config'
+} from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { ViewName } from '../../../types/view-name'

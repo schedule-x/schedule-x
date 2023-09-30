@@ -9,7 +9,7 @@ import { vi } from 'vitest'
 import DatePickerApp from '../date-picker.app'
 import { createElement, render } from 'preact'
 import { createAppSingleton } from '../factory'
-import { DatePickerListeners } from '../utils/stateful/config/listeners.interface'
+import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 
 const createApp = (
   initialSelectedDate?: string,

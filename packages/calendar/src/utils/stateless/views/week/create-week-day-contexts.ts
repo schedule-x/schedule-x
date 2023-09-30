@@ -1,7 +1,7 @@
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { WeekDayContexts } from '../../../../types/week-day-context'
-import CalendarAppSingleton from '../../../stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { DateRange } from '../../../../types/date-range'
 
 export const createWeekDayContexts = ($app: CalendarAppSingleton) => {

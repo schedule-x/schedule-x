@@ -1,7 +1,6 @@
-import { ViewName } from '../../../types/view-name'
+import { ViewName } from '@schedule-x/calendar/src/types/view-name'
 import { Signal } from '@preact/signals'
-import { DateRange } from '../../../types/date-range'
-import { View } from '../../../types/view'
+import { DateRange } from '@schedule-x/calendar/src/types/date-range'
 
 export default interface CalendarState {
   view: Signal<ViewName>

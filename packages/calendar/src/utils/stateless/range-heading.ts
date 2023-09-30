@@ -1,4 +1,4 @@
-import CalendarAppSingleton from '../stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 const getLocaleStringMonthArgs = ($app: CalendarAppSingleton) => {

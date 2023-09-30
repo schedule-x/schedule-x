@@ -2,7 +2,7 @@
 import {
   CalendarEventInternal,
   CalendarEventTime,
-} from '@schedule-x/shared/src/interfaces/calendar-event.interface'
+} from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import {
   getBorderRule,
   getEventHeight,

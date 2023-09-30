@@ -1,4 +1,6 @@
-import CalendarConfigInternal, { WeekOptions } from './calendar-config'
+import CalendarConfigInternal, {
+  WeekOptions,
+} from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import {
   DEFAULT_FIRST_DAY_OF_WEEK,

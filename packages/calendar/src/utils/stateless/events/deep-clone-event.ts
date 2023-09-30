@@ -1,6 +1,6 @@
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarEventBuilder from '../../stateful/calendar-event/calendar-event.builder'
-import CalendarAppSingleton from '../../stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 export const deepCloneEvent = (
   calendarEvent: CalendarEventInternal,

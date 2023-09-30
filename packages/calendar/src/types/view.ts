@@ -1,5 +1,5 @@
 import { ViewName } from './view-name'
-import CalendarAppSingleton from '../utils/stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 export type View = {
   name: ViewName // identifier for the view

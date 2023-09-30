@@ -1,11 +1,11 @@
-import CalendarAppSingleton from './calendar-app-singleton'
-import CalendarConfigInternal from '../config/calendar-config'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
+import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import DatePickerState from '@schedule-x/date-picker/src/utils/stateful/date-picker-state/date-picker-state.interface'
 import { TranslateFn } from '@schedule-x/translations/src'
-import CalendarState from '../calendar-state/calendar-state.interface'
-import DatePickerConfigInternal from '@schedule-x/date-picker/src/utils/stateful/config/config.interface'
-import CalendarEvents from '../calendar-events/calendar-events.interface'
+import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
+import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
+import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-events.interface'
 
 export default class CalendarAppSingletonImpl implements CalendarAppSingleton {
   constructor(

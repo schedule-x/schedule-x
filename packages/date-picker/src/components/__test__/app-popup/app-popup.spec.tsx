@@ -7,7 +7,7 @@ import {
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { MONTH_VIEW } from '../../../constants/test-ids'
 import { factory } from './utils'
-import { Placement } from '../../../enums/placement.enum'
+import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 
 describe('AppPopup', () => {
   beforeEach(() => {

@@ -3,7 +3,7 @@ import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import DatePickerAppSingleton from './date-picker-app.singleton'
 import DatePickerAppSingletonImpl from './date-picker-app-singleton.impl'
 import DatePickerState from '../date-picker-state/date-picker-state.interface'
-import DatePickerConfigInternal from '../config/config.interface'
+import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import { TranslateFn } from '@schedule-x/translations/src'
 

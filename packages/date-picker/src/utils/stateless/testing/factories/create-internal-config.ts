@@ -1,6 +1,6 @@
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { DEFAULT_LOCALE } from '@schedule-x/shared/src/values'
-import { Placement } from '../../../../enums/placement.enum'
+import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 
 export const __createInternalConfig__ = (locale?: string) => {
   return {

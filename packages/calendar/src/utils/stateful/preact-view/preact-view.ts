@@ -1,7 +1,7 @@
 import { View } from '../../../types/view'
 import { PreactViewComponent } from '../../../types/preact-view-component'
 import { createElement, render as renderPreact } from 'preact'
-import CalendarAppSingleton from '../app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 
 class PreactView implements View {
