@@ -1,4 +1,4 @@
-import { doubleDigit } from '../date-time-mutation/date-time-mutation'
+import { doubleDigit } from '../date-time-mutation/double-digit'
 
 export const toDateString = (date: Date): string => {
   return `${date.getFullYear()}-${doubleDigit(
