@@ -9,7 +9,7 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   root: true,
   rules: {
-    'max-lines': ['error', 100],
+    'max-lines': ['error', 150],
     '@typescript-eslint/no-empty-interface': 'off',
   },
   ignorePatterns: ['**/dist/**'],
