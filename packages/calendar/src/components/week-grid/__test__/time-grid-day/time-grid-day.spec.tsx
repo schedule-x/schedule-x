@@ -1,29 +1,13 @@
-/* eslint-disable max-lines */
 import {
   afterEach,
   describe,
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createCalendarAppSingleton } from '../../../factory'
-import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { cleanup, render } from '@testing-library/preact'
-import TimeGridDay from '../time-grid-day'
-import { AppContext } from '../../../utils/stateful/app-context'
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import CalendarEventBuilder from '../../../utils/stateful/calendar-event/calendar-event.builder'
-
-const factory = (
-  $app: CalendarAppSingleton,
-  calendarEvents: CalendarEventInternal[],
-  date: string
-) => {
-  render(
-    <AppContext.Provider value={$app}>
-      <TimeGridDay calendarEvents={calendarEvents} date={date} />
-    </AppContext.Provider>
-  )
-}
+import { createCalendarAppSingleton } from '../../../../factory'
+import { cleanup } from '@testing-library/preact'
+import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/calendar-event.builder'
+import { factory } from './utils'
 
 describe('TimeGridDay', () => {
   afterEach(() => {
