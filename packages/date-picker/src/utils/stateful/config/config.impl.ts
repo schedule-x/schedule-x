@@ -1,13 +1,13 @@
-import DatePickerConfigInternal from './config.interface'
+import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import {
   DEFAULT_FIRST_DAY_OF_WEEK,
   DEFAULT_LOCALE,
 } from '@schedule-x/shared/src/values'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import { Placement } from '../../../enums/placement.enum'
-import { DatePickerListeners } from './listeners.interface'
-import { DatePickerStyle } from './style.interface'
+import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
+import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
+import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
 
 export class ConfigImpl implements DatePickerConfigInternal {
   constructor(

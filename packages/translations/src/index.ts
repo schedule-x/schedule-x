@@ -26,8 +26,6 @@ const datePickerTranslations = {
   zhCN: datePickerZhCN,
 }
 
-export type TranslateFn = (key: string) => string
-
 export {
   translate,
   translations,

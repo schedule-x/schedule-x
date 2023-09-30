@@ -6,11 +6,11 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendarAppSingleton } from '../../../factory'
-import CalendarAppSingleton from '../../../utils/stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { cleanup, render } from '@testing-library/preact'
 import TimeGridDay from '../time-grid-day'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarEventBuilder from '../../../utils/stateful/calendar-event/calendar-event.builder'
 
 const factory = (

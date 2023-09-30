@@ -1,7 +1,7 @@
 import AppWrapper from '@schedule-x/date-picker/src/components/app-wrapper'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
-import DatePickerAppSingletonBuilder from '@schedule-x/date-picker/src/utils/stateful/app-singleton/date-picker-app-singleton.builder'
+import DatePickerAppSingletonBuilder from '@schedule-x/shared/src/utils/stateful/date-picker/app-singleton/date-picker-app-singleton.builder'
 import RangeHeading from './range-heading'
 import TodayButton from './today-button'
 import ViewSelection from './view-selection'

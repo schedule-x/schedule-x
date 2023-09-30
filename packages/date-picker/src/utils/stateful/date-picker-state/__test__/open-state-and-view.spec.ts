@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 
-import { DatePickerView } from '../../../../enums/date-picker-view.enum'
+import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/date-picker-view.enum'
 import { createDatePickerState } from '../date-picker-state.impl'
 import { __createInternalConfig__ as config } from '../../../stateless/testing/factories/create-internal-config'
 

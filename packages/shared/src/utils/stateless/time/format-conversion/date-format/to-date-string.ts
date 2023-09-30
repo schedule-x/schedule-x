@@ -3,9 +3,9 @@ import {
   DateFormatDelimiter as Delimiter,
   DateFormatOrder as Order,
 } from '../../../../../enums/time/date-format'
-import { doubleDigit } from '../../date-time-mutation/date-time-mutation'
 import { LocaleNotSupportedError } from '../../../errors/locale-not-supported.error'
 import { InvalidDateFormatError } from '../../../errors/invalid-date-format.error'
+import { doubleDigit } from '../../date-time-mutation/double-digit'
 
 const _getMatchesOrThrow = (
   format: string,

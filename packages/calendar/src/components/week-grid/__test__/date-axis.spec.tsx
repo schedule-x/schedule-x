@@ -11,7 +11,7 @@ import { cleanup, render, screen } from '@testing-library/preact'
 import DateAxis from '../date-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { createCalendarAppSingleton } from '../../../factory'
-import CalendarAppSingleton from '../../../utils/stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 const factory = ($app: CalendarAppSingleton, week: Date[]) => {
   render(

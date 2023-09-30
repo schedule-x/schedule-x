@@ -1,4 +1,4 @@
-import { EventId } from '../types/event-id'
+import { EventId } from '../../types/event-id'
 
 export type CalendarEventTime = {
   start: string

@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import TodayButton from '../../today-button'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import CalendarAppSingleton from '../../../../utils/stateful/app-singleton/calendar-app-singleton'
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 const factory = ($app: CalendarAppSingleton) => {
   render(

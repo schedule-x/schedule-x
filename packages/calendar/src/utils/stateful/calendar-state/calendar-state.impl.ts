@@ -1,8 +1,8 @@
-import CalendarState from './calendar-state.interface'
+import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
 import { Signal, signal } from '@preact/signals'
 import { ViewName } from '../../../types/view-name'
 import { DateRange } from '../../../types/date-range'
-import CalendarConfigInternal from '../config/calendar-config'
+import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { InternalViewName } from '../../../enums/internal-view.enum'
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import {

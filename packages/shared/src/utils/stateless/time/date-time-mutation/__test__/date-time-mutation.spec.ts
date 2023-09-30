@@ -4,12 +4,12 @@ import {
   expect,
 } from '../../../testing/unit/unit-testing-library.impl'
 import {
-  doubleDigit,
   getFirstDayOfNextMonth,
   getFirstDayOPreviousMonth,
   setDateOfMonth,
 } from '../date-time-mutation'
 import { NumberRangeError } from '../../../errors/number-range.error'
+import { doubleDigit } from '../double-digit'
 
 describe('date time mutation', () => {
   describe('doubleDigit', () => {
