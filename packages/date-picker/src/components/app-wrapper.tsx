@@ -1,4 +1,4 @@
-import DatePickerAppSingleton from '../utils/stateful/app-singleton/date-picker-app.singleton'
+import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 import { AppContext } from '../utils/stateful/app-context'
 import AppInput from './app-input'
 import AppPopup from './app-popup'

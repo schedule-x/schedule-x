@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'preact/compat'
-import { DatePickerView } from '../enums/date-picker-view.enum'
+import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/date-picker-view.enum'
 import MonthView from './month-view'
 import YearsView from './years-view'
 import { AppContext } from '../utils/stateful/app-context'

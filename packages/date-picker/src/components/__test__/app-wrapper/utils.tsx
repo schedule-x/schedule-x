@@ -1,6 +1,6 @@
 import { expect } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { render, screen, waitFor } from '@testing-library/preact'
-import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
+import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 import AppWrapper from '../../app-wrapper'
 
 export const DATE_PICKER_POPUP_TEST_ID = 'date-picker-popup'

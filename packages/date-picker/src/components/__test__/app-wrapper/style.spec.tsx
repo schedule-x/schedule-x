@@ -7,7 +7,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, render } from '@testing-library/preact'
 import AppWrapper from '../../app-wrapper'
-import DatePickerAppSingleton from '../../../utils/stateful/app-singleton/date-picker-app.singleton'
+import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 import { getAppWrapper } from './utils'
 import { createAppSingleton } from '../../../factory'
 
