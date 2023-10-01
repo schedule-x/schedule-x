@@ -30,12 +30,12 @@ export default function DateGridEvent({ calendarEvent, gridRow }: props) {
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
     setEventCopy(newEventCopy)
 
-    $app.config.plugins.dragAndDrop.createDateGridDragHandler(
+    $app.config.plugins.dragAndDrop.createDateGridDragHandler({
+      event: e,
+      eventCopy: newEventCopy,
+      updateCopy,
       $app,
-      e,
-      newEventCopy,
-      updateCopy
-    )
+    })
   }
 
   return (

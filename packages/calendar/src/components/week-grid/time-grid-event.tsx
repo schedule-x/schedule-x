@@ -72,10 +72,12 @@ export default function TimeGridEvent({
     setEventCopy(newEventCopy)
 
     $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
-      $app,
-      e,
-      newEventCopy,
-      updateCopy,
+      {
+        $app,
+        event: e,
+        updateCopy,
+        eventCopy: newEventCopy,
+      },
       dayBoundariesDateTime
     )
   }
