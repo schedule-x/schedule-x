@@ -39,7 +39,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
 
   private init() {
     document.addEventListener('mousemove', this.handleMouseMove)
-    // document.addEventListener('mouseup', this.handleMouseUp, { once: true })
+    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
   }
 
   private handleMouseMove = (e: MouseEvent) => {
@@ -56,6 +56,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
 
     this.eventCopy.time.start = newStart
     this.eventCopy.time.end = newEnd
+    // todo: calculate _nDaysInGrid anew for eventCopy
     console.log(this.eventCopy.time)
     this.updateCopy(this.eventCopy)
     this.lastDaysDiff = currentDaysDiff
