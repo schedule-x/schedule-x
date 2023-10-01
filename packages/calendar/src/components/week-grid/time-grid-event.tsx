@@ -68,13 +68,13 @@ export default function TimeGridEvent({
     if (!e.target) return
     if (!$app.config.plugins.dragAndDrop) return
 
-    const eventCopy = deepCloneEvent(calendarEvent, $app)
-    setEventCopy(eventCopy)
+    const newEventCopy = deepCloneEvent(calendarEvent, $app)
+    setEventCopy(newEventCopy)
 
     $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
       $app,
       e,
-      eventCopy,
+      newEventCopy,
       updateCopy,
       dayBoundariesDateTime
     )

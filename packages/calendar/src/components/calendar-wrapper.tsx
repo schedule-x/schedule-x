@@ -27,6 +27,12 @@ export default function CalendarWrapper({ $app }: props) {
   }
   useEffect(changeView, [$app.calendarState.view.value])
 
+  useEffect(() => {
+    $app.elements.calendarWrapper = document.querySelector(
+      '.sx__calendar-wrapper'
+    ) as HTMLDivElement
+  }, [])
+
   return (
     <>
       <div className={'sx__calendar-wrapper'}>
