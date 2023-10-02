@@ -6,9 +6,13 @@ export const deepCloneEvent = (
   calendarEvent: CalendarEventInternal,
   $app: CalendarAppSingleton
 ) => {
-  return new CalendarEventBuilder($app.config, calendarEvent.id, {
-    ...calendarEvent.time,
-  })
+  const calendarEventInternal = new CalendarEventBuilder(
+    $app.config,
+    calendarEvent.id,
+    {
+      ...calendarEvent.time,
+    }
+  )
     .withTitle(calendarEvent.title)
     .withPeople(calendarEvent.people)
     .withCalendarId(calendarEvent.calendarId)
@@ -18,4 +22,7 @@ export const deepCloneEvent = (
     .withLocation(calendarEvent.location)
     .withDescription(calendarEvent.description)
     .build()
+  calendarEventInternal._nDaysInGrid = calendarEvent._nDaysInGrid
+
+  return calendarEventInternal
 }

@@ -48,6 +48,10 @@ $overflow-indicator-width: 10px;
     height: 100%;
     z-index: 1;
   }
+
+  .sx__date-grid-event--copy {
+    z-index: 2;
+  }
 }
 
 .sx__date-grid-cell {

@@ -4,13 +4,19 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DateRange } from '../../types/date-range'
+import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 
 type props = {
   calendarEvent: CalendarEventInternal
   gridRow: number
+  isCopy?: boolean
 }
 
-export default function DateGridEvent({ calendarEvent, gridRow }: props) {
+export default function DateGridEvent({
+  calendarEvent,
+  gridRow,
+  isCopy,
+}: props) {
   const $app = useContext(AppContext)
 
   const [eventCopy, setEventCopy] = useState<CalendarEventInternal>()
@@ -55,14 +61,22 @@ export default function DateGridEvent({ calendarEvent, gridRow }: props) {
   return (
     <>
       <div
+        id={
+          isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
+        }
         onMouseDown={handleMouseDown}
-        className={'sx__date-grid-event sx__date-grid-cell'}
+        className={
+          'sx__date-grid-event sx__date-grid-cell' +
+          (isCopy ? ' sx__date-grid-event--copy' : '')
+        }
         style={{
           width: `calc(${
             calendarEvent._nDaysInGrid! * 100
           }% - ${widthToSubtract}px)`,
           gridRow,
           ...eventCSSVariables,
+          opacity: eventCopy ? 0 : 1,
+          display: eventCopy ? 'none' : 'flex',
           borderLeft: hasOverflowLeft ? 'none' : eventCSSVariables.borderLeft,
           borderBottomLeftRadius: hasOverflowLeft ? 0 : undefined,
           borderTopLeftRadius: hasOverflowLeft ? 0 : undefined,
@@ -86,6 +100,14 @@ export default function DateGridEvent({ calendarEvent, gridRow }: props) {
           />
         )}
       </div>
+
+      {eventCopy && (
+        <DateGridEvent
+          calendarEvent={eventCopy}
+          gridRow={gridRow}
+          isCopy={true}
+        />
+      )}
     </>
   )
 }
