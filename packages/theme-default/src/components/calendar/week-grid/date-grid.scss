@@ -30,24 +30,25 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
     margin-right: $event-overflow-margin;
   }
 
-  .sx__date-grid-event--left-overflow {
+  @mixin event-overflow-indicator {
     position: absolute;
-    left: $overflow-indicator-inline-position;
-    clip-path: polygon(100% 0, 0 50%, 100% 100%, 100% 0);
-    background-color: #00a400;
+    z-index: 1;
     width: $overflow-indicator-width;
     height: 100%;
-    z-index: 1;
+  }
+
+  .sx__date-grid-event--left-overflow {
+    @include event-overflow-indicator;
+
+    left: $overflow-indicator-inline-position;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%, 100% 0);
   }
 
   .sx__date-grid-event--right-overflow {
-    position: absolute;
+    @include event-overflow-indicator;
+
     right: $overflow-indicator-inline-position;
     clip-path: polygon(0 0, 100% 50%, 0 100%, 0 0);
-    background-color: #00a400;
-    width: $overflow-indicator-width;
-    height: 100%;
-    z-index: 1;
   }
 
   &.sx__date-grid-event--copy {
