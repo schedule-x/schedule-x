@@ -49,8 +49,9 @@ $overflow-indicator-width: 10px;
     z-index: 1;
   }
 
-  .sx__date-grid-event--copy {
+  &.sx__date-grid-event--copy {
     z-index: 2;
+    box-shadow: var(--sx-box-shadow-level3);
   }
 }
 

@@ -59,7 +59,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
 
     this.eventCopy.time.start = newStart
     this.eventCopy.time.end = newEnd
-    // todo: calculate _nDaysInGrid anew for eventCopy
     const newStartIsInWeek =
       newStartDate >= this.rangeStartDate && newStartDate <= this.rangeEndDate
     const firstDateInGrid = newStartIsInWeek
@@ -68,7 +67,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     const lastDateIsInGrid =
       newEndDate >= this.rangeStartDate && newEndDate <= this.rangeEndDate
     const lastDateInGrid = lastDateIsInGrid ? newEndDate : this.rangeEndDate
-    // calculate days between firstDateInGrid and lastDateInGrid
     const nDaysInGrid =
       Math.round(
         (new Date(lastDateInGrid).getTime() -
@@ -84,11 +82,8 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     this.lastNDaysInGrid = nDaysInGrid
   }
 
-  // copied from time-grid-drag-handler
   private transformEventCopyPosition(newStartDate: string) {
-    // newStartDate - originalStartDate = daysToShift
     const dateFromOriginalStart = dateFromDateTime(this.originalStart)
-
     const daysToShift = Math.round(
       (new Date(newStartDate).getTime() -
         new Date(
@@ -98,13 +93,9 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
         ).getTime()) /
         (1000 * 60 * 60 * 24)
     )
-    console.log(daysToShift)
     const copyElement = this.$app.elements.calendarWrapper!.querySelector(
       '#' + getTimeGridEventCopyElementId(this.eventCopy.id)
     ) as HTMLDivElement
-    console.log(
-      `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
-    )
     copyElement.style.transform = `translateX(calc(${
       daysToShift * this.dayWidth
     }px + ${daysToShift}px))`
