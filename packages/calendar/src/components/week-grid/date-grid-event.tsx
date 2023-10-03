@@ -9,6 +9,7 @@ import {
   getBorderRadius,
   getWidthToSubtract,
 } from '../../utils/stateless/events/date-grid-event-styles'
+import useDraggableEvent from '../../utils/stateful/hooks/use-draggable-event'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -23,12 +24,7 @@ export default function DateGridEvent({
 }: props) {
   const $app = useContext(AppContext)
 
-  const [eventCopy, setEventCopy] = useState<CalendarEventInternal>()
-  const updateCopy = (newCopy: CalendarEventInternal | undefined) => {
-    if (!newCopy) return setEventCopy(undefined)
-
-    setEventCopy(deepCloneEvent(newCopy, $app))
-  }
+  const { eventCopy, updateCopy } = useDraggableEvent($app)
 
   const eventCSSVariables = {
     borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
@@ -40,7 +36,7 @@ export default function DateGridEvent({
     if (!$app.config.plugins.dragAndDrop) return
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
-    setEventCopy(newEventCopy)
+    updateCopy(newEventCopy)
 
     $app.config.plugins.dragAndDrop.createDateGridDragHandler({
       event: e,
