@@ -4,6 +4,7 @@ import { AppContext } from '../utils/stateful/app-context'
 import { useEffect, useState } from 'preact/compat'
 import { View } from '../types/view'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
+import { setWrapperElement } from '../utils/stateless/dom/set-wrapper-element'
 
 type props = {
   $app: CalendarAppSingleton
@@ -27,11 +28,7 @@ export default function CalendarWrapper({ $app }: props) {
   }
   useEffect(changeView, [$app.calendarState.view.value])
 
-  useEffect(() => {
-    $app.elements.calendarWrapper = document.querySelector(
-      '.sx__calendar-wrapper'
-    ) as HTMLDivElement
-  }, [])
+  useEffect(() => setWrapperElement($app), [])
 
   return (
     <>
