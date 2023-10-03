@@ -9,6 +9,8 @@
 
   &.is-event-copy {
     opacity: 0.5;
+    box-shadow: var(--sx-box-shadow-level3);
+    z-index: 1;
   }
 }
 
