@@ -11,6 +11,7 @@ type props = {
 }
 
 export default function CalendarWrapper({ $app }: props) {
+  const calendarId = randomStringId()
   const viewContainerId = randomStringId()
   const [currentView, setCurrentView] = useState<View | null>()
 
@@ -28,11 +29,11 @@ export default function CalendarWrapper({ $app }: props) {
   }
   useEffect(changeView, [$app.calendarState.view.value])
 
-  useEffect(() => setWrapperElement($app), [])
+  useEffect(() => setWrapperElement($app, calendarId), [])
 
   return (
     <>
-      <div className={'sx__calendar-wrapper'}>
+      <div className={'sx__calendar-wrapper'} id={calendarId}>
         <div className={'sx__calendar'}>
           <AppContext.Provider value={$app}>
             <CalendarHeader />

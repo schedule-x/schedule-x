@@ -8,6 +8,7 @@ import { setDateInDateTimeString } from '@schedule-x/shared/src/utils/stateless/
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
+import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly originalStart: string
@@ -138,11 +139,6 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private updateOriginalEvent() {
     if (this.lastIntervalDiff === 0 && this.lastDaysDiff === 0) return
 
-    const indexOfEventToUpdate = this.$app.calendarEvents.list.value.findIndex(
-      (event) => event.id === this.eventCopy.id
-    )
-    const updatedList = [...this.$app.calendarEvents.list.value]
-    updatedList.splice(indexOfEventToUpdate, 1, this.eventCopy)
-    this.$app.calendarEvents.list.value = updatedList
+    replaceOriginalWithCopy(this.$app, this.eventCopy)
   }
 }

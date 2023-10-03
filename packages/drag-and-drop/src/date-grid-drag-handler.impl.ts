@@ -5,6 +5,11 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import { DateRange } from '@schedule-x/calendar/src/types/date-range'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
+import { getTimeGridDayWidth } from './utils/stateless/get-time-grid-day-width'
+import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
+import { getDateGridEventCopy } from './utils/stateless/get-date-grid-event-copy'
+
+const MS_PER_DAY = 1000 * 60 * 60 * 24
 
 export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private readonly startX: number
@@ -13,7 +18,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private readonly originalEnd: string
   private readonly rangeStartDate: string
   private readonly rangeEndDate: string
-  private lastNDaysInGrid: number
   private lastDaysDiff = 0
 
   constructor(
@@ -23,11 +27,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void
   ) {
     this.startX = event.clientX
-    this.dayWidth = (
-      this.$app.elements.calendarWrapper!.querySelector(
-        '.sx__time-grid-day'
-      ) as HTMLDivElement
-    ).clientWidth
+    this.dayWidth = getTimeGridDayWidth(this.$app)
     this.originalStart = this.eventCopy.time.start
     this.originalEnd = this.eventCopy.time.end
     this.rangeStartDate = dateFromDateTime(
@@ -36,7 +36,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     this.rangeEndDate = dateFromDateTime(
       (this.$app.calendarState.range.value as DateRange).end
     )
-    this.lastNDaysInGrid = this.eventCopy._nDaysInGrid as number
     this.init()
   }
 
@@ -67,19 +66,22 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     const lastDateIsInGrid =
       newEndDate >= this.rangeStartDate && newEndDate <= this.rangeEndDate
     const lastDateInGrid = lastDateIsInGrid ? newEndDate : this.rangeEndDate
-    const nDaysInGrid =
+    this.eventCopy._nDaysInGrid =
       Math.round(
         (new Date(lastDateInGrid).getTime() -
           new Date(firstDateInGrid).getTime()) /
-          (1000 * 60 * 60 * 24)
+          MS_PER_DAY
       ) + 1
 
-    this.eventCopy._nDaysInGrid = nDaysInGrid
+    /**
+     * Transitioning the position sideways is not necessary as long as the start date is earlier than the first date in the grid.
+     * While moving an event during a state as such, it will optically look as if its position is transitioned, since the event width is increased and decreased
+     * as the event is moved.
+     * */
     if (newStartDate >= this.rangeStartDate)
       this.transformEventCopyPosition(newStartDate)
     this.updateCopy(this.eventCopy)
     this.lastDaysDiff = currentDaysDiff
-    this.lastNDaysInGrid = nDaysInGrid
   }
 
   private transformEventCopyPosition(newStartDate: string) {
@@ -91,12 +93,12 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
             ? dateFromOriginalStart
             : this.rangeStartDate
         ).getTime()) /
-        (1000 * 60 * 60 * 24)
+        MS_PER_DAY
     )
-    const copyElement = this.$app.elements.calendarWrapper!.querySelector(
-      '#' + getTimeGridEventCopyElementId(this.eventCopy.id)
-    ) as HTMLDivElement
-    copyElement.style.transform = `translateX(calc(${
+    getDateGridEventCopy(
+      this.$app,
+      this.eventCopy
+    ).style.transform = `translateX(calc(${
       daysToShift * this.dayWidth
     }px + ${daysToShift}px))`
   }
@@ -110,12 +112,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private updateOriginalEvent() {
     if (this.lastDaysDiff === 0) return
 
-    // todo: reuse from time-grid-drag-handler instead of copy-pasting
-    const indexOfEventToUpdate = this.$app.calendarEvents.list.value.findIndex(
-      (event) => event.id === this.eventCopy.id
-    )
-    const updatedList = [...this.$app.calendarEvents.list.value]
-    updatedList.splice(indexOfEventToUpdate, 1, this.eventCopy)
-    this.$app.calendarEvents.list.value = updatedList
+    replaceOriginalWithCopy(this.$app, this.eventCopy)
   }
 }

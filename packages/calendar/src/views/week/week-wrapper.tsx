@@ -60,10 +60,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
 
               <div className="sx__date-grid">
                 {Object.values(weekDayContexts).map((dayContext) => (
-                  <DateGridDay
-                    calendarEvents={dayContext.dateGridEvents}
-                    key={dayContext.date + new Date().getTime()}
-                  />
+                  <DateGridDay calendarEvents={dayContext.dateGridEvents} />
                 ))}
               </div>
 
