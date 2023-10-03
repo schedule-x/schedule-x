@@ -13,6 +13,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private readonly originalEnd: string
   private readonly rangeStartDate: string
   private readonly rangeEndDate: string
+  private lastNDaysInGrid: number
   private lastDaysDiff = 0
 
   constructor(
@@ -35,6 +36,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     this.rangeEndDate = dateFromDateTime(
       (this.$app.calendarState.range.value as DateRange).end
     )
+    this.lastNDaysInGrid = this.eventCopy._nDaysInGrid as number
     this.init()
   }
 
@@ -73,22 +75,39 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
           new Date(firstDateInGrid).getTime()) /
           (1000 * 60 * 60 * 24)
       ) + 1
-    console.log(nDaysInGrid)
-    this.eventCopy._nDaysInGrid = nDaysInGrid
 
-    this.transformEventCopyPosition(currentDaysDiff)
+    this.eventCopy._nDaysInGrid = nDaysInGrid
+    if (newStartDate >= this.rangeStartDate)
+      this.transformEventCopyPosition(newStartDate)
     this.updateCopy(this.eventCopy)
     this.lastDaysDiff = currentDaysDiff
+    this.lastNDaysInGrid = nDaysInGrid
   }
 
   // copied from time-grid-drag-handler
-  private transformEventCopyPosition(totalDaysDiff: number) {
+  private transformEventCopyPosition(newStartDate: string) {
+    // newStartDate - originalStartDate = daysToShift
+    const dateFromOriginalStart = dateFromDateTime(this.originalStart)
+
+    const daysToShift = Math.round(
+      (new Date(newStartDate).getTime() -
+        new Date(
+          dateFromOriginalStart >= this.rangeStartDate
+            ? dateFromOriginalStart
+            : this.rangeStartDate
+        ).getTime()) /
+        (1000 * 60 * 60 * 24)
+    )
+    console.log(daysToShift)
     const copyElement = this.$app.elements.calendarWrapper!.querySelector(
       '#' + getTimeGridEventCopyElementId(this.eventCopy.id)
     ) as HTMLDivElement
+    console.log(
+      `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
+    )
     copyElement.style.transform = `translateX(calc(${
-      totalDaysDiff * this.dayWidth
-    }px + ${totalDaysDiff}px))`
+      daysToShift * this.dayWidth
+    }px + ${daysToShift}px))`
   }
 
   private handleMouseUp = () => {
