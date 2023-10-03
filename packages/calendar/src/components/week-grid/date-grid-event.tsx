@@ -5,6 +5,10 @@ import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DateRange } from '../../types/date-range'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
+import {
+  getBorderRadius,
+  getWidthToSubtract,
+} from '../../utils/stateless/events/date-grid-event-styles'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -53,10 +57,6 @@ export default function DateGridEvent({
     dateFromDateTime(calendarEvent.time.end) >
     dateFromDateTime(($app.calendarState.range.value as DateRange).end)
   const overflowStyles = { backgroundColor: eventCSSVariables.backgroundColor }
-  let widthToSubtract = 0
-  if (hasOverflowLeft) widthToSubtract += 10
-  if (hasOverflowRight) widthToSubtract += 10
-  widthToSubtract += 2 // for all events, to leave some space between them
 
   return (
     <>
@@ -72,16 +72,12 @@ export default function DateGridEvent({
         style={{
           width: `calc(${
             calendarEvent._nDaysInGrid! * 100
-          }% - ${widthToSubtract}px)`,
+          }% - ${getWidthToSubtract(hasOverflowLeft, hasOverflowRight)}px)`,
           gridRow,
           ...eventCSSVariables,
-          opacity: eventCopy ? 0 : 1,
           display: eventCopy ? 'none' : 'flex',
           borderLeft: hasOverflowLeft ? 'none' : eventCSSVariables.borderLeft,
-          borderBottomLeftRadius: hasOverflowLeft ? 0 : undefined,
-          borderTopLeftRadius: hasOverflowLeft ? 0 : undefined,
-          borderBottomRightRadius: hasOverflowRight ? 0 : undefined,
-          borderTopRightRadius: hasOverflowRight ? 0 : undefined,
+          ...getBorderRadius(hasOverflowLeft, hasOverflowRight),
         }}
       >
         {hasOverflowLeft && (

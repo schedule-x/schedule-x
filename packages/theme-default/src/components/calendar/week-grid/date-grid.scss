@@ -1,5 +1,6 @@
 $overflow-indicator-inline-position: -10px;
 $overflow-indicator-width: 10px;
+$event-overflow-margin: 10px; // CORRELATION ID: 1
 
 .sx__date-grid {
   display: flex;
@@ -22,11 +23,11 @@ $overflow-indicator-width: 10px;
   font-weight: 600;
 
   &:has(.sx__date-grid-event--left-overflow) {
-    margin-left: 10px;
+    margin-left: $event-overflow-margin;
   }
 
   &:has(.sx__date-grid-event--right-overflow) {
-    margin-right: 10px;
+    margin-right: $event-overflow-margin;
   }
 
   .sx__date-grid-event--left-overflow {
