@@ -1,3 +1,7 @@
+$overflow-indicator-inline-position: -10px;
+$overflow-indicator-width: 10px;
+$event-overflow-margin: 10px; // CORRELATION ID: 1
+
 .sx__date-grid {
   display: flex;
   padding-left: var(--sx-calendar-week-grid-padding-left);
@@ -10,12 +14,47 @@
 }
 
 .sx__date-grid-event {
+  position: relative;
   display: flex;
   align-items: center;
   padding: var(--sx-spacing-padding1);
   border-radius: var(--sx-rounding-extra-small);
   font-size: clamp(12px, var(--sx-font-extra-small), 14px);
   font-weight: 600;
+
+  &:has(.sx__date-grid-event--left-overflow) {
+    margin-left: $event-overflow-margin;
+  }
+
+  &:has(.sx__date-grid-event--right-overflow) {
+    margin-right: $event-overflow-margin;
+  }
+
+  @mixin event-overflow-indicator {
+    position: absolute;
+    z-index: 1;
+    width: $overflow-indicator-width;
+    height: 100%;
+  }
+
+  .sx__date-grid-event--left-overflow {
+    @include event-overflow-indicator;
+
+    left: $overflow-indicator-inline-position;
+    clip-path: polygon(100% 0, 0 50%, 100% 100%, 100% 0);
+  }
+
+  .sx__date-grid-event--right-overflow {
+    @include event-overflow-indicator;
+
+    right: $overflow-indicator-inline-position;
+    clip-path: polygon(0 0, 100% 50%, 0 100%, 0 0);
+  }
+
+  &.sx__date-grid-event--copy {
+    z-index: 2;
+    box-shadow: var(--sx-box-shadow-level3);
+  }
 }
 
 .sx__date-grid-cell {

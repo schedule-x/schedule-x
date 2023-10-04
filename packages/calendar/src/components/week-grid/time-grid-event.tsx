@@ -17,6 +17,7 @@ import TimeIcon from '../icons/time-icon'
 import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
+import useDraggableEvent from '../../utils/stateful/hooks/use-draggable-event'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -31,12 +32,7 @@ export default function TimeGridEvent({
 }: props) {
   const $app = useContext(AppContext)
 
-  const [eventCopy, setEventCopy] = useState<CalendarEventInternal>()
-  const updateCopy = (newCopy: CalendarEventInternal | undefined) => {
-    if (!newCopy) return setEventCopy(undefined)
-
-    setEventCopy(deepCloneEvent(newCopy, $app))
-  }
+  const { eventCopy, updateCopy } = useDraggableEvent($app)
 
   const localizeArgs = [
     $app.config.locale,
@@ -68,14 +64,16 @@ export default function TimeGridEvent({
     if (!e.target) return
     if (!$app.config.plugins.dragAndDrop) return
 
-    const eventCopy = deepCloneEvent(calendarEvent, $app)
-    setEventCopy(eventCopy)
+    const newEventCopy = deepCloneEvent(calendarEvent, $app)
+    updateCopy(newEventCopy)
 
     $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
-      $app,
-      e,
-      eventCopy,
-      updateCopy,
+      {
+        $app,
+        event: e,
+        updateCopy,
+        eventCopy: newEventCopy,
+      },
       dayBoundariesDateTime
     )
   }

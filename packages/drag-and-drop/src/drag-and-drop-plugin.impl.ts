@@ -1,9 +1,10 @@
 import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-and-drop-plugin.interface'
-import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import TimeGridDragHandlerImpl from './time-grid-drag-handler.impl'
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
+import DateGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/date-grid-drag-handler.interface'
+import DateGridDragHandlerImpl from './date-grid-drag-handler.impl'
+import DragHandlerDependencies from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-handler-dependencies.interface'
 
 class DragAndDropPluginImpl implements DragAndDropPlugin {
   name = PluginName.DragAndDrop
@@ -11,17 +12,14 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
   constructor(private minutesPerInterval: number) {}
 
   createTimeGridDragHandler(
-    $app: CalendarAppSingleton,
-    event: MouseEvent,
-    eventCopy: CalendarEventInternal,
-    updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
+    dependencies: DragHandlerDependencies,
     dayBoundariesDateTime: DayBoundariesDateTime
   ): TimeGridDragHandlerImpl {
     return new TimeGridDragHandlerImpl(
-      $app,
-      event,
-      eventCopy,
-      updateCopy,
+      dependencies.$app,
+      dependencies.event,
+      dependencies.eventCopy,
+      dependencies.updateCopy,
       dayBoundariesDateTime,
       this.getTimePointsForIntervalConfig()
     )
@@ -31,6 +29,17 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
     if (this.minutesPerInterval === 60) return 100
     if (this.minutesPerInterval === 30) return 50
     return 25
+  }
+
+  createDateGridDragHandler(
+    dependencies: DragHandlerDependencies
+  ): DateGridDragHandler {
+    return new DateGridDragHandlerImpl(
+      dependencies.$app,
+      dependencies.event,
+      dependencies.eventCopy,
+      dependencies.updateCopy
+    )
   }
 }
 
