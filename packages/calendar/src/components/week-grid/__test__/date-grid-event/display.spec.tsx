@@ -61,4 +61,28 @@ describe('display value of date grid event element', () => {
       })
     })
   })
+
+  describe('event copy when not in drag state', () => {
+    it('should not display event copy', () => {
+      factory($app, oneDayEventId, 1)
+      const eventCopy = document.querySelector('.sx__date-grid-event--copy')
+
+      expect(eventCopy).toBeNull()
+    })
+  })
+
+  describe('event copy when in drag state', () => {
+    it('should display event copy', async () => {
+      factory($app, oneDayEventId, 1)
+      const oneDayEvent = screen.getByText(oneDayEventTitle)
+
+      const mouseDownEvent = new MouseEvent('mousedown', {})
+      oneDayEvent.dispatchEvent(mouseDownEvent)
+
+      await waitFor(() => {
+        const eventCopy = document.querySelector('.sx__date-grid-event--copy')
+        expect(eventCopy).not.toBeNull()
+      })
+    })
+  })
 })
