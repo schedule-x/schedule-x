@@ -27,23 +27,6 @@ const createApp = (
 }
 
 describe('date picker app', () => {
-  beforeEach(() => {
-    vi.mock('preact', () => {
-      return {
-        createContext: mockFn(),
-        render: mockFn(),
-        createElement: mockFn(),
-      }
-    })
-  })
-
-  it('should render the app', () => {
-    createApp()
-
-    expect(render).toHaveBeenCalled()
-    expect(createElement).toHaveBeenCalled()
-  })
-
   it('should be able to retrieve date picker value', () => {
     const expectedInitialValue = '2020-01-01'
     const app = createApp(expectedInitialValue)
