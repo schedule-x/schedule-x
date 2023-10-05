@@ -9,6 +9,7 @@ import { afterEach } from 'vitest'
 import { factory } from './utils'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 
+// TODO: move to package-neutral location
 describe('style attribute "display" of date grid event element', () => {
   afterEach(() => {
     cleanup()

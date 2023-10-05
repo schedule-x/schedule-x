@@ -1,11 +1,25 @@
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { useEffect } from 'preact/compat'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
+import { EventModalProps } from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
+import { createClickOutsideListener } from './utils/stateless/click-outside'
 
-type props = { calendarEvent: CalendarEventInternal }
+export default function EventModal({ calendarEvent, $app }: EventModalProps) {
+  const modalId = randomStringId()
 
-export default function EventModal({ calendarEvent }: props) {
+  useEffect(() => {
+    const clickOutsideListener = createClickOutsideListener($app, modalId)
+    document.addEventListener('click', clickOutsideListener)
+    return () => {
+      console.log('unmount modal')
+      document.removeEventListener('click', clickOutsideListener)
+    }
+  }, [])
+
   return (
     <>
-      <div className={'sx__event-modal'}>event with id {calendarEvent.id}</div>
+      <div id={modalId} className={'sx__event-modal'}>
+        event with id {calendarEvent.id}
+      </div>
     </>
   )
 }
