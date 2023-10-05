@@ -7,12 +7,13 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [preact()],
   test: {
-    environment: 'happy-dom',
+    environment: 'jsdom',
     coverage: {
       provider: 'istanbul',
       extension: ['.ts', '.tsx'],
       reporter: ['text', 'html', 'lcov', 'text-summary'],
     },
+    useAtomics: true,
   },
   build: {
     rollupOptions: {

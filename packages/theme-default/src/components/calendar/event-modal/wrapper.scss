@@ -12,4 +12,19 @@
     0 11px 15px -7px rgb(0 0 0 / 20%);
   border-radius: var(--sx-rounding-small);
   z-index: 1;
+  animation: animate-dialog;
+  animation-duration: 0.3s;
+}
+
+// write animation for sliding in from top once the modal is open
+@keyframes animate-dialog {
+  from {
+    opacity: 0;
+    transform: translateX(var(--sx-event-modal-animation-start));
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
