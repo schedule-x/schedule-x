@@ -15,7 +15,9 @@
     "dist"
   ],
   "dependencies": {
-    "@schedule-x/shared": "^0.1.0-alpha.4"
+    "@preact/signals": "^1.1.5",
+    "@schedule-x/shared": "^0.1.0-alpha.4",
+    "preact": "^10.16.0"
   },
   "repository": {
     "type": "git",

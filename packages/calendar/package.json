@@ -15,6 +15,7 @@
     "dist"
   ],
   "dependencies": {
+    "@preact/signals": "^1.1.5",
     "@schedule-x/date-picker": "^0.1.0-alpha.4",
     "@schedule-x/drag-and-drop": "^0.1.0-alpha.4",
     "@schedule-x/shared": "^0.1.0-alpha.4",

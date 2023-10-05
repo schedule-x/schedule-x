@@ -23,11 +23,23 @@ export default function useDraggableEvent($app: CalendarAppSingleton) {
   }
 
   const setClickedEventIfNotDragging = (
-    calendarEvent: CalendarEventInternal
+    calendarEvent: CalendarEventInternal,
+    mouseEvent: MouseEvent
   ) => {
     if (dragStartTimeout) {
       clearTimeout(dragStartTimeout)
-      $app.calendarState.setLastClickedEvent(calendarEvent)
+
+      if ($app.config.plugins.eventModal) {
+        const eventTarget = mouseEvent.target as HTMLElement
+        const targetIsEventElement = eventTarget.classList.contains('sx__event')
+        const eventElement = targetIsEventElement
+          ? eventTarget
+          : eventTarget.closest('.sx__event')
+        $app.config.plugins.eventModal.setCalendarEvent(
+          calendarEvent,
+          eventElement as HTMLElement
+        )
+      }
     }
     setDragStartTimeout(undefined)
   }

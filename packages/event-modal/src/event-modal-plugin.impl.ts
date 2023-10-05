@@ -1,11 +1,33 @@
 import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import EventModal from './event-modal'
+import { signal } from '@preact/signals'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
-class EventModalPluginImpl implements EventModalPlugin {
-  name = PluginName.EventModal
+export const createEventModalPlugin = (): EventModalPlugin => {
+  const calendarEvent = signal<CalendarEventInternal | null>(null)
+  const calendarEventElement = signal<HTMLElement | null>(null)
 
-  ComponentFn = EventModal
+  return {
+    name: PluginName.EventModal,
+    calendarEvent,
+    calendarEventElement,
+    ComponentFn: EventModal,
+    setCalendarEvent: (
+      event: CalendarEventInternal,
+      eventTarget: HTMLElement
+    ) => {
+      document.documentElement.style.setProperty(
+        '--sx-event-modal-top',
+        '100px'
+      )
+      document.documentElement.style.setProperty(
+        '--sx-event-modal-left',
+        '100px'
+      )
+
+      calendarEvent.value = event
+      calendarEventElement.value = eventTarget
+    },
+  }
 }
-
-export const createEventModalPlugin = () => new EventModalPluginImpl()

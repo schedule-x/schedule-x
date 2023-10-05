@@ -6,8 +6,6 @@ import { CalendarEventInternal } from './calendar-event.interface'
 export default interface CalendarState {
   view: Signal<ViewName>
   range: Signal<DateRange | null>
-  lastClickedEvent: Signal<CalendarEventInternal | null>
-  setLastClickedEvent: (event: CalendarEventInternal | null) => void
 
   handleDateSelection: (date: string) => void
 }

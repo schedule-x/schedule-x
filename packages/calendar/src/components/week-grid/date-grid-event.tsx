@@ -66,9 +66,9 @@ export default function DateGridEvent({
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
         onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
-        onMouseUp={() => setClickedEventIfNotDragging(calendarEvent)}
+        onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         className={
-          'sx__date-grid-event sx__date-grid-cell' +
+          'sx__date-grid-event sx__date-grid-cell sx__event' +
           (isCopy ? ' sx__date-grid-event--copy' : '')
         }
         style={{

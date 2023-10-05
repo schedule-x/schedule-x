@@ -90,8 +90,10 @@ export default function TimeGridEvent({
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
         onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
-        onMouseUp={() => setClickedEventIfNotDragging(calendarEvent)}
-        className={'sx__time-grid-event' + (isCopy ? ' is-event-copy' : '')}
+        onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
+        className={
+          'sx__time-grid-event sx__event' + (isCopy ? ' is-event-copy' : '')
+        }
         style={{
           top: `${getEventTop(
             calendarEvent.time,
