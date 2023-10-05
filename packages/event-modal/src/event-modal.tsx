@@ -12,8 +12,7 @@ export default function EventModal({ $app }: EventModalProps) {
   useEffect(() => {
     calculatePosition(
       $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
-      $app.config.plugins.eventModal!.calendarEventElement.value?.getBoundingClientRect() as DOMRect,
-      modalId
+      $app.config.plugins.eventModal!.calendarEventElement.value?.getBoundingClientRect() as DOMRect
     )
 
     setIsDisplayed(true)
