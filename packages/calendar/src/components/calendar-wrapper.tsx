@@ -36,6 +36,12 @@ export default function CalendarWrapper({ $app }: props) {
       <div className={'sx__calendar-wrapper'} id={calendarId}>
         <div className={'sx__calendar'}>
           <AppContext.Provider value={$app}>
+            {$app.config.plugins.eventModal &&
+              $app.calendarState.lastClickedEvent.value &&
+              $app.config.plugins.eventModal.ComponentFn({
+                calendarEvent: $app.calendarState.lastClickedEvent.value,
+              })}
+
             <CalendarHeader />
 
             <div className="sx__view-container" id={viewContainerId}></div>

@@ -9,6 +9,7 @@ import {
 } from '@schedule-x/calendar/src/types/config/day-boundaries'
 import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin.interface'
 import PluginBase from '../plugin.interface'
+import EventModalPlugin from '../event-modal/event-modal.plugin'
 
 export type WeekOptions = {
   gridHeight: number
@@ -21,6 +22,7 @@ export type CalendarType = {
 
 export type Plugins = {
   dragAndDrop?: DragAndDropPlugin
+  eventModal?: EventModalPlugin
 }
 
 export default interface CalendarConfigInternal extends Config {

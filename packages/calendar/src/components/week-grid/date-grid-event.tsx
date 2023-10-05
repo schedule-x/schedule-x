@@ -24,7 +24,12 @@ export default function DateGridEvent({
 }: props) {
   const $app = useContext(AppContext)
 
-  const { eventCopy, updateCopy } = useDraggableEvent($app)
+  const {
+    eventCopy,
+    updateCopy,
+    setClickedEventIfNotDragging,
+    createDragStartTimeout,
+  } = useDraggableEvent($app)
 
   const eventCSSVariables = {
     borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
@@ -60,7 +65,8 @@ export default function DateGridEvent({
         id={
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
-        onMouseDown={handleMouseDown}
+        onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
+        onMouseUp={() => setClickedEventIfNotDragging(calendarEvent)}
         className={
           'sx__date-grid-event sx__date-grid-cell' +
           (isCopy ? ' sx__date-grid-event--copy' : '')

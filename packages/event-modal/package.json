@@ -1,0 +1,26 @@
+{
+  "name": "@schedule-x/event-modal",
+  "version": "0.1.0-alpha.4",
+  "description": "Plugin for Schedule-X to show a modal when clicking on an event",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
+  "module": "./dist/core.js",
+  "main": "./dist/core.cjs.js",
+  "umd": "./dist/core.umd.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@schedule-x/shared": "^0.1.0-alpha.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/event-modal"
+  },
+  "gitHead": "08e4f6ae6f96e63570e75acd14041271d1d1c59e"
+}

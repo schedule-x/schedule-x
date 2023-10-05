@@ -16,6 +16,7 @@ import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/tim
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-and-drop-plugin.interface'
+import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -89,12 +90,12 @@ export default class CalendarConfigBuilder
   }
 
   withPlugins(plugins: PluginBase[] | undefined): CalendarConfigBuilder {
-    const dragAndDropPlugin = plugins?.find(
+    this.plugins.dragAndDrop = plugins?.find(
       (plugin) => plugin.name === PluginName.DragAndDrop
-    )
-    if (dragAndDropPlugin) {
-      this.plugins.dragAndDrop = dragAndDropPlugin as DragAndDropPlugin
-    }
+    ) as DragAndDropPlugin | undefined
+    this.plugins.eventModal = plugins?.find(
+      (plugin) => plugin.name === PluginName.EventModal
+    ) as EventModalPlugin | undefined
     return this
   }
 }

@@ -32,7 +32,12 @@ export default function TimeGridEvent({
 }: props) {
   const $app = useContext(AppContext)
 
-  const { eventCopy, updateCopy } = useDraggableEvent($app)
+  const {
+    eventCopy,
+    updateCopy,
+    createDragStartTimeout,
+    setClickedEventIfNotDragging,
+  } = useDraggableEvent($app)
 
   const localizeArgs = [
     $app.config.locale,
@@ -84,7 +89,8 @@ export default function TimeGridEvent({
         id={
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
-        onMouseDown={handleMouseDown}
+        onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
+        onMouseUp={() => setClickedEventIfNotDragging(calendarEvent)}
         className={'sx__time-grid-event' + (isCopy ? ' is-event-copy' : '')}
         style={{
           top: `${getEventTop(

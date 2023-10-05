@@ -14,6 +14,7 @@ import {
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import { createEventModalPlugin } from '../../packages/event-modal/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -35,7 +36,7 @@ const calendar = createCalendar(calendarElement, {
       color: 'tertiary',
     },
   },
-  plugins: [createDragAndDropPlugin()],
+  plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
   events: [
     {
       id: '1',

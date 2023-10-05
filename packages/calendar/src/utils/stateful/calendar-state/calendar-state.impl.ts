@@ -10,6 +10,7 @@ import {
   setRangeForMonth,
   setRangeForWeek,
 } from '../../stateless/time/range/set-range'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
@@ -17,6 +18,7 @@ export const createCalendarState = (
 ): CalendarState => {
   const view = signal<ViewName>(calendarConfig.defaultView)
   const range = signal<DateRange | null>(null)
+  const lastClickedEvent = signal<CalendarEventInternal | null>(null)
 
   const handleDateSelection = (date: string) => {
     if (view.value === InternalViewName.Week) {
@@ -36,5 +38,9 @@ export const createCalendarState = (
     view,
     handleDateSelection,
     range,
+    lastClickedEvent,
+    setLastClickedEvent: (event: CalendarEventInternal | null) => {
+      lastClickedEvent.value = event
+    },
   }
 }
