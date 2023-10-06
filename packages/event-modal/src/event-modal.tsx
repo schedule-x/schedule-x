@@ -3,8 +3,10 @@ import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/r
 import { EventModalProps } from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { createClickOutsideListener } from './utils/stateless/click-outside'
 import { setPosition } from './utils/stateless/set-position'
-import TimeIcon from '@schedule-x/calendar/src/components/icons/time-icon'
+import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { getTimeStamp } from './utils/stateless/get-time-stamp'
+import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
+import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
 
 export default function EventModal({ $app }: EventModalProps) {
   const modalId = randomStringId()
@@ -52,6 +54,14 @@ export default function EventModal({ $app }: EventModalProps) {
 
             {getTimeStamp(calendarEvent, $app.config.locale)}
           </div>
+
+          {calendarEvent.people && (
+            <div className="sx__has-icon sx__event-modal__people">
+              <UserIcon strokeColor={'#000'} />
+
+              {concatenatePeople(calendarEvent.people)}
+            </div>
+          )}
         </div>
       )}
     </>

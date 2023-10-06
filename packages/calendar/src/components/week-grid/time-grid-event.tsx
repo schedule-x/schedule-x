@@ -9,15 +9,16 @@ import {
   getLeftRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
-import { useContext, useState } from 'preact/compat'
+import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import UserIcon from '../icons/user-icon'
-import TimeIcon from '../icons/time-icon'
+import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
+import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import useDraggableEvent from '../../utils/stateful/hooks/use-draggable-event'
+import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -52,8 +53,6 @@ export default function TimeGridEvent({
     )
     return `${localizedStartTime} – ${localizedEndTime}`
   }
-
-  const getEventPeople = (people: string[]) => people.join(', ')
 
   const eventCSSVariables = {
     borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
@@ -125,7 +124,7 @@ export default function TimeGridEvent({
         {calendarEvent.people && (
           <div className="sx__time-grid-event-people">
             <UserIcon strokeColor={eventCSSVariables.iconStroke} />
-            {getEventPeople(calendarEvent.people)}
+            {concatenatePeople(calendarEvent.people)}
           </div>
         )}
       </div>
