@@ -1,0 +1,32 @@
+.sx__event-modal {
+  .sx__event-icon {
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+    margin-inline-end: var(--sx-spacing-padding2);
+  }
+}
+
+.sx__has-icon {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 30px 1fr;
+  margin-bottom: var(--sx-spacing-padding2);
+}
+
+.sx__event-modal__title {
+  font-size: var(--sx-font-large);
+}
+
+.sx__event-modal__color-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 25%;
+  margin-right: var(--sx-spacing-padding3);
+}
+
+.sx__event-modal__time {
+  font-size: var(--sx-font-small);
+}

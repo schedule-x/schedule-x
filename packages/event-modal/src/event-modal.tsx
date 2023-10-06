@@ -3,16 +3,23 @@ import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/r
 import { EventModalProps } from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { createClickOutsideListener } from './utils/stateless/click-outside'
 import { setPosition } from './utils/stateless/set-position'
+import TimeIcon from '@schedule-x/calendar/src/components/icons/time-icon'
+import { getTimeStamp } from './utils/stateless/get-time-stamp'
 
 export default function EventModal({ $app }: EventModalProps) {
   const modalId = randomStringId()
-
+  const { value: calendarEvent } = $app.config.plugins.eventModal!.calendarEvent
   const [isDisplayed, setIsDisplayed] = useState(false)
 
   useEffect(() => {
     setPosition(
       $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
-      $app.config.plugins.eventModal!.calendarEventElement.value?.getBoundingClientRect() as DOMRect
+      $app.config.plugins.eventModal!.calendarEventElement.value?.getBoundingClientRect() as DOMRect,
+      (
+        $app.elements.calendarWrapper?.querySelector(
+          '.sx__event-modal'
+        ) as HTMLElement
+      ).clientHeight
     )
 
     setIsDisplayed(true)
@@ -23,9 +30,28 @@ export default function EventModal({ $app }: EventModalProps) {
 
   return (
     <>
-      {$app.config.plugins.eventModal?.calendarEvent.value && isDisplayed && (
-        <div id={modalId} className={'sx__event-modal'}>
-          event with id {$app.config.plugins.eventModal.calendarEvent.value?.id}
+      {calendarEvent && (
+        <div
+          id={modalId}
+          className={`sx__event-modal${isDisplayed ? ' is-open' : ''}`}
+        >
+          <div className="sx__has-icon sx__event-modal__title">
+            <div
+              style={{
+                backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
+              }}
+              className="sx__event-modal__color-icon"
+            />
+
+            {calendarEvent.title}
+          </div>
+
+          <div className="sx__has-icon sx__event-modal__time">
+            {/*todo: fix stroke color for dark mode*/}
+            <TimeIcon strokeColor={'#000'} />
+
+            {getTimeStamp(calendarEvent, $app.config.locale)}
+          </div>
         </div>
       )}
     </>
