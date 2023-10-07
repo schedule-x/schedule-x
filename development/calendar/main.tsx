@@ -25,10 +25,10 @@ const calendar = createCalendar(calendarElement, {
   // locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'week',
-  // dayBoundaries: {
-  //   start: '06:00',
-  //   end: '03:00',
-  // },
+  dayBoundaries: {
+    start: '06:00',
+    end: '03:00',
+  },
   calendars: {
     personal: {
       color: 'primary',

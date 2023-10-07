@@ -7,6 +7,7 @@
   padding-left: var(--sx-calendar-week-grid-padding-left);
   display: flex;
   height: var(--sx-week-grid-height);
+  overflow: hidden;
 }
 
 .sx__week-header {
