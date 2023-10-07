@@ -1,7 +1,10 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 const dateFn = (dateTimeString: string, locale: string) => {
-  return new Date(dateTimeString).toLocaleDateString(locale, {
+  const { year, month, date } = toIntegers(dateTimeString)
+
+  return new Date(year, month, date).toLocaleDateString(locale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -9,10 +12,15 @@ const dateFn = (dateTimeString: string, locale: string) => {
 }
 
 const timeFn = (dateTimeString: string, locale: string) => {
-  return new Date(dateTimeString).toLocaleTimeString(locale, {
-    hour: 'numeric',
-    minute: 'numeric',
-  })
+  const { year, month, date, hours, minutes } = toIntegers(dateTimeString)
+
+  return new Date(year, month, date, hours, minutes).toLocaleTimeString(
+    locale,
+    {
+      hour: 'numeric',
+      minute: 'numeric',
+    }
+  )
 }
 
 export const getTimeStamp = (

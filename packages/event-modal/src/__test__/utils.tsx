@@ -3,9 +3,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
-export const setup = () => {
-  const $app = stubInterface<CalendarAppSingleton>()
-  const eventModalPlugin = stubInterface<EventModalPlugin>()
+const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()
   calendarEvent.id = '1'
   calendarEvent.title = 'test'
@@ -17,6 +15,13 @@ export const setup = () => {
   calendarEvent._isSingleDayFullDay = false
   calendarEvent._isSingleDayTimed = false
   calendarEvent._isMultiDayTimed = false
+  return calendarEvent
+}
+
+export const setup = () => {
+  const $app = stubInterface<CalendarAppSingleton>()
+  const eventModalPlugin = stubInterface<EventModalPlugin>()
+  const calendarEvent = createCalendarEvent()
   eventModalPlugin.calendarEvent.value = calendarEvent
   eventModalPlugin.calendarEventElement.value = document.createElement('div')
   const calendarWrapperEl = document.createElement('div')

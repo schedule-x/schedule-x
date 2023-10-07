@@ -17,15 +17,6 @@ export const createEventModalPlugin = (): EventModalPlugin => {
       event: CalendarEventInternal,
       eventTarget: HTMLElement
     ) => {
-      document.documentElement.style.setProperty(
-        '--sx-event-modal-top',
-        '100px'
-      )
-      document.documentElement.style.setProperty(
-        '--sx-event-modal-left',
-        '100px'
-      )
-
       calendarEvent.value = event
       calendarEventElement.value = eventTarget
     },
