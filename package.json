@@ -24,7 +24,8 @@
     "release": "npm run build && lerna publish --no-commit-hooks",
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "seed": "ts-node-esm development/seeder/seed.ts"
   },
   "dependencies": {
     "@preact/signals": "^1.1.5",
@@ -46,6 +47,7 @@
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@testing-library/preact": "^3.2.3",
     "@types/jsdom": "^21.1.1",
+    "@types/node": "^20.8.3",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "@vitest/coverage-istanbul": "^0.34.0",
@@ -65,6 +67,7 @@
     "sass": "^1.63.6",
     "stylelint": "^15.10.2",
     "stylelint-config-standard-scss": "^10.0.0",
+    "ts-node": "^10.9.1",
     "ts-sinon": "^2.0.2",
     "typescript": "^5.0.2",
     "vite": "^4.4.0",
