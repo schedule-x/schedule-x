@@ -1,7 +1,6 @@
 import {
   describe,
   it,
-  expect,
 } from '../../../stateless/testing/unit/unit-testing-library.impl'
 import TimeUnitsBuilder from '../time-units.builder'
 import { Month } from '../../../../enums/time/month.enum'

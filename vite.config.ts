@@ -13,6 +13,7 @@ export default defineConfig({
       extension: ['.ts', '.tsx'],
       reporter: ['text', 'html', 'lcov', 'text-summary'],
     },
+    useAtomics: true,
   },
   build: {
     rollupOptions: {

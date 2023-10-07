@@ -1,7 +1,7 @@
 {
-  "name": "@schedule-x/calendar",
+  "name": "@schedule-x/event-modal",
   "version": "0.1.0-alpha.4",
-  "description": "Schedule-X calendar component",
+  "description": "Plugin for Schedule-X to show a modal when clicking on an event",
   "author": {
     "name": "Tom Österlund",
     "email": "tom@oesterlund.de",
@@ -16,15 +16,13 @@
   ],
   "dependencies": {
     "@preact/signals": "^1.1.5",
-    "@schedule-x/date-picker": "^0.1.0-alpha.4",
-    "@schedule-x/drag-and-drop": "^0.1.0-alpha.4",
     "@schedule-x/shared": "^0.1.0-alpha.4",
     "preact": "^10.16.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
-    "directory": "packages/calendar"
+    "directory": "packages/event-modal"
   },
   "gitHead": "08e4f6ae6f96e63570e75acd14041271d1d1c59e"
 }

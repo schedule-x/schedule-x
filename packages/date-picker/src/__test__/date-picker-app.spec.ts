@@ -2,12 +2,9 @@ import {
   describe,
   it,
   expect,
-  beforeEach,
   mockFn,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { vi } from 'vitest'
 import DatePickerApp from '../date-picker.app'
-import { createElement, render } from 'preact'
 import { createAppSingleton } from '../factory'
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 

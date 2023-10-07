@@ -1,5 +1,5 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
-import { Signal, signal } from '@preact/signals'
+import { signal } from '@preact/signals'
 import { ViewName } from '../../../types/view-name'
 import { DateRange } from '../../../types/date-range'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'

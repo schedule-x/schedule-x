@@ -11,8 +11,43 @@ export default function useDraggableEvent($app: CalendarAppSingleton) {
     setEventCopy(deepCloneEvent(newCopy, $app))
   }
 
+  const [dragStartTimeout, setDragStartTimeout] = useState<
+    ReturnType<typeof setTimeout> | undefined
+  >()
+
+  const createDragStartTimeout = (
+    callback: (e: MouseEvent) => void,
+    mouseEvent: MouseEvent
+  ) => {
+    setDragStartTimeout(setTimeout(() => callback(mouseEvent), 150))
+  }
+
+  const setClickedEventIfNotDragging = (
+    calendarEvent: CalendarEventInternal,
+    mouseEvent: MouseEvent
+  ) => {
+    if (dragStartTimeout) {
+      clearTimeout(dragStartTimeout)
+
+      if ($app.config.plugins.eventModal) {
+        const eventTarget = mouseEvent.target as HTMLElement
+        const targetIsEventElement = eventTarget.classList.contains('sx__event')
+        const eventElement = targetIsEventElement
+          ? eventTarget
+          : eventTarget.closest('.sx__event')
+        $app.config.plugins.eventModal.setCalendarEvent(
+          calendarEvent,
+          eventElement as HTMLElement
+        )
+      }
+    }
+    setDragStartTimeout(undefined)
+  }
+
   return {
     eventCopy,
     updateCopy,
+    createDragStartTimeout,
+    setClickedEventIfNotDragging,
   }
 }

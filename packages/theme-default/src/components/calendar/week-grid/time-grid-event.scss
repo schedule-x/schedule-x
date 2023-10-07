@@ -11,6 +11,7 @@
     opacity: 0.5;
     box-shadow: var(--sx-box-shadow-level3);
     z-index: 1;
+    transition: transform 0.15s ease-in-out;
   }
 }
 

@@ -21,6 +21,7 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   border-radius: var(--sx-rounding-extra-small);
   font-size: clamp(12px, var(--sx-font-extra-small), 14px);
   font-weight: 600;
+  user-select: none;
 
   &:has(.sx__date-grid-event--left-overflow) {
     margin-left: $event-overflow-margin;
@@ -54,6 +55,9 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   &.sx__date-grid-event--copy {
     z-index: 2;
     box-shadow: var(--sx-box-shadow-level3);
+    transition-property: transform, width;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
   }
 }
 

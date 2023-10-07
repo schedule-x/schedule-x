@@ -14,6 +14,7 @@ import {
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import { createEventModalPlugin } from '../../packages/event-modal/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -35,7 +36,7 @@ const calendar = createCalendar(calendarElement, {
       color: 'tertiary',
     },
   },
-  plugins: [createDragAndDropPlugin()],
+  plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
   events: [
     {
       id: '1',
@@ -46,6 +47,9 @@ const calendar = createCalendar(calendarElement, {
         end: '2023-10-06 09:50',
       },
       people: ['John Doe', 'Jane Doe'],
+      location: '@Home',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc.',
     },
     {
       id: '2',
@@ -67,8 +71,8 @@ const calendar = createCalendar(calendarElement, {
       id: '20',
       title: 'Event 20',
       time: {
-        start: '2023-10-03',
-        end: '2023-10-05',
+        start: '2023-10-07',
+        end: '2023-10-08',
       },
       calendarId: 'work',
     },
@@ -79,6 +83,9 @@ const calendar = createCalendar(calendarElement, {
         start: '2023-09-27',
         end: '2023-10-09',
       },
+      location: 'Silbersteinstr. 20',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc.',
     },
     {
       id: '21',
