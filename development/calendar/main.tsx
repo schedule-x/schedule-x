@@ -71,8 +71,8 @@ const calendar = createCalendar(calendarElement, {
       id: '20',
       title: 'Event 20',
       time: {
-        start: '2023-10-03',
-        end: '2023-10-05',
+        start: '2023-10-07',
+        end: '2023-10-08',
       },
       calendarId: 'work',
     },

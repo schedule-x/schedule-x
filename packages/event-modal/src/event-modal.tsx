@@ -57,7 +57,7 @@ export default function EventModal({ $app }: EventModalProps) {
             {getTimeStamp(calendarEvent, $app.config.locale)}
           </div>
 
-          {calendarEvent.people && (
+          {calendarEvent.people && calendarEvent.people.length && (
             <div className="sx__has-icon sx__event-modal__people">
               <UserIcon strokeColor={'#000'} />
 

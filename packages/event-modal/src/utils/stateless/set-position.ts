@@ -3,7 +3,6 @@ export const setPosition = (
   eventDOMRect: DOMRect,
   modalHeight = 250
 ) => {
-  console.log(modalHeight)
   const MODAL_WIDTH = 400
   const INLINE_SPACE = 10
   const WIDTH_NEEDED = MODAL_WIDTH + INLINE_SPACE
