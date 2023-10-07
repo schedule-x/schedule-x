@@ -1,9 +1,6 @@
 import { PreactViewComponent } from '../../types/preact-view-component'
+import { WeekWrapper } from '../week/week-wrapper'
 
 export const DayWrapper: PreactViewComponent = ({ $app, id }) => {
-  return (
-    <div id={id} className="sx__day-wrapper">
-      day
-    </div>
-  )
+  return <WeekWrapper $app={$app} id={id} />
 }
