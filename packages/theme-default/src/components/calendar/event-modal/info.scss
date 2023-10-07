@@ -23,10 +23,12 @@
   margin-bottom: var(--sx-spacing-padding2);
 
   .sx__event-icon {
+    // todo: find a better way to align the icon with the text
     margin-top: 2px;
   }
 
   .sx__event-modal__color-icon {
+    // todo: find a better way to align the icon with the text
     margin-top: 4px;
   }
 }
