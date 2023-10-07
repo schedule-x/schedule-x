@@ -8,23 +8,31 @@
   }
 }
 
-.sx__has-icon {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 30px 1fr;
-  margin-bottom: var(--sx-spacing-padding2);
-}
-
-.sx__event-modal__title {
-  font-size: var(--sx-font-large);
-}
-
 .sx__event-modal__color-icon {
   display: inline-block;
   width: 16px;
   height: 16px;
   border-radius: 25%;
   margin-right: var(--sx-spacing-padding3);
+}
+
+.sx__has-icon {
+  display: grid;
+  align-items: start;
+  grid-template-columns: 30px 1fr;
+  margin-bottom: var(--sx-spacing-padding2);
+
+  .sx__event-icon {
+    margin-top: 2px;
+  }
+
+  .sx__event-modal__color-icon {
+    margin-top: 4px;
+  }
+}
+
+.sx__event-modal__title {
+  font-size: var(--sx-font-large);
 }
 
 .sx__event-modal__time {

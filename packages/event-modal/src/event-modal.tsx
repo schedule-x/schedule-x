@@ -7,6 +7,8 @@ import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { getTimeStamp } from './utils/stateless/get-time-stamp'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
 import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
+import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pin-icon'
+import DescriptionIcon from '@schedule-x/shared/src/components/icons/description-icon'
 
 export default function EventModal({ $app }: EventModalProps) {
   const modalId = randomStringId()
@@ -16,7 +18,7 @@ export default function EventModal({ $app }: EventModalProps) {
   useEffect(() => {
     setPosition(
       $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
-      $app.config.plugins.eventModal!.calendarEventElement.value?.getBoundingClientRect() as DOMRect,
+      $app.config.plugins.eventModal?.calendarEventElement.value?.getBoundingClientRect() as DOMRect,
       (
         $app.elements.calendarWrapper?.querySelector(
           '.sx__event-modal'
@@ -42,7 +44,7 @@ export default function EventModal({ $app }: EventModalProps) {
               style={{
                 backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
               }}
-              className="sx__event-modal__color-icon"
+              className="sx__event-modal__color-icon sx__event-icon"
             />
 
             {calendarEvent.title}
@@ -60,6 +62,22 @@ export default function EventModal({ $app }: EventModalProps) {
               <UserIcon strokeColor={'#000'} />
 
               {concatenatePeople(calendarEvent.people)}
+            </div>
+          )}
+
+          {calendarEvent.location && (
+            <div className="sx__has-icon sx__event-modal__location">
+              <LocationPinIcon strokeColor={'#000'} />
+
+              {calendarEvent.location}
+            </div>
+          )}
+
+          {calendarEvent.description && (
+            <div className="sx__has-icon sx__event-modal__description">
+              <DescriptionIcon strokeColor={'#000'} />
+
+              {calendarEvent.description}
             </div>
           )}
         </div>

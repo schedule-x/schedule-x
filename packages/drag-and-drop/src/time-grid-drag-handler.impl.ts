@@ -130,7 +130,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     }% + ${totalDaysDiff}px))`
   }
 
-  private handleMouseUp = (_e: MouseEvent) => {
+  private handleMouseUp = () => {
     document.removeEventListener('mousemove', this.handleMouseMove)
     this.updateCopy(undefined)
     this.updateOriginalEvent()

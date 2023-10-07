@@ -47,6 +47,9 @@ const calendar = createCalendar(calendarElement, {
         end: '2023-10-06 09:50',
       },
       people: ['John Doe', 'Jane Doe'],
+      location: '@Home',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc.',
     },
     {
       id: '2',
@@ -80,6 +83,9 @@ const calendar = createCalendar(calendarElement, {
         start: '2023-09-27',
         end: '2023-10-09',
       },
+      location: 'Silbersteinstr. 20',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc. Donec auctor, nisl eget ultricies aliquam, nunc nisl aliquet nunc, vitae aliquam nisl nunc eget nunc.',
     },
     {
       id: '21',

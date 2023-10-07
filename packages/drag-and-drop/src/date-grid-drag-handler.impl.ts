@@ -4,7 +4,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DateRange } from '@schedule-x/calendar/src/types/date-range'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import { getTimeGridDayWidth } from './utils/stateless/get-time-grid-day-width'
 import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
 import { getDateGridEventCopy } from './utils/stateless/get-date-grid-event-copy'
