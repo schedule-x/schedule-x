@@ -1,0 +1,17 @@
+export default [
+  'Maths',
+  'Physics',
+  'Chemistry',
+  'Biology',
+  'English',
+  'History',
+  'Geography',
+  'Economics',
+  'Computer Science',
+  'Art',
+  'Music',
+  'Sport',
+  'Literature',
+  'Philosophy',
+  'Religion',
+]
