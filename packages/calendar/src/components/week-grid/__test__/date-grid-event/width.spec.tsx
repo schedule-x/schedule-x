@@ -3,10 +3,10 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createCalendarAppSingleton } from '../../../../factory'
 import { cleanup, screen } from '@testing-library/preact'
 import { afterEach } from 'vitest'
 import { factory } from './utils'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 describe('styles of DateGridEvent', () => {
   afterEach(() => {
@@ -20,7 +20,7 @@ describe('styles of DateGridEvent', () => {
     const threeDayEventId = 'my-event-id-2'
     const threeDayEventTitle = 'My event 2'
 
-    const $app = createCalendarAppSingleton({
+    const $app = __createAppWithViews__({
       datePicker: {
         selectedDate: selectedDate,
       },
@@ -67,7 +67,7 @@ describe('styles of DateGridEvent', () => {
     const eventWithOverflowBothId = 'my-event-id-2'
     const eventWithOverflowBothTitle = 'My event 2'
 
-    const $app = createCalendarAppSingleton({
+    const $app = __createAppWithViews__({
       datePicker: {
         selectedDate: selectedDate,
       },

@@ -44,7 +44,7 @@ interface CalendarDatePickerConfigExternal
 interface ReducedCalendarConfigInternal
   extends Omit<
     CalendarConfigInternal,
-    'dayBoundaries' | 'isHybridDay' | 'plugins'
+    'dayBoundaries' | 'isHybridDay' | 'plugins' | 'views'
   > {}
 
 export interface CalendarConfigExternal
@@ -53,4 +53,5 @@ export interface CalendarConfigExternal
   events?: CalendarEventExternal[]
   dayBoundaries?: DayBoundariesExternal
   plugins?: PluginBase[]
+  views: [View, ...View[]]
 }

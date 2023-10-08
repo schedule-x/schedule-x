@@ -9,9 +9,7 @@ import { createInternalConfig } from './utils/stateless/factories/create-interna
 import { createTimeUnitsImpl } from './utils/stateless/factories/create-time-units-impl'
 import { createDatePickerConfig } from './utils/stateless/factories/create-date-picker-config'
 
-export const createCalendarAppSingleton = (
-  config: CalendarConfigExternal = {}
-) => {
+export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const internalConfig = createInternalConfig(config)
   const timeUnitsImpl = createTimeUnitsImpl(internalConfig)
   const calendarState = createCalendarState(internalConfig, timeUnitsImpl)
@@ -40,7 +38,7 @@ export const createCalendarAppSingleton = (
 
 export const createCalendar = (
   el: HTMLElement,
-  config: CalendarConfigExternal = {}
+  config: CalendarConfigExternal
 ) => {
   const $app = createCalendarAppSingleton(config)
 

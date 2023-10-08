@@ -10,7 +10,11 @@ export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
   timeUnitsImpl: TimeUnits
 ): CalendarState => {
-  const view = signal<ViewName>(calendarConfig.defaultView)
+  const view = signal<ViewName>(
+    calendarConfig.views.find(
+      (view) => view.name === calendarConfig.defaultView
+    )?.name || calendarConfig.views[0].name
+  )
   const range = signal<DateRange | null>(null)
 
   const handleDateSelection = (date: string) => {

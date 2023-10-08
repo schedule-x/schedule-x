@@ -9,6 +9,7 @@ import { cleanup, render } from '@testing-library/preact'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { WeekWrapper } from '../week-wrapper'
 import { createCalendarAppSingleton } from '../../../factory'
+import { __createAppWithViews__ } from '../../../utils/stateless/testing/__create-app-with-views__'
 
 const factory = ($app: CalendarAppSingleton) => {
   render(
@@ -25,7 +26,7 @@ describe('WeekWrapper', () => {
 
   describe('a week with regular days', () => {
     it('renders one event at 12PM', () => {
-      const $app = createCalendarAppSingleton({
+      const $app = __createAppWithViews__({
         datePicker: {
           selectedDate: '2021-01-01',
         },

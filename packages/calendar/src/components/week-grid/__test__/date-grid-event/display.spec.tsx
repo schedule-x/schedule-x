@@ -3,11 +3,11 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createCalendarAppSingleton } from '../../../../factory'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { afterEach } from 'vitest'
 import { factory } from './utils'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 // TODO: move to package-neutral location
 describe('style attribute "display" of date grid event element', () => {
@@ -19,7 +19,7 @@ describe('style attribute "display" of date grid event element', () => {
   const oneDayEventId = 'my-event-id'
   const oneDayEventTitle = 'My event'
 
-  const $app = createCalendarAppSingleton({
+  const $app = __createAppWithViews__({
     datePicker: {
       selectedDate: selectedDate,
     },

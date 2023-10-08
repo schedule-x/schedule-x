@@ -4,6 +4,7 @@ import { AppContext } from '../../../../utils/stateful/app-context'
 import TodayButton from '../../today-button'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 const factory = ($app: CalendarAppSingleton) => {
   render(
@@ -14,7 +15,7 @@ const factory = ($app: CalendarAppSingleton) => {
 }
 
 const createAppSingletonWithSelectedDate = (initialSelectedDate: string) => {
-  return createCalendarAppSingleton({
+  return __createAppWithViews__({
     datePicker: {
       selectedDate: initialSelectedDate,
     },
