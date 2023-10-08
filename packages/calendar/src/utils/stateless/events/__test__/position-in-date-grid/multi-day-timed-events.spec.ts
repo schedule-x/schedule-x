@@ -3,16 +3,16 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createCalendarAppSingleton } from '../../../../../factory'
 import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
 import { createWeekDayContexts } from '../../../views/week/create-week-day-contexts'
 import { positionInDateGrid } from '../../position-in-date-grid'
 import { DATE_GRID_BLOCKER } from '../../../../../constants'
+import { __createAppWithViews__ } from '../../../testing/__create-app-with-views__'
 
 describe('positioning events in the date grid of a week or day', () => {
   describe('positioning timed events', () => {
     const selectedDate = '2023-09-17'
-    const $app = createCalendarAppSingleton({
+    const $app = __createAppWithViews__({
       datePicker: {
         selectedDate: selectedDate,
       },

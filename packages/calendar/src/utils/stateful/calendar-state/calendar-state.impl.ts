@@ -3,33 +3,30 @@ import { signal } from '@preact/signals'
 import { ViewName } from '../../../types/view-name'
 import { DateRange } from '../../../types/date-range'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
-import { InternalViewName } from '../../../enums/internal-view.enum'
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
-import {
-  setRangeForDay,
-  setRangeForMonth,
-  setRangeForWeek,
-} from '../../stateless/time/range/set-range'
+import { View } from '../../../types/view'
 
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
   timeUnitsImpl: TimeUnits
 ): CalendarState => {
-  const view = signal<ViewName>(calendarConfig.defaultView)
+  const view = signal<ViewName>(
+    calendarConfig.views.find(
+      (view) => view.name === calendarConfig.defaultView
+    )?.name || calendarConfig.views[0].name
+  )
   const range = signal<DateRange | null>(null)
 
   const handleDateSelection = (date: string) => {
-    if (view.value === InternalViewName.Week) {
-      setRangeForWeek(date, timeUnitsImpl, calendarConfig, range)
-    }
-
-    if (view.value === InternalViewName.Month) {
-      setRangeForMonth(date, timeUnitsImpl, range)
-    }
-
-    if (view.value === InternalViewName.Day) {
-      setRangeForDay(date, calendarConfig, range)
-    }
+    const selectedView = calendarConfig.views.find(
+      (availableView) => availableView.name === view.value
+    )
+    ;(selectedView as View).setDateRange({
+      calendarConfig,
+      date,
+      range,
+      timeUnitsImpl,
+    })
   }
 
   return {

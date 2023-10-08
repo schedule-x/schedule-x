@@ -4,10 +4,10 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createCalendarAppSingleton } from '../../../../factory'
 import { cleanup } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/calendar-event.builder'
 import { factory } from './utils'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 describe('TimeGridDay', () => {
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('TimeGridDay', () => {
   })
 
   describe('a non-hybrid day', () => {
-    const $app = createCalendarAppSingleton({
+    const $app = __createAppWithViews__({
       datePicker: { selectedDate: '2023-09-11' },
     })
 
@@ -57,7 +57,7 @@ describe('TimeGridDay', () => {
   })
 
   describe('a hybrid day', () => {
-    const $app = createCalendarAppSingleton({
+    const $app = __createAppWithViews__({
       datePicker: { selectedDate: '2023-09-11' },
       dayBoundaries: {
         start: '18:00',

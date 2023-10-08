@@ -8,6 +8,7 @@ import { createCalendarAppSingleton } from '../../../../factory'
 import { factory } from './utils'
 import { setNewInputValueAndPressEnter } from '@schedule-x/date-picker/src/components/__test__/app-input/utils'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 describe('CalendarHeader', () => {
   beforeEach(() => {
@@ -17,7 +18,7 @@ describe('CalendarHeader', () => {
   describe('changing date', () => {
     it('should change date when typing a date in the input', () => {
       const initialDate = '2010-01-01'
-      const $app = createCalendarAppSingleton({
+      const $app = __createAppWithViews__({
         datePicker: { selectedDate: initialDate },
       })
       factory($app)
@@ -31,7 +32,7 @@ describe('CalendarHeader', () => {
 
     it('should set date to today when clicking today button', () => {
       const initialDate = '2010-01-15'
-      const $app = createCalendarAppSingleton({
+      const $app = __createAppWithViews__({
         datePicker: { selectedDate: initialDate },
       })
       factory($app)
