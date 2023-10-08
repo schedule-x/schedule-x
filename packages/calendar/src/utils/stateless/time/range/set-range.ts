@@ -12,6 +12,7 @@ import {
   toDateTimeString,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { RangeSetterConfig } from '@schedule-x/shared/src/interfaces/calendar/range-setter-config.interface'
 
 const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
@@ -39,30 +40,24 @@ const getRangeEndGivenDayBoundaries = (
   return `${newRangeEndDate} ${dayEndTimeString}`
 }
 
-export const setRangeForWeek = (
-  date: string,
-  timeUnitsImpl: TimeUnits,
-  calendarConfig: CalendarConfigInternal,
-  range: Signal<DateRange | null>
-) => {
-  const weekForDate = timeUnitsImpl.getWeekFor(toJSDate(date))
+export const setRangeForWeek = (config: RangeSetterConfig) => {
+  const weekForDate = config.timeUnitsImpl.getWeekFor(toJSDate(config.date))
 
-  range.value = {
-    start: getRangeStartGivenDayBoundaries(calendarConfig, weekForDate[0]),
+  config.range.value = {
+    start: getRangeStartGivenDayBoundaries(
+      config.calendarConfig,
+      weekForDate[0]
+    ),
     end: getRangeEndGivenDayBoundaries(
-      calendarConfig,
+      config.calendarConfig,
       weekForDate[weekForDate.length - 1]
     ),
   }
 }
 
-export const setRangeForMonth = (
-  date: string,
-  timeUnitsImpl: TimeUnits,
-  range: Signal<DateRange | null>
-) => {
-  const { year, month } = toIntegers(date)
-  const monthForDate = timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
+export const setRangeForMonth = (config: RangeSetterConfig) => {
+  const { year, month } = toIntegers(config.date)
+  const monthForDate = config.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
     year,
     month
   )
@@ -71,19 +66,21 @@ export const setRangeForMonth = (
       monthForDate[monthForDate.length - 1].length - 1
     ]
   )
-  range.value = {
+  config.range.value = {
     start: toDateTimeString(monthForDate[0][0]),
     end: `${newRangeEndDate} 23:59`,
   }
 }
 
-export const setRangeForDay = (
-  date: string,
-  calendarConfig: CalendarConfigInternal,
-  range: Signal<DateRange | null>
-) => {
-  range.value = {
-    start: getRangeStartGivenDayBoundaries(calendarConfig, toJSDate(date)),
-    end: getRangeEndGivenDayBoundaries(calendarConfig, toJSDate(date)),
+export const setRangeForDay = (config: RangeSetterConfig) => {
+  config.range.value = {
+    start: getRangeStartGivenDayBoundaries(
+      config.calendarConfig,
+      toJSDate(config.date)
+    ),
+    end: getRangeEndGivenDayBoundaries(
+      config.calendarConfig,
+      toJSDate(config.date)
+    ),
   }
 }
