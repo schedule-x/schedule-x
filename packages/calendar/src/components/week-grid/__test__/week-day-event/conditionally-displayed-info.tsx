@@ -6,8 +6,8 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/calendar-event.builder'
-import { createCalendarAppSingleton } from '../../../../factory'
 import { factory } from './utils'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 describe('WeekDayEvent', () => {
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('WeekDayEvent', () => {
   })
 
   describe('conditionally displaying info', () => {
-    const $app = createCalendarAppSingleton({
+    const $app = __createAppWithViews__({
       datePicker: {
         selectedDate: '2020-12-01',
       },

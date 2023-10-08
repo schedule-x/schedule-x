@@ -4,7 +4,9 @@ import { viewDay } from '../../../views/day'
 import { viewWeek } from '../../../views/week'
 import { viewMonth } from '../../../views/month'
 
-export const __createAppWithViews__ = (config: CalendarConfigExternal = {}) => {
+export const __createAppWithViews__ = (
+  config: Partial<CalendarConfigExternal> = {}
+) => {
   return createCalendarAppSingleton({
     ...config,
     views: [viewDay, viewWeek, viewMonth],
