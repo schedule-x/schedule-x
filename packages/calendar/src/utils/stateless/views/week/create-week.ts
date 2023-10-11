@@ -5,26 +5,23 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { DateRange } from '../../../../types/date-range'
 import { InternalViewName } from '../../../../enums/internal-view.enum'
 
-const createContextForOneDate = (acc: Week, date: Date) => {
+const createOneDay = (week: Week, date: Date) => {
   const dateString = toDateString(date)
-  acc[dateString] = {
+  week[dateString] = {
     date: dateString,
     timeGridEvents: [],
     dateGridEvents: {},
   }
 
-  return acc
+  return week
 }
 
 export const createWeek = ($app: CalendarAppSingleton) => {
   if ($app.calendarState.view.value === InternalViewName.Day)
-    return createContextForOneDate(
-      {},
-      toJSDate($app.calendarState.range.value!.start)
-    )
+    return createOneDay({}, toJSDate($app.calendarState.range.value!.start))
 
   // Week mode
   return $app.timeUnitsImpl
     .getWeekFor(toJSDate(($app.calendarState.range.value as DateRange).start))
-    .reduce(createContextForOneDate, {} as Week)
+    .reduce(createOneDay, {} as Week)
 }
