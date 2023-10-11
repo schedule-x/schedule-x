@@ -4,7 +4,7 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createWeekDayContexts } from '../../../views/week/create-week-day-contexts'
+import { createWeek } from '../../../views/week/create-week'
 import { createCalendarAppSingleton } from '../../../../../factory'
 import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
 import { positionInDateGrid } from '../../position-in-date-grid'
@@ -27,29 +27,29 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-17',
         }).build(),
       ]
-      const weekDayContexts = createWeekDayContexts($app)
+      const week = createWeek($app)
 
-      const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
+      const weekWithEvents = positionInDateGrid(dateGridEvents, week)
 
-      expect(contexts['2023-09-11'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-11'].dateGridEvents[0]).toEqual(
         dateGridEvents[0]
       )
-      expect(contexts['2023-09-12'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-12'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-13'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-13'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-14'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-14'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-15'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-15'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-16'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-16'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-17'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
     })
@@ -61,19 +61,19 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-16',
         }).build(),
       ]
-      const weekDayContexts = createWeekDayContexts($app)
+      const week = createWeek($app)
 
-      const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
+      const weekWithEvents = positionInDateGrid(dateGridEvents, week)
 
-      expect(contexts['2023-09-11'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-12'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-13'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-14'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-15'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-16'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-11'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-12'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-13'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-14'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-15'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-16'].dateGridEvents[0]).toEqual(
         dateGridEvents[0]
       )
-      expect(contexts['2023-09-17'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[0]).toBeUndefined()
     })
 
     it('should position three two day events', () => {
@@ -93,49 +93,49 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-15',
         }).build(),
       ]
-      const weekDayContexts = createWeekDayContexts($app)
+      const week = createWeek($app)
 
-      const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
+      const weekWithEvents = positionInDateGrid(dateGridEvents, week)
 
       // Monday
-      expect(contexts['2023-09-11'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-11'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-11'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-11'].dateGridEvents[1]).toBeUndefined()
 
       // Tuesday
-      expect(contexts['2023-09-12'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-12'].dateGridEvents[0]).toEqual(
         dateGridEvents[0]
       )
-      expect(contexts['2023-09-12'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-12'].dateGridEvents[1]).toBeUndefined()
 
       // Wednesday
-      expect(contexts['2023-09-13'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-13'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-13'].dateGridEvents[1]).toEqual(
+      expect(weekWithEvents['2023-09-13'].dateGridEvents[1]).toEqual(
         dateGridEvents[1]
       )
 
       // Thursday
-      expect(contexts['2023-09-14'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-14'].dateGridEvents[0]).toEqual(
         dateGridEvents[2]
       )
-      expect(contexts['2023-09-14'].dateGridEvents[1]).toEqual(
+      expect(weekWithEvents['2023-09-14'].dateGridEvents[1]).toEqual(
         DATE_GRID_BLOCKER
       )
 
       // Friday
-      expect(contexts['2023-09-15'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-15'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-15'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-15'].dateGridEvents[1]).toBeUndefined()
 
       // Saturday
-      expect(contexts['2023-09-16'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-16'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-16'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-16'].dateGridEvents[1]).toBeUndefined()
 
       // Sunday
-      expect(contexts['2023-09-17'].dateGridEvents[0]).toBeUndefined()
-      expect(contexts['2023-09-17'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[0]).toBeUndefined()
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[1]).toBeUndefined()
     })
 
     it('should position events that start before the week and end after the week', () => {
@@ -160,54 +160,62 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-18',
         }).build(),
       ]
-      const weekDayContexts = createWeekDayContexts($app)
+      const week = createWeek($app)
       const eventWithId = (id: number) =>
         dateGridEvents.find((e) => e.id === id)
 
-      const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
+      const weekWithEvents = positionInDateGrid(dateGridEvents, week)
 
       // Monday
-      expect(contexts['2023-09-11'].dateGridEvents[0]).toEqual(eventWithId(1))
-      expect(contexts['2023-09-11'].dateGridEvents[1]).toEqual(eventWithId(2))
+      expect(weekWithEvents['2023-09-11'].dateGridEvents[0]).toEqual(
+        eventWithId(1)
+      )
+      expect(weekWithEvents['2023-09-11'].dateGridEvents[1]).toEqual(
+        eventWithId(2)
+      )
 
       // Tuesday
-      expect(contexts['2023-09-12'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-12'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-12'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-12'].dateGridEvents[1]).toBeUndefined()
 
       // Wednesday
-      expect(contexts['2023-09-13'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-13'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-13'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-13'].dateGridEvents[1]).toBeUndefined()
 
       // Thursday
-      expect(contexts['2023-09-14'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-14'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-14'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-14'].dateGridEvents[1]).toBeUndefined()
 
       // Friday
-      expect(contexts['2023-09-15'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-15'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-15'].dateGridEvents[1]).toBeUndefined()
+      expect(weekWithEvents['2023-09-15'].dateGridEvents[1]).toBeUndefined()
 
       // Saturday
-      expect(contexts['2023-09-16'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-16'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-16'].dateGridEvents[1]).toEqual(eventWithId(3))
+      expect(weekWithEvents['2023-09-16'].dateGridEvents[1]).toEqual(
+        eventWithId(3)
+      )
 
       // Sunday
-      expect(contexts['2023-09-17'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-17'].dateGridEvents[1]).toEqual(
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[1]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-17'].dateGridEvents[2]).toEqual(eventWithId(4))
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[2]).toEqual(
+        eventWithId(4)
+      )
     })
   })
 })

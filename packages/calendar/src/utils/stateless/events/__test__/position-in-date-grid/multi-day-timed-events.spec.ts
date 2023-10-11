@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
-import { createWeekDayContexts } from '../../../views/week/create-week-day-contexts'
+import { createWeek } from '../../../views/week/create-week'
 import { positionInDateGrid } from '../../position-in-date-grid'
 import { DATE_GRID_BLOCKER } from '../../../../../constants'
 import { __createAppWithViews__ } from '../../../testing/__create-app-with-views__'
@@ -25,29 +25,29 @@ describe('positioning events in the date grid of a week or day', () => {
           end: '2023-09-20 20:00',
         }).build(),
       ]
-      const weekDayContexts = createWeekDayContexts($app)
+      const week = createWeek($app)
 
-      const contexts = positionInDateGrid(dateGridEvents, weekDayContexts)
+      const weekWithEvents = positionInDateGrid(dateGridEvents, week)
 
-      expect(contexts['2023-09-11'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-11'].dateGridEvents[0]).toEqual(
         dateGridEvents[0]
       )
-      expect(contexts['2023-09-12'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-12'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-13'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-13'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-14'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-14'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-15'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-15'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-16'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-16'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
-      expect(contexts['2023-09-17'].dateGridEvents[0]).toEqual(
+      expect(weekWithEvents['2023-09-17'].dateGridEvents[0]).toEqual(
         DATE_GRID_BLOCKER
       )
     })

@@ -6,10 +6,10 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { cleanup, render } from '@testing-library/preact'
-import { AppContext } from '../../../utils/stateful/app-context'
+import { AppContext } from '../../../../utils/stateful/app-context'
 import { WeekWrapper } from '../week-wrapper'
-import { createCalendarAppSingleton } from '../../../factory'
-import { __createAppWithViews__ } from '../../../utils/stateless/testing/__create-app-with-views__'
+import { createCalendarAppSingleton } from '../../../../factory'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 const factory = ($app: CalendarAppSingleton) => {
   render(
