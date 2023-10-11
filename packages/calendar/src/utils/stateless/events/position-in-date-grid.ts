@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { WeekDayContexts } from '../../../types/week-day-context'
+import { Week } from '../../../types/week'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DATE_GRID_BLOCKER } from '../../../constants'
 
@@ -15,9 +15,9 @@ import { DATE_GRID_BLOCKER } from '../../../constants'
  * */
 export const positionInDateGrid = (
   sortedDateGridEvents: CalendarEventInternal[],
-  weekDayContexts: WeekDayContexts
+  week: Week
 ) => {
-  const weekDates = Object.keys(weekDayContexts).sort()
+  const weekDates = Object.keys(week).sort()
   const firstDateOfWeek = weekDates[0]
   const lastDateOfWeek = weekDates[weekDates.length - 1]
   const occupiedLevels = new Set<number>()
@@ -26,7 +26,7 @@ export const positionInDateGrid = (
     const eventStartDate = dateFromDateTime(event.time.start)
     const eventEndDate = dateFromDateTime(event.time.end)
 
-    const isEventStartInWeek = !!weekDayContexts[eventStartDate]
+    const isEventStartInWeek = !!week[eventStartDate]
     let isEventInWeek = isEventStartInWeek
     if (
       !isEventStartInWeek &&
@@ -43,21 +43,16 @@ export const positionInDateGrid = (
     const lastDateOfEvent =
       eventEndDate <= lastDateOfWeek ? eventEndDate : lastDateOfWeek
 
-    const eventDays = Object.values(weekDayContexts).filter(
-      (weekDayContext) => {
-        return (
-          weekDayContext.date >= firstDateOfEvent &&
-          weekDayContext.date <= lastDateOfEvent
-        )
-      }
-    )
+    const eventDays = Object.values(week).filter((day) => {
+      return day.date >= firstDateOfEvent && day.date <= lastDateOfEvent
+    })
 
     let levelInWeekForEvent
     let testLevel = 0
 
     while (levelInWeekForEvent === undefined) {
-      const isLevelFree = eventDays.every((weekDayContext) => {
-        return !weekDayContext.dateGridEvents[testLevel]
+      const isLevelFree = eventDays.every((day) => {
+        return !day.dateGridEvents[testLevel]
       })
       if (isLevelFree) {
         levelInWeekForEvent = testLevel
@@ -76,12 +71,12 @@ export const positionInDateGrid = (
   }
 
   for (const level of Array.from(occupiedLevels)) {
-    for (const [, dayContext] of Object.entries(weekDayContexts)) {
-      if (!dayContext.dateGridEvents[level]) {
-        dayContext.dateGridEvents[level] = undefined
+    for (const [, day] of Object.entries(week)) {
+      if (!day.dateGridEvents[level]) {
+        day.dateGridEvents[level] = undefined
       }
     }
   }
 
-  return weekDayContexts
+  return week
 }

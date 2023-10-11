@@ -1,7 +1,7 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { DATE_GRID_BLOCKER } from '../constants'
 
-type WeekDayContext = {
+type WeekDay = {
   date: string
   timeGridEvents: CalendarEventInternal[]
   dateGridEvents: {
@@ -9,4 +9,4 @@ type WeekDayContext = {
   }
 }
 
-export type WeekDayContexts = Record<string, WeekDayContext>
+export type Week = Record<string, WeekDay>

@@ -1,4 +1,4 @@
-import { WeekDayContexts } from '../../../types/week-day-context'
+import { Week } from '../../../types/week'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import {
@@ -15,7 +15,7 @@ const resetEventConcurrencyProperties = (event: CalendarEventInternal) => {
 
 export const positionInTimeGrid = (
   timeGridEvents: CalendarEventInternal[],
-  weekDayContexts: WeekDayContexts,
+  week: Week,
   $app: CalendarAppSingleton
 ) => {
   for (const event of timeGridEvents) {
@@ -32,9 +32,9 @@ export const positionInTimeGrid = (
       ) {
         date = addDays(date, -1)
       }
-      weekDayContexts[date].timeGridEvents.push(event)
+      week[date].timeGridEvents.push(event)
     }
   }
 
-  return weekDayContexts
+  return week
 }

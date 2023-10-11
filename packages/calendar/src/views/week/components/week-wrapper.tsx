@@ -4,10 +4,10 @@ import TimeGridDay from '../../../components/week-grid/time-grid-day'
 import TimeAxis from '../../../components/week-grid/time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import DateAxis from '../../../components/week-grid/date-axis'
-import { WeekDayContexts } from '../../../types/week-day-context'
+import { Week } from '../../../types/week'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../../utils/stateless/events/sort-events-for-week'
-import { createWeekDayContexts } from '../../../utils/stateless/views/week/create-week-day-contexts'
+import { createWeek } from '../../../utils/stateless/views/week/create-week'
 import { positionInTimeGrid } from '../../../utils/stateless/events/position-in-time-grid'
 import { positionInDateGrid } from '../../../utils/stateless/events/position-in-date-grid'
 import { sortEventsByStart } from '../../../utils/stateless/events/sort-by-start-date'
@@ -19,19 +19,19 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
     `${$app.config.weekOptions.gridHeight}px`
   )
 
-  const [weekDayContexts, setWeekDayContexts] = useState<WeekDayContexts>({})
+  const [week, setWeek] = useState<Week>({})
 
   const sortEventsIntoDateAndTimeGrids = () => {
-    let contexts = createWeekDayContexts($app)
+    let newWeek = createWeek($app)
     const { dateGridEvents, timeGridEvents } = sortEventsForWeekView(
       $app.calendarEvents.list.value
     )
-    contexts = positionInDateGrid(
+    newWeek = positionInDateGrid(
       dateGridEvents.sort(sortEventsByStart),
-      contexts
+      newWeek
     )
-    contexts = positionInTimeGrid(timeGridEvents, contexts, $app)
-    setWeekDayContexts(contexts)
+    newWeek = positionInTimeGrid(timeGridEvents, newWeek, $app)
+    setWeek(newWeek)
   }
 
   useEffect(() => {
@@ -53,14 +53,12 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-header">
             <div className="sx__week-header-content">
               <DateAxis
-                week={Object.values(weekDayContexts).map((context) =>
-                  toJSDate(context.date)
-                )}
+                week={Object.values(week).map((day) => toJSDate(day.date))}
               />
 
               <div className="sx__date-grid">
-                {Object.values(weekDayContexts).map((dayContext) => (
-                  <DateGridDay calendarEvents={dayContext.dateGridEvents} />
+                {Object.values(week).map((day) => (
+                  <DateGridDay calendarEvents={day.dateGridEvents} />
                 ))}
               </div>
 
@@ -71,11 +69,11 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-grid">
             <TimeAxis />
 
-            {Object.values(weekDayContexts).map((dayContext) => (
+            {Object.values(week).map((day) => (
               <TimeGridDay
-                calendarEvents={dayContext.timeGridEvents}
-                date={dayContext.date}
-                key={dayContext.date + new Date().getTime()}
+                calendarEvents={day.timeGridEvents}
+                date={day.date}
+                key={day.date + new Date().getTime()}
               />
             ))}
           </div>
