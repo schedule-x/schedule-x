@@ -1,0 +1,30 @@
+.sx__month-week {
+  border-top: var(--sx-border);
+  flex: 1;
+  display: flex;
+}
+
+.sx__month-day {
+  padding: var(--sx-spacing-padding2);
+  flex: 1;
+
+  &:not(:last-child) {
+    border-right: var(--sx-border);
+  }
+}
+
+.sx__month-day-header {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.sx__month-day-header-day-name {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--sx-color-neutral);
+}
+
+.sx__month-day-header-date {
+  font-size: var(--sx-font-extra-small);
+}

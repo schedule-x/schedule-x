@@ -1,10 +1,10 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
-type MonthDay = {
+export type MonthDay = {
   date: string
-  events: CalendarEventInternal[]
+  events: Record<string, CalendarEventInternal>
 }
 
-type MonthWeek = Record<string, MonthDay>
+export type MonthWeek = Record<string, MonthDay>
 
 export type Month = MonthWeek[]
