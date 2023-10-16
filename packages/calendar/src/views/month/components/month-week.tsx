@@ -9,7 +9,7 @@ type props = {
 export default function MonthWeek({ week, isFirstWeek }: props) {
   return (
     <div className="sx__month-week">
-      {Object.values(week).map((day) => (
+      {week.map((day) => (
         <MonthDay day={day} isFirstWeek={isFirstWeek} />
       ))}
     </div>

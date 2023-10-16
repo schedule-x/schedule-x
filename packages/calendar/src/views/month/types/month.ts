@@ -2,9 +2,9 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 
 export type MonthDay = {
   date: string
-  events: Record<string, CalendarEventInternal>
+  events: Record<string, CalendarEventInternal | 'blocker' | undefined>
 }
 
-export type MonthWeek = Record<string, MonthDay>
+export type MonthWeek = MonthDay[]
 
 export type Month = MonthWeek[]

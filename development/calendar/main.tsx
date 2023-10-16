@@ -24,7 +24,7 @@ const calendar = createCalendar(calendarElement, {
   locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
-  defaultView: 'week',
+  defaultView: 'month',
   // dayBoundaries: {
   //   start: '06:00',
   //   end: '03:00',
