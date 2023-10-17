@@ -52,7 +52,7 @@ const positionInMonthWeek = (
 
     for (const [eventDayIndex, eventDay] of eventDays.entries()) {
       if (eventDayIndex === 0) {
-        event._nDaysInGrid = eventDays.length
+        event._nDaysStartingFrom[firstDateOfEvent] = eventDays.length
         eventDay.events[levelInWeekForEvent] = event
       } else {
         eventDay.events[levelInWeekForEvent] = DATE_GRID_BLOCKER

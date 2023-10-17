@@ -31,6 +31,9 @@ export interface CalendarEventInternal extends CalendarEventExternal {
   // week date grid
   _nDaysInGrid: number | undefined
 
+  // month grid
+  _nDaysStartingFrom: Record<string, number> // key for week starting on date, value for number of days in week
+
   _color: string
 
   _getForeignProperties(): Record<string, unknown>

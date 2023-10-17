@@ -110,4 +110,6 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   _getForeignProperties(): Record<string, unknown> {
     return this._foreignProperties
   }
+
+  _nDaysStartingFrom: Record<string, number> = {}
 }
