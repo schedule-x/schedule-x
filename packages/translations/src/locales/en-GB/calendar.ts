@@ -5,4 +5,6 @@ export const calendarEnGB: CalendarTranslations = {
   Month: 'Month',
   Week: 'Week',
   Day: 'Day',
+  events: 'events',
+  event: 'event',
 }

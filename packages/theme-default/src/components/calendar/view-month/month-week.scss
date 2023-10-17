@@ -5,7 +5,7 @@
 }
 
 .sx__month-day {
-  padding: var(--sx-spacing-padding2);
+  padding: var(--sx-spacing-padding2) 0;
   flex: 1;
 
   &:not(:last-child) {
@@ -27,4 +27,22 @@
 
 .sx__month-day-header-date {
   font-size: var(--sx-font-extra-small);
+}
+
+.sx__month-day-events-more {
+  width: calc(100% - 10px); // CORRELATION ID: 2 (10px subtracted from width)
+  font-size: var(--sx-font-extra-small);
+  color: var(--sx-color-neutral);
+  margin: var(--sx-spacing-padding1) 0;
+  padding: var(--sx-spacing-padding1);
+  border-radius: var(--sx-rounding-extra-small);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--sx-color-surface-container);
+    color: var(--sx-color-on-surface);
+  }
 }

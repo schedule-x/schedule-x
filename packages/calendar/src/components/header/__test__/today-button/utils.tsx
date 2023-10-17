@@ -1,4 +1,3 @@
-import { createCalendarAppSingleton } from '../../../../factory'
 import { fireEvent, render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import TodayButton from '../../today-button'

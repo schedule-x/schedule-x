@@ -3,4 +3,6 @@ export interface CalendarTranslations {
   Month: string
   Week: string
   Day: string
+  events: string
+  event: string
 }

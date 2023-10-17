@@ -5,4 +5,6 @@ export const calendarSvSE: CalendarTranslations = {
   Month: 'Månad',
   Week: 'Vecka',
   Day: 'Dag',
+  events: 'händelser',
+  event: 'händelse',
 }

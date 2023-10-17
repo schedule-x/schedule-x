@@ -14,8 +14,7 @@ export const MonthWrapper: PreactViewComponent = ({ $app, id }) => {
       $app.datePickerState.selectedDate.value,
       $app.timeUnitsImpl
     )
-    positionInMonth(newMonth, $app.calendarEvents.list.value)
-    setMonth(newMonth)
+    setMonth(positionInMonth(newMonth, $app.calendarEvents.list.value))
   }, [
     $app.calendarState.range.value?.start,
     $app.calendarState.range.value?.end,

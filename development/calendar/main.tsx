@@ -20,8 +20,8 @@ import { seededEvents } from '../data/seeded-events.ts'
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar(calendarElement, {
-  // locale: 'de-DE',
-  locale: 'en-US',
+  locale: 'de-DE',
+  // locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonth, viewWeek, viewDay],
   defaultView: 'month',
