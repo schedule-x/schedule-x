@@ -18,7 +18,10 @@ const createOneDay = (week: Week, date: Date) => {
 
 export const createWeek = ($app: CalendarAppSingleton) => {
   if ($app.calendarState.view.value === InternalViewName.Day)
-    return createOneDay({}, toJSDate($app.calendarState.range.value!.start))
+    return createOneDay(
+      {},
+      toJSDate(($app.calendarState.range.value as DateRange).start)
+    )
 
   // Week mode
   return $app.timeUnitsImpl

@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { useContext, useState } from 'preact/compat'
+import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -73,7 +73,7 @@ export default function DateGridEvent({
         }
         style={{
           width: `calc(${
-            calendarEvent._nDaysInGrid! * 100
+            (calendarEvent._nDaysInGrid as number) * 100
           }% - ${getWidthToSubtract(hasOverflowLeft, hasOverflowRight)}px)`,
           gridRow,
           ...eventCSSVariables,

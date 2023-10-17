@@ -1,4 +1,7 @@
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import {
+  CalendarEventInternal,
+  CalendarEventTime,
+} from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 const dateFn = (dateTimeString: string, locale: string) => {
@@ -28,30 +31,31 @@ export const getTimeStamp = (
   locale: string
 ) => {
   const enDash = '\u2013'
+  const eventTime = calendarEvent.time as CalendarEventTime
 
   if (calendarEvent._isSingleDayFullDay) {
-    return dateFn(calendarEvent.time!.start, locale)
+    return dateFn(eventTime.start, locale)
   }
 
   if (calendarEvent._isMultiDayFullDay) {
-    return `${dateFn(calendarEvent.time!.start, locale)} ${enDash} ${dateFn(
-      calendarEvent.time!.end,
+    return `${dateFn(eventTime.start, locale)} ${enDash} ${dateFn(
+      eventTime.end,
       locale
     )}`
   }
 
   if (calendarEvent._isSingleDayTimed) {
-    return `${dateFn(calendarEvent.time!.start, locale)} ⋅ ${timeFn(
-      calendarEvent.time!.start,
+    return `${dateFn(eventTime.start, locale)} ⋅ ${timeFn(
+      eventTime.start,
       locale
-    )} ${enDash} ${timeFn(calendarEvent.time!.end, locale)}`
+    )} ${enDash} ${timeFn(eventTime.end, locale)}`
   }
 
-  return `${dateFn(calendarEvent.time!.start, locale)}, ${timeFn(
-    calendarEvent.time!.start,
+  return `${dateFn(eventTime.start, locale)}, ${timeFn(
+    eventTime.start,
     locale
-  )} ${enDash} ${dateFn(calendarEvent.time!.end, locale)}, ${timeFn(
-    calendarEvent.time!.end,
+  )} ${enDash} ${dateFn(eventTime.end, locale)}, ${timeFn(
+    eventTime.end,
     locale
   )}`
 }

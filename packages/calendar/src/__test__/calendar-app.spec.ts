@@ -5,7 +5,6 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendar } from '../factory'
 import { viewMonth } from '../views/month'
-import { viewWeek } from '../views/week'
 
 describe('CalendarApp', () => {
   describe('bootstrapping the app', () => {

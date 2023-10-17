@@ -5,7 +5,6 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createWeek } from '../../../views/week/create-week'
-import { createCalendarAppSingleton } from '../../../../../factory'
 import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
 import { positionInDateGrid } from '../../position-in-date-grid'
 import { DATE_GRID_BLOCKER } from '../../../../../constants'

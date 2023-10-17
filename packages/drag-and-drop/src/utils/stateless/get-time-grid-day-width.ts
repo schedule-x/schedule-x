@@ -2,7 +2,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 
 export const getTimeGridDayWidth = ($app: CalendarAppSingleton) => {
   return (
-    $app.elements.calendarWrapper!.querySelector(
+    ($app.elements.calendarWrapper as HTMLElement).querySelector(
       '.sx__time-grid-day'
     ) as HTMLDivElement
   ).clientWidth

@@ -8,7 +8,6 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { cleanup, render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { WeekWrapper } from '../week-wrapper'
-import { createCalendarAppSingleton } from '../../../../factory'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 const factory = ($app: CalendarAppSingleton) => {

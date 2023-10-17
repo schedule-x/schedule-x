@@ -7,6 +7,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { DateRange } from '../../../types/date-range'
 
 const resetEventConcurrencyProperties = (event: CalendarEventInternal) => {
   event._previousConcurrentEvents = undefined
@@ -20,11 +21,9 @@ export const positionInTimeGrid = (
 ) => {
   for (const event of timeGridEvents) {
     resetEventConcurrencyProperties(event)
+    const range = $app.calendarState.range.value as DateRange
 
-    if (
-      event.time.start >= $app.calendarState.range.value!.start &&
-      event.time.end < $app.calendarState.range.value!.end
-    ) {
+    if (event.time.start >= range.start && event.time.end < range.end) {
       let date = dateFromDateTime(event.time.start)
       const timeFromStart = timeFromDateTime(event.time.start)
       if (

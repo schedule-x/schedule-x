@@ -22,7 +22,7 @@ describe('EventModal', () => {
     })
 
     it('should display event time', () => {
-      const { $app, calendarEvent } = setup()
+      const { $app } = setup()
       render(<EventModal $app={$app} />)
 
       expect(
