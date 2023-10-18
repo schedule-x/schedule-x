@@ -23,25 +23,27 @@ export const positionInDateGrid = (
   const occupiedLevels = new Set<number>()
 
   for (const event of sortedDateGridEvents) {
-    const eventStartDate = dateFromDateTime(event.time.start)
-    const eventEndDate = dateFromDateTime(event.time.end)
+    const eventOriginalStartDate = dateFromDateTime(event.time.start)
+    const eventOriginalEndDate = dateFromDateTime(event.time.end)
 
-    const isEventStartInWeek = !!week[eventStartDate]
+    const isEventStartInWeek = !!week[eventOriginalStartDate]
     let isEventInWeek = isEventStartInWeek
     if (
       !isEventStartInWeek &&
-      eventStartDate < firstDateOfWeek &&
-      eventEndDate >= firstDateOfWeek
+      eventOriginalStartDate < firstDateOfWeek &&
+      eventOriginalEndDate >= firstDateOfWeek
     ) {
       isEventInWeek = true
     }
     if (!isEventInWeek) continue
 
     const firstDateOfEvent = isEventStartInWeek
-      ? eventStartDate
+      ? eventOriginalStartDate
       : firstDateOfWeek
     const lastDateOfEvent =
-      eventEndDate <= lastDateOfWeek ? eventEndDate : lastDateOfWeek
+      eventOriginalEndDate <= lastDateOfWeek
+        ? eventOriginalEndDate
+        : lastDateOfWeek
 
     const eventDays = Object.values(week).filter((day) => {
       return day.date >= firstDateOfEvent && day.date <= lastDateOfEvent
