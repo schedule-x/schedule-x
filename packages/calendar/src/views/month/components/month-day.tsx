@@ -31,6 +31,7 @@ export default function MonthDay({ day, isFirstWeek }: props) {
 
     // Timeout to display the ripple effect
     setTimeout(() => {
+      $app.datePickerState.selectedDate.value = day.date
       $app.calendarState.view.value = InternalViewName.Day
     }, 250)
   }
@@ -72,7 +73,7 @@ export default function MonthDay({ day, isFirstWeek }: props) {
       </div>
 
       {nEventsInDay > EVENT_LIMIT_CONFIG ? (
-        <div
+        <button
           className="sx__month-day-events-more sx__ripple--wide"
           onClick={handleClickAdditionalEvents}
         >
@@ -81,7 +82,7 @@ export default function MonthDay({ day, isFirstWeek }: props) {
           } ${getEventTranslationSingularOrPlural(
             nEventsInDay - EVENT_LIMIT_CONFIG
           )}`}
-        </div>
+        </button>
       ) : null}
     </div>
   )
