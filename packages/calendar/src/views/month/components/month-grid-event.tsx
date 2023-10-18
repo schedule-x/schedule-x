@@ -25,7 +25,7 @@ export default function MonthGridEvent({
 
   const dateIsEventFirstDate =
     dateFromDateTime(calendarEvent.time.start) === date
-  const nDays = calendarEvent._nDaysStartingFrom[date]
+  const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {
     borderLeft: dateIsEventFirstDate

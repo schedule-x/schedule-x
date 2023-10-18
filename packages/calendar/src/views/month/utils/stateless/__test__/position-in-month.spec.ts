@@ -49,7 +49,7 @@ describe('Positioning events for in month view', () => {
     it('should position event1 on 30th of December, 31st of December and 1st of January', () => {
       const result = positionInMonth(month, sortedEvents)
 
-      expect(event1._nDaysStartingFrom['2019-12-30']).toBe(3)
+      expect(event1._eventFragments['2019-12-30']).toBe(3)
       expect(result[0][0].events[0]).toBe(event1)
       expect(result[0][1].events[0]).toBe('blocker')
       expect(result[0][2].events[0]).toBe('blocker')
@@ -58,7 +58,7 @@ describe('Positioning events for in month view', () => {
     it('should position event2 on 1st of January, 2nd of January and 3rd of January', () => {
       const result = positionInMonth(month, sortedEvents)
 
-      expect(event2._nDaysStartingFrom['2020-01-01']).toBe(3)
+      expect(event2._eventFragments['2020-01-01']).toBe(3)
       expect(result[0][2].events[1]).toBe(event2)
       expect(result[0][3].events[1]).toBe('blocker')
       expect(result[0][4].events[1]).toBe('blocker')
@@ -81,7 +81,7 @@ describe('Positioning events for in month view', () => {
       const result = positionInMonth(month, sortedEvents)
 
       expect(
-        (result[0][0].events[0] as CalendarEventInternal)._nDaysStartingFrom[
+        (result[0][0].events[0] as CalendarEventInternal)._eventFragments[
           '2019-12-30'
         ]
       ).toBe(7)
@@ -94,7 +94,7 @@ describe('Positioning events for in month view', () => {
       expect(result[0][6].events[0]).toBe('blocker') // Sunday 5th of January
 
       expect(
-        (result[1][0].events[0] as CalendarEventInternal)._nDaysStartingFrom[
+        (result[1][0].events[0] as CalendarEventInternal)._eventFragments[
           '2020-01-06'
         ]
       ).toBe(7)
@@ -107,7 +107,7 @@ describe('Positioning events for in month view', () => {
       expect(result[1][6].events[0]).toBe('blocker') // Sunday 12th of January
 
       expect(
-        (result[2][0].events[0] as CalendarEventInternal)._nDaysStartingFrom[
+        (result[2][0].events[0] as CalendarEventInternal)._eventFragments[
           '2020-01-13'
         ]
       ).toBe(7)
@@ -120,7 +120,7 @@ describe('Positioning events for in month view', () => {
       expect(result[2][6].events[0]).toBe('blocker') // Sunday 19th of January
 
       expect(
-        (result[3][0].events[0] as CalendarEventInternal)._nDaysStartingFrom[
+        (result[3][0].events[0] as CalendarEventInternal)._eventFragments[
           '2020-01-20'
         ]
       ).toBe(7)
@@ -133,7 +133,7 @@ describe('Positioning events for in month view', () => {
       expect(result[3][6].events[0]).toBe('blocker') // Sunday 26th of January
 
       expect(
-        (result[4][0].events[0] as CalendarEventInternal)._nDaysStartingFrom[
+        (result[4][0].events[0] as CalendarEventInternal)._eventFragments[
           '2020-01-27'
         ]
       ).toBe(2)
@@ -150,7 +150,7 @@ describe('Positioning events for in month view', () => {
       const result = positionInMonth(month, sortedEvents)
 
       expect(
-        (result[4][1].events[1] as CalendarEventInternal)._nDaysStartingFrom[
+        (result[4][1].events[1] as CalendarEventInternal)._eventFragments[
           '2020-01-28'
         ]
       ).toBe(2)

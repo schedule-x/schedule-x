@@ -13,6 +13,7 @@ import {
   timeFromDateTime,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DEFAULT_EVENT_COLOR_NAME } from '../../../constants'
+import { EventFragments } from '@schedule-x/shared/src/interfaces/calendar/event-fragments'
 
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined
@@ -111,5 +112,5 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     return this._foreignProperties
   }
 
-  _nDaysStartingFrom: Record<string, number> = {}
+  _eventFragments: EventFragments = {}
 }
