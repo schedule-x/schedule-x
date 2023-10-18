@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'preact/compat'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
-import { EventModalProps } from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
+import EventModalPlugin, {
+  EventModalProps,
+} from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { createClickOutsideListener } from './utils/stateless/click-outside'
 import { setPosition } from './utils/stateless/set-position'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
@@ -12,7 +14,9 @@ import DescriptionIcon from '@schedule-x/shared/src/components/icons/description
 
 export default function EventModal({ $app }: EventModalProps) {
   const modalId = randomStringId()
-  const { value: calendarEvent } = $app.config.plugins.eventModal!.calendarEvent
+  const { value: calendarEvent } = (
+    $app.config.plugins.eventModal as EventModalPlugin
+  ).calendarEvent
   const [isDisplayed, setIsDisplayed] = useState(false)
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { createMonth } from '../utils/stateless/create-month'
 import { Month } from '../types/month'
 import MonthWeek from './month-week'
 import { AppContext } from '../../../utils/stateful/app-context'
+import { positionInMonth } from '../utils/stateless/position-in-month'
 
 export const MonthWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])
@@ -13,7 +14,7 @@ export const MonthWrapper: PreactViewComponent = ({ $app, id }) => {
       $app.datePickerState.selectedDate.value,
       $app.timeUnitsImpl
     )
-    setMonth(newMonth)
+    setMonth(positionInMonth(newMonth, $app.calendarEvents.list.value))
   }, [
     $app.calendarState.range.value?.start,
     $app.calendarState.range.value?.end,

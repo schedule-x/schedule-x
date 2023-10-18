@@ -1,0 +1,21 @@
+.sx__month-day-events {
+  display: grid;
+  grid-gap: 4px;
+}
+
+.sx__month-grid-cell {
+  height: clamp(20px, 1.25rem, 24px);
+}
+
+.sx__month-grid-event {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--sx-spacing-padding1);
+  border-radius: var(--sx-rounding-extra-small);
+  font-size: clamp(12px, var(--sx-font-extra-small), 14px);
+}
+
+.sx__month-grid-blocker {
+  pointer-events: none;
+}

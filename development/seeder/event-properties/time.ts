@@ -68,7 +68,7 @@ export const getListOfTimePropertiesForEvents = (
     )
 
     // For every Nth event, create a full day-event
-    if (timesArray.length % 45 === 0) {
+    if (timesArray.length % 10 === 0) {
       const daysToAdd = getRandomElementOfArray([
         0, 0, 0, 1, 1, 1, 5, 7, 7, 7, 15, 30, 60,
       ]) as number

@@ -1,4 +1,5 @@
 import { EventId } from '../../types/event-id'
+import { EventFragments } from './event-fragments'
 
 export type CalendarEventTime = {
   start: string
@@ -30,6 +31,9 @@ export interface CalendarEventInternal extends CalendarEventExternal {
 
   // week date grid
   _nDaysInGrid: number | undefined
+
+  // month grid
+  _eventFragments: EventFragments
 
   _color: string
 

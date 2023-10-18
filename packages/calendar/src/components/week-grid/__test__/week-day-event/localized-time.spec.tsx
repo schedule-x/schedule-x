@@ -6,7 +6,6 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/calendar-event.builder'
-import { createCalendarAppSingleton } from '../../../../factory'
 import { factory } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 

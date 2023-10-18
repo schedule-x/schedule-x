@@ -45,12 +45,16 @@ const writeEventsToFile = () => {
     Buffer.from(`export const seededEvents = ${JSON.stringify(events)}`)
   )
 
-  fs.writeFile('./development/data/seeded-events.ts', payload, (err: any) => {
-    if (err) console.error(err)
-    else {
-      printCliMessage(monthsToSeed, commandArguments.year || null)
+  fs.writeFile(
+    './development/data/seeded-events.ts',
+    payload,
+    (err: unknown) => {
+      if (err) console.error(err)
+      else {
+        printCliMessage(monthsToSeed, commandArguments.year || null)
+      }
     }
-  })
+  )
 }
 
 writeEventsToFile()

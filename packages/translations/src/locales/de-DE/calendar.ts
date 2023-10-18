@@ -5,4 +5,6 @@ export const calendarDeDE: CalendarTranslations = {
   Month: 'Monat',
   Week: 'Woche',
   Day: 'Tag',
+  events: 'Ereignisse',
+  event: 'Ereignis',
 }

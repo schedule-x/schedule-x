@@ -3,13 +3,13 @@ import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-c
 import { Month, MonthWeek } from '../../types/month'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 
-const createWeekForMonth = (acc: MonthWeek, day: Date) => {
-  acc[toDateString(day)] = {
+const createWeekForMonth = (week: MonthWeek, day: Date) => {
+  week.push({
     date: toDateString(day),
     events: {},
-  }
+  })
 
-  return acc
+  return week
 }
 
 export const createMonth = (date: string, timeUnitsImpl: TimeUnits) => {
@@ -21,7 +21,7 @@ export const createMonth = (date: string, timeUnitsImpl: TimeUnits) => {
   const month: Month = []
 
   for (const week of monthWithDates) {
-    month.push(week.reduce(createWeekForMonth, {} as MonthWeek))
+    month.push(week.reduce(createWeekForMonth, [] as MonthWeek))
   }
 
   return month
