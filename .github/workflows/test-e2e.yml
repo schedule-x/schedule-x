@@ -1,6 +1,8 @@
 name: End-to-end tests
 on:
   pull_request:
+    paths:
+      - 'packages/**'
   push:
     branches:
       - master
