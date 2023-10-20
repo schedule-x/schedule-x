@@ -37,7 +37,7 @@ export default function MonthDay({ day, isFirstWeek }: props) {
   }
 
   return (
-    <div className="sx__month-day">
+    <div className="sx__month-day" data-date={day.date}>
       <div className="sx__month-day-header">
         {isFirstWeek ? (
           <div className="sx__month-day-header-day-name">

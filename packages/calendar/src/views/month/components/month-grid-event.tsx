@@ -41,10 +41,18 @@ export default function MonthGridEvent({
 
   const handleMouseDown = (e: MouseEvent) => {
     // todo: implement drag and drop
+    if (!e.target) return
+    if (!$app.config.plugins.dragAndDrop) return
+
+    $app.config.plugins.dragAndDrop.createMonthGridDragHandler(
+      calendarEvent,
+      $app
+    )
   }
 
   return (
     <div
+      draggable={!!$app.config.plugins.dragAndDrop}
       onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       className="sx__event sx__month-grid-event sx__month-grid-cell"
