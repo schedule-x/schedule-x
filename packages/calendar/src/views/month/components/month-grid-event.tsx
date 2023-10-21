@@ -53,6 +53,7 @@ export default function MonthGridEvent({
   return (
     <div
       draggable={!!$app.config.plugins.dragAndDrop}
+      data-id={calendarEvent.id}
       onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       className="sx__event sx__month-grid-event sx__month-grid-cell"
