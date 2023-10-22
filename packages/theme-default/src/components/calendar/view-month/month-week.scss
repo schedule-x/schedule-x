@@ -13,6 +13,10 @@
   }
 }
 
+.sx__month-day--dragover {
+  background-color: var(--sx-color-surface-container);
+}
+
 .sx__month-day-header {
   display: flex;
   flex-flow: column;
