@@ -36,7 +36,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     this.allDayElements.forEach((el) => {
       el.addEventListener('dragover', this.handleDragOver)
     })
-    this.toggleCalendarEventPointerEvents('none')
+    this.setCalendarEventPointerEventsTo('none')
   }
 
   private handleDragOver = (e: MouseEvent) => {
@@ -73,11 +73,11 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
       el.removeEventListener('dragover', this.handleDragOver)
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
     })
-    this.toggleCalendarEventPointerEvents('auto')
+    this.setCalendarEventPointerEventsTo('auto')
     this.updateCalendarEvent()
   }
 
-  private toggleCalendarEventPointerEvents = (
+  private setCalendarEventPointerEventsTo = (
     pointerEvents: 'auto' | 'none'
   ) => {
     ;(
