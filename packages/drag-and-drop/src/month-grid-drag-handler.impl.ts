@@ -12,13 +12,17 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private currentDragoverDate: string | undefined
   private eventNDays: number
 
+  private readonly MONTH_DAY_CLASS_NAME = 'sx__month-day'
+  private readonly MONTH_DAY_SELECTOR = `.${this.MONTH_DAY_CLASS_NAME}`
+  private readonly DAY_DRAGOVER_CLASS_NAME = 'sx__month-day--dragover'
+
   constructor(
     private calendarEvent: CalendarEventInternal,
     private $app: CalendarAppSingleton
   ) {
     this.allDayElements = (
       $app.elements.calendarWrapper as HTMLElement
-    ).querySelectorAll('.sx__month-day') as NodeListOf<HTMLDivElement>
+    ).querySelectorAll(this.MONTH_DAY_SELECTOR) as NodeListOf<HTMLDivElement>
     this.eventNDays =
       calculateDaysDifference(
         this.calendarEvent.time.start,
@@ -40,10 +44,10 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     let dayElement: HTMLDivElement = e.target as HTMLDivElement
     if (
       !(dayElement instanceof HTMLDivElement) ||
-      !dayElement.classList.contains('sx__month-day')
+      !dayElement.classList.contains(this.MONTH_DAY_CLASS_NAME)
     )
       dayElement = (e.target as Element).closest(
-        '.sx__month-day'
+        this.MONTH_DAY_SELECTOR
       ) as HTMLDivElement
 
     if (this.currentDragoverDate === dayElement.dataset.date) return
@@ -57,9 +61,9 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
         dayElementDate >= (this.currentDragoverDate as string) &&
         dayElementDate <= newEndDate
       ) {
-        el.classList.add('sx__month-day--dragover')
+        el.classList.add(this.DAY_DRAGOVER_CLASS_NAME)
       } else {
-        el.classList.remove('sx__month-day--dragover')
+        el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
       }
     })
   }
@@ -67,7 +71,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private handleDragEnd = (e: MouseEvent) => {
     this.allDayElements.forEach((el) => {
       el.removeEventListener('dragover', this.handleDragOver)
-      el.classList.remove('sx__month-day--dragover')
+      el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
     })
     this.toggleCalendarEventPointerEvents('auto')
     this.updateCalendarEvent()

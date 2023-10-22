@@ -40,7 +40,6 @@ export default function MonthGridEvent({
   } as const
 
   const handleMouseDown = (e: MouseEvent) => {
-    // todo: implement drag and drop
     if (!e.target) return
     if (!$app.config.plugins.dragAndDrop) return
 
