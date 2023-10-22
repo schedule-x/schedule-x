@@ -5,6 +5,7 @@ import { useContext } from 'preact/compat'
 import { AppContext } from '../../../utils/stateful/app-context'
 import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '../../../enums/internal-view.enum'
+import { DATE_GRID_BLOCKER } from '../../../constants'
 
 type props = {
   day: MonthDayType
@@ -16,7 +17,7 @@ const EVENT_LIMIT_CONFIG = 4
 export default function MonthDay({ day, isFirstWeek }: props) {
   const $app = useContext(AppContext)
   const nEventsInDay = Object.values(day.events).filter(
-    (event) => typeof event === 'object'
+    (event) => typeof event === 'object' || event === DATE_GRID_BLOCKER
   ).length
 
   const getEventTranslationSingularOrPlural = (nOfAdditionalEvents: number) => {
