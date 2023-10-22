@@ -29,7 +29,6 @@ describe('MonthDay component', () => {
 
   describe('displaying an event', () => {
     const $app = __createAppWithViews__()
-
     const eventTitle = 'Event 1'
     const calendarEventInternal = new CalendarEventBuilder($app.config, 1, {
       start: '2020-01-01 00:00',
@@ -53,7 +52,6 @@ describe('MonthDay component', () => {
 
   describe('displaying less events than the limit', () => {
     const $app = __createAppWithViews__()
-
     const calendarEventInternal = getTestEvent($app)
     const dayWithOneEvent: MonthDayType = {
       date: '2020-01-01',
@@ -71,7 +69,6 @@ describe('MonthDay component', () => {
 
   describe('displaying one more event than the limit', () => {
     const $app = __createAppWithViews__()
-
     const dayWithEventLimitPlus1: MonthDayType = {
       date: '2020-01-01',
       events: {
@@ -95,7 +92,6 @@ describe('MonthDay component', () => {
 
   describe('displaying 2 more events than the limit', () => {
     const $app = __createAppWithViews__()
-
     const dayWithEventLimitPlus2: MonthDayType = {
       date: '2020-01-01',
       events: {
