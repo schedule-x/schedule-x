@@ -16,12 +16,8 @@ export default function MonthGridEvent({
   date,
 }: props) {
   const $app = useContext(AppContext)
-  const {
-    updateCopy,
-    createDragStartTimeout,
-    eventCopy,
-    setClickedEventIfNotDragging,
-  } = useDraggableEvent($app)
+  const { createDragStartTimeout, setClickedEventIfNotDragging } =
+    useDraggableEvent($app)
 
   const dateIsEventFirstDate =
     dateFromDateTime(calendarEvent.time.start) === date
