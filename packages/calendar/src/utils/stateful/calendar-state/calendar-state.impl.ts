@@ -1,5 +1,5 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
-import { signal } from '@preact/signals'
+import { effect, signal } from '@preact/signals'
 import { ViewName } from '../../../types/view-name'
 import { DateRange } from '../../../types/date-range'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -29,9 +29,16 @@ export const createCalendarState = (
     })
   }
 
+  const isSmallScreen = signal<boolean>(false)
+
+  effect(() => {
+    console.log('isSmallScreen', isSmallScreen.value)
+  })
+
   return {
     view,
     handleDateSelection,
     range,
+    isSmallScreen,
   }
 }

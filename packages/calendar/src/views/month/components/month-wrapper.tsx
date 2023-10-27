@@ -6,6 +6,7 @@ import MonthWeek from './month-week'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { positionInMonth } from '../utils/stateless/position-in-month'
 import { sortEventsByStart } from '../../../utils/stateless/events/sort-by-start-date'
+import MonthAgendaView from './month-agenda-view'
 
 export const MonthWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])
@@ -33,13 +34,16 @@ export const MonthWrapper: PreactViewComponent = ({ $app, id }) => {
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__month-wrapper">
-        {month.map((week, index) => (
-          <MonthWeek
-            key={index + new Date().getTime()}
-            week={week}
-            isFirstWeek={index === 0}
-          />
-        ))}
+        {!$app.calendarState.isSmallScreen.value &&
+          month.map((week, index) => (
+            <MonthWeek
+              key={index + new Date().getTime()}
+              week={week}
+              isFirstWeek={index === 0}
+            />
+          ))}
+
+        {$app.calendarState.isSmallScreen.value && <MonthAgendaView />}
       </div>
     </AppContext.Provider>
   )

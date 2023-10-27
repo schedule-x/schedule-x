@@ -5,6 +5,7 @@ import { useEffect, useState } from 'preact/compat'
 import { View } from '../types/view'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { setWrapperElement } from '../utils/stateless/dom/set-wrapper-element'
+import { setIsSmallScreen } from '../utils/stateless/dom/set-is-small-screen'
 
 type props = {
   $app: CalendarAppSingleton
@@ -31,6 +32,14 @@ export default function CalendarWrapper({ $app }: props) {
 
   useEffect(() => setWrapperElement($app, calendarId), [])
 
+  const handleCalendarResize = () => {
+    setIsSmallScreen($app)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleCalendarResize)
+    return () => window.removeEventListener('resize', handleCalendarResize)
+  }, [])
   return (
     <>
       <div className={'sx__calendar-wrapper'} id={calendarId}>
