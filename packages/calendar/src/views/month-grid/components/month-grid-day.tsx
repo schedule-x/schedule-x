@@ -14,7 +14,7 @@ type props = {
 
 const EVENT_LIMIT_CONFIG = 4
 
-export default function MonthDay({ day, isFirstWeek }: props) {
+export default function MonthGridDay({ day, isFirstWeek }: props) {
   const $app = useContext(AppContext)
   const nEventsInDay = Object.values(day.events).filter(
     (event) => typeof event === 'object' || event === DATE_GRID_BLOCKER
@@ -38,20 +38,20 @@ export default function MonthDay({ day, isFirstWeek }: props) {
   }
 
   return (
-    <div className="sx__month-day" data-date={day.date}>
-      <div className="sx__month-day-header">
+    <div className="sx__month-grid-day" data-date={day.date}>
+      <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
-          <div className="sx__month-day-header-day-name">
+          <div className="sx__month-grid-day__header-day-name">
             {getDayNameShort(toJSDate(day.date), $app.config.locale)}
           </div>
         ) : null}
 
-        <div className="sx__month-day-header-date">
+        <div className="sx__month-grid-day__header-date">
           {toJSDate(day.date).getDate()}
         </div>
       </div>
 
-      <div className="sx__month-day-events">
+      <div className="sx__month-grid-day__events">
         {Object.values(day.events)
           .slice(0, EVENT_LIMIT_CONFIG)
           .map((event, index) => {
@@ -75,7 +75,7 @@ export default function MonthDay({ day, isFirstWeek }: props) {
 
       {nEventsInDay > EVENT_LIMIT_CONFIG ? (
         <button
-          className="sx__month-day-events-more sx__ripple--wide"
+          className="sx__month-grid-day__events-more sx__ripple--wide"
           onClick={handleClickAdditionalEvents}
         >
           {`+ ${

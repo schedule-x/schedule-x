@@ -1,14 +1,14 @@
 import { createCalendarAppSingleton } from '../../../../factory'
 import { viewDay } from '../../../../views/day'
 import { viewWeek } from '../../../../views/week'
-import { viewMonth } from '../../../../views/month'
+import { viewMonthGrid } from '../../../../views/month-grid'
 import { render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import ViewSelection from '../../view-selection'
 
 export const factory = () => {
   const $app = createCalendarAppSingleton({
-    views: [viewDay, viewWeek, viewMonth],
+    views: [viewDay, viewWeek, viewMonthGrid],
   })
 
   return render(

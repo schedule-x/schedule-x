@@ -9,7 +9,7 @@ import { createCalendarAppSingleton } from '../../../../factory'
 import { factory } from './utils'
 import { viewDay } from '../../../../views/day'
 import { viewWeek } from '../../../../views/week'
-import { viewMonth } from '../../../../views/month'
+import { viewMonthGrid } from '../../../../views/month-grid'
 import { openViewSelection } from '../../../../utils/stateless/testing/page-objects/view-selection'
 
 describe('CalendarHeader', () => {
@@ -22,7 +22,7 @@ describe('CalendarHeader', () => {
       const $app = createCalendarAppSingleton({
         defaultView: 'week',
         datePicker: { selectedDate: '2010-01-01' },
-        views: [viewMonth, viewWeek, viewDay],
+        views: [viewMonthGrid, viewWeek, viewDay],
       })
       factory($app)
       const expectedRangeHeadingBeforeChange = 'December 2009 – January 2010'
@@ -45,7 +45,7 @@ describe('CalendarHeader', () => {
       const $app = createCalendarAppSingleton({
         defaultView: 'day',
         datePicker: { selectedDate: '2010-01-01' },
-        views: [viewMonth, viewWeek, viewDay],
+        views: [viewMonthGrid, viewWeek, viewDay],
       })
       factory($app)
       const expectedRangeHeadingBeforeChange = 'January 2010'

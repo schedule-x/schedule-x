@@ -9,7 +9,7 @@ import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/cale
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { cleanup, render, screen, waitFor } from '@testing-library/preact'
-import MonthDay from '../month-day'
+import MonthGridDay from '../month-grid-day'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { getTestEvent } from './test-events'
 import { InternalViewName } from '../../../../enums/internal-view.enum'
@@ -17,7 +17,7 @@ import { InternalViewName } from '../../../../enums/internal-view.enum'
 const factory = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(
     <AppContext.Provider value={$app}>
-      <MonthDay day={day} isFirstWeek={false} />
+      <MonthGridDay day={day} isFirstWeek={false} />
     </AppContext.Provider>
   )
 }
@@ -63,7 +63,9 @@ describe('MonthDay component', () => {
     it('should display an event with title', () => {
       factory($app, dayWithOneEvent)
 
-      expect(document.querySelector('.sx__month-day-events-more')).toBeNull()
+      expect(
+        document.querySelector('.sx__month-grid-day__events-more')
+      ).toBeNull()
     })
   })
 
@@ -84,7 +86,7 @@ describe('MonthDay component', () => {
       factory($app, dayWithEventLimitPlus1)
 
       expect(
-        document.querySelector('.sx__month-day-events-more')
+        document.querySelector('.sx__month-grid-day__events-more')
       ).not.toBeNull()
       expect(screen.getByText('+ 1 event')).not.toBeNull()
     })
@@ -108,7 +110,7 @@ describe('MonthDay component', () => {
       factory($app, dayWithEventLimitPlus2)
 
       expect(
-        document.querySelector('.sx__month-day-events-more')
+        document.querySelector('.sx__month-grid-day__events-more')
       ).not.toBeNull()
       expect(screen.getByText('+ 2 events')).not.toBeNull()
     })
@@ -118,7 +120,7 @@ describe('MonthDay component', () => {
       expect($app.calendarState.view.value).toBe(InternalViewName.Week)
 
       const moreEventsButton = document.querySelector(
-        '.sx__month-day-events-more'
+        '.sx__month-grid-day__events-more'
       )
       moreEventsButton?.dispatchEvent(
         new MouseEvent('click', { bubbles: true })

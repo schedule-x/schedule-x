@@ -2,5 +2,5 @@
 export enum InternalViewName {
   Day = 'day',
   Week = 'week',
-  Month = 'month',
+  MonthGrid = 'month-grid',
 }
