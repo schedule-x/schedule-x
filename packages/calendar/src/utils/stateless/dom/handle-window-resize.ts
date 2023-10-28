@@ -1,6 +1,6 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
-export const setIsSmallScreen = ($app: CalendarAppSingleton) => {
+export const handleWindowResize = ($app: CalendarAppSingleton) => {
   const documentRoot = document.documentElement
   const calendarRoot = $app.elements.calendarWrapper
   const documentFontSize = +window
@@ -14,4 +14,5 @@ export const setIsSmallScreen = ($app: CalendarAppSingleton) => {
 
   $app.calendarState.isSmallScreen.value =
     calendarRoot.clientWidth < smallCalendarBreakpoint
+  console.log($app.calendarState.isSmallScreen.value)
 }
