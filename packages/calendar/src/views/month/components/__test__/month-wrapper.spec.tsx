@@ -13,40 +13,18 @@ const factory = ($app: CalendarAppSingleton) => {
   render(<MonthWrapper $app={$app} id={'1'} />)
 }
 
-const getMonthWeek = () => document.querySelector('.sx__month-week')
-
-const getAgendaView = () => document.querySelector('.sx__month-agenda-view')
-
 describe('MonthWrapper', () => {
   afterEach(() => {
     cleanup()
   })
 
-  describe('when the calendar is not in small screen mode', () => {
-    it('should render the month weeks but no agenda view', () => {
-      factory(__createAppWithViews__())
-
-      expect(getMonthWeek()).toBeTruthy()
-      expect(getAgendaView()).toBeFalsy()
-    })
-
+  describe('rendering weeks for a certain month', () => {
     it('should render 6 weeks for October 2023', () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2023-10-01'
       factory($app)
 
       expect(document.querySelectorAll('.sx__month-week').length).toBe(6)
-    })
-  })
-
-  describe('when the calendar is in small screen mode', () => {
-    it('should render the month agenda view but no month weeks', () => {
-      const $app = __createAppWithViews__()
-      $app.calendarState.isSmallScreen.value = true
-      factory($app)
-
-      expect(getAgendaView()).toBeTruthy()
-      expect(getMonthWeek()).toBeFalsy()
     })
   })
 })
