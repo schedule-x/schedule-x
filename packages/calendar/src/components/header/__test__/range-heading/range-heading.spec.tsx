@@ -6,7 +6,7 @@ import {
 import { createCalendarAppSingleton } from '../../../../factory'
 import { factory } from './utils'
 import { screen } from '@testing-library/preact'
-import { viewMonth } from '../../../../views/month'
+import { viewMonthGrid } from '../../../../views/month-grid'
 import { viewWeek } from '../../../../views/week'
 import { viewDay } from '../../../../views/day'
 
@@ -27,7 +27,7 @@ describe('RangeHeading', () => {
           datePicker: {
             selectedDate,
           },
-          views: [viewMonth, viewWeek, viewDay],
+          views: [viewMonthGrid, viewWeek, viewDay],
         })
         factory($app)
 

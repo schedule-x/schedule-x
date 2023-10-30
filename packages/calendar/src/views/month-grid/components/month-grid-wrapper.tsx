@@ -2,12 +2,12 @@ import { PreactViewComponent } from '../../../types/preact-view-component'
 import { useEffect, useState } from 'preact/compat'
 import { createMonth } from '../utils/stateless/create-month'
 import { Month } from '../types/month'
-import MonthWeek from './month-week'
+import MonthGridWeek from './month-grid-week'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { positionInMonth } from '../utils/stateless/position-in-month'
 import { sortEventsByStart } from '../../../utils/stateless/events/sort-by-start-date'
 
-export const MonthWrapper: PreactViewComponent = ({ $app, id }) => {
+export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])
 
   useEffect(() => {
@@ -32,9 +32,9 @@ export const MonthWrapper: PreactViewComponent = ({ $app, id }) => {
 
   return (
     <AppContext.Provider value={$app}>
-      <div id={id} className="sx__month-wrapper">
+      <div id={id} className="sx__month-grid-wrapper">
         {month.map((week, index) => (
-          <MonthWeek
+          <MonthGridWeek
             key={index + new Date().getTime()}
             week={week}
             isFirstWeek={index === 0}

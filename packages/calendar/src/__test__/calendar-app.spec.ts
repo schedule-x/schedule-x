@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendar } from '../factory'
-import { viewMonth } from '../views/month'
+import { viewMonthGrid } from '../views/month-grid'
 
 describe('CalendarApp', () => {
   describe('bootstrapping the app', () => {
@@ -12,7 +12,7 @@ describe('CalendarApp', () => {
       const calendarEl = document.createElement('div')
       document.body.appendChild(calendarEl)
       const calendarApp = createCalendar(calendarEl, {
-        views: [viewMonth],
+        views: [viewMonthGrid],
       })
       expect(document.querySelector('.sx__calendar-wrapper')).toBeNull()
 

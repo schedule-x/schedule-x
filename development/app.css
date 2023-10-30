@@ -20,6 +20,13 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+@media (width <=699px) {
+  #calendar {
+    height: 100vh;
+    padding: 0;
+  }
+}
+
 .is-dark {
   background-color: var(--sx-color-background);
   color: #fff;

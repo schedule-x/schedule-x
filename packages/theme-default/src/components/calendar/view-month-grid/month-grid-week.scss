@@ -1,10 +1,10 @@
-.sx__month-week {
+.sx__month-grid-week {
   border-top: var(--sx-border);
   flex: 1;
   display: flex;
 }
 
-.sx__month-day {
+.sx__month-grid-day {
   padding: var(--sx-spacing-padding2) 0;
   flex: 1;
 
@@ -13,27 +13,27 @@
   }
 }
 
-.sx__month-day--dragover {
+.sx__month-grid-day--dragover {
   background-color: var(--sx-color-surface-container);
 }
 
-.sx__month-day-header {
+.sx__month-grid-day__header {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
 
-.sx__month-day-header-day-name {
+.sx__month-grid-day__header-day-name {
   font-size: 11px;
   text-transform: uppercase;
   color: var(--sx-color-neutral);
 }
 
-.sx__month-day-header-date {
+.sx__month-grid-day__header-date {
   font-size: var(--sx-font-extra-small);
 }
 
-.sx__month-day-events-more {
+.sx__month-grid-day__events-more {
   width: calc(100% - 10px); // CORRELATION ID: 2 (10px subtracted from width)
   font-size: var(--sx-font-extra-small);
   color: var(--sx-color-neutral);

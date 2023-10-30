@@ -8,7 +8,7 @@ import '@fontsource/roboto-condensed'
 import {
   createCalendar,
   viewWeek,
-  viewMonth,
+  viewMonthGrid,
   viewDay,
 } from '../../packages/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
@@ -23,7 +23,7 @@ const calendar = createCalendar(calendarElement, {
   locale: 'de-DE',
   // locale: 'en-US',
   // locale: 'zh-CN',
-  views: [viewMonth, viewWeek, viewDay],
+  views: [viewMonthGrid, viewWeek, viewDay],
   defaultView: 'month',
   // dayBoundaries: {
   //   start: '06:00',

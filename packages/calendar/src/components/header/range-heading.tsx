@@ -24,7 +24,7 @@ export default function RangeHeading() {
     }
 
     if (
-      $app.calendarState.view.value === InternalViewName.Month ||
+      $app.calendarState.view.value === InternalViewName.MonthGrid ||
       $app.calendarState.view.value === InternalViewName.Day
     ) {
       setCurrentHeading(getMonthAndYearForSelectedDate($app))

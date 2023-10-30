@@ -1,4 +1,4 @@
-.sx__month-day-events {
+.sx__month-grid-day__events {
   display: grid;
   grid-gap: 4px;
 }
@@ -14,6 +14,8 @@
   padding: var(--sx-spacing-padding1);
   border-radius: var(--sx-rounding-extra-small);
   font-size: clamp(12px, var(--sx-font-extra-small), 14px);
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .sx__month-grid-blocker {

@@ -5,14 +5,14 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendar } from '../factory'
 import CalendarApp from '../calendar.app'
-import { viewMonth } from '../views/month'
+import { viewMonthGrid } from '../views/month-grid'
 
 describe('The calendar factory', () => {
   it('should create a calendar app', () => {
     const underTest = createCalendar
 
     const result = underTest(document.createElement('div'), {
-      views: [viewMonth],
+      views: [viewMonthGrid],
     })
 
     expect(result).toBeInstanceOf(CalendarApp)

@@ -12,9 +12,9 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private currentDragoverDate: string | undefined
   private eventNDays: number
 
-  private readonly MONTH_DAY_CLASS_NAME = 'sx__month-day'
+  private readonly MONTH_DAY_CLASS_NAME = 'sx__month-grid-day'
   private readonly MONTH_DAY_SELECTOR = `.${this.MONTH_DAY_CLASS_NAME}`
-  private readonly DAY_DRAGOVER_CLASS_NAME = 'sx__month-day--dragover'
+  private readonly DAY_DRAGOVER_CLASS_NAME = 'sx__month-grid-day--dragover'
 
   constructor(
     private calendarEvent: CalendarEventInternal,
