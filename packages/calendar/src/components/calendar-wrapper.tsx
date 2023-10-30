@@ -32,13 +32,13 @@ export default function CalendarWrapper({ $app }: props) {
 
   useEffect(() => setWrapperElement($app, calendarId), [])
 
+  const onResize = () => {
+    handleWindowResize($app)
+  }
+
   useEffect(() => {
-    window.addEventListener('resize', handleWindowResize.bind(undefined, $app))
-    return () =>
-      window.removeEventListener(
-        'resize',
-        handleWindowResize.bind(undefined, $app)
-      )
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
   }, [])
   return (
     <>
