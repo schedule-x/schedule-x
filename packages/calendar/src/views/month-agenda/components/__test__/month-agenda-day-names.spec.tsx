@@ -29,18 +29,23 @@ const getDayN = (n: number) => {
 }
 
 describe('MonthAgendaDayNames', () => {
+  const $appWithEnglishLocale = __createAppWithViews__()
+  const $appWithGermanLocale = __createAppWithViews__({
+    locale: 'de-DE',
+  })
+
   afterEach(() => {
     cleanup()
   })
 
   describe('A week starting on Sunday', () => {
+    const timeUnitsImpl = new TimeUnitsBuilder()
+      .withFirstDayOfWeek(WeekDay.SUNDAY)
+      .build()
+
     it('should list all days in English', () => {
-      const $app = __createAppWithViews__()
-      const timeUnitsImpl = new TimeUnitsBuilder()
-        .withFirstDayOfWeek(WeekDay.SUNDAY)
-        .build()
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $app)
+      factory(agendaMonth.weeks[0], $appWithEnglishLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('S')
@@ -53,14 +58,8 @@ describe('MonthAgendaDayNames', () => {
     })
 
     it('should list all days in German', () => {
-      const $app = __createAppWithViews__({
-        locale: 'de-DE',
-      })
-      const timeUnitsImpl = new TimeUnitsBuilder()
-        .withFirstDayOfWeek(WeekDay.SUNDAY)
-        .build()
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $app)
+      factory(agendaMonth.weeks[0], $appWithGermanLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('S')
@@ -74,13 +73,14 @@ describe('MonthAgendaDayNames', () => {
   })
 
   describe('A week starting on Monday', () => {
+    const timeUnitsImpl = new TimeUnitsBuilder()
+      .withFirstDayOfWeek(WeekDay.MONDAY)
+      .build()
+
     it('should list all days in English', () => {
       const $app = __createAppWithViews__()
-      const timeUnitsImpl = new TimeUnitsBuilder()
-        .withFirstDayOfWeek(WeekDay.MONDAY)
-        .build()
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $app)
+      factory(agendaMonth.weeks[0], $appWithEnglishLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('M')
@@ -93,14 +93,8 @@ describe('MonthAgendaDayNames', () => {
     })
 
     it('should list all days in German', () => {
-      const $app = __createAppWithViews__({
-        locale: 'de-DE',
-      })
-      const timeUnitsImpl = new TimeUnitsBuilder()
-        .withFirstDayOfWeek(WeekDay.MONDAY)
-        .build()
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $app)
+      factory(agendaMonth.weeks[0], $appWithGermanLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('M')
