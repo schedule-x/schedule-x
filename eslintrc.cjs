@@ -12,5 +12,5 @@ module.exports = {
     'max-lines': ['error', 150],
     '@typescript-eslint/no-empty-interface': 'off',
   },
-  ignorePatterns: ['**/dist/**'],
+  ignorePatterns: ['**/dist/**', '**/seeded-events.ts'],
 }
