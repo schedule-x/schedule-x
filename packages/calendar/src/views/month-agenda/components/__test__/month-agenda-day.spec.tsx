@@ -2,12 +2,13 @@ import {
   describe,
   it,
   expect,
+  afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, fireEvent, render } from '@testing-library/preact'
 import MonthAgendaDay from '../month-agenda-day'
 import { MonthAgendaDay as MonthAgendaDayType } from '../../types/month-agenda'
 import { StateUpdater } from 'preact/compat'
-import { afterEach, vi } from 'vitest'
+import { vi } from 'vitest'
 
 const factory = (
   day: MonthAgendaDayType,
