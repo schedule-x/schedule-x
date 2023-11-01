@@ -7,20 +7,17 @@ import MonthAgendaDayNames from './month-agenda-day-names'
 import { AppContext } from '../../../utils/stateful/app-context'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
-  const [agendaMonth, setAgendaMonth] = useState<MonthAgenda>(
-    createAgendaMonth(
+  const getMonth = () => {
+    return createAgendaMonth(
       $app.datePickerState.selectedDate.value,
       $app.timeUnitsImpl
     )
-  )
+  }
+
+  const [agendaMonth, setAgendaMonth] = useState<MonthAgenda>(getMonth())
 
   useEffect(() => {
-    setAgendaMonth(
-      createAgendaMonth(
-        $app.datePickerState.selectedDate.value,
-        $app.timeUnitsImpl
-      )
-    )
+    setAgendaMonth(getMonth())
   }, [$app.datePickerState.selectedDate.value])
 
   const [activeDate, setActiveDate] = useState(

@@ -13,16 +13,14 @@ export const createAgendaMonth = (
     month
   )
 
-  const weeks = monthWithDates.map((week) => {
-    return week.map((date) => {
-      return {
-        date: toDateString(date),
-        events: [],
-      }
-    })
-  })
-
   return {
-    weeks,
+    weeks: monthWithDates.map((week) => {
+      return week.map((date) => {
+        return {
+          date: toDateString(date),
+          events: [],
+        }
+      })
+    }),
   }
 }

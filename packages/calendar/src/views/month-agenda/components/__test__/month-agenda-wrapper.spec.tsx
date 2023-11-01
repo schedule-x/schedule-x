@@ -91,7 +91,7 @@ describe('MonthAgendaWrapper', () => {
       )
     })
 
-    it('should display a new month when selected date is in another month', async () => {
+    it('should display a new month when selecting a date in another month', async () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2027-01-27'
       factory($app)
