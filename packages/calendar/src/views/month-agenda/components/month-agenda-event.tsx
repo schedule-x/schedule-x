@@ -21,7 +21,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     <div className="sx__month-agenda-event" style={eventCSSVariables}>
       <div className="sx__month-agenda-event__title">{calendarEvent.title}</div>
 
-      <div className="sx__month-agenda-event__has-icon">
+      <div className="sx__month-agenda-event__time sx__month-agenda-event__has-icon">
         <TimeIcon
           strokeColor={`var(--sx-color-on-${calendarEvent._color}-container)`}
         />
