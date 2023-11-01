@@ -13,9 +13,7 @@
     margin-top: $event-gap;
   }
 
-  &:not(:last-child) {
-    margin-bottom: $event-gap;
-  }
+  margin-bottom: $event-gap;
 }
 
 .sx__month-agenda-event__title {

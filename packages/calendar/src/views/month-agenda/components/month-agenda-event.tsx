@@ -14,6 +14,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
   const eventCSSVariables = {
     backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
     color: `var(--sx-color-on-${calendarEvent._color}-container)`,
+    borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
   }
 
   return (

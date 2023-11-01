@@ -1,8 +1,7 @@
 .sx__month-agenda-week {
   display: flex;
-  border-top: var(--sx-border);
 
-  &:last-child {
-    border-bottom: var(--sx-border);
+  &:not(:first-child) {
+    border-top: var(--sx-border);
   }
 }
