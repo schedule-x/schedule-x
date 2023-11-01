@@ -9,18 +9,14 @@ import { positionEventsInAgenda } from '../utils/stateless/position-events-in-ag
 import { sortEventsByStart } from '../../../utils/stateless/events/sort-by-start-date'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
-  const getMonth = () => {
-    let monthAgenda = createAgendaMonth(
-      $app.datePickerState.selectedDate.value,
-      $app.timeUnitsImpl
-    )
-    monthAgenda = positionEventsInAgenda(
-      monthAgenda,
+  const getMonth = () =>
+    positionEventsInAgenda(
+      createAgendaMonth(
+        $app.datePickerState.selectedDate.value,
+        $app.timeUnitsImpl
+      ),
       $app.calendarEvents.list.value.sort(sortEventsByStart)
     )
-
-    return monthAgenda
-  }
 
   const [agendaMonth, setAgendaMonth] = useState<MonthAgenda>(getMonth())
 
