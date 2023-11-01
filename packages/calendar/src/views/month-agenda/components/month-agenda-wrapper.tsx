@@ -5,13 +5,21 @@ import { createAgendaMonth } from '../utils/stateless/create-agenda-month'
 import MonthAgendaWeek from './month-agenda-week'
 import MonthAgendaDayNames from './month-agenda-day-names'
 import { AppContext } from '../../../utils/stateful/app-context'
+import { positionEventsInAgenda } from '../utils/stateless/position-events-in-agenda'
+import { sortEventsByStart } from '../../../utils/stateless/events/sort-by-start-date'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
   const getMonth = () => {
-    return createAgendaMonth(
+    let monthAgenda = createAgendaMonth(
       $app.datePickerState.selectedDate.value,
       $app.timeUnitsImpl
     )
+    monthAgenda = positionEventsInAgenda(
+      monthAgenda,
+      $app.calendarEvents.list.value.sort(sortEventsByStart)
+    )
+
+    return monthAgenda
   }
 
   const [agendaMonth, setAgendaMonth] = useState<MonthAgenda>(getMonth())
