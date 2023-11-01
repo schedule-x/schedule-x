@@ -29,7 +29,7 @@ describe('MonthAgendaWrapper', () => {
   })
 
   describe('a month for the current date', () => {
-    it('should have on day with an active class', () => {
+    it('should have one day with an active class', () => {
       factory(__createAppWithViews__())
 
       expect(
@@ -54,7 +54,7 @@ describe('MonthAgendaWrapper', () => {
   })
 
   describe('a month for a date in the future', () => {
-    it('should have on day with an active class', () => {
+    it('should have one day with an active class', () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2027-01-27'
       factory($app)
