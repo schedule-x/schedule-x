@@ -68,7 +68,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     })
   }
 
-  private handleDragEnd = (e: MouseEvent) => {
+  private handleDragEnd = (_e: MouseEvent) => {
     this.allDayElements.forEach((el) => {
       el.removeEventListener('dragover', this.handleDragOver)
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)

@@ -78,7 +78,6 @@ describe('MonthAgendaDayNames', () => {
       .build()
 
     it('should list all days in English', () => {
-      const $app = __createAppWithViews__()
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
       factory(agendaMonth.weeks[0], $appWithEnglishLocale)
 
