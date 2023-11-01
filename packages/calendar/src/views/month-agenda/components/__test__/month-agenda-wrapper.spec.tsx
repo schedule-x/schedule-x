@@ -90,5 +90,22 @@ describe('MonthAgendaWrapper', () => {
         35
       )
     })
+
+    it('should display a new month when selected date is in another month', async () => {
+      const $app = __createAppWithViews__()
+      $app.datePickerState.selectedDate.value = '2027-01-27'
+      factory($app)
+      expect(document.querySelectorAll('.sx__month-agenda-week')).toHaveLength(
+        5
+      )
+
+      $app.datePickerState.selectedDate.value = '2027-02-27'
+
+      await waitFor(() => {
+        expect(
+          document.querySelectorAll('.sx__month-agenda-week')
+        ).toHaveLength(4)
+      })
+    })
   })
 })

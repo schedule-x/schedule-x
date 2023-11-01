@@ -1,5 +1,5 @@
 import { PreactViewComponent } from '../../../types/preact-view-component'
-import { useState } from 'preact/compat'
+import { useEffect, useState } from 'preact/compat'
 import { MonthAgenda } from '../types/month-agenda'
 import { createAgendaMonth } from '../utils/stateless/create-agenda-month'
 import MonthAgendaWeek from './month-agenda-week'
@@ -13,6 +13,15 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
       $app.timeUnitsImpl
     )
   )
+
+  useEffect(() => {
+    setAgendaMonth(
+      createAgendaMonth(
+        $app.datePickerState.selectedDate.value,
+        $app.timeUnitsImpl
+      )
+    )
+  }, [$app.datePickerState.selectedDate.value])
 
   const [activeDate, setActiveDate] = useState(
     $app.datePickerState.selectedDate.value
