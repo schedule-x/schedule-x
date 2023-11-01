@@ -2,9 +2,9 @@ import {
   describe,
   it,
   expect,
-} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+} from '../../../testing/unit/unit-testing-library.impl'
+import { CalendarEventInternal } from '../../../../../interfaces/calendar/calendar-event.interface'
 import { getTimeStamp } from '../get-time-stamp'
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
 describe('Getting the time stamp for the event modal', () => {
   describe('Time stamps for full single day events', () => {

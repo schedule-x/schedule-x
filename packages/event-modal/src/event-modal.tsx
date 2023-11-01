@@ -6,11 +6,11 @@ import EventModalPlugin, {
 import { createClickOutsideListener } from './utils/stateless/click-outside'
 import { setPosition } from './utils/stateless/set-position'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
-import { getTimeStamp } from './utils/stateless/get-time-stamp'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
 import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
 import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pin-icon'
 import DescriptionIcon from '@schedule-x/shared/src/components/icons/description-icon'
+import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 export default function EventModal({ $app }: EventModalProps) {
   const modalId = randomStringId()
