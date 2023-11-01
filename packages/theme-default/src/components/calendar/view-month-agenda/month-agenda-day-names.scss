@@ -1,0 +1,14 @@
+.sx__month-agenda-day-names {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: var(--sx-spacing-padding1) 0;
+  font-size: var(--sx-font-extra-small);
+  color: var(--sx-color-neutral);
+}
+
+.sx__month-agenda-day-name {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
