@@ -9,10 +9,11 @@ import MonthAgendaDay from '../month-agenda-day'
 import { MonthAgendaDay as MonthAgendaDayType } from '../../types/month-agenda'
 import { StateUpdater } from 'preact/compat'
 import { vi } from 'vitest'
+import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 const factory = (
   day: MonthAgendaDayType,
-  isActive: boolean,
+  isActive = false,
   setActiveDate: StateUpdater<string> = vi.fn
 ) => {
   render(
@@ -27,6 +28,7 @@ const factory = (
 const ACTIVE_DAY_SELECTOR = '.sx__month-agenda-day--active'
 const DAY_SELECTOR = '.sx__month-agenda-day'
 
+const EVENT_ICON_SELECTOR = '.sx__month-agenda-day__event-icon'
 describe('MonthAgendaDay', () => {
   afterEach(() => {
     cleanup()
@@ -55,6 +57,53 @@ describe('MonthAgendaDay', () => {
       fireEvent.click(document.querySelector(DAY_SELECTOR) as Element)
 
       expect(setActiveDate).toHaveBeenCalledWith(date)
+    })
+  })
+
+  describe('displaying event icons for the number of events in the day', () => {
+    it('should display 0 event icons', () => {
+      const $app = __createAppWithViews__({
+        events: [],
+      })
+      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+
+      expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(0)
+    })
+
+    it('should display 1 event icons', () => {
+      const $app = __createAppWithViews__({
+        events: [{ id: 1, time: { start: '2020-01-01', end: '2020-01-01' } }],
+      })
+      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+
+      expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(1)
+    })
+
+    it('should display 3 event icons', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          { id: 1, time: { start: '2020-01-01', end: '2020-01-01' } },
+          { id: 2, time: { start: '2020-01-01', end: '2020-01-01' } },
+          { id: 3, time: { start: '2020-01-01', end: '2020-01-01' } },
+        ],
+      })
+      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+
+      expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(3)
+    })
+
+    it('should display 3 event icons even when there are more events', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          { id: 1, time: { start: '2020-01-01', end: '2020-01-01' } },
+          { id: 2, time: { start: '2020-01-01', end: '2020-01-01' } },
+          { id: 3, time: { start: '2020-01-01', end: '2020-01-01' } },
+          { id: 4, time: { start: '2020-01-01', end: '2020-01-01' } },
+        ],
+      })
+      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+
+      expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(3)
     })
   })
 })

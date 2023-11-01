@@ -11,3 +11,18 @@
 .sx__month-agenda-day--active {
   box-shadow: inset 0 0 0 3px var(--sx-color-primary);
 }
+
+.sx__month-agenda-day__event-icons {
+  margin-top: 4px;
+  display: flex;
+  grid-gap: 3px;
+}
+
+.sx__month-agenda-day__event-icon {
+  $icon-size: 6px;
+
+  height: $icon-size;
+  width: $icon-size;
+  border-radius: 50%;
+  background-color: #00a400;
+}
