@@ -1,0 +1,13 @@
+.sx__month-agenda-day {
+  padding: var(--sx-spacing-padding2);
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 3rem;
+  border-radius: var(--sx-rounding-extra-small);
+}
+
+.sx__month-agenda-day--active {
+  box-shadow: inset 0 0 0 3px var(--sx-color-primary);
+}

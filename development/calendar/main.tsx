@@ -10,6 +10,7 @@ import {
   viewWeek,
   viewMonthGrid,
   viewDay,
+  viewMonthAgenda,
 } from '../../packages/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
@@ -20,11 +21,11 @@ import { seededEvents } from '../data/seeded-events.ts'
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar(calendarElement, {
-  locale: 'de-DE',
-  // locale: 'en-US',
+  // locale: 'de-DE',
+  locale: 'en-US',
   // locale: 'zh-CN',
-  views: [viewMonthGrid, viewWeek, viewDay],
-  defaultView: 'month',
+  views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
+  defaultView: viewMonthAgenda.name,
   // dayBoundaries: {
   //   start: '06:00',
   //   end: '03:00',
