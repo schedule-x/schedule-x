@@ -29,13 +29,12 @@ export default function useDraggableEvent($app: CalendarAppSingleton) {
     if (!$app.config.plugins.eventModal) return
 
     const eventTarget = mouseEvent.target as HTMLElement
-    const targetIsEventElement = eventTarget.classList.contains('sx__event')
-    const eventElement = targetIsEventElement
+    const calendarEventElement = eventTarget.classList.contains('sx__event')
       ? eventTarget
       : eventTarget.closest('.sx__event')
     $app.config.plugins.eventModal.setCalendarEvent(
       calendarEvent,
-      eventElement as HTMLElement
+      calendarEventElement as HTMLElement
     )
   }
 

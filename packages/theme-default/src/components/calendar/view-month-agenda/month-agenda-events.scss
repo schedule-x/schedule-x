@@ -6,14 +6,13 @@
   $event-gap: var(--sx-spacing-padding2);
 
   padding: var(--sx-spacing-padding2);
+  margin-bottom: $event-gap;
   border-radius: var(--sx-rounding-extra-small);
   font-size: var(--sx-font-small);
 
   &:first-child {
     margin-top: $event-gap;
   }
-
-  margin-bottom: $event-gap;
 }
 
 .sx__month-agenda-event__title {
