@@ -1,0 +1,31 @@
+.sx__month-agenda-events {
+  padding: 0 var(--sx-spacing-padding2);
+}
+
+.sx__month-agenda-event {
+  $event-gap: var(--sx-spacing-padding2);
+
+  padding: var(--sx-spacing-padding2);
+  margin-bottom: $event-gap;
+  border-radius: var(--sx-rounding-extra-small);
+  font-size: var(--sx-font-small);
+
+  &:first-child {
+    margin-top: $event-gap;
+  }
+}
+
+.sx__month-agenda-event__title {
+  font-weight: 600;
+}
+
+.sx__month-agenda-event__has-icon {
+  display: flex;
+  align-items: center;
+}
+
+.sx__month-agenda-events__empty {
+  margin-top: var(--sx-spacing-padding4);
+  display: flex;
+  justify-content: center;
+}

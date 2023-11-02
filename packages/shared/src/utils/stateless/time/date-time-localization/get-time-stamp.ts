@@ -1,8 +1,8 @@
+import { toIntegers } from '../format-conversion/format-conversion'
 import {
   CalendarEventInternal,
   CalendarEventTime,
-} from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+} from '../../../../interfaces/calendar/calendar-event.interface'
 
 const dateFn = (dateTimeString: string, locale: string) => {
   const { year, month, date } = toIntegers(dateTimeString)
@@ -13,7 +13,6 @@ const dateFn = (dateTimeString: string, locale: string) => {
     year: 'numeric',
   })
 }
-
 const timeFn = (dateTimeString: string, locale: string) => {
   const { year, month, date, hours, minutes } = toIntegers(dateTimeString)
 
@@ -25,7 +24,6 @@ const timeFn = (dateTimeString: string, locale: string) => {
     }
   )
 }
-
 export const getTimeStamp = (
   calendarEvent: Partial<CalendarEventInternal>, // to facilitate testing. In reality, we will always have a full CalendarEventInternal
   locale: string

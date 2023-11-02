@@ -7,4 +7,5 @@ export const calendarZhCN: CalendarTranslations = {
   Day: '日',
   events: '场活动',
   event: '活动',
+  'No events': '没有活动',
 }

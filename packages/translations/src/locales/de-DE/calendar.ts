@@ -7,4 +7,5 @@ export const calendarDeDE: CalendarTranslations = {
   Day: 'Tag',
   events: 'Ereignisse',
   event: 'Ereignis',
+  'No events': 'Keine Ereignisse',
 }

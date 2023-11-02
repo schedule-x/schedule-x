@@ -21,7 +21,19 @@ export default function MonthAgendaDay({
       className={dayClasses.join(' ')}
       onClick={() => setActiveDate(day.date)}
     >
-      {toJSDate(day.date).getDate()}
+      <div>{toJSDate(day.date).getDate()}</div>
+
+      <div className="sx__month-agenda-day__event-icons">
+        {day.events.slice(0, 3).map((event) => (
+          <div
+            style={{
+              backgroundColor: `var(--sx-color-${event._color})`,
+              filter: `brightness(1.6)`,
+            }}
+            className="sx__month-agenda-day__event-icon"
+          />
+        ))}
+      </div>
     </div>
   )
 }

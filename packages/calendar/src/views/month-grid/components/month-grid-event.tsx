@@ -1,6 +1,6 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import useDraggableEvent from '../../../utils/stateful/hooks/use-draggable-event'
+import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { useContext } from 'preact/compat'
 
@@ -17,7 +17,7 @@ export default function MonthGridEvent({
 }: props) {
   const $app = useContext(AppContext)
   const { createDragStartTimeout, setClickedEventIfNotDragging } =
-    useDraggableEvent($app)
+    useEventInteractions($app)
 
   const dateIsEventFirstDate =
     dateFromDateTime(calendarEvent.time.start) === date

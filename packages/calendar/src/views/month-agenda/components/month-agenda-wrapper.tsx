@@ -7,6 +7,7 @@ import MonthAgendaDayNames from './month-agenda-day-names'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { positionEventsInAgenda } from '../utils/stateless/position-events-in-agenda'
 import { sortEventsByStart } from '../../../utils/stateless/events/sort-by-start-date'
+import MonthAgendaEvents from './month-agenda-events'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
   const getMonth = () =>
@@ -33,13 +34,23 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
       <div id={id} className="sx__month-agenda-wrapper">
         <MonthAgendaDayNames week={agendaMonth.weeks[0]} />
 
-        {agendaMonth.weeks.map((week) => (
-          <MonthAgendaWeek
-            week={week}
-            setActiveDate={setActiveDate}
-            activeDate={activeDate}
-          />
-        ))}
+        <div className="sx__month-agenda-weeks">
+          {agendaMonth.weeks.map((week) => (
+            <MonthAgendaWeek
+              week={week}
+              setActiveDate={setActiveDate}
+              activeDate={activeDate}
+            />
+          ))}
+        </div>
+
+        <MonthAgendaEvents
+          key={activeDate}
+          events={
+            agendaMonth.weeks.flat().find((day) => day.date === activeDate)
+              ?.events || []
+          }
+        />
       </div>
     </AppContext.Provider>
   )
