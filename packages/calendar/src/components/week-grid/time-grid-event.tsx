@@ -17,7 +17,7 @@ import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
-import useDraggableEvent from '../../utils/stateful/hooks/use-draggable-event'
+import useEventInteractions from '../../utils/stateful/hooks/use-event-interactions'
 import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
 
 type props = {
@@ -38,7 +38,7 @@ export default function TimeGridEvent({
     updateCopy,
     createDragStartTimeout,
     setClickedEventIfNotDragging,
-  } = useDraggableEvent($app)
+  } = useEventInteractions($app)
 
   const localizeArgs = [
     $app.config.locale,

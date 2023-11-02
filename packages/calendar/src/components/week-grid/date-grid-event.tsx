@@ -9,7 +9,7 @@ import {
   getBorderRadius,
   getWidthToSubtract,
 } from '../../utils/stateless/events/date-grid-event-styles'
-import useDraggableEvent from '../../utils/stateful/hooks/use-draggable-event'
+import useEventInteractions from '../../utils/stateful/hooks/use-event-interactions'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -29,7 +29,7 @@ export default function DateGridEvent({
     updateCopy,
     setClickedEventIfNotDragging,
     createDragStartTimeout,
-  } = useDraggableEvent($app)
+  } = useEventInteractions($app)
 
   const eventCSSVariables = {
     borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,

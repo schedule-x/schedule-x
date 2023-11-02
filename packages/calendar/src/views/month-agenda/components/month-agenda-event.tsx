@@ -3,7 +3,7 @@ import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../../utils/stateful/app-context'
-import useDraggableEvent from '../../../utils/stateful/hooks/use-draggable-event'
+import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -11,7 +11,7 @@ type props = {
 
 export default function MonthAgendaEvent({ calendarEvent }: props) {
   const $app = useContext(AppContext)
-  const { setClickedEvent } = useDraggableEvent($app)
+  const { setClickedEvent } = useEventInteractions($app)
 
   const eventCSSVariables = {
     backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
