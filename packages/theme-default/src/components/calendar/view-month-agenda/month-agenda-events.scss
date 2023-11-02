@@ -24,3 +24,9 @@
   display: flex;
   align-items: center;
 }
+
+.sx__month-agenda-events__empty {
+  margin-top: var(--sx-spacing-padding4);
+  display: flex;
+  justify-content: center;
+}

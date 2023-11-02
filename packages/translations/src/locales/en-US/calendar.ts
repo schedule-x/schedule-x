@@ -7,4 +7,5 @@ export const calendarEnUS: CalendarTranslations = {
   Day: 'Day',
   events: 'events',
   event: 'event',
+  'No events': 'No events',
 }

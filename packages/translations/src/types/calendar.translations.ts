@@ -5,4 +5,5 @@ export interface CalendarTranslations {
   Day: string
   events: string
   event: string
+  'No events': string
 }

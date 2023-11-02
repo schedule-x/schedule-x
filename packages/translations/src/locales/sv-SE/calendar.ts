@@ -7,4 +7,5 @@ export const calendarSvSE: CalendarTranslations = {
   Day: 'Dag',
   events: 'händelser',
   event: 'händelse',
+  'No events': 'Inga händelser',
 }
