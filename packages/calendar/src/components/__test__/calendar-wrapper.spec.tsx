@@ -17,7 +17,7 @@ describe('CalendarWrapper', () => {
   describe('when the calendar is small (less than 700px)', () => {
     it('should have an element class of sx__is-calendar-small', () => {
       const $app = __createAppWithViews__()
-      $app.calendarState.isSmallScreen.value = true
+      $app.calendarState.isCalendarSmall.value = true
       factory($app)
 
       expect(

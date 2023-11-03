@@ -41,9 +41,9 @@ export const handleWindowResize = ($app: CalendarAppSingleton) => {
 
   const isSmall = calendarRoot.clientWidth < smallCalendarBreakpoint
   const didIsSmallScreenChange =
-    isSmall !== $app.calendarState.isSmallScreen.value
+    isSmall !== $app.calendarState.isCalendarSmall.value
   if (!didIsSmallScreenChange) return
 
-  $app.calendarState.isSmallScreen.value = isSmall
+  $app.calendarState.isCalendarSmall.value = isSmall
   setScreenSizeCompatibleView($app, isSmall)
 }
