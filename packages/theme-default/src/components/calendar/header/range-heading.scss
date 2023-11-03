@@ -1,3 +1,7 @@
 .sx__range-heading {
   font-size: clamp(16px, 1.25rem, 24px);
+
+  .sx__is-calendar-small & {
+    font-size: 16px;
+  }
 }
