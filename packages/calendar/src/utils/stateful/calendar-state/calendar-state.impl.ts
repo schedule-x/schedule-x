@@ -29,12 +29,12 @@ export const createCalendarState = (
     })
   }
 
-  const isSmallScreen = signal<boolean>(false)
+  const isCalendarSmall = signal<boolean>(false)
 
   return {
     view,
     handleDateSelection,
     range,
-    isSmallScreen,
+    isCalendarSmall,
   }
 }

@@ -6,6 +6,7 @@ import { View } from '../types/view'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { setWrapperElement } from '../utils/stateless/dom/set-wrapper-element'
 import { handleWindowResize } from '../utils/stateless/dom/handle-window-resize'
+import useWrapperClasses from '../utils/stateful/hooks/use-wrapper-classes'
 
 type props = {
   $app: CalendarAppSingleton
@@ -40,9 +41,12 @@ export default function CalendarWrapper({ $app }: props) {
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
+
+  const wrapperClasses = useWrapperClasses($app)
+
   return (
     <>
-      <div className={'sx__calendar-wrapper'} id={calendarId}>
+      <div className={wrapperClasses.join(' ')} id={calendarId}>
         <div className={'sx__calendar'}>
           <AppContext.Provider value={$app}>
             <CalendarHeader />

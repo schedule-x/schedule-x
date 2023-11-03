@@ -1,9 +1,24 @@
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
 import { ViewName } from '../../types/view-name'
+import { View } from '../../types/view'
 
 export default function ViewSelection() {
   const $app = useContext(AppContext)
+
+  const [availableViews, setAvailableViews] = useState<View[]>([])
+
+  useEffect(() => {
+    if ($app.calendarState.isCalendarSmall.value) {
+      setAvailableViews(
+        $app.config.views.filter((view) => view.hasSmallScreenCompat)
+      )
+    } else {
+      setAvailableViews(
+        $app.config.views.filter((view) => view.hasWideScreenCompat)
+      )
+    }
+  }, [$app.calendarState.isCalendarSmall.value])
 
   const [selectedViewLabel, setSelectedViewLabel] = useState('')
   useEffect(() => {
@@ -50,7 +65,7 @@ export default function ViewSelection() {
           data-testid="view-selection-items"
           className="sx__view-selection-items"
         >
-          {$app.config.views.map((view) => (
+          {availableViews.map((view) => (
             <li
               className={
                 'sx__view-selection-item' +
