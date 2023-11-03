@@ -1,18 +1,19 @@
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import {
   describe,
-  it,
   expect,
-  beforeEach,
+  it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { factory } from './utils'
 import {
   isDropdownOpen,
   openViewSelection,
 } from '../../../../utils/stateless/testing/page-objects/view-selection'
+import { InternalViewName } from '../../../../enums/internal-view.enum'
+import { afterEach } from 'vitest'
 
 describe('ViewSelection', () => {
-  beforeEach(() => {
+  afterEach(() => {
     cleanup()
   })
 
@@ -64,6 +65,41 @@ describe('ViewSelection', () => {
         '.sx__view-selection-selected-item'
       )
       expect(selectedViewElement?.textContent).toBe('Day')
+    })
+  })
+
+  it('should only display views compatible with a small calendar', async () => {
+    const { $app } = factory()
+    $app.calendarState.view.value = InternalViewName.MonthAgenda
+    $app.calendarState.isCalendarSmall.value = true
+
+    openViewSelection()
+
+    await waitFor(() => {
+      const selectionItems = document.querySelectorAll(
+        '.sx__view-selection-item'
+      )
+      expect(selectionItems.length).toBe(2)
+      expect(selectionItems[0].textContent).toBe('Day')
+      expect(selectionItems[1].textContent).toBe('Month')
+    })
+  })
+
+  it('should only display views compatible with a large calendar', async () => {
+    const { $app } = factory()
+    $app.calendarState.view.value = InternalViewName.MonthAgenda
+    $app.calendarState.isCalendarSmall.value = false
+
+    openViewSelection()
+
+    await waitFor(() => {
+      const selectionItems = document.querySelectorAll(
+        '.sx__view-selection-item'
+      )
+      expect(selectionItems.length).toBe(3)
+      expect(selectionItems[0].textContent).toBe('Day')
+      expect(selectionItems[1].textContent).toBe('Week')
+      expect(selectionItems[2].textContent).toBe('Month')
     })
   })
 })
