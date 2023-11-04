@@ -4,7 +4,7 @@ import { render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import TimeGridEvent from '../../time-grid-event'
 
-export const factory = (
+export const renderComponent = (
   $app: CalendarAppSingleton,
   calendarEvent: CalendarEventInternal
 ) => {

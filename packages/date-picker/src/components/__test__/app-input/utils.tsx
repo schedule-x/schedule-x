@@ -3,7 +3,7 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import AppInput from '../../app-input'
 import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 
-export const factory = ($app: DatePickerAppSingleton) => {
+export const renderComponent = ($app: DatePickerAppSingleton) => {
   render(
     <AppContext.Provider value={$app}>
       <AppInput />

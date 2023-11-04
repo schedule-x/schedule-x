@@ -5,7 +5,7 @@ import { mockFn } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit
 import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 import { Mock } from 'vitest'
 
-export const factory = ($app: DatePickerAppSingleton, spy?: Mock) => {
+export const renderComponent = ($app: DatePickerAppSingleton, spy?: Mock) => {
   return render(
     <AppContext.Provider value={$app}>
       <MonthViewHeader setYearsView={spy || mockFn} />

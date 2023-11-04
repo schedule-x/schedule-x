@@ -4,7 +4,7 @@ import DayNames from '../../day-names'
 import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 import { expect } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 
-export const factory = (app: DatePickerAppSingleton) => {
+export const renderComponent = (app: DatePickerAppSingleton) => {
   render(
     <AppContext.Provider value={app}>
       <DayNames />

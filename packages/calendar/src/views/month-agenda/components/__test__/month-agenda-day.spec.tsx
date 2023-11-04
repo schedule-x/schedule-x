@@ -11,7 +11,7 @@ import { StateUpdater } from 'preact/compat'
 import { vi } from 'vitest'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = (
+const renderComponent = (
   day: MonthAgendaDayType,
   isActive = false,
   setActiveDate: StateUpdater<string> = vi.fn
@@ -36,13 +36,13 @@ describe('MonthAgendaDay', () => {
 
   describe('the active state', () => {
     it('should have an active class', () => {
-      factory({ date: '2020-01-01', events: [] }, true)
+      renderComponent({ date: '2020-01-01', events: [] }, true)
 
       expect(document.querySelector(ACTIVE_DAY_SELECTOR)).not.toBeNull()
     })
 
     it('should not have an active class', () => {
-      factory({ date: '2020-01-01', events: [] }, false)
+      renderComponent({ date: '2020-01-01', events: [] }, false)
 
       expect(document.querySelector(ACTIVE_DAY_SELECTOR)).toBeNull()
     })
@@ -52,7 +52,7 @@ describe('MonthAgendaDay', () => {
     it('should call setActiveDate with the date', () => {
       const setActiveDate = vi.fn()
       const date = '2020-01-01'
-      factory({ date, events: [] }, false, setActiveDate)
+      renderComponent({ date, events: [] }, false, setActiveDate)
 
       fireEvent.click(document.querySelector(DAY_SELECTOR) as Element)
 
@@ -65,7 +65,10 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         events: [],
       })
-      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+      renderComponent({
+        date: '2020-01-01',
+        events: $app.calendarEvents.list.value,
+      })
 
       expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(0)
     })
@@ -74,7 +77,10 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         events: [{ id: 1, time: { start: '2020-01-01', end: '2020-01-01' } }],
       })
-      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+      renderComponent({
+        date: '2020-01-01',
+        events: $app.calendarEvents.list.value,
+      })
 
       expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(1)
     })
@@ -87,7 +93,10 @@ describe('MonthAgendaDay', () => {
           { id: 3, time: { start: '2020-01-01', end: '2020-01-01' } },
         ],
       })
-      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+      renderComponent({
+        date: '2020-01-01',
+        events: $app.calendarEvents.list.value,
+      })
 
       expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(3)
     })
@@ -101,7 +110,10 @@ describe('MonthAgendaDay', () => {
           { id: 4, time: { start: '2020-01-01', end: '2020-01-01' } },
         ],
       })
-      factory({ date: '2020-01-01', events: $app.calendarEvents.list.value })
+      renderComponent({
+        date: '2020-01-01',
+        events: $app.calendarEvents.list.value,
+      })
 
       expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(3)
     })

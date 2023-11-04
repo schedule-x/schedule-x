@@ -9,7 +9,7 @@ import { MonthGridWrapper } from '../month-grid-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { afterEach } from 'vitest'
 
-const factory = ($app: CalendarAppSingleton) => {
+const renderComponent = ($app: CalendarAppSingleton) => {
   render(<MonthGridWrapper $app={$app} id={'1'} />)
 }
 
@@ -22,7 +22,7 @@ describe('MonthWrapper', () => {
     it('should render 6 weeks for October 2023', () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2023-10-01'
-      factory($app)
+      renderComponent($app)
 
       expect(document.querySelectorAll('.sx__month-grid-week').length).toBe(6)
     })

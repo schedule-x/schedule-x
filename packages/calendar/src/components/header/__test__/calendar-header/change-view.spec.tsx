@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { createCalendarAppSingleton } from '../../../../factory'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import { viewDay } from '../../../../views/day'
 import { viewWeek } from '../../../../views/week'
 import { viewMonthGrid } from '../../../../views/month-grid'
@@ -24,7 +24,7 @@ describe('CalendarHeader', () => {
         datePicker: { selectedDate: '2010-01-01' },
         views: [viewMonthGrid, viewWeek, viewDay],
       })
-      factory($app)
+      renderComponent($app)
       const expectedRangeHeadingBeforeChange = 'December 2009 – January 2010'
       expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeTruthy()
 
@@ -47,7 +47,7 @@ describe('CalendarHeader', () => {
         datePicker: { selectedDate: '2010-01-01' },
         views: [viewMonthGrid, viewWeek, viewDay],
       })
-      factory($app)
+      renderComponent($app)
       const expectedRangeHeadingBeforeChange = 'January 2010'
       expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeTruthy()
 

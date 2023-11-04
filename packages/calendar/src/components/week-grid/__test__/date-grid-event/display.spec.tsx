@@ -5,7 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { afterEach } from 'vitest'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
@@ -42,7 +42,7 @@ describe('style attribute "display" of date grid event element', () => {
 
   describe('event when not in drag state', () => {
     it('should have style "display: flex"', () => {
-      factory($app, oneDayEventId, 1)
+      renderComponent($app, oneDayEventId, 1)
 
       const oneDayEvent = screen.getByText(oneDayEventTitle)
       expect(oneDayEvent.style.display).toBe('flex')
@@ -51,7 +51,7 @@ describe('style attribute "display" of date grid event element', () => {
 
   describe('event when in drag state', () => {
     it('should have style "display: none"', async () => {
-      factory($app, oneDayEventId, 1)
+      renderComponent($app, oneDayEventId, 1)
       const oneDayEvent = screen.getByText(oneDayEventTitle)
 
       const mouseDownEvent = new MouseEvent('mousedown', {})
@@ -65,7 +65,7 @@ describe('style attribute "display" of date grid event element', () => {
 
   describe('event copy when not in drag state', () => {
     it('should not display event copy', () => {
-      factory($app, oneDayEventId, 1)
+      renderComponent($app, oneDayEventId, 1)
       const eventCopy = document.querySelector('.sx__date-grid-event--copy')
 
       expect(eventCopy).toBeNull()
@@ -74,7 +74,7 @@ describe('style attribute "display" of date grid event element', () => {
 
   describe('event copy when in drag state', () => {
     it('should display event copy', async () => {
-      factory($app, oneDayEventId, 1)
+      renderComponent($app, oneDayEventId, 1)
       const oneDayEvent = screen.getByText(oneDayEventTitle)
 
       const mouseDownEvent = new MouseEvent('mousedown', {})

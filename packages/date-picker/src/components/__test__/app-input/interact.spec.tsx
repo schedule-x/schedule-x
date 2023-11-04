@@ -8,7 +8,7 @@ import {
 import { cleanup, fireEvent, waitFor } from '@testing-library/preact'
 import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 import {
-  factory,
+  renderComponent,
   getInputElement,
   setNewInputValueAndPressEnter,
 } from './utils'
@@ -21,7 +21,7 @@ describe('date picker input', () => {
 
   it('should toggle date-picker open status when clicking input', async () => {
     const $app = createAppSingleton()
-    factory($app)
+    renderComponent($app)
     const datePickerOpenSpy = spyOn(
       ($app as DatePickerAppSingleton).datePickerState,
       'open'
@@ -37,7 +37,7 @@ describe('date picker input', () => {
   it('should not update selected date on entering a date without pressing enter', () => {
     const selectedDate = '2021-01-01'
     const $app = createAppSingleton({ selectedDate: selectedDate })
-    factory($app)
+    renderComponent($app)
     const inputElement = getInputElement()
 
     fireEvent.input(inputElement, { target: { value: '1/2/2021' } })
@@ -48,7 +48,7 @@ describe('date picker input', () => {
 
   it('should update selected date on entering a date and pressing enter', () => {
     const $app = createAppSingleton({ selectedDate: '2021-01-01' })
-    factory($app)
+    renderComponent($app)
 
     setNewInputValueAndPressEnter('1/2/2021')
 

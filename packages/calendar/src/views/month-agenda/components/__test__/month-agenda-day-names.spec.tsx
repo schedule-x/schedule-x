@@ -14,7 +14,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = (week: MonthAgendaWeek, $app: CalendarAppSingleton) => {
+const renderComponent = (week: MonthAgendaWeek, $app: CalendarAppSingleton) => {
   render(
     <AppContext.Provider value={$app}>
       <MonthAgendaDayNames week={week} />
@@ -45,7 +45,7 @@ describe('MonthAgendaDayNames', () => {
 
     it('should list all days in English', () => {
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $appWithEnglishLocale)
+      renderComponent(agendaMonth.weeks[0], $appWithEnglishLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('S')
@@ -59,7 +59,7 @@ describe('MonthAgendaDayNames', () => {
 
     it('should list all days in German', () => {
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $appWithGermanLocale)
+      renderComponent(agendaMonth.weeks[0], $appWithGermanLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('S')
@@ -79,7 +79,7 @@ describe('MonthAgendaDayNames', () => {
 
     it('should list all days in English', () => {
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $appWithEnglishLocale)
+      renderComponent(agendaMonth.weeks[0], $appWithEnglishLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('M')
@@ -93,7 +93,7 @@ describe('MonthAgendaDayNames', () => {
 
     it('should list all days in German', () => {
       const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
-      factory(agendaMonth.weeks[0], $appWithGermanLocale)
+      renderComponent(agendaMonth.weeks[0], $appWithGermanLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
       expect(getDayN(0).textContent).toBe('M')

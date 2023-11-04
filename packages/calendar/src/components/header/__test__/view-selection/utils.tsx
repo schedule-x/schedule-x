@@ -7,7 +7,7 @@ import { AppContext } from '../../../../utils/stateful/app-context'
 import ViewSelection from '../../view-selection'
 import { viewMonthAgenda } from '../../../../views/month-agenda'
 
-export const factory = () => {
+export const renderComponent = () => {
   const $app = createCalendarAppSingleton({
     views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
   })
