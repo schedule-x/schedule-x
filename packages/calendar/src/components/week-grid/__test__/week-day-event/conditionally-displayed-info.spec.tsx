@@ -69,7 +69,7 @@ describe('WeekDayEvent', () => {
       expect(
         document.querySelector('.sx__time-grid-event-people')
       ).not.toBeNull()
-      expect(screen.queryByText('Paul, John')).toBeTruthy()
+      expect(screen.queryByText('Paul & John')).toBeTruthy()
     })
   })
 })
