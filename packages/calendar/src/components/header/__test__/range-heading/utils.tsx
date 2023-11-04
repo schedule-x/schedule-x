@@ -3,7 +3,7 @@ import { render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import RangeHeading from '../../range-heading'
 
-export const factory = ($app: CalendarAppSingleton) => {
+export const renderComponent = ($app: CalendarAppSingleton) => {
   render(
     <AppContext.Provider value={$app}>
       <RangeHeading />

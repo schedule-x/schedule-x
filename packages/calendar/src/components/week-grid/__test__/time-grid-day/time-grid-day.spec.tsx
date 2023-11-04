@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/calendar-event.builder'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 describe('TimeGridDay', () => {
@@ -24,7 +24,7 @@ describe('TimeGridDay', () => {
         start: '2023-09-11 00:00',
         end: '2023-09-11 01:00',
       }
-      factory(
+      renderComponent(
         $app,
         [new CalendarEventBuilder($app.config, '1', eventTime).build()],
         '2023-09-11'
@@ -42,7 +42,7 @@ describe('TimeGridDay', () => {
         start: '2023-09-11 18:00',
         end: '2023-09-11 19:00',
       }
-      factory(
+      renderComponent(
         $app,
         [new CalendarEventBuilder($app.config, '1', eventTime).build()],
         '2023-09-11'
@@ -70,7 +70,7 @@ describe('TimeGridDay', () => {
         start: '2023-09-12 00:00',
         end: '2023-09-12 01:00',
       }
-      factory(
+      renderComponent(
         $app,
         [new CalendarEventBuilder($app.config, '1', eventTime).build()],
         '2023-09-12'

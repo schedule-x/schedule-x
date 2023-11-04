@@ -7,7 +7,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, fireEvent } from '@testing-library/preact'
 import { createAppSingleton } from '../../../factory'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 
 describe('month view header', () => {
   describe('api', () => {
@@ -18,7 +18,7 @@ describe('month view header', () => {
     it('should call the display year view action', () => {
       const callBackToTest = mockFn()
       const $app = createAppSingleton()
-      const { container } = factory($app, callBackToTest)
+      const { container } = renderComponent($app, callBackToTest)
 
       const monthYearElement = container.querySelector(
         '.sx__date-picker__month-view-header__month-year'

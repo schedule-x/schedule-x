@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, waitFor } from '@testing-library/preact'
 import { createAppSingleton } from '../../../factory'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 
 describe('month view header', () => {
   describe('displaying month and year', () => {
@@ -28,7 +28,7 @@ describe('month view header', () => {
           locale,
         })
 
-        const { container } = factory($app)
+        const { container } = renderComponent($app)
 
         expect(container.textContent).toContain(expectedMonthName)
       }
@@ -39,7 +39,7 @@ describe('month view header', () => {
       const expectedYear = '2021'
       const $app = createAppSingleton({ selectedDate })
 
-      const { container } = factory($app)
+      const { container } = renderComponent($app)
 
       expect(container.textContent).toContain(expectedYear)
     })
@@ -49,7 +49,7 @@ describe('month view header', () => {
       const expectedMonthName = 'February'
       const $app = createAppSingleton({ selectedDate })
 
-      const { container } = factory($app)
+      const { container } = renderComponent($app)
 
       $app.datePickerState.datePickerDate.value = '2021-02-01'
 

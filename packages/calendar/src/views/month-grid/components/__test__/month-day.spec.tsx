@@ -14,7 +14,7 @@ import { AppContext } from '../../../../utils/stateful/app-context'
 import { getTestEvent } from './test-events'
 import { InternalViewName } from '../../../../enums/internal-view.enum'
 
-const factory = ($app: CalendarAppSingleton, day: MonthDayType) => {
+const renderComponent = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(
     <AppContext.Provider value={$app}>
       <MonthGridDay day={day} isFirstWeek={false} />
@@ -44,7 +44,7 @@ describe('MonthDay component', () => {
     }
 
     it('should display an event with title', () => {
-      factory($app, dayWithOneEvent)
+      renderComponent($app, dayWithOneEvent)
 
       expect(screen.getByText(eventTitle)).not.toBeNull()
     })
@@ -61,7 +61,7 @@ describe('MonthDay component', () => {
     }
 
     it('should display an event with title', () => {
-      factory($app, dayWithOneEvent)
+      renderComponent($app, dayWithOneEvent)
 
       expect(
         document.querySelector('.sx__month-grid-day__events-more')
@@ -83,7 +83,7 @@ describe('MonthDay component', () => {
     }
 
     it('should display an event with title', () => {
-      factory($app, dayWithEventLimitPlus1)
+      renderComponent($app, dayWithEventLimitPlus1)
 
       expect(
         document.querySelector('.sx__month-grid-day__events-more')
@@ -107,7 +107,7 @@ describe('MonthDay component', () => {
     }
 
     it('should display an event with title', () => {
-      factory($app, dayWithEventLimitPlus2)
+      renderComponent($app, dayWithEventLimitPlus2)
 
       expect(
         document.querySelector('.sx__month-grid-day__events-more')
@@ -116,7 +116,7 @@ describe('MonthDay component', () => {
     })
 
     it('should navigate to day view when clicking on the more events button', async () => {
-      factory($app, dayWithEventLimitPlus2)
+      renderComponent($app, dayWithEventLimitPlus2)
       expect($app.calendarState.view.value).toBe(InternalViewName.Week)
 
       const moreEventsButton = document.querySelector(

@@ -10,7 +10,7 @@ import { AppContext } from '../../../../utils/stateful/app-context'
 import { WeekWrapper } from '../week-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = ($app: CalendarAppSingleton) => {
+const renderComponent = ($app: CalendarAppSingleton) => {
   render(
     <AppContext.Provider value={$app}>
       <WeekWrapper $app={$app} id={'1'} />
@@ -39,7 +39,7 @@ describe('WeekWrapper', () => {
           },
         ],
       })
-      factory($app)
+      renderComponent($app)
 
       const renderedEvent = document.querySelector(
         '.sx__time-grid-event'

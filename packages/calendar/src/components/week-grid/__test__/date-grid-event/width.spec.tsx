@@ -5,7 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
 import { afterEach } from 'vitest'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 describe('styles of DateGridEvent', () => {
@@ -45,14 +45,14 @@ describe('styles of DateGridEvent', () => {
     })
 
     it('should have 100% width minus 2px', () => {
-      factory($app, oneDayEventId, 1)
+      renderComponent($app, oneDayEventId, 1)
       const oneDayEvent = screen.getByText(oneDayEventTitle)
 
       expect(oneDayEvent.style.width).toBe('calc(100% - 2px)')
     })
 
     it('should have 300% width minus 2px', () => {
-      factory($app, threeDayEventId, 3)
+      renderComponent($app, threeDayEventId, 3)
       const oneDayEvent = screen.getByText(threeDayEventTitle)
 
       expect(oneDayEvent.style.width).toBe('calc(300% - 2px)')
@@ -92,14 +92,14 @@ describe('styles of DateGridEvent', () => {
     })
 
     it('should subtract 10px extra from width to make room for overflow indicator', () => {
-      factory($app, eventWithOverflowLeftId, 2)
+      renderComponent($app, eventWithOverflowLeftId, 2)
       const event = screen.getByText(eventWithOverflowLeftTitle)
 
       expect(event.style.width).toBe('calc(200% - 12px)')
     })
 
     it('should subtract 20px extra from width to make room for overflow indicators', () => {
-      factory($app, eventWithOverflowBothId, 7)
+      renderComponent($app, eventWithOverflowBothId, 7)
       const event = screen.getByText(eventWithOverflowBothTitle)
 
       expect(event.style.width).toBe('calc(700% - 22px)')

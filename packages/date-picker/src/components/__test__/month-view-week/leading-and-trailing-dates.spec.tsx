@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { Month } from '@schedule-x/shared/src/enums/time/month.enum'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { createAppSingleton } from '../../../factory'
 
@@ -12,7 +12,10 @@ const SELECTOR = '.sx__date-picker__day.is-leading-or-trailing'
 
 const setup = (date: Date) => {
   const $app = createAppSingleton({ selectedDate: toDateString(date) })
-  const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
+  const { container } = renderComponent(
+    $app,
+    $app.timeUnitsImpl.getWeekFor(date)
+  )
   return container
 }
 

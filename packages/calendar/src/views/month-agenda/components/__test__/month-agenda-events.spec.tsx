@@ -11,7 +11,7 @@ import MonthAgendaEvents from '../month-agenda-events'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = (
+const renderComponent = (
   events: CalendarEventInternal[],
   $app: CalendarAppSingleton
 ) => {
@@ -29,7 +29,7 @@ describe('MonthAgendaEvents', () => {
 
   describe('when there are no events', () => {
     it('should render a German message saying that there are no events for this day', () => {
-      factory(
+      renderComponent(
         [],
         __createAppWithViews__({
           locale: 'de-DE',
@@ -60,7 +60,7 @@ describe('MonthAgendaEvents', () => {
           },
         ],
       })
-      factory($app.calendarEvents.list.value, $app)
+      renderComponent($app.calendarEvents.list.value, $app)
 
       expect(document.querySelectorAll('.sx__month-agenda-event').length).toBe(
         2

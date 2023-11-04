@@ -4,7 +4,7 @@ import AppPopup from '../../app-popup'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 import { createAppSingleton } from '../../../factory'
 
-export const factory = (placement?: Placement) => {
+export const renderComponent = (placement?: Placement) => {
   const { container } = render(
     <AppContext.Provider
       value={createAppSingleton({

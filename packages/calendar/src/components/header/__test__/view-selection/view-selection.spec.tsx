@@ -4,7 +4,7 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import {
   isDropdownOpen,
   openViewSelection,
@@ -18,7 +18,7 @@ describe('ViewSelection', () => {
   })
 
   it('should close on click outside', async () => {
-    factory()
+    renderComponent()
     expect(isDropdownOpen()).toBe(false)
 
     openViewSelection()
@@ -34,7 +34,7 @@ describe('ViewSelection', () => {
   })
 
   it('should close on selecting a new view', async () => {
-    factory()
+    renderComponent()
     expect(isDropdownOpen()).toBe(false)
 
     openViewSelection()
@@ -50,7 +50,7 @@ describe('ViewSelection', () => {
   })
 
   it('should select the day view', async () => {
-    factory()
+    renderComponent()
     expect(screen.queryByText('Week')).toBeTruthy()
     expect(screen.queryByText('Day')).toBeFalsy()
 
@@ -69,7 +69,7 @@ describe('ViewSelection', () => {
   })
 
   it('should only display views compatible with a small calendar', async () => {
-    const { $app } = factory()
+    const { $app } = renderComponent()
     $app.calendarState.view.value = InternalViewName.MonthAgenda
     $app.calendarState.isCalendarSmall.value = true
 
@@ -86,7 +86,7 @@ describe('ViewSelection', () => {
   })
 
   it('should only display views compatible with a large calendar', async () => {
-    const { $app } = factory()
+    const { $app } = renderComponent()
     $app.calendarState.view.value = InternalViewName.MonthAgenda
     $app.calendarState.isCalendarSmall.value = false
 

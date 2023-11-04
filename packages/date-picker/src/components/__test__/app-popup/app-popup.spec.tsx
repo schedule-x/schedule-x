@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { MONTH_VIEW } from '../../../constants/test-ids'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 
 describe('AppPopup', () => {
@@ -15,12 +15,12 @@ describe('AppPopup', () => {
   })
 
   it('should render month view as default view', () => {
-    factory()
+    renderComponent()
     expect(screen.queryByTestId(MONTH_VIEW)).not.toBeNull()
   })
 
   it('should display years view', async () => {
-    const container = factory()
+    const container = renderComponent()
     const toggleViewElement = container.querySelector(
       '.sx__date-picker__month-view-header__month-year'
     )
@@ -35,7 +35,7 @@ describe('AppPopup', () => {
   })
 
   it('should toggle from years to month view', async () => {
-    const container = factory()
+    const container = renderComponent()
     const toggleViewElement = container.querySelector(
       '.sx__date-picker__month-view-header__month-year'
     )
@@ -64,7 +64,7 @@ describe('AppPopup', () => {
   ])(
     'should render with different placement classes',
     (placement: Placement) => {
-      factory(placement)
+      renderComponent(placement)
       const popup = screen.getByTestId('date-picker-popup')
       expect(popup.classList.contains(placement)).toBe(true)
     }

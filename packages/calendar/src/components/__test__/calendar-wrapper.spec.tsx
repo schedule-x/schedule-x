@@ -8,7 +8,7 @@ import { render, waitFor } from '@testing-library/preact'
 import CalendarWrapper from '../calendar-wrapper'
 import { __createAppWithViews__ } from '../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = ($app: CalendarAppSingleton) => {
+const renderComponent = ($app: CalendarAppSingleton) => {
   render(<CalendarWrapper $app={$app} />)
 }
 
@@ -19,7 +19,7 @@ describe('CalendarWrapper', () => {
   describe('when the calendar is small (less than 700px)', () => {
     it('should have an element class of sx__is-calendar-small', async () => {
       const $app = __createAppWithViews__()
-      factory($app)
+      renderComponent($app)
       $app.calendarState.isCalendarSmall.value = true
 
       await waitFor(() => {
@@ -35,7 +35,7 @@ describe('CalendarWrapper', () => {
   describe('when the calendar is not small (wider than 700px)', () => {
     it('should not have an element class of sx__is-calendar-small', async () => {
       const $app = __createAppWithViews__()
-      factory($app)
+      renderComponent($app)
       $app.calendarState.isCalendarSmall.value = false
 
       await waitFor(() => {

@@ -15,7 +15,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { MonthAgendaWrapper } from '../month-agenda-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = ($app: CalendarAppSingleton) => {
+const renderComponent = ($app: CalendarAppSingleton) => {
   render(<MonthAgendaWrapper $app={$app} id={'1'} />)
 }
 
@@ -30,7 +30,7 @@ describe('MonthAgendaWrapper', () => {
 
   describe('a month for the current date', () => {
     it('should have one day with an active class', () => {
-      factory(__createAppWithViews__())
+      renderComponent(__createAppWithViews__())
 
       expect(
         document.querySelectorAll('.sx__month-agenda-day--active')
@@ -38,7 +38,7 @@ describe('MonthAgendaWrapper', () => {
     })
 
     it('should display day names', () => {
-      factory(__createAppWithViews__())
+      renderComponent(__createAppWithViews__())
 
       expect(
         document.querySelectorAll('.sx__month-agenda-day-name')
@@ -57,7 +57,7 @@ describe('MonthAgendaWrapper', () => {
     it('should have one day with an active class', () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2027-01-27'
-      factory($app)
+      renderComponent($app)
 
       const activeDay = document.querySelector('.sx__month-agenda-day--active')
       expect(activeDay?.textContent).toContain('27')
@@ -66,7 +66,7 @@ describe('MonthAgendaWrapper', () => {
     it('should select a new day', async () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2027-01-27'
-      factory($app)
+      renderComponent($app)
 
       fireEvent.click(screen.getAllByText('28')[1]) // first 28 is in December 2026, second is in January 2027
 
@@ -81,7 +81,7 @@ describe('MonthAgendaWrapper', () => {
     it('should display 5 weeks and 35 days', () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2027-01-27'
-      factory($app)
+      renderComponent($app)
 
       expect(document.querySelectorAll('.sx__month-agenda-week')).toHaveLength(
         5
@@ -94,7 +94,7 @@ describe('MonthAgendaWrapper', () => {
     it('should display a new month when selecting a date in another month', async () => {
       const $app = __createAppWithViews__()
       $app.datePickerState.selectedDate.value = '2027-01-27'
-      factory($app)
+      renderComponent($app)
       expect(document.querySelectorAll('.sx__month-agenda-week')).toHaveLength(
         5
       )

@@ -5,7 +5,7 @@ import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = ($app: CalendarAppSingleton) => {
+const renderComponent = ($app: CalendarAppSingleton) => {
   render(
     <AppContext.Provider value={$app}>
       <TodayButton />
@@ -25,14 +25,14 @@ export const renderWithSelectedDateInThePast = (
   initialSelectedDate: string
 ) => {
   const $app = createAppSingletonWithSelectedDate(initialSelectedDate)
-  factory($app)
+  renderComponent($app)
 
   return $app
 }
 
 export const renderWithSelectedDateToday = () => {
   const $app = createAppSingletonWithSelectedDate(toDateString(new Date()))
-  factory($app)
+  renderComponent($app)
 
   return $app
 }

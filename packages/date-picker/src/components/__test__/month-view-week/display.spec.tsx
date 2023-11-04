@@ -7,7 +7,7 @@ import {
 import { cleanup } from '@testing-library/preact'
 import { Month } from '@schedule-x/shared/src/enums/time/month.enum'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import { factory, getSelectedDay, getToday } from './utils'
+import { renderComponent, getSelectedDay, getToday } from './utils'
 import { createAppSingleton } from '../../../factory'
 
 describe('MonthViewWeek', () => {
@@ -18,7 +18,10 @@ describe('MonthViewWeek', () => {
   it('should render week', () => {
     const $app = createAppSingleton()
     const date = new Date(2023, Month.JULY, 23)
-    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
+    const { container } = renderComponent(
+      $app,
+      $app.timeUnitsImpl.getWeekFor(date)
+    )
 
     ;['17', '18', '19', '20', '21', '22', '23'].forEach((day) => {
       expect(container.textContent).toContain(day)
@@ -28,7 +31,10 @@ describe('MonthViewWeek', () => {
   it('should display selected date', () => {
     const date = new Date(2023, Month.AUGUST, 8)
     const $app = createAppSingleton({ selectedDate: toDateString(date) })
-    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
+    const { container } = renderComponent(
+      $app,
+      $app.timeUnitsImpl.getWeekFor(date)
+    )
 
     const selectedDay = getSelectedDay(container)
     expect(selectedDay).not.toBeNull()
@@ -38,7 +44,10 @@ describe('MonthViewWeek', () => {
   it('should not display any selected date', () => {
     const date = new Date(2023, Month.AUGUST, 8)
     const $app = createAppSingleton({ selectedDate: '2020-01-01' })
-    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(date))
+    const { container } = renderComponent(
+      $app,
+      $app.timeUnitsImpl.getWeekFor(date)
+    )
 
     const selectedDay = getSelectedDay(container)
     expect(selectedDay).toBeNull()
@@ -48,7 +57,10 @@ describe('MonthViewWeek', () => {
     const today = new Date()
     const expectedTodaysDate = today.getDate()
     const $app = createAppSingleton({ selectedDate: toDateString(today) })
-    const { container } = factory($app, $app.timeUnitsImpl.getWeekFor(today))
+    const { container } = renderComponent(
+      $app,
+      $app.timeUnitsImpl.getWeekFor(today)
+    )
 
     const todaysDate = getToday(container)
 

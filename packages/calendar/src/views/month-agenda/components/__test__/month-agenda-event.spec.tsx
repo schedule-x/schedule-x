@@ -11,7 +11,10 @@ import MonthAgendaEvent from '../month-agenda-event'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
-const factory = ($app: CalendarAppSingleton, event: CalendarEventInternal) => {
+const renderComponent = (
+  $app: CalendarAppSingleton,
+  event: CalendarEventInternal
+) => {
   render(
     <AppContext.Provider value={$app}>
       <MonthAgendaEvent calendarEvent={event} />
@@ -40,7 +43,7 @@ describe('MonthAgendaEvent', () => {
     })
 
     it('should display the expected title', () => {
-      factory($app, $app.calendarEvents.list.value[0])
+      renderComponent($app, $app.calendarEvents.list.value[0])
 
       expect(
         document.querySelector('.sx__month-agenda-event__title')?.textContent
@@ -48,7 +51,7 @@ describe('MonthAgendaEvent', () => {
     })
 
     it('should display the expected time', () => {
-      factory($app, $app.calendarEvents.list.value[0])
+      renderComponent($app, $app.calendarEvents.list.value[0])
 
       expect(
         document.querySelector('.sx__month-agenda-event__time')?.textContent

@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/calendar-event.builder'
-import { factory } from './utils'
+import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 describe('WeekDayEvent', () => {
@@ -33,7 +33,7 @@ describe('WeekDayEvent', () => {
           start: '2020-12-01 10:00',
           end: '2020-12-01 11:00',
         }).build()
-        factory($app, calendarEvent)
+        renderComponent($app, calendarEvent)
 
         expect(screen.queryByText(expectedTime)).toBeTruthy()
       }
