@@ -3,7 +3,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { calculateDaysDifference } from './utils/stateless/days-difference'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { deepCloneEvent } from '@schedule-x/calendar/src/utils/stateless/events/deep-clone-event'
+import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
 

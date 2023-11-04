@@ -1,11 +1,11 @@
 import {
   describe,
-  expect,
   it,
-} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+  expect,
+} from '../../../testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../calendar-event.builder'
-import CalendarConfigBuilder from '../../config/calendar-config.builder'
-import { CalendarEventTime } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import CalendarConfigBuilder from '@schedule-x/calendar/src/utils/stateful/config/calendar-config.builder'
+import { CalendarEventTime } from '../../../../../interfaces/calendar/calendar-event.interface'
 
 describe('CalendarEventImpl', () => {
   describe('the event time type in a day with default day boundaries', () => {

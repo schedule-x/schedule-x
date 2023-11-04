@@ -1,9 +1,9 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
-import { deepCloneEvent } from '../../utils/stateless/events/deep-clone-event'
+import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import { DateRange } from '../../types/date-range'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import {
   getBorderRadius,

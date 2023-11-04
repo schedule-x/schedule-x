@@ -5,7 +5,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { MonthDay as MonthDayType } from '../../types/month'
-import CalendarEventBuilder from '../../../../utils/stateful/calendar-event/calendar-event.builder'
+import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { cleanup, render, screen, waitFor } from '@testing-library/preact'

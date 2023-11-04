@@ -7,7 +7,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { DateRange } from '../../../types/date-range'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 const resetEventConcurrencyProperties = (event: CalendarEventInternal) => {
   event._previousConcurrentEvents = undefined
