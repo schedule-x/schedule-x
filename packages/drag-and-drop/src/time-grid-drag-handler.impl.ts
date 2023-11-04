@@ -3,7 +3,7 @@ import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { DateRange } from '@schedule-x/calendar/src/types/date-range'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { setDateInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'

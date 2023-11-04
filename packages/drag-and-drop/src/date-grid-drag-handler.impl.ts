@@ -2,7 +2,7 @@ import DateGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { DateRange } from '@schedule-x/calendar/src/types/date-range'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridDayWidth } from './utils/stateless/get-time-grid-day-width'
 import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'

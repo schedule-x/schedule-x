@@ -1,6 +1,6 @@
 import { ViewName } from '@schedule-x/calendar/src/types/view-name'
 import { Signal } from '@preact/signals'
-import { DateRange } from '@schedule-x/calendar/src/types/date-range'
+import { DateRange } from 'src/types/date-range'
 
 export default interface CalendarState {
   isCalendarSmall: Signal<boolean>
