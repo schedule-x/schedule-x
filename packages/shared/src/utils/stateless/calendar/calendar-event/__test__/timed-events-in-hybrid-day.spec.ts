@@ -1,9 +1,6 @@
-import {
-  describe,
-  it,
-} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import CalendarConfigBuilder from '../../config/calendar-config.builder'
-import { CalendarEventTime } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { describe, it } from '../../../testing/unit/unit-testing-library.impl'
+import CalendarConfigBuilder from '@schedule-x/calendar/src/utils/stateful/config/calendar-config.builder'
+import { CalendarEventTime } from '../../../../../interfaces/calendar/calendar-event.interface'
 import CalendarEventBuilder from '../calendar-event.builder'
 import {
   assertIsMultiDayTimed,

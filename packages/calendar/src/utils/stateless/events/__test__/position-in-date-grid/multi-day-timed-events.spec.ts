@@ -3,7 +3,7 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import CalendarEventBuilder from '../../../../stateful/calendar-event/calendar-event.builder'
+import CalendarEventBuilder from '../../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { createWeek } from '../../../views/week/create-week'
 import { positionInDateGrid } from '../../position-in-date-grid'
 import { DATE_GRID_BLOCKER } from '../../../../../constants'

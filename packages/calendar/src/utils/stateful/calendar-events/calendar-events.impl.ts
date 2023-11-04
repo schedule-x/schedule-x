@@ -4,7 +4,7 @@ import CalendarEventExternal, {
 import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-events.interface'
 import { signal } from '@preact/signals'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
-import CalendarEventBuilder from '../calendar-event/calendar-event.builder'
+import CalendarEventBuilder from '../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 
 export const createCalendarEventsImpl = (
   events: CalendarEventExternal[],

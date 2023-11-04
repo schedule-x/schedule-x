@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { CalendarEventTime } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import CalendarEventBuilder from '../../../stateful/calendar-event/calendar-event.builder'
+import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
 import { sortEventsByStart } from '../sort-by-start-date'
 

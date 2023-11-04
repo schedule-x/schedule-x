@@ -1,6 +1,6 @@
 import { useState } from 'preact/compat'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { deepCloneEvent } from '../../stateless/events/deep-clone-event'
+import { deepCloneEvent } from '../../../../../shared/src/utils/stateless/calendar/deep-clone-event'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 export default function useEventInteractions($app: CalendarAppSingleton) {

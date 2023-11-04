@@ -1,5 +1,5 @@
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { expect } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+import { CalendarEventInternal } from '../../../../../interfaces/calendar/calendar-event.interface'
+import { expect } from '../../../testing/unit/unit-testing-library.impl'
 
 export const assertIsSingleDayTimedAndHybridDayTimed = (
   calendarEvent: CalendarEventInternal

@@ -1,19 +1,19 @@
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { EventId } from '@schedule-x/shared/src/types/event-id'
-import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
+import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-event.interface'
+import { EventId } from '../../../../types/event-id'
+import CalendarConfigInternal from '../../../../interfaces/calendar/calendar-config'
 import {
   dateStringRegex,
   dateTimeStringRegex,
-} from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
+} from '../../time/validation/regex'
+import { toJSDate } from '../../time/format-conversion/format-conversion'
+import { toDateString } from '../../time/format-conversion/date-to-strings'
+import { timePointsFromString } from '../../time/time-points/string-conversion'
 import {
   dateFromDateTime,
   timeFromDateTime,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import { DEFAULT_EVENT_COLOR_NAME } from '../../../constants'
-import { EventFragments } from '@schedule-x/shared/src/interfaces/calendar/event-fragments'
+} from '../../time/format-conversion/string-to-string'
+import { EventFragments } from '../../../../interfaces/calendar/event-fragments'
+import { DEFAULT_EVENT_COLOR_NAME } from '../../../../values'
 
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined
