@@ -5,7 +5,7 @@ import {
   afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { cleanup, render, screen } from '@testing-library/preact'
+import { cleanup, render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import MonthAgendaEvent from '../month-agenda-event'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
