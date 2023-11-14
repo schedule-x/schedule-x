@@ -15,21 +15,6 @@ type props = {
 export default function CalendarWrapper({ $app }: props) {
   const calendarId = randomStringId()
   const viewContainerId = randomStringId()
-  const [currentView, setCurrentView] = useState<View | null>()
-
-  const changeView = () => {
-    const newView = $app.config.views.find(
-      (view) => view.name === $app.calendarState.view.value
-    )
-    const viewElement = document.getElementById(viewContainerId)
-
-    if (!newView || !viewElement) return
-
-    if (currentView) currentView.destroy()
-    setCurrentView(newView)
-    newView.render(viewElement, $app)
-  }
-  useEffect(changeView, [$app.calendarState.view.value])
 
   useEffect(() => setWrapperElement($app, calendarId), [])
 
@@ -38,11 +23,28 @@ export default function CalendarWrapper({ $app }: props) {
   }
 
   useEffect(() => {
+    onResize()
     window.addEventListener('resize', onResize)
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
   const wrapperClasses = useWrapperClasses($app)
+
+  const [currentView, setCurrentView] = useState<View | null>()
+
+  const renderSelectedView = () => {
+    const newView = $app.config.views.find(
+      (view) => view.name === $app.calendarState.view.value
+    )
+    const viewElement = document.getElementById(viewContainerId)
+
+    if (!newView || !viewElement || newView.name === currentView?.name) return
+
+    if (currentView) currentView.destroy()
+    setCurrentView(newView)
+    newView.render(viewElement, $app)
+  }
+  useEffect(renderSelectedView, [$app.calendarState.view.value])
 
   return (
     <>

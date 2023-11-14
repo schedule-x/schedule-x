@@ -29,7 +29,7 @@ export const createCalendarState = (
     })
   }
 
-  const isCalendarSmall = signal<boolean>(false)
+  const isCalendarSmall = signal<boolean | undefined>(undefined)
 
   return {
     view,
