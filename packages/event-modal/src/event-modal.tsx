@@ -36,6 +36,9 @@ export default function EventModal({ $app }: EventModalProps) {
     return () => document.removeEventListener('click', clickOutsideListener)
   }, [])
 
+  let iconColor = '#000'
+  if ($app.config.isDark) iconColor = 'var(--sx-color-neutral-variant)'
+
   return (
     <>
       {calendarEvent && (
@@ -56,14 +59,14 @@ export default function EventModal({ $app }: EventModalProps) {
 
           <div className="sx__has-icon sx__event-modal__time">
             {/*todo: fix stroke color for dark mode*/}
-            <TimeIcon strokeColor={'#000'} />
+            <TimeIcon strokeColor={iconColor} />
 
             {getTimeStamp(calendarEvent, $app.config.locale)}
           </div>
 
           {calendarEvent.people && calendarEvent.people.length && (
             <div className="sx__has-icon sx__event-modal__people">
-              <UserIcon strokeColor={'#000'} />
+              <UserIcon strokeColor={iconColor} />
 
               {concatenatePeople(calendarEvent.people)}
             </div>
@@ -71,7 +74,7 @@ export default function EventModal({ $app }: EventModalProps) {
 
           {calendarEvent.location && (
             <div className="sx__has-icon sx__event-modal__location">
-              <LocationPinIcon strokeColor={'#000'} />
+              <LocationPinIcon strokeColor={iconColor} />
 
               {calendarEvent.location}
             </div>
@@ -79,7 +82,7 @@ export default function EventModal({ $app }: EventModalProps) {
 
           {calendarEvent.description && (
             <div className="sx__has-icon sx__event-modal__description">
-              <DescriptionIcon strokeColor={'#000'} />
+              <DescriptionIcon strokeColor={iconColor} />
 
               {calendarEvent.description}
             </div>
