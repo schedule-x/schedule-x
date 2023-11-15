@@ -29,6 +29,7 @@ export default class CalendarConfigBuilder
   weekOptions: WeekOptions | undefined
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
+  isDark: boolean | undefined = false
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -39,7 +40,8 @@ export default class CalendarConfigBuilder
       this.dayBoundaries,
       this.weekOptions,
       this.calendars,
-      this.plugins
+      this.plugins,
+      this.isDark
     )
   }
 
@@ -96,6 +98,11 @@ export default class CalendarConfigBuilder
     this.plugins.eventModal = plugins?.find(
       (plugin) => plugin.name === PluginName.EventModal
     ) as EventModalPlugin | undefined
+    return this
+  }
+
+  withIsDark(isDark: boolean | undefined): CalendarConfigBuilder {
+    this.isDark = isDark
     return this
   }
 }

@@ -30,6 +30,7 @@ const calendar = createCalendar(calendarElement, {
   //   start: '06:00',
   //   end: '03:00',
   // },
+  isDark: true,
   calendars: {
     personal: {
       color: 'primary',

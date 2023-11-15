@@ -27,7 +27,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
       gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
     },
     public calendars = {},
-    public plugins = {}
+    public plugins = {},
+    public isDark = false
   ) {}
 
   get isHybridDay(): boolean {
