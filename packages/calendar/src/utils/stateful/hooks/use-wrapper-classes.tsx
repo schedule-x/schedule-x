@@ -2,7 +2,7 @@ import { useEffect, useState } from 'preact/compat'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 export default function useWrapperClasses($app: CalendarAppSingleton) {
-  const calendarWrapperClass = 'sx__calendar-wrapper'
+  const calendarWrapperClass = 'sx__calendar-wrapper is-dark'
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([
     calendarWrapperClass,
   ])

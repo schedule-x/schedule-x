@@ -13,6 +13,10 @@
 
   &:hover {
     background-color: var(--sx-internal-color-light-gray);
+
+    .is-dark & {
+      background-color: var(--sx-color-surface-container-low);
+    }
   }
 }
 
@@ -23,6 +27,10 @@
   margin: 0;
   background-color: var(--sx-color-background);
   z-index: var(--sx-calendar-header-popup-z-index);
+
+  .is-dark & {
+    background-color: var(--sx-color-surface-container-high);
+  }
 }
 
 .sx__view-selection-item {

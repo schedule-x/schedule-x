@@ -21,6 +21,10 @@
     animation-duration: 0.3s;
     visibility: initial;
   }
+
+  .is-dark & {
+    background-color: var(--sx-color-surface-container-high);
+  }
 }
 
 @keyframes slide-sideways {

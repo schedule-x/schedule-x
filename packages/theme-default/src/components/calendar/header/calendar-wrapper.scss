@@ -1,6 +1,9 @@
 .sx__calendar-wrapper {
   height: 100%;
   display: flex;
+  border-radius: var(--sx-rounding-small);
+  background-color: var(--sx-color-background);
+  color: var(--sx-text-color);
 }
 
 .sx__calendar {
