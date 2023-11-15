@@ -3,10 +3,7 @@
   padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
   border-radius: var(--sx-rounding-extra-small);
   font-size: var(--sx-calendar-header-input-font-size);
-
-  &:hover {
-    background-color: var(--sx-internal-color-light-gray);
-  }
+  color: var(--sx-internal-color-text);
 
   &:active {
     background-color: var(--sx-internal-color-gray-ripple-background);
@@ -14,5 +11,13 @@
 
   .sx__is-calendar-small & {
     display: none;
+  }
+
+  &:hover {
+    background-color: var(--sx-internal-color-light-gray);
+
+    .is-dark & {
+      background-color: var(--sx-color-surface-container-low);
+    }
   }
 }

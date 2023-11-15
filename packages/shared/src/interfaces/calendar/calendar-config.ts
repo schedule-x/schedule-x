@@ -32,6 +32,7 @@ export default interface CalendarConfigInternal extends Config {
   weekOptions: WeekOptions
   calendars?: Record<string, CalendarType>
   plugins: Plugins
+  isDark: boolean
 
   // Getters
   isHybridDay: boolean

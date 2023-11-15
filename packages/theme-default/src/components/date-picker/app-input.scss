@@ -26,10 +26,6 @@
   cursor: pointer;
   background-color: var(--sx-color-background);
 
-  .is-dark & {
-    background-color: var(--sx-color-surface-container-high);
-  }
-
   .sx__date-input--active & {
     border-color: var(--sx-color-primary);
     outline: 1px solid var(--sx-color-primary);

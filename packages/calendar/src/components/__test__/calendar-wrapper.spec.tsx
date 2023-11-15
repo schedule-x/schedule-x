@@ -52,4 +52,36 @@ describe('CalendarWrapper', () => {
       })
     })
   })
+
+  describe('when dark mode is enabled', () => {
+    it('should have an element class of is-dark', async () => {
+      const $app = __createAppWithViews__({
+        isDark: true,
+      })
+      renderComponent($app)
+
+      await waitFor(() => {
+        expect(
+          document
+            .querySelector(CALENDAR_WRAPPER_SELECTOR)
+            ?.classList.contains('is-dark')
+        ).toBe(true)
+      })
+    })
+  })
+
+  describe('when light mode is enabled by default', () => {
+    it('should not have an element class of is-dark', async () => {
+      const $app = __createAppWithViews__()
+      renderComponent($app)
+
+      await waitFor(() => {
+        expect(
+          document
+            .querySelector(CALENDAR_WRAPPER_SELECTOR)
+            ?.classList.contains('is-dark')
+        ).toBe(false)
+      })
+    })
+  })
 })

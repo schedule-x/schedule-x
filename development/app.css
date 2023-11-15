@@ -6,6 +6,13 @@ body {
   margin: 0;
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #fff;
+  }
+}
+
 #app {
   width: 400px;
   max-width: 100%;

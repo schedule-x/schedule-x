@@ -12,7 +12,9 @@ export default function useWrapperClasses($app: CalendarAppSingleton) {
     if ($app.calendarState.isCalendarSmall.value)
       classes.push('sx__is-calendar-small')
     setWrapperClasses(classes)
-  }, [$app.calendarState.isCalendarSmall.value])
+
+    if ($app.config.isDark) classes.push('is-dark')
+  }, [$app.calendarState.isCalendarSmall.value, $app.config.isDark])
 
   return wrapperClasses
 }
