@@ -30,7 +30,7 @@
   // internally defined colors, not belonging to the material design spec
   --sx-internal-color-gray-ripple-background: #e0e0e0;
   --sx-internal-color-light-gray: #fafafa;
-  --sx-text-color: #000;
+  --sx-internal-color-text: #000;
 }
 
 .is-dark {
@@ -61,5 +61,5 @@
   --sx-color-surface-tint: #d0bcff;
 
   // internally defined colors, not belonging to the material design spec
-  --sx-text-color: #fff;
+  --sx-internal-color-text: #fff;
 }
