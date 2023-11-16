@@ -22,15 +22,15 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar(calendarElement, {
   // locale: 'de-DE',
-  locale: 'en-US',
-  // locale: 'zh-CN',
+  // locale: 'en-US',
+  locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
   defaultView: viewMonthAgenda.name,
   // dayBoundaries: {
   //   start: '06:00',
   //   end: '03:00',
   // },
-  isDark: true,
+  // isDark: true,
   calendars: {
     personal: {
       color: 'primary',

@@ -33,6 +33,9 @@ describe('MonthAgendaDayNames', () => {
   const $appWithGermanLocale = __createAppWithViews__({
     locale: 'de-DE',
   })
+  const $appWithChineseLocale = __createAppWithViews__({
+    locale: 'zh-CN',
+  })
 
   afterEach(() => {
     cleanup()
@@ -103,6 +106,21 @@ describe('MonthAgendaDayNames', () => {
       expect(getDayN(4).textContent).toBe('F')
       expect(getDayN(5).textContent).toBe('S')
       expect(getDayN(6).textContent).toBe('S')
+    })
+
+    it('should list all days in Chinese', () => {
+      const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
+      renderComponent(agendaMonth.weeks[0], $appWithChineseLocale)
+
+      expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
+
+      expect(getDayN(0).textContent).toBe('周一')
+      expect(getDayN(1).textContent).toBe('周二')
+      expect(getDayN(2).textContent).toBe('周三')
+      expect(getDayN(3).textContent).toBe('周四')
+      expect(getDayN(4).textContent).toBe('周五')
+      expect(getDayN(5).textContent).toBe('周六')
+      expect(getDayN(6).textContent).toBe('周日')
     })
   })
 })
