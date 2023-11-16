@@ -12,7 +12,7 @@ import { cleanup, render, screen, waitFor } from '@testing-library/preact'
 import MonthGridDay from '../month-grid-day'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { getTestEvent } from './test-events'
-import { InternalViewName } from '../../../../enums/internal-view.enum'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 
 const renderComponent = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(

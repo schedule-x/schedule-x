@@ -9,7 +9,7 @@ import {
   isDropdownOpen,
   openViewSelection,
 } from '../../../../utils/stateless/testing/page-objects/view-selection'
-import { InternalViewName } from '../../../../enums/internal-view.enum'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { afterEach } from 'vitest'
 
 describe('ViewSelection', () => {

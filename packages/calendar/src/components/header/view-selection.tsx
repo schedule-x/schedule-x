@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'preact/compat'
 import { AppContext } from '../../utils/stateful/app-context'
-import { ViewName } from '../../types/view-name'
-import { View } from '../../types/view'
+import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
+import { View } from '@schedule-x/shared/src/types/calendar/view'
 
 export default function ViewSelection() {
   const $app = useContext(AppContext)

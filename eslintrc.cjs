@@ -36,6 +36,7 @@ module.exports = {
         pattern: 'packages/translations/*',
       },
     ],
+    'boundaries/ignore': ['**/*.spec.ts', '**/*.spec.tsx'],
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
@@ -49,6 +50,8 @@ module.exports = {
       1,
       {
         default: 'disallow',
+        message:
+          'Modules in the "${file.type}" package are not allowed to depend on modules from the "${dependency.type}" package',
         rules: [
           {
             from: 'calendar',

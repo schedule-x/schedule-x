@@ -1,6 +1,6 @@
 import { ViewName } from './view-name'
-import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { RangeSetterConfig } from '@schedule-x/shared/src/interfaces/calendar/range-setter-config.interface'
+import CalendarAppSingleton from '../../interfaces/calendar/calendar-app-singleton'
+import { RangeSetterConfig } from '../../interfaces/calendar/range-setter-config.interface'
 import { PreactViewComponent } from './preact-view-component'
 
 export type ViewConfig = {

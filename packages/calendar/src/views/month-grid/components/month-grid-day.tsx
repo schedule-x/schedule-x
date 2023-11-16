@@ -4,7 +4,7 @@ import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/dat
 import { useContext } from 'preact/compat'
 import { AppContext } from '../../../utils/stateful/app-context'
 import MonthGridEvent from './month-grid-event'
-import { InternalViewName } from '../../../enums/internal-view.enum'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { DATE_GRID_BLOCKER } from '../../../constants'
 
 type props = {
