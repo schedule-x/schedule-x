@@ -1,4 +1,4 @@
-import { DayBoundariesInternal } from '../../../../types/config/day-boundaries'
+import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 
 export const getTimeAxisHours = (
   { start, end }: DayBoundariesInternal,

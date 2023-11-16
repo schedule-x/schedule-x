@@ -1,12 +1,12 @@
 import Config from '../config.interface'
 import { DatePickerConfigExternal } from '../date-picker/config.interface'
-import { ViewName } from '@schedule-x/calendar/src/types/view-name'
-import { View } from '@schedule-x/calendar/src/types/view'
+import { ViewName } from '../../types/calendar/view-name'
+import { View } from '../../types/calendar/view'
 import CalendarEventExternal from './calendar-event.interface'
 import {
-  DayBoundariesExternal,
   DayBoundariesInternal,
-} from '@schedule-x/calendar/src/types/config/day-boundaries'
+  DayBoundariesExternal,
+} from '../../types/calendar/day-boundaries'
 import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin.interface'
 import PluginBase from '../plugin.interface'
 import EventModalPlugin from '../event-modal/event-modal.plugin'

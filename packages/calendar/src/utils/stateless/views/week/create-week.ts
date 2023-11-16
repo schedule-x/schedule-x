@@ -3,7 +3,7 @@ import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format
 import { Week } from '../../../../types/week'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
-import { InternalViewName } from '../../../../enums/internal-view.enum'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 
 const createOneDay = (week: Week, date: Date) => {
   const dateString = toDateString(date)

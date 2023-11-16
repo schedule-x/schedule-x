@@ -6,12 +6,12 @@ import CalendarConfigInternal, {
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
-import { ViewName } from '../../../types/view-name'
-import { View } from '../../../types/view'
+import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
+import { View } from '@schedule-x/shared/src/types/calendar/view'
 import {
   DayBoundariesExternal,
   DayBoundariesInternal,
-} from '../../../types/config/day-boundaries'
+} from '@schedule-x/shared/src/types/calendar/day-boundaries'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'

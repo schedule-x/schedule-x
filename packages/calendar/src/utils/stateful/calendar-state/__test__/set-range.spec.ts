@@ -6,7 +6,7 @@ import {
 import { createCalendarState } from '../calendar-state.impl'
 import CalendarConfigBuilder from '../../config/calendar-config.builder'
 import TimeUnitsBuilder from '@schedule-x/shared/src/utils/stateful/time-units/time-units.builder'
-import { InternalViewName } from '../../../../enums/internal-view.enum'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { viewWeek } from '../../../../views/week'
 import { viewMonthGrid } from '../../../../views/month-grid'
 import { viewDay } from '../../../../views/day'

@@ -6,10 +6,10 @@ import {
   DEFAULT_FIRST_DAY_OF_WEEK,
   DEFAULT_LOCALE,
 } from '@schedule-x/shared/src/values'
-import { ViewName } from '../../../types/view-name'
-import { InternalViewName } from '../../../enums/internal-view.enum'
-import { View } from '../../../types/view'
-import { DayBoundariesInternal } from '../../../types/config/day-boundaries'
+import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { View } from '@schedule-x/shared/src/types/calendar/view'
+import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 import {
   DEFAULT_DAY_BOUNDARIES,
   DEFAULT_WEEK_GRID_HEIGHT,

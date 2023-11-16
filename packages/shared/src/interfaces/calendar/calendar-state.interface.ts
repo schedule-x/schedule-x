@@ -1,4 +1,4 @@
-import { ViewName } from '@schedule-x/calendar/src/types/view-name'
+import { ViewName } from '../../types/calendar/view-name'
 import { Signal } from '@preact/signals'
 import { DateRange } from '../../types/date-range'
 

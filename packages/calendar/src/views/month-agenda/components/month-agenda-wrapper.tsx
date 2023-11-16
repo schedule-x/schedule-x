@@ -1,4 +1,4 @@
-import { PreactViewComponent } from '../../../types/preact-view-component'
+import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
 import { useEffect, useState } from 'preact/compat'
 import { MonthAgenda } from '../types/month-agenda'
 import { createAgendaMonth } from '../utils/stateless/create-agenda-month'
