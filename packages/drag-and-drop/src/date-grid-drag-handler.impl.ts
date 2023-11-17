@@ -32,8 +32,9 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     this.rangeStartDate = dateFromDateTime(
       (this.$app.calendarState.range.value as DateRange).start
     )
-    this.rangeEndDate = dateFromDateTime(
-      (this.$app.calendarState.range.value as DateRange).end
+    this.rangeEndDate = addDays(
+      this.rangeStartDate,
+      7 - 1 // 7 days in a week. This needs to change, if the number of days in a week becomes configurable
     )
     this.init()
   }
