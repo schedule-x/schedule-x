@@ -32,8 +32,9 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     this.rangeStartDate = dateFromDateTime(
       (this.$app.calendarState.range.value as DateRange).start
     )
-    this.rangeEndDate = dateFromDateTime(
-      (this.$app.calendarState.range.value as DateRange).end
+    this.rangeEndDate = addDays(
+      this.rangeStartDate,
+      7 - 1 // 7 days in a week. This needs to change, if the number of days in a week becomes configurable
     )
     this.init()
   }
@@ -105,7 +106,10 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private handleMouseUp = () => {
     document.removeEventListener('mousemove', this.handleMouseMove)
     this.updateOriginalEvent()
-    this.updateCopy(undefined)
+
+    setTimeout(() => {
+      this.updateCopy(undefined)
+    }, 10) // Timeout needed to prevent the original from being displayed for a split second, before being removed from DOM.
   }
 
   private updateOriginalEvent() {
