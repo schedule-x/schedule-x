@@ -28,7 +28,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     },
     public calendars = {},
     public plugins = {},
-    public isDark = false
+    public isDark = false,
+    public callbacks = {}
   ) {}
 
   get isHybridDay(): boolean {

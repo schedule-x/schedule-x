@@ -17,6 +17,7 @@ import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-and-drop-plugin.interface'
 import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
+import { CalendarCallbacks } from '@schedule-x/shared/src/interfaces/calendar/listeners.interface'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -30,6 +31,7 @@ export default class CalendarConfigBuilder
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
   isDark: boolean | undefined = false
+  callbacks: CalendarCallbacks | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -41,7 +43,8 @@ export default class CalendarConfigBuilder
       this.weekOptions,
       this.calendars,
       this.plugins,
-      this.isDark
+      this.isDark,
+      this.callbacks
     )
   }
 
@@ -103,6 +106,13 @@ export default class CalendarConfigBuilder
 
   withIsDark(isDark: boolean | undefined): CalendarConfigBuilder {
     this.isDark = isDark
+    return this
+  }
+
+  withCallbacks(
+    listeners: CalendarCallbacks | undefined
+  ): CalendarConfigBuilder {
+    this.callbacks = listeners
     return this
   }
 }
