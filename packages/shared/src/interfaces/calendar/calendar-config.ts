@@ -10,6 +10,7 @@ import {
 import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin.interface'
 import PluginBase from '../plugin.interface'
 import EventModalPlugin from '../event-modal/event-modal.plugin'
+import { CalendarCallbacks } from './listeners.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -33,6 +34,7 @@ export default interface CalendarConfigInternal extends Config {
   calendars?: Record<string, CalendarType>
   plugins: Plugins
   isDark: boolean
+  callbacks: CalendarCallbacks
 
   // Getters
   isHybridDay: boolean

@@ -12,5 +12,6 @@ export const createInternalConfig = (config: CalendarConfigExternal) => {
     .withCalendars(config.calendars)
     .withPlugins(config.plugins)
     .withIsDark(config.isDark)
+    .withCallbacks(config.callbacks)
     .build()
 }

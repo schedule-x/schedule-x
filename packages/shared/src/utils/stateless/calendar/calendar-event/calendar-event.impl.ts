@@ -1,4 +1,6 @@
-import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-event.interface'
+import CalendarEventExternal, {
+  CalendarEventInternal,
+} from '../../../../interfaces/calendar/calendar-event.interface'
 import { EventId } from '../../../../types/event-id'
 import CalendarConfigInternal from '../../../../interfaces/calendar/calendar-config'
 import {
@@ -110,6 +112,19 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
   _getForeignProperties(): Record<string, unknown> {
     return this._foreignProperties
+  }
+
+  _getExternalEvent(): CalendarEventExternal {
+    return {
+      id: this.id,
+      time: this.time,
+      title: this.title,
+      people: this.people,
+      location: this.location,
+      description: this.description,
+      calendarId: this.calendarId,
+      ...this._getForeignProperties(),
+    }
   }
 
   _eventFragments: EventFragments = {}
