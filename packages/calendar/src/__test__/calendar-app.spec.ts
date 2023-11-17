@@ -10,6 +10,11 @@ import { viewMonthGrid } from '../views/month-grid'
 import { cleanup } from '@testing-library/preact'
 import CalendarApp from '../calendar.app'
 
+const sampleEventTime = {
+  start: '2020-01-01',
+  end: '2020-01-02',
+}
+
 describe('CalendarApp', () => {
   afterEach(() => {
     cleanup()
@@ -34,7 +39,6 @@ describe('CalendarApp', () => {
 
   describe('interacting with the events facade', () => {
     const calendarEl = document.createElement('div')
-    document.body.appendChild(calendarEl)
     let calendarApp: CalendarApp
 
     beforeEach(() => {
@@ -49,10 +53,7 @@ describe('CalendarApp', () => {
       calendarApp.events.add({
         id: '1',
         title: 'test',
-        time: {
-          start: '2020-01-01',
-          end: '2020-01-02',
-        },
+        time: sampleEventTime,
       })
 
       expect((calendarApp as CalendarApp).events.getAll()).length(1)
@@ -61,17 +62,17 @@ describe('CalendarApp', () => {
     it('should add an event and then access it over get()', () => {
       expect((calendarApp as CalendarApp).events.getAll()).length(0)
       const EVENT_ID = '1'
+      const EVENT_TITLE = 'test'
 
       calendarApp.events.add({
         id: EVENT_ID,
-        title: 'test',
-        time: {
-          start: '2020-01-01',
-          end: '2020-01-02',
-        },
+        title: EVENT_TITLE,
+        time: sampleEventTime,
       })
 
-      expect((calendarApp as CalendarApp).events.get(EVENT_ID)).toBeDefined()
+      const event = (calendarApp as CalendarApp).events.get(EVENT_ID)
+      expect(event).toBeDefined()
+      expect(event?.title).toBe(EVENT_TITLE)
     })
 
     it('should receive undefined when trying to access an event that does not exist', () => {
@@ -81,10 +82,7 @@ describe('CalendarApp', () => {
       calendarApp.events.add({
         id: EVENT_ID,
         title: 'test',
-        time: {
-          start: '2020-01-01',
-          end: '2020-01-02',
-        },
+        time: sampleEventTime,
       })
 
       expect((calendarApp as CalendarApp).events.get('2')).toBeUndefined()
@@ -97,10 +95,7 @@ describe('CalendarApp', () => {
       calendarApp.events.add({
         id: EVENT_ID,
         title: 'test',
-        time: {
-          start: '2020-01-01',
-          end: '2020-01-02',
-        },
+        time: sampleEventTime,
       })
 
       expect((calendarApp as CalendarApp).events.getAll()).length(1)
@@ -117,10 +112,7 @@ describe('CalendarApp', () => {
       const INITIAL_EVENT = {
         id: EVENT_ID,
         title: INITIAL_TITLE,
-        time: {
-          start: '2020-01-01',
-          end: '2020-01-02',
-        },
+        time: sampleEventTime,
       }
       calendarApp.events.add(INITIAL_EVENT)
       expect((calendarApp as CalendarApp).events.get(EVENT_ID)?.title).toBe(
