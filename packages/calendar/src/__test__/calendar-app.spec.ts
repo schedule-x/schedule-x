@@ -91,15 +91,15 @@ describe('CalendarApp', () => {
     it('should remove an event', () => {
       expect((calendarApp as CalendarApp).events.getAll()).length(0)
       const EVENT_ID = '1'
-
       calendarApp.events.add({
         id: EVENT_ID,
         title: 'test',
         time: sampleEventTime,
       })
-
       expect((calendarApp as CalendarApp).events.getAll()).length(1)
+
       calendarApp.events.remove(EVENT_ID)
+
       expect((calendarApp as CalendarApp).events.getAll()).length(0)
     })
 
