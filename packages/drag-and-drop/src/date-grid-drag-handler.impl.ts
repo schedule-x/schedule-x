@@ -106,7 +106,10 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private handleMouseUp = () => {
     document.removeEventListener('mousemove', this.handleMouseMove)
     this.updateOriginalEvent()
-    this.updateCopy(undefined)
+
+    setTimeout(() => {
+      this.updateCopy(undefined)
+    }, 10) // Timeout needed to prevent the original from being displayed for a split second, before being removed from DOM.
   }
 
   private updateOriginalEvent() {
