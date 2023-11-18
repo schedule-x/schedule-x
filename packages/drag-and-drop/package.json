@@ -14,13 +14,10 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "@schedule-x/shared": "^0.1.0-alpha.5"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
     "directory": "packages/drag-and-drop"
   },
-  "gitHead": "08e4f6ae6f96e63570e75acd14041271d1d1c59e"
+  "gitHead": "e405a5a6c2a474bab8bf51bb39619098412024cb"
 }
