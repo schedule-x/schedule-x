@@ -13,7 +13,6 @@
     "skipLibCheck": true,
     "noEmit": false,
     "declaration": true,
-    "declarationDir": "dist/dts",
     "types": ["vite/client"]
   },
   "exclude": ["node_modules", "dist", "tests"]
