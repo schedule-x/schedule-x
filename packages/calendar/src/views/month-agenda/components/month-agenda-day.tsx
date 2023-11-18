@@ -1,11 +1,11 @@
 import { MonthAgendaDay as MonthAgendaDayType } from '../types/month-agenda'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { StateUpdater } from 'preact/compat'
+import { SetStateAction } from 'preact/compat'
 
 type props = {
   day: MonthAgendaDayType
   isActive: boolean
-  setActiveDate: StateUpdater<string>
+  setActiveDate: SetStateAction<string>
 }
 
 export default function MonthAgendaDay({

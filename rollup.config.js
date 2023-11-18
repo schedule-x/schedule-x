@@ -82,6 +82,7 @@ async function build(commandLineArgs) {
           tsconfig: `${basePath}/tsconfig.json`,
         }),
       ],
+      external: ['preact', '@preact/signals'],
     })
   })
 

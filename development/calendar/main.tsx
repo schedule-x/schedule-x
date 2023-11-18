@@ -11,11 +11,11 @@ import {
   viewMonthGrid,
   viewDay,
   viewMonthAgenda,
-} from '@schedule-x/calendar'
+} from '@schedule-x/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
-import { createEventModalPlugin } from '@schedule-x/event-modal'
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement

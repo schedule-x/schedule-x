@@ -8,6 +8,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "serve": "vite serve",
     "preview": "vite preview",
     "build": "npm run clean:build && rollup -c && lerna run build",
     "test:unit": "vitest run",
@@ -26,10 +27,6 @@
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
     "prepare": "husky install",
     "seed": "ts-node-esm development/seeder/seed.ts"
-  },
-  "dependencies": {
-    "@preact/signals": "1.1.5",
-    "preact": "10.16.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",

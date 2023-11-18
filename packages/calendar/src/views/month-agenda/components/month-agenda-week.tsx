@@ -1,10 +1,10 @@
 import { MonthAgendaWeek as MonthAgendaWeekType } from '../types/month-agenda'
 import MonthAgendaDay from './month-agenda-day'
-import { StateUpdater } from 'preact/compat'
+import { SetStateAction } from 'preact/compat'
 
 type props = {
   week: MonthAgendaWeekType
-  setActiveDate: StateUpdater<string>
+  setActiveDate: SetStateAction<string>
   activeDate: string
 }
 
