@@ -1,0 +1,14 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 0.1.0-alpha.5 (2023-11-18)
+
+### Features
+
+- dark mode ([#71](https://github.com/schedule-x/schedule-x/issues/71)) ([93fe6bc](https://github.com/schedule-x/schedule-x/commit/93fe6bc4f6f07b8a84db11053edc1f44d1db066c))
+- event modal ([#48](https://github.com/schedule-x/schedule-x/issues/48)) ([5026be8](https://github.com/schedule-x/schedule-x/commit/5026be8ff514a8d7a3e134277f1d5b5d55b5f518))
+- expose single ts declarations for packages ([#78](https://github.com/schedule-x/schedule-x/issues/78)) ([d4a5e43](https://github.com/schedule-x/schedule-x/commit/d4a5e437ab52a7643423ff59f377c8834422d89b))
+- month agenda events ([#66](https://github.com/schedule-x/schedule-x/issues/66)) ([5e8e2b1](https://github.com/schedule-x/schedule-x/commit/5e8e2b17a641fced2458abc8bc82de572cb8b4f3))
+- position events in month ([#55](https://github.com/schedule-x/schedule-x/issues/55)) ([858f1be](https://github.com/schedule-x/schedule-x/commit/858f1beae063c119752cdb2d2c227434ddb3be10))
