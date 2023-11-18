@@ -9,6 +9,7 @@ import MonthGridDragHandlerImpl from './month-grid-drag-handler.impl'
 import MonthGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/month-grid-drag-handler.interface'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
+import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
 
 class DragAndDropPluginImpl implements DragAndDropPlugin {
   name = PluginName.DragAndDrop
@@ -18,7 +19,7 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
   createTimeGridDragHandler(
     dependencies: DragHandlerDependencies,
     dayBoundariesDateTime: DayBoundariesDateTime
-  ): TimeGridDragHandlerImpl {
+  ): TimeGridDragHandler {
     return new TimeGridDragHandlerImpl(
       dependencies.$app,
       dependencies.event,

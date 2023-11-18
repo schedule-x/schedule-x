@@ -32,7 +32,6 @@
     "preact": "^10.15.1"
   },
   "devDependencies": {
-    "@atomico/rollup-plugin-sizes": "^1.1.4",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
     "@fontsource/open-sans": "^5.0.7",
@@ -63,8 +62,9 @@
     "lerna": "^7.1.4",
     "minimist": "^1.2.8",
     "prettier": "^3.0.0",
+    "rollup": "^4.5.0",
     "rollup-plugin-auto-external": "^2.0.0",
-    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
     "sass": "^1.63.6",
     "stylelint": "^15.10.2",
