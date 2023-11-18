@@ -28,6 +28,10 @@
     "prepare": "husky install",
     "seed": "ts-node-esm development/seeder/seed.ts"
   },
+  "dependencies": {
+    "@preact/signals": "1.2.1",
+    "preact": "10.19.2"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
