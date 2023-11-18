@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.8](https://github.com/schedule-x/schedule-x/compare/v0.1.0-alpha.7...v0.1.0-alpha.8) (2023-11-18)
+
+### Bug Fixes
+
+- broken deps ([ba06ab5](https://github.com/schedule-x/schedule-x/commit/ba06ab5e0fd362cd6e7f844e9b4ad0bcf276e8a9))
+
 # [0.1.0-alpha.7](https://github.com/schedule-x/schedule-x/compare/v0.1.0-alpha.6...v0.1.0-alpha.7) (2023-11-18)
 
 ### Bug Fixes
