@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.6](https://github.com/schedule-x/schedule-x/compare/v0.1.0-alpha.5...v0.1.0-alpha.6) (2023-11-18)
+
+### Bug Fixes
+
+- broken dependency on shared lib ([24bfee2](https://github.com/schedule-x/schedule-x/commit/24bfee261efdbbd8482105e0b5b008f08316e76c))
+- broken type ([a636214](https://github.com/schedule-x/schedule-x/commit/a636214ba4c0fd42b7853e0753657a3d82f72012))
+
 # 0.1.0-alpha.5 (2023-11-18)
 
 ### Bug Fixes
