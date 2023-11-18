@@ -1,4 +1,4 @@
-import { createDatePicker } from '../../../packages/date-picker/src'
+import { createDatePicker } from '@schedule-x/date-picker'
 import '../../../packages/theme-default/src/date-picker.scss'
 
 const el = document.getElementById('app')
