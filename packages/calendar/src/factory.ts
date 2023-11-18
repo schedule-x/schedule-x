@@ -8,8 +8,10 @@ import { createCalendarEventsImpl } from './utils/stateful/calendar-events/calen
 import { createInternalConfig } from './utils/stateless/factories/create-internal-config'
 import { createTimeUnitsImpl } from './utils/stateless/factories/create-time-units-impl'
 import { createDatePickerConfig } from './utils/stateless/factories/create-date-picker-config'
+import EventModal from '@schedule-x/event-modal/src/event-modal'
 
 export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
+  console.log(EventModal)
   const internalConfig = createInternalConfig(config)
   const timeUnitsImpl = createTimeUnitsImpl(internalConfig)
   const calendarState = createCalendarState(internalConfig, timeUnitsImpl)

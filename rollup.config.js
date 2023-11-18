@@ -9,9 +9,9 @@ import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
-import sizes from '@atomico/rollup-plugin-sizes'
 import autoExternal from 'rollup-plugin-auto-external'
 import image from '@rollup/plugin-image'
+import { dts } from 'rollup-plugin-dts'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -50,7 +50,6 @@ async function build(commandLineArgs) {
         babelHelpers: 'bundled',
         exclude: 'node_modules/**',
       }),
-      sizes(),
       image(),
     ]
 
@@ -80,12 +79,29 @@ async function build(commandLineArgs) {
         }),
         ...basePlugins,
         typescript({
-          tsconfig:
-            './' + fs.existsSync(`${basePath}/tsconfig.json`)
-              ? `${basePath}/tsconfig.json`
-              : 'common/package.tsconfig.json',
+          tsconfig: `${basePath}/tsconfig.json`,
         }),
       ],
+    })
+  })
+
+  // push dts config
+  packages.forEach((pkg) => {
+    const basePath = path.relative(__dirname, pkg.location)
+    const { name } = pkg.toJSON()
+
+    config.push({
+      input: path.join(
+        basePath,
+        'dist',
+        name.replace('@schedule-x/', ''),
+        'src/index.d.ts'
+      ),
+      output: {
+        file: path.join(basePath, 'dist/index.d.ts'),
+        format: 'es',
+      },
+      plugins: [dts()],
     })
   })
 
