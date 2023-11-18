@@ -15,9 +15,9 @@
     "dist"
   ],
   "dependencies": {
-    "@preact/signals": "^1.1.5",
     "@schedule-x/date-picker": "^0.1.0-alpha.6",
-    "preact": "^10.16.0"
+    "@preact/signals": "1.2.1",
+    "preact": "10.16.0"
   },
   "repository": {
     "type": "git",

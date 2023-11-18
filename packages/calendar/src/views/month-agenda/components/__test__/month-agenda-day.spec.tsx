@@ -7,14 +7,14 @@ import {
 import { cleanup, fireEvent, render } from '@testing-library/preact'
 import MonthAgendaDay from '../month-agenda-day'
 import { MonthAgendaDay as MonthAgendaDayType } from '../../types/month-agenda'
-import { SetStateAction } from 'preact/compat'
+import { StateUpdater } from 'preact/compat'
 import { vi } from 'vitest'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
 const renderComponent = (
   day: MonthAgendaDayType,
   isActive = false,
-  setActiveDate: SetStateAction<string> = vi.fn
+  setActiveDate: StateUpdater<string> = vi.fn
 ) => {
   render(
     <MonthAgendaDay

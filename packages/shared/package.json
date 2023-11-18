@@ -16,7 +16,7 @@
     "dist"
   ],
   "dependencies": {
-    "@preact/signals": "^1.1.5"
+    "@preact/signals": "1.2.1"
   },
   "repository": {
     "type": "git",

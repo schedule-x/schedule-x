@@ -28,8 +28,8 @@
     "seed": "ts-node-esm development/seeder/seed.ts"
   },
   "dependencies": {
-    "@preact/signals": "^1.1.5",
-    "preact": "^10.15.1"
+    "@preact/signals": "1.2.1",
+    "preact": "10.16.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
@@ -62,7 +62,6 @@
     "lerna": "^7.1.4",
     "minimist": "^1.2.8",
     "prettier": "^3.0.0",
-    "rollup": "^4.5.0",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
