@@ -1,4 +1,4 @@
-import { useState } from 'preact/compat'
+import { useState } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { deepCloneEvent } from '../../../../../shared/src/utils/stateless/calendar/deep-clone-event'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'

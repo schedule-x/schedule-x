@@ -1,7 +1,7 @@
 import { MONTH_VIEW } from '../constants/test-ids'
 import MonthViewHeader from './month-view-header'
 import DayNames from './day-names'
-import { useContext, useEffect, useState } from 'preact/compat'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { MonthWithDates } from '@schedule-x/shared/src/types/time'

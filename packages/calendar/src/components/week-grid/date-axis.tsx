@@ -1,6 +1,6 @@
 import { WeekWithDates } from '@schedule-x/shared/src/types/time'
 import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
-import { useContext } from 'preact/compat'
+import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 

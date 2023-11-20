@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/compat'
+import { useEffect, useState } from 'preact/hooks'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import EventModalPlugin, {
   EventModalProps,

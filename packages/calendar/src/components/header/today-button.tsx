@@ -1,5 +1,5 @@
 import { AppContext } from '../../utils/stateful/app-context'
-import { useContext } from 'preact/compat'
+import { useContext } from 'preact/hooks'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 
 export default function TodayButton() {

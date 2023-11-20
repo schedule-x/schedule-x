@@ -2,7 +2,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useContext } from 'preact/compat'
+import { useContext } from 'preact/hooks'
 
 type props = {
   gridRow: number

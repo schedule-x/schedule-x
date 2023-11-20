@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'preact/compat'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/date-picker-view.enum'
 import MonthView from './month-view'
 import YearsView from './years-view'

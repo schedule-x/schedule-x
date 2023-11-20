@@ -52,7 +52,7 @@ async function build(commandLineArgs) {
       image(),
     ]
 
-    const packageConfig = {
+    config.push({
       input,
       output: [
         // {
@@ -69,19 +69,11 @@ async function build(commandLineArgs) {
           file: path.join(basePath, main),
           format: 'cjs',
           exports: 'auto',
-          // globals: {
-          //   preact: 'preact',
-          //   '@preact/signals': 'signals'
-          // }
         },
         {
           name,
           file: path.join(basePath, module),
           format: 'es',
-          // globals: {
-          //   preact: 'preact',
-          //   '@preact/signals': 'signals'
-          // }
         },
       ],
       plugins: [
@@ -90,15 +82,8 @@ async function build(commandLineArgs) {
           tsconfig: `${basePath}/tsconfig.json`,
         }),
       ],
-      external: ['preact', '@preact/signals'],
-    }
-
-    // if (name === '@schedule-x/event-modal' || name === '@schedule-x/date-picker') {
-    //   console.log('HRLLO TOM')
-    //   packageConfig.external = ['preact', '@preact/signals']
-    // }
-
-    config.push(packageConfig)
+      external: ['preact', 'preact/hooks', '@preact/signals', 'preact/src/jsx'],
+    })
   })
 
   // push dts config
