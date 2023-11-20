@@ -13,15 +13,8 @@ import '../../../packages/theme-default/src/calendar.scss'
 import '../index.css'
 import { createDragAndDropPlugin } from '../../../packages/drag-and-drop'
 import { createEventModalPlugin } from '../../../packages/event-modal'
-import { signal } from '@preact/signals'
-import { createRef } from 'preact'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
-
-const b = createRef()
-console.log(b)
-const a = signal(1)
-console.log(a)
 
 const calendar = createCalendar(calendarElement, {
   datePicker: {

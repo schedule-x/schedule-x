@@ -17,12 +17,8 @@ export const createEventModalPlugin = (): EventModalPlugin => {
       event: CalendarEventInternal,
       eventTarget: HTMLElement
     ) => {
-      console.log(EventModal)
-      console.log(1)
       calendarEvent.value = event
       calendarEventElement.value = eventTarget
-
-      console.log(calendarEvent)
     },
   }
 }
