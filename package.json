@@ -10,7 +10,7 @@
     "dev": "vite",
     "serve": "vite serve",
     "preview": "vite preview",
-    "build": "npm run clean:build && rollup -c && lerna run build",
+    "build": "npm run clean:build && rollup -c && lerna run build && vite build",
     "test:unit": "vitest run",
     "test:e2e": "cypress open -- --e2e",
     "test:e2e:ci": "./node_modules/.bin/cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",

@@ -9,7 +9,6 @@ import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
-import autoExternal from 'rollup-plugin-auto-external'
 import image from '@rollup/plugin-image'
 import { dts } from 'rollup-plugin-dts'
 
@@ -53,36 +52,53 @@ async function build(commandLineArgs) {
       image(),
     ]
 
-    config.push({
+    const packageConfig = {
       input,
       output: [
-        {
-          name,
-          file: path.join(basePath, umd),
-          format: 'umd',
-        },
+        // {
+        //   name,
+        //   file: path.join(basePath, umd),
+        //   format: 'umd',
+        //   globals: {
+        //     preact: 'preact',
+        //     '@preact/signals': 'signals'
+        //   }
+        // },
         {
           name,
           file: path.join(basePath, main),
           format: 'cjs',
           exports: 'auto',
+          // globals: {
+          //   preact: 'preact',
+          //   '@preact/signals': 'signals'
+          // }
         },
         {
           name,
           file: path.join(basePath, module),
           format: 'es',
+          // globals: {
+          //   preact: 'preact',
+          //   '@preact/signals': 'signals'
+          // }
         },
       ],
       plugins: [
-        autoExternal({
-          packagePath: path.join(basePath, 'package.json'),
-        }),
         ...basePlugins,
         typescript({
           tsconfig: `${basePath}/tsconfig.json`,
         }),
       ],
-    })
+      external: ['preact', '@preact/signals'],
+    }
+
+    // if (name === '@schedule-x/event-modal' || name === '@schedule-x/date-picker') {
+    //   console.log('HRLLO TOM')
+    //   packageConfig.external = ['preact', '@preact/signals']
+    // }
+
+    config.push(packageConfig)
   })
 
   // push dts config

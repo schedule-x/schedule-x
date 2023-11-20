@@ -28,6 +28,8 @@ export default function useEventInteractions($app: CalendarAppSingleton) {
   ) => {
     if (!$app.config.plugins.eventModal) return
 
+    console.log($app.config.plugins.eventModal.calendarEvent.value)
+
     const eventTarget = mouseEvent.target as HTMLElement
     const calendarEventElement = eventTarget.classList.contains('sx__event')
       ? eventTarget

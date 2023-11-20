@@ -4,21 +4,33 @@ import '@fontsource/open-sans/500-italic.css'
 import '@fontsource/open-sans/700.css'
 import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
-import { createCalendar, viewWeek } from '@schedule-x/calendar/src'
+import {
+  createCalendar,
+  viewWeek,
+  viewMonthGrid,
+} from '../../../packages/calendar'
 import '../../../packages/theme-default/src/calendar.scss'
 import '../index.css'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import { createDragAndDropPlugin } from '../../../packages/drag-and-drop'
+import { createEventModalPlugin } from '../../../packages/event-modal'
+import { signal } from '@preact/signals'
+import { createRef } from 'preact'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
+
+const b = createRef()
+console.log(b)
+const a = signal(1)
+console.log(a)
 
 const calendar = createCalendar(calendarElement, {
   datePicker: {
     selectedDate: '2023-09-21',
   },
   locale: 'en-US',
-  views: [viewWeek],
+  views: [viewWeek, viewMonthGrid],
   defaultView: 'week',
-  plugins: [createDragAndDropPlugin()],
+  plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
   events: [
     {
       id: 1,
