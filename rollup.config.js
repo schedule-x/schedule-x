@@ -54,15 +54,11 @@ async function build(commandLineArgs) {
     config.push({
       input,
       output: [
-        // {
-        //   name,
-        //   file: path.join(basePath, umd),
-        //   format: 'umd',
-        //   globals: {
-        //     preact: 'preact',
-        //     '@preact/signals': 'signals'
-        //   }
-        // },
+        {
+          name,
+          file: path.join(basePath, umd),
+          format: 'umd',
+        },
         {
           name,
           file: path.join(basePath, main),

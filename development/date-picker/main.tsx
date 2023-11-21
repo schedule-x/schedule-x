@@ -6,7 +6,7 @@ import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
 import '../app.css'
 import '../../packages/theme-default/src/date-picker.scss'
-import { createDatePicker } from '@schedule-x/date-picker'
+import { createDatePicker } from '@schedule-x/date-picker/src'
 
 const datePicker = createDatePicker(
   document.querySelector('#app') as HTMLElement,
