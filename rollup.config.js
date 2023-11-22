@@ -1,4 +1,3 @@
-import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import minimist from 'minimist'
@@ -9,7 +8,6 @@ import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
-import autoExternal from 'rollup-plugin-auto-external'
 import image from '@rollup/plugin-image'
 import { dts } from 'rollup-plugin-dts'
 
@@ -74,14 +72,12 @@ async function build(commandLineArgs) {
         },
       ],
       plugins: [
-        autoExternal({
-          packagePath: path.join(basePath, 'package.json'),
-        }),
         ...basePlugins,
         typescript({
           tsconfig: `${basePath}/tsconfig.json`,
         }),
       ],
+      external: ['preact', 'preact/hooks', '@preact/signals', 'preact/src/jsx'],
     })
   })
 

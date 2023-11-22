@@ -1,6 +1,6 @@
 import { YEARS_VIEW } from '../constants/test-ids'
 import YearsViewAccordion from './years-view-accordion'
-import { useContext, useEffect, useState } from 'preact/compat'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'

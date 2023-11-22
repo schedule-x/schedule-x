@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'preact/compat'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { View } from '@schedule-x/shared/src/types/calendar/view'

@@ -1,5 +1,5 @@
-import { createDatePicker } from '../../../packages/date-picker/src'
-import '../../../packages/theme-default/src/date-picker.scss'
+import { createDatePicker } from '@schedule-x/date-picker'
+import '@schedule-x/theme-default/dist/date-picker.css'
 
 const datePickerTopLeft = document.querySelector('.date-picker-top-left')
 const datePickerTopRight = document.querySelector('.date-picker-top-right')

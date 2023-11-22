@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/compat'
+import { useEffect, useState } from 'preact/hooks'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 
 export default function useWrapperClasses($app: CalendarAppSingleton) {

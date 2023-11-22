@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/date-picker",
-  "version": "0.1.0-alpha.5",
+  "version": "0.1.0-alpha.9",
   "description": "Schedule-X date picker component",
   "author": {
     "name": "Tom Österlund",
@@ -14,16 +14,14 @@
   "files": [
     "dist"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "@preact/signals": "^1.1.5",
-    "@schedule-x/shared": "^0.1.0-alpha.5",
-    "@schedule-x/translations": "^0.1.0-alpha.5",
-    "preact": "^10.16.0"
+    "preact": "^10.19.2"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
     "directory": "packages/date-picker"
   },
-  "gitHead": "08e4f6ae6f96e63570e75acd14041271d1d1c59e"
+  "gitHead": "e405a5a6c2a474bab8bf51bb39619098412024cb"
 }

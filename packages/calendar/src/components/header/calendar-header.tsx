@@ -1,5 +1,5 @@
 import AppWrapper from '@schedule-x/date-picker/src/components/app-wrapper'
-import { useContext } from 'preact/compat'
+import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import DatePickerAppSingletonBuilder from '@schedule-x/shared/src/utils/stateful/date-picker/app-singleton/date-picker-app-singleton.builder'
 import RangeHeading from './range-heading'

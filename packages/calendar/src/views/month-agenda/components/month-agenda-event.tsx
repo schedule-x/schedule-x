@@ -1,7 +1,7 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
-import { useContext } from 'preact/compat'
+import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 

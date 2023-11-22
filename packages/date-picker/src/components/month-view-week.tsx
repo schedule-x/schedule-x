@@ -1,6 +1,6 @@
 import { WeekWithDates } from '@schedule-x/shared/src/types/time'
 import { DATE_PICKER_WEEK } from '../constants/test-ids'
-import { useContext } from 'preact/compat'
+import { useContext } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import {

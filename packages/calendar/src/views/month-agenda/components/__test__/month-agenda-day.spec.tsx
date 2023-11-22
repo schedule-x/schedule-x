@@ -7,7 +7,7 @@ import {
 import { cleanup, fireEvent, render } from '@testing-library/preact'
 import MonthAgendaDay from '../month-agenda-day'
 import { MonthAgendaDay as MonthAgendaDayType } from '../../types/month-agenda'
-import { StateUpdater } from 'preact/compat'
+import { StateUpdater } from 'preact/hooks'
 import { vi } from 'vitest'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 

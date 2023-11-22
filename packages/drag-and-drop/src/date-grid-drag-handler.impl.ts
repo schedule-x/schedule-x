@@ -95,12 +95,8 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
         ).getTime()) /
         MS_PER_DAY
     )
-    getDateGridEventCopy(
-      this.$app,
-      this.eventCopy
-    ).style.transform = `translateX(calc(${
-      daysToShift * this.dayWidth
-    }px + ${daysToShift}px))`
+    getDateGridEventCopy(this.$app, this.eventCopy).style.transform =
+      `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
   }
 
   private handleMouseUp = () => {

@@ -4,10 +4,10 @@ import '@fontsource/open-sans/500-italic.css'
 import '@fontsource/open-sans/700.css'
 import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
-import { createCalendar, viewWeek } from '@schedule-x/calendar/src'
+import { createCalendar, viewWeek } from '../../../packages/calendar'
 import '../../../packages/theme-default/src/calendar.scss'
 import '../index.css'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
+import { createDragAndDropPlugin } from '../../../packages/drag-and-drop'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 

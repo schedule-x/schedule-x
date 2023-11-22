@@ -1,5 +1,5 @@
 import { AppContext } from '../../utils/stateful/app-context'
-import { useContext, useEffect, useState } from 'preact/compat'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import {

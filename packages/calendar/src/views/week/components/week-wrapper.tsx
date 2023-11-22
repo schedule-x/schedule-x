@@ -1,5 +1,5 @@
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
-import { useEffect, useState } from 'preact/compat'
+import { useEffect, useState } from 'preact/hooks'
 import TimeGridDay from '../../../components/week-grid/time-grid-day'
 import TimeAxis from '../../../components/week-grid/time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'

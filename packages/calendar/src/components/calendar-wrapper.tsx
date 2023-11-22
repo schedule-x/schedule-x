@@ -1,7 +1,7 @@
 import CalendarHeader from './header/calendar-header'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { AppContext } from '../utils/stateful/app-context'
-import { useEffect, useState } from 'preact/compat'
+import { useEffect, useState } from 'preact/hooks'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { setWrapperElement } from '../utils/stateless/dom/set-wrapper-element'

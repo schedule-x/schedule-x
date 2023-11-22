@@ -1,5 +1,5 @@
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
-import { useEffect, useState } from 'preact/compat'
+import { useEffect, useState } from 'preact/hooks'
 import { createMonth } from '../utils/stateless/create-month'
 import { Month } from '../types/month'
 import MonthGridWeek from './month-grid-week'

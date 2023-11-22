@@ -8,8 +8,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "serve": "vite serve",
     "preview": "vite preview",
     "build": "npm run clean:build && rollup -c && lerna run build",
+    "build:e2e": "vite build",
     "test:unit": "vitest run",
     "test:e2e": "cypress open -- --e2e",
     "test:e2e:ci": "./node_modules/.bin/cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",
@@ -28,8 +30,8 @@
     "seed": "ts-node-esm development/seeder/seed.ts"
   },
   "dependencies": {
-    "@preact/signals": "^1.1.5",
-    "preact": "^10.15.1"
+    "@preact/signals": "1.2.1",
+    "preact": "10.19.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.1",
@@ -62,7 +64,6 @@
     "lerna": "^7.1.4",
     "minimist": "^1.2.8",
     "prettier": "^3.0.0",
-    "rollup": "^4.5.0",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-typescript2": "^0.36.0",
