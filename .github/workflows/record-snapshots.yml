@@ -5,10 +5,15 @@ jobs:
   chrome:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: cypress-io/github-action@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build lib
+        run: npm run build
+      - name: Build test pages
+        run: npm run build:e2e
+      - name: Record snapshots
+        uses: cypress-io/github-action@v4
         with:
-          build: npm run build && npm run build:e2e
           browser: chrome
           start: npm run serve
           env: type=base
