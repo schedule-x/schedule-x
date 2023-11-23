@@ -8,5 +8,7 @@ export const cypressPageUrls = Object.freeze({
   },
   calendar: {
     dragAndDrop: '/cypress/pages/calendar/001-drag-and-drop.html',
+    smoke: '/cypress/pages/calendar/002-smoke.html',
+    darkMode: '/cypress/pages/calendar/003-dark-mode.html',
   },
 })

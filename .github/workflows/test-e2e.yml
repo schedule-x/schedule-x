@@ -19,7 +19,7 @@ jobs:
         run: npm run build:e2e
         with:
           browser: chrome
-          start: npm run dev
+          start: npm run serve
           env: type=actual # for screenshot testing
           config: screenshotsFolder=cypress/snapshots/linux/actual
       - uses: actions/upload-artifact@v3
