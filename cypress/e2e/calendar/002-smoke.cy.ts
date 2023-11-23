@@ -5,7 +5,7 @@ describe('Calendar Smoke Test', () => {
   const calendarHeader = createCalendarHeaderPageObject()
 
   beforeEach(() => {
-    cy.viewport(1440, 1200)
+    cy.viewport(1440, 900)
     cy.visit(cypressPageUrls.calendar.smoke)
   })
 
