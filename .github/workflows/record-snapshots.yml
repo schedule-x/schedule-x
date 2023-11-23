@@ -7,11 +7,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build lib
+      - name: Install dependencies ⬇️
+        run: npm install
+      - name: Build lib 🔨
         run: npm run build
-      - name: Build test pages
+      - name: Build test pages 🔨
         run: npm run build:e2e
-      - name: Record snapshots
+      - name: Record snapshots 📹
         uses: cypress-io/github-action@v4
         with:
           browser: chrome
