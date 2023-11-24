@@ -14,7 +14,6 @@
 #calendar {
   padding: 1rem;
   height: 800px;
-  /*max-height: 90vh;*/
   font-family: 'Open Sans', sans-serif;
   max-width: 90%;
 }

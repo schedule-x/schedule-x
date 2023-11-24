@@ -9,8 +9,8 @@ describe('Calendar dark mode', () => {
     cy.visit(cypressPageUrls.calendar.darkMode)
   })
 
-  it('should render events in the week view', { scrollBehavior: false }, () => {
-    cy.compareSnapshot('calendar-dark-mode__week-view', 0.5)
+  it('should render events in the week view', () => {
+    cy.compareSnapshot('calendar-dark-mode__week-view')
   })
 
   it('should render events in the month view', () => {
