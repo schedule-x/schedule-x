@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/shared",
   "private": true,
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.10",
   "description": "Schedule-X shared utils",
   "author": {
     "name": "Tom Österlund",
