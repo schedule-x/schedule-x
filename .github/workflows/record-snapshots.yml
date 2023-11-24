@@ -23,6 +23,6 @@ jobs:
       - uses: actions/upload-artifact@v3
         if: success()
         with:
-          name: visual-regression-diff
+          name: new-screenshots
           path: cypress/snapshots
           retention-days: 14
