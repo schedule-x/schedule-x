@@ -2,6 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run format
-npm run lint:fix
+npm run lint:changed:fix
 npm run lint:scss:fix
 git add .
