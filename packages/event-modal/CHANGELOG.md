@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.12](https://github.com/schedule-x/schedule-x/compare/v0.1.0-alpha.5...v0.1.0-alpha.12) (2023-11-24)
+
+### Bug Fixes
+
+- broken bundling of dependencies ([#79](https://github.com/schedule-x/schedule-x/issues/79)) ([dd24893](https://github.com/schedule-x/schedule-x/commit/dd2489360c25a0bbc4e454323b15ff1a61069b89))
+
 # [0.1.0-alpha.10](https://github.com/schedule-x/schedule-x/compare/v0.1.0-alpha.5...v0.1.0-alpha.10) (2023-11-24)
 
 ### Bug Fixes

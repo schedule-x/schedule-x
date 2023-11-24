@@ -1,0 +1,12 @@
+{
+  "name": "@schedule-x/prettier-config",
+  "main": "src/index.json",
+  "version": "0.1.0-alpha.12",
+  "description": "Schedule-X prettier config",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.0"
+  }
+}
