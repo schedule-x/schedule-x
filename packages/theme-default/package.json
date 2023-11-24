@@ -8,7 +8,8 @@
     "url": "https://github.com/tomosterlund"
   },
   "scripts": {
-    "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css"
+    "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css",
+    "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
   },
   "exports": {
     "./dist/index.css": {

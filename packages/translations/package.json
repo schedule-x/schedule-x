@@ -16,7 +16,8 @@
   ],
   "scripts": {
     "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
-    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix"
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "format": "prettier . --write"
   },
   "repository": {
     "type": "git",
