@@ -1,5 +1,6 @@
 {
   "name": "schedule-x",
+  "type": "module",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -10,7 +11,7 @@
     "dev": "vite",
     "serve": "vite serve",
     "preview": "vite preview",
-    "build": "npm run clean:build && rollup -c --bundleConfigAsCjs && lerna run build",
+    "build": "npm run clean:build && rollup -c && lerna run build",
     "build:e2e": "vite build --config packages/shared/src/config/e2e.vite.ts",
     "test:unit:all": "vitest run",
     "test:unit:changed": "lerna run test --since origin/main",
@@ -31,7 +32,7 @@
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
     "prepare": "husky install",
-    "seed": "npx ts-node development/seeder/seed.ts"
+    "seed": "ts-node-esm development/seeder/seed.ts"
   },
   "dependencies": {
     "@preact/signals": "1.2.1",

@@ -5,7 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { afterEach } from 'vitest'
-import { renderComponent } from './utils'
+import { getEventByText, renderComponent } from './utils'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
@@ -44,7 +44,7 @@ describe('style attribute "display" of date grid event element', () => {
     it('should have style "display: flex"', () => {
       renderComponent($app, oneDayEventId, 1)
 
-      const oneDayEvent = screen.getByText(oneDayEventTitle)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
       expect(oneDayEvent.style.display).toBe('flex')
     })
   })
@@ -52,7 +52,7 @@ describe('style attribute "display" of date grid event element', () => {
   describe('event when in drag state', () => {
     it('should have style "display: none"', async () => {
       renderComponent($app, oneDayEventId, 1)
-      const oneDayEvent = screen.getByText(oneDayEventTitle)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
 
       const mouseDownEvent = new MouseEvent('mousedown', {})
       oneDayEvent.dispatchEvent(mouseDownEvent)
@@ -75,7 +75,7 @@ describe('style attribute "display" of date grid event element', () => {
   describe('event copy when in drag state', () => {
     it('should display event copy', async () => {
       renderComponent($app, oneDayEventId, 1)
-      const oneDayEvent = screen.getByText(oneDayEventTitle)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
 
       const mouseDownEvent = new MouseEvent('mousedown', {})
       oneDayEvent.dispatchEvent(mouseDownEvent)
