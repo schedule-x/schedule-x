@@ -15,19 +15,4 @@ export default defineConfig({
     },
     useAtomics: true,
   },
-  build: {
-    rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'index.html'),
-        datePicker001: resolve(
-          __dirname,
-          'cypress/pages/date-picker/001-navigate-months.html'
-        ),
-        dragAndDrop001: resolve(
-          __dirname,
-          'cypress/pages/calendar/001-drag-and-drop.html'
-        ),
-      },
-    },
-  },
 })

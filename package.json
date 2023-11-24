@@ -1,18 +1,18 @@
 {
   "name": "schedule-x",
+  "type": "module",
   "private": true,
   "workspaces": [
     "packages/*",
     "libs/*"
   ],
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "serve": "vite serve",
     "preview": "vite preview",
     "build": "npm run clean:build && rollup -c && lerna run build",
-    "build:e2e": "vite build",
+    "build:e2e": "vite build --config packages/shared/src/config/e2e.vite.ts",
     "test:unit:all": "vitest run",
     "test:unit:changed": "lerna run test --since origin/main",
     "test:e2e": "./node_modules/.bin/cypress open --e2e --env type=actual",

@@ -1,6 +1,6 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { render } from '@testing-library/preact'
+import { render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import DateGridEvent from '../../date-grid-event'
 
@@ -19,4 +19,7 @@ export const renderComponent = (
       <DateGridEvent calendarEvent={calendarEvent} gridRow={1} />
     </AppContext.Provider>
   )
+}
+export const getEventByText = (text: string) => {
+  return screen.getByText(text).closest('.sx__date-grid-event') as HTMLElement
 }

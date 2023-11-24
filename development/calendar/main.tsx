@@ -25,7 +25,10 @@ const calendar = createCalendar(calendarElement, {
   locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
-  defaultView: viewMonthAgenda.name,
+  defaultView: viewWeek.name,
+  datePicker: {
+    selectedDate: '2023-11-09'
+  },
   // dayBoundaries: {
   //   start: '06:00',
   //   end: '03:00',
