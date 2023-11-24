@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v1.2
         with:
@@ -25,7 +28,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npx vitest run --silent
+        run: npm run test:unit:changed -- -- --silent
 
   test_mountain_view:
     name: Mountain View time
@@ -33,6 +36,9 @@ jobs:
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v1.2
         with:
@@ -44,7 +50,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npx vitest run --silent
+        run: npm run test:unit:changed -- -- --silent
 
   test_tokyo:
     name: Tokyo time
@@ -52,6 +58,9 @@ jobs:
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v1.2
         with:
@@ -63,4 +72,4 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npx vitest run --silent
+        run: npm run test:unit:changed -- -- --silent
