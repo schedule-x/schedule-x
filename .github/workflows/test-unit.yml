@@ -25,7 +25,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npx vitest run --silent
+        run: npm run test:unit:changed -- -- --silent
 
   test_mountain_view:
     name: Mountain View time
@@ -44,7 +44,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npx vitest run --silent
+        run: npm run test:unit:changed -- -- --silent
 
   test_tokyo:
     name: Tokyo time
@@ -63,4 +63,4 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npx vitest run --silent
+        run: npm run test:unit:changed -- -- --silent
