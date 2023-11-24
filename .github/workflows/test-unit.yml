@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v1.2
         with:
@@ -33,6 +36,9 @@ jobs:
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v1.2
         with:
@@ -52,6 +58,9 @@ jobs:
     steps:
       - name: Checkout ✅
         uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v1.2
         with:
