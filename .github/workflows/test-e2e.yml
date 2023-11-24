@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'packages/**'
+      - 'cypress/**'
   push:
     branches:
       - master
@@ -12,14 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: cypress-io/github-action@v4
-      - name: Build lib
+      - name: Install dependencies ⬇️
+        run: npm install
+      - name: Build lib 🔨
         run: npm run build
-      - name: Build test pages
+      - name: Build test pages 🔨
         run: npm run build:e2e
+      - uses: cypress-io/github-action@v4
         with:
           browser: chrome
-          start: npm run dev
+          start: npm run serve
           env: type=actual # for screenshot testing
           config: screenshotsFolder=cypress/snapshots/linux/actual
       - uses: actions/upload-artifact@v3

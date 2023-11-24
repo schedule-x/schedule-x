@@ -6,10 +6,6 @@
   font-family: Roboto, sans-serif;
 }
 
-body {
-  margin: 24px auto;
-}
-
 .sx__date-picker-wrapper {
   width: fit-content;
   margin: 0 auto;
@@ -17,7 +13,7 @@ body {
 
 #calendar {
   padding: 1rem;
-  height: 90vh;
+  height: 800px;
   font-family: 'Open Sans', sans-serif;
   max-width: 90%;
 }
