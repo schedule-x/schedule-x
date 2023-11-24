@@ -6,7 +6,6 @@
     "libs/*"
   ],
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "serve": "vite serve",
@@ -32,7 +31,7 @@
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease",
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease",
     "prepare": "husky install",
-    "seed": "ts-node-esm development/seeder/seed.ts"
+    "seed": "npx ts-node development/seeder/seed.ts"
   },
   "dependencies": {
     "@preact/signals": "1.2.1",

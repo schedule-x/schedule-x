@@ -61,6 +61,15 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   }
 }
 
+.sx__date-grid-event-text {
+  width: calc(100% - var(--sx-spacing-padding1) * 2);
+  left: var(--sx-spacing-padding1);
+  position: absolute;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
 .sx__date-grid-cell {
   height: clamp(20px, 1.25rem, 24px);
 }
