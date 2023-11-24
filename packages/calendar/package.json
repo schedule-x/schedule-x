@@ -7,6 +7,9 @@
     "email": "tom@oesterlund.de",
     "url": "https://github.com/tomosterlund"
   },
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx"
+  },
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",

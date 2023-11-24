@@ -47,6 +47,7 @@
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-image": "^3.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
+    "@schedule-x/eslint-config": "^0.1.0-alpha.10",
     "@testing-library/preact": "^3.2.3",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^20.8.3",

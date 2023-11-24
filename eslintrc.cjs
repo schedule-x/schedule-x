@@ -1,13 +1,7 @@
 /* eslint-env node */
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'plugin:boundaries/recommended',
-  ],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'boundaries'],
+  extends: ['@schedule-x/eslint-config', 'plugin:boundaries/recommended'],
+  plugins: ['boundaries'],
   root: true,
   settings: {
     'boundaries/elements': [
@@ -44,10 +38,8 @@ module.exports = {
     },
   },
   rules: {
-    'max-lines': ['error', 150],
-    '@typescript-eslint/no-empty-interface': 'off',
     'boundaries/element-types': [
-      1,
+      2,
       {
         default: 'disallow',
         message:
@@ -81,5 +73,4 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['**/dist/**', '**/seeded-events.ts'],
 }
