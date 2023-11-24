@@ -2,7 +2,8 @@
   "name": "schedule-x",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "libs/*"
   ],
   "version": "0.0.0",
   "type": "module",
@@ -17,8 +18,10 @@
     "test:e2e:ci": "./node_modules/.bin/cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",
     "test:e2e:record": "./node_modules/.bin/cypress run --env type=base --config screenshotsFolder=cypress/snapshots/mac/base",
     "format": "prettier . --write",
-    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
-    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "lint:all": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:all:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "lint:changed": "lerna run lint --since main",
+    "lint:changed:fix": "lerna run lint:fix --since main",
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact",
     "clean:deps": "lerna clean",
@@ -46,6 +49,7 @@
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-image": "^3.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
+    "@schedule-x/eslint-config": "^0.1.0-alpha.10",
     "@testing-library/preact": "^3.2.3",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^20.8.3",

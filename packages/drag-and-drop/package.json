@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/drag-and-drop",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.10",
   "description": "Drag & drop plugin for Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",
@@ -14,6 +14,10 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",

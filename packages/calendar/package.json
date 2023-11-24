@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/calendar",
-  "version": "0.1.0-alpha.9",
+  "version": "0.1.0-alpha.11",
   "description": "Schedule-X calendar component",
   "author": {
     "name": "Tom Österlund",
@@ -14,6 +14,10 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix"
+  },
   "peerDependencies": {
     "@preact/signals": "^1.1.5",
     "preact": "^10.19.2"

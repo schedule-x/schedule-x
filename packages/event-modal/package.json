@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/event-modal",
-  "version": "0.1.0-alpha.9",
+  "version": "0.1.0-alpha.10",
   "description": "Plugin for Schedule-X to show a modal when clicking on an event",
   "author": {
     "name": "Tom Österlund",
@@ -14,6 +14,10 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix"
+  },
   "peerDependencies": {
     "@preact/signals": "^1.1.5",
     "@schedule-x/calendar": "^0.1.0-alpha.8",
