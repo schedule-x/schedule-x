@@ -18,6 +18,7 @@
     "test:e2e:ci": "./node_modules/.bin/cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",
     "test:e2e:record": "./node_modules/.bin/cypress run --env type=base --config screenshotsFolder=cypress/snapshots/mac/base",
     "format": "prettier . --write",
+    "format:changed": "lerna run prettier --since main",
     "lint:all": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
     "lint:all:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
     "lint:changed": "lerna run lint --since main",
