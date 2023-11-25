@@ -10,8 +10,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve('index.html'),
-        datePicker001: resolve('cypress/pages/date-picker/001-navigate-months.html'),
-        dragAndDrop001: resolve('cypress/pages/calendar/001-drag-and-drop.html'),
+        datePicker001: resolve(
+          'cypress/pages/date-picker/001-navigate-months.html'
+        ),
+        dragAndDrop001: resolve(
+          'cypress/pages/calendar/001-drag-and-drop.html'
+        ),
       },
     },
   },

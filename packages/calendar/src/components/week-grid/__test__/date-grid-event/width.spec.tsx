@@ -1,4 +1,8 @@
-import { describe, expect, it, } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+import {
+  describe,
+  expect,
+  it,
+} from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup } from '@testing-library/preact'
 import { afterEach } from 'vitest'
 import { getEventByText, renderComponent } from './utils'
