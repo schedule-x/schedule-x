@@ -1,0 +1,25 @@
+{
+  "extends": "nx/presets/npm.json",
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    }
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "test:unit:changed",
+          "format:changed",
+          "lint:changed",
+          "lint:changed:fix",
+          "lint",
+          "lint:fix",
+          "format",
+          "test"
+        ]
+      }
+    }
+  }
+}
