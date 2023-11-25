@@ -3,7 +3,7 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, screen, waitFor } from '@testing-library/preact'
+import { cleanup, waitFor } from '@testing-library/preact'
 import { afterEach } from 'vitest'
 import { getEventByText, renderComponent } from './utils'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'

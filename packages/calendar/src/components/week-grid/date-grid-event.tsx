@@ -89,9 +89,7 @@ export default function DateGridEvent({
           />
         )}
 
-        <span className="sx__date-grid-event-text">
-          {calendarEvent.title}
-        </span>
+        <span className="sx__date-grid-event-text">{calendarEvent.title}</span>
 
         {hasOverflowRight && (
           <div
