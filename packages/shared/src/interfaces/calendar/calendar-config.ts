@@ -16,9 +16,16 @@ export type WeekOptions = {
   gridHeight: number
 }
 
-// Extend with field "label" when implementing calendar picker
+export type ColorDefinition = {
+  main: string
+  container: string
+  onContainer: string
+}
+
 export type CalendarType = {
-  color: string
+  colorName: string
+  lightColors?: ColorDefinition
+  darkColors?: ColorDefinition
 }
 
 export type Plugins = {

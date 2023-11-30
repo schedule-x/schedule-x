@@ -104,7 +104,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
       this._config.calendars &&
       this.calendarId in this._config.calendars
     ) {
-      return this._config.calendars[this.calendarId].color
+      return this._config.calendars[this.calendarId].colorName
     }
 
     return DEFAULT_EVENT_COLOR_NAME

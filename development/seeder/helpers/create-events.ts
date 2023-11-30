@@ -9,6 +9,7 @@ import colors from '../event-properties/color.ts'
 import descriptions from '../event-properties/descriptions.ts'
 import locations from '../event-properties/locations.ts'
 import topics from '../event-properties/topics.ts'
+import calendarIds from '../event-properties/calendar-ids.ts'
 
 export const createEvents = (monthArg: string | null = null) => {
   const events = []
@@ -39,6 +40,7 @@ export const createEvents = (monthArg: string | null = null) => {
     if (Math.random() < 0.5)
       event.location = getRandomElementOfArray(locations) as string
     if (Math.random() < 0.4) event.topic = getRandomElementOfArray(topics)
+    if (Math.random() < 0.3) event.calendarId = getRandomElementOfArray(calendarIds) as string
 
     events.push(event)
   }

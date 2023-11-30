@@ -7,7 +7,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendar } from '../factory'
 import { viewMonthGrid } from '../views/month-grid'
-import { cleanup } from '@testing-library/preact'
+import { cleanup, waitFor } from '@testing-library/preact'
 import CalendarApp from '../calendar.app'
 
 const sampleEventTime = {
@@ -18,23 +18,6 @@ const sampleEventTime = {
 describe('CalendarApp', () => {
   afterEach(() => {
     cleanup()
-  })
-
-  describe('bootstrapping the app', () => {
-    it('should render the CalendarWrapper component', () => {
-      const calendarEl = document.createElement('div')
-      document.body.appendChild(calendarEl)
-      const calendarApp = createCalendar(calendarEl, {
-        views: [viewMonthGrid],
-      })
-      expect(document.querySelector('.sx__calendar-wrapper')).toBeNull()
-
-      calendarApp.bootstrap()
-
-      expect(document.querySelector('.sx__calendar-wrapper')).toBeInstanceOf(
-        HTMLElement
-      )
-    })
   })
 
   describe('interacting with the events facade', () => {
@@ -129,6 +112,24 @@ describe('CalendarApp', () => {
       expect((calendarApp as CalendarApp).events.get(EVENT_ID)?.title).toBe(
         EXPECTED_CHANGED_TITLE
       )
+    })
+  })
+
+  describe('changing theme', () => {
+    it('should change the theme to dark', async () => {
+      const calendarEl = document.createElement('div')
+      document.body.appendChild(calendarEl)
+      const calendarApp = createCalendar(calendarEl, {
+        views: [viewMonthGrid],
+      })
+      calendarApp.bootstrap()
+      expect(document.querySelector('.is-dark')).toBeFalsy()
+
+      calendarApp.setTheme('dark')
+
+      await waitFor(() => {
+        expect(document.querySelector('.is-dark')).toBeTruthy()
+      })
     })
   })
 })

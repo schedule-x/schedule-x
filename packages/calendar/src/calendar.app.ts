@@ -17,4 +17,8 @@ export default class CalendarApp {
   bootstrap(): void {
     render(createElement(CalendarWrapper, { $app: this.$app }), this.el)
   }
+
+  setTheme(theme: 'light' | 'dark'): void {
+    this.$app.calendarState.isDark.value = theme === 'dark'
+  }
 }
