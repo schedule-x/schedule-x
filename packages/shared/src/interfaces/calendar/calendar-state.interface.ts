@@ -6,6 +6,7 @@ export default interface CalendarState {
   isCalendarSmall: Signal<boolean | undefined>
   view: Signal<ViewName>
   range: Signal<DateRange | null>
+  isDark: Signal<boolean>
 
   handleDateSelection: (date: string) => void
 }

@@ -25,21 +25,67 @@ const calendar = createCalendar(calendarElement, {
   locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
-  defaultView: viewWeek.name,
+  defaultView: viewMonthGrid.name,
   datePicker: {
-    selectedDate: '2023-11-09'
+    selectedDate: '2023-11-01'
   },
   // dayBoundaries: {
   //   start: '06:00',
   //   end: '03:00',
   // },
-  // isDark: true,
+  isDark: true,
   calendars: {
     personal: {
-      color: 'primary',
+      colorName: 'personal',
+      lightColors: {
+        main: '#f9d71c',
+        container: '#fff5aa',
+        onContainer: '#594800',
+      },
+      darkColors: {
+        main: '#fff5c0',
+        onContainer: '#fff5de',
+        container: '#a29742',
+      }
     },
     work: {
-      color: 'tertiary',
+      colorName: 'work',
+      lightColors: {
+        main: '#f91c45',
+        container: '#ffd2dc',
+        onContainer: '#59000d',
+      },
+      darkColors: {
+        main: '#ffc0cc',
+        onContainer: '#ffdee6',
+        container: '#a24258',
+      }
+    },
+    leisure: {
+      colorName: 'leisure',
+      lightColors: {
+        main: '#1cf9b0',
+        container: '#dafff0',
+        onContainer: '#004d3d',
+      },
+      darkColors: {
+        main: '#c0fff5',
+        onContainer: '#e6fff5',
+        container: '#42a297',
+      }
+    },
+    school: {
+      colorName: 'school',
+      lightColors: {
+        main: '#1c7df9',
+        container: '#d2e7ff',
+        onContainer: '#002859',
+      },
+      darkColors: {
+        main: '#c0dfff',
+        onContainer: '#dee6ff',
+        container: '#426aa2',
+      }
     },
   },
   plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
@@ -47,3 +93,11 @@ const calendar = createCalendar(calendarElement, {
 })
 
 calendar.bootstrap()
+
+let darkToggle = 0;
+
+const themeToggle = document.getElementById('theme-toggle') as HTMLInputElement
+themeToggle.addEventListener('click', () => {
+  calendar.setTheme(darkToggle === 0 ? 'light' : 'dark')
+  darkToggle === 0 ? darkToggle++ : darkToggle--
+})
