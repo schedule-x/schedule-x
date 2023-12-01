@@ -22,7 +22,9 @@
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@schedule-x/calendar": "^0.1.0-alpha.13",
+    "@schedule-x/theme-default": "^0.1.0-alpha.13"
   },
   "devDependencies": {
     "@types/node": "18.11.10",
