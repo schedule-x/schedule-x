@@ -40,7 +40,8 @@ export const createEvents = (monthArg: string | null = null) => {
     if (Math.random() < 0.5)
       event.location = getRandomElementOfArray(locations) as string
     if (Math.random() < 0.4) event.topic = getRandomElementOfArray(topics)
-    if (Math.random() < 0.3) event.calendarId = getRandomElementOfArray(calendarIds) as string
+    if (Math.random() < 0.3)
+      event.calendarId = getRandomElementOfArray(calendarIds) as string
 
     events.push(event)
   }

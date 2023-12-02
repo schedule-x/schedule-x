@@ -8,6 +8,8 @@ export default [
   'work',
   'work',
   'leisure',
+  'leisure',
+  'leisure',
   'personal',
-  'personal'
+  'personal',
 ]
