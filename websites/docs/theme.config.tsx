@@ -1,6 +1,7 @@
 import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import Logo from './components/theme/logo'
+import { useRouter } from 'next/router'
 
 const config: DocsThemeConfig = {
   logo: Logo,
@@ -13,6 +14,14 @@ const config: DocsThemeConfig = {
   docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
   footer: {
     text: `© 2023-present Tom Österlund`,
+  },
+  useNextSeoProps() {
+    const { asPath } = useRouter()
+    if (asPath !== '/') {
+      return {
+        titleTemplate: '%s – Schedule-X',
+      }
+    }
   },
 }
 

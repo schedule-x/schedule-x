@@ -14,6 +14,7 @@ import { javascript } from '@codemirror/lang-javascript'
 import { githubDarkInit, githubLightInit } from '@uiw/codemirror-theme-github'
 import { calendarDemoCode } from './__data__/calendar-code'
 import HeadingWithIcon from '../partials/heading-with-icon/heading-with-icon'
+import styles from './demo.module.scss'
 
 const checkIfDark = () => {
   if (typeof window === 'undefined') return false
@@ -115,19 +116,19 @@ export default function CalendarDemoPage() {
   }, [isDark])
 
   return (
-    <div className={'page-wrapper calendar-demo'}>
+    <div className={['page-wrapper', styles.demoPageWrapper].join(' ')}>
       <HeadingWithIcon icon={'🗓️'} text={'Calendar demo'} />
 
       <div id="calendar" className="calendar-wrapper" />
 
-      <h2>Code</h2>
+      <h2 className={styles.demoSubheading}>Code</h2>
 
-      <p className="calendar-demo-text">
+      <p className={styles.calendarDemoText}>
         The demo above is based on the code below.
       </p>
 
       <CodeMirror
-        className={'calendar-demo-code'}
+        className={styles.calendarDemoCode}
         value={calendarDemoCode}
         height="800px"
         extensions={[javascript({ jsx: true })]}
