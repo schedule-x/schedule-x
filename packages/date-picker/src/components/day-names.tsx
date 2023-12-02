@@ -12,9 +12,9 @@ export default function DayNames() {
   const dayNames = getOneLetterOrShortDayNames(aWeek, $app.config.locale)
 
   return (
-    <div class="sx__date-picker__day-names">
+    <div className="sx__date-picker__day-names">
       {dayNames.map((dayName) => (
-        <span data-testid="day-name" class="sx__date-picker__day-name">
+        <span data-testid="day-name" className="sx__date-picker__day-name">
           {dayName}
         </span>
       ))}

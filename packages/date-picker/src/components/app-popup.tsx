@@ -28,7 +28,7 @@ export default function AppPopup() {
 
   return (
     <>
-      <div data-testid="date-picker-popup" class={popupClasses.join(' ')}>
+      <div data-testid="date-picker-popup" className={popupClasses.join(' ')}>
         {datePickerView === DatePickerView.MONTH_DAYS ? (
           <MonthView
             seatYearsView={() => setDatePickerView(DatePickerView.YEARS)}

@@ -33,7 +33,7 @@ export default function MonthView({ seatYearsView }: props) {
 
   return (
     <>
-      <div data-testid={MONTH_VIEW} class="sx__date-picker__month-view">
+      <div data-testid={MONTH_VIEW} className="sx__date-picker__month-view">
         <MonthViewHeader setYearsView={seatYearsView} />
 
         <DayNames />

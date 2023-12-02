@@ -14,7 +14,7 @@ export default function AppWrapper({ $app }: props) {
 
   return (
     <>
-      <div class={classes.join(' ')}>
+      <div className={classes.join(' ')}>
         <AppContext.Provider value={$app}>
           <AppInput />
 

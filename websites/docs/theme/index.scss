@@ -1,5 +1,11 @@
 @use '../theme/mixins' as mixins;
 
+.page-wrapper {
+  max-width: 1000px;
+  min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
+  margin: 0 auto;
+}
+
 .logo-lg {
   @include mixins.smaller-screens {
     display: none;

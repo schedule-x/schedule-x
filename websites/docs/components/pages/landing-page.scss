@@ -2,10 +2,7 @@
 
 .landingPage {
   position: relative;
-  margin: 0 auto;
   width: 100%;
-  max-width: 1000px;
-  min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
 
   @include mixins.smaller-screens {
     padding: 0 1.5rem;
@@ -95,6 +92,7 @@
 
 .buttonPrimary {
   background: linear-gradient(to right, #6750a4 50%, #8c6fb7 100%);
+  border: 2px solid transparent;
   color: #fff;
 }
 
