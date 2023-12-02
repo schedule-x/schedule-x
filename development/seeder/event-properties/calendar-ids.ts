@@ -11,5 +11,5 @@ export default [
   'leisure',
   'leisure',
   'personal',
-  'personal'
+  'personal',
 ]

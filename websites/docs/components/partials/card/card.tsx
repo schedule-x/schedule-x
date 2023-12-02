@@ -7,19 +7,21 @@ type props = {
 }
 
 export default function Card(props: props) {
-  return <>
-    <div className={'landing-page-card'}>
-      <Image
-        className={'landing-page-card-icon'}
-        src={props.icon}
-        width={50}
-        height={50}
-        alt={props.title}
-      />
+  return (
+    <>
+      <div className={'landing-page-card'}>
+        <Image
+          className={'landing-page-card-icon'}
+          src={props.icon}
+          width={50}
+          height={50}
+          alt={props.title}
+        />
 
-      <h2>{props.title}</h2>
+        <h2>{props.title}</h2>
 
-      <p>{props.description}</p>
-    </div>
-  </>
+        <p>{props.description}</p>
+      </div>
+    </>
+  )
 }

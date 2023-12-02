@@ -5,7 +5,7 @@
   border-radius: 1rem;
   background: #f6f6f7;
   transition: all 0.2s ease;
-  color: rgba(60, 60, 67);
+  color: rgb(60 60 67);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,7 @@
     margin-bottom: 0.5rem;
 
     .dark & {
-      color: rgba(255, 255, 245, 0.86);
+      color: rgb(255 255 245 / 86%);
     }
   }
 
@@ -37,7 +37,7 @@
     text-align: center;
 
     .dark & {
-      color: rgba(235, 235, 245, .6);
+      color: rgb(235 235 245 / 60%);
     }
   }
 }

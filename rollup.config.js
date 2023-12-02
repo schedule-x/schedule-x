@@ -8,7 +8,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 import image from '@rollup/plugin-image'
-import ts from 'rollup-plugin-ts';
+import ts from 'rollup-plugin-ts'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -73,8 +73,8 @@ async function build(commandLineArgs) {
       plugins: [
         ...basePlugins,
         ts({
-          tsconfig: `${basePath}/tsconfig.json`
-        })
+          tsconfig: `${basePath}/tsconfig.json`,
+        }),
       ],
       external: ['preact', 'preact/hooks', '@preact/signals', 'preact/src/jsx'],
     })

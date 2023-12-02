@@ -46,7 +46,7 @@ const calendar = createCalendar(calendarElement, {
         main: '#fff5c0',
         onContainer: '#fff5de',
         container: '#a29742',
-      }
+      },
     },
     work: {
       colorName: 'work',
@@ -59,7 +59,7 @@ const calendar = createCalendar(calendarElement, {
         main: '#ffc0cc',
         onContainer: '#ffdee6',
         container: '#a24258',
-      }
+      },
     },
     leisure: {
       colorName: 'leisure',
@@ -72,7 +72,7 @@ const calendar = createCalendar(calendarElement, {
         main: '#c0fff5',
         onContainer: '#e6fff5',
         container: '#42a297',
-      }
+      },
     },
     school: {
       colorName: 'school',
@@ -85,7 +85,7 @@ const calendar = createCalendar(calendarElement, {
         main: '#c0dfff',
         onContainer: '#dee6ff',
         container: '#426aa2',
-      }
+      },
     },
   },
   plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
@@ -94,7 +94,7 @@ const calendar = createCalendar(calendarElement, {
 
 calendar.bootstrap()
 
-let darkToggle = 0;
+let darkToggle = 0
 
 const themeToggle = document.getElementById('theme-toggle') as HTMLInputElement
 themeToggle.addEventListener('click', () => {

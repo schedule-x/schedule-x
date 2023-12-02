@@ -1,15 +1,15 @@
 .dark .logo-light {
-    display: none;
+  display: none;
 }
 
 .dark .logo-dark {
-    display: block;
+  display: block;
 }
 
 .light .logo-light {
-    display: block;
+  display: block;
 }
 
 .light .logo-dark {
-    display: none;
+  display: none;
 }
