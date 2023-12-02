@@ -1,17 +1,17 @@
 @mixin smaller-screens {
-  @media (max-width: 999px) {
+  @media (width <= 999px) {
     @content;
   }
 }
 
 @mixin mobile-screens {
-  @media (max-width: 600px) {
+  @media (width <= 600px) {
     @content;
   }
 }
 
 @mixin large-screens {
-  @media (min-width: 1000px) {
+  @media (width >= 1000px) {
     @content;
   }
 }
