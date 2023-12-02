@@ -13,6 +13,7 @@ import CodeMirror from '@uiw/react-codemirror'
 import { javascript } from '@codemirror/lang-javascript'
 import { githubDarkInit, githubLightInit } from '@uiw/codemirror-theme-github'
 import { calendarDemoCode } from './__data__/calendar-code'
+import HeadingWithIcon from '../partials/heading-with-icon/heading-with-icon'
 
 const checkIfDark = () => {
   if (typeof window === 'undefined') return false
@@ -87,7 +88,7 @@ export default function CalendarDemoPage() {
       ],
       calendars: {
         leisure: {
-          colorName: 'school',
+          colorName: 'leisure',
           lightColors: {
             main: '#1c7df9',
             container: '#d2e7ff',
@@ -107,9 +108,7 @@ export default function CalendarDemoPage() {
 
   return (
     <div className={'page-wrapper calendar-demo'}>
-      <h1>
-        <span className={'calendar-icon'}>🗓️</span> Calendar demo
-      </h1>
+      <HeadingWithIcon icon={'🗓️'} text={'Calendar demo'} />
 
       <div id="calendar" className="calendar-wrapper" />
 

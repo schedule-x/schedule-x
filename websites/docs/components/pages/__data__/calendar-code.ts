@@ -52,7 +52,7 @@ const calendar = createCalendar(calendarEl, {
   ],
   calendars: {
     leisure: {
-      colorName: 'school',
+      colorName: 'leisure',
       lightColors: {
         main: '#1c7df9',
         container: '#d2e7ff',
