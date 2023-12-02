@@ -1,4 +1,4 @@
-import '../theme/index.css'
+import '../theme/index.scss'
 import '../components/pages/landing-page.scss'
 import '../components/partials/card/card.scss'
 

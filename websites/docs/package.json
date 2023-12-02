@@ -1,11 +1,13 @@
 {
-  "name": "nextra-docs-template",
+  "name": "@schedule-x/docs",
+  "private": "true",
   "version": "0.0.1",
   "description": "Nextra docs template",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",

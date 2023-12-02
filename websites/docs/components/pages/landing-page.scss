@@ -1,9 +1,15 @@
+@use '../../theme/mixins' as mixins;
+
 .landingPage {
   position: relative;
   margin: 0 auto;
   width: 100%;
   max-width: 1000px;
   min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
+
+  @include mixins.smaller-screens {
+    padding: 0 1.5rem;
+  }
 }
 
 .landingPageBG {
@@ -26,6 +32,11 @@
   font-weight: 700;
   margin: 1rem 0;
   margin-top: 2rem;
+
+  @include mixins.smaller-screens {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+  }
 }
 
 .headingGradient {
@@ -45,6 +56,14 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 4rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+  }
+
+  @include mixins.mobile-screens {
+    flex-direction: column;
+  }
 }
 
 .landingPageAction {
@@ -56,11 +75,22 @@
   font-weight: 600;
   transition: all 0.2s ease;
   box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+
+  @include mixins.smaller-screens {
+    font-size: 1rem;
+  }
+
+  @include mixins.mobile-screens {
+    width: 100%;
+    text-align: center;
+  }
 }
 
-.landingPageAction:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+@media (hover: hover) {
+  .landingPageAction:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgb(0 0 0 / 10%);
+  }
 }
 
 .buttonPrimary {
@@ -108,4 +138,8 @@
   gap: 2rem;
   flex-wrap: wrap;
   margin-bottom: 4rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+  }
 }
