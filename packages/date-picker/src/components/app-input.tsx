@@ -55,19 +55,19 @@ export default function AppInput() {
 
   return (
     <>
-      <div class={wrapperClasses.join(' ')}>
-        <label class="sx__date-input-label">{$app.translate('Date')}</label>
+      <div className={wrapperClasses.join(' ')}>
+        <label className="sx__date-input-label">{$app.translate('Date')}</label>
 
         <input
           value={$app.datePickerState.inputDisplayedValue.value}
           data-testid="date-picker-input"
-          class="sx__date-input"
+          className="sx__date-input"
           onClick={handleClick}
           onKeyUp={handleKeyUp}
           type="text"
         />
 
-        <img class="sx__date-input-chevron" src={chevronIcon} alt="" />
+        <img className="sx__date-input-chevron" src={chevronIcon} alt="" />
       </div>
     </>
   )

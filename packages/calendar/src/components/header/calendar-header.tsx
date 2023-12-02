@@ -18,7 +18,7 @@ export default function CalendarHeader() {
 
   return (
     <header className={'sx__calendar-header'}>
-      <div class={'sx__calendar-header-content'}>
+      <div className={'sx__calendar-header-content'}>
         <TodayButton />
 
         <RangeHeading />

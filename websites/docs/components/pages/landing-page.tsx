@@ -6,11 +6,12 @@ import Card from '../partials/card/card'
 import darkModeIcon from '../../assets/icons/dark-mode.svg'
 import dragAndDropIcon from '../../assets/icons/drag-drop.svg'
 import customizeIcon from '../../assets/icons/customize.svg'
+import Link from 'next/link'
 
 export default function LandingPage() {
   return (
     <>
-      <div className={'landingPage'}>
+      <div className={'landingPage page-wrapper'}>
         {/*<div className={'landingPageBG'}></div>*/}
 
         <h1>
@@ -19,13 +20,17 @@ export default function LandingPage() {
         </h1>
 
         <div className={'landingPageActions'}>
-          <button className={'landingPageAction buttonPrimary'}>
-            Calendar demo
-          </button>
+          <Link href={'/demos/calendar'}>
+            <button className={'landingPageAction buttonPrimary'}>
+              Calendar demo
+            </button>
+          </Link>
 
-          <button className={'landingPageAction buttonOutlined'}>
-            Date picker demo
-          </button>
+          <Link href={'/demos/date-picker'}>
+            <button className={'landingPageAction buttonOutlined'}>
+              Date picker demo
+            </button>
+          </Link>
         </div>
 
         <Image

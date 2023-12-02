@@ -20,13 +20,16 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.1",
+    "@schedule-x/calendar": "^0.1.0-alpha.13",
+    "@schedule-x/theme-default": "^0.1.0-alpha.13",
+    "@uiw/codemirror-theme-github": "^4.21.21",
+    "@uiw/react-codemirror": "^4.21.21",
     "next": "^13.0.6",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@schedule-x/calendar": "^0.1.0-alpha.13",
-    "@schedule-x/theme-default": "^0.1.0-alpha.13"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.11.10",

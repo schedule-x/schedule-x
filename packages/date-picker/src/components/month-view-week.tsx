@@ -48,11 +48,11 @@ export default function MonthViewWeek({ week }: props) {
 
   return (
     <>
-      <div data-testid={DATE_PICKER_WEEK} class="sx__date-picker__week">
+      <div data-testid={DATE_PICKER_WEEK} className="sx__date-picker__week">
         {weekDays.map((weekDay) => (
           <button
             disabled={!isDateSelectable(weekDay.day)}
-            class={weekDay.classes.join(' ')}
+            className={weekDay.classes.join(' ')}
             onClick={() => selectDate(weekDay.day)}
           >
             {weekDay.day.getDate()}
