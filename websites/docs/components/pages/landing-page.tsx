@@ -1,6 +1,7 @@
 import '@schedule-x/theme-default/dist/index.css'
 import Image from 'next/image'
 import calendarPng from '../../assets/calendar-month.png'
+import calendarDarkPng from '../../assets/calendar-month-dark.png'
 import Card from '../partials/card/card'
 import darkModeIcon from '../../assets/icons/dark-mode.svg'
 import dragAndDropIcon from '../../assets/icons/drag-drop.svg'
@@ -29,8 +30,16 @@ export default function LandingPage() {
       </div>
 
       <Image
-        className={'landingPageImage'}
+        className={'landingPageImage landingPageImage--light'}
         src={calendarPng}
+        width={900}
+        height={500}
+        alt="Schedule X"
+      />
+
+      <Image
+        className={'landingPageImage landingPageImage--dark'}
+        src={calendarDarkPng}
         width={900}
         height={500}
         alt="Schedule X"

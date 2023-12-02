@@ -6,6 +6,9 @@
   background: #f6f6f7;
   transition: all 0.2s ease;
   color: rgba(60, 60, 67);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .dark & {
     background: #252529;
@@ -31,6 +34,7 @@
   }
 
   p {
+    text-align: center;
 
     .dark & {
       color: rgba(235, 235, 245, .6);

@@ -19,7 +19,7 @@
     z-index: -1;
     background-image: url('../../assets/pattern_plus.png');
     background-repeat: repeat;
-    opacity: 0.1;
+    opacity: 0.05;
 }
 
 .landingPage h1 {
@@ -35,6 +35,12 @@
     text-shadow: 0 0 90px rgba(0, 0, 0, 0.3);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
+    .dark & {
+        background: linear-gradient(to left, #deccfa 0%, #6750a4 100%);
+        text-shadow: 0 0 90px rgba(0, 0, 0, 0.3);
+        -webkit-background-clip: text;
+    }
 }
 
 .calendarWrapper {
@@ -83,6 +89,26 @@
 
 .landingPageImage {
     margin-bottom: 4rem;
+}
+
+.light {
+    .landingPageImage--light {
+        display: block;
+    }
+
+    .landingPageImage--dark {
+        display: none;
+    }
+}
+
+.dark {
+    .landingPageImage--light {
+        display: none;
+    }
+
+    .landingPageImage--dark {
+        display: block;
+    }
 }
 
 .landingPageCards {
