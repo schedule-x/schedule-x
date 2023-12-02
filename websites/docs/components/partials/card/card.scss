@@ -1,0 +1,39 @@
+.landing-page-card {
+  width: 300px;
+  height: 250px;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: #f6f6f7;
+  transition: all 0.2s ease;
+  color: rgba(60, 60, 67);
+
+  .dark & {
+    background: #252529;
+  }
+
+  .landing-page-card-icon {
+    margin-bottom: 1rem;
+
+    .dark & {
+      filter: invert(1);
+    }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 0.5rem;
+
+    .dark & {
+      color: rgba(255, 255, 245, 0.86);
+    }
+  }
+
+  p {
+
+    .dark & {
+      color: rgba(235, 235, 245, .6);
+    }
+  }
+}
