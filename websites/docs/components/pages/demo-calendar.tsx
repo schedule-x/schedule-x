@@ -14,7 +14,6 @@ import { javascript } from '@codemirror/lang-javascript'
 import { githubDarkInit, githubLightInit } from '@uiw/codemirror-theme-github'
 import { calendarDemoCode } from './__data__/calendar-code'
 import HeadingWithIcon from '../partials/heading-with-icon/heading-with-icon'
-import CalendarApp from '@schedule-x/calendar/src/calendar.app'
 
 const checkIfDark = () => {
   if (typeof window === 'undefined') return false
@@ -36,7 +35,7 @@ export default function CalendarDemoPage() {
     observer.observe(htmlEl, { attributes: true })
   }, [])
 
-  const [cal, setCal] = useState<CalendarApp>(null)
+  const [cal, setCal] = useState<any>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
