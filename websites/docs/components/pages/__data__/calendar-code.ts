@@ -4,7 +4,6 @@ import { createEventModalPlugin } from '@schedule-x/event-modal'
 import '@schedule-x/theme-default/dist/index.css'
 
 const calendarEl = document.getElementById('calendar') as HTMLElement
-if (!calendarEl) return
 
 const calendar = createCalendar(calendarEl, {
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
