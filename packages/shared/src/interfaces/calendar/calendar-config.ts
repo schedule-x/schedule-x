@@ -64,4 +64,5 @@ export interface CalendarConfigExternal
   dayBoundaries?: DayBoundariesExternal
   plugins?: PluginBase[]
   views: [View, ...View[]]
+  selectedDate?: string
 }
