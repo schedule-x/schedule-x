@@ -15,26 +15,10 @@ import { githubDarkInit, githubLightInit } from '@uiw/codemirror-theme-github'
 import { calendarDemoCode } from './__data__/calendar-code'
 import HeadingWithIcon from '../partials/heading-with-icon/heading-with-icon'
 import styles from './demo.module.scss'
-
-const checkIfDark = () => {
-  if (typeof window === 'undefined') return false
-
-  const htmlEl = document.getElementsByTagName('html')[0]
-  return htmlEl.classList.contains('dark')
-}
+import { useTheme } from 'nextra-theme-docs'
 
 export default function CalendarDemoPage() {
-  const [isDark, setIsDark] = useState(checkIfDark())
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    const htmlEl = document.getElementsByTagName('html')[0]
-    const observer = new MutationObserver(() => {
-      setIsDark(checkIfDark())
-    })
-    observer.observe(htmlEl, { attributes: true })
-  }, [])
+  const { resolvedTheme } = useTheme()
 
   const [cal, setCal] = useState<any>(null)
 
@@ -48,7 +32,7 @@ export default function CalendarDemoPage() {
       datePicker: {
         selectedDate: '2023-12-01',
       },
-      isDark,
+      isDark: resolvedTheme === 'dark',
       defaultView: viewWeek.name,
       events: [
         {
@@ -112,8 +96,8 @@ export default function CalendarDemoPage() {
   useEffect(() => {
     if (!cal) return
 
-    cal.setTheme(isDark ? 'dark' : 'light')
-  }, [isDark])
+    cal.setTheme(resolvedTheme === 'dark' ? 'dark' : 'light')
+  }, [resolvedTheme])
 
   return (
     <div className={['page-wrapper', styles.demoPageWrapper].join(' ')}>
@@ -133,7 +117,7 @@ export default function CalendarDemoPage() {
         height="800px"
         extensions={[javascript({ jsx: true })]}
         onChange={() => null}
-        theme={isDark ? githubDarkInit() : githubLightInit()}
+        theme={resolvedTheme === 'dark' ? githubDarkInit() : githubLightInit()}
       />
     </div>
   )

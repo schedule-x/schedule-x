@@ -10,5 +10,10 @@
   "docs": {
     "title": "Docs",
     "type": "page"
+  },
+  "demos": {
+    "display": "hidden",
+    "title": "Demos",
+    "type": "page"
   }
 }

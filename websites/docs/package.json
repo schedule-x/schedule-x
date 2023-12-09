@@ -24,6 +24,8 @@
     "@schedule-x/calendar": "^0.1.0-alpha.14",
     "@schedule-x/date-picker": "^0.1.0-alpha.14",
     "@schedule-x/theme-default": "^0.1.0-alpha.14",
+    "@schedule-x/drag-and-drop": "^0.1.0-alpha.14",
+    "@schedule-x/event-modal": "^0.1.0-alpha.14",
     "@uiw/codemirror-theme-github": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "next": "^13.0.6",
