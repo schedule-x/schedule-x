@@ -25,5 +25,6 @@
     "url": "https://github.com/schedule-x/schedule-x",
     "directory": "packages/drag-and-drop"
   },
+  "homepage": "https://schedule-x.dev",
   "gitHead": "e405a5a6c2a474bab8bf51bb39619098412024cb"
 }
