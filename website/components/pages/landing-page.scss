@@ -1,0 +1,141 @@
+@use '../../theme/mixins' as mixins;
+
+.landingPage {
+  position: relative;
+  width: 100%;
+
+  @include mixins.smaller-screens {
+    padding: 0 1.5rem;
+  }
+}
+
+.landingPageBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  background-repeat: repeat;
+  opacity: 0.05;
+}
+
+.landingPage h1 {
+  max-width: 700px;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  margin-top: 2rem;
+
+  @include mixins.smaller-screens {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+  }
+}
+
+.headingGradient {
+  background: linear-gradient(to right, #deccfa 0%, #6750a4 100%);
+  text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  .dark & {
+    background: linear-gradient(to left, #deccfa 0%, #6750a4 100%);
+    text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+    background-clip: text;
+  }
+}
+
+.landingPageActions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 4rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+  }
+
+  @include mixins.mobile-screens {
+    flex-direction: column;
+  }
+}
+
+.landingPageAction {
+  font-size: 1.125rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+
+  @include mixins.smaller-screens {
+    font-size: 1rem;
+  }
+
+  @include mixins.mobile-screens {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (hover: hover) {
+  .landingPageAction:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.buttonPrimary {
+  background: linear-gradient(to right, #6750a4 50%, #8c6fb7 100%);
+  color: #fff;
+}
+
+.buttonOutlined {
+  background: transparent;
+  color: #6750a4;
+  box-shadow: inset 0 0 0 2px #6750a4;
+
+  .dark & {
+    color: #d0bcff;
+    border-color: #d0bcff;
+    box-shadow: inset 0 0 0 2px #d0bcff;
+  }
+}
+
+.landingPageImage {
+  margin-bottom: 4rem;
+}
+
+.light {
+  .landingPageImage--light {
+    display: block;
+  }
+
+  .landingPageImage--dark {
+    display: none;
+  }
+}
+
+.dark {
+  .landingPageImage--light {
+    display: none;
+  }
+
+  .landingPageImage--dark {
+    display: block;
+  }
+}
+
+.landingPageCards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+  }
+}

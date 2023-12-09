@@ -1,0 +1,24 @@
+{
+  "index": {
+    "title": "Getting started"
+  },
+  "configuration": {
+    "title": "Configuration"
+  },
+  "views": {
+    "title": "Views"
+  },
+  "events": {
+    "title": "Events"
+  },
+  "plugins": {
+    "title": "Plugins"
+  },
+  "custom-views": {
+    "title": "Custom views"
+  },
+  "demo": {
+    "title": "Demo",
+    "href": "/demos/calendar"
+  }
+}

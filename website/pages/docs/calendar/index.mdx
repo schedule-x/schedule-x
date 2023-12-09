@@ -1,0 +1,53 @@
+# Getting Started
+
+## 1. Install
+
+We will start this tutorial by downloading the calendar and its styles. Please note, that using the
+styles is completely optional, and you could theoretically create your own
+theme. If doing so, however, please pin your dependency to a fixed version to avoid risking unwanted breaking changes.
+
+```bash
+npm i @schedule-x/calendar @schedule-x/theme-default
+```
+
+## 2. Code
+
+After importing our dependencies, we can now move on to create an instance of the calendar using the
+`createCalendar` function. This function takes two arguments:
+
+1. The DOM element that will contain the calendar
+2. The configuration object
+
+```ts
+import { createCalendar, viewMonthGrid } from '@schedule-x/calendar'
+import '@schedule-x/theme-default/dist/index.css'
+
+const calendar = createCalendar(document.getElementById('calendar'), {
+  views: [viewMonthGrid],
+  events: [
+    {
+      id: 1,
+      title: 'Coffee with John',
+      time: {
+        start: '2023-12-04 10:05',
+        end: '2023-12-04 10:35',
+      },
+    },
+  ],
+})
+
+calendar.bootstrap()
+```
+
+### Configuration object
+
+As a bare minimum, the configuration object needs two things:
+
+1. A list of views. Currently available views are `viewMonthGrid`,
+   `viewWeek`, `viewDay` and `viewMonthAgenda`.
+2. A list of events.
+
+### Initialize the Calendar
+
+Finally, we call the `bootstrap` method on the calendar. This will now
+render the calendar in the DOM element we specified earlier.

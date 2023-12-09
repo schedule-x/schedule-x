@@ -1,0 +1,19 @@
+{
+  "index": {
+    "display": "hidden",
+    "theme": {
+      "layout": "raw",
+      "sidebar": false,
+      "toc": true
+    }
+  },
+  "docs": {
+    "title": "Docs",
+    "type": "page"
+  },
+  "demos": {
+    "display": "hidden",
+    "title": "Demos",
+    "type": "page"
+  }
+}

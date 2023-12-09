@@ -1,0 +1,138 @@
+# Events
+
+At the center of any calendar, lie the events that are planned into it. An
+event can have the following properties:
+
+## Event Properties
+
+| Property      | Type                                  | Description                                 | Required |
+| ------------- | ------------------------------------- | ------------------------------------------- | -------- |
+| `id`          | `string` or `number`                  | A unique identifier for the event.          | Yes      |
+| `time`        | See ["Event time"](#event-time) below | The time of the event.                      | Yes      |
+| `title`       | `string`                              | The title of the event.                     | No       |
+| `description` | `string`                              | A description of the event.                 | No       |
+| `location`    | `string`                              | The location of the event.                  | No       |
+| `people`      | `string[]`                            | Names of the participants                   | No       |
+| `calendarId`  | `string`                              | id of the calendar. See "calendars" section | No       |
+
+## Other properties
+
+Since you may want to add additional properties to your events, that carry meaning in the business logic of your
+application, you are free to do so. The calendar will simply ignore the existence of them and return them back to
+you upon interacting with the events.
+
+## Event time
+
+The calendar internally distinguishes between a few types of events. The most basic distinction between them, is
+whether they are **timed events** or **full day events**.
+
+1. **Timed events** - Events that have a start and end time such as:
+
+```js
+const timedEvent = {
+  id: 1,
+  time: {
+    start: '2025-10-01 20:15',
+    end: '2025-10-01 21:15',
+  },
+}
+```
+
+2. **Full day events** - Events that span the entire day such as:
+
+```js
+const fullDayEvent = {
+  id: 2,
+  time: {
+    start: '2025-10-01',
+    end: '2025-10-01',
+  },
+}
+```
+
+Furthermore, both of these types then have the possibility to be either a **single day event** or a **multi day event**.
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+  Though a planned future feature, the calendar does not yet support{' '}
+  <b>time zones</b>. All times are assumed to be in the same time zone. If this
+  feature is important to you, feel free to open an issue on the GitHub
+  repository to help prioritize this feature.
+</Callout>
+
+## Interacting with events
+
+The events that you pass to the calendar are considered immutable by the calendar. The calendar instead creates its
+own internal versions of the events. With these, you can communicate through the following APIs:
+
+### `events.get`
+
+Returns a single event, based on the id that you pass to it as its single parameter.
+
+### `events.getAll`
+
+Returns all events that are currently in the calendar.
+
+### `events.add`
+
+Is called with one parameter: the new event to be added. The event must have a unique id.
+
+### `events.update`
+
+Updates an event that already exists in the calendar. Takes one parameter, which is the entire event you want to update.
+
+### `events.remove`
+
+Removes an event from the calendar. Takes one parameter, which is the id of the event you want to remove.
+
+## Example
+
+```ts
+import { createCalendar, viewMonthGrid } from '@schedule-x/calendar'
+import '@schedule-x/theme-default/dist/index.css'
+
+const calendar = createCalendar(document.getElementById('calendar'), {
+  // ... other config
+  events: [
+    {
+      id: 1,
+      title: 'Coffee with John',
+      time: {
+        start: '2023-11-04 10:05',
+        end: '2023-11-04 10:35',
+      },
+    },
+    {
+      id: 2,
+      title: 'Ski trip',
+      time: {
+        start: '2023-12-04',
+        end: '2023-12-06',
+      },
+    },
+  ],
+})
+
+calendar.events.get(1) // returns the event with id 1
+calendar.events.getAll() // returns all events
+calendar.events.add({
+  id: 3,
+  title: 'New event',
+  time: {
+    start: '2023-12-04',
+    end: '2023-12-06',
+  },
+}) // adds a new event
+calendar.events.update({
+  id: 1,
+  title: 'Updated event',
+  time: {
+    start: '2023-12-04',
+    end: '2023-12-06',
+  },
+}) // updates the event with id 1
+calendar.events.remove(1) // removes the event with id 1
+
+calendar.bootstrap()
+```

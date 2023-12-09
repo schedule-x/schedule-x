@@ -1,0 +1,44 @@
+# Plugins
+
+The calendar can be extended with additional features through plugins. Currently, there are two plugins available:
+
+## 1. Drag and Drop
+
+### Install
+
+```bash
+npm i @schedule-x/drag-and-drop
+```
+
+### Usage
+
+```js
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+
+const calendar = createCalendar(document.getElementById('calendar'), {
+  // ...other configuration
+  plugins: [createDragAndDropPlugin()],
+})
+```
+
+## 2. Event modal
+
+If your events have more information than just their time and a short title, chances are it would be helpful to
+display information about the events in a modal.
+
+### Install
+
+```bash
+npm i @schedule-x/event-modal
+```
+
+### Usage
+
+```js
+import { createEventModalPlugin } from '@schedule-x/event-modal'
+
+const calendar = createCalendar(document.getElementById('calendar'), {
+  // ...other configuration
+  plugins: [createEventModalPlugin()],
+})
+```

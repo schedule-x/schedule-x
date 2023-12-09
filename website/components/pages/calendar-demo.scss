@@ -1,0 +1,9 @@
+@use '../../theme/mixins' as mixins;
+
+.calendar-wrapper {
+  height: 700px;
+
+  @include mixins.mobile-screens {
+    height: 600px;
+  }
+}
