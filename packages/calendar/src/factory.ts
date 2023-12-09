@@ -19,7 +19,7 @@ export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const datePickerConfig = createDatePickerConfig(config, dateSelectionCallback)
   const datePickerState = createDatePickerState(
     datePickerConfig,
-    config.datePicker?.selectedDate
+    config.selectedDate || config.datePicker?.selectedDate
   )
   const calendarEvents = createCalendarEventsImpl(
     config.events || [],
