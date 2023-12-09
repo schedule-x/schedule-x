@@ -1,4 +1,4 @@
-@use '../../theme/mixins' as mixins;
+@use 'mixins' as mixins;
 
 .landingPage {
   position: relative;
@@ -18,7 +18,7 @@
   object-fit: cover;
   object-position: center;
   z-index: -1;
-  background-image: url('../../assets/pattern_plus.png');
+  background-image: url('pattern_plus.png');
   background-repeat: repeat;
   opacity: 0.05;
 }
