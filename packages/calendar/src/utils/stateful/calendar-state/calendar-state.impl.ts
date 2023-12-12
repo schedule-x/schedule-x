@@ -1,5 +1,5 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
-import { effect, signal } from '@preact/signals'
+import { effect, Signal, signal } from '@preact/signals'
 import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -18,9 +18,19 @@ export const createCalendarState = (
   )
   const range = signal<DateRange | null>(null)
 
+  let wasInitialized = false
+
+  const callOnRangeUpdate = (_range: Signal<DateRange | null>) => {
+    if (!wasInitialized) return (wasInitialized = true)
+
+    if (calendarConfig.callbacks.onRangeUpdate && _range.value) {
+      calendarConfig.callbacks.onRangeUpdate(_range.value)
+    }
+  }
+
   effect(() => {
     if (calendarConfig.callbacks.onRangeUpdate && range.value) {
-      calendarConfig.callbacks.onRangeUpdate(range.value)
+      callOnRangeUpdate(range)
     }
   })
 

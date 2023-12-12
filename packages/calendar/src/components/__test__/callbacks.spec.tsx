@@ -32,15 +32,9 @@ describe('CalendarWrapper', () => {
       setNewDateAndPressEnter('2024-01-01')
 
       await waitFor(() => {
-        expect(onRangeUpdate).toHaveBeenCalledTimes(2)
+        expect(onRangeUpdate).toHaveBeenCalledTimes(1)
 
-        // Call upon initialization
-        expect(onRangeUpdate).toHaveBeenNthCalledWith(1, {
-          start: '2023-11-27 00:00',
-          end: '2023-12-31 23:59',
-        })
-
-        expect(onRangeUpdate).lastCalledWith({
+        expect(onRangeUpdate).toHaveBeenCalledWith({
           start: '2024-01-01 00:00',
           end: '2024-02-04 23:59',
         })
@@ -66,15 +60,9 @@ describe('CalendarWrapper', () => {
       })
 
       await waitFor(() => {
-        expect(onRangeUpdate).toHaveBeenCalledTimes(2)
+        expect(onRangeUpdate).toHaveBeenCalledTimes(1)
 
-        // Call upon initialization
-        expect(onRangeUpdate).toHaveBeenNthCalledWith(1, {
-          start: '2023-11-27 00:00',
-          end: '2023-12-03 23:59',
-        })
-
-        expect(onRangeUpdate).lastCalledWith({
+        expect(onRangeUpdate).toHaveBeenCalledWith({
           start: '2023-11-27 00:00',
           end: '2023-12-31 23:59',
         })
