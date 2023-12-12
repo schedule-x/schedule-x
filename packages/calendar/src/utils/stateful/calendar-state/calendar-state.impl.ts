@@ -21,6 +21,8 @@ export const createCalendarState = (
   let wasInitialized = false
 
   const callOnRangeUpdate = (_range: Signal<DateRange | null>) => {
+    // On the first call of this function (upon initializing the calendar), we don't want to call the callback.
+    // This is dirty. If a better way is found, please change this.
     if (!wasInitialized) return (wasInitialized = true)
 
     if (calendarConfig.callbacks.onRangeUpdate && _range.value) {
