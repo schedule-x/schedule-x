@@ -20,9 +20,19 @@ export default function ForwardBackwardNavigation() {
 
   return (
     <>
-      <button onClick={() => navigate('backwards')}>{'<'}</button>
+      <button
+        className="sx__chevron-wrapper"
+        onClick={() => navigate('backwards')}
+      >
+        <i className="sx__chevron sx__chevron--previous"></i>
+      </button>
 
-      <button onClick={() => navigate('forwards')}>{'>'}</button>
+      <button
+        className="sx__chevron-wrapper"
+        onClick={() => navigate('forwards')}
+      >
+        <i className="sx__chevron sx__chevron--next"></i>
+      </button>
     </>
   )
 }
