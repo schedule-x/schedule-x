@@ -24,43 +24,37 @@
 }
 
 .sx__slide-left {
-  animation: slide-left 0.2s ease-out;
+  animation: slide-left 0.3s ease-out;
 }
 
 @keyframes slide-left {
   0% {
-    transform: translateX(10%);
-    opacity: 0.5;
-  }
-
-  75% {
-    transform: translateX(2%);
-    opacity: 0.6;
+    transform: translateX(8%);
+    filter: blur(0.25rem);
+    opacity: 0.1;
   }
 
   100% {
     transform: translateX(0);
+    filter: blur(0);
     opacity: 1;
   }
 }
 
 .sx__slide-right {
-  animation: slide-right 0.2s ease-out;
+  animation: slide-right 0.3s ease-out;
 }
 
 @keyframes slide-right {
   0% {
-    transform: translateX(-10%);
-    opacity: 0.5;
-  }
-
-  75% {
-    transform: translateX(-2%);
-    opacity: 0.6;
+    transform: translateX(-8%);
+    filter: blur(0.25rem);
+    opacity: 0.1;
   }
 
   100% {
     transform: translateX(0);
+    filter: blur(0);
     opacity: 1;
   }
 }

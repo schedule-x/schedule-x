@@ -56,7 +56,7 @@ export default function CalendarWrapper({ $app }: props) {
 
     setTimeout(() => {
       setTransitionClass('')
-    }, 200)
+    }, 300)
     setPreviousRangeStart($app.calendarState.range.value?.start || '')
   }, [$app.calendarState.range.value])
 
