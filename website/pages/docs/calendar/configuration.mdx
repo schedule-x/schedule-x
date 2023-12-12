@@ -1,11 +1,75 @@
-[//]: # '# Calendar configuration'
-[//]: #
-[//]: # 'This page describes a few of the options available for configuring the calendar. Some options, however, require more'
-[//]: # 'in-depth understanding and are therefore documented in separate pages.'
-[//]: #
-[//]: # '## Options in the calendar config'
-[//]: #
+# Calendar configuration
 
-import PageStubCallout from '../../../components/partials/callouts/page-stub-callout'
+This page describes a few of the options available for configuring the calendar. Some options, however, require more
+in-depth understanding and are therefore documented in separate pages.
 
-<PageStubCallout />
+## Options in the calendar config
+
+```ts
+import { createCalendar, viewMonthGrid } from '@schedule-x/calendar'
+import '@schedule-x/theme-default/dist/index.css'
+
+const config = {
+  // ... views, events and other options
+
+  /**
+  * Set the language. Currently supports: 'en-US', 'en-GB', 'de-DE', 'zh-CN' and 'sv-SE'
+  * For support of further languages, please open a PR, adding your translations under the folder:
+  * packages/translations/src/locales/xx-XX
+  *
+  * Defaults to 'en-US'
+  * */
+  locale: 'zh-CN',
+
+  /**
+  * Set which day is to be considered the starting day of the week. 0 = Sunday, 1 = Monday, (...other days) 6 = Saturday
+  * Defaults to 1 (Monday)
+  * */
+  firstDayOfWeek: 0,
+
+  /**
+  * The preferred view to display when the calendar is first rendered.
+  * all views that you import have a "name" property, which helps you identify them.
+  * Defaults to the first view in the "views" array
+  * */
+  defaultView: viewMonthGrid.name,
+
+  /**
+  * The default date to display when the calendar is first rendered. Only accepts YYYY-MM-DD format.
+  * Defaults to the current date
+  * */
+  selectedDate: '2023-12-24',
+
+  /**
+  * Render the calendar in dark mode.
+  * Defaults to false
+  * */
+  isDark: true,
+
+  /**
+  * Callbacks for events that occur in the calendar
+  * */
+  callbacks: {
+    /**
+    * Is called when:
+    * 1. Selecting a date in the date picker
+    * 2. Selecting a new view
+    * */
+    onRangeUpdate(range) {
+      console.log('new calendar range start date', range.start)
+      console.log('new calendar range end date', range.end)
+    },
+
+    /**
+    * Is called when an event is updated through drag and drop
+    * */
+    onEventUpdate(updatedEvent) {
+      console.log('onEventUpdate', updatedEvent)
+    },
+  }
+}
+
+const calendar = createCalendar(document.getElementById('calendar'), config)
+
+calendar.bootstrap()
+```
