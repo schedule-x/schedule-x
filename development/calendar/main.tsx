@@ -37,7 +37,11 @@ const calendar = createCalendar(calendarElement, {
   callbacks: {
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
-    }
+    },
+
+    onEventUpdate(event) {
+      console.log('onEventUpdate', event)
+    },
   },
   calendars: {
     personal: {
