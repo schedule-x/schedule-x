@@ -4,10 +4,12 @@ import {
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { cleanup, render, waitFor } from '@testing-library/preact'
+import { cleanup, render, screen, waitFor } from '@testing-library/preact'
 import CalendarWrapper from '../calendar-wrapper'
 import { __createAppWithViews__ } from '../../utils/stateless/testing/__create-app-with-views__'
-import { afterEach } from 'vitest'
+import { afterEach, vi, vitest } from 'vitest'
+import { setNewDateAndPressEnter } from '@schedule-x/date-picker/src/components/__test__/app-input/utils'
+import { openViewSelection } from '../../utils/stateless/testing/page-objects/view-selection'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<CalendarWrapper $app={$app} />)
@@ -81,6 +83,48 @@ describe('CalendarWrapper', () => {
             .querySelector(CALENDAR_WRAPPER_SELECTOR)
             ?.classList.contains('is-dark')
         ).toBe(false)
+      })
+    })
+  })
+
+  describe('selecting a date in the date picker', () => {
+    it('should call the callback onRangeUpdate', async () => {
+      const onRangeUpdate = vi.fn()
+      const $app = __createAppWithViews__({
+        callbacks: {
+          onRangeUpdate,
+        },
+        selectedDate: '2023-12-01',
+      })
+      renderComponent($app)
+
+      setNewDateAndPressEnter('2024-01-01')
+
+      await waitFor(() => {
+        expect(onRangeUpdate).toHaveBeenCalled()
+      })
+    })
+  })
+
+  describe('changing from week to month view', () => {
+    it('should call the callback onRangeUpdate', async () => {
+      const onRangeUpdate = vi.fn()
+      const $app = __createAppWithViews__({
+        callbacks: {
+          onRangeUpdate,
+        },
+        selectedDate: '2023-12-01',
+        defaultView: 'week',
+      })
+      renderComponent($app)
+
+      openViewSelection()
+      await waitFor(() => {
+        screen.getByText('Month').click() // select month view
+      })
+
+      await waitFor(() => {
+        expect(onRangeUpdate).toHaveBeenCalled()
       })
     })
   })

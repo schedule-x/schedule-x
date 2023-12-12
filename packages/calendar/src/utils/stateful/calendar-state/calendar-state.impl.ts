@@ -18,6 +18,12 @@ export const createCalendarState = (
   )
   const range = signal<DateRange | null>(null)
 
+  effect(() => {
+    if (calendarConfig.callbacks.onRangeUpdate && range.value) {
+      calendarConfig.callbacks.onRangeUpdate(range.value)
+    }
+  })
+
   const handleDateSelection = (date: string) => {
     const selectedView = calendarConfig.views.find(
       (availableView) => availableView.name === view.value

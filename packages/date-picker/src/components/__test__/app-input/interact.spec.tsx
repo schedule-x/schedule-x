@@ -10,7 +10,7 @@ import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picke
 import {
   renderComponent,
   getInputElement,
-  setNewInputValueAndPressEnter,
+  setNewDateAndPressEnter,
 } from './utils'
 import { createAppSingleton } from '../../../factory'
 
@@ -50,7 +50,7 @@ describe('date picker input', () => {
     const $app = createAppSingleton({ selectedDate: '2021-01-01' })
     renderComponent($app)
 
-    setNewInputValueAndPressEnter('1/2/2021')
+    setNewDateAndPressEnter('1/2/2021')
 
     expect($app.datePickerState.selectedDate.value).toBe('2021-01-02')
   })
