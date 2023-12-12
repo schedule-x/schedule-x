@@ -34,6 +34,11 @@ const calendar = createCalendar(calendarElement, {
   //   end: '03:00',
   // },
   isDark: true,
+  callbacks: {
+    onRangeUpdate(range) {
+      console.log('onRangeUpdate', range)
+    }
+  },
   calendars: {
     personal: {
       colorName: 'personal',

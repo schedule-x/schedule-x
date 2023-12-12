@@ -1,17 +1,12 @@
 import {
   describe,
-  it,
   expect,
+  it,
+  afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { cleanup, render, waitFor } from '@testing-library/preact'
-import CalendarWrapper from '../calendar-wrapper'
+import { cleanup, waitFor } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../utils/stateless/testing/__create-app-with-views__'
-import { afterEach } from 'vitest'
-
-const renderComponent = ($app: CalendarAppSingleton) => {
-  render(<CalendarWrapper $app={$app} />)
-}
+import { renderComponent } from './utils'
 
 const CALENDAR_WRAPPER_SELECTOR = '.sx__calendar-wrapper'
 const SMALL_CALENDAR_CLASS = 'sx__is-calendar-small'

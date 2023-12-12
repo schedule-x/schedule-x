@@ -17,7 +17,7 @@ export const getInputWrapperElement = () => {
 
 export const getInputElement = () => screen.getByTestId('date-picker-input')
 
-export const setNewInputValueAndPressEnter = (value: string) => {
+export const setNewDateAndPressEnter = (value: string) => {
   const inputElement = getInputElement()
   fireEvent.input(inputElement, { target: { value } })
   fireEvent.keyUp(inputElement, { key: 'Enter' })

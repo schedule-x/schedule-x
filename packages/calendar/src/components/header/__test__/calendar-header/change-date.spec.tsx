@@ -5,7 +5,7 @@ import {
   beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { renderComponent } from './utils'
-import { setNewInputValueAndPressEnter } from '@schedule-x/date-picker/src/components/__test__/app-input/utils'
+import { setNewDateAndPressEnter } from '@schedule-x/date-picker/src/components/__test__/app-input/utils'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
@@ -24,7 +24,7 @@ describe('CalendarHeader', () => {
       const expectedRangeHeadingAfterChange = 'March 2022'
       expect(screen.queryByText(expectedRangeHeadingAfterChange)).toBeFalsy()
 
-      setNewInputValueAndPressEnter('2022-03-10')
+      setNewDateAndPressEnter('2022-03-10')
 
       expect(screen.queryByText(expectedRangeHeadingAfterChange)).toBeTruthy()
     })
