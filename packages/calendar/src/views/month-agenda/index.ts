@@ -2,6 +2,7 @@ import { createPreactView } from '../../utils/stateful/preact-view/preact-view'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { setRangeForMonth } from '../../utils/stateless/time/range/set-range'
 import { MonthAgendaWrapper } from './components/month-agenda-wrapper'
+import { addMonths } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 export const viewMonthAgenda = createPreactView({
   name: InternalViewName.MonthAgenda,
@@ -10,4 +11,6 @@ export const viewMonthAgenda = createPreactView({
   ComponentFn: MonthAgendaWrapper,
   hasSmallScreenCompat: true,
   hasWideScreenCompat: false,
+  backwardForwardFn: addMonths,
+  backwardForwardUnits: 1,
 })
