@@ -22,7 +22,9 @@ export default function CalendarHeader() {
       <div className={'sx__calendar-header-content'}>
         <TodayButton />
 
-        <ForwardBackwardNavigation />
+        {!$app.calendarState.isCalendarSmall.value && (
+          <ForwardBackwardNavigation />
+        )}
 
         <RangeHeading />
       </div>
