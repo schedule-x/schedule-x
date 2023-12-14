@@ -46,6 +46,22 @@ export default function CalendarWrapper({ $app }: props) {
   }
   useEffect(renderSelectedView, [$app.calendarState.view.value])
 
+  const [previousRangeStart, setPreviousRangeStart] = useState('')
+  const [transitionClass, setTransitionClass] = useState('')
+
+  useEffect(() => {
+    const newRangeStartIsLaterThanPrevious =
+      ($app.calendarState.range.value?.start || '') > previousRangeStart
+    setTransitionClass(
+      newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
+    )
+
+    setTimeout(() => {
+      setTransitionClass('')
+    }, 300) // CORRELATION ID: 3
+    setPreviousRangeStart($app.calendarState.range.value?.start || '')
+  }, [$app.calendarState.range.value])
+
   return (
     <>
       <div className={wrapperClasses.join(' ')} id={calendarId}>
@@ -53,7 +69,10 @@ export default function CalendarWrapper({ $app }: props) {
           <AppContext.Provider value={$app}>
             <CalendarHeader />
 
-            <div className="sx__view-container" id={viewContainerId}></div>
+            <div
+              className={['sx__view-container', transitionClass].join(' ')}
+              id={viewContainerId}
+            ></div>
 
             {$app.config.plugins.eventModal &&
               $app.config.plugins.eventModal.calendarEvent.value && (

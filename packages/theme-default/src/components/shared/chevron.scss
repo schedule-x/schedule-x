@@ -1,0 +1,41 @@
+.sx__chevron-wrapper {
+  position: relative;
+  border-radius: 50%;
+  min-height: 48px;
+  min-width: 48px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  font-size: 0;
+
+  &:active {
+    background-color: var(--sx-internal-color-gray-ripple-background);
+  }
+
+  &:hover {
+    background-color: var(--sx-color-surface-dim);
+
+    .is-dark & {
+      background-color: var(--sx-color-surface-container-high);
+    }
+  }
+
+  .sx__chevron {
+    position: absolute;
+    top: 50%;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-width: 0.2rem 0.2rem 0 0;
+    border-style: solid;
+    border-color: var(--sx-internal-color-text);
+  }
+}
+
+.sx__chevron--previous {
+  left: calc(50% + 0.125rem);
+  transform: translate(-50%, -50%) rotate(225deg);
+}
+
+.sx__chevron--next {
+  left: calc(50% - 0.125rem);
+  transform: translate(-50%, -50%) rotate(45deg);
+}

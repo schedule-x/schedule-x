@@ -34,7 +34,7 @@ const calendar = createCalendar(calendarElement, {
   //   start: '06:00',
   //   end: '03:00',
   // },
-  isDark: true,
+  // isDark: true,
   callbacks: {
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)

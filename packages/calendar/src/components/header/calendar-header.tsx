@@ -5,6 +5,7 @@ import DatePickerAppSingletonBuilder from '@schedule-x/shared/src/utils/stateful
 import RangeHeading from './range-heading'
 import TodayButton from './today-button'
 import ViewSelection from './view-selection'
+import ForwardBackwardNavigation from './forward-backward-navigation'
 
 export default function CalendarHeader() {
   const $app = useContext(AppContext)
@@ -20,6 +21,10 @@ export default function CalendarHeader() {
     <header className={'sx__calendar-header'}>
       <div className={'sx__calendar-header-content'}>
         <TodayButton />
+
+        {!$app.calendarState.isCalendarSmall.value && (
+          <ForwardBackwardNavigation />
+        )}
 
         <RangeHeading />
       </div>

@@ -13,6 +13,7 @@
   display: flex;
   flex-flow: column;
   background-color: var(--sx-color-background);
+  overflow: hidden;
 }
 
 .sx__view-container {
@@ -20,4 +21,40 @@
   flex: 1;
   overflow-y: auto;
   scroll-behavior: smooth;
+}
+
+.sx__slide-left {
+  animation: slide-left 0.3s ease-out; // CORRELATION ID: 3
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(8%);
+    filter: blur(0.25rem);
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: translateX(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.sx__slide-right {
+  animation: slide-right 0.3s ease-out; // CORRELATION ID: 3
+}
+
+@keyframes slide-right {
+  0% {
+    transform: translateX(-8%);
+    filter: blur(0.25rem);
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: translateX(0);
+    filter: blur(0);
+    opacity: 1;
+  }
 }
