@@ -1,10 +1,10 @@
 class DatePickerPageObject {
   goToNextMonth() {
-    cy.get('.sx__date-picker__chevron--next').click()
+    cy.get('.sx__date-picker__month-view-header.sx__chevron--next').click()
   }
 
   goToPreviousMonth() {
-    cy.get('.sx__date-picker__chevron--previous').click()
+    cy.get('.sx__date-picker__month-view-header.sx__chevron--previous').click()
   }
 
   toggleOpenState() {

@@ -9,6 +9,7 @@ import {
   getFirstDayOfNextMonth,
   getFirstDayOPreviousMonth,
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
+import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 
 type props = {
   setYearsView: () => void
@@ -60,28 +61,24 @@ export default function MonthViewHeader({ setYearsView }: props) {
   return (
     <>
       <header className="sx__date-picker__month-view-header">
-        <button
-          className="sx__date-picker__chevron-wrapper sx__ripple"
+        <Chevron
+          direction={'previous'}
           onClick={() => setPreviousMonth()}
-        >
-          <i className="sx__date-picker__chevron sx__date-picker__chevron--previous">
-            {$app.translate('Previous month')}
-          </i>
-        </button>
+          buttonText={$app.translate('Previous month')}
+        />
+
         <button
           className="sx__date-picker__month-view-header__month-year"
           onClick={(event) => handleOpenYearsView(event)}
         >
           {selectedDateMonthName + ' ' + datePickerYear}
         </button>
-        <button
-          className="sx__date-picker__chevron-wrapper sx__ripple"
+
+        <Chevron
+          direction={'next'}
           onClick={() => setNextMonth()}
-        >
-          <i className="sx__date-picker__chevron sx__date-picker__chevron--next">
-            {$app.translate('Next month')}
-          </i>
-        </button>
+          buttonText={$app.translate('Next month')}
+        />
       </header>
     </>
   )

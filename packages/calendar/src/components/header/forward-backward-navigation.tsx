@@ -1,5 +1,6 @@
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
+import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
@@ -20,19 +21,9 @@ export default function ForwardBackwardNavigation() {
 
   return (
     <>
-      <button
-        className="sx__chevron-wrapper"
-        onClick={() => navigate('backwards')}
-      >
-        <i className="sx__chevron sx__chevron--previous"></i>
-      </button>
+      <Chevron onClick={() => navigate('backwards')} direction={'previous'} />
 
-      <button
-        className="sx__chevron-wrapper"
-        onClick={() => navigate('forwards')}
-      >
-        <i className="sx__chevron sx__chevron--next"></i>
-      </button>
+      <Chevron onClick={() => navigate('forwards')} direction={'next'} />
     </>
   )
 }
