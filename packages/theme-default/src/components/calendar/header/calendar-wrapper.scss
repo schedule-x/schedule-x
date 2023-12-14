@@ -24,7 +24,7 @@
 }
 
 .sx__slide-left {
-  animation: slide-left 0.3s ease-out;
+  animation: slide-left 0.3s ease-out; // CORRELATION ID: 3
 }
 
 @keyframes slide-left {
@@ -42,7 +42,7 @@
 }
 
 .sx__slide-right {
-  animation: slide-right 0.3s ease-out;
+  animation: slide-right 0.3s ease-out; // CORRELATION ID: 3
 }
 
 @keyframes slide-right {

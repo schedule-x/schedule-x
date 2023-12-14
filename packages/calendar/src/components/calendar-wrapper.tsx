@@ -50,13 +50,15 @@ export default function CalendarWrapper({ $app }: props) {
   const [transitionClass, setTransitionClass] = useState('')
 
   useEffect(() => {
-    const isLater =
+    const newRangeStartIsLaterThanPrevious =
       ($app.calendarState.range.value?.start || '') > previousRangeStart
-    setTransitionClass(isLater ? 'sx__slide-left' : 'sx__slide-right')
+    setTransitionClass(
+      newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
+    )
 
     setTimeout(() => {
       setTransitionClass('')
-    }, 300)
+    }, 300) // CORRELATION ID: 3
     setPreviousRangeStart($app.calendarState.range.value?.start || '')
   }, [$app.calendarState.range.value])
 

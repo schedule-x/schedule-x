@@ -21,17 +21,19 @@ export default function ForwardBackwardNavigation() {
 
   return (
     <>
-      <Chevron
-        onClick={() => navigate('backwards')}
-        direction={'previous'}
-        buttonText={'Previous'}
-      />
+      <div>
+        <Chevron
+          onClick={() => navigate('backwards')}
+          direction={'previous'}
+          buttonText={'Previous'}
+        />
 
-      <Chevron
-        onClick={() => navigate('forwards')}
-        direction={'next'}
-        buttonText={'Next'}
-      />
+        <Chevron
+          onClick={() => navigate('forwards')}
+          direction={'next'}
+          buttonText={'Next'}
+        />
+      </div>
     </>
   )
 }

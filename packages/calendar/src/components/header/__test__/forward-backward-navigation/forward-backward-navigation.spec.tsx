@@ -1,14 +1,23 @@
 import {
   afterEach,
   describe,
-  it,
   expect,
+  it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { vi } from 'vitest'
 import { cleanup } from '@testing-library/preact'
 import { clickNext, clickPrevious, renderComponent } from './utils'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+
+const getApp = (onRangeUpdate: () => void, defaultView: InternalViewName) =>
+  __createAppWithViews__({
+    defaultView,
+    callbacks: {
+      onRangeUpdate: onRangeUpdate,
+    },
+    selectedDate: '2023-01-01',
+  })
 
 describe('ForwardBackwardNavigation', () => {
   afterEach(() => {
@@ -18,13 +27,7 @@ describe('ForwardBackwardNavigation', () => {
   describe('when in month view', () => {
     it('should navigate forwards', () => {
       const onRangeUpdate = vi.fn()
-      const $app = __createAppWithViews__({
-        defaultView: InternalViewName.MonthGrid,
-        callbacks: {
-          onRangeUpdate: onRangeUpdate,
-        },
-        selectedDate: '2023-01-01',
-      })
+      const $app = getApp(onRangeUpdate, InternalViewName.MonthGrid)
       renderComponent($app)
 
       clickNext()
@@ -38,13 +41,7 @@ describe('ForwardBackwardNavigation', () => {
 
     it('should navigate backwards', () => {
       const onRangeUpdate = vi.fn()
-      const $app = __createAppWithViews__({
-        defaultView: InternalViewName.MonthGrid,
-        callbacks: {
-          onRangeUpdate: onRangeUpdate,
-        },
-        selectedDate: '2023-01-01',
-      })
+      const $app = getApp(onRangeUpdate, InternalViewName.MonthGrid)
       renderComponent($app)
 
       clickPrevious()
@@ -60,13 +57,7 @@ describe('ForwardBackwardNavigation', () => {
   describe('when in week view', () => {
     it('should navigate forwards', () => {
       const onRangeUpdate = vi.fn()
-      const $app = __createAppWithViews__({
-        defaultView: InternalViewName.Week,
-        callbacks: {
-          onRangeUpdate: onRangeUpdate,
-        },
-        selectedDate: '2023-01-01',
-      })
+      const $app = getApp(onRangeUpdate, InternalViewName.Week)
       renderComponent($app)
 
       clickNext()
@@ -80,13 +71,7 @@ describe('ForwardBackwardNavigation', () => {
 
     it('should navigate backwards', () => {
       const onRangeUpdate = vi.fn()
-      const $app = __createAppWithViews__({
-        defaultView: InternalViewName.Week,
-        callbacks: {
-          onRangeUpdate: onRangeUpdate,
-        },
-        selectedDate: '2023-01-01',
-      })
+      const $app = getApp(onRangeUpdate, InternalViewName.Week)
       renderComponent($app)
 
       clickPrevious()
@@ -102,13 +87,7 @@ describe('ForwardBackwardNavigation', () => {
   describe('when in day view', () => {
     it('should navigate forwards', () => {
       const onRangeUpdate = vi.fn()
-      const $app = __createAppWithViews__({
-        defaultView: InternalViewName.Day,
-        callbacks: {
-          onRangeUpdate: onRangeUpdate,
-        },
-        selectedDate: '2023-01-01',
-      })
+      const $app = getApp(onRangeUpdate, InternalViewName.Day)
       renderComponent($app)
 
       clickNext()
@@ -122,13 +101,7 @@ describe('ForwardBackwardNavigation', () => {
 
     it('should navigate backwards', () => {
       const onRangeUpdate = vi.fn()
-      const $app = __createAppWithViews__({
-        defaultView: InternalViewName.Day,
-        callbacks: {
-          onRangeUpdate: onRangeUpdate,
-        },
-        selectedDate: '2023-01-01',
-      })
+      const $app = getApp(onRangeUpdate, InternalViewName.Day)
       renderComponent($app)
 
       clickPrevious()
