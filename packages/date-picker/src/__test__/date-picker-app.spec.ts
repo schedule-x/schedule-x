@@ -18,8 +18,8 @@ const createApp = (
     listeners: listeners || {},
   })
   const el = document.createElement('div')
-  const app = new underTest($app, el)
-  app.render()
+  const app = new underTest($app)
+  app.render(el)
   return app
 }
 
