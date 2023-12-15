@@ -1,4 +1,4 @@
-import { createWeekViewPageObject } from '../../page-objects/week-view.page-object.ts'
+import { createWeekViewPageObject } from '../../../libs/e2e-testing/src/page-objects/week-view.page-object.ts'
 import { cypressPageUrls } from '../../pages/urls.ts'
 
 describe('Dragging events', () => {

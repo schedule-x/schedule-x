@@ -1,0 +1,17 @@
+{
+  "name": "@schedule-x/e2e-testing",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Shared E2E testing utils for Schedule-X",
+  "version": "0.2.0",
+  "module": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "format": "prettier . --write"
+  }
+}

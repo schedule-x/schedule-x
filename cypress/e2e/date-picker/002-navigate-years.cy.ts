@@ -1,5 +1,5 @@
 import { cypressPageUrls } from '../../pages/urls.ts'
-import { createDatePickerPageObject } from '../../page-objects/date-picker.page-object.ts'
+import { createDatePickerPageObject } from '../../../libs/e2e-testing/src/page-objects/date-picker.page-object.ts'
 
 describe('Navigating years in the date picker', () => {
   const datePicker = createDatePickerPageObject()
