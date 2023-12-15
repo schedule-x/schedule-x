@@ -1,8 +1,7 @@
 import { createDatePicker } from '@schedule-x/date-picker'
 import '@schedule-x/theme-default/dist/date-picker.css'
 
-const el = document.getElementById('app')
-const datePicker = createDatePicker(el as HTMLElement, {
+const datePicker = createDatePicker({
   selectedDate: '2020-01-01',
 })
-datePicker.bootstrap()
+datePicker.render(document.getElementById('app') as HTMLElement)

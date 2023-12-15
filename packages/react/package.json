@@ -1,18 +1,19 @@
 {
-  "name": "@schedule-x/calendar",
+  "name": "@schedule-x/react",
   "version": "0.1.0",
-  "description": "Schedule-X calendar component",
+  "description": "Schedule-X react components",
+  "keywords": [
+    "calendar",
+    "event",
+    "full-sized",
+    "dark-mode",
+    "react"
+  ],
   "author": {
     "name": "Tom Österlund",
     "email": "tom@oesterlund.de",
     "url": "https://github.com/tomosterlund"
   },
-  "keywords": [
-    "calendar",
-    "event",
-    "dark-mode",
-    "internationalization"
-  ],
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
@@ -23,17 +24,17 @@
   "scripts": {
     "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
     "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
-    "format": "prettier . --write",
-    "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
+    "format": "prettier . --write"
   },
   "peerDependencies": {
-    "@preact/signals": "^1.1.5",
-    "preact": "^10.19.2"
+    "@schedule-x/calendar": "^0.1.0",
+    "react": "^16.7.0 || ^17 || ^18",
+    "react-dom": "^16.7.0 || ^17 || ^18"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
-    "directory": "packages/calendar"
+    "directory": "packages/react"
   },
   "homepage": "https://schedule-x.dev",
   "gitHead": "e405a5a6c2a474bab8bf51bb39619098412024cb"

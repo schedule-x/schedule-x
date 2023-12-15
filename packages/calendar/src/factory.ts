@@ -36,11 +36,6 @@ export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
     .build()
 }
 
-export const createCalendar = (
-  el: HTMLElement,
-  config: CalendarConfigExternal
-) => {
-  const $app = createCalendarAppSingleton(config)
-
-  return new CalendarApp(el, $app)
+export const createCalendar = (config: CalendarConfigExternal) => {
+  return new CalendarApp(createCalendarAppSingleton(config))
 }

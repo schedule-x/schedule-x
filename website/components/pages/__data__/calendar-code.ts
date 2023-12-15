@@ -3,9 +3,7 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import '@schedule-x/theme-default/dist/index.css'
 
-const calendarEl = document.getElementById('calendar') as HTMLElement
-
-const calendar = createCalendar(calendarEl, {
+const calendar = createCalendar({
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
   datePicker: {
     selectedDate: '2023-12-01'
@@ -66,4 +64,7 @@ const calendar = createCalendar(calendarEl, {
   },
   plugins: [createDragAndDropPlugin(), createEventModalPlugin()]
 })
-calendar.bootstrap()`
+
+const calendarEl = document.getElementById('calendar') as HTMLElement
+
+calendar.render(calendarEl)`

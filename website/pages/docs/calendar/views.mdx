@@ -38,10 +38,10 @@ import {
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
-const calendar = createCalendar(document.getElementById('calendar'), {
+const calendar = createCalendar({
   views: [viewMonthGrid, viewDay, viewMonthAgenda, viewWeek],
   events: [],
 })
 
-calendar.bootstrap()
+calendar.render(document.getElementById('calendar'))
 ```

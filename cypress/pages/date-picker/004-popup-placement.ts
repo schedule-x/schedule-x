@@ -8,15 +8,18 @@ const datePickerBottomRight = document.querySelector(
   '.date-picker-bottom-right'
 )
 
-createDatePicker(datePickerTopLeft as HTMLElement, {
+createDatePicker({
   placement: 'bottom-start',
-}).bootstrap()
-createDatePicker(datePickerTopRight as HTMLElement, {
+}).render(datePickerTopLeft as HTMLElement)
+
+createDatePicker({
   placement: 'bottom-end',
-}).bootstrap()
-createDatePicker(datePickerBottomLeft as HTMLElement, {
+}).render(datePickerTopRight as HTMLElement)
+
+createDatePicker({
   placement: 'top-start',
-}).bootstrap()
-createDatePicker(datePickerBottomRight as HTMLElement, {
+}).render(datePickerBottomLeft as HTMLElement)
+
+createDatePicker({
   placement: 'top-end',
-}).bootstrap()
+}).render(datePickerBottomRight as HTMLElement)

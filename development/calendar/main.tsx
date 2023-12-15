@@ -20,7 +20,7 @@ import { seededEvents } from '../data/seeded-events.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
-const calendar = createCalendar(calendarElement, {
+const calendar = createCalendar({
   firstDayOfWeek: 0,
   // locale: 'de-DE',
   locale: 'en-US',
@@ -102,7 +102,7 @@ const calendar = createCalendar(calendarElement, {
   events: seededEvents,
 })
 
-calendar.bootstrap()
+calendar.render(calendarElement)
 
 let darkToggle = 0
 

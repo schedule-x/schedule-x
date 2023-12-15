@@ -9,4 +9,4 @@ const datePicker = createDatePicker(datePickerEl, {
     }
   },
 })
-datePicker.bootstrap()`
+datePicker.render(datePickerEl)`

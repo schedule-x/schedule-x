@@ -25,9 +25,10 @@ describe('CalendarApp', () => {
     let calendarApp: CalendarApp
 
     beforeEach(() => {
-      calendarApp = createCalendar(calendarEl, {
+      calendarApp = createCalendar({
         views: [viewMonthGrid],
       })
+      calendarApp.render(calendarEl)
     })
 
     it('should add an event and then access it over getAll()', () => {
@@ -119,10 +120,10 @@ describe('CalendarApp', () => {
     it('should change the theme to dark', async () => {
       const calendarEl = document.createElement('div')
       document.body.appendChild(calendarEl)
-      const calendarApp = createCalendar(calendarEl, {
+      const calendarApp = createCalendar({
         views: [viewMonthGrid],
       })
-      calendarApp.bootstrap()
+      calendarApp.render(calendarEl)
       expect(document.querySelector('.is-dark')).toBeFalsy()
 
       calendarApp.setTheme('dark')

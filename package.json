@@ -36,7 +36,7 @@
     "seed": "ts-node-esm development/seeder/seed.ts"
   },
   "dependencies": {
-    "@preact/signals": "1.2.1",
+    "@preact/signals": "1.2.2",
     "preact": "10.19.2"
   },
   "devDependencies": {

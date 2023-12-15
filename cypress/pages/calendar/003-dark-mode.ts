@@ -19,7 +19,7 @@ import { smokeTestEvents } from './__data__/smoke-data.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
-const calendar = createCalendar(calendarElement, {
+const calendar = createCalendar({
   datePicker: {
     selectedDate: '2023-09-21',
   },
@@ -31,4 +31,4 @@ const calendar = createCalendar(calendarElement, {
   events: smokeTestEvents,
 })
 
-calendar.bootstrap()
+calendar.render(calendarElement)
