@@ -1,5 +1,5 @@
 import { cypressPageUrls } from '../../pages/urls.ts'
-import { createCalendarHeaderPageObject } from '../../page-objects/calendar-header.page-object.ts'
+import { createCalendarHeaderPageObject } from '../../../libs/e2e-testing/src/page-objects/calendar-header.page-object.ts'
 
 describe('Calendar Smoke Test', () => {
   const calendarHeader = createCalendarHeaderPageObject()
