@@ -9,7 +9,6 @@ import '../../packages/theme-default/src/date-picker.scss'
 import { createDatePicker } from '@schedule-x/date-picker/src'
 
 const datePicker = createDatePicker(
-  document.querySelector('#app') as HTMLElement,
   {
     locale: 'de-DE',
     style: {
@@ -29,7 +28,7 @@ const datePicker = createDatePicker(
     // },
   }
 )
-datePicker.bootstrap()
+datePicker.render(document.querySelector('#app') as HTMLElement)
 
 // set a listener to theme-toggle element, when clicked, set an is-dark class on the body
 // or remove it if it already exists

@@ -31,18 +31,12 @@ export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
     .build()
 }
 
-export const createDatePicker = (
-  el: HTMLElement,
-  config?: DatePickerConfigExternal
-) => {
+export const createDatePicker = (config?: DatePickerConfigExternal) => {
   const $app = createAppSingleton(config)
 
-  return new DatePickerApp($app, el)
+  return new DatePickerApp($app)
 }
 
-export const createDatePickerInternal = (
-  $app: DatePickerAppSingleton,
-  el: HTMLElement
-) => {
-  return new DatePickerApp($app, el)
+export const createDatePickerInternal = ($app: DatePickerAppSingleton) => {
+  return new DatePickerApp($app)
 }

@@ -122,7 +122,7 @@ describe('CalendarApp', () => {
       const calendarApp = createCalendar(calendarEl, {
         views: [viewMonthGrid],
       })
-      calendarApp.bootstrap()
+      calendarApp.render()
       expect(document.querySelector('.is-dark')).toBeFalsy()
 
       calendarApp.setTheme('dark')

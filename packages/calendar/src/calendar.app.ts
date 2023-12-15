@@ -7,15 +7,12 @@ import EventsFacadeImpl from './utils/stateful/events-facade/events-facade.impl'
 export default class CalendarApp {
   public events: EventsFacade
 
-  constructor(
-    private el: HTMLElement,
-    private $app: CalendarAppSingleton
-  ) {
+  constructor(private $app: CalendarAppSingleton) {
     this.events = new EventsFacadeImpl(this.$app)
   }
 
-  bootstrap(): void {
-    render(createElement(CalendarWrapper, { $app: this.$app }), this.el)
+  render(el: HTMLElement): void {
+    render(createElement(CalendarWrapper, { $app: this.$app }), el)
   }
 
   setTheme(theme: 'light' | 'dark'): void {

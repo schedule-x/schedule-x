@@ -3,17 +3,14 @@ import AppWrapper from './components/app-wrapper'
 import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 
 export default class DatePickerApp {
-  constructor(
-    private $app: DatePickerAppSingleton,
-    private el: HTMLElement
-  ) {}
+  constructor(private $app: DatePickerAppSingleton) {}
 
-  bootstrap(): void {
+  render(el: HTMLElement): void {
     render(
       createElement(AppWrapper, {
         $app: this.$app,
       }),
-      this.el
+      el
     )
   }
 

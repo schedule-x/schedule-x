@@ -29,7 +29,7 @@ const datePicker = createDatePicker(
     // },
   }
 )
-datePicker.bootstrap()
+datePicker.render()
 
 // document.addEventListener('dblclick', () => {
 //   console.log(datePicker.value)

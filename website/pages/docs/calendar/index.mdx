@@ -13,16 +13,14 @@ npm i @schedule-x/calendar @schedule-x/theme-default
 ## 2. Code
 
 After importing our dependencies, we can now move on to create an instance of the calendar using the
-`createCalendar` function. This function takes two arguments:
-
-1. The DOM element that will contain the calendar
-2. The configuration object
+`createCalendar` function. This function takes one argument, namely its configuration object. It is then rendered
+using the `render` method. This method takes a DOM element, which the calendar is then rendered onto, as its argument.
 
 ```ts
 import { createCalendar, viewMonthGrid } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
-const calendar = createCalendar(document.getElementById('calendar'), {
+const calendar = createCalendar({
   views: [viewMonthGrid],
   events: [
     {
@@ -36,7 +34,7 @@ const calendar = createCalendar(document.getElementById('calendar'), {
   ],
 })
 
-calendar.bootstrap()
+calendar.render(document.getElementById('calendar'))
 ```
 
 ### Configuration object

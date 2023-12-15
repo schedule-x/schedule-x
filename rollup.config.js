@@ -17,7 +17,7 @@ async function getSortedPackages(scope, ignore) {
   const packages = await Project.getPackages(__dirname || process.cwd())
   let filtered = filterPackages(packages, scope, ignore, false)
   filtered = filtered.filter(
-    (pkg) => !pkg.name.startsWith('@schedule-x/theme-')
+    (pkg) => !pkg.name.startsWith('@schedule-x/theme-') && !pkg.name.startsWith('@schedule-x/react')
   )
 
   return batchPackages(filtered).reduce((arr, batch) => arr.concat(batch), [])

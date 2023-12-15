@@ -11,7 +11,7 @@ import { createDragAndDropPlugin } from '../../../packages/drag-and-drop'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
-const calendar = createCalendar(calendarElement, {
+const calendar = createCalendar({
   datePicker: {
     selectedDate: '2023-09-21',
   },
@@ -31,4 +31,4 @@ const calendar = createCalendar(calendarElement, {
   ],
 })
 
-calendar.bootstrap()
+calendar.render(calendarElement)

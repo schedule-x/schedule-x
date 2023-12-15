@@ -69,7 +69,7 @@ const config = {
   }
 }
 
-const calendar = createCalendar(document.getElementById('calendar'), config)
+const calendar = createCalendar(config)
 
-calendar.bootstrap()
+calendar.render(document.getElementById('calendar'))
 ```

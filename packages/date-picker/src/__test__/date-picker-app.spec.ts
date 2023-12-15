@@ -19,7 +19,7 @@ const createApp = (
   })
   const el = document.createElement('div')
   const app = new underTest($app, el)
-  app.bootstrap()
+  app.render()
   return app
 }
 
