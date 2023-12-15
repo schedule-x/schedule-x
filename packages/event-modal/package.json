@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/event-modal",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Plugin for Schedule-X to show a modal when clicking on an event",
   "author": {
     "name": "Tom Österlund",
