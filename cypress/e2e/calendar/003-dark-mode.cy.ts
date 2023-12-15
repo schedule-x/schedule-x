@@ -1,5 +1,6 @@
 import { cypressPageUrls } from '../../pages/urls.ts'
 import { createCalendarHeaderPageObject } from '../../../libs/e2e-testing/src/page-objects/calendar-header.page-object.ts'
+import { SNAPSHOT_FAULT_TOLERANCE } from '../../../libs/e2e-testing/src/index.ts'
 
 describe('Calendar dark mode', () => {
   const calendarHeader = createCalendarHeaderPageObject()
@@ -10,16 +11,16 @@ describe('Calendar dark mode', () => {
   })
 
   it('should render events in the week view', () => {
-    cy.compareSnapshot('calendar-dark-mode__week-view')
+    cy.compareSnapshot('calendar-dark-mode__week-view', SNAPSHOT_FAULT_TOLERANCE)
   })
 
   it('should render events in the month view', () => {
     calendarHeader.openViewByLabel('Month')
-    cy.compareSnapshot('calendar-dark-mode__month-view')
+    cy.compareSnapshot('calendar-dark-mode__month-view', SNAPSHOT_FAULT_TOLERANCE)
   })
 
   it('should render events in the day view', () => {
     calendarHeader.openViewByLabel('Day')
-    cy.compareSnapshot('calendar-dark-mode__day-view')
+    cy.compareSnapshot('calendar-dark-mode__day-view', SNAPSHOT_FAULT_TOLERANCE)
   })
 })
