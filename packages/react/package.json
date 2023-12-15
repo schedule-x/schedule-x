@@ -24,8 +24,7 @@
   "scripts": {
     "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
     "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
-    "format": "prettier . --write",
-    "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
+    "format": "prettier . --write"
   },
   "peerDependencies": {
     "@schedule-x/calendar": "^0.1.0",
