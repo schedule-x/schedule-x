@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@schedule-x/react",
   "version": "0.1.0",
   "description": "Schedule-X react components",

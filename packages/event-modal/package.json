@@ -22,7 +22,6 @@
   },
   "peerDependencies": {
     "@preact/signals": "^1.1.5",
-    "@schedule-x/calendar": "^0.1.0-alpha.8",
     "preact": "^10.19.2"
   },
   "repository": {
