@@ -17,6 +17,9 @@
   "custom-views": {
     "title": "Custom views"
   },
+  "react": {
+    "title": "React component"
+  },
   "demo": {
     "title": "Demo",
     "href": "/demos/calendar"
