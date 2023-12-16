@@ -45,7 +45,20 @@ As a bare minimum, the configuration object needs two things:
    `viewWeek`, `viewDay` and `viewMonthAgenda`.
 2. A list of events.
 
+### Style
+
+You will need to decide on the styles of the element wrapping the calendar. This will be highly dependent on
+your use case. For many use cases, however, something like the following should suffice:
+
+```css
+#calendar {
+  width: 100%;
+  height: 800px;
+  max-height: 90vh;
+}
+```
+
 ### Initialize the Calendar
 
-Finally, we call the `bootstrap` method on the calendar. This will now
+Finally, we call the `render` method on the calendar. This will now
 render the calendar in the DOM element we specified earlier.
