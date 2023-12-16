@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v0.2.0...v0.3.0-alpha.0) (2023-12-16)
+
+### Features
+
+- add e2e testing lib ([#104](https://github.com/schedule-x/schedule-x/issues/104)) ([c63be37](https://github.com/schedule-x/schedule-x/commit/c63be37db2ce3083846e8d71f069aa8a6b5d7b42))
+
 # [0.1.0-alpha.13](https://github.com/schedule-x/schedule-x/compare/v0.1.0-alpha.5...v0.1.0-alpha.13) (2023-11-25)
 
 ### Bug Fixes

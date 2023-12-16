@@ -16,8 +16,13 @@ const __dirname = path.dirname(__filename)
 async function getSortedPackages(scope, ignore) {
   const packages = await Project.getPackages(__dirname || process.cwd())
   let filtered = filterPackages(packages, scope, ignore, false)
+  const nonTSPackages = [
+    '@schedule-x/theme-default',
+    '@schedule-x/eslint-config',
+    '@schedule-x/prettier-config',
+  ];
   filtered = filtered.filter(
-    (pkg) => !pkg.name.startsWith('@schedule-x/theme-') && !pkg.name.startsWith('@schedule-x/react')
+    (pkg) => !nonTSPackages.includes(pkg.name)
   )
 
   return batchPackages(filtered).reduce((arr, batch) => arr.concat(batch), [])
