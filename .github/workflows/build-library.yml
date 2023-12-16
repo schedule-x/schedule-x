@@ -9,7 +9,7 @@ on:
       - 'package-lock.json'
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build_library:
