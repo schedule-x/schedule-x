@@ -111,3 +111,15 @@ themeToggle.addEventListener('click', () => {
   calendar.setTheme(darkToggle === 0 ? 'light' : 'dark')
   darkToggle === 0 ? darkToggle++ : darkToggle--
 })
+
+const addEventButton = document.getElementById('add-event') as HTMLInputElement
+addEventButton.addEventListener('click', () => {
+  calendar.events.add({
+    id: 'new-event',
+    title: 'New Event',
+    time: {
+      start: '2023-12-18',
+      end: '2023-12-19',
+    }
+  })
+})

@@ -19,12 +19,12 @@ describe('Dragging events', () => {
           .contains('.sx__time-grid-event', eventTitle)
 
         // xPixels does not work as expected. everything above 200 seems to yield the same result (15 minute drag) 🧐
-        weekView.getEventByTitleAndDragIt(eventTitle, 800, 800)
+        weekView.getTimeGridEventByTitleAndDragIt(eventTitle, 800, 800)
 
         weekView
           .getTimeGridDayByIndex(6)
           .contains('.sx__time-grid-event', eventTitle)
-        const draggedEvent = weekView.getEventByTitle(eventTitle)
+        const draggedEvent = weekView.getTimeGridEventByTitle(eventTitle)
         draggedEvent.contains('12:30 AM – 1:30 AM')
       }
     )
