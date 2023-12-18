@@ -9,7 +9,9 @@ export default class EventsFacadeImpl implements EventsFacade {
 
   add(event: CalendarEventExternal): void {
     const newEvent = externalEventToInternal(event, this.$app.config)
-    this.$app.calendarEvents.list.value.push(newEvent)
+    const copiedEvents = [...this.$app.calendarEvents.list.value]
+    copiedEvents.push(newEvent)
+    this.$app.calendarEvents.list.value = copiedEvents
   }
 
   get(id: EventId): CalendarEventExternal | undefined {
@@ -28,14 +30,21 @@ export default class EventsFacadeImpl implements EventsFacade {
     const index = this.$app.calendarEvents.list.value.findIndex(
       (event) => event.id === id
     )
-    this.$app.calendarEvents.list.value.splice(index, 1)
+    const copiedEvents = [...this.$app.calendarEvents.list.value]
+    copiedEvents.splice(index, 1)
+    this.$app.calendarEvents.list.value = copiedEvents
   }
 
   update(event: CalendarEventExternal): void {
     const index = this.$app.calendarEvents.list.value.findIndex(
       (e) => e.id === event.id
     )
-    const newEvent = externalEventToInternal(event, this.$app.config)
-    this.$app.calendarEvents.list.value.splice(index, 1, newEvent)
+    const copiedEvents = [...this.$app.calendarEvents.list.value]
+    copiedEvents.splice(
+      index,
+      1,
+      externalEventToInternal(event, this.$app.config)
+    )
+    this.$app.calendarEvents.list.value = copiedEvents
   }
 }

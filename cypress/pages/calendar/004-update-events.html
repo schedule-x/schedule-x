@@ -7,12 +7,19 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Calendar | dev | Schedule-X</title>
+    <title>Browser test | Calendar | Update Events</title>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
-    <button id="theme-toggle">Toggle theme</button>
-    <button id="add-event">add event</button>
     <div id="calendar"></div>
-    <script type="module" src="/development/calendar/main.tsx"></script>
+
+    <button id="add-event">add</button>
+    <button id="update-event">update</button>
+    <button id="remove-event">remove</button>
+    <script type="module" src="./004-update-events.ts"></script>
   </body>
 </html>

@@ -1,6 +1,10 @@
 class WeekViewPageObject {
-  getEventByTitle(uniqueTitle: string) {
+  getTimeGridEventByTitle(uniqueTitle: string) {
     return cy.contains('.sx__time-grid-event', uniqueTitle)
+  }
+
+  getDateGridEventByTitle(uniqueTitle: string) {
+    return cy.contains('.sx__date-grid-event', uniqueTitle)
   }
 
   getEventByTitleAndDragIt(
