@@ -23,10 +23,8 @@ const calendar = createCalendar({
     {
       id: 1,
       title: 'Event 1',
-      time: {
-        start: '2023-09-21 00:15',
-        end: '2023-09-21 01:15',
-      },
+      start: '2023-09-21 00:15',
+      end: '2023-09-21 01:15',
     },
   ],
 })

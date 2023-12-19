@@ -9,10 +9,8 @@ import { getTimeStamp } from '../get-time-stamp'
 describe('Getting the time stamp for the event modal', () => {
   describe('Time stamps for full single day events', () => {
     const singleFullDayEvent: Partial<CalendarEventInternal> = {
-      time: {
-        start: '2023-10-06',
-        end: '2023-10-06',
-      },
+      start: '2023-10-06',
+      end: '2023-10-06',
       _isSingleDayFullDay: true,
     }
     it('should return a German time stamp for a single day timed event', () => {
@@ -34,10 +32,8 @@ describe('Getting the time stamp for the event modal', () => {
 
   describe('Time stamps for full multi day events', () => {
     const multiFullDayEvent: Partial<CalendarEventInternal> = {
-      time: {
-        start: '2023-10-06',
-        end: '2023-10-08',
-      },
+      start: '2023-10-06',
+      end: '2023-10-08',
       _isMultiDayFullDay: true,
     }
     it('should return a German time stamp for a multi day timed event', () => {
@@ -59,10 +55,8 @@ describe('Getting the time stamp for the event modal', () => {
 
   describe('Time stamps for single day timed events', () => {
     const singleDayTimedEvent: Partial<CalendarEventInternal> = {
-      time: {
-        start: '2023-10-06 20:07',
-        end: '2023-10-06 21:07',
-      },
+      start: '2023-10-06 20:07',
+      end: '2023-10-06 21:07',
       _isSingleDayTimed: true,
     }
 
@@ -85,10 +79,8 @@ describe('Getting the time stamp for the event modal', () => {
 
   describe('Time stamps for multi day timed events', () => {
     const multiDayTimedEvent: Partial<CalendarEventInternal> = {
-      time: {
-        start: '2023-10-06 20:07',
-        end: '2023-10-08 21:07',
-      },
+      start: '2023-10-06 20:07',
+      end: '2023-10-08 21:07',
       _isMultiDayTimed: true,
     }
 

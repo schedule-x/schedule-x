@@ -1,7 +1,4 @@
-import {
-  CalendarEventInternal,
-  CalendarEventTime,
-} from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import {
   getBorderRule,
   getEventHeight,
@@ -44,13 +41,11 @@ export default function TimeGridEvent({
     $app.config.locale,
     { hour: 'numeric', minute: 'numeric' },
   ] as const
-  const getEventTime = (time: CalendarEventTime) => {
-    const localizedStartTime = toJSDate(time.start).toLocaleTimeString(
+  const getEventTime = (start: string, end: string) => {
+    const localizedStartTime = toJSDate(start).toLocaleTimeString(
       ...localizeArgs
     )
-    const localizedEndTime = toJSDate(time.end).toLocaleTimeString(
-      ...localizeArgs
-    )
+    const localizedEndTime = toJSDate(end).toLocaleTimeString(...localizeArgs)
     return `${localizedStartTime} – ${localizedEndTime}`
   }
 
@@ -95,12 +90,13 @@ export default function TimeGridEvent({
         }
         style={{
           top: `${getEventTop(
-            calendarEvent.time,
+            calendarEvent.start,
             $app.config.dayBoundaries,
             $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
-            calendarEvent.time,
+            calendarEvent.start,
+            calendarEvent.end,
             $app.config.dayBoundaries,
             $app.config.timePointsPerDay
           )}%`,
@@ -118,7 +114,7 @@ export default function TimeGridEvent({
 
         <div className="sx__time-grid-event-time">
           <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
-          {getEventTime(calendarEvent.time)}
+          {getEventTime(calendarEvent.start, calendarEvent.end)}
         </div>
 
         {calendarEvent.people && (

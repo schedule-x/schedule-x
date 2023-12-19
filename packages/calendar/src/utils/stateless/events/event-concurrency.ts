@@ -12,7 +12,7 @@ export const handleEventConcurrency = (
     if (
       concurrentEventsCache.length &&
       (!nextEvent ||
-        concurrentEventsCache.every((e) => e.time.end < nextEvent.time.start))
+        concurrentEventsCache.every((e) => e.end < nextEvent.start))
     ) {
       concurrentEventsCache.push(event)
 
@@ -26,8 +26,8 @@ export const handleEventConcurrency = (
     }
 
     if (
-      (nextEvent && event.time.end > nextEvent.time.start) ||
-      concurrentEventsCache.some((e) => e.time.end > event.time.start)
+      (nextEvent && event.end > nextEvent.start) ||
+      concurrentEventsCache.some((e) => e.end > event.start)
     ) {
       concurrentEventsCache.push(event)
       return handleEventConcurrency(sortedEvents, concurrentEventsCache, i + 1)

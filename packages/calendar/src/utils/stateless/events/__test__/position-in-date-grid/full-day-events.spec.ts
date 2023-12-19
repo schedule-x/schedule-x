@@ -21,10 +21,12 @@ describe('positioning events in the date grid of a week or day', () => {
 
     it('should position an event, stretching from the first until last day of the week', () => {
       const dateGridEvents = [
-        new CalendarEventBuilder($app.config, 1, {
-          start: '2023-09-11',
-          end: '2023-09-17',
-        }).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          1,
+          '2023-09-11',
+          '2023-09-17'
+        ).build(),
       ]
       const week = createWeek($app)
 
@@ -55,10 +57,12 @@ describe('positioning events in the date grid of a week or day', () => {
 
     it('should position a single full day event', () => {
       const dateGridEvents = [
-        new CalendarEventBuilder($app.config, 1, {
-          start: '2023-09-16',
-          end: '2023-09-16',
-        }).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          1,
+          '2023-09-16',
+          '2023-09-16'
+        ).build(),
       ]
       const week = createWeek($app)
 
@@ -77,20 +81,24 @@ describe('positioning events in the date grid of a week or day', () => {
 
     it('should position three two day events', () => {
       const dateGridEvents = [
-        new CalendarEventBuilder($app.config, 1, {
-          start: '2023-09-12',
-          end: '2023-09-13',
-        }).build(),
-
-        new CalendarEventBuilder($app.config, 2, {
-          start: '2023-09-13',
-          end: '2023-09-14',
-        }).build(),
-
-        new CalendarEventBuilder($app.config, 3, {
-          start: '2023-09-14',
-          end: '2023-09-15',
-        }).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          1,
+          '2023-09-12',
+          '2023-09-13'
+        ).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          2,
+          '2023-09-13',
+          '2023-09-14'
+        ).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          3,
+          '2023-09-14',
+          '2023-09-15'
+        ).build(),
       ]
       const week = createWeek($app)
 
@@ -139,25 +147,30 @@ describe('positioning events in the date grid of a week or day', () => {
 
     it('should position events that start before the week and end after the week', () => {
       const dateGridEvents = [
-        new CalendarEventBuilder($app.config, 1, {
-          start: '2023-09-09',
-          end: '2023-09-19',
-        }).build(),
-
-        new CalendarEventBuilder($app.config, 2, {
-          start: '2023-09-10',
-          end: '2023-09-11',
-        }).build(),
-
-        new CalendarEventBuilder($app.config, 3, {
-          start: '2023-09-16',
-          end: '2023-09-17',
-        }).build(),
-
-        new CalendarEventBuilder($app.config, 4, {
-          start: '2023-09-17',
-          end: '2023-09-18',
-        }).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          1,
+          '2023-09-09',
+          '2023-09-19'
+        ).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          2,
+          '2023-09-10',
+          '2023-09-11'
+        ).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          3,
+          '2023-09-16',
+          '2023-09-17'
+        ).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          4,
+          '2023-09-17',
+          '2023-09-18'
+        ).build(),
       ]
       const week = createWeek($app)
       const eventWithId = (id: number) =>

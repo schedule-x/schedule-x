@@ -3,15 +3,14 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { CalendarEventTime } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
 import { sortEventsByStart } from '../sort-by-start-date'
 
 describe('sorting events based on time', () => {
   const config = new CalendarConfigBuilder().build()
-  const createEvent = (time: CalendarEventTime) => {
-    return new CalendarEventBuilder(config, '1', time).build()
+  const createEvent = (time: { start: string; end: string }) => {
+    return new CalendarEventBuilder(config, '1', time.start, time.end).build()
   }
 
   it('should sort events according to time in ascending order', () => {

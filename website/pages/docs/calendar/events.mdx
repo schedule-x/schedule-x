@@ -5,15 +5,16 @@ event can have the following properties:
 
 ## Event Properties
 
-| Property      | Type                                  | Description                                 | Required |
-| ------------- | ------------------------------------- | ------------------------------------------- | -------- |
-| `id`          | `string` or `number`                  | A unique identifier for the event.          | Yes      |
-| `time`        | See ["Event time"](#event-time) below | The time of the event.                      | Yes      |
-| `title`       | `string`                              | The title of the event.                     | No       |
-| `description` | `string`                              | A description of the event.                 | No       |
-| `location`    | `string`                              | The location of the event.                  | No       |
-| `people`      | `string[]`                            | Names of the participants                   | No       |
-| `calendarId`  | `string`                              | id of the calendar. See "calendars" section | No       |
+| Property      | Type                 | Description                                 | Required |
+|---------------|----------------------|---------------------------------------------|----------|
+| `id`          | `string` or `number` | A unique identifier for the event.          | Yes      |
+| `start`       | `string`             | The start time of the event.                | Yes      |
+| `end`         | `string`             | The end time of the event.                  | Yes      |
+| `title`       | `string`             | The title of the event.                     | No       |
+| `description` | `string`             | A description of the event.                 | No       |
+| `location`    | `string`             | The location of the event.                  | No       |
+| `people`      | `string[]`           | Names of the participants                   | No       |
+| `calendarId`  | `string`             | id of the calendar. See "calendars" section | No       |
 
 ## Other properties
 
@@ -31,10 +32,8 @@ whether they are **timed events** or **full day events**.
 ```js
 const timedEvent = {
   id: 1,
-  time: {
-    start: '2025-10-01 20:15',
-    end: '2025-10-01 21:15',
-  },
+  start: '2025-10-01 20:15',
+  end: '2025-10-01 21:15',
 }
 ```
 
@@ -43,10 +42,8 @@ const timedEvent = {
 ```js
 const fullDayEvent = {
   id: 2,
-  time: {
-    start: '2025-10-01',
-    end: '2025-10-01',
-  },
+  start: '2025-10-01',
+  end: '2025-10-01',
 }
 ```
 
@@ -98,18 +95,14 @@ const calendar = createCalendar({
     {
       id: 1,
       title: 'Coffee with John',
-      time: {
-        start: '2023-11-04 10:05',
-        end: '2023-11-04 10:35',
-      },
+      start: '2023-11-04 10:05',
+      end: '2023-11-04 10:35',
     },
     {
       id: 2,
       title: 'Ski trip',
-      time: {
-        start: '2023-12-04',
-        end: '2023-12-06',
-      },
+      start: '2023-12-04',
+      end: '2023-12-06',
     },
   ],
 })
@@ -121,18 +114,14 @@ calendar.events.getAll() // returns all events
 calendar.events.add({
   id: 3,
   title: 'New event',
-  time: {
-    start: '2023-12-04',
-    end: '2023-12-06',
-  },
+  start: '2023-12-04',
+  end: '2023-12-06',
 }) // adds a new event
 calendar.events.update({
   id: 1,
   title: 'Updated event',
-  time: {
-    start: '2023-12-04',
-    end: '2023-12-06',
-  },
+  start: '2023-12-04',
+  end: '2023-12-06',
 }) // updates the event with id 1
 calendar.events.remove(1) // removes the event with id 1
 ```

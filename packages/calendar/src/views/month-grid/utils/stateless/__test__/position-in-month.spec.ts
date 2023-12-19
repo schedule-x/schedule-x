@@ -16,14 +16,18 @@ describe('Positioning events for in month view', () => {
 
   describe('Positioning single day events in first week', () => {
     const month = createMonth('2020-01-01', new TimeUnitsBuilder().build())
-    const event1 = new CalendarEventBuilder($app.config, 1, {
-      start: '2020-01-01',
-      end: '2020-01-01',
-    }).build()
-    const event2 = new CalendarEventBuilder($app.config, 1, {
-      start: '2020-01-01',
-      end: '2020-01-01',
-    }).build()
+    const event1 = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2020-01-01',
+      '2020-01-01'
+    ).build()
+    const event2 = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2020-01-01',
+      '2020-01-01'
+    ).build()
     const sortedEvents = [event1, event2]
 
     it('should position two events on first two levels of 1st of January', () => {
@@ -36,14 +40,18 @@ describe('Positioning events for in month view', () => {
 
   describe('Positioning multi day events in first week', () => {
     const month = createMonth('2020-01-01', new TimeUnitsBuilder().build())
-    const event1 = new CalendarEventBuilder($app.config, 1, {
-      start: '2019-12-30',
-      end: '2020-01-01',
-    }).build()
-    const event2 = new CalendarEventBuilder($app.config, 1, {
-      start: '2020-01-01',
-      end: '2020-01-03',
-    }).build()
+    const event1 = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2019-12-30',
+      '2020-01-01'
+    ).build()
+    const event2 = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2020-01-01',
+      '2020-01-03'
+    ).build()
     const sortedEvents = [event1, event2]
 
     it('should position event1 on 30th of December, 31st of December and 1st of January', () => {
@@ -67,14 +75,18 @@ describe('Positioning events for in month view', () => {
 
   describe('Positioning a multi day event in every week of month, alongside other events', () => {
     const month = createMonth('2020-01-01', new TimeUnitsBuilder().build())
-    const event1 = new CalendarEventBuilder($app.config, 1, {
-      start: '2019-12-30',
-      end: '2020-01-28',
-    }).build()
-    const event2 = new CalendarEventBuilder($app.config, 1, {
-      start: '2020-01-28',
-      end: '2020-01-29',
-    }).build()
+    const event1 = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2019-12-30',
+      '2020-01-28'
+    ).build()
+    const event2 = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2020-01-28',
+      '2020-01-29'
+    ).build()
     const sortedEvents = [event1, event2]
 
     it('should position an event in all weeks of month', () => {

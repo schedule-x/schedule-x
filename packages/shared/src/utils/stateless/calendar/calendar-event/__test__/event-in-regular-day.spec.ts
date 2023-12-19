@@ -5,13 +5,17 @@ import {
 } from '../../../testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../calendar-event.builder'
 import CalendarConfigBuilder from '@schedule-x/calendar/src/utils/stateful/config/calendar-config.builder'
-import { CalendarEventTime } from '../../../../../interfaces/calendar/calendar-event.interface'
 
 describe('CalendarEventImpl', () => {
   describe('the event time type in a day with default day boundaries', () => {
     const _config = new CalendarConfigBuilder().build()
-    const createEvent = (eventTime: CalendarEventTime) =>
-      new CalendarEventBuilder(_config, '1', eventTime).build()
+    const createEvent = (eventTime: { start: string; end: string }) =>
+      new CalendarEventBuilder(
+        _config,
+        '1',
+        eventTime.start,
+        eventTime.end
+      ).build()
 
     it('should create a single-day timed event', () => {
       const eventTime = {
@@ -21,7 +25,8 @@ describe('CalendarEventImpl', () => {
       const calendarEvent = new CalendarEventBuilder(
         _config,
         '1',
-        eventTime
+        eventTime.start,
+        eventTime.end
       ).build()
 
       expect(calendarEvent._isSingleDayTimed).toBe(true)

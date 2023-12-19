@@ -24,10 +24,8 @@ export const createEvents = (monthArg: string | null = null) => {
     const event = {
       title: getRandomElementOfArray(eventTitles),
       with: getRandomElementOfArray(names),
-      time: {
-        start: time.start,
-        end: time.end,
-      },
+      start: time.start,
+      end: time.end,
       color: getRandomElementOfArray(colors),
       isEditable: true,
       id:
@@ -46,10 +44,10 @@ export const createEvents = (monthArg: string | null = null) => {
     events.push(event)
   }
 
-  // Sort events according to time.start, for easier debugging, if something breaks
+  // Sort events according to start, for easier debugging, if something breaks
   return events.sort((a, b) => {
-    if (a.time.start > b.time.start) return 1
-    if (a.time.start < b.time.start) return -1
+    if (a.start > b.start) return 1
+    if (a.start < b.start) return -1
 
     return 0
   })

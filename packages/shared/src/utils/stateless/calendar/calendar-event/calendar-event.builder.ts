@@ -1,7 +1,4 @@
-import {
-  CalendarEventInternal,
-  CalendarEventTime,
-} from '../../../../interfaces/calendar/calendar-event.interface'
+import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-event.interface'
 import Builder from '../../../../interfaces/builder.interface'
 import CalendarEventImpl from './calendar-event.impl'
 import { EventId } from '../../../../types/event-id'
@@ -20,14 +17,16 @@ export default class CalendarEventBuilder
   constructor(
     private _config: CalendarConfigInternal,
     private id: EventId,
-    private time: CalendarEventTime
+    private start: string,
+    private end: string
   ) {}
 
   build(): CalendarEventInternal {
     return new CalendarEventImpl(
       this._config,
       this.id,
-      this.time,
+      this.start,
+      this.end,
       this.title,
       this.people,
       this.location,

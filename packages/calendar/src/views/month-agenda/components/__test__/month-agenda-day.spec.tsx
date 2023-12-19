@@ -75,7 +75,7 @@ describe('MonthAgendaDay', () => {
 
     it('should display 1 event icons', () => {
       const $app = __createAppWithViews__({
-        events: [{ id: 1, time: { start: '2020-01-01', end: '2020-01-01' } }],
+        events: [{ id: 1, start: '2020-01-01', end: '2020-01-01' }],
       })
       renderComponent({
         date: '2020-01-01',
@@ -88,9 +88,9 @@ describe('MonthAgendaDay', () => {
     it('should display 3 event icons', () => {
       const $app = __createAppWithViews__({
         events: [
-          { id: 1, time: { start: '2020-01-01', end: '2020-01-01' } },
-          { id: 2, time: { start: '2020-01-01', end: '2020-01-01' } },
-          { id: 3, time: { start: '2020-01-01', end: '2020-01-01' } },
+          { id: 1, start: '2020-01-01', end: '2020-01-01' },
+          { id: 2, start: '2020-01-01', end: '2020-01-01' },
+          { id: 3, start: '2020-01-01', end: '2020-01-01' },
         ],
       })
       renderComponent({
@@ -104,10 +104,10 @@ describe('MonthAgendaDay', () => {
     it('should display 3 event icons even when there are more events', () => {
       const $app = __createAppWithViews__({
         events: [
-          { id: 1, time: { start: '2020-01-01', end: '2020-01-01' } },
-          { id: 2, time: { start: '2020-01-01', end: '2020-01-01' } },
-          { id: 3, time: { start: '2020-01-01', end: '2020-01-01' } },
-          { id: 4, time: { start: '2020-01-01', end: '2020-01-01' } },
+          { id: 1, start: '2020-01-01', end: '2020-01-01' },
+          { id: 2, start: '2020-01-01', end: '2020-01-01' },
+          { id: 3, start: '2020-01-01', end: '2020-01-01' },
+          { id: 4, start: '2020-01-01', end: '2020-01-01' },
         ],
       })
       renderComponent({

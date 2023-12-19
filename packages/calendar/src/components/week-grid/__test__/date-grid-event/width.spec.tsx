@@ -28,18 +28,14 @@ describe('styles of DateGridEvent', () => {
         {
           id: oneDayEventId,
           title: oneDayEventTitle,
-          time: {
-            start: selectedDate,
-            end: selectedDate,
-          },
+          start: selectedDate,
+          end: selectedDate,
         },
         {
           id: threeDayEventId,
           title: threeDayEventTitle,
-          time: {
-            start: selectedDate,
-            end: '2024-10-03',
-          },
+          start: selectedDate,
+          end: '2024-10-03',
         },
       ],
     })
@@ -75,18 +71,14 @@ describe('styles of DateGridEvent', () => {
         {
           id: eventWithOverflowLeftId,
           title: eventWithOverflowLeftTitle,
-          time: {
-            start: '2024-09-28',
-            end: selectedDate,
-          },
+          start: '2024-09-28',
+          end: selectedDate,
         },
         {
           id: eventWithOverflowBothId,
           title: eventWithOverflowBothTitle,
-          time: {
-            start: '2024-09-28',
-            end: '2024-10-07',
-          },
+          start: '2024-09-28',
+          end: '2024-10-07',
         },
       ],
     })

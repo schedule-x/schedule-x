@@ -25,8 +25,8 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     ).querySelectorAll(this.MONTH_DAY_SELECTOR) as NodeListOf<HTMLDivElement>
     this.eventNDays =
       calculateDaysDifference(
-        this.calendarEvent.time.start,
-        this.calendarEvent.time.end
+        this.calendarEvent.start,
+        this.calendarEvent.end
       ) + 1
     this.init()
   }
@@ -94,11 +94,11 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private updateCalendarEvent = () => {
     const eventCopy = deepCloneEvent(this.calendarEvent, this.$app)
     const diffOldDateAndNewDate = calculateDaysDifference(
-      dateFromDateTime(this.calendarEvent.time.start),
+      dateFromDateTime(this.calendarEvent.start),
       dateFromDateTime(this.currentDragoverDate as string)
     )
-    eventCopy.time.start = addDays(eventCopy.time.start, diffOldDateAndNewDate)
-    eventCopy.time.end = addDays(eventCopy.time.end, diffOldDateAndNewDate)
+    eventCopy.start = addDays(eventCopy.start, diffOldDateAndNewDate)
+    eventCopy.end = addDays(eventCopy.end, diffOldDateAndNewDate)
     replaceOriginalWithCopy(this.$app, eventCopy)
   }
 }

@@ -23,9 +23,9 @@ export const positionInTimeGrid = (
     resetEventConcurrencyProperties(event)
     const range = $app.calendarState.range.value as DateRange
 
-    if (event.time.start >= range.start && event.time.end < range.end) {
-      let date = dateFromDateTime(event.time.start)
-      const timeFromStart = timeFromDateTime(event.time.start)
+    if (event.start >= range.start && event.end < range.end) {
+      let date = dateFromDateTime(event.start)
+      const timeFromStart = timeFromDateTime(event.start)
       if (
         timePointsFromString(timeFromStart) < $app.config.dayBoundaries.start
       ) {

@@ -1,14 +1,10 @@
 import { EventId } from '../../types/event-id'
 import { EventFragments } from './event-fragments'
 
-export type CalendarEventTime = {
-  start: string
-  end: string
-}
-
 export default interface CalendarEventExternal {
   id: EventId
-  time: CalendarEventTime
+  start: string
+  end: string
   title?: string
   people?: string[]
   location?: string

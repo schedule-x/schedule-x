@@ -20,10 +20,12 @@ describe('positioning events in the date grid of a week or day', () => {
 
     it('should position an event that spans from before the first day until after the last', () => {
       const dateGridEvents = [
-        new CalendarEventBuilder($app.config, 1, {
-          start: '2023-09-10 04:00',
-          end: '2023-09-20 20:00',
-        }).build(),
+        new CalendarEventBuilder(
+          $app.config,
+          1,
+          '2023-09-10 04:00',
+          '2023-09-20 20:00'
+        ).build(),
       ]
       const week = createWeek($app)
 

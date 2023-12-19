@@ -29,10 +29,12 @@ describe('WeekDayEvent', () => {
           },
           locale,
         })
-        const calendarEvent = new CalendarEventBuilder($app.config, '1', {
-          start: '2020-12-01 10:00',
-          end: '2020-12-01 11:00',
-        }).build()
+        const calendarEvent = new CalendarEventBuilder(
+          $app.config,
+          '1',
+          '2020-12-01 10:00',
+          '2020-12-01 11:00'
+        ).build()
         renderComponent($app, calendarEvent)
 
         expect(screen.queryByText(expectedTime)).toBeTruthy()

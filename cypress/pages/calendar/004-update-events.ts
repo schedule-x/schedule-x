@@ -37,10 +37,8 @@ addEventButton.addEventListener('click', () => {
   calendar.events.add({
     id: 1,
     title: 'New event',
-    time: {
-      start: '2023-09-21',
-      end: '2023-09-21',
-    }
+    start: '2023-09-21',
+    end: '2023-09-21',
   })
 })
 

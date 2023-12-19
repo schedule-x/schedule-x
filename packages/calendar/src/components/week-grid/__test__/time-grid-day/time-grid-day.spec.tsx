@@ -26,7 +26,14 @@ describe('TimeGridDay', () => {
       }
       renderComponent(
         $app,
-        [new CalendarEventBuilder($app.config, '1', eventTime).build()],
+        [
+          new CalendarEventBuilder(
+            $app.config,
+            '1',
+            eventTime.start,
+            eventTime.end
+          ).build(),
+        ],
         '2023-09-11'
       )
 
@@ -44,7 +51,14 @@ describe('TimeGridDay', () => {
       }
       renderComponent(
         $app,
-        [new CalendarEventBuilder($app.config, '1', eventTime).build()],
+        [
+          new CalendarEventBuilder(
+            $app.config,
+            '1',
+            eventTime.start,
+            eventTime.end
+          ).build(),
+        ],
         '2023-09-11'
       )
 
@@ -72,7 +86,14 @@ describe('TimeGridDay', () => {
       }
       renderComponent(
         $app,
-        [new CalendarEventBuilder($app.config, '1', eventTime).build()],
+        [
+          new CalendarEventBuilder(
+            $app.config,
+            '1',
+            eventTime.start,
+            eventTime.end
+          ).build(),
+        ],
         '2023-09-12'
       )
 
