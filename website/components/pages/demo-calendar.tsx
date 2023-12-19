@@ -27,7 +27,7 @@ export default function CalendarDemoPage() {
 
     const calendarEl = document.getElementById('calendar') as HTMLElement
 
-    const calendar = createCalendar(calendarEl, {
+    const calendar = createCalendar({
       views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
       datePicker: {
         selectedDate: '2023-12-01',
@@ -38,37 +38,29 @@ export default function CalendarDemoPage() {
         {
           id: 1,
           title: 'Coffee with John',
-          time: {
-            start: '2023-12-01',
-            end: '2023-12-01',
-          },
+          start: '2023-12-01',
+          end: '2023-12-01',
         },
         {
           id: 2,
           title: 'Breakfast with Sam',
           description: 'Discuss the new project',
           location: 'Starbucks',
-          time: {
-            start: '2023-11-29 05:00',
-            end: '2023-11-29 06:00',
-          },
+          start: '2023-11-29 05:00',
+          end: '2023-11-29 06:00',
         },
         {
           id: 3,
           title: 'Gym',
-          time: {
-            start: '2023-11-27 06:00',
-            end: '2023-11-27 07:00',
-          },
+          start: '2023-11-27 06:00',
+          end: '2023-11-27 07:00',
           calendarId: 'leisure',
         },
         {
           id: 4,
           title: 'Media fasting',
-          time: {
-            start: '2023-12-01',
-            end: '2023-12-03',
-          },
+          start: '2023-12-01',
+          end: '2023-12-03',
           calendarId: 'leisure',
         },
       ],
@@ -89,7 +81,7 @@ export default function CalendarDemoPage() {
       },
       plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
     })
-    calendar.bootstrap()
+    calendar.render(calendarEl)
     setCal(calendar as any)
   }, [])
 
