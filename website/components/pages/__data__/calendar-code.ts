@@ -14,7 +14,7 @@ const calendar = createCalendar({
       id: 1,
       title: 'Coffee with John',
       start: '2023-12-01',
-      end: '2023-12-01'
+      end: '2023-12-01',
     },
     {
       id: 2,
@@ -22,20 +22,20 @@ const calendar = createCalendar({
       description: 'Discuss the new project',
       location: 'Starbucks',
       start: '2023-11-29 05:00',
-      end: '2023-11-29 06:00'
+      end: '2023-11-29 06:00',
     },
     {
       id: 3,
       title: 'Gym',
       start: '2023-11-27 06:00',
-      end: '2023-11-27 07:00'
+      end: '2023-11-27 07:00',
       calendarId: 'leisure'
     },
     {
       id: 4,
       title: 'Media fasting',
       start: '2023-12-01',
-      end: '2023-12-03'
+      end: '2023-12-03',
       calendarId: 'leisure'
     }
   ],

@@ -34,14 +34,14 @@ export default function DatePickerDemoPage() {
     setIsDark(checkIfDark())
 
     const datePickerEl = document.getElementById('date-picker') as HTMLElement
-    const datePicker = createDatePicker(datePickerEl, {
+    const datePicker = createDatePicker({
       listeners: {
         onChange: (date) => {
           console.log('date changed', date)
         },
       },
     })
-    datePicker.bootstrap()
+    datePicker.render(datePickerEl)
   }, [])
 
   return (
