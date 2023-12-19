@@ -1,8 +1,5 @@
 import { toIntegers } from '../format-conversion/format-conversion'
-import {
-  CalendarEventInternal,
-  CalendarEventTime,
-} from '../../../../interfaces/calendar/calendar-event.interface'
+import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-event.interface'
 
 const dateFn = (dateTimeString: string, locale: string) => {
   const { year, month, date } = toIntegers(dateTimeString)
@@ -29,7 +26,10 @@ export const getTimeStamp = (
   locale: string
 ) => {
   const enDash = '\u2013'
-  const eventTime = calendarEvent.time as CalendarEventTime
+  const eventTime = { start: calendarEvent.start, end: calendarEvent.end } as {
+    start: string
+    end: string
+  }
 
   if (calendarEvent._isSingleDayFullDay) {
     return dateFn(eventTime.start, locale)

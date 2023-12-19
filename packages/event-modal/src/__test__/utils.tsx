@@ -7,10 +7,8 @@ const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()
   calendarEvent.id = '1'
   calendarEvent.title = 'test'
-  calendarEvent.time = {
-    start: '2023-10-07',
-    end: '2023-10-08',
-  }
+  calendarEvent.start = '2023-10-07'
+  calendarEvent.end = '2023-10-08'
   calendarEvent._isMultiDayFullDay = true
   calendarEvent._isSingleDayFullDay = false
   calendarEvent._isSingleDayTimed = false

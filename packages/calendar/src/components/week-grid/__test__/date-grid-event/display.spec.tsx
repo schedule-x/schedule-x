@@ -28,10 +28,8 @@ describe('style attribute "display" of date grid event element', () => {
       {
         id: oneDayEventId,
         title: oneDayEventTitle,
-        time: {
-          start: selectedDate,
-          end: selectedDate,
-        },
+        start: selectedDate,
+        end: selectedDate,
       },
     ],
   })

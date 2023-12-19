@@ -22,10 +22,12 @@ describe('WeekDayEvent', () => {
     })
 
     it('should not contain a title element if the event has no title', () => {
-      const calendarEvent = new CalendarEventBuilder($app.config, '1', {
-        start: '2020-12-01 10:00',
-        end: '2020-12-01 11:00',
-      }).build()
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        '1',
+        '2020-12-01 10:00',
+        '2020-12-01 11:00'
+      ).build()
       renderComponent($app, calendarEvent)
 
       expect(document.querySelector('.sx__time-grid-event-title')).toBeNull()
@@ -33,10 +35,12 @@ describe('WeekDayEvent', () => {
 
     it('should contain a title element if the event has a title', () => {
       const expectedTitle = 'Coffee with Paul'
-      const calendarEvent = new CalendarEventBuilder($app.config, '1', {
-        start: '2020-12-01 10:00',
-        end: '2020-12-01 11:00',
-      })
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        '1',
+        '2020-12-01 10:00',
+        '2020-12-01 11:00'
+      )
         .withTitle(expectedTitle)
         .build()
       renderComponent($app, calendarEvent)
@@ -48,20 +52,24 @@ describe('WeekDayEvent', () => {
     })
 
     it('should not display any people info if the event has no people', () => {
-      const calendarEvent = new CalendarEventBuilder($app.config, '1', {
-        start: '2020-12-01 10:00',
-        end: '2020-12-01 11:00',
-      }).build()
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        '1',
+        '2020-12-01 10:00',
+        '2020-12-01 11:00'
+      ).build()
       renderComponent($app, calendarEvent)
 
       expect(document.querySelector('.sx__time-grid-event-people')).toBeNull()
     })
 
     it('should display people info if the event has people', () => {
-      const calendarEvent = new CalendarEventBuilder($app.config, '1', {
-        start: '2020-12-01 10:00',
-        end: '2020-12-01 11:00',
-      })
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        '1',
+        '2020-12-01 10:00',
+        '2020-12-01 11:00'
+      )
         .withPeople(['Paul', 'John'])
         .build()
       renderComponent($app, calendarEvent)

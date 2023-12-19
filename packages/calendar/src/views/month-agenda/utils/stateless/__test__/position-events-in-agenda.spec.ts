@@ -14,10 +14,8 @@ describe('Positioning events in a month agenda', () => {
       events: [
         {
           id: eventId,
-          time: {
-            start: '2023-11-01',
-            end: '2023-11-10',
-          },
+          start: '2023-11-01',
+          end: '2023-11-10',
         },
       ],
     })
@@ -55,24 +53,18 @@ describe('Positioning events in a month agenda', () => {
       events: [
         {
           id: eventId1,
-          time: {
-            start: '2023-11-01',
-            end: '2023-11-10',
-          },
+          start: '2023-11-01',
+          end: '2023-11-10',
         },
         {
           id: eventId2,
-          time: {
-            start: '2023-11-01',
-            end: '2023-11-05',
-          },
+          start: '2023-11-01',
+          end: '2023-11-05',
         },
         {
           id: eventId3,
-          time: {
-            start: '2023-11-05',
-            end: '2023-11-10',
-          },
+          start: '2023-11-05',
+          end: '2023-11-10',
         },
       ],
     })

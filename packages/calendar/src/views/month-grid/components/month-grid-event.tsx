@@ -19,8 +19,7 @@ export default function MonthGridEvent({
   const { createDragStartTimeout, setClickedEventIfNotDragging } =
     useEventInteractions($app)
 
-  const dateIsEventFirstDate =
-    dateFromDateTime(calendarEvent.time.start) === date
+  const dateIsEventFirstDate = dateFromDateTime(calendarEvent.start) === date
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {

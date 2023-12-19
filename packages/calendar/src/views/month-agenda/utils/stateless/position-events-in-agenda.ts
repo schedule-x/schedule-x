@@ -19,8 +19,8 @@ const placeEventInDay =
   (allDaysMap: Record<string, MonthAgendaDay>) =>
   (event: CalendarEventInternal) => {
     getAllEventDates(
-      dateFromDateTime(event.time.start),
-      dateFromDateTime(event.time.end)
+      dateFromDateTime(event.start),
+      dateFromDateTime(event.end)
     ).forEach((date) => {
       if (allDaysMap[date]) {
         allDaysMap[date].events.push(event)

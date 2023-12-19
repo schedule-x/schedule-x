@@ -5,13 +5,12 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
-import { CalendarEventTime } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { handleEventConcurrency } from '../event-concurrency'
 
 describe('Event concurrency', () => {
   const _config = new CalendarConfigBuilder().build()
-  const createEvent = (time: CalendarEventTime) => {
-    return new CalendarEventBuilder(_config, '1', time).build()
+  const createEvent = (time: { start: string; end: string }) => {
+    return new CalendarEventBuilder(_config, '1', time.start, time.end).build()
   }
 
   describe('when concurrency occurs', () => {

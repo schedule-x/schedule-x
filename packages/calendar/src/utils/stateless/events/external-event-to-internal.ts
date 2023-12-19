@@ -8,14 +8,15 @@ export const externalEventToInternal = (
 ) => {
   const {
     id,
-    time,
+    start,
+    end,
     title,
     description,
     location,
     people,
     ...foreignProperties
   } = event
-  return new CalendarEventBuilder(config, id, time)
+  return new CalendarEventBuilder(config, id, start, end)
     .withTitle(title)
     .withDescription(description)
     .withLocation(location)

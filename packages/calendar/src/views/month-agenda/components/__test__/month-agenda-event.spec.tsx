@@ -34,10 +34,8 @@ describe('MonthAgendaEvent', () => {
         {
           id: '1',
           title: expectedTitle,
-          time: {
-            start: '1999-03-12 14:45',
-            end: '1999-03-12 15:45',
-          },
+          start: '1999-03-12 14:45',
+          end: '1999-03-12 15:45',
         },
       ],
     })

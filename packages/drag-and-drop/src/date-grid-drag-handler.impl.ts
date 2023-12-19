@@ -27,8 +27,8 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   ) {
     this.startX = event.clientX
     this.dayWidth = getTimeGridDayWidth(this.$app)
-    this.originalStart = this.eventCopy.time.start
-    this.originalEnd = this.eventCopy.time.end
+    this.originalStart = this.eventCopy.start
+    this.originalEnd = this.eventCopy.end
     this.rangeStartDate = dateFromDateTime(
       (this.$app.calendarState.range.value as DateRange).start
     )
@@ -56,8 +56,8 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     if (newStartDate > this.rangeEndDate) return
     if (newEndDate < this.rangeStartDate) return
 
-    this.eventCopy.time.start = newStart
-    this.eventCopy.time.end = newEnd
+    this.eventCopy.start = newStart
+    this.eventCopy.end = newEnd
     const newStartIsInWeek =
       newStartDate >= this.rangeStartDate && newStartDate <= this.rangeEndDate
     const firstDateInGrid = newStartIsInWeek

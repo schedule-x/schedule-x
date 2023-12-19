@@ -30,10 +30,12 @@ describe('MonthDay component', () => {
   describe('displaying an event', () => {
     const $app = __createAppWithViews__()
     const eventTitle = 'Event 1'
-    const calendarEventInternal = new CalendarEventBuilder($app.config, 1, {
-      start: '2020-01-01 00:00',
-      end: '2020-01-01 23:59',
-    })
+    const calendarEventInternal = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2020-01-01 00:00',
+      '2020-01-01 23:59'
+    )
       .withTitle(eventTitle)
       .build()
     const dayWithOneEvent: MonthDayType = {

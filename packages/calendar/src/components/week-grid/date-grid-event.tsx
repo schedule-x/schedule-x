@@ -52,10 +52,10 @@ export default function DateGridEvent({
   }
 
   const hasOverflowLeft =
-    dateFromDateTime(calendarEvent.time.start) <
+    dateFromDateTime(calendarEvent.start) <
     dateFromDateTime(($app.calendarState.range.value as DateRange).start)
   const hasOverflowRight =
-    dateFromDateTime(calendarEvent.time.end) >
+    dateFromDateTime(calendarEvent.end) >
     dateFromDateTime(($app.calendarState.range.value as DateRange).end)
   const overflowStyles = { backgroundColor: eventCSSVariables.backgroundColor }
 

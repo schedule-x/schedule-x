@@ -18,9 +18,9 @@ describe('replacing original event with copy', () => {
     beforeEach(() => {
       $app = __createAppWithViews__({
         events: [
-          { id: 1, time: { start: '2010-10-10', end: '2010-10-10' } },
-          { id: 2, time: { start: '2010-10-10', end: '2010-10-10' } },
-          { id: 3, time: { start: '2010-10-10', end: '2010-10-10' } },
+          { id: 1, start: '2010-10-10', end: '2010-10-10' },
+          { id: 2, start: '2010-10-10', end: '2010-10-10' },
+          { id: 3, start: '2010-10-10', end: '2010-10-10' },
         ],
       })
       eventCopy = deepCloneEvent(
@@ -53,7 +53,7 @@ describe('replacing original event with copy', () => {
       callbacks: {
         onEventUpdate: onEventUpdateSpy,
       },
-      events: [{ id: 1, time: { start: '2010-10-10', end: '2010-10-10' } }],
+      events: [{ id: 1, start: '2010-10-10', end: '2010-10-10' }],
     })
     const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
 

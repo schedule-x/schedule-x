@@ -30,8 +30,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     this.dayWidth = (
       document.querySelector('.sx__time-grid-day') as HTMLDivElement
     ).clientWidth
-    this.originalStart = this.eventCopy.time.start
-    this.originalEnd = this.eventCopy.time.end
+    this.originalStart = this.eventCopy.start
+    this.originalEnd = this.eventCopy.end
     this.startY = this.event.clientY
     this.startX = this.event.clientX
     this.init()
@@ -74,18 +74,15 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private setTimeForEventCopy(pointsToAdd: number) {
-    const newStart = addTimePointsToDateTime(
-      this.eventCopy.time.start,
-      pointsToAdd
-    )
-    const newEnd = addTimePointsToDateTime(this.eventCopy.time.end, pointsToAdd)
+    const newStart = addTimePointsToDateTime(this.eventCopy.start, pointsToAdd)
+    const newEnd = addTimePointsToDateTime(this.eventCopy.end, pointsToAdd)
     if (newStart < addDays(this.dayBoundariesDateTime.start, this.lastDaysDiff))
       return
     if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff))
       return
 
-    this.eventCopy.time.start = newStart
-    this.eventCopy.time.end = newEnd
+    this.eventCopy.start = newStart
+    this.eventCopy.end = newEnd
     this.updateCopy(this.eventCopy)
   }
 
@@ -100,11 +97,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
       dateFromDateTime(this.originalEnd),
       totalDaysDiff
     )
-    const newStart = setDateInDateTimeString(
-      this.eventCopy.time.start,
-      newStartDate
-    )
-    const newEnd = setDateInDateTimeString(this.eventCopy.time.end, newEndDate)
+    const newStart = setDateInDateTimeString(this.eventCopy.start, newStartDate)
+    const newEnd = setDateInDateTimeString(this.eventCopy.end, newEndDate)
 
     if (newStart < (this.$app.calendarState.range.value as DateRange).start)
       return
@@ -116,8 +110,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private setDateForEventCopy(newStart: string, newEnd: string) {
-    this.eventCopy.time.start = newStart
-    this.eventCopy.time.end = newEnd
+    this.eventCopy.start = newStart
+    this.eventCopy.end = newEnd
     this.updateCopy(this.eventCopy)
   }
 

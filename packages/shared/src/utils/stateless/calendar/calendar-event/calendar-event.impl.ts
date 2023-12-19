@@ -25,7 +25,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   constructor(
     private _config: CalendarConfigInternal,
     public id: EventId,
-    public time: { start: string; end: string },
+    public start: string,
+    public end: string,
     public title?: string,
     public people?: string[],
     public location?: string,
@@ -36,46 +37,46 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
   get _isSingleDayTimed(): boolean {
     return (
-      dateTimeStringRegex.test(this.time.start) &&
-      dateTimeStringRegex.test(this.time.end) &&
-      dateFromDateTime(this.time.start) === dateFromDateTime(this.time.end)
+      dateTimeStringRegex.test(this.start) &&
+      dateTimeStringRegex.test(this.end) &&
+      dateFromDateTime(this.start) === dateFromDateTime(this.end)
     )
   }
 
   get _isSingleDayFullDay(): boolean {
     return (
-      dateStringRegex.test(this.time.start) &&
-      dateStringRegex.test(this.time.end) &&
-      this.time.start === this.time.end
+      dateStringRegex.test(this.start) &&
+      dateStringRegex.test(this.end) &&
+      this.start === this.end
     )
   }
 
   get _isMultiDayTimed(): boolean {
     return (
-      dateTimeStringRegex.test(this.time.start) &&
-      dateTimeStringRegex.test(this.time.end) &&
-      dateFromDateTime(this.time.start) !== dateFromDateTime(this.time.end)
+      dateTimeStringRegex.test(this.start) &&
+      dateTimeStringRegex.test(this.end) &&
+      dateFromDateTime(this.start) !== dateFromDateTime(this.end)
     )
   }
 
   get _isMultiDayFullDay(): boolean {
     return (
-      dateStringRegex.test(this.time.start) &&
-      dateStringRegex.test(this.time.end) &&
-      this.time.start !== this.time.end
+      dateStringRegex.test(this.start) &&
+      dateStringRegex.test(this.end) &&
+      this.start !== this.end
     )
   }
 
   get _isSingleHybridDayTimed(): boolean {
     if (!this._config.isHybridDay) return false
     if (
-      !dateTimeStringRegex.test(this.time.start) ||
-      !dateTimeStringRegex.test(this.time.end)
+      !dateTimeStringRegex.test(this.start) ||
+      !dateTimeStringRegex.test(this.end)
     )
       return false
 
-    const startDate = dateFromDateTime(this.time.start)
-    const endDate = dateFromDateTime(this.time.end)
+    const startDate = dateFromDateTime(this.start)
+    const endDate = dateFromDateTime(this.end)
     const endDateMinusOneDay = toDateString(
       new Date(toJSDate(endDate).getTime() - 86400000)
     )
@@ -83,11 +84,9 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
     const dayBoundaries = this._config.dayBoundaries
     const eventStartTimePoints = timePointsFromString(
-      timeFromDateTime(this.time.start)
+      timeFromDateTime(this.start)
     )
-    const eventEndTimePoints = timePointsFromString(
-      timeFromDateTime(this.time.end)
-    )
+    const eventEndTimePoints = timePointsFromString(timeFromDateTime(this.end))
 
     return (
       (eventStartTimePoints >= dayBoundaries.start &&
@@ -117,7 +116,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   _getExternalEvent(): CalendarEventExternal {
     return {
       id: this.id,
-      time: this.time,
+      start: this.start,
+      end: this.end,
       title: this.title,
       people: this.people,
       location: this.location,

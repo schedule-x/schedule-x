@@ -24,10 +24,7 @@ describe('an internal calendar event', () => {
       hostPersonId: EVENT_HOST_PERSON_ID,
     }
 
-    const event = new CalendarEventBuilder(_config, '1', {
-      start: EVENT_START,
-      end: EVENT_END,
-    })
+    const event = new CalendarEventBuilder(_config, '1', EVENT_START, EVENT_END)
       .withTitle(EVENT_TITLE)
       .withLocation(EVENT_LOCATION)
       .withPeople(EVENT_PEOPLE)
@@ -40,8 +37,8 @@ describe('an internal calendar event', () => {
       const eventExternal = event._getExternalEvent()
 
       expect(eventExternal.id).toBe('1')
-      expect(eventExternal.time.start).toBe(EVENT_START)
-      expect(eventExternal.time.end).toBe(EVENT_END)
+      expect(eventExternal.start).toBe(EVENT_START)
+      expect(eventExternal.end).toBe(EVENT_END)
       expect(eventExternal.title).toBe(EVENT_TITLE)
       expect(eventExternal.location).toBe(EVENT_LOCATION)
       expect(eventExternal.people).toBe(EVENT_PEOPLE)
