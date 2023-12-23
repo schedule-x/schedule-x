@@ -11,12 +11,18 @@ describe('Calendar dark mode', () => {
   })
 
   it('should render events in the week view', () => {
-    cy.compareSnapshot('calendar-dark-mode__week-view', SNAPSHOT_FAULT_TOLERANCE)
+    cy.compareSnapshot(
+      'calendar-dark-mode__week-view',
+      SNAPSHOT_FAULT_TOLERANCE
+    )
   })
 
   it('should render events in the month view', () => {
     calendarHeader.openViewByLabel('Month')
-    cy.compareSnapshot('calendar-dark-mode__month-view', SNAPSHOT_FAULT_TOLERANCE)
+    cy.compareSnapshot(
+      'calendar-dark-mode__month-view',
+      SNAPSHOT_FAULT_TOLERANCE
+    )
   })
 
   it('should render events in the day view', () => {

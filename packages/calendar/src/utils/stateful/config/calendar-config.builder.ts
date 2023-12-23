@@ -44,7 +44,8 @@ export default class CalendarConfigBuilder
       this.calendars,
       this.plugins,
       this.isDark,
-      this.callbacks
+      this.callbacks,
+      {}
     )
   }
 

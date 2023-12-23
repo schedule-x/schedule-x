@@ -33,6 +33,15 @@ export type Plugins = {
   eventModal?: EventModalPlugin
 }
 
+export type CustomComponentFn = (
+  wrapperElement: HTMLElement,
+  props: Record<string, unknown>
+) => void
+
+export type CustomComponentFns = {
+  timeGridEvent?: CustomComponentFn
+}
+
 export default interface CalendarConfigInternal extends Config {
   defaultView: ViewName
   views: View[]
@@ -42,6 +51,7 @@ export default interface CalendarConfigInternal extends Config {
   plugins: Plugins
   isDark: boolean
   callbacks: CalendarCallbacks
+  _customComponentFns: CustomComponentFns
 
   // Getters
   isHybridDay: boolean
@@ -54,7 +64,11 @@ interface CalendarDatePickerConfigExternal
 interface ReducedCalendarConfigInternal
   extends Omit<
     CalendarConfigInternal,
-    'dayBoundaries' | 'isHybridDay' | 'plugins' | 'views'
+    | 'dayBoundaries'
+    | 'isHybridDay'
+    | 'plugins'
+    | 'views'
+    | '_customComponentFns'
   > {}
 
 export interface CalendarConfigExternal

@@ -42,7 +42,9 @@ addEventButton.addEventListener('click', () => {
   })
 })
 
-const updateEventButton = document.getElementById('update-event') as HTMLButtonElement
+const updateEventButton = document.getElementById(
+  'update-event'
+) as HTMLButtonElement
 updateEventButton.addEventListener('click', () => {
   const event = calendar.events.get(1)
   if (event) {
@@ -53,7 +55,9 @@ updateEventButton.addEventListener('click', () => {
   }
 })
 
-const removeEventButton = document.getElementById('remove-event') as HTMLButtonElement
+const removeEventButton = document.getElementById(
+  'remove-event'
+) as HTMLButtonElement
 removeEventButton.addEventListener('click', () => {
   calendar.events.remove('1')
 })

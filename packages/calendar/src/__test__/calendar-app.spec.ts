@@ -37,7 +37,7 @@ describe('CalendarApp', () => {
       calendarApp.events.add({
         id: '1',
         title: 'test',
-        time: sampleEventTime,
+        ...sampleEventTime,
       })
 
       expect((calendarApp as CalendarApp).events.getAll()).length(1)
@@ -51,7 +51,7 @@ describe('CalendarApp', () => {
       calendarApp.events.add({
         id: EVENT_ID,
         title: EVENT_TITLE,
-        time: sampleEventTime,
+        ...sampleEventTime,
       })
 
       const event = (calendarApp as CalendarApp).events.get(EVENT_ID)
@@ -66,7 +66,7 @@ describe('CalendarApp', () => {
       calendarApp.events.add({
         id: EVENT_ID,
         title: 'test',
-        time: sampleEventTime,
+        ...sampleEventTime,
       })
 
       expect((calendarApp as CalendarApp).events.get('2')).toBeUndefined()
@@ -78,7 +78,7 @@ describe('CalendarApp', () => {
       calendarApp.events.add({
         id: EVENT_ID,
         title: 'test',
-        time: sampleEventTime,
+        ...sampleEventTime,
       })
       expect((calendarApp as CalendarApp).events.getAll()).length(1)
 
@@ -96,7 +96,7 @@ describe('CalendarApp', () => {
       const INITIAL_EVENT = {
         id: EVENT_ID,
         title: INITIAL_TITLE,
-        time: sampleEventTime,
+        ...sampleEventTime,
       }
       calendarApp.events.add(INITIAL_EVENT)
       expect((calendarApp as CalendarApp).events.get(EVENT_ID)?.title).toBe(
