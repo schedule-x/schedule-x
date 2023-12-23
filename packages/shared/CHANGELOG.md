@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v0.4.0...v0.5.0-alpha.0) (2023-12-23)
+
+### Features
+
+- enable custom component time grid event ([#110](https://github.com/schedule-x/schedule-x/issues/110)) ([bdf5e6b](https://github.com/schedule-x/schedule-x/commit/bdf5e6b35279508c1c9ff724df05e496d7f82ad6))
+
 # [0.1.0-alpha.13](https://github.com/schedule-x/schedule-x/compare/v0.1.0-alpha.5...v0.1.0-alpha.13) (2023-11-25)
 
 ### Bug Fixes
