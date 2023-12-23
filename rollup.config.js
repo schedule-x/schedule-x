@@ -20,10 +20,8 @@ async function getSortedPackages(scope, ignore) {
     '@schedule-x/theme-default',
     '@schedule-x/eslint-config',
     '@schedule-x/prettier-config',
-  ];
-  filtered = filtered.filter(
-    (pkg) => !nonTSPackages.includes(pkg.name)
-  )
+  ]
+  filtered = filtered.filter((pkg) => !nonTSPackages.includes(pkg.name))
 
   return batchPackages(filtered).reduce((arr, batch) => arr.concat(batch), [])
 }

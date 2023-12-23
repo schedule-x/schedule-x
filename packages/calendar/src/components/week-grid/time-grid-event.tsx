@@ -18,7 +18,7 @@ import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stat
 import useEventInteractions from '../../utils/stateful/hooks/use-event-interactions'
 import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
 import { Fragment } from 'preact'
-import { getCustomComponentId } from './time-grid-event-utils'
+import { getCCID } from './time-grid-event-utils'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -81,11 +81,7 @@ export default function TimeGridEvent({
   }
 
   const customComponent = $app.config._customComponentFns.timeGridEvent
-  const customComponentId = getCustomComponentId(
-    customComponent,
-    calendarEvent,
-    isCopy
-  )
+  const customComponentId = getCCID(customComponent, calendarEvent, isCopy)
 
   useEffect(() => {
     if (!customComponent) return

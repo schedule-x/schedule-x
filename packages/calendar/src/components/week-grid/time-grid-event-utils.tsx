@@ -1,6 +1,6 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
-export const getCustomComponentId = (
+export const getCCID = (
   customComponent:
     | ((wrapperElement: HTMLElement, props: Record<string, unknown>) => void)
     | undefined,

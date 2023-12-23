@@ -3,7 +3,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Ted Mosby',
-    start: '2023-09-01 06:55', end: '2023-09-01 08:25',
+    start: '2023-09-01 06:55',
+    end: '2023-09-01 08:25',
     color: 'brown',
     isEditable: true,
     id: '4562e28b1660',
@@ -13,7 +14,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Ted Mosby',
-    start: '2023-09-01 07:35', end: '2023-09-01 09:05',
+    start: '2023-09-01 07:35',
+    end: '2023-09-01 09:05',
     color: 'blue',
     isEditable: true,
     id: 'a84de78fa5e6',
@@ -23,7 +25,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Barney Stinson',
-    start: '2023-09-01 14:30', end: '2023-09-01 16:00',
+    start: '2023-09-01 14:30',
+    end: '2023-09-01 16:00',
     color: 'blue',
     isEditable: true,
     id: '1ed20217e714',
@@ -32,7 +35,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Max Mustermann',
-    start: '2023-09-01 15:52', end: '2023-09-01 17:22',
+    start: '2023-09-01 15:52',
+    end: '2023-09-01 17:22',
     color: 'turquoise',
     isEditable: true,
     id: '868f8c12ad18',
@@ -41,7 +45,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Ross Geller',
-    start: '2023-09-01 15:52', end: '2023-09-01 17:22',
+    start: '2023-09-01 15:52',
+    end: '2023-09-01 17:22',
     color: 'pink',
     isEditable: true,
     id: '985aa109f952',
@@ -51,7 +56,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-09-01 18:00', end: '2023-09-01 19:30',
+    start: '2023-09-01 18:00',
+    end: '2023-09-01 19:30',
     color: 'blue',
     isEditable: true,
     id: '78ad918d4aa7',
@@ -60,7 +66,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Max Mustermann',
-    start: '2023-09-03', end: '2023-11-02',
+    start: '2023-09-03',
+    end: '2023-11-02',
     color: 'purple',
     isEditable: true,
     id: '55839923ae0b',
@@ -69,7 +76,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'John Doe',
-    start: '2023-09-03 03:47', end: '2023-09-03 04:47',
+    start: '2023-09-03 03:47',
+    end: '2023-09-03 04:47',
     color: 'yellow',
     isEditable: true,
     id: '3a87c2725878',
@@ -79,7 +87,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Ted Mosby',
-    start: '2023-09-03 17:10', end: '2023-09-03 17:55',
+    start: '2023-09-03 17:10',
+    end: '2023-09-03 17:55',
     color: 'blue',
     isEditable: true,
     id: 'fedee3003c2d',
@@ -87,7 +96,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Tom Österlund',
-    start: '2023-09-03 19:45', end: '2023-09-03 21:45',
+    start: '2023-09-03 19:45',
+    end: '2023-09-03 21:45',
     color: 'blue',
     isEditable: true,
     id: '03576ed7bf71',
@@ -98,7 +108,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Chandler Bing',
-    start: '2023-09-04', end: '2023-09-09',
+    start: '2023-09-04',
+    end: '2023-09-09',
     color: 'turquoise',
     isEditable: true,
     id: 'cd0de1026412',
@@ -107,7 +118,8 @@ export const smokeTestEvents = [
   {
     title: 'English essay deadline',
     with: 'Monica Geller',
-    start: '2023-09-04 02:50', end: '2023-09-04 03:20',
+    start: '2023-09-04 02:50',
+    end: '2023-09-04 03:20',
     color: 'purple',
     isEditable: true,
     id: 'f17fd5feb28f',
@@ -117,7 +129,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Barney Stinson',
-    start: '2023-09-04 07:15', end: '2023-09-04 09:15',
+    start: '2023-09-04 07:15',
+    end: '2023-09-04 09:15',
     color: 'pink',
     isEditable: true,
     id: '59ad2993953c',
@@ -127,7 +140,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Barney Stinson',
-    start: '2023-09-04 11:10', end: '2023-09-04 12:10',
+    start: '2023-09-04 11:10',
+    end: '2023-09-04 12:10',
     color: 'purple',
     isEditable: true,
     id: '47899f05117d',
@@ -137,7 +151,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Ted Mosby',
-    start: '2023-09-04 12:00', end: '2023-09-04 13:30',
+    start: '2023-09-04 12:00',
+    end: '2023-09-04 13:30',
     color: 'turquoise',
     isEditable: true,
     id: '8bdb020b796c',
@@ -146,7 +161,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Erika Musterfrau',
-    start: '2023-09-04 13:00', end: '2023-09-04 14:30',
+    start: '2023-09-04 13:00',
+    end: '2023-09-04 14:30',
     color: 'yellow',
     isEditable: true,
     id: '5e4ffc26787a',
@@ -154,7 +170,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Max Mustermann',
-    start: '2023-09-04 22:25', end: '2023-09-04 23:15',
+    start: '2023-09-04 22:25',
+    end: '2023-09-04 23:15',
     color: 'red',
     isEditable: true,
     id: '545b8b2a01fb',
@@ -163,7 +180,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Lily Aldrin',
-    start: '2023-09-05 00:55', end: '2023-09-05 02:55',
+    start: '2023-09-05 00:55',
+    end: '2023-09-05 02:55',
     color: 'yellow',
     isEditable: true,
     id: '4c5d0ee30a55',
@@ -173,7 +191,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Monica Geller',
-    start: '2023-09-05 18:20', end: '2023-09-05 19:20',
+    start: '2023-09-05 18:20',
+    end: '2023-09-05 19:20',
     color: 'blue',
     isEditable: true,
     id: '4dad57ee1bcd',
@@ -185,7 +204,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Joey Tribiani',
-    start: '2023-09-05 20:00', end: '2023-09-05 22:00',
+    start: '2023-09-05 20:00',
+    end: '2023-09-05 22:00',
     color: 'blue',
     isEditable: true,
     id: 'd81d80e073f4',
@@ -193,7 +213,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Lily Aldrin',
-    start: '2023-09-05 20:05', end: '2023-09-05 20:20',
+    start: '2023-09-05 20:05',
+    end: '2023-09-05 20:20',
     color: 'blue',
     isEditable: true,
     id: 'b2e2a366a5c3',
@@ -201,7 +222,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Alejandro Montes Oca de Munós',
-    start: '2023-09-05 22:00', end: '2023-09-05 23:30',
+    start: '2023-09-05 22:00',
+    end: '2023-09-05 23:30',
     color: 'yellow',
     isEditable: true,
     id: 'f103aab70786',
@@ -212,7 +234,8 @@ export const smokeTestEvents = [
   {
     title: 'Outdoor sports',
     with: 'Martin Gruber',
-    start: '2023-09-05 22:00', end: '2023-09-05 23:30',
+    start: '2023-09-05 22:00',
+    end: '2023-09-05 23:30',
     color: 'blue',
     isEditable: true,
     id: 'b7a9ece446f0',
@@ -222,7 +245,8 @@ export const smokeTestEvents = [
   {
     title: 'Outdoor sports',
     with: 'John Doe',
-    start: '2023-09-06', end: '2023-09-06',
+    start: '2023-09-06',
+    end: '2023-09-06',
     color: 'pink',
     isEditable: true,
     id: 'dcf9726f931c',
@@ -232,7 +256,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Chandler Bing',
-    start: '2023-09-06 20:35', end: '2023-09-06 22:35',
+    start: '2023-09-06 20:35',
+    end: '2023-09-06 22:35',
     color: 'blue',
     isEditable: true,
     id: '5aca0d541260',
@@ -241,7 +266,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Barney Stinson',
-    start: '2023-09-07 01:14', end: '2023-09-07 02:04',
+    start: '2023-09-07 01:14',
+    end: '2023-09-07 02:04',
     color: 'green',
     isEditable: true,
     id: '2a813e4578f0',
@@ -250,7 +276,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Robin Scherbatsky',
-    start: '2023-09-07 17:10', end: '2023-09-07 17:55',
+    start: '2023-09-07 17:10',
+    end: '2023-09-07 17:55',
     color: 'blue',
     isEditable: true,
     id: '8d4973889606',
@@ -260,7 +287,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Tom Österlund',
-    start: '2023-09-07 18:15', end: '2023-09-07 20:15',
+    start: '2023-09-07 18:15',
+    end: '2023-09-07 20:15',
     color: 'blue',
     isEditable: true,
     id: '6c054c80f015',
@@ -271,7 +299,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Tom Österlund',
-    start: '2023-09-07 21:55', end: '2023-09-07 22:10',
+    start: '2023-09-07 21:55',
+    end: '2023-09-07 22:10',
     color: 'yellow',
     isEditable: true,
     id: '3675d0f94c85',
@@ -282,7 +311,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Erika Musterfrau',
-    start: '2023-09-08 00:52', end: '2023-09-08 02:22',
+    start: '2023-09-08 00:52',
+    end: '2023-09-08 02:22',
     color: 'pink',
     isEditable: true,
     id: 'b5a464393464',
@@ -291,7 +321,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Monica Geller',
-    start: '2023-09-08 18:00', end: '2023-09-08 18:45',
+    start: '2023-09-08 18:00',
+    end: '2023-09-08 18:45',
     color: 'yellow',
     isEditable: true,
     id: 'a76066b47a90',
@@ -300,7 +331,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Pheobe Buffay',
-    start: '2023-09-09 01:20', end: '2023-09-09 02:20',
+    start: '2023-09-09 01:20',
+    end: '2023-09-09 02:20',
     color: 'blue',
     isEditable: true,
     id: 'd63794bb3aaa',
@@ -309,7 +341,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Pheobe Buffay',
-    start: '2023-09-09 05:14', end: '2023-09-09 06:44',
+    start: '2023-09-09 05:14',
+    end: '2023-09-09 06:44',
     color: 'blue',
     isEditable: true,
     id: 'aa819e1ccb63',
@@ -320,7 +353,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Monica Geller',
-    start: '2023-09-09 06:00', end: '2023-09-09 06:50',
+    start: '2023-09-09 06:00',
+    end: '2023-09-09 06:50',
     color: 'green',
     isEditable: true,
     id: 'ee904f53b3ff',
@@ -329,7 +363,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Rachel Greene',
-    start: '2023-09-09 14:50', end: '2023-09-09 15:50',
+    start: '2023-09-09 14:50',
+    end: '2023-09-09 15:50',
     color: 'red',
     isEditable: true,
     id: '61c15a14dc3f',
@@ -339,7 +374,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-09-10 00:00', end: '2023-09-10 01:30',
+    start: '2023-09-10 00:00',
+    end: '2023-09-10 01:30',
     color: 'blue',
     isEditable: true,
     id: '2be375c060f9',
@@ -350,7 +386,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Pheobe Buffay',
-    start: '2023-09-10 05:30', end: '2023-09-10 07:00',
+    start: '2023-09-10 05:30',
+    end: '2023-09-10 07:00',
     color: 'blue',
     isEditable: true,
     id: '70231b7432aa',
@@ -361,7 +398,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Rachel Greene',
-    start: '2023-09-10 09:14', end: '2023-09-10 11:14',
+    start: '2023-09-10 09:14',
+    end: '2023-09-10 11:14',
     color: 'blue',
     isEditable: true,
     id: 'cbef5c8e2ada',
@@ -371,7 +409,8 @@ export const smokeTestEvents = [
   {
     title: 'English essay deadline',
     with: 'Tom Österlund',
-    start: '2023-09-10 15:50', end: '2023-09-10 17:20',
+    start: '2023-09-10 15:50',
+    end: '2023-09-10 17:20',
     color: 'green',
     isEditable: true,
     id: '323c945fddfe',
@@ -381,7 +420,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Erika Musterfrau',
-    start: '2023-09-10 18:00', end: '2023-09-10 18:15',
+    start: '2023-09-10 18:00',
+    end: '2023-09-10 18:15',
     color: 'turquoise',
     isEditable: true,
     id: '70ff45884b3e',
@@ -389,7 +429,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Max Mustermann',
-    start: '2023-09-11 00:52', end: '2023-09-11 02:52',
+    start: '2023-09-11 00:52',
+    end: '2023-09-11 02:52',
     color: 'blue',
     isEditable: true,
     id: 'a79229b24426',
@@ -397,7 +438,8 @@ export const smokeTestEvents = [
   {
     title: 'Outdoor sports',
     with: 'Erika Musterfrau',
-    start: '2023-09-11 01:30', end: '2023-09-11 03:30',
+    start: '2023-09-11 01:30',
+    end: '2023-09-11 03:30',
     color: 'purple',
     isEditable: true,
     id: '31624536319b',
@@ -408,7 +450,8 @@ export const smokeTestEvents = [
   {
     title: 'English essay deadline',
     with: 'Chandler Bing',
-    start: '2023-09-11 10:00', end: '2023-09-11 11:00',
+    start: '2023-09-11 10:00',
+    end: '2023-09-11 11:00',
     color: 'blue',
     isEditable: true,
     id: '28f6bbfb218d',
@@ -418,7 +461,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Monica Geller',
-    start: '2023-09-11 20:40', end: '2023-09-11 22:40',
+    start: '2023-09-11 20:40',
+    end: '2023-09-11 22:40',
     color: 'red',
     isEditable: true,
     id: '6cc5443ebdcd',
@@ -428,7 +472,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Marshall Eriksen',
-    start: '2023-09-12 12:45', end: '2023-09-12 14:15',
+    start: '2023-09-12 12:45',
+    end: '2023-09-12 14:15',
     color: 'yellow',
     isEditable: true,
     id: '1c6436d7a0c1',
@@ -437,7 +482,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Alejandro Montes Oca de Munós',
-    start: '2023-09-13 14:00', end: '2023-09-13 14:50',
+    start: '2023-09-13 14:00',
+    end: '2023-09-13 14:50',
     color: 'green',
     isEditable: true,
     id: '83f27add8942',
@@ -447,7 +493,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Erika Musterfrau',
-    start: '2023-09-13 21:05', end: '2023-09-13 22:35',
+    start: '2023-09-13 21:05',
+    end: '2023-09-13 22:35',
     color: 'brown',
     isEditable: true,
     id: '488401cc1ff4',
@@ -456,7 +503,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Joey Tribiani',
-    start: '2023-09-15 23:00', end: '2023-09-16 00:30',
+    start: '2023-09-15 23:00',
+    end: '2023-09-16 00:30',
     color: 'blue',
     isEditable: true,
     id: 'acfa62299fbf',
@@ -465,7 +513,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Ted Mosby',
-    start: '2023-09-16 22:40', end: '2023-09-16 22:55',
+    start: '2023-09-16 22:40',
+    end: '2023-09-16 22:55',
     color: 'red',
     isEditable: true,
     id: '2fcf1fdff458',
@@ -475,7 +524,8 @@ export const smokeTestEvents = [
   {
     title: 'English essay deadline',
     with: 'Monica Geller',
-    start: '2023-09-17 13:35', end: '2023-09-17 14:20',
+    start: '2023-09-17 13:35',
+    end: '2023-09-17 14:20',
     color: 'pink',
     isEditable: true,
     id: '1ac33a1b3b79',
@@ -484,7 +534,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Robin Scherbatsky',
-    start: '2023-09-17 15:00', end: '2023-09-17 17:00',
+    start: '2023-09-17 15:00',
+    end: '2023-09-17 17:00',
     color: 'pink',
     isEditable: true,
     id: '6dfef32b640d',
@@ -496,7 +547,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Tom Österlund',
-    start: '2023-09-17 21:00', end: '2023-09-17 22:30',
+    start: '2023-09-17 21:00',
+    end: '2023-09-17 22:30',
     color: 'brown',
     isEditable: true,
     id: 'b95144c19747',
@@ -505,7 +557,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Chandler Bing',
-    start: '2023-09-18 05:30', end: '2023-09-18 07:00',
+    start: '2023-09-18 05:30',
+    end: '2023-09-18 07:00',
     color: 'red',
     isEditable: true,
     id: '39f25ca7029e',
@@ -516,7 +569,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Barney Stinson',
-    start: '2023-09-19 05:05', end: '2023-09-19 06:05',
+    start: '2023-09-19 05:05',
+    end: '2023-09-19 06:05',
     color: 'red',
     isEditable: true,
     id: 'dd7f98f17e85',
@@ -526,7 +580,8 @@ export const smokeTestEvents = [
   {
     title: 'English essay deadline',
     with: 'Barney Stinson',
-    start: '2023-09-19 12:35', end: '2023-09-19 14:05',
+    start: '2023-09-19 12:35',
+    end: '2023-09-19 14:05',
     color: 'blue',
     isEditable: true,
     id: '9542abf8f334',
@@ -535,7 +590,8 @@ export const smokeTestEvents = [
   {
     title: 'Outdoor sports',
     with: 'Max Mustermann',
-    start: '2023-09-19 13:50', end: '2023-09-19 14:50',
+    start: '2023-09-19 13:50',
+    end: '2023-09-19 14:50',
     color: 'yellow',
     isEditable: true,
     id: 'a87c5f6312e1',
@@ -545,7 +601,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Erika Musterfrau',
-    start: '2023-09-19 16:14', end: '2023-09-19 17:04',
+    start: '2023-09-19 16:14',
+    end: '2023-09-19 17:04',
     color: 'turquoise',
     isEditable: true,
     id: '0ac3c92a0e17',
@@ -554,7 +611,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Joey Tribiani',
-    start: '2023-09-19 21:00', end: '2023-09-19 21:45',
+    start: '2023-09-19 21:00',
+    end: '2023-09-19 21:45',
     color: 'purple',
     isEditable: true,
     id: '2dfb820d29b7',
@@ -563,7 +621,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Elisabeth Gruber',
-    start: '2023-09-20', end: '2023-09-27',
+    start: '2023-09-20',
+    end: '2023-09-27',
     color: 'purple',
     isEditable: true,
     id: '86a3b9bee1d7',
@@ -573,7 +632,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-09-20 02:00', end: '2023-09-20 03:00',
+    start: '2023-09-20 02:00',
+    end: '2023-09-20 03:00',
     color: 'blue',
     isEditable: true,
     id: '962c2e48f89b',
@@ -584,7 +644,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Alejandro Montes Oca de Munós',
-    start: '2023-09-20 10:30', end: '2023-09-20 11:15',
+    start: '2023-09-20 10:30',
+    end: '2023-09-20 11:15',
     color: 'brown',
     isEditable: true,
     id: '445766e3a682',
@@ -594,7 +655,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Rachel Greene',
-    start: '2023-09-20 14:15', end: '2023-09-20 15:45',
+    start: '2023-09-20 14:15',
+    end: '2023-09-20 15:45',
     color: 'yellow',
     isEditable: true,
     id: '8bfeb4bbb4c8',
@@ -603,7 +665,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Erika Musterfrau',
-    start: '2023-09-20 19:00', end: '2023-09-20 19:15',
+    start: '2023-09-20 19:00',
+    end: '2023-09-20 19:15',
     color: 'blue',
     isEditable: true,
     id: 'aa27d5246387',
@@ -613,7 +676,8 @@ export const smokeTestEvents = [
   {
     title: 'Intro to physics',
     with: 'Max Mustermann',
-    start: '2023-09-21 01:00', end: '2023-09-21 02:30',
+    start: '2023-09-21 01:00',
+    end: '2023-09-21 02:30',
     color: 'green',
     isEditable: true,
     id: 'b705590b3c9d',
@@ -623,7 +687,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Pheobe Buffay',
-    start: '2023-09-21 02:45', end: '2023-09-21 03:30',
+    start: '2023-09-21 02:45',
+    end: '2023-09-21 03:30',
     color: 'green',
     isEditable: true,
     id: 'b3533934d9ae',
@@ -631,7 +696,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Daphne',
     with: 'Pheobe Buffay',
-    start: '2023-09-21 06:10', end: '2023-09-21 07:00',
+    start: '2023-09-21 06:10',
+    end: '2023-09-21 07:00',
     color: 'blue',
     isEditable: true,
     id: '2ae15b12f88e',
@@ -642,7 +708,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Ross Geller',
-    start: '2023-09-21 09:00', end: '2023-09-21 10:30',
+    start: '2023-09-21 09:00',
+    end: '2023-09-21 10:30',
     color: 'turquoise',
     isEditable: true,
     id: '1ac6cc5478ab',
@@ -652,7 +719,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Monica Geller',
-    start: '2023-09-21 09:00', end: '2023-09-21 10:30',
+    start: '2023-09-21 09:00',
+    end: '2023-09-21 10:30',
     color: 'blue',
     isEditable: true,
     id: '54b6e370eeb0',
@@ -662,7 +730,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Ross Geller',
-    start: '2023-09-21 09:35', end: '2023-09-21 10:20',
+    start: '2023-09-21 09:35',
+    end: '2023-09-21 10:20',
     color: 'turquoise',
     isEditable: true,
     id: 'b1ca33289c58',
@@ -673,7 +742,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Chandler Bing',
-    start: '2023-09-22 19:30', end: '2023-09-22 20:30',
+    start: '2023-09-22 19:30',
+    end: '2023-09-22 20:30',
     color: 'blue',
     isEditable: true,
     id: '39220ffe8863',
@@ -684,7 +754,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'John Doe',
-    start: '2023-09-23 07:00', end: '2023-09-23 08:30',
+    start: '2023-09-23 07:00',
+    end: '2023-09-23 08:30',
     color: 'red',
     isEditable: true,
     id: 'bc2e660205a0',
@@ -694,7 +765,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Max Mustermann',
-    start: '2023-09-23 07:05', end: '2023-09-23 08:35',
+    start: '2023-09-23 07:05',
+    end: '2023-09-23 08:35',
     color: 'turquoise',
     isEditable: true,
     id: 'cfaf386d4600',
@@ -703,7 +775,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Monica Geller',
-    start: '2023-09-23 15:50', end: '2023-09-23 16:05',
+    start: '2023-09-23 15:50',
+    end: '2023-09-23 16:05',
     color: 'yellow',
     isEditable: true,
     id: 'fcf74e460a17',
@@ -712,7 +785,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Monica Geller',
-    start: '2023-09-24 00:20', end: '2023-09-24 00:35',
+    start: '2023-09-24 00:20',
+    end: '2023-09-24 00:35',
     color: 'turquoise',
     isEditable: true,
     id: '9c14f51634bc',
@@ -723,7 +797,8 @@ export const smokeTestEvents = [
   {
     title: 'Outdoor sports',
     with: 'Elisabeth Gruber',
-    start: '2023-09-24 02:40', end: '2023-09-24 04:40',
+    start: '2023-09-24 02:40',
+    end: '2023-09-24 04:40',
     color: 'pink',
     isEditable: true,
     id: 'c0b1bd82746d',
@@ -734,7 +809,8 @@ export const smokeTestEvents = [
   {
     title: 'Outdoor sports',
     with: 'Albert Einstein',
-    start: '2023-09-25 02:00', end: '2023-09-25 04:00',
+    start: '2023-09-25 02:00',
+    end: '2023-09-25 04:00',
     color: 'red',
     isEditable: true,
     id: '760a39f1b126',
@@ -743,7 +819,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting with Dora',
     with: 'Chandler Bing',
-    start: '2023-09-25 07:14', end: '2023-09-25 08:14',
+    start: '2023-09-25 07:14',
+    end: '2023-09-25 08:14',
     color: 'pink',
     isEditable: true,
     id: 'e3ecc767d0c8',
@@ -752,7 +829,8 @@ export const smokeTestEvents = [
   {
     title: 'English essay deadline',
     with: 'Lily Aldrin',
-    start: '2023-09-25 10:30', end: '2023-09-25 11:20',
+    start: '2023-09-25 10:30',
+    end: '2023-09-25 11:20',
     color: 'blue',
     isEditable: true,
     id: '4341560c017e',
@@ -761,7 +839,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'Rachel Greene',
-    start: '2023-09-25 11:20', end: '2023-09-25 12:05',
+    start: '2023-09-25 11:20',
+    end: '2023-09-25 12:05',
     color: 'turquoise',
     isEditable: true,
     id: '883feb2273de',
@@ -773,7 +852,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Monica Geller',
-    start: '2023-09-26', end: '2023-09-26',
+    start: '2023-09-26',
+    end: '2023-09-26',
     color: 'blue',
     isEditable: true,
     id: '26d523fe6627',
@@ -784,7 +864,8 @@ export const smokeTestEvents = [
   {
     title: 'English essay deadline',
     with: 'Erika Musterfrau',
-    start: '2023-09-26 17:35', end: '2023-09-26 17:50',
+    start: '2023-09-26 17:35',
+    end: '2023-09-26 17:50',
     color: 'blue',
     isEditable: true,
     id: 'aac4258fce64',
@@ -793,7 +874,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-09-27 11:52', end: '2023-09-27 13:22',
+    start: '2023-09-27 11:52',
+    end: '2023-09-27 13:22',
     color: 'pink',
     isEditable: true,
     id: '6c702009d02d',
@@ -804,7 +886,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Elisabeth Gruber',
-    start: '2023-09-27 14:00', end: '2023-09-27 15:30',
+    start: '2023-09-27 14:00',
+    end: '2023-09-27 15:30',
     color: 'green',
     isEditable: true,
     id: '4fdea380e8a7',
@@ -814,7 +897,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Joey Tribiani',
-    start: '2023-09-28 03:00', end: '2023-09-28 04:00',
+    start: '2023-09-28 03:00',
+    end: '2023-09-28 04:00',
     color: 'blue',
     isEditable: true,
     id: 'b6da60ac2676',
@@ -824,7 +908,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'John Doe',
-    start: '2023-09-28 05:10', end: '2023-09-28 06:10',
+    start: '2023-09-28 05:10',
+    end: '2023-09-28 06:10',
     color: 'red',
     isEditable: true,
     id: 'c094f28573b1',
@@ -832,7 +917,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-09-28 09:00', end: '2023-09-28 10:30',
+    start: '2023-09-28 09:00',
+    end: '2023-09-28 10:30',
     color: 'brown',
     isEditable: true,
     id: '53daca9cfe32',
@@ -841,7 +927,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Barney Stinson',
-    start: '2023-09-29 10:40', end: '2023-09-29 11:40',
+    start: '2023-09-29 10:40',
+    end: '2023-09-29 11:40',
     color: 'brown',
     isEditable: true,
     id: '43d803097d67',
@@ -852,7 +939,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Marshall Eriksen',
-    start: '2023-09-29 11:05', end: '2023-09-29 12:35',
+    start: '2023-09-29 11:05',
+    end: '2023-09-29 12:35',
     color: 'red',
     isEditable: true,
     id: '7acb1501031d',
@@ -861,7 +949,8 @@ export const smokeTestEvents = [
   {
     title: 'Introduction to algebra',
     with: 'John Doe',
-    start: '2023-09-29 16:35', end: '2023-09-29 18:35',
+    start: '2023-09-29 16:35',
+    end: '2023-09-29 18:35',
     color: 'blue',
     isEditable: true,
     id: 'd8d5bff80fc8',
@@ -870,7 +959,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Robin Scherbatsky',
-    start: '2023-09-29 17:30', end: '2023-09-29 19:00',
+    start: '2023-09-29 17:30',
+    end: '2023-09-29 19:00',
     color: 'green',
     isEditable: true,
     id: '9a92a658fcc2',
@@ -878,7 +968,8 @@ export const smokeTestEvents = [
   {
     title: 'Break',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-09-30 05:05', end: '2023-09-30 06:35',
+    start: '2023-09-30 05:05',
+    end: '2023-09-30 06:35',
     color: 'green',
     isEditable: true,
     id: '02a62d286f25',
@@ -888,7 +979,8 @@ export const smokeTestEvents = [
   {
     title: 'Meeting: John w. parents',
     with: 'Ted Mosby',
-    start: '2023-09-30 05:05', end: '2023-09-30 06:35',
+    start: '2023-09-30 05:05',
+    end: '2023-09-30 06:35',
     color: 'blue',
     isEditable: true,
     id: '6e33b07c1796',
@@ -897,7 +989,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-09-30 08:00', end: '2023-09-30 09:30',
+    start: '2023-09-30 08:00',
+    end: '2023-09-30 09:30',
     color: 'green',
     isEditable: true,
     id: '7e47961f3637',
@@ -906,7 +999,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Martin Gruber',
-    start: '2023-09-30 10:30', end: '2023-09-30 11:15',
+    start: '2023-09-30 10:30',
+    end: '2023-09-30 11:15',
     color: 'yellow',
     isEditable: true,
     id: 'd320d2227353',
@@ -917,7 +1011,8 @@ export const smokeTestEvents = [
   {
     title: 'Advanced algebra',
     with: 'Janina Elisabeth Parker Larson',
-    start: '2023-10-01 11:47', end: '2023-10-01 13:17',
+    start: '2023-10-01 11:47',
+    end: '2023-10-01 13:17',
     color: 'red',
     isEditable: true,
     id: '6dc6b064edd5',
