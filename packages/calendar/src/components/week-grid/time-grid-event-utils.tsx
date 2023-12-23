@@ -1,9 +1,8 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 
 export const getCCID = (
-  customComponent:
-    | ((wrapperElement: HTMLElement, props: Record<string, unknown>) => void)
-    | undefined,
+  customComponent: CustomComponentFn | undefined,
   calendarEvent: CalendarEventInternal,
   isCopy: boolean | undefined
 ) => {
