@@ -66,7 +66,7 @@ export default function DateGridEvent({
   let customComponentId = customComponent
     ? 'custom-date-grid-event-' + calendarEvent.id
     : undefined
-  if (isCopy) customComponentId += '-copy'
+  if (isCopy && customComponentId) customComponentId += '-copy'
 
   useEffect(() => {
     if (!customComponent) return
