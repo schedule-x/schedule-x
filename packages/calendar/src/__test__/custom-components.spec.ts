@@ -203,5 +203,19 @@ describe('CalendarApp', () => {
         eventEl.classList.contains('sx__date-grid-event--overflow-right')
       ).toBe(false)
     })
+
+    it('should have 0 padding', () => {
+      const eventEl = getFirstEventElement(calendarEl)
+      expect(eventEl.style.padding).toBe('0px')
+    })
+
+    it('should not subtract any event width for overflow', () => {
+      const event1 = getByCCID('1')
+      expect(event1.style.width).toBe('calc(100% - 2px)')
+      const event2 = getByCCID('2')
+      expect(event2.style.width).toBe('calc(300% - 2px)')
+      const event3 = getByCCID('3')
+      expect(event3.style.width).toBe('calc(500% - 2px)')
+    })
   })
 })

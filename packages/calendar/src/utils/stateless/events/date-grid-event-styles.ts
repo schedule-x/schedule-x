@@ -1,11 +1,14 @@
 export const getWidthToSubtract = (
   hasOverflowLeft: boolean,
-  hasOverflowRight: boolean
+  hasOverflowRight: boolean,
+  enableOverflowSubtraction: boolean
 ) => {
   let widthToSubtract = 2 // 2px for all events, to leave some space between them
   const eventOverflowMargin = 10 // CORRELATION ID: 1
-  if (hasOverflowLeft) widthToSubtract += eventOverflowMargin
-  if (hasOverflowRight) widthToSubtract += eventOverflowMargin
+  if (hasOverflowLeft && enableOverflowSubtraction)
+    widthToSubtract += eventOverflowMargin
+  if (hasOverflowRight && enableOverflowSubtraction)
+    widthToSubtract += eventOverflowMargin
   return widthToSubtract
 }
 

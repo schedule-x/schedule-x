@@ -1,5 +1,6 @@
+/* eslint-disable max-lines */
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -74,13 +75,17 @@ export default function DateGridEvent({
     customComponent(customComponentElement, { calendarEvent })
   }, [])
 
-  const eventClasses = ['sx__event', 'sx__date-grid-event', 'sx__date-grid-cell']
+  const eventClasses = [
+    'sx__event',
+    'sx__date-grid-event',
+    'sx__date-grid-cell',
+  ]
   if (isCopy) eventClasses.push(' sx__date-grid-event--copy')
   if (hasOverflowLeft) eventClasses.push(' sx__date-grid-event--overflow-left')
   if (hasOverflowRight)
     eventClasses.push(' sx__date-grid-event--overflow-right')
 
-  const borderLeftIsNoCustom = hasOverflowLeft
+  const borderLeftNonCustom = hasOverflowLeft
     ? 'none'
     : eventCSSVariables.borderLeft
   return (
@@ -96,10 +101,15 @@ export default function DateGridEvent({
         style={{
           width: `calc(${
             (calendarEvent._nDaysInGrid as number) * 100
-          }% - ${getWidthToSubtract(hasOverflowLeft, hasOverflowRight)}px)`,
+          }% - ${getWidthToSubtract(
+            hasOverflowLeft,
+            hasOverflowRight,
+            !customComponent
+          )}px)`,
           gridRow,
           display: eventCopy ? 'none' : 'flex',
-          borderLeft: customComponent ? undefined : borderLeftIsNoCustom,
+          padding: customComponent ? '0px' : undefined,
+          borderLeft: customComponent ? undefined : borderLeftNonCustom,
           color: customComponent ? undefined : eventCSSVariables.color,
           backgroundColor: customComponent
             ? undefined
