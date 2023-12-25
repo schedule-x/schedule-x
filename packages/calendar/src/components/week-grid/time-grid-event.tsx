@@ -19,6 +19,7 @@ import useEventInteractions from '../../utils/stateful/hooks/use-event-interacti
 import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
 import { Fragment } from 'preact'
 import { getCCID } from './time-grid-event-utils'
+import { getElementByCCID } from '../../utils/stateless/dom/getters'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -86,9 +87,7 @@ export default function TimeGridEvent({
   useEffect(() => {
     if (!customComponent) return
 
-    const customComponentElement = document.querySelector(
-      `[data-ccid="${customComponentId}"]`
-    ) as HTMLElement
+    const customComponentElement = getElementByCCID(customComponentId)
     customComponent(customComponentElement, { calendarEvent })
   }, [])
 

@@ -11,12 +11,15 @@ export const getWidthToSubtract = (
 
 export const getBorderRadius = (
   hasOverflowLeft: boolean,
-  hasOverflowRight: boolean
+  hasOverflowRight: boolean,
+  forceZeroRule: boolean
 ) => {
+  if (!forceZeroRule) return {}
+
   return {
-    borderBottomLeftRadius: hasOverflowLeft ? 0 : undefined,
-    borderTopLeftRadius: hasOverflowLeft ? 0 : undefined,
-    borderBottomRightRadius: hasOverflowRight ? 0 : undefined,
-    borderTopRightRadius: hasOverflowRight ? 0 : undefined,
+    borderBottomLeftRadius: hasOverflowLeft || forceZeroRule ? 0 : undefined,
+    borderTopLeftRadius: hasOverflowLeft || forceZeroRule ? 0 : undefined,
+    borderBottomRightRadius: hasOverflowRight || forceZeroRule ? 0 : undefined,
+    borderTopRightRadius: hasOverflowRight || forceZeroRule ? 0 : undefined,
   }
 }

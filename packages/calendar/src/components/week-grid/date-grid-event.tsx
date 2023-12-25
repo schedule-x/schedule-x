@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -10,6 +10,8 @@ import {
   getWidthToSubtract,
 } from '../../utils/stateless/events/date-grid-event-styles'
 import useEventInteractions from '../../utils/stateful/hooks/use-event-interactions'
+import { getElementByCCID } from '../../utils/stateless/dom/getters'
+import { Fragment } from 'preact'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -59,43 +61,76 @@ export default function DateGridEvent({
     dateFromDateTime(($app.calendarState.range.value as DateRange).end)
   const overflowStyles = { backgroundColor: eventCSSVariables.backgroundColor }
 
+  const customComponent = $app.config._customComponentFns.dateGridEvent
+  let customComponentId = customComponent
+    ? 'custom-date-grid-event-' + calendarEvent.id
+    : undefined
+  if (isCopy) customComponentId += '-copy'
+
+  useEffect(() => {
+    if (!customComponent) return
+
+    const customComponentElement = getElementByCCID(customComponentId)
+    customComponent(customComponentElement, { calendarEvent })
+  }, [])
+
+  const eventClasses = ['sx__event', 'sx__date-grid-event', 'sx__date-grid-cell']
+  if (isCopy) eventClasses.push(' sx__date-grid-event--copy')
+  if (hasOverflowLeft) eventClasses.push(' sx__date-grid-event--overflow-left')
+  if (hasOverflowRight)
+    eventClasses.push(' sx__date-grid-event--overflow-right')
+
+  const borderLeftIsNoCustom = hasOverflowLeft
+    ? 'none'
+    : eventCSSVariables.borderLeft
   return (
     <>
       <div
         id={
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
+        data-ccid={customComponentId}
         onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-        className={
-          'sx__date-grid-event sx__date-grid-cell sx__event' +
-          (isCopy ? ' sx__date-grid-event--copy' : '')
-        }
+        className={eventClasses.join(' ')}
         style={{
           width: `calc(${
             (calendarEvent._nDaysInGrid as number) * 100
           }% - ${getWidthToSubtract(hasOverflowLeft, hasOverflowRight)}px)`,
           gridRow,
-          ...eventCSSVariables,
           display: eventCopy ? 'none' : 'flex',
-          borderLeft: hasOverflowLeft ? 'none' : eventCSSVariables.borderLeft,
-          ...getBorderRadius(hasOverflowLeft, hasOverflowRight),
+          borderLeft: customComponent ? undefined : borderLeftIsNoCustom,
+          color: customComponent ? undefined : eventCSSVariables.color,
+          backgroundColor: customComponent
+            ? undefined
+            : eventCSSVariables.backgroundColor,
+          ...getBorderRadius(
+            hasOverflowLeft,
+            hasOverflowRight,
+            !!customComponent
+          ),
         }}
       >
-        {hasOverflowLeft && (
-          <div
-            className={'sx__date-grid-event--left-overflow'}
-            style={overflowStyles}
-          />
-        )}
+        {!customComponent && (
+          <Fragment>
+            {hasOverflowLeft && (
+              <div
+                className={'sx__date-grid-event--left-overflow'}
+                style={overflowStyles}
+              />
+            )}
 
-        <span className="sx__date-grid-event-text">{calendarEvent.title}</span>
+            <span className="sx__date-grid-event-text">
+              {calendarEvent.title}
+            </span>
 
-        {hasOverflowRight && (
-          <div
-            className={'sx__date-grid-event--right-overflow'}
-            style={overflowStyles}
-          />
+            {hasOverflowRight && (
+              <div
+                className={'sx__date-grid-event--right-overflow'}
+                style={overflowStyles}
+              />
+            )}
+          </Fragment>
         )}
       </div>
 
