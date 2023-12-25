@@ -40,6 +40,7 @@ export type CustomComponentFn = (
 
 export type CustomComponentFns = {
   timeGridEvent?: CustomComponentFn
+  dateGridEvent?: CustomComponentFn
 }
 
 export default interface CalendarConfigInternal extends Config {

@@ -53,6 +53,16 @@ describe('styles of DateGridEvent', () => {
 
       expect(oneDayEvent.style.width).toBe('calc(300% - 2px)')
     })
+
+    it('should not define any border radius', () => {
+      renderComponent($app, oneDayEventId, 1)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
+
+      expect(oneDayEvent.style.borderTopLeftRadius).toBe('')
+      expect(oneDayEvent.style.borderBottomLeftRadius).toBe('')
+      expect(oneDayEvent.style.borderTopRightRadius).toBe('')
+      expect(oneDayEvent.style.borderBottomRightRadius).toBe('')
+    })
   })
 
   describe('events with overflow', () => {
@@ -95,6 +105,27 @@ describe('styles of DateGridEvent', () => {
       const event = getEventByText(eventWithOverflowBothTitle)
 
       expect(event.style.width).toBe('calc(700% - 22px)')
+    })
+
+    it('should have 0 border radius on left side', () => {
+      renderComponent($app, eventWithOverflowLeftId, 2)
+      const event = getEventByText(eventWithOverflowLeftTitle)
+
+      expect(event.style.borderTopLeftRadius).toBe('0px')
+      expect(event.style.borderBottomLeftRadius).toBe('0px')
+
+      expect(event.style.borderTopRightRadius).toBe('')
+      expect(event.style.borderBottomRightRadius).toBe('')
+    })
+
+    it('should have 0 border radius on all sides', () => {
+      renderComponent($app, eventWithOverflowBothId, 7)
+      const event = getEventByText(eventWithOverflowBothTitle)
+
+      expect(event.style.borderTopLeftRadius).toBe('0px')
+      expect(event.style.borderBottomLeftRadius).toBe('0px')
+      expect(event.style.borderTopRightRadius).toBe('0px')
+      expect(event.style.borderBottomRightRadius).toBe('0px')
     })
   })
 })

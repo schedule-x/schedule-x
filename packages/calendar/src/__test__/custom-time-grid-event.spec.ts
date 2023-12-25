@@ -11,12 +11,15 @@ import CalendarApp from '../calendar.app'
 import { viewWeek } from '../views/week'
 import { spy } from 'sinon'
 
+const getFirstEventElement = (calendarEl: HTMLDivElement) =>
+  calendarEl.querySelector('.sx__event') as HTMLDivElement
+
 describe('CalendarApp', () => {
   afterEach(() => {
     cleanup()
   })
 
-  describe('Using a custom component for the time grid', () => {
+  describe('Using a custom component for the week time grid event', () => {
     let calendarApp: CalendarApp
     const calendarEl = document.createElement('div')
     document.body.appendChild(calendarEl)
@@ -64,6 +67,16 @@ describe('CalendarApp', () => {
     it('should not render any default markup', () => {
       const eventEl = calendarEl.querySelector('.sx__event')
       expect(eventEl?.innerHTML).toBe('')
+    })
+
+    it('should have 0 padding', () => {
+      const eventEl = getFirstEventElement(calendarEl)
+      expect(eventEl.style.padding).toBe('0px')
+    })
+
+    it('should have an undefined border', () => {
+      const eventEl = getFirstEventElement(calendarEl)
+      expect(eventEl.style.borderLeft).toBe('')
     })
   })
 })
