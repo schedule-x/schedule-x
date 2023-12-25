@@ -17,8 +17,6 @@ export const getBorderRadius = (
   hasOverflowRight: boolean,
   forceZeroRule: boolean
 ) => {
-  if (!forceZeroRule) return {}
-
   return {
     borderBottomLeftRadius: hasOverflowLeft || forceZeroRule ? 0 : undefined,
     borderTopLeftRadius: hasOverflowLeft || forceZeroRule ? 0 : undefined,
