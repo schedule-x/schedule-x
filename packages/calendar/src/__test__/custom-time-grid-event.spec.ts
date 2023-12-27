@@ -29,6 +29,7 @@ describe('CalendarApp', () => {
     const eventTitle = 'test title 123'
     const eventStart = '2020-01-01 04:00'
     const eventEnd = '2020-01-01 06:00'
+    const foreignPropertyValue = 'foreign property value'
 
     beforeEach(() => {
       calendarApp = createCalendar({
@@ -40,6 +41,7 @@ describe('CalendarApp', () => {
             title: eventTitle,
             start: eventStart,
             end: eventEnd,
+            foreignProperty: foreignPropertyValue,
           },
         ],
       })
@@ -61,6 +63,9 @@ describe('CalendarApp', () => {
         expect(callSecondArgument.calendarEvent.title).toBe(eventTitle)
         expect(callSecondArgument.calendarEvent.start).toBe(eventStart)
         expect(callSecondArgument.calendarEvent.end).toBe(eventEnd)
+        expect(callSecondArgument.calendarEvent.foreignProperty).toBe(
+          foreignPropertyValue
+        )
       })
     })
 

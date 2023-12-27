@@ -25,7 +25,7 @@ export default class CalendarApp {
    * Purpose: To be consumed by framework adapters for custom component rendering.
    * */
   _setCustomComponentFn(
-    fnId: 'timeGridEvent' | 'dateGridEvent',
+    fnId: 'timeGridEvent' | 'dateGridEvent' | 'monthGridEvent',
     fn: CustomComponentFn
   ) {
     this.$app.config._customComponentFns[fnId] = fn

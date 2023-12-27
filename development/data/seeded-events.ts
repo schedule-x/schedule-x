@@ -1,5 +1,11 @@
 export const seededEvents = [
   {
+    start: '2023-11-25 00:00',
+    end: '2023-12-27 01:00',
+    id: 'njkwehfje',
+    title: 'hello world'
+  },
+  {
     title: 'English essay deadline',
     with: 'Tom Österlund',
     start: '2023-12-01 11:30',
