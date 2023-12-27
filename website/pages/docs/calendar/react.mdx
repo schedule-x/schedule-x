@@ -1,8 +1,102 @@
 # React component
 
-import { Callout } from 'nextra/components'
+This page offers documentation for the React-specific usage of the Schedule-X calendar. For general documentation on
+configuring and interacting with the calendar, refer to the rest of the calendar documentation.
 
-<Callout type="info">
-  More documentation is coming soon. For now, refer to the react example
-  repository: https://github.com/schedule-x/react-example/blob/main/src/App.tsx
-</Callout>
+## Installing
+
+```bash copy
+npm install @schedule-x/react @schedule-x/theme-default
+```
+
+This installs the React component and the default theme. If you're using a package manager that does not automatically
+download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
+`preact`. This is for example the case for **yarn** and **npm < v7**.
+
+
+## Basic usage
+
+### Example
+
+```jsx
+import { useCalendarApp, Calendar } from '@schedule-x/react'
+import {
+  viewWeek,
+  viewDay,
+  viewMonthGrid,
+  viewMonthAgenda,
+} from '@schedule-x/calendar'
+
+import '@schedule-x/theme-default/dist/index.css'
+
+function CalendarApp() {
+  const calendar = useCalendarApp({
+    defaultView: viewMonthGrid.name,
+    views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
+    events: [
+      {
+        id: '1',
+        title: 'Event 1',
+        start: '2023-12-16',
+        end: '2023-12-16',
+      },
+    ],
+  })
+
+  return (
+    <div>
+      <Calendar calendarApp={calendar} />
+    </div>
+  )
+}
+
+export default CalendarApp
+```
+
+### Explanation
+
+#### Dependencies
+
+From `@schedule-x/react` you need to import the `Calendar` component and the `useCalendarApp` hook. From
+`@schedule-x/calendar` you need to import the views you want to use. This example uses all the
+available default views. Lastly, from `@schedule-x/theme-default` you import the default theme.
+
+#### Calendar app
+
+The `useCalendarApp` takes a [configuration object](/docs/calendar/configuration) as its single argument, and returns an
+instance of the calendar app. This instance contains some methods that you can use to interact with
+the calendar events and toggle between light and dark mode. For more on this, refer to the rest of the calendar docs
+which to a large extent also applies to the React component.
+
+#### Calendar component
+
+After configuring the calendar instance to your liking, you can pass it to the `Calendar` component as a prop. The
+component will then take care of rendering the calendar and all its views, meaning you should not call the `render`
+method on your own, as documented in other parts of this site.
+
+## Styles
+
+The Schedule-X calendar is a responsive component which aims to fit many screen sizes and use cases. To achieve this,
+it cannot be delivered with a fixed height or width of its own. You need to define the height and width of the
+wrapping element `.sx-react-calendar-wrapper` according to your needs. For a regular desktop application, something
+like this might do the trick for you:
+
+```css
+.sx-react-calendar-wrapper {
+  width: 100%;
+  height: 800px;
+  max-height: 90vh;
+}
+```
+
+## Custom components
+
+The Schedule-X calendar is built with customization in mind. Currently, you can use the following two custom
+components to write your own React components for parts of the calendar:
+
+| Component name  | Description                                                      | Props           |
+|-----------------|------------------------------------------------------------------|-----------------|
+| `timeGridEvent` | The component for timed events used in the week- and day views   | `calendarEvent` |
+| `dateGridEvent` | The component for all-day events used in the week- and day views | `calendarEvent` |
+
+An example of how to use these components can be found here: https://github.com/schedule-x/react-example/blob/main/src/App.tsx
