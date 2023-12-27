@@ -2,7 +2,9 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect } from 'preact/hooks'
+import { getElementByCCID } from '../../../utils/stateless/dom/getters'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 
 type props = {
   gridRow: number
@@ -19,16 +21,15 @@ export default function MonthGridEvent({
   const { createDragStartTimeout, setClickedEventIfNotDragging } =
     useEventInteractions($app)
 
-  const dateIsEventFirstDate = dateFromDateTime(calendarEvent.start) === date
+  const hasStartDate = dateFromDateTime(calendarEvent.start) === date
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {
-    borderLeft: dateIsEventFirstDate
+    borderLeft: hasStartDate
       ? `4px solid var(--sx-color-${calendarEvent._color})`
       : undefined,
     color: `var(--sx-color-on-${calendarEvent._color}-container)`,
     backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
-    gridRow,
     // CORRELATION ID: 2 (10px subtracted from width)
     // nDays * 100% for the width of each day + 1px for border - 10 px for horizontal gap between events
     width: `calc(${nDays * 100 + '%'} + ${nDays}px - 10px)`,
@@ -44,16 +45,43 @@ export default function MonthGridEvent({
     )
   }
 
+  const customComponent = $app.config._customComponentFns.monthGridEvent
+  const customComponentId = customComponent
+    ? 'custom-month-grid-event-' + randomStringId()
+    : undefined
+
+  useEffect(() => {
+    if (!customComponent) return
+
+    const customComponentElement = getElementByCCID(customComponentId)
+    customComponent(customComponentElement, {
+      calendarEvent: calendarEvent._getExternalEvent(),
+      hasStartDate,
+    })
+  }, [])
+
   return (
     <div
       draggable={!!$app.config.plugins.dragAndDrop}
       data-id={calendarEvent.id}
+      data-ccid={customComponentId}
       onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       className="sx__event sx__month-grid-event sx__month-grid-cell"
-      style={eventCSSVariables}
+      style={{
+        gridRow,
+        width: eventCSSVariables.width,
+        padding: customComponent ? '0px' : undefined,
+        borderLeft: customComponent ? undefined : eventCSSVariables.borderLeft,
+        color: customComponent ? undefined : eventCSSVariables.color,
+        backgroundColor: customComponent
+          ? undefined
+          : eventCSSVariables.backgroundColor,
+      }}
     >
-      <div className="sx__month-grid-event-title">{calendarEvent.title}</div>
+      {!customComponent && (
+        <div className="sx__month-grid-event-title">{calendarEvent.title}</div>
+      )}
     </div>
   )
 }

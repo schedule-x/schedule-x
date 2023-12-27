@@ -35,6 +35,7 @@ describe('CalendarApp', () => {
     const eventTitle1 = 'test title 123'
     const eventStart1 = '2020-01-01'
     const eventEnd1 = '2020-01-01'
+    const event1ForeignPropertyValue = 'foreign property 1'
 
     const eventId2 = '2'
     const eventTitle2 = 'test title 456'
@@ -56,6 +57,7 @@ describe('CalendarApp', () => {
             title: eventTitle1,
             start: eventStart1,
             end: eventEnd1,
+            foreignProperty: event1ForeignPropertyValue,
           },
           {
             id: eventId2,
@@ -90,6 +92,9 @@ describe('CalendarApp', () => {
         expect(callSecondArgument.calendarEvent.title).toBe(eventTitle1)
         expect(callSecondArgument.calendarEvent.start).toBe(eventStart1)
         expect(callSecondArgument.calendarEvent.end).toBe(eventEnd1)
+        expect(callSecondArgument.calendarEvent.foreignProperty).toBe(
+          event1ForeignPropertyValue
+        )
 
         const event2 = customComponentFn.getCalls()[0]
         const callFirstArgument2 = event2.args[0]

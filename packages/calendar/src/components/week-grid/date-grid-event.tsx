@@ -72,7 +72,9 @@ export default function DateGridEvent({
     if (!customComponent) return
 
     const customComponentElement = getElementByCCID(customComponentId)
-    customComponent(customComponentElement, { calendarEvent })
+    customComponent(customComponentElement, {
+      calendarEvent: calendarEvent._getExternalEvent(),
+    })
   }, [])
 
   const eventClasses = [
