@@ -20,6 +20,7 @@ import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/string
 import { Fragment } from 'preact'
 import { getCCID } from './time-grid-event-utils'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
+import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -100,6 +101,7 @@ export default function TimeGridEvent({
         }
         data-ccid={customComponentId}
         onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
+        onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         className={
           'sx__time-grid-event sx__event' + (isCopy ? ' is-event-copy' : '')

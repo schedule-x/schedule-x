@@ -66,6 +66,13 @@ const config = {
     onEventUpdate(updatedEvent) {
       console.log('onEventUpdate', updatedEvent)
     },
+
+    /**
+    * Is called when an event is clicked
+    * */
+    onEventClick(calendarEvent) {
+      console.log('onEventClick', calendarEvent)
+    }
   },
 }
 

@@ -5,6 +5,7 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import { useContext, useEffect } from 'preact/hooks'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
+import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
 
 type props = {
   gridRow: number
@@ -66,6 +67,7 @@ export default function MonthGridEvent({
       data-ccid={customComponentId}
       onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
+      onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
       className="sx__event sx__month-grid-event sx__month-grid-cell"
       style={{
         gridRow,

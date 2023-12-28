@@ -11,6 +11,11 @@ import { setNewDateAndPressEnter } from '@schedule-x/date-picker/src/components/
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import { openViewSelection } from '../../utils/stateless/testing/page-objects/view-selection'
 import { renderComponent } from './utils'
+import { createCalendarAppSingleton } from '../../factory'
+import { viewMonthGrid } from '../../views/month-grid'
+import { viewMonthAgenda } from '../../views/month-agenda'
+import { viewDay } from '../../views/day'
+import { viewWeek } from '../../views/week'
 
 describe('CalendarWrapper', () => {
   afterEach(() => {
@@ -66,6 +71,44 @@ describe('CalendarWrapper', () => {
           start: '2023-11-27 00:00',
           end: '2023-12-31 23:59',
         })
+      })
+    })
+  })
+
+  describe('Clicking an event', () => {
+    it.each([
+      InternalViewName.Week,
+      InternalViewName.MonthGrid,
+      InternalViewName.MonthAgenda,
+      InternalViewName.Day,
+    ])('should call the callback onEventClick in view %s', async (viewName) => {
+      const onEventClick = vi.fn()
+      const calendarEvent = {
+        id: '1',
+        start: '2023-12-01 00:00',
+        end: '2023-12-01 23:59',
+        title: 'Event 1',
+      }
+      const $app = createCalendarAppSingleton({
+        views: [viewMonthGrid, viewMonthAgenda, viewDay, viewWeek],
+        callbacks: {
+          onEventClick,
+        },
+        selectedDate: '2023-12-01',
+        defaultView: viewName,
+        events: [calendarEvent],
+      })
+
+      renderComponent($app)
+
+      await waitFor(() => {
+        screen.getByText('Event 1').click()
+      })
+
+      await waitFor(() => {
+        expect(onEventClick).toHaveBeenCalledTimes(1)
+
+        expect(onEventClick).toHaveBeenCalledWith(calendarEvent)
       })
     })
   })

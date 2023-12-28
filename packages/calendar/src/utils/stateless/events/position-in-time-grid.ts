@@ -23,7 +23,7 @@ export const positionInTimeGrid = (
     resetEventConcurrencyProperties(event)
     const range = $app.calendarState.range.value as DateRange
 
-    if (event.start >= range.start && event.end < range.end) {
+    if (event.start >= range.start && event.end <= range.end) {
       let date = dateFromDateTime(event.start)
       const timeFromStart = timeFromDateTime(event.start)
       if (
