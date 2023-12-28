@@ -1,18 +1,16 @@
 import {
+  afterEach,
+  beforeEach,
   describe,
   expect,
   it,
-  beforeEach,
-  afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createCalendar } from '../factory'
 import { cleanup, waitFor } from '@testing-library/preact'
 import CalendarApp from '../calendar.app'
 import { spy } from 'sinon'
 import { viewMonthAgenda } from '../views/month-agenda'
-
-const getFirstEventElement = (calendarEl: HTMLDivElement) =>
-  calendarEl.querySelector('.sx__event') as HTMLDivElement
+import { getFirstEventElement } from './utils'
 
 describe('CalendarApp', () => {
   afterEach(() => {

@@ -11,9 +11,7 @@ import { cleanup, waitFor } from '@testing-library/preact'
 import CalendarApp from '../calendar.app'
 import { viewWeek } from '../views/week'
 import { spy } from 'sinon'
-
-const getFirstEventElement = (calendarEl: HTMLDivElement) =>
-  calendarEl.querySelector('.sx__event') as HTMLDivElement
+import { getFirstEventElement } from './utils'
 
 const getByCCID = (id: string) =>
   document.querySelector(
