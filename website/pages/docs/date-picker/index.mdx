@@ -1,3 +1,27 @@
-import PageStubCallout from '../../../components/partials/callouts/page-stub-callout'
+# Getting Started
 
-<PageStubCallout />
+## 1. Install
+
+```bash copy
+npm install @schedule-x/date-picker @schedule-x/theme-default
+```
+
+## Setup
+
+```js copy
+import { createDatePicker } from '@schedule-x/date-picker'
+import '@schedule-x/theme-default/dist/date-picker.css'
+
+const datePicker = createDatePicker({
+  listeners: {
+    onChange: (date) => {
+      console.log('date changed', date)
+    }
+  },
+})
+datePicker.render(document.getElementById('date-picker'))
+```
+
+First, we create a date picker instance with the `createDatePicker` function. This function takes a configuration
+object as its only argument. With the `onChange` listener, this sets us up to react to the selection of a date.
+Finally, the `render` method is called, rendering the date picker into the element specified as the single argument.

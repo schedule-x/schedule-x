@@ -1,5 +1,6 @@
 {
   "index": "Getting started",
+  "configuration": "Configuration",
   "demo": {
     "title": "Demo",
     "href": "/demos/date-picker"
