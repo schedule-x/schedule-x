@@ -4,13 +4,14 @@ import { ViewName } from '../../types/calendar/view-name'
 import { View } from '../../types/calendar/view'
 import CalendarEventExternal from './calendar-event.interface'
 import {
-  DayBoundariesInternal,
   DayBoundariesExternal,
+  DayBoundariesInternal,
 } from '../../types/calendar/day-boundaries'
 import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin.interface'
 import PluginBase from '../plugin.interface'
 import EventModalPlugin from '../event-modal/event-modal.plugin'
 import { CalendarCallbacks } from './listeners.interface'
+import { CustomComponentFns } from './custom-component-fns'
 
 export type WeekOptions = {
   gridHeight: number
@@ -37,12 +38,6 @@ export type CustomComponentFn = (
   wrapperElement: HTMLElement,
   props: Record<string, unknown>
 ) => void
-
-export type CustomComponentFns = {
-  timeGridEvent?: CustomComponentFn
-  dateGridEvent?: CustomComponentFn
-  monthGridEvent?: CustomComponentFn
-}
 
 export default interface CalendarConfigInternal extends Config {
   defaultView: ViewName

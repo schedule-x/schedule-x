@@ -53,8 +53,7 @@ export default function MonthGridEvent({
   useEffect(() => {
     if (!customComponent) return
 
-    const customComponentElement = getElementByCCID(customComponentId)
-    customComponent(customComponentElement, {
+    customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
       hasStartDate,
     })

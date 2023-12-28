@@ -1,9 +1,11 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
+import { getElementByCCID } from '../../../utils/stateless/dom/getters'
+import { Fragment } from 'preact'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -19,21 +21,48 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
   }
 
+  const customComponent = $app.config._customComponentFns.monthAgendaEvent
+  const customComponentId = customComponent
+    ? 'custom-month-agenda-event-' + calendarEvent.id
+    : undefined
+
+  useEffect(() => {
+    if (!customComponent) return
+
+    customComponent(getElementByCCID(customComponentId), {
+      calendarEvent: calendarEvent._getExternalEvent(),
+    })
+  }, [])
+
   return (
     <div
       className="sx__event sx__month-agenda-event"
-      style={eventCSSVariables}
+      data-ccid={customComponentId}
+      style={{
+        backgroundColor: customComponent
+          ? undefined
+          : eventCSSVariables.backgroundColor,
+        color: customComponent ? undefined : eventCSSVariables.color,
+        borderLeft: customComponent ? undefined : eventCSSVariables.borderLeft,
+        padding: customComponent ? '0px' : undefined,
+      }}
       onClick={(e) => setClickedEvent(e, calendarEvent)}
     >
-      <div className="sx__month-agenda-event__title">{calendarEvent.title}</div>
+      {!customComponent && (
+        <Fragment>
+          <div className="sx__month-agenda-event__title">
+            {calendarEvent.title}
+          </div>
 
-      <div className="sx__month-agenda-event__time sx__month-agenda-event__has-icon">
-        <TimeIcon
-          strokeColor={`var(--sx-color-on-${calendarEvent._color}-container)`}
-        />
+          <div className="sx__month-agenda-event__time sx__month-agenda-event__has-icon">
+            <TimeIcon
+              strokeColor={`var(--sx-color-on-${calendarEvent._color}-container)`}
+            />
 
-        {getTimeStamp(calendarEvent, $app.config.locale)}
-      </div>
+            {getTimeStamp(calendarEvent, $app.config.locale)}
+          </div>
+        </Fragment>
+      )}
     </div>
   )
 }

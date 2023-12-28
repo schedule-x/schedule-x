@@ -87,8 +87,7 @@ export default function TimeGridEvent({
   useEffect(() => {
     if (!customComponent) return
 
-    const customComponentElement = getElementByCCID(customComponentId)
-    customComponent(customComponentElement, {
+    customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
   }, [])

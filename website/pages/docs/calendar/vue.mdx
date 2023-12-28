@@ -25,7 +25,7 @@ import {
   viewDay,
   viewWeek,
   viewMonthGrid,
-  viewMonthAgenda
+  viewMonthAgenda,
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
@@ -48,14 +48,11 @@ const calendarApp = createCalendar({
     },
   ],
 })
-
 </script>
 
 <template>
   <div>
-    <ScheduleXCalendar
-      :calendar-app="calendarApp"
-    />
+    <ScheduleXCalendar :calendar-app="calendarApp" />
   </div>
 </template>
 ```
@@ -87,7 +84,7 @@ The Schedule-X calendar is built with customization in mind. Currently, you can 
 using Vue slots or custom components:
 
 | Slot / Component name | Description                                                      | Props           |
-|-----------------------|------------------------------------------------------------------|-----------------|
+| --------------------- | ---------------------------------------------------------------- | --------------- |
 | `timeGridEvent`       | The component for timed events used in the week- and day views   | `calendarEvent` |
 | `dateGridEvent`       | The component for all-day events used in the week- and day views | `calendarEvent` |
 
@@ -97,9 +94,7 @@ An example of how to use these components can be found here: https://github.com/
 
 ```vue
 <template>
-  <ScheduleXCalendar
-    :calendar-app="calendarApp"
-  >
+  <ScheduleXCalendar :calendar-app="calendarApp">
     <template #timeGridEvent="{ calendarEvent }">
       <div class="event">
         {{ calendarEvent.title }}
@@ -114,10 +109,7 @@ An example of how to use these components can be found here: https://github.com/
 ```vue
 <script setup>
 import { ScheduleXCalendar } from '@schedule-x/vue'
-import {
-  createCalendar,
-  viewWeek,
-} from '@schedule-x/calendar'
+import { createCalendar, viewWeek } from '@schedule-x/calendar'
 import CustomTimeGridEvent from './some-path/CustomTimeGridEvent.vue'
 import '@schedule-x/theme-default/dist/index.css'
 
@@ -137,7 +129,6 @@ const calendarApp = createCalendar({
 const customComponents = {
   timeGridEvent: CustomTimeGridEvent,
 }
-
 </script>
 
 <template>
@@ -149,5 +140,3 @@ const customComponents = {
   </div>
 </template>
 ```
-
-
