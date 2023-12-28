@@ -16,6 +16,7 @@ const renderComponent = ($app: CalendarAppSingleton) => {
 
 const DATE_GRID_EVENT = '.sx__date-grid-event'
 const TIME_GRID_EVENT = '.sx__time-grid-event'
+
 describe('DayWrapper', () => {
   afterEach(() => {
     cleanup()
