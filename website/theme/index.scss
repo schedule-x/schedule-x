@@ -1,6 +1,9 @@
 @use 'mixins' as mixins;
 
 .page-wrapper {
+  max-width: 1000px;
+  min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
+  margin: 0 auto;
 
   input {
     outline-offset: unset;
@@ -9,19 +12,14 @@
   input:focus-visible {
     --tw-ring-offset-shadow: unset;
     --tw-ring-shadow: unset;
-    box-shadow: unset;
     --tw-ring-opacity: initial;
     --tw-ring-color: unset;
     --tw-ring-offset-width: unset;
     --tw-ring-offset-color: unset;
+
+    box-shadow: unset;
     outline-offset: unset;
   }
-}
-
-.page-wrapper {
-  max-width: 1000px;
-  min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
-  margin: 0 auto;
 }
 
 .logo-lg {
