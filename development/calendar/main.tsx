@@ -43,6 +43,10 @@ const calendar = createCalendar({
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
     },
+
+    onEventClick(event) {
+      console.log('onEventClick', event)
+    }
   },
   calendars: {
     personal: {

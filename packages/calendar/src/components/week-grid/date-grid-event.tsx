@@ -13,6 +13,7 @@ import {
 import useEventInteractions from '../../utils/stateful/hooks/use-event-interactions'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
+import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -98,6 +99,7 @@ export default function DateGridEvent({
         data-ccid={customComponentId}
         onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
+        onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
         className={eventClasses.join(' ')}
         style={{
           width: `calc(${

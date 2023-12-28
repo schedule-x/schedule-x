@@ -1,9 +1,9 @@
 export const seededEvents = [
   {
-    title: 'Advanced algebra',
+    title: 'Advanced algebra!!!!!',
     with: 'Alejandro Montes Oca de Munós',
-    start: '2023-12-01 10:10',
-    end: '2023-12-01 11:40',
+    start: '2023-12-28 00:00',
+    end: '2023-12-28 23:59',
     color: 'turquoise',
     isEditable: true,
     id: '6383520d736d',

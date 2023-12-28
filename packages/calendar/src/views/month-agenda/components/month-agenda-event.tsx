@@ -6,6 +6,7 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
+import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -34,6 +35,11 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     })
   }, [])
 
+  const onClick = (e: MouseEvent) => {
+    invokeOnEventClickCallback($app, calendarEvent)
+    setClickedEvent(e, calendarEvent)
+  }
+
   return (
     <div
       className="sx__event sx__month-agenda-event"
@@ -46,7 +52,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
         borderLeft: customComponent ? undefined : eventCSSVariables.borderLeft,
         padding: customComponent ? '0px' : undefined,
       }}
-      onClick={(e) => setClickedEvent(e, calendarEvent)}
+      onClick={(e) => onClick(e)}
     >
       {!customComponent && (
         <Fragment>
