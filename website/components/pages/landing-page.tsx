@@ -19,7 +19,10 @@ export default function LandingPage() {
           and date picker
         </h1>
 
-        <h2>React, Vue and plain JS components that make scheduling simple and elegant in your web project</h2>
+        <h2>
+          React, Vue and plain JS components that make scheduling simple and
+          elegant in your web project
+        </h2>
 
         <div className={'landingPageActions'}>
           <Link href={'/demos/calendar'}>
