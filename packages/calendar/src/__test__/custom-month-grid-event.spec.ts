@@ -10,9 +10,7 @@ import { cleanup, waitFor } from '@testing-library/preact'
 import CalendarApp from '../calendar.app'
 import { spy } from 'sinon'
 import { viewMonthGrid } from '../views/month-grid'
-
-const getFirstEventElement = (calendarEl: HTMLDivElement) =>
-  calendarEl.querySelector('.sx__event') as HTMLDivElement
+import { getFirstEventElement } from './utils'
 
 describe('CalendarApp', () => {
   afterEach(() => {

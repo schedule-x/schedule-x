@@ -11,9 +11,7 @@ import { cleanup, waitFor } from '@testing-library/preact'
 import CalendarApp from '../calendar.app'
 import { viewWeek } from '../views/week'
 import { spy } from 'sinon'
-
-const getFirstEventElement = (calendarEl: HTMLDivElement) =>
-  calendarEl.querySelector('.sx__event') as HTMLDivElement
+import { getFirstEventElement } from './utils'
 
 const getByCCID = (id: string) =>
   document.querySelector(
@@ -85,7 +83,7 @@ describe('CalendarApp', () => {
         const event1 = customComponentFn.getCalls()[1]
         const callFirstArgument = event1.args[0]
         const callSecondArgument = event1.args[1]
-        expect(callFirstArgument).toBeInstanceOf(HTMLElement)
+        expect(callFirstArgument).toBeInstanceOf(HTMLDivElement)
         const elementCCID = callFirstArgument.dataset.ccid
         expect(elementCCID).toBe('custom-date-grid-event-1')
         expect(callSecondArgument.calendarEvent.id).toBe(eventId1)
@@ -99,7 +97,7 @@ describe('CalendarApp', () => {
         const event2 = customComponentFn.getCalls()[0]
         const callFirstArgument2 = event2.args[0]
         const callSecondArgument2 = event2.args[1]
-        expect(callFirstArgument2).toBeInstanceOf(HTMLElement)
+        expect(callFirstArgument2).toBeInstanceOf(HTMLDivElement)
         const elementCCID2 = callFirstArgument2.dataset.ccid
         expect(elementCCID2).toBe('custom-date-grid-event-2')
         expect(callSecondArgument2.calendarEvent.id).toBe(eventId2)
@@ -110,7 +108,7 @@ describe('CalendarApp', () => {
         const event3 = customComponentFn.getCalls()[2]
         const callFirstArgument3 = event3.args[0]
         const callSecondArgument3 = event3.args[1]
-        expect(callFirstArgument3).toBeInstanceOf(HTMLElement)
+        expect(callFirstArgument3).toBeInstanceOf(HTMLDivElement)
         const elementCCID3 = callFirstArgument3.dataset.ccid
         expect(elementCCID3).toBe('custom-date-grid-event-3')
         expect(callSecondArgument3.calendarEvent.id).toBe(eventId3)
