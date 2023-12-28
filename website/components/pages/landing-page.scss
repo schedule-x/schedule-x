@@ -1,5 +1,7 @@
 @use '../../theme/mixins' as mixins;
 
+$heading-width: 700px;
+
 .landingPage {
   position: relative;
   width: 100%;
@@ -26,10 +28,10 @@
 }
 
 .landingPage h1 {
-  max-width: 700px;
+  max-width: $heading-width;
   font-size: 3.25rem;
   font-weight: 700;
-  margin: 3rem auto 1rem auto;
+  margin: 3rem auto 1rem;
   text-align: center;
   text-wrap: balance;
   color: #002c61;
@@ -46,10 +48,10 @@
 }
 
 .landingPage h2 {
-  max-width: 700px;
+  max-width: $heading-width;
   font-size: 1.75rem;
   font-weight: 400;
-  margin: 0 auto 2rem auto;
+  margin: 0 auto 2rem;
   text-align: center;
   text-wrap: balance;
   color: #8290ac;
