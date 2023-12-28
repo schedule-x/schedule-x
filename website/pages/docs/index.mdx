@@ -1,14 +1,29 @@
 # Welcome to Schedule-X
 
-Schedule-X is a library of scheduling components for the web. It is built on top of the virtual DOM implementation
-of Preact, in order to remain lightweight and framework-agnostic. This means
-that you can use its calendar and date picker in React, Vue,
-Angular, or any other web application framework.
+## Mission
 
-import { Callout } from 'nextra/components'
+The world largely stays organized through calendars. We open them in the morning at work on our laptop, to get a
+grasp of what's awaiting us for the day. We open them on our phones when our friends ask us if we're free next
+weekend. If our eyes are tired, we might want to switch to dark mode.
 
-<Callout type="info" emoji="💡">
-  This library is still in a pre-release state, and it's API may be subject to
-  change. If you use it, consider pinning your dependency to a specific version
-  until v1.0.0 is released.
-</Callout>
+Schedule-X aims to fill a gap in the space of web calendars, offering scheduling components that meet **all the most
+common needs** of web apps, such as responsiveness, accessibility, dark- and light modes and being intuitive.
+Schedule-X tries to achieve all of this through being very petty about performance, small details, and through
+leaning heavily on Google's [Material Design 3](https://m3.material.io/).
+
+## Quick links
+
+import { Cards } from 'nextra/components'
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Calendar documentation"
+    href="/docs/calendar"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Date picker documentation"
+    href="/docs/date-picker"
+  ></Cards.Card>
+</Cards>

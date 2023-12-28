@@ -1,8 +1,13 @@
 @use '../../theme/mixins' as mixins;
 
+$heading-width: 700px;
+
 .landingPage {
   position: relative;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @include mixins.smaller-screens {
     padding: 0 1.5rem;
@@ -23,15 +28,41 @@
 }
 
 .landingPage h1 {
-  max-width: 700px;
-  font-size: 3rem;
+  max-width: $heading-width;
+  font-size: 3.25rem;
   font-weight: 700;
-  margin: 1rem 0;
-  margin-top: 2rem;
+  margin: 3rem auto 1rem;
+  text-align: center;
+  text-wrap: balance;
+  color: #002c61;
+
+  .dark & {
+    color: #d0bcff;
+  }
 
   @include mixins.smaller-screens {
     font-size: 2.5rem;
     margin-top: 1rem;
+    text-wrap: initial;
+  }
+}
+
+.landingPage h2 {
+  max-width: $heading-width;
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin: 0 auto 2rem;
+  text-align: center;
+  text-wrap: balance;
+  color: #8290ac;
+
+  .dark & {
+    color: #e1daf1;
+  }
+
+  @include mixins.smaller-screens {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -59,6 +90,7 @@
 
   @include mixins.mobile-screens {
     flex-direction: column;
+    width: 100%;
   }
 }
 
