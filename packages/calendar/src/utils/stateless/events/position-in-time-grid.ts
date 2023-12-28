@@ -22,7 +22,6 @@ export const positionInTimeGrid = (
   for (const event of timeGridEvents) {
     resetEventConcurrencyProperties(event)
     const range = $app.calendarState.range.value as DateRange
-    console.log(range.end)
 
     if (event.start >= range.start && event.end <= range.end) {
       let date = dateFromDateTime(event.start)

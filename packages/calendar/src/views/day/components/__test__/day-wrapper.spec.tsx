@@ -14,12 +14,14 @@ const renderComponent = ($app: CalendarAppSingleton) => {
   render(<DayWrapper $app={$app} id={'randomstring'} />)
 }
 
+const DATE_GRID_EVENT = '.sx__date-grid-event'
+const TIME_GRID_EVENT = '.sx__time-grid-event'
 describe('DayWrapper', () => {
   afterEach(() => {
     cleanup()
   })
 
-  describe('When an event is oen minute too long to fit in the time grid', () => {
+  describe('When an event is one minute too long to fit in the time grid', () => {
     it('should render a date grid event but no time grid event', () => {
       const calendarEvent = {
         id: 1,
@@ -34,8 +36,8 @@ describe('DayWrapper', () => {
 
       renderComponent($app)
 
-      expect(document.querySelector('.sx__date-grid-event')).toBeTruthy()
-      expect(document.querySelector('.sx__time-grid-event')).toBeFalsy()
+      expect(document.querySelector(DATE_GRID_EVENT)).toBeTruthy()
+      expect(document.querySelector(TIME_GRID_EVENT)).toBeFalsy()
     })
   })
 
@@ -54,8 +56,8 @@ describe('DayWrapper', () => {
 
       renderComponent($app)
 
-      expect(document.querySelector('.sx__date-grid-event')).toBeFalsy()
-      expect(document.querySelector('.sx__time-grid-event')).toBeTruthy()
+      expect(document.querySelector(DATE_GRID_EVENT)).toBeFalsy()
+      expect(document.querySelector(TIME_GRID_EVENT)).toBeTruthy()
     })
   })
 })
