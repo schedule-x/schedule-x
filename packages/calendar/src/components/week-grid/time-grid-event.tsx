@@ -93,6 +93,11 @@ export default function TimeGridEvent({
     })
   }, [])
 
+  const handleOnClick = (e: MouseEvent) => {
+    e.stopPropagation()
+    invokeOnEventClickCallback($app, calendarEvent)
+  }
+
   return (
     <>
       <div
@@ -101,7 +106,7 @@ export default function TimeGridEvent({
         }
         data-ccid={customComponentId}
         onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
-        onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
+        onClick={handleOnClick}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         className={
           'sx__time-grid-event sx__event' + (isCopy ? ' is-event-copy' : '')

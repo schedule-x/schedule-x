@@ -8,6 +8,7 @@ import { timeStringFromTimePoints } from '@schedule-x/shared/src/utils/stateless
 import { setTimeInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
+import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datetime/grid-click-to-datetime'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -39,8 +40,17 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   const sortedEvents = calendarEvents.sort(sortEventsByStart)
   const eventsWithConcurrency = handleEventConcurrency(sortedEvents)
 
+  const handleOnClick = (e: MouseEvent) => {
+    if (!$app.config.callbacks.onClickDateTime) return
+
+    const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
+    if (clickDateTime) {
+      $app.config.callbacks.onClickDateTime(clickDateTime)
+    }
+  }
+
   return (
-    <div className="sx__time-grid-day">
+    <div className="sx__time-grid-day" onClick={handleOnClick}>
       {eventsWithConcurrency.map((event) => (
         <TimeGridEvent
           key={event.id}
