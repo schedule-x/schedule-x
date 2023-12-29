@@ -72,7 +72,7 @@ export default function MonthGridEvent({
       data-ccid={customComponentId}
       onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-      onClick={(e) => handleOnClick(e)}
+      onClick={handleOnClick}
       className="sx__event sx__month-grid-event sx__month-grid-cell"
       style={{
         gridRow,
