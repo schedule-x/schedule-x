@@ -11,6 +11,7 @@ import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/string
 import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pin-icon'
 import DescriptionIcon from '@schedule-x/shared/src/components/icons/description-icon'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { useIconColors } from './utils/stateful/use-icon-colors'
 
 export default function EventModal({ $app }: EventModalProps) {
   const modalId = randomStringId()
@@ -36,8 +37,7 @@ export default function EventModal({ $app }: EventModalProps) {
     return () => document.removeEventListener('click', clickOutsideListener)
   }, [])
 
-  let iconColor = '#000'
-  if ($app.config.isDark) iconColor = 'var(--sx-color-neutral-variant)'
+  const iconColor = useIconColors($app)
 
   return (
     <>
@@ -58,15 +58,14 @@ export default function EventModal({ $app }: EventModalProps) {
           </div>
 
           <div className="sx__has-icon sx__event-modal__time">
-            {/*todo: fix stroke color for dark mode*/}
-            <TimeIcon strokeColor={iconColor} />
+            <TimeIcon strokeColor={iconColor.value} />
 
             {getTimeStamp(calendarEvent, $app.config.locale)}
           </div>
 
           {calendarEvent.people && calendarEvent.people.length && (
             <div className="sx__has-icon sx__event-modal__people">
-              <UserIcon strokeColor={iconColor} />
+              <UserIcon strokeColor={iconColor.value} />
 
               {concatenatePeople(calendarEvent.people)}
             </div>
@@ -74,7 +73,7 @@ export default function EventModal({ $app }: EventModalProps) {
 
           {calendarEvent.location && (
             <div className="sx__has-icon sx__event-modal__location">
-              <LocationPinIcon strokeColor={iconColor} />
+              <LocationPinIcon strokeColor={iconColor.value} />
 
               {calendarEvent.location}
             </div>
@@ -82,7 +81,7 @@ export default function EventModal({ $app }: EventModalProps) {
 
           {calendarEvent.description && (
             <div className="sx__has-icon sx__event-modal__description">
-              <DescriptionIcon strokeColor={iconColor} />
+              <DescriptionIcon strokeColor={iconColor.value} />
 
               {calendarEvent.description}
             </div>

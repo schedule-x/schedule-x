@@ -2,6 +2,7 @@ import { stubInterface } from 'ts-sinon'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { signal } from '@preact/signals'
 
 const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()
@@ -29,6 +30,7 @@ export const setup = () => {
   $app.elements.calendarWrapper = calendarWrapperEl
   $app.config.plugins = {}
   $app.config.plugins.eventModal = eventModalPlugin
+  $app.calendarState.isDark = signal(false)
   return { $app, calendarEvent }
 }
 
