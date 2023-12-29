@@ -60,6 +60,11 @@ export default function MonthGridEvent({
     })
   }, [])
 
+  const handleOnClick = (e: MouseEvent) => {
+    e.stopPropagation() // prevent the click from bubbling up to the day element
+    invokeOnEventClickCallback($app, calendarEvent)
+  }
+
   return (
     <div
       draggable={!!$app.config.plugins.dragAndDrop}
@@ -67,7 +72,7 @@ export default function MonthGridEvent({
       data-ccid={customComponentId}
       onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-      onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
+      onClick={handleOnClick}
       className="sx__event sx__month-grid-event sx__month-grid-cell"
       style={{
         gridRow,

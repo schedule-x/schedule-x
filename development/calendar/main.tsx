@@ -26,15 +26,15 @@ const calendar = createCalendar({
   locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
-  defaultView: viewMonthGrid.name,
+  defaultView: viewWeek.name,
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
   // dayBoundaries: {
   //   start: '06:00',
-  //   end: '03:00',
+  //   end: '18:00',
   // },
-  // isDark: true,
+  isDark: true,
   callbacks: {
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
@@ -46,6 +46,14 @@ const calendar = createCalendar({
 
     onEventClick(event) {
       console.log('onEventClick', event)
+    },
+
+    onClickDate(date) {
+      console.log('onClickDate', date)
+    },
+
+    onClickDateTime(dateTime) {
+      console.log('onClickDateTime', dateTime)
     }
   },
   calendars: {

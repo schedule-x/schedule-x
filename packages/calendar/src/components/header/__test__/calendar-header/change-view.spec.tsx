@@ -11,6 +11,7 @@ import { viewDay } from '../../../../views/day'
 import { viewWeek } from '../../../../views/week'
 import { viewMonthGrid } from '../../../../views/month-grid'
 import { openViewSelection } from '../../../../utils/stateless/testing/page-objects/view-selection'
+import { clickByText } from '../../../../utils/stateless/testing/click-by-text'
 
 describe('CalendarHeader', () => {
   beforeEach(() => {
@@ -29,10 +30,7 @@ describe('CalendarHeader', () => {
       expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeTruthy()
 
       openViewSelection()
-
-      await waitFor(() => {
-        screen.getByText('Month').click() // select month view
-      })
+      await clickByText('Month') // select month view
 
       await waitFor(() => {
         expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeFalsy()
@@ -52,10 +50,7 @@ describe('CalendarHeader', () => {
       expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeTruthy()
 
       openViewSelection()
-
-      await waitFor(() => {
-        screen.getByText('Week').click() // select week view
-      })
+      await clickByText('Week') // select week view
 
       await waitFor(() => {
         expect(screen.queryByText(expectedRangeHeadingBeforeChange)).toBeFalsy()

@@ -5,4 +5,6 @@ export interface CalendarCallbacks {
   onEventUpdate?: (event: CalendarEventExternal) => void
   onEventClick?: (event: CalendarEventExternal) => void
   onRangeUpdate?: (range: DateRange) => void
+  onClickDate?: (date: string) => void
+  onClickDateTime?: (dateTime: string) => void
 }
