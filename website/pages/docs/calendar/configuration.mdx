@@ -72,6 +72,20 @@ const config = {
     * */
     onEventClick(calendarEvent) {
       console.log('onEventClick', calendarEvent)
+    },
+
+    /**
+    * Is called when clicking a date in the month grid
+    * */
+    onClickDate(date) {
+      console.log('onClickDate', date) // e.g. 2024-01-01
+    },
+
+    /**
+    * Is called when clicking somewhere in the time grid of a week or day view
+    * */
+    onClickDateTime(dateTime) {
+      console.log('onClickDateTime', dateTime) // e.g. 2024-01-01 12:37
     }
   },
 }
