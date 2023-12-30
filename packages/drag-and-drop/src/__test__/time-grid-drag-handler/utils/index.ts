@@ -1,10 +1,10 @@
 export const dragEventNQuarters = (
   clickEvent: MouseEvent,
   nStepsToDrag: number,
-  direction: 'up' | 'down'
+  direction: 'up' | 'down',
+  pixelPerQuarterHour = 16.6666666667
 ) => {
   let currentY = clickEvent.clientY
-  const pixelPerQuarterHour = 16.6666666667
   for (let i = 0; i < nStepsToDrag; i++) {
     if (direction === 'down') {
       currentY += pixelPerQuarterHour
@@ -18,4 +18,12 @@ export const dragEventNQuarters = (
     } as MouseEvent
     document.dispatchEvent(new MouseEvent('mousemove', event))
   }
+}
+
+export const dragEventNQuarters12HourGrid = (
+  clickEvent: MouseEvent,
+  nStepsToDrag: number,
+  direction: 'up' | 'down'
+) => {
+  dragEventNQuarters(clickEvent, nStepsToDrag, direction, 16.6666666667 * 2)
 }
