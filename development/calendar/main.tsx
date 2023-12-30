@@ -31,8 +31,8 @@ const calendar = createCalendar({
   //   selectedDate: '2023-11-01'
   // },
   // dayBoundaries: {
-  //   start: '06:00',
-  //   end: '18:00',
+  //   start: '03:00',
+  //   end: '15:00',
   // },
   isDark: true,
   callbacks: {
