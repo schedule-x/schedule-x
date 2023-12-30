@@ -47,7 +47,7 @@ const config: DocsThemeConfig = {
       />
       <meta
         property="og:image"
-        content="https://schedule-x.s3.eu-west-1.amazonaws.com/SX-logo-icon.png"
+        content="https://schedule-x.s3.eu-west-1.amazonaws.com/logo_open_graph.png"
       />
     </>
   ),
