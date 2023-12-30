@@ -28,7 +28,9 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number
   ) {
     this.dayWidth = (
-      document.querySelector('.sx__time-grid-day') as HTMLDivElement
+      ($app.elements.calendarWrapper as HTMLElement).querySelector(
+        '.sx__time-grid-day'
+      ) as HTMLDivElement
     ).clientWidth
     this.originalStart = this.eventCopy.start
     this.originalEnd = this.eventCopy.end
@@ -116,8 +118,10 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private transformEventCopyPosition(totalDaysDiff: number) {
-    const copyElement = document.getElementById(
-      getTimeGridEventCopyElementId(this.eventCopy.id)
+    const copyElement = (
+      this.$app.elements.calendarWrapper as HTMLElement
+    ).querySelector(
+      '#' + getTimeGridEventCopyElementId(this.eventCopy.id)
     ) as HTMLDivElement
     copyElement.style.transform = `translateX(calc(${
       totalDaysDiff * 100
