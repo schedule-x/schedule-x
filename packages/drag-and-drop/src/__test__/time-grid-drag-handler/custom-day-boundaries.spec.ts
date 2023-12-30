@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import {
   beforeEach,
   describe,
@@ -11,7 +10,7 @@ import { Mock, vi } from 'vitest'
 import TimeGridDragHandlerImpl from '../../time-grid-drag-handler.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { dragEventNQuarters, dragEventNQuarters12HourGrid } from './utils'
+import { dragEventNQuarters12HourGrid, getEventWithId } from './utils'
 
 describe('A calendar with custom, non-hybrid day boundaries', () => {
   let $app: CalendarAppSingleton
@@ -56,10 +55,6 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       end: '2024-02-02 15:00',
     }
   })
-
-  const getEventWithId = (id: string | number, $app: CalendarAppSingleton) => {
-    return $app.calendarEvents.list.value.find((event) => event.id === id)
-  }
 
   describe('Dragging an event vertically in the time grid', () => {
     it('should not be able to drag and event beyond the start of a custom day', () => {

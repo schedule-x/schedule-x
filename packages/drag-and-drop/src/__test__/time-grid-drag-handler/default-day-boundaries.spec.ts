@@ -11,7 +11,7 @@ import { Mock, vi } from 'vitest'
 import TimeGridDragHandlerImpl from '../../time-grid-drag-handler.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { dragEventNQuarters } from './utils'
+import { dragEventNQuarters, getEventWithId } from './utils'
 
 describe('A calendar with normal day boundaries', () => {
   let $app: CalendarAppSingleton
@@ -59,10 +59,6 @@ describe('A calendar with normal day boundaries', () => {
       end: '2024-02-02 24:00',
     }
   })
-
-  const getEventWithId = (id: string | number, $app: CalendarAppSingleton) => {
-    return $app.calendarEvents.list.value.find((event) => event.id === id)
-  }
 
   describe('Dragging an event vertically in the time grid', () => {
     it('should drag an event to 2 hours later', () => {

@@ -1,3 +1,5 @@
+import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
+
 export const dragEventNQuarters = (
   clickEvent: MouseEvent,
   nStepsToDrag: number,
@@ -26,4 +28,11 @@ export const dragEventNQuarters12HourGrid = (
   direction: 'up' | 'down'
 ) => {
   dragEventNQuarters(clickEvent, nStepsToDrag, direction, 16.6666666667 * 2)
+}
+
+export const getEventWithId = (
+  id: string | number,
+  $app: CalendarAppSingleton
+) => {
+  return $app.calendarEvents.list.value.find((event) => event.id === id)
 }
