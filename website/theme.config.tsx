@@ -49,6 +49,9 @@ const config: DocsThemeConfig = {
         property="og:image"
         content="https://schedule-x.s3.eu-west-1.amazonaws.com/logo_open_graph.png"
       />
+      <meta property="og:image:width" content="1600" />
+      <meta property="og:image:height" content="630" />
+      <meta property="twitter:card" content="summary_large_image" />
     </>
   ),
 }
