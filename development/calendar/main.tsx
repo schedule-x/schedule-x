@@ -30,10 +30,10 @@ const calendar = createCalendar({
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  dayBoundaries: {
-    start: '03:00',
-    end: '15:00',
-  },
+  // dayBoundaries: {
+  //   start: '03:00',
+  //   end: '15:00',
+  // },
   isDark: true,
   callbacks: {
     onRangeUpdate(range) {
