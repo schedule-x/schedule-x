@@ -8,9 +8,9 @@ const config: DocsThemeConfig = {
   project: {
     link: 'https://github.com/schedule-x/schedule-x',
   },
-  // chat: {
-  //   link: 'https://discord.com',
-  // },
+  chat: {
+    link: 'https://discord.gg/yHbT3C4M8w',
+  },
   docsRepositoryBase:
     'https://github.com/schedule-x/schedule-x/tree/main/website',
   footer: {
@@ -44,6 +44,10 @@ const config: DocsThemeConfig = {
         type="image/png"
         sizes="16x16"
         href="/images/favicon_io/favicon-16x16.png"
+      />
+      <meta
+        property="og:image"
+        content="https://schedule-x.s3.eu-west-1.amazonaws.com/SX-logo-icon.png"
       />
     </>
   ),
