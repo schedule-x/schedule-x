@@ -6,7 +6,8 @@ labels: ""
 assignees: ""
 ---
 
-Thank you for wanting to take the time to report a problem. In order optimise the chances of the issue being resolved,
+Thank you for wanting to take the time to report a problem. In order to increase the chances of the issue being 
+resolved,
 please take a moment to give as much relevant information as possible.
 
 **Context:**
