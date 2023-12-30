@@ -107,7 +107,7 @@ describe('A calendar with normal day boundaries', () => {
       )
     })
 
-    it('should not be able to drag and event beyond the start of a day', () => {
+    it('should not be able to drag an event beyond the start of a day', () => {
       eventCopy.start = '2024-02-02 00:30'
       eventCopy.end = '2024-02-02 01:30'
 
@@ -230,7 +230,6 @@ describe('A calendar with normal day boundaries', () => {
         dayBoundariesDateTime,
         25
       )
-
       const pixelPerDay = 100
 
       /**
@@ -243,6 +242,8 @@ describe('A calendar with normal day boundaries', () => {
           clientY: clickEvent.clientY,
         } as MouseEvent)
       )
+      expect(eventCopy.start).toBe('2024-02-03 12:00')
+      expect(eventCopy.end).toBe('2024-02-03 13:00')
       expect(eventCopyElement.style.transform).toEqual(
         'translateX(calc(100% + 1px))'
       )
@@ -257,6 +258,8 @@ describe('A calendar with normal day boundaries', () => {
           clientY: clickEvent.clientY,
         } as MouseEvent)
       )
+      expect(eventCopy.start).toBe('2024-02-04 12:00')
+      expect(eventCopy.end).toBe('2024-02-04 13:00')
       expect(eventCopyElement.style.transform).toEqual(
         'translateX(calc(200% + 2px))'
       )
@@ -271,6 +274,8 @@ describe('A calendar with normal day boundaries', () => {
           clientY: clickEvent.clientY,
         } as MouseEvent)
       )
+      expect(eventCopy.start).toBe('2024-02-04 12:00')
+      expect(eventCopy.end).toBe('2024-02-04 13:00')
       expect(eventCopyElement.style.transform).toEqual(
         'translateX(calc(200% + 2px))'
       )
