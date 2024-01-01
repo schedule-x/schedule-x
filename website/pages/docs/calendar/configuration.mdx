@@ -47,6 +47,16 @@ const config = {
   isDark: true,
 
   /**
+  * Decides which hours should be displayed in the week and day grids. Defaults to midnight - midnight (a full day)
+  * Can also be set to a "hybrid" day, such as { start: '06:00', end: '03:00' }, meaning each day starts at 6am but
+  * extends into the next day until 3am.
+  * */
+  dayBoundaries: {
+    start: '06:00',
+    end: '18:00',
+  },
+
+  /**
    * Callbacks for events that occur in the calendar
    * */
   callbacks: {
