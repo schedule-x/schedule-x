@@ -20,7 +20,7 @@ jobs:
           start: npm run serve
           env: type=base
           config: screenshotsFolder=cypress/snapshots/linux/base
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: success()
         with:
           name: new-screenshots
