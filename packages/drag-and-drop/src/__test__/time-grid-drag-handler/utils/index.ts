@@ -7,7 +7,7 @@ export const dragEventNQuarters = (
   pixelPerQuarterHour = 16.6666666667
 ) => {
   let currentY = clickEvent.clientY
-  let event = {
+  const event = {
     clientX: clickEvent.clientX,
     clientY: currentY,
   }
@@ -19,10 +19,7 @@ export const dragEventNQuarters = (
       currentY -= pixelPerQuarterHour
     }
 
-    event = {
-      clientX: clickEvent.clientX,
-      clientY: currentY,
-    } as MouseEvent
+    event.clientY = currentY
     document.dispatchEvent(new MouseEvent('mousemove', event))
   }
 
