@@ -3,7 +3,10 @@ import YearsViewAccordion from './years-view-accordion'
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { AppContext } from '../utils/stateful/app-context'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import {
+  toIntegers,
+  toJSDate,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 type props = {
   setMonthView: () => void
@@ -17,9 +20,10 @@ export default function YearsView({ setMonthView }: props) {
     { length: maxYear - minYear + 1 },
     (_, i) => minYear + i
   )
-  const [expandedYear, setExpandedYear] = useState<number>(
-    new Date().getFullYear()
+  const { year: selectedYear } = toIntegers(
+    $app.datePickerState.selectedDate.value
   )
+  const [expandedYear, setExpandedYear] = useState<number>(selectedYear)
 
   const setNewDatePickerDate = (year: number, month: number) => {
     $app.datePickerState.datePickerDate.value = toDateString(
