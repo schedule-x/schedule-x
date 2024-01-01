@@ -27,7 +27,7 @@ jobs:
           start: npm run serve
           env: type=actual # for screenshot testing
           config: screenshotsFolder=cypress/snapshots/linux/actual
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: visual-regression-diff
