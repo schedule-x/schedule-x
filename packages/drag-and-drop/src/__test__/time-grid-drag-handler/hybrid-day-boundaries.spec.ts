@@ -10,12 +10,13 @@ import { Mock, vi } from 'vitest'
 import TimeGridDragHandlerImpl from '../../time-grid-drag-handler.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { dragEventNQuarters12HourGrid, getEventWithId } from './utils'
+import { dragEventNQuartersIn20HourGridOf2000px } from './utils'
 
-describe('A calendar with custom, non-hybrid day boundaries', () => {
+describe('A calendar with custom hybrid day boundaries', () => {
   let $app: CalendarAppSingleton
   let clickEvent: MouseEvent
   let eventCopy: CalendarEventInternal
+  let eventCopyElement: HTMLDivElement
   let updateCopyFn: Mock
   let dayBoundariesDateTime: {
     start: string
@@ -24,24 +25,33 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
 
   beforeEach(() => {
     $app = __createAppWithViews__({
+      weekOptions: {
+        gridHeight: 2000,
+      },
       selectedDate: '2024-02-02',
       dayBoundaries: {
-        start: '03:00',
-        end: '15:00',
+        start: '06:00',
+        end: '02:00',
       },
     })
     eventCopy = new CalendarEventBuilder(
       $app.config,
       1,
-      '2024-02-02 03:30',
-      '2024-02-02 04:00'
+      '2024-02-02 23:00',
+      '2024-02-02 23:30'
     ).build()
+    eventCopyElement = document.createElement('div')
+    eventCopyElement.id = ('time-grid-event-copy-' + eventCopy.id) as string
     $app.elements.calendarWrapper = {
       querySelector: (selector: string) => {
         if (selector === '.sx__time-grid-day') {
           return {
             clientWidth: 100,
           } as HTMLDivElement
+        }
+
+        if (selector === '#' + eventCopyElement.id) {
+          return eventCopyElement
         }
       },
     } as HTMLDivElement
@@ -51,13 +61,13 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
     } as MouseEvent
     updateCopyFn = vi.fn()
     dayBoundariesDateTime = {
-      start: '2024-02-02 03:00',
-      end: '2024-02-02 15:00',
+      start: '2024-02-02 06:00',
+      end: '2024-02-03 02:00',
     }
   })
 
   describe('Dragging an event vertically in the time grid', () => {
-    it('should not be able to drag and event beyond the start of a custom day', () => {
+    it('should be able to drag an event beyond midnight', () => {
       new TimeGridDragHandlerImpl(
         $app,
         clickEvent,
@@ -68,34 +78,55 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       )
 
       /**
-       * Drag event to 15:15
+       * Drag event to end at 23:45
        * */
-      dragEventNQuarters12HourGrid(clickEvent, 1, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:15')
-      expect(eventCopy.end).toBe('2024-02-02 03:45')
+      dragEventNQuartersIn20HourGridOf2000px(clickEvent, 3, 'down')
+      expect(eventCopy.start).toBe('2024-02-02 23:45')
+      expect(eventCopy.end).toBe('2024-02-03 00:15')
+    })
+
+    it('should drag an event past midnight into next day, then backwards a day horizontally, and then backward vertically', () => {
+      new TimeGridDragHandlerImpl(
+        $app,
+        clickEvent,
+        eventCopy,
+        updateCopyFn,
+        dayBoundariesDateTime,
+        25
+      )
 
       /**
-       * Drag event to 15:00
+       * Drag event to end at 23:45
        * */
-      dragEventNQuarters12HourGrid(clickEvent, 2, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:00')
-      expect(eventCopy.end).toBe('2024-02-02 03:30')
+      const eventDraggedOnce = dragEventNQuartersIn20HourGridOf2000px(
+        clickEvent,
+        5,
+        'down'
+      )
+      expect(eventCopy.start).toBe('2024-02-03 00:15')
+      expect(eventCopy.end).toBe('2024-02-03 00:45')
 
       /**
-       * Try dragging event to 14:45 (which should do nothing)
+       * Drag event 2 day to the left
        * */
-      dragEventNQuarters12HourGrid(clickEvent, 3, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:00')
-      expect(eventCopy.end).toBe('2024-02-02 03:30')
+      const eventDraggedTwice = {
+        ...eventDraggedOnce,
+        clientX: eventDraggedOnce.clientX - 100,
+      }
+      document.dispatchEvent(new MouseEvent('mousemove', eventDraggedTwice))
+      expect(eventCopy.start).toBe('2024-02-02 00:15')
+      expect(eventCopy.end).toBe('2024-02-02 00:45')
 
-      document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-02 03:00'
+      /**
+       * Drag event 1 hour up
+       * */
+      dragEventNQuartersIn20HourGridOf2000px(
+        eventDraggedTwice as MouseEvent,
+        4,
+        'up'
       )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-02 03:30'
-      )
+      expect(eventCopy.start).toBe('2024-02-01 23:15')
+      expect(eventCopy.end).toBe('2024-02-01 23:45')
     })
   })
 })
