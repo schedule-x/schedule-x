@@ -11,6 +11,9 @@
   "events": {
     "title": "Events"
   },
+  "calendars": {
+    "title": "Calendars"
+  },
   "plugins": {
     "title": "Plugins"
   },
