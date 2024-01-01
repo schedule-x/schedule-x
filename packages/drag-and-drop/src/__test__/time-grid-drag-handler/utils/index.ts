@@ -7,6 +7,11 @@ export const dragEventNQuarters = (
   pixelPerQuarterHour = 16.6666666667
 ) => {
   let currentY = clickEvent.clientY
+  const event = {
+    clientX: clickEvent.clientX,
+    clientY: currentY,
+  }
+
   for (let i = 0; i < nStepsToDrag; i++) {
     if (direction === 'down') {
       currentY += pixelPerQuarterHour
@@ -14,12 +19,11 @@ export const dragEventNQuarters = (
       currentY -= pixelPerQuarterHour
     }
 
-    const event = {
-      clientX: clickEvent.clientX,
-      clientY: currentY,
-    } as MouseEvent
+    event.clientY = currentY
     document.dispatchEvent(new MouseEvent('mousemove', event))
   }
+
+  return event
 }
 
 export const dragEventNQuarters12HourGrid = (
@@ -35,4 +39,12 @@ export const getEventWithId = (
   $app: CalendarAppSingleton
 ) => {
   return $app.calendarEvents.list.value.find((event) => event.id === id)
+}
+
+export const dragEventNQuartersIn20HourGridOf2000px = (
+  clickEvent: MouseEvent,
+  nStepsToDrag: number,
+  direction: 'up' | 'down'
+) => {
+  return dragEventNQuarters(clickEvent, nStepsToDrag, direction, 25)
 }

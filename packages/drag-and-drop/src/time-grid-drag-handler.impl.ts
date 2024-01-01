@@ -11,8 +11,6 @@ import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop
 import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
-  private readonly originalStart: string
-  private readonly originalEnd: string
   private readonly dayWidth: number
   private readonly startY: number
   private readonly startX
@@ -32,8 +30,6 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
         '.sx__time-grid-day'
       ) as HTMLDivElement
     ).clientWidth
-    this.originalStart = this.eventCopy.start
-    this.originalEnd = this.eventCopy.end
     this.startY = this.event.clientY
     this.startX = this.event.clientX
     this.init()
@@ -91,14 +87,12 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private handleHorizontalMouseMove(totalDaysDiff: number) {
     if (totalDaysDiff === this.lastDaysDiff) return
 
+    const diffToAdd = totalDaysDiff - this.lastDaysDiff
     const newStartDate = addDays(
-      dateFromDateTime(this.originalStart),
-      totalDaysDiff
+      dateFromDateTime(this.eventCopy.start),
+      diffToAdd
     )
-    const newEndDate = addDays(
-      dateFromDateTime(this.originalEnd),
-      totalDaysDiff
-    )
+    const newEndDate = addDays(dateFromDateTime(this.eventCopy.end), diffToAdd)
     const newStart = setDateInDateTimeString(this.eventCopy.start, newStartDate)
     const newEnd = setDateInDateTimeString(this.eventCopy.end, newEndDate)
 
