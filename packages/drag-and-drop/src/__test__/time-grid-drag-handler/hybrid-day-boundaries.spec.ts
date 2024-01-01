@@ -107,7 +107,7 @@ describe('A calendar with custom hybrid day boundaries', () => {
       expect(eventCopy.end).toBe('2024-02-03 00:45')
 
       /**
-       * Drag event 2 day to the left
+       * Drag event 1 day to the left
        * */
       const eventDraggedTwice = {
         ...eventDraggedOnce,
