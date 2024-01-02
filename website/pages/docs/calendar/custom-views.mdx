@@ -1,3 +1,25 @@
-import PageStubCallout from '../../../components/partials/callouts/page-stub-callout'
+import { Callout } from 'nextra/components'
 
-<PageStubCallout />
+<Callout type="info">
+  This page will be extended with examples and more info soon. Until then, if you have questions, please join the
+  chat on Discord: https://discord.gg/yHbT3C4M8w
+</Callout>
+
+# Custom views
+
+The Schedule-X calendar can be extended endlessly. You are not limited to using the default views offered by this
+library; you can create your own views and plug them into the calendar. Currently, you can only build a custom view
+using Preact, the virtual DOM library used by Schedule-X, but the plan is to extend this to enable building custom
+views in React and Vue.
+
+## Building a custom view with Preact
+
+First of all, you do not need to download Preact on top of Schedule-X. When you downloaded Schedule-X, you
+already
+received Preact as a peer dependency.
+
+You create a custom view by calling the `createPreactView` function from the `@schedule-x/calendar` package. This
+function takes a single argument, a ViewConfig object which is for now only documented here: https://github.com/schedule-x/schedule-x/blob/main/packages/shared/src/types/calendar/view.ts
+
+For an example of how a view is put together, you can look at the source code of the default views in the
+`@schedule-x/calendar` package, for example: https://github.com/schedule-x/schedule-x/blob/main/packages/calendar/src/views/month-grid/index.ts
