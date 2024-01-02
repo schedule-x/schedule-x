@@ -8,14 +8,48 @@ import {
 } from '../../utils/stateless/time/date-time-mutation/adding'
 
 export type ViewConfig = {
-  name: ViewName // identifier for the view
-  label: string // text that will be displayed in the view dropdown
-  setDateRange: (config: RangeSetterConfig) => void // function that is called when a new date is selected
+  /**
+   * a unique identifier for the view
+   * */
+  name: ViewName
+
+  /**
+   * text that will be displayed in the view dropdown
+   * */
+  label: string
+
+  /**
+   * function that is called when a new date is selected
+   * */
+  setDateRange: (config: RangeSetterConfig) => void
+
+  /**
+   * should the view be displayed on small screens (< 700px calendar width)
+   * */
   hasSmallScreenCompat: boolean
+
+  /**
+   * should the view be displayed on wide screens (> 700px calendar width)
+   * */
   hasWideScreenCompat: boolean
-  Component: PreactViewComponent | unknown
+
+  /**
+   * The component you want to render
+   * */
+  Component: PreactViewComponent | unknown // the view component you want to render
+
+  /**
+   * function that is called when the user clicks the backward/forward button
+   * */
   backwardForwardFn: typeof addDays | typeof addMonths
-  backwardForwardUnits: number
+
+  /**
+   * number of units to add into the backwardForwardFn function. Result behind the scenes for example:
+   * backwardForwardFn = addDays
+   * backwardForwardUnits = 1
+   * result (behind the scenes) = addDays(date, 1)
+   * */
+  backwardForwardUnits: number // number of units to add when the user clicks the backward/forward button
 }
 
 export type View = ViewConfig & {
