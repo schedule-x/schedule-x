@@ -10,7 +10,7 @@ export const viewDay = createPreactView({
   setDateRange: setRangeForDay,
   hasWideScreenCompat: true,
   hasSmallScreenCompat: true,
-  ComponentFn: DayWrapper,
+  Component: DayWrapper,
   backwardForwardFn: addDays,
   backwardForwardUnits: 1,
 })

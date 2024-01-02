@@ -7,7 +7,7 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 export const viewWeek = createPreactView({
   name: InternalViewName.Week,
   label: 'Week',
-  ComponentFn: WeekWrapper,
+  Component: WeekWrapper,
   setDateRange: setRangeForWeek,
   hasSmallScreenCompat: false,
   hasWideScreenCompat: true,

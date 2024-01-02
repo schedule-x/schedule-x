@@ -8,7 +8,7 @@ export const viewMonthAgenda = createPreactView({
   name: InternalViewName.MonthAgenda,
   label: 'Month',
   setDateRange: setRangeForMonth,
-  ComponentFn: MonthAgendaWrapper,
+  Component: MonthAgendaWrapper,
   hasSmallScreenCompat: true,
   hasWideScreenCompat: false,
   backwardForwardFn: addMonths,

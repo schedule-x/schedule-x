@@ -14,7 +14,7 @@ class PreactView implements View {
 
   public name: string
   public label: string
-  public ComponentFn: PreactViewComponent
+  public Component: PreactViewComponent
   public setDateRange: (config: RangeSetterConfig) => void
   public hasSmallScreenCompat: boolean
   public hasWideScreenCompat: boolean
@@ -24,7 +24,7 @@ class PreactView implements View {
   constructor(config: ViewConfig) {
     this.name = config.name
     this.label = config.label
-    this.ComponentFn = config.ComponentFn
+    this.Component = config.Component as PreactViewComponent
     this.setDateRange = config.setDateRange
     this.hasSmallScreenCompat = config.hasSmallScreenCompat
     this.hasWideScreenCompat = config.hasWideScreenCompat
@@ -34,7 +34,7 @@ class PreactView implements View {
 
   render(onElement: HTMLElement, $app: CalendarAppSingleton): void {
     renderPreact(
-      createElement(this.ComponentFn, { $app, id: this.randomId }),
+      createElement(this.Component, { $app, id: this.randomId }),
       onElement
     )
   }
