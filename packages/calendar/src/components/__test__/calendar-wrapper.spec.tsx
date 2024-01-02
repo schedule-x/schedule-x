@@ -7,6 +7,10 @@ import {
 import { cleanup, waitFor } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../utils/stateless/testing/__create-app-with-views__'
 import { renderComponent } from './utils'
+import { vi } from 'vitest'
+import { stubInterface } from 'ts-sinon'
+import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
+import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 
 const CALENDAR_WRAPPER_SELECTOR = '.sx__calendar-wrapper'
 const SMALL_CALENDAR_CLASS = 'sx__is-calendar-small'
@@ -77,6 +81,23 @@ describe('CalendarWrapper', () => {
             ?.classList.contains('is-dark')
         ).toBe(false)
       })
+    })
+  })
+
+  describe('Initializing plugins', () => {
+    it('should call the "init" function of a plugin', () => {
+      const plugin = {
+        ...stubInterface<PluginBase>(),
+        init: vi.fn(),
+        name: PluginName.ScrollController,
+      }
+      const $app = __createAppWithViews__({
+        plugins: [plugin],
+      })
+      renderComponent($app)
+
+      expect(plugin.init).toHaveBeenCalled()
+      expect(plugin.init).toHaveBeenCalledWith($app)
     })
   })
 })

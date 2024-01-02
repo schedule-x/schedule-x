@@ -32,6 +32,7 @@ export type CalendarType = {
 export type Plugins = {
   dragAndDrop?: DragAndDropPlugin
   eventModal?: EventModalPlugin
+  scrollController?: PluginBase
 }
 
 export type CustomComponentFn = (

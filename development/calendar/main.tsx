@@ -17,6 +17,7 @@ import '../app.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
+import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -110,7 +111,11 @@ const calendar = createCalendar({
       },
     },
   },
-  plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
+  plugins: [
+    createDragAndDropPlugin(),
+    createEventModalPlugin(),
+    createScrollControllerPlugin(),
+  ],
   events: seededEvents,
 })
 

@@ -96,12 +96,16 @@ export default class CalendarConfigBuilder
   }
 
   withPlugins(plugins: PluginBase[] | undefined): CalendarConfigBuilder {
-    this.plugins.dragAndDrop = plugins?.find(
-      (plugin) => plugin.name === PluginName.DragAndDrop
-    ) as DragAndDropPlugin | undefined
-    this.plugins.eventModal = plugins?.find(
-      (plugin) => plugin.name === PluginName.EventModal
-    ) as EventModalPlugin | undefined
+    const getPlugin = <T>(pluginName: PluginName) =>
+      plugins?.find((plugin) => pluginName === plugin.name) as T | undefined
+
+    this.plugins.dragAndDrop = getPlugin<DragAndDropPlugin>(
+      PluginName.DragAndDrop
+    )
+    this.plugins.eventModal = getPlugin<EventModalPlugin>(PluginName.EventModal)
+    this.plugins.scrollController = getPlugin<PluginBase>(
+      PluginName.ScrollController
+    )
     return this
   }
 
