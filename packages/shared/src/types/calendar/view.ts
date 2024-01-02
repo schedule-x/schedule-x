@@ -13,7 +13,7 @@ export type ViewConfig = {
   setDateRange: (config: RangeSetterConfig) => void // function that is called when a new date is selected
   hasSmallScreenCompat: boolean
   hasWideScreenCompat: boolean
-  ComponentFn: PreactViewComponent
+  Component: PreactViewComponent | unknown
   backwardForwardFn: typeof addDays | typeof addMonths
   backwardForwardUnits: number
 }

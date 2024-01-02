@@ -8,7 +8,7 @@ export const viewMonthGrid = createPreactView({
   name: InternalViewName.MonthGrid,
   label: 'Month',
   setDateRange: setRangeForMonth,
-  ComponentFn: MonthGridWrapper,
+  Component: MonthGridWrapper,
   hasWideScreenCompat: true,
   hasSmallScreenCompat: false,
   backwardForwardFn: addMonths,
