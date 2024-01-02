@@ -9,6 +9,11 @@ import {
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarApp from './calendar.app'
 import { createPreactView } from './utils/stateful/preact-view/preact-view'
+import {
+  setRangeForWeek,
+  setRangeForMonth,
+  setRangeForDay,
+} from './utils/stateless/time/range/set-range'
 
 export type { CalendarConfig, CustomComponentFn }
 
@@ -20,4 +25,7 @@ export {
   viewMonthAgenda,
   CalendarApp,
   createPreactView,
+  setRangeForDay,
+  setRangeForWeek,
+  setRangeForMonth,
 }
