@@ -22,6 +22,29 @@ class ScrollControllerPlugin implements PluginBase {
     else this.observeIfGridDayExistsThenScroll()
   }
 
+  /**
+   * @param {string} time - time in format 'HH:mm'
+   * */
+  scrollTo(time: string) {
+    const $app = this.$app as CalendarAppSingleton
+    const pixelsPerHour =
+      $app.config.weekOptions.gridHeight / ($app.config.timePointsPerDay / 100)
+    const scrollToTimePoint = timePointsFromString(time)
+
+    const hoursFromDayStart =
+      $app.config.isHybridDay &&
+      scrollToTimePoint < $app.config.dayBoundaries.start
+        ? 2400 - $app.config.dayBoundaries.start + scrollToTimePoint
+        : scrollToTimePoint - $app.config.dayBoundaries.start
+    const hoursPointsToScroll = hoursFromDayStart / 100
+    const pixelsToScroll = hoursPointsToScroll * pixelsPerHour
+
+    const viewContainer = (
+      $app.elements.calendarWrapper as HTMLElement
+    ).querySelector('.sx__view-container') as HTMLElement
+    viewContainer.scroll(0, pixelsToScroll)
+  }
+
   private observeIfGridDayExistsThenScroll() {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
@@ -45,23 +68,7 @@ class ScrollControllerPlugin implements PluginBase {
   }
 
   private scrollOnRender() {
-    const $app = this.$app as CalendarAppSingleton
-    const viewContainer = (
-      $app.elements.calendarWrapper as HTMLElement
-    ).querySelector('.sx__view-container') as HTMLElement
-    const initialScroll = this.config.initialScroll
-
-    const pixelsPerHour =
-      $app.config.weekOptions.gridHeight / ($app.config.timePointsPerDay / 100)
-    const scrollToTimePoint = timePointsFromString(initialScroll || '07:50')
-    const hoursFromDayStart =
-      $app.config.isHybridDay &&
-      scrollToTimePoint < $app.config.dayBoundaries.start
-        ? 2400 - $app.config.dayBoundaries.start + scrollToTimePoint
-        : scrollToTimePoint - $app.config.dayBoundaries.start
-    const hoursPointsToScroll = hoursFromDayStart / 100
-    const pixelsToScroll = hoursPointsToScroll * pixelsPerHour
-    viewContainer.scroll(0, pixelsToScroll)
+    this.scrollTo(this.config.initialScroll || '07:50')
   }
 }
 
