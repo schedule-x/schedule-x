@@ -33,7 +33,7 @@ const calendar = createCalendar({
   locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
-  defaultView: viewWeek.name,
+  defaultView: viewMonthGrid.name,
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },

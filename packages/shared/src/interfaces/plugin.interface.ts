@@ -4,4 +4,5 @@ export default interface PluginBase {
   name: string
 
   init?($app: CalendarAppSingleton): void
+  destroy?(): void
 }

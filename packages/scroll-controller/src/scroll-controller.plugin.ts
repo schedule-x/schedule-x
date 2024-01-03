@@ -7,6 +7,7 @@ import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/tim
 class ScrollControllerPlugin implements PluginBase {
   name = PluginName.ScrollController
   private $app: CalendarAppSingleton | null = null
+  private observer: MutationObserver | null = null
 
   constructor(private config: ScrollControllerConfig = {}) {}
 
@@ -20,6 +21,10 @@ class ScrollControllerPlugin implements PluginBase {
     ).querySelector('.sx__time-grid-day')
     if (gridDay) this.scrollOnRender()
     else this.observeIfGridDayExistsThenScroll()
+  }
+
+  destroy(): void {
+    this.observer?.disconnect()
   }
 
   /**
@@ -46,18 +51,20 @@ class ScrollControllerPlugin implements PluginBase {
   }
 
   private observeIfGridDayExistsThenScroll() {
-    const observer = new MutationObserver((mutations) => {
+    /**
+     * Do not disconnect observer, because it should be used on every subsequent visit to the week- or day view
+     * */
+    this.observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         const gridDayExists = Array.from(mutation.addedNodes).find((node) =>
           (node as HTMLElement).classList.contains('sx__time-grid-day')
         )
         if (mutation.type === 'childList' && gridDayExists) {
           this.scrollOnRender()
-          observer.disconnect()
         }
       })
     })
-    observer.observe(
+    this.observer.observe(
       (this.$app as CalendarAppSingleton).elements
         .calendarWrapper as HTMLElement,
       {

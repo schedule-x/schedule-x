@@ -7,3 +7,9 @@ export const initPlugins = ($app: CalendarAppSingleton) => {
     }
   })
 }
+
+export const destroyPlugins = ($app: CalendarAppSingleton) => {
+  Object.values($app.config.plugins).forEach((plugin) => {
+    if (plugin?.destroy) plugin.destroy()
+  })
+}
