@@ -147,6 +147,6 @@ addEventButton.addEventListener('click', () => {
 
 const scrollButton = document.getElementById('scroll') as HTMLButtonElement
 scrollButton.addEventListener('click', () => {
-  scrollControllerPlugin.scrollTo('10:00')
+  scrollControllerPlugin.scrollTo((document.getElementById('scroll-to') as HTMLInputElement).value)
 })
 
