@@ -1,5 +1,5 @@
 export enum PluginName {
-  DragAndDrop = 'drag-and-drop',
-  EventModal = 'event-modal',
-  ScrollController = 'scroll-controller',
+  DragAndDrop = 'dragAndDrop',
+  EventModal = 'eventModal',
+  ScrollController = 'scrollController',
 }

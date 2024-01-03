@@ -14,9 +14,6 @@ import {
 } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
-import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
-import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-and-drop-plugin.interface'
-import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { CalendarCallbacks } from '@schedule-x/shared/src/interfaces/calendar/listeners.interface'
 
 export default class CalendarConfigBuilder
@@ -96,16 +93,12 @@ export default class CalendarConfigBuilder
   }
 
   withPlugins(plugins: PluginBase[] | undefined): CalendarConfigBuilder {
-    const getPlugin = <T>(pluginName: PluginName) =>
-      plugins?.find((plugin) => pluginName === plugin.name) as T | undefined
+    if (!plugins) return this
 
-    this.plugins.dragAndDrop = getPlugin<DragAndDropPlugin>(
-      PluginName.DragAndDrop
-    )
-    this.plugins.eventModal = getPlugin<EventModalPlugin>(PluginName.EventModal)
-    this.plugins.scrollController = getPlugin<PluginBase>(
-      PluginName.ScrollController
-    )
+    plugins.forEach((plugin) => {
+      this.plugins[plugin.name] = plugin
+    })
+
     return this
   }
 
