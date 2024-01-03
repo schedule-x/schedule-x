@@ -43,3 +43,9 @@ To run all tests of the packages affected by your changes, run `npm run test:uni
 later run in the GitHub Actions pipeline.
 
 To run all tests locally, run `test:unit:all`.
+
+## Project structure
+
+If you are interested in contributing with code, it might be helpful for some initial orientation, to have a look at 
+the files in `documentation/adr`. These offer some basic explanations and graphical representations of the
+architecture and design decisions.

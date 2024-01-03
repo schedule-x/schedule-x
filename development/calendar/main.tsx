@@ -17,23 +17,30 @@ import '../app.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
+import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
+const scrollControllerPlugin = createScrollControllerPlugin({
+  initialScroll: '07:50'
+})
 const calendar = createCalendar({
+  // weekOptions: {
+  //   gridHeight: 2500,
+  // },
   firstDayOfWeek: 0,
   // locale: 'de-DE',
   locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
-  defaultView: viewWeek.name,
+  defaultView: viewMonthGrid.name,
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  dayBoundaries: {
-    start: '06:00',
-    end: '03:00',
-  },
+  // dayBoundaries: {
+  //   start: '21:00',
+  //   end: '18:00',
+  // },
   // isDark: true,
   callbacks: {
     onRangeUpdate(range) {
@@ -110,7 +117,11 @@ const calendar = createCalendar({
       },
     },
   },
-  plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
+  plugins: [
+    createDragAndDropPlugin(),
+    createEventModalPlugin(),
+    scrollControllerPlugin,
+  ],
   events: seededEvents,
 })
 
@@ -118,13 +129,13 @@ calendar.render(calendarElement)
 
 let darkToggle = 0
 
-const themeToggle = document.getElementById('theme-toggle') as HTMLInputElement
+const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement
 themeToggle.addEventListener('click', () => {
   calendar.setTheme(darkToggle === 0 ? 'light' : 'dark')
   darkToggle === 0 ? darkToggle++ : darkToggle--
 })
 
-const addEventButton = document.getElementById('add-event') as HTMLInputElement
+const addEventButton = document.getElementById('add-event') as HTMLButtonElement
 addEventButton.addEventListener('click', () => {
   calendar.events.add({
     id: 'new-event',
@@ -133,3 +144,9 @@ addEventButton.addEventListener('click', () => {
     end: '2023-12-19',
   })
 })
+
+const scrollButton = document.getElementById('scroll') as HTMLButtonElement
+scrollButton.addEventListener('click', () => {
+  scrollControllerPlugin.scrollTo((document.getElementById('scroll-to') as HTMLInputElement).value)
+})
+

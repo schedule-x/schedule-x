@@ -7,6 +7,10 @@ import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/r
 import { setWrapperElement } from '../utils/stateless/dom/set-wrapper-element'
 import { handleWindowResize } from '../utils/stateless/dom/handle-window-resize'
 import useWrapperClasses from '../utils/stateful/hooks/use-wrapper-classes'
+import {
+  destroyPlugins,
+  initPlugins,
+} from '../utils/stateless/plugins-lifecycle'
 
 type props = {
   $app: CalendarAppSingleton
@@ -16,7 +20,12 @@ export default function CalendarWrapper({ $app }: props) {
   const calendarId = randomStringId()
   const viewContainerId = randomStringId()
 
-  useEffect(() => setWrapperElement($app, calendarId), [])
+  useEffect(() => {
+    setWrapperElement($app, calendarId)
+    initPlugins($app)
+
+    return () => destroyPlugins($app)
+  }, [])
 
   const onResize = () => {
     handleWindowResize($app)

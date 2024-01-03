@@ -18,3 +18,7 @@ For any other questions or comments, feel free to join the chat on Discord: http
 MIT
 
 Copyright (c) 2023, Tom Österlund
+
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/schedule-x/schedule-x/blob/main/.github/contributing.md) for information on how to contribute to this project.

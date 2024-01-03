@@ -11,6 +11,7 @@ describe('Calendar Smoke Test', () => {
   })
 
   it('should render events in the week view', () => {
+    cy.wait(1000) // for scrolling to finish
     cy.compareSnapshot('smoke-test__week-view', SNAPSHOT_FAULT_TOLERANCE)
   })
 
@@ -20,6 +21,7 @@ describe('Calendar Smoke Test', () => {
   })
 
   it('should render events in the day view', () => {
+    cy.wait(1000) // for scrolling to finish
     calendarHeader.openViewByLabel('Day')
     cy.compareSnapshot('smoke-test__day-view', SNAPSHOT_FAULT_TOLERANCE)
   })
