@@ -11,6 +11,7 @@ describe('Calendar dark mode', () => {
   })
 
   it('should render events in the week view', () => {
+    cy.wait(1000) // for scrolling to finish
     cy.compareSnapshot(
       'calendar-dark-mode__week-view',
       SNAPSHOT_FAULT_TOLERANCE
@@ -26,6 +27,7 @@ describe('Calendar dark mode', () => {
   })
 
   it('should render events in the day view', () => {
+    cy.wait(1000) // for scrolling to finish
     calendarHeader.openViewByLabel('Day')
     cy.compareSnapshot('calendar-dark-mode__day-view', SNAPSHOT_FAULT_TOLERANCE)
   })
