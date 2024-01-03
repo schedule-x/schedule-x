@@ -16,6 +16,7 @@ import '../index.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { smokeTestEvents } from './__data__/smoke-data.ts'
+import { createScrollControllerPlugin } from '@schedule-x/scroll-controller'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -26,7 +27,7 @@ const calendar = createCalendar({
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
-  plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
+  plugins: [createDragAndDropPlugin(), createEventModalPlugin(), createScrollControllerPlugin()],
   events: smokeTestEvents,
 })
 
