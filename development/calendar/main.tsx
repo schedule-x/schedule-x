@@ -22,6 +22,9 @@ import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar({
+  // weekOptions: {
+  //   gridHeight: 2500,
+  // },
   firstDayOfWeek: 0,
   // locale: 'de-DE',
   locale: 'en-US',
@@ -31,10 +34,10 @@ const calendar = createCalendar({
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  dayBoundaries: {
-    start: '06:00',
-    end: '03:00',
-  },
+  // dayBoundaries: {
+  //   start: '21:00',
+  //   end: '18:00',
+  // },
   // isDark: true,
   callbacks: {
     onRangeUpdate(range) {
@@ -114,7 +117,9 @@ const calendar = createCalendar({
   plugins: [
     createDragAndDropPlugin(),
     createEventModalPlugin(),
-    createScrollControllerPlugin(),
+    createScrollControllerPlugin({
+      initialScroll: '07:50'
+    }),
   ],
   events: seededEvents,
 })
