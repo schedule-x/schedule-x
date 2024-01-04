@@ -65,7 +65,7 @@ export default function CalendarDemoPage() {
         },
         {
           id: 5,
-          title: 'Someone appointment',
+          title: 'Some appointment',
           people: ['John'],
           start: '2023-12-03 03:00',
           end: '2023-12-03 04:30',
