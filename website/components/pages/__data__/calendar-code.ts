@@ -4,7 +4,7 @@ import { createEventModalPlugin } from '@schedule-x/event-modal'
 import '@schedule-x/theme-default/dist/index.css'
 
 const calendar = createCalendar({
-  views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
+  views: [viewMonthGrid, viewMonthAgenda, viewWeek, viewDay],
   datePicker: {
     selectedDate: '2023-12-01'
   },
@@ -37,7 +37,22 @@ const calendar = createCalendar({
       start: '2023-12-01',
       end: '2023-12-03',
       calendarId: 'leisure'
-    }
+    },
+    {
+      id: 5,
+      title: 'Someone appointment',
+      people: ['John'],
+      start: '2023-12-03 03:00',
+      end: '2023-12-03 04:30',
+    },
+    {
+      id: 6,
+      title: 'Other appointment',
+      people: ['Susan', 'Mike'],
+      start: '2023-12-03 03:00',
+      end: '2023-12-03 04:00',
+      calendarId: 'leisure',
+    },
   ],
   calendars: {
     leisure: {
