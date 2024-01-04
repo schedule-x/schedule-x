@@ -19,6 +19,11 @@ MIT
 
 Copyright (c) 2023, Tom Österlund
 
-## Contributing
+## Code contributions & project insights
 
-See [CONTRIBUTING.md](https://github.com/schedule-x/schedule-x/blob/main/.github/contributing.md) for information on how to contribute to this project.
+Code contributions are welcome, but require communication. Please read [CONTRIBUTING.md](https://github.com/schedule-x/schedule-x/blob/main/.github/contributing.md) and open an issue before 
+opening a PR.
+
+For insight into what's currently in progress, and what's coming up, refer to the [project board](https://github.com/orgs/schedule-x/projects/3/views/1).
+The "backlog" column is sorted by priority, so the topmost tasks are the ones that are most likely to be worked on next.
+
