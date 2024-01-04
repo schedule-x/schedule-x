@@ -1,7 +1,7 @@
 @use 'mixins' as mixins;
 
 .page-wrapper {
-  max-width: 1000px;
+  max-width: 90rem;
   min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
   margin: 0 auto;
 
