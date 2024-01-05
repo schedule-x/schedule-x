@@ -9,6 +9,8 @@ import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/fo
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
 import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
+import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number
@@ -19,7 +21,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
 
   constructor(
     private $app: CalendarAppSingleton,
-    private event: MouseEvent,
+    private eventCoordinates: EventCoordinates,
     private eventCopy: CalendarEventInternal,
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private dayBoundariesDateTime: DayBoundariesDateTime,
@@ -30,27 +32,37 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
         '.sx__time-grid-day'
       ) as HTMLDivElement
     ).clientWidth
-    this.startY = this.event.clientY
-    this.startX = this.event.clientX
+    this.startY = this.eventCoordinates.clientY
+    this.startX = this.eventCoordinates.clientX
     this.init()
   }
 
   private init() {
-    document.addEventListener('mousemove', this.handleMouseMove)
-    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
+    document.addEventListener('mousemove', this.handleMouseOrTouchMove)
+    document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
+
+    document.addEventListener('touchmove', this.handleMouseOrTouchMove, {
+      passive: false,
+    })
+    document.addEventListener('touchend', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
   }
 
-  private handleMouseMove = (e: MouseEvent) => {
-    const pixelDiffY = e.clientY - this.startY
+  private handleMouseOrTouchMove = (uiEvent: UIEvent) => {
+    const { clientX, clientY } = getEventCoordinates(uiEvent)
+    const pixelDiffY = clientY - this.startY
     const timePointsDiffY = pixelDiffY * this.timePointsPerPixel()
     const currentIntervalDiff = Math.round(
       timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
     )
-    const pixelDiffX = e.clientX - this.startX
+    const pixelDiffX = clientX - this.startX
     const currentDaysDiff = Math.round(pixelDiffX / this.dayWidth)
 
-    this.handleVerticalMouseMove(currentIntervalDiff)
-    this.handleHorizontalMouseMove(currentDaysDiff)
+    this.handleVerticalMouseOrTouchMove(currentIntervalDiff)
+    this.handleHorizontalMouseOrTouchMove(currentDaysDiff)
   }
 
   private timePointsPerPixel(): number {
@@ -60,7 +72,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     )
   }
 
-  private handleVerticalMouseMove(currentIntervalDiff: number) {
+  private handleVerticalMouseOrTouchMove(currentIntervalDiff: number) {
     if (currentIntervalDiff === this.lastIntervalDiff) return
 
     const pointsToAdd =
@@ -84,9 +96,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     this.updateCopy(this.eventCopy)
   }
 
-  private handleHorizontalMouseMove(totalDaysDiff: number) {
+  private handleHorizontalMouseOrTouchMove(totalDaysDiff: number) {
     if (totalDaysDiff === this.lastDaysDiff) return
-
     const diffToAdd = totalDaysDiff - this.lastDaysDiff
     const newStartDate = addDays(
       dateFromDateTime(this.eventCopy.start),
@@ -122,15 +133,15 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     }% + ${totalDaysDiff}px))`
   }
 
-  private handleMouseUp = () => {
-    document.removeEventListener('mousemove', this.handleMouseMove)
+  private handleMouseUpOrTouchEnd = () => {
+    document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
+    document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
     this.updateCopy(undefined)
     this.updateOriginalEvent()
   }
 
   private updateOriginalEvent() {
     if (this.lastIntervalDiff === 0 && this.lastDaysDiff === 0) return
-
     replaceOriginalWithCopy(this.$app, this.eventCopy)
   }
 }

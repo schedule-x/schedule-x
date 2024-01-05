@@ -84,4 +84,22 @@ describe('style attribute "display" of date grid event element', () => {
       })
     })
   })
+
+  describe('starting a drag process through touchstart', () => {
+    it('should have style "display: none"', async () => {
+      renderComponent($app, oneDayEventId, 1)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
+
+      const touchStartEvent = new TouchEvent('touchstart', {
+        touches: [{ clientX: 0, clientY: 0 } as Touch],
+      })
+      oneDayEvent.dispatchEvent(touchStartEvent)
+
+      await waitFor(() => {
+        expect(oneDayEvent.style.display).toBe('none')
+        const eventCopy = document.querySelector('.sx__date-grid-event--copy')
+        expect(eventCopy).not.toBeNull()
+      })
+    })
+  })
 })

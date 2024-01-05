@@ -10,11 +10,11 @@ export type EventModalProps = {
 
 export default interface EventModalPlugin extends PluginBase {
   calendarEvent: Signal<CalendarEventInternal | null>
-  calendarEventElement: Signal<HTMLElement | null>
+  calendarEventDOMRect: Signal<DOMRect | null>
 
   setCalendarEvent(
     event: CalendarEventInternal | null,
-    eventTarget: HTMLElement | null
+    eventTargetDOMReact: DOMRect | null
   ): void
 
   ComponentFn(props: EventModalProps): JSXInternal.Element

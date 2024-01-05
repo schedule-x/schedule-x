@@ -2,6 +2,7 @@ import { useState } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { deepCloneEvent } from '../../../../../shared/src/utils/stateless/calendar/deep-clone-event'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
+import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 
 export default function useEventInteractions($app: CalendarAppSingleton) {
   const [eventCopy, setEventCopy] = useState<CalendarEventInternal>()
@@ -16,35 +17,46 @@ export default function useEventInteractions($app: CalendarAppSingleton) {
   >()
 
   const createDragStartTimeout = (
-    callback: (e: MouseEvent) => void,
-    mouseEvent: MouseEvent
+    callback: (uiEvent: UIEvent) => void,
+    uiEvent: UIEvent
   ) => {
-    setDragStartTimeout(setTimeout(() => callback(mouseEvent), 150))
+    setDragStartTimeout(setTimeout(() => callback(uiEvent), 150))
   }
 
   const setClickedEvent = (
-    mouseEvent: MouseEvent,
+    uiEvent: UIEvent,
     calendarEvent: CalendarEventInternal
   ) => {
+    // For some reason, an event without touches is being triggered on touchend
+    if (
+      isUIEventTouchEvent(uiEvent) &&
+      (uiEvent as TouchEvent).touches.length === 0
+    )
+      return
     if (!$app.config.plugins.eventModal) return
 
-    const eventTarget = mouseEvent.target as HTMLElement
+    const eventTarget = uiEvent.target
+    if (!(eventTarget instanceof HTMLElement)) return
+
     const calendarEventElement = eventTarget.classList.contains('sx__event')
       ? eventTarget
       : eventTarget.closest('.sx__event')
-    $app.config.plugins.eventModal.setCalendarEvent(
-      calendarEvent,
-      calendarEventElement as HTMLElement
-    )
+
+    if (calendarEventElement) {
+      $app.config.plugins.eventModal.setCalendarEvent(
+        calendarEvent,
+        calendarEventElement.getBoundingClientRect()
+      )
+    }
   }
 
   const setClickedEventIfNotDragging = (
     calendarEvent: CalendarEventInternal,
-    mouseEvent: MouseEvent
+    uiEvent: UIEvent
   ) => {
     if (dragStartTimeout) {
       clearTimeout(dragStartTimeout)
-      setClickedEvent(mouseEvent, calendarEvent)
+      setClickedEvent(uiEvent, calendarEvent)
     }
     setDragStartTimeout(undefined)
   }

@@ -6,19 +6,19 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 
 export const createEventModalPlugin = (): EventModalPlugin => {
   const calendarEvent = signal<CalendarEventInternal | null>(null)
-  const calendarEventElement = signal<HTMLElement | null>(null)
+  const calendarEventDOMRect = signal<DOMRect | null>(null)
 
   return {
     name: PluginName.EventModal,
     calendarEvent,
-    calendarEventElement,
+    calendarEventDOMRect,
     ComponentFn: EventModal,
     setCalendarEvent: (
       event: CalendarEventInternal,
-      eventTarget: HTMLElement
+      eventTargetDOMReact: DOMRect
     ) => {
       calendarEvent.value = event
-      calendarEventElement.value = eventTarget
+      calendarEventDOMRect.value = eventTargetDOMReact
     },
   }
 }
