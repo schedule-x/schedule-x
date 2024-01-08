@@ -18,17 +18,6 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
-import { CalendarAppSingleton } from '@schedule-x/shared'
-
-class LoggerPlugin{
-  name = 'logger-plugin'
-
-  init($app: CalendarAppSingleton) {
-    $app.calendarEvents.list.value.forEach((event) => {
-      console.log('init', event)
-    })
-  }
-}
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -44,7 +33,7 @@ const calendar = createCalendar({
   locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
-  defaultView: viewMonthGrid.name,
+  defaultView: viewWeek.name,
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
@@ -132,7 +121,6 @@ const calendar = createCalendar({
     createDragAndDropPlugin(),
     createEventModalPlugin(),
     scrollControllerPlugin,
-    new LoggerPlugin(),
   ],
   events: seededEvents,
 })
