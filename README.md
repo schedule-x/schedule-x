@@ -1,5 +1,11 @@
 ![qalendar](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-logo.png)
 
+<div style="display: flex; justify-content: center">
+  <img src="https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-logo.png" alt="Schedule-X logo" >
+
+  <img src="https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-demo.gif" alt="Schedule-X demo" >
+</div>
+
 # Material design calendar and date picker
 
 This library offers a material design calendar and date picker for the web. They can be used regardless of your
