@@ -1,6 +1,8 @@
 import { CalendarAppSingleton } from '@schedule-x/shared'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
+import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
+import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
 export class TimeGridEventResizer {
   private lastIntervalDiff = 0
@@ -9,13 +11,13 @@ export class TimeGridEventResizer {
     private $app: CalendarAppSingleton,
     private calendarEvent: CalendarEventInternal,
     private initialY: number,
-    private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number
+    private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number,
+    private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
     this.setupEventListeners()
   }
 
   setupEventListeners() {
-    console.log('initiating time grid event resizer')
     ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
       'mousemove',
       this.handleMouseMove
@@ -24,18 +26,17 @@ export class TimeGridEventResizer {
 
   private handleMouseMove = (event: MouseEvent) => {
     const pixelDiffY = event.clientY - this.initialY
-    const timePointsDiffY = pixelDiffY * this.timePointsPerPixel()
+    const number = this.timePointsPerPixel()
+    const timePointsDiffY = pixelDiffY * number
     const currentIntervalDiff = Math.round(
       timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
     )
     const timeDidNotChange = currentIntervalDiff === this.lastIntervalDiff
     if (timeDidNotChange) return
 
-    const pointsToAdd =
-      currentIntervalDiff > this.lastIntervalDiff
-        ? this.CHANGE_THRESHOLD_IN_TIME_POINTS
-        : -this.CHANGE_THRESHOLD_IN_TIME_POINTS
-    this.setTimeForEventCopy(pointsToAdd)
+    this.setTimeForEventCopy(
+      this.CHANGE_THRESHOLD_IN_TIME_POINTS * currentIntervalDiff
+    )
   }
 
   private timePointsPerPixel(): number {
@@ -44,15 +45,26 @@ export class TimeGridEventResizer {
 
   // TODO: maybe refactor to shared
   private setTimeForEventCopy(pointsToAdd: number) {
-    // const newStart = addTimePointsToDateTime(this.calendarEvent.start, pointsToAdd)
-    // const newEnd = addTimePointsToDateTime(this.calendarEvent.end, pointsToAdd)
-    // if (newStart < addDays(this.dayBoundariesDateTime.start, this.lastDaysDiff))
-    //   return
-    // if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff))
-    //   return
-    //
-    // this.calendarEvent.start = newStart
-    // this.calendarEvent.end = newEnd
-    // this.updateCopy(this.eventCopy)
+    const newStart = addTimePointsToDateTime(
+      this.calendarEvent.start,
+      pointsToAdd
+    )
+    const newEnd = addTimePointsToDateTime(this.calendarEvent.end, pointsToAdd)
+    if (newStart < this.dayBoundariesDateTime.start) return
+    if (newEnd > this.dayBoundariesDateTime.end) return
+
+    this.calendarEvent.start = newStart
+    this.calendarEvent.end = newEnd
+    this.runSideEffects()
+  }
+
+  private runSideEffects() {
+    const $app = this.$app as CalendarAppSingleton
+    $app.calendarEvents.list.value = [...this.$app.calendarEvents.list.value]
+    if ($app.config.callbacks.onEventUpdate) {
+      $app.config.callbacks.onEventUpdate(
+        this.calendarEvent._getExternalEvent()
+      )
+    }
   }
 }
