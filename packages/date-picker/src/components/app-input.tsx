@@ -3,8 +3,10 @@ import { AppContext } from '../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import chevronIcon from '../assets/chevron-input.svg'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 
 export default function AppInput() {
+  const datePickerLabelId = randomStringId()
   const $app = useContext(AppContext)
   const getLocalizedDate = (dateString: string) => {
     if (dateString === '') return $app.translate('MM/DD/YYYY')
@@ -53,12 +55,22 @@ export default function AppInput() {
     $app.datePickerState.open()
   }
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault()
+      $app.datePickerState.open()
+    }
+  }
+
   return (
     <>
       <div className={wrapperClasses.join(' ')}>
-        <label className="sx__date-input-label">{$app.translate('Date')}</label>
+        <label id={datePickerLabelId} className="sx__date-input-label">
+          {$app.translate('Date')}
+        </label>
 
         <input
+          aria-describedby={datePickerLabelId}
           value={$app.datePickerState.inputDisplayedValue.value}
           data-testid="date-picker-input"
           className="sx__date-input"
@@ -67,7 +79,12 @@ export default function AppInput() {
           type="text"
         />
 
-        <img className="sx__date-input-chevron" src={chevronIcon} alt="" />
+        <button
+          onKeyDown={handleKeyDown}
+          className="sx__date-input-chevron-wrapper"
+        >
+          <img className="sx__date-input-chevron" src={chevronIcon} alt="" />
+        </button>
       </div>
     </>
   )
