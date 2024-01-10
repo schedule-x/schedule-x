@@ -59,6 +59,15 @@ export default function AppInput() {
     if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault()
       $app.datePickerState.open()
+
+      setTimeout(() => {
+        // focus the element that has data-focus attribute
+        const element = document.querySelector('[data-focus="true"]')
+        if (element) {
+          console.log('focus button')
+          ;(element as HTMLButtonElement).focus()
+        }
+      }, 50)
     }
   }
 

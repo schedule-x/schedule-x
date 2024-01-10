@@ -8,6 +8,7 @@ import {
   isToday,
 } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { addDays } from '@schedule-x/shared'
 
 type props = {
   week: WeekWithDates
@@ -46,14 +47,61 @@ export default function MonthViewWeek({ week }: props) {
     $app.datePickerState.close()
   }
 
+  const hasFocus = (weekDay: WeekDay) =>
+    toDateString(weekDay.day) === $app.datePickerState.datePickerDate.value
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    const isDown = event.key === 'ArrowDown'
+    const isUp = event.key === 'ArrowUp'
+    const isLeft = event.key === 'ArrowLeft'
+    const isRight = event.key === 'ArrowRight'
+    if (isDown) {
+      $app.datePickerState.datePickerDate.value = addDays(
+        $app.datePickerState.datePickerDate.value,
+        7
+      )
+    }
+
+    if (isUp) {
+      $app.datePickerState.datePickerDate.value = addDays(
+        $app.datePickerState.datePickerDate.value,
+        -7
+      )
+    }
+
+    if (isLeft) {
+      $app.datePickerState.datePickerDate.value = addDays(
+        $app.datePickerState.datePickerDate.value,
+        -1
+      )
+    }
+
+    if (isRight) {
+      console.log('isRight')
+      $app.datePickerState.datePickerDate.value = addDays(
+        $app.datePickerState.datePickerDate.value,
+        1
+      )
+      // focus next element
+      const element = document.querySelector('[data-focus="true"]')
+      if (element) {
+        console.log('focus button')
+        ;(element as HTMLButtonElement).focus()
+      }
+    }
+  }
+
   return (
     <>
       <div data-testid={DATE_PICKER_WEEK} className="sx__date-picker__week">
         {weekDays.map((weekDay) => (
           <button
+            tabIndex={hasFocus(weekDay) ? 0 : -1}
             disabled={!isDateSelectable(weekDay.day)}
             className={weekDay.classes.join(' ')}
+            data-focus={hasFocus(weekDay) ? 'true' : undefined}
             onClick={() => selectDate(weekDay.day)}
+            onKeyDown={handleKeyDown}
           >
             {weekDay.day.getDate()}
           </button>
