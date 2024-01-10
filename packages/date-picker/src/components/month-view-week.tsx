@@ -77,17 +77,10 @@ export default function MonthViewWeek({ week }: props) {
     }
 
     if (isRight) {
-      console.log('isRight')
       $app.datePickerState.datePickerDate.value = addDays(
         $app.datePickerState.datePickerDate.value,
         1
       )
-      // focus next element
-      const element = document.querySelector('[data-focus="true"]')
-      if (element) {
-        console.log('focus button')
-        ;(element as HTMLButtonElement).focus()
-      }
     }
   }
 
@@ -98,6 +91,9 @@ export default function MonthViewWeek({ week }: props) {
           <button
             tabIndex={hasFocus(weekDay) ? 0 : -1}
             disabled={!isDateSelectable(weekDay.day)}
+            aria-label={toJSDate(
+              $app.datePickerState.datePickerDate.value
+            ).toLocaleDateString()}
             className={weekDay.classes.join(' ')}
             data-focus={hasFocus(weekDay) ? 'true' : undefined}
             onClick={() => selectDate(weekDay.day)}

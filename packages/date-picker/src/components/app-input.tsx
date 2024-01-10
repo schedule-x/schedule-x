@@ -71,6 +71,8 @@ export default function AppInput() {
     }
   }
 
+  console.log($app.translate('Choose Date'))
+
   return (
     <>
       <div className={wrapperClasses.join(' ')}>
@@ -89,6 +91,7 @@ export default function AppInput() {
         />
 
         <button
+          aria-label={$app.translate('Choose Date')}
           onKeyDown={handleKeyDown}
           className="sx__date-input-chevron-wrapper"
         >

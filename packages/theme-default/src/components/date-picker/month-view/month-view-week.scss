@@ -15,7 +15,9 @@
   }
 
   &:focus {
-    outline: 2px solid pink;
+    // make outline appear as inline
+    outline-offset: -2px;
+    outline: 2px solid var(--sx-color-primary);
   }
 
   &.is-leading-or-trailing {

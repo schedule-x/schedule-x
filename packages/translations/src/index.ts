@@ -13,7 +13,6 @@ import { datePickerZhCN } from './locales/zh-CN/date-picker'
 
 import { translate } from './translator/translate'
 
-
 const translations = {
   deDE,
   enUS,
