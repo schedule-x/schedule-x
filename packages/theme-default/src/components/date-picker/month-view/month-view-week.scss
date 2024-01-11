@@ -14,6 +14,11 @@
     background-color: var(--sx-color-surface-dim);
   }
 
+  &:focus {
+    outline-offset: -2px;
+    outline: 2px solid var(--sx-color-primary);
+  }
+
   &.is-leading-or-trailing {
     color: var(--sx-color-neutral-variant);
   }

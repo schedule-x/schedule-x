@@ -8,6 +8,7 @@ import {
   isToday,
 } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { addDays } from '@schedule-x/shared/src'
 
 type props = {
   week: WeekWithDates
@@ -46,14 +47,43 @@ export default function MonthViewWeek({ week }: props) {
     $app.datePickerState.close()
   }
 
+  const hasFocus = (weekDay: WeekDay) =>
+    toDateString(weekDay.day) === $app.datePickerState.datePickerDate.value
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      $app.datePickerState.selectedDate.value =
+        $app.datePickerState.datePickerDate.value
+      $app.datePickerState.close()
+      return
+    }
+
+    const keyMapDaysToAdd = new Map([
+      ['ArrowDown', 7],
+      ['ArrowUp', -7],
+      ['ArrowLeft', -1],
+      ['ArrowRight', 1],
+    ])
+    $app.datePickerState.datePickerDate.value = addDays(
+      $app.datePickerState.datePickerDate.value,
+      keyMapDaysToAdd.get(event.key) || 0
+    )
+  }
+
   return (
     <>
       <div data-testid={DATE_PICKER_WEEK} className="sx__date-picker__week">
         {weekDays.map((weekDay) => (
           <button
+            tabIndex={hasFocus(weekDay) ? 0 : -1}
             disabled={!isDateSelectable(weekDay.day)}
+            aria-label={toJSDate(
+              $app.datePickerState.datePickerDate.value
+            ).toLocaleDateString()}
             className={weekDay.classes.join(' ')}
+            data-focus={hasFocus(weekDay) ? 'true' : undefined}
             onClick={() => selectDate(weekDay.day)}
+            onKeyDown={handleKeyDown}
           >
             {weekDay.day.getDate()}
           </button>
