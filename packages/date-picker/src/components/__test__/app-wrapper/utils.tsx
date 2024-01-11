@@ -27,3 +27,10 @@ export const renderWithOpenPopup = (
 export const getAppWrapper = () => {
   return document.querySelector('.sx__date-picker-wrapper') as HTMLElement
 }
+
+export const focusInputChevronAndPressEnter = () => {
+  const chevronButton = document.querySelector(
+    '.sx__date-input-chevron-wrapper'
+  )
+  chevronButton?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
+}

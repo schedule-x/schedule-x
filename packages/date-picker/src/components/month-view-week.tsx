@@ -51,37 +51,23 @@ export default function MonthViewWeek({ week }: props) {
     toDateString(weekDay.day) === $app.datePickerState.datePickerDate.value
 
   const handleKeyDown = (event: KeyboardEvent) => {
-    const isDown = event.key === 'ArrowDown'
-    const isUp = event.key === 'ArrowUp'
-    const isLeft = event.key === 'ArrowLeft'
-    const isRight = event.key === 'ArrowRight'
-    if (isDown) {
-      $app.datePickerState.datePickerDate.value = addDays(
-        $app.datePickerState.datePickerDate.value,
-        7
-      )
+    if (event.key === 'Enter') {
+      $app.datePickerState.selectedDate.value =
+        $app.datePickerState.datePickerDate.value
+      $app.datePickerState.close()
+      return
     }
 
-    if (isUp) {
-      $app.datePickerState.datePickerDate.value = addDays(
-        $app.datePickerState.datePickerDate.value,
-        -7
-      )
-    }
-
-    if (isLeft) {
-      $app.datePickerState.datePickerDate.value = addDays(
-        $app.datePickerState.datePickerDate.value,
-        -1
-      )
-    }
-
-    if (isRight) {
-      $app.datePickerState.datePickerDate.value = addDays(
-        $app.datePickerState.datePickerDate.value,
-        1
-      )
-    }
+    const keyMapDaysToAdd = new Map([
+      ['ArrowDown', 7],
+      ['ArrowUp', -7],
+      ['ArrowLeft', -1],
+      ['ArrowRight', 1],
+    ])
+    $app.datePickerState.datePickerDate.value = addDays(
+      $app.datePickerState.datePickerDate.value,
+      keyMapDaysToAdd.get(event.key) || 0
+    )
   }
 
   return (
