@@ -37,7 +37,8 @@
   padding: var(--sx-spacing-padding4) var(--sx-spacing-padding6);
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--sx-color-primary);
     color: var(--sx-color-on-primary);
   }
@@ -45,7 +46,8 @@
   &.is-selected {
     background-color: var(--sx-color-surface-dim);
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: var(--sx-color-primary);
       color: var(--sx-color-on-primary);
     }

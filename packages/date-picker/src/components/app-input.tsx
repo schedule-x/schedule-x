@@ -4,6 +4,7 @@ import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-con
 import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import chevronIcon from '../assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
+import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 
 export default function AppInput() {
   const datePickerLabelId = randomStringId()
@@ -55,9 +56,9 @@ export default function AppInput() {
     $app.datePickerState.open()
   }
 
-  const handleButtonKeyDown = (e: KeyboardEvent) => {
-    if (e.key === ' ' || e.key === 'Enter') {
-      e.preventDefault()
+  const handleButtonKeyDown = (keyboardEvent: KeyboardEvent) => {
+    if (isKeyEnterOrSpace(keyboardEvent)) {
+      keyboardEvent.preventDefault()
       $app.datePickerState.open()
 
       setTimeout(() => {
