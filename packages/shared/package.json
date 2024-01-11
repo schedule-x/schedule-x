@@ -10,6 +10,7 @@
     "email": "tom@oesterlund.de",
     "url": "https://github.com/tomosterlund"
   },
+  "license": "MIT",
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
