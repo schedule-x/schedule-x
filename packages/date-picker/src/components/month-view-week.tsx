@@ -8,7 +8,7 @@ import {
   isToday,
 } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { addDays } from '@schedule-x/shared'
+import { addDays } from '@schedule-x/shared/src'
 
 type props = {
   week: WeekWithDates

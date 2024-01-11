@@ -67,8 +67,6 @@ export default function AppInput() {
     }
   }
 
-  console.log($app.translate('Choose Date'))
-
   return (
     <>
       <div className={wrapperClasses.join(' ')}>
