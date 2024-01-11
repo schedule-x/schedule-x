@@ -1,8 +1,11 @@
 ![Schedule-X](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-logo.png)
 
-[![Build Status](https://github.com/schedule-x/schedule-x/actions/workflows/build-library/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml)
-[![Unit Tests](https://github.com/schedule-x/schedule-x/actions/workflows/test-unit/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/test-unit.yml)
-[![E2E Tests](https://github.com/schedule-x/schedule-x/actions/workflows/test-e2e/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/test-e2e.yml)
+[![Build Status](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml/badge.svg)]
+(https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml)
+[![Unit Tests](https://github.com/schedule-x/schedule-x/actions/workflows/test-unit.yml/badge.svg)](https://github.
+com/schedule-x/schedule-x/actions/workflows/test-unit.yml)
+[![E2E Tests](https://github.com/schedule-x/schedule-x/actions/workflows/test-e2e.yml/badge.svg)](https://github.
+com/schedule-x/schedule-x/actions/workflows/test-e2e.yml)
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true)](https://discord.gg/yHbT3C4M8w)
 
 # Material design calendar and date picker
