@@ -55,7 +55,7 @@ export default function AppInput() {
     $app.datePickerState.open()
   }
 
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleButtonKeyDown = (e: KeyboardEvent) => {
     if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault()
       $app.datePickerState.open()
@@ -86,7 +86,7 @@ export default function AppInput() {
 
         <button
           aria-label={$app.translate('Choose Date')}
-          onKeyDown={handleKeyDown}
+          onKeyDown={handleButtonKeyDown}
           className="sx__date-input-chevron-wrapper"
         >
           <img className="sx__date-input-chevron" src={chevronIcon} alt="" />
