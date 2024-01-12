@@ -8,4 +8,6 @@ export const calendarZhCN: CalendarTranslations = {
   events: '场活动',
   event: '活动',
   'No events': '没有活动',
+  'Next period': '下一段时间',
+  'Previous period': '上一段时间',
 }

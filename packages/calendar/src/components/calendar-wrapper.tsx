@@ -11,6 +11,7 @@ import {
   destroyPlugins,
   initPlugins,
 } from '../utils/stateless/plugins-lifecycle'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 type props = {
   $app: CalendarAppSingleton

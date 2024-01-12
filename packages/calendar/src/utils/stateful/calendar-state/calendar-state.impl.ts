@@ -17,6 +17,7 @@ export const createCalendarState = (
     )?.name || calendarConfig.views[0].name
   )
   const range = signal<DateRange | null>(null)
+  const rangeName = signal<string>('')
 
   let wasInitialized = false
 

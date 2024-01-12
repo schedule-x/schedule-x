@@ -6,4 +6,6 @@ export interface CalendarTranslations {
   events: string
   event: string
   'No events': string
+  'Next period': string
+  'Previous period': string
 }

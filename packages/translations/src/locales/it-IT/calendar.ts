@@ -8,4 +8,6 @@ export const calendarItIT: CalendarTranslations = {
   events: 'eventi',
   event: 'evento',
   'No events': 'Nessun evento',
+  'Next period': 'Periodo successivo',
+  'Previous period': 'Periodo precedente',
 }

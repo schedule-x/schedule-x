@@ -8,4 +8,6 @@ export const calendarEnUS: CalendarTranslations = {
   events: 'events',
   event: 'event',
   'No events': 'No events',
+  'Next period': 'Next period',
+  'Previous period': 'Previous period',
 }

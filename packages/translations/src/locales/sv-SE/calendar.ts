@@ -8,4 +8,6 @@ export const calendarSvSE: CalendarTranslations = {
   events: 'händelser',
   event: 'händelse',
   'No events': 'Inga händelser',
+  'Next period': 'Nästa period',
+  'Previous period': 'Föregående period',
 }
