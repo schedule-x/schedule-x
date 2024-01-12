@@ -6,4 +6,5 @@ export const datePickerZhCN: DatePickerTranslations = {
   'Next month': '下个月',
   'Previous month': '上个月',
   'Choose Date': '选择日期',
+  'Select View': '选择视图',
 }
