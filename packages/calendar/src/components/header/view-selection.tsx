@@ -81,26 +81,19 @@ export default function ViewSelection() {
     if (!viewSelectionItems) return
 
     if (keyboardEvent.key === 'ArrowDown') {
-      if (selectedViewIndex < viewSelectionItems.length - 1) {
-        const nextOption = viewSelectionItems[selectedViewIndex + 1]
-        if (nextOption instanceof HTMLElement) {
-          setSelectedViewIndex(selectedViewIndex + 1)
-          nextOption.focus()
-        }
+      const nextOption = viewSelectionItems[selectedViewIndex + 1]
+      if (nextOption instanceof HTMLElement) {
+        setSelectedViewIndex(selectedViewIndex + 1)
+        nextOption.focus()
       }
     } else if (keyboardEvent.key === 'ArrowUp') {
-      if (selectedViewIndex > 0) {
-        const prevOption = viewSelectionItems[selectedViewIndex - 1]
-        if (prevOption instanceof HTMLElement) {
-          setSelectedViewIndex(selectedViewIndex - 1)
-          prevOption.focus()
-        }
+      const prevOption = viewSelectionItems[selectedViewIndex - 1]
+      if (prevOption instanceof HTMLElement) {
+        setSelectedViewIndex(selectedViewIndex - 1)
+        prevOption.focus()
       }
     } else if (isKeyEnterOrSpace(keyboardEvent)) {
-      const selectedViewName = viewSelectionItems[selectedViewIndex].textContent
-      if (selectedViewName) {
-        handleClickOnSelectionItem(viewName)
-      }
+      handleClickOnSelectionItem(viewName)
     }
   }
 
