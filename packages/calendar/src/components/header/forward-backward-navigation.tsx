@@ -1,15 +1,7 @@
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { CalendarAppSingleton } from '@schedule-x/shared'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
-
-function getLocalizedDateTime($app: CalendarAppSingleton) {
-  return toJSDate($app.calendarState.range.value?.end || '').toLocaleDateString(
-    $app.config.locale
-  )
-}
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
