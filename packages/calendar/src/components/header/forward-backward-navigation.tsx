@@ -2,6 +2,14 @@ import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { CalendarAppSingleton } from '@schedule-x/shared'
+import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+
+function getLocalizedDateTime($app: CalendarAppSingleton) {
+  return toJSDate($app.calendarState.range.value?.end || '').toLocaleDateString(
+    $app.config.locale
+  )
+}
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
@@ -22,18 +30,24 @@ export default function ForwardBackwardNavigation() {
 
   const [localizedRange, setLocalizedRange] = useState('')
   useEffect(() => {
-    const localizedStart = toJSDate(
-      $app.calendarState.range.value?.start || ''
-    ).toLocaleDateString()
-    const localizedEnd = toJSDate(
-      $app.calendarState.range.value?.end || ''
-    ).toLocaleDateString()
-    setLocalizedRange(`${localizedStart} bis ${localizedEnd}`)
+    setLocalizedRange(
+      `${getLocalizedDate(
+        $app.calendarState.range.value!.start,
+        $app.config.locale
+      )} ${$app.translate('to')} ${getLocalizedDate(
+        $app.calendarState.range.value!.end,
+        $app.config.locale
+      )}`
+    )
   }, [$app.calendarState.range.value])
 
   return (
     <>
-      <div aria-label={localizedRange} aria-live="assertive">
+      <div
+        className="sx__forward-backward-navigation"
+        aria-label={localizedRange}
+        aria-live="polite"
+      >
         <Chevron
           onClick={() => navigate('backwards')}
           direction={'previous'}

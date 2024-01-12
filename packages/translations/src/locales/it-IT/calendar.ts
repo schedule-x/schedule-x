@@ -10,4 +10,5 @@ export const calendarItIT: CalendarTranslations = {
   'No events': 'Nessun evento',
   'Next period': 'Periodo successivo',
   'Previous period': 'Periodo precedente',
+  to: 'a', // as in 2/1/2020 to 2/2/2020
 }

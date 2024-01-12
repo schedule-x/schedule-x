@@ -12,9 +12,17 @@ export const renderComponent = ($app: CalendarAppSingleton) => {
 }
 
 export const clickNext = () => {
-  screen.getByText('Next').click()
+  screen.getByText('Next period').click()
 }
 
 export const clickPrevious = () => {
-  screen.getByText('Previous').click()
+  screen.getByText('Previous period').click()
+}
+
+export const getLeftChevron = () => {
+  return document.querySelectorAll('.sx__chevron-wrapper')[0] as HTMLElement
+}
+
+export const getRightChevron = () => {
+  return document.querySelectorAll('.sx__chevron-wrapper')[1] as HTMLElement
 }

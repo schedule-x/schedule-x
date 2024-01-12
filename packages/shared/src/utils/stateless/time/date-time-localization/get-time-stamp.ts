@@ -10,6 +10,9 @@ const dateFn = (dateTimeString: string, locale: string) => {
     year: 'numeric',
   })
 }
+
+export const getLocalizedDate = dateFn
+
 const timeFn = (dateTimeString: string, locale: string) => {
   const { year, month, date, hours, minutes } = toIntegers(dateTimeString)
 
@@ -21,6 +24,7 @@ const timeFn = (dateTimeString: string, locale: string) => {
     }
   )
 }
+
 export const getTimeStamp = (
   calendarEvent: Partial<CalendarEventInternal>, // to facilitate testing. In reality, we will always have a full CalendarEventInternal
   locale: string

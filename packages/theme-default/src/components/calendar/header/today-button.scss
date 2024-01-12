@@ -13,7 +13,8 @@
     display: none;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--sx-internal-color-light-gray);
 
     .is-dark & {

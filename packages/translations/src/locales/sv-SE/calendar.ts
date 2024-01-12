@@ -10,4 +10,5 @@ export const calendarSvSE: CalendarTranslations = {
   'No events': 'Inga händelser',
   'Next period': 'Nästa period',
   'Previous period': 'Föregående period',
+  to: 'till', // as in 2/1/2020 to 2/2/2020
 }
