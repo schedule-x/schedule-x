@@ -14,7 +14,7 @@ export default function Chevron({ direction, onClick, buttonText }: props) {
   return (
     <button
       className="sx__chevron-wrapper sx__ripple"
-      onClick={onClick}
+      onMouseUp={onClick}
       onKeyDown={handleKeyDown}
       tabIndex={0}
     >

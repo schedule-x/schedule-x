@@ -20,7 +20,7 @@ describe('month view header', () => {
       if (!nextButton) {
         throw new Error('nextButton is not defined')
       }
-      fireEvent.click(nextButton)
+      fireEvent.mouseUp(nextButton)
 
       await waitFor(() => {
         expect(container.textContent).toContain(expectedMonthName)
@@ -38,7 +38,7 @@ describe('month view header', () => {
       if (!previousButton) {
         throw new Error('previousButton is not defined')
       }
-      fireEvent.click(previousButton)
+      fireEvent.mouseUp(previousButton)
 
       await waitFor(() => {
         expect(container.textContent).toContain(expectedMonthName)
