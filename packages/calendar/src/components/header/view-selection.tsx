@@ -55,7 +55,7 @@ export default function ViewSelection() {
 
   const [viewSelectionItems, setViewSelectionItems] =
     useState<NodeListOf<Element>>()
-  const [selectedViewIndex, setSelectedViewIndex] = useState(0)
+  const [focusedViewIndex, setFocusedViewIndex] = useState(0)
 
   const handleSelectedViewKeyDown = (keyboardEvent: KeyboardEvent) => {
     if (isKeyEnterOrSpace(keyboardEvent)) {
@@ -70,7 +70,7 @@ export default function ViewSelection() {
       setViewSelectionItems(allOptions as NodeListOf<Element>)
       const firstOption = allOptions[0]
       if (firstOption instanceof HTMLElement) {
-        setSelectedViewIndex(0)
+        setFocusedViewIndex(0)
         firstOption.focus()
       }
     }, 50)
@@ -80,15 +80,15 @@ export default function ViewSelection() {
     if (!viewSelectionItems) return
 
     if (keyboardEvent.key === 'ArrowDown') {
-      const nextOption = viewSelectionItems[selectedViewIndex + 1]
+      const nextOption = viewSelectionItems[focusedViewIndex + 1]
       if (nextOption instanceof HTMLElement) {
-        setSelectedViewIndex(selectedViewIndex + 1)
+        setFocusedViewIndex(focusedViewIndex + 1)
         nextOption.focus()
       }
     } else if (keyboardEvent.key === 'ArrowUp') {
-      const prevOption = viewSelectionItems[selectedViewIndex - 1]
+      const prevOption = viewSelectionItems[focusedViewIndex - 1]
       if (prevOption instanceof HTMLElement) {
-        setSelectedViewIndex(selectedViewIndex - 1)
+        setFocusedViewIndex(focusedViewIndex - 1)
         prevOption.focus()
       }
     } else if (isKeyEnterOrSpace(keyboardEvent)) {
