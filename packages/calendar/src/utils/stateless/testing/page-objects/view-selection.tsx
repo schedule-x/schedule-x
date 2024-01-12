@@ -13,3 +13,9 @@ export const openViewSelection = () => {
     document.querySelector('.sx__view-selection-selected-item') as HTMLElement
   ).click()
 }
+
+export const getViewSelectionElement = () => {
+  return document.querySelector(
+    '.sx__view-selection-selected-item'
+  ) as HTMLElement
+}

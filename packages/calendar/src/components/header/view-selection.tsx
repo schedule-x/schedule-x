@@ -62,19 +62,17 @@ export default function ViewSelection() {
       setIsOpen(!isOpen)
     }
 
-    setTimeout(() => {
-      const allOptions = $app.elements.calendarWrapper?.querySelectorAll(
-        '.sx__view-selection-item'
-      )
-      if (!allOptions) return
+    const allOptions = $app.elements.calendarWrapper?.querySelectorAll(
+      '.sx__view-selection-item'
+    )
+    if (!allOptions) return
 
-      setViewSelectionItems(allOptions as NodeListOf<Element>)
-      const firstOption = allOptions[0]
-      if (firstOption instanceof HTMLElement) {
-        setSelectedViewIndex(0)
-        firstOption.focus()
-      }
-    })
+    setViewSelectionItems(allOptions as NodeListOf<Element>)
+    const firstOption = allOptions[0]
+    if (firstOption instanceof HTMLElement) {
+      setSelectedViewIndex(0)
+      firstOption.focus()
+    }
   }
 
   const navigateUpOrDown = (keyboardEvent: KeyboardEvent, viewName: string) => {
