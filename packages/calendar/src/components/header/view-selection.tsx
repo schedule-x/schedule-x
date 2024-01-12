@@ -62,17 +62,18 @@ export default function ViewSelection() {
       setIsOpen(!isOpen)
     }
 
-    const allOptions = $app.elements.calendarWrapper?.querySelectorAll(
-      '.sx__view-selection-item'
-    )
-    if (!allOptions) return
-
-    setViewSelectionItems(allOptions as NodeListOf<Element>)
-    const firstOption = allOptions[0]
-    if (firstOption instanceof HTMLElement) {
-      setSelectedViewIndex(0)
-      firstOption.focus()
-    }
+    setTimeout(() => {
+      const allOptions = $app.elements.calendarWrapper?.querySelectorAll(
+        '.sx__view-selection-item'
+      )
+      if (!allOptions) return
+      setViewSelectionItems(allOptions as NodeListOf<Element>)
+      const firstOption = allOptions[0]
+      if (firstOption instanceof HTMLElement) {
+        setSelectedViewIndex(0)
+        firstOption.focus()
+      }
+    }, 50)
   }
 
   const navigateUpOrDown = (keyboardEvent: KeyboardEvent, viewName: string) => {
@@ -100,7 +101,7 @@ export default function ViewSelection() {
       <div
         tabIndex={0}
         role="button"
-        aria-label={$app.translate('Select view')}
+        aria-label={$app.translate('Select View')}
         className="sx__view-selection-selected-item sx__ripple"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleSelectedViewKeyDown}
@@ -114,7 +115,9 @@ export default function ViewSelection() {
         >
           {availableViews.map((view) => (
             <li
-              aria-label={$app.translate('Select view') + ' ' + view.label}
+              aria-label={
+                $app.translate('Select View') + ' ' + $app.translate(view.label)
+              }
               tabIndex={-1}
               role="button"
               onKeyDown={(keyboardEvent) =>

@@ -19,3 +19,21 @@ export const getViewSelectionElement = () => {
     '.sx__view-selection-selected-item'
   ) as HTMLElement
 }
+
+export const getFirstViewOption = () => {
+  return document.querySelector(
+    '.sx__view-selection-item:nth-child(1)'
+  ) as HTMLElement
+}
+
+export const getSecondViewOption = () => {
+  return document.querySelector(
+    '.sx__view-selection-item:nth-child(2)'
+  ) as HTMLElement
+}
+
+export const getThirdViewOption = () => {
+  return document.querySelector(
+    '.sx__view-selection-item:nth-child(3)'
+  ) as HTMLElement
+}

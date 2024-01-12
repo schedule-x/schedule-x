@@ -6,15 +6,22 @@ import {
 import { renderComponent } from './utils'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import {
+  getFirstViewOption,
+  getSecondViewOption,
+  getThirdViewOption,
   getViewSelectionElement,
   isDropdownOpen,
 } from '../../../../utils/stateless/testing/page-objects/view-selection'
 import { cleanup, render, waitFor } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import CalendarWrapper from '../../../calendar-wrapper'
-import { afterEach } from 'vitest'
+import { afterEach, beforeEach, vi } from 'vitest'
 
 describe('ViewSelection', () => {
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+
   afterEach(() => {
     cleanup()
   })
@@ -47,24 +54,28 @@ describe('ViewSelection', () => {
         new KeyboardEvent('keydown', { key: 'Enter' })
       )
 
-      let viewOption1: HTMLElement | null = document.querySelector(
-        '.sx__view-selection-item'
-      )
+      let viewOption1: HTMLElement | null = getFirstViewOption()
+      let viewOption2: HTMLElement | null = getSecondViewOption()
+      let viewOption3: HTMLElement | null = getThirdViewOption()
+      vi.runAllTimers()
       await waitFor(() => {
-        viewOption1 = document.querySelector(
-          '.sx__view-selection-item'
-        ) as HTMLElement
+        viewOption1 = getFirstViewOption()
+        viewOption2 = getSecondViewOption()
+        viewOption3 = getThirdViewOption()
         expect(viewOption1).toBeTruthy()
       })
       ;(viewOption1 as HTMLElement).dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowDown' })
       )
-      ;(viewOption1 as HTMLElement).dispatchEvent(
+      ;(viewOption2 as HTMLElement).dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowDown' })
+      )
+      ;(viewOption3 as HTMLElement).dispatchEvent(
         new KeyboardEvent('keydown', { key: 'Enter' })
       )
 
       await waitFor(() => {
-        expect($app.calendarState.view.value).toBe(InternalViewName.Day)
+        expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
       })
     })
   })
