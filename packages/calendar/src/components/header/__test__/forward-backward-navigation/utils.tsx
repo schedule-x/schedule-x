@@ -1,5 +1,5 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { render, screen } from '@testing-library/preact'
+import { fireEvent, render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import ForwardBackwardNavigation from '../../forward-backward-navigation'
 
@@ -12,9 +12,17 @@ export const renderComponent = ($app: CalendarAppSingleton) => {
 }
 
 export const clickNext = () => {
-  screen.getByText('Next').click()
+  fireEvent.mouseUp(screen.getByText('Next period'))
 }
 
 export const clickPrevious = () => {
-  screen.getByText('Previous').click()
+  fireEvent.mouseUp(screen.getByText('Previous period'))
+}
+
+export const getLeftChevron = () => {
+  return document.querySelectorAll('.sx__chevron-wrapper')[0] as HTMLElement
+}
+
+export const getRightChevron = () => {
+  return document.querySelectorAll('.sx__chevron-wrapper')[1] as HTMLElement
 }

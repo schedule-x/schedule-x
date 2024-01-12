@@ -1,6 +1,7 @@
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
+import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
@@ -19,19 +20,36 @@ export default function ForwardBackwardNavigation() {
     )
   }
 
+  const [localizedRange, setLocalizedRange] = useState('')
+  useEffect(() => {
+    setLocalizedRange(
+      `${getLocalizedDate(
+        $app.calendarState.range.value!.start,
+        $app.config.locale
+      )} ${$app.translate('to')} ${getLocalizedDate(
+        $app.calendarState.range.value!.end,
+        $app.config.locale
+      )}`
+    )
+  }, [$app.calendarState.range.value])
+
   return (
     <>
-      <div>
+      <div
+        className="sx__forward-backward-navigation"
+        aria-label={localizedRange}
+        aria-live="polite"
+      >
         <Chevron
           onClick={() => navigate('backwards')}
           direction={'previous'}
-          buttonText={'Previous'}
+          buttonText={$app.translate('Previous period')}
         />
 
         <Chevron
           onClick={() => navigate('forwards')}
           direction={'next'}
-          buttonText={'Next'}
+          buttonText={$app.translate('Next period')}
         />
       </div>
     </>

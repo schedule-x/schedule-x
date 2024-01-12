@@ -9,6 +9,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { addDays } from '@schedule-x/shared/src'
+import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   week: WeekWithDates
@@ -77,9 +78,10 @@ export default function MonthViewWeek({ week }: props) {
           <button
             tabIndex={hasFocus(weekDay) ? 0 : -1}
             disabled={!isDateSelectable(weekDay.day)}
-            aria-label={toJSDate(
-              $app.datePickerState.datePickerDate.value
-            ).toLocaleDateString()}
+            aria-label={getLocalizedDate(
+              $app.datePickerState.datePickerDate.value,
+              $app.config.locale
+            )}
             className={weekDay.classes.join(' ')}
             data-focus={hasFocus(weekDay) ? 'true' : undefined}
             onClick={() => selectDate(weekDay.day)}

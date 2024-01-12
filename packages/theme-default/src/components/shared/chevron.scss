@@ -11,7 +11,8 @@
     background-color: var(--sx-internal-color-gray-ripple-background);
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--sx-color-surface-dim);
 
     .is-dark & {
