@@ -56,7 +56,10 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
                 week={Object.values(week).map((day) => toJSDate(day.date))}
               />
 
-              <div className="sx__date-grid">
+              <div
+                className="sx__date-grid"
+                aria-label={$app.translate('Full day- and multiple day events')}
+              >
                 {Object.values(week).map((day) => (
                   <DateGridDay calendarEvents={day.dateGridEvents} />
                 ))}

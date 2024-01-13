@@ -111,6 +111,7 @@ export default function TimeGridEvent({
         className={
           'sx__time-grid-event sx__event' + (isCopy ? ' is-event-copy' : '')
         }
+        tabIndex={0}
         style={{
           top: `${getEventTop(
             calendarEvent.start,

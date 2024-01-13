@@ -14,6 +14,7 @@ import useEventInteractions from '../../utils/stateful/hooks/use-event-interacti
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
+import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -96,6 +97,13 @@ export default function DateGridEvent({
         id={
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
+        tabIndex={0}
+        aria-label={
+          calendarEvent.title +
+          ' ' +
+          getTimeStamp(calendarEvent, $app.config.locale, $app.translate('to'))
+        }
+        aria-hidden={true}
         data-ccid={customComponentId}
         onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
