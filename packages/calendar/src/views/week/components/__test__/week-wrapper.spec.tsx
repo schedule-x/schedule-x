@@ -4,21 +4,11 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { cleanup, render } from '@testing-library/preact'
-import { AppContext } from '../../../../utils/stateful/app-context'
-import { WeekWrapper } from '../week-wrapper'
+import { cleanup } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { renderComponent } from './utils'
 
-const renderComponent = ($app: CalendarAppSingleton) => {
-  render(
-    <AppContext.Provider value={$app}>
-      <WeekWrapper $app={$app} id={'1'} />
-    </AppContext.Provider>
-  )
-}
-
-describe('WeekWrapper', () => {
+describe('Week view', () => {
   afterEach(() => {
     cleanup()
   })
