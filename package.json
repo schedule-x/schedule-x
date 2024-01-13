@@ -33,7 +33,7 @@
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease --force-publish",
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease --force-publish",
     "prepare": "husky install",
-    "seed": "ts-node-esm development/seeder/seed.ts"
+    "seed": "npx tsx development/seeder/seed.ts"
   },
   "dependencies": {
     "@preact/signals": "1.2.2",
@@ -77,8 +77,8 @@
     "sinon": "^17.0.1",
     "stylelint": "^15.10.2",
     "stylelint-config-standard-scss": "^10.0.0",
-    "ts-node": "^10.9.1",
     "ts-sinon": "^2.0.2",
+    "tsx": "^4.7.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.0",
     "vitest": "^0.34.0"
