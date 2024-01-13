@@ -66,6 +66,13 @@ $heading-width: 700px;
   }
 }
 
+#calendar-app {
+  width: 100%;
+  max-width: 950px;
+  height: 600px;
+  margin-bottom: 4rem;
+}
+
 .headingGradient {
   background: linear-gradient(to right, #deccfa 0%, #6750a4 100%);
   text-shadow: 0 0 90px rgb(0 0 0 / 30%);
@@ -126,6 +133,8 @@ $heading-width: 700px;
 }
 
 .buttonOutlined {
+  display: flex;
+  align-items: center;
   background: transparent;
   color: #6750a4;
   box-shadow: inset 0 0 0 2px #6750a4;
@@ -134,6 +143,10 @@ $heading-width: 700px;
     color: #d0bcff;
     border-color: #d0bcff;
     box-shadow: inset 0 0 0 2px #d0bcff;
+  }
+
+  .github-icon {
+    margin-left: 0.5rem;
   }
 }
 
