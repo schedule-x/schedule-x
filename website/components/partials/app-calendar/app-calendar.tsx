@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react'
 import { useTheme } from 'nextra-theme-docs'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
-import { createScrollControllerPlugin } from '@schedule-x/scroll-controller'
+
+const getTheme = (resolvedTheme: string) => resolvedTheme === 'dark' ? 'dark' : 'light'
 
 export default function AppCalendar() {
   const [calendarApp, setCalendarApp] = useState<CalendarApp>(null)
@@ -21,6 +22,7 @@ export default function AppCalendar() {
       events: seededEvents,
       plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
       selectedDate: '2024-01-13',
+      isDark: getTheme(resolvedTheme) === 'dark',
       calendars: {
         personal: {
           colorName: 'personal',
@@ -82,8 +84,7 @@ export default function AppCalendar() {
   
   useEffect(() => {
     if (calendarApp) {
-      console.log(resolvedTheme)
-      calendarApp.setTheme(resolvedTheme === 'dark' ? 'dark' : 'light')
+      calendarApp.setTheme(getTheme(resolvedTheme))
     }
   }, [resolvedTheme])
 
