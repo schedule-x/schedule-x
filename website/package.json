@@ -21,11 +21,12 @@
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.1",
-    "@schedule-x/calendar": "^1.0.0",
-    "@schedule-x/date-picker": "^1.0.0",
-    "@schedule-x/theme-default": "^1.0.0",
-    "@schedule-x/drag-and-drop": "^1.0.0",
-    "@schedule-x/event-modal": "^1.0.0",
+    "@schedule-x/calendar": "^1.6.0",
+    "@schedule-x/date-picker": "^1.6.0",
+    "@schedule-x/drag-and-drop": "^1.6.0",
+    "@schedule-x/event-modal": "^1.6.0",
+    "@schedule-x/react": "^1.4.0",
+    "@schedule-x/theme-default": "^1.6.0",
     "@uiw/codemirror-theme-github": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "next": "^13.0.6",
@@ -36,7 +37,7 @@
   },
   "devDependencies": {
     "@types/node": "20.10.6",
-    "typescript": "^4.9.3",
-    "sass": "^1.63.6"
+    "sass": "^1.63.6",
+    "typescript": "^4.9.3"
   }
 }
