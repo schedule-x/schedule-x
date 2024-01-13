@@ -9,6 +9,7 @@ import { setTimeInDateTimeString } from '@schedule-x/shared/src/utils/stateless/
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datetime/grid-click-to-datetime'
+import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -50,7 +51,11 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   }
 
   return (
-    <div className="sx__time-grid-day" onClick={handleOnClick}>
+    <div
+      className="sx__time-grid-day"
+      onClick={handleOnClick}
+      aria-label={getLocalizedDate(date, $app.config.locale)}
+    >
       {eventsWithConcurrency.map((event) => (
         <TimeGridEvent
           key={event.id}

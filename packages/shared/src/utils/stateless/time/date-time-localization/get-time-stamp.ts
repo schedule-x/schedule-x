@@ -27,9 +27,9 @@ const timeFn = (dateTimeString: string, locale: string) => {
 
 export const getTimeStamp = (
   calendarEvent: Partial<CalendarEventInternal>, // to facilitate testing. In reality, we will always have a full CalendarEventInternal
-  locale: string
+  locale: string,
+  delimiter = '\u2013'
 ) => {
-  const enDash = '\u2013'
   const eventTime = { start: calendarEvent.start, end: calendarEvent.end } as {
     start: string
     end: string
@@ -40,7 +40,7 @@ export const getTimeStamp = (
   }
 
   if (calendarEvent._isMultiDayFullDay) {
-    return `${dateFn(eventTime.start, locale)} ${enDash} ${dateFn(
+    return `${dateFn(eventTime.start, locale)} ${delimiter} ${dateFn(
       eventTime.end,
       locale
     )}`
@@ -50,13 +50,13 @@ export const getTimeStamp = (
     return `${dateFn(eventTime.start, locale)} ⋅ ${timeFn(
       eventTime.start,
       locale
-    )} ${enDash} ${timeFn(eventTime.end, locale)}`
+    )} ${delimiter} ${timeFn(eventTime.end, locale)}`
   }
 
   return `${dateFn(eventTime.start, locale)}, ${timeFn(
     eventTime.start,
     locale
-  )} ${enDash} ${dateFn(eventTime.end, locale)}, ${timeFn(
+  )} ${delimiter} ${dateFn(eventTime.end, locale)}, ${timeFn(
     eventTime.end,
     locale
   )}`

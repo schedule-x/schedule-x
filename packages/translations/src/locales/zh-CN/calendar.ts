@@ -11,4 +11,5 @@ export const calendarZhCN: CalendarTranslations = {
   'Next period': '下一段时间',
   'Previous period': '上一段时间',
   to: '至', // as in 2/1/2020 to 2/2/2020
+  'Full day- and multiple day events': '全天和多天活动', // todo: check
 }

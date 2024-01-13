@@ -11,4 +11,5 @@ export const calendarDeDE: CalendarTranslations = {
   'Next period': 'Nächster Zeitraum',
   'Previous period': 'Vorheriger Zeitraum',
   to: 'bis', // as in 2/1/2020 to 2/2/2020
+  'Full day- and multiple day events': 'Ganztägige und mehrtägige Ereignisse',
 }
