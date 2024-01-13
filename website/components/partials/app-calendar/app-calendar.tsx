@@ -16,7 +16,7 @@ export default function AppCalendar() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    let calendarInstance = createCalendar({
+    const calendarInstance = createCalendar({
       views: [viewWeek, viewMonthAgenda, viewDay, viewMonthGrid],
       defaultView: viewWeek.name,
       events: seededEvents,
