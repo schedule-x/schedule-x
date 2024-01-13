@@ -71,6 +71,11 @@ $heading-width: 700px;
   max-width: 950px;
   height: 600px;
   margin-bottom: 4rem;
+
+  // lower on mobile
+  @include mixins.mobile-screens {
+    height: 500px;
+  }
 }
 
 .headingGradient {
