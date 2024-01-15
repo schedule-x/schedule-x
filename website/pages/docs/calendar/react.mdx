@@ -17,48 +17,37 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 
 ### Example
 
-```jsx
-import { useCalendarApp, ScheduleXCalendar } from '@schedule-x/react'
-import {
-  viewWeek,
-  viewDay,
-  viewMonthGrid,
-  viewMonthAgenda,
-} from '@schedule-x/calendar'
+import { Tabs } from 'nextra/components'
+import ReactExample from '../../../components/code-examples/react-calendar.mdx'
+import NextjsExample from '../../../components/code-examples/nextjs-calendar.mdx'
+import {Callout} from "nextra/components";
 
-import '@schedule-x/theme-default/dist/index.css'
+<Tabs items={['React', 'Next']}>
+  <Tabs.Tab>
+    <ReactExample />
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Callout type="info">
+      Depending on your build tools, you might need to target
+      the ESM file from `@schedule-x/react` explicitly:
 
-function CalendarApp() {
-  const calendar = useCalendarApp({
-    defaultView: viewMonthGrid.name,
-    views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
-    events: [
-      {
-        id: '1',
-        title: 'Event 1',
-        start: '2023-12-16',
-        end: '2023-12-16',
-      },
-    ],
-  })
+      ```js copy
+      import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+      ```
 
-  return (
-    <div>
-      <ScheduleXCalendar calendarApp={calendar} />
-    </div>
-  )
-}
-
-export default CalendarApp
-```
+    </Callout>
+    <NextjsExample />
+  </Tabs.Tab>
+</Tabs>
 
 ### Explanation
 
 #### Dependencies
 
-From `@schedule-x/react` you need to import the `Calendar` component and the `useCalendarApp` hook. From
-`@schedule-x/calendar` you need to import the views you want to use. This example uses all the
-available default views. Lastly, from `@schedule-x/theme-default` you import the default theme.
+From `@schedule-x/react` you need to import the `Calendar` component and the `useCalendarApp` hook.  If you are
+working with an SSR framework, you will need to use the `useNextCalendarApp` instead. From `@schedule-x/calendar` you
+need to import the views you want to use. This example uses all the available default views. Lastly, from
+`@schedule-x/theme-default` you import the default theme.
 
 #### Calendar app
 
