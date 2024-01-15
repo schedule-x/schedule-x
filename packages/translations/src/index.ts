@@ -12,6 +12,8 @@ import { zhCN } from './locales/zh-CN'
 import { datePickerZhCN } from './locales/zh-CN/date-picker'
 import { jaJP } from './locales/ja-JP'
 import { datePickerJaJP } from './locales/ja-JP/date-picker'
+import { ruRU } from './locales/ru-RU'
+import { datePickerRuRU } from './locales/ru-RU/date-picker'
 
 import { translate } from './translator/translate'
 
@@ -23,6 +25,7 @@ const translations = {
   svSE,
   zhCN,
   jaJP,
+  ruRU,
 }
 
 const datePickerTranslations = {
@@ -33,6 +36,7 @@ const datePickerTranslations = {
   svSE: datePickerSvSE,
   zhCN: datePickerZhCN,
   jaJP: datePickerJaJP,
+  ruRU: datePickerRuRU,
 }
 
 export {
@@ -46,4 +50,5 @@ export {
   svSE,
   zhCN,
   jaJP,
+  ruRU,
 }
