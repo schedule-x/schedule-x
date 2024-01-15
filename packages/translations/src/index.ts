@@ -10,6 +10,8 @@ import { svSE } from './locales/sv-SE'
 import { datePickerSvSE } from './locales/sv-SE/date-picker'
 import { zhCN } from './locales/zh-CN'
 import { datePickerZhCN } from './locales/zh-CN/date-picker'
+import { ruRu } from './locales/ru-RU'
+import { datePickerRuRU } from './locales/ru-RU/date-picker'
 
 import { translate } from './translator/translate'
 
@@ -20,6 +22,7 @@ const translations = {
   enGB,
   svSE,
   zhCN,
+  ruRu,
 }
 
 const datePickerTranslations = {
@@ -29,6 +32,7 @@ const datePickerTranslations = {
   enGB: datePickerEnGB,
   svSE: datePickerSvSE,
   zhCN: datePickerZhCN,
+  ruRu: datePickerRuRU,
 }
 
 export {
@@ -41,4 +45,5 @@ export {
   enGB,
   svSE,
   zhCN,
+  ruRu,
 }
