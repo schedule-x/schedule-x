@@ -1,0 +1,15 @@
+import { CalendarTranslations } from '../../types/calendar.translations'
+
+export const calendarJaJP: CalendarTranslations = {
+  Today: '今日',
+  Month: '月',
+  Week: '週',
+  Day: '日',
+  events: 'イベント',
+  event: 'イベント',
+  'No events': 'イベントなし',
+  'Next period': '次の期間',
+  'Previous period': '前の期間',
+  to: 'から', // as in 2/1/2020 to 2/2/2020
+  'Full day- and multiple day events': '終日および複数日イベント',
+}
