@@ -21,6 +21,8 @@ import { Fragment } from 'preact'
 import { getCCID } from './time-grid-event-utils'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
+import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -63,9 +65,10 @@ export default function TimeGridEvent({
 
   const leftRule = getLeftRule(calendarEvent)
 
-  const handleMouseDown = (e: MouseEvent) => {
+  const handleStartDrag = (uiEvent: UIEvent) => {
+    if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
-    if (!e.target) return
+    if (!uiEvent.target) return
     if (!$app.config.plugins.dragAndDrop) return
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
@@ -74,7 +77,7 @@ export default function TimeGridEvent({
     $app.config.plugins.dragAndDrop.createTimeGridDragHandler(
       {
         $app,
-        event: e,
+        eventCoordinates: getEventCoordinates(uiEvent),
         updateCopy,
         eventCopy: newEventCopy,
       },
@@ -105,9 +108,11 @@ export default function TimeGridEvent({
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
         data-ccid={customComponentId}
-        onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
         onClick={handleOnClick}
+        onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
+        onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
+        onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         className={
           'sx__time-grid-event sx__event' + (isCopy ? ' is-event-copy' : '')
         }

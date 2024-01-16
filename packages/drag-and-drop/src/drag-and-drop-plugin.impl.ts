@@ -4,12 +4,12 @@ import TimeGridDragHandlerImpl from './time-grid-drag-handler.impl'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import DateGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/date-grid-drag-handler.interface'
 import DateGridDragHandlerImpl from './date-grid-drag-handler.impl'
-import DragHandlerDependencies from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-handler-dependencies.interface'
 import MonthGridDragHandlerImpl from './month-grid-drag-handler.impl'
 import MonthGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/month-grid-drag-handler.interface'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
+import DragHandlerDependencies from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-handler-dependencies.interface'
 
 class DragAndDropPluginImpl implements DragAndDropPlugin {
   name = PluginName.DragAndDrop
@@ -22,7 +22,7 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
   ): TimeGridDragHandler {
     return new TimeGridDragHandlerImpl(
       dependencies.$app,
-      dependencies.event,
+      dependencies.eventCoordinates,
       dependencies.eventCopy,
       dependencies.updateCopy,
       dayBoundariesDateTime,
@@ -41,7 +41,7 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
   ): DateGridDragHandler {
     return new DateGridDragHandlerImpl(
       dependencies.$app,
-      dependencies.event,
+      dependencies.eventCoordinates,
       dependencies.eventCopy,
       dependencies.updateCopy
     )

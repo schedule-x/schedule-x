@@ -23,7 +23,7 @@ export default function EventModal({ $app }: EventModalProps) {
   useEffect(() => {
     setPosition(
       $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
-      $app.config.plugins.eventModal?.calendarEventElement.value?.getBoundingClientRect() as DOMRect,
+      $app.config.plugins.eventModal?.calendarEventDOMRect.value as DOMRect,
       (
         $app.elements.calendarWrapper?.querySelector(
           '.sx__event-modal'

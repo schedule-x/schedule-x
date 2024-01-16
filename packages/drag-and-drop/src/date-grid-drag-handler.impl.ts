@@ -7,6 +7,8 @@ import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/fo
 import { getTimeGridDayWidth } from './utils/stateless/get-time-grid-day-width'
 import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
 import { getDateGridEventCopy } from './utils/stateless/get-date-grid-event-copy'
+import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24
 
@@ -21,11 +23,11 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
 
   constructor(
     private $app: CalendarAppSingleton,
-    private event: MouseEvent,
+    private eventCoordinates: EventCoordinates,
     private eventCopy: CalendarEventInternal,
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void
   ) {
-    this.startX = event.clientX
+    this.startX = eventCoordinates.clientX
     this.dayWidth = getTimeGridDayWidth(this.$app)
     this.originalStart = this.eventCopy.start
     this.originalEnd = this.eventCopy.end
@@ -40,12 +42,22 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   }
 
   private init() {
-    document.addEventListener('mousemove', this.handleMouseMove)
-    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
+    document.addEventListener('mousemove', this.handleMouseOrTouchMove)
+    document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
+
+    document.addEventListener('touchmove', this.handleMouseOrTouchMove, {
+      passive: false,
+    })
+    document.addEventListener('touchend', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
   }
 
-  private handleMouseMove = (e: MouseEvent) => {
-    const pixelDiffX = e.clientX - this.startX
+  private handleMouseOrTouchMove = (uiEvent: UIEvent) => {
+    const { clientX } = getEventCoordinates(uiEvent)
+    const pixelDiffX = clientX - this.startX
     const currentDaysDiff = Math.round(pixelDiffX / this.dayWidth)
     if (currentDaysDiff === this.lastDaysDiff) return
 
@@ -99,8 +111,10 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
       `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
   }
 
-  private handleMouseUp = () => {
-    document.removeEventListener('mousemove', this.handleMouseMove)
+  private handleMouseUpOrTouchEnd = () => {
+    document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
+    document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
+
     this.updateOriginalEvent()
 
     setTimeout(() => {

@@ -14,6 +14,8 @@ import useEventInteractions from '../../utils/stateful/hooks/use-event-interacti
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
+import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
@@ -42,14 +44,15 @@ export default function DateGridEvent({
     backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
   } as const
 
-  const handleMouseDown = (e: MouseEvent) => {
+  const handleStartDrag = (uiEvent: UIEvent) => {
     if (!$app.config.plugins.dragAndDrop) return
+    if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(newEventCopy)
 
     $app.config.plugins.dragAndDrop.createDateGridDragHandler({
-      event: e,
+      eventCoordinates: getEventCoordinates(uiEvent),
       eventCopy: newEventCopy,
       updateCopy,
       $app,
@@ -105,8 +108,10 @@ export default function DateGridEvent({
         }
         aria-hidden={true}
         data-ccid={customComponentId}
-        onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
+        onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
+        onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
+        onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
         className={eventClasses.join(' ')}
         style={{

@@ -6,6 +6,7 @@ import { useContext, useEffect } from 'preact/hooks'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
+import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 
 type props = {
   gridRow: number
@@ -36,8 +37,9 @@ export default function MonthGridEvent({
     width: `calc(${nDays * 100 + '%'} + ${nDays}px - 10px)`,
   } as const
 
-  const handleMouseDown = (e: MouseEvent) => {
-    if (!e.target) return
+  const handleStartDrag = (uiEvent: UIEvent) => {
+    if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
+    if (!uiEvent.target) return
     if (!$app.config.plugins.dragAndDrop) return
 
     $app.config.plugins.dragAndDrop.createMonthGridDragHandler(
@@ -70,8 +72,10 @@ export default function MonthGridEvent({
       draggable={!!$app.config.plugins.dragAndDrop}
       data-id={calendarEvent.id}
       data-ccid={customComponentId}
-      onMouseDown={(e) => createDragStartTimeout(handleMouseDown, e)}
+      onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
+      onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
+      onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       onClick={handleOnClick}
       className="sx__event sx__month-grid-event sx__month-grid-cell"
       style={{
