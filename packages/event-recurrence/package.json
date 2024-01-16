@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/event-recurrence",
+  "private": true,
   "version": "1.7.0",
   "description": "Plugin for Schedule-X that enable using recurring events per iCalendar specification",
   "author": {
@@ -22,8 +23,7 @@
     "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
   },
   "peerDependencies": {
-    "@preact/signals": "^1.1.5",
-    "preact": "^10.19.2"
+    "rrule": "2.8.1"
   },
   "repository": {
     "type": "git",
