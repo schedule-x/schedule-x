@@ -18,8 +18,7 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
-import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src/event-recurrence.plugin.ts'
-import { EventRecurrence, RRule } from '@schedule-x/event-recurrence/src/utils/stateful/event-recurrence.ts'
+import { createEventRecurrencePlugin, EventRecurrence, RRule } from '@schedule-x/event-recurrence/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
