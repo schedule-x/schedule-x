@@ -129,9 +129,11 @@ const calendar = createCalendar({
     {
       id: 123,
       title: 'Event 1',
+      start: '2024-01-17 17:00',
+      end: '2024-01-17 18:15',
       rrule: new RRule({
         freq: RRule.WEEKLY,
-        byweekday: [RRule.MO],
+        byweekday: [RRule.WE],
         dtstart: datetime(2024, 1, 17),
         until: datetime(2024, 2, 31),
       }),
@@ -139,10 +141,7 @@ const calendar = createCalendar({
     ...seededEvents
   ],
 })
-const p1 = performance.now()
 calendar.render(calendarElement)
-const p2 = performance.now()
-console.log('render time', p2 - p1)
 
 let darkToggle = 0
 

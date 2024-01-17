@@ -2,6 +2,8 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { RRule, RRuleSet } from 'rrule'
 
 export interface AugmentedEvent extends CalendarEventInternal {
-  _groupId?: string
   rrule?: RRule | RRuleSet
+
+  _groupId?: string
+  _durationInMinutes?: number
 }

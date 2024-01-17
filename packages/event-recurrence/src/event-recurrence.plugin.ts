@@ -5,8 +5,14 @@ import { AugmentedEvent } from './augmented-event/augmented-event.interface'
 import { RRule, RRuleSet } from 'rrule'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import {
+  toDateString,
+  toDateTimeString,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import { calculateMinutesDifference } from './utils/stateless/calculate-minutes-difference'
+import { addMinutesToDatetime } from './utils/stateless/add-minutes-to-datetime'
+import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
+import { replaceTimeInDatetime } from './utils/stateless/replace-time-in-datetime'
 
 class EventRecurrencePlugin implements PluginBase {
   name = 'event-recurrence'
@@ -45,26 +51,37 @@ class EventRecurrencePlugin implements PluginBase {
   private createEventGroup(event: AugmentedEvent): AugmentedEvent {
     const eventGroupId = randomStringId()
     const rrule = event._getForeignProperties().rrule as RRule | RRuleSet
+    event._durationInMinutes = calculateMinutesDifference(
+      event.start,
+      event.end
+    )
     const allEvents = rrule
       .all()
-      .map((date) =>
-        this.createEventFromRRule(rrule, date, eventGroupId, event)
-      )
+      .map((date) => this.createEventFromRRule(date, eventGroupId, event))
     console.log(allEvents)
 
     return event
   }
 
   private createEventFromRRule(
-    rrule: RRule | RRuleSet,
     date: Date,
     groupId: string,
     originalEvent: AugmentedEvent
   ): AugmentedEvent {
-    const copiedEvent = deepCloneEvent(originalEvent, this.$app)
+    const copiedEvent: AugmentedEvent = deepCloneEvent(originalEvent, this.$app)
     copiedEvent._groupId = groupId
-    copiedEvent.start = toDateString(date)
-    copiedEvent.end = toDateString(date)
+    const startDateTime = dateTimeStringRegex.test(copiedEvent.start)
+      ? replaceTimeInDatetime(
+          toDateTimeString(date),
+          copiedEvent.start.substring(11)
+        )
+      : toDateString(date)
+
+    copiedEvent.start = startDateTime
+    copiedEvent.end = addMinutesToDatetime(
+      startDateTime,
+      originalEvent._durationInMinutes!
+    )
 
     return copiedEvent
   }
