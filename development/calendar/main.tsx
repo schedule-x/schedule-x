@@ -19,7 +19,7 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src/event-recurrence.plugin.ts'
-import { RRule, datetime } from 'rrule'
+import { EventRecurrence, RRule } from '@schedule-x/event-recurrence/src/utils/stateful/event-recurrence.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -30,7 +30,7 @@ const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 2500,
   // },
-  firstDayOfWeek: 0,
+  // firstDayOfWeek: 1,
   locale: 'de-DE',
   // locale: 'en-US',
   // locale: 'zh-CN',
@@ -131,14 +131,25 @@ const calendar = createCalendar({
       title: 'Event 1',
       start: '2024-01-17 17:00',
       end: '2024-01-17 18:15',
-      rrule: new RRule({
+      rrule: new EventRecurrence({
         freq: RRule.WEEKLY,
-        byweekday: [RRule.WE],
-        dtstart: datetime(2024, 1, 17),
-        until: datetime(2024, 2, 31),
+        byweekday: [RRule.WE, RRule.FR],
+        until: '2024-03-15',
       }),
     },
-    ...seededEvents
+    {
+      id: 12345,
+      title: 'Event 2',
+      start: '2024-01-15',
+      end: '2024-01-16',
+      rrule: new EventRecurrence({
+        freq: RRule.WEEKLY,
+        byweekday: [RRule.MO],
+        until: '2024-03-31',
+      }),
+      calendarId: 'personal',
+    },
+    // ...seededEvents
   ],
 })
 calendar.render(calendarElement)

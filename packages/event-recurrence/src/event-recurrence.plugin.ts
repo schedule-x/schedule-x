@@ -2,7 +2,7 @@ import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { AugmentedEvent } from './augmented-event/augmented-event.interface'
-import { RRule, RRuleSet } from 'rrule'
+import { datetime } from 'rrule'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import {
@@ -13,17 +13,24 @@ import { calculateMinutesDifference } from './utils/stateless/calculate-minutes-
 import { addMinutesToDatetime } from './utils/stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { replaceTimeInDatetime } from './utils/stateless/replace-time-in-datetime'
+import { EventRecurrence } from './utils/stateful/event-recurrence'
+import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 class EventRecurrencePlugin implements PluginBase {
   name = 'event-recurrence'
 
   private $app!: CalendarAppSingleton
+  private recurrences: AugmentedEvent[] = []
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
     $app.calendarEvents.list.value = $app.calendarEvents.list.value.map(
       this.createEventProxy.bind(this)
     )
+    this.$app.calendarEvents.list.value = [
+      ...this.$app.calendarEvents.list.value,
+      ...this.recurrences,
+    ]
   }
 
   private createEventProxy(event: CalendarEventInternal) {
@@ -50,15 +57,18 @@ class EventRecurrencePlugin implements PluginBase {
 
   private createEventGroup(event: AugmentedEvent): AugmentedEvent {
     const eventGroupId = randomStringId()
-    const rrule = event._getForeignProperties().rrule as RRule | RRuleSet
+    const rrule = event._getForeignProperties().rrule as EventRecurrence
     event._durationInMinutes = calculateMinutesDifference(
       event.start,
       event.end
     )
+    const { year, month, date } = toIntegers(event.start)
     const allEvents = rrule
+      ._createRRule(datetime(year, month + 1, date))
       .all()
+      .slice(1) // skip the first index because it's the original event
       .map((date) => this.createEventFromRRule(date, eventGroupId, event))
-    console.log(allEvents)
+    this.recurrences.push(...allEvents)
 
     return event
   }
@@ -84,10 +94,6 @@ class EventRecurrencePlugin implements PluginBase {
     )
 
     return copiedEvent
-  }
-
-  destroy(): void {
-    console.log(1)
   }
 }
 
