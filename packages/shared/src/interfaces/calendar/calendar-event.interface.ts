@@ -3,8 +3,8 @@ import { EventFragments } from './event-fragments'
 
 export default interface CalendarEventExternal {
   id: EventId
-  start: string
-  end: string
+  start?: string
+  end?: string
   title?: string
   people?: string[]
   location?: string
@@ -13,7 +13,15 @@ export default interface CalendarEventExternal {
   [key: string]: any
 }
 
-export interface CalendarEventInternal extends CalendarEventExternal {
+// on external events, start and end are optional, since implementors may instead use rrule
+// we need to override this for internal events, and make them required
+interface EventWithoutTimes
+  extends Omit<CalendarEventExternal, 'start' | 'end'> {}
+
+export interface CalendarEventInternal extends EventWithoutTimes {
+  start: string
+  end: string
+
   // event duration
   _isSingleDayTimed: boolean
   _isSingleDayFullDay: boolean

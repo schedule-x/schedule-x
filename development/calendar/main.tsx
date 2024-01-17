@@ -18,6 +18,8 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
+import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src/event-recurrence.plugin.ts'
+import { RRule, datetime } from 'rrule'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -121,11 +123,26 @@ const calendar = createCalendar({
     createDragAndDropPlugin(),
     createEventModalPlugin(),
     scrollControllerPlugin,
+    createEventRecurrencePlugin(),
   ],
-  events: seededEvents,
+  events: [
+    {
+      id: 123,
+      title: 'Event 1',
+      rrule: new RRule({
+        freq: RRule.WEEKLY,
+        byweekday: [RRule.MO],
+        dtstart: datetime(2024, 1, 17),
+        until: datetime(2024, 2, 31),
+      }),
+    },
+    ...seededEvents
+  ],
 })
-
+const p1 = performance.now()
 calendar.render(calendarElement)
+const p2 = performance.now()
+console.log('render time', p2 - p1)
 
 let darkToggle = 0
 
