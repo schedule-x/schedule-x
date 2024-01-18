@@ -13,7 +13,7 @@ import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time
 import { replaceTimeInDatetime } from './utils/stateless/replace-time-in-datetime'
 import { EventRRule } from './utils/stateful/event-rrule'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { addDays } from '@schedule-x/shared'
+import { addDays } from '@schedule-x/shared/src'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 
 class EventRecurrencePlugin implements PluginBase {
