@@ -1,6 +1,6 @@
 import { Weekday } from 'rrule/dist/esm/weekday'
 import { ByWeekday, Frequency } from 'rrule/dist/esm/types'
-import { datetime, RRule as RRuleJS } from 'rrule'
+import { datetime, RRule, RRuleSet } from 'rrule'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 export interface Options {
@@ -24,18 +24,28 @@ export interface Options {
   byeaster: number | null
 }
 
-export class EventRecurrence {
+export class EventRRule {
   constructor(public options: Partial<Options>) {}
 
-  _createRRule(dtstart: Date) {
-    const { year, month, date } = toIntegers(this.options.until!)
+  _createRecurrenceSet(dtstart: Date) {
+    const rrset = new RRuleSet()
+    rrset.rrule(
+      new RRule({
+        ...this.options,
+        dtstart,
+        until: this.getUntil(),
+      })
+    )
 
-    return new RRuleJS({
-      ...this.options,
-      dtstart,
-      until: datetime(year, month + 1, date),
-    })
+    return rrset
+  }
+
+  private getUntil() {
+    if (typeof this.options.until !== 'string') return null
+
+    const { year, month, date } = toIntegers(this.options.until)
+    return datetime(year, month + 1, date)
   }
 }
 
-export const RRule = RRuleJS
+export const RRValues = RRule

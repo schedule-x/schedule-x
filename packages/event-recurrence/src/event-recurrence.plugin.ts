@@ -13,85 +13,63 @@ import { calculateMinutesDifference } from './utils/stateless/calculate-minutes-
 import { addMinutesToDatetime } from './utils/stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { replaceTimeInDatetime } from './utils/stateless/replace-time-in-datetime'
-import { EventRecurrence } from './utils/stateful/event-recurrence'
+import { EventRRule } from './utils/stateful/event-rrule'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { addDays } from '@schedule-x/shared'
 
 class EventRecurrencePlugin implements PluginBase {
   name = 'event-recurrence'
 
   private $app!: CalendarAppSingleton
-  private recurrences: AugmentedEvent[] = []
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
-    $app.calendarEvents.list.value = $app.calendarEvents.list.value.map(
-      this.createEventProxy.bind(this)
-    )
-    this.$app.calendarEvents.list.value = [
-      ...this.$app.calendarEvents.list.value,
-      ...this.recurrences,
-    ]
+    this.createEventsGroups($app)
   }
 
-  private createEventProxy(event: CalendarEventInternal) {
-    let augmentedEvent: AugmentedEvent = event
-
-    if (event._getForeignProperties().rrule) {
-      augmentedEvent = this.createEventGroup(event)
-    }
-
-    return new Proxy(augmentedEvent, {
-      get(target, prop, receiver) {
-        return Reflect.get(target, prop, receiver)
-      },
-      set(target, prop, value, receiver) {
-        if (prop === 'start' || prop === 'end') {
-          console.log(`changed ${prop} from ${target[prop]} to ${value}`)
-          // todo: update the time of all events in the group
-        }
-
-        return Reflect.set(target, prop, value, receiver)
-      },
+  private createEventsGroups($app: CalendarAppSingleton) {
+    $app.calendarEvents.list.value.forEach((event) => {
+      if (event._getForeignProperties().rrule) {
+        this.createEventGroup(event)
+      }
     })
   }
 
   private createEventGroup(event: AugmentedEvent): AugmentedEvent {
-    const eventGroupId = randomStringId()
-    const rrule = event._getForeignProperties().rrule as EventRecurrence
+    const rrule = event._getForeignProperties().rrule as EventRRule
     event._durationInMinutes = calculateMinutesDifference(
       event.start,
       event.end
     )
     const { year, month, date } = toIntegers(event.start)
     const allEvents = rrule
-      ._createRRule(datetime(year, month + 1, date))
+      ._createRecurrenceSet(datetime(year, month + 1, date))
       .all()
       .slice(1) // skip the first index because it's the original event
-      .map((date) => this.createEventFromRRule(date, eventGroupId, event))
-    this.recurrences.push(...allEvents)
+      .map((date) => this.createEventFromRRule(date, event))
+    this.$app.calendarEvents.list.value.push(...allEvents)
 
     return event
   }
 
   private createEventFromRRule(
     date: Date,
-    groupId: string,
     originalEvent: AugmentedEvent
   ): AugmentedEvent {
     const copiedEvent: AugmentedEvent = deepCloneEvent(originalEvent, this.$app)
-    copiedEvent._groupId = groupId
-    const startDateTime = dateTimeStringRegex.test(copiedEvent.start)
+    copiedEvent._recurrenceSourceId = originalEvent.id
+    const isDateTime = dateTimeStringRegex.test(copiedEvent.start)
+    const eventStart = isDateTime
       ? replaceTimeInDatetime(
           toDateTimeString(date),
           copiedEvent.start.substring(11)
         )
       : toDateString(date)
 
-    copiedEvent.start = startDateTime
-    copiedEvent.end = addMinutesToDatetime(
-      startDateTime,
-      originalEvent._durationInMinutes!
-    )
+    copiedEvent.start = eventStart
+    copiedEvent.end = isDateTime
+      ? addMinutesToDatetime(eventStart, originalEvent._durationInMinutes!)
+      : addDays(eventStart, originalEvent._durationInMinutes! / 60 / 24)
 
     return copiedEvent
   }
