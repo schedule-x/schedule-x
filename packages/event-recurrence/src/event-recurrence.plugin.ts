@@ -14,6 +14,7 @@ import { replaceTimeInDatetime } from './utils/stateless/replace-time-in-datetim
 import { EventRRule } from './utils/stateful/event-rrule'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { addDays } from '@schedule-x/shared'
+import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 
 class EventRecurrencePlugin implements PluginBase {
   name = 'event-recurrence'
@@ -57,7 +58,7 @@ class EventRecurrencePlugin implements PluginBase {
     const eventStart = isDateTime
       ? replaceTimeInDatetime(
           toDateTimeString(date),
-          copiedEvent.start.substring(11)
+          timeFromDateTime(copiedEvent.start)
         )
       : toDateString(date)
 

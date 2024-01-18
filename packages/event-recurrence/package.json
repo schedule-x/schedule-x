@@ -2,7 +2,7 @@
   "name": "@schedule-x/event-recurrence",
   "private": true,
   "version": "1.7.0",
-  "description": "Plugin for Schedule-X that enable using recurring events per iCalendar specification",
+  "description": "Plugin for Schedule-X that enables using recurring events per iCalendar specification",
   "author": {
     "name": "Tom Österlund",
     "email": "tom@oesterlund.de",
