@@ -1,9 +1,7 @@
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
-import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { AugmentedEvent } from './augmented-event/augmented-event.interface'
 import { datetime } from 'rrule'
-import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import {
   toDateString,
@@ -24,18 +22,18 @@ class EventRecurrencePlugin implements PluginBase {
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
-    this.createEventsGroups($app)
+    this.createEventRecurrenceGroups($app)
   }
 
-  private createEventsGroups($app: CalendarAppSingleton) {
+  private createEventRecurrenceGroups($app: CalendarAppSingleton) {
     $app.calendarEvents.list.value.forEach((event) => {
       if (event._getForeignProperties().rrule) {
-        this.createEventGroup(event)
+        this.createEventRecurrenceGroup(event)
       }
     })
   }
 
-  private createEventGroup(event: AugmentedEvent): AugmentedEvent {
+  private createEventRecurrenceGroup(event: AugmentedEvent) {
     const rrule = event._getForeignProperties().rrule as EventRRule
     event._durationInMinutes = calculateMinutesDifference(
       event.start,
@@ -48,8 +46,6 @@ class EventRecurrencePlugin implements PluginBase {
       .slice(1) // skip the first index because it's the original event
       .map((date) => this.createEventFromRRule(date, event))
     this.$app.calendarEvents.list.value.push(...allEvents)
-
-    return event
   }
 
   private createEventFromRRule(
@@ -57,7 +53,6 @@ class EventRecurrencePlugin implements PluginBase {
     originalEvent: AugmentedEvent
   ): AugmentedEvent {
     const copiedEvent: AugmentedEvent = deepCloneEvent(originalEvent, this.$app)
-    copiedEvent._recurrenceSourceId = originalEvent.id
     const isDateTime = dateTimeStringRegex.test(copiedEvent.start)
     const eventStart = isDateTime
       ? replaceTimeInDatetime(

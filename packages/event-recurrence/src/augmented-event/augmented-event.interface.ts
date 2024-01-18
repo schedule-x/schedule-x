@@ -1,9 +1,8 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { RRule, RRuleSet } from 'rrule'
+import { EventRRule } from '../utils/stateful/event-rrule'
 
 export interface AugmentedEvent extends CalendarEventInternal {
-  rrule?: RRule | RRuleSet
+  rrule?: EventRRule
 
-  _recurrenceSourceId?: string
   _durationInMinutes?: number
 }
