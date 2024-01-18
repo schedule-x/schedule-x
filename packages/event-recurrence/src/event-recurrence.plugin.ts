@@ -11,7 +11,10 @@ import { addMinutesToDatetime } from './utils/stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { replaceTimeInDatetime } from './utils/stateless/replace-time-in-datetime'
 import { EventRRule } from './utils/stateful/event-rrule'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import {
+  toJSDate,
+  toJSDateUTC,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { addDays } from '@schedule-x/shared/src'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { addTzOffsetToDatetime } from './utils/stateless/add-tz-offset-to-datetime'
@@ -42,9 +45,11 @@ class EventRecurrencePlugin implements PluginBase {
       event.start,
       event.end
     )
-    // let dtstart = toJSDate(event.start)
-    const dtstart = toRRuleDatetime(event.start)
-    // let dtstart = toRRuleDatetime(event.start)
+    // let dtstart = toJSDateUTC(addTzOffsetToDatetime(event.start))
+    // const dtstart = toRRuleDatetime(event.start)
+    const dtstart = toRRuleDatetime(addTzOffsetToDatetime(event.start))
+    // let dtstart = toJSDate(addTzOffsetToDatetime((event.start)))
+    console.log('dtstart', dtstart)
     const allEvents = rrule
       ._createRecurrenceSet(dtstart)
       .all()

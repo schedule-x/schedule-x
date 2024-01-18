@@ -17,6 +17,24 @@ export const toJSDate = (dateTimeSpecification: string): Date => {
   )
 }
 
+export const toJSDateUTC = (dateTimeSpecification: string): Date => {
+  if (
+    !DateFormats.DATE_TIME_STRING.test(dateTimeSpecification) &&
+    !DateFormats.DATE_STRING.test(dateTimeSpecification)
+  )
+    throw new InvalidDateTimeError(dateTimeSpecification)
+
+  return new Date(
+    Date.UTC(
+      Number(dateTimeSpecification.slice(0, 4)),
+      Number(dateTimeSpecification.slice(5, 7)) - 1,
+      Number(dateTimeSpecification.slice(8, 10)),
+      Number(dateTimeSpecification.slice(11, 13)), // for date strings this will be 0
+      Number(dateTimeSpecification.slice(14, 16)) // for date strings this will be 0
+    )
+  )
+}
+
 type DateTimeVariables = {
   year: number
   month: number

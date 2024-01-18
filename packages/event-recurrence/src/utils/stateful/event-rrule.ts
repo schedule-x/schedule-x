@@ -1,5 +1,8 @@
 import { RRule, RRuleSet } from 'rrule'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import {
+  toJSDate,
+  toJSDateUTC,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { EventRRuleOptions } from '../../types/event-rrrule-options'
 import { addTzOffsetToDatetime } from '../stateless/add-tz-offset-to-datetime'
 import { toRRuleDatetime } from '../stateless/to-rrule-datetime'
@@ -9,14 +12,12 @@ export class EventRRule {
 
   _createRecurrenceSet(dtstart: Date) {
     const rrset = new RRuleSet()
-    const tzid = Intl.DateTimeFormat().resolvedOptions().timeZone
-    console.log(tzid)
     rrset.rrule(
       new RRule({
         ...this.options,
         dtstart,
         until: this.getUntil(),
-        tzid: tzid,
+        // tzid: Intl.DateTimeFormat().resolvedOptions().timeZone,
       })
     )
 
@@ -26,10 +27,11 @@ export class EventRRule {
   private getUntil() {
     if (typeof this.options.until !== 'string') return null
 
-    // let untilDate = toJSDate(this.options.until)
-    const untilDate = toRRuleDatetime(this.options.until)
-    // let untilDate = toRRuleDatetime(addTzOffsetToDatetime(this.options.until))
-    console.log(untilDate)
+    // let untilDate = toJSDateUTC(addTzOffsetToDatetime(this.options.until))
+    // const untilDate = toRRuleDatetime(this.options.until)
+    const untilDate = toRRuleDatetime(addTzOffsetToDatetime(this.options.until))
+    // let untilDate = toJSDate(addTzOffsetToDatetime(this.options.until))
+    console.log('until', untilDate)
     return untilDate
   }
 }
