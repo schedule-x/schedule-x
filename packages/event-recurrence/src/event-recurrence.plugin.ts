@@ -1,6 +1,6 @@
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
-import { AugmentedEvent } from './augmented-event/augmented-event.interface'
+import { AugmentedEvent } from './types/augmented-event.interface'
 import { datetime } from 'rrule'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import {
