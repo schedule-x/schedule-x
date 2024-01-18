@@ -21,8 +21,8 @@ export class EventRRule {
   private getUntil() {
     if (typeof this.options.until !== 'string') return null
 
-    const { year, month, date } = toIntegers(this.options.until)
-    return datetime(year, month + 1, date)
+    const { year, month, date, hours, minutes } = toIntegers(this.options.until)
+    return new Date(Date.UTC(year, month, date, hours || 0, minutes || 0))
   }
 }
 
