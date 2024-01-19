@@ -1,0 +1,35 @@
+{
+  "name": "@schedule-x/event-recurrence",
+  "private": true,
+  "version": "1.7.0",
+  "description": "Plugin for Schedule-X that enables using recurring events per iCalendar specification",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
+  "license": "MIT",
+  "module": "./dist/core.js",
+  "main": "./dist/core.cjs.js",
+  "umd": "./dist/core.umd.js",
+  "types": "./dist/core.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "format": "prettier . --write",
+    "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
+  },
+  "peerDependencies": {
+    "rrule": "2.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/event-recurrence"
+  },
+  "homepage": "https://schedule-x.dev",
+  "gitHead": "e405a5a6c2a474bab8bf51bb39619098412024cb"
+}

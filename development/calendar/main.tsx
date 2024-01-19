@@ -18,6 +18,7 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
+import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -28,12 +29,13 @@ const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 2500,
   // },
-  firstDayOfWeek: 0,
-  locale: 'de-DE',
+  // firstDayOfWeek: 1,
+  // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
-  defaultView: viewWeek.name,
+  defaultView: viewMonthGrid.name,
+  // selectedDate: '2024-02-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
@@ -121,10 +123,35 @@ const calendar = createCalendar({
     createDragAndDropPlugin(),
     createEventModalPlugin(),
     scrollControllerPlugin,
+    createEventRecurrencePlugin(),
   ],
-  events: seededEvents,
+  events: [
+    // {
+    //   id: 123,
+    //   title: 'Event 1',
+    //   start: '2024-01-17 17:00',
+    //   end: '2024-01-17 18:15',
+    //   rrule: new EventRRule({
+    //     freq: RRValues.WEEKLY,
+    //     byweekday: [RRValues.WE, RRValues.FR],
+    //     until: '2024-03-15',
+    //   }),
+    // },
+    // {
+    //   id: 12345,
+    //   title: 'Event 2',
+    //   start: '2024-01-15',
+    //   end: '2024-01-16',
+    //   rrule: new EventRRule({
+    //     freq: RRValues.WEEKLY,
+    //     byweekday: [RRValues.MO],
+    //     until: '2024-02-05',
+    //   }),
+    //   calendarId: 'personal',
+    // },
+    ...seededEvents
+  ],
 })
-
 calendar.render(calendarElement)
 
 let darkToggle = 0
