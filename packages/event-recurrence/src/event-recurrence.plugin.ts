@@ -59,7 +59,6 @@ class EventRecurrencePlugin implements PluginBase {
     date: Date,
     originalEvent: AugmentedEvent
   ): AugmentedEvent {
-    console.log(date)
     const copiedEvent: AugmentedEvent = deepCloneEvent(originalEvent, this.$app)
     const isDateTime = dateTimeStringRegex.test(copiedEvent.start)
     const eventStart = isDateTime
@@ -68,7 +67,6 @@ class EventRecurrencePlugin implements PluginBase {
           timeFromDateTime(copiedEvent.start)
         )
       : toDateString(date)
-    console.log(eventStart)
 
     copiedEvent.start = eventStart
     copiedEvent.end = isDateTime
