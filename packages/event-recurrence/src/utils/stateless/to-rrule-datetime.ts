@@ -3,6 +3,5 @@ import { datetime } from 'rrule'
 
 export const toRRuleDatetime = (datetimeString: string) => {
   const { year, month, date, hours, minutes } = toIntegers(datetimeString)
-  // use Date.UTC
   return datetime(year, month + 1, date, hours || 0, minutes || 0)
 }
