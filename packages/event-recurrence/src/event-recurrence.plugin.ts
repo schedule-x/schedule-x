@@ -14,6 +14,7 @@ import { EventRRule } from './utils/stateful/event-rrule'
 import { addDays } from '@schedule-x/shared/src'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { toRRuleDatetime } from './utils/stateless/to-rrule-datetime'
+import { EventRRuleOptions } from './types/event-rrule-options'
 
 class EventRecurrencePlugin implements PluginBase {
   name = 'event-recurrence'
@@ -27,14 +28,20 @@ class EventRecurrencePlugin implements PluginBase {
 
   private createEventRecurrenceGroups($app: CalendarAppSingleton) {
     $app.calendarEvents.list.value.forEach((event) => {
-      if (event._getForeignProperties().rrule) {
-        this.createEventRecurrenceGroup(event)
+      const rruleOptions = event._getForeignProperties().rrule as
+        | EventRRuleOptions
+        | undefined
+      if (rruleOptions) {
+        this.createEventRecurrenceGroup(event, rruleOptions)
       }
     })
   }
 
-  private createEventRecurrenceGroup(event: AugmentedEvent) {
-    const rrule = event._getForeignProperties().rrule as EventRRule
+  private createEventRecurrenceGroup(
+    event: AugmentedEvent,
+    rruleOptions: EventRRuleOptions
+  ) {
+    const rrule = new EventRRule(rruleOptions)
     event._durationInMinutes = calculateMinutesDifference(
       event.start,
       event.end

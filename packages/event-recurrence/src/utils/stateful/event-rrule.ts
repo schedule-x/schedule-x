@@ -1,5 +1,5 @@
 import { RRule, RRuleSet } from 'rrule'
-import { EventRRuleOptions } from '../../types/event-rrrule-options'
+import { EventRRuleOptions } from '../../types/event-rrule-options'
 import { toRRuleDatetime } from '../stateless/to-rrule-datetime'
 
 export class EventRRule {

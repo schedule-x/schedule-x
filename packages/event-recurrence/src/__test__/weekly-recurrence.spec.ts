@@ -16,11 +16,11 @@ describe('EventRecurrencePlugin', () => {
             id: '1',
             start: '2024-01-15',
             end: '2024-01-16',
-            rrule: new EventRRule({
+            rrule: {
               freq: RRValues.WEEKLY,
               byweekday: [RRValues.MO],
               until: '2024-02-05',
-            }),
+            },
           },
         ],
       })
@@ -46,11 +46,11 @@ describe('EventRecurrencePlugin', () => {
             id: '1',
             start: '2024-01-15',
             end: '2024-01-15',
-            rrule: new EventRRule({
+            rrule: {
               freq: RRValues.WEEKLY,
               byweekday: [RRValues.MO, RRValues.WE],
               until: '2024-02-07',
-            }),
+            },
           },
         ],
       })
@@ -94,11 +94,11 @@ describe('EventRecurrencePlugin', () => {
             id: '1',
             start: '2024-01-15 10:00',
             end: '2024-01-15 11:00',
-            rrule: new EventRRule({
+            rrule: {
               freq: RRValues.WEEKLY,
               byweekday: [RRValues.MO],
               until: '2024-02-05 10:00',
-            }),
+            },
           },
         ],
       })
