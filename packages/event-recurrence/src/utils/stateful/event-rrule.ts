@@ -6,6 +6,7 @@ import {
 import { EventRRuleOptions } from '../../types/event-rrrule-options'
 import { addTzOffsetToDatetime } from '../stateless/add-tz-offset-to-datetime'
 import { toRRuleDatetime } from '../stateless/to-rrule-datetime'
+import { datetime } from 'rrule'
 
 export class EventRRule {
   constructor(public options: Partial<EventRRuleOptions>) {}
@@ -17,7 +18,7 @@ export class EventRRule {
         ...this.options,
         dtstart,
         until: this.getUntil(),
-        // tzid: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        tzid: Intl.DateTimeFormat().resolvedOptions().timeZone,
       })
     )
 
@@ -27,10 +28,13 @@ export class EventRRule {
   private getUntil() {
     if (typeof this.options.until !== 'string') return null
 
-    // let untilDate = toJSDateUTC(addTzOffsetToDatetime(this.options.until))
-    // const untilDate = toRRuleDatetime(this.options.until)
-    const untilDate = toRRuleDatetime(addTzOffsetToDatetime(this.options.until))
+    // let untilstring = addTzOffsetToDatetime(this.options.until)
+    // console.log('untilstring', untilstring)
+    // let untilDate = toJSDateUTC(untilstring)
+    const untilDate = toRRuleDatetime(this.options.until)
+    // const untilDate = toRRuleDatetime(addTzOffsetToDatetime(this.options.until))
     // let untilDate = toJSDate(addTzOffsetToDatetime(this.options.until))
+    // const untilDate = datetime(2024, 2, 5)
     console.log('until', untilDate)
     return untilDate
   }

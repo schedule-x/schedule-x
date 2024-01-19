@@ -24,13 +24,17 @@ export const toJSDateUTC = (dateTimeSpecification: string): Date => {
   )
     throw new InvalidDateTimeError(dateTimeSpecification)
 
+  const { year, month, date, hours, minutes } = toIntegers(
+    dateTimeSpecification
+  )
+
   return new Date(
     Date.UTC(
-      Number(dateTimeSpecification.slice(0, 4)),
-      Number(dateTimeSpecification.slice(5, 7)) - 1,
-      Number(dateTimeSpecification.slice(8, 10)),
-      Number(dateTimeSpecification.slice(11, 13)), // for date strings this will be 0
-      Number(dateTimeSpecification.slice(14, 16)) // for date strings this will be 0
+      year,
+      month,
+      date,
+      hours || 0, // for date strings this will be 0
+      minutes || 0 // for date strings this will be 0
     )
   )
 }

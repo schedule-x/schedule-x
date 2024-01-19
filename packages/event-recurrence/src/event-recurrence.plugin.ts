@@ -45,14 +45,18 @@ class EventRecurrencePlugin implements PluginBase {
       event.start,
       event.end
     )
-    // let dtstart = toJSDateUTC(addTzOffsetToDatetime(event.start))
-    // const dtstart = toRRuleDatetime(event.start)
-    const dtstart = toRRuleDatetime(addTzOffsetToDatetime(event.start))
+    // let startString = addTzOffsetToDatetime(event.start)
+    // console.log('startstring', startString)
+    // let dtstart = toJSDateUTC(startString)
+    const dtstart = toRRuleDatetime(event.start)
+    // const dtstart = toRRuleDatetime(addTzOffsetToDatetime(event.start))
     // let dtstart = toJSDate(addTzOffsetToDatetime((event.start)))
+    // let dtstart = datetime(2024, 1, 15)
     console.log('dtstart', dtstart)
     const allEvents = rrule
       ._createRecurrenceSet(dtstart)
       .all()
+      .map(this.offsetToTimezone)
       .slice(1) // skip the first index because it's the original event
       .map((date) => this.createEventFromRRule(date, event))
     this.$app.calendarEvents.list.value.push(...allEvents)
@@ -62,6 +66,7 @@ class EventRecurrencePlugin implements PluginBase {
     date: Date,
     originalEvent: AugmentedEvent
   ): AugmentedEvent {
+    console.log(date)
     const copiedEvent: AugmentedEvent = deepCloneEvent(originalEvent, this.$app)
     const isDateTime = dateTimeStringRegex.test(copiedEvent.start)
     const eventStart = isDateTime
@@ -78,6 +83,11 @@ class EventRecurrencePlugin implements PluginBase {
       : addDays(eventStart, originalEvent._durationInMinutes! / 60 / 24)
 
     return copiedEvent
+  }
+
+  private offsetToTimezone(date: Date) {
+    const offset = date.getTimezoneOffset()
+    return new Date(date.getTime() + offset * 60 * 1000)
   }
 }
 
