@@ -5,4 +5,5 @@ export interface AugmentedEvent extends CalendarEventInternal {
   rrule?: EventRRuleOptions
 
   _durationInMinutes?: number
+  _durationInDays?: number
 }

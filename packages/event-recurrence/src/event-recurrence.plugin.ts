@@ -15,6 +15,7 @@ import { addDays } from '@schedule-x/shared/src'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { toRRuleDatetime } from './utils/stateless/to-rrule-datetime'
 import { EventRRuleOptions } from './types/event-rrule-options'
+import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
 
 class EventRecurrencePlugin implements PluginBase {
   name = 'event-recurrence'
@@ -42,10 +43,16 @@ class EventRecurrencePlugin implements PluginBase {
     rruleOptions: EventRRuleOptions
   ) {
     const rrule = new EventRRule(rruleOptions)
-    event._durationInMinutes = calculateMinutesDifference(
-      event.start,
-      event.end
-    )
+
+    if (dateTimeStringRegex.test(event.start)) {
+      event._durationInMinutes = calculateMinutesDifference(
+        event.start,
+        event.end
+      )
+    } else {
+      event._durationInDays = calculateDaysDifference(event.start, event.end)
+    }
+
     const allEvents = rrule
       ._createRecurrenceSet(toRRuleDatetime(event.start))
       .all()
@@ -71,7 +78,7 @@ class EventRecurrencePlugin implements PluginBase {
     copiedEvent.start = eventStart
     copiedEvent.end = isDateTime
       ? addMinutesToDatetime(eventStart, originalEvent._durationInMinutes!)
-      : addDays(eventStart, originalEvent._durationInMinutes! / 60 / 24)
+      : addDays(eventStart, originalEvent._durationInDays!)
 
     return copiedEvent
   }
