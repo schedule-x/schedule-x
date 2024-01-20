@@ -15,7 +15,7 @@ const __dirname = path.dirname(__filename)
 
 async function getSortedPackages(scope, ignore) {
   const packages = await Project.getPackages(__dirname || process.cwd())
-  let filtered = filterPackages(packages, scope, ignore, false)
+  let filtered = filterPackages(packages, scope, ignore, true)
   const nonTSPackages = [
     '@schedule-x/theme-default',
     '@schedule-x/eslint-config',
@@ -79,7 +79,7 @@ async function build(commandLineArgs) {
           tsconfig: `${basePath}/tsconfig.json`,
         }),
       ],
-      external: ['preact', 'preact/hooks', '@preact/signals', 'preact/src/jsx'],
+      external: ['preact', 'preact/hooks', '@preact/signals', 'preact/src/jsx', 'rrule'],
     })
   })
 

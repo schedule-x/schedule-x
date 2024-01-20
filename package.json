@@ -29,7 +29,7 @@
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact",
     "clean:deps": "lerna clean",
     "clean:build": "rm -rf ./packages/*/dist",
-    "release": "npm run build && lerna publish --no-commit-hooks --force-publish",
+    "release": "npm run build && lerna publish --no-commit-hooks --force-publish --no-private",
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease --force-publish",
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease --force-publish",
     "prepare": "husky install",
