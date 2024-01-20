@@ -10,7 +10,7 @@ import { calculateMinutesDifference } from './utils/stateless/calculate-minutes-
 import { addMinutesToDatetime } from './utils/stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { replaceTimeInDatetime } from './utils/stateless/replace-time-in-datetime'
-import { EventRRule } from './utils/stateful/event-rrule'
+import { RecurrenceSetBuilder } from './utils/stateful/recurrence-set-builder'
 import { addDays } from '@schedule-x/shared/src'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { toRRuleDatetime } from './utils/stateless/to-rrule-datetime'
@@ -42,8 +42,6 @@ class EventRecurrencePlugin implements PluginBase {
     event: AugmentedEvent,
     rruleOptions: EventRRuleOptions
   ) {
-    const rrule = new EventRRule(rruleOptions)
-
     if (dateTimeStringRegex.test(event.start)) {
       event._durationInMinutes = calculateMinutesDifference(
         event.start,
@@ -53,8 +51,10 @@ class EventRecurrencePlugin implements PluginBase {
       event._durationInDays = calculateDaysDifference(event.start, event.end)
     }
 
-    const allEvents = rrule
-      ._createRecurrenceSet(toRRuleDatetime(event.start))
+    const allEvents = new RecurrenceSetBuilder(toRRuleDatetime(event.start))
+      .rrule(rruleOptions)
+      .exdate(event._getForeignProperties().exdate as string[] | undefined)
+      .build()
       .all()
       .map(this.offsetToTimezone)
       .slice(1) // skip the first index because it's the original event
