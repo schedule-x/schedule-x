@@ -1,2 +1,2 @@
-export { RRValues, EventRRule } from './utils/stateful/event-rrule'
+export { RRValues, RecurrenceSetBuilder } from './utils/stateful/event-r-set'
 export { createEventRecurrencePlugin } from './event-recurrence.plugin'

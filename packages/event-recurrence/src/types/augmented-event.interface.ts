@@ -3,6 +3,7 @@ import { EventRRuleOptions } from './event-rrule-options'
 
 export interface AugmentedEvent extends CalendarEventInternal {
   rrule?: EventRRuleOptions
+  exdate?: string[]
 
   _durationInMinutes?: number
   _durationInDays?: number
