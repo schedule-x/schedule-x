@@ -51,8 +51,8 @@ class EventRecurrencePlugin implements PluginBase {
       event._durationInDays = calculateDaysDifference(event.start, event.end)
     }
 
-    const allEvents = new RecurrenceSetBuilder(rruleOptions)
-      .rrule(toRRuleDatetime(event.start))
+    const allEvents = new RecurrenceSetBuilder(toRRuleDatetime(event.start))
+      .rrule(rruleOptions)
       .exdate(event._getForeignProperties().exdate as string[] | undefined)
       .build()
       .all()

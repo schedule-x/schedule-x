@@ -4,7 +4,7 @@ import {
   expect,
   beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { RRValues } from '../utils/stateful/event-r-set'
+import { RRValues } from '../utils/stateful/recurrence-set-builder'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { createEventRecurrencePlugin } from '../event-recurrence.plugin'
 

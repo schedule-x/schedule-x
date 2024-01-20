@@ -9,14 +9,18 @@ import { toRRuleDatetime } from '../stateless/to-rrule-datetime'
 export class RecurrenceSetBuilder {
   private rset: RRuleSet = new RRuleSet()
 
-  constructor(public rruleOptions: Partial<EventRRuleOptions>) {}
+  constructor(private dtstart: Date) {}
 
-  rrule(dtstart: Date) {
+  build() {
+    return this.rset
+  }
+
+  rrule(rruleOptions: Partial<EventRRuleOptions>) {
     this.rset.rrule(
       new RRule({
-        ...this.rruleOptions,
-        dtstart,
-        until: this.getOptionUntil(),
+        ...rruleOptions,
+        dtstart: this.dtstart,
+        until: this.getOptionUntil(rruleOptions),
         tzid: Intl.DateTimeFormat().resolvedOptions().timeZone,
       })
     )
@@ -33,14 +37,10 @@ export class RecurrenceSetBuilder {
     return this
   }
 
-  build() {
-    return this.rset
-  }
+  private getOptionUntil(rruleOptions: Partial<EventRRuleOptions>) {
+    if (typeof rruleOptions.until !== 'string') return null
 
-  private getOptionUntil() {
-    if (typeof this.rruleOptions.until !== 'string') return null
-
-    return toRRuleDatetime(this.rruleOptions.until)
+    return toRRuleDatetime(rruleOptions.until)
   }
 }
 
