@@ -42,8 +42,6 @@ class EventRecurrencePlugin implements PluginBase {
     event: AugmentedEvent,
     rruleOptions: EventRRuleOptions
   ) {
-    const rsetBuilder = new RecurrenceSetBuilder(rruleOptions)
-
     if (dateTimeStringRegex.test(event.start)) {
       event._durationInMinutes = calculateMinutesDifference(
         event.start,
@@ -53,7 +51,7 @@ class EventRecurrencePlugin implements PluginBase {
       event._durationInDays = calculateDaysDifference(event.start, event.end)
     }
 
-    const allEvents = rsetBuilder
+    const allEvents = new RecurrenceSetBuilder(rruleOptions)
       .rrule(toRRuleDatetime(event.start))
       .exdate(event._getForeignProperties().exdate as string[] | undefined)
       .build()
