@@ -127,18 +127,18 @@ const calendar = createCalendar({
     createEventRecurrencePlugin(),
   ],
   events: [
-    // {
-    //   id: 123,
-    //   title: 'Event 1',
-    //   start: '2024-01-17 17:00',
-    //   end: '2024-01-17 18:15',
-    //   rrule: {
-    //     freq: RRValues.WEEKLY,
-    //     byweekday: [RRValues.WE, RRValues.FR],
-    //     until: '2024-03-15',
-    //   },
-    //   exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
-    // },
+    {
+      id: 123,
+      title: 'Event 1',
+      start: '2024-01-17 17:00',
+      end: '2024-01-17 18:15',
+      rrule: {
+        freq: RRValues.WEEKLY,
+        byweekday: [RRValues.WE, RRValues.FR],
+        until: '2024-03-15',
+      },
+      exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
+    },
     // {
     //   id: 12345,
     //   title: 'Event 2',
@@ -151,7 +151,7 @@ const calendar = createCalendar({
     //   },
     //   calendarId: 'personal',
     // },
-    ...seededEvents
+    // ...seededEvents
   ],
 })
 calendar.render(calendarElement)

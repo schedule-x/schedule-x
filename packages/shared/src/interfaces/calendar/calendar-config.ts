@@ -12,6 +12,7 @@ import PluginBase from '../plugin.interface'
 import EventModalPlugin from '../event-modal/event-modal.plugin'
 import { CalendarCallbacks } from './listeners.interface'
 import { CustomComponentFns } from './custom-component-fns'
+import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -33,6 +34,7 @@ export type Plugins = {
   dragAndDrop?: DragAndDropPlugin
   eventModal?: EventModalPlugin
   scrollController?: PluginBase
+  eventRecurrence?: EventRecurrencePlugin
   [key: string]: PluginBase | undefined
 }
 

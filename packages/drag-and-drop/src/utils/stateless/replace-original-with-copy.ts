@@ -5,6 +5,19 @@ export const replaceOriginalWithCopy = (
   $app: CalendarAppSingleton,
   eventCopy: CalendarEventInternal
 ) => {
+  // TODO: put under test
+  if (
+    'rrule' in eventCopy._getForeignProperties() &&
+    $app.config.plugins.eventRecurrence
+  ) {
+    $app.config.plugins.eventRecurrence.updateRecurrenceGroup(
+      eventCopy.id,
+      eventCopy.start,
+      eventCopy.end
+    )
+    return
+  }
+
   const indexOfEventToUpdate = $app.calendarEvents.list.value.findIndex(
     (event) => event.id === eventCopy.id
   )

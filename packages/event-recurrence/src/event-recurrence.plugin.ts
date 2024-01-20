@@ -16,15 +16,26 @@ import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/fo
 import { toRRuleDatetime } from './utils/stateless/to-rrule-datetime'
 import { EventRRuleOptions } from './types/event-rrule-options'
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
+import { EventRecurrencePlugin } from '@schedule-x/shared/src/interfaces/event-recurrence/event-recurrence-plugin.interface'
+import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
+import { EventId } from '@schedule-x/shared/src/types/event-id'
 
-class EventRecurrencePlugin implements PluginBase {
-  name = 'event-recurrence'
+class EventRecurrencePluginImpl implements EventRecurrencePlugin {
+  name = PluginName.EventRecurrence
 
   private $app!: CalendarAppSingleton
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
     this.createEventRecurrenceGroups($app)
+  }
+
+  updateRecurrenceGroup(
+    eventId: EventId,
+    newEventStart: string,
+    newEventEnd: string
+  ) {
+    console.log(eventId, newEventStart, newEventEnd)
   }
 
   private createEventRecurrenceGroups($app: CalendarAppSingleton) {
@@ -89,4 +100,4 @@ class EventRecurrencePlugin implements PluginBase {
   }
 }
 
-export const createEventRecurrencePlugin = () => new EventRecurrencePlugin()
+export const createEventRecurrencePlugin = () => new EventRecurrencePluginImpl()
