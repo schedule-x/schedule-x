@@ -151,7 +151,7 @@ const calendar = createCalendar({
     //   },
     //   calendarId: 'personal',
     // },
-    // ...seededEvents
+    ...seededEvents
   ],
 })
 calendar.render(calendarElement)

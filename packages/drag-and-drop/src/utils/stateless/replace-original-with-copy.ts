@@ -18,12 +18,14 @@ export const replaceOriginalWithCopy = (
     return
   }
 
-  const indexOfEventToUpdate = $app.calendarEvents.list.value.findIndex(
+  const eventToUpdate = $app.calendarEvents.list.value.find(
     (event) => event.id === eventCopy.id
   )
-  const updatedList = [...$app.calendarEvents.list.value]
-  updatedList.splice(indexOfEventToUpdate, 1, eventCopy)
-  $app.calendarEvents.list.value = updatedList
+  if (!eventToUpdate) return
+
+  eventToUpdate.start = eventCopy.start
+  eventToUpdate.end = eventCopy.end
+  $app.calendarEvents.list.value = [...$app.calendarEvents.list.value]
 
   if ($app.config.callbacks.onEventUpdate) {
     $app.config.callbacks.onEventUpdate(eventCopy._getExternalEvent())
