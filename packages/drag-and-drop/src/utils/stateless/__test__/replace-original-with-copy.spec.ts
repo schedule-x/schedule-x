@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { replaceOriginalWithCopy } from '../replace-original-with-copy'
+import { updateDraggedEvent } from '../update-dragged-event'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { vi } from 'vitest'
@@ -23,7 +23,7 @@ describe('replacing original event with copy', () => {
     const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
 
     it('should invoke the listener with the copy of the original event', () => {
-      replaceOriginalWithCopy($app, eventCopy)
+      updateDraggedEvent($app, eventCopy, eventCopy.start)
 
       expect(onEventUpdateSpy).toHaveBeenCalledWith(
         eventCopy._getExternalEvent()

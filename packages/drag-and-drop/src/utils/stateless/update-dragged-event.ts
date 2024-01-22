@@ -1,9 +1,10 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
-export const replaceOriginalWithCopy = (
+export const updateDraggedEvent = (
   $app: CalendarAppSingleton,
-  eventCopy: CalendarEventInternal
+  eventCopy: CalendarEventInternal,
+  startPreDrag: string
 ) => {
   // TODO: put under test
   if (
@@ -12,9 +13,10 @@ export const replaceOriginalWithCopy = (
   ) {
     $app.config.plugins.eventRecurrence.updateRecurrenceGroup(
       eventCopy.id,
-      eventCopy.start,
-      eventCopy.end
+      startPreDrag,
+      eventCopy.start
     )
+
     return
   }
 

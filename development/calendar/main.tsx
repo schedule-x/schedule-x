@@ -137,21 +137,21 @@ const calendar = createCalendar({
         byweekday: [RRValues.WE, RRValues.FR],
         until: '2024-03-15',
       },
-      exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
+      // exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
     },
-    // {
-    //   id: 12345,
-    //   title: 'Event 2',
-    //   start: '2024-01-15',
-    //   end: '2024-01-16',
-    //   rrule:{
-    //     freq: RRValues.WEEKLY,
-    //     byweekday: [RRValues.MO],
-    //     until: '2024-02-05',
-    //   },
-    //   calendarId: 'personal',
-    // },
-    ...seededEvents
+    {
+      id: 12345,
+      title: 'Event 2',
+      start: '2024-01-15',
+      end: '2024-01-16',
+      rrule:{
+        freq: RRValues.WEEKLY,
+        byweekday: [RRValues.MO],
+        until: '2024-02-05',
+      },
+      calendarId: 'personal',
+    },
+    // ...seededEvents
   ],
 })
 calendar.render(calendarElement)
