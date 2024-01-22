@@ -179,3 +179,8 @@ scrollButton.addEventListener('click', () => {
   scrollControllerPlugin.scrollTo((document.getElementById('scroll-to') as HTMLInputElement).value)
 })
 
+const logAllEventsButton = document.getElementById('log-all-events') as HTMLButtonElement
+logAllEventsButton.addEventListener('click', () => {
+  console.log(calendar.events.getAll())
+})
+

@@ -12,23 +12,25 @@ import { addMinutesToDatetime } from '../stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { ByWeekday } from 'rrule/dist/esm/types'
 
-export class RecurrenceSetUpdater {
-  constructor(private $app: CalendarAppSingleton) {}
+export class RecurrenceSetDndUpdater {
+  constructor(
+    private $app: CalendarAppSingleton,
+    private eventId: EventId,
+    private oldEventStart: string,
+    private newEventStart: string
+  ) {}
 
-  updateRecurrenceGroup(
-    eventId: EventId,
-    oldEventStart: string,
-    newEventStart: string
-  ) {
+  update() {
     const eventToUpdate = this.$app.calendarEvents.list.value.find(
-      (event) => event.id === eventId
+      (event) => event.id === this.eventId
     )
-    if (!eventToUpdate) throw new Error(`Event with id ${eventId} not found`)
+    if (!eventToUpdate)
+      throw new Error(`Event with id ${this.eventId} not found`)
 
-    this.deletePreviousRecurrences(eventId, eventToUpdate)
-    this.updateRRule(eventToUpdate, oldEventStart, newEventStart)
-    this.updateExdate(eventToUpdate, oldEventStart, newEventStart)
-    this.updateStartAndEnd(eventToUpdate, oldEventStart, newEventStart)
+    this.deletePreviousRecurrences(this.eventId, eventToUpdate)
+    this.updateRRule(eventToUpdate)
+    this.updateExdate(eventToUpdate)
+    this.updateStartAndEnd(eventToUpdate)
     new EventRecurrenceCreator(this.$app).createEventRecurrenceGroup(
       eventToUpdate,
       eventToUpdate._getForeignProperties().rrule as EventRRuleOptions
@@ -45,14 +47,10 @@ export class RecurrenceSetUpdater {
       )
   }
 
-  private updateStartAndEnd(
-    eventToUpdate: CalendarEventInternal,
-    oldEventStart: string,
-    newEventStart: string
-  ) {
+  private updateStartAndEnd(eventToUpdate: CalendarEventInternal) {
     const minutesDifference = calculateMinutesDifference(
-      oldEventStart,
-      newEventStart
+      this.oldEventStart,
+      this.newEventStart
     )
     eventToUpdate.start = addMinutesToDatetime(
       eventToUpdate.start,
@@ -66,11 +64,7 @@ export class RecurrenceSetUpdater {
     ]
   }
 
-  private updateRRule(
-    eventToUpdate: CalendarEventInternal,
-    oldEventStart: string,
-    newEventStart: string
-  ) {
+  private updateRRule(eventToUpdate: CalendarEventInternal) {
     const rruleOptions = eventToUpdate._getForeignProperties().rrule as
       | EventRRuleOptions
       | undefined
@@ -83,7 +77,10 @@ export class RecurrenceSetUpdater {
     ).build()
     const oldRRuleString = oldRRule.toString()
     const oldWeekdays = oldRRuleString.match(/BYDAY=([A-Z,]+)/)?.[1].split(',')
-    const daysDifference = calculateDaysDifference(oldEventStart, newEventStart)
+    const daysDifference = calculateDaysDifference(
+      this.oldEventStart,
+      this.newEventStart
+    )
     if (rruleOptions.until) {
       rruleOptions.until = addDays(rruleOptions.until, daysDifference)
     }
@@ -114,14 +111,10 @@ export class RecurrenceSetUpdater {
     ) as ByWeekday[]
   }
 
-  private updateExdate(
-    eventToUpdate: CalendarEventInternal,
-    oldEventStart: string,
-    newEventStart: string
-  ) {
+  private updateExdate(eventToUpdate: CalendarEventInternal) {
     const minutesDifference = calculateMinutesDifference(
-      oldEventStart,
-      newEventStart
+      this.oldEventStart,
+      this.newEventStart
     )
     const exdate = eventToUpdate._getForeignProperties().exdate
     if (!exdate) return

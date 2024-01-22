@@ -4,7 +4,7 @@ import { EventRecurrencePlugin } from '@schedule-x/shared/src/interfaces/event-r
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { EventRecurrenceCreator } from './utils/stateful/event-recurrence-creator'
-import { RecurrenceSetUpdater } from './utils/stateful/recurrence-set-updater'
+import { RecurrenceSetDndUpdater } from './utils/stateful/recurrence-set-dnd-updater'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name = PluginName.EventRecurrence
@@ -21,11 +21,12 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     oldEventStart: string,
     newEventStart: string
   ) {
-    new RecurrenceSetUpdater(this.$app).updateRecurrenceGroup(
+    new RecurrenceSetDndUpdater(
+      this.$app,
       eventId,
       oldEventStart,
       newEventStart
-    )
+    ).update()
   }
 
   private createEventRecurrenceGroups($app: CalendarAppSingleton) {
