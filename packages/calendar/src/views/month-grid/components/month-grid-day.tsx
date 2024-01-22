@@ -39,7 +39,8 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
   }
 
   const dateClassNames = ['sx__month-grid-day__header-date']
-  if (isToday(toJSDate(day.date))) dateClassNames.push('sx__is-today')
+  const dayDate = toJSDate(day.date)
+  if (isToday(dayDate)) dateClassNames.push('sx__is-today')
 
   return (
     <div
@@ -53,13 +54,11 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
           <div className="sx__month-grid-day__header-day-name">
-            {getDayNameShort(toJSDate(day.date), $app.config.locale)}
+            {getDayNameShort(dayDate, $app.config.locale)}
           </div>
         ) : null}
 
-        <div className={dateClassNames.join(' ')}>
-          {toJSDate(day.date).getDate()}
-        </div>
+        <div className={dateClassNames.join(' ')}>{dayDate.getDate()}</div>
       </div>
 
       <div className="sx__month-grid-day__events">
