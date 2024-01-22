@@ -27,4 +27,15 @@ describe('MonthWrapper', () => {
       expect(document.querySelectorAll('.sx__month-grid-week').length).toBe(6)
     })
   })
+
+  describe('rendering the current month', () => {
+    it('should highlight the current date', () => {
+      renderComponent(__createAppWithViews__())
+      const todaysDate = new Date().getDate()
+
+      expect(document.querySelector('.sx__is-today')?.textContent).toBe(
+        todaysDate.toString()
+      )
+    })
+  })
 })

@@ -6,6 +6,7 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { DATE_GRID_BLOCKER } from '../../../constants'
+import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 type props = {
   day: MonthDayType
@@ -37,6 +38,10 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
     }, 250)
   }
 
+  const dateClassNames = ['sx__month-grid-day__header-date']
+  const dayDate = toJSDate(day.date)
+  if (isToday(dayDate)) dateClassNames.push('sx__is-today')
+
   return (
     <div
       className="sx__month-grid-day"
@@ -49,13 +54,11 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
           <div className="sx__month-grid-day__header-day-name">
-            {getDayNameShort(toJSDate(day.date), $app.config.locale)}
+            {getDayNameShort(dayDate, $app.config.locale)}
           </div>
         ) : null}
 
-        <div className="sx__month-grid-day__header-date">
-          {toJSDate(day.date).getDate()}
-        </div>
+        <div className={dateClassNames.join(' ')}>{dayDate.getDate()}</div>
       </div>
 
       <div className="sx__month-grid-day__events">
