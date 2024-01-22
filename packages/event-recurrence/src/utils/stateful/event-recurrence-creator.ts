@@ -1,4 +1,4 @@
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { AugmentedEvent } from '../../types/augmented-event.interface'
 import { EventRRuleOptions } from '../../types/event-rrule-options'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
@@ -56,6 +56,7 @@ export class EventRecurrenceCreator {
         )
       : toDateString(date)
 
+    copiedEvent._isRecurrenceCopy = true
     copiedEvent.start = eventStart
     copiedEvent.end = isDateTime
       ? addMinutesToDatetime(eventStart, originalEvent._durationInMinutes!)

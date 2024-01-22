@@ -1,11 +1,11 @@
 import EventsFacade from './events-facade.interface'
-import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { EventId } from '@schedule-x/shared/src/types/event-id'
-import { externalEventToInternal } from '../../stateless/events/external-event-to-internal'
+import CalendarAppSingleton from '../../../interfaces/calendar/calendar-app-singleton'
+import CalendarEventExternal from '../../../interfaces/calendar/calendar-event.interface'
+import { EventId } from '../../../types/event-id'
+import { externalEventToInternal } from '../../stateless/calendar/external-event-to-internal'
 
 export default class EventsFacadeImpl implements EventsFacade {
-  constructor(private $app: CalendarAppSingleton) {}
+  constructor(protected $app: CalendarAppSingleton) {}
 
   add(event: CalendarEventExternal): void {
     const newEvent = externalEventToInternal(event, this.$app.config)

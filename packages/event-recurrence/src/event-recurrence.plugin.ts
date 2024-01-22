@@ -5,6 +5,7 @@ import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { EventRecurrenceCreator } from './utils/stateful/event-recurrence-creator'
 import { RecurrenceSetDndUpdater } from './utils/stateful/recurrence-set-dnd-updater'
+import { EventsFacade } from './utils/stateless/events-facade.impl'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name = PluginName.EventRecurrence
@@ -14,6 +15,10 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   init($app: CalendarAppSingleton): void {
     this.$app = $app
     this.createEventRecurrenceGroups($app)
+  }
+
+  getEventsFacade() {
+    return new EventsFacade(this.$app)
   }
 
   updateRecurrenceGroup(

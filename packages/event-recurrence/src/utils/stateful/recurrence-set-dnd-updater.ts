@@ -1,4 +1,4 @@
-import { addDays, CalendarAppSingleton } from '@schedule-x/shared'
+import { addDays, CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { EventRRuleOptions } from '../../types/event-rrule-options'
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
