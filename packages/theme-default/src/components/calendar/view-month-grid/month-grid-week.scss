@@ -31,6 +31,18 @@
 
 .sx__month-grid-day__header-date {
   font-size: var(--sx-font-extra-small);
+  margin-bottom: var(--sx-spacing-padding1);
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.sx__is-today {
+    background-color: var(--sx-color-primary);
+    color: var(--sx-color-on-primary);
+  }
 }
 
 .sx__month-grid-day__events-more {
