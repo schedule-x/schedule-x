@@ -21,7 +21,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     return new EventsFacade(this.$app)
   }
 
-  updateRecurrenceGroup(
+  updateRecurrenceDND(
     eventId: EventId,
     oldEventStart: string,
     newEventStart: string

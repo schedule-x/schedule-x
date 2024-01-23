@@ -11,7 +11,7 @@ export const updateDraggedEvent = (
     'rrule' in eventCopy._getForeignProperties() &&
     $app.config.plugins.eventRecurrence
   ) {
-    $app.config.plugins.eventRecurrence.updateRecurrenceGroup(
+    $app.config.plugins.eventRecurrence.updateRecurrenceDND(
       eventCopy.id,
       startPreDrag,
       eventCopy.start
