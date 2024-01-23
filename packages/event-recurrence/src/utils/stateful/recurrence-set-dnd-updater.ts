@@ -11,7 +11,7 @@ import { calculateMinutesDifference } from '../stateless/calculate-minutes-diffe
 import { addMinutesToDatetime } from '../stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { ByWeekday } from 'rrule/dist/esm/types'
-import { getRRule } from '../stateless/get-rset-properties'
+import { getExDate, getRRule } from '../stateless/get-rset-properties'
 
 export class RecurrenceSetDndUpdater {
   constructor(
@@ -118,7 +118,7 @@ export class RecurrenceSetDndUpdater {
       this.oldEventStart,
       this.newEventStart
     )
-    const exdate = eventToUpdate._getForeignProperties().exdate
+    const exdate = getExDate(eventToUpdate)
     if (!exdate) return
 
     eventToUpdate._getForeignProperties().exdate = (exdate as string[]).map(

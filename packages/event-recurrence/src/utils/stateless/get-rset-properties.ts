@@ -11,6 +11,6 @@ export const getRRule = (
 
 export const getExDate = (
   calendarEvent: AugmentedEvent
-): Date[] | undefined => {
-  return calendarEvent._getForeignProperties()?.exdate as Date[] | undefined
+): string[] | undefined => {
+  return calendarEvent._getForeignProperties()?.exdate as string[] | undefined
 }

@@ -15,6 +15,7 @@ import {
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { addMinutesToDatetime } from '../stateless/add-minutes-to-datetime'
 import { addDays } from '@schedule-x/shared/src'
+import { getExDate } from '../stateless/get-rset-properties'
 
 export class EventRecurrenceCreator {
   constructor(private $app: CalendarAppSingleton) {}
@@ -34,7 +35,7 @@ export class EventRecurrenceCreator {
 
     const allEvents = new RecurrenceSetBuilder(toRRuleDatetime(event.start))
       .rrule(rruleOptions)
-      .exdate(event._getForeignProperties().exdate as string[] | undefined)
+      .exdate(getExDate(event))
       .build()
       .all()
       .map(this.offsetToTimezone)
