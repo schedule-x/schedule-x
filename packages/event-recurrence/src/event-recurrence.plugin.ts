@@ -6,6 +6,7 @@ import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { EventRecurrenceCreator } from './utils/stateful/event-recurrence-creator'
 import { RecurrenceSetDndUpdater } from './utils/stateful/recurrence-set-dnd-updater'
 import { EventsFacade } from './utils/stateless/events-facade.impl'
+import { getRRule } from './utils/stateless/get-rset-properties'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name = PluginName.EventRecurrence
@@ -36,9 +37,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   private createEventRecurrenceGroups($app: CalendarAppSingleton) {
     $app.calendarEvents.list.value.forEach((event) => {
-      const rruleOptions = event._getForeignProperties().rrule as
-        | EventRRuleOptions
-        | undefined
+      const rruleOptions = getRRule(event)
       if (rruleOptions) {
         new EventRecurrenceCreator($app).createEventRecurrenceGroup(
           event,

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -129,6 +130,33 @@ describe('Updating the recurrence rules of an event', () => {
       expect(
         $app.calendarEvents.list.value[0]._getForeignProperties().exdate
       ).toEqual(['2024-01-22 00:00'])
+    })
+  })
+
+  describe('Trying to update an event without an rrule', () => {
+    let $app: CalendarAppSingleton
+
+    beforeEach(() => {
+      $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1',
+            start: '2024-01-22 00:00',
+            end: '2024-01-22 01:00',
+          },
+        ],
+      })
+    })
+
+    it('should throw an error', () => {
+      expect(() => {
+        new RecurrenceSetDndUpdater(
+          $app,
+          '1',
+          '2024-01-22 00:00',
+          '2024-01-23 00:00'
+        ).update()
+      }).toThrowError('Event with id 1 has no rrule')
     })
   })
 })

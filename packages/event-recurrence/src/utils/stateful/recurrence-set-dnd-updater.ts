@@ -11,6 +11,7 @@ import { calculateMinutesDifference } from '../stateless/calculate-minutes-diffe
 import { addMinutesToDatetime } from '../stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { ByWeekday } from 'rrule/dist/esm/types'
+import { getRRule } from '../stateless/get-rset-properties'
 
 export class RecurrenceSetDndUpdater {
   constructor(
@@ -27,13 +28,17 @@ export class RecurrenceSetDndUpdater {
     if (!eventToUpdate)
       throw new Error(`Event with id ${this.eventId} not found`)
 
+    const eventRRuleOptions = getRRule(eventToUpdate)
+    if (!eventRRuleOptions)
+      throw new Error(`Event with id ${this.eventId} has no rrule`)
+
     this.deletePreviousRecurrences(this.eventId, eventToUpdate)
-    this.updateRRule(eventToUpdate)
+    this.updateRRule(eventToUpdate, eventRRuleOptions)
     this.updateExdate(eventToUpdate)
     this.updateStartAndEnd(eventToUpdate)
     new EventRecurrenceCreator(this.$app).createEventRecurrenceGroup(
       eventToUpdate,
-      eventToUpdate._getForeignProperties().rrule as EventRRuleOptions
+      eventRRuleOptions
     )
   }
 
@@ -64,13 +69,10 @@ export class RecurrenceSetDndUpdater {
     ]
   }
 
-  private updateRRule(eventToUpdate: CalendarEventInternal) {
-    const rruleOptions = eventToUpdate._getForeignProperties().rrule as
-      | EventRRuleOptions
-      | undefined
-    if (!rruleOptions)
-      throw new Error(`Event with id ${eventToUpdate.id} has no rrule`)
-
+  private updateRRule(
+    eventToUpdate: CalendarEventInternal,
+    rruleOptions: EventRRuleOptions
+  ) {
     const oldRRule = new RecurrenceRuleBuilder(
       toRRuleDatetime(eventToUpdate.start),
       rruleOptions
