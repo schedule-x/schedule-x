@@ -23,6 +23,12 @@ describe('Accessing the events facade through the event recurrence plugin', () =
               count: 3,
             },
           },
+          {
+            id: '2',
+            title: 'should also should be returned',
+            start: '2020-01-15',
+            end: '2020-01-15',
+          },
         ],
         plugins: [eventRecurrencePlugin],
       })
@@ -30,7 +36,7 @@ describe('Accessing the events facade through the event recurrence plugin', () =
       const eventsFacade = eventRecurrencePlugin.getEventsFacade()
 
       const events = eventsFacade.getAll()
-      expect(events).length(1)
+      expect(events).length(2)
     })
   })
 
@@ -49,17 +55,23 @@ describe('Accessing the events facade through the event recurrence plugin', () =
               count: 3,
             },
           },
+          {
+            id: '2',
+            title: 'should not be removed',
+            start: '2020-01-15',
+            end: '2020-01-15',
+          },
         ],
         plugins: [eventRecurrencePlugin],
       })
       eventRecurrencePlugin.init($app)
-      expect($app.calendarEvents.list.value).toHaveLength(3)
+      expect($app.calendarEvents.list.value).toHaveLength(4)
       const eventsFacade = eventRecurrencePlugin.getEventsFacade()
+      expect(eventsFacade.getAll()).toHaveLength(2)
 
       eventsFacade.remove('1')
       const events = eventsFacade.getAll()
-      expect(events).length(0)
-      expect($app.calendarEvents.list.value).toHaveLength(0)
+      expect(events).length(1)
     })
   })
 })
