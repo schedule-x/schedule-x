@@ -19,7 +19,7 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
-import { RecurrenceSetBuilder, RRValues } from '../../packages/event-recurrence/src'
+import { RRValues } from '../../packages/event-recurrence/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -137,7 +137,7 @@ const calendar = createCalendar({
         byweekday: [RRValues.WE, RRValues.FR],
         until: '2024-03-15',
       },
-      // exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
+      exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
     },
     {
       id: 12345,

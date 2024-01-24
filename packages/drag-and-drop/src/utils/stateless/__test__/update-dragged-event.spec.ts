@@ -11,10 +11,10 @@ import { Mock, SpyInstance, vi } from 'vitest'
 import {
   createEventRecurrencePlugin,
   RRValues,
-} from '@schedule-x/event-recurrence'
+} from '@schedule-x/event-recurrence/src'
 import { createDragAndDropPlugin } from '../../../drag-and-drop-plugin.impl'
 import { EventRecurrencePlugin } from '@schedule-x/shared/src/interfaces/event-recurrence/event-recurrence-plugin.interface'
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
 describe('Updating a dragged event', () => {

@@ -7,12 +7,10 @@ import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/sta
 import { RecurrenceSetBuilder } from './recurrence-set-builder'
 import { toRRuleDatetime } from '../stateless/to-rrule-datetime'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { replaceTimeInDatetime } from '../stateless/replace-time-in-datetime'
 import {
   toDateString,
   toDateTimeString,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { addMinutesToDatetime } from '../stateless/add-minutes-to-datetime'
 import { addDays } from '@schedule-x/shared/src'
 import { getExDate } from '../stateless/get-rset-properties'
@@ -50,12 +48,7 @@ export class EventRecurrenceCreator {
   ): AugmentedEvent {
     const copiedEvent: AugmentedEvent = deepCloneEvent(originalEvent, this.$app)
     const isDateTime = dateTimeStringRegex.test(copiedEvent.start)
-    const eventStart = isDateTime
-      ? replaceTimeInDatetime(
-          toDateTimeString(date),
-          timeFromDateTime(copiedEvent.start)
-        )
-      : toDateString(date)
+    const eventStart = isDateTime ? toDateTimeString(date) : toDateString(date)
 
     copiedEvent._isRecurrenceCopy = true
     copiedEvent.start = eventStart
