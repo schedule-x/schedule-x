@@ -1,6 +1,6 @@
-import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
-import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
+import CalendarEventExternal from '../../../interfaces/calendar/calendar-event.interface'
+import CalendarConfigInternal from '../../../interfaces/calendar/calendar-config'
+import CalendarEventBuilder from './calendar-event/calendar-event.builder'
 
 export const externalEventToInternal = (
   event: CalendarEventExternal,

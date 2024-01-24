@@ -5,7 +5,7 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridDayWidth } from './utils/stateless/get-time-grid-day-width'
-import { replaceOriginalWithCopy } from './utils/stateless/replace-original-with-copy'
+import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { getDateGridEventCopy } from './utils/stateless/get-date-grid-event-copy'
 import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
@@ -125,6 +125,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private updateOriginalEvent() {
     if (this.lastDaysDiff === 0) return
 
-    replaceOriginalWithCopy(this.$app, this.eventCopy)
+    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
   }
 }

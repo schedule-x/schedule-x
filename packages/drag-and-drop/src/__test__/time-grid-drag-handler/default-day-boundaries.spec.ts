@@ -24,16 +24,20 @@ describe('A calendar with normal day boundaries', () => {
   }
   let eventCopyElement: HTMLDivElement
 
+  const eventId = 1
+
   beforeEach(() => {
     $app = __createAppWithViews__({
       selectedDate: '2024-02-02',
     })
-    eventCopy = new CalendarEventBuilder(
+    const calendarEvent = new CalendarEventBuilder(
       $app.config,
-      1,
+      eventId,
       '2024-02-02 12:00',
       '2024-02-02 13:00'
     ).build()
+    $app.calendarEvents.list.value = [calendarEvent]
+    eventCopy = calendarEvent
     eventCopyElement = document.createElement('div')
     eventCopyElement.id = ('time-grid-event-copy-' + eventCopy.id) as string
     $app.elements.calendarWrapper = {
@@ -76,12 +80,8 @@ describe('A calendar with normal day boundaries', () => {
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-02 14:00'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-02 15:00'
-      )
+      expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 14:00')
+      expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 15:00')
     })
 
     it('should drag an event to 2 hours and 30 minutes earlier', () => {
@@ -99,12 +99,8 @@ describe('A calendar with normal day boundaries', () => {
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-02 09:30'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-02 10:30'
-      )
+      expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 09:30')
+      expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 10:30')
     })
 
     it('should not be able to drag an event beyond the start of a day', () => {
@@ -123,7 +119,7 @@ describe('A calendar with normal day boundaries', () => {
       /**
        * Drag event to 00:15
        * */
-      dragEventNQuarters(clickEvent, 1, 'up')
+      dragEventNQuarters(clickEvent, eventId, 'up')
       expect(updateCopyFn).toHaveBeenCalled()
       expect(eventCopy.start).toBe('2024-02-02 00:15')
       expect(eventCopy.end).toBe('2024-02-02 01:15')
@@ -166,7 +162,7 @@ describe('A calendar with normal day boundaries', () => {
         25
       )
 
-      const daysToDrag = 1
+      const daysToDrag = eventId
       const pixelPerDay = 100
       const pixelDiffX = daysToDrag * pixelPerDay
       const event = {
@@ -198,7 +194,7 @@ describe('A calendar with normal day boundaries', () => {
         25
       )
 
-      const daysToDrag = -1
+      const daysToDrag = -eventId
       const pixelPerDay = 100
       const pixelDiffX = daysToDrag * pixelPerDay
       const eventX = clickEvent.clientX + pixelDiffX

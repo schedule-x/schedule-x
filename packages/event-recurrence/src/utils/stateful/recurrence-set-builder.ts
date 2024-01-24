@@ -1,6 +1,7 @@
 import { RRule, RRuleSet } from 'rrule'
 import { EventRRuleOptions } from '../../types/event-rrule-options'
 import { toRRuleDatetime } from '../stateless/to-rrule-datetime'
+import { RecurrenceRuleBuilder } from './recurrence-rule-builder'
 
 /**
  * Note that unlike common builders, all public methods need to be called
@@ -17,12 +18,7 @@ export class RecurrenceSetBuilder {
 
   rrule(rruleOptions: Partial<EventRRuleOptions>) {
     this.rset.rrule(
-      new RRule({
-        ...rruleOptions,
-        dtstart: this.dtstart,
-        until: this.getOptionUntil(rruleOptions),
-        tzid: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      })
+      new RecurrenceRuleBuilder(this.dtstart, rruleOptions).build()
     )
 
     return this
@@ -35,12 +31,6 @@ export class RecurrenceSetBuilder {
     })
 
     return this
-  }
-
-  private getOptionUntil(rruleOptions: Partial<EventRRuleOptions>) {
-    if (typeof rruleOptions.until !== 'string') return null
-
-    return toRRuleDatetime(rruleOptions.until)
   }
 }
 

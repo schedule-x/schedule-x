@@ -21,6 +21,7 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
     start: string
     end: string
   }
+  let eventId: string | number
 
   beforeEach(() => {
     $app = __createAppWithViews__({
@@ -30,12 +31,15 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
         end: '15:00',
       },
     })
-    eventCopy = new CalendarEventBuilder(
+    const calendarEvent = new CalendarEventBuilder(
       $app.config,
       1,
       '2024-02-02 03:30',
       '2024-02-02 04:00'
     ).build()
+    eventId = calendarEvent.id
+    $app.calendarEvents.list.value = [calendarEvent]
+    eventCopy = calendarEvent
     $app.elements.calendarWrapper = {
       querySelector: (selector: string) => {
         if (selector === '.sx__time-grid-day') {
@@ -90,12 +94,8 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
 
       document.dispatchEvent(new MouseEvent('mouseup'))
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-02 03:00'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-02 03:30'
-      )
+      expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 03:00')
+      expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 03:30')
     })
   })
 })

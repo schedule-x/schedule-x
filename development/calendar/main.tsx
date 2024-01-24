@@ -19,7 +19,7 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
-import { RecurrenceSetBuilder, RRValues } from '../../packages/event-recurrence/src'
+import { RRValues } from '../../packages/event-recurrence/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -127,31 +127,31 @@ const calendar = createCalendar({
     createEventRecurrencePlugin(),
   ],
   events: [
-    // {
-    //   id: 123,
-    //   title: 'Event 1',
-    //   start: '2024-01-17 17:00',
-    //   end: '2024-01-17 18:15',
-    //   rrule: {
-    //     freq: RRValues.WEEKLY,
-    //     byweekday: [RRValues.WE, RRValues.FR],
-    //     until: '2024-03-15',
-    //   },
-    //   exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
-    // },
-    // {
-    //   id: 12345,
-    //   title: 'Event 2',
-    //   start: '2024-01-15',
-    //   end: '2024-01-16',
-    //   rrule:{
-    //     freq: RRValues.WEEKLY,
-    //     byweekday: [RRValues.MO],
-    //     until: '2024-02-05',
-    //   },
-    //   calendarId: 'personal',
-    // },
-    ...seededEvents
+    {
+      id: 123,
+      title: 'Event 1',
+      start: '2024-01-17 17:00',
+      end: '2024-01-17 18:15',
+      rrule: {
+        freq: RRValues.WEEKLY,
+        byweekday: [RRValues.WE, RRValues.FR],
+        until: '2024-03-15',
+      },
+      exdate: ['2024-01-19 17:00', '2024-02-02 17:00'],
+    },
+    {
+      id: 12345,
+      title: 'Event 2',
+      start: '2024-01-15',
+      end: '2024-01-16',
+      rrule:{
+        freq: RRValues.WEEKLY,
+        byweekday: [RRValues.MO],
+        until: '2024-02-05',
+      },
+      calendarId: 'personal',
+    },
+    // ...seededEvents
   ],
 })
 calendar.render(calendarElement)
@@ -177,5 +177,10 @@ addEventButton.addEventListener('click', () => {
 const scrollButton = document.getElementById('scroll') as HTMLButtonElement
 scrollButton.addEventListener('click', () => {
   scrollControllerPlugin.scrollTo((document.getElementById('scroll-to') as HTMLInputElement).value)
+})
+
+const logAllEventsButton = document.getElementById('log-all-events') as HTMLButtonElement
+logAllEventsButton.addEventListener('click', () => {
+  console.log(calendar.events.getAll())
 })
 
