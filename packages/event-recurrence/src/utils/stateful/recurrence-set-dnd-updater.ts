@@ -2,7 +2,6 @@ import { addDays, CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { EventRRuleOptions } from '../../types/event-rrule-options'
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
-import { RRule } from 'rrule'
 import { RecurrenceRuleBuilder } from './recurrence-rule-builder'
 import { toRRuleDatetime } from '../stateless/to-rrule-datetime'
 import { EventRecurrenceCreator } from './event-recurrence-creator'
@@ -12,6 +11,7 @@ import { addMinutesToDatetime } from '../stateless/add-minutes-to-datetime'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { ByWeekday } from 'rrule/dist/esm/types'
 import { getExDate, getRRule } from '../stateless/get-rset-properties'
+import { RRValues } from './recurrence-set-builder'
 
 export class RecurrenceSetDndUpdater {
   constructor(
@@ -23,7 +23,7 @@ export class RecurrenceSetDndUpdater {
 
   update() {
     const eventToUpdate = this.$app.calendarEvents.list.value.find(
-      (event) => event.id === this.eventId
+      (event) => event.id === this.eventId && !event._isRecurrenceCopy
     )
     if (!eventToUpdate)
       throw new Error(`Event with id ${this.eventId} not found`)
@@ -109,7 +109,7 @@ export class RecurrenceSetDndUpdater {
       return weekDaysAxis[newWeekdayIndex]
     })
     return newWeekdays.map(
-      (weekday) => RRule[weekday as keyof typeof RRule]
+      (weekday) => RRValues[weekday as keyof typeof RRValues]
     ) as ByWeekday[]
   }
 
