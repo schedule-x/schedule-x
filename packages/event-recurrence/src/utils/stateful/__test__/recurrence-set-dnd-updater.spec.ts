@@ -39,10 +39,23 @@ describe('Updating the recurrence rules of an event', () => {
         '2024-01-23 00:00'
       ).update()
 
+      expect($app.calendarEvents.list.value).toHaveLength(5)
       expect($app.calendarEvents.list.value[0].start).toEqual(
         '2024-01-23 00:00'
       )
       expect($app.calendarEvents.list.value[0].end).toEqual('2024-01-23 01:00')
+
+      expect($app.calendarEvents.list.value[1].start).toBe('2024-01-29 00:00')
+      expect($app.calendarEvents.list.value[1].end).toBe('2024-01-29 01:00')
+
+      expect($app.calendarEvents.list.value[2].start).toBe('2024-01-30 00:00')
+      expect($app.calendarEvents.list.value[2].end).toBe('2024-01-30 01:00')
+
+      expect($app.calendarEvents.list.value[3].start).toBe('2024-02-05 00:00')
+      expect($app.calendarEvents.list.value[3].end).toBe('2024-02-05 01:00')
+
+      expect($app.calendarEvents.list.value[4].start).toBe('2024-02-06 00:00')
+      expect($app.calendarEvents.list.value[4].end).toBe('2024-02-06 01:00')
     })
 
     it('should update the rrule options through dragging the first event recurrence', () => {
