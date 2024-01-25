@@ -15,6 +15,20 @@
   }
 }
 
+.sx__time-grid-event-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.sx__time-grid-event-resize-handle {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  cursor: ns-resize;
+  height: clamp(10px, 20px, 50%);
+}
+
 .sx__time-grid-event-title {
   font-weight: 600;
 }

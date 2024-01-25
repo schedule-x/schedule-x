@@ -1,9 +1,9 @@
-import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { TimeGridEventResizer } from './time-grid-event-resizer'
+import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 
-class ResizePlugin implements PluginBase {
+class ResizePluginImpl implements ResizePlugin {
   name = 'resize'
   $app: CalendarAppSingleton | null = null
 
@@ -13,7 +13,8 @@ class ResizePlugin implements PluginBase {
 
   createTimeGridEventResizer(
     calendarEvent: CalendarEventInternal,
-    mouseDownEvent: MouseEvent
+    mouseDownEvent: MouseEvent,
+    dayBoundariesDateTime: { start: string; end: string }
   ) {
     if (!this.$app) return this.logError()
 
@@ -22,7 +23,8 @@ class ResizePlugin implements PluginBase {
       this.$app,
       calendarEvent,
       mouseDownEvent.clientY,
-      25
+      25,
+      dayBoundariesDateTime
     )
   }
 
@@ -34,3 +36,5 @@ class ResizePlugin implements PluginBase {
     console.error('The calendar is not yet initialized. Cannot resize events.')
   }
 }
+
+export const createResizePlugin = (): ResizePlugin => new ResizePluginImpl()

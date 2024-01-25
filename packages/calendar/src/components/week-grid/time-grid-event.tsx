@@ -101,6 +101,20 @@ export default function TimeGridEvent({
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const startResize = (e: MouseEvent) => {
+    e.stopPropagation()
+
+    if (!dayBoundariesDateTime) return // this can only happen in eventCopy
+
+    if ($app.config.plugins.resize) {
+      $app.config.plugins.resize.createTimeGridEventResizer(
+        calendarEvent,
+        e,
+        dayBoundariesDateTime
+      )
+    }
+  }
+
   return (
     <>
       <div
@@ -142,27 +156,36 @@ export default function TimeGridEvent({
           padding: customComponent ? '0' : undefined,
         }}
       >
-        {!customComponent && (
-          <Fragment>
-            {calendarEvent.title && (
-              <div className="sx__time-grid-event-title">
-                {calendarEvent.title}
-              </div>
-            )}
+        <div className="sx__time-grid-event-inner">
+          {!customComponent && (
+            <Fragment>
+              {calendarEvent.title && (
+                <div className="sx__time-grid-event-title">
+                  {calendarEvent.title}
+                </div>
+              )}
 
-            <div className="sx__time-grid-event-time">
-              <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
-              {getEventTime(calendarEvent.start, calendarEvent.end)}
-            </div>
-
-            {calendarEvent.people && (
-              <div className="sx__time-grid-event-people">
-                <UserIcon strokeColor={eventCSSVariables.iconStroke} />
-                {concatenatePeople(calendarEvent.people)}
+              <div className="sx__time-grid-event-time">
+                <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
+                {getEventTime(calendarEvent.start, calendarEvent.end)}
               </div>
-            )}
-          </Fragment>
-        )}
+
+              {calendarEvent.people && (
+                <div className="sx__time-grid-event-people">
+                  <UserIcon strokeColor={eventCSSVariables.iconStroke} />
+                  {concatenatePeople(calendarEvent.people)}
+                </div>
+              )}
+            </Fragment>
+          )}
+
+          {$app.config.plugins.resize && (
+            <div
+              className={'sx__time-grid-event-resize-handle'}
+              onMouseDown={startResize}
+            />
+          )}
+        </div>
       </div>
 
       {eventCopy && <TimeGridEvent calendarEvent={eventCopy} isCopy={true} />}

@@ -1,10 +1,11 @@
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
 export class TimeGridEventResizer {
+  private readonly originalEventEnd: string
   private lastIntervalDiff = 0
 
   constructor(
@@ -15,12 +16,18 @@ export class TimeGridEventResizer {
     private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
     this.setupEventListeners()
+    this.originalEventEnd = this.calendarEvent.end
   }
 
   setupEventListeners() {
     ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
       'mousemove',
       this.handleMouseMove
+    )
+    ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
+      'mouseup',
+      this.handleMouseUp,
+      { once: true }
     )
   }
 
@@ -33,6 +40,7 @@ export class TimeGridEventResizer {
     )
     const timeDidNotChange = currentIntervalDiff === this.lastIntervalDiff
     if (timeDidNotChange) return
+    this.lastIntervalDiff = currentIntervalDiff
 
     this.setTimeForEventCopy(
       this.CHANGE_THRESHOLD_IN_TIME_POINTS * currentIntervalDiff
@@ -43,17 +51,14 @@ export class TimeGridEventResizer {
     return getTimePointsPerPixel(this.$app)
   }
 
-  // TODO: maybe refactor to shared
   private setTimeForEventCopy(pointsToAdd: number) {
-    const newStart = addTimePointsToDateTime(
-      this.calendarEvent.start,
-      pointsToAdd
+    const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
+    if (
+      newEnd > this.dayBoundariesDateTime.end ||
+      newEnd <= this.calendarEvent.start
     )
-    const newEnd = addTimePointsToDateTime(this.calendarEvent.end, pointsToAdd)
-    if (newStart < this.dayBoundariesDateTime.start) return
-    if (newEnd > this.dayBoundariesDateTime.end) return
+      return
 
-    this.calendarEvent.start = newStart
     this.calendarEvent.end = newEnd
     this.runSideEffects()
   }
@@ -66,5 +71,12 @@ export class TimeGridEventResizer {
         this.calendarEvent._getExternalEvent()
       )
     }
+  }
+
+  private handleMouseUp = () => {
+    ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
+      'mousemove',
+      this.handleMouseMove
+    )
   }
 }

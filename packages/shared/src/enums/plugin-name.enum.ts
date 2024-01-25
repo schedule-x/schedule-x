@@ -3,4 +3,5 @@ export enum PluginName {
   EventModal = 'eventModal',
   ScrollController = 'scrollController',
   EventRecurrence = 'eventRecurrence',
+  Resize = 'resize',
 }

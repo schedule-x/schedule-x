@@ -5,7 +5,7 @@ import {
   beforeEach,
   spyOn,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { stubInterface } from 'ts-sinon'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
