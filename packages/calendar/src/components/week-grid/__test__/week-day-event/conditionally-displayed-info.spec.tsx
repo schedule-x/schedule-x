@@ -8,6 +8,8 @@ import { cleanup, screen } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { stubInterface } from 'ts-sinon'
+import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 
 describe('WeekDayEvent', () => {
   afterEach(() => {
@@ -78,6 +80,49 @@ describe('WeekDayEvent', () => {
         document.querySelector('.sx__time-grid-event-people')
       ).not.toBeNull()
       expect(screen.queryByText('Paul & John')).toBeTruthy()
+    })
+  })
+
+  describe('Usage of resize plugin', () => {
+    it('should not display a resize handle', () => {
+      const $app = __createAppWithViews__({
+        datePicker: {
+          selectedDate: '2020-12-01',
+        },
+      })
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        '1',
+        '2020-12-01 10:00',
+        '2020-12-01 11:00'
+      ).build()
+      renderComponent($app, calendarEvent)
+
+      expect(
+        document.querySelector('.sx__time-grid-event-resize-handle')
+      ).toBeNull()
+    })
+
+    it('should have a resize handle', () => {
+      const resizePlugin = stubInterface<ResizePlugin>()
+      resizePlugin.name = 'resize'
+      const $app = __createAppWithViews__({
+        datePicker: {
+          selectedDate: '2020-12-01',
+        },
+        plugins: [resizePlugin],
+      })
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        '1',
+        '2020-12-01 10:00',
+        '2020-12-01 11:00'
+      ).build()
+      renderComponent($app, calendarEvent)
+
+      expect(
+        document.querySelector('.sx__time-grid-event-resize-handle')
+      ).not.toBeNull()
     })
   })
 })

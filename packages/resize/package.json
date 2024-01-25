@@ -1,6 +1,5 @@
 {
   "name": "@schedule-x/resize",
-  "private": true,
   "version": "1.3.0",
   "description": "Resize events in the Schedule-X calendar",
   "author": {
