@@ -121,7 +121,6 @@ export default function TimeGridEvent({
         id={
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
-        data-ccid={customComponentId}
         onClick={handleOnClick}
         onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
@@ -156,7 +155,10 @@ export default function TimeGridEvent({
           padding: customComponent ? '0' : undefined,
         }}
       >
-        <div className="sx__time-grid-event-inner">
+        <div
+          data-ccid={customComponentId}
+          className="sx__time-grid-event-inner"
+        >
           {!customComponent && (
             <Fragment>
               {calendarEvent.title && (

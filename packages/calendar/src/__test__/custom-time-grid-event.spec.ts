@@ -68,7 +68,7 @@ describe('CalendarApp', () => {
     })
 
     it('should not render any default markup', () => {
-      const eventEl = calendarEl.querySelector('.sx__event')
+      const eventEl = calendarEl.querySelector('.sx__time-grid-event-inner')
       expect(eventEl?.innerHTML).toBe('')
     })
 
