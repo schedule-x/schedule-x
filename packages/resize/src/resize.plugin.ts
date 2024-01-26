@@ -3,6 +3,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { TimeGridEventResizer } from './time-grid-event-resizer'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
+import { DateGridEventResizer } from './date-grid-event-resizer'
 
 class ResizePluginImpl implements ResizePlugin {
   name = PluginName.Resize
@@ -26,6 +27,15 @@ class ResizePluginImpl implements ResizePlugin {
       25,
       dayBoundariesDateTime
     )
+  }
+
+  createDateGridEventResizer(
+    calendarEvent: CalendarEventInternal,
+    mouseDownEvent: MouseEvent
+  ) {
+    if (!this.$app) return this.logError()
+
+    new DateGridEventResizer(this.$app, calendarEvent, mouseDownEvent.clientX)
   }
 
   private logError() {

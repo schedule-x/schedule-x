@@ -17,6 +17,7 @@ import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -80,6 +81,14 @@ export default function DateGridEvent({
       calendarEvent: calendarEvent._getExternalEvent(),
     })
   }, [])
+
+  const startResize = (mouseEvent: MouseEvent) => {
+    mouseEvent.stopPropagation()
+    ;($app.config.plugins.resize as ResizePlugin).createDateGridEventResizer(
+      calendarEvent,
+      mouseEvent
+    )
+  }
 
   const eventClasses = [
     'sx__event',
@@ -157,6 +166,13 @@ export default function DateGridEvent({
               />
             )}
           </Fragment>
+        )}
+
+        {$app.config.plugins.resize && !hasOverflowRight && (
+          <div
+            className="sx__date-grid-event-resize-handle"
+            onMouseDown={startResize}
+          />
         )}
       </div>
 
