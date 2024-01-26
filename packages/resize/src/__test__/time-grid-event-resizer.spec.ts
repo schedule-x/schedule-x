@@ -19,6 +19,7 @@ describe('Resizing events in the time grid', () => {
   describe('When the calendar has regular day boundaries 0-24', () => {
     let $app: CalendarAppSingleton
     let calendarEvent: CalendarEventInternal
+    let calendarEventNearEndOfDay: CalendarEventInternal
     let calendarWrapper: HTMLDivElement
     const initialY = 500
 
@@ -36,6 +37,12 @@ describe('Resizing events in the time grid', () => {
         1,
         '2024-01-05 06:00',
         '2024-01-05 07:00'
+      ).build()
+      calendarEventNearEndOfDay = new CalendarEventBuilder(
+        $app.config,
+        1,
+        '2024-01-05 23:00',
+        '2024-01-05 23:30'
       ).build()
       $app.calendarEvents = stubInterface<CalendarEvents>()
       $app.calendarEvents.list = signal([calendarEvent])
@@ -108,6 +115,31 @@ describe('Resizing events in the time grid', () => {
         id: 1,
         start: '2024-01-05 06:00',
         end: '2024-01-05 06:15',
+      })
+    })
+
+    it('should not resize beyond the end of the day', () => {
+      new TimeGridEventResizer($app, calendarEventNearEndOfDay, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      let currentY = initialY
+      // drag 6 times 25px downwards to simulate 1 1/2 hours
+      for (let i = 0; i < 6; i++) {
+        currentY += 25
+        calendarWrapper.dispatchEvent(
+          new MouseEvent('mousemove', { clientX: 0, clientY: currentY })
+        )
+      }
+
+      expect(calendarEventNearEndOfDay.start).toBe('2024-01-05 23:00')
+      expect(calendarEventNearEndOfDay.end).toBe('2024-01-05 23:45')
+      expect(updateEventSpy).toHaveBeenCalledWith({
+        id: 1,
+        start: '2024-01-05 23:00',
+        end: '2024-01-05 23:45',
       })
     })
   })

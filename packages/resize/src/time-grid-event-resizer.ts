@@ -24,11 +24,7 @@ export class TimeGridEventResizer {
       'mousemove',
       this.handleMouseMove
     )
-    ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
-      'mouseup',
-      this.handleMouseUp,
-      { once: true }
-    )
+    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
   }
 
   private handleMouseMove = (event: MouseEvent) => {
