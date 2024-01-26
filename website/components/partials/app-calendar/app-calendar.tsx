@@ -6,6 +6,7 @@ import { useTheme } from 'nextra-theme-docs'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+import { createResizePlugin } from '@schedule-x/resize'
 
 const getTheme = (resolvedTheme: string) => resolvedTheme === 'dark' ? 'dark' : 'light'
 
@@ -16,7 +17,7 @@ export default function AppCalendar() {
     views: [viewWeek, viewMonthAgenda, viewDay, viewMonthGrid],
     defaultView: viewWeek.name,
     events: seededEvents,
-    plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
+    plugins: [createDragAndDropPlugin(), createEventModalPlugin(), createResizePlugin()],
     selectedDate: '2024-01-13',
     isDark: getTheme(resolvedTheme) === 'dark',
     calendars: {
