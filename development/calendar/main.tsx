@@ -41,10 +41,10 @@ const calendar = createCalendar({
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  // dayBoundaries: {
-  //   start: '21:00',
-  //   end: '18:00',
-  // },
+  dayBoundaries: {
+    start: '21:00',
+    end: '18:00',
+  },
   // isDark: true,
   callbacks: {
     onRangeUpdate(range) {

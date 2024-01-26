@@ -29,8 +29,7 @@ export class TimeGridEventResizer {
 
   private handleMouseMove = (event: MouseEvent) => {
     const pixelDiffY = event.clientY - this.initialY
-    const number = this.timePointsPerPixel()
-    const timePointsDiffY = pixelDiffY * number
+    const timePointsDiffY = pixelDiffY * getTimePointsPerPixel(this.$app)
     const currentIntervalDiff = Math.round(
       timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
     )
@@ -41,10 +40,6 @@ export class TimeGridEventResizer {
     this.setTimeForEventCopy(
       this.CHANGE_THRESHOLD_IN_TIME_POINTS * currentIntervalDiff
     )
-  }
-
-  private timePointsPerPixel(): number {
-    return getTimePointsPerPixel(this.$app)
   }
 
   private setTimeForEventCopy(pointsToAdd: number) {
