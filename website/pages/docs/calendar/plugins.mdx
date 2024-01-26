@@ -11,7 +11,7 @@ Update event time and date using a classical drag and drop. Available in all vie
 
 #### Install
 
-```bash
+```bash copy
 npm i @schedule-x/drag-and-drop
 ```
 
@@ -33,7 +33,7 @@ display information about the events in a modal.
 
 #### Install
 
-```bash
+```bash copy
 npm i @schedule-x/event-modal
 ```
 
@@ -54,7 +54,7 @@ Take control over the scrolling in the week- and day view grids.
 
 #### Install
 
-```bash
+```bash copy
 npm i @schedule-x/scroll-controller
 ```
 
@@ -74,6 +74,34 @@ const calendar = createCalendar({
 calendar.render(document.getElementById('calendar'))
 
 scrollController.scrollTo('04:00')
+```
+
+### Resize
+
+Resize events by dragging the bottom edge of the event.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info" emoji="💡" title="Note">
+  This plugin currently only offers resizing in the week- and day views. Month view support is planned as a minor
+  release during the 1.x.x release cycle.
+</Callout>
+
+#### Install
+
+```bash copy
+npm i @schedule-x/resize
+```
+
+#### Usage
+
+```js
+import { createResizePlugin } from '@schedule-x/resize'
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [createResizePlugin()],
+})
 ```
 
 ## Write your own plugin
