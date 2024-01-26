@@ -11,36 +11,35 @@ import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
 describe('Resizing events in the date grid', () => {
-  describe('Dragging the event to the right', () => {
-    let $app: CalendarAppSingleton
-    let calendarEvent: CalendarEventInternal
-    let twoDayEvent: CalendarEventInternal
+  let $app: CalendarAppSingleton
+  let calendarEvent: CalendarEventInternal
+  let twoDayEvent: CalendarEventInternal
 
-    beforeEach(() => {
-      $app = __createAppWithViews__()
-      calendarEvent = new CalendarEventBuilder(
-        $app.config,
-        1,
-        '2024-01-26',
-        '2024-01-26'
-      ).build()
-      twoDayEvent = new CalendarEventBuilder(
-        $app.config,
-        1,
-        '2024-01-26',
-        '2024-01-27'
-      ).build()
-      $app.calendarEvents.list.value = [calendarEvent]
-      $app.elements.calendarWrapper = document.createElement('div')
-      $app.elements.calendarWrapper.querySelector = (selector: string) => {
-        if (selector === '.sx__time-grid-day') {
-          return {
-            clientWidth: 100,
-          }
+  beforeEach(() => {
+    $app = __createAppWithViews__()
+    calendarEvent = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2024-01-26',
+      '2024-01-26'
+    ).build()
+    twoDayEvent = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2024-01-26',
+      '2024-01-27'
+    ).build()
+    $app.elements.calendarWrapper = document.createElement('div')
+    $app.elements.calendarWrapper.querySelector = (selector: string) => {
+      if (selector === '.sx__time-grid-day') {
+        return {
+          clientWidth: 100,
         }
       }
-    })
+    }
+  })
 
+  describe('Dragging the event to the right', () => {
     it('should resize the event to be one day longer', () => {
       new DateGridEventResizer($app, calendarEvent, 1000)
       ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
@@ -80,7 +79,9 @@ describe('Resizing events in the date grid', () => {
       expect(calendarEvent.start).toBe('2024-01-26')
       expect(calendarEvent.end).toBe('2024-01-26')
     })
+  })
 
+  describe('Dragging the event to the left', () => {
     it('should be able to resize a two-day event into being a one-day event', () => {
       new DateGridEventResizer($app, twoDayEvent, 1000)
       ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
