@@ -1,10 +1,8 @@
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
-import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { getTimeGridDayWidth } from '@schedule-x/drag-and-drop/src/utils/stateless/get-time-grid-day-width'
-import { addDays } from '@schedule-x/shared'
+import { addDays } from '@schedule-x/shared/src'
 
 export class DateGridEventResizer {
   private readonly dayWidth: number
