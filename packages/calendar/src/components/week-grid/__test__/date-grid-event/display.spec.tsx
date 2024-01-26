@@ -8,6 +8,8 @@ import { afterEach } from 'vitest'
 import { getEventByText, renderComponent } from './utils'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { stubInterface } from 'ts-sinon'
+import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 
 // TODO: move to package-neutral location
 describe('style attribute "display" of date grid event element', () => {
@@ -100,6 +102,27 @@ describe('style attribute "display" of date grid event element', () => {
         const eventCopy = document.querySelector('.sx__date-grid-event--copy')
         expect(eventCopy).not.toBeNull()
       })
+    })
+  })
+
+  describe('Usage of resize plugin', () => {
+    it('should not display a resize handle if the resize plugin is not enabled', () => {
+      renderComponent($app, oneDayEventId, 1)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
+
+      expect(
+        oneDayEvent.querySelector('.sx__date-grid-event-resize-handle')
+      ).toBeNull()
+    })
+
+    it('should display a resize handle if the resize plugin is enabled', () => {
+      $app.config.plugins.resize = stubInterface<ResizePlugin>()
+      renderComponent($app, oneDayEventId, 1)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
+
+      expect(
+        oneDayEvent.querySelector('.sx__date-grid-event-resize-handle')
+      ).not.toBeNull()
     })
   })
 })

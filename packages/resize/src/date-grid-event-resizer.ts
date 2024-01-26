@@ -31,10 +31,10 @@ export class DateGridEventResizer {
   private handleMouseMove = (event: MouseEvent) => {
     const xDifference = event.clientX - this.initialX
     const daysToAdd = Math.floor(xDifference / this.dayWidth)
-    this.setEndForEvent(daysToAdd)
+    this.setNewTimeForEventEnd(daysToAdd)
   }
 
-  private setEndForEvent(daysToAdd: number) {
+  private setNewTimeForEventEnd(daysToAdd: number) {
     const newEnd = addDays(this.originalEventEnd, daysToAdd)
     if (
       newEnd > (this.$app.calendarState.range.value as DateRange).end ||
