@@ -43,6 +43,18 @@ describe('translate', () => {
     expect(underTest(key)).toEqual(key)
   })
 
+  it('should return the key if the locale is ko-KR', () => {
+    const locale = 'ko-KR'
+    const translations = {
+      hello: '월드',
+    }
+    const key = 'hello'
+
+    const underTest = translate(locale, { koKR: translations })
+
+    expect(underTest(key)).toEqual(translations[key])
+  })
+
   it('should return key if locale is supported, but key does not exist', () => {
     const locale = 'en-US'
     const translations = {
