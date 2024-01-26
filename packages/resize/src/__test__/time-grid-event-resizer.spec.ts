@@ -56,12 +56,58 @@ describe('Resizing events in the time grid', () => {
         new MouseEvent('mousemove', { clientX: 0, clientY: initialY + 50 })
       )
 
-      expect(calendarEvent.start).toBe('2024-01-05 06:30')
+      expect(calendarEvent.start).toBe('2024-01-05 06:00')
       expect(calendarEvent.end).toBe('2024-01-05 07:30')
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:30',
+        start: '2024-01-05 06:00',
         end: '2024-01-05 07:30',
+      })
+    })
+
+    it('should shorten an event by 30 minutes', () => {
+      new TimeGridEventResizer($app, calendarEvent, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      // Drag 50 pixels up (half hour, because day = 2400px)
+      calendarWrapper.dispatchEvent(
+        new MouseEvent('mousemove', { clientX: 0, clientY: initialY - 50 })
+      )
+
+      expect(calendarEvent.start).toBe('2024-01-05 06:00')
+      expect(calendarEvent.end).toBe('2024-01-05 06:30')
+      expect(updateEventSpy).toHaveBeenCalledWith({
+        id: 1,
+        start: '2024-01-05 06:00',
+        end: '2024-01-05 06:30',
+      })
+    })
+
+    it('should not resize above the event start', () => {
+      new TimeGridEventResizer($app, calendarEvent, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      let currentY = initialY
+      // drag 6 times 25px upwards to simulate 1 1/2 hours
+      for (let i = 0; i < 6; i++) {
+        currentY -= 25
+        calendarWrapper.dispatchEvent(
+          new MouseEvent('mousemove', { clientX: 0, clientY: currentY })
+        )
+      }
+
+      expect(calendarEvent.start).toBe('2024-01-05 06:00')
+      expect(calendarEvent.end).toBe('2024-01-05 06:15')
+      expect(updateEventSpy).toHaveBeenCalledWith({
+        id: 1,
+        start: '2024-01-05 06:00',
+        end: '2024-01-05 06:15',
       })
     })
   })

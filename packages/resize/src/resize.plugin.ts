@@ -2,9 +2,10 @@ import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { TimeGridEventResizer } from './time-grid-event-resizer'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
+import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 
 class ResizePluginImpl implements ResizePlugin {
-  name = 'resize'
+  name = PluginName.Resize
   $app: CalendarAppSingleton | null = null
 
   init($app: CalendarAppSingleton) {
@@ -18,7 +19,6 @@ class ResizePluginImpl implements ResizePlugin {
   ) {
     if (!this.$app) return this.logError()
 
-    // TODO: let implementer configure threshold
     new TimeGridEventResizer(
       this.$app,
       calendarEvent,
@@ -27,10 +27,6 @@ class ResizePluginImpl implements ResizePlugin {
       dayBoundariesDateTime
     )
   }
-
-  // createDateGridEventResizer() {}
-  //
-  // createMonthGridEventResizer() {}
 
   private logError() {
     console.error('The calendar is not yet initialized. Cannot resize events.')
