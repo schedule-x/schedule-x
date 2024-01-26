@@ -11,6 +11,7 @@ import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop
 import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
+import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number
@@ -68,10 +69,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private timePointsPerPixel(): number {
-    return (
-      this.$app.config.timePointsPerDay /
-      this.$app.config.weekOptions.gridHeight
-    )
+    return getTimePointsPerPixel(this.$app)
   }
 
   private handleVerticalMouseOrTouchMove(currentIntervalDiff: number) {

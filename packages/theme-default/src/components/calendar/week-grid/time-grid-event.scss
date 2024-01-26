@@ -5,6 +5,7 @@
   border-radius: var(--sx-rounding-extra-small);
   font-size: var(--sx-font-extra-small);
   overflow: hidden;
+  -webkit-user-select: none;
   user-select: none;
 
   &.is-event-copy {
@@ -13,6 +14,19 @@
     z-index: 1;
     transition: transform 0.15s ease-in-out;
   }
+}
+
+.sx__time-grid-event-inner {
+  position: relative;
+  height: 100%;
+}
+
+.sx__time-grid-event-resize-handle {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  cursor: ns-resize;
+  height: clamp(10px, 20px, 50%);
 }
 
 .sx__time-grid-event-title {
