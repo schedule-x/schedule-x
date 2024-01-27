@@ -37,12 +37,12 @@ export class TimeGridEventResizer {
     if (timeDidNotChange) return
     this.lastIntervalDiff = currentIntervalDiff
 
-    this.setTimeForEventCopy(
+    this.setNewTimeForEventEnd(
       this.CHANGE_THRESHOLD_IN_TIME_POINTS * currentIntervalDiff
     )
   }
 
-  private setTimeForEventCopy(pointsToAdd: number) {
+  private setNewTimeForEventEnd(pointsToAdd: number) {
     const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
     if (
       newEnd > this.dayBoundariesDateTime.end ||

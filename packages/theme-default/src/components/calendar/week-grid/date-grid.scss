@@ -73,3 +73,12 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
 .sx__date-grid-cell {
   height: clamp(20px, 1.25rem, 24px);
 }
+
+.sx__date-grid-event-resize-handle {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: clamp(10px, 15px, 50%);
+  cursor: ew-resize;
+  z-index: 1;
+}

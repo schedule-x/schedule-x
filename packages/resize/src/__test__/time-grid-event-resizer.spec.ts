@@ -142,5 +142,7 @@ describe('Resizing events in the time grid', () => {
         end: '2024-01-05 23:45',
       })
     })
+
+    it.todo('should call onEventUpdate once on mouseup')
   })
 })

@@ -7,4 +7,9 @@ export interface ResizePlugin extends PluginBase {
     mouseDownEvent: MouseEvent,
     dayBoundariesDateTime: { start: string; end: string }
   ): void
+
+  createDateGridEventResizer(
+    calendarEvent: CalendarEventInternal,
+    mouseDownEvent: MouseEvent
+  ): void
 }
