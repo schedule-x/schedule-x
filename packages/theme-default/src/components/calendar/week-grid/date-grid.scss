@@ -80,4 +80,5 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   height: 100%;
   width: clamp(10px, 15px, 50%);
   cursor: ew-resize;
+  z-index: 1;
 }

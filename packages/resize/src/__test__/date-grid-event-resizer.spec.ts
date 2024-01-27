@@ -14,6 +14,7 @@ describe('Resizing events in the date grid', () => {
   let $app: CalendarAppSingleton
   let calendarEvent: CalendarEventInternal
   let twoDayEvent: CalendarEventInternal
+  let eventStartingInPreviousWeek: CalendarEventInternal
 
   beforeEach(() => {
     $app = __createAppWithViews__()
@@ -28,6 +29,12 @@ describe('Resizing events in the date grid', () => {
       1,
       '2024-01-26',
       '2024-01-27'
+    ).build()
+    eventStartingInPreviousWeek = new CalendarEventBuilder(
+      $app.config,
+      1,
+      '2024-01-21',
+      '2024-01-23'
     ).build()
     $app.elements.calendarWrapper = document.createElement('div')
     $app.elements.calendarWrapper.querySelector = (selector: string) => {
@@ -92,6 +99,27 @@ describe('Resizing events in the date grid', () => {
 
       expect(twoDayEvent.start).toBe('2024-01-26')
       expect(twoDayEvent.end).toBe('2024-01-26')
+    })
+
+    it('should not be able to resize beyond the start of the week, if the event starts in the previous week', () => {
+      // should first be able to resize one day to the left
+      new DateGridEventResizer($app, eventStartingInPreviousWeek, 1000)
+      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+        new MouseEvent('mousemove', {
+          clientX: 900,
+        })
+      )
+      expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
+      expect(eventStartingInPreviousWeek.end).toBe('2024-01-22')
+
+      // should not be able to resize beyond the start of the week
+      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+        new MouseEvent('mousemove', {
+          clientX: 800,
+        })
+      )
+      expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
+      expect(eventStartingInPreviousWeek.end).toBe('2024-01-22')
     })
   })
 })
