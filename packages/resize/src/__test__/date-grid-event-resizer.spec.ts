@@ -26,13 +26,13 @@ describe('Resizing events in the date grid', () => {
     ).build()
     twoDayEvent = new CalendarEventBuilder(
       $app.config,
-      1,
+      2,
       '2024-01-26',
       '2024-01-27'
     ).build()
     eventStartingInPreviousWeek = new CalendarEventBuilder(
       $app.config,
-      1,
+      3,
       '2024-01-21',
       '2024-01-23'
     ).build()
@@ -48,6 +48,8 @@ describe('Resizing events in the date grid', () => {
 
   describe('Dragging the event to the right', () => {
     it('should resize the event to be one day longer', () => {
+      expect(calendarEvent.start).toBe('2024-01-26')
+      expect(calendarEvent.end).toBe('2024-01-26')
       new DateGridEventResizer($app, calendarEvent, 1000)
       ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
         new MouseEvent('mousemove', {
@@ -60,6 +62,8 @@ describe('Resizing events in the date grid', () => {
     })
 
     it('should not be able to resize beyond the end of the week', () => {
+      expect(calendarEvent.start).toBe('2024-01-26')
+      expect(calendarEvent.end).toBe('2024-01-26')
       new DateGridEventResizer($app, calendarEvent, 1000)
 
       // iteratively move 100px to the right 8 times
@@ -74,22 +78,12 @@ describe('Resizing events in the date grid', () => {
       expect(calendarEvent.start).toBe('2024-01-26')
       expect(calendarEvent.end).toBe('2024-01-28')
     })
-
-    it('should not be able to resize beyond the start of the event', () => {
-      new DateGridEventResizer($app, calendarEvent, 1000)
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
-        new MouseEvent('mousemove', {
-          clientX: 900,
-        })
-      )
-
-      expect(calendarEvent.start).toBe('2024-01-26')
-      expect(calendarEvent.end).toBe('2024-01-26')
-    })
   })
 
   describe('Dragging the event to the left', () => {
     it('should be able to resize a two-day event into being a one-day event', () => {
+      expect(twoDayEvent.start).toBe('2024-01-26')
+      expect(twoDayEvent.end).toBe('2024-01-27')
       new DateGridEventResizer($app, twoDayEvent, 1000)
       ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
         new MouseEvent('mousemove', {
@@ -101,7 +95,23 @@ describe('Resizing events in the date grid', () => {
       expect(twoDayEvent.end).toBe('2024-01-26')
     })
 
+    it('should not be able to resize beyond the start of the event', () => {
+      expect(twoDayEvent.start).toBe('2024-01-26')
+      expect(twoDayEvent.end).toBe('2024-01-27')
+      new DateGridEventResizer($app, calendarEvent, 1000)
+      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+        new MouseEvent('mousemove', {
+          clientX: 900,
+        })
+      )
+
+      expect(calendarEvent.start).toBe('2024-01-26')
+      expect(calendarEvent.end).toBe('2024-01-26')
+    })
+
     it('should not be able to resize beyond the start of the week, if the event starts in the previous week', () => {
+      expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
+      expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
       // should first be able to resize one day to the left
       new DateGridEventResizer($app, eventStartingInPreviousWeek, 1000)
       ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
