@@ -47,12 +47,13 @@ export class DateGridEventResizer {
       return
 
     this.calendarEvent.end = newEnd
-    this.runSideEffects()
+    this.updateEventsList()
   }
 
-  private runSideEffects() {
-    const $app = this.$app as CalendarAppSingleton
-    $app.calendarEvents.list.value = [...this.$app.calendarEvents.list.value]
+  private updateEventsList() {
+    this.$app.calendarEvents.list.value = [
+      ...this.$app.calendarEvents.list.value,
+    ]
   }
 
   private handleMouseUp = () => {
