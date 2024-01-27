@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -9,6 +10,7 @@ import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless
 import { DateGridEventResizer } from '../date-grid-event-resizer'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { vi } from 'vitest'
 
 describe('Resizing events in the date grid', () => {
   let $app: CalendarAppSingleton
@@ -130,6 +132,36 @@ describe('Resizing events in the date grid', () => {
       )
       expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-22')
+    })
+
+    it('should call the onEventUpdate callback when the resizing is finished', () => {
+      const mockCallback = vi.fn()
+      $app.config.callbacks.onEventUpdate = mockCallback
+      expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
+      expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
+      new DateGridEventResizer($app, eventStartingInPreviousWeek, 1000)
+
+      // Dispatch 2 mousemove events to prove that the callback is still only called once on mouseup
+      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+        new MouseEvent('mousemove', {
+          clientX: 1100,
+        })
+      )
+      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+        new MouseEvent('mousemove', {
+          clientX: 1200,
+        })
+      )
+      document.dispatchEvent(
+        new MouseEvent('mouseup', {
+          clientX: 1200,
+        })
+      )
+
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+      expect(mockCallback).toHaveBeenCalledWith(
+        eventStartingInPreviousWeek._getExternalEvent()
+      )
     })
   })
 })

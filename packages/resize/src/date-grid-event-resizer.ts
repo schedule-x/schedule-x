@@ -53,11 +53,6 @@ export class DateGridEventResizer {
   private runSideEffects() {
     const $app = this.$app as CalendarAppSingleton
     $app.calendarEvents.list.value = [...this.$app.calendarEvents.list.value]
-    if ($app.config.callbacks.onEventUpdate) {
-      $app.config.callbacks.onEventUpdate(
-        this.calendarEvent._getExternalEvent()
-      )
-    }
   }
 
   private handleMouseUp = () => {
@@ -65,5 +60,11 @@ export class DateGridEventResizer {
       'mousemove',
       this.handleMouseMove
     )
+
+    if (this.$app.config.callbacks.onEventUpdate) {
+      this.$app.config.callbacks.onEventUpdate(
+        this.calendarEvent._getExternalEvent()
+      )
+    }
   }
 }
