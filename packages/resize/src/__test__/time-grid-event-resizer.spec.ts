@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -62,6 +63,7 @@ describe('Resizing events in the time grid', () => {
       calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', { clientX: 0, clientY: initialY + 50 })
       )
+      document.dispatchEvent(new MouseEvent('mouseup'))
 
       expect(calendarEvent.start).toBe('2024-01-05 06:00')
       expect(calendarEvent.end).toBe('2024-01-05 07:30')
@@ -83,6 +85,7 @@ describe('Resizing events in the time grid', () => {
       calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', { clientX: 0, clientY: initialY - 50 })
       )
+      document.dispatchEvent(new MouseEvent('mouseup'))
 
       expect(calendarEvent.start).toBe('2024-01-05 06:00')
       expect(calendarEvent.end).toBe('2024-01-05 06:30')
@@ -108,6 +111,7 @@ describe('Resizing events in the time grid', () => {
           new MouseEvent('mousemove', { clientX: 0, clientY: currentY })
         )
       }
+      document.dispatchEvent(new MouseEvent('mouseup'))
 
       expect(calendarEvent.start).toBe('2024-01-05 06:00')
       expect(calendarEvent.end).toBe('2024-01-05 06:15')
@@ -134,6 +138,9 @@ describe('Resizing events in the time grid', () => {
         )
       }
 
+      // mouseup
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
       expect(calendarEventNearEndOfDay.start).toBe('2024-01-05 23:00')
       expect(calendarEventNearEndOfDay.end).toBe('2024-01-05 23:45')
       expect(updateEventSpy).toHaveBeenCalledWith({
@@ -143,6 +150,31 @@ describe('Resizing events in the time grid', () => {
       })
     })
 
-    it.todo('should call onEventUpdate once on mouseup')
+    it('should call onEventUpdate once on mouseup', () => {
+      new TimeGridEventResizer($app, calendarEvent, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      // first do 3 mousemoves
+      let currentY = initialY
+      for (let i = 0; i < 3; i++) {
+        currentY += 25
+        calendarWrapper.dispatchEvent(
+          new MouseEvent('mousemove', { clientX: 0, clientY: currentY })
+        )
+      }
+
+      // then do a mouseup
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      expect(updateEventSpy).toHaveBeenCalledTimes(1)
+      expect(updateEventSpy).toHaveBeenCalledWith({
+        id: 1,
+        start: '2024-01-05 06:00',
+        end: '2024-01-05 07:45',
+      })
+    })
   })
 })
