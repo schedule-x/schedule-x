@@ -51,17 +51,13 @@ export class TimeGridEventResizer {
       return
 
     this.calendarEvent.end = newEnd
-    this.runSideEffects()
+    this.updateEventsList()
   }
 
-  private runSideEffects() {
-    const $app = this.$app as CalendarAppSingleton
-    $app.calendarEvents.list.value = [...this.$app.calendarEvents.list.value]
-    if ($app.config.callbacks.onEventUpdate) {
-      $app.config.callbacks.onEventUpdate(
-        this.calendarEvent._getExternalEvent()
-      )
-    }
+  private updateEventsList() {
+    this.$app.calendarEvents.list.value = [
+      ...this.$app.calendarEvents.list.value,
+    ]
   }
 
   private handleMouseUp = () => {
@@ -69,5 +65,11 @@ export class TimeGridEventResizer {
       'mousemove',
       this.handleMouseMove
     )
+
+    if (this.$app.config.callbacks.onEventUpdate) {
+      this.$app.config.callbacks.onEventUpdate(
+        this.calendarEvent._getExternalEvent()
+      )
+    }
   }
 }

@@ -19,7 +19,9 @@ describe('Resizing events in the date grid', () => {
   let eventStartingInPreviousWeek: CalendarEventInternal
 
   beforeEach(() => {
-    $app = __createAppWithViews__()
+    $app = __createAppWithViews__({
+      selectedDate: '2024-01-26',
+    })
     calendarEvent = new CalendarEventBuilder(
       $app.config,
       1,
