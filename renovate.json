@@ -6,6 +6,10 @@
       "matchDepTypes": ["devDependencies"],
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "devDependencies (non-major)"
+    },
+    {
+      "groupName": "Schedule-X updates",
+      "packagePatterns": ["^@schedule-x.*"]
     }
   ],
   "schedule": ["before 7am every weekday"],
