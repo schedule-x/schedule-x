@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/eslint-config",
   "main": "src/index.js",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "description": "Schedule-X eslint config",
   "publishConfig": {
     "access": "public"

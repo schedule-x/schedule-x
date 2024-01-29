@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/schedule-x/schedule-x/compare/v1.12.0...v1.12.1) (2024-01-29)
+
+### Bug Fixes
+
+- prevent redundant calls of onEventUpdate on resizing ([#189](https://github.com/schedule-x/schedule-x/issues/189)) ([6b7bf65](https://github.com/schedule-x/schedule-x/commit/6b7bf6544628793ef399862713a1c91c16bd7b2e))
+
 # [1.12.0](https://github.com/schedule-x/schedule-x/compare/v1.11.0...v1.12.0) (2024-01-27)
 
 ### Features
