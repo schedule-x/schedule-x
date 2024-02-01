@@ -29,3 +29,16 @@ export const addDays = (to: string, nDays: number): string => {
 
   return toDateString(jsDate)
 }
+
+export const addMinutes = (to: string, nMinutes: number): string => {
+  const { year, month, date, hours, minutes } = toIntegers(to)
+  const isDateTimeString = hours !== undefined && minutes !== undefined
+  const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)
+  jsDate.setMinutes(jsDate.getMinutes() + nMinutes)
+
+  if (isDateTimeString) {
+    return toDateTimeString(jsDate)
+  }
+
+  return toDateString(jsDate)
+}
