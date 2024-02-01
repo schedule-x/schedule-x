@@ -60,7 +60,7 @@
     "@types/sinon": "^17.0.2",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
-    "@vitest/coverage-istanbul": "^0.34.0",
+    "@vitest/coverage-istanbul": "^1.0.0",
     "cypress": "^12.17.3",
     "cypress-visual-regression": "^3.0.0",
     "eslint": "^8.44.0",
@@ -81,7 +81,7 @@
     "tsx": "^4.7.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.0",
-    "vitest": "^0.34.0"
+    "vitest": "^1.0.0"
   },
   "commitlint": {
     "extends": [
