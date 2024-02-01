@@ -80,7 +80,7 @@
     "ts-sinon": "^2.0.2",
     "tsx": "^4.7.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.0",
+    "vite": "^5.0.0",
     "vitest": "^1.0.0"
   },
   "commitlint": {
