@@ -52,8 +52,8 @@
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-image": "^3.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
-    "@schedule-x/eslint-config": "^0.2.0",
-    "@schedule-x/prettier-config": "^0.2.0",
+    "@schedule-x/eslint-config": "^1.12.2",
+    "@schedule-x/prettier-config": "^1.12.2",
     "@testing-library/preact": "^3.2.3",
     "@types/jsdom": "^21.1.1",
     "@types/node": "^20.8.3",
@@ -79,8 +79,8 @@
     "stylelint-config-standard-scss": "^10.0.0",
     "ts-sinon": "^2.0.2",
     "tsx": "^4.7.0",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
     "vitest": "^1.0.0"
   },
   "commitlint": {
