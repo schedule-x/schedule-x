@@ -1,5 +1,5 @@
 import { defineConfig } from 'cypress'
-const { configureVisualRegression } = require('cypress-visual-regression')
+import { configureVisualRegression } from 'cypress-visual-regression'
 import { getPlatformForCypressSnapshots } from './cypress/utils/platform'
 
 const platformForCypressSnapshots = getPlatformForCypressSnapshots()
