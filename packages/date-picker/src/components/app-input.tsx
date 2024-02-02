@@ -7,6 +7,7 @@ import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/r
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 
 export default function AppInput() {
+  const datePickerInputId = randomStringId()
   const datePickerLabelId = randomStringId()
   const $app = useContext(AppContext)
   const getLocalizedDate = (dateString: string) => {
@@ -47,8 +48,11 @@ export default function AppInput() {
   }
 
   useEffect(() => {
-    document.addEventListener('change', handleInputValue) // Preact onChange triggers on every input
-    return () => document.removeEventListener('change', handleInputValue)
+    const inputElement = document.getElementById(datePickerInputId)
+    if (inputElement === null) return
+
+    inputElement.addEventListener('change', handleInputValue) // Preact onChange triggers on every input
+    return () => inputElement.removeEventListener('change', handleInputValue)
   })
 
   const handleClick = (event: Event) => {
@@ -76,6 +80,7 @@ export default function AppInput() {
         </label>
 
         <input
+          id={datePickerInputId}
           aria-describedby={datePickerLabelId}
           value={$app.datePickerState.inputDisplayedValue.value}
           data-testid="date-picker-input"
