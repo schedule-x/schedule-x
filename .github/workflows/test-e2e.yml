@@ -25,7 +25,7 @@ jobs:
         with:
           browser: chrome
           start: npm run serve
-          env: type=actual # for screenshot testing
+          env: type=regression # for screenshot testing
           config: screenshotsFolder=cypress/snapshots/linux/actual
       - uses: actions/upload-artifact@v4
         if: failure()
