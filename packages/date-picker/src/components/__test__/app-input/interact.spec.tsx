@@ -54,4 +54,16 @@ describe('date picker input', () => {
 
     expect($app.datePickerState.selectedDate.value).toBe('2021-01-02')
   })
+
+  it('should not update input upon externally firing change event', () => {
+    const $app = createAppSingleton({ selectedDate: '2021-01-01' })
+    renderComponent($app)
+    const externalInput = document.createElement('input')
+    document.body.appendChild(externalInput)
+    expect($app.datePickerState.inputDisplayedValue.value).toBe('1/1/2021')
+
+    fireEvent.change(externalInput, { target: { value: 'hello world' } })
+
+    expect($app.datePickerState.inputDisplayedValue.value).toBe('1/1/2021')
+  })
 })
