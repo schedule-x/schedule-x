@@ -32,10 +32,6 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   return rrule
 }
 
-/**
- * parse e.g. '2024-01-01 01:00' to '20240101T010000'
- * or '2024-01-01' to '20240101'
- * */
 export const parseSXToRFC5545 = (datetime: string): string => {
   datetime = datetime.replace(/-/g, '')
   datetime = datetime.replace(/:/g, '')
@@ -45,11 +41,6 @@ export const parseSXToRFC5545 = (datetime: string): string => {
   return datetime
 }
 
-/**
- * Opposite of parseInternalDateToRFC5545
- * e.g. '20240101T010000' to '2024-01-01 01:00'
- * or '20240101' to '2024-01-01'
- * */
 export const parseRFC5545ToSX = (datetime: string): string => {
   datetime = datetime.replace('T', ' ')
   datetime = datetime.replace(/^(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')

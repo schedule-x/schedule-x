@@ -42,12 +42,11 @@ export class RecurrenceSet {
   updateDtstart(newDtstart: string) {
     newDtstart = parseRFC5545ToSX(newDtstart)
     const oldDtstart = this.dtstart
-    const rruleUpdater = new RRuleUpdater(this.rrule, this.dtstart, newDtstart)
-    const isDateTime = dateTimeStringRegex.test(this.dtstart)
+    const rruleUpdater = new RRuleUpdater(this.rrule, oldDtstart, newDtstart)
 
     this.rrule = rruleUpdater.getUpdatedRRuleOptions()
     this.dtstart = newDtstart
-    this.dtend = isDateTime
+    this.dtend = dateTimeStringRegex.test(oldDtstart)
       ? addMinutes(this.dtend!, getDurationInMinutes(oldDtstart, newDtstart))
       : addDays(this.dtend!, calculateDaysDifference(oldDtstart, newDtstart))
   }
