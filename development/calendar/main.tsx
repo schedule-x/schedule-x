@@ -126,10 +126,7 @@ const calendar = createCalendar({
     createResizePlugin(),
   ],
   events: [
-    ...seededEvents.map(event => {
-      delete event.title
-      return event
-    })
+    ...seededEvents
   ],
 })
 calendar.render(calendarElement)

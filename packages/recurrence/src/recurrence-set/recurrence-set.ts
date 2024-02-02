@@ -3,8 +3,7 @@ import { rruleJSToString, rruleStringToJS } from '../parsers/rrule/parse-rrule'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { getDurationInMinutes } from '../rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
-import { addMinutes } from '../utils/stateless/add-minutes'
-import { addDays } from '@schedule-x/shared/src'
+import { addDays, addMinutes } from '@schedule-x/shared/src'
 
 type RecurrenceSetOptions = {
   dtsart: string
