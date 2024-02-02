@@ -1,4 +1,3 @@
 /// <reference types="cypress" />
-import compareSnapshotCommand from 'cypress-visual-regression/dist/command'
-
-compareSnapshotCommand()
+import { addCompareSnapshotCommand } from 'cypress-visual-regression/dist/command'
+addCompareSnapshotCommand()
