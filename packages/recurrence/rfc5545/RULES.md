@@ -21,3 +21,11 @@ For cases where a "VEVENT" calendar component
 specifies a "DTSTART" property with a DATE-TIME value type but no
 "DTEND" property, the event ends on the same calendar date and
 time of day specified by the "DTSTART" property.
+
+## #2
+
+The UNTIL rule part defines a DATE or DATE-TIME value that bounds
+the recurrence rule in an inclusive manner. If the value
+specified by UNTIL is synchronized with the specified recurrence,
+this DATE or DATE-TIME becomes the last instance of the
+recurrence.

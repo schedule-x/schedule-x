@@ -1,7 +1,4 @@
-import {
-  RRuleOptions,
-  RRuleOptionsExternal,
-} from '../../rrule/types/rrule-options'
+import { RRuleOptionsExternal } from '../../rrule/types/rrule-options'
 import { RRuleFreq } from '../../rrule/enums/rrule-freq'
 
 export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
@@ -15,7 +12,7 @@ export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
 
     if (key === 'FREQ') rruleOptions.freq = value as RRuleFreq
     if (key === 'BYDAY') rruleOptions.byday = value.split(',')
-    if (key === 'UNTIL') rruleOptions.until = value
+    if (key === 'UNTIL') rruleOptions.until = parseRFC5545ToSX(value)
     if (key === 'COUNT') rruleOptions.count = Number(value)
     if (key === 'INTERVAL') rruleOptions.interval = Number(value)
   })
@@ -26,10 +23,37 @@ export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
 export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   let rrule = `FREQ=${rruleOptions.freq}`
 
-  if (rruleOptions.until) rrule += `;UNTIL=${rruleOptions.until}`
+  if (rruleOptions.until)
+    rrule += `;UNTIL=${parseSXToRFC5545(rruleOptions.until)}`
   if (rruleOptions.count) rrule += `;COUNT=${rruleOptions.count}`
   if (rruleOptions.interval) rrule += `;INTERVAL=${rruleOptions.interval}`
   if (rruleOptions.byday) rrule += `;BYDAY=${rruleOptions.byday.join(',')}`
 
   return rrule
+}
+
+/**
+ * parse e.g. '2024-01-01 01:00' to '20240101T010000'
+ * or '2024-01-01' to '20240101'
+ * */
+export const parseSXToRFC5545 = (datetime: string): string => {
+  datetime = datetime.replace(/-/g, '')
+  datetime = datetime.replace(/:/g, '')
+  datetime = datetime.replace(' ', 'T')
+  if (/T\d{4}$/.test(datetime)) datetime += '00' // add seconds if not present
+
+  return datetime
+}
+
+/**
+ * Opposite of parseInternalDateToRFC5545
+ * e.g. '20240101T010000' to '2024-01-01 01:00'
+ * or '20240101' to '2024-01-01'
+ * */
+export const parseRFC5545ToSX = (datetime: string): string => {
+  datetime = datetime.replace('T', ' ')
+  datetime = datetime.replace(/^(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')
+  datetime = datetime.replace(/(\d{2})(\d{2})(\d{2})$/, '$1:$2')
+
+  return datetime
 }

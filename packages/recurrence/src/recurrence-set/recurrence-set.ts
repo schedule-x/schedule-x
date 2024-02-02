@@ -1,9 +1,17 @@
 import { RRuleUpdater } from '../rrule/rrule-updater'
-import { rruleJSToString, rruleStringToJS } from '../parsers/rrule/parse-rrule'
+import {
+  parseSXToRFC5545,
+  parseRFC5545ToSX,
+  rruleJSToString,
+  rruleStringToJS,
+} from '../parsers/rrule/parse-rrule'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { getDurationInMinutes } from '../rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
 import { addDays, addMinutes } from '@schedule-x/shared/src'
+import { RRule } from '../rrule/rrule'
+import { Recurrence } from '../types/recurrence'
+import { RRuleOptionsExternal } from '../rrule/types/rrule-options'
 
 type RecurrenceSetOptions = {
   dtsart: string
@@ -13,25 +21,31 @@ type RecurrenceSetOptions = {
 
 export class RecurrenceSet {
   private dtstart: string
-  private dtend: string | undefined
-  private rrule: string
+  private dtend: string
+  private rrule: RRuleOptionsExternal
 
   constructor(options: RecurrenceSetOptions) {
-    this.dtstart = options.dtsart
-    this.dtend = options.dtend
-    this.rrule = options.rrule
+    this.dtstart = parseRFC5545ToSX(options.dtsart)
+    this.dtend = parseRFC5545ToSX(options.dtend || options.dtsart)
+    this.rrule = rruleStringToJS(options.rrule)
+  }
+
+  getRecurrences(): Recurrence[] {
+    const recurrences: Recurrence[] = []
+    recurrences.push(
+      ...new RRule(this.rrule, this.dtstart, this.dtend).getRecurrences()
+    )
+
+    return recurrences
   }
 
   updateDtstart(newDtstart: string) {
+    newDtstart = parseRFC5545ToSX(newDtstart)
     const oldDtstart = this.dtstart
-    const rruleUpdater = new RRuleUpdater(
-      rruleStringToJS(this.rrule),
-      this.dtstart,
-      newDtstart
-    )
+    const rruleUpdater = new RRuleUpdater(this.rrule, this.dtstart, newDtstart)
     const isDateTime = dateTimeStringRegex.test(this.dtstart)
 
-    this.rrule = rruleJSToString(rruleUpdater.getUpdatedRRuleOptions())
+    this.rrule = rruleUpdater.getUpdatedRRuleOptions()
     this.dtstart = newDtstart
     this.dtend = isDateTime
       ? addMinutes(this.dtend!, getDurationInMinutes(oldDtstart, newDtstart))
@@ -39,14 +53,14 @@ export class RecurrenceSet {
   }
 
   getRrule() {
-    return this.rrule
+    return rruleJSToString(this.rrule)
   }
 
   getDtstart() {
-    return this.dtstart
+    return parseSXToRFC5545(this.dtstart)
   }
 
   getDtend() {
-    return this.dtend
+    return parseSXToRFC5545(this.dtend)
   }
 }

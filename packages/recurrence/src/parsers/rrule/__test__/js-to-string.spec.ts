@@ -14,7 +14,7 @@ describe('Parsing an rrule from js to string', () => {
         until: '2021-01-15',
       })
 
-      expect(result).toEqual('FREQ=WEEKLY;UNTIL=2021-01-15')
+      expect(result).toEqual('FREQ=WEEKLY;UNTIL=20210115')
     })
   })
 
@@ -26,7 +26,7 @@ describe('Parsing an rrule from js to string', () => {
         byday: ['MO', 'WE'],
       })
 
-      expect(result).toEqual('FREQ=WEEKLY;UNTIL=2021-01-15;BYDAY=MO,WE')
+      expect(result).toEqual('FREQ=WEEKLY;UNTIL=20210115;BYDAY=MO,WE')
     })
   })
 

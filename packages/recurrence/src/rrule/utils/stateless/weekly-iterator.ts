@@ -13,8 +13,10 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
 
   return {
     next() {
+      /* RFC5545: #2 */
       const untilDateHasPassed =
         rruleOptions.until && currentDate > rruleOptions.until
+
       const countIsReached =
         rruleOptions.count && allDateTimes.length >= rruleOptions.count
       if (untilDateHasPassed || countIsReached) {
