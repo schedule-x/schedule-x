@@ -5,4 +5,5 @@ export type { CalendarAppSingleton }
 export {
   addDays,
   addMonths,
+  addMinutes,
 } from './utils/stateless/time/date-time-mutation/adding'
