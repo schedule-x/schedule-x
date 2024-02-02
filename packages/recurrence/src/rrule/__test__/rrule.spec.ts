@@ -10,7 +10,7 @@ import { RRuleFreq } from '../enums/rrule-freq'
 
 describe('RRule', () => {
   describe('getting weekly occurrences with byday option', () => {
-    it('should return all mondays for the month of January 2024', () => {
+    it('should return all Mondays for the month of January 2024', () => {
       const options: RRuleOptionsExternal = {
         freq: RRuleFreq.WEEKLY,
         byday: ['MO'],
@@ -28,7 +28,7 @@ describe('RRule', () => {
       ])
     })
 
-    it('should return every 2nd monday for the month of January 2024', () => {
+    it('should return every 2nd Monday for the month of January 2024', () => {
       const options: RRuleOptionsExternal = {
         freq: RRuleFreq.WEEKLY,
         byday: ['MO'],
@@ -45,7 +45,7 @@ describe('RRule', () => {
       ])
     })
 
-    it('should return a timed event for every 2nd monday and Wednesday for the month of January 2024', () => {
+    it('should return a timed event for every 2nd Monday and Wednesday for the month of January 2024', () => {
       const options: RRuleOptionsExternal = {
         freq: RRuleFreq.WEEKLY,
         byday: ['MO', 'WE'],
@@ -71,7 +71,7 @@ describe('RRule', () => {
   })
 
   describe('weekly occurrences without byday option', () => {
-    it('should return all Tuesday of February 2024', () => {
+    it('should return all Tuesdays of February 2024', () => {
       const options: RRuleOptionsExternal = {
         freq: RRuleFreq.WEEKLY,
         until: '2024-02-29',
