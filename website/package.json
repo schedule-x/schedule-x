@@ -30,7 +30,7 @@
     "@schedule-x/theme-default": "^1.10.0",
     "@uiw/codemirror-theme-github": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
-    "next": "^13.0.6",
+    "next": "^14.0.0",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
