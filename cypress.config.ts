@@ -12,6 +12,9 @@ export default defineConfig({
     ALWAYS_GENERATE_DIFF: true,
     screenshotsFolder: `./cypress/snapshots/${platformForCypressSnapshots}/actual`,
     trashAssetsBeforeRuns: true,
+    visualRegression: {
+      type: 'regression'
+    }
   },
   e2e: {
     baseUrl: 'http://localhost:5173',
