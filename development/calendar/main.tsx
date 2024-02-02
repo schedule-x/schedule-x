@@ -18,7 +18,6 @@ import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
-import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { createResizePlugin } from '../../packages/resize/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
@@ -124,11 +123,13 @@ const calendar = createCalendar({
     createDragAndDropPlugin(),
     createEventModalPlugin(),
     scrollControllerPlugin,
-    createEventRecurrencePlugin(),
     createResizePlugin(),
   ],
   events: [
-    ...seededEvents
+    ...seededEvents.map(event => {
+      delete event.title
+      return event
+    })
   ],
 })
 calendar.render(calendarElement)

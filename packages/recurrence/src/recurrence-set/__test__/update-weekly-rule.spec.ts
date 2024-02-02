@@ -2,7 +2,6 @@ import {
   describe,
   it,
   expect,
-  beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { RecurrenceSet } from '../recurrence-set'
 

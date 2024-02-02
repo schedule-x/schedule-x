@@ -4,7 +4,7 @@ import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time
 import { getDurationInMinutes } from '../rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
 import { addMinutes } from '../utils/stateless/add-minutes'
-import { addDays } from '@schedule-x/shared'
+import { addDays } from '@schedule-x/shared/src'
 
 type RecurrenceSetOptions = {
   dtsart: string
