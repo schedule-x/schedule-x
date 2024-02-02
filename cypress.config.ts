@@ -1,5 +1,5 @@
 import { defineConfig } from 'cypress'
-import getCompareSnapshotsPlugin from 'cypress-visual-regression/dist/plugin'
+const { configureVisualRegression } = require('cypress-visual-regression')
 import { getPlatformForCypressSnapshots } from './cypress/utils/platform'
 
 const platformForCypressSnapshots = getPlatformForCypressSnapshots()
@@ -16,7 +16,7 @@ export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:5173',
     setupNodeEvents(on, config) {
-      getCompareSnapshotsPlugin(on, config)
+      configureVisualRegression(on, config)
     },
   },
 })
