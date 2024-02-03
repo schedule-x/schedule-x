@@ -18,6 +18,7 @@ import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time
 import { getDurationInMinutes } from '../../recurrence/src/rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
 import { AugmentedEvent } from './types/augmented-event'
+import { DndUpdater } from './util/stateful/dnd-updater'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -33,43 +34,13 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     oldEventStart: string,
     newEventStart: string
   ): void {
-    const eventToUpdate = this.$app!.calendarEvents.list.value.find(
-      (event) => event.id === eventId && !event.isCopy
-    )
-    if (!eventToUpdate)
-      throw new Error('Event for updating through DND not found')
+    const { updatedEvent, recurrenceSet } = new DndUpdater(
+      this.$app as CalendarAppSingleton
+    ).update(eventId, oldEventStart, newEventStart)
 
-    this.$app!.calendarEvents.list.value =
-      this.$app!.calendarEvents.list.value.filter(
-        (event) => event.id !== eventId || !event.isCopy
-      )
-
-    const recurrenceSet = new RecurrenceSet({
-      dtstart: eventToUpdate.start,
-      dtend: eventToUpdate.end,
-      rrule: eventToUpdate._getForeignProperties().rrule as string,
-    })
-
-    const newDtStart = dateTimeStringRegex.test(newEventStart)
-      ? addMinutes(
-          eventToUpdate.start,
-          getDurationInMinutes(oldEventStart, newEventStart)
-        )
-      : addDays(
-          eventToUpdate.start,
-          calculateDaysDifference(oldEventStart, newEventStart)
-        )
-
-    recurrenceSet.updateDtstart(newDtStart)
-    eventToUpdate.start = parseRFC5545ToSX(recurrenceSet.getDtstart())
-    eventToUpdate.end = parseRFC5545ToSX(recurrenceSet.getDtend())
-    eventToUpdate._getForeignProperties().rrule = recurrenceSet.getRrule()
     this.$app!.calendarEvents.list.value = [
       ...this.$app!.calendarEvents.list.value,
-      ...this.createRecurrencesForEvent(
-        eventToUpdate,
-        recurrenceSet.getRrule()
-      ),
+      ...this.createRecurrencesForEvent(updatedEvent, recurrenceSet.getRrule()),
     ]
   }
 

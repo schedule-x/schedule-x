@@ -74,4 +74,20 @@ describe('Drag and drop recurring events', () => {
       )
     })
   })
+
+  describe('Trying to update a non-existing event', () => {
+    it('should throw an error', () => {
+      const $app = __createAppWithViews__()
+      const eventRecurrencePlugin = createEventRecurrencePlugin()
+      eventRecurrencePlugin.init!($app)
+
+      expect(() =>
+        eventRecurrencePlugin.updateRecurrenceDND(
+          '16567',
+          '2024-02-04 16:00',
+          '2024-02-05 18:00'
+        )
+      ).toThrowError('Tried to update a non-existing event')
+    })
+  })
 })
