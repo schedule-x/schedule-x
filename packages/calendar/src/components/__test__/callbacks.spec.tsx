@@ -10,7 +10,7 @@ import { vi } from 'vitest'
 import { __createAppWithViews__ } from '../../utils/stateless/testing/__create-app-with-views__'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { setNewDateAndPressEnter } from '@schedule-x/date-picker/src/components/__test__/app-input/utils'
-import { cleanup, fireEvent, screen, waitFor } from '@testing-library/preact'
+import { cleanup, fireEvent, waitFor } from '@testing-library/preact'
 import { openViewSelection } from '../../utils/stateless/testing/page-objects/view-selection'
 import { renderComponent } from './utils'
 import { createCalendarAppSingleton } from '../../factory'
@@ -191,7 +191,7 @@ describe('Calendar callbacks', () => {
         return {
           top: 0,
           height: 2400,
-        } as any
+        } as DOMRect
       }
     })
 

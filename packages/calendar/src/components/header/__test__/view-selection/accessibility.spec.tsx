@@ -28,7 +28,7 @@ describe('ViewSelection', () => {
 
   describe('Navigating it by keyboard', () => {
     it('should open the dropdown on enter or space', async () => {
-      const { $app } = renderComponent()
+      renderComponent()
       expect(isDropdownOpen()).toBe(false)
 
       const selectElement = getViewSelectionElement()
