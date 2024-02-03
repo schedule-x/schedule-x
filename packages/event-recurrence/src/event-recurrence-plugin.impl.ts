@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { EventRecurrencePlugin } from '@schedule-x/shared/src/interfaces/event-recurrence/event-recurrence-plugin.interface'
-import { CalendarAppSingleton } from '@schedule-x/shared'
-// import { EventId } from '@schedule-x/shared/src/types/event-id'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
+import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { RecurrenceSet } from '../../recurrence/src'
@@ -16,12 +17,11 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     this.createRecurrenceForEvents()
   }
 
-  // updateRecurrenceDND(
-  //   eventId: EventId,
-  //   newEventStart: string,
-  //   newEventEnd: string
-  // ): void {
-  // }
+  updateRecurrenceDND(
+    eventId: EventId,
+    newEventStart: string,
+    newEventEnd: string
+  ): void {}
 
   private createRecurrenceForEvents() {
     const recurrencesToCreate: CalendarEventInternal[] = []
