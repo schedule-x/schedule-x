@@ -21,7 +21,7 @@ describe('Creating recurrences for events', () => {
         events: [eventWithRRule],
       })
 
-      createEventRecurrencePlugin().init($app)
+      createEventRecurrencePlugin().init!($app)
 
       const events = $app.calendarEvents.list.value
       expect(events).toHaveLength(4)
