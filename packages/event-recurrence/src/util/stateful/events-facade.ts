@@ -47,10 +47,9 @@ export class EventsFacadeImpl implements EventsFacade {
     const copiedEvents = [...this.$app.calendarEvents.list.value]
     const updatedEvent = externalEventToInternal(event, this.$app.config)
     copiedEvents.splice(eventIndex, 1, updatedEvent)
-    const newEventsList = [...copiedEvents]
     const rrule = (updatedEvent as AugmentedEvent)._getForeignProperties().rrule
     if (rrule) {
-      newEventsList.push(
+      copiedEvents.push(
         ...createRecurrencesForEvent(
           this.$app,
           event as AugmentedEvent,
@@ -58,7 +57,7 @@ export class EventsFacadeImpl implements EventsFacade {
         )
       )
     }
-    this.$app.calendarEvents.list.value = newEventsList
+    this.$app.calendarEvents.list.value = copiedEvents
   }
 
   private removeCopiesForEvent(event: CalendarEventExternal) {
