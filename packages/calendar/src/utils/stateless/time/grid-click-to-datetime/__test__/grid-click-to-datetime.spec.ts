@@ -18,7 +18,7 @@ describe('Getting a date time from clicking the time grid', () => {
         return {
           top: 100, // Day starts 100px down from window top
           height: 2400,
-        } as any
+        } as DOMRect
       }
       dayGridElement = document.createElement('div')
       dayGridElement.classList.add('sx__time-grid-day')
@@ -35,7 +35,11 @@ describe('Getting a date time from clicking the time grid', () => {
       }
       const $app = __createAppWithViews__()
 
-      const result = getClickDateTime(e as any, $app, '2020-01-01 00:00')
+      const result = getClickDateTime(
+        e as unknown as MouseEvent,
+        $app,
+        '2020-01-01 00:00'
+      )
 
       expect(result).toBe('2020-01-01 01:00')
     })
@@ -44,10 +48,10 @@ describe('Getting a date time from clicking the time grid', () => {
       const e = {
         clientY: 1350,
         target: dayGridElement,
-      }
+      } as unknown as MouseEvent
       const $app = __createAppWithViews__()
 
-      const result = getClickDateTime(e as any, $app, '2020-01-01 00:00')
+      const result = getClickDateTime(e, $app, '2020-01-01 00:00')
 
       expect(result).toBe('2020-01-01 12:30')
     })
@@ -56,10 +60,10 @@ describe('Getting a date time from clicking the time grid', () => {
       const e = {
         clientY: 2499,
         target: dayGridElement,
-      }
+      } as unknown as MouseEvent
       const $app = __createAppWithViews__()
 
-      const result = getClickDateTime(e as any, $app, '2020-01-01 00:00')
+      const result = getClickDateTime(e, $app, '2020-01-01 00:00')
 
       expect(result).toBe('2020-01-01 23:59')
     })

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 type props = {
-  icon: any
+  icon: string
   title: string
   description: string
 }

@@ -3,7 +3,6 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { __createAppWithViews__ } from '../../../stateless/testing/__create-app-with-views__'
 import EventColors from '../event-colors'
 import CalendarConfigBuilder from '../../config/calendar-config.builder'
 

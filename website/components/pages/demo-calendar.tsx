@@ -1,4 +1,5 @@
 import {
+  CalendarApp,
   createCalendar,
   viewDay,
   viewMonthAgenda,
@@ -20,7 +21,7 @@ import { useTheme } from 'nextra-theme-docs'
 export default function CalendarDemoPage() {
   const { resolvedTheme } = useTheme()
 
-  const [cal, setCal] = useState<any>(null)
+  const [cal, setCal] = useState<CalendarApp|null>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -97,7 +98,7 @@ export default function CalendarDemoPage() {
       plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
     })
     calendar.render(calendarEl)
-    setCal(calendar as any)
+    setCal(calendar)
   }, [])
 
   useEffect(() => {

@@ -2,7 +2,6 @@ import {
   describe,
   it,
   expect,
-  beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { useIconColors } from '../use-icon-colors'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
