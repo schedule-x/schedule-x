@@ -24,8 +24,8 @@ describe('Drag and drop recurring events', () => {
 
       eventRecurrencePlugin.updateRecurrenceDND(
         eventWithRRule.id,
-        '2024-02-05 18:00',
-        '2024-02-05 19:00'
+        '2024-02-04 16:00',
+        '2024-02-05 18:00'
       )
 
       const updatedEvent = $app.calendarEvents.list.value.find(
@@ -35,8 +35,8 @@ describe('Drag and drop recurring events', () => {
 
       expect(updatedEvent.start).toEqual('2024-02-05 18:00')
       expect(updatedEvent.end).toEqual('2024-02-05 19:00')
-      expect(updatedEvent.rrule).toEqual(
-        'FREQ=WEEKLY;BYDAY=MO;UNTIL=20240302T015959'
+      expect(updatedEvent._getForeignProperties().rrule).toEqual(
+        'FREQ=WEEKLY;UNTIL=20240302T015900;BYDAY=MO'
       )
     })
   })
@@ -47,7 +47,7 @@ describe('Drag and drop recurring events', () => {
         id: '1',
         start: '2024-02-04 16:00',
         end: '2024-02-04 17:00',
-        rrule: 'FREQ=WEEKLY;BYDAY=SU;UNTIL=20240229T235959',
+        rrule: 'FREQ=WEEKLY;BYDAY=SU,MO;UNTIL=20240229T235959',
       }
       const $app = __createAppWithViews__({
         events: [eventWithRRule],
@@ -70,7 +70,7 @@ describe('Drag and drop recurring events', () => {
       expect(updatedEvent.start).toEqual('2024-02-01 16:00')
       expect(updatedEvent.end).toEqual('2024-02-01 17:00')
       expect(updatedEvent._getForeignProperties().rrule).toEqual(
-        'FREQ=WEEKLY;UNTIL=20240226T235900;BYDAY=TH'
+        'FREQ=WEEKLY;UNTIL=20240226T235900;BYDAY=TH,FR'
       )
     })
   })
