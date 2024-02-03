@@ -31,7 +31,9 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       const rrule = event._getForeignProperties().rrule as string | undefined
 
       if (rrule) {
-        recurrencesToCreate.push(...this.createRecurrenceForEvent(event, rrule))
+        recurrencesToCreate.push(
+          ...this.createRecurrencesForEvent(event, rrule)
+        )
       }
     })
 
@@ -41,7 +43,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     ]
   }
 
-  private createRecurrenceForEvent(
+  private createRecurrencesForEvent(
     calendarEvent: CalendarEventInternal,
     rrule: string
   ) {
