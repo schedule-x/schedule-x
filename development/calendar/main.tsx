@@ -19,6 +19,7 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
+import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -39,10 +40,10 @@ const calendar = createCalendar({
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  dayBoundaries: {
-    start: '21:00',
-    end: '18:00',
-  },
+  // dayBoundaries: {
+  //   start: '21:00',
+  //   end: '18:00',
+  // },
   // isDark: true,
   callbacks: {
     onRangeUpdate(range) {
@@ -124,9 +125,24 @@ const calendar = createCalendar({
     createEventModalPlugin(),
     scrollControllerPlugin,
     createResizePlugin(),
+    createEventRecurrencePlugin(),
   ],
   events: [
-    ...seededEvents
+    // ...seededEvents,
+    {
+      id: 18547854,
+      title: 'Bi-Weekly Event Monday and Wednesday',
+      start: '2024-02-05 14:00',
+      end: '2024-02-05 15:00',
+      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;UNTIL=20240229T235959',
+    },
+    {
+      id: 18547855,
+      title: 'Weekly Event',
+      start: '2024-02-03',
+      end: '2024-02-03',
+      rrule: 'FREQ=WEEKLY;COUNT=4',
+    }
   ],
 })
 calendar.render(calendarElement)
