@@ -146,7 +146,9 @@ describe('Events facade for recurrence plugin', () => {
       eventsFacade.remove('1')
       expect($app.calendarEvents.list.value.length).toBe(0)
     })
+  })
 
+  describe('Updating events', () => {
     it('should update an event with rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventRecurrencePlugin()

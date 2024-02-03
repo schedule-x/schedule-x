@@ -15,7 +15,13 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
-    this.createRecurrenceForEvents()
+    this.createRecurrencesForEvents()
+  }
+
+  get eventsFacade(): EventsFacade {
+    if (!this.$app) throw new Error('Plugin not yet initialized')
+
+    return new EventsFacadeImpl(this.$app)
   }
 
   updateRecurrenceDND(
@@ -33,13 +39,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     ]
   }
 
-  get eventsFacade(): EventsFacade {
-    if (!this.$app) throw new Error('Plugin not initialized')
-
-    return new EventsFacadeImpl(this.$app)
-  }
-
-  private createRecurrenceForEvents() {
+  private createRecurrencesForEvents() {
     const recurrencesToCreate: CalendarEventInternal[] = []
     const $app = this.$app as CalendarAppSingleton
 
