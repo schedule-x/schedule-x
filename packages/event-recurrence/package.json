@@ -1,0 +1,31 @@
+{
+  "name": "@schedule-x/event-recurrence",
+  "version": "1.12.1",
+  "description": "Create recurring events for the Schedule-X calendar",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
+  "license": "MIT",
+  "module": "./dist/core.js",
+  "main": "./dist/core.cjs.js",
+  "umd": "./dist/core.umd.js",
+  "types": "./dist/core.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "format": "prettier . --write",
+    "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/event-recurrence"
+  },
+  "homepage": "https://schedule-x.dev",
+  "gitHead": "326825eb7cf39d865aff0b4fbedb014e606ae54e"
+}

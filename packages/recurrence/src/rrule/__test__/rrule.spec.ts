@@ -50,7 +50,7 @@ describe('RRule', () => {
         freq: RRuleFreq.WEEKLY,
         byday: ['MO', 'WE'],
         interval: 2,
-        until: '2024-01-31',
+        until: '2024-01-31 17:30',
       }
 
       const result = new RRule(
