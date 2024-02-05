@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/schedule-x/schedule-x/compare/v1.13.0...v1.14.0) (2024-02-05)
+
+### Features
+
+- add french lang ([#222](https://github.com/schedule-x/schedule-x/issues/222)) ([ee5581a](https://github.com/schedule-x/schedule-x/commit/ee5581a2b209471be5499147a7ec9443971bfc21))
+
 # [1.13.0](https://github.com/schedule-x/schedule-x/compare/v1.12.2...v1.13.0) (2024-02-05)
 
 **Note:** Version bump only for package @schedule-x/translations
