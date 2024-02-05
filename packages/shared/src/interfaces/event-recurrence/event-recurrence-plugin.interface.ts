@@ -9,5 +9,11 @@ export interface EventRecurrencePlugin extends PluginBase {
     newEventStart: string
   ): void
 
+  updateRecurrenceOnResize(
+    eventId: EventId,
+    oldEventEnd: string,
+    newEventEnd: string
+  ): void
+
   eventsFacade: EventsFacade
 }
