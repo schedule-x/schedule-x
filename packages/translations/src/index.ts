@@ -16,6 +16,8 @@ import { ruRU } from './locales/ru-RU'
 import { datePickerRuRU } from './locales/ru-RU/date-picker'
 import { koKR } from './locales/ko-KR'
 import { datePickerKoKR } from './locales/ko-KR/date-picker'
+import { frFR } from './locales/fr-FR'
+import { datePickerFrFR } from './locales/fr-FR/date-picker'
 
 import { translate } from './translator/translate'
 
@@ -29,6 +31,7 @@ const translations = {
   jaJP,
   ruRU,
   koKR,
+  frFR,
 }
 
 const datePickerTranslations = {
@@ -41,6 +44,7 @@ const datePickerTranslations = {
   jaJP: datePickerJaJP,
   ruRU: datePickerRuRU,
   koKR: datePickerKoKR,
+  frFR: datePickerFrFR,
 }
 
 export {
@@ -56,4 +60,5 @@ export {
   jaJP,
   ruRU,
   koKR,
+  frFR,
 }

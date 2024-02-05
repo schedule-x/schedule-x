@@ -34,6 +34,7 @@ const calendar = createCalendar({
   // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',
+  // locale: 'fr-FR',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
   defaultView: viewWeek.name,
   // selectedDate: '2024-02-01',
