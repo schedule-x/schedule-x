@@ -1,0 +1,108 @@
+import {Callout} from "nextra/components";
+
+# Event recurrence
+
+Enables you to create recurring events according to the iCalendar specification. Please note, however, that this
+plugin only offers a partial implementation of the specification. The reason for this is that not all features of
+the iCalendar spec make sense for an interactive event calendar with drag & drop and resizing features; all types of
+rules can be displayed, but many of them cannot be updated in a predictable way. Therefore:
+
+**If you don't need drag and drop or resizing and
+want an almost full implementation of the iCalendar spec, you should use the [rrule](https://www.npmjs.com/package/rrule)
+library instead of this plugin.**
+
+If you want to use the interactive features of this calendar and recurrence, use this plugin.
+
+## Installation
+
+```sh copy
+npm install @schedule-x/event-recurrence
+```
+
+## Usage
+
+```js
+import { createEventRecurrencePlugin } from "@schedule-x/event-recurrence";
+
+const calendar = createCalendar({
+  // ... other config options
+  plugins: [
+    createEventRecurrencePlugin()
+  ],
+  events: [
+    {
+      id: 123,
+      title: 'Bi-Weekly Event Monday and Wednesday',
+      start: '2024-02-05 14:00',
+      end: '2024-02-05 15:00',
+      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;UNTIL=20240229T235959'
+    },
+    {
+      id: 456,
+      title: 'Weekly Event',
+      start: '2024-02-03',
+      end: '2024-02-03',
+      rrule: 'FREQ=WEEKLY;COUNT=4'
+    }
+  ]
+});
+```
+
+## Supported rules
+
+<Callout type="info">
+  This plugin is a work-in-progress, and will be updated step-by-step with support for more rules.
+</Callout>
+
+| Rule     | Supported values                                                                                                                                                                     | Required |
+|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| FREQ     | `WEEKLY`                                                                                                                                                                             | Yes      |
+| COUNT    | Number                                                                                                                                                                               | No       |
+| INTERVAL | Number                                                                                                                                                                               | No       |
+| BYDAY    | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
+| UNTIL    | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No       |
+
+## Events facade
+
+When using this plugin, you should no longer use the normal events facade like `calendar.events.add(...)`. Instead, you
+can now interact with the events such as:
+
+```js
+
+const recurrencePlugin = createEventRecurrencePlugin();
+const calendar = createCalendar({
+  // ... other config options
+  plugins: [
+    recurrencePlugin
+  ],
+});
+
+// Add an event
+recurrencePlugin.eventsFacade.add({
+  id: 1,
+  title: 'New event',
+  start: '2024-02-05 14:00',
+  end: '2024-02-05 15:00',
+  rrule: 'FREQ=WEEKLY;COUNT=3'
+});
+
+// Update
+recurrencePlugin.eventsFacade.update({
+  id: 1,
+  title: 'New event',
+  start: '2024-02-05 14:00',
+  end: '2024-02-05 15:00',
+  rrule: 'FREQ=WEEKLY;COUNT=10'
+})
+
+// Get one event with id 123
+const event = recurrencePlugin.eventsFacade.get(123);
+
+// Get all
+const events = recurrencePlugin.eventsFacade.getAll();
+
+// Remove an event with id 123
+recurrencePlugin.eventsFacade.remove(123);
+```
+
+

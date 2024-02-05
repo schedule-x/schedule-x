@@ -1,0 +1,23 @@
+{
+  "index": {
+    "title": "Overview"
+  },
+  "drag-and-drop": {
+    "title": "Drag and Drop"
+  },
+  "resize": {
+    "title": "Resize"
+  },
+  "event-modal": {
+    "title": "Event Modal"
+  },
+  "recurrence": {
+    "title": "Event Recurrence \uD83C\uDD95"
+  },
+  "scroll-controller": {
+    "title": "Scroll Controller"
+  },
+  "custom-plugins": {
+    "title": "Custom Plugins"
+  }
+}

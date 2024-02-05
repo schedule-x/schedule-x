@@ -1,0 +1,20 @@
+# Drag and Drop
+
+Update event time and date using a classical drag and drop. Available in all views except the month agenda view.
+
+## Install
+
+```bash copy
+npm i @schedule-x/drag-and-drop
+```
+
+## Usage
+
+```js
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [createDragAndDropPlugin()],
+})
+```
