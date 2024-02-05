@@ -10,6 +10,7 @@ import { createDatePicker } from '@schedule-x/date-picker/src'
 
 const datePicker = createDatePicker({
   locale: 'de-DE',
+  // locale: 'fr-FR',
   style: {
     fullWidth: true,
   },
