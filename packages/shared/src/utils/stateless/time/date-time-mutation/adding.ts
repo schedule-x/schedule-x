@@ -42,3 +42,16 @@ export const addMinutes = (to: string, nMinutes: number): string => {
 
   return toDateString(jsDate)
 }
+
+export const addYears = (to: string, nYears: number): string => {
+  const { year, month, date, hours, minutes } = toIntegers(to)
+  const isDateTimeString = hours !== undefined && minutes !== undefined
+  const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)
+  jsDate.setFullYear(jsDate.getFullYear() + nYears)
+
+  if (isDateTimeString) {
+    return toDateTimeString(jsDate)
+  }
+
+  return toDateString(jsDate)
+}
