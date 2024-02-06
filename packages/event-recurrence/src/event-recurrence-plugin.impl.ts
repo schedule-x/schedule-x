@@ -8,11 +8,11 @@ import { DndUpdater } from './util/stateful/dnd-updater'
 import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.interface'
 import { EventsFacadeImpl } from './util/stateful/events-facade'
 import { createRecurrencesForEvent } from './util/stateless/create-recurrences-for-event'
+import { ResizeUpdater } from './util/stateful/resize-updater'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
   private $app: CalendarAppSingleton | null = null
-
   init($app: CalendarAppSingleton): void {
     this.$app = $app
     this.createRecurrencesForEvents()
@@ -36,6 +36,24 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     this.$app!.calendarEvents.list.value = [
       ...this.$app!.calendarEvents.list.value,
       ...this.createRecurrencesForEvent(updatedEvent, recurrenceSet.getRrule()),
+    ]
+  }
+
+  updateRecurrenceOnResize(
+    eventId: EventId,
+    oldEventEnd: string,
+    newEventEnd: string
+  ): void {
+    const updatedEvent = new ResizeUpdater(
+      this.$app as CalendarAppSingleton
+    ).update(eventId, oldEventEnd, newEventEnd)
+
+    this.$app!.calendarEvents.list.value = [
+      ...this.$app!.calendarEvents.list.value,
+      ...this.createRecurrencesForEvent(
+        updatedEvent,
+        updatedEvent._getForeignProperties().rrule as string
+      ),
     ]
   }
 

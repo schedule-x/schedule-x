@@ -5,6 +5,7 @@ import { getTimeGridDayWidth } from '@schedule-x/drag-and-drop/src/utils/statele
 import { addDays } from '@schedule-x/shared/src'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { updateEventsList } from './utils/stateless/update-events-list'
 
 export class DateGridEventResizer {
   private readonly dayWidth: number
@@ -35,6 +36,7 @@ export class DateGridEventResizer {
   }
 
   private setNewTimeForEventEnd(daysToAdd: number) {
+    const endBeforeUpdate = this.calendarEvent.end
     const newEnd = addDays(this.originalEventEnd, daysToAdd)
     if (
       newEnd > (this.$app.calendarState.range.value as DateRange).end ||
@@ -46,14 +48,7 @@ export class DateGridEventResizer {
     )
       return
 
-    this.calendarEvent.end = newEnd
-    this.updateEventsList()
-  }
-
-  private updateEventsList() {
-    this.$app.calendarEvents.list.value = [
-      ...this.$app.calendarEvents.list.value,
-    ]
+    updateEventsList(this.$app, this.calendarEvent, endBeforeUpdate, newEnd)
   }
 
   private handleMouseUp = () => {
