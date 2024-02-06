@@ -67,4 +67,16 @@ describe('Resize Recurrence', () => {
       })
     })
   })
+
+  describe('Trying to update a non-existing event', () => {
+    it('should throw an error', () => {
+      const $app = __createAppWithViews__()
+      const recurrencePlugin = createEventRecurrencePlugin()
+      recurrencePlugin.init!($app)
+
+      expect(() => {
+        recurrencePlugin.updateRecurrenceOnResize(1, '2024-02-06', '2024-02-07')
+      }).toThrowError('Tried to update a non-existing event')
+    })
+  })
 })
