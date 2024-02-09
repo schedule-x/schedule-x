@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 const config: DocsThemeConfig = {
   logo: Logo,
+  logoLink: false,
   project: {
     link: 'https://github.com/schedule-x/schedule-x',
   },
