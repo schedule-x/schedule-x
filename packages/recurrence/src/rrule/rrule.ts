@@ -48,8 +48,6 @@ export class RRule {
     const weeklyRecurrences = weeklyIteratorResult(this.dtstart, this.options)
 
     return weeklyRecurrences.map((date) => {
-      if (this.isDateTime) date = `${date} ${this.dtstartTime}`
-
       return {
         start: date,
         end: this.isDateTime

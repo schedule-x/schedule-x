@@ -14,7 +14,7 @@ import { Recurrence } from '../types/recurrence'
 import { RRuleOptionsExternal } from '../rrule/types/rrule-options'
 
 type RecurrenceSetOptions = {
-  dtsart: string
+  dtstart: string
   dtend?: string
   rrule: string
 }
@@ -25,8 +25,8 @@ export class RecurrenceSet {
   private rrule: RRuleOptionsExternal
 
   constructor(options: RecurrenceSetOptions) {
-    this.dtstart = parseRFC5545ToSX(options.dtsart)
-    this.dtend = parseRFC5545ToSX(options.dtend || options.dtsart)
+    this.dtstart = parseRFC5545ToSX(options.dtstart)
+    this.dtend = parseRFC5545ToSX(options.dtend || options.dtstart)
     this.rrule = rruleStringToJS(options.rrule)
   }
 

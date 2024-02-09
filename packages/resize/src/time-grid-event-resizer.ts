@@ -3,6 +3,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
+import { updateEventsList } from './utils/stateless/update-events-list'
 
 export class TimeGridEventResizer {
   private readonly originalEventEnd: string
@@ -43,6 +44,7 @@ export class TimeGridEventResizer {
   }
 
   private setNewTimeForEventEnd(pointsToAdd: number) {
+    const endBeforeUpdate = this.calendarEvent.end
     const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
     if (
       newEnd > this.dayBoundariesDateTime.end ||
@@ -50,14 +52,7 @@ export class TimeGridEventResizer {
     )
       return
 
-    this.calendarEvent.end = newEnd
-    this.updateEventsList()
-  }
-
-  private updateEventsList() {
-    this.$app.calendarEvents.list.value = [
-      ...this.$app.calendarEvents.list.value,
-    ]
+    updateEventsList(this.$app, this.calendarEvent, endBeforeUpdate, newEnd)
   }
 
   private handleMouseUp = () => {

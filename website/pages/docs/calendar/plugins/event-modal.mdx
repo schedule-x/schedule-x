@@ -1,0 +1,21 @@
+# Event modal
+
+If your events have more information than just their time and a short title, chances are it would be helpful to
+display information about the events in a modal.
+
+## Install
+
+```bash copy
+npm i @schedule-x/event-modal
+```
+
+## Usage
+
+```js
+import { createEventModalPlugin } from '@schedule-x/event-modal'
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [createEventModalPlugin()],
+})
+```

@@ -16,7 +16,7 @@ describe('Updating a recurrence set', () => {
 
       const rset = new RecurrenceSet({
         rrule: initialValues.rrule,
-        dtsart: initialValues.dtstart,
+        dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
       rset.updateDtstart('20240102')
@@ -35,7 +35,7 @@ describe('Updating a recurrence set', () => {
 
       const rset = new RecurrenceSet({
         rrule: initialValues.rrule,
-        dtsart: initialValues.dtstart,
+        dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
       rset.updateDtstart('20240107')
@@ -56,7 +56,7 @@ describe('Updating a recurrence set', () => {
 
       const rset = new RecurrenceSet({
         rrule: initialValues.rrule,
-        dtsart: initialValues.dtstart,
+        dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
       rset.updateDtstart('20240101T030000')
@@ -75,7 +75,7 @@ describe('Updating a recurrence set', () => {
 
       const rset = new RecurrenceSet({
         rrule: initialValues.rrule,
-        dtsart: initialValues.dtstart,
+        dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
       rset.updateDtstart('20240131T230000')
