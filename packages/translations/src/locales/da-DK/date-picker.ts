@@ -1,6 +1,6 @@
 import { DatePickerTranslations } from '../../types/date-picker.translations'
 
-export const datePickerSvSE: DatePickerTranslations = {
+export const datePickerDaDK: DatePickerTranslations = {
   Date: 'Dato',
   'MM/DD/YYYY': 'ÅÅÅÅ-MM-DD',
   'Next month': 'Næste måned',

@@ -1,8 +1,8 @@
-import { datePickerSvSE } from './date-picker'
+import { datePickerDaDK } from './date-picker'
 import { Language } from '../../types/language.translations'
-import { calendarSvSE } from './calendar'
+import { calendarDaDK } from './calendar'
 
-export const svSE: Language = {
-  ...datePickerSvSE,
-  ...calendarSvSE,
+export const daDK: Language = {
+  ...datePickerDaDK,
+  ...calendarDaDK,
 }
