@@ -22,6 +22,12 @@
   }
 }
 
+.header-logo {
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
 .logo-lg {
   @include mixins.smaller-screens {
     display: none;

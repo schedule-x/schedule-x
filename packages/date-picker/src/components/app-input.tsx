@@ -75,7 +75,11 @@ export default function AppInput() {
   return (
     <>
       <div className={wrapperClasses.join(' ')}>
-        <label id={datePickerLabelId} className="sx__date-input-label">
+        <label
+          for={datePickerInputId}
+          id={datePickerLabelId}
+          className="sx__date-input-label"
+        >
           {$app.translate('Date')}
         </label>
 

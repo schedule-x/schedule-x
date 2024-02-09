@@ -115,7 +115,6 @@ export default function DateGridEvent({
           ' ' +
           getTimeStamp(calendarEvent, $app.config.locale, $app.translate('to'))
         }
-        aria-hidden={true}
         data-ccid={customComponentId}
         onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
