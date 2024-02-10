@@ -2,16 +2,22 @@ import {Callout} from "nextra/components";
 
 # Event recurrence
 
-Enables you to create recurring events according to the iCalendar specification. Please note, however, that this
-plugin only offers a partial implementation of the specification. The reason for this is that not all features of
-the iCalendar spec make sense for an interactive event calendar with drag & drop and resizing features; all types of
-rules can be displayed, but many of them cannot be updated in a predictable way. Therefore:
+## ℹ️ Important note before getting started
 
-**If you don't need drag and drop or resizing and
-want an almost full implementation of the iCalendar spec, you should use the [rrule](https://www.npmjs.com/package/rrule)
-library instead of this plugin.**
+This plugin enables you to create recurring events according to the [iCalendar specification](https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.10). Please note, however,
+that
+this plugin only offers a partial implementation of the specification. There are 2 reasons for this:
 
-If you want to use the interactive features of this calendar and recurrence, use this plugin.
+1. Some rules just haven't been implemented yet. If there is a rule that you would like to see implemented, and you
+think this rule could be updated
+in a predictable way using drag & drop or resize, please open an issue on GitHub.
+2. Some iCalendar rules don't make sense in an interactive calendar. Consider for example `FREQ=MONTHLY;BYDAY=1SU,4TH;
+COUNT=20` where dragging one occurrence might offset the other occurrences in a non-symmetrical way, which might not
+have been intended when creating the rule.
+
+If you need an almost full implementation of the iCalendar spec, you can use the [rrule](https://www.npmjs.com/package/rrule)
+library instead of this plugin. However, this only works if you're merely using the calendar to display events.
+**If you want to use interactive features like drag & drop or resizing, you cannot use the external rrule library**.
 
 ## Installation
 
@@ -39,7 +45,7 @@ const calendar = createCalendar({
     },
     {
       id: 456,
-      title: 'Weekly Event at 4 occasions',
+      title: 'Weekly Event on 4 occasions',
       start: '2024-02-03',
       end: '2024-02-03',
       rrule: 'FREQ=WEEKLY;COUNT=4'
@@ -79,10 +85,6 @@ const calendar = createCalendar({
 ```
 
 ## Supported rules
-
-<Callout type="info">
-  This plugin is a work-in-progress, and will be updated step-by-step with support for more rules.
-</Callout>
 
 | Rule                                         | Supported values                                                                                                                                                                     | Required |
 |----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
