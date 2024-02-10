@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-#npm run format:changed
-#npm run lint:changed:fix
-#git add .
+npm run format:changed
+npm run lint:changed:fix
+git add .

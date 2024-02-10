@@ -36,14 +36,10 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         }
       })
 
-
-      if (isDatePastUntil(
-        currentDate,
-        rruleOptions.until
-      ) || isCountReached(
-        allDateTimes.length,
-        rruleOptions.count
-      )) {
+      if (
+        isDatePastUntil(currentDate, rruleOptions.until) ||
+        isCountReached(allDateTimes.length, rruleOptions.count)
+      ) {
         return { done: true, value: allDateTimes }
       }
 
