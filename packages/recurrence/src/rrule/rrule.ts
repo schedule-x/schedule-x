@@ -7,6 +7,9 @@ import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time
 import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
 import { addDays, addMinutes } from '@schedule-x/shared/src'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
+import { dailyIteratorResult } from './utils/stateless/daily-iterator'
+import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
+import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
 
 export class RRule {
   private options: RRuleOptions
@@ -35,26 +38,51 @@ export class RRule {
   }
 
   getRecurrences(): Recurrence[] {
-    let result: Recurrence[] = []
+    if (this.options.freq === RRuleFreq.DAILY) return this.getDatesForDaily()
 
-    if (this.options.freq === RRuleFreq.WEEKLY) {
-      result = this.getDatesForFreqWeekly()
-    }
+    if (this.options.freq === RRuleFreq.WEEKLY)
+      return this.getDatesForFreqWeekly()
 
-    return result
+    if (this.options.freq === RRuleFreq.MONTHLY)
+      return this.getDatesForFreqMonthly()
+
+    if (this.options.freq === RRuleFreq.YEARLY)
+      return this.getDatesForFreqYearly()
+
+    throw new Error('freq is required')
   }
 
   private getDatesForFreqWeekly(): Recurrence[] {
-    const weeklyRecurrences = weeklyIteratorResult(this.dtstart, this.options)
+    return weeklyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrenceBasedOnStartDates.bind(this)
+    )
+  }
 
-    return weeklyRecurrences.map((date) => {
-      return {
-        start: date,
-        end: this.isDateTime
-          ? addMinutes(date, this.durationInMinutes!)
-          : addDays(date, this.durationInDays!),
-      }
-    })
+  private getDatesForDaily(): Recurrence[] {
+    return dailyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrenceBasedOnStartDates.bind(this)
+    )
+  }
+
+  private getDatesForFreqMonthly(): Recurrence[] {
+    return monthlyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrenceBasedOnStartDates.bind(this)
+    )
+  }
+
+  private getDatesForFreqYearly(): Recurrence[] {
+    return yearlyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrenceBasedOnStartDates.bind(this)
+    )
+  }
+
+  private getRecurrenceBasedOnStartDates(date: string) {
+    return {
+      start: date,
+      end: this.isDateTime
+        ? addMinutes(date, this.durationInMinutes!)
+        : addDays(date, this.durationInDays!),
+    }
   }
 
   private get isDateTime() {

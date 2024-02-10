@@ -9,7 +9,7 @@ import { RRuleOptionsExternal } from '../types/rrule-options'
 import { RRuleFreq } from '../enums/rrule-freq'
 
 describe('RRule', () => {
-  describe('getting weekly occurrences with byday option', () => {
+  describe('getting weekly recurrences with byday option', () => {
     it('should return all Mondays for the month of January 2024', () => {
       const options: RRuleOptionsExternal = {
         freq: RRuleFreq.WEEKLY,

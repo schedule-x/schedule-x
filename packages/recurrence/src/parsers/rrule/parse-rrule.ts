@@ -12,6 +12,7 @@ export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
 
     if (key === 'FREQ') rruleOptions.freq = value as RRuleFreq
     if (key === 'BYDAY') rruleOptions.byday = value.split(',')
+    if (key === 'BYMONTHDAY') rruleOptions.bymonthday = Number(value)
     if (key === 'UNTIL') rruleOptions.until = parseRFC5545ToSX(value)
     if (key === 'COUNT') rruleOptions.count = Number(value)
     if (key === 'INTERVAL') rruleOptions.interval = Number(value)
@@ -28,6 +29,7 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   if (rruleOptions.count) rrule += `;COUNT=${rruleOptions.count}`
   if (rruleOptions.interval) rrule += `;INTERVAL=${rruleOptions.interval}`
   if (rruleOptions.byday) rrule += `;BYDAY=${rruleOptions.byday.join(',')}`
+  if (rruleOptions.bymonthday) rrule += `;BYMONTHDAY=${rruleOptions.bymonthday}`
 
   return rrule
 }

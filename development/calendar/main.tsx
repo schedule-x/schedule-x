@@ -143,6 +143,36 @@ const calendar = createCalendar({
       start: '2024-02-03',
       end: '2024-02-03',
       rrule: 'FREQ=WEEKLY;COUNT=4',
+    },
+    {
+      id: 789,
+      title: 'Daily event',
+      start: '2024-02-05 12:00',
+      end: '2024-02-05 13:55',
+      rrule: 'FREQ=DAILY;COUNT=5',
+      calendarId: 'personal',
+    },
+    {
+      id: 9834876578,
+      title: 'Daily event 2',
+      start: '2024-02-05 12:00',
+      end: '2024-02-05 13:55',
+      rrule: 'FREQ=DAILY;UNTIL=20240209T235900',
+      calendarId: 'work',
+    },
+    {
+      id: 7845684678465874,
+      title: 'Monthly event',
+      start: '2024-02-07 16:00',
+      end: '2024-02-07 17:55',
+      rrule: 'FREQ=MONTHLY;COUNT=5',
+    },
+    {
+      rrule: 'FREQ=YEARLY;COUNT=5',
+      title: 'Yearly event',
+      start: '2024-02-08 16:00',
+      end: '2024-02-08 17:55',
+      id: 874367853
     }
   ],
 })

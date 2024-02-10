@@ -4,6 +4,7 @@ import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format
 import { RRuleOptions } from '../../types/rrule-options'
 import { getJSDayFromByday } from './byday-jsday-map'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
+import { isCountReached, isDatePastUntil } from './iterator-utils'
 
 const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   const timeInDtstart = timeFromDateTime(dtstart)
@@ -12,11 +13,6 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   ]
   let currentDate = dtstart
   const allDateTimes: string[] = []
-
-  const isDatePastUntil = (date: string) =>
-    rruleOptions.until && date > rruleOptions.until
-  const isCountReached = (count: number) =>
-    rruleOptions.count && count >= rruleOptions.count
 
   return {
     next() {
@@ -33,18 +29,17 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
       candidatesDates.forEach((candidate) => {
         if (
           candidate >= dtstart &&
-          !isCountReached(allDateTimes.length) &&
-          !isDatePastUntil(candidate)
+          !isCountReached(allDateTimes.length, rruleOptions.count) &&
+          !isDatePastUntil(candidate, rruleOptions.until)
         ) {
           allDateTimes.push(candidate)
         }
       })
 
-      /* RFC5545: #2 */
-      const untilDateHasPassed = isDatePastUntil(currentDate)
-
-      const countIsReached = isCountReached(allDateTimes.length)
-      if (untilDateHasPassed || countIsReached) {
+      if (
+        isDatePastUntil(currentDate, rruleOptions.until) ||
+        isCountReached(allDateTimes.length, rruleOptions.count)
+      ) {
         return { done: true, value: allDateTimes }
       }
 

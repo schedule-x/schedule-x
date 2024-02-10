@@ -3,6 +3,7 @@ import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/sta
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { addDays, addMinutes } from '@schedule-x/shared/src'
 import { getDurationInMinutes } from './utils/stateless/duration-in-minutes'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 export class RRuleUpdater {
   private rruleOptionsNew: RRuleOptionsExternal
@@ -14,6 +15,7 @@ export class RRuleUpdater {
   ) {
     this.rruleOptionsNew = { ...rruleOptions }
     this.updateByDay()
+    this.updateByMonthDay()
     this.updateUntil()
   }
 
@@ -42,6 +44,12 @@ export class RRuleUpdater {
         this.rruleOptionsNew.byday![index] = days[newIndex]
       }
     })
+  }
+
+  updateByMonthDay() {
+    if (!this.rruleOptions.bymonthday) return
+
+    this.rruleOptionsNew.bymonthday = toJSDate(this.dtstartNew).getDate()
   }
 
   updateUntil() {
