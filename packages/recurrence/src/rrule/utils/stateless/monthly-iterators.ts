@@ -1,5 +1,5 @@
 import { RRuleOptions } from '../../types/rrule-options'
-import { addMonths } from '@schedule-x/shared'
+import { addMonths } from '@schedule-x/shared/src'
 import { isCountReached, isDatePastUntil } from './iterator-utils'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
