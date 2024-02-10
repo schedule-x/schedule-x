@@ -1,5 +1,4 @@
 import '@schedule-x/theme-default/dist/index.css'
-import HeadingWithIcon from '../partials/heading-with-icon/heading-with-icon'
 import styles from './newsletter-signup.module.scss'
 
 export default function NewsletterSignupPage() {
