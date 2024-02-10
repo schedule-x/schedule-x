@@ -15,7 +15,7 @@
     "build": "npm run clean:build && rollup -c && lerna run build",
     "build:e2e": "vite build --config packages/shared/src/config/e2e.vite.ts",
     "test:unit:all": "vitest run",
-    "test:unit:changed": "vitest run update-weekly-rule.spec.ts get-weekly-rule.spec.ts freq-weekly.spec.ts",
+    "test:unit:changed": "vitest run update-yearly-rule.spec.ts get-yearly-rule.spec.ts freq-yearly.spec.ts",
     "test:e2e": "./node_modules/.bin/cypress open --e2e --env type=actual",
     "test:e2e:ci": "./node_modules/.bin/cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",
     "test:e2e:record": "./node_modules/.bin/cypress run --env type=base --config screenshotsFolder=cypress/snapshots/mac/base",
