@@ -14,7 +14,7 @@ import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-t
 import { useIconColors } from './utils/stateful/use-icon-colors'
 
 export default function EventModal({ $app }: EventModalProps) {
-  const modalId = randomStringId()
+  const [modalId] = useState(randomStringId())
   const { value: calendarEvent } = (
     $app.config.plugins.eventModal as EventModalPlugin
   ).calendarEvent
