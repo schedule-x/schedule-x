@@ -5,7 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { RecurrenceSet } from '../recurrence-set'
 
-describe.only('Updating a recurrence set with a daily rule', () => {
+describe('Updating a recurrence set with a daily rule', () => {
   describe('Based on a date string', () => {
     it('should handle moving 3 days forward', () => {
       const initialValues = {
