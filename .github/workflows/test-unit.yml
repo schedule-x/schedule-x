@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: vitest run update-daily-rule.spec.ts get-daily-rule.spec.ts freq-daily.spec.ts
+        run: npm run test:unit:changed -- -- --silent
 
 #  test_tokyo:
 #    name: Tokyo time
