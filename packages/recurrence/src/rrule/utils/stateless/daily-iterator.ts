@@ -13,6 +13,7 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   const allDateTimes: string[] = []
   const bydayNumbers: number[] | undefined =
     rruleOptions.byday?.map(getJSDayFromByday) || undefined
+  console.log(bydayNumbers)
   const isDateTime = dateTimeStringRegex.test(dtstart)
 
   return {
@@ -23,6 +24,8 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
       ) {
         if (bydayNumbers) {
           const dayOfWeek = toJSDate(currentDate).getDay()
+          console.log(dayOfWeek)
+          console.log(bydayNumbers.includes(dayOfWeek))
           if (bydayNumbers.includes(dayOfWeek)) {
             allDateTimes.push(currentDate)
           }
