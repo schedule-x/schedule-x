@@ -26,15 +26,10 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         }
       }
 
-      const untilDateHasPassed = isDatePastUntil(
-        currentDate,
-        rruleOptions.until
-      )
-      const countIsReached = isCountReached(
-        allDateTimes.length,
-        rruleOptions.count
-      )
-      if (untilDateHasPassed || countIsReached) {
+      if (
+        isDatePastUntil(currentDate, rruleOptions.until) ||
+        isCountReached(allDateTimes.length, rruleOptions.count)
+      ) {
         return { done: true, value: allDateTimes }
       }
 
