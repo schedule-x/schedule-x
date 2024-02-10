@@ -16,7 +16,7 @@ import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
-// import { seededEvents } from '../data/seeded-events.ts'
+import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
@@ -122,14 +122,14 @@ const calendar = createCalendar({
     },
   },
   plugins: [
-    createDragAndDropPlugin(),
+    // createDragAndDropPlugin(),
     createEventModalPlugin(),
     scrollControllerPlugin,
     createResizePlugin(),
     createEventRecurrencePlugin(),
   ],
   events: [
-    // ...seededEvents,
+    ...seededEvents,
     {
       id: 18547854,
       title: 'Bi-Weekly Event Monday and Wednesday',
