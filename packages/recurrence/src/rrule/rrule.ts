@@ -54,29 +54,29 @@ export class RRule {
 
   private getDatesForFreqWeekly(): Recurrence[] {
     return weeklyIteratorResult(this.dtstart, this.options).map(
-      this.getRecurrencesBasedOnStartDates.bind(this)
+      this.getRecurrenceBasedOnStartDates.bind(this)
     )
   }
 
   private getDatesForDaily(): Recurrence[] {
     return dailyIteratorResult(this.dtstart, this.options).map(
-      this.getRecurrencesBasedOnStartDates.bind(this)
+      this.getRecurrenceBasedOnStartDates.bind(this)
     )
   }
 
   private getDatesForFreqMonthly(): Recurrence[] {
     return monthlyIteratorResult(this.dtstart, this.options).map(
-      this.getRecurrencesBasedOnStartDates.bind(this)
+      this.getRecurrenceBasedOnStartDates.bind(this)
     )
   }
 
   private getDatesForFreqYearly(): Recurrence[] {
     return yearlyIteratorResult(this.dtstart, this.options).map(
-      this.getRecurrencesBasedOnStartDates.bind(this)
+      this.getRecurrenceBasedOnStartDates.bind(this)
     )
   }
 
-  private getRecurrencesBasedOnStartDates(date: string) {
+  private getRecurrenceBasedOnStartDates(date: string) {
     return {
       start: date,
       end: this.isDateTime
