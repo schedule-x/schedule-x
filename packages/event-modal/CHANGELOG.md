@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/schedule-x/schedule-x/compare/v1.16.0...v1.17.0) (2024-02-10)
+
+### Bug Fixes
+
+- prevent event modal from closing on click inside ([#235](https://github.com/schedule-x/schedule-x/issues/235)) ([39c9c3e](https://github.com/schedule-x/schedule-x/commit/39c9c3e34c48f1480880cbec3848988f07bb3893))
+
 # [1.16.0](https://github.com/schedule-x/schedule-x/compare/v1.15.0...v1.16.0) (2024-02-09)
 
 **Note:** Version bump only for package @schedule-x/event-modal
