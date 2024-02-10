@@ -53,47 +53,36 @@ export class RRule {
   }
 
   private getDatesForFreqWeekly(): Recurrence[] {
-    return weeklyIteratorResult(this.dtstart, this.options).map((date) => {
-      return {
-        start: date,
-        end: this.isDateTime
-          ? addMinutes(date, this.durationInMinutes!)
-          : addDays(date, this.durationInDays!),
-      }
-    })
+    return weeklyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrencesBasedOnStartDates.bind(this)
+    )
   }
 
   private getDatesForDaily(): Recurrence[] {
-    return dailyIteratorResult(this.dtstart, this.options).map((date) => {
-      return {
-        start: date,
-        end: this.isDateTime
-          ? addMinutes(date, this.durationInMinutes!)
-          : addDays(date, this.durationInDays!),
-      }
-    })
+    return dailyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrencesBasedOnStartDates.bind(this)
+    )
   }
 
   private getDatesForFreqMonthly(): Recurrence[] {
-    return monthlyIteratorResult(this.dtstart, this.options).map((date) => {
-      return {
-        start: date,
-        end: this.isDateTime
-          ? addMinutes(date, this.durationInMinutes!)
-          : addDays(date, this.durationInDays!),
-      }
-    })
+    return monthlyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrencesBasedOnStartDates.bind(this)
+    )
   }
 
   private getDatesForFreqYearly(): Recurrence[] {
-    return yearlyIteratorResult(this.dtstart, this.options).map((date) => {
-      return {
-        start: date,
-        end: this.isDateTime
-          ? addMinutes(date, this.durationInMinutes!)
-          : addDays(date, this.durationInDays!),
-      }
-    })
+    return yearlyIteratorResult(this.dtstart, this.options).map(
+      this.getRecurrencesBasedOnStartDates.bind(this)
+    )
+  }
+
+  private getRecurrencesBasedOnStartDates(date: string) {
+    return {
+      start: date,
+      end: this.isDateTime
+        ? addMinutes(date, this.durationInMinutes!)
+        : addDays(date, this.durationInDays!),
+    }
   }
 
   private get isDateTime() {
