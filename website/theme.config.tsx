@@ -62,6 +62,15 @@ const config: DocsThemeConfig = {
         <meta property="og:locale" content="en_US"/>
       </>
     )
+  },
+
+  banner: {
+    key: 'newsletter-signup-1.0',
+    text: (
+      <a href="/newsletter" target="_blank">
+        Get the latest project news. Click here for the newsletter signup 📬
+      </a>
+    )
   }
 }
 
