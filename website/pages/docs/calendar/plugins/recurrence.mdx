@@ -39,10 +39,40 @@ const calendar = createCalendar({
     },
     {
       id: 456,
-      title: 'Weekly Event',
+      title: 'Weekly Event at 4 occasions',
       start: '2024-02-03',
       end: '2024-02-03',
       rrule: 'FREQ=WEEKLY;COUNT=4'
+    },
+    {
+      id: 789,
+      title: 'Daily event 5 times',
+      start: '2024-02-05 12:00',
+      end: '2024-02-05 13:55',
+      rrule: 'FREQ=DAILY;COUNT=5',
+      calendarId: 'personal',
+    },
+    {
+      id: 121314,
+      title: 'Daily event mo-fr 10 times',
+      start: '2024-02-05 12:00',
+      end: '2024-02-05 13:55',
+      rrule: 'FREQ=DAILY;COUNT=10;BYDAY=MO,TU,WE,TH,FR',
+      calendarId: 'work',
+    },
+    {
+      id: 141617,
+      title: 'Monthly event on the 7th 5 times',
+      start: '2024-02-07 16:00',
+      end: '2024-02-07 17:55',
+      rrule: 'FREQ=MONTHLY;COUNT=5',
+    },
+    {
+      rrule: 'FREQ=YEARLY;COUNT=5',
+      title: 'Event on the 8th of February for 5 years',
+      start: '2024-02-08 16:00',
+      end: '2024-02-08 17:55',
+      id: 181920
     }
   ]
 });
@@ -54,13 +84,14 @@ const calendar = createCalendar({
   This plugin is a work-in-progress, and will be updated step-by-step with support for more rules.
 </Callout>
 
-| Rule     | Supported values                                                                                                                                                                     | Required |
-|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| FREQ     | `WEEKLY`                                                                                                                                                                             | Yes      |
-| COUNT    | Number                                                                                                                                                                               | No       |
-| INTERVAL | Number                                                                                                                                                                               | No       |
-| BYDAY    | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
-| UNTIL    | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No       |
+| Rule                                         | Supported values                                                                                                                                                                     | Required |
+|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| FREQ                                         | `DAILY`, `WEEKLY`, `MONTHLY` or `YEARLY`                                                                                                                                             | Yes      |
+| COUNT                                        | Number                                                                                                                                                                               | No       |
+| INTERVAL                                     | Number                                                                                                                                                                               | No       |
+| BYDAY - compatible with `DAILY` and `WEEKLY` | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
+| BYMONTHDAY  - compatible with `MONTHLY`      | Positive integer 1-31                                                                                                                                                                | No       |
+| UNTIL                                        | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No       |
 
 ## Events facade
 
