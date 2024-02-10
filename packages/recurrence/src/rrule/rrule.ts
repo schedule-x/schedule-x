@@ -38,31 +38,22 @@ export class RRule {
   }
 
   getRecurrences(): Recurrence[] {
-    let result: Recurrence[] = []
+    if (this.options.freq === RRuleFreq.DAILY) return this.getDatesForDaily()
 
-    if (this.options.freq === RRuleFreq.DAILY) {
-      result = this.getDatesForDaily()
-    }
+    if (this.options.freq === RRuleFreq.WEEKLY)
+      return this.getDatesForFreqWeekly()
 
-    if (this.options.freq === RRuleFreq.WEEKLY) {
-      result = this.getDatesForFreqWeekly()
-    }
+    if (this.options.freq === RRuleFreq.MONTHLY)
+      return this.getDatesForFreqMonthly()
 
-    if (this.options.freq === RRuleFreq.MONTHLY) {
-      result = this.getDatesForFreqMonthly()
-    }
+    if (this.options.freq === RRuleFreq.YEARLY)
+      return this.getDatesForFreqYearly()
 
-    if (this.options.freq === RRuleFreq.YEARLY) {
-      result = this.getDatesForFreqYearly()
-    }
-
-    return result
+    throw new Error('freq is required')
   }
 
   private getDatesForFreqWeekly(): Recurrence[] {
-    const weeklyRecurrences = weeklyIteratorResult(this.dtstart, this.options)
-
-    return weeklyRecurrences.map((date) => {
+    return weeklyIteratorResult(this.dtstart, this.options).map((date) => {
       return {
         start: date,
         end: this.isDateTime
@@ -73,9 +64,7 @@ export class RRule {
   }
 
   private getDatesForDaily(): Recurrence[] {
-    const dailyRecurrences = dailyIteratorResult(this.dtstart, this.options)
-
-    return dailyRecurrences.map((date) => {
+    return dailyIteratorResult(this.dtstart, this.options).map((date) => {
       return {
         start: date,
         end: this.isDateTime
@@ -86,9 +75,7 @@ export class RRule {
   }
 
   private getDatesForFreqMonthly(): Recurrence[] {
-    const monthlyRecurrences = monthlyIteratorResult(this.dtstart, this.options)
-
-    return monthlyRecurrences.map((date) => {
+    return monthlyIteratorResult(this.dtstart, this.options).map((date) => {
       return {
         start: date,
         end: this.isDateTime
@@ -99,9 +86,7 @@ export class RRule {
   }
 
   private getDatesForFreqYearly(): Recurrence[] {
-    const yearlyRecurrences = yearlyIteratorResult(this.dtstart, this.options)
-
-    return yearlyRecurrences.map((date) => {
+    return yearlyIteratorResult(this.dtstart, this.options).map((date) => {
       return {
         start: date,
         end: this.isDateTime

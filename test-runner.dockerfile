@@ -6,4 +6,4 @@ COPY . .
 
 RUN npm install --quiet
 
-CMD ["npx", "vitest", "run", "freq-daily.spec.ts"]
+CMD ["npx", "vitest", "run", "--silent"]
