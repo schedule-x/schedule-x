@@ -122,7 +122,7 @@ const calendar = createCalendar({
     },
   },
   plugins: [
-    // createDragAndDropPlugin(),
+    createDragAndDropPlugin(),
     createEventModalPlugin(),
     scrollControllerPlugin,
     createResizePlugin(),
