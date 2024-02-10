@@ -10,27 +10,27 @@ on:
       - master
 
 jobs:
-#  test_london:
-#    name: London time
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout ✅
-#        uses: actions/checkout@v4
-#        with:
-#          # Fetching the full history is required to determine the changed packages
-#          fetch-depth: 0
-#      - name: Set Timezone 🌍🌎🌏
-#        uses: szenius/set-timezone@v1.2
-#        with:
-#          timezoneLinux: 'Europe/London'
-#      - name: Setup Node.js 🔧
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 'lts/*'
-#      - name: Install dependencies 🛠️
-#        run: npm i
-#      - name: Run Vitest 🧪
-#        run: npm run test:unit:changed -- -- --silent
+  test_london:
+    name: London time
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ✅
+        uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
+      - name: Set Timezone 🌍🌎🌏
+        uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: 'Europe/London'
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies 🛠️
+        run: npm i
+      - name: Run Vitest 🧪
+        run: npm run test:unit:changed -- -- --silent
 
   test_mountain_view:
     name: Mountain View time
@@ -52,26 +52,26 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npm run test:unit:changed
+        run: npm run test:unit:changed -- -- --silent
 
-#  test_tokyo:
-#    name: Tokyo time
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout ✅
-#        uses: actions/checkout@v4
-#        with:
-#          # Fetching the full history is required to determine the changed packages
-#          fetch-depth: 0
-#      - name: Set Timezone 🌍🌎🌏
-#        uses: szenius/set-timezone@v1.2
-#        with:
-#          timezoneLinux: 'Asia/Tokyo'
-#      - name: Setup Node.js 🔧
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 'lts/*'
-#      - name: Install dependencies 🛠️
-#        run: npm i
-#      - name: Run Vitest 🧪
-#        run: npm run test:unit:changed -- -- --silent
+  test_tokyo:
+    name: Tokyo time
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ✅
+        uses: actions/checkout@v4
+        with:
+          # Fetching the full history is required to determine the changed packages
+          fetch-depth: 0
+      - name: Set Timezone 🌍🌎🌏
+        uses: szenius/set-timezone@v1.2
+        with:
+          timezoneLinux: 'Asia/Tokyo'
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies 🛠️
+        run: npm i
+      - name: Run Vitest 🧪
+        run: npm run test:unit:changed -- -- --silent

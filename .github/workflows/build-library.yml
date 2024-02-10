@@ -1,0 +1,28 @@
+name: Build
+on:
+  pull_request:
+    paths:
+      - 'packages/**'
+      - 'rollup.config.js'
+      - 'tsconfig.json'
+      - 'package.json'
+      - 'package-lock.json'
+  push:
+    branches:
+      - main
+
+jobs:
+  build_library:
+    name: Library
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout ✅
+        uses: actions/checkout@v4
+      - name: Setup Node.js 🔧
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - name: Install dependencies 🛠️
+        run: npm i
+      - name: Build
+        run: npm run build

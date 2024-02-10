@@ -1,20 +1,14 @@
 import { RRuleOptions } from '../../types/rrule-options'
-import {
-  toDateString,
-  toDateTimeString,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { getJSDayFromByday } from './byday-jsday-map'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { isCountReached, isDatePastUntil } from './iterator-utils'
+import { addDays } from '@schedule-x/shared'
 
 const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   let currentDate = dtstart
   const allDateTimes: string[] = []
   const bydayNumbers: number[] | undefined =
     rruleOptions.byday?.map(getJSDayFromByday) || undefined
-  console.log(bydayNumbers)
-  const isDateTime = dateTimeStringRegex.test(dtstart)
 
   return {
     next() {
@@ -24,8 +18,6 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
       ) {
         if (bydayNumbers) {
           const dayOfWeek = toJSDate(currentDate).getDay()
-          console.log(dayOfWeek)
-          console.log(bydayNumbers.includes(dayOfWeek))
           if (bydayNumbers.includes(dayOfWeek)) {
             allDateTimes.push(currentDate)
           }
@@ -46,11 +38,7 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      const nextDateJS = new Date(currentDate)
-      nextDateJS.setDate(nextDateJS.getDate() + rruleOptions.interval)
-      currentDate = isDateTime
-        ? toDateTimeString(nextDateJS)
-        : toDateString(nextDateJS)
+      currentDate = addDays(currentDate, rruleOptions.interval)
 
       return { done: false, value: allDateTimes }
     },

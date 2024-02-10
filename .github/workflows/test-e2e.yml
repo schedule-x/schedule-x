@@ -1,0 +1,35 @@
+name: End-to-end tests
+on:
+  pull_request:
+    paths:
+      - 'packages/**'
+      - 'cypress/**'
+      - 'package.json'
+      - 'package-lock.json'
+  push:
+    branches:
+      - master
+
+jobs:
+  chrome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies ⬇️
+        run: npm install
+      - name: Build lib 🔨
+        run: npm run build
+      - name: Build test pages 🔨
+        run: npm run build:e2e
+      - uses: cypress-io/github-action@v4
+        with:
+          browser: chrome
+          start: npm run serve
+          env: type=actual # for screenshot testing
+          config: screenshotsFolder=cypress/snapshots/linux/actual
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: visual-regression-diff
+          path: cypress/snapshots
+          retention-days: 14
