@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/schedule-x/schedule-x/compare/v1.17.0...v1.17.1) (2024-02-17)
+
+### Bug Fixes
+
+- enable touch device users to scroll upon touching events ([#232](https://github.com/schedule-x/schedule-x/issues/232)) ([36e4818](https://github.com/schedule-x/schedule-x/commit/36e48187d509df664155c5aec1a9af13e8e10146))
+- typo in Danish translations ([#242](https://github.com/schedule-x/schedule-x/issues/242)) ([84430ee](https://github.com/schedule-x/schedule-x/commit/84430eee21ca1ebada604cfb212829f9125b3a68))
+
 # [1.17.0](https://github.com/schedule-x/schedule-x/compare/v1.16.0...v1.17.0) (2024-02-10)
 
 ### Bug Fixes
