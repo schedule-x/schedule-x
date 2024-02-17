@@ -22,11 +22,19 @@
 }
 
 .sx__time-grid-event-resize-handle {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  cursor: ns-resize;
-  height: clamp(10px, 20px, 50%);
+  display: none;
+}
+
+/** Only display the resize handle on non-touch devices */
+@media (hover: hover) {
+  .sx__time-grid-event-resize-handle {
+    display: block;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    cursor: ns-resize;
+    height: clamp(10px, 20px, 50%);
+  }
 }
 
 .sx__time-grid-event-title {
@@ -40,8 +48,11 @@
   white-space: nowrap;
 }
 
-.sx__event { 
-  touch-action: none; 
+
+[data-has-dnd='true'] {
+  .sx__time-grid-event {
+    touch-action: none;
+  }
 }
 
 .sx__event-icon {
