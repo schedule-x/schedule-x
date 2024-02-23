@@ -1,5 +1,5 @@
 import CalendarControlsPlugin from '@schedule-x/shared/src/interfaces/calendar-controls/calendar-controls-plugin.interface'
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {

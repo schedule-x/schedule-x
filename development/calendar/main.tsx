@@ -27,7 +27,7 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 const scrollControllerPlugin = createScrollControllerPlugin({
   initialScroll: '07:50'
 })
-let calendarControlsPlugin = createCalendarControlsPlugin()
+const calendarControlsPlugin = createCalendarControlsPlugin()
 const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 2500,
