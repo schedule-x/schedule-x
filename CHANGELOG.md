@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/schedule-x/schedule-x/compare/v1.17.1...v1.18.0) (2024-02-23)
+
+### Bug Fixes
+
+- **deps:** update dependency @uiw/codemirror-theme-github to v4.21.23 ([#249](https://github.com/schedule-x/schedule-x/issues/249)) ([076012d](https://github.com/schedule-x/schedule-x/commit/076012d55c8e27f5316c26718a8bbf71b1285194))
+
+### Features
+
+- add calendar controls plugin ([#253](https://github.com/schedule-x/schedule-x/issues/253)) ([db414d6](https://github.com/schedule-x/schedule-x/commit/db414d69b2fc95b6699b40699c0a546168a82f30))
+
 ## [1.17.1](https://github.com/schedule-x/schedule-x/compare/v1.17.0...v1.17.1) (2024-02-17)
 
 ### Bug Fixes
