@@ -4,4 +4,5 @@ export enum PluginName {
   ScrollController = 'scrollController',
   EventRecurrence = 'eventRecurrence',
   Resize = 'resize',
+  CalendarControls = 'calendarControls',
 }

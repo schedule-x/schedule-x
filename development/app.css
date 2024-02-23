@@ -39,3 +39,15 @@ body {
   background-color: var(--sx-color-background);
   color: #fff;
 }
+
+.input-wrapper {
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.input-wrapper button {
+  background-color: #1c1b1f;
+  color: #fff;
+}
