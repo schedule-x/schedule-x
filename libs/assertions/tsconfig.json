@@ -1,0 +1,12 @@
+{
+  "extends": "@schedule-x/shared/src/config/package.tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/types",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress", "node"]
+  },
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}

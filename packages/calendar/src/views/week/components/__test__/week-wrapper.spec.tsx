@@ -29,9 +29,7 @@ describe('Week view', () => {
       })
       renderComponent($app)
 
-      const renderedEvent = document.querySelector(
-        '.sx__time-grid-event'
-      ) as HTMLDivElement
+      const renderedEvent = document.querySelector('.sx__time-grid-event')
       expect(renderedEvent?.attributes.getNamedItem('style')?.value).toContain(
         'top: 50%'
       )

@@ -12,11 +12,10 @@ import CalendarApp from '../calendar.app'
 import { viewWeek } from '../views/week'
 import { spy } from 'sinon'
 import { getFirstEventElement } from './utils'
+import { assertIsDIV } from '../../../../libs/assertions/src'
 
 const getByCCID = (id: string) =>
-  document.querySelector(
-    `[data-ccid="custom-date-grid-event-${id}"]`
-  ) as HTMLDivElement
+  document.querySelector(`[data-ccid="custom-date-grid-event-${id}"]`)
 
 describe('CalendarApp', () => {
   afterEach(() => {
@@ -138,6 +137,8 @@ describe('CalendarApp', () => {
 
     it('should have a class for overflow right, signalling that the event extends beyond the week', () => {
       const eventEl = getByCCID('3')
+      assertIsDIV(eventEl)
+
       expect(
         eventEl.classList.contains('sx__date-grid-event--overflow-right')
       ).toBe(true)
@@ -148,6 +149,8 @@ describe('CalendarApp', () => {
 
     it('should have a class for overflow left, signalling that the event started before the current week', () => {
       const eventEl = getByCCID('2')
+      assertIsDIV(eventEl)
+
       expect(
         eventEl.classList.contains('sx__date-grid-event--overflow-left')
       ).toBe(true)
@@ -163,10 +166,15 @@ describe('CalendarApp', () => {
 
     it('should not subtract any event width for overflow', () => {
       const event1 = getByCCID('1')
+      assertIsDIV(event1)
       expect(event1.style.width).toBe('calc(100% - 2px)')
+
       const event2 = getByCCID('2')
+      assertIsDIV(event2)
       expect(event2.style.width).toBe('calc(300% - 2px)')
+
       const event3 = getByCCID('3')
+      assertIsDIV(event3)
       expect(event3.style.width).toBe('calc(500% - 2px)')
     })
   })

@@ -40,7 +40,7 @@ describe('Week view', () => {
 
       tab()
 
-      const focusedEvent = document.activeElement as HTMLDivElement
+      const focusedEvent = document.activeElement
       expect(focusedEvent?.textContent).toContain(eventTitle)
     })
 
@@ -49,9 +49,7 @@ describe('Week view', () => {
       const $app = getAppWithOneFullDayEvent(eventTitle)
       renderComponent($app)
 
-      const eventElement = document.querySelector(
-        '.sx__date-grid-event'
-      ) as HTMLDivElement
+      const eventElement = document.querySelector('.sx__date-grid-event')
       expect(eventElement?.attributes.getNamedItem('aria-label')?.value).toBe(
         eventTitle + ' January 1, 2021'
       )
@@ -80,7 +78,7 @@ describe('Week view', () => {
 
       tab()
 
-      const focusedEvent = document.activeElement as HTMLDivElement
+      const focusedEvent = document.activeElement
       expect(focusedEvent?.textContent).toContain(eventTitle)
       expect(focusedEvent?.textContent).toContain('12:00 PM – 6:00 PM')
     })

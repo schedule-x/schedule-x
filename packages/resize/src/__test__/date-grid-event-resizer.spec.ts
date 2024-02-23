@@ -17,6 +17,7 @@ describe('Resizing events in the date grid', () => {
   let calendarEvent: CalendarEventInternal
   let twoDayEvent: CalendarEventInternal
   let eventStartingInPreviousWeek: CalendarEventInternal
+  let calendarWrapper: HTMLDivElement
 
   beforeEach(() => {
     $app = __createAppWithViews__({
@@ -48,6 +49,7 @@ describe('Resizing events in the date grid', () => {
         }
       }
     }
+    calendarWrapper = $app.elements.calendarWrapper
   })
 
   describe('Dragging the event to the right', () => {
@@ -55,7 +57,7 @@ describe('Resizing events in the date grid', () => {
       expect(calendarEvent.start).toBe('2024-01-26')
       expect(calendarEvent.end).toBe('2024-01-26')
       new DateGridEventResizer($app, calendarEvent, 1000)
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+      calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 1100,
         })
@@ -72,7 +74,7 @@ describe('Resizing events in the date grid', () => {
 
       // iteratively move 100px to the right 8 times
       for (let i = 0; i < 8; i++) {
-        ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+        calendarWrapper.dispatchEvent(
           new MouseEvent('mousemove', {
             clientX: 1000 + 100 * i,
           })
@@ -89,7 +91,7 @@ describe('Resizing events in the date grid', () => {
       expect(twoDayEvent.start).toBe('2024-01-26')
       expect(twoDayEvent.end).toBe('2024-01-27')
       new DateGridEventResizer($app, twoDayEvent, 1000)
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+      calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 900,
         })
@@ -103,7 +105,7 @@ describe('Resizing events in the date grid', () => {
       expect(twoDayEvent.start).toBe('2024-01-26')
       expect(twoDayEvent.end).toBe('2024-01-27')
       new DateGridEventResizer($app, calendarEvent, 1000)
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+      calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 900,
         })
@@ -118,7 +120,7 @@ describe('Resizing events in the date grid', () => {
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
       // should first be able to resize one day to the left
       new DateGridEventResizer($app, eventStartingInPreviousWeek, 1000)
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+      calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 900,
         })
@@ -127,7 +129,7 @@ describe('Resizing events in the date grid', () => {
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-22')
 
       // should not be able to resize beyond the start of the week
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+      calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 800,
         })
@@ -144,12 +146,12 @@ describe('Resizing events in the date grid', () => {
       new DateGridEventResizer($app, eventStartingInPreviousWeek, 1000)
 
       // Dispatch 2 mousemove events to prove that the callback is still only called once on mouseup
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+      calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 1100,
         })
       )
-      ;($app.elements.calendarWrapper as HTMLDivElement).dispatchEvent(
+      calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 1200,
         })

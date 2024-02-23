@@ -6,9 +6,7 @@ import {
 import { renderComponent } from './utils'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import {
-  getFirstViewOption,
-  getSecondViewOption,
-  getThirdViewOption,
+  getViewOptionN,
   getViewSelectionElement,
   isDropdownOpen,
 } from '../../../../utils/stateless/testing/page-objects/view-selection'
@@ -54,25 +52,24 @@ describe('ViewSelection', () => {
         new KeyboardEvent('keydown', { key: 'Enter' })
       )
 
-      let viewOption1: HTMLElement | null = getFirstViewOption()
-      let viewOption2: HTMLElement | null = getSecondViewOption()
-      let viewOption3: HTMLElement | null = getThirdViewOption()
+      let viewOption1!: HTMLLIElement
+      let viewOption2!: HTMLLIElement
+      let viewOption3!: HTMLLIElement
       vi.runAllTimers()
       await waitFor(() => {
-        viewOption1 = getFirstViewOption()
-        viewOption2 = getSecondViewOption()
-        viewOption3 = getThirdViewOption()
+        viewOption1 = getViewOptionN(1)
+        viewOption2 = getViewOptionN(2)
+        viewOption3 = getViewOptionN(3)
         expect(viewOption1).toBeTruthy()
       })
-      ;(viewOption1 as HTMLElement).dispatchEvent(
+
+      viewOption1.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowDown' })
       )
-      ;(viewOption2 as HTMLElement).dispatchEvent(
+      viewOption2.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'ArrowDown' })
       )
-      ;(viewOption3 as HTMLElement).dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter' })
-      )
+      viewOption3.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
 
       await waitFor(() => {
         expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)

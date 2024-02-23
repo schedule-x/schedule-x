@@ -1,4 +1,8 @@
 import { screen } from '@testing-library/preact'
+import {
+  assertIsDIV,
+  assertIsLI,
+} from '../../../../../../../libs/assertions/src'
 
 export function queryDropdown() {
   return screen.queryByTestId('view-selection-items')
@@ -15,25 +19,15 @@ export const openViewSelection = () => {
 }
 
 export const getViewSelectionElement = () => {
-  return document.querySelector(
-    '.sx__view-selection-selected-item'
-  ) as HTMLElement
+  const el = document.querySelector('.sx__view-selection-selected-item')
+  assertIsDIV(el)
+
+  return el
 }
 
-export const getFirstViewOption = () => {
-  return document.querySelector(
-    '.sx__view-selection-item:nth-child(1)'
-  ) as HTMLElement
-}
+export const getViewOptionN = (n: number) => {
+  const el = document.querySelector(`.sx__view-selection-item:nth-child(${n})`)
+  assertIsLI(el)
 
-export const getSecondViewOption = () => {
-  return document.querySelector(
-    '.sx__view-selection-item:nth-child(2)'
-  ) as HTMLElement
-}
-
-export const getThirdViewOption = () => {
-  return document.querySelector(
-    '.sx__view-selection-item:nth-child(3)'
-  ) as HTMLElement
+  return el
 }

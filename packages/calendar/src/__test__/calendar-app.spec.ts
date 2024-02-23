@@ -32,7 +32,7 @@ describe('CalendarApp', () => {
     })
 
     it('should add an event and then access it over getAll()', () => {
-      expect((calendarApp as CalendarApp).events.getAll()).length(0)
+      expect(calendarApp.events.getAll()).length(0)
 
       calendarApp.events.add({
         id: '1',
@@ -40,11 +40,11 @@ describe('CalendarApp', () => {
         ...sampleEventTime,
       })
 
-      expect((calendarApp as CalendarApp).events.getAll()).length(1)
+      expect(calendarApp.events.getAll()).length(1)
     })
 
     it('should add an event and then access it over get()', () => {
-      expect((calendarApp as CalendarApp).events.getAll()).length(0)
+      expect(calendarApp.events.getAll()).length(0)
       const EVENT_ID = '1'
       const EVENT_TITLE = 'test'
 
@@ -54,13 +54,13 @@ describe('CalendarApp', () => {
         ...sampleEventTime,
       })
 
-      const event = (calendarApp as CalendarApp).events.get(EVENT_ID)
+      const event = calendarApp.events.get(EVENT_ID)
       expect(event).toBeDefined()
       expect(event?.title).toBe(EVENT_TITLE)
     })
 
     it('should receive undefined when trying to access an event that does not exist', () => {
-      expect((calendarApp as CalendarApp).events.getAll()).length(0)
+      expect(calendarApp.events.getAll()).length(0)
       const EVENT_ID = '1'
 
       calendarApp.events.add({
@@ -69,27 +69,27 @@ describe('CalendarApp', () => {
         ...sampleEventTime,
       })
 
-      expect((calendarApp as CalendarApp).events.get('2')).toBeUndefined()
+      expect(calendarApp.events.get('2')).toBeUndefined()
     })
 
     it('should remove an event', () => {
-      expect((calendarApp as CalendarApp).events.getAll()).length(0)
+      expect(calendarApp.events.getAll()).length(0)
       const EVENT_ID = '1'
       calendarApp.events.add({
         id: EVENT_ID,
         title: 'test',
         ...sampleEventTime,
       })
-      expect((calendarApp as CalendarApp).events.getAll()).length(1)
+      expect(calendarApp.events.getAll()).length(1)
 
       calendarApp.events.remove(EVENT_ID)
 
-      expect((calendarApp as CalendarApp).events.getAll()).length(0)
+      expect(calendarApp.events.getAll()).length(0)
     })
 
     it('should update an event', () => {
       // Arrange
-      expect((calendarApp as CalendarApp).events.getAll()).length(0)
+      expect(calendarApp.events.getAll()).length(0)
       const EVENT_ID = '1'
       const INITIAL_TITLE = 'test'
       const EXPECTED_CHANGED_TITLE = 'test2'
@@ -99,9 +99,7 @@ describe('CalendarApp', () => {
         ...sampleEventTime,
       }
       calendarApp.events.add(INITIAL_EVENT)
-      expect((calendarApp as CalendarApp).events.get(EVENT_ID)?.title).toBe(
-        INITIAL_TITLE
-      )
+      expect(calendarApp.events.get(EVENT_ID)?.title).toBe(INITIAL_TITLE)
 
       // Act
       calendarApp.events.update({
@@ -110,7 +108,7 @@ describe('CalendarApp', () => {
       })
 
       // Assert
-      expect((calendarApp as CalendarApp).events.get(EVENT_ID)?.title).toBe(
+      expect(calendarApp.events.get(EVENT_ID)?.title).toBe(
         EXPECTED_CHANGED_TITLE
       )
     })
