@@ -19,6 +19,7 @@ import { viewMonthAgenda } from '../../views/month-agenda'
 import { viewDay } from '../../views/day'
 import { viewWeek } from '../../views/week'
 import { clickByText } from '../../utils/stateless/testing/click-by-text'
+import { assertIsDIV } from '../../../../../libs/assertions/src'
 
 describe('Calendar callbacks', () => {
   afterEach(() => {
@@ -175,10 +176,9 @@ describe('Calendar callbacks', () => {
       })
       renderComponent($app)
 
-      fireEvent(
-        document.querySelector('.sx__month-grid-day') as HTMLDivElement, // first day in grid
-        new MouseEvent('click')
-      )
+      const gridDayElement = document.querySelector('.sx__month-grid-day') // first day in grid
+      assertIsDIV(gridDayElement)
+      fireEvent(gridDayElement, new MouseEvent('click'))
 
       expect(onClickDate).toHaveBeenCalledTimes(1)
       expect(onClickDate).toHaveBeenCalledWith('2027-11-01')
@@ -210,10 +210,9 @@ describe('Calendar callbacks', () => {
         renderComponent($app)
 
         // Click at the top of the day
-        fireEvent(
-          document.querySelector('.sx__time-grid-day') as HTMLDivElement, // first day in grid
-          new MouseEvent('click')
-        )
+        const gridDayElement = document.querySelector('.sx__time-grid-day') // first day in grid
+        assertIsDIV(gridDayElement)
+        fireEvent(gridDayElement, new MouseEvent('click'))
 
         expect(onClickDateTime).toHaveBeenCalledTimes(1)
         expect(onClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')

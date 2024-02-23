@@ -23,7 +23,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
 
   constructor(
     private $app: CalendarAppSingleton,
-    private eventCoordinates: EventCoordinates,
+    eventCoordinates: EventCoordinates,
     private eventCopy: CalendarEventInternal,
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void
   ) {
