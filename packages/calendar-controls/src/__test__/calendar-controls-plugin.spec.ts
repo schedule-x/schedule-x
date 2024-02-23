@@ -23,6 +23,20 @@ describe('createCalendarControlsPlugin', () => {
 
       expect($app.datePickerState.selectedDate.value).toBe('2021-02-02')
     })
+
+    it('should throw if the date is invalid', () => {
+      const controlsPlugin = createCalendarControlsPlugin()
+      const $app = __createAppWithViews__({
+        plugins: [controlsPlugin],
+        selectedDate: '2021-01-01',
+      })
+      expect($app.datePickerState.selectedDate.value).toBe('2021-01-01')
+      controlsPlugin.init($app)
+
+      expect(() => controlsPlugin.setDate('20210230T01:00:000Z')).toThrow(
+        'Invalid date. Expected format YYYY-MM-DD'
+      )
+    })
   })
 
   describe('Setting the view', () => {
@@ -39,6 +53,21 @@ describe('createCalendarControlsPlugin', () => {
       controlsPlugin.setView(InternalViewName.Day)
 
       expect($app.calendarState.view.value).toBe(InternalViewName.Day)
+    })
+
+    it('should throw if the view name is not the name of a configured view', () => {
+      const controlsPlugin = createCalendarControlsPlugin()
+      const $app = __createAppWithViews__({
+        plugins: [controlsPlugin],
+        selectedDate: '2021-01-01',
+        defaultView: InternalViewName.MonthGrid,
+      })
+      expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
+      controlsPlugin.init($app)
+
+      expect(() => controlsPlugin.setView('NotAView')).toThrow(
+        'Invalid view name. Expected one of day, week, month-grid'
+      )
     })
   })
 })
