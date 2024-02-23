@@ -13,8 +13,22 @@
     <button id="theme-toggle">Toggle theme</button>
     <button id="add-event">add event</button>
     <button id="log-all-events">log all events</button>
-    <input placeholder="For example 04:00" id="scroll-to">
-    <button id="scroll">Scroll</button>
+
+    <div class="input-wrapper">
+      <input placeholder="For example 04:00" id="scroll-to">
+      <button id="scroll">Scroll</button>
+    </div>
+
+    <div class="input-wrapper">
+      <input placeholder="For example 2024-01-01" id="set-date">
+      <button id="set-date-button">Set date</button>
+    </div>
+
+    <div class="input-wrapper">
+      <input placeholder="day, week, month-grid, or month-agenda" id="set-view">
+      <button id="set-view-button">Set view</button>
+    </div>
+
     <div id="calendar"></div>
     <script type="module" src="/development/calendar/main.tsx"></script>
   </body>

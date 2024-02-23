@@ -20,12 +20,14 @@ import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
+import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const scrollControllerPlugin = createScrollControllerPlugin({
   initialScroll: '07:50'
 })
+const calendarControlsPlugin = createCalendarControlsPlugin()
 const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 2500,
@@ -127,6 +129,7 @@ const calendar = createCalendar({
     scrollControllerPlugin,
     createResizePlugin(),
     createEventRecurrencePlugin(),
+    calendarControlsPlugin,
   ],
   events: [
     ...seededEvents,
@@ -204,5 +207,17 @@ scrollButton.addEventListener('click', () => {
 const logAllEventsButton = document.getElementById('log-all-events') as HTMLButtonElement
 logAllEventsButton.addEventListener('click', () => {
   console.log(calendar.events.getAll())
+})
+
+const setDateButton = document.getElementById('set-date-button') as HTMLButtonElement
+setDateButton.addEventListener('click', () => {
+  const newDate = (document.getElementById('set-date') as HTMLInputElement).value
+  calendarControlsPlugin.setDate(newDate)
+})
+
+const setViewButton = document.getElementById('set-view-button') as HTMLButtonElement
+setViewButton.addEventListener('click', () => {
+  const newView = (document.getElementById('set-view') as HTMLInputElement).value
+  calendarControlsPlugin.setView(newView)
 })
 

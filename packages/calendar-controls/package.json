@@ -1,0 +1,30 @@
+{
+  "name": "@schedule-x/calendar-controls",
+  "version": "1.17.1",
+  "description": "Plugin for extra controls for the Schedule-X calendar",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@oesterlund.de",
+    "url": "https://github.com/tomosterlund"
+  },
+  "license": "MIT",
+  "module": "./dist/core.js",
+  "main": "./dist/core.cjs.js",
+  "umd": "./dist/core.umd.js",
+  "types": "./dist/core.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
+    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
+    "format": "prettier . --write",
+    "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/calendar-controls"
+  },
+  "homepage": "https://schedule-x.dev"
+}
