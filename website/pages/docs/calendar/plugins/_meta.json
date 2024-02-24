@@ -11,6 +11,9 @@
   "event-modal": {
     "title": "Event Modal"
   },
+  "calendar-controls": {
+    "title": "Calendar Controls"
+  },
   "recurrence": {
     "title": "Event Recurrence \uD83C\uDD95"
   },

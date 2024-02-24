@@ -1,0 +1,29 @@
+# Calendar controls
+
+Add some additional controls, to programmatically change the calendar view and set the date.
+
+## Install
+
+```bash copy
+npm i @schedule-x/calendar-controls
+```
+
+## Usage
+
+```js
+import { createCalendarControlsPlugin } from '@schedule-x/calendar-controls'
+
+const calendarControls = createCalendarControlsPlugin()
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [calendarControls],
+})
+calendar.render(/** your calendar element */)
+
+// Programmatically change the calendar view
+calendarControls.setView('week')
+
+// Programmatically set the date
+calendarControls.setDate('2025-01-01')
+```
