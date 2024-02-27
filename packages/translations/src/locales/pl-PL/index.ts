@@ -1,8 +1,8 @@
-import { datePickerEnGB } from './date-picker'
+import { datePickerPlPL } from './date-picker'
 import { Language } from '../../types/language.translations'
-import { calendarEnGB } from './calendar'
+import { calendarPlPL } from './calendar'
 
-export const enGB: Language = {
-  ...datePickerEnGB,
-  ...calendarEnGB,
+export const plPL: Language = {
+  ...datePickerPlPL,
+  ...calendarPlPL,
 }

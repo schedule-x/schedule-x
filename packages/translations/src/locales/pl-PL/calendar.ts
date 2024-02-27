@@ -1,6 +1,6 @@
 import { CalendarTranslations } from '../../types/calendar.translations'
 
-export const calendarEnGB: CalendarTranslations = {
+export const calendarPlPL: CalendarTranslations = {
   Today: 'Dzisiaj',
   Month: 'Miesiąc',
   Week: 'Tydzień',
