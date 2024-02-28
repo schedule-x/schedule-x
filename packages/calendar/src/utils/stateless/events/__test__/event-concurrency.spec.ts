@@ -84,5 +84,47 @@ describe('Event concurrency', () => {
       expect(result[1]._totalConcurrentEvents).toBe(2)
       expect(result[1]._previousConcurrentEvents).toBe(1)
     })
+
+    it('should have 5 concurrent events, but 2-5 should only have 1 or 2 previous concurrent event', () => {
+      const longEvent = createEvent({
+        start: '2020-01-01 00:00',
+        end: '2020-01-01 06:00',
+      })
+      const event2 = createEvent({
+        start: '2020-01-01 00:30',
+        end: '2020-01-01 01:00',
+      })
+      const event3 = createEvent({
+        start: '2020-01-01 00:45',
+        end: '2020-01-01 01:30',
+      })
+      const event4 = createEvent({
+        start: '2020-01-01 02:00',
+        end: '2020-01-01 03:00',
+      })
+      const event5 = createEvent({
+        start: '2020-01-01 04:30',
+        end: '2020-01-01 05:00',
+      })
+
+      const result = handleEventConcurrency([
+        longEvent,
+        event2,
+        event3,
+        event4,
+        event5,
+      ])
+
+      expect(result[0]._totalConcurrentEvents).toBe(5)
+      expect(result[0]._previousConcurrentEvents).toBe(0)
+      expect(result[1]._totalConcurrentEvents).toBe(5)
+      expect(result[1]._previousConcurrentEvents).toBe(1)
+      expect(result[2]._totalConcurrentEvents).toBe(5)
+      expect(result[2]._previousConcurrentEvents).toBe(2)
+      expect(result[3]._totalConcurrentEvents).toBe(5)
+      expect(result[3]._previousConcurrentEvents).toBe(1)
+      expect(result[4]._totalConcurrentEvents).toBe(5)
+      expect(result[4]._previousConcurrentEvents).toBe(1)
+    })
   })
 })
