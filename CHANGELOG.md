@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/schedule-x/schedule-x/compare/v1.18.0...v1.19.0) (2024-02-28)
+
+### Features
+
+- add support for polish language ([#262](https://github.com/schedule-x/schedule-x/issues/262)) ([459a8bc](https://github.com/schedule-x/schedule-x/commit/459a8bc5d40bfa1acb1bd24b037eaf375b9865fe))
+
 # [1.18.0](https://github.com/schedule-x/schedule-x/compare/v1.17.1...v1.18.0) (2024-02-23)
 
 ### Bug Fixes
