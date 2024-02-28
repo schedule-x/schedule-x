@@ -40,8 +40,8 @@
     "preact": "10.19.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.0.0",
-    "@commitlint/config-conventional": "^18.0.0",
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
     "@fontsource/open-sans": "^5.0.7",
     "@fontsource/roboto-condensed": "^5.0.7",
     "@lerna/batch-packages": "^3.16.0",
