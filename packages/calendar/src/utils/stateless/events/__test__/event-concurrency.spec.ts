@@ -219,5 +219,25 @@ describe('Event concurrency', () => {
       expect(result[4]._totalConcurrentEvents).toBe(5)
       expect(result[4]._previousConcurrentEvents).toBe(1)
     })
+
+    it('should have two concurrent events, where 2 starts after 1, and also ends after 1', () => {
+      const event = createEvent({
+        start: '2023-09-19 12:35',
+        end: '2023-09-19 14:05',
+        id: '9542abf8f334',
+      })
+      const event2 = createEvent({
+        start: '2023-09-19 13:50',
+        end: '2023-09-19 14:50',
+        id: 'a87c5f6312e1',
+      })
+
+      const result = handleEventConcurrency([event, event2])
+
+      expect(result[0]._totalConcurrentEvents).toBe(2)
+      expect(result[0]._previousConcurrentEvents).toBe(0)
+      expect(result[1]._totalConcurrentEvents).toBe(2)
+      expect(result[1]._previousConcurrentEvents).toBe(1)
+    })
   })
 })
