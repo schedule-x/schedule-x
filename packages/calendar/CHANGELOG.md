@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/schedule-x/schedule-x/compare/v1.19.0...v1.20.0) (2024-03-04)
+
+### Bug Fixes
+
+- overlap in multiple event-concurrency where only a few overlap ([#265](https://github.com/schedule-x/schedule-x/issues/265)) ([6e9a996](https://github.com/schedule-x/schedule-x/commit/6e9a996f3bf32af368c8ac118ba177b42e5cc829))
+
 # [1.19.0](https://github.com/schedule-x/schedule-x/compare/v1.18.0...v1.19.0) (2024-02-28)
 
 **Note:** Version bump only for package @schedule-x/calendar
