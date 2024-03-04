@@ -7,7 +7,7 @@ import {
   addMonths,
 } from '../../utils/stateless/time/date-time-mutation/adding'
 
-export type ViewConfig = {
+export type ViewConfig<FrameworkComponent = PreactViewComponent> = {
   /**
    * a unique identifier for the view
    * */
@@ -36,7 +36,7 @@ export type ViewConfig = {
   /**
    * The component you want to render
    * */
-  Component: PreactViewComponent | unknown // the view component you want to render
+  Component: FrameworkComponent
 
   /**
    * function that is called when the user clicks the backward/forward button
@@ -49,10 +49,11 @@ export type ViewConfig = {
    * backwardForwardUnits = 1
    * result (behind the scenes) = addDays(date, 1)
    * */
-  backwardForwardUnits: number // number of units to add when the user clicks the backward/forward button
+  backwardForwardUnits: number
 }
 
-export type View = ViewConfig & {
-  render(onElement: HTMLElement, $app: CalendarAppSingleton): void
-  destroy(): void
-}
+export type View<FrameworkComponent = PreactViewComponent> =
+  ViewConfig<FrameworkComponent> & {
+    render(onElement: HTMLElement, $app: CalendarAppSingleton): void
+    destroy(): void
+  }
