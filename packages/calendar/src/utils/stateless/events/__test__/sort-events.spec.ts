@@ -5,7 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
-import { sortEventsByStart } from '../sort-by-start-date'
+import { sortEventsByStartAndEnd } from '../sort-by-start-date'
 
 describe('sorting events based on time', () => {
   const config = new CalendarConfigBuilder().build()
@@ -36,7 +36,7 @@ describe('sorting events based on time', () => {
       eventExpected1,
       eventExpected2,
       eventExpected4,
-    ].sort(sortEventsByStart)
+    ].sort(sortEventsByStartAndEnd)
 
     expect(result[0]).toBe(eventExpected1)
     expect(result[1]).toBe(eventExpected2)
