@@ -17,9 +17,18 @@ export const handleEventConcurrency = (
       concurrentEventsCache.push(event)
 
       for (let ii = 0; ii < concurrentEventsCache.length; ii++) {
-        concurrentEventsCache[ii]._totalConcurrentEvents =
-          concurrentEventsCache.length
-        concurrentEventsCache[ii]._previousConcurrentEvents = ii
+        const currentEvent = concurrentEventsCache[ii]
+        currentEvent._totalConcurrentEvents = concurrentEventsCache.length
+        currentEvent._previousConcurrentEvents = concurrentEventsCache.filter(
+          (cachedEvent, index) => {
+            if (cachedEvent === currentEvent || index > ii) return false
+
+            return (
+              cachedEvent.start <= currentEvent.start &&
+              cachedEvent.end > currentEvent.start
+            )
+          }
+        ).length
       }
       concurrentEventsCache = []
       return handleEventConcurrency(sortedEvents, concurrentEventsCache, i + 1)
