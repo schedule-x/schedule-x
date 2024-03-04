@@ -2,7 +2,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import TimeGridEvent from './time-grid-event'
-import { sortEventsByStart } from '../../utils/stateless/events/sort-by-start-date'
+import { sortEventsByStartAndEnd } from '../../utils/stateless/events/sort-by-start-date'
 import { handleEventConcurrency } from '../../utils/stateless/events/event-concurrency'
 import { timeStringFromTimePoints } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { setTimeInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
@@ -38,7 +38,7 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
     end: dayEndDateTime,
   }
 
-  const sortedEvents = calendarEvents.sort(sortEventsByStart)
+  const sortedEvents = calendarEvents.sort(sortEventsByStartAndEnd)
   const eventsWithConcurrency = handleEventConcurrency(sortedEvents)
 
   const handleOnClick = (e: MouseEvent) => {

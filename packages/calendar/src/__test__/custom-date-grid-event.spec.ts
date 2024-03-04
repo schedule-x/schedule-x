@@ -79,7 +79,7 @@ describe('CalendarApp', () => {
       await waitFor(() => {
         expect(customComponentFn.calledThrice).toBe(true)
 
-        const event1 = customComponentFn.getCalls()[1]
+        const event1 = customComponentFn.getCalls()[2]
         const callFirstArgument = event1.args[0]
         const callSecondArgument = event1.args[1]
         expect(callFirstArgument).toBeInstanceOf(HTMLDivElement)
@@ -104,7 +104,7 @@ describe('CalendarApp', () => {
         expect(callSecondArgument2.calendarEvent.start).toBe(eventStart2)
         expect(callSecondArgument2.calendarEvent.end).toBe(eventEnd2)
 
-        const event3 = customComponentFn.getCalls()[2]
+        const event3 = customComponentFn.getCalls()[1]
         const callFirstArgument3 = event3.args[0]
         const callSecondArgument3 = event3.args[1]
         expect(callFirstArgument3).toBeInstanceOf(HTMLDivElement)

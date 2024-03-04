@@ -10,7 +10,7 @@ import { sortEventsForWeekView } from '../../../utils/stateless/events/sort-even
 import { createWeek } from '../../../utils/stateless/views/week/create-week'
 import { positionInTimeGrid } from '../../../utils/stateless/events/position-in-time-grid'
 import { positionInDateGrid } from '../../../utils/stateless/events/position-in-date-grid'
-import { sortEventsByStart } from '../../../utils/stateless/events/sort-by-start-date'
+import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
 import DateGridDay from '../../../components/week-grid/date-grid-day'
 
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
@@ -27,7 +27,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
       $app.calendarEvents.list.value
     )
     newWeek = positionInDateGrid(
-      dateGridEvents.sort(sortEventsByStart),
+      dateGridEvents.sort(sortEventsByStartAndEnd),
       newWeek
     )
     newWeek = positionInTimeGrid(timeGridEvents, newWeek, $app)
