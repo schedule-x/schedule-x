@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/schedule-x/schedule-x/compare/v1.20.0...v1.21.0) (2024-03-04)
+
+### Features
+
+- make view api generic ([#272](https://github.com/schedule-x/schedule-x/issues/272)) ([8f0d20c](https://github.com/schedule-x/schedule-x/commit/8f0d20c2a5185720993eeaa8b9af2414a172e7d7))
+
 # [1.20.0](https://github.com/schedule-x/schedule-x/compare/v1.19.0...v1.20.0) (2024-03-04)
 
 **Note:** Version bump only for package @schedule-x/shared

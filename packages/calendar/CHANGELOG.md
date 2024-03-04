@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/schedule-x/schedule-x/compare/v1.20.0...v1.21.0) (2024-03-04)
+
+### Bug Fixes
+
+- event concurrency algorithm ([#271](https://github.com/schedule-x/schedule-x/issues/271)) ([37b4b2d](https://github.com/schedule-x/schedule-x/commit/37b4b2d42db40bdc5e5ae1eda7cc2a8982f01706))
+
 # [1.20.0](https://github.com/schedule-x/schedule-x/compare/v1.19.0...v1.20.0) (2024-03-04)
 
 ### Bug Fixes
