@@ -24,6 +24,8 @@ import { plPL } from './locales/pl-PL'
 import { datePickerPlPL } from './locales/pl-PL/date-picker'
 import { esES } from './locales/es-ES'
 import { datePickerEsES } from './locales/es-ES/date-picker'
+import { nlNL } from './locales/nl-NL'
+import { datePickerNlNL } from './locales/nl-NL/date-picker'
 
 import { translate } from './translator/translate'
 
@@ -41,6 +43,7 @@ const translations = {
   daDK,
   plPL,
   esES,
+  nlNL,
 }
 
 const datePickerTranslations = {
@@ -57,6 +60,7 @@ const datePickerTranslations = {
   daDK: datePickerDaDK,
   plPL: datePickerPlPL,
   esES: datePickerEsES,
+  nlNL: datePickerNlNL,
 }
 
 export {
@@ -76,4 +80,5 @@ export {
   daDK,
   plPL,
   esES,
+  nlNL,
 }
