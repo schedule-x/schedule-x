@@ -4,6 +4,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.interface'
 import EventsFacadeImpl from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.impl'
 import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
+import { CustomComponentFns } from '@schedule-x/shared/src/interfaces/calendar/custom-component-fns'
 
 export default class CalendarApp {
   public events: EventsFacade
@@ -24,14 +25,7 @@ export default class CalendarApp {
    * @internal
    * Purpose: To be consumed by framework adapters for custom component rendering.
    * */
-  _setCustomComponentFn(
-    fnId:
-      | 'timeGridEvent'
-      | 'dateGridEvent'
-      | 'monthGridEvent'
-      | 'monthAgendaEvent',
-    fn: CustomComponentFn
-  ) {
+  _setCustomComponentFn(fnId: keyof CustomComponentFns, fn: CustomComponentFn) {
     this.$app.config._customComponentFns[fnId] = fn
   }
 }
