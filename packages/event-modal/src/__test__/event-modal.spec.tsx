@@ -85,7 +85,7 @@ describe('EventModal', () => {
   })
 
   describe('Displaying a custom component', () => {
-    it('call the customComponentFn', () => {
+    it('should call the customComponentFn', () => {
       const customComponentFn = vi.fn()
       const { $app } = setup(customComponentFn)
       render(<EventModal $app={$app} />)
