@@ -11,5 +11,6 @@ export const calendarEsES: CalendarTranslations = {
   'Next period': 'Siguiente período',
   'Previous period': 'Período anterior',
   to: 'a', // as in 2/1/2020 to 2/2/2020
-  'Full day- and multiple day events': 'Día completo y eventos de múltiples días',
+  'Full day- and multiple day events':
+    'Día completo y eventos de múltiples días',
 }
