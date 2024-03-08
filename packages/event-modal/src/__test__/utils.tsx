@@ -3,6 +3,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { signal } from '@preact/signals'
+import { CustomComponentFn } from '@schedule-x/calendar'
 
 const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()
@@ -17,7 +18,7 @@ const createCalendarEvent = () => {
   return calendarEvent
 }
 
-export const setup = () => {
+export const setup = (customComponentFn?: CustomComponentFn) => {
   const $app = stubInterface<CalendarAppSingleton>()
   const eventModalPlugin = stubInterface<EventModalPlugin>()
   const calendarEvent = createCalendarEvent()
@@ -30,6 +31,9 @@ export const setup = () => {
   $app.elements.calendarWrapper = calendarWrapperEl
   $app.config.plugins = {}
   $app.config.plugins.eventModal = eventModalPlugin
+  $app.config._customComponentFns = {
+    eventModal: customComponentFn,
+  }
   $app.calendarState.isDark = signal(false)
   return { $app, calendarEvent }
 }

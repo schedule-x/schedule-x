@@ -6,7 +6,7 @@ import {
 import { cleanup, render, screen } from '@testing-library/preact'
 import EventModal from '../event-modal'
 import { getDescriptionEl, getLocationEl, getPeopleEl, setup } from './utils'
-import { beforeEach } from 'vitest'
+import { beforeEach, vi } from 'vitest'
 
 describe('EventModal', () => {
   beforeEach(() => {
@@ -81,6 +81,30 @@ describe('EventModal', () => {
       expect(
         screen.queryByText(calendarEvent.description as string)
       ).toBeTruthy()
+    })
+  })
+
+  describe('Displaying a custom component', () => {
+    it('call the customComponentFn', () => {
+      const customComponentFn = vi.fn()
+      const { $app } = setup(customComponentFn)
+      render(<EventModal $app={$app} />)
+
+      expect(customComponentFn).toHaveBeenCalledOnce()
+    })
+
+    it('should not display any default content', () => {
+      const customComponentFn = vi.fn()
+      const { $app, calendarEvent } = setup(customComponentFn)
+      render(<EventModal $app={$app} />)
+
+      expect(screen.queryByText(calendarEvent.title as string)).toBeFalsy()
+      expect(
+        screen.queryByText('October 7, 2023 – October 8, 2023' as string)
+      ).toBeFalsy()
+      expect(getLocationEl()).toBeFalsy()
+      expect(getPeopleEl()).toBeFalsy()
+      expect(getDescriptionEl()).toBeFalsy()
     })
   })
 })
