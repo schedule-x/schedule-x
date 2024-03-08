@@ -12,6 +12,7 @@ import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pi
 import DescriptionIcon from '@schedule-x/shared/src/components/icons/description-icon'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { useIconColors } from './utils/stateful/use-icon-colors'
+import { Fragment } from 'preact/jsx-runtime'
 
 export default function EventModal({ $app }: EventModalProps) {
   const [modalId] = useState(randomStringId())
@@ -19,8 +20,21 @@ export default function EventModal({ $app }: EventModalProps) {
     $app.config.plugins.eventModal as EventModalPlugin
   ).calendarEvent
   const [isDisplayed, setIsDisplayed] = useState(false)
+  const customComponent = $app.config._customComponentFns.eventModal
+
+  const [eventWrapperStyle, setEventWrapperStyle] = useState('sx__event-modal')
 
   useEffect(() => {
+    if (customComponent) {
+      customComponent(
+        document.querySelector(`[data-ccid=${modalId}]`) as HTMLElement,
+        {
+          calendarEvent: calendarEvent?._getExternalEvent(),
+        }
+      )
+    } else {
+      setEventWrapperStyle(eventWrapperStyle.concat(' sx__event-modal-default'))
+    }
     setPosition(
       $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
       $app.config.plugins.eventModal?.calendarEventDOMRect.value as DOMRect,
@@ -44,47 +58,52 @@ export default function EventModal({ $app }: EventModalProps) {
       {calendarEvent && (
         <div
           id={modalId}
-          className={`sx__event-modal${isDisplayed ? ' is-open' : ''}`}
+          data-ccid={modalId}
+          className={`${eventWrapperStyle}${isDisplayed ? ' is-open' : ''}`}
         >
-          <div className="sx__has-icon sx__event-modal__title">
-            <div
-              style={{
-                backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
-              }}
-              className="sx__event-modal__color-icon sx__event-icon"
-            />
+          {!customComponent && (
+            <Fragment>
+              <div className="sx__has-icon sx__event-modal__title">
+                <div
+                  style={{
+                    backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
+                  }}
+                  className="sx__event-modal__color-icon sx__event-icon"
+                />
 
-            {calendarEvent.title}
-          </div>
+                {calendarEvent.title}
+              </div>
 
-          <div className="sx__has-icon sx__event-modal__time">
-            <TimeIcon strokeColor={iconColor.value} />
+              <div className="sx__has-icon sx__event-modal__time">
+                <TimeIcon strokeColor={iconColor.value} />
 
-            {getTimeStamp(calendarEvent, $app.config.locale)}
-          </div>
+                {getTimeStamp(calendarEvent, $app.config.locale)}
+              </div>
 
-          {calendarEvent.people && calendarEvent.people.length && (
-            <div className="sx__has-icon sx__event-modal__people">
-              <UserIcon strokeColor={iconColor.value} />
+              {calendarEvent.people && calendarEvent.people.length && (
+                <div className="sx__has-icon sx__event-modal__people">
+                  <UserIcon strokeColor={iconColor.value} />
 
-              {concatenatePeople(calendarEvent.people)}
-            </div>
-          )}
+                  {concatenatePeople(calendarEvent.people)}
+                </div>
+              )}
 
-          {calendarEvent.location && (
-            <div className="sx__has-icon sx__event-modal__location">
-              <LocationPinIcon strokeColor={iconColor.value} />
+              {calendarEvent.location && (
+                <div className="sx__has-icon sx__event-modal__location">
+                  <LocationPinIcon strokeColor={iconColor.value} />
 
-              {calendarEvent.location}
-            </div>
-          )}
+                  {calendarEvent.location}
+                </div>
+              )}
 
-          {calendarEvent.description && (
-            <div className="sx__has-icon sx__event-modal__description">
-              <DescriptionIcon strokeColor={iconColor.value} />
+              {calendarEvent.description && (
+                <div className="sx__has-icon sx__event-modal__description">
+                  <DescriptionIcon strokeColor={iconColor.value} />
 
-              {calendarEvent.description}
-            </div>
+                  {calendarEvent.description}
+                </div>
+              )}
+            </Fragment>
           )}
         </div>
       )}

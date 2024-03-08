@@ -5,4 +5,5 @@ export type CustomComponentFns = {
   dateGridEvent?: CustomComponentFn
   monthGridEvent?: CustomComponentFn
   monthAgendaEvent?: CustomComponentFn
+  eventModal?: CustomComponentFn
 }
