@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/schedule-x/schedule-x/compare/v1.21.0...v1.22.0) (2024-03-08)
+
+### Features
+
+- add Brazilian Portuguese language support ([#279](https://github.com/schedule-x/schedule-x/issues/279)) ([ebc0bf7](https://github.com/schedule-x/schedule-x/commit/ebc0bf70715219dd00b5d5807fe29759154f8677))
+- add Dutch language support ([#281](https://github.com/schedule-x/schedule-x/issues/281)) ([c82c515](https://github.com/schedule-x/schedule-x/commit/c82c515262be663150f6a7ab7e2a0831dd039562))
+- add the ability to customize event modals ([#282](https://github.com/schedule-x/schedule-x/issues/282)) ([a053c3c](https://github.com/schedule-x/schedule-x/commit/a053c3c7144d6d3d8c3b8f30478672f8bebe49f2))
+
 # [1.21.0](https://github.com/schedule-x/schedule-x/compare/v1.20.0...v1.21.0) (2024-03-04)
 
 ### Bug Fixes
