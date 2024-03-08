@@ -15,6 +15,7 @@ import {
   DEFAULT_WEEK_GRID_HEIGHT,
 } from '../../../constants'
 import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
+import { signal } from '@preact/signals'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   constructor(
@@ -26,7 +27,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public weekOptions: WeekOptions = {
       gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
     },
-    public calendars = {},
+    public calendars = signal({}),
     public plugins = {},
     public isDark = false,
     public callbacks = {},

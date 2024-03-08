@@ -14,6 +14,7 @@ import { CalendarCallbacks } from './listeners.interface'
 import { CustomComponentFns } from './custom-component-fns'
 import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
 import { ResizePlugin } from '../resize/resize-plugin.interface'
+import { Signal } from '@preact/signals'
 
 export type WeekOptions = {
   gridHeight: number
@@ -50,7 +51,7 @@ export default interface CalendarConfigInternal extends Config {
   views: View[]
   dayBoundaries: DayBoundariesInternal
   weekOptions: WeekOptions
-  calendars?: Record<string, CalendarType>
+  calendars?: Signal<Record<string, CalendarType>>
   plugins: Plugins
   isDark: boolean
   callbacks: CalendarCallbacks
@@ -74,6 +75,7 @@ interface ReducedCalendarConfigInternal
     | 'plugins'
     | 'views'
     | '_customComponentFns'
+    | 'calendars'
   > {}
 
 export interface CalendarConfigExternal
@@ -84,4 +86,5 @@ export interface CalendarConfigExternal
   plugins?: PluginBase[]
   views: [View, ...View[]]
   selectedDate?: string
+  calendars?: Record<string, CalendarType>
 }

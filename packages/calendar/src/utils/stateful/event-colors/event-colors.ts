@@ -6,7 +6,7 @@ export default class EventColors {
   constructor(private config: CalendarConfigInternal) {}
 
   setLight() {
-    Object.entries(this.config.calendars || {}).forEach(
+    Object.entries(this.config.calendars?.value || {}).forEach(
       ([calendarName, calendar]) => {
         if (!calendar.lightColors) {
           console.warn(`No light colors defined for calendar ${calendarName}`)
@@ -22,7 +22,7 @@ export default class EventColors {
   }
 
   setDark() {
-    Object.entries(this.config.calendars || {}).forEach(
+    Object.entries(this.config.calendars?.value || {}).forEach(
       ([calendarName, calendar]) => {
         if (!calendar.darkColors) {
           console.warn(`No dark colors defined for calendar ${calendarName}`)
