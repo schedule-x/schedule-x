@@ -88,10 +88,11 @@ The Schedule-X calendar is built with customization in mind. Currently, you can 
 components to take control over certain parts of the calendar. This is done by writing your own React components:
 
 | Component name     | Description                                                      | Props                           |
-| ------------------ | ---------------------------------------------------------------- | ------------------------------- |
+|--------------------|------------------------------------------------------------------|---------------------------------|
 | `timeGridEvent`    | The component for timed events used in the week- and day views   | `calendarEvent`                 |
 | `dateGridEvent`    | The component for all-day events used in the week- and day views | `calendarEvent`                 |
 | `monthGridEvent`   | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
 | `monthAgendaEvent` | The component for events used in the month agenda view           | `calendarEvent`                 |
+| `eventModal`       | The component for the event modal                                | `calendarEvent`                 |
 
 An example of how to use these components can be found here: https://github.com/schedule-x/react-example/blob/main/src/App.tsx
