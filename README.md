@@ -11,7 +11,7 @@ adapter components for React and Vue.
 
 Website for documentation and demo: https://schedule-x.dev/
 
-![Schedule-X calendar demo](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-demo-readme-480p-20fps.gif)
+![Schedule-X calendar demo](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-demo-readme-480p.gif)
 
 ## Contact
 
