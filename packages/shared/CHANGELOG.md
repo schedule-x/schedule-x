@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/schedule-x/schedule-x/compare/v1.22.0...v1.23.0) (2024-03-11)
+
+### Features
+
+- export CustomComponentFns API as CustomComponents ([#290](https://github.com/schedule-x/schedule-x/issues/290)) ([bd5028d](https://github.com/schedule-x/schedule-x/commit/bd5028db0ba8a96759c3e0c3e6107daa8059b3bf))
+
 # [1.22.0](https://github.com/schedule-x/schedule-x/compare/v1.21.0...v1.22.0) (2024-03-08)
 
 ### Features
