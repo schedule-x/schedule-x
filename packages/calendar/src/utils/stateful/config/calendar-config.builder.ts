@@ -29,6 +29,8 @@ export default class CalendarConfigBuilder
   plugins: Plugins = {}
   isDark: boolean | undefined = false
   callbacks: CalendarCallbacks | undefined
+  minDate: string | undefined
+  maxDate: string | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -42,7 +44,9 @@ export default class CalendarConfigBuilder
       this.plugins,
       this.isDark,
       this.callbacks,
-      {}
+      {},
+      this.minDate,
+      this.maxDate
     )
   }
 
@@ -111,6 +115,16 @@ export default class CalendarConfigBuilder
     listeners: CalendarCallbacks | undefined
   ): CalendarConfigBuilder {
     this.callbacks = listeners
+    return this
+  }
+
+  withMinDate(minDate: string | undefined): CalendarConfigBuilder {
+    this.minDate = minDate
+    return this
+  }
+
+  withMaxDate(maxDate: string | undefined): CalendarConfigBuilder {
+    this.maxDate = maxDate
     return this
   }
 }
