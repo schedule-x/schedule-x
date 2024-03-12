@@ -55,7 +55,7 @@ export default function ForwardBackwardNavigation() {
 
     setPreviousMinusOne(getDateToNavigateTo('backwards', selectedView))
     setNextPlusOne(getDateToNavigateTo('forwards', selectedView))
-  }, [$app.datePickerState.selectedDate.value])
+  }, [$app.datePickerState.selectedDate.value, $app.calendarState.view.value])
 
   return (
     <>
