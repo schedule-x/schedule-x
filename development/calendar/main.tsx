@@ -21,12 +21,47 @@ import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const scrollControllerPlugin = createScrollControllerPlugin({
   initialScroll: '07:50'
 })
+
+class CalendarsUpdaterPlugin {
+  name: string = 'calendars-updater'
+  $app!: CalendarAppSingleton
+
+  destroy(): void {
+  }
+
+  init($app: CalendarAppSingleton): void {
+    this.$app = $app
+  }
+
+  updateCalendars(): void {
+    this.$app.config.calendars.value = {
+      ...this.$app.config.calendars.value,
+      personal: {
+        colorName: 'personal',
+        lightColors: {
+          main: 'yellow',
+          container: '#000',
+          onContainer: 'yellow',
+        },
+        darkColors: {
+          main: '#fff5c0',
+          onContainer: '#fff5de',
+          container: '#a29742',
+        },
+      },
+    }
+  }
+}
+const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
+
+
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const calendar = createCalendar({
   // weekOptions: {
@@ -133,6 +168,7 @@ const calendar = createCalendar({
     createResizePlugin(),
     createEventRecurrencePlugin(),
     calendarControlsPlugin,
+    calendarsUpdaterPlugin
   ],
   events: [
     ...seededEvents,
@@ -222,5 +258,10 @@ const setViewButton = document.getElementById('set-view-button') as HTMLButtonEl
 setViewButton.addEventListener('click', () => {
   const newView = (document.getElementById('set-view') as HTMLInputElement).value
   calendarControlsPlugin.setView(newView)
+})
+
+const updateCalendarsButton = document.getElementById('update-calendars') as HTMLButtonElement
+updateCalendarsButton.addEventListener('click', () => {
+  calendarsUpdaterPlugin.updateCalendars()
 })
 
