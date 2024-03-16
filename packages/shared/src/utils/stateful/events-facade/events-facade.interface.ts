@@ -7,4 +7,5 @@ export default interface EventsFacade {
   add(event: CalendarEventExternal): void
   update(event: CalendarEventExternal): void
   remove(id: EventId): void
+  set(events: CalendarEventExternal[]): void
 }

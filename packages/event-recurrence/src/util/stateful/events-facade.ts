@@ -9,6 +9,22 @@ import { AugmentedEvent } from '../../types/augmented-event'
 export class EventsFacadeImpl implements EventsFacade {
   constructor(private $app: CalendarAppSingleton) {}
 
+  set(events: CalendarEventExternal[]): void {
+    const newEventsList = []
+    for (const event of events) {
+      const newEvent = externalEventToInternal(event, this.$app.config)
+      newEventsList.push(newEvent)
+      const rrule = newEvent._getForeignProperties().rrule
+      if (rrule) {
+        newEventsList.push(
+          ...createRecurrencesForEvent(this.$app, newEvent, rrule as string)
+        )
+      }
+    }
+
+    this.$app.calendarEvents.list.value = newEventsList
+  }
+
   add(event: CalendarEventExternal): void {
     const newEvent = externalEventToInternal(event, this.$app.config)
     const newEventsList = [...this.$app.calendarEvents.list.value, newEvent]

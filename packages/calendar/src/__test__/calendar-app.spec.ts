@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -111,6 +112,34 @@ describe('CalendarApp', () => {
       expect(calendarApp.events.get(EVENT_ID)?.title).toBe(
         EXPECTED_CHANGED_TITLE
       )
+    })
+
+    it('should set the whole events list', () => {
+      // Arrange
+      expect(calendarApp.events.getAll()).length(0)
+      const EVENT_ID = '1'
+      const INITIAL_TITLE = 'test'
+      const INITIAL_EVENT = {
+        id: EVENT_ID,
+        title: INITIAL_TITLE,
+        ...sampleEventTime,
+      }
+      const NEW_EVENTS = [
+        INITIAL_EVENT,
+        {
+          id: '2',
+          title: 'test2',
+          ...sampleEventTime,
+        },
+      ]
+      calendarApp.events.add(INITIAL_EVENT)
+      expect(calendarApp.events.getAll()).length(1)
+
+      // Act
+      calendarApp.events.set(NEW_EVENTS)
+
+      // Assert
+      expect(calendarApp.events.getAll()).length(2)
     })
   })
 
