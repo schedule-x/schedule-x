@@ -30,7 +30,9 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public plugins = {},
     public isDark = false,
     public callbacks = {},
-    public _customComponentFns = {}
+    public _customComponentFns = {},
+    public minDate: string | undefined = undefined,
+    public maxDate: string | undefined = undefined
   ) {}
 
   get isHybridDay(): boolean {

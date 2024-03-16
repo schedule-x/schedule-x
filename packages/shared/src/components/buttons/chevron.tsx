@@ -4,15 +4,22 @@ type props = {
   direction: 'previous' | 'next'
   onClick: () => void
   buttonText?: string
+  disabled?: boolean
 }
 
-export default function Chevron({ direction, onClick, buttonText }: props) {
+export default function Chevron({
+  direction,
+  onClick,
+  buttonText,
+  disabled = false,
+}: props) {
   const handleKeyDown = (keyboardEvent: KeyboardEvent) => {
     if (isKeyEnterOrSpace(keyboardEvent)) onClick()
   }
 
   return (
     <button
+      disabled={disabled}
       className="sx__chevron-wrapper sx__ripple"
       onMouseUp={onClick}
       onKeyDown={handleKeyDown}

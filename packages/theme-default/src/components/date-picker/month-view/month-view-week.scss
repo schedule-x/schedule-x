@@ -19,6 +19,11 @@
     outline: 2px solid var(--sx-color-primary);
   }
 
+  &:disabled {
+    color: var(--sx-color-neutral-variant);
+    cursor: not-allowed;
+  }
+
   &.is-leading-or-trailing {
     color: var(--sx-color-neutral-variant);
   }

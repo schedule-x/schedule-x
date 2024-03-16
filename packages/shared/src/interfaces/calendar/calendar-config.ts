@@ -55,6 +55,8 @@ export default interface CalendarConfigInternal extends Config {
   isDark: boolean
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
+  minDate?: string
+  maxDate?: string
 
   // Getters
   isHybridDay: boolean

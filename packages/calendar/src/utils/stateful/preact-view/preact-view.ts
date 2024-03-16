@@ -8,6 +8,7 @@ import {
   addDays,
   addMonths,
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 class PreactView implements View {
   private randomId = randomStringId()
@@ -15,7 +16,7 @@ class PreactView implements View {
   public name: string
   public label: string
   public Component: PreactViewComponent
-  public setDateRange: (config: RangeSetterConfig) => void
+  public setDateRange: (config: RangeSetterConfig) => DateRange
   public hasSmallScreenCompat: boolean
   public hasWideScreenCompat: boolean
   public backwardForwardFn: typeof addDays | typeof addMonths
@@ -24,7 +25,7 @@ class PreactView implements View {
   constructor(config: ViewConfig) {
     this.name = config.name
     this.label = config.label
-    this.Component = config.Component as PreactViewComponent
+    this.Component = config.Component
     this.setDateRange = config.setDateRange
     this.hasSmallScreenCompat = config.hasSmallScreenCompat
     this.hasWideScreenCompat = config.hasWideScreenCompat
