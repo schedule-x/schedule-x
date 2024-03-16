@@ -6,7 +6,10 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@schedule-x/assertions": ["libs/assertions"],
+    }
   },
   "include": ["vite.config.ts"]
 }
