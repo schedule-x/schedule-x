@@ -1,4 +1,5 @@
 import CalendarConfigInternal, {
+  CalendarType,
   WeekOptions,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
@@ -15,9 +16,11 @@ import {
   DEFAULT_WEEK_GRID_HEIGHT,
 } from '../../../constants'
 import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
-import { signal } from '@preact/signals'
+import { Signal, signal } from '@preact/signals'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
+  calendars: Signal<Record<string, CalendarType>>
+
   constructor(
     public locale: string = DEFAULT_LOCALE,
     public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
@@ -27,14 +30,16 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public weekOptions: WeekOptions = {
       gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
     },
-    public calendars = signal({}),
+    calendars = {},
     public plugins = {},
     public isDark = false,
     public callbacks = {},
     public _customComponentFns = {},
     public minDate: string | undefined = undefined,
     public maxDate: string | undefined = undefined
-  ) {}
+  ) {
+    this.calendars = signal(calendars)
+  }
 
   get isHybridDay(): boolean {
     return (

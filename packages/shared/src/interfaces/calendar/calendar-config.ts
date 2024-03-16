@@ -51,7 +51,7 @@ export default interface CalendarConfigInternal extends Config {
   views: View[]
   dayBoundaries: DayBoundariesInternal
   weekOptions: WeekOptions
-  calendars?: Signal<Record<string, CalendarType>>
+  calendars: Signal<Record<string, CalendarType>>
   plugins: Plugins
   isDark: boolean
   callbacks: CalendarCallbacks
