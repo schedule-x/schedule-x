@@ -21,14 +21,21 @@ export const createDatePickerState = (
   const datePickerDate = signal(initialSelectedDate || currentDayDateString)
 
   const inputDisplayedValue = signal(selectedDateParam || '')
+  const lastValidDisplayedValue = signal(selectedDateParam || '')
   effect(() => {
     try {
       const newValue = formatToDateString(
         inputDisplayedValue.value,
         config.locale
-      ) as string
+      )
+      if (newValue < config.min || newValue > config.max) {
+        inputDisplayedValue.value = lastValidDisplayedValue.value
+        return
+      }
+
       selectedDate.value = newValue
       datePickerDate.value = newValue
+      lastValidDisplayedValue.value = inputDisplayedValue.value
     } catch (e) {
       // nothing to do
     }

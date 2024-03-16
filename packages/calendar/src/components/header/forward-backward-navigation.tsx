@@ -2,23 +2,10 @@ import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
-import type { View } from '@schedule-x/shared/src'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
-
-  const getDateToNavigateTo = (
-    direction: 'forwards' | 'backwards',
-    currentView: View
-  ) => {
-    return currentView.backwardForwardFn(
-      $app.datePickerState.selectedDate.value,
-      direction === 'forwards'
-        ? currentView.backwardForwardUnits
-        : -currentView.backwardForwardUnits
-    )
-  }
 
   const navigate = (direction: 'forwards' | 'backwards') => {
     const currentView = $app.config.views.find(
@@ -26,9 +13,11 @@ export default function ForwardBackwardNavigation() {
     )
     if (!currentView) return
 
-    $app.datePickerState.selectedDate.value = getDateToNavigateTo(
-      direction,
-      currentView
+    $app.datePickerState.selectedDate.value = currentView.backwardForwardFn(
+      $app.datePickerState.selectedDate.value,
+      direction === 'forwards'
+        ? currentView.backwardForwardUnits
+        : -currentView.backwardForwardUnits
     )
   }
 
