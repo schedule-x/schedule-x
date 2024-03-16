@@ -169,4 +169,44 @@ describe('Events facade for recurrence plugin', () => {
       expect($app.calendarEvents.list.value.length).toBe(1)
     })
   })
+
+  describe('Setting the whole list of events', () => {
+    it('should set the whole list of events', () => {
+      const $app = __createAppWithViews__()
+      const plugin = createEventRecurrencePlugin()
+      plugin.init!($app)
+      const eventsFacade = plugin.eventsFacade
+      expect($app.calendarEvents.list.value.length).toBe(0)
+
+      const event1 = {
+        id: '1',
+        start: '2021-01-01',
+        end: '2021-01-01',
+        rrule: 'FREQ=WEEKLY;COUNT=3',
+      }
+      eventsFacade.add(event1)
+      const event2 = {
+        id: '2',
+        start: '2021-01-01',
+        end: '2021-01-01',
+      }
+      eventsFacade.add(event2)
+
+      expect(eventsFacade.getAll()).toHaveLength(2)
+      expect(eventsFacade.getAll()).toEqual(
+        expect.arrayContaining([
+          event1,
+          { id: '2', start: '2021-01-01', end: '2021-01-01' },
+        ])
+      )
+
+      eventsFacade.set([{ id: '3', start: '2021-01-01', end: '2021-01-01' }])
+      expect(eventsFacade.getAll()).toHaveLength(1)
+      expect(eventsFacade.getAll()).toEqual(
+        expect.arrayContaining([
+          { id: '3', start: '2021-01-01', end: '2021-01-01' },
+        ])
+      )
+    })
+  })
 })

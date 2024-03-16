@@ -11,7 +11,7 @@ event can have the following properties:
 ## Event Properties
 
 | Property      | Type                 | Description                                 | Required |
-| ------------- | -------------------- | ------------------------------------------- | -------- |
+|---------------|----------------------|---------------------------------------------|----------|
 | `id`          | `string` or `number` | A unique identifier for the event.          | Yes      |
 | `start`       | `string`             | The start time of the event.                | Yes      |
 | `end`         | `string`             | The end time of the event.                  | Yes      |
@@ -88,6 +88,10 @@ Updates an event that already exists in the calendar. Takes one parameter, which
 
 Removes an event from the calendar. Takes one parameter, which is the id of the event you want to remove.
 
+### `events.set`
+
+Sets all events in the calendar. This will override all existing events in the calendar with the new ones you pass to it.
+
 ## Example
 
 ```ts
@@ -129,4 +133,26 @@ calendar.events.update({
   end: '2023-12-06',
 }) // updates the event with id 1
 calendar.events.remove(1) // removes the event with id 1
+
+// sets all events overriding the existing ones
+calendar.events.set([
+  {
+    id: 1,
+    title: 'Coffee with John',
+    start: '2023-11-04 10:05',
+    end: '2023-11-04 10:35',
+  },
+  {
+    id: 2,
+    title: 'Ski trip',
+    start: '2023-12-04',
+    end: '2023-12-06',
+  },
+  {
+    id: 3,
+    title: 'New event',
+    start: '2023-12-04',
+    end: '2023-12-06',
+  },
+])
 ```

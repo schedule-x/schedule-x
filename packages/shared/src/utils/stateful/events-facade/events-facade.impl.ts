@@ -7,6 +7,12 @@ import { externalEventToInternal } from '../../stateless/calendar/external-event
 export default class EventsFacadeImpl implements EventsFacade {
   constructor(protected $app: CalendarAppSingleton) {}
 
+  set(events: CalendarEventExternal[]): void {
+    this.$app.calendarEvents.list.value = events.map((event) =>
+      externalEventToInternal(event, this.$app.config)
+    )
+  }
+
   add(event: CalendarEventExternal): void {
     const newEvent = externalEventToInternal(event, this.$app.config)
     const copiedEvents = [...this.$app.calendarEvents.list.value]
