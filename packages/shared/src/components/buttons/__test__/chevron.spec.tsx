@@ -7,7 +7,7 @@ import {
 import { cleanup, render } from '@testing-library/preact'
 import Chevron from '../chevron'
 import { vi } from 'vitest'
-import { assertElementType } from '../../../../../../libs/assertions'
+import { assertElementType } from '../../../../../../libs/assertions/src'
 
 const renderComponent = (props: {
   direction: 'previous' | 'next'
