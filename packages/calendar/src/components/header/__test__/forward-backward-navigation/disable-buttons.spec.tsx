@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { getLeftChevron, getRightChevron, renderComponent } from './utils'
-import { assertElementType } from '@schedule-x/assertions'
+import { assertElementType } from '../../../../../../../libs/assertions'
 import { cleanup, fireEvent, waitFor } from '@testing-library/preact'
 
 describe('Forward backward navigation', () => {
