@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/schedule-x/schedule-x/compare/v1.23.0...v1.24.0) (2024-03-16)
+
+### Features
+
+- add config options minDate and maxDate ([#293](https://github.com/schedule-x/schedule-x/issues/293)) ([3d21392](https://github.com/schedule-x/schedule-x/commit/3d213920201cc7bbd126b720cc900b89952d048e))
+
 # [1.23.0](https://github.com/schedule-x/schedule-x/compare/v1.22.0...v1.23.0) (2024-03-11)
 
 **Note:** Version bump only for package @schedule-x/theme-default
