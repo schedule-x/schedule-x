@@ -13,7 +13,10 @@
     "skipLibCheck": true,
     "noEmit": false,
     "declaration": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "paths": {
+      "@schedule-x/assertions": ["libs/assertions"]
+    }
   },
   "exclude": ["node_modules", "dist", "tests"]
 }
