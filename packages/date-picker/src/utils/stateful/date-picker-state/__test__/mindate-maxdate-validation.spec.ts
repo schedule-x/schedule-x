@@ -19,7 +19,7 @@ describe('Date-picker state', () => {
 
       state.inputDisplayedValue.value = '2020-12-31' // less than min
 
-      expect(state.inputDisplayedValue.value).toBe('2021-12-20')
+      expect(state.inputDisplayedValue.value).toBe(originalSelectedDate)
     })
 
     it('should change the input value if it is greater than the min date', () => {
@@ -27,8 +27,7 @@ describe('Date-picker state', () => {
       config.locale = 'en-US'
       config.min = '2021-01-01'
       config.max = '2100-12-31'
-      const originalSelectedDate = '2021-12-31'
-      const state = createDatePickerState(config, originalSelectedDate)
+      const state = createDatePickerState(config, '2021-12-31')
 
       state.inputDisplayedValue.value = '2022-01-01' // greater than min
 
@@ -47,7 +46,7 @@ describe('Date-picker state', () => {
 
       state.inputDisplayedValue.value = '2022-01-01'
 
-      expect(state.inputDisplayedValue.value).toBe('2021-12-20')
+      expect(state.inputDisplayedValue.value).toBe(originalSelectedDate)
     })
 
     it('should change the input value if it is less than the max date', () => {
@@ -55,8 +54,7 @@ describe('Date-picker state', () => {
       config.locale = 'en-US'
       config.min = '2000-01-01'
       config.max = '2021-12-31'
-      const originalSelectedDate = '2021-12-31'
-      const state = createDatePickerState(config, originalSelectedDate)
+      const state = createDatePickerState(config, '2021-12-31')
 
       state.inputDisplayedValue.value = '2021-01-01'
 
