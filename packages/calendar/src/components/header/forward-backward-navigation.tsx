@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
-import { View } from '@schedule-x/shared'
+import type { View } from '@schedule-x/shared/src'
+import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
@@ -44,8 +45,8 @@ export default function ForwardBackwardNavigation() {
     )
   }, [$app.calendarState.range.value])
 
-  const [previousMinusOne, setPreviousMinusOne] = useState('')
-  const [nextPlusOne, setNextPlusOne] = useState('')
+  const [rangeEndMinusOneRange, setRangeEndMinusOneRange] = useState('')
+  const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState('')
 
   useEffect(() => {
     const selectedView = $app.config.views.find(
@@ -53,8 +54,28 @@ export default function ForwardBackwardNavigation() {
     )
     if (!selectedView) return
 
-    setPreviousMinusOne(getDateToNavigateTo('backwards', selectedView))
-    setNextPlusOne(getDateToNavigateTo('forwards', selectedView))
+    setRangeEndMinusOneRange(
+      selectedView.setDateRange({
+        range: $app.calendarState.range,
+        calendarConfig: $app.config,
+        timeUnitsImpl: $app.timeUnitsImpl,
+        date: selectedView.backwardForwardFn(
+          $app.datePickerState.selectedDate.value,
+          -selectedView.backwardForwardUnits
+        ),
+      }).end
+    )
+    setRangeStartPlusOneRange(
+      selectedView.setDateRange({
+        range: $app.calendarState.range,
+        calendarConfig: $app.config,
+        timeUnitsImpl: $app.timeUnitsImpl,
+        date: selectedView.backwardForwardFn(
+          $app.datePickerState.selectedDate.value,
+          selectedView.backwardForwardUnits
+        ),
+      }).start
+    )
   }, [$app.datePickerState.selectedDate.value, $app.calendarState.view.value])
 
   return (
@@ -66,7 +87,10 @@ export default function ForwardBackwardNavigation() {
       >
         <Chevron
           disabled={
-            !!($app.config.minDate && previousMinusOne < $app.config.minDate)
+            !!(
+              $app.config.minDate &&
+              dateFromDateTime(rangeEndMinusOneRange) < $app.config.minDate
+            )
           }
           onClick={() => navigate('backwards')}
           direction={'previous'}
@@ -75,7 +99,10 @@ export default function ForwardBackwardNavigation() {
 
         <Chevron
           disabled={
-            !!($app.config.maxDate && nextPlusOne > $app.config.maxDate)
+            !!(
+              $app.config.maxDate &&
+              dateFromDateTime(rangeStartPlusOneRange) > $app.config.maxDate
+            )
           }
           onClick={() => navigate('forwards')}
           direction={'next'}

@@ -6,6 +6,7 @@ import {
   addDays,
   addMonths,
 } from '../../utils/stateless/time/date-time-mutation/adding'
+import { DateRange } from '../date-range'
 
 export type ViewConfig<FrameworkComponent = PreactViewComponent> = {
   /**
@@ -21,7 +22,7 @@ export type ViewConfig<FrameworkComponent = PreactViewComponent> = {
   /**
    * function that is called when a new date is selected
    * */
-  setDateRange: (config: RangeSetterConfig) => void
+  setDateRange: (config: RangeSetterConfig) => DateRange
 
   /**
    * should the view be displayed on small screens (< 700px calendar width)

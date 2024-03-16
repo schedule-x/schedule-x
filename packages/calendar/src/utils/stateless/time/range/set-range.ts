@@ -10,6 +10,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { RangeSetterConfig } from '@schedule-x/shared/src/interfaces/calendar/range-setter-config.interface'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
@@ -37,10 +38,10 @@ const getRangeEndGivenDayBoundaries = (
   return `${newRangeEndDate} ${dayEndTimeString}`
 }
 
-export const setRangeForWeek = (config: RangeSetterConfig) => {
+export const setRangeForWeek = (config: RangeSetterConfig): DateRange => {
   const weekForDate = config.timeUnitsImpl.getWeekFor(toJSDate(config.date))
 
-  config.range.value = {
+  return {
     start: getRangeStartGivenDayBoundaries(
       config.calendarConfig,
       weekForDate[0]
@@ -52,7 +53,7 @@ export const setRangeForWeek = (config: RangeSetterConfig) => {
   }
 }
 
-export const setRangeForMonth = (config: RangeSetterConfig) => {
+export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
   const { year, month } = toIntegers(config.date)
   const monthForDate = config.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
     year,
@@ -63,14 +64,14 @@ export const setRangeForMonth = (config: RangeSetterConfig) => {
       monthForDate[monthForDate.length - 1].length - 1
     ]
   )
-  config.range.value = {
+  return {
     start: toDateTimeString(monthForDate[0][0]),
     end: `${newRangeEndDate} 23:59`,
   }
 }
 
-export const setRangeForDay = (config: RangeSetterConfig) => {
-  config.range.value = {
+export const setRangeForDay = (config: RangeSetterConfig): DateRange => {
+  return {
     start: getRangeStartGivenDayBoundaries(
       config.calendarConfig,
       toJSDate(config.date)

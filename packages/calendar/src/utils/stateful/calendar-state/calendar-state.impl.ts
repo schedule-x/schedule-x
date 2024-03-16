@@ -40,7 +40,7 @@ export const createCalendarState = (
     const selectedView = calendarConfig.views.find(
       (availableView) => availableView.name === view.value
     )
-    ;(selectedView as View).setDateRange({
+    range.value = (selectedView as View).setDateRange({
       calendarConfig,
       date,
       range,
