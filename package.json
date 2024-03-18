@@ -47,7 +47,7 @@
     "@lerna/batch-packages": "^3.16.0",
     "@lerna/filter-packages": "^6.4.1",
     "@lerna/project": "^6.4.1",
-    "@preact/preset-vite": "^2.5.0",
+    "@preact/preset-vite": "^2.8.2",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-image": "^3.0.2",
