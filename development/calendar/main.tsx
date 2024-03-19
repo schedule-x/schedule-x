@@ -175,6 +175,13 @@ const calendar = createCalendar({
   events: [
     ...seededEvents,
     {
+      id: 45678,
+      title: 'Bi-Weekly Event Monday and Wednesday',
+      start: '2024-03-19 14:00',
+      end: '2024-03-19 15:00',
+      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;UNTIL=20240229T235959',
+    },
+    {
       id: 18547854,
       title: 'Bi-Weekly Event Monday and Wednesday',
       start: '2024-02-05 14:00',

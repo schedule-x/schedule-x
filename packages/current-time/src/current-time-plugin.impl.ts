@@ -34,10 +34,9 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   }
 
   private setIndicator(isRecursion = false) {
-    console.log('ran set indicator')
     const todayDateString = toDateString(new Date())
     const nowDateTimeString = toDateTimeString(new Date())
-    const todayElement = document.querySelector(
+    const todayElement = this.$app.elements.calendarWrapper!.querySelector(
       `[data-time-grid-date="${todayDateString}"]`
     )
 
@@ -57,9 +56,29 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
           this.$app.config.dayBoundaries,
           this.$app.config.timePointsPerDay
         ) + '%'
-      console.log(top)
       currentTimeIndicator.style.top = top
       todayElement.appendChild(currentTimeIndicator)
+
+      ////////////////////////// TODO: OPTIONAL, CONFIGURABLE PART
+      const fullWeekTimeIndicator = document.createElement('div')
+      fullWeekTimeIndicator.classList.add(
+        'sx__current-time-indicator-full-week'
+      )
+      fullWeekTimeIndicator.style.top = top
+      const weekGridWrapper = document.querySelector('.sx__week-grid')
+
+      const existingFullWeekIndicator = weekGridWrapper?.querySelector(
+        '.sx__current-time-indicator-full-week'
+      )
+      if (existingFullWeekIndicator) {
+        existingFullWeekIndicator.remove()
+      }
+
+      if (weekGridWrapper) {
+        weekGridWrapper.appendChild(fullWeekTimeIndicator)
+      }
+      ////////////////////////// OPTIONAL, CONFIGURABLE PART END
+
       setTimeout(this.setIndicator.bind(this, true), 60000)
     }
   }
