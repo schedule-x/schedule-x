@@ -3,7 +3,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import {
   getBorderRule,
   getEventHeight,
-  getEventTop,
   getLeftRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
@@ -23,6 +22,7 @@ import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
+import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -131,7 +131,7 @@ export default function TimeGridEvent({
         }
         tabIndex={0}
         style={{
-          top: `${getEventTop(
+          top: `${getYCoordinateInTimeGrid(
             calendarEvent.start,
             $app.config.dayBoundaries,
             $app.config.timePointsPerDay

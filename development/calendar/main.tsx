@@ -22,6 +22,7 @@ import { createResizePlugin } from '../../packages/resize/src'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
+import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -81,10 +82,10 @@ const calendar = createCalendar({
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  // dayBoundaries: {
-  //   start: '21:00',
-  //   end: '18:00',
-  // },
+  dayBoundaries: {
+    start: '06:00',
+    end: '20:00',
+  },
   // isDark: true,
   callbacks: {
     onRangeUpdate(range) {
@@ -168,7 +169,8 @@ const calendar = createCalendar({
     createResizePlugin(),
     createEventRecurrencePlugin(),
     calendarControlsPlugin,
-    calendarsUpdaterPlugin
+    calendarsUpdaterPlugin,
+    createCurrentTimePlugin(),
   ],
   events: [
     ...seededEvents,
