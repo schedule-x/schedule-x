@@ -1,4 +1,6 @@
-import CurrentTimePlugin from '@schedule-x/shared/src/interfaces/current-time/current-time-plugin.interface'
+import CurrentTimePlugin, {
+  CurrentTimePluginConfig,
+} from '@schedule-x/shared/src/interfaces/current-time/current-time-plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared'
 import {
   toDateString,
@@ -10,6 +12,8 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   name = 'current-time-plugin'
   $app!: CalendarAppSingleton
   observer: MutationObserver | null = null
+
+  constructor(private config: CurrentTimePluginConfig = {}) {}
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
@@ -59,27 +63,29 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
       currentTimeIndicator.style.top = top
       todayElement.appendChild(currentTimeIndicator)
 
-      ////////////////////////// TODO: OPTIONAL, CONFIGURABLE PART
-      const fullWeekTimeIndicator = document.createElement('div')
-      fullWeekTimeIndicator.classList.add(
-        'sx__current-time-indicator-full-week'
-      )
-      fullWeekTimeIndicator.style.top = top
-      const weekGridWrapper = document.querySelector('.sx__week-grid')
-
-      const existingFullWeekIndicator = weekGridWrapper?.querySelector(
-        '.sx__current-time-indicator-full-week'
-      )
-      if (existingFullWeekIndicator) {
-        existingFullWeekIndicator.remove()
+      if (this.config.fullWeekWidth) {
+        this.createFullWidthIndicator(top)
       }
-
-      if (weekGridWrapper) {
-        weekGridWrapper.appendChild(fullWeekTimeIndicator)
-      }
-      ////////////////////////// OPTIONAL, CONFIGURABLE PART END
 
       setTimeout(this.setIndicator.bind(this, true), 60000)
+    }
+  }
+
+  private createFullWidthIndicator(top: string) {
+    const fullWeekTimeIndicator = document.createElement('div')
+    fullWeekTimeIndicator.classList.add('sx__current-time-indicator-full-week')
+    fullWeekTimeIndicator.style.top = top
+    const weekGridWrapper = document.querySelector('.sx__week-grid')
+
+    const existingFullWeekIndicator = weekGridWrapper?.querySelector(
+      '.sx__current-time-indicator-full-week'
+    )
+    if (existingFullWeekIndicator) {
+      existingFullWeekIndicator.remove()
+    }
+
+    if (weekGridWrapper) {
+      weekGridWrapper.appendChild(fullWeekTimeIndicator)
     }
   }
 
@@ -90,4 +96,5 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   }
 }
 
-export const createCurrentTimePlugin = () => new CurrentTimePluginImpl()
+export const createCurrentTimePlugin = (config?: CurrentTimePluginConfig) =>
+  new CurrentTimePluginImpl(config)

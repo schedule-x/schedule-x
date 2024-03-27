@@ -7,6 +7,7 @@ import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless
 import { createCurrentTimePlugin } from '../current-time-plugin.impl'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { waitFor } from '@testing-library/preact'
+import { assertIsDIV } from '@schedule-x/assertions'
 
 describe('CurrentTimePlugin', () => {
   describe('Initializing the plugin when a week is displayed that is not now', () => {
@@ -60,7 +61,8 @@ describe('CurrentTimePlugin', () => {
       const currentTimeIndicator = app.elements.calendarWrapper.querySelector(
         '.sx__current-time-indicator'
       )
-      expect(currentTimeIndicator).not.toBeNull()
+      assertIsDIV(currentTimeIndicator)
+      expect(currentTimeIndicator.style.top).toMatch(/^\d+(\.\d+)%$/)
     })
   })
 })
