@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://github.com/schedule-x/schedule-x/compare/v1.26.0...v1.27.0) (2024-03-28)
+
+### Features
+
+- add Slovak language support([#312](https://github.com/schedule-x/schedule-x/issues/312)) ([#313](https://github.com/schedule-x/schedule-x/issues/313)) ([471a0a8](https://github.com/schedule-x/schedule-x/commit/471a0a8087f7e5511167398baf043638cfc4d814))
+
 # [1.26.0](https://github.com/schedule-x/schedule-x/compare/v1.25.0...v1.26.0) (2024-03-28)
 
 ### Features
