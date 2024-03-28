@@ -28,6 +28,8 @@ import { nlNL } from './locales/nl-NL'
 import { datePickerNlNL } from './locales/nl-NL/date-picker'
 import { ptBR } from './locales/pt-BR'
 import { datePickerPtBR } from './locales/pt-BR/date-picker'
+import { skSK } from './locales/sk-SK'
+import { datePickerSkSK } from './locales/sk-SK/date-picker'
 
 import { translate } from './translator/translate'
 
@@ -47,6 +49,7 @@ const translations = {
   esES,
   nlNL,
   ptBR,
+  skSK,
 }
 
 const datePickerTranslations = {
@@ -65,6 +68,7 @@ const datePickerTranslations = {
   esES: datePickerEsES,
   nlNL: datePickerNlNL,
   ptBR: datePickerPtBR,
+  skSK: datePickerSkSK,
 }
 
 export {
@@ -86,4 +90,5 @@ export {
   esES,
   nlNL,
   ptBR,
+  skSK,
 }
