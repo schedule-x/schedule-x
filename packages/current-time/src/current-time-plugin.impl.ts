@@ -1,7 +1,7 @@
 import CurrentTimePlugin, {
   CurrentTimePluginConfig,
 } from '@schedule-x/shared/src/interfaces/current-time/current-time-plugin.interface'
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import {
   toDateString,
   toDateTimeString,
