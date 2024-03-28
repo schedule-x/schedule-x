@@ -67,7 +67,10 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
         this.createFullWidthIndicator(top)
       }
 
-      setTimeout(this.setIndicator.bind(this, true), 60000)
+      setTimeout(
+        this.setIndicator.bind(this, true),
+        60000 - (Date.now() % 60000)
+      )
     }
   }
 
