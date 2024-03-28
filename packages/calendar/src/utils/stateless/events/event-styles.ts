@@ -1,8 +1,8 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import { timePointToPercentage } from '../time/time-point-to-grid-percentage/time-point-to-grid-percentage'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
+import { timePointToPercentage } from '@schedule-x/shared/src/utils/stateless/time/interpolation/time-point-to-grid-percentage'
 
 export const getEventHeight = (
   start: string,
@@ -21,18 +21,6 @@ export const getEventHeight = (
       dayBoundaries,
       timePointsFromString(timeFromDateTime(start))
     )
-  )
-}
-
-export const getEventTop = (
-  start: string,
-  dayBoundaries: DayBoundariesInternal,
-  pointsPerDay: number
-) => {
-  return timePointToPercentage(
-    pointsPerDay,
-    dayBoundaries,
-    timePointsFromString(timeFromDateTime(start))
   )
 }
 

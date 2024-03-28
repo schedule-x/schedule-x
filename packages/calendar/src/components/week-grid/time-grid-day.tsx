@@ -53,6 +53,7 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   return (
     <div
       className="sx__time-grid-day"
+      data-time-grid-date={date}
       onClick={handleOnClick}
       aria-label={getLocalizedDate(date, $app.config.locale)}
     >
