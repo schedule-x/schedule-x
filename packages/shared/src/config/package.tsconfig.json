@@ -15,7 +15,7 @@
     "declaration": true,
     "types": ["vite/client"],
     "paths": {
-      "@schedule-x/assertions": ["../../../../libs/assertions"]
+      "@schedule-x/assertions": ["../../../../libs/assertions/src"]
     }
   },
   "exclude": ["node_modules", "dist", "tests"]
