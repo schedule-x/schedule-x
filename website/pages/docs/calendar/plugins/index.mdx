@@ -1,11 +1,11 @@
 # Plugins
 
-The calendar can be extended with additional features through plugins. Currently, Schedule-X offers six plugins.
+The calendar can be extended with additional features through plugins. The library offers a range of plugins that can be downloaded separately.
 You can also write your own custom plugins.
 
 ## Available plugins
 
-import { Cards } from 'nextra/components'
+import {Cards} from 'nextra/components'
 
 <Cards num={2}>
   <Cards.Card
@@ -48,6 +48,11 @@ import { Cards } from 'nextra/components'
 </Cards>
 
 <Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Current time indicator"
+    href="/docs/calendar/plugins/current-time"
+  ></Cards.Card>
   <Cards.Card
     arrow
     title="Custom plugins"
