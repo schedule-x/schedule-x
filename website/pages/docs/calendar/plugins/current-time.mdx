@@ -1,0 +1,31 @@
+# Current time indicator
+
+This plugin adds a current time indicator to the calendar. It will automatically update every minute.
+
+![Current time indicator](../../../../assets/current-time.png)
+
+## Install
+
+```bash copy
+npm i @schedule-x/current-time
+```
+
+## Usage
+
+```js
+import { createCurrentTimePlugin } from '@schedule-x/current-time'
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [createCurrentTimePlugin()],
+})
+```
+
+## Configuration
+
+```js
+createCurrentTimePlugin({
+  // Whether the indicator should be displayed in the full width of the week. Defaults to false
+  fullWeekWidth: true
+})
+```

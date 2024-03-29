@@ -26,5 +26,6 @@
     "url": "https://github.com/schedule-x/schedule-x",
     "directory": "packages/calendar-controls"
   },
-  "homepage": "https://schedule-x.dev"
+  "homepage": "https://schedule-x.dev",
+  "gitHead": "d6461cd713a7b601599220288f37287b527f3667"
 }

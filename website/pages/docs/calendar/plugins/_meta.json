@@ -20,6 +20,9 @@
   "scroll-controller": {
     "title": "Scroll Controller"
   },
+  "current-time": {
+    "title": "Current Time Indicator"
+  },
   "custom-plugins": {
     "title": "Custom Plugins"
   }
