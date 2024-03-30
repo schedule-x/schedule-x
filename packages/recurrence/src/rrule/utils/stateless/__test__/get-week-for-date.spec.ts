@@ -33,4 +33,44 @@ describe('getWeekForDate', () => {
       '2024-02-03',
     ])
   })
+
+  it('should return the week dates for 2024-03-30', () => {
+    const result = getWeekForDate('2024-03-30')
+    console.log(result)
+    expect(result).toEqual([
+      '2024-03-24',
+      '2024-03-25',
+      '2024-03-26',
+      '2024-03-27',
+      '2024-03-28',
+      '2024-03-29',
+      '2024-03-30',
+    ])
+  })
+
+  it('should return the week dates for 2024-02-04', () => {
+    const result = getWeekForDate('2024-02-04')
+    expect(result).toEqual([
+      '2024-02-04',
+      '2024-02-05',
+      '2024-02-06',
+      '2024-02-07',
+      '2024-02-08',
+      '2024-02-09',
+      '2024-02-10',
+    ])
+  })
+
+  it('should return the week dates for 2024-04-06', () => {
+    const result = getWeekForDate('2024-04-01')
+    expect(result).toEqual([
+      '2024-03-31',
+      '2024-04-01',
+      '2024-04-02',
+      '2024-04-03',
+      '2024-04-04',
+      '2024-04-05',
+      '2024-04-06',
+    ])
+  })
 })
