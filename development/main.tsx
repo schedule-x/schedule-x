@@ -11,7 +11,7 @@ import { createDatePicker } from '../packages/date-picker/src'
 const datePicker = createDatePicker(
   document.querySelector('#app') as HTMLElement,
   {
-    locale: 'de-DE',
+    locale: 'fr-FR',
     style: {
       fullWidth: true,
     },
