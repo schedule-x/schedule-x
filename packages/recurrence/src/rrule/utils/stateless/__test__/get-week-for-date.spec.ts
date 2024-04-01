@@ -36,7 +36,6 @@ describe('getWeekForDate', () => {
 
   it('should return the week dates for 2024-03-30', () => {
     const result = getWeekForDate('2024-03-30')
-    console.log(result)
     expect(result).toEqual([
       '2024-03-24',
       '2024-03-25',
