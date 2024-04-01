@@ -26,9 +26,32 @@ export default function AppPopup() {
     return () => document.removeEventListener('click', clickOutsideListener)
   }, [])
 
+  const remSize: number = Number(
+    getComputedStyle(document.documentElement).fontSize.split('px')[0]
+  )
+  const popupHeight = 362
+  const popupWidth = 332
+
   return (
     <>
-      <div data-testid="date-picker-popup" className={popupClasses.join(' ')}>
+      <div
+        style={{
+          top: $app.config.placement.includes('bottom')
+            ? $app.datePickerState.inputRect.value.height +
+              $app.datePickerState.inputRect.value.y +
+              1
+            : $app.datePickerState.inputRect.value.y - remSize - popupHeight,
+          left: $app.config.placement.includes('start')
+            ? $app.datePickerState.inputRect.value.x
+            : $app.datePickerState.inputRect.value.x +
+              $app.datePickerState.inputRect.value.width -
+              popupWidth,
+          width: popupWidth,
+          height: 'fit-content',
+        }}
+        data-testid="date-picker-popup"
+        className={popupClasses.join(' ')}
+      >
         {datePickerView === DatePickerView.MONTH_DAYS ? (
           <MonthView
             seatYearsView={() => setDatePickerView(DatePickerView.YEARS)}

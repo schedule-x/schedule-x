@@ -7,6 +7,7 @@ export default interface DatePickerState {
   inputDisplayedValue: Signal<string>
   datePickerDate: Signal<string>
   datePickerView: Signal<DatePickerView>
+  inputRect: Signal<{ x: number; y: number; height: number; width: number }>
 
   open(): void
   close(): void

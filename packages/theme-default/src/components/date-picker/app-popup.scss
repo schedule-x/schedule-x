@@ -1,5 +1,5 @@
 .sx__date-picker-popup {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   top: calc(100% + 1px); // 1px to account for outline
   width: 20.75rem;
@@ -12,25 +12,5 @@
 
   .is-dark & {
     background-color: var(--sx-color-surface-container-high);
-  }
-
-  $top-placement-bottom-value: calc(100% + 1rem);
-
-  &.bottom-end {
-    left: auto;
-    right: 0;
-    transform: translateX(0);
-  }
-
-  &.top-start {
-    top: auto;
-    bottom: $top-placement-bottom-value;
-    left: 0;
-    transform: translateX(0);
-  }
-
-  &.top-end {
-    inset: auto 0 $top-placement-bottom-value auto;
-    transform: translateX(0);
   }
 }

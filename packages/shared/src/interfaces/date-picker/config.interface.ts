@@ -9,6 +9,7 @@ export default interface DatePickerConfigInternal extends Config {
   placement: Placement
   listeners: DatePickerListeners
   style: DatePickerStyle
+  teleportTo?: HTMLElement
 }
 
 export interface DatePickerConfigExternal
