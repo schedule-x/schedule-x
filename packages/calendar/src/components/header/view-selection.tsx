@@ -3,8 +3,13 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
+import { ToggleBtnsViewSelection } from './toggle-btns-view-selection'
 
-export default function ViewSelection() {
+interface props {
+  toggleView: boolean
+}
+
+export default function ViewSelection({ toggleView = true }: props) {
   const $app = useContext(AppContext)
 
   const [availableViews, setAvailableViews] = useState<View[]>([])
@@ -96,7 +101,9 @@ export default function ViewSelection() {
     }
   }
 
-  return (
+  return toggleView ? (
+    <ToggleBtnsViewSelection />
+  ) : (
     <div className="sx__view-selection">
       <div
         tabIndex={0}
