@@ -41,7 +41,7 @@ export default function CalendarHeader() {
       </div>
 
       <div className={'sx__calendar-header-content'}>
-        <ViewSelection />
+        <ViewSelection toggleView={true} />
 
         <AppWrapper $app={datePickerAppSingleton}></AppWrapper>
       </div>
