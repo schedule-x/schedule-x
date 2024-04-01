@@ -7,7 +7,7 @@ import '../../../packages/theme-default/src/date-picker.scss'
 const datePickerTopLeft = document.querySelector('.date-picker-top-left')
 const datePickerTopRight = document.querySelector('.date-picker-top-right')
 const datePickerBottomLeft = document.querySelector('.date-picker-bottom-left')
-const datePickerBottomRight = document.querySelector(
+const datePickerInModal = document.querySelector(
   '.date-picker-bottom-right'
 )
 
@@ -24,6 +24,5 @@ createDatePicker({
 }).render(datePickerBottomLeft as HTMLElement)
 
 createDatePicker({
-  placement: 'top-end',
-  teleportTo: document.body,
-}).render(datePickerBottomRight as HTMLElement)
+  placement: 'bottom-start',
+}).render(datePickerInModal as HTMLElement)

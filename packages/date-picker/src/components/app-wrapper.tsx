@@ -20,12 +20,7 @@ export default function AppWrapper({ $app }: props) {
           <AppInput />
 
           {$app.datePickerState.isOpen.value &&
-            ($app.config.teleportTo ? (
-              $app.config.teleportTo &&
-              createPortal(<AppPopup />, $app.config.teleportTo)
-            ) : (
-              <AppPopup />
-            ))}
+            createPortal(<AppPopup />, $app.config.teleportTo || document.body)}
         </AppContext.Provider>
       </div>
     </>
