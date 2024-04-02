@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0](https://github.com/schedule-x/schedule-x/compare/v1.27.1...v1.28.0) (2024-04-02)
+
+### Features
+
+- add macedonian language support ([#321](https://github.com/schedule-x/schedule-x/issues/321)) ([02482a8](https://github.com/schedule-x/schedule-x/commit/02482a855ec9d9f1b1d1a97bfc0bec3ebef764a3))
+- enable teleporting date picker ([#323](https://github.com/schedule-x/schedule-x/issues/323)) ([f441e60](https://github.com/schedule-x/schedule-x/commit/f441e606aaa5c1b0a49caa898e281acb72b1e3e4))
+
 ## [1.27.1](https://github.com/schedule-x/schedule-x/compare/v1.27.0...v1.27.1) (2024-04-01)
 
 ### Bug Fixes
