@@ -2,3 +2,5 @@
 . "${0%/*}/h"
 
 ./../build-and-copy.sh
+
+echo 'qq'
