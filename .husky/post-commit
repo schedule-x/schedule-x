@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 . "${0%/*}/h"
 
-./../build-and-copy.sh
+./build-and-copy.sh
 
 echo 'qq'

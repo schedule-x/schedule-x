@@ -5,4 +5,4 @@ npm run format:changed
 npm run lint:changed:fix
 git add .
 
-./build-and-copy.sh
+# ./build-and-copy.sh
