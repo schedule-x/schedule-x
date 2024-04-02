@@ -26,9 +26,6 @@
     "url": "https://github.com/schedule-x/schedule-x",
     "directory": "packages/translations"
   },
-  "dependencies": {
-    "sass": "^1.72.0"
-  },
   "homepage": "https://schedule-x.dev",
   "gitHead": "d6461cd713a7b601599220288f37287b527f3667"
 }

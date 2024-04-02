@@ -7,6 +7,8 @@ export const calendarRuRU: CalendarTranslations = {
   Day: 'День',
   events: 'события',
   event: 'событие',
+  'My appointments': 'Мои встречи',
+  'Add time off': 'Добавить отпуск',
   'No events': 'Нет событий',
   'Next period': 'Следующий период',
   'Previous period': 'Прошлый период',

@@ -7,6 +7,8 @@ export const calendarSkSK: CalendarTranslations = {
   Day: 'Deň',
   events: 'udalosti',
   event: 'udalosť',
+  'My appointments': 'Moje stretnutia',
+  'Add time off': 'Pridať voľno',
   'No events': 'Žiadne udalosti',
   'Next period': 'Ďalšie obdobie',
   'Previous period': 'Predchádzajúce obdobie',

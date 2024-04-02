@@ -9,6 +9,7 @@ import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/c
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-events.interface'
+import CustomCallbacks from '@schedule-x/shared/src/interfaces/calendar/custom-callbacks.interface'
 
 export default class CalendarAppSingletonBuilder
   implements Builder<CalendarAppSingleton>
@@ -20,6 +21,7 @@ export default class CalendarAppSingletonBuilder
   private translate: TranslateFn | undefined
   private datePickerConfig: DatePickerConfigInternal | undefined
   private calendarEvents: CalendarEvents | undefined
+  private customCallbacks: CustomCallbacks | undefined
 
   build(): CalendarAppSingleton {
     return new CalendarAppSingletonImpl(
@@ -29,7 +31,9 @@ export default class CalendarAppSingletonBuilder
       this.datePickerState!,
       this.translate!,
       this.datePickerConfig!,
-      this.calendarEvents!
+      this.calendarEvents!,
+      { calendarWrapper: undefined },
+      this.customCallbacks!
     )
   }
 
@@ -71,6 +75,13 @@ export default class CalendarAppSingletonBuilder
     calendarEvents: CalendarEvents
   ): CalendarAppSingletonBuilder {
     this.calendarEvents = calendarEvents
+    return this
+  }
+
+  withCustomCallbacks(
+    customCallBacks: CustomCallbacks
+  ): CalendarAppSingletonBuilder {
+    this.customCallbacks = customCallBacks
     return this
   }
 }

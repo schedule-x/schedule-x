@@ -19,6 +19,7 @@ export default function CalendarHeader() {
   }
 
   const handleAddTimeOff = () => {
+    $app.customCallbacks?.onAddTimeOff()
     console.log('handleAddTimeOff function')
   }
 

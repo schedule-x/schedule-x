@@ -15,6 +15,7 @@ import { CustomComponentFns } from './custom-component-fns'
 import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
+import CustomCallbacks from './custom-callbacks.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -87,4 +88,5 @@ export interface CalendarConfigExternal
   views: [View, ...View[]]
   selectedDate?: string
   calendars?: Record<string, CalendarType>
+  customCallBacks?: CustomCallbacks
 }

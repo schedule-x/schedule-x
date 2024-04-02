@@ -27,15 +27,14 @@ import { createCurrentTimePlugin } from '../../packages/current-time/src/current
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const scrollControllerPlugin = createScrollControllerPlugin({
-  initialScroll: '07:50'
+  initialScroll: '07:50',
 })
 
 class CalendarsUpdaterPlugin {
   name: string = 'calendars-updater'
   $app!: CalendarAppSingleton
 
-  destroy(): void {
-  }
+  destroy(): void {}
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
@@ -62,9 +61,12 @@ class CalendarsUpdaterPlugin {
 }
 const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
-
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const calendar = createCalendar({
+  customCallBacks: {
+    onAddTimeOff: () =>
+      console.log('successful on add time off added function'),
+  },
   // weekOptions: {
   //   gridHeight: 2500,
   // },
@@ -106,7 +108,7 @@ const calendar = createCalendar({
 
     onClickDateTime(dateTime) {
       console.log('onClickDateTime', dateTime)
-    }
+    },
   },
   calendars: {
     personal: {
@@ -223,8 +225,8 @@ const calendar = createCalendar({
       title: 'Yearly event',
       start: '2024-02-08 16:00',
       end: '2024-02-08 17:55',
-      id: 874367853
-    }
+      id: 874367853,
+    },
   ],
 })
 calendar.render(calendarElement)
@@ -249,28 +251,39 @@ addEventButton.addEventListener('click', () => {
 
 const scrollButton = document.getElementById('scroll') as HTMLButtonElement
 scrollButton.addEventListener('click', () => {
-  scrollControllerPlugin.scrollTo((document.getElementById('scroll-to') as HTMLInputElement).value)
+  scrollControllerPlugin.scrollTo(
+    (document.getElementById('scroll-to') as HTMLInputElement).value
+  )
 })
 
-const logAllEventsButton = document.getElementById('log-all-events') as HTMLButtonElement
+const logAllEventsButton = document.getElementById(
+  'log-all-events'
+) as HTMLButtonElement
 logAllEventsButton.addEventListener('click', () => {
   console.log(calendar.events.getAll())
 })
 
-const setDateButton = document.getElementById('set-date-button') as HTMLButtonElement
+const setDateButton = document.getElementById(
+  'set-date-button'
+) as HTMLButtonElement
 setDateButton.addEventListener('click', () => {
-  const newDate = (document.getElementById('set-date') as HTMLInputElement).value
+  const newDate = (document.getElementById('set-date') as HTMLInputElement)
+    .value
   calendarControlsPlugin.setDate(newDate)
 })
 
-const setViewButton = document.getElementById('set-view-button') as HTMLButtonElement
+const setViewButton = document.getElementById(
+  'set-view-button'
+) as HTMLButtonElement
 setViewButton.addEventListener('click', () => {
-  const newView = (document.getElementById('set-view') as HTMLInputElement).value
+  const newView = (document.getElementById('set-view') as HTMLInputElement)
+    .value
   calendarControlsPlugin.setView(newView)
 })
 
-const updateCalendarsButton = document.getElementById('update-calendars') as HTMLButtonElement
+const updateCalendarsButton = document.getElementById(
+  'update-calendars'
+) as HTMLButtonElement
 updateCalendarsButton.addEventListener('click', () => {
   calendarsUpdaterPlugin.updateCalendars()
 })
-

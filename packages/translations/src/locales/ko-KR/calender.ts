@@ -7,6 +7,8 @@ export const calendarKoKR: CalendarTranslations = {
   Day: '일',
   events: '일정들',
   event: '일정',
+  'My appointments': '내 약속',
+  'Add time off': '휴가 추가',
   'No events': '일정 없음',
   'Next period': '다음',
   'Previous period': '이전',

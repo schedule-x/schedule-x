@@ -7,6 +7,8 @@ export const calendarDeDE: CalendarTranslations = {
   Day: 'Tag',
   events: 'Ereignisse',
   event: 'Ereignis',
+  'My appointments': 'Meine Termine',
+  'Add time off': 'Freizeit hinzufügen',
   'No events': 'Keine Ereignisse',
   'Next period': 'Nächster Zeitraum',
   'Previous period': 'Vorheriger Zeitraum',

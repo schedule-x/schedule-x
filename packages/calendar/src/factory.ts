@@ -25,6 +25,9 @@ export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
     config.events || [],
     internalConfig
   )
+
+  const customCallBacks = config.customCallBacks || { onAddTimeOff: () => {} }
+
   return new CalendarAppSingletonBuilder()
     .withConfig(internalConfig)
     .withTimeUnitsImpl(timeUnitsImpl)
@@ -33,6 +36,7 @@ export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
     .withDatePickerConfig(datePickerConfig)
     .withCalendarState(calendarState)
     .withTranslate(translate(internalConfig.locale, translations))
+    .withCustomCallbacks(customCallBacks)
     .build()
 }
 

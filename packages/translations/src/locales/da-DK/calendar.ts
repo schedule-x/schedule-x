@@ -7,6 +7,8 @@ export const calendarDaDK: CalendarTranslations = {
   Day: 'Dag',
   events: 'begivenheder',
   event: 'begivenhed',
+  'My appointments': 'Mine aftaler',
+  'Add time off': 'Tilføj fritid',
   'No events': 'Ingen begivenheder',
   'Next period': 'Næste periode',
   'Previous period': 'Forgående periode',

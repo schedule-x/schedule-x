@@ -7,6 +7,8 @@ export const calendarNlNL: CalendarTranslations = {
   Day: 'Dag',
   events: 'gebeurtenissen',
   event: 'gebeurtenis',
+  'My appointments': 'Mijn afspraken',
+  'Add time off': 'Vrije tijd toevoegen',
   'No events': 'Geen gebeurtenissen',
   'Next period': 'Volgende periode',
   'Previous period': 'Vorige periode',

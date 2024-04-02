@@ -7,6 +7,8 @@ export const calendarPtBR: CalendarTranslations = {
   Day: 'Dia',
   events: 'eventos',
   event: 'evento',
+  'My appointments': 'Meus compromissos',
+  'Add time off': 'Adicionar tempo livre',
   'No events': 'Sem eventos',
   'Next period': 'Período seguinte',
   'Previous period': 'Período anterior',
