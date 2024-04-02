@@ -9,6 +9,7 @@ import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/ev
 export default function AppInput() {
   const datePickerInputId = randomStringId()
   const datePickerLabelId = randomStringId()
+  const inputWrapperId = randomStringId()
   const $app = useContext(AppContext)
   const getLocalizedDate = (dateString: string) => {
     if (dateString === '') return $app.translate('MM/DD/YYYY')
@@ -23,7 +24,21 @@ export default function AppInput() {
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
+  const setInputDOMRect = () => {
+    const inputWrapperEl = document.getElementById(inputWrapperId)
+    if (inputWrapperEl === null) return
+
+    $app.datePickerState.inputRect.value = {
+      x: inputWrapperEl.getBoundingClientRect().left + window.scrollX,
+      y: inputWrapperEl.getBoundingClientRect().top + window.scrollY,
+      height: inputWrapperEl.getBoundingClientRect().height,
+      width: inputWrapperEl.getBoundingClientRect().width,
+    }
+  }
+
   useEffect(() => {
+    if ($app.config.teleportTo) setInputDOMRect()
+
     const newClasses = ['sx__date-input-wrapper']
     if ($app.datePickerState.isOpen.value)
       newClasses.push('sx__date-input--active')
@@ -74,7 +89,7 @@ export default function AppInput() {
 
   return (
     <>
-      <div className={wrapperClasses.join(' ')}>
+      <div className={wrapperClasses.join(' ')} id={inputWrapperId}>
         <label
           for={datePickerInputId}
           id={datePickerLabelId}

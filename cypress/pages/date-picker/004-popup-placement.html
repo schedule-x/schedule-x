@@ -43,6 +43,16 @@
         bottom: 10px;
         right: 10px;
       }
+
+      .modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px;
+        height: 300px;
+        background-color: lightgray;
+      }
     </style>
   </head>
   <body>
@@ -51,6 +61,10 @@
       <div class="date-picker-top-right"></div>
       <div class="date-picker-bottom-left"></div>
       <div class="date-picker-bottom-right"></div>
+
+      <div class="modal">
+        <div class="date-picker-in-modal"></div>
+      </div>
     </div>
     <script defer type="module" src="./004-popup-placement.ts"></script>
   </body>
