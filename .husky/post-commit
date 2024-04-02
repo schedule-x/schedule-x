@@ -2,5 +2,3 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 ./build-and-copy.sh
-
-echo 'qq'
