@@ -18,6 +18,10 @@ export default function CalendarHeader() {
     console.log('change to my appointments')
   }
 
+  const handleAddTimeOff = () => {
+    console.log('handleAddTimeOff function')
+  }
+
   return (
     <header className={'sx__calendar-header'}>
       <div className={'sx__calendar-header-content'}>
@@ -59,7 +63,10 @@ export default function CalendarHeader() {
 
         <ViewSelection toggleView={true} />
 
-        <div className={'sx__calendar-header-content-add-time-off'}>
+        <div
+          className={'sx__calendar-header-content-add-time-off'}
+          onClick={() => handleAddTimeOff()}
+        >
           <img src={calendarIcon} alt="Calendar icon" width="24" />
           <span>{$app.translate('Add time off')}</span>
         </div>
