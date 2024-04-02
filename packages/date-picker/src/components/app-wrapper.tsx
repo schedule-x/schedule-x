@@ -13,14 +13,17 @@ export default function AppWrapper({ $app }: props) {
   if ($app.config.style?.dark) classes.push('is-dark')
   if ($app.config.style?.fullWidth) classes.push('has-full-width')
 
+  let appPopupJSX = <AppPopup />
+  if ($app.config.teleportTo)
+    appPopupJSX = createPortal(appPopupJSX, $app.config.teleportTo)
+
   return (
     <>
       <div className={classes.join(' ')}>
         <AppContext.Provider value={$app}>
           <AppInput />
 
-          {$app.datePickerState.isOpen.value &&
-            createPortal(<AppPopup />, $app.config.teleportTo || document.body)}
+          {$app.datePickerState.isOpen.value && appPopupJSX}
         </AppContext.Provider>
       </div>
     </>

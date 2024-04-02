@@ -40,7 +40,7 @@ export default function AppInput() {
   }
 
   useEffect(() => {
-    setInputDOMRect()
+    if ($app.config.teleportTo) setInputDOMRect()
 
     const newClasses = ['sx__date-input-wrapper']
     if ($app.datePickerState.isOpen.value)

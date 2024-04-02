@@ -32,23 +32,25 @@ export default function AppPopup() {
   const popupHeight = 362
   const popupWidth = 332
 
+  const fixedPositionStyle = {
+    top: $app.config.placement.includes('bottom')
+      ? $app.datePickerState.inputRect.value.height +
+        $app.datePickerState.inputRect.value.y +
+        1
+      : $app.datePickerState.inputRect.value.y - remSize - popupHeight,
+    left: $app.config.placement.includes('start')
+      ? $app.datePickerState.inputRect.value.x
+      : $app.datePickerState.inputRect.value.x +
+        $app.datePickerState.inputRect.value.width -
+        popupWidth,
+    width: popupWidth,
+    position: 'fixed',
+  }
+
   return (
     <>
       <div
-        style={{
-          top: $app.config.placement.includes('bottom')
-            ? $app.datePickerState.inputRect.value.height +
-              $app.datePickerState.inputRect.value.y +
-              1
-            : $app.datePickerState.inputRect.value.y - remSize - popupHeight,
-          left: $app.config.placement.includes('start')
-            ? $app.datePickerState.inputRect.value.x
-            : $app.datePickerState.inputRect.value.x +
-              $app.datePickerState.inputRect.value.width -
-              popupWidth,
-          width: popupWidth,
-          height: 'fit-content',
-        }}
+        style={$app.config.teleportTo ? fixedPositionStyle : undefined}
         data-testid="date-picker-popup"
         className={popupClasses.join(' ')}
       >

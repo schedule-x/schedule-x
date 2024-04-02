@@ -1,14 +1,15 @@
-// import { createDatePicker } from '@schedule-x/date-picker'
-// import '@schedule-x/theme-default/dist/date-picker.css'
+import { createDatePicker } from '@schedule-x/date-picker'
+import '@schedule-x/theme-default/dist/date-picker.css'
 
-import { createDatePicker } from '@schedule-x/date-picker/src'
-import '../../../packages/theme-default/src/date-picker.scss'
+// import { createDatePicker } from '@schedule-x/date-picker/src'
+// import '../../../packages/theme-default/src/date-picker.scss'
 
 const datePickerTopLeft = document.querySelector('.date-picker-top-left')
 const datePickerTopRight = document.querySelector('.date-picker-top-right')
 const datePickerBottomLeft = document.querySelector('.date-picker-bottom-left')
+const datePickerBottomRight = document.querySelector('.date-picker-bottom-right')
 const datePickerInModal = document.querySelector(
-  '.date-picker-bottom-right'
+  '.date-picker-in-modal'
 )
 
 createDatePicker({
@@ -24,5 +25,10 @@ createDatePicker({
 }).render(datePickerBottomLeft as HTMLElement)
 
 createDatePicker({
+  placement: 'top-end',
+}).render(datePickerBottomRight as HTMLElement)
+
+createDatePicker({
   placement: 'bottom-start',
+  teleportTo: document.body
 }).render(datePickerInModal as HTMLElement)
