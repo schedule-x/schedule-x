@@ -36,8 +36,8 @@ export default function AppPopup() {
     top: $app.config.placement.includes('bottom')
       ? $app.datePickerState.inputRect.value.height +
         $app.datePickerState.inputRect.value.y +
-        1
-      : $app.datePickerState.inputRect.value.y - remSize - popupHeight,
+        1 // 1px border
+      : $app.datePickerState.inputRect.value.y - remSize - popupHeight, // subtract remsize to leave room for label text
     left: $app.config.placement.includes('start')
       ? $app.datePickerState.inputRect.value.x
       : $app.datePickerState.inputRect.value.x +

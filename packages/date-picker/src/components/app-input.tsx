@@ -28,12 +28,9 @@ export default function AppInput() {
     const inputWrapperEl = document.getElementById(inputWrapperId)
     if (inputWrapperEl === null) return
 
-    const inputY = inputWrapperEl.getBoundingClientRect().top + window.scrollY
-    const inputX = inputWrapperEl.getBoundingClientRect().left + window.scrollX
-
     $app.datePickerState.inputRect.value = {
-      x: inputX,
-      y: inputY,
+      x: inputWrapperEl.getBoundingClientRect().left + window.scrollX,
+      y: inputWrapperEl.getBoundingClientRect().top + window.scrollY,
       height: inputWrapperEl.getBoundingClientRect().height,
       width: inputWrapperEl.getBoundingClientRect().width,
     }
