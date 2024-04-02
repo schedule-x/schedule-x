@@ -52,7 +52,7 @@
 .sx__calendar-header-change-btn-appointments {
   background-color: #32cb90;
   border-radius: 999px;
-  padding: 4px 8px;
+  padding: 8px 16px;
   margin: 0 8px;
   display: flex;
   align-items: center;
@@ -65,5 +65,15 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 4px 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 999px;
+
+  &:hover {
+    background-color: #eee;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

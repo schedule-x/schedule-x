@@ -8,7 +8,6 @@ import hideSidePanelIcon from './hide_sidebar_horizontal_icon_128227.svg'
 import showSidePanelIcon from './show_sidebar_horizontal_icon_128225.svg'
 import changeIcon from './change_icon.svg'
 import calendarIcon from './calendar_icon.svg'
-import './header.css'
 
 export default function CalendarHeader() {
   const $app = useContext(AppContext)
@@ -26,12 +25,14 @@ export default function CalendarHeader() {
           {isOpen ? (
             <img
               src={hideSidePanelIcon}
+              className="cursor-pointer"
               alt="Icon hide side panel"
               onClick={() => setIsOpen(false)}
             />
           ) : (
             <img
               src={showSidePanelIcon}
+              className="cursor-pointer"
               alt="Icon open side panel"
               onClick={() => setIsOpen(true)}
             />
