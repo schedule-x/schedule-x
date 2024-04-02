@@ -19,4 +19,51 @@
   display: flex;
   align-items: center;
   gap: var(--sx-spacing-padding4);
+  justify-content: space-between;
+  flex: 1 0 0;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.time-frame-buttons {
+  border-radius: 9999px;
+  border: 1px solid #1c1b1f;
+  overflow: hidden;
+  padding: 4px 6px;
+  display: flex;
+  width: auto;
+
+  & button {
+    width: 80px;
+    border-radius: 999px;
+    padding: 4px 0;
+
+    &.active {
+      background-color: #3367c5;
+      color: #fff;
+    }
+  }
+}
+
+.sx__calendar-header-change-btn-appointments {
+  background-color: #32cb90;
+  border-radius: 999px;
+  padding: 4px 8px;
+  margin: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sx__calendar-header-content-add-time-off {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 4px 8px;
 }

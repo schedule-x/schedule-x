@@ -1,49 +1,68 @@
-import AppWrapper from '@schedule-x/date-picker/src/components/app-wrapper'
 import { useContext, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
-import DatePickerAppSingletonBuilder from '@schedule-x/shared/src/utils/stateful/date-picker/app-singleton/date-picker-app-singleton.builder'
 import RangeHeading from './range-heading'
 import TodayButton from './today-button'
 import ViewSelection from './view-selection'
 import ForwardBackwardNavigation from './forward-backward-navigation'
 import hideSidePanelIcon from './hide_sidebar_horizontal_icon_128227.svg'
 import showSidePanelIcon from './show_sidebar_horizontal_icon_128225.svg'
+import changeIcon from './change_icon.svg'
+import calendarIcon from './calendar_icon.svg'
+import './header.css'
 
 export default function CalendarHeader() {
   const $app = useContext(AppContext)
 
-  const datePickerAppSingleton = new DatePickerAppSingletonBuilder()
-    .withDatePickerState($app.datePickerState)
-    .withConfig($app.datePickerConfig)
-    .withTranslate($app.translate)
-    .withTimeUnitsImpl($app.timeUnitsImpl)
-    .build()
-
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleChangeAppointments = () => {
+    console.log('change to my appointments')
+  }
 
   return (
     <header className={'sx__calendar-header'}>
       <div className={'sx__calendar-header-content'}>
-        {isOpen ? (
-          <>
-            <img src={hideSidePanelIcon} onClick={() => setIsOpen(false)} />
-          </>
-        ) : (
-          <>
-            <img src={showSidePanelIcon} onClick={() => setIsOpen(true)} />
-          </>
-        )}
-        <TodayButton />
-        {!$app.calendarState.isCalendarSmall.value && (
-          <ForwardBackwardNavigation />
-        )}
-        <RangeHeading />
-      </div>
+        <div>
+          {isOpen ? (
+            <img
+              src={hideSidePanelIcon}
+              alt="Icon hide side panel"
+              onClick={() => setIsOpen(false)}
+            />
+          ) : (
+            <img
+              src={showSidePanelIcon}
+              alt="Icon open side panel"
+              onClick={() => setIsOpen(true)}
+            />
+          )}
 
-      <div className={'sx__calendar-header-content'}>
+          <div className={'sx__calendar-header-change-btn-appointments'}>
+            <img
+              src={changeIcon}
+              onClick={() => handleChangeAppointments()}
+              width={30}
+              alt=""
+            />
+            {$app.translate('My appointments')}
+          </div>
+        </div>
+
+        <div>
+          <TodayButton />
+          {!$app.calendarState.isCalendarSmall.value && (
+            <ForwardBackwardNavigation />
+          )}
+          <RangeHeading />
+        </div>
+
         <ViewSelection toggleView={true} />
 
-        <AppWrapper $app={datePickerAppSingleton}></AppWrapper>
+        <div className={'sx__calendar-header-content-add-time-off'}>
+          <img src={calendarIcon} alt="Calendar icon" width="24" />
+          <span>{$app.translate('Add time off')}</span>
+        </div>
+        <div></div>
       </div>
     </header>
   )

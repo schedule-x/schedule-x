@@ -55,22 +55,3 @@ body {
   background-color: #1c1b1f;
   color: #fff;
 }
-
-.time-frame-buttons {
-  border-radius: 9999px;
-  border: 1px solid #1c1b1f;
-  overflow: hidden;
-  padding: 4px 6px;
-  display: flex;
-  width: auto;
-  & button {
-    width: 80px;
-    border-radius: 999px;
-    padding: 4px 0;
-
-    &.active {
-      background-color: #3367c5;
-      color: #fff;
-    }
-  }
-}
