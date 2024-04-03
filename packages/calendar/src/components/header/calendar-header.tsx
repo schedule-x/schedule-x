@@ -14,6 +14,10 @@ export default function CalendarHeader() {
 
   const [isOpen, setIsOpen] = useState(false)
 
+  if ($app.config.plugins.sidebar) {
+    setIsOpen($app.config.plugins.sidebar.isOpen.value)
+  }
+
   const handleChangeAppointments = () => {
     if ($app.config.callbacks.onChangeToAppointments) {
       $app.config.callbacks.onChangeToAppointments()
@@ -27,10 +31,13 @@ export default function CalendarHeader() {
   }
 
   const handleToggleSidePanel = () => {
+    if (!$app.config.plugins.sidebar) return
     if ($app.config.callbacks.onToggleSidePanel) {
       $app.config.callbacks.onToggleSidePanel()
     }
-    setIsOpen(!isOpen)
+    $app.config.plugins.sidebar.isOpen.value =
+      !$app.config.plugins.sidebar?.isOpen.value
+    setIsOpen($app.config.plugins.sidebar.isOpen.value)
   }
 
   return (

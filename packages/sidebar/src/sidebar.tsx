@@ -9,9 +9,16 @@ export default function Sidebar({ $app }: EventModalProps) {
   console.log('customcomp', customComponent)
   useEffect(() => {
     if (customComponent) {
+      // const setIsOpen = (value: boolean) => {
+      //   if ($app.config.plugins.sidebar) {
+      //     $app.config.plugins.sidebar.isOpen.value = value
+      //   }
+      // }
       customComponent(
         document.querySelector(`[data-ccid=${sidebarId}]`) as HTMLElement,
-        { nul: '' }
+        {
+          isOpen: $app.config.plugins.sidebar?.isOpen,
+        }
       )
     }
   }, [])
