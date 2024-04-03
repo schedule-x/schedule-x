@@ -20,6 +20,10 @@
   overflow: hidden;
 }
 
+.sx__calendar-content {
+  display: flex;
+}
+
 .sx__view-container {
   position: relative;
   flex: 1;

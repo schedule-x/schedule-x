@@ -15,41 +15,50 @@ export default function CalendarHeader() {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleChangeAppointments = () => {
-    console.log('change to my appointments')
+    if ($app.config.callbacks.onChangeToAppointments) {
+      $app.config.callbacks.onChangeToAppointments()
+    }
   }
 
   const handleAddTimeOff = () => {
-    $app.customCallbacks?.onAddTimeOff()
-    console.log('handleAddTimeOff function')
+    if ($app.config.callbacks.onAddTimeOff) {
+      $app.config.callbacks.onAddTimeOff()
+    }
+  }
+
+  const handleToggleSidePanel = () => {
+    if ($app.config.callbacks.onToggleSidePanel) {
+      $app.config.callbacks.onToggleSidePanel()
+    }
+    setIsOpen(!isOpen)
   }
 
   return (
     <header className={'sx__calendar-header'}>
       <div className={'sx__calendar-header-content'}>
         <div>
-          {isOpen ? (
-            <img
-              src={hideSidePanelIcon}
-              className="cursor-pointer"
-              alt="Icon hide side panel"
-              onClick={() => setIsOpen(false)}
-            />
-          ) : (
-            <img
-              src={showSidePanelIcon}
-              className="cursor-pointer"
-              alt="Icon open side panel"
-              onClick={() => setIsOpen(true)}
-            />
-          )}
+          {$app.config.plugins.sidebar &&
+            (isOpen ? (
+              <img
+                src={hideSidePanelIcon}
+                className="cursor-pointer"
+                alt="Icon hide side panel"
+                onClick={handleToggleSidePanel}
+              />
+            ) : (
+              <img
+                src={showSidePanelIcon}
+                className="cursor-pointer"
+                alt="Icon open side panel"
+                onClick={handleToggleSidePanel}
+              />
+            ))}
 
-          <div className={'sx__calendar-header-change-btn-appointments'}>
-            <img
-              src={changeIcon}
-              onClick={() => handleChangeAppointments()}
-              width={30}
-              alt=""
-            />
+          <div
+            className={'sx__calendar-header-change-btn-appointments'}
+            onClick={handleChangeAppointments}
+          >
+            <img src={changeIcon} width={30} alt="" />
             {$app.translate('My appointments')}
           </div>
         </div>
@@ -66,7 +75,7 @@ export default function CalendarHeader() {
 
         <div
           className={'sx__calendar-header-content-add-time-off'}
-          onClick={() => handleAddTimeOff()}
+          onClick={handleAddTimeOff}
         >
           <img src={calendarIcon} alt="Calendar icon" width="24" />
           <span>{$app.translate('Add time off')}</span>

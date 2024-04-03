@@ -23,11 +23,14 @@ import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
+import { createSidebarPlugin } from '../../packages/sidebar/src/sidebar-plugin.impl.ts'
+import { Component } from 'preact'
+// import Sidebar from '../../packages/sidebar/src/sidebar.tsx'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const scrollControllerPlugin = createScrollControllerPlugin({
-  initialScroll: '07:50',
+  initialScroll: '12:00',
 })
 
 class CalendarsUpdaterPlugin {
@@ -60,7 +63,6 @@ class CalendarsUpdaterPlugin {
   }
 }
 const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
-
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const calendar = createCalendar({
   customCallBacks: {
@@ -84,12 +86,21 @@ const calendar = createCalendar({
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  dayBoundaries: {
-    start: '06:00',
-    end: '20:00',
-  },
+  // dayBoundaries: {
+  //   start: '06:00',
+  //   end: '20:00',
+  // },
   // isDark: true,
   callbacks: {
+    onToggleSidePanel() {
+      console.log('on toggle side panel cb')
+    },
+    onChangeToAppointments() {
+      console.log('handle change to appointments')
+    },
+    onAddTimeOff() {
+      console.log('Add time off')
+    },
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
     },
@@ -173,6 +184,7 @@ const calendar = createCalendar({
     calendarControlsPlugin,
     calendarsUpdaterPlugin,
     createCurrentTimePlugin(),
+    createSidebarPlugin(),
   ],
   events: [
     ...seededEvents,
@@ -229,7 +241,24 @@ const calendar = createCalendar({
     },
   ],
 })
+
+calendar._setCustomComponentFn('sidebar', (wrapper, props) => {
+  let elemt = document.createElement('div')
+  elemt.innerText = 'inner text '
+  wrapper.appendChild(elemt)
+
+  return <div>qqqq</div>
+})
+
 calendar.render(calendarElement)
+
+// const customVNodes = customComponentsMeta.map(
+//   ({ Component, wrapperElement }) => {
+//     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//     // @ts-ignore
+//     return h(Teleport, { to: wrapperElement }, Component)
+//   }
+// )
 
 let darkToggle = 0
 

@@ -10,6 +10,7 @@ import {
 import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin.interface'
 import PluginBase from '../plugin.interface'
 import EventModalPlugin from '../event-modal/event-modal.plugin'
+import SidebarPlugin from './calendar-sidebar.interface'
 import { CalendarCallbacks } from './listeners.interface'
 import { CustomComponentFns } from './custom-component-fns'
 import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
@@ -36,6 +37,7 @@ export type CalendarType = {
 export type Plugins = {
   dragAndDrop?: DragAndDropPlugin
   eventModal?: EventModalPlugin
+  sidebar?: SidebarPlugin
   scrollController?: PluginBase
   eventRecurrence?: EventRecurrencePlugin
   resize?: ResizePlugin

@@ -37,7 +37,8 @@
   },
   "dependencies": {
     "@preact/signals": "1.2.2",
-    "preact": "10.19.2"
+    "preact": "10.19.2",
+    "vue": "^3.4.21"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.2.0",
