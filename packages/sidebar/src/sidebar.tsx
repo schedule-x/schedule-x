@@ -24,7 +24,7 @@ export default function Sidebar({ $app }: EventModalProps) {
   }, [])
 
   return (
-    <div id={sidebarId} data-ccid={sidebarId} className={``}>
+    <div id={sidebarId} data-ccid={sidebarId} className="sx__calendar-sidebar">
       {!customComponent && (
         <Fragment>custom sidebar in the sidebar.tsx</Fragment>
       )}

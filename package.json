@@ -1,5 +1,5 @@
 {
-  "name": "schedule-x",
+  "name": "@holitime/schedule-x-customized",
   "type": "module",
   "private": true,
   "workspaces": [
