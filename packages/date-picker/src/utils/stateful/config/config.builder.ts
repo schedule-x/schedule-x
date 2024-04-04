@@ -15,6 +15,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   listeners: DatePickerListeners | undefined
   style: DatePickerStyle | undefined
   teleportTo?: HTMLElement
+  label?: string
 
   build(): DatePickerConfigInternal {
     return new ConfigImpl(
@@ -25,7 +26,8 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
       this.placement,
       this.listeners,
       this.style,
-      this.teleportTo
+      this.teleportTo,
+      this.label
     )
   }
 
@@ -73,6 +75,12 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
 
   withTeleportTo(teleportTo: HTMLElement | undefined): ConfigBuilder {
     this.teleportTo = teleportTo
+
+    return this
+  }
+
+  withLabel(label: string | undefined): ConfigBuilder {
+    this.label = label
 
     return this
   }
