@@ -3,6 +3,10 @@
 [![Build Status](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml)
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true)](https://discord.gg/yHbT3C4M8w)
 
+# Disclaimer
+
+I have started from the repository of TomOsterlund and this customized package is destined for a business purpose, I won't maintain it for the moment.
+
 # Material design calendar and date picker
 
 This library offers a material design calendar and date picker for the web. They can be used regardless of your

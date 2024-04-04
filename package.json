@@ -1,13 +1,13 @@
 {
   "name": "@holitime/schedule-x-customized",
   "type": "module",
-  "private": true,
+  "private": false,
   "workspaces": [
     "packages/*",
     "libs/*",
     "websites/*"
   ],
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "serve": "vite serve",
@@ -16,9 +16,9 @@
     "build:e2e": "vite build --config packages/shared/src/config/e2e.vite.mts",
     "test:unit:all": "vitest run",
     "test:unit:changed": "lerna run test --since origin/main",
-    "test:e2e": "./node_modules/.bin/cypress open --e2e --env type=actual",
-    "test:e2e:ci": "./node_modules/.bin/cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",
-    "test:e2e:record": "./node_modules/.bin/cypress run --env type=base --config screenshotsFolder=cypress/snapshots/mac/base",
+    "test:e2e": "cypress open --e2e --env type=actual",
+    "test:e2e:ci": "cypress run --env type=actual --config screenshotsFolder=cypress/snapshots/mac/actual",
+    "test:e2e:record": "cypress run --env type=base --config screenshotsFolder=cypress/snapshots/mac/base",
     "format": "prettier . --write",
     "format:changed": "lerna run format --since main",
     "lint:all": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
@@ -87,5 +87,21 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  }
+  },
+  "description": "![Schedule-X](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-logo.png)",
+  "main": "rollup.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astowny/schedule-x.git#main"
+  },
+  "keywords": [
+    "schedule-x",
+    "calendar"
+  ],
+  "author": "Tony DUONG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/astowny/schedule-x/issues"
+  },
+  "homepage": "https://github.com/astowny/schedule-x/tree/main#readme"
 }
