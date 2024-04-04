@@ -5,7 +5,7 @@
 
 # Disclaimer
 
-I have started from the repository of TomOsterlund and this customized package is destined for a business purpose, I won't maintain it for the moment.
+I have started from the repository of TomOsterlund and this customized package is destined for an internal business purpose, I won't maintain it for the moment.
 
 # Material design calendar and date picker
 
