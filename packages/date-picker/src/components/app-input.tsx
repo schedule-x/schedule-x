@@ -95,7 +95,7 @@ export default function AppInput() {
           id={datePickerLabelId}
           className="sx__date-input-label"
         >
-          {$app.translate('Date')}
+          {$app.config.label || $app.translate('Date')}
         </label>
 
         <input
