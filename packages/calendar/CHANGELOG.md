@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/schedule-x/schedule-x/compare/v1.28.0...v1.29.0) (2024-04-04)
+
+### Bug Fixes
+
+- force event modal to render again when clicking new event ([#331](https://github.com/schedule-x/schedule-x/issues/331)) ([ecb97f3](https://github.com/schedule-x/schedule-x/commit/ecb97f3979b65cff5ca7896f87a06a843955c72e))
+
 # [1.28.0](https://github.com/schedule-x/schedule-x/compare/v1.27.1...v1.28.0) (2024-04-02)
 
 **Note:** Version bump only for package @schedule-x/calendar

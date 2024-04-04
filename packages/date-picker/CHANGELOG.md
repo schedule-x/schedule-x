@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/schedule-x/schedule-x/compare/v1.28.0...v1.29.0) (2024-04-04)
+
+### Features
+
+- enable configuring label text in date picker ([#330](https://github.com/schedule-x/schedule-x/issues/330)) ([397ba7e](https://github.com/schedule-x/schedule-x/commit/397ba7e0acad4f0ac730be5858d2363a0664cda5))
+
 # [1.28.0](https://github.com/schedule-x/schedule-x/compare/v1.27.1...v1.28.0) (2024-04-02)
 
 ### Features
