@@ -85,7 +85,10 @@ export default function CalendarWrapper({ $app }: props) {
 
             {$app.config.plugins.eventModal &&
               $app.config.plugins.eventModal.calendarEvent.value && (
-                <$app.config.plugins.eventModal.ComponentFn $app={$app} />
+                <$app.config.plugins.eventModal.ComponentFn
+                  $app={$app}
+                  key={$app.config.plugins.eventModal.calendarEvent.value?.id}
+                />
               )}
           </AppContext.Provider>
         </div>
