@@ -11,21 +11,26 @@ const datePickerInModal = document.querySelector(
 
 createDatePicker({
   placement: 'bottom-start',
+  selectedDate: '2020-01-01'
 }).render(datePickerTopLeft as HTMLElement)
 
 createDatePicker({
   placement: 'bottom-end',
+  selectedDate: '2020-01-01'
 }).render(datePickerTopRight as HTMLElement)
 
 createDatePicker({
   placement: 'top-start',
+  selectedDate: '2020-01-01'
 }).render(datePickerBottomLeft as HTMLElement)
 
 createDatePicker({
   placement: 'top-end',
+  selectedDate: '2020-01-01'
 }).render(datePickerBottomRight as HTMLElement)
 
 createDatePicker({
   placement: 'bottom-start',
-  teleportTo: document.body
+  selectedDate: '2020-01-01',
+  teleportTo: document.body,
 }).render(datePickerInModal as HTMLElement)
