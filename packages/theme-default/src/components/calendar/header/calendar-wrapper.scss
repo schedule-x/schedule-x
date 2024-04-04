@@ -23,6 +23,8 @@
 .sx__calendar-content {
   display: flex;
   height: 100%;
+  position: relative;
+  overflow-y: auto;
 }
 
 .sx__calendar-view-container-wrapper {
