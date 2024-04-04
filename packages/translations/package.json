@@ -1,11 +1,11 @@
 {
-  "name": "@schedule-x/translations",
-  "version": "1.27.0",
+  "name": "@holitime/translations",
+  "version": "1.28.0",
   "description": "Schedule-X translations",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony DUONG",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "license": "MIT",
   "module": "./dist/core.js",

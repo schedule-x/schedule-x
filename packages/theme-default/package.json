@@ -1,11 +1,11 @@
 {
-  "name": "@schedule-x/theme-default",
+  "name": "@holitime/theme-default",
   "version": "1.27.0",
   "license": "MIT",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony DUONG",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "scripts": {
     "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css",

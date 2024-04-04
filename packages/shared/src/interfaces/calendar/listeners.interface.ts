@@ -9,5 +9,5 @@ export interface CalendarCallbacks {
   onClickDateTime?: (dateTime: string) => void
   onAddTimeOff?: () => void
   onChangeToAppointments?: () => void
-  onToggleSidePanel?: () => void
+  onToggleSidePanel?: (isOpen: boolean) => void
 }

@@ -1,14 +1,14 @@
 {
-  "name": "@schedule-x/shared",
-  "version": "1.27.0",
+  "name": "@holitime/shared",
+  "version": "1.28.0",
   "publishConfig": {
     "access": "public"
   },
   "description": "Schedule-X shared utils",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony DUONG",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "license": "MIT",
   "module": "./dist/core.js",

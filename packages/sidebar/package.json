@@ -1,11 +1,11 @@
 {
-  "name": "@schedule-x/sidebar",
+  "name": "@holitime/sidebar",
   "version": "1.27.0",
   "description": "Plugin for Schedule-X to display the sidebar",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony DUONG",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "license": "MIT",
   "module": "./dist/core.js",

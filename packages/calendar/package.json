@@ -1,11 +1,11 @@
 {
-  "name": "@schedule-x/calendar",
+  "name": "@holitime/calendar",
   "version": "1.27.0",
-  "description": "Schedule-X calendar component",
+  "description": "Schedule-X customized for Holitime calendar component",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony Duong",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "license": "MIT",
   "keywords": [

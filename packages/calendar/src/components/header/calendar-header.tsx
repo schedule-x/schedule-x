@@ -32,12 +32,14 @@ export default function CalendarHeader() {
 
   const handleToggleSidePanel = () => {
     if (!$app.config.plugins.sidebar) return
-    if ($app.config.callbacks.onToggleSidePanel) {
-      $app.config.callbacks.onToggleSidePanel()
-    }
     $app.config.plugins.sidebar.isOpen.value =
       !$app.config.plugins.sidebar?.isOpen.value
     setIsOpen($app.config.plugins.sidebar.isOpen.value)
+    if ($app.config.callbacks.onToggleSidePanel) {
+      $app.config.callbacks.onToggleSidePanel(
+        $app.config.plugins.sidebar.isOpen.value
+      )
+    }
   }
 
   return (

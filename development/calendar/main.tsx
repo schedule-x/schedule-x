@@ -92,8 +92,8 @@ const calendar = createCalendar({
   // },
   // isDark: true,
   callbacks: {
-    onToggleSidePanel() {
-      console.log('on toggle side panel cb')
+    onToggleSidePanel(isOpen) {
+      console.log('on toggle side panel cb test ' + isOpen)
     },
     onChangeToAppointments() {
       console.log('handle change to appointments')
