@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.1](https://github.com/schedule-x/schedule-x/compare/v1.29.0...v1.29.1) (2024-04-05)
+
+### Bug Fixes
+
+- enable reactively updating the list of events in month agenda view ([#334](https://github.com/schedule-x/schedule-x/issues/334)) ([c9b0f10](https://github.com/schedule-x/schedule-x/commit/c9b0f10116ab0a3d0ae87a873692c05d3ae32dce))
+
 # [1.29.0](https://github.com/schedule-x/schedule-x/compare/v1.28.0...v1.29.0) (2024-04-04)
 
 ### Bug Fixes
