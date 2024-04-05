@@ -6,7 +6,7 @@ import { Fragment } from 'preact/jsx-runtime'
 export default function Sidebar({ $app }: EventModalProps) {
   const [sidebarId] = useState(randomStringId())
   const customComponent = $app.config._customComponentFns.sidebar
-  console.log('customcomp', customComponent)
+
   useEffect(() => {
     if (customComponent) {
       // const setIsOpen = (value: boolean) => {

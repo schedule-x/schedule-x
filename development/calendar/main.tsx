@@ -61,7 +61,14 @@ class CalendarsUpdaterPlugin {
       },
     }
   }
+
+  updateSidebar(val = true): void {
+    if (this.$app.config.plugins.sidebar) {
+      this.$app.config.plugins.sidebar.isOpen.value = val
+    }
+  }
 }
+
 const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const calendar = createCalendar({
@@ -299,6 +306,9 @@ setDateButton.addEventListener('click', () => {
   const newDate = (document.getElementById('set-date') as HTMLInputElement)
     .value
   calendarControlsPlugin.setDate(newDate)
+  calendarsUpdaterPlugin.updateSidebar(
+    !calendarsUpdaterPlugin.$app.config.plugins.sidebar?.isOpen.value
+  )
 })
 
 const setViewButton = document.getElementById(
