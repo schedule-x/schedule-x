@@ -23,7 +23,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
 
   useEffect(() => {
     setAgendaMonth(getMonth())
-  }, [$app.datePickerState.selectedDate.value])
+  }, [$app.datePickerState.selectedDate.value, $app.calendarEvents.list.value])
 
   const [activeDate, setActiveDate] = useState(
     $app.datePickerState.selectedDate.value

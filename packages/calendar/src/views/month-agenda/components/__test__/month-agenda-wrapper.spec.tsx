@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -14,6 +15,7 @@ import {
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { MonthAgendaWrapper } from '../month-agenda-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<MonthAgendaWrapper $app={$app} id={'1'} />)
@@ -105,6 +107,52 @@ describe('MonthAgendaWrapper', () => {
         expect(
           document.querySelectorAll('.sx__month-agenda-week')
         ).toHaveLength(4)
+      })
+    })
+  })
+
+  describe('Reactively updating the list of events', () => {
+    const AGENDA_EVENT = '.sx__month-agenda-event'
+
+    it('should render the month view again when adding an event', async () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-01-27',
+      })
+      renderComponent($app)
+      expect(document.querySelectorAll(AGENDA_EVENT)).toHaveLength(0)
+
+      $app.calendarEvents.list.value = [
+        new CalendarEventBuilder(
+          $app.config,
+          1,
+          '2027-01-27',
+          '2027-01-27'
+        ).build(),
+      ]
+
+      await waitFor(() => {
+        expect(document.querySelectorAll(AGENDA_EVENT)).toHaveLength(1)
+      })
+    })
+
+    it('should render the month view again when removing an event', async () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-01-27',
+        events: [
+          {
+            id: 1,
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+        ],
+      })
+      renderComponent($app)
+      expect(document.querySelectorAll(AGENDA_EVENT)).toHaveLength(1)
+
+      $app.calendarEvents.list.value = []
+
+      await waitFor(() => {
+        expect(document.querySelectorAll(AGENDA_EVENT)).toHaveLength(0)
       })
     })
   })
