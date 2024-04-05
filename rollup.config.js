@@ -17,7 +17,7 @@ async function getSortedPackages(scope, ignore) {
   const packages = await Project.getPackages(__dirname || process.cwd())
   let filtered = filterPackages(packages, scope, ignore, true)
   const nonTSPackages = [
-    '@holitime/theme-default',
+    '@holitime/schedule-x-theme-default',
     '@schedule-x/eslint-config',
     '@schedule-x/prettier-config',
   ]
