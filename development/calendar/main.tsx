@@ -66,7 +66,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const calendar = createCalendar({
   // weekOptions: {
-  //   gridHeight: 2500,
+  //   gridHeight: 3000,
   // },
   // firstDayOfWeek: 1,
   // locale: 'ja-JP',

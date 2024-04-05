@@ -48,7 +48,9 @@ As a bare minimum, the configuration object needs two things:
    `viewWeek`, `viewDay` and `viewMonthAgenda`.
 2. A list of events.
 
-### Style
+### Style & theme
+
+#### CSS of wrapping element
 
 You will need to decide on the styles of the element wrapping the calendar. This will be highly dependent on
 your use case. For many use cases, however, something like the following should suffice:
@@ -59,4 +61,18 @@ your use case. For many use cases, however, something like the following should 
   height: 800px;
   max-height: 90vh;
 }
+```
+
+#### Theme
+
+The calendar renders to light mode by default. If you want, you can either override this default through configuration,
+or set the theme programmatically
+through the `setTheme` method, like so:
+
+```ts
+const calendar = createCalendar(/***/)
+
+calendar.setTheme('dark')
+// or
+calendar.setTheme('light')
 ```
