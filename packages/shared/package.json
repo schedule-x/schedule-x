@@ -1,5 +1,5 @@
 {
-  "name": "@holitime/shared",
+  "name": "@holitime/schedule-x-shared",
   "version": "1.28.0",
   "publishConfig": {
     "access": "public"
