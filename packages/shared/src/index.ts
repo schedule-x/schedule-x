@@ -8,3 +8,5 @@ export {
   addMonths,
   addMinutes,
 } from './utils/stateless/time/date-time-mutation/adding'
+
+export type { SidebarPluginProps } from './interfaces/calendar/calendar-sidebar.interface'
