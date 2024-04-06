@@ -1,0 +1,76 @@
+.sx__time-picker-popup {
+  position: absolute;
+  height: fit-content;
+  z-index: 1;
+  top: calc(100% + 1px); // 1px to account for outline
+  width: 20.75rem;
+  max-width: 500px;
+  max-height: 400px;
+  overflow: scroll;
+  box-shadow: var(--sx-box-shadow-level3);
+  padding: var(--sx-spacing-modal-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sx-spacing-padding3);
+  background-color: var(--sx-color-background);
+
+  .is-dark & {
+    background-color: var(--sx-color-surface-container-high);
+  }
+
+  $top-placement-bottom-value: calc(100% + 1rem);
+
+  &.bottom-end {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+  }
+
+  &.top-start {
+    inset: auto auto $top-placement-bottom-value 0;
+    transform: translateX(0);
+  }
+
+  &.top-end {
+    inset: auto 0 $top-placement-bottom-value auto;
+    transform: translateX(0);
+  }
+
+  .sx__time-picker-popup-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--sx-color-neutral);
+  }
+
+  .sx__time-picker-time-inputs {
+    display: flex;
+    align-items: center;
+    gap: var(--sx-spacing-padding2);
+  }
+
+  .sx__time-picker-colon {
+    font-size: 2.5rem;
+    color: var(--sx-color-text);
+    margin: 0 var(--sx-spacing-padding1);
+  }
+
+  .sx__time-picker-actions {
+    display: flex;
+    justify-content: end;
+    gap: var(--sx-spacing-padding2);
+
+  }
+
+  .sx__time-picker-action {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--sx-color-primary);
+    cursor: pointer;
+    border: none;
+
+    &:focus {
+      outline: 2px solid var(--sx-color-primary);
+      border-radius: var(--sx-rounding-extra-small);
+    }
+  }
+}

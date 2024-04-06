@@ -1,0 +1,41 @@
+.sx__time-input-wrapper {
+  position: relative;
+}
+
+.sx__time-picker-input {
+  width: 6rem;
+  font-size: 1rem;
+  padding: var(--sx-spacing-padding4);
+  border: var(--sx-border);
+  border-radius: var(--sx-rounding-extra-small);
+  cursor: pointer;
+  background-color: var(--sx-color-background);
+  text-align: center;
+
+  .sx__time-input--active & {
+    border-color: var(--sx-color-primary);
+    outline: 1px solid var(--sx-color-primary);
+  }
+}
+
+.sx__time-input-label {
+  position: absolute;
+  top: 0;
+  left: 21px; // align with input padding
+  padding: 0 var(--sx-spacing-padding1);
+  background-color: var(--sx-color-background);
+  font-size: 0.75rem;
+  color: var(--sx-color-neutral);
+  line-height: 1rem;
+  transform: translateY(-50%) translateX(-0.5rem);
+  transition: transform 0.2s ease-in-out;
+  pointer-events: none;
+
+  .sx__time-input--active & {
+    color: var(--sx-color-primary);
+  }
+
+  .is-dark & {
+    display: none;
+  }
+}

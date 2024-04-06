@@ -8,7 +8,7 @@
     "url": "https://github.com/tomosterlund"
   },
   "scripts": {
-    "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css",
+    "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css && sass ./src/time-picker.scss ./dist/time-picker.css && sass ./src/calendar.scss ./dist/calendar.css",
     "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
   },
   "exports": {
@@ -19,6 +19,14 @@
     "./dist/date-picker.css": {
       "import": "./dist/date-picker.css",
       "require": "./dist/date-picker.css"
+    },
+    "./dist/time-picker.css": {
+      "import": "./dist/time-picker.css",
+      "require": "./dist/time-picker.css"
+    },
+    "./dist/calendar.css": {
+      "import": "./dist/calendar.css",
+      "require": "./dist/calendar.css"
     }
   },
   "files": [
