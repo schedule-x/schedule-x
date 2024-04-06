@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/drag-and-drop",
-  "version": "1.29.1",
+  "version": "1.30.0",
   "description": "Drag & drop plugin for Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",
