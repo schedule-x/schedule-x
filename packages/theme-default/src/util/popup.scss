@@ -1,0 +1,12 @@
+@mixin popup-base {
+  position: absolute;
+  height: fit-content;
+  z-index: 1;
+  top: calc(100% + 1px); // 1px to account for outline
+  width: 20.75rem;
+  max-width: 500px;
+  max-height: 400px;
+  overflow: scroll;
+  box-shadow: var(--sx-box-shadow-level3);
+  padding: var(--sx-spacing-modal-padding);
+}
