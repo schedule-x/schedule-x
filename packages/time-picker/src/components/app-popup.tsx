@@ -66,11 +66,16 @@ export default function AppPopup() {
       </div>
 
       <div class="sx__time-picker-actions">
-        <button class="sx__time-picker-action sx__ripple">Cancel</button>
+        <button
+          class="sx__time-picker-action sx__ripple sx__button-cancel"
+          onClick={() => ($app.timePickerState.isOpen.value = false)}
+        >
+          Cancel
+        </button>
 
         <button
           ref={OKButtonRef}
-          class="sx__time-picker-action sx__ripple"
+          class="sx__time-picker-action sx__ripple sx__button-accept"
           onClick={handleAccept}
         >
           OK

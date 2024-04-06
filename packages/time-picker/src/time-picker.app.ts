@@ -15,10 +15,10 @@ export default class TimePickerApp {
   }
 
   get value() {
-    throw new Error('Method not implemented.')
+    return this.$app.timePickerState.currentTime.value
   }
 
   set value(value: string) {
-    throw new Error('Method not implemented.')
+    this.$app.timePickerState.currentTime.value = value
   }
 }
