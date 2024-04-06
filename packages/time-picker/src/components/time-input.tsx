@@ -30,6 +30,9 @@ export default function TimeInput({
 
     if (inputValue.length === 2 && nextTabIndexRef) {
       nextTabIndexRef.current?.focus()
+      if (nextTabIndexRef.current instanceof HTMLInputElement) {
+        nextTabIndexRef.current.select()
+      }
     }
   }, [inputValue])
 
