@@ -7,6 +7,7 @@ import {
 
 import { createTimePicker } from '../factory'
 import TimePickerApp from '../time-picker.app'
+import { vi } from 'vitest'
 
 describe('TimePickerApp', () => {
   let timePickerApp: TimePickerApp
@@ -25,5 +26,18 @@ describe('TimePickerApp', () => {
     timePickerApp.value = '13:00'
 
     expect(timePickerApp.value).toBe('13:00')
+  })
+
+  it('should call the onChange method', () => {
+    const onChangeCallback = vi.fn()
+    timePickerApp = createTimePicker({
+      initialValue: '12:00',
+      onChange: onChangeCallback,
+    })
+    expect(onChangeCallback).not.toHaveBeenCalled()
+
+    timePickerApp.value = '17:10'
+
+    expect(onChangeCallback).toHaveBeenCalledWith('17:10')
   })
 })

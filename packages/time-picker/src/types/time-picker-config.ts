@@ -5,11 +5,12 @@ export type TimePickerConfigExternal = {
   dark?: boolean
   placement?: TimePickerPlacement
   initialValue?: string
+  onChange?: (value: string) => void
 }
 
 export type TimePickerConfig = Omit<
   {
     [p in keyof TimePickerConfigExternal]-?: Signal<TimePickerConfigExternal[p]>
   },
-  'initialValue'
+  'initialValue' | 'onChange'
 >

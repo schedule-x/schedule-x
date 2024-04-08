@@ -8,5 +8,11 @@ import '../app.css'
 import '../../packages/theme-default/src/time-picker.scss'
 import { createTimePicker } from '../../packages/time-picker/src/factory.ts'
 
-const timePicker = createTimePicker()
+const onChange = (time: string) => {
+  console.log('Time changed:', time)
+}
+
+const timePicker = createTimePicker({
+  onChange
+})
 timePicker.render(document.querySelector('#app') as HTMLElement)
