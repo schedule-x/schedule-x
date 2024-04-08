@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.30.1](https://github.com/schedule-x/schedule-x/compare/v1.30.0...v1.30.1) (2024-04-08)
+
+### Bug Fixes
+
+- enable updating custom events in agenda view ([0c09c06](https://github.com/schedule-x/schedule-x/commit/0c09c0650703c2c01dd562790a8c2d6d35e978ab))
+
 # [1.30.0](https://github.com/schedule-x/schedule-x/compare/v1.29.1...v1.30.0) (2024-04-06)
 
 ### Features
