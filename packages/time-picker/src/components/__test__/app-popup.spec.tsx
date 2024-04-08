@@ -7,7 +7,7 @@ import { createTimePickerAppContext } from '../../factory'
 import { cleanup, fireEvent, render } from '@testing-library/preact'
 import { AppContext } from '../../utils/stateful/app-context'
 import AppPopup from '../app-popup'
-import { assertElementType } from '../../../../../libs/assertions'
+import { assertElementType } from '../../../../../libs/assertions/src'
 import { afterEach } from 'vitest'
 
 describe('Time picker popup', () => {
