@@ -50,6 +50,7 @@ export default function TimeInput({
   return (
     <input
       ref={inputRef}
+      maxLength={2}
       className="sx__time-input"
       type="text"
       value={inputValue}
