@@ -61,7 +61,10 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
                 aria-label={$app.translate('Full day- and multiple day events')}
               >
                 {Object.values(week).map((day) => (
-                  <DateGridDay calendarEvents={day.dateGridEvents} />
+                  <DateGridDay
+                    key={day.date + new Date().getTime()}
+                    calendarEvents={day.dateGridEvents}
+                  />
                 ))}
               </div>
 
