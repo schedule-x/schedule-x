@@ -11,6 +11,7 @@ export default function AppPopup() {
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
   const OKButtonRef = useRef<HTMLButtonElement>(null)
+  const popupClasses = [POPUP_CLASS_NAME, $app.config.placement]
 
   const [initialStart, initialEnd] =
     $app.timePickerState.currentTime.value.split(':')
@@ -41,8 +42,32 @@ export default function AppPopup() {
     $app.timePickerState.isOpen.value = false
   }
 
+  const remSize: number = Number(
+    getComputedStyle(document.documentElement).fontSize.split('px')[0]
+  )
+  const popupHeight = 362
+  const popupWidth = 332
+
+  const fixedPositionStyle = {
+    top: $app.config.placement.value?.includes('bottom')
+      ? $app.timePickerState.inputRect.value.height +
+        $app.timePickerState.inputRect.value.y +
+        1 // 1px border
+      : $app.timePickerState.inputRect.value.y - remSize - popupHeight, // subtract remsize to leave room for label text
+    left: $app.config.placement.value?.includes('start')
+      ? $app.timePickerState.inputRect.value.x
+      : $app.timePickerState.inputRect.value.x +
+        $app.timePickerState.inputRect.value.width -
+        popupWidth,
+    width: popupWidth,
+    position: 'fixed',
+  }
+
   return (
-    <div className={POPUP_CLASS_NAME}>
+    <div
+      className={popupClasses.join(' ')}
+      style={$app.config.teleportTo.value ? fixedPositionStyle : undefined}
+    >
       <div className="sx__time-picker-popup-label">Select time</div>
 
       <div className="sx__time-picker-time-inputs">

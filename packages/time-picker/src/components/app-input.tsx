@@ -6,6 +6,7 @@ import { useState } from 'preact/hooks'
 export default function AppInput() {
   const $app = useContext(AppContext)
   const inputId = randomStringId()
+  const wrapperId = randomStringId()
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
   useEffect(() => {
@@ -15,9 +16,25 @@ export default function AppInput() {
     setWrapperClasses(newClasses)
   }, [$app.timePickerState.isOpen.value])
 
+  const openPopup = () => {
+    $app.timePickerState.isOpen.value = true
+
+    const inputRect = document
+      .getElementById(wrapperId)
+      ?.getBoundingClientRect()
+    if (!(inputRect instanceof DOMRect)) return
+
+    $app.timePickerState.inputRect.value = {
+      x: inputRect.left + window.scrollX,
+      y: inputRect.top + window.scrollY,
+      height: inputRect.height,
+      width: inputRect.width,
+    }
+  }
+
   return (
     <>
-      <div className={wrapperClasses.join(' ')}>
+      <div id={wrapperId} className={wrapperClasses.join(' ')}>
         <label htmlFor={inputId} className="sx__time-input-label">
           Time
         </label>
@@ -28,7 +45,7 @@ export default function AppInput() {
           id={inputId}
           className="sx__time-picker-input"
           type="text"
-          onFocus={() => ($app.timePickerState.isOpen.value = true)}
+          onFocus={openPopup}
         />
       </div>
     </>

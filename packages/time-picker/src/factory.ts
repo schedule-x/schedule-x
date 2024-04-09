@@ -27,6 +27,7 @@ const getTimePickerState = (
   return {
     isOpen: signal(false),
     currentTime: currentTime,
+    inputRect: signal({ x: 0, y: 0, height: 0, width: 0 }),
   }
 }
 
@@ -36,6 +37,7 @@ export const createTimePickerAppContext = (
   config: {
     dark: signal(config.dark ?? false),
     placement: signal(config.placement ?? 'bottom-start'),
+    teleportTo: signal(config.teleportTo ?? null),
   },
   timePickerState: getTimePickerState(config),
 })

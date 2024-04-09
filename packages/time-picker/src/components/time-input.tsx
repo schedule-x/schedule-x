@@ -28,7 +28,11 @@ export default function TimeInput({
   useEffect(() => {
     onChange(inputValue)
 
-    if (inputValue.length === 2 && nextTabIndexRef) {
+    if (
+      inputValue.length === 2 &&
+      nextTabIndexRef &&
+      'current' in nextTabIndexRef
+    ) {
       nextTabIndexRef.current?.focus()
       if (nextTabIndexRef.current instanceof HTMLInputElement) {
         nextTabIndexRef.current.select()
