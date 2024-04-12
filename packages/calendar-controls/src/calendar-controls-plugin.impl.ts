@@ -3,6 +3,8 @@ import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { dateStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 
+export type { CalendarControlsPlugin }
+
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name: string = PluginName.CalendarControls
   $app!: CalendarAppSingleton
