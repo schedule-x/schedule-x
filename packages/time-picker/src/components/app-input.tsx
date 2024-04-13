@@ -36,7 +36,7 @@ export default function AppInput() {
     <>
       <div id={wrapperId} className={wrapperClasses.join(' ')}>
         <label htmlFor={inputId} className="sx__time-input-label">
-          Time
+          {$app.config.label.value ?? 'Time'}
         </label>
 
         <input

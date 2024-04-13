@@ -38,6 +38,7 @@ export const createTimePickerAppContext = (
     dark: signal(config.dark ?? false),
     placement: signal(config.placement ?? 'bottom-start'),
     teleportTo: signal(config.teleportTo ?? null),
+    label: signal(config.label ?? null),
   },
   timePickerState: getTimePickerState(config),
 })

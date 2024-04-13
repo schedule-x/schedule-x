@@ -36,7 +36,7 @@ describe('Time picker popup', () => {
       expect(minutesInput.value).toBe('00')
     })
 
-    it('should focus on hours input', () => {
+    it('should focus the hours input', () => {
       const $app = createTimePickerAppContext()
       render(
         <AppContext.Provider value={$app}>
@@ -45,7 +45,6 @@ describe('Time picker popup', () => {
       )
       const hoursInput = document.querySelectorAll('.sx__time-input')[0]
       assertElementType<HTMLInputElement>(hoursInput, HTMLInputElement)
-      expect(hoursInput).not.toBeNull()
       expect(document.activeElement).toBe(hoursInput)
     })
   })

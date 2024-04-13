@@ -7,6 +7,7 @@ export type TimePickerConfigExternal = {
   initialValue?: string
   onChange?: (value: string) => void
   teleportTo?: HTMLElement | null
+  label?: string | null
 }
 
 export type TimePickerConfig = Omit<
