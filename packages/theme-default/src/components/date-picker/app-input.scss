@@ -1,3 +1,5 @@
+@use '../../util/input-field' as input-field;
+
 .sx__date-input-wrapper {
   position: relative;
 }
@@ -28,13 +30,9 @@
 }
 
 .sx__date-input {
+  @include input-field.input-element;
+
   width: 100%;
-  font-size: 1rem;
-  padding: var(--sx-spacing-padding4);
-  border: var(--sx-border);
-  border-radius: var(--sx-rounding-extra-small);
-  cursor: pointer;
-  background-color: var(--sx-color-background);
 
   .sx__date-input--active & {
     border-color: var(--sx-color-primary);
@@ -43,17 +41,7 @@
 }
 
 .sx__date-input-label {
-  position: absolute;
-  top: 0;
-  left: 21px; // align with input padding
-  padding: 0 var(--sx-spacing-padding1);
-  background-color: var(--sx-color-background);
-  font-size: 0.75rem;
-  color: var(--sx-color-neutral);
-  line-height: 1rem;
-  transform: translateY(-50%) translateX(-0.5rem);
-  transition: transform 0.2s ease-in-out;
-  pointer-events: none;
+  @include input-field.input-label;
 
   .sx__date-input--active & {
     color: var(--sx-color-primary);

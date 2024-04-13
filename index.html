@@ -5,14 +5,49 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + Preact + TS</title>
+    <style>
+      * {
+        font-family: 'Open Sans', sans-serif;
+      }
+
+      a {
+        color: #1976d2;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      li span {
+        margin-left: 0.5rem;
+      }
+    </style>
   </head>
   <body>
-    <section style="margin: 0 auto; width: fit-content">
+    <nav style="margin: 0 auto; width: fit-content">
       <h1>Dev pages</h1>
-      <a href="/development/date-picker/index.html">Date picker</a>
-      |
-      <a href="/development/calendar/index.html">Calendar</a>
-    </section>
+
+      <ul>
+        <li>
+          <a href="/development/date-picker/index.html">📅 <span>Date picker</span></a>
+        </li>
+        <li>
+          <a href="/development/calendar/index.html">🗓 <span>Calendar</span></a>
+        </li>
+        <li>
+          <a href="/development/time-picker/index.html">🕰 <span>Time picker</span></a>
+        </li>
+      </ul>
+    </nav>
     <script type="module" src="/development/main.tsx"></script>
   </body>
 </html>
