@@ -18,6 +18,7 @@
 .sx__calendar-header-content {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--sx-spacing-padding4);
   justify-content: space-between;
   flex: 1 0 0;
