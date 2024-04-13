@@ -1,12 +1,16 @@
 {
-  "name": "@schedule-x/resize",
+  "name": "@schedule-x/event-updater",
   "version": "1.31.0",
-  "description": "Resize events in the Schedule-X calendar",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Plugin for updating events in the Schedule-x calendar",
   "author": {
     "name": "Tom Österlund",
     "email": "tom@oesterlund.de",
     "url": "https://github.com/tomosterlund"
   },
+  "license": "MIT",
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
@@ -23,7 +27,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
-    "directory": "packages/resize"
+    "directory": "packages/event-updater"
   },
   "homepage": "https://schedule-x.dev",
   "gitHead": "981dc3c7e4f5d56288dfbb27b992ea73e8206675"

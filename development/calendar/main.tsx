@@ -23,6 +23,7 @@ import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
+import { createEventUpdaterPlugin } from '../../packages/event-updater/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -64,6 +65,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
+const eventUpdaterPlugin = createEventUpdaterPlugin()
 const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 3000,
@@ -165,6 +167,7 @@ const calendar = createCalendar({
   plugins: [
     createDragAndDropPlugin(),
     createEventModalPlugin(),
+    eventUpdaterPlugin,
     scrollControllerPlugin,
     createResizePlugin(),
     createEventRecurrencePlugin(),
@@ -239,7 +242,7 @@ themeToggle.addEventListener('click', () => {
 
 const addEventButton = document.getElementById('add-event') as HTMLButtonElement
 addEventButton.addEventListener('click', () => {
-  calendar.events.add({
+  eventUpdaterPlugin.add({
     id: 'new-event',
     title: 'New Event',
     start: '2023-12-18',

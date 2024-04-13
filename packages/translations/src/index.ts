@@ -76,7 +76,8 @@ const datePickerTranslations = {
   nlNL: datePickerNlNL,
   ptBR: datePickerPtBR,
   skSK: datePickerSkSK,
-  trTR, datePickerTrTR,
+  trTR,
+  datePickerTrTR,
 }
 
 export {
