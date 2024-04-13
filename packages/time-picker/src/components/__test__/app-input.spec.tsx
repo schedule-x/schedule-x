@@ -8,7 +8,7 @@ import { cleanup, render, waitFor } from '@testing-library/preact'
 import AppInput from '../app-input'
 import { createTimePickerAppContext } from '../../factory'
 import { AppContext } from '../../utils/stateful/app-context'
-import { assertElementType } from '@schedule-x/assertions'
+import { assertElementType } from '../../../../../libs/assertions/src'
 
 describe('The time picker input (readonly, value display field)', () => {
   afterEach(() => {
