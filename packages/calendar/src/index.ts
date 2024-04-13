@@ -31,5 +31,4 @@ export {
   setRangeForDay,
   setRangeForWeek,
   setRangeForMonth,
-  CalendarEventExternal,
 }
