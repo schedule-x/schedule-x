@@ -63,7 +63,7 @@ module.exports = {
           },
           {
             from: 'shared',
-            allow: [],
+            allow: ['translations'],
           },
           {
             from: 'translations',
