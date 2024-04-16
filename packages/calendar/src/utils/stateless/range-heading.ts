@@ -1,8 +1,12 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+type Locale = 'long' | 'numeric'
 
-const getLocaleStringMonthArgs = ($app: CalendarAppSingleton) => {
-  return [$app.config.locale, { month: 'long' }] as const
+export const getLocaleStringMonthArgs = (
+  $app: CalendarAppSingleton,
+  local: Locale = 'long'
+) => {
+  return [$app.config.locale, { month: local }] as const
 }
 
 const getLocaleStringYearArgs = ($app: CalendarAppSingleton) => {

@@ -1,6 +1,8 @@
 import { MonthAgendaDay as MonthAgendaDayType } from '../types/month-agenda'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { StateUpdater } from 'preact/hooks'
+import { StateUpdater, useContext } from 'preact/hooks'
+import { AppContext } from '../../../utils/stateful/app-context'
+import { getLocaleStringMonthArgs } from '../../../utils/stateless/range-heading'
 
 type props = {
   day: MonthAgendaDayType
@@ -13,8 +15,19 @@ export default function MonthAgendaDay({
   isActive,
   setActiveDate,
 }: props) {
+  const $app = useContext(AppContext)
+
+  const monthSelected = toJSDate(
+    $app.datePickerState.selectedDate.value
+  ).toLocaleString(...getLocaleStringMonthArgs($app, 'numeric'))
+
+  const currentMonth = toJSDate(day.date).getMonth()
+  const isDateOfPreviousMonth = Number(monthSelected) - 1 < currentMonth
+  const isDateOfNextMonth = Number(monthSelected) - 1 > currentMonth
   const dayClasses = ['sx__month-agenda-day']
   if (isActive) dayClasses.push('sx__month-agenda-day--active')
+  if (isDateOfPreviousMonth) dayClasses.push('sx__is-leading-date')
+  if (isDateOfNextMonth) dayClasses.push('sx__is-trailing-date')
 
   return (
     <div
