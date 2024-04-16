@@ -72,7 +72,9 @@ const calendar = createCalendar({
   // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',
+
   locale: 'kg-KG',
+
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
