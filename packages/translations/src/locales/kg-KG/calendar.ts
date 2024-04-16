@@ -1,6 +1,6 @@
 import { CalendarTranslations } from '../../types/calendar.translations'
 
-export const calendarKyKG: CalendarTranslations = {
+export const calendarKgKG: CalendarTranslations = {
   Today: 'Бүгүн',
   Month: 'Ай',
   Week: 'Апта',

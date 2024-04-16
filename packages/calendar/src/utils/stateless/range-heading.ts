@@ -1,12 +1,18 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { translate, translations } from '@schedule-x/translations/src'
 
-const getLocaleStringMonthArgs = ($app: CalendarAppSingleton) => {
-  return [$app.config.locale, { month: 'long' }] as const
+const getLocaleStringMonthArgs = (date: Date, $app: CalendarAppSingleton) => {
+  const language = translate($app.config.locale, translations)
+
+  if (language('monthsName') === 'monthsName') {
+    return date.toLocaleString($app.config.locale, { month: 'long' })
+  }
+  return language('monthsName')[date.getMonth()]
 }
 
-const getLocaleStringYearArgs = ($app: CalendarAppSingleton) => {
-  return [$app.config.locale, { year: 'numeric' }] as const
+const getLocaleStringYearArgs = (date: Date, $app: CalendarAppSingleton) => {
+  return date.toLocaleString($app.config.locale, { year: 'numeric' })
 }
 
 export const getMonthAndYearForDateRange = (
@@ -14,18 +20,10 @@ export const getMonthAndYearForDateRange = (
   rangeStart: string,
   rangeEnd: string
 ): string => {
-  const startDateMonth = toJSDate(rangeStart).toLocaleString(
-    ...getLocaleStringMonthArgs($app)
-  )
-  const startDateYear = toJSDate(rangeStart).toLocaleString(
-    ...getLocaleStringYearArgs($app)
-  )
-  const endDateMonth = toJSDate(rangeEnd).toLocaleString(
-    ...getLocaleStringMonthArgs($app)
-  )
-  const endDateYear = toJSDate(rangeEnd).toLocaleString(
-    ...getLocaleStringYearArgs($app)
-  )
+  const startDateMonth = getLocaleStringMonthArgs(toJSDate(rangeStart), $app)
+  const endDateMonth = getLocaleStringMonthArgs(toJSDate(rangeEnd), $app)
+  const startDateYear = getLocaleStringYearArgs(toJSDate(rangeStart), $app)
+  const endDateYear = getLocaleStringYearArgs(toJSDate(rangeEnd), $app)
 
   if (startDateMonth === endDateMonth && startDateYear === endDateYear) {
     return `${startDateMonth} ${startDateYear}`
@@ -37,12 +35,14 @@ export const getMonthAndYearForDateRange = (
 }
 
 export const getMonthAndYearForSelectedDate = ($app: CalendarAppSingleton) => {
-  const dateMonth = toJSDate(
-    $app.datePickerState.selectedDate.value
-  ).toLocaleString(...getLocaleStringMonthArgs($app))
-  const dateYear = toJSDate(
-    $app.datePickerState.selectedDate.value
-  ).toLocaleString(...getLocaleStringYearArgs($app))
+  const dateMonth = getLocaleStringMonthArgs(
+    toJSDate($app.datePickerState.selectedDate.value),
+    $app
+  )
+  const dateYear = getLocaleStringYearArgs(
+    toJSDate($app.datePickerState.selectedDate.value),
+    $app
+  )
 
   return `${dateMonth} ${dateYear}`
 }

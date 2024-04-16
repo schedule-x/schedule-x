@@ -1,6 +1,6 @@
 import { DatePickerTranslations } from '../../types/date-picker.translations'
 
-export const datePickerKyKG: DatePickerTranslations = {
+export const datePickerKgKG: DatePickerTranslations = {
   Date: 'Датасы',
   'MM/DD/YYYY': 'АА/КК/ЖЖЖЖ',
   'Next month': 'Кийинки ай',
