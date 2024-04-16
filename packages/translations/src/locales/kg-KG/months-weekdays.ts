@@ -7,5 +7,5 @@ export const monthsWeekdaysKgKG: MonthsWeekdaysTranslations = {
       '_'
     ),
   weekdaysName:
-    'Жекшемби_Дүйшөмбү_Шейшемби_Шаршемби_Бейшемби_Жума_Ишемби'.split('_'),
+    'Дүйшөмбү_Шейшемби_Шаршемби_Бейшемби_Жума_Ишемби_Жекшемби'.split('_'),
 }
