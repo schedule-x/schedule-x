@@ -142,7 +142,7 @@ describe('Events facade for recurrence plugin', () => {
   })
 
   describe('Updating events', () => {
-    it('should update an event with rrule', () => {
+    it('should remove an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventUpdaterPlugin()
       plugin.init!($app)
@@ -159,6 +159,39 @@ describe('Events facade for recurrence plugin', () => {
 
       plugin.update({ id: '1', start: '2021-01-01', end: '2021-01-01' })
       expect($app.calendarEvents.list.value.length).toBe(1)
+    })
+
+    it('should update an event with an rrule', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '657436747',
+            title: 'tjena tjena',
+            start: '2024-02-04',
+            end: '2024-02-04',
+          },
+        ],
+      })
+      const plugin = createEventUpdaterPlugin()
+      plugin.init!($app)
+      expect($app.calendarEvents.list.value.length).toBe(1)
+
+      const event = {
+        id: '1',
+        start: '2021-01-01',
+        end: '2021-01-01',
+        rrule: 'FREQ=WEEKLY;COUNT=3',
+      }
+      plugin.add(event)
+      expect($app.calendarEvents.list.value.length).toBe(4)
+
+      plugin.update({
+        id: '1',
+        start: '2021-01-01',
+        end: '2021-01-01',
+        rrule: 'FREQ=WEEKLY;COUNT=3',
+      })
+      expect($app.calendarEvents.list.value.length).toBe(4)
     })
   })
 
