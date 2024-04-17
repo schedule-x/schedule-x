@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -10,18 +11,23 @@ import { MonthAgendaDay as MonthAgendaDayType } from '../../types/month-agenda'
 import { StateUpdater } from 'preact/hooks'
 import { vi } from 'vitest'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
+import { AppContext } from '../../../../utils/stateful/app-context'
 
 const renderComponent = (
+  $app: CalendarAppSingleton,
   day: MonthAgendaDayType,
   isActive = false,
   setActiveDate: StateUpdater<string> = vi.fn
 ) => {
   render(
-    <MonthAgendaDay
-      day={day}
-      isActive={isActive}
-      setActiveDate={setActiveDate}
-    />
+    <AppContext.Provider value={$app}>
+      <MonthAgendaDay
+        day={day}
+        isActive={isActive}
+        setActiveDate={setActiveDate}
+      />
+    </AppContext.Provider>
   )
 }
 
@@ -36,13 +42,21 @@ describe('MonthAgendaDay', () => {
 
   describe('the active state', () => {
     it('should have an active class', () => {
-      renderComponent({ date: '2020-01-01', events: [] }, true)
+      renderComponent(
+        __createAppWithViews__(),
+        { date: '2020-01-01', events: [] },
+        true
+      )
 
       expect(document.querySelector(ACTIVE_DAY_SELECTOR)).not.toBeNull()
     })
 
     it('should not have an active class', () => {
-      renderComponent({ date: '2020-01-01', events: [] }, false)
+      renderComponent(
+        __createAppWithViews__(),
+        { date: '2020-01-01', events: [] },
+        false
+      )
 
       expect(document.querySelector(ACTIVE_DAY_SELECTOR)).toBeNull()
     })
@@ -52,7 +66,12 @@ describe('MonthAgendaDay', () => {
     it('should call setActiveDate with the date', () => {
       const setActiveDate = vi.fn()
       const date = '2020-01-01'
-      renderComponent({ date, events: [] }, false, setActiveDate)
+      renderComponent(
+        __createAppWithViews__(),
+        { date, events: [] },
+        false,
+        setActiveDate
+      )
 
       fireEvent.click(document.querySelector(DAY_SELECTOR) as Element)
 
@@ -65,7 +84,7 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         events: [],
       })
-      renderComponent({
+      renderComponent($app, {
         date: '2020-01-01',
         events: $app.calendarEvents.list.value,
       })
@@ -77,7 +96,7 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         events: [{ id: 1, start: '2020-01-01', end: '2020-01-01' }],
       })
-      renderComponent({
+      renderComponent($app, {
         date: '2020-01-01',
         events: $app.calendarEvents.list.value,
       })
@@ -93,7 +112,7 @@ describe('MonthAgendaDay', () => {
           { id: 3, start: '2020-01-01', end: '2020-01-01' },
         ],
       })
-      renderComponent({
+      renderComponent($app, {
         date: '2020-01-01',
         events: $app.calendarEvents.list.value,
       })
@@ -110,12 +129,41 @@ describe('MonthAgendaDay', () => {
           { id: 4, start: '2020-01-01', end: '2020-01-01' },
         ],
       })
-      renderComponent({
+      renderComponent($app, {
         date: '2020-01-01',
         events: $app.calendarEvents.list.value,
       })
 
       expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(3)
+    })
+  })
+
+  describe('setting classes for leading and trailing dates', () => {
+    it('should not show any leading and trailing classes', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2021-02-01',
+      })
+      renderComponent($app, { date: '2021-02-01', events: [] })
+
+      expect(document.querySelector('.is-leading-or-trailing')).toBeNull()
+    })
+
+    it('should set a class for being a leading date', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2021-04-01',
+      })
+      renderComponent($app, { date: '2021-03-31', events: [] })
+
+      expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
+    })
+
+    it('should set a class for being a trailing date', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2021-04-01',
+      })
+      renderComponent($app, { date: '2021-05-01', events: [] })
+
+      expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
   })
 })
