@@ -4,13 +4,13 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createEventUpdaterPlugin } from '../event-updater-plugin.impl'
+import { createEventsServicePlugin } from '../events-service-plugin.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 
-describe('Event-updater plugin', () => {
+describe('Events-service plugin', () => {
   it('should add an event', () => {
     const $app = __createAppWithViews__()
-    const underTest = createEventUpdaterPlugin()
+    const underTest = createEventsServicePlugin()
     underTest.init($app)
 
     const event = {
@@ -30,7 +30,7 @@ describe('Event-updater plugin', () => {
 
   it('should update an event', () => {
     const $app = __createAppWithViews__()
-    const underTest = createEventUpdaterPlugin()
+    const underTest = createEventsServicePlugin()
     underTest.init($app)
     const event = {
       id: '1',
@@ -57,7 +57,7 @@ describe('Event-updater plugin', () => {
 
   it('should get an event', () => {
     const $app = __createAppWithViews__()
-    const underTest = createEventUpdaterPlugin()
+    const underTest = createEventsServicePlugin()
     underTest.init($app)
     const event = {
       id: '1',
@@ -77,7 +77,7 @@ describe('Event-updater plugin', () => {
 
   it('should remove an event', () => {
     const $app = __createAppWithViews__()
-    const underTest = createEventUpdaterPlugin()
+    const underTest = createEventsServicePlugin()
     underTest.init($app)
     const event = {
       id: '1',
@@ -94,7 +94,7 @@ describe('Event-updater plugin', () => {
 
   it('should get multiple events', () => {
     const $app = __createAppWithViews__()
-    const underTest = createEventUpdaterPlugin()
+    const underTest = createEventsServicePlugin()
     underTest.init($app)
     const event1 = {
       id: '1',
@@ -141,7 +141,7 @@ describe('Event-updater plugin', () => {
         },
       ],
     })
-    const underTest = createEventUpdaterPlugin()
+    const underTest = createEventsServicePlugin()
     underTest.init($app)
     expect($app.calendarEvents.list.value.length).toBe(2)
 

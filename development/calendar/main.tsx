@@ -23,7 +23,7 @@ import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
-import { createEventUpdaterPlugin } from '../../packages/event-updater/src'
+import { createEventsServicePlugin } from '../../packages/events-service/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -63,7 +63,7 @@ class CalendarsUpdaterPlugin {
 const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
-const eventUpdaterPlugin = createEventUpdaterPlugin()
+const eventUpdaterPlugin = createEventsServicePlugin()
 const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 3000,
