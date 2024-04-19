@@ -1,10 +1,10 @@
 {
-  "name": "@schedule-x/event-updater",
+  "name": "@schedule-x/events-service",
   "version": "1.32.0",
   "publishConfig": {
     "access": "public"
   },
-  "description": "Plugin for updating events in the Schedule-x calendar",
+  "description": "Plugin for querying and updating events in the Schedule-x calendar",
   "author": {
     "name": "Tom Österlund",
     "email": "tom@oesterlund.de",
@@ -27,7 +27,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
-    "directory": "packages/event-updater"
+    "directory": "packages/events-service"
   },
   "homepage": "https://schedule-x.dev",
   "gitHead": "981dc3c7e4f5d56288dfbb27b992ea73e8206675"
