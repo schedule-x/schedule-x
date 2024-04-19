@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://github.com/schedule-x/schedule-x/compare/v1.32.0...v1.33.0) (2024-04-19)
+
+### Bug Fixes
+
+- event recurrence update fn ([#358](https://github.com/schedule-x/schedule-x/issues/358)) ([b229acb](https://github.com/schedule-x/schedule-x/commit/b229acb75b7a6957923559f51c68e06b6fe274fc))
+
 # [1.32.0](https://github.com/schedule-x/schedule-x/compare/v1.31.0...v1.32.0) (2024-04-15)
 
 ### Features

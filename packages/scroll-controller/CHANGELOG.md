@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://github.com/schedule-x/schedule-x/compare/v1.32.0...v1.33.0) (2024-04-19)
+
+**Note:** Version bump only for package @schedule-x/scroll-controller
+
 # [1.32.0](https://github.com/schedule-x/schedule-x/compare/v1.31.0...v1.32.0) (2024-04-15)
 
 ### Features
