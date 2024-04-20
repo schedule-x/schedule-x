@@ -75,6 +75,13 @@ const config = {
     gridHeight: 2500,
   },
 
+  monthGridOptions: {
+    /**
+    * Number of events to display in a day cell before the "+ N events" button is shown
+    * */
+    nEventsPerDay: 8
+  },
+
   /**
    * Callbacks for events that occur in the calendar
    * */
@@ -115,6 +122,13 @@ const config = {
     * */
     onClickDateTime(dateTime) {
       console.log('onClickDateTime', dateTime) // e.g. 2024-01-01 12:37
+    },
+
+    /**
+    * Is called when clicking the "+ N events" button of a month grid-day
+    * */
+    onClickPlusEvents(date) {
+      console.log('onClickPlusEvents', date) // e.g. 2024-01-01
     }
   },
 }

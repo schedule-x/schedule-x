@@ -1,0 +1,67 @@
+# Events Service Plugin
+
+This plugin provides APIs to add, update and remove events.
+
+## Install
+
+```bash copy
+npm i @schedule-x/events-service
+```
+
+## Methods
+
+### `get(id)`
+
+Returns a single event, based on the id that you pass to it as its single parameter.
+
+### `getAll()`
+
+Returns all events that are currently in the calendar.
+
+### `add(event)`
+
+Is called with one parameter: the new event to be added. The event must have a unique id.
+
+### `update(event)`
+
+Updates an event that already exists in the calendar. Takes one parameter, which is the entire event you want to update.
+
+### `remove(id)`
+
+Removes an event from the calendar. Takes one parameter, which is the id of the event you want to remove.
+
+### `set(events)`
+
+Sets all events in the calendar. This will override all existing events in the calendar with the new ones you pass to it.
+
+## Example
+
+```js
+import { createEventsServicePlugin } from '@schedule-x/events-service'
+
+const eventsServicePlugin = createEventsServicePlugin();const calendar = createCalendar({
+  // ...other configuration
+  plugins: [eventsServicePlugin],
+})
+calendar.render(document.getElementById('calendar'))
+
+eventsServicePlugin.add({
+  title: 'Event 1',
+  start: '2024-04-20',
+  end: '2024-04-20',
+  id: 1
+})
+
+eventsServicePlugin.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }
+
+eventsServicePlugin.getAll() // [{ title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }]
+
+eventsServicePlugin.update({
+  title: 'Real title',
+  start: '2024-04-20',
+  end: '2024-04-20',
+  id: 1
+})
+
+eventsServicePlugin.remove(1)
+```

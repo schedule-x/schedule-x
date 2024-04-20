@@ -2,6 +2,7 @@
 
 [![Build Status](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml)
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true)](https://discord.gg/yHbT3C4M8w)
+![npm](https://img.shields.io/npm/dm/@schedule-x/calendar)
 
 # Material design calendar and date picker
 
