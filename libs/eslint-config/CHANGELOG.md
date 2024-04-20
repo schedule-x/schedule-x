@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/schedule-x/schedule-x/compare/v1.33.0...v1.34.0) (2024-04-20)
+
+**Note:** Version bump only for package @schedule-x/eslint-config
+
 # [1.33.0](https://github.com/schedule-x/schedule-x/compare/v1.32.0...v1.33.0) (2024-04-19)
 
 **Note:** Version bump only for package @schedule-x/eslint-config

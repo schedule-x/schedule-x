@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/schedule-x/schedule-x/compare/v1.33.0...v1.34.0) (2024-04-20)
+
+### Features
+
+- rename plugin ([#369](https://github.com/schedule-x/schedule-x/issues/369)) ([8e89b0f](https://github.com/schedule-x/schedule-x/commit/8e89b0f4658e80276510e4ce092c3a4132eaede3))
+
 # [1.33.0](https://github.com/schedule-x/schedule-x/compare/v1.32.0...v1.33.0) (2024-04-19)
 
 ### Bug Fixes

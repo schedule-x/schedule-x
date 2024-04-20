@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.34.0](https://github.com/schedule-x/schedule-x/compare/v1.33.0...v1.34.0) (2024-04-20)
+
+### Features
+
+- **calendar:** add callback for clicking plus events button ([#367](https://github.com/schedule-x/schedule-x/issues/367)) ([da11f78](https://github.com/schedule-x/schedule-x/commit/da11f788f121bd561af16ef0c67f60f20d1cefdc))
+- **calendar:** add config option nEventsPerDay for month grid ([#368](https://github.com/schedule-x/schedule-x/issues/368)) ([a285d3d](https://github.com/schedule-x/schedule-x/commit/a285d3d92db3b6638c9235c9da2c50a4aa561525))
+
 # [1.33.0](https://github.com/schedule-x/schedule-x/compare/v1.32.0...v1.33.0) (2024-04-19)
 
 **Note:** Version bump only for package @schedule-x/shared
