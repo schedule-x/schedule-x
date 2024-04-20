@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import TimeGridEvent from './time-grid-event'
 import { sortEventsByStartAndEnd } from '../../utils/stateless/events/sort-by-start-date'
@@ -39,7 +39,13 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   }
 
   const sortedEvents = calendarEvents.sort(sortEventsByStartAndEnd)
-  const eventsWithConcurrency = handleEventConcurrency(sortedEvents)
+  const [eventsWithConcurrency, setEventsWithConcurrency] = useState<
+    CalendarEventInternal[]
+  >([])
+
+  useEffect(() => {
+    setEventsWithConcurrency(handleEventConcurrency(sortedEvents))
+  }, [calendarEvents])
 
   const handleOnClick = (e: MouseEvent) => {
     if (!$app.config.callbacks.onClickDateTime) return
