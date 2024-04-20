@@ -15,5 +15,6 @@ export const createInternalConfig = (config: CalendarConfigExternal) => {
     .withCallbacks(config.callbacks)
     .withMinDate(config.minDate)
     .withMaxDate(config.maxDate)
+    .withMonthGridOptions(config.monthGridOptions)
     .build()
 }

@@ -1,5 +1,6 @@
 import CalendarConfigInternal, {
   CalendarType,
+  MonthGridOptions,
   WeekOptions,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
@@ -36,7 +37,10 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public callbacks = {},
     public _customComponentFns = {},
     public minDate: string | undefined = undefined,
-    public maxDate: string | undefined = undefined
+    public maxDate: string | undefined = undefined,
+    public monthGridOptions: MonthGridOptions = {
+      nEventsPerDay: 4,
+    }
   ) {
     this.calendars = signal(calendars)
   }
