@@ -63,7 +63,7 @@ class CalendarsUpdaterPlugin {
 const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
-const eventUpdaterPlugin = createEventsServicePlugin()
+const eventsServicePlugin = createEventsServicePlugin()
 const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 3000,
@@ -168,7 +168,7 @@ const calendar = createCalendar({
   plugins: [
     createDragAndDropPlugin(),
     createEventModalPlugin(),
-    eventUpdaterPlugin,
+    eventsServicePlugin,
     scrollControllerPlugin,
     createResizePlugin(),
     createEventRecurrencePlugin(),
@@ -243,7 +243,7 @@ themeToggle.addEventListener('click', () => {
 
 const addEventButton = document.getElementById('add-event') as HTMLButtonElement
 addEventButton.addEventListener('click', () => {
-  eventUpdaterPlugin.add({
+  eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
     start: '2023-12-18',

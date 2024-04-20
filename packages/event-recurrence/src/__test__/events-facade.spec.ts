@@ -4,14 +4,14 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createEventUpdaterPlugin } from '../event-updater-plugin.impl'
+import { createEventsServicePlugin } from '../events-service-plugin.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 
 describe('Events facade for recurrence plugin', () => {
   describe('Adding events', () => {
     it('should add one event without an rrule', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -27,7 +27,7 @@ describe('Events facade for recurrence plugin', () => {
 
     it('should add one event with an rrule', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -46,7 +46,7 @@ describe('Events facade for recurrence plugin', () => {
   describe('Getting a single event by id', () => {
     it('should return the event if it exists', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -63,7 +63,7 @@ describe('Events facade for recurrence plugin', () => {
 
     it('should return undefined if the event does not exist', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -74,7 +74,7 @@ describe('Events facade for recurrence plugin', () => {
   describe('Getting all events', () => {
     it('should return all events', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -105,7 +105,7 @@ describe('Events facade for recurrence plugin', () => {
   describe('Removing events', () => {
     it('should remove one event without an rrule', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -123,7 +123,7 @@ describe('Events facade for recurrence plugin', () => {
 
     it('should remove one event with an rrule', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -144,7 +144,7 @@ describe('Events facade for recurrence plugin', () => {
   describe('Updating events', () => {
     it('should remove an rrule', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
@@ -172,7 +172,7 @@ describe('Events facade for recurrence plugin', () => {
           },
         ],
       })
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(1)
 
@@ -198,7 +198,7 @@ describe('Events facade for recurrence plugin', () => {
   describe('Setting the whole list of events', () => {
     it('should set the whole list of events', () => {
       const $app = __createAppWithViews__()
-      const plugin = createEventUpdaterPlugin()
+      const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
