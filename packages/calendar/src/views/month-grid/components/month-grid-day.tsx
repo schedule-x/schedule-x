@@ -28,6 +28,8 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
   }
 
   const handleClickAdditionalEvents = () => {
+    if ($app.config.callbacks.onClickPlusEvents)
+      $app.config.callbacks.onClickPlusEvents(day.date)
     if (!$app.config.views.find((view) => view.name === InternalViewName.Day))
       return
 
