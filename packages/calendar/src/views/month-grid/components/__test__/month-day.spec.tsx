@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   afterEach,
   describe,
@@ -13,6 +14,7 @@ import MonthGridDay from '../month-grid-day'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { getTestEvent } from './test-events'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { vi } from 'vitest'
 
 const renderComponent = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(
@@ -95,7 +97,12 @@ describe('MonthDay component', () => {
   })
 
   describe('displaying 2 more events than the limit', () => {
-    const $app = __createAppWithViews__()
+    const onClickPlusEvents = vi.fn()
+    const $app = __createAppWithViews__({
+      callbacks: {
+        onClickPlusEvents,
+      },
+    })
     const dayWithEventLimitPlus2: MonthDayType = {
       date: '2020-01-01',
       events: {
@@ -115,6 +122,22 @@ describe('MonthDay component', () => {
         document.querySelector('.sx__month-grid-day__events-more')
       ).not.toBeNull()
       expect(screen.getByText('+ 2 events')).not.toBeNull()
+    })
+
+    it('should call the callback for clicking the "+ N events"-button', () => {
+      renderComponent($app, dayWithEventLimitPlus2)
+      const moreEventsButton = document.querySelector(
+        '.sx__month-grid-day__events-more'
+      )
+
+      expect(onClickPlusEvents).not.toHaveBeenCalled()
+      moreEventsButton?.dispatchEvent(
+        new MouseEvent('click', { bubbles: true })
+      )
+
+      expect(onClickPlusEvents).toHaveBeenCalledWith(
+        dayWithEventLimitPlus2.date
+      )
     })
 
     it('should navigate to day view when clicking on the more events button', async () => {
