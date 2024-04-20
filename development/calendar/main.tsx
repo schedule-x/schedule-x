@@ -68,6 +68,9 @@ const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 3000,
   // },
+  // monthGridOptions: {
+  //   nEventsPerDay: 7
+  // },
   // firstDayOfWeek: 1,
   // locale: 'ja-JP',
   // locale: 'en-US',

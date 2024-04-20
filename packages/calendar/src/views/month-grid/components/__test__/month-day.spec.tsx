@@ -156,4 +156,40 @@ describe('MonthDay component', () => {
       })
     })
   })
+
+  describe('configuring number of events to display', () => {
+    const $app = __createAppWithViews__({
+      monthGridOptions: {
+        nEventsPerDay: 6,
+      },
+    })
+    const day: MonthDayType = {
+      date: '2020-01-01',
+      events: {
+        '0': getTestEvent($app),
+        '1': getTestEvent($app),
+        '2': getTestEvent($app),
+        '3': getTestEvent($app),
+        '4': getTestEvent($app),
+        '5': getTestEvent($app),
+        '6': getTestEvent($app),
+        '7': getTestEvent($app),
+      },
+    }
+
+    it('should display 6 events', () => {
+      renderComponent($app, day)
+
+      expect(document.querySelectorAll('.sx__month-grid-event').length).toBe(6)
+    })
+
+    it('should say 2 plus events in the butotn', () => {
+      renderComponent($app, day)
+
+      expect(
+        document.querySelector('.sx__month-grid-day__events-more')
+      ).not.toBeNull()
+      expect(screen.getByText('+ 2 events')).not.toBeNull()
+    })
+  })
 })
