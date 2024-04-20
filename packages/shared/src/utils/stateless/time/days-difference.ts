@@ -1,4 +1,4 @@
-import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { toIntegers } from './format-conversion/format-conversion'
 
 export const calculateDaysDifference = (
   startDate: string,

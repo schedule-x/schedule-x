@@ -10,6 +10,14 @@ module.exports = {
         pattern: 'packages/calendar/*',
       },
       {
+        type: 'calendar-controls',
+        pattern: 'packages/calendar-controls/*',
+      },
+      {
+        type: 'current-time',
+        pattern: 'packages/current-time/*',
+      },
+      {
         type: 'date-picker',
         pattern: 'packages/date-picker/*',
       },
@@ -20,6 +28,22 @@ module.exports = {
       {
         type: 'event-modal',
         pattern: 'packages/event-modal/*',
+      },
+      {
+        type: 'event-recurrence',
+        pattern: 'packages/event-recurrence/*',
+      },
+      {
+        type: 'events-service',
+        pattern: 'packages/events-service/*',
+      },
+      {
+        type: 'recurrence',
+        pattern: 'packages/recurrence/*',
+      },
+      {
+        type: 'resize',
+        pattern: 'packages/resize/*',
       },
       {
         type: 'shared',
@@ -50,6 +74,14 @@ module.exports = {
             allow: ['shared', 'date-picker', 'translations'],
           },
           {
+            from: 'calendar-controls',
+            allow: ['shared'],
+          },
+          {
+            from: 'current-time',
+            allow: ['shared'],
+          },
+          {
             from: 'date-picker',
             allow: ['shared', 'translations'],
           },
@@ -59,6 +91,22 @@ module.exports = {
           },
           {
             from: 'event-modal',
+            allow: ['shared'],
+          },
+          {
+            from: 'event-recurrence',
+            allow: ['shared', 'recurrence'],
+          },
+          {
+            from: 'events-service',
+            allow: ['shared'],
+          },
+          {
+            from: 'recurrence',
+            allow: ['shared'],
+          },
+          {
+            from: 'resize',
             allow: ['shared'],
           },
           {
