@@ -46,8 +46,16 @@ module.exports = {
         pattern: 'packages/resize/*',
       },
       {
+        type: 'scroll-controller',
+        pattern: 'packages/scroll-controller/*',
+      },
+      {
         type: 'shared',
         pattern: 'packages/shared/*',
+      },
+      {
+        type: 'time-picker',
+        pattern: 'packages/time-picker/*',
       },
       {
         type: 'translations',
@@ -110,8 +118,16 @@ module.exports = {
             allow: ['shared'],
           },
           {
+            from: 'scroll-controller',
+            allow: ['shared'],
+          },
+          {
             from: 'shared',
             allow: [],
+          },
+          {
+            from: 'time-picker',
+            allow: ['shared'],
           },
           {
             from: 'translations',
