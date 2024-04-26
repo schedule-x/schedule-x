@@ -84,8 +84,11 @@ export default function DateGridEvent({
 
   const startResize = (mouseEvent: MouseEvent) => {
     mouseEvent.stopPropagation()
+    const eventCopy = deepCloneEvent(calendarEvent, $app)
+    updateCopy(eventCopy)
     ;($app.config.plugins.resize as ResizePlugin).createDateGridEventResizer(
-      calendarEvent,
+      eventCopy,
+      updateCopy,
       mouseEvent
     )
   }

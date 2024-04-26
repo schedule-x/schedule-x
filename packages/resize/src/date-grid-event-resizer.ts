@@ -10,15 +10,22 @@ import { updateEventsList } from './utils/stateless/update-events-list'
 export class DateGridEventResizer {
   private readonly dayWidth: number
   private readonly originalEventEnd: string
+  private readonly ORIGINAL_NDAYS: number
+  private lastNDaysDiff = 0
 
   constructor(
     private $app: CalendarAppSingleton,
     private calendarEvent: CalendarEventInternal,
+    private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private initialX: number
   ) {
     this.setupEventListeners()
     this.originalEventEnd = calendarEvent.end
     this.dayWidth = getTimeGridDayWidth(this.$app)
+    ;(this.$app.elements.calendarWrapper as HTMLElement).classList.add(
+      'sx__is-resizing'
+    )
+    this.ORIGINAL_NDAYS = calendarEvent._nDaysInGrid || 0
   }
 
   setupEventListeners() {
@@ -31,13 +38,12 @@ export class DateGridEventResizer {
 
   private handleMouseMove = (event: MouseEvent) => {
     const xDifference = event.clientX - this.initialX
-    const daysToAdd = Math.floor(xDifference / this.dayWidth)
-    this.setNewTimeForEventEnd(daysToAdd)
+    this.lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
+    this.setNewTimeForEventEnd()
   }
 
-  private setNewTimeForEventEnd(daysToAdd: number) {
-    const endBeforeUpdate = this.calendarEvent.end
-    const newEnd = addDays(this.originalEventEnd, daysToAdd)
+  private setNewTimeForEventEnd() {
+    const newEnd = addDays(this.originalEventEnd, this.lastNDaysDiff)
     if (
       newEnd > (this.$app.calendarState.range.value as DateRange).end ||
       newEnd < this.calendarEvent.start ||
@@ -48,10 +54,22 @@ export class DateGridEventResizer {
     )
       return
 
-    updateEventsList(this.$app, this.calendarEvent, endBeforeUpdate, newEnd)
+    this.calendarEvent.end = newEnd
+    this.calendarEvent._nDaysInGrid = this.ORIGINAL_NDAYS + this.lastNDaysDiff
+    this.updateCopy(this.calendarEvent)
   }
 
   private handleMouseUp = () => {
+    updateEventsList(
+      this.$app,
+      this.calendarEvent,
+      this.originalEventEnd,
+      this.calendarEvent.end
+    )
+    this.updateCopy(undefined)
+    ;(this.$app.elements.calendarWrapper as HTMLElement).classList.remove(
+      'sx__is-resizing'
+    )
     ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
       'mousemove',
       this.handleMouseMove

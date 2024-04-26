@@ -16,6 +16,22 @@
   }
 }
 
+[data-has-dnd='true'] {
+  .sx__time-grid-event {
+    touch-action: none;
+  }
+}
+
+.sx__is-resizing {
+  .sx__time-grid-event:has(+ .is-event-copy) {
+    opacity: 0;
+  }
+
+  .is-event-copy {
+    opacity: 1;
+  }
+}
+
 .sx__time-grid-event-inner {
   position: relative;
   height: 100%;
@@ -46,13 +62,6 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
-}
-
-
-[data-has-dnd='true'] {
-  .sx__time-grid-event {
-    touch-action: none;
-  }
 }
 
 .sx__event-icon {

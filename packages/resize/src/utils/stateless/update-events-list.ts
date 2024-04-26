@@ -8,7 +8,6 @@ export const updateEventsList = (
   newEventEnd: string
 ) => {
   const rrule = calendarEvent._getForeignProperties().rrule
-  calendarEvent.end = newEventEnd
 
   if (rrule && $app.config.plugins.eventRecurrence) {
     $app.config.plugins.eventRecurrence.updateRecurrenceOnResize(
@@ -19,5 +18,11 @@ export const updateEventsList = (
     return
   }
 
+  const eventToUpdate = $app.calendarEvents.list.value.find(
+    (event) => event.id === calendarEvent.id
+  )
+  if (!eventToUpdate) return
+
+  eventToUpdate.end = calendarEvent.end
   $app.calendarEvents.list.value = [...$app.calendarEvents.list.value]
 }
