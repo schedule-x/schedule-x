@@ -18,3 +18,18 @@ const calendar = createCalendar({
   plugins: [createDragAndDropPlugin()],
 })
 ```
+
+## Configuration
+
+You can configure the length, in minutes, of the intervals that are used when dragging:
+
+```js
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [createDragAndDropPlugin(30)], // drag 30 minute intervals
+})
+```
+
+Available values are `15` (default), `30` and `60`
