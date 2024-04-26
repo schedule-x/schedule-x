@@ -3,7 +3,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { signal } from '@preact/signals'
-import { CustomComponentFn } from '@schedule-x/calendar'
+import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 
 const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()

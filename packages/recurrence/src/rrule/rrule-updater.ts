@@ -1,5 +1,5 @@
 import { RRuleOptionsExternal } from './types/rrule-options'
-import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
+import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { addDays, addMinutes } from '@schedule-x/shared/src'
 import { getDurationInMinutes } from './utils/stateless/duration-in-minutes'

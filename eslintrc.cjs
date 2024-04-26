@@ -10,6 +10,14 @@ module.exports = {
         pattern: 'packages/calendar/*',
       },
       {
+        type: 'calendar-controls',
+        pattern: 'packages/calendar-controls/*',
+      },
+      {
+        type: 'current-time',
+        pattern: 'packages/current-time/*',
+      },
+      {
         type: 'date-picker',
         pattern: 'packages/date-picker/*',
       },
@@ -22,8 +30,32 @@ module.exports = {
         pattern: 'packages/event-modal/*',
       },
       {
+        type: 'event-recurrence',
+        pattern: 'packages/event-recurrence/*',
+      },
+      {
+        type: 'events-service',
+        pattern: 'packages/events-service/*',
+      },
+      {
+        type: 'recurrence',
+        pattern: 'packages/recurrence/*',
+      },
+      {
+        type: 'resize',
+        pattern: 'packages/resize/*',
+      },
+      {
+        type: 'scroll-controller',
+        pattern: 'packages/scroll-controller/*',
+      },
+      {
         type: 'shared',
         pattern: 'packages/shared/*',
+      },
+      {
+        type: 'time-picker',
+        pattern: 'packages/time-picker/*',
       },
       {
         type: 'translations',
@@ -50,6 +82,14 @@ module.exports = {
             allow: ['shared', 'date-picker', 'translations'],
           },
           {
+            from: 'calendar-controls',
+            allow: ['shared'],
+          },
+          {
+            from: 'current-time',
+            allow: ['shared'],
+          },
+          {
             from: 'date-picker',
             allow: ['shared', 'translations'],
           },
@@ -62,8 +102,32 @@ module.exports = {
             allow: ['shared'],
           },
           {
+            from: 'event-recurrence',
+            allow: ['shared', 'recurrence'],
+          },
+          {
+            from: 'events-service',
+            allow: ['shared'],
+          },
+          {
+            from: 'recurrence',
+            allow: ['shared'],
+          },
+          {
+            from: 'resize',
+            allow: ['shared'],
+          },
+          {
+            from: 'scroll-controller',
+            allow: ['shared'],
+          },
+          {
             from: 'shared',
             allow: [],
+          },
+          {
+            from: 'time-picker',
+            allow: ['shared'],
           },
           {
             from: 'translations',

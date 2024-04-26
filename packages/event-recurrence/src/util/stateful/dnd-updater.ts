@@ -6,7 +6,7 @@ import {
 import { RecurrenceSet } from '../../../../recurrence/src'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { getDurationInMinutes } from '../../../../recurrence/src/rrule/utils/stateless/duration-in-minutes'
-import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
+import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { parseRFC5545ToSX } from '../../../../recurrence/src/parsers/rrule/parse-rrule'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 

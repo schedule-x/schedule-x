@@ -6,7 +6,7 @@ import {
 import { AugmentedEvent } from '../../types/augmented-event'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { getDurationInMinutes } from '@schedule-x/recurrence/src/rrule/utils/stateless/duration-in-minutes'
-import { calculateDaysDifference } from '@schedule-x/drag-and-drop/src/utils/stateless/days-difference'
+import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 
 export class ResizeUpdater {
