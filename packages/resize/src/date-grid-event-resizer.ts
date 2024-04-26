@@ -15,17 +15,17 @@ export class DateGridEventResizer {
 
   constructor(
     private $app: CalendarAppSingleton,
-    private calendarEvent: CalendarEventInternal,
+    private eventCopy: CalendarEventInternal,
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private initialX: number
   ) {
     this.setupEventListeners()
-    this.originalEventEnd = calendarEvent.end
+    this.originalEventEnd = eventCopy.end
     this.dayWidth = getTimeGridDayWidth(this.$app)
     ;(this.$app.elements.calendarWrapper as HTMLElement).classList.add(
       'sx__is-resizing'
     )
-    this.ORIGINAL_NDAYS = calendarEvent._nDaysInGrid || 0
+    this.ORIGINAL_NDAYS = eventCopy._nDaysInGrid || 0
   }
 
   setupEventListeners() {
@@ -46,7 +46,7 @@ export class DateGridEventResizer {
     const newEnd = addDays(this.originalEventEnd, this.lastNDaysDiff)
     if (
       newEnd > (this.$app.calendarState.range.value as DateRange).end ||
-      newEnd < this.calendarEvent.start ||
+      newEnd < this.eventCopy.start ||
       newEnd <
         toDateString(
           toJSDate((this.$app.calendarState.range.value as DateRange).start)
@@ -54,17 +54,17 @@ export class DateGridEventResizer {
     )
       return
 
-    this.calendarEvent.end = newEnd
-    this.calendarEvent._nDaysInGrid = this.ORIGINAL_NDAYS + this.lastNDaysDiff
-    this.updateCopy(this.calendarEvent)
+    this.eventCopy.end = newEnd
+    this.eventCopy._nDaysInGrid = this.ORIGINAL_NDAYS + this.lastNDaysDiff
+    this.updateCopy(this.eventCopy)
   }
 
   private handleMouseUp = () => {
     updateEventsList(
       this.$app,
-      this.calendarEvent,
+      this.eventCopy,
       this.originalEventEnd,
-      this.calendarEvent.end
+      this.eventCopy.end
     )
     this.updateCopy(undefined)
     ;(this.$app.elements.calendarWrapper as HTMLElement).classList.remove(
@@ -77,7 +77,7 @@ export class DateGridEventResizer {
 
     if (this.$app.config.callbacks.onEventUpdate) {
       this.$app.config.callbacks.onEventUpdate(
-        this.calendarEvent._getExternalEvent()
+        this.eventCopy._getExternalEvent()
       )
     }
   }

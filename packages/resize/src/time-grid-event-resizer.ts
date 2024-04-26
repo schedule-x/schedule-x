@@ -8,17 +8,19 @@ import { updateEventsList } from './utils/stateless/update-events-list'
 export class TimeGridEventResizer {
   private readonly originalEventEnd: string
   private lastIntervalDiff = 0
+  private lastValidEnd = ''
 
   constructor(
     private $app: CalendarAppSingleton,
-    private calendarEvent: CalendarEventInternal,
+    private eventCopy: CalendarEventInternal,
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private initialY: number,
     private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number,
     private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
     this.setupEventListeners()
-    this.originalEventEnd = this.calendarEvent.end
+    this.originalEventEnd = this.eventCopy.end
+    this.lastValidEnd = this.eventCopy.end
     ;(this.$app.elements.calendarWrapper as HTMLElement).classList.add(
       'sx__is-resizing'
     )
@@ -47,27 +49,29 @@ export class TimeGridEventResizer {
     )
   }
 
-  private setNewTimeForEventEnd(pointsToAdd: number, shouldUpdateList = false) {
-    const endBeforeUpdate = this.calendarEvent.end
+  private setNewTimeForEventEnd(pointsToAdd: number) {
     const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
+    console.log(newEnd)
     if (
       newEnd > this.dayBoundariesDateTime.end ||
-      newEnd <= this.calendarEvent.start
+      newEnd <= this.eventCopy.start
     )
       return
 
-    this.calendarEvent.end = newEnd
-    this.updateCopy(this.calendarEvent)
-
-    if (shouldUpdateList) {
-      updateEventsList(this.$app, this.calendarEvent, endBeforeUpdate, newEnd)
-    }
+    this.lastValidEnd = newEnd
+    this.eventCopy.end = this.lastValidEnd
+    this.updateCopy(this.eventCopy)
   }
 
   private handleMouseUp = () => {
     this.setNewTimeForEventEnd(
-      this.CHANGE_THRESHOLD_IN_TIME_POINTS * this.lastIntervalDiff,
-      true
+      this.CHANGE_THRESHOLD_IN_TIME_POINTS * this.lastIntervalDiff
+    )
+    updateEventsList(
+      this.$app,
+      this.eventCopy,
+      this.originalEventEnd,
+      this.lastValidEnd
     )
     this.updateCopy(undefined)
     ;(this.$app.elements.calendarWrapper as HTMLElement).classList.remove(
@@ -80,7 +84,7 @@ export class TimeGridEventResizer {
 
     if (this.$app.config.callbacks.onEventUpdate) {
       this.$app.config.callbacks.onEventUpdate(
-        this.calendarEvent._getExternalEvent()
+        this.eventCopy._getExternalEvent()
       )
     }
   }

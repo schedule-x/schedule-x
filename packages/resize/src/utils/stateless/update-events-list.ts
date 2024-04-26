@@ -3,15 +3,15 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 
 export const updateEventsList = (
   $app: CalendarAppSingleton,
-  calendarEvent: CalendarEventInternal,
+  eventCopy: CalendarEventInternal,
   oldEventEnd: string,
   newEventEnd: string
 ) => {
-  const rrule = calendarEvent._getForeignProperties().rrule
+  const rrule = eventCopy._getForeignProperties().rrule
 
   if (rrule && $app.config.plugins.eventRecurrence) {
     $app.config.plugins.eventRecurrence.updateRecurrenceOnResize(
-      calendarEvent.id,
+      eventCopy.id,
       oldEventEnd,
       newEventEnd
     )
@@ -19,10 +19,10 @@ export const updateEventsList = (
   }
 
   const eventToUpdate = $app.calendarEvents.list.value.find(
-    (event) => event.id === calendarEvent.id
+    (event) => event.id === eventCopy.id
   )
   if (!eventToUpdate) return
 
-  eventToUpdate.end = calendarEvent.end
+  eventToUpdate.end = eventCopy.end
   $app.calendarEvents.list.value = [...$app.calendarEvents.list.value]
 }
