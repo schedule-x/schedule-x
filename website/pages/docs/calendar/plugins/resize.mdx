@@ -26,3 +26,18 @@ const calendar = createCalendar({
   plugins: [createResizePlugin()],
 })
 ```
+
+## Configuration
+
+You can configure the length, in minutes, of the intervals that are used when resizing:
+
+```js
+import { createResizePlugin } from '@schedule-x/resize'
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [createResizePlugin(30)], // 30 minute intervals when resizing
+})
+```
+
+Available values are `15` (default), `30` and `60`
