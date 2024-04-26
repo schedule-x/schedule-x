@@ -9,6 +9,8 @@ class ResizePluginImpl implements ResizePlugin {
   name = PluginName.Resize
   $app: CalendarAppSingleton | null = null
 
+  constructor(private minutesPerInterval: number) {}
+
   init($app: CalendarAppSingleton) {
     this.$app = $app
   }
@@ -24,7 +26,7 @@ class ResizePluginImpl implements ResizePlugin {
       this.$app,
       calendarEvent,
       mouseDownEvent.clientY,
-      25,
+      this.getTimePointsForIntervalConfig(),
       dayBoundariesDateTime
     )
   }
@@ -38,9 +40,16 @@ class ResizePluginImpl implements ResizePlugin {
     new DateGridEventResizer(this.$app, calendarEvent, mouseDownEvent.clientX)
   }
 
+  private getTimePointsForIntervalConfig(): number {
+    if (this.minutesPerInterval === 60) return 100
+    if (this.minutesPerInterval === 30) return 50
+    return 25
+  }
+
   private logError() {
     console.error('The calendar is not yet initialized. Cannot resize events.')
   }
 }
 
-export const createResizePlugin = (): ResizePlugin => new ResizePluginImpl()
+export const createResizePlugin = (minutesPerInterval = 15): ResizePlugin =>
+  new ResizePluginImpl(minutesPerInterval)
