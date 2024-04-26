@@ -85,10 +85,10 @@ const calendar = createCalendar({
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
-  dayBoundaries: {
-    start: '06:00',
-    end: '20:00',
-  },
+  // dayBoundaries: {
+  //   start: '06:00',
+  //   end: '20:00',
+  // },
   // isDark: true,
   callbacks: {
     onRangeUpdate(range) {
@@ -170,7 +170,7 @@ const calendar = createCalendar({
     createEventModalPlugin(),
     eventsServicePlugin,
     scrollControllerPlugin,
-    createResizePlugin(),
+    createResizePlugin(30),
     createEventRecurrencePlugin(),
     calendarControlsPlugin,
     calendarsUpdaterPlugin,
