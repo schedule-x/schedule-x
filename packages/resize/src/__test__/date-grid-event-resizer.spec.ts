@@ -67,6 +67,15 @@ describe('Resizing events in the date grid', () => {
     calendarWrapper = $app.elements.calendarWrapper
   })
 
+  describe('When the calendar wrapper is not found in', () => {
+    it('should not throw an error', () => {
+      $app.elements.calendarWrapper = undefined
+      expect(() => {
+        new DateGridEventResizer($app, eventCopy, eventUpdater, 1000)
+      }).not.toThrow()
+    })
+  })
+
   describe('Dragging the event to the right', () => {
     it('should resize the event to be one day longer', () => {
       expect(calendarEvent.start).toBe('2024-01-26')

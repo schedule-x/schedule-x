@@ -18,12 +18,13 @@ export class TimeGridEventResizer {
     private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number,
     private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
-    this.setupEventListeners()
     this.originalEventEnd = this.eventCopy.end
     this.lastValidEnd = this.eventCopy.end
-    ;(this.$app.elements.calendarWrapper as HTMLElement).classList.add(
-      'sx__is-resizing'
-    )
+    const calendarWrapper = this.$app.elements.calendarWrapper
+    if (!calendarWrapper) return
+
+    calendarWrapper.classList.add('sx__is-resizing')
+    this.setupEventListeners()
   }
 
   setupEventListeners() {
@@ -51,7 +52,7 @@ export class TimeGridEventResizer {
 
   private setNewTimeForEventEnd(pointsToAdd: number) {
     const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
-    console.log(newEnd)
+
     if (
       newEnd > this.dayBoundariesDateTime.end ||
       newEnd <= this.eventCopy.start

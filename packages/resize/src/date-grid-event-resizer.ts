@@ -8,7 +8,7 @@ import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-con
 import { updateEventsList } from './utils/stateless/update-events-list'
 
 export class DateGridEventResizer {
-  private readonly dayWidth: number
+  private readonly dayWidth: number = 0
   private readonly originalEventEnd: string
   private readonly ORIGINAL_NDAYS: number
   private lastNDaysDiff = 0
@@ -19,13 +19,15 @@ export class DateGridEventResizer {
     private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private initialX: number
   ) {
-    this.setupEventListeners()
     this.originalEventEnd = eventCopy.end
-    this.dayWidth = getTimeGridDayWidth(this.$app)
-    ;(this.$app.elements.calendarWrapper as HTMLElement).classList.add(
-      'sx__is-resizing'
-    )
     this.ORIGINAL_NDAYS = eventCopy._nDaysInGrid || 0
+    const calendarWrapper = this.$app.elements.calendarWrapper
+
+    if (!calendarWrapper) return
+
+    calendarWrapper.classList.add('sx__is-resizing')
+    this.dayWidth = getTimeGridDayWidth(this.$app)
+    this.setupEventListeners()
   }
 
   setupEventListeners() {

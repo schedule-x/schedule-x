@@ -18,6 +18,32 @@ import { Mock, vi } from 'vitest'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 
 describe('Resizing events in the time grid', () => {
+  describe('When the calendar wrapper cannot be found', () => {
+    it('should not throw an error', () => {
+      const $app = stubInterface<CalendarAppSingleton>()
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        1,
+        '2024-01-05 06:00',
+        '2024-01-05 07:00'
+      ).build()
+      const eventUpdater = vi.fn()
+      const initialY = 500
+
+      new TimeGridEventResizer(
+        $app,
+        calendarEvent,
+        eventUpdater,
+        initialY,
+        25,
+        {
+          start: '2024-01-05 00:00',
+          end: '2024-01-05 23:59',
+        }
+      )
+    })
+  })
+
   describe('When the calendar has regular day boundaries 0-24', () => {
     let $app: CalendarAppSingleton
     let calendarEvent: CalendarEventInternal
