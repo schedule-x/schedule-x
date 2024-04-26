@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/schedule-x/schedule-x/compare/v1.34.0...v1.35.0) (2024-04-26)
+
+### Bug Fixes
+
+- prevent too frequent updates on resize ([#386](https://github.com/schedule-x/schedule-x/issues/386)) ([0a5a299](https://github.com/schedule-x/schedule-x/commit/0a5a2998bc12ce695c61fd6db13b14b2d4bd386f))
+
 # [1.34.0](https://github.com/schedule-x/schedule-x/compare/v1.33.0...v1.34.0) (2024-04-20)
 
 ### Features
