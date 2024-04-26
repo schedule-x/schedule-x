@@ -8,17 +8,26 @@ import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-con
 import { updateEventsList } from './utils/stateless/update-events-list'
 
 export class DateGridEventResizer {
-  private readonly dayWidth: number
+  private readonly dayWidth: number = 0
   private readonly originalEventEnd: string
+  private readonly ORIGINAL_NDAYS: number
+  private lastNDaysDiff = 0
 
   constructor(
     private $app: CalendarAppSingleton,
-    private calendarEvent: CalendarEventInternal,
+    private eventCopy: CalendarEventInternal,
+    private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private initialX: number
   ) {
-    this.setupEventListeners()
-    this.originalEventEnd = calendarEvent.end
+    this.originalEventEnd = eventCopy.end
+    this.ORIGINAL_NDAYS = eventCopy._nDaysInGrid || 0
+    const calendarWrapper = this.$app.elements.calendarWrapper
+
+    if (!calendarWrapper) return
+
+    calendarWrapper.classList.add('sx__is-resizing')
     this.dayWidth = getTimeGridDayWidth(this.$app)
+    this.setupEventListeners()
   }
 
   setupEventListeners() {
@@ -31,16 +40,15 @@ export class DateGridEventResizer {
 
   private handleMouseMove = (event: MouseEvent) => {
     const xDifference = event.clientX - this.initialX
-    const daysToAdd = Math.floor(xDifference / this.dayWidth)
-    this.setNewTimeForEventEnd(daysToAdd)
+    this.lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
+    this.setNewTimeForEventEnd()
   }
 
-  private setNewTimeForEventEnd(daysToAdd: number) {
-    const endBeforeUpdate = this.calendarEvent.end
-    const newEnd = addDays(this.originalEventEnd, daysToAdd)
+  private setNewTimeForEventEnd() {
+    const newEnd = addDays(this.originalEventEnd, this.lastNDaysDiff)
     if (
       newEnd > (this.$app.calendarState.range.value as DateRange).end ||
-      newEnd < this.calendarEvent.start ||
+      newEnd < this.eventCopy.start ||
       newEnd <
         toDateString(
           toJSDate((this.$app.calendarState.range.value as DateRange).start)
@@ -48,10 +56,22 @@ export class DateGridEventResizer {
     )
       return
 
-    updateEventsList(this.$app, this.calendarEvent, endBeforeUpdate, newEnd)
+    this.eventCopy.end = newEnd
+    this.eventCopy._nDaysInGrid = this.ORIGINAL_NDAYS + this.lastNDaysDiff
+    this.updateCopy(this.eventCopy)
   }
 
   private handleMouseUp = () => {
+    updateEventsList(
+      this.$app,
+      this.eventCopy,
+      this.originalEventEnd,
+      this.eventCopy.end
+    )
+    this.updateCopy(undefined)
+    ;(this.$app.elements.calendarWrapper as HTMLElement).classList.remove(
+      'sx__is-resizing'
+    )
     ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
       'mousemove',
       this.handleMouseMove
@@ -59,7 +79,7 @@ export class DateGridEventResizer {
 
     if (this.$app.config.callbacks.onEventUpdate) {
       this.$app.config.callbacks.onEventUpdate(
-        this.calendarEvent._getExternalEvent()
+        this.eventCopy._getExternalEvent()
       )
     }
   }

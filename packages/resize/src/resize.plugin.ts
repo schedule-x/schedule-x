@@ -17,6 +17,7 @@ class ResizePluginImpl implements ResizePlugin {
 
   createTimeGridEventResizer(
     calendarEvent: CalendarEventInternal,
+    updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     mouseDownEvent: MouseEvent,
     dayBoundariesDateTime: { start: string; end: string }
   ) {
@@ -25,6 +26,7 @@ class ResizePluginImpl implements ResizePlugin {
     new TimeGridEventResizer(
       this.$app,
       calendarEvent,
+      updateCopy,
       mouseDownEvent.clientY,
       this.getTimePointsForIntervalConfig(),
       dayBoundariesDateTime
@@ -33,11 +35,17 @@ class ResizePluginImpl implements ResizePlugin {
 
   createDateGridEventResizer(
     calendarEvent: CalendarEventInternal,
+    updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     mouseDownEvent: MouseEvent
   ) {
     if (!this.$app) return this.logError()
 
-    new DateGridEventResizer(this.$app, calendarEvent, mouseDownEvent.clientX)
+    new DateGridEventResizer(
+      this.$app,
+      calendarEvent,
+      updateCopy,
+      mouseDownEvent.clientX
+    )
   }
 
   private getTimePointsForIntervalConfig(): number {

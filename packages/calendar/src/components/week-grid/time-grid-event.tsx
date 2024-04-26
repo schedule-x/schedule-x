@@ -107,8 +107,12 @@ export default function TimeGridEvent({
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
 
     if ($app.config.plugins.resize) {
+      const eventCopy = deepCloneEvent(calendarEvent, $app)
+      updateCopy(eventCopy)
+
       $app.config.plugins.resize.createTimeGridEventResizer(
-        calendarEvent,
+        eventCopy,
+        updateCopy,
         e,
         dayBoundariesDateTime
       )

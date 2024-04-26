@@ -7,32 +7,31 @@ import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless
 import { updateEventsList } from '../update-events-list'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { vi } from 'vitest'
+import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 
 describe('Updating the events list after resizing an event', () => {
   describe('When the event is not recurring', () => {
     it('should update the events list', () => {
+      const originalEventEnd = '2021-01-01 01:00'
       const $app = __createAppWithViews__({
         events: [
           {
             id: '1',
             start: '2021-01-01 00:00',
-            end: '2021-01-01 01:00',
+            end: originalEventEnd,
           },
         ],
       })
-      const calendarEvent = $app.calendarEvents.list.value[0]
+      const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
+      const newEventEnd = '2021-01-01 02:00'
+      eventCopy.end = newEventEnd
 
-      updateEventsList(
-        $app,
-        calendarEvent,
-        '2021-01-01 01:00',
-        '2021-01-01 02:00'
-      )
+      updateEventsList($app, eventCopy, originalEventEnd, newEventEnd)
 
       const externalEvent =
         $app.calendarEvents.list.value[0]._getExternalEvent()
       expect(externalEvent.start).toBe('2021-01-01 00:00')
-      expect(externalEvent.end).toBe('2021-01-01 02:00')
+      expect(externalEvent.end).toBe(newEventEnd)
     })
   })
 
@@ -56,14 +55,9 @@ describe('Updating the events list after resizing an event', () => {
         plugins: [eventRecurrencePlugin],
       })
       eventRecurrencePlugin.init!($app)
-      const calendarEvent = $app.calendarEvents.list.value[0]
+      const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
 
-      updateEventsList(
-        $app,
-        calendarEvent,
-        '2021-01-01 01:00',
-        '2021-01-01 02:00'
-      )
+      updateEventsList($app, eventCopy, '2021-01-01 01:00', '2021-01-01 02:00')
 
       expect(updateOnResizeSpy).toHaveBeenCalledWith(
         '1',

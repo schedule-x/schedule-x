@@ -8,16 +8,23 @@ import { updateEventsList } from './utils/stateless/update-events-list'
 export class TimeGridEventResizer {
   private readonly originalEventEnd: string
   private lastIntervalDiff = 0
+  private lastValidEnd = ''
 
   constructor(
     private $app: CalendarAppSingleton,
-    private calendarEvent: CalendarEventInternal,
+    private eventCopy: CalendarEventInternal,
+    private updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     private initialY: number,
     private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number,
     private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
+    this.originalEventEnd = this.eventCopy.end
+    this.lastValidEnd = this.eventCopy.end
+    const calendarWrapper = this.$app.elements.calendarWrapper
+    if (!calendarWrapper) return
+
+    calendarWrapper.classList.add('sx__is-resizing')
     this.setupEventListeners()
-    this.originalEventEnd = this.calendarEvent.end
   }
 
   setupEventListeners() {
@@ -44,18 +51,33 @@ export class TimeGridEventResizer {
   }
 
   private setNewTimeForEventEnd(pointsToAdd: number) {
-    const endBeforeUpdate = this.calendarEvent.end
     const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
+
     if (
       newEnd > this.dayBoundariesDateTime.end ||
-      newEnd <= this.calendarEvent.start
+      newEnd <= this.eventCopy.start
     )
       return
 
-    updateEventsList(this.$app, this.calendarEvent, endBeforeUpdate, newEnd)
+    this.lastValidEnd = newEnd
+    this.eventCopy.end = this.lastValidEnd
+    this.updateCopy(this.eventCopy)
   }
 
   private handleMouseUp = () => {
+    this.setNewTimeForEventEnd(
+      this.CHANGE_THRESHOLD_IN_TIME_POINTS * this.lastIntervalDiff
+    )
+    updateEventsList(
+      this.$app,
+      this.eventCopy,
+      this.originalEventEnd,
+      this.lastValidEnd
+    )
+    this.updateCopy(undefined)
+    ;(this.$app.elements.calendarWrapper as HTMLElement).classList.remove(
+      'sx__is-resizing'
+    )
     ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
       'mousemove',
       this.handleMouseMove
@@ -63,7 +85,7 @@ export class TimeGridEventResizer {
 
     if (this.$app.config.callbacks.onEventUpdate) {
       this.$app.config.callbacks.onEventUpdate(
-        this.calendarEvent._getExternalEvent()
+        this.eventCopy._getExternalEvent()
       )
     }
   }

@@ -14,15 +14,44 @@ import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calenda
 import { TimeGridEventResizer } from '../time-grid-event-resizer'
 import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-events.interface'
 import { signal } from '@preact/signals'
-import { vi } from 'vitest'
+import { Mock, vi } from 'vitest'
+import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 
 describe('Resizing events in the time grid', () => {
+  describe('When the calendar wrapper cannot be found', () => {
+    it('should not throw an error', () => {
+      const $app = stubInterface<CalendarAppSingleton>()
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        1,
+        '2024-01-05 06:00',
+        '2024-01-05 07:00'
+      ).build()
+      const eventUpdater = vi.fn()
+      const initialY = 500
+
+      new TimeGridEventResizer(
+        $app,
+        calendarEvent,
+        eventUpdater,
+        initialY,
+        25,
+        {
+          start: '2024-01-05 00:00',
+          end: '2024-01-05 23:59',
+        }
+      )
+    })
+  })
+
   describe('When the calendar has regular day boundaries 0-24', () => {
     let $app: CalendarAppSingleton
     let calendarEvent: CalendarEventInternal
+    let eventCopy: CalendarEventInternal
     let calendarEventNearEndOfDay: CalendarEventInternal
     let calendarWrapper: HTMLDivElement
     const initialY = 500
+    let eventUpdater: Mock
 
     beforeEach(() => {
       calendarWrapper = document.createElement('div')
@@ -39,21 +68,26 @@ describe('Resizing events in the time grid', () => {
         '2024-01-05 06:00',
         '2024-01-05 07:00'
       ).build()
+      eventCopy = deepCloneEvent(calendarEvent, $app)
       calendarEventNearEndOfDay = new CalendarEventBuilder(
         $app.config,
-        1,
+        2,
         '2024-01-05 23:00',
         '2024-01-05 23:30'
       ).build()
       $app.calendarEvents = stubInterface<CalendarEvents>()
-      $app.calendarEvents.list = signal([calendarEvent])
+      $app.calendarEvents.list = signal([
+        calendarEvent,
+        calendarEventNearEndOfDay,
+      ])
       $app.config.callbacks = {
         onEventUpdate: vi.fn(),
       }
+      eventUpdater = vi.fn()
     })
 
     it('should extend an event by 30 minutes', () => {
-      new TimeGridEventResizer($app, calendarEvent, initialY, 25, {
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
         start: '2024-01-05 00:00',
         end: '2024-01-05 23:59',
       })
@@ -75,7 +109,7 @@ describe('Resizing events in the time grid', () => {
     })
 
     it('should shorten an event by 30 minutes', () => {
-      new TimeGridEventResizer($app, calendarEvent, initialY, 25, {
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
         start: '2024-01-05 00:00',
         end: '2024-01-05 23:59',
       })
@@ -97,7 +131,7 @@ describe('Resizing events in the time grid', () => {
     })
 
     it('should not resize above the event start', () => {
-      new TimeGridEventResizer($app, calendarEvent, initialY, 25, {
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
         start: '2024-01-05 00:00',
         end: '2024-01-05 23:59',
       })
@@ -123,10 +157,21 @@ describe('Resizing events in the time grid', () => {
     })
 
     it('should not resize beyond the end of the day', () => {
-      new TimeGridEventResizer($app, calendarEventNearEndOfDay, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
-      })
+      const copiedEventNearEndOfDay = deepCloneEvent(
+        calendarEventNearEndOfDay,
+        $app
+      )
+      new TimeGridEventResizer(
+        $app,
+        copiedEventNearEndOfDay,
+        eventUpdater,
+        initialY,
+        25,
+        {
+          start: '2024-01-05 00:00',
+          end: '2024-01-05 23:59',
+        }
+      )
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
       let currentY = initialY
@@ -144,14 +189,14 @@ describe('Resizing events in the time grid', () => {
       expect(calendarEventNearEndOfDay.start).toBe('2024-01-05 23:00')
       expect(calendarEventNearEndOfDay.end).toBe('2024-01-05 23:45')
       expect(updateEventSpy).toHaveBeenCalledWith({
-        id: 1,
+        id: 2,
         start: '2024-01-05 23:00',
         end: '2024-01-05 23:45',
       })
     })
 
     it('should call onEventUpdate once on mouseup', () => {
-      new TimeGridEventResizer($app, calendarEvent, initialY, 25, {
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
         start: '2024-01-05 00:00',
         end: '2024-01-05 23:59',
       })
