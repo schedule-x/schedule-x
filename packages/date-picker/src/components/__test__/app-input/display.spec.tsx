@@ -60,4 +60,13 @@ describe('date picker input', () => {
       ).toBe(true)
     })
   })
+
+  it('should use a custom label', () => {
+    const label = 'Custom label'
+    renderComponent(createAppSingleton({ label }))
+
+    expect(document.querySelector('.sx__date-input-label')?.textContent).toBe(
+      label
+    )
+  })
 })

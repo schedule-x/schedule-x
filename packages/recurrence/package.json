@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/recurrence",
-  "version": "1.27.0",
+  "version": "1.35.0",
   "description": "A library for working with recurring events according to the iCalendar specification",
   "author": {
     "name": "Tom Österlund",
@@ -27,5 +27,5 @@
     "directory": "packages/recurrence"
   },
   "homepage": "https://schedule-x.dev",
-  "gitHead": "d6461cd713a7b601599220288f37287b527f3667"
+  "gitHead": "981dc3c7e4f5d56288dfbb27b992ea73e8206675"
 }

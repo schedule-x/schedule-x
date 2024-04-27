@@ -1,6 +1,7 @@
 import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarConfigInternal, {
   CalendarType,
+  MonthGridOptions,
   Plugins,
   WeekOptions,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -25,6 +26,7 @@ export default class CalendarConfigBuilder
   views: View[] | undefined
   dayBoundaries: DayBoundariesInternal | undefined
   weekOptions: WeekOptions | undefined
+  monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
   isDark: boolean | undefined = false
@@ -46,7 +48,8 @@ export default class CalendarConfigBuilder
       this.callbacks,
       {},
       this.minDate,
-      this.maxDate
+      this.maxDate,
+      this.monthGridOptions
     )
   }
 
@@ -125,6 +128,13 @@ export default class CalendarConfigBuilder
 
   withMaxDate(maxDate: string | undefined): CalendarConfigBuilder {
     this.maxDate = maxDate
+    return this
+  }
+
+  withMonthGridOptions(
+    monthOptions: MonthGridOptions | undefined
+  ): CalendarConfigBuilder {
+    this.monthGridOptions = monthOptions
     return this
   }
 }

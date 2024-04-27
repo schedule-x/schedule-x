@@ -13,8 +13,6 @@ type props = {
   isFirstWeek: boolean
 }
 
-const EVENT_LIMIT_CONFIG = 4
-
 export default function MonthGridDay({ day, isFirstWeek }: props) {
   const $app = useContext(AppContext)
   const nEventsInDay = Object.values(day.events).filter(
@@ -28,6 +26,8 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
   }
 
   const handleClickAdditionalEvents = () => {
+    if ($app.config.callbacks.onClickPlusEvents)
+      $app.config.callbacks.onClickPlusEvents(day.date)
     if (!$app.config.views.find((view) => view.name === InternalViewName.Day))
       return
 
@@ -63,7 +63,7 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
 
       <div className="sx__month-grid-day__events">
         {Object.values(day.events)
-          .slice(0, EVENT_LIMIT_CONFIG)
+          .slice(0, $app.config.monthGridOptions.nEventsPerDay)
           .map((event, index) => {
             if (typeof event !== 'object')
               return (
@@ -83,15 +83,15 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
           })}
       </div>
 
-      {nEventsInDay > EVENT_LIMIT_CONFIG ? (
+      {nEventsInDay > $app.config.monthGridOptions.nEventsPerDay ? (
         <button
           className="sx__month-grid-day__events-more sx__ripple--wide"
           onClick={handleClickAdditionalEvents}
         >
           {`+ ${
-            nEventsInDay - EVENT_LIMIT_CONFIG
+            nEventsInDay - $app.config.monthGridOptions.nEventsPerDay
           } ${getEventTranslationSingularOrPlural(
-            nEventsInDay - EVENT_LIMIT_CONFIG
+            nEventsInDay - $app.config.monthGridOptions.nEventsPerDay
           )}`}
         </button>
       ) : null}

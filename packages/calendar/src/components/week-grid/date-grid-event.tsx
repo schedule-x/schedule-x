@@ -84,8 +84,11 @@ export default function DateGridEvent({
 
   const startResize = (mouseEvent: MouseEvent) => {
     mouseEvent.stopPropagation()
+    const eventCopy = deepCloneEvent(calendarEvent, $app)
+    updateCopy(eventCopy)
     ;($app.config.plugins.resize as ResizePlugin).createDateGridEventResizer(
-      calendarEvent,
+      eventCopy,
+      updateCopy,
       mouseEvent
     )
   }
@@ -116,6 +119,7 @@ export default function DateGridEvent({
           getTimeStamp(calendarEvent, $app.config.locale, $app.translate('to'))
         }
         data-ccid={customComponentId}
+        data-event-id={calendarEvent.id}
         onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}

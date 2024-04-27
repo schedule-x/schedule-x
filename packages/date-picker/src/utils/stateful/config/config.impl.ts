@@ -19,6 +19,8 @@ export class ConfigImpl implements DatePickerConfigInternal {
     ),
     public placement: Placement = Placement.BOTTOM_START,
     public listeners: DatePickerListeners = {},
-    public style: DatePickerStyle = {}
+    public style: DatePickerStyle = {},
+    public teleportTo?: HTMLElement,
+    public label?: string
   ) {}
 }

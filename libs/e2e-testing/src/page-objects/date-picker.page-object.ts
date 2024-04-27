@@ -1,18 +1,48 @@
 class DatePickerPageObject {
+  constructor(private wrapperClass: string = '') {}
+
   goToNextMonth() {
-    cy.get('.sx__date-picker__month-view-header .sx__chevron--next').click()
+    const selector = '.sx__date-picker__month-view-header .sx__chevron--next'
+
+    if (this.wrapperClass) {
+      cy.get(this.wrapperClass).find(selector).click()
+      return
+    }
+
+    cy.get(selector).click()
   }
 
   goToPreviousMonth() {
-    cy.get('.sx__date-picker__month-view-header .sx__chevron--previous').click()
+    const selector =
+      '.sx__date-picker__month-view-header .sx__chevron--previous'
+
+    if (this.wrapperClass) {
+      cy.get(this.wrapperClass).find(selector).click()
+      return
+    }
+
+    cy.get(selector).click()
   }
 
   toggleOpenState() {
-    cy.get('.sx__date-input-wrapper').click()
+    const selector = '.sx__date-input-wrapper'
+
+    if (this.wrapperClass) {
+      cy.get(this.wrapperClass).find(selector).click()
+      return
+    }
+
+    cy.get(selector).click()
   }
 
   getCurrentMonthAndYearElement() {
-    return cy.get('.sx__date-picker__month-view-header__month-year')
+    const selector = '.sx__date-picker__month-view-header__month-year'
+
+    if (this.wrapperClass) {
+      return cy.get(this.wrapperClass).find(selector)
+    }
+
+    return cy.get(selector)
   }
 
   getCurrentMonthAndYear() {
@@ -24,7 +54,14 @@ class DatePickerPageObject {
   }
 
   clickMonthByIndex(index: number) {
-    cy.get('.sx__date-picker__years-view-accordion__month').eq(index).click()
+    const selector = '.sx__date-picker__years-view-accordion__month'
+
+    if (this.wrapperClass) {
+      cy.get(this.wrapperClass).find(selector).eq(index).click()
+      return
+    }
+
+    cy.get(selector).eq(index).click()
   }
 
   clickYear(year: number) {
@@ -42,4 +79,5 @@ class DatePickerPageObject {
   }
 }
 
-export const createDatePickerPageObject = () => new DatePickerPageObject()
+export const createDatePickerPageObject = (wrapperClass = '') =>
+  new DatePickerPageObject(wrapperClass)

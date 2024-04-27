@@ -11,6 +11,9 @@
   "event-modal": {
     "title": "Event Modal"
   },
+  "events-service": {
+    "title": "Events Service"
+  },
   "calendar-controls": {
     "title": "Calendar Controls"
   },

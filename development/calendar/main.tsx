@@ -26,11 +26,12 @@ import { createCurrentTimePlugin } from '../../packages/current-time/src/current
 import { createSidebarPlugin } from '../../packages/sidebar/src/sidebar-plugin.impl.ts'
 import { Component } from 'preact'
 // import Sidebar from '../../packages/sidebar/src/sidebar.tsx'
+import { createEventsServicePlugin } from '../../packages/events-service/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const scrollControllerPlugin = createScrollControllerPlugin({
-  initialScroll: '12:00',
+  initialScroll: '07:50',
 })
 
 class CalendarsUpdaterPlugin {
@@ -71,19 +72,23 @@ class CalendarsUpdaterPlugin {
 
 const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
+const eventsServicePlugin = createEventsServicePlugin()
 const calendar = createCalendar({
   customCallBacks: {
     onAddTimeOff: () =>
       console.log('successful on add time off added function'),
   },
   // weekOptions: {
-  //   gridHeight: 2500,
+  //   gridHeight: 3000,
+  // },
+  // monthGridOptions: {
+  //   nEventsPerDay: 7
   // },
   // firstDayOfWeek: 1,
   // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',
-  // locale: 'fr-FR',
+  locale: 'de-DE',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
@@ -185,8 +190,9 @@ const calendar = createCalendar({
   plugins: [
     createDragAndDropPlugin(),
     createEventModalPlugin(),
+    eventsServicePlugin,
     scrollControllerPlugin,
-    createResizePlugin(),
+    createResizePlugin(30),
     createEventRecurrencePlugin(),
     calendarControlsPlugin,
     calendarsUpdaterPlugin,
@@ -277,7 +283,7 @@ themeToggle.addEventListener('click', () => {
 
 const addEventButton = document.getElementById('add-event') as HTMLButtonElement
 addEventButton.addEventListener('click', () => {
-  calendar.events.add({
+  eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
     start: '2023-12-18',

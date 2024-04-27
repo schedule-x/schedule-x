@@ -3,6 +3,95 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/schedule-x/schedule-x/compare/v1.34.0...v1.35.0) (2024-04-26)
+
+### Bug Fixes
+
+- prevent too frequent updates on resize ([#386](https://github.com/schedule-x/schedule-x/issues/386)) ([0a5a299](https://github.com/schedule-x/schedule-x/commit/0a5a2998bc12ce695c61fd6db13b14b2d4bd386f))
+
+### Features
+
+- enable configuring interval in resize plugin ([#384](https://github.com/schedule-x/schedule-x/issues/384)) ([49cd041](https://github.com/schedule-x/schedule-x/commit/49cd04173e33d9e2920330062f8c2735ba422adc))
+
+# [1.34.0](https://github.com/schedule-x/schedule-x/compare/v1.33.0...v1.34.0) (2024-04-20)
+
+### Bug Fixes
+
+- prevent redundant rerenders in time grid ([#365](https://github.com/schedule-x/schedule-x/issues/365)) ([e63b813](https://github.com/schedule-x/schedule-x/commit/e63b813b29b33fd5d8c68b62c926eae39091c083))
+
+### Features
+
+- **calendar:** add callback for clicking plus events button ([#367](https://github.com/schedule-x/schedule-x/issues/367)) ([da11f78](https://github.com/schedule-x/schedule-x/commit/da11f788f121bd561af16ef0c67f60f20d1cefdc))
+- **calendar:** add config option nEventsPerDay for month grid ([#368](https://github.com/schedule-x/schedule-x/issues/368)) ([a285d3d](https://github.com/schedule-x/schedule-x/commit/a285d3d92db3b6638c9235c9da2c50a4aa561525))
+- **calendar:** expose interfaces ([#366](https://github.com/schedule-x/schedule-x/issues/366)) ([a00c950](https://github.com/schedule-x/schedule-x/commit/a00c950dd5265fa9ad591d4d0daa9aa80f877c20))
+- rename plugin ([#369](https://github.com/schedule-x/schedule-x/issues/369)) ([8e89b0f](https://github.com/schedule-x/schedule-x/commit/8e89b0f4658e80276510e4ce092c3a4132eaede3))
+
+# [1.33.0](https://github.com/schedule-x/schedule-x/compare/v1.32.0...v1.33.0) (2024-04-19)
+
+### Bug Fixes
+
+- event recurrence update fn ([#358](https://github.com/schedule-x/schedule-x/issues/358)) ([b229acb](https://github.com/schedule-x/schedule-x/commit/b229acb75b7a6957923559f51c68e06b6fe274fc))
+
+### Features
+
+- **calendar:** add new class name for leading and trailing in month agenda ([#359](https://github.com/schedule-x/schedule-x/issues/359)) ([1323eb2](https://github.com/schedule-x/schedule-x/commit/1323eb28d52240c4a7e001ba8890e03015a14027))
+- **events-service:** rename package ([#364](https://github.com/schedule-x/schedule-x/issues/364)) ([830bfc1](https://github.com/schedule-x/schedule-x/commit/830bfc1f23c1c01133b93b208eba256ff903baf9))
+
+# [1.32.0](https://github.com/schedule-x/schedule-x/compare/v1.31.0...v1.32.0) (2024-04-15)
+
+### Features
+
+- add event updater plugin ([#349](https://github.com/schedule-x/schedule-x/issues/349)) ([0e81005](https://github.com/schedule-x/schedule-x/commit/0e8100569e9781a993915ceff1f0196fa4d846d0))
+- add Kyrgyz translations ([#350](https://github.com/schedule-x/schedule-x/issues/350)) ([f48f6d6](https://github.com/schedule-x/schedule-x/commit/f48f6d6579c028b8e825e77ca810b27956cc8cc6))
+- expose interfaces for external config and events ([#352](https://github.com/schedule-x/schedule-x/issues/352)) ([a9148f0](https://github.com/schedule-x/schedule-x/commit/a9148f0b732f20aea5497a25ab0d8c3cfddac7b0))
+
+# [1.31.0](https://github.com/schedule-x/schedule-x/compare/v1.30.1...v1.31.0) (2024-04-13)
+
+### Features
+
+- add time picker component ([#337](https://github.com/schedule-x/schedule-x/issues/337)) ([f5605fc](https://github.com/schedule-x/schedule-x/commit/f5605fccd17c69f76a8a19c33ce1718d3fc1a451))
+
+## [1.30.1](https://github.com/schedule-x/schedule-x/compare/v1.30.0...v1.30.1) (2024-04-08)
+
+### Bug Fixes
+
+- enable updating custom events in agenda view ([0c09c06](https://github.com/schedule-x/schedule-x/commit/0c09c0650703c2c01dd562790a8c2d6d35e978ab))
+
+# [1.30.0](https://github.com/schedule-x/schedule-x/compare/v1.29.1...v1.30.0) (2024-04-06)
+
+### Features
+
+- add turkish language support ([#336](https://github.com/schedule-x/schedule-x/issues/336)) ([7bbae58](https://github.com/schedule-x/schedule-x/commit/7bbae58547c1279a4a3d5ec28826e5324efc2c5c))
+
+## [1.29.1](https://github.com/schedule-x/schedule-x/compare/v1.29.0...v1.29.1) (2024-04-05)
+
+### Bug Fixes
+
+- enable reactively updating the list of events in month agenda view ([#334](https://github.com/schedule-x/schedule-x/issues/334)) ([c9b0f10](https://github.com/schedule-x/schedule-x/commit/c9b0f10116ab0a3d0ae87a873692c05d3ae32dce))
+
+# [1.29.0](https://github.com/schedule-x/schedule-x/compare/v1.28.0...v1.29.0) (2024-04-04)
+
+### Bug Fixes
+
+- force event modal to render again when clicking new event ([#331](https://github.com/schedule-x/schedule-x/issues/331)) ([ecb97f3](https://github.com/schedule-x/schedule-x/commit/ecb97f3979b65cff5ca7896f87a06a843955c72e))
+
+### Features
+
+- enable configuring label text in date picker ([#330](https://github.com/schedule-x/schedule-x/issues/330)) ([397ba7e](https://github.com/schedule-x/schedule-x/commit/397ba7e0acad4f0ac730be5858d2363a0664cda5))
+
+# [1.28.0](https://github.com/schedule-x/schedule-x/compare/v1.27.1...v1.28.0) (2024-04-02)
+
+### Features
+
+- add macedonian language support ([#321](https://github.com/schedule-x/schedule-x/issues/321)) ([02482a8](https://github.com/schedule-x/schedule-x/commit/02482a855ec9d9f1b1d1a97bfc0bec3ebef764a3))
+- enable teleporting date picker ([#323](https://github.com/schedule-x/schedule-x/issues/323)) ([f441e60](https://github.com/schedule-x/schedule-x/commit/f441e606aaa5c1b0a49caa898e281acb72b1e3e4))
+
+## [1.27.1](https://github.com/schedule-x/schedule-x/compare/v1.27.0...v1.27.1) (2024-04-01)
+
+### Bug Fixes
+
+- fix DST recurrence calculation ([#317](https://github.com/schedule-x/schedule-x/issues/317)) ([5ec04b9](https://github.com/schedule-x/schedule-x/commit/5ec04b96f40efba6430aa102aa91f91aec8ea0ac))
+
 # [1.27.0](https://github.com/schedule-x/schedule-x/compare/v1.26.0...v1.27.0) (2024-03-28)
 
 ### Features

@@ -22,6 +22,10 @@ export type WeekOptions = {
   gridHeight: number
 }
 
+export type MonthGridOptions = {
+  nEventsPerDay: number
+}
+
 export type ColorDefinition = {
   main: string
   container: string
@@ -54,6 +58,7 @@ export default interface CalendarConfigInternal extends Config {
   views: View[]
   dayBoundaries: DayBoundariesInternal
   weekOptions: WeekOptions
+  monthGridOptions: MonthGridOptions
   calendars: Signal<Record<string, CalendarType>>
   plugins: Plugins
   isDark: boolean
@@ -73,6 +78,7 @@ interface CalendarDatePickerConfigExternal
 interface ReducedCalendarConfigInternal
   extends Omit<
     CalendarConfigInternal,
+    | 'events'
     | 'dayBoundaries'
     | 'isHybridDay'
     | 'plugins'

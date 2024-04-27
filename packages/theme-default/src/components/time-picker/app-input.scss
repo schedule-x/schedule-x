@@ -1,0 +1,29 @@
+@use '../../util/input-field' as input-field;
+
+.sx__time-input-wrapper {
+  position: relative;
+}
+
+.sx__time-picker-input {
+  @include input-field.input-element;
+
+  width: 6rem;
+  text-align: center;
+
+  .sx__time-input--active & {
+    border-color: var(--sx-color-primary);
+    outline: 1px solid var(--sx-color-primary);
+  }
+}
+
+.sx__time-input-label {
+  @include input-field.input-label;
+
+  .sx__time-input--active & {
+    color: var(--sx-color-primary);
+
+    .is-dark & {
+      display: none;
+    }
+  }
+}

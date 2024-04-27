@@ -1,13 +1,8 @@
+@use '../../util/popup' as popup;
+
 .sx__date-picker-popup {
-  position: absolute;
-  z-index: 1;
-  top: calc(100% + 1px); // 1px to account for outline
-  width: 20.75rem;
-  max-width: 500px;
-  max-height: 400px;
-  overflow: scroll;
-  box-shadow: var(--sx-box-shadow-level3);
-  padding: var(--sx-spacing-modal-padding);
+  @include popup.popup-base;
+
   background-color: var(--sx-color-background);
 
   .is-dark & {
@@ -23,9 +18,7 @@
   }
 
   &.top-start {
-    top: auto;
-    bottom: $top-placement-bottom-value;
-    left: 0;
+    inset: auto auto $top-placement-bottom-value 0;
     transform: translateX(0);
   }
 

@@ -23,7 +23,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
 
   useEffect(() => {
     setAgendaMonth(getMonth())
-  }, [$app.datePickerState.selectedDate.value])
+  }, [$app.datePickerState.selectedDate.value, $app.calendarEvents.list.value])
 
   const [activeDate, setActiveDate] = useState(
     $app.datePickerState.selectedDate.value
@@ -35,8 +35,9 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
         <MonthAgendaDayNames week={agendaMonth.weeks[0]} />
 
         <div className="sx__month-agenda-weeks">
-          {agendaMonth.weeks.map((week) => (
+          {agendaMonth.weeks.map((week, index) => (
             <MonthAgendaWeek
+              key={index + new Date().getTime()}
               week={week}
               setActiveDate={setActiveDate}
               activeDate={activeDate}
@@ -45,7 +46,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
         </div>
 
         <MonthAgendaEvents
-          key={activeDate}
+          key={activeDate + new Date().getTime()}
           events={
             agendaMonth.weeks.flat().find((day) => day.date === activeDate)
               ?.events || []

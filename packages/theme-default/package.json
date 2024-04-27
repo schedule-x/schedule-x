@@ -1,6 +1,6 @@
 {
   "name": "@holitime/schedule-x-theme-default",
-  "version": "1.32.0",
+  "version": "1.35.0",
   "license": "MIT",
   "author": {
     "name": "Tony DUONG",
@@ -8,7 +8,7 @@
     "url": "https://github.com/astowny"
   },
   "scripts": {
-    "build": "sass ./src/index.scss ./dist/index.css && sass ./src/date-picker.scss ./dist/date-picker.css",
+    "build": "node scripts/build.mjs",
     "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
   },
   "exports": {
@@ -19,6 +19,14 @@
     "./dist/date-picker.css": {
       "import": "./dist/date-picker.css",
       "require": "./dist/date-picker.css"
+    },
+    "./dist/time-picker.css": {
+      "import": "./dist/time-picker.css",
+      "require": "./dist/time-picker.css"
+    },
+    "./dist/calendar.css": {
+      "import": "./dist/calendar.css",
+      "require": "./dist/calendar.css"
     }
   },
   "files": [
@@ -27,7 +35,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "gitHead": "d6461cd713a7b601599220288f37287b527f3667",
+  "gitHead": "981dc3c7e4f5d56288dfbb27b992ea73e8206675",
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",

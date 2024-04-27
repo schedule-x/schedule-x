@@ -7,6 +7,7 @@ import {
   CalendarConfigExternal as CalendarConfig,
   CustomComponentFn,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
+import { CalendarEvent } from '@schedule-x/shared/src'
 import CalendarApp from './calendar.app'
 import {
   PreactViewComponent,
@@ -18,7 +19,12 @@ import {
   setRangeForDay,
 } from './utils/stateless/time/range/set-range'
 
-export type { CalendarConfig, CustomComponentFn, PreactViewComponent }
+export type {
+  CalendarConfig,
+  CustomComponentFn,
+  CalendarEvent,
+  PreactViewComponent,
+}
 
 export {
   createCalendar,
