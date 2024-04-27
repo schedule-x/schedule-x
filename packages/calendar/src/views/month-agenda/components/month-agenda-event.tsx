@@ -44,6 +44,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     <div
       className="sx__event sx__month-agenda-event"
       data-ccid={customComponentId}
+      data-event-id={calendarEvent.id}
       style={{
         backgroundColor: customComponent
           ? undefined

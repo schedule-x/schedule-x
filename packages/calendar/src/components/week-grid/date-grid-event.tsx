@@ -119,6 +119,7 @@ export default function DateGridEvent({
           getTimeStamp(calendarEvent, $app.config.locale, $app.translate('to'))
         }
         data-ccid={customComponentId}
+        data-event-id={calendarEvent.id}
         onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
