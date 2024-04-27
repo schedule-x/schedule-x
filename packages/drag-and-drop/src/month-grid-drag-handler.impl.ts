@@ -87,7 +87,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
         '.sx__event'
       ) as NodeListOf<HTMLDivElement>
     ).forEach((el) => {
-      if (String(el.dataset.id) === String(this.calendarEvent.id)) return
+      if (String(el.dataset.eventId) === String(this.calendarEvent.id)) return
 
       el.style.pointerEvents = pointerEvents
     })

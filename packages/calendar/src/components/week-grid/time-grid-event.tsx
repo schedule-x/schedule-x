@@ -125,6 +125,7 @@ export default function TimeGridEvent({
         id={
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
+        data-event-id={calendarEvent.id}
         onClick={handleOnClick}
         onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}

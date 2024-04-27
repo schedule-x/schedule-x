@@ -32,7 +32,7 @@ describe('MonthAgendaEvent', () => {
     const $app = __createAppWithViews__({
       events: [
         {
-          id: '1',
+          id: '123',
           title: expectedTitle,
           start: '1999-03-12 14:45',
           end: '1999-03-12 15:45',
@@ -54,6 +54,16 @@ describe('MonthAgendaEvent', () => {
       expect(
         document.querySelector('.sx__month-agenda-event__time')?.textContent
       ).toBe('March 12, 1999 ⋅ 2:45 PM – 3:45 PM')
+    })
+
+    it('should have a data-event-id attribute', () => {
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      expect(
+        document
+          .querySelector('.sx__month-agenda-event')
+          ?.getAttribute('data-event-id')
+      ).toBe('123')
     })
   })
 })

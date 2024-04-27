@@ -40,6 +40,15 @@ describe('style attribute "display" of date grid event element', () => {
   day.classList.add('sx__time-grid-day')
   $app.elements.calendarWrapper.appendChild(day)
 
+  describe('Every event', () => {
+    it('should have a data-event-id attribute', () => {
+      renderComponent($app, oneDayEventId, 1)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
+
+      expect(oneDayEvent.getAttribute('data-event-id')).toBe(oneDayEventId)
+    })
+  })
+
   describe('event when not in drag state', () => {
     it('should have style "display: flex"', () => {
       renderComponent($app, oneDayEventId, 1)
