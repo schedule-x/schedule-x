@@ -7,6 +7,8 @@ export const calendarKyKG: CalendarTranslations = {
   Day: 'Күн',
   events: 'Окуялар',
   event: 'Окуя',
+  'Add time off': 'Эс алуу кошуу',
+  'My appointments': 'Менин жолугушууларым',
   'No events': 'Окуя жок',
   'Next period': 'Кийинки мезгил',
   'Previous period': 'Өткөн мезгил',

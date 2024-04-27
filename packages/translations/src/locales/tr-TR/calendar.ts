@@ -7,6 +7,8 @@ export const calendarTrTR: CalendarTranslations = {
   Day: 'Günlük',
   events: 'etkinlikler',
   event: 'etkinlik',
+  'Add time off': 'İzin ekle',
+  'My appointments': 'Randevularım',
   'No events': 'Etkinlik yok',
   'Next period': 'Sonraki dönem',
   'Previous period': 'Önceki dönem',

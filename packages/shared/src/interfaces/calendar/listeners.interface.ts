@@ -8,4 +8,7 @@ export interface CalendarCallbacks {
   onClickDate?: (date: string) => void
   onClickDateTime?: (dateTime: string) => void
   onClickPlusEvents?: (date: string) => void
+  onChangeToAppointments?: () => void
+  onAddTimeOff?: () => void
+  onToggleSidePanel?: (isOpen: boolean) => void
 }
