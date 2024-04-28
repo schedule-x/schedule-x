@@ -1,6 +1,6 @@
 {
   "name": "@holitime/schedule-x-sidebar",
-  "version": "1.31.0",
+  "version": "1.31.1",
   "description": "Plugin for Schedule-X to display the sidebar",
   "author": {
     "name": "Tony DUONG",
@@ -24,11 +24,6 @@
   "peerDependencies": {
     "@preact/signals": "^1.1.5",
     "preact": "^10.19.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/schedule-x/schedule-x",
-    "directory": "packages/event-modal"
   },
   "homepage": "https://schedule-x.dev",
   "gitHead": "d6461cd713a7b601599220288f37287b527f3667"
