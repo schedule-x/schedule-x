@@ -9,6 +9,7 @@ export const getCCID = (
   let customComponentId = customComponent
     ? 'custom-time-grid-event-' + calendarEvent.id
     : undefined
-  if (customComponentId && isCopy) customComponentId += '-' + 'copy'
+  if (customComponentId && isCopy)
+    customComponentId += '-' + 'copy' + '-' + calendarEvent.start
   return customComponentId
 }

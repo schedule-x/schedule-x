@@ -68,6 +68,7 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
           key={event.id}
           calendarEvent={event}
           dayBoundariesDateTime={dayBoundariesDateTime}
+          isCopy={event.isCopy}
         />
       ))}
     </div>
