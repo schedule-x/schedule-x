@@ -50,7 +50,7 @@ export default function MonthGridEvent({
 
   const customComponent = $app.config._customComponentFns.monthGridEvent
   const customComponentId = customComponent
-    ? 'custom-month-grid-event-' + randomStringId()
+    ? 'custom-month-grid-event-' + randomStringId() // needs a unique string to support event recurrence
     : undefined
 
   useEffect(() => {
