@@ -99,10 +99,9 @@ export default function DateGridEvent({
     'sx__date-grid-event',
     'sx__date-grid-cell',
   ]
-  if (isCopy) eventClasses.push(' sx__date-grid-event--copy')
-  if (hasOverflowLeft) eventClasses.push(' sx__date-grid-event--overflow-left')
-  if (hasOverflowRight)
-    eventClasses.push(' sx__date-grid-event--overflow-right')
+  if (isCopy) eventClasses.push('sx__date-grid-event--copy')
+  if (hasOverflowLeft) eventClasses.push('sx__date-grid-event--overflow-left')
+  if (hasOverflowRight) eventClasses.push('sx__date-grid-event--overflow-right')
 
   const borderLeftNonCustom = hasOverflowLeft
     ? 'none'
