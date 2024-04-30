@@ -40,12 +40,19 @@ export const createCalendarState = (
     const selectedView = calendarConfig.views.find(
       (availableView) => availableView.name === view.value
     )
-    range.value = (selectedView as View).setDateRange({
+    const newRange = (selectedView as View).setDateRange({
       calendarConfig,
       date,
       range,
       timeUnitsImpl,
     })
+    if (
+      newRange.start === range.value?.start &&
+      newRange.end === range.value?.end
+    )
+      return
+
+    range.value = newRange
   }
 
   const isCalendarSmall = signal<boolean | undefined>(undefined)
