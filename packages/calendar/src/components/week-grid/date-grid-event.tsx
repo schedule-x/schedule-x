@@ -18,6 +18,7 @@ import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -70,7 +71,7 @@ export default function DateGridEvent({
 
   const customComponent = $app.config._customComponentFns.dateGridEvent
   let customComponentId = customComponent
-    ? 'custom-date-grid-event-' + calendarEvent.id
+    ? 'custom-date-grid-event-' + randomStringId() // needs a unique string to support event recurrence
     : undefined
   if (isCopy && customComponentId) customComponentId += '-copy'
 
