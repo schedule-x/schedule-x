@@ -52,6 +52,20 @@ describe('calendar state', () => {
         end: '2023-09-13 23:59',
       })
     })
+
+    it('should not update the range if both start and end remain the same', () => {
+      const state = createCalendarState(config, timeUnitsImpl)
+      state.view.value = InternalViewName.Day
+      state.range.value = {
+        start: '2023-09-13 00:00',
+        end: '2023-09-13 23:59',
+      }
+      const originalRange = state.range.value
+
+      state.handleDateSelection('2023-09-13')
+
+      expect(state.range.value).toBe(originalRange) // checking object equality is wanted here
+    })
   })
 
   describe('setting the range in a hybrid day', () => {
