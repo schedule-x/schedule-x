@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.36.0](https://github.com/schedule-x/schedule-x/compare/v1.35.0...v1.36.0) (2024-04-30)
+
+### Bug Fixes
+
+- **calendar:** prevent duplicate custom component ids ([#396](https://github.com/schedule-x/schedule-x/issues/396)) ([a0af6d2](https://github.com/schedule-x/schedule-x/commit/a0af6d2891bdeeb7d8d67ed044970b565f511f1d))
+- **calendar:** prevent redundant range updates ([#395](https://github.com/schedule-x/schedule-x/issues/395)) ([fbdd100](https://github.com/schedule-x/schedule-x/commit/fbdd1003d0cb1792fe2fdacf468e74917efcd7da))
+
+### Features
+
+- add data-event-id attribute to all events ([#388](https://github.com/schedule-x/schedule-x/issues/388)) ([106833b](https://github.com/schedule-x/schedule-x/commit/106833b2079bbfb76e1f7a409b3cd9a40585daf9))
+- **shared:** expose more interfaces ([#394](https://github.com/schedule-x/schedule-x/issues/394)) ([5e9b6e7](https://github.com/schedule-x/schedule-x/commit/5e9b6e771ee832aa6f74b9345eef395201eba1ea))
+
 # [1.35.0](https://github.com/schedule-x/schedule-x/compare/v1.34.0...v1.35.0) (2024-04-26)
 
 ### Bug Fixes
