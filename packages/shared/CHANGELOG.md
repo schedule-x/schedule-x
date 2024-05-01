@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
+
+### Features
+
+- expose apis from shared ([#401](https://github.com/schedule-x/schedule-x/issues/401)) ([30783ae](https://github.com/schedule-x/schedule-x/commit/30783ae2ee948a18186130ef24ff47a5a0d7a949))
+
 # [1.36.0](https://github.com/schedule-x/schedule-x/compare/v1.35.0...v1.36.0) (2024-04-30)
 
 ### Features
