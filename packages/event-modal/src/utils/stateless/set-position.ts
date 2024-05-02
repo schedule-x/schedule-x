@@ -8,16 +8,22 @@ export const setPosition = (
   const WIDTH_NEEDED = MODAL_WIDTH + INLINE_SPACE_BETWEEN_MODAL_AND_EVENT
   const hasSpaceTop = eventDOMRect.bottom - appDOMRect.top > modalHeight
   const eventBottomLessThanAppBottom = eventDOMRect.bottom < appDOMRect.bottom
+  const eventTopLessThanAppTop = eventDOMRect.top < appDOMRect.top
   let top = 0
   let left = 0
   let animationStart = '0%'
 
-  if (appDOMRect.bottom - eventDOMRect.top > modalHeight) {
+  if (
+    appDOMRect.bottom - eventDOMRect.top > modalHeight &&
+    !eventTopLessThanAppTop
+  ) {
     top = eventDOMRect.top
   } else if (hasSpaceTop && eventBottomLessThanAppBottom) {
     top = eventDOMRect.bottom - modalHeight
   } else if (hasSpaceTop && !eventBottomLessThanAppBottom) {
     top = appDOMRect.bottom - modalHeight
+  } else if (eventTopLessThanAppTop) {
+    top = appDOMRect.top
   } else {
     top = appDOMRect.top
   }

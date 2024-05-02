@@ -9,6 +9,7 @@ export const createEventModalPlugin = (): EventModalPlugin => {
   const calendarEventDOMRect = signal<DOMRect | null>(null)
 
   return {
+    calendarEventElement: signal<HTMLElement | null>(null),
     name: PluginName.EventModal,
     calendarEvent,
     calendarEventDOMRect,
