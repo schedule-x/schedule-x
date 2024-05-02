@@ -68,7 +68,8 @@ export default function CalendarHeader() {
             onClick={handleChangeAppointments}
           >
             <img src={changeIcon} width={30} alt="" />
-            {$app.translate('My appointments')}
+            { isAppointment
+            $app.translate('My appointments')}
           </div>
         </div>
 

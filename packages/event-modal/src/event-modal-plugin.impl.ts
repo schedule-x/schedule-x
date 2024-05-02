@@ -12,6 +12,7 @@ export const createEventModalPlugin = (): EventModalPlugin => {
     name: PluginName.EventModal,
     calendarEvent,
     calendarEventDOMRect,
+    calendarEventElement: signal<HTMLElement | null>(null),
     ComponentFn: EventModal,
     setCalendarEvent: (
       event: CalendarEventInternal,

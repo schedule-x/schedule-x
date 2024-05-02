@@ -86,7 +86,7 @@ export default function TimeGridEvent({
   }
 
   const customComponent = $app.config._customComponentFns.timeGridEvent
-  const customComponentId = getCCID(customComponent, calendarEvent, isCopy)
+  const customComponentId = getCCID(customComponent, isCopy)
 
   useEffect(() => {
     if (!customComponent) return

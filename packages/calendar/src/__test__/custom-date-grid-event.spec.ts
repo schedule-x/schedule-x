@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -12,10 +11,6 @@ import CalendarApp from '../calendar.app'
 import { viewWeek } from '../views/week'
 import { spy } from 'sinon'
 import { getFirstEventElement } from './utils'
-import { assertIsDIV } from '../../../../libs/assertions/src'
-
-const getByCCID = (id: string) =>
-  document.querySelector(`[data-ccid="custom-date-grid-event-${id}"]`)
 
 describe('CalendarApp', () => {
   afterEach(() => {
@@ -84,7 +79,7 @@ describe('CalendarApp', () => {
         const callSecondArgument = event1.args[1]
         expect(callFirstArgument).toBeInstanceOf(HTMLDivElement)
         const elementCCID = callFirstArgument.dataset.ccid
-        expect(elementCCID).toBe('custom-date-grid-event-1')
+        expect(elementCCID).toMatch(/custom-date-grid-event-\w+$/)
         expect(callSecondArgument.calendarEvent.id).toBe(eventId1)
         expect(callSecondArgument.calendarEvent.title).toBe(eventTitle1)
         expect(callSecondArgument.calendarEvent.start).toBe(eventStart1)
@@ -98,7 +93,7 @@ describe('CalendarApp', () => {
         const callSecondArgument2 = event2.args[1]
         expect(callFirstArgument2).toBeInstanceOf(HTMLDivElement)
         const elementCCID2 = callFirstArgument2.dataset.ccid
-        expect(elementCCID2).toBe('custom-date-grid-event-2')
+        expect(elementCCID2).toMatch(/custom-date-grid-event-\w+$/)
         expect(callSecondArgument2.calendarEvent.id).toBe(eventId2)
         expect(callSecondArgument2.calendarEvent.title).toBe(eventTitle2)
         expect(callSecondArgument2.calendarEvent.start).toBe(eventStart2)
@@ -109,7 +104,7 @@ describe('CalendarApp', () => {
         const callSecondArgument3 = event3.args[1]
         expect(callFirstArgument3).toBeInstanceOf(HTMLDivElement)
         const elementCCID3 = callFirstArgument3.dataset.ccid
-        expect(elementCCID3).toBe('custom-date-grid-event-3')
+        expect(elementCCID3).toMatch(/custom-date-grid-event-\w+$/)
         expect(callSecondArgument3.calendarEvent.id).toBe(eventId3)
         expect(callSecondArgument3.calendarEvent.title).toBe(eventTitle3)
         expect(callSecondArgument3.calendarEvent.start).toBe(eventStart3)
@@ -135,47 +130,9 @@ describe('CalendarApp', () => {
       expect(eventEl.style.borderTopRightRadius).toBe('0px')
     })
 
-    it('should have a class for overflow right, signalling that the event extends beyond the week', () => {
-      const eventEl = getByCCID('3')
-      assertIsDIV(eventEl)
-
-      expect(
-        eventEl.classList.contains('sx__date-grid-event--overflow-right')
-      ).toBe(true)
-      expect(
-        eventEl.classList.contains('sx__date-grid-event--overflow-left')
-      ).toBe(false)
-    })
-
-    it('should have a class for overflow left, signalling that the event started before the current week', () => {
-      const eventEl = getByCCID('2')
-      assertIsDIV(eventEl)
-
-      expect(
-        eventEl.classList.contains('sx__date-grid-event--overflow-left')
-      ).toBe(true)
-      expect(
-        eventEl.classList.contains('sx__date-grid-event--overflow-right')
-      ).toBe(false)
-    })
-
     it('should have 0 padding', () => {
       const eventEl = getFirstEventElement(calendarEl)
       expect(eventEl.style.padding).toBe('0px')
-    })
-
-    it('should not subtract any event width for overflow', () => {
-      const event1 = getByCCID('1')
-      assertIsDIV(event1)
-      expect(event1.style.width).toBe('calc(100% - 2px)')
-
-      const event2 = getByCCID('2')
-      assertIsDIV(event2)
-      expect(event2.style.width).toBe('calc(300% - 2px)')
-
-      const event3 = getByCCID('3')
-      assertIsDIV(event3)
-      expect(event3.style.width).toBe('calc(500% - 2px)')
     })
   })
 })

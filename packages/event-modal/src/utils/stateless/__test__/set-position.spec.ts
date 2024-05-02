@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -143,6 +144,39 @@ describe('setting position of event modal', () => {
       expect(
         document.documentElement.style.getPropertyValue('--sx-event-modal-left')
       ).toBe(eventDOMRect.left - 410 + 'px')
+    })
+  })
+
+  describe('when there is not enough space on the app top', () => {
+    it('should position modal at the top of the app', () => {
+      const appDOMRect = {
+        x: 16,
+        y: 191,
+        width: 1688,
+        height: 1130.390625,
+        top: 191,
+        right: 1704,
+        bottom: 1321.390625,
+        left: 16,
+        toJSON: () => ({}),
+      }
+      const eventDOMRect = {
+        x: 553.28125,
+        y: 70,
+        width: 229.140625,
+        height: 100,
+        top: 70,
+        right: 782.421875,
+        bottom: 170,
+        left: 553.28125,
+        toJSON: () => ({}),
+      }
+
+      setPosition(appDOMRect, eventDOMRect)
+
+      expect(
+        document.documentElement.style.getPropertyValue('--sx-event-modal-top')
+      ).toBe(appDOMRect.top + 'px')
     })
   })
 })

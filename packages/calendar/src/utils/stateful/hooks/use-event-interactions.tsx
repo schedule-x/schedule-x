@@ -42,7 +42,9 @@ export default function useEventInteractions($app: CalendarAppSingleton) {
       ? eventTarget
       : eventTarget.closest('.sx__event')
 
-    if (calendarEventElement) {
+    if (calendarEventElement instanceof HTMLElement) {
+      $app.config.plugins.eventModal.calendarEventElement.value =
+        calendarEventElement
       $app.config.plugins.eventModal.setCalendarEvent(
         calendarEvent,
         calendarEventElement.getBoundingClientRect()

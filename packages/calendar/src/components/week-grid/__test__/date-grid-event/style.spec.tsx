@@ -98,6 +98,12 @@ describe('styles of DateGridEvent', () => {
       const event = getEventByText(eventWithOverflowLeftTitle)
 
       expect(event.style.width).toBe('calc(200% - 12px)')
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-left')
+      ).toBe(true)
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-right')
+      ).toBe(false)
     })
 
     it('should subtract 20px extra from width to make room for overflow indicators', () => {
@@ -105,6 +111,12 @@ describe('styles of DateGridEvent', () => {
       const event = getEventByText(eventWithOverflowBothTitle)
 
       expect(event.style.width).toBe('calc(700% - 22px)')
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-right')
+      ).toBe(true)
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-left')
+      ).toBe(true)
     })
 
     it('should have 0 border radius on left side', () => {
