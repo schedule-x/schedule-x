@@ -16,64 +16,64 @@ const config = {
    * */
   locale: 'zh-CN',
 
-   /**
+  /**
    * Set which day is to be considered the starting day of the week. 0 = Sunday, 1 = Monday, (...other days) 6 = Saturday
    * Defaults to 1 (Monday)
    * */
   firstDayOfWeek: 0,
 
-   /**
+  /**
    * The default date to display when the calendar is first rendered. Only accepts YYYY-MM-DD format.
    * Defaults to the current date
    * */
   selectedDate: '2023-12-24',
 
   /**
-  * An HTML element to which the date picker popup will be appended when opened.
-  * */
+   * An HTML element to which the date picker popup will be appended when opened.
+   * */
   teleportTo: document.body,
 
   /**
-  * The placement of the date picker popup in relation to the input field
-  * Available values: 'top-start', 'top-end', 'bottom-start', 'bottom-end'
-  * Defaults to 'bottom-start'
-  * */
+   * The placement of the date picker popup in relation to the input field
+   * Available values: 'top-start', 'top-end', 'bottom-start', 'bottom-end'
+   * Defaults to 'bottom-start'
+   * */
   placement: 'bottom-end',
 
   /**
-  * The minimum date that a user can select. Only accepts YYYY-MM-DD format.
-  * Defaults to 1970-01-01
-  * */
+   * The minimum date that a user can select. Only accepts YYYY-MM-DD format.
+   * Defaults to 1970-01-01
+   * */
   min: '2020-01-01',
 
   /**
-  * The maximum date that a user can select. Only accepts YYYY-MM-DD format.
-  * Defaults to December 31st of the year following the current year
-  */
+   * The maximum date that a user can select. Only accepts YYYY-MM-DD format.
+   * Defaults to December 31st of the year following the current year
+   */
   max: '2025-01-01',
 
   style: {
     /**
-    * Render the date picker in dark mode.
-    * Defaults to false
-    */
+     * Render the date picker in dark mode.
+     * Defaults to false
+     */
     isDark: true,
 
     /**
-    * Set the width of the date picker wrapper to 100%. Particularly useful for small screens.
-    * Defaults to false
-    */
+     * Set the width of the date picker wrapper to 100%. Particularly useful for small screens.
+     * Defaults to false
+     */
     fullWidth: true,
   },
 
   listeners: {
     /**
-    * Callback function that is called when the user selects a date.
-    * @param {string} date - The date that the user selected, in YYYY-MM-DD format
-    */
+     * Callback function that is called when the user selects a date.
+     * @param {string} date - The date that the user selected, in YYYY-MM-DD format
+     */
     onChange: (date) => {
       console.log('date changed', date)
-    }
+    },
   },
 }
 

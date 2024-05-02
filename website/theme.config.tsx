@@ -33,7 +33,7 @@ const config: DocsThemeConfig = {
 
     return (
       <>
-        <link rel="shortcut icon" href="/images/favicon_io/favicon.ico"/>
+        <link rel="shortcut icon" href="/images/favicon_io/favicon.ico" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -55,11 +55,11 @@ const config: DocsThemeConfig = {
           property="og:image"
           content="https://schedule-x.s3.eu-west-1.amazonaws.com/logo_open_graph.png"
         />
-        <meta property="og:image:width" content="1600"/>
-        <meta property="og:image:height" content="630"/>
+        <meta property="og:image:width" content="1600" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:url" content={url} />
-        <meta property="twitter:card" content="summary_large_image"/>
-        <meta property="og:locale" content="en_US"/>
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="og:locale" content="en_US" />
       </>
     )
   },
@@ -70,8 +70,8 @@ const config: DocsThemeConfig = {
       <a href="/newsletter" target="_blank">
         Get the latest project news. Click here for the newsletter signup 📬
       </a>
-    )
-  }
+    ),
+  },
 }
 
 export default config

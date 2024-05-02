@@ -68,8 +68,10 @@ export default function CalendarHeader() {
             onClick={handleChangeAppointments}
           >
             <img src={changeIcon} width={30} alt="" />
-            { isAppointment
-            $app.translate('My appointments')}
+            {$app.config.plugins.header &&
+            $app.config.plugins.header.textSwitchBtn.value
+              ? $app.config.plugins.header.textSwitchBtn.value
+              : $app.translate('My appointments')}
           </div>
         </div>
 

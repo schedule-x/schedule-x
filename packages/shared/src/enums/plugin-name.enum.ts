@@ -6,4 +6,5 @@ export enum PluginName {
   Resize = 'resize',
   CalendarControls = 'calendarControls',
   Sidebar = 'sidebar',
+  Header = 'header',
 }

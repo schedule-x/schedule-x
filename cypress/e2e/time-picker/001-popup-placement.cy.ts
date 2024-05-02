@@ -4,9 +4,15 @@ import { createTimePickerPageObject } from '@schedule-x/e2e-testing/src/page-obj
 
 describe('Time Picker - Placement', () => {
   const timePickerTopLeft = createTimePickerPageObject('.time-picker-top-left')
-  const timePickerTopRight = createTimePickerPageObject('.time-picker-top-right')
-  const timePickerBottomLeft = createTimePickerPageObject('.time-picker-bottom-left')
-  const timePickerBottomRight = createTimePickerPageObject('.time-picker-bottom-right')
+  const timePickerTopRight = createTimePickerPageObject(
+    '.time-picker-top-right'
+  )
+  const timePickerBottomLeft = createTimePickerPageObject(
+    '.time-picker-bottom-left'
+  )
+  const timePickerBottomRight = createTimePickerPageObject(
+    '.time-picker-bottom-right'
+  )
   const timePickerInModal = createTimePickerPageObject('.time-picker-in-modal')
 
   beforeEach(() => {

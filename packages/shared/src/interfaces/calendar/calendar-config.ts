@@ -17,6 +17,7 @@ import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plug
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
 import CustomCallbacks from './custom-callbacks.interface'
+import HeaderPlugin from './calendar-header.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -45,6 +46,7 @@ export type Plugins = {
   scrollController?: PluginBase
   eventRecurrence?: EventRecurrencePlugin
   resize?: ResizePlugin
+  header?: HeaderPlugin
   [key: string]: PluginBase | undefined
 }
 

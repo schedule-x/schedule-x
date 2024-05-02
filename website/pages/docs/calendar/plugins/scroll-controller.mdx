@@ -14,12 +14,12 @@ npm i @schedule-x/scroll-controller
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller'
 
 const scrollController = createScrollControllerPlugin({
-  initialScroll: '07:50'
+  initialScroll: '07:50',
 })
 
 const calendar = createCalendar({
   // ...other configuration
-  plugins: [scrollController]
+  plugins: [scrollController],
 })
 calendar.render(document.getElementById('calendar'))
 

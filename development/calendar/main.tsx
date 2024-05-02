@@ -24,6 +24,7 @@ import { createCalendarControlsPlugin } from '../../packages/calendar-controls/s
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
 import { createSidebarPlugin } from '../../packages/sidebar/src/sidebar-plugin.impl.ts'
+import { createHeaderPlugin } from '../../packages/header/src'
 import { Component } from 'preact'
 // import Sidebar from '../../packages/sidebar/src/sidebar.tsx'
 import { createEventsServicePlugin } from '../../packages/events-service/src'
@@ -64,8 +65,14 @@ class CalendarsUpdaterPlugin {
   }
 
   updateSidebar(val = true): void {
-    if (this.$app.config.plugins.sidebar) {
+    if (this.$app && this.$app.config.plugins.sidebar) {
       this.$app.config.plugins.sidebar.isOpen.value = val
+    }
+  }
+
+  updateHeader(textSwitchBtn: string = ''): void {
+    if (this.$app && this.$app.config.plugins.header && textSwitchBtn) {
+      this.$app.config.plugins.header.textSwitchBtn.value = textSwitchBtn
     }
   }
 }
@@ -73,6 +80,7 @@ class CalendarsUpdaterPlugin {
 const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
+const headerPlugin = createHeaderPlugin()
 const calendar = createCalendar({
   customCallBacks: {
     onAddTimeOff: () =>
@@ -198,6 +206,7 @@ const calendar = createCalendar({
     calendarsUpdaterPlugin,
     createCurrentTimePlugin(),
     createSidebarPlugin(),
+    headerPlugin,
   ],
   events: [
     ...seededEvents,
@@ -283,6 +292,7 @@ themeToggle.addEventListener('click', () => {
 
 const addEventButton = document.getElementById('add-event') as HTMLButtonElement
 addEventButton.addEventListener('click', () => {
+  calendarsUpdaterPlugin.updateHeader('mes consultations')
   eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
