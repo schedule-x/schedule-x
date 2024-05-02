@@ -22,8 +22,6 @@ export const setPosition = (
     top = eventDOMRect.bottom - modalHeight
   } else if (hasSpaceTop && !eventBottomLessThanAppBottom) {
     top = appDOMRect.bottom - modalHeight
-  } else if (eventTopLessThanAppTop) {
-    top = appDOMRect.top
   } else {
     top = appDOMRect.top
   }
