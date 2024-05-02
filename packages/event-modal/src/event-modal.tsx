@@ -24,6 +24,26 @@ export default function EventModal({ $app }: EventModalProps) {
 
   const [eventWrapperStyle, setEventWrapperStyle] = useState('sx__event-modal')
 
+  const callSetPosition = () => {
+    setPosition(
+      $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
+      $app.config.plugins.eventModal?.calendarEventDOMRect.value as DOMRect,
+      (
+        $app.elements.calendarWrapper?.querySelector(
+          '.sx__event-modal'
+        ) as HTMLElement
+      ).clientHeight
+    )
+  }
+
+  const scrollListener = () => {
+    ;(
+      $app.config.plugins.eventModal as EventModalPlugin
+    ).calendarEventDOMRect.value =
+      $app.config.plugins.eventModal?.calendarEventElement.value?.getBoundingClientRect() as DOMRect
+    callSetPosition()
+  }
+
   useEffect(() => {
     if (customComponent) {
       customComponent(
@@ -35,20 +55,24 @@ export default function EventModal({ $app }: EventModalProps) {
     } else {
       setEventWrapperStyle(eventWrapperStyle.concat(' sx__event-modal-default'))
     }
-    setPosition(
-      $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
-      $app.config.plugins.eventModal?.calendarEventDOMRect.value as DOMRect,
-      (
-        $app.elements.calendarWrapper?.querySelector(
-          '.sx__event-modal'
-        ) as HTMLElement
-      ).clientHeight
-    )
+    callSetPosition()
 
     setIsDisplayed(true)
     const clickOutsideListener = createClickOutsideListener($app, modalId)
+
+    $app.elements.calendarWrapper
+      ?.querySelector('.sx__view-container')
+      ?.addEventListener('scroll', scrollListener)
     document.addEventListener('click', clickOutsideListener)
-    return () => document.removeEventListener('click', clickOutsideListener)
+    window.addEventListener('scroll', scrollListener)
+
+    return () => {
+      document.removeEventListener('click', clickOutsideListener)
+      window.removeEventListener('scroll', scrollListener)
+      $app.elements.calendarWrapper
+        ?.querySelector('.sx__view-container')
+        ?.removeEventListener('scroll', scrollListener)
+    }
   }, [])
 
   const iconColor = useIconColors($app)

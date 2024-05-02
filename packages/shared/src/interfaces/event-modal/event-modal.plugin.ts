@@ -11,6 +11,7 @@ export type EventModalProps = {
 export default interface EventModalPlugin extends PluginBase {
   calendarEvent: Signal<CalendarEventInternal | null>
   calendarEventDOMRect: Signal<DOMRect | null>
+  calendarEventElement: Signal<HTMLElement | null>
 
   setCalendarEvent(
     event: CalendarEventInternal | null,
