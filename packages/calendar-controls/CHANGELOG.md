@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
+
+### Bug Fixes
+
+- **calendar controls:** upgrade version ([5e70067](https://github.com/schedule-x/schedule-x/commit/5e70067d91f7e40bb4834aeb5dd33c6ef6902f68))
+- **types:** add export types and doc ([2091958](https://github.com/schedule-x/schedule-x/commit/209195878d841aed5aae86a7b3220e585274a5e0))
+
+### Features
+
+- **types:** add export types ([0280903](https://github.com/schedule-x/schedule-x/commit/02809035b4b0f8600fe24f753b947a4d8a6f59aa))
+
 # [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
 
 **Note:** Version bump only for package @schedule-x/calendar-controls

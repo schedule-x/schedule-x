@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/astowny/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
+
+### Features
+
+- **calendar:** add header management and header plugin + format ([6f79e1e](https://github.com/astowny/schedule-x/commit/6f79e1e7b394f454cae4e7df80563f3b34179f2d))
+
 # [1.27.0](https://github.com/schedule-x/schedule-x/compare/v1.26.0...v1.27.0) (2024-03-28)
 
 **Note:** Version bump only for package @schedule-x/event-modal

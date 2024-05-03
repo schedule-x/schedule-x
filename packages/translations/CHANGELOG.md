@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
+
+### Features
+
+- **custom functions:** add custom callbacks + translations ([2407704](https://github.com/schedule-x/schedule-x/commit/2407704e8e3be8bf7b539ae10801b6229d5456dd))
+- **header:** add property on toggle side panel ([05f9f81](https://github.com/schedule-x/schedule-x/commit/05f9f81d9ee6bf1543b8a01c113919d19347a4d2))
+- **header:** add side panel icon show and hide ([fcb54f9](https://github.com/schedule-x/schedule-x/commit/fcb54f96ee914ff0e8f825b4e83b8d9a9090d1c8))
+- **header:** add UI for custom add time off button ([a6bba4e](https://github.com/schedule-x/schedule-x/commit/a6bba4e62ea7c5013bbb7f82250fb770ba4baf59))
+- **package names:** edit package names ([670fc4a](https://github.com/schedule-x/schedule-x/commit/670fc4a6d9818a522cd43053a829af99068eb45c))
+- **translation:** add lang ([015e7e9](https://github.com/schedule-x/schedule-x/commit/015e7e9060896f17db496062fb05ead835710f7e))
+- **workflow:** build 1.30 custom packages ([157a472](https://github.com/schedule-x/schedule-x/commit/157a472158f14a09a5852e71ac7bfebbac49943a))
+- **workflow:** build 1.31 and 1.32 publish export sidebar lgin interface ([95b4b55](https://github.com/schedule-x/schedule-x/commit/95b4b559d70bbfc8c00ad687bf88f084ae9f08f5))
+
 # [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
 
 **Note:** Version bump only for package @schedule-x/translations

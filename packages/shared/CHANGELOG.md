@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
+
+### Bug Fixes
+
+- **calendar shared:** export CalendarEventExternal ([9483783](https://github.com/schedule-x/schedule-x/commit/94837837247f294c0282ac6c05ae1f7cbdae5e5b))
+- **calendar shared:** upgrade version ([c2b3c01](https://github.com/schedule-x/schedule-x/commit/c2b3c0141831b32199b4d78e84e379ad30e4790e))
+
+### Features
+
+- **calendar:** add header management and header plugin + format ([6f79e1e](https://github.com/schedule-x/schedule-x/commit/6f79e1e7b394f454cae4e7df80563f3b34179f2d))
+- **custom functions:** add custom callbacks + translations ([2407704](https://github.com/schedule-x/schedule-x/commit/2407704e8e3be8bf7b539ae10801b6229d5456dd))
+- **event-modal:** set modal position on scroll ([#403](https://github.com/schedule-x/schedule-x/issues/403)) ([518aa63](https://github.com/schedule-x/schedule-x/commit/518aa631d25c2bbc9700f0f68cf0f04d7fe6d4be))
+- **header:** add property on toggle side panel ([05f9f81](https://github.com/schedule-x/schedule-x/commit/05f9f81d9ee6bf1543b8a01c113919d19347a4d2))
+- **package names:** edit package names ([670fc4a](https://github.com/schedule-x/schedule-x/commit/670fc4a6d9818a522cd43053a829af99068eb45c))
+- **sidebar plugin:** add sidebar plugin ([1069163](https://github.com/schedule-x/schedule-x/commit/10691635ad7460d105c6b8821ee393c5605c1e8b))
+- **sidebar plugin:** add sidebar plugin is open prop ([3b79f4c](https://github.com/schedule-x/schedule-x/commit/3b79f4c23c4bbb070c9c3cd1841724979c5ab9fe))
+- **translation:** add lang ([015e7e9](https://github.com/schedule-x/schedule-x/commit/015e7e9060896f17db496062fb05ead835710f7e))
+- **workflow:** build 1.30 custom packages ([157a472](https://github.com/schedule-x/schedule-x/commit/157a472158f14a09a5852e71ac7bfebbac49943a))
+- **workflow:** build 1.31 and 1.32 publish export sidebar lgin interface ([95b4b55](https://github.com/schedule-x/schedule-x/commit/95b4b559d70bbfc8c00ad687bf88f084ae9f08f5))
+
 # [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
 
 ### Features

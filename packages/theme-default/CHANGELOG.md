@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
+
+### Features
+
+- **calendar:** add header management and header plugin + format ([6f79e1e](https://github.com/schedule-x/schedule-x/commit/6f79e1e7b394f454cae4e7df80563f3b34179f2d))
+
+## [1.35.1](https://github.com/schedule-x/schedule-x/compare/v1.35.0...v1.35.1) (2024-04-28)
+
+### Bug Fixes
+
+- **theme-default:** upgrade version and fix flex wrap header ([394d41a](https://github.com/schedule-x/schedule-x/commit/394d41a04bc37f1f0c168be151047bb1d8b834d2))
+
+### Features
+
+- **header:** add property on toggle side panel ([05f9f81](https://github.com/schedule-x/schedule-x/commit/05f9f81d9ee6bf1543b8a01c113919d19347a4d2))
+- **package names:** edit package names ([670fc4a](https://github.com/schedule-x/schedule-x/commit/670fc4a6d9818a522cd43053a829af99068eb45c))
+- **translation:** fix vrsion ([95060de](https://github.com/schedule-x/schedule-x/commit/95060deff31b56cd7da6ed706715a1a3477a6f95))
+- **workflow:** build 1.30 custom packages ([157a472](https://github.com/schedule-x/schedule-x/commit/157a472158f14a09a5852e71ac7bfebbac49943a))
+- **workflow:** build 1.31 and 1.32 publish export sidebar lgin interface ([95b4b55](https://github.com/schedule-x/schedule-x/commit/95b4b559d70bbfc8c00ad687bf88f084ae9f08f5))
+
+# [2.0.0](https://github.com/schedule-x/schedule-x/compare/v1.28.0...v2.0.0) (2024-04-04)
+
+### Features
+
+- **header:** add UI for custom add time off button ([a6bba4e](https://github.com/schedule-x/schedule-x/commit/a6bba4e62ea7c5013bbb7f82250fb770ba4baf59))
+- **header:** fix UI for custom add time off button ([08f5e8b](https://github.com/schedule-x/schedule-x/commit/08f5e8b140840653fc3808a30fbc3203b8e0d81c))
+- **sidebar plugin:** add sidebar plugin ([1069163](https://github.com/schedule-x/schedule-x/commit/10691635ad7460d105c6b8821ee393c5605c1e8b))
+- **sidebar plugin:** fix scroll behaviour for calendar ([3132284](https://github.com/schedule-x/schedule-x/commit/3132284eb43be238509df8c9a5a819c02107601a))
+- **sidebar plugin:** fix scroll behaviour for calendar ([f9d3e81](https://github.com/schedule-x/schedule-x/commit/f9d3e81712ab81e254674feafbcaa53ccfcf8f9b))
+
 # [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
 
 **Note:** Version bump only for package @schedule-x/theme-default
