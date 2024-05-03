@@ -8,7 +8,6 @@ export const getCCID = (
   let customComponentId = customComponent
     ? 'custom-time-grid-event-' + randomStringId() // needs a unique string to support event recurrence
     : undefined
-  if (customComponentId && isCopy)
-    customComponentId += '-' + 'copy' + '-' + calendarEvent.start
+  if (customComponentId && isCopy) customComponentId += '-' + 'copy'
   return customComponentId
 }
