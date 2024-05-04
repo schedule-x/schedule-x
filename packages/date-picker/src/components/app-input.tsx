@@ -29,11 +29,13 @@ export default function AppInput() {
     if (inputWrapperEl === null) return
 
     $app.datePickerState.inputRect.value = {
-      x: inputWrapperEl.getBoundingClientRect().left + window.scrollX,
-      y: inputWrapperEl.getBoundingClientRect().top + window.scrollY,
+      x: inputWrapperEl.getBoundingClientRect().left,
+      y: inputWrapperEl.getBoundingClientRect().top,
       height: inputWrapperEl.getBoundingClientRect().height,
       width: inputWrapperEl.getBoundingClientRect().width,
     }
+    $app.datePickerState.inputWrapperElement.value =
+      inputWrapperEl instanceof HTMLDivElement ? inputWrapperEl : undefined
   }
 
   useEffect(() => {

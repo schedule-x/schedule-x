@@ -17,19 +17,26 @@ export default function AppInput() {
   }, [$app.timePickerState.isOpen.value])
 
   const openPopup = () => {
-    $app.timePickerState.isOpen.value = true
+    if (!$app.config.teleportTo.value) {
+      $app.timePickerState.isOpen.value = true
+      return
+    }
 
-    const inputRect = document
-      .getElementById(wrapperId)
-      ?.getBoundingClientRect()
+    const inputWrapperElement = document.getElementById(wrapperId)
+    const inputRect = inputWrapperElement?.getBoundingClientRect()
     if (!(inputRect instanceof DOMRect)) return
 
     $app.timePickerState.inputRect.value = {
-      x: inputRect.left + window.scrollX,
-      y: inputRect.top + window.scrollY,
+      x: inputRect.left,
+      y: inputRect.top,
       height: inputRect.height,
       width: inputRect.width,
     }
+    $app.timePickerState.inputWrapperElement.value =
+      inputWrapperElement instanceof HTMLDivElement
+        ? inputWrapperElement
+        : undefined
+    $app.timePickerState.isOpen.value = true
   }
 
   return (

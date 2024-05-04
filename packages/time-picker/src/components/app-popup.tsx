@@ -2,6 +2,7 @@ import TimeInput from './time-input'
 import { AppContext } from '../utils/stateful/app-context'
 import { useContext, useRef } from 'preact/compat'
 import { useEffect, useState } from 'preact/hooks'
+import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
 
 export default function AppPopup() {
   const $app = useContext(AppContext)
@@ -48,20 +49,46 @@ export default function AppPopup() {
   const popupHeight = 362
   const popupWidth = 332
 
-  const fixedPositionStyle = {
-    top: $app.config.placement.value?.includes('bottom')
-      ? $app.timePickerState.inputRect.value.height +
-        $app.timePickerState.inputRect.value.y +
-        1 // 1px border
-      : $app.timePickerState.inputRect.value.y - remSize - popupHeight, // subtract remsize to leave room for label text
-    left: $app.config.placement.value?.includes('start')
-      ? $app.timePickerState.inputRect.value.x
-      : $app.timePickerState.inputRect.value.x +
-        $app.timePickerState.inputRect.value.width -
-        popupWidth,
-    width: popupWidth,
-    position: 'fixed',
+  const getFixedPositionStyles = () => {
+    const inputRect =
+      $app.timePickerState.inputWrapperElement.value?.getBoundingClientRect()
+    if (!inputRect) return { position: 'fixed' }
+
+    return {
+      top: $app.config.placement.value?.includes('bottom')
+        ? inputRect.height + inputRect.y + 1 // 1px border
+        : inputRect.y - remSize - popupHeight, // subtract remsize to leave room for label text
+      left: $app.config.placement.value?.includes('start')
+        ? inputRect.x
+        : inputRect.x + inputRect.width - popupWidth,
+      width: popupWidth,
+      position: 'fixed',
+    }
   }
+
+  const [fixedPositionStyle, setFixedPositionStyle] = useState(
+    getFixedPositionStyles()
+  )
+
+  useEffect(() => {
+    const inputWrapperEl = $app.timePickerState.inputWrapperElement.value
+    if (!inputWrapperEl) return
+
+    const scrollableParents = getScrollableParents(inputWrapperEl)
+    scrollableParents.forEach((parent) =>
+      parent.addEventListener('scroll', () =>
+        setFixedPositionStyle(getFixedPositionStyles())
+      )
+    )
+
+    return () => {
+      scrollableParents.forEach((parent) =>
+        parent.removeEventListener('scroll', () =>
+          setFixedPositionStyle(getFixedPositionStyles())
+        )
+      )
+    }
+  }, [])
 
   return (
     <div

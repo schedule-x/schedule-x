@@ -4,4 +4,5 @@ export interface TimePickerState {
   isOpen: Signal<boolean>
   currentTime: Signal<string>
   inputRect: Signal<{ x: number; y: number; height: number; width: number }>
+  inputWrapperElement: Signal<HTMLDivElement | undefined>
 }
