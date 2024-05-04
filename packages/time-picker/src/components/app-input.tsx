@@ -23,15 +23,6 @@ export default function AppInput() {
     }
 
     const inputWrapperElement = document.getElementById(wrapperId)
-    const inputRect = inputWrapperElement?.getBoundingClientRect()
-    if (!(inputRect instanceof DOMRect)) return
-
-    $app.timePickerState.inputRect.value = {
-      x: inputRect.left,
-      y: inputRect.top,
-      height: inputRect.height,
-      width: inputRect.width,
-    }
     $app.timePickerState.inputWrapperElement.value =
       inputWrapperElement instanceof HTMLDivElement
         ? inputWrapperElement
