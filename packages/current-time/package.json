@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/current-time",
-  "version": "1.37.0",
+  "version": "1.38.0",
   "description": "Schedule-X plugin for displaying an indicator for the current time",
   "author": {
     "name": "Tom Österlund",

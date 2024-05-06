@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-06)
+
+### Features
+
+- **event-modal:** set modal position on scroll ([#403](https://github.com/schedule-x/schedule-x/issues/403)) ([518aa63](https://github.com/schedule-x/schedule-x/commit/518aa631d25c2bbc9700f0f68cf0f04d7fe6d4be))
+- hide forward backward nav based on css ([#410](https://github.com/schedule-x/schedule-x/issues/410)) ([314e0aa](https://github.com/schedule-x/schedule-x/commit/314e0aa5a1379ff5a923fcd7221111badaa818c3))
+- reposition popups and modals on scroll ([#408](https://github.com/schedule-x/schedule-x/issues/408)) ([de0d92d](https://github.com/schedule-x/schedule-x/commit/de0d92d7a2adc1783adfee515cfccb9379ceba8b))
+
 # [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
 
 ### Features
