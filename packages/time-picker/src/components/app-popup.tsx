@@ -52,7 +52,7 @@ export default function AppPopup() {
   const getFixedPositionStyles = () => {
     const inputRect =
       $app.timePickerState.inputWrapperElement.value?.getBoundingClientRect()
-    if (!inputRect) return { position: 'fixed' }
+    if (!inputRect) return undefined
 
     return {
       top: $app.config.placement.value?.includes('bottom')

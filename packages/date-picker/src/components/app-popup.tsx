@@ -37,7 +37,7 @@ export default function AppPopup() {
     const inputWrapperEl = $app.datePickerState.inputWrapperElement.value
     const inputRect = inputWrapperEl?.getBoundingClientRect()
     if (inputWrapperEl === undefined || !(inputRect instanceof DOMRect))
-      return { position: 'fixed' }
+      return undefined
 
     return {
       top: $app.config.placement.includes('bottom')
