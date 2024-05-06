@@ -20,3 +20,9 @@
   align-items: center;
   gap: var(--sx-spacing-padding4);
 }
+
+.sx__forward-backward-navigation {
+  .sx__is-calendar-small & {
+    display: none;
+  }
+}
