@@ -24,22 +24,14 @@ export default function AppInput() {
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
-  const setInputDOMRect = () => {
+  const setInputElement = () => {
     const inputWrapperEl = document.getElementById(inputWrapperId)
-    if (inputWrapperEl === null) return
-
-    $app.datePickerState.inputRect.value = {
-      x: inputWrapperEl.getBoundingClientRect().left,
-      y: inputWrapperEl.getBoundingClientRect().top,
-      height: inputWrapperEl.getBoundingClientRect().height,
-      width: inputWrapperEl.getBoundingClientRect().width,
-    }
     $app.datePickerState.inputWrapperElement.value =
       inputWrapperEl instanceof HTMLDivElement ? inputWrapperEl : undefined
   }
 
   useEffect(() => {
-    if ($app.config.teleportTo) setInputDOMRect()
+    if ($app.config.teleportTo) setInputElement()
 
     const newClasses = ['sx__date-input-wrapper']
     if ($app.datePickerState.isOpen.value)

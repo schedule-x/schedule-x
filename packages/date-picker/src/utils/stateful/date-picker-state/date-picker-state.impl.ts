@@ -47,7 +47,6 @@ export const createDatePickerState = (
   })
 
   return {
-    inputRect: signal({ x: 0, y: 0, width: 0, height: 0, right: 0 }),
     inputWrapperElement: signal(undefined),
     isOpen,
     datePickerView,
