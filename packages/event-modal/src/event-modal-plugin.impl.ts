@@ -16,10 +16,10 @@ export const createEventModalPlugin = (): EventModalPlugin => {
     ComponentFn: EventModal,
     setCalendarEvent: (
       event: CalendarEventInternal,
-      eventTargetDOMReact: DOMRect
+      eventTargetDOMRect: DOMRect
     ) => {
       calendarEvent.value = event
-      calendarEventDOMRect.value = eventTargetDOMReact
+      calendarEventDOMRect.value = eventTargetDOMRect
     },
   }
 }

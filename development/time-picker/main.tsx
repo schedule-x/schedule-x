@@ -13,6 +13,7 @@ const onChange = (time: string) => {
 }
 
 const timePicker = createTimePicker({
-  onChange
+  onChange,
+  teleportTo: document.body,
 })
 timePicker.render(document.querySelector('#app') as HTMLElement)

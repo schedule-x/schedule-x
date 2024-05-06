@@ -3,6 +3,7 @@ import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/da
 import MonthView from './month-view'
 import YearsView from './years-view'
 import { AppContext } from '../utils/stateful/app-context'
+import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
 
 const POPUP_CLASS_NAME = 'sx__date-picker-popup'
 
@@ -32,20 +33,43 @@ export default function AppPopup() {
   const popupHeight = 362
   const popupWidth = 332
 
-  const fixedPositionStyle = {
-    top: $app.config.placement.includes('bottom')
-      ? $app.datePickerState.inputRect.value.height +
-        $app.datePickerState.inputRect.value.y +
-        1 // 1px border
-      : $app.datePickerState.inputRect.value.y - remSize - popupHeight, // subtract remsize to leave room for label text
-    left: $app.config.placement.includes('start')
-      ? $app.datePickerState.inputRect.value.x
-      : $app.datePickerState.inputRect.value.x +
-        $app.datePickerState.inputRect.value.width -
-        popupWidth,
-    width: popupWidth,
-    position: 'fixed',
+  const getFixedPositionStyles = () => {
+    const inputWrapperEl = $app.datePickerState.inputWrapperElement.value
+    const inputRect = inputWrapperEl?.getBoundingClientRect()
+    if (inputWrapperEl === undefined || !(inputRect instanceof DOMRect))
+      return undefined
+
+    return {
+      top: $app.config.placement.includes('bottom')
+        ? inputRect.height + inputRect.y + 1 // 1px border
+        : inputRect.y - remSize - popupHeight, // subtract remsize to leave room for label text
+      left: $app.config.placement.includes('start')
+        ? inputRect.x
+        : inputRect.x + inputRect.width - popupWidth,
+      width: popupWidth,
+      position: 'fixed',
+    }
   }
+
+  const [fixedPositionStyle, setFixedPositionStyle] = useState(
+    getFixedPositionStyles()
+  )
+
+  useEffect(() => {
+    const inputWrapper = $app.datePickerState.inputWrapperElement.value
+    if (inputWrapper === undefined) return
+
+    const scrollableParents = getScrollableParents(inputWrapper)
+    const scrollListener = () => setFixedPositionStyle(getFixedPositionStyles())
+    scrollableParents.forEach((parent) =>
+      parent.addEventListener('scroll', scrollListener)
+    )
+
+    return () =>
+      scrollableParents.forEach((parent) =>
+        parent.removeEventListener('scroll', scrollListener)
+      )
+  }, [])
 
   return (
     <>

@@ -15,7 +15,7 @@ export default interface EventModalPlugin extends PluginBase {
 
   setCalendarEvent(
     event: CalendarEventInternal | null,
-    eventTargetDOMReact: DOMRect | null
+    eventTargetDOMRect: DOMRect | null
   ): void
 
   ComponentFn(props: EventModalProps): JSXInternal.Element

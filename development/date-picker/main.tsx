@@ -9,6 +9,7 @@ import '../../packages/theme-default/src/date-picker.scss'
 import { createDatePicker } from '@schedule-x/date-picker/src'
 
 const datePicker = createDatePicker({
+  teleportTo: document.body,
   locale: 'de-DE',
   // locale: 'fr-FR',
   style: {

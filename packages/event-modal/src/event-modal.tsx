@@ -13,6 +13,7 @@ import DescriptionIcon from '@schedule-x/shared/src/components/icons/description
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { useIconColors } from './utils/stateful/use-icon-colors'
 import { Fragment } from 'preact/jsx-runtime'
+import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
 
 export default function EventModal({ $app }: EventModalProps) {
   const [modalId] = useState(randomStringId())
@@ -60,18 +61,20 @@ export default function EventModal({ $app }: EventModalProps) {
     setIsDisplayed(true)
     const clickOutsideListener = createClickOutsideListener($app, modalId)
 
-    $app.elements.calendarWrapper
-      ?.querySelector('.sx__view-container')
-      ?.addEventListener('scroll', scrollListener)
+    const scrollableAncestors = getScrollableParents(
+      $app.config.plugins.eventModal?.calendarEventElement.value || null
+    )
+    scrollableAncestors.forEach((el) =>
+      el.addEventListener('scroll', scrollListener)
+    )
+
     document.addEventListener('click', clickOutsideListener)
-    window.addEventListener('scroll', scrollListener)
 
     return () => {
       document.removeEventListener('click', clickOutsideListener)
-      window.removeEventListener('scroll', scrollListener)
-      $app.elements.calendarWrapper
-        ?.querySelector('.sx__view-container')
-        ?.removeEventListener('scroll', scrollListener)
+      scrollableAncestors.forEach((el) =>
+        el.removeEventListener('scroll', scrollListener)
+      )
     }
   }, [])
 

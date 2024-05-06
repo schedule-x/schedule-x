@@ -27,7 +27,7 @@ const getTimePickerState = (
   return {
     isOpen: signal(false),
     currentTime: currentTime,
-    inputRect: signal({ x: 0, y: 0, height: 0, width: 0 }),
+    inputWrapperElement: signal(undefined),
   }
 }
 
