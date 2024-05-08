@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.39.0](https://github.com/schedule-x/schedule-x/compare/v1.38.0...v1.39.0) (2024-05-08)
+
+### Features
+
+- **shared:** expose deepCloneEvent API ([#414](https://github.com/schedule-x/schedule-x/issues/414)) ([72a2d52](https://github.com/schedule-x/schedule-x/commit/72a2d52175f2baaf9d16929e99382876ce8a0f41))
+
 # [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-06)
 
 ### Features
