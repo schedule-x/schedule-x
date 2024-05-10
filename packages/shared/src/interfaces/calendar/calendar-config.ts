@@ -32,6 +32,7 @@ export type ColorDefinition = {
 
 export type CalendarType = {
   colorName: string
+  label?: string
   lightColors?: ColorDefinition
   darkColors?: ColorDefinition
 }
