@@ -49,6 +49,25 @@ describe('Calendar callbacks', () => {
         })
       })
     })
+
+    it('should call the callback onSelectedDateUpdate', async () => {
+      const onSelectedDateUpdate = vi.fn()
+      const $app = __createAppWithViews__({
+        callbacks: {
+          onSelectedDateUpdate,
+        },
+        selectedDate: '2023-12-01',
+        defaultView: InternalViewName.MonthGrid,
+      })
+      renderComponent($app)
+
+      setNewDateAndPressEnter('2024-01-01')
+
+      await waitFor(() => {
+        expect(onSelectedDateUpdate).toHaveBeenCalledTimes(1)
+        expect(onSelectedDateUpdate).toHaveBeenCalledWith('2024-01-01')
+      })
+    })
   })
 
   describe('Changing from week to month view', () => {

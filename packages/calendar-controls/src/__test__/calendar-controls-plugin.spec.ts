@@ -70,4 +70,33 @@ describe('createCalendarControlsPlugin', () => {
       )
     })
   })
+
+  describe('Getting the date', () => {
+    it('should return the date', () => {
+      const controlsPlugin = createCalendarControlsPlugin()
+      const $app = __createAppWithViews__({
+        plugins: [controlsPlugin],
+        selectedDate: '2021-01-01',
+      })
+      controlsPlugin.init($app)
+      $app.datePickerState.selectedDate.value = '2023-01-01'
+
+      expect(controlsPlugin.getDate()).toBe('2023-01-01')
+    })
+  })
+
+  describe('Getting the view', () => {
+    it('should return the view', () => {
+      const controlsPlugin = createCalendarControlsPlugin()
+      const $app = __createAppWithViews__({
+        plugins: [controlsPlugin],
+        selectedDate: '2021-01-01',
+        defaultView: InternalViewName.MonthGrid,
+      })
+      controlsPlugin.init($app)
+      $app.calendarState.view.value = InternalViewName.Day
+
+      expect(controlsPlugin.getView()).toBe(InternalViewName.Day)
+    })
+  })
 })

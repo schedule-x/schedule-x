@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ESNext",
+    "useDefineForClassFields": true,
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": false,
+    "declaration": true,
+    "types": ["vite/client"],
+    "outDir": "../../dist/types",
+    "jsxImportSource": "preact",
+    "emitDeclarationOnly": false,
+    "incremental": true,
+    "tsBuildInfoFile": "/Users/oes0003t/Projects/schedule-x/schedule-x/node_modules/vitest/dist/vendor/tsconfig.tmp.tsbuildinfo"
+  },
+  "exclude": [
+    "../../node_modules/@schedule-x/shared/src/config/node_modules",
+    "../../node_modules/@schedule-x/shared/src/config/dist",
+    "../../node_modules/@schedule-x/shared/src/config/tests",
+    "../../dist/types"
+  ],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}

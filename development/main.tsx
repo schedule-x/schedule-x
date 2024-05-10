@@ -9,7 +9,6 @@ import '../packages/theme-default/src/date-picker.scss'
 import { createDatePicker } from '../packages/date-picker/src'
 
 const datePicker = createDatePicker(
-  document.querySelector('#app') as HTMLElement,
   {
     locale: 'de-DE',
     style: {
@@ -29,7 +28,7 @@ const datePicker = createDatePicker(
     // },
   }
 )
-datePicker.render()
+datePicker.render(document.querySelector('#app') as HTMLElement)
 
 // document.addEventListener('dblclick', () => {
 //   console.log(datePicker.value)

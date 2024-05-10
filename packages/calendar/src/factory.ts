@@ -8,6 +8,7 @@ import { createCalendarEventsImpl } from './utils/stateful/calendar-events/calen
 import { createInternalConfig } from './utils/stateless/factories/create-internal-config'
 import { createTimeUnitsImpl } from './utils/stateless/factories/create-time-units-impl'
 import { createDatePickerConfig } from './utils/stateless/factories/create-date-picker-config'
+import { effect } from '@preact/signals'
 
 export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const internalConfig = createInternalConfig(config)
@@ -21,6 +22,24 @@ export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
     datePickerConfig,
     config.selectedDate || config.datePicker?.selectedDate
   )
+
+  let wasInitialized = false
+
+  const handleUpdatedSelectedDate = () => {
+    if (!wasInitialized) return (wasInitialized = true)
+
+    config.callbacks?.onSelectedDateUpdate!(datePickerState.selectedDate.value)
+  }
+
+  effect(() => {
+    if (
+      datePickerState.selectedDate.value &&
+      config.callbacks?.onSelectedDateUpdate
+    ) {
+      handleUpdatedSelectedDate()
+    }
+  })
+
   const calendarEvents = createCalendarEventsImpl(
     config.events || [],
     internalConfig

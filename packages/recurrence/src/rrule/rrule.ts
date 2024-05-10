@@ -6,7 +6,6 @@ import { Recurrence } from '../types/recurrence'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { addDays, addMinutes } from '@schedule-x/shared/src'
-import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { dailyIteratorResult } from './utils/stateless/daily-iterator'
 import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
 import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
@@ -15,7 +14,6 @@ export class RRule {
   private options: RRuleOptions
   private durationInMinutes: number | undefined
   private durationInDays: number | undefined
-  private readonly dtstartTime: string | undefined
 
   constructor(
     options: RRuleOptionsExternal,
@@ -30,7 +28,6 @@ export class RRule {
     const actualDTEND = dtend || dtstart /* RFC5545: #1 */
 
     if (this.isDateTime) {
-      this.dtstartTime = timeFromDateTime(this.dtstart)
       this.durationInMinutes = getDurationInMinutes(this.dtstart, actualDTEND)
     } else {
       this.durationInDays = calculateDaysDifference(this.dtstart, actualDTEND)

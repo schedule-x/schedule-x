@@ -27,6 +27,14 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 
     this.$app.calendarState.view.value = view
   }
+
+  getDate(): string {
+    return this.$app.datePickerState.selectedDate.value
+  }
+
+  getView(): string {
+    return this.$app.calendarState.view.value
+  }
 }
 
 export const createCalendarControlsPlugin = (): CalendarControlsPlugin => {
