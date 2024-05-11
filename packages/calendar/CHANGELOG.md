@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/schedule-x/schedule-x/compare/v1.40.0...v1.41.0) (2024-05-11)
+
+### Features
+
+- **calendar:** create possibility to add a filterPredicate for events ([#421](https://github.com/schedule-x/schedule-x/issues/421)) ([131490a](https://github.com/schedule-x/schedule-x/commit/131490a1dd6096c5def5881d707dc3f2627853d9))
+
 # [1.40.0](https://github.com/schedule-x/schedule-x/compare/v1.39.0...v1.40.0) (2024-05-11)
 
 ### Features
