@@ -129,6 +129,13 @@ const config = {
     * */
     onClickPlusEvents(date) {
       console.log('onClickPlusEvents', date) // e.g. 2024-01-01
+    },
+
+    /**
+    * Is called when the selected date is updated
+    * */
+    onSelectedDateUpdate(date) {
+      console.log('onSelectedDateUpdate', date)
     }
   },
 }
