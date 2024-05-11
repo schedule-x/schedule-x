@@ -14,9 +14,7 @@ describe('positioning events in the date grid of a week or day', () => {
   describe('positioning full day events', () => {
     const selectedDate = '2023-09-17'
     const $app = __createAppWithViews__({
-      datePicker: {
-        selectedDate: selectedDate,
-      },
+      selectedDate,
     })
 
     it('should position an event, stretching from the first until last day of the week', () => {

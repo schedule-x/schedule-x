@@ -41,9 +41,15 @@ export const createDatePickerState = (
     }
   })
 
+  let wasInitialized = false
+  const handleOnChange = (selectedDate: string) => {
+    if (!wasInitialized) return (wasInitialized = true)
+
+    config.listeners.onChange!(selectedDate)
+  }
+
   effect(() => {
-    if (config.listeners?.onChange)
-      config.listeners.onChange(selectedDate.value)
+    if (config.listeners?.onChange) handleOnChange(selectedDate.value)
   })
 
   return {

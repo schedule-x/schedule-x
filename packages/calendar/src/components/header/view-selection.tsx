@@ -51,6 +51,7 @@ export default function ViewSelection() {
   const handleClickOnSelectionItem = (viewName: ViewName) => {
     setIsOpen(false)
     $app.calendarState.view.value = viewName
+    $app.calendarState.setRange($app.datePickerState.selectedDate.value)
   }
 
   const [viewSelectionItems, setViewSelectionItems] =

@@ -21,7 +21,7 @@ describe('calendar state', () => {
       const state = createCalendarState(config, timeUnitsImpl)
       state.view.value = InternalViewName.Week
 
-      state.handleDateSelection('2023-09-13')
+      state.setRange('2023-09-13')
 
       expect(state.range.value).toEqual({
         start: '2023-09-11 00:00',
@@ -33,7 +33,7 @@ describe('calendar state', () => {
       const state = createCalendarState(config, timeUnitsImpl)
       state.view.value = InternalViewName.MonthGrid
 
-      state.handleDateSelection('2023-09-13')
+      state.setRange('2023-09-13')
 
       expect(state.range.value).toEqual({
         start: '2023-08-28 00:00',
@@ -45,7 +45,7 @@ describe('calendar state', () => {
       const state = createCalendarState(config, timeUnitsImpl)
       state.view.value = InternalViewName.Day
 
-      state.handleDateSelection('2023-09-13')
+      state.setRange('2023-09-13')
 
       expect(state.range.value).toEqual({
         start: '2023-09-13 00:00',
@@ -62,7 +62,7 @@ describe('calendar state', () => {
       }
       const originalRange = state.range.value
 
-      state.handleDateSelection('2023-09-13')
+      state.setRange('2023-09-13')
 
       expect(state.range.value).toBe(originalRange) // checking object equality is wanted here
     })
@@ -82,7 +82,7 @@ describe('calendar state', () => {
       const state = createCalendarState(config, timeUnitsImpl)
       state.view.value = InternalViewName.Week
 
-      state.handleDateSelection('2023-09-13')
+      state.setRange('2023-09-13')
 
       expect(state.range.value).toEqual({
         start: '2023-09-11 08:00',
@@ -94,7 +94,7 @@ describe('calendar state', () => {
       const state = createCalendarState(config, timeUnitsImpl)
       state.view.value = InternalViewName.MonthGrid
 
-      state.handleDateSelection('2023-09-13')
+      state.setRange('2023-09-13')
 
       expect(state.range.value).toEqual({
         start: '2023-08-28 00:00',
@@ -106,7 +106,7 @@ describe('calendar state', () => {
       const state = createCalendarState(config, timeUnitsImpl)
       state.view.value = InternalViewName.Day
 
-      state.handleDateSelection('2023-09-13')
+      state.setRange('2023-09-13')
 
       expect(state.range.value).toEqual({
         start: '2023-09-13 08:00',

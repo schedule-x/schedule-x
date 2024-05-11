@@ -81,7 +81,7 @@ const calendar = createCalendar({
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
   defaultView: 'week',
-  // selectedDate: '2024-02-01',
+  // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
@@ -110,6 +110,10 @@ const calendar = createCalendar({
     onClickDateTime(dateTime) {
       console.log('onClickDateTime', dateTime)
     },
+
+    onSelectedDateUpdate(date) {
+      console.log('onSelectedDateUpdate', date)
+    }
   },
   calendars: {
     personal: {

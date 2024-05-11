@@ -13,9 +13,7 @@ describe('positioning events in the date grid of a week or day', () => {
   describe('positioning timed events', () => {
     const selectedDate = '2023-09-17'
     const $app = __createAppWithViews__({
-      datePicker: {
-        selectedDate: selectedDate,
-      },
+      selectedDate,
     })
 
     it('should position an event that spans from before the first day until after the last', () => {

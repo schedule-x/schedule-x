@@ -18,7 +18,7 @@ describe('CalendarHeader', () => {
     it('should change date when typing a date in the input', () => {
       const initialDate = '2010-01-01'
       const $app = __createAppWithViews__({
-        datePicker: { selectedDate: initialDate },
+        selectedDate: initialDate,
       })
       renderComponent($app)
       const expectedRangeHeadingAfterChange = 'March 2022'
@@ -32,7 +32,7 @@ describe('CalendarHeader', () => {
     it('should set date to today when clicking today button', () => {
       const initialDate = '2010-01-15'
       const $app = __createAppWithViews__({
-        datePicker: { selectedDate: initialDate },
+        selectedDate: initialDate,
       })
       renderComponent($app)
       const initialRangeHeading = 'January 2010'
