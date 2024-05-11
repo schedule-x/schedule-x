@@ -4,7 +4,7 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup } from '@testing-library/preact'
+import { cleanup, waitFor } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { renderComponent } from './utils'
 
@@ -37,6 +37,102 @@ describe('Week view', () => {
     })
 
     it.todo('renders a full day event')
+
+    it('should render all events', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2021-01-01',
+        events: [
+          {
+            id: 1,
+            start: '2021-01-01 12:00',
+            end: '2021-01-01 18:00',
+          },
+          {
+            id: 2,
+            start: '2021-01-01 14:00',
+            end: '2021-01-01 16:00',
+          },
+        ],
+      })
+      renderComponent($app)
+
+      const renderedEvents = document.querySelectorAll('.sx__time-grid-event')
+      expect(renderedEvents.length).toBe(2)
+    })
+
+    it('should filter based on the filter predicate when rendering week', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2021-01-01',
+        events: [
+          {
+            id: 1,
+            start: '2021-01-01 12:00',
+            end: '2021-01-01 18:00',
+            title: 'hello event',
+          },
+          {
+            id: 2,
+            start: '2021-01-01 14:00',
+            end: '2021-01-01 16:00',
+            title: 'hello event 2',
+          },
+          {
+            id: 3,
+            start: '2021-01-01 14:00',
+            end: '2021-01-01 16:00',
+            title: 'hello event',
+          },
+        ],
+      })
+      $app.calendarEvents.filterPredicate.value = (event) =>
+        event.title === 'hello event'
+      renderComponent($app)
+
+      const renderedEvents = document.querySelectorAll('.sx__time-grid-event')
+      expect(renderedEvents.length).toBe(2)
+      expect(renderedEvents[0].textContent).toContain('hello event')
+      expect(renderedEvents[1].textContent).toContain('hello event')
+    })
+
+    it('should rerender week when filter predicate changes', async () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2021-01-01',
+        events: [
+          {
+            id: 1,
+            start: '2021-01-01 12:00',
+            end: '2021-01-01 18:00',
+            title: 'hello event',
+          },
+          {
+            id: 2,
+            start: '2021-01-01 14:00',
+            end: '2021-01-01 16:00',
+            title: 'hello event 2',
+          },
+          {
+            id: 3,
+            start: '2021-01-01 14:00',
+            end: '2021-01-01 16:00',
+            title: 'hello event',
+          },
+        ],
+      })
+      renderComponent($app)
+
+      const renderedEvents = document.querySelectorAll('.sx__time-grid-event')
+      expect(renderedEvents.length).toBe(3)
+
+      $app.calendarEvents.filterPredicate.value = (event) =>
+        event.title === 'hello event'
+
+      await waitFor(() => {
+        const renderedEventsAfterFilter = document.querySelectorAll(
+          '.sx__time-grid-event'
+        )
+        expect(renderedEventsAfterFilter.length).toBe(2)
+      })
+    })
   })
 
   describe('a week with hybrid days', () => {

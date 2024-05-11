@@ -18,16 +18,19 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
       $app.datePickerState.selectedDate.value,
       $app.timeUnitsImpl
     )
+    const filteredEvents = $app.calendarEvents.filterPredicate.value
+      ? $app.calendarEvents.list.value.filter(
+          $app.calendarEvents.filterPredicate.value
+        )
+      : $app.calendarEvents.list.value
     setMonth(
-      positionInMonth(
-        newMonth,
-        $app.calendarEvents.list.value.sort(sortEventsByStartAndEnd)
-      )
+      positionInMonth(newMonth, filteredEvents.sort(sortEventsByStartAndEnd))
     )
   }, [
     $app.calendarState.range.value?.start,
     $app.calendarState.range.value?.end,
     $app.calendarEvents.list.value,
+    $app.calendarEvents.filterPredicate.value,
   ])
 
   return (
