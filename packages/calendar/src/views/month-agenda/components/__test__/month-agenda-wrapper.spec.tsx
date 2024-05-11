@@ -16,6 +16,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { MonthAgendaWrapper } from '../month-agenda-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
+import { CalendarEventInternal } from '@schedule-x/shared'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<MonthAgendaWrapper $app={$app} id={'1'} />)
@@ -153,6 +154,108 @@ describe('MonthAgendaWrapper', () => {
 
       await waitFor(() => {
         expect(document.querySelectorAll(AGENDA_EVENT)).toHaveLength(0)
+      })
+    })
+  })
+
+  describe('using the events filter', () => {
+    it('should display all events when there is no filter', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-01-27',
+        events: [
+          {
+            id: 1,
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+          {
+            id: 2,
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+        ],
+      })
+      $app.calendarEvents.filterPredicate.value = () => true
+      renderComponent($app)
+
+      expect(document.querySelectorAll('.sx__month-agenda-event')).toHaveLength(
+        2
+      )
+    })
+
+    it('should display only the events that pass the filter', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-01-27',
+        events: [
+          {
+            id: 1,
+            title: 'display me',
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+          {
+            id: 2,
+            title: 'do not display me',
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+          {
+            id: 3,
+            title: 'display me',
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+        ],
+      })
+      $app.calendarEvents.filterPredicate.value = (
+        event: CalendarEventInternal
+      ) => event.title === 'display me'
+      renderComponent($app)
+
+      expect(document.querySelectorAll('.sx__month-agenda-event')).toHaveLength(
+        2
+      )
+    })
+
+    it('should re-render the month agenda view when the filter changes', async () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-01-27',
+        events: [
+          {
+            id: 1,
+            title: 'display me',
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+          {
+            id: 2,
+            title: 'do not display me',
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+          {
+            id: 3,
+            title: 'display me',
+            start: '2027-01-27',
+            end: '2027-01-27',
+          },
+        ],
+      })
+      $app.calendarEvents.filterPredicate.value = (
+        event: CalendarEventInternal
+      ) => event.title === 'display me'
+      renderComponent($app)
+
+      expect(document.querySelectorAll('.sx__month-agenda-event')).toHaveLength(
+        2
+      )
+
+      $app.calendarEvents.filterPredicate.value = () => true
+
+      await waitFor(() => {
+        expect(
+          document.querySelectorAll('.sx__month-agenda-event')
+        ).toHaveLength(3)
       })
     })
   })

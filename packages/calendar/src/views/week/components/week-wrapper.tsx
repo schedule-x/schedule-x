@@ -23,9 +23,13 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
 
   const sortEventsIntoDateAndTimeGrids = () => {
     let newWeek = createWeek($app)
-    const { dateGridEvents, timeGridEvents } = sortEventsForWeekView(
-      $app.calendarEvents.list.value
-    )
+    const filteredEvents = $app.calendarEvents.filterPredicate.value
+      ? $app.calendarEvents.list.value.filter(
+          $app.calendarEvents.filterPredicate.value
+        )
+      : $app.calendarEvents.list.value
+    const { dateGridEvents, timeGridEvents } =
+      sortEventsForWeekView(filteredEvents)
     newWeek = positionInDateGrid(
       dateGridEvents.sort(sortEventsByStartAndEnd),
       newWeek
@@ -44,6 +48,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
     $app.calendarState.range.value?.start,
     $app.calendarState.range.value?.end,
     $app.calendarEvents.list.value,
+    $app.calendarEvents.filterPredicate.value,
   ])
 
   return (
