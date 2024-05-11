@@ -16,9 +16,7 @@ describe('Week view', () => {
   describe('a week with regular days', () => {
     it('renders one event at 12PM', () => {
       const $app = __createAppWithViews__({
-        datePicker: {
-          selectedDate: '2021-01-01',
-        },
+        selectedDate: '2021-01-01',
         events: [
           {
             id: 1,

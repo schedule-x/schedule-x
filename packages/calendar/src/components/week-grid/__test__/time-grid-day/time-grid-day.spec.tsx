@@ -16,7 +16,7 @@ describe('TimeGridDay', () => {
 
   describe('a non-hybrid day', () => {
     const $app = __createAppWithViews__({
-      datePicker: { selectedDate: '2023-09-11' },
+      selectedDate: '2023-09-11',
     })
 
     it('renders an event at 00:00', () => {
@@ -72,7 +72,7 @@ describe('TimeGridDay', () => {
 
   describe('a hybrid day', () => {
     const $app = __createAppWithViews__({
-      datePicker: { selectedDate: '2023-09-11' },
+      selectedDate: '2023-09-11',
       dayBoundaries: {
         start: '18:00',
         end: '06:00',

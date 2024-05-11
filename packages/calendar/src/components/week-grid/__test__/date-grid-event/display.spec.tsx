@@ -22,9 +22,7 @@ describe('style attribute "display" of date grid event element', () => {
   const oneDayEventTitle = 'My event'
 
   const $app = __createAppWithViews__({
-    datePicker: {
-      selectedDate: selectedDate,
-    },
+    selectedDate,
     plugins: [createDragAndDropPlugin()],
     events: [
       {
