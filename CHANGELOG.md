@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://github.com/schedule-x/schedule-x/compare/v1.39.0...v1.40.0) (2024-05-11)
+
+### Features
+
+- add getDate and onSelectedDateUpdate apis ([#419](https://github.com/schedule-x/schedule-x/issues/419)) ([adfd5e6](https://github.com/schedule-x/schedule-x/commit/adfd5e60a6cb2c85c6cfeb31fc70b427205f87d5))
+- **calendar:** expose further public apis ([#418](https://github.com/schedule-x/schedule-x/issues/418)) ([e2be1b0](https://github.com/schedule-x/schedule-x/commit/e2be1b0915786794121d923aebe0e72860c0de2e))
+
 # [1.39.0](https://github.com/schedule-x/schedule-x/compare/v1.38.0...v1.39.0) (2024-05-08)
 
 ### Features
