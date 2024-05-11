@@ -6,7 +6,7 @@ import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/c
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import EventColors from '../event-colors/event-colors'
-import { toDateString } from '@schedule-x/shared'
+import { toDateString } from '@schedule-x/shared/src'
 
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
