@@ -20,9 +20,7 @@ import { smokeTestEvents } from './__data__/smoke-data.ts'
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar({
-  datePicker: {
-    selectedDate: '2023-09-21',
-  },
+  selectedDate: '2023-09-21',
   isDark: true,
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
