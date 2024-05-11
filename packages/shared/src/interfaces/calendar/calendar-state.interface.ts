@@ -8,5 +8,5 @@ export default interface CalendarState {
   range: Signal<DateRange | null>
   isDark: Signal<boolean>
 
-  handleDateSelection: (date: string) => void
+  setRange: (date: string) => void
 }

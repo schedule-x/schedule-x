@@ -6,10 +6,12 @@ import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/c
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import EventColors from '../event-colors/event-colors'
+import { toDateString } from '@schedule-x/shared'
 
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
-  timeUnitsImpl: TimeUnits
+  timeUnitsImpl: TimeUnits,
+  selectedDate?: string
 ): CalendarState => {
   const view = signal<ViewName>(
     calendarConfig.views.find(
@@ -19,10 +21,7 @@ export const createCalendarState = (
   const range = signal<DateRange | null>(null)
 
   let wasInitialized = false
-
   const callOnRangeUpdate = (_range: Signal<DateRange | null>) => {
-    // On the first call of this function (upon initializing the calendar), we don't want to call the callback.
-    // This is dirty. If a better way is found, please change this.
     if (!wasInitialized) return (wasInitialized = true)
 
     if (calendarConfig.callbacks.onRangeUpdate && _range.value) {
@@ -36,7 +35,7 @@ export const createCalendarState = (
     }
   })
 
-  const handleDateSelection = (date: string) => {
+  const setRange = (date: string) => {
     const selectedView = calendarConfig.views.find(
       (availableView) => availableView.name === view.value
     )
@@ -55,6 +54,9 @@ export const createCalendarState = (
     range.value = newRange
   }
 
+  // one initial call for setting the range
+  setRange(selectedDate || toDateString(new Date()))
+
   const isCalendarSmall = signal<boolean | undefined>(undefined)
   const isDark = signal<boolean>(calendarConfig.isDark || false)
 
@@ -70,7 +72,7 @@ export const createCalendarState = (
   return {
     isDark,
     view,
-    handleDateSelection,
+    setRange,
     range,
     isCalendarSmall,
   }

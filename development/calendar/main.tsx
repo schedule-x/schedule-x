@@ -110,6 +110,10 @@ const calendar = createCalendar({
     onClickDateTime(dateTime) {
       console.log('onClickDateTime', dateTime)
     },
+
+    onSelectedDateUpdate(date) {
+      console.log('onSelectedDateUpdate', date)
+    }
   },
   calendars: {
     personal: {
