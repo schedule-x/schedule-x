@@ -79,7 +79,7 @@ async function build(commandLineArgs) {
           tsconfig: `${basePath}/tsconfig.json`,
         }),
       ],
-      external: ['preact', 'preact/hooks', '@preact/signals', 'preact/src/jsx', 'rrule'],
+      external: ['preact', 'preact/hooks', 'preact/compat', '@preact/signals', 'preact/src/jsx', 'rrule'],
     })
   })
 
