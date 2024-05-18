@@ -16,8 +16,6 @@ import { Fragment } from 'preact/jsx-runtime'
 import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
 
 export default function EventModal({ $app }: EventModalProps) {
-  console.log('hi hi eheheh jehj')
-
   const [modalId] = useState(randomStringId())
   const { value: calendarEvent } = (
     $app.config.plugins.eventModal as EventModalPlugin

@@ -99,6 +99,8 @@ describe('Time picker popup', () => {
       )
       const popup = document.querySelector('.sx__time-picker-popup')
       assertElementType<HTMLElement>(popup, HTMLElement)
+      expect($app.timePickerState.isOpen.value).toBe(true)
+
       fireEvent.click(document.body)
 
       expect($app.timePickerState.isOpen.value).toBe(false)
