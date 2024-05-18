@@ -87,4 +87,21 @@ describe('Time picker popup', () => {
       expect($app.timePickerState.isOpen.value).toBe(false)
     })
   })
+
+  describe('clicking outside', () => {
+    it('should close the popup when clicking outside', () => {
+      const $app = createTimePickerAppContext()
+      $app.timePickerState.isOpen.value = true
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+      const popup = document.querySelector('.sx__time-picker-popup')
+      assertElementType<HTMLElement>(popup, HTMLElement)
+      fireEvent.click(document.body)
+
+      expect($app.timePickerState.isOpen.value).toBe(false)
+    })
+  })
 })

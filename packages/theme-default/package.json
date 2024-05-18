@@ -35,7 +35,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "gitHead": "981dc3c7e4f5d56288dfbb27b992ea73e8206675",
+  "gitHead": "7a6909e2f46441f004b724ead7f91a5c25f3b522",
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",

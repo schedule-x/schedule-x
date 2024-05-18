@@ -3,9 +3,9 @@ import {
   it,
   expect,
 } from '../../../testing/unit/unit-testing-library.impl'
-import { addDays, addMonths, addYears } from '../adding'
+import { addDays, addMinutes, addMonths, addYears } from '../adding'
 
-describe('adding months to time specifications', () => {
+describe('adding time', () => {
   it.each([
     // date strings
     ['2000-01-01', 1, '2000-02-01'],
@@ -51,6 +51,20 @@ describe('adding months to time specifications', () => {
     'should add years to date strings & date time strings',
     (oldDate, yearsPlus, newDate) => {
       expect(addYears(oldDate, yearsPlus)).toBe(newDate)
+    }
+  )
+
+  it.each([
+    ['2020-01-01 00:00', 1, '2020-01-01 00:01'],
+    ['2020-01-01 00:00', -1, '2019-12-31 23:59'],
+    ['2019-12-31 23:59', 1, '2020-01-01 00:00'],
+    ['2025-11-01 12:30', 1440, '2025-11-02 12:30'],
+    ['2025-11-01 12:30', -10080, '2025-10-25 12:30'],
+    ['2025-11-01', 10080, '2025-11-08'],
+  ])(
+    'should add minutes to date strings & date time strings',
+    (oldDate, minutesPlus, newDate) => {
+      expect(addMinutes(oldDate, minutesPlus)).toBe(newDate)
     }
   )
 })
