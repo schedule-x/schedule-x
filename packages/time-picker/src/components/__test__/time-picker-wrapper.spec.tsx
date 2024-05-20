@@ -44,7 +44,7 @@ describe('TimePickerWrapper', () => {
 
       const wrapperEl = document.querySelector(`.${WRAPPER_CLASS}`)
       if (!(wrapperEl instanceof HTMLElement))
-        throw new Error('Could not find the wrapper class')
+        throw new Error('Could not find the wrapper element')
       expect(wrapperEl.classList.contains('is-dark')).toBe(true)
     })
   })
@@ -59,7 +59,7 @@ describe('TimePickerWrapper', () => {
 
       const wrapperEl = document.querySelector(`.${WRAPPER_CLASS}`)
       if (!(wrapperEl instanceof HTMLElement))
-        throw new Error('Could not find the wrapper class')
+        throw new Error('Could not find the wrapper element')
       expect(wrapperEl.classList.contains('is-dark')).toBe(false)
     })
   })
