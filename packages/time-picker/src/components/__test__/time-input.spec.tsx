@@ -3,7 +3,7 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, fireEvent, render } from '@testing-library/preact'
+import { cleanup, fireEvent, render, waitFor } from '@testing-library/preact'
 import TimeInput from '../time-input'
 import { afterEach, vi } from 'vitest'
 import { RefObject } from 'preact/compat'
@@ -49,5 +49,34 @@ describe('TimeInput', () => {
 
       expect(getByDisplayValue('12')).toBeTruthy()
     })
+  })
+
+  describe('correcting invalid values', () => {
+    it.each([['-1'], ['24'], ['100'], ['a'], ['1a'], ['a1']])(
+      'should correct values out of range or incorrect values to be 00',
+      async (incorrectValue) => {
+        const onChangeMock = vi.fn()
+        const inputRef = stubInterface<RefObject<HTMLInputElement>>()
+        render(
+          <TimeInput
+            initialValue="12"
+            onChange={onChangeMock}
+            inputRef={inputRef}
+            validRange={[0, 23]}
+          />
+        )
+
+        const htmlInputElement = document.querySelector('input')!
+        fireEvent.input(htmlInputElement, {
+          target: { value: incorrectValue },
+        })
+        htmlInputElement.focus()
+        htmlInputElement.blur()
+
+        await waitFor(() => {
+          expect(onChangeMock).toHaveBeenCalledWith('00')
+        })
+      }
+    )
   })
 })

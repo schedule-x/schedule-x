@@ -42,9 +42,11 @@ export default function TimeInput({
 
   const handleOnBlur = () => {
     const [min, max] = validRange
-    const value = parseInt(inputValue)
-    if (value < min || value > max) {
+    const value = +inputValue
+
+    if (value < min || value > max || isNaN(value)) {
       setInputValue('00')
+      return
     }
     if (inputValue.length === 1) {
       setInputValue(`0${inputValue}`)

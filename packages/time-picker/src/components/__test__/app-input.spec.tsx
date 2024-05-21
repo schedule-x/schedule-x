@@ -63,4 +63,43 @@ describe('The time picker input (readonly, value display field)', () => {
       })
     })
   })
+
+  describe('opening the popup', () => {
+    it('should open the popup but not set wrapperElement when the input is focused, if no teleport is defined', async () => {
+      const $app = createTimePickerAppContext()
+      render(
+        <AppContext.Provider value={$app}>
+          <AppInput />
+        </AppContext.Provider>
+      )
+
+      const input = document.querySelector('.sx__time-picker-input')
+      if (!(input instanceof HTMLElement)) throw new Error('Input not found')
+      input.focus()
+
+      await waitFor(() => {
+        expect($app.timePickerState.isOpen.value).toBe(true)
+        expect($app.timePickerState.inputWrapperElement.value).not.toBeDefined()
+      })
+    })
+
+    it('should open the popup and set wrapperElement when the input is focused, if teleport is defined', async () => {
+      const $app = createTimePickerAppContext({ teleportTo: document.body })
+      $app.config.teleportTo.value = document.body
+      render(
+        <AppContext.Provider value={$app}>
+          <AppInput />
+        </AppContext.Provider>
+      )
+
+      const input = document.querySelector('.sx__time-picker-input')
+      if (!(input instanceof HTMLElement)) throw new Error('Input not found')
+      input.focus()
+
+      await waitFor(() => {
+        expect($app.timePickerState.isOpen.value).toBe(true)
+        expect($app.timePickerState.inputWrapperElement.value).toBeDefined()
+      })
+    })
+  })
 })
