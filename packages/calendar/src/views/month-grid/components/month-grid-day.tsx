@@ -1,5 +1,8 @@
 import { MonthDay as MonthDayType } from '../types/month'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import {
+  toIntegers,
+  toJSDate,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
@@ -42,9 +45,17 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
   const dayDate = toJSDate(day.date)
   if (isToday(dayDate)) dateClassNames.push('sx__is-today')
 
+  const { month: selectedDateMonth } = toIntegers(
+    $app.datePickerState.selectedDate.value
+  )
+  const { month: dayMonth } = toIntegers(day.date)
+  const wrapperClasses = ['sx__month-grid-day']
+  if (dayMonth !== selectedDateMonth)
+    wrapperClasses.push('is-leading-or-trailing')
+
   return (
     <div
-      className="sx__month-grid-day"
+      className={wrapperClasses.join(' ')}
       data-date={day.date}
       onClick={() =>
         $app.config.callbacks.onClickDate &&

@@ -14,7 +14,7 @@ import MonthGridDay from '../month-grid-day'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { getTestEvent } from './test-events'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
-import { vi } from 'vitest'
+import { beforeEach, vi } from 'vitest'
 
 const renderComponent = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(
@@ -190,6 +190,41 @@ describe('MonthDay component', () => {
         document.querySelector('.sx__month-grid-day__events-more')
       ).not.toBeNull()
       expect(screen.getByText('+ 2 events')).not.toBeNull()
+    })
+  })
+
+  describe('leading and trailing dates', () => {
+    let $app: CalendarAppSingleton
+    let day: MonthDayType
+
+    beforeEach(() => {
+      $app = __createAppWithViews__({
+        selectedDate: '2020-01-01',
+      })
+      day = {
+        date: '2020-01-01',
+        events: {},
+      }
+    })
+
+    it('should not have the class "is-leading-or-trailing" when day is in selected month', () => {
+      renderComponent($app, day)
+
+      expect(document.querySelector('.is-leading-or-trailing')).toBeNull()
+    })
+
+    it('should have the class "is-leading-or-trailing" when day is in month previous to selected month', () => {
+      day.date = '2019-12-31'
+      renderComponent($app, day)
+
+      expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
+    })
+
+    it('should have the class "is-leading-or-trailing" when day is in month after selected month', () => {
+      day.date = '2020-02-01'
+      renderComponent($app, day)
+
+      expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
   })
 })
