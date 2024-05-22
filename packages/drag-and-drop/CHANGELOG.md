@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/schedule-x/schedule-x/compare/v1.41.2...v1.42.0) (2024-05-22)
+
+**Note:** Version bump only for package @schedule-x/drag-and-drop
+
 ## [1.41.2](https://github.com/schedule-x/schedule-x/compare/v1.41.1...v1.41.2) (2024-05-17)
 
 **Note:** Version bump only for package @schedule-x/drag-and-drop
