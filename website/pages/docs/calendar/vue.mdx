@@ -36,6 +36,8 @@ import {
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
+// Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
+// For updating events, use the events service plugin
 const calendarApp = createCalendar({
   selectedDate: '2023-12-19',
   views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
@@ -84,6 +86,21 @@ calendar docs.
 The `ScheduleXCalendar` component then takes the calendar instance as a prop `calendar-app` and renders the calendar
 for you. This means you should not call the `render` method of the calendar instance yourself, as shown in other
 examples in the docs.
+
+## Styles
+
+The Schedule-X calendar is a responsive component which aims to fit many screen sizes and use cases. To achieve this,
+it cannot be delivered with a fixed height or width of its own. You need to define the height and width of the
+wrapping element `.sx-vue-calendar-wrapper` according to your needs. For a regular desktop application, something
+like this might do the trick for you:
+
+```css
+.sx-vue-calendar-wrapper {
+  width: 100%;
+  height: 800px;
+  max-height: 90vh;
+}
+```
 
 ## Slots & custom components
 
