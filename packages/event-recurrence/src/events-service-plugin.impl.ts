@@ -3,6 +3,7 @@ import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.interface'
 import { EventsFacadeImpl } from './util/stateful/events-facade'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { EventId } from '@schedule-x/shared/src/types/event-id'
 
 class EventsServicePluginImpl implements PluginBase {
   name: string = 'EventsServicePlugin'
@@ -22,11 +23,11 @@ class EventsServicePluginImpl implements PluginBase {
     this.eventsFacade.update(event)
   }
 
-  remove(eventId: string): void {
+  remove(eventId: EventId): void {
     this.eventsFacade.remove(eventId)
   }
 
-  get(eventId: string): CalendarEventExternal | undefined {
+  get(eventId: EventId): CalendarEventExternal | undefined {
     return this.eventsFacade.get(eventId)
   }
 
