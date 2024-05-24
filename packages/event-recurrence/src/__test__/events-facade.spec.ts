@@ -44,21 +44,21 @@ describe('Events facade for recurrence plugin', () => {
   })
 
   describe('Getting a single event by id', () => {
-    it('should return the event if it exists', () => {
+    it.each([['1'], [1]])('should return the event if it exists', (id) => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
-        id: '1',
+        id,
         start: '2021-01-01',
         end: '2021-01-01',
         rrule: 'FREQ=WEEKLY;COUNT=3',
       }
       plugin.add(event)
 
-      expect(plugin.get('1')).toEqual(event)
+      expect(plugin.get(id)).toEqual(event)
     })
 
     it('should return undefined if the event does not exist', () => {
@@ -103,21 +103,21 @@ describe('Events facade for recurrence plugin', () => {
   })
 
   describe('Removing events', () => {
-    it('should remove one event without an rrule', () => {
+    it.each([['1'], [1]])('should remove one event without an rrule', (id) => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
       plugin.init!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
-        id: '1',
+        id,
         start: '2021-01-01',
         end: '2021-01-01',
       }
       plugin.add(event)
       expect($app.calendarEvents.list.value.length).toBe(1)
 
-      plugin.remove('1')
+      plugin.remove(id)
       expect($app.calendarEvents.list.value.length).toBe(0)
     })
 

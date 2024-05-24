@@ -75,22 +75,25 @@ describe('Events-service plugin', () => {
     expect(result?.end).toBe('2110-10-10 11:10')
   })
 
-  it('should remove an event', () => {
-    const $app = __createAppWithViews__()
-    const underTest = createEventsServicePlugin()
-    underTest.init($app)
-    const event = {
-      id: '1',
-      title: 'event 1',
-      start: '2110-10-10 10:10',
-      end: '2110-10-10 11:10',
+  it.each([['1'], [1]])(
+    'should remove an event with different id types',
+    (id) => {
+      const $app = __createAppWithViews__()
+      const underTest = createEventsServicePlugin()
+      underTest.init($app)
+      const event = {
+        id: id,
+        title: 'event 1',
+        start: '2110-10-10 10:10',
+        end: '2110-10-10 11:10',
+      }
+      underTest.add(event)
+
+      underTest.remove(id)
+
+      expect($app.calendarEvents.list.value.length).toBe(0)
     }
-    underTest.add(event)
-
-    underTest.remove('1')
-
-    expect($app.calendarEvents.list.value.length).toBe(0)
-  })
+  )
 
   it('should get multiple events', () => {
     const $app = __createAppWithViews__()
