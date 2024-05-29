@@ -34,6 +34,21 @@ describe('date picker input', () => {
     })
   })
 
+  it('should open date-picker when clicking chevron', () => {
+    const $app = createAppSingleton()
+    renderComponent($app)
+    const datePickerOpenSpy = spyOn(
+      ($app as DatePickerAppSingleton).datePickerState,
+      'open'
+    )
+    const chevron = document.querySelector('img')
+    if (!chevron) throw new Error('Chevron not found')
+
+    fireEvent.click(chevron)
+
+    expect(datePickerOpenSpy).toHaveBeenCalled()
+  })
+
   it('should not update selected date on entering a date without pressing enter', () => {
     const selectedDate = '2021-01-01'
     const $app = createAppSingleton({ selectedDate: selectedDate })
