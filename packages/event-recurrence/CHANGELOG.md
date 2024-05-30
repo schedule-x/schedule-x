@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.42.2](https://github.com/schedule-x/schedule-x/compare/v1.42.1...v1.42.2) (2024-05-30)
+
+**Note:** Version bump only for package @schedule-x/event-recurrence
+
 ## [1.42.1](https://github.com/schedule-x/schedule-x/compare/v1.42.0...v1.42.1) (2024-05-24)
 
 ### Bug Fixes
