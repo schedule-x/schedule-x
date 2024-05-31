@@ -18,7 +18,7 @@ export default function Card(props: props) {
           alt={props.title}
         />
 
-        <h2>{props.title}</h2>
+        <h2 className={'heading-font'}>{props.title}</h2>
 
         <p>{props.description}</p>
       </div>

@@ -5,10 +5,7 @@ description: 'Learn how events work in the Schedule-X calendar.'
 
 # Events
 
-At the center of any calendar, lie the events that are planned into it. An
-event can have the following properties:
-
-## Event Properties
+## Properties
 
 | Property      | Type                 | Description                                 | Required |
 |---------------|----------------------|---------------------------------------------|----------|
@@ -29,8 +26,8 @@ you upon interacting with the events.
 
 ## Event time
 
-The calendar internally distinguishes between a few types of events. The most basic distinction between them, is
-whether they are **timed events** or **full day events**.
+The timestamps of an event can have two different formats: `YYYY-MM-DD` or `YYYY-MM-DD HH:mm`. These cannot be mixed
+within the same event. For example:
 
 1. **Timed events** - Events that have a start and end time such as:
 
@@ -52,7 +49,7 @@ const fullDayEvent = {
 }
 ```
 
-Furthermore, both of these types then have the possibility to be either a **single day event** or a **multi day event**.
+Both of these types have the possibility to be either a **single day event** or a **multi day event**.
 
 import { Callout } from 'nextra/components'
 
