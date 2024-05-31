@@ -2,6 +2,7 @@ import React from 'react'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 import Logo from './components/theme/logo'
 import { useRouter } from 'next/router'
+import CustomFooter from './components/theme/custom-footer'
 
 const config: DocsThemeConfig = {
   logo: Logo,
@@ -15,7 +16,7 @@ const config: DocsThemeConfig = {
   docsRepositoryBase:
     'https://github.com/schedule-x/schedule-x/tree/main/website',
   footer: {
-    text: `© 2023-present Tom Österlund`,
+    component: CustomFooter,
   },
   useNextSeoProps() {
     const { asPath } = useRouter()
@@ -64,14 +65,22 @@ const config: DocsThemeConfig = {
     )
   },
 
+  // banner: {
+  //   key: 'newsletter-signup-1.0',
+  //   text: (
+  //     <a href="/newsletter" target="_blank">
+  //       Get the latest project news. Click here for the newsletter signup 📬
+  //     </a>
+  //   )
+  // }
   banner: {
-    key: 'newsletter-signup-1.0',
-    text: (
-      <a href="/newsletter" target="_blank">
-        Get the latest project news. Click here for the newsletter signup 📬
-      </a>
-    )
-  }
+      key: 'premium-1.0',
+      text: (
+        <a href="https://premium.schedule-x.dev" target="_blank">
+          Schedule-X Premium is now here 🚀
+        </a>
+      )
+    }
 }
 
 export default config

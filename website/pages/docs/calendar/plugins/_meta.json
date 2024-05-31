@@ -11,6 +11,16 @@
   "event-modal": {
     "title": "Event Modal"
   },
+  "event-modal-with-form": {
+    "title": "⭐ Premium Event Modal",
+    "href": "https://premium.schedule-x.dev/docs/interactive-event-modal",
+    "newWindow": true
+  },
+  "sidebar": {
+    "title": "⭐ Sidebar",
+    "href": "https://premium.schedule-x.dev/docs/sidebar",
+    "newWindow": true
+  },
   "events-service": {
     "title": "Events Service"
   },
@@ -18,7 +28,7 @@
     "title": "Calendar Controls"
   },
   "recurrence": {
-    "title": "Event Recurrence \uD83C\uDD95"
+    "title": "Event Recurrence"
   },
   "scroll-controller": {
     "title": "Scroll Controller"

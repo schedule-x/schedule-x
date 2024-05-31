@@ -8,6 +8,9 @@ Please put "X" in the below checkboxes that apply:
 - [ ] I have tried to build the feature in a way, that it does not cause any breaking changes for others (unless 
   agreed upon in an issue). 
 
+**Premium**
+- [ ] I'm a Schedule-X premium user
+
 ## This PR solves the following problem**. 
 
 Insert your description or reference to the issue here.
