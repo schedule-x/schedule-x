@@ -41,6 +41,7 @@ describe('handle window resize', () => {
       handleWindowResize($app)
 
       expect($app.calendarState.view.value).toBe('day')
+      expect($app.calendarState.setRange).toHaveBeenCalledTimes(1)
       expect($app.calendarState.setRange).toHaveBeenCalledWith(
         $app.datePickerState.selectedDate.value
       )
