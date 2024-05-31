@@ -119,6 +119,8 @@ export default function TimeGridEvent({
     }
   }
 
+  const borderRule = getBorderRule(calendarEvent)
+
   return (
     <>
       <div
@@ -153,7 +155,9 @@ export default function TimeGridEvent({
             ? undefined
             : eventCSSVariables.backgroundColor,
           color: customComponent ? undefined : eventCSSVariables.textColor,
-          border: customComponent ? undefined : getBorderRule(calendarEvent),
+          borderTop: borderRule,
+          borderRight: borderRule,
+          borderBottom: borderRule,
           borderLeft: customComponent
             ? undefined
             : eventCSSVariables.borderLeft,

@@ -54,6 +54,9 @@ export const handleEventConcurrency = (
       concurrentEventsCache.push(event)
       return handleEventConcurrency(sortedEvents, concurrentEventsCache, i + 1)
     }
+
+    event._totalConcurrentEvents = 1
+    event._previousConcurrentEvents = 0
   }
 
   return sortedEvents
