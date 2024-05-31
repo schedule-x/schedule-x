@@ -26,6 +26,9 @@ const config: DocsThemeConfig = {
       }
     }
   },
+  feedback: {
+    useLink: () => 'https://github.com/schedule-x/schedule-x/issues/new/choose'
+  },
 
   head: () => {
     // using useRouter, get full current path including host
