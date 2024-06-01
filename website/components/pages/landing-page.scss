@@ -41,8 +41,7 @@ $heading-width: 900px;
   }
 
   @include mixins.smaller-screens {
-    font-size: 2.5rem;
-    margin-top: 1rem;
+    font-size: 3rem;
     text-wrap: initial;
   }
 }
@@ -61,8 +60,8 @@ $heading-width: 900px;
   }
 
   @include mixins.smaller-screens {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    margin: 1.5rem 0 3rem;
   }
 }
 
