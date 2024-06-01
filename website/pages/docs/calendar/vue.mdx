@@ -5,8 +5,8 @@ description: 'Learn how to use the Schedule-X calendar in a Vue application'
 
 # Vue component
 
-This page offers documentation for the Vue-specific usage of the Schedule-X calendar. For general documentation on
-configuring and interacting with the calendar, refer to the rest of the calendar documentation. If you are using
+This page offers documentation for the Schedule-X calendar in Vue. For general documentation on
+configuring the calendar, refer to the rest of the documentation. If you are using
 Schedule-X with Nuxt, all code examples below should work, but everything needs to be wrapped in a
 `<ClientOnly>` component.
 
@@ -16,7 +16,7 @@ Schedule-X with Nuxt, all code examples below should work, but everything needs 
 npm install @schedule-x/vue @schedule-x/theme-default
 ```
 
-This installs the Vue component and the default theme. If you're using a package manager that does not automatically
+If you're using a package manager that does not automatically
 download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
 `preact`. This is for example the case for **yarn** and **npm < v7**.
 
@@ -68,12 +68,6 @@ const calendarApp = createCalendar({
 
 ### Explanation
 
-#### Dependencies
-
-From `@schedule-x/vue` you need to import the `ScheduleXCalendar` component. From `@schedule-x/calendar` you need to
-import the views you want to use and the `createCalendar` function. Lastly, from `@schedule-x/theme-default` you
-import the default theme.
-
 #### The calendar instance
 
 The `createCalendar` function takes a [configuration object](/docs/calendar/configuration) as its single argument,
@@ -89,7 +83,7 @@ examples in the docs.
 
 ## Styles
 
-The Schedule-X calendar is a responsive component which aims to fit many screen sizes and use cases. To achieve this,
+The Schedule-X calendar is a responsive component. To achieve this,
 it cannot be delivered with a fixed height or width of its own. You need to define the height and width of the
 wrapping element `.sx-vue-calendar-wrapper` according to your needs. For a regular desktop application, something
 like this might do the trick for you:
