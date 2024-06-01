@@ -210,4 +210,9 @@ $heading-width: 900px;
   top: auto;
   bottom: -350px;
   right: -350px;
+
+  @include mixins.smaller-screens {
+    bottom: -200px;
+    right: -200px;
+  }
 }
