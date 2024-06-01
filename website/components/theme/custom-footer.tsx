@@ -20,10 +20,16 @@ export default function CustomFooter() {
         style={{ marginBottom: '1em' }}
         className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">©
         2023-present Tom Österlund, Schedule-X
-
       </div>
 
       <div
+        style={{ marginBottom: '1em', textDecoration: 'underline' }}
+        className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)]">
+        <a href="/newsletter">Newsletter</a>
+      </div>
+
+      <div
+        style={{ textDecoration: 'underline' }}
         className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)]">
         <a href="/imprint">Imprint</a>
       </div>
