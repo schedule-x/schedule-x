@@ -51,20 +51,6 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
     $app.calendarEvents.filterPredicate.value,
   ])
 
-  const getTimeGridDayKey = (date: string) => {
-    // return !$app.config._customComponentFns.timeGridEvent
-    //   ? date
-    //   : date + new Date().getTime()
-    return date
-  }
-
-  const getDateGridDayKey = (date: string) => {
-    // return !$app.config._customComponentFns.dateGridEvent
-    //   ? date
-    //   : date + new Date().getTime()
-    return date
-  }
-
   return (
     <>
       <AppContext.Provider value={$app}>
@@ -81,7 +67,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
               >
                 {Object.values(week).map((day) => (
                   <DateGridDay
-                    key={getDateGridDayKey(day.date)}
+                    key={day.date}
                     calendarEvents={day.dateGridEvents}
                   />
                 ))}
@@ -98,7 +84,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
               <TimeGridDay
                 calendarEvents={day.timeGridEvents}
                 date={day.date}
-                key={getTimeGridDayKey(day.date)}
+                key={day.date}
               />
             ))}
           </div>
