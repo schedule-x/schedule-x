@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.43.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.42.3...v1.43.0-alpha.0) (2024-06-03)
+
+### Features
+
+- create function for detecting time overlap ([e3fcafb](https://github.com/schedule-x/schedule-x/commit/e3fcafb83a178a607c46c74965f7ecea2c64bf6f))
+- refactor day keys in time grid ([ca8fdef](https://github.com/schedule-x/schedule-x/commit/ca8fdefe707a596bbc4d61bdc490917748c995f3))
+- refactor day keys in time grid ([1f5716e](https://github.com/schedule-x/schedule-x/commit/1f5716efa1896cfd6308ced6d4ffb9622b67606a))
+- refactor day keys in time grid ([abcfc7d](https://github.com/schedule-x/schedule-x/commit/abcfc7d2760f32ee81ff02930616c1acf41c085c))
+- refactor event concurrency ([f29c62b](https://github.com/schedule-x/schedule-x/commit/f29c62b053fe4465b5927b3b58015a272cd1f383))
+
 ## [1.42.3](https://github.com/schedule-x/schedule-x/compare/v1.42.2...v1.42.3) (2024-05-31)
 
 ### Bug Fixes

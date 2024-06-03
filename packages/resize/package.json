@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/resize",
-  "version": "1.42.3",
+  "version": "1.43.0-alpha.0",
   "description": "Resize events in the Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",
@@ -26,5 +26,5 @@
     "directory": "packages/resize"
   },
   "homepage": "https://schedule-x.dev",
-  "gitHead": "f014a9d4386b627aabb18295e7a7a8ea3b9f9712"
+  "gitHead": "c3696b1b9e8cbad792a41ad6e36a732e9bd982ac"
 }

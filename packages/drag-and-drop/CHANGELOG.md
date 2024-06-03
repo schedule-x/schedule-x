@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.43.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.42.3...v1.43.0-alpha.0) (2024-06-03)
+
+### Features
+
+- refactor day keys in time grid ([ca8fdef](https://github.com/schedule-x/schedule-x/commit/ca8fdefe707a596bbc4d61bdc490917748c995f3))
+
 ## [1.42.3](https://github.com/schedule-x/schedule-x/compare/v1.42.2...v1.42.3) (2024-05-31)
 
 **Note:** Version bump only for package @schedule-x/drag-and-drop

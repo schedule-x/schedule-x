@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
@@ -142,6 +143,15 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
 
   private updateOriginalEvent() {
     if (this.lastIntervalDiff === 0 && this.lastDaysDiff === 0) return
+
+    const dayIsSame = this.lastDaysDiff === 0
+    const eventElement = document.querySelector(
+      `[data-event-id="${this.eventCopy.id}"]`
+    )
+    const shouldHideEventToPreventFlickering =
+      !dayIsSame && eventElement instanceof HTMLElement
+    if (shouldHideEventToPreventFlickering) eventElement.style.display = 'none'
+
     updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
   }
 }

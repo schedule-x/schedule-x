@@ -55,8 +55,8 @@ describe('Event concurrency', () => {
       expect(result[2]._totalConcurrentEvents).toBe(3)
       expect(result[2]._previousConcurrentEvents).toBe(2)
 
-      expect(result[3]._totalConcurrentEvents).toBe(undefined)
-      expect(result[3]._previousConcurrentEvents).toBe(undefined)
+      expect(result[3]._totalConcurrentEvents).toBe(1)
+      expect(result[3]._previousConcurrentEvents).toBe(0)
     })
 
     it('should not be concurrent, if event1 ends at the same time event2 starts', () => {
@@ -73,10 +73,10 @@ describe('Event concurrency', () => {
 
       const result = handleEventConcurrency([event1, event2])
 
-      expect(result[0]._totalConcurrentEvents).toBe(undefined)
-      expect(result[0]._previousConcurrentEvents).toBe(undefined)
-      expect(result[1]._totalConcurrentEvents).toBe(undefined)
-      expect(result[1]._previousConcurrentEvents).toBe(undefined)
+      expect(result[0]._totalConcurrentEvents).toBe(1)
+      expect(result[0]._previousConcurrentEvents).toBe(0)
+      expect(result[1]._totalConcurrentEvents).toBe(1)
+      expect(result[1]._previousConcurrentEvents).toBe(0)
     })
 
     it('should be concurrent, if event1 overlaps event2 by 1 minute', () => {

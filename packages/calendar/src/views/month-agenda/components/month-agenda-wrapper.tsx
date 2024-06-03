@@ -48,7 +48,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
         <div className="sx__month-agenda-weeks">
           {agendaMonth.weeks.map((week, index) => (
             <MonthAgendaWeek
-              key={index + new Date().getTime()}
+              key={index}
               week={week}
               setActiveDate={setActiveDate}
               activeDate={activeDate}
@@ -57,7 +57,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
         </div>
 
         <MonthAgendaEvents
-          key={activeDate + new Date().getTime()}
+          key={activeDate}
           events={
             agendaMonth.weeks.flat().find((day) => day.date === activeDate)
               ?.events || []

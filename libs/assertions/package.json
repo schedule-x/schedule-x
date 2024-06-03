@@ -4,7 +4,7 @@
     "access": "public"
   },
   "description": "Assertion library for testing Schedule-X",
-  "version": "1.42.3",
+  "version": "1.43.0-alpha.0",
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
@@ -17,5 +17,5 @@
     "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
     "format": "prettier . --write"
   },
-  "gitHead": "f014a9d4386b627aabb18295e7a7a8ea3b9f9712"
+  "gitHead": "c3696b1b9e8cbad792a41ad6e36a732e9bd982ac"
 }

@@ -94,7 +94,7 @@ export default function TimeGridEvent({
     customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
-  }, [])
+  })
 
   const handleOnClick = (e: MouseEvent) => {
     e.stopPropagation()
@@ -118,6 +118,8 @@ export default function TimeGridEvent({
       )
     }
   }
+
+  const borderRule = getBorderRule(calendarEvent)
 
   return (
     <>
@@ -153,7 +155,9 @@ export default function TimeGridEvent({
             ? undefined
             : eventCSSVariables.backgroundColor,
           color: customComponent ? undefined : eventCSSVariables.textColor,
-          border: customComponent ? undefined : getBorderRule(calendarEvent),
+          borderTop: borderRule,
+          borderRight: borderRule,
+          borderBottom: borderRule,
           borderLeft: customComponent
             ? undefined
             : eventCSSVariables.borderLeft,
