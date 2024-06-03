@@ -190,16 +190,33 @@ $heading-width: 900px;
   }
 }
 
-.landingPageMesh {
+.landingPageMesh1 {
   position: absolute;
-  top: 0;
-  left: -300px;
+  top: -400px;
+  left: -450px;
   width: 100%;
   height: 100%;
   z-index: -1;
 
   @include mixins.smaller-screens {
-    left: -200px;
+    top: -100px;
+    left: -180px;
+  }
+}
+
+.landingPageMesh2 {
+  transform: scale(0.6);
+  position: absolute;
+  top: 20px;
+  left: 200px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  @include mixins.smaller-screens {
+    top: 600px;
+    left: 0;
+    transform: scale(1);
   }
 }
 

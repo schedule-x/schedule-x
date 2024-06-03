@@ -16,9 +16,13 @@ export default function LandingPage() {
           and date picker
         </h1>
 
-        <div className={'landingPageMesh'}>
-          <Image src={'/images/mesh_sx_3.png'} alt={''} width={1000} height={1000}/>
-        </div>
+        {/*<div className={'landingPageMesh1'}>*/}
+        {/*  <Image src={'/images/mesh_top.png'} alt={''} width={1000} height={1000}/>*/}
+        {/*</div>*/}
+
+        {/*<div className={'landingPageMesh2'}>*/}
+        {/*  <Image src={'/images/mesh_top.png'} alt={''} width={1000} height={1000}/>*/}
+        {/*</div>*/}
 
         <h2>
           React, Vue and plain JS components that make scheduling simple and
