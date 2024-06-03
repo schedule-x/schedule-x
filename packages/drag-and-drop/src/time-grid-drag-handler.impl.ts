@@ -148,8 +148,9 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     const eventElement = document.querySelector(
       `[data-event-id="${this.eventCopy.id}"]`
     )
-    if (!dayIsSame && eventElement instanceof HTMLElement)
-      eventElement.style.display = 'none'
+    const shouldHideEventToPreventFlickering =
+      !dayIsSame && eventElement instanceof HTMLElement
+    if (shouldHideEventToPreventFlickering) eventElement.style.display = 'none'
 
     updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
   }
