@@ -33,7 +33,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
-  }, [])
+  })
 
   const onClick = (e: MouseEvent) => {
     invokeOnEventClickCallback($app, calendarEvent)

@@ -94,7 +94,7 @@ export default function TimeGridEvent({
     customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
-  }, [])
+  })
 
   const handleOnClick = (e: MouseEvent) => {
     e.stopPropagation()
