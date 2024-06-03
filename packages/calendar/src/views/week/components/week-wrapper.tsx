@@ -52,15 +52,17 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   ])
 
   const getTimeGridDayKey = (date: string) => {
-    return !$app.config._customComponentFns.timeGridEvent
-      ? date
-      : date + new Date().getTime()
+    // return !$app.config._customComponentFns.timeGridEvent
+    //   ? date
+    //   : date + new Date().getTime()
+    return date
   }
 
   const getDateGridDayKey = (date: string) => {
-    return !$app.config._customComponentFns.dateGridEvent
-      ? date
-      : date + new Date().getTime()
+    // return !$app.config._customComponentFns.dateGridEvent
+    //   ? date
+    //   : date + new Date().getTime()
+    return date
   }
 
   return (
