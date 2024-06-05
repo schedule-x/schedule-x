@@ -63,7 +63,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
-let eventRecurrencePlugin = createEventRecurrencePlugin()
+const eventRecurrencePlugin = createEventRecurrencePlugin()
 const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 3000,

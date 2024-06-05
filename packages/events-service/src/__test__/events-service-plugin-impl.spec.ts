@@ -11,7 +11,7 @@ describe('Events-service plugin', () => {
   it('should add an event', () => {
     const $app = __createAppWithViews__()
     const underTest = createEventsServicePlugin()
-    underTest.init($app)
+    underTest.beforeInit($app)
 
     const event = {
       id: '1',
@@ -31,7 +31,7 @@ describe('Events-service plugin', () => {
   it('should update an event', () => {
     const $app = __createAppWithViews__()
     const underTest = createEventsServicePlugin()
-    underTest.init($app)
+    underTest.beforeInit($app)
     const event = {
       id: '1',
       title: 'event 1',
@@ -58,7 +58,7 @@ describe('Events-service plugin', () => {
   it('should get an event', () => {
     const $app = __createAppWithViews__()
     const underTest = createEventsServicePlugin()
-    underTest.init($app)
+    underTest.beforeInit($app)
     const event = {
       id: '1',
       title: 'event 1',
@@ -80,7 +80,7 @@ describe('Events-service plugin', () => {
     (id) => {
       const $app = __createAppWithViews__()
       const underTest = createEventsServicePlugin()
-      underTest.init($app)
+      underTest.beforeInit($app)
       const event = {
         id: id,
         title: 'event 1',
@@ -98,7 +98,7 @@ describe('Events-service plugin', () => {
   it('should get multiple events', () => {
     const $app = __createAppWithViews__()
     const underTest = createEventsServicePlugin()
-    underTest.init($app)
+    underTest.beforeInit($app)
     const event1 = {
       id: '1',
       title: 'event 1',
@@ -145,7 +145,7 @@ describe('Events-service plugin', () => {
       ],
     })
     const underTest = createEventsServicePlugin()
-    underTest.init($app)
+    underTest.beforeInit($app)
     expect($app.calendarEvents.list.value.length).toBe(2)
 
     const newEvents = [
