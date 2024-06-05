@@ -87,4 +87,64 @@ describe('TimeGridEvent interactivity', () => {
       expect(resizePlugin.createTimeGridEventResizer).not.toHaveBeenCalled()
     })
   })
+
+  describe('when dnd is enabled', () => {
+    it('should start dragging', () => {
+      const dragAndDropPlugin = stubInterface<DragAndDropPlugin>()
+      dragAndDropPlugin.name = PluginName.DragAndDrop
+      dragAndDropPlugin.createTimeGridDragHandler =
+        vi.fn() as unknown as typeof dragAndDropPlugin.createTimeGridDragHandler
+      const $app = __createAppWithViews__({
+        plugins: [dragAndDropPlugin],
+        events: [
+          {
+            start: '2021-10-10 00:00',
+            end: '2021-10-10 01:00',
+            id: 1,
+          },
+        ],
+      })
+
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      const mouseEvent = new MouseEvent('mousedown')
+      const timeGridEvent = document.querySelector('.sx__event')
+      timeGridEvent?.dispatchEvent(mouseEvent)
+
+      vi.advanceTimersByTime(1000)
+
+      expect(dragAndDropPlugin.createTimeGridDragHandler).toHaveBeenCalled()
+    })
+  })
+
+  describe('when resizing is enabled', () => {
+    it('should start resizing', () => {
+      const resizePlugin = stubInterface<ResizePlugin>()
+      resizePlugin.name = PluginName.Resize
+      resizePlugin.createTimeGridEventResizer =
+        vi.fn() as unknown as typeof resizePlugin.createTimeGridEventResizer
+      const $app = __createAppWithViews__({
+        plugins: [resizePlugin],
+        events: [
+          {
+            start: '2021-10-10 00:00',
+            end: '2021-10-10 01:00',
+            id: 1,
+          },
+        ],
+      })
+
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      const mouseEvent = new MouseEvent('mousedown')
+      const resizeHandle = document.querySelector(
+        '.sx__time-grid-event-resize-handle'
+      )
+      resizeHandle?.dispatchEvent(mouseEvent)
+
+      vi.advanceTimersByTime(1000)
+
+      expect(resizePlugin.createTimeGridEventResizer).toHaveBeenCalled()
+    })
+  })
 })

@@ -48,6 +48,7 @@ export default function DateGridEvent({
 
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (!$app.config.plugins.dragAndDrop) return
+    if (calendarEvent._options?.disableDND) return
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
@@ -84,6 +85,7 @@ export default function DateGridEvent({
   })
 
   const startResize = (mouseEvent: MouseEvent) => {
+    if (calendarEvent._options?.disableResize) return
     mouseEvent.stopPropagation()
     const eventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(eventCopy)
