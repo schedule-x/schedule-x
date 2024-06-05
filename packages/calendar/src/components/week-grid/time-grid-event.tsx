@@ -70,6 +70,7 @@ export default function TimeGridEvent({
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
     if (!uiEvent.target) return
     if (!$app.config.plugins.dragAndDrop) return
+    if (calendarEvent._options?.disableDND) return
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(newEventCopy)
@@ -105,6 +106,7 @@ export default function TimeGridEvent({
     e.stopPropagation()
 
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
+    if (calendarEvent._options?.disableResize) return
 
     if ($app.config.plugins.resize) {
       const eventCopy = deepCloneEvent(calendarEvent, $app)
@@ -120,6 +122,10 @@ export default function TimeGridEvent({
   }
 
   const borderRule = getBorderRule(calendarEvent)
+  const classNames = ['sx__time-grid-event', 'sx__event']
+  if (isCopy) classNames.push('is-event-copy')
+  if (calendarEvent._options?.additionalClasses)
+    classNames.push(...calendarEvent._options.additionalClasses)
 
   return (
     <>
@@ -133,9 +139,7 @@ export default function TimeGridEvent({
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
         onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-        className={
-          'sx__time-grid-event sx__event' + (isCopy ? ' is-event-copy' : '')
-        }
+        className={classNames.join(' ')}
         tabIndex={0}
         style={{
           top: `${getYCoordinateInTimeGrid(

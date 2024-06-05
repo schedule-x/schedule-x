@@ -1,4 +1,7 @@
-import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-event.interface'
+import {
+  CalendarEventInternal,
+  CalendarEventOptions,
+} from '../../../../interfaces/calendar/calendar-event.interface'
 import Builder from '../../../../interfaces/builder.interface'
 import CalendarEventImpl from './calendar-event.impl'
 import { EventId } from '../../../../types/event-id'
@@ -13,6 +16,7 @@ export default class CalendarEventBuilder
   private title: string | undefined
   private calendarId: string | undefined
   private _foreignProperties: Record<string, unknown> = {}
+  private _options: CalendarEventOptions | undefined = {}
 
   constructor(
     private _config: CalendarConfigInternal,
@@ -32,6 +36,7 @@ export default class CalendarEventBuilder
       this.location,
       this.description,
       this.calendarId,
+      this._options,
       this._foreignProperties
     )
   }
@@ -65,6 +70,11 @@ export default class CalendarEventBuilder
 
   withCalendarId(calendarId: string | undefined): CalendarEventBuilder {
     this.calendarId = calendarId
+    return this
+  }
+
+  withOptions(options: CalendarEventOptions | undefined): CalendarEventBuilder {
+    this._options = options
     return this
   }
 }

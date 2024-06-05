@@ -39,5 +39,28 @@ describe('TimeGridEvent', () => {
       const timeGridEvent = document.querySelector('[data-event-id]')
       expect(timeGridEvent?.getAttribute('data-event-id')).toBe('123')
     })
+
+    it('should add additional classes to the event', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            title: 'Event 1',
+            start: '2020-01-01 00:00',
+            end: '2020-01-01 01:00',
+            _options: {
+              additionalClasses: ['event-class', 'another-class'],
+            },
+          },
+        ],
+      })
+
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      const timeGridEvent = document.querySelector('.event-class')
+      expect(timeGridEvent).not.toBeNull()
+      const anotherClass = document.querySelector('.another-class')
+      expect(anotherClass).not.toBeNull()
+    })
   })
 })
