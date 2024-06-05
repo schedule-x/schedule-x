@@ -87,4 +87,16 @@ describe('Scroll controller plugin', () => {
       }
     )
   })
+
+  describe('Trying to use the plugin before being initialized', () => {
+    it('should throw an error', () => {
+      const underTest = createScrollControllerPlugin({
+        initialScroll: '07:50',
+      })
+
+      expect(() => underTest.scrollTo('07:50')).toThrow(
+        '[Schedule-X error]: Plugin not yet initialized. You cannot scroll before the calendar is rendered. For configuring the initial scroll, use the `initialScroll` parameter'
+      )
+    })
+  })
 })

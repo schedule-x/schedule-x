@@ -10,6 +10,7 @@ import { createCalendar } from '../factory'
 import { viewMonthGrid } from '../views/month-grid'
 import { cleanup, waitFor } from '@testing-library/preact'
 import CalendarApp from '../calendar.app'
+import { vi } from 'vitest'
 
 const sampleEventTime = {
   start: '2020-01-01',
@@ -157,6 +158,42 @@ describe('CalendarApp', () => {
 
       await waitFor(() => {
         expect(document.querySelector('.is-dark')).toBeTruthy()
+      })
+    })
+  })
+
+  describe('calling plugin lifecycle methods', () => {
+    it('should call the beforeInit method of a plugin', () => {
+      const testPlugin = {
+        name: 'test',
+        beforeInit: vi.fn(),
+      }
+      const calendarApp = createCalendar({
+        views: [viewMonthGrid],
+        plugins: [testPlugin],
+      })
+
+      calendarApp.render(document.createElement('div'))
+
+      expect(testPlugin.beforeInit).toHaveBeenCalled()
+    })
+
+    it('should not call the init method of a plugin in the calendarApp constructor, but only after render', async () => {
+      const testPlugin = {
+        name: 'test',
+        init: vi.fn(),
+      }
+      const calendarApp = createCalendar({
+        views: [viewMonthGrid],
+        plugins: [testPlugin],
+      })
+
+      expect(testPlugin.init).not.toHaveBeenCalled()
+
+      calendarApp.render(document.createElement('div'))
+
+      await waitFor(() => {
+        expect(testPlugin.init).toHaveBeenCalled()
       })
     })
   })

@@ -19,11 +19,10 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
-import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
+import { createEventRecurrencePlugin, createEventsServicePlugin } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
-import { createEventsServicePlugin } from '../../packages/events-service/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -64,6 +63,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
+let eventRecurrencePlugin = createEventRecurrencePlugin()
 const calendar = createCalendar({
   // weekOptions: {
   //   gridHeight: 3000,
@@ -176,7 +176,7 @@ const calendar = createCalendar({
     eventsServicePlugin,
     scrollControllerPlugin,
     createResizePlugin(30),
-    createEventRecurrencePlugin(),
+    eventRecurrencePlugin,
     calendarControlsPlugin,
     calendarsUpdaterPlugin,
     createCurrentTimePlugin(),
@@ -251,8 +251,8 @@ addEventButton.addEventListener('click', () => {
   eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
-    start: '2023-12-18',
-    end: '2023-12-19',
+    start: '2024-06-06',
+    end: '2024-06-06',
   })
 })
 

@@ -19,7 +19,13 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   }
 
   get eventsFacade(): EventsFacade {
-    if (!this.$app) throw new Error('Plugin not yet initialized')
+    console.warn(
+      '[Schedule-X warning]: the eventsFacade is deprecated and will be removed in v2. Please use the createEventsServicePlugin function from @schedule-x/event-recurrence instead. Docs: https://schedule-x.dev/docs/calendar/plugins/recurrence'
+    )
+    if (!this.$app)
+      throw new Error(
+        'Plugin not yet initialized. The events facade is not intended to add the initial events. For adding events upon rendering, add them directly to the configuration object passed to `createCalendar`, or `useCalendarApp` if you are using the React component'
+      )
 
     return new EventsFacadeImpl(this.$app)
   }
