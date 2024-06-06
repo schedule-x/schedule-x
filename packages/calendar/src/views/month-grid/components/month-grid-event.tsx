@@ -40,7 +40,8 @@ export default function MonthGridEvent({
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
     if (!uiEvent.target) return
-    if (!$app.config.plugins.dragAndDrop) return
+    if (!$app.config.plugins.dragAndDrop || calendarEvent._options?.disableDND)
+      return
 
     $app.config.plugins.dragAndDrop.createMonthGridDragHandler(
       calendarEvent,
@@ -67,6 +68,15 @@ export default function MonthGridEvent({
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const classNames = [
+    'sx__event',
+    'sx__month-grid-event',
+    'sx__month-grid-cell',
+  ]
+  if (calendarEvent._options?.additionalClasses) {
+    classNames.push(...calendarEvent._options.additionalClasses)
+  }
+
   return (
     <div
       draggable={!!$app.config.plugins.dragAndDrop}
@@ -77,7 +87,7 @@ export default function MonthGridEvent({
       onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
       onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       onClick={handleOnClick}
-      className="sx__event sx__month-grid-event sx__month-grid-cell"
+      className={classNames.join(' ')}
       style={{
         gridRow,
         width: eventCSSVariables.width,

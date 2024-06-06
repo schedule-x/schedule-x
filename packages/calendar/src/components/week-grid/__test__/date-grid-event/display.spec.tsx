@@ -132,4 +132,19 @@ describe('style attribute "display" of date grid event element', () => {
       ).not.toBeNull()
     })
   })
+
+  describe('adding additional classes', () => {
+    it('should add 2 custom classes', () => {
+      const customClass1 = 'custom-class-1'
+      const customClass2 = 'custom-class-2'
+      $app.calendarEvents.list.value[0]._options = {
+        additionalClasses: [customClass1, customClass2],
+      }
+      renderComponent($app, oneDayEventId, 1)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
+
+      expect(oneDayEvent.classList.contains(customClass1)).toBe(true)
+      expect(oneDayEvent.classList.contains(customClass2)).toBe(true)
+    })
+  })
 })

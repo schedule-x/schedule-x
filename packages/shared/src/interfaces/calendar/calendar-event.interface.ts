@@ -1,6 +1,12 @@
 import { EventId } from '../../types/event-id'
 import { EventFragments } from './event-fragments'
 
+export type CalendarEventOptions = {
+  disableDND?: boolean
+  disableResize?: boolean
+  additionalClasses?: string[]
+}
+
 export default interface CalendarEventExternal {
   id: EventId
   start: string
@@ -10,6 +16,7 @@ export default interface CalendarEventExternal {
   location?: string
   description?: string
   calendarId?: string
+  _options?: CalendarEventOptions
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }

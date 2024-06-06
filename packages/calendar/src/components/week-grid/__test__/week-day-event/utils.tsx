@@ -10,7 +10,13 @@ export const renderComponent = (
 ) => {
   render(
     <AppContext.Provider value={$app}>
-      <TimeGridEvent calendarEvent={calendarEvent} />
+      <TimeGridEvent
+        calendarEvent={calendarEvent}
+        dayBoundariesDateTime={{
+          start: '2021-10-10 00:00',
+          end: '2021-10-10 23:59',
+        }}
+      />
     </AppContext.Provider>
   )
 }

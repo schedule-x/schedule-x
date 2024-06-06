@@ -1,5 +1,6 @@
 import CalendarEventExternal, {
   CalendarEventInternal,
+  CalendarEventOptions,
 } from '../../../../interfaces/calendar/calendar-event.interface'
 import { EventId } from '../../../../types/event-id'
 import CalendarConfigInternal from '../../../../interfaces/calendar/calendar-config'
@@ -32,6 +33,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     public location?: string,
     public description?: string,
     public calendarId?: string,
+    public _options: CalendarEventOptions = {},
     private _foreignProperties: Record<string, unknown> = {}
   ) {}
 
