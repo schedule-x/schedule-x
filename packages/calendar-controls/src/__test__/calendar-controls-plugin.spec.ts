@@ -55,6 +55,29 @@ describe('createCalendarControlsPlugin', () => {
       expect($app.calendarState.view.value).toBe(InternalViewName.Day)
     })
 
+    it('should update the range as a side effect of updating the view', () => {
+      const controlsPlugin = createCalendarControlsPlugin()
+      const $app = __createAppWithViews__({
+        plugins: [controlsPlugin],
+        selectedDate: '2021-01-01',
+        defaultView: InternalViewName.MonthGrid,
+      })
+      expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
+      controlsPlugin.init($app)
+      expect($app.calendarState.range.value).toEqual({
+        start: '2020-12-28 00:00',
+        end: '2021-01-31 23:59',
+      })
+
+      controlsPlugin.setView(InternalViewName.Day)
+
+      expect($app.calendarState.view.value).toBe(InternalViewName.Day)
+      expect($app.calendarState.range.value).toEqual({
+        start: '2021-01-01 00:00',
+        end: '2021-01-01 23:59',
+      })
+    })
+
     it('should throw if the view name is not the name of a configured view', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
@@ -97,6 +120,27 @@ describe('createCalendarControlsPlugin', () => {
       $app.calendarState.view.value = InternalViewName.Day
 
       expect(controlsPlugin.getView()).toBe(InternalViewName.Day)
+    })
+  })
+
+  describe('Getting the range', () => {
+    it('should return the range', () => {
+      const controlsPlugin = createCalendarControlsPlugin()
+      const $app = __createAppWithViews__({
+        plugins: [controlsPlugin],
+        selectedDate: '2021-01-01',
+        defaultView: InternalViewName.MonthGrid,
+      })
+      controlsPlugin.init($app)
+      $app.calendarState.range.value = {
+        start: '2021-01-01 00:00',
+        end: '2021-01-01 23:59',
+      }
+
+      expect(controlsPlugin.getRange()).toEqual({
+        start: '2021-01-01 00:00',
+        end: '2021-01-01 23:59',
+      })
     })
   })
 })
