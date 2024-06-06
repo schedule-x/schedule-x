@@ -76,15 +76,10 @@ describe('TimeGridEvent interactivity', () => {
 
       renderComponent($app, $app.calendarEvents.list.value[0])
 
-      const mouseEvent = new MouseEvent('mousedown')
       const resizeHandle = document.querySelector(
         '.sx__time-grid-event-resize-handle'
       )
-      resizeHandle?.dispatchEvent(mouseEvent)
-
-      vi.advanceTimersByTime(1000)
-
-      expect(resizePlugin.createTimeGridEventResizer).not.toHaveBeenCalled()
+      expect(resizeHandle).toBeNull()
     })
   })
 

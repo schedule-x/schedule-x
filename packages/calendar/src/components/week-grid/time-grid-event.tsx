@@ -106,7 +106,6 @@ export default function TimeGridEvent({
     e.stopPropagation()
 
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
-    if (calendarEvent._options?.disableResize) return
 
     if ($app.config.plugins.resize) {
       const eventCopy = deepCloneEvent(calendarEvent, $app)
@@ -194,12 +193,13 @@ export default function TimeGridEvent({
             </Fragment>
           )}
 
-          {$app.config.plugins.resize && (
-            <div
-              className={'sx__time-grid-event-resize-handle'}
-              onMouseDown={startResize}
-            />
-          )}
+          {$app.config.plugins.resize &&
+            !calendarEvent._options?.disableResize && (
+              <div
+                className={'sx__time-grid-event-resize-handle'}
+                onMouseDown={startResize}
+              />
+            )}
         </div>
       </div>
 

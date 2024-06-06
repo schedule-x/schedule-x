@@ -40,7 +40,8 @@ export default function MonthGridEvent({
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
     if (!uiEvent.target) return
-    if (!$app.config.plugins.dragAndDrop) return
+    if (!$app.config.plugins.dragAndDrop || calendarEvent._options?.disableDND)
+      return
 
     $app.config.plugins.dragAndDrop.createMonthGridDragHandler(
       calendarEvent,

@@ -157,15 +157,7 @@ describe('DateGridEvent', () => {
       const resizeHandler = document.querySelector(
         '.sx__date-grid-event-resize-handle'
       )
-      if (!resizeHandler) throw new Error('Resize handler not found')
-      const mouseDownEvent = new MouseEvent('mousedown')
-
-      expect(resizePlugin.createDateGridEventResizer).not.toHaveBeenCalled()
-
-      resizeHandler.dispatchEvent(mouseDownEvent)
-      vi.advanceTimersByTime(1000)
-
-      expect(resizePlugin.createDateGridEventResizer).not.toHaveBeenCalled()
+      expect(resizeHandler).toBeNull()
     })
   })
 })
