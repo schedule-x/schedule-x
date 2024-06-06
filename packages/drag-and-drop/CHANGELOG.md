@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.45.0](https://github.com/schedule-x/schedule-x/compare/v1.44.0...v1.45.0) (2024-06-06)
+
+### Bug Fixes
+
+- **calendar-controls:** update range when setting view ([#463](https://github.com/schedule-x/schedule-x/issues/463)) ([ebfb4a6](https://github.com/schedule-x/schedule-x/commit/ebfb4a65b7152b39af6dcfc60dda18ae86fb9104))
+
 # [1.44.0](https://github.com/schedule-x/schedule-x/compare/v1.43.0...v1.44.0) (2024-06-06)
 
 **Note:** Version bump only for package @schedule-x/drag-and-drop
