@@ -125,6 +125,27 @@ const config = {
     },
 
     /**
+    * Is called when selecting a day in the month agenda
+    * */
+    onClickAgendaDate(date) {
+      console.log('onClickAgendaDate', date) // e.g. 2024-01-01
+    },
+
+    /**
+    * Is called when double clicking a date in the month grid
+    * */
+    onDoubleClickDate(date) {
+      console.log('onClickDate', date) // e.g. 2024-01-01
+    },
+
+    /**
+    * Is called when double clicking somewhere in the time grid of a week or day view
+    * */
+    onDoubleClickDateTime(dateTime) {
+      console.log('onDoubleClickDateTime', dateTime) // e.g. 2024-01-01 12:37
+    },
+
+    /**
     * Is called when clicking the "+ N events" button of a month grid-day
     * */
     onClickPlusEvents(date) {
@@ -136,7 +157,7 @@ const config = {
     * */
     onSelectedDateUpdate(date) {
       console.log('onSelectedDateUpdate', date)
-    }
+    },
   },
 }
 

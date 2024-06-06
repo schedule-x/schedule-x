@@ -112,9 +112,21 @@ const calendar = createCalendar({
       console.log('onClickDateTime', dateTime)
     },
 
+    onClickAgendaDate(date) {
+      console.log('onClickAgendaDate', date)
+    },
+
     onSelectedDateUpdate(date) {
       console.log('onSelectedDateUpdate', date)
-    }
+    },
+
+    onDoubleClickDateTime(dateTime) {
+      console.log('onDoubleClickDateTime', dateTime)
+    },
+
+    onDoubleClickDate(date) {
+      console.log('onDoubleClickDate', date)
+    },
   },
   calendars: {
     personal: {
