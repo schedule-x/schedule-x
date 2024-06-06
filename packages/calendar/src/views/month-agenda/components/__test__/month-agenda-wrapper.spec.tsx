@@ -17,6 +17,7 @@ import { MonthAgendaWrapper } from '../month-agenda-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { CalendarEventInternal } from '@schedule-x/shared'
+import { vi } from 'vitest'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<MonthAgendaWrapper $app={$app} id={'1'} />)
@@ -79,6 +80,21 @@ describe('MonthAgendaWrapper', () => {
         )
         expect(activeDay?.textContent).toContain('28')
       })
+    })
+
+    it('should call the onClickAgendaDate callback when selecting a day', () => {
+      const onClickDateSpy = vi.fn()
+      const $app = __createAppWithViews__({
+        callbacks: {
+          onClickAgendaDate: onClickDateSpy,
+        },
+      })
+      $app.datePickerState.selectedDate.value = '2027-01-27'
+      renderComponent($app)
+
+      fireEvent.click(screen.getAllByText('28')[1]) // first 28 is in December 2026, second is in January 2027
+
+      expect(onClickDateSpy).toHaveBeenCalledWith('2027-01-28')
     })
 
     it('should display 5 weeks and 35 days', () => {

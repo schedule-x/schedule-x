@@ -28,11 +28,13 @@ export default function MonthAgendaDay({
   if (isActive) dayClasses.push('sx__month-agenda-day--active')
   if (monthOfDay !== monthSelected) dayClasses.push('is-leading-or-trailing')
 
+  const handleClick = () => {
+    setActiveDate(day.date)
+    $app.config.callbacks.onClickAgendaDate?.(day.date)
+  }
+
   return (
-    <div
-      className={dayClasses.join(' ')}
-      onClick={() => setActiveDate(day.date)}
-    >
+    <div className={dayClasses.join(' ')} onClick={handleClick}>
       <div>{toJSDate(day.date).getDate()}</div>
 
       <div className="sx__month-agenda-day__event-icons">

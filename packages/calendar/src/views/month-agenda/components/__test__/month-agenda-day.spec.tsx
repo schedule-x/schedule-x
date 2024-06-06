@@ -38,6 +38,7 @@ const EVENT_ICON_SELECTOR = '.sx__month-agenda-day__event-icon'
 describe('MonthAgendaDay', () => {
   afterEach(() => {
     cleanup()
+    vi.resetAllMocks()
   })
 
   describe('the active state', () => {
