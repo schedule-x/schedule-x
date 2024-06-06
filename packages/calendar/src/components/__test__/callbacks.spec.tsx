@@ -204,6 +204,28 @@ describe('Calendar callbacks', () => {
     })
   })
 
+  describe('double clicking in a date in the month grid', () => {
+    it('should call onDoubleClickDate', async () => {
+      const onDoubleClickDate = vi.fn()
+      const $app = createCalendarAppSingleton({
+        views: [viewMonthGrid],
+        callbacks: {
+          onDoubleClickDate,
+        },
+        selectedDate: '2027-11-12',
+        defaultView: InternalViewName.MonthGrid,
+      })
+      renderComponent($app)
+
+      const gridDayElement = document.querySelector('.sx__month-grid-day') // first day in grid
+      assertIsDIV(gridDayElement)
+      fireEvent(gridDayElement, new MouseEvent('dblclick'))
+
+      expect(onDoubleClickDate).toHaveBeenCalledTimes(1)
+      expect(onDoubleClickDate).toHaveBeenCalledWith('2027-11-01')
+    })
+  })
+
   describe('clicking in a day in the time grid', () => {
     beforeEach(() => {
       Element.prototype.getBoundingClientRect = () => {
@@ -235,6 +257,41 @@ describe('Calendar callbacks', () => {
 
         expect(onClickDateTime).toHaveBeenCalledTimes(1)
         expect(onClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
+      }
+    )
+  })
+
+  describe('double clicking in a day in the time grid', () => {
+    beforeEach(() => {
+      Element.prototype.getBoundingClientRect = () => {
+        return {
+          top: 0,
+          height: 2400,
+        } as DOMRect
+      }
+    })
+
+    it.each([InternalViewName.Day, InternalViewName.Week])(
+      'should call onDoubleClickDateTime',
+      (view) => {
+        const onDoubleClickDateTime = vi.fn()
+        const $app = createCalendarAppSingleton({
+          views: [viewDay, viewWeek],
+          callbacks: {
+            onDoubleClickDateTime,
+          },
+          selectedDate: '2023-12-11',
+          defaultView: view,
+        })
+        renderComponent($app)
+
+        // Click at the top of the day
+        const gridDayElement = document.querySelector('.sx__time-grid-day') // first day in grid
+        assertIsDIV(gridDayElement)
+        fireEvent(gridDayElement, new MouseEvent('dblclick'))
+
+        expect(onDoubleClickDateTime).toHaveBeenCalledTimes(1)
+        expect(onDoubleClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
       }
     )
   })

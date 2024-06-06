@@ -7,7 +7,9 @@ export interface CalendarCallbacks {
   onRangeUpdate?: (range: DateRange) => void
   onSelectedDateUpdate?: (date: string) => void
   onClickDate?: (date: string) => void
+  onDoubleClickDate?: (date: string) => void
   onClickDateTime?: (dateTime: string) => void
+  onDoubleClickDateTime?: (dateTime: string) => void
   onClickAgendaDate?: (date: string) => void
   onClickPlusEvents?: (date: string) => void
 }

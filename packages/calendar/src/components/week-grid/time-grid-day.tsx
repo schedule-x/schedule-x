@@ -47,12 +47,15 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
     setEventsWithConcurrency(handleEventConcurrency(sortedEvents))
   }, [calendarEvents])
 
-  const handleOnClick = (e: MouseEvent) => {
-    if (!$app.config.callbacks.onClickDateTime) return
+  const handleOnClick = (
+    e: MouseEvent,
+    callback: ((dateTime: string) => void) | undefined
+  ) => {
+    if (!callback) return
 
     const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
     if (clickDateTime) {
-      $app.config.callbacks.onClickDateTime(clickDateTime)
+      callback(clickDateTime)
     }
   }
 
@@ -60,7 +63,10 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
     <div
       className="sx__time-grid-day"
       data-time-grid-date={date}
-      onClick={handleOnClick}
+      onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
+      onDblClick={(e) =>
+        handleOnClick(e, $app.config.callbacks.onDoubleClickDateTime)
+      }
       aria-label={getLocalizedDate(date, $app.config.locale)}
     >
       {eventsWithConcurrency.map((event) => (

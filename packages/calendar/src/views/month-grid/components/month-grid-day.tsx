@@ -61,6 +61,7 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
         $app.config.callbacks.onClickDate &&
         $app.config.callbacks.onClickDate(day.date)
       }
+      onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
     >
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
