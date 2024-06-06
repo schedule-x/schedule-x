@@ -8,5 +8,6 @@ export interface CalendarCallbacks {
   onSelectedDateUpdate?: (date: string) => void
   onClickDate?: (date: string) => void
   onClickDateTime?: (dateTime: string) => void
+  onClickAgendaDate?: (date: string) => void
   onClickPlusEvents?: (date: string) => void
 }
