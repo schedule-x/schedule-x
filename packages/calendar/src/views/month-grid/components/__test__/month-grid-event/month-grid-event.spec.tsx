@@ -30,4 +30,25 @@ describe('MonthGridEvent', () => {
       ).toBe('1234')
     })
   })
+
+  describe('adding additional classes', () => {
+    it('should add the additional class to the event', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1234',
+            start: '2020-01-01',
+            end: '2020-01-02',
+            _options: {
+              additionalClasses: ['test-class', 'test-class-2'],
+            },
+          },
+        ],
+      })
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      expect(document.querySelector('.test-class')).toBeTruthy()
+      expect(document.querySelector('.test-class-2')).toBeTruthy()
+    })
+  })
 })

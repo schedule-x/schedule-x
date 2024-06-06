@@ -103,6 +103,8 @@ export default function DateGridEvent({
   if (isCopy) eventClasses.push('sx__date-grid-event--copy')
   if (hasOverflowLeft) eventClasses.push('sx__date-grid-event--overflow-left')
   if (hasOverflowRight) eventClasses.push('sx__date-grid-event--overflow-right')
+  if (calendarEvent._options?.additionalClasses)
+    eventClasses.push(...calendarEvent._options.additionalClasses)
 
   const borderLeftNonCustom = hasOverflowLeft
     ? 'none'

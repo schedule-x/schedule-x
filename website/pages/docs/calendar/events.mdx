@@ -7,16 +7,17 @@ description: 'Learn how events work in the Schedule-X calendar.'
 
 ## Properties
 
-| Property      | Type                 | Description                                 | Required |
-|---------------|----------------------|---------------------------------------------|----------|
-| `id`          | `string` or `number` | A unique identifier for the event.          | Yes      |
-| `start`       | `string`             | The start time of the event.                | Yes      |
-| `end`         | `string`             | The end time of the event.                  | Yes      |
-| `title`       | `string`             | The title of the event.                     | No       |
-| `description` | `string`             | A description of the event.                 | No       |
-| `location`    | `string`             | The location of the event.                  | No       |
-| `people`      | `string[]`           | Names of the participants                   | No       |
-| `calendarId`  | `string`             | id of the calendar. See "calendars" section | No       |
+| Property      | Type                                                      | Description                                 | Required |
+|---------------|-----------------------------------------------------------|---------------------------------------------|----------|
+| `id`          | `string` or `number`                                      | A unique identifier for the event.          | Yes      |
+| `start`       | `string`                                                  | The start time of the event.                | Yes      |
+| `end`         | `string`                                                  | The end time of the event.                  | Yes      |
+| `title`       | `string`                                                  | The title of the event.                     | No       |
+| `description` | `string`                                                  | A description of the event.                 | No       |
+| `location`    | `string`                                                  | The location of the event.                  | No       |
+| `people`      | `string[]`                                                | Names of the participants                   | No       |
+| `calendarId`  | `string`                                                  | id of the calendar. See "calendars" section | No       |
+| `_options`    | [See "_options" section](/docs/calendar/events/#_options) | Configuration for the event.                | No       |
 
 ## Other properties
 
@@ -59,6 +60,18 @@ import { Callout } from 'nextra/components'
   feature is important to you, feel free to open an issue on the GitHub
   repository to help prioritize this feature.
 </Callout>
+
+## _options
+
+Configure the behavior of individual events by adding an `_options` object to the event. All the following
+properties are optional:
+
+| Property          | Type       | Description                             | Default     |
+|-------------------|------------|-----------------------------------------|-------------|
+| disableDND        | `boolean`  | Disables drag and drop for the event.   | `undefined` |
+| disableResize     | `boolean`  | Disables resizing for the event.        | `undefined` |
+| additionalClasses | `string[]` | Additional classes to add to the event. | `undefined` |
+
 
 ## Updating events
 
