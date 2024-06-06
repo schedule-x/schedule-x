@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.44.0](https://github.com/schedule-x/schedule-x/compare/v1.43.0...v1.44.0) (2024-06-06)
+
+### Features
+
+- add \_options property for events ([#457](https://github.com/schedule-x/schedule-x/issues/457)) ([23bddad](https://github.com/schedule-x/schedule-x/commit/23bddada52327134753885a838ab658ee0cfd254))
+- add beforeInit lifecycle hook for plugins ([#456](https://github.com/schedule-x/schedule-x/issues/456)) ([61830dd](https://github.com/schedule-x/schedule-x/commit/61830dd0b89edf37a6e677c5f160dfb7e0707485))
+
 # [1.43.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.42.3...v1.43.0-alpha.0) (2024-06-03)
 
 **Note:** Version bump only for package @schedule-x/shared
