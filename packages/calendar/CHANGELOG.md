@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.45.1](https://github.com/schedule-x/schedule-x/compare/v1.45.0...v1.45.1) (2024-06-08)
+
+### Bug Fixes
+
+- **calendar:** only update custom event component when event changes ([#474](https://github.com/schedule-x/schedule-x/issues/474)) ([0cddf8a](https://github.com/schedule-x/schedule-x/commit/0cddf8ac87a4adee52a1c6813b83f0d0e2dde421))
+
 # [1.45.0](https://github.com/schedule-x/schedule-x/compare/v1.44.0...v1.45.0) (2024-06-06)
 
 ### Bug Fixes
