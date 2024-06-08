@@ -82,7 +82,7 @@ export default function DateGridEvent({
     customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
-  })
+  }, [calendarEvent])
 
   const startResize = (mouseEvent: MouseEvent) => {
     mouseEvent.stopPropagation()

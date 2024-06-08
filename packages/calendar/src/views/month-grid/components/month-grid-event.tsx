@@ -61,7 +61,7 @@ export default function MonthGridEvent({
       calendarEvent: calendarEvent._getExternalEvent(),
       hasStartDate,
     })
-  })
+  }, [calendarEvent])
 
   const handleOnClick = (e: MouseEvent) => {
     e.stopPropagation() // prevent the click from bubbling up to the day element
