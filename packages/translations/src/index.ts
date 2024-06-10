@@ -38,6 +38,8 @@ import { kyKG } from './locales/ky-KG'
 import { datePickerKyKG } from './locales/ky-KG/date-picker'
 import { idID } from './locales/id-ID'
 import { datePickerIdID } from './locales/id-ID/date-picker'
+import { csCZ } from './locales/cs-CZ'
+import { datePickerCsCZ } from './locales/cs-CZ/date-picker'
 
 import { translate } from './translator/translate'
 
@@ -62,6 +64,7 @@ const translations = {
   trTR,
   kyKG,
   idID,
+  csCZ,
 }
 
 const datePickerTranslations = {
@@ -85,6 +88,7 @@ const datePickerTranslations = {
   trTR: datePickerTrTR,
   kyKG: datePickerKyKG,
   idID: datePickerIdID,
+  csCZ: datePickerCsCZ,
 }
 
 export {
@@ -111,4 +115,5 @@ export {
   trTR,
   kyKG,
   idID,
+  csCZ,
 }
