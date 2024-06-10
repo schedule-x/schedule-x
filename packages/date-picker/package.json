@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/date-picker",
-  "version": "1.45.1",
+  "version": "1.46.0",
   "description": "Schedule-X date picker component",
   "author": {
     "name": "Tom Österlund",
@@ -31,5 +31,5 @@
     "directory": "packages/date-picker"
   },
   "homepage": "https://schedule-x.dev",
-  "gitHead": "bc64a6613d557c2378364be84f43d0871415a045"
+  "gitHead": "fded218f27228cc8fd72264028c29824fb398cd8"
 }

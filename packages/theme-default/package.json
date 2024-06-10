@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/theme-default",
-  "version": "1.45.1",
+  "version": "1.46.0",
   "license": "MIT",
   "author": {
     "name": "Tom Österlund",
@@ -35,7 +35,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "gitHead": "bc64a6613d557c2378364be84f43d0871415a045",
+  "gitHead": "fded218f27228cc8fd72264028c29824fb398cd8",
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
