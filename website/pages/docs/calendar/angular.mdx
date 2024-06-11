@@ -1,0 +1,98 @@
+---
+title: 'Angular component'
+description: 'Learn how to use the Schedule-X calendar in an Angular application'
+---
+
+# Angular component
+
+This page offers documentation for using the Schedule-X calendar in Angular. For general documentation on
+configuring the calendar, refer to the rest of the documentation. If you are using
+Schedule-X in an app with SSR, you need to make sure the component only renders in the browser.
+
+## Installing
+
+```bash copy
+npm install @schedule-x/angular @schedule-x/theme-default
+```
+
+If you're using a package manager that does not automatically
+download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
+`preact`. This is for example the case for **yarn** and **npm < v7**.
+
+## Basic usage
+
+### Example
+
+```ts
+// app.component.ts
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { CalendarComponent } from "@schedule-x/angular";
+import { createCalendar, viewWeek } from "@schedule-x/calendar";
+import '@schedule-x/theme-default/dist/calendar.css'
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, CalendarComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'angular-example';
+  calendarApp = createCalendar({
+    events: [
+      {
+        id: '1',
+        title: 'Event 1',
+        start: '2024-06-11 03:00',
+        end: '2024-06-11 05:00',
+      },
+    ],
+    views: [viewWeek],
+  })
+}
+
+```
+
+```html
+<!-- app.component.html -->
+
+<main class="main">
+  <div class="content">
+    <sx-calendar [calendarApp]="calendarApp"></sx-calendar>
+  </div>
+</main>
+
+<router-outlet />
+
+```
+
+### Explanation
+
+#### The calendar instance
+
+The `createCalendar` function takes a [configuration object](/docs/calendar/configuration) as its single argument,
+and returns an instance of the calendar app. The calendar instance contains some methods that you can use to
+interact with the calendar events and toggle between light and dark mode. For more on this, refer to the rest of the
+calendar docs.
+
+## Styles
+
+The Schedule-X calendar is a responsive component. To achieve this,
+it cannot be delivered with a fixed height or width of its own. You need to define the height and width of the
+wrapping element `.ng-calendar-wrapper` according to your needs. For a regular desktop application, something
+like this might do the trick for you:
+
+```css
+.ng-calendar-wrapper {
+  width: 100%;
+  height: 800px;
+  max-height: 90vh;
+}
+```
+
+## Custom content rendering
+
+Though a project goal, the Angular component does not yet support customizing the content of events. If you need this
+for your use case, please open an issue at GitHub.
