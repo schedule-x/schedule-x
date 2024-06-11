@@ -4,8 +4,6 @@
 
 .sx__date-picker__years-accordion__expand-button {
   width: 100%;
-  border: 0;
-  border-bottom: var(--sx-border);
   border-radius: 0;
   background-color: transparent;
   font-size: 1rem;
@@ -14,7 +12,6 @@
 
   .sx__is-expanded & {
     background-color: var(--sx-color-surface-container);
-    border-bottom: 0;
   }
 
   &:hover {
