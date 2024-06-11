@@ -5,7 +5,6 @@ import dragAndDropIcon from '../../assets/icons/drag-drop.svg'
 import customizeIcon from '../../assets/icons/customize.svg'
 import Link from 'next/link'
 import AppCalendar from '../partials/app-calendar/app-calendar'
-import Image from 'next/image'
 
 export default function LandingPage() {
   return (
@@ -15,14 +14,6 @@ export default function LandingPage() {
           <span className={'headingGradient'}>Material design</span> calendar
           and date picker
         </h1>
-
-        {/*<div className={'landingPageMesh1'}>*/}
-        {/*  <Image src={'/images/mesh_top.png'} alt={''} width={1000} height={1000}/>*/}
-        {/*</div>*/}
-
-        {/*<div className={'landingPageMesh2'}>*/}
-        {/*  <Image src={'/images/mesh_top.png'} alt={''} width={1000} height={1000}/>*/}
-        {/*</div>*/}
 
         <h2>
           React, Vue and plain JS components that make scheduling simple and
@@ -72,10 +63,6 @@ export default function LandingPage() {
               'Built with light- and dark modes in mind. Toggle between them, simply by calling a method.'
             }
           />
-        </div>
-
-        <div className={'landingPageMesh_bottom'}>
-          <Image src={'/images/mesh_sx_10.png'} alt={''} width={1000} height={1000}/>
         </div>
       </div>
     </>
