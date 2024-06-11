@@ -5,7 +5,6 @@ import dragAndDropIcon from '../../assets/icons/drag-drop.svg'
 import customizeIcon from '../../assets/icons/customize.svg'
 import Link from 'next/link'
 import AppCalendar from '../partials/app-calendar/app-calendar'
-import Image from 'next/image'
 
 export default function LandingPage() {
   return (
