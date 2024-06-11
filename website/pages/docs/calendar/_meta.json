@@ -26,6 +26,9 @@
   "vue": {
     "title": "Vue component"
   },
+  "angular": {
+    "title": "Angular component"
+  },
   "demo": {
     "title": "Demo",
     "href": "/demos/calendar"
