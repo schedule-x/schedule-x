@@ -60,6 +60,7 @@ export default interface CalendarConfigInternal extends Config {
   calendars: Signal<Record<string, CalendarType>>
   plugins: Plugins
   isDark: boolean
+  isResponsive: boolean
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
   minDate?: string
