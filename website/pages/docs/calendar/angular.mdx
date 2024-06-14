@@ -92,7 +92,27 @@ like this might do the trick for you:
 }
 ```
 
-## Custom content rendering
+## Custom markup
 
-Though a project goal, the Angular component does not yet support customizing the content of events. If you need this
-for your use case, please open an issue at GitHub.
+You can also use `ng-template` to take control over some of the markup rendered in the calendar. For example, you
+can create a custom event for the time grid, in the week- and day views, like this:
+
+```html
+<ng-template #timeGridEvent let-arg>
+  <div style="background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%; border-radius: 5px;
+padding: 5px">
+    <div>Time grid event: {{ arg.calendarEvent.title }}</div>
+  </div>
+</ng-template>
+```
+
+All available templates are:
+
+| Template name      | Description                                                      | Args                            |
+|--------------------|------------------------------------------------------------------|---------------------------------|
+| `timeGridEvent`    | The component for timed events used in the week- and day views   | `calendarEvent`                 |
+| `dateGridEvent`    | The component for all-day events used in the week- and day views | `calendarEvent`                 |
+| `monthGridEvent`   | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
+| `monthAgendaEvent` | The component for events used in the month agenda view           | `calendarEvent`                 |
+| `eventModal`       | The component for the modal that opens when clicking an event    | `calendarEvent`                 |
+
