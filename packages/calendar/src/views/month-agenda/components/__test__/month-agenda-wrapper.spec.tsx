@@ -274,5 +274,24 @@ describe('MonthAgendaWrapper', () => {
         ).toHaveLength(3)
       })
     })
+
+    it('should select a new month agenda date when selected date changes', async () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-01-27',
+        events: [],
+      })
+      renderComponent($app)
+      const activeDay = document.querySelector('.sx__month-agenda-day--active')
+      expect(activeDay?.textContent).toContain('27')
+
+      $app.datePickerState.selectedDate.value = '2027-01-20'
+
+      await waitFor(() => {
+        const newActiveDay = document.querySelector(
+          '.sx__month-agenda-day--active'
+        )
+        expect(newActiveDay?.textContent).toContain('20')
+      })
+    })
   })
 })

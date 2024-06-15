@@ -36,10 +36,6 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
     $app.calendarEvents.filterPredicate.value,
   ])
 
-  const [activeDate, setActiveDate] = useState(
-    $app.datePickerState.selectedDate.value
-  )
-
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__month-agenda-wrapper">
@@ -50,17 +46,22 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
             <MonthAgendaWeek
               key={index}
               week={week}
-              setActiveDate={setActiveDate}
-              activeDate={activeDate}
+              setActiveDate={(dateString: string) =>
+                ($app.datePickerState.selectedDate.value = dateString)
+              }
+              activeDate={$app.datePickerState.selectedDate.value}
             />
           ))}
         </div>
 
         <MonthAgendaEvents
-          key={activeDate}
+          key={$app.datePickerState.selectedDate.value}
           events={
-            agendaMonth.weeks.flat().find((day) => day.date === activeDate)
-              ?.events || []
+            agendaMonth.weeks
+              .flat()
+              .find(
+                (day) => day.date === $app.datePickerState.selectedDate.value
+              )?.events || []
           }
         />
       </div>
