@@ -8,7 +8,7 @@
 
 This library offers a material design calendar and date picker for the web. They can be used regardless of your
 framework preferences, since they are built around a lightweight virtual-DOM implementation. The library also offers 
-adapter components for React and Vue.
+adapter components for React, Vue and Angular.
 
 Website for documentation and demo: https://schedule-x.dev/
 
