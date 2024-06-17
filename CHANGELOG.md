@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.2](https://github.com/schedule-x/schedule-x/compare/v1.46.1...v1.46.2) (2024-06-17)
+
+### Bug Fixes
+
+- change month agenda date when date picker date changes ([#488](https://github.com/schedule-x/schedule-x/issues/488)) ([083295a](https://github.com/schedule-x/schedule-x/commit/083295ac7be0f85e0b610bae8032a6c633418ae1))
+
 ## [1.46.1](https://github.com/schedule-x/schedule-x/compare/v1.46.0...v1.46.1) (2024-06-11)
 
 ### Bug Fixes
