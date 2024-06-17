@@ -3,13 +3,13 @@ import {
   toIntegers,
   toJSDate,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { StateUpdater, useContext } from 'preact/hooks'
+import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 
 type props = {
   day: MonthAgendaDayType
   isActive: boolean
-  setActiveDate: StateUpdater<string>
+  setActiveDate: (dateString: string) => void
 }
 
 export default function MonthAgendaDay({
