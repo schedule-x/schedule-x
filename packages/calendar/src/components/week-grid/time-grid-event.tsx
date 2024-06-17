@@ -184,7 +184,7 @@ export default function TimeGridEvent({
                 {getEventTime(calendarEvent.start, calendarEvent.end)}
               </div>
 
-              {calendarEvent.people && (
+              {calendarEvent.people && calendarEvent.people.length > 0 && (
                 <div className="sx__time-grid-event-people">
                   <UserIcon strokeColor={eventCSSVariables.iconStroke} />
                   {concatenatePeople(calendarEvent.people)}
