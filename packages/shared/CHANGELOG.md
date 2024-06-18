@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.4](https://github.com/schedule-x/schedule-x/compare/v1.46.3...v1.46.4) (2024-06-18)
+
+### Bug Fixes
+
+- **calendar:** get \_options on external event ([#491](https://github.com/schedule-x/schedule-x/issues/491)) ([057a1c7](https://github.com/schedule-x/schedule-x/commit/057a1c7def8f3804ef2522316447523c926ec8ce))
+
 ## [1.46.3](https://github.com/schedule-x/schedule-x/compare/v1.46.2...v1.46.3) (2024-06-17)
 
 **Note:** Version bump only for package @schedule-x/shared

@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/recurrence",
-  "version": "1.46.3",
+  "version": "1.46.4",
   "description": "A library for working with recurring events according to the iCalendar specification",
   "author": {
     "name": "Tom Österlund",

@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/events-service",
-  "version": "1.46.3",
+  "version": "1.46.4",
   "publishConfig": {
     "access": "public"
   },

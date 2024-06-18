@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.4](https://github.com/schedule-x/schedule-x/compare/v1.46.3...v1.46.4) (2024-06-18)
+
+**Note:** Version bump only for package @schedule-x/date-picker
+
 ## [1.46.3](https://github.com/schedule-x/schedule-x/compare/v1.46.2...v1.46.3) (2024-06-17)
 
 **Note:** Version bump only for package @schedule-x/date-picker
