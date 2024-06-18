@@ -125,6 +125,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
       location: this.location,
       description: this.description,
       calendarId: this.calendarId,
+      _options: this._options,
       ...this._getForeignProperties(),
     }
   }
