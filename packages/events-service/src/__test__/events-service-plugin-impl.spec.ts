@@ -64,6 +64,9 @@ describe('Events-service plugin', () => {
       title: 'event 1',
       start: '2110-10-10 10:10',
       end: '2110-10-10 11:10',
+      _options: {
+        additionalClasses: ['class1', 'class2'],
+      },
     }
     underTest.add(event)
 
@@ -73,6 +76,7 @@ describe('Events-service plugin', () => {
     expect(result?.title).toBe('event 1')
     expect(result?.start).toBe('2110-10-10 10:10')
     expect(result?.end).toBe('2110-10-10 11:10')
+    expect(result?._options?.additionalClasses).toEqual(['class1', 'class2'])
   })
 
   it.each([['1'], [1]])(
