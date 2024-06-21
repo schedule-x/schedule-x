@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.5](https://github.com/schedule-x/schedule-x/compare/v1.46.4...v1.46.5) (2024-06-21)
+
+### Bug Fixes
+
+- **calendar:** align items in header ([#495](https://github.com/schedule-x/schedule-x/issues/495)) ([a16a6e2](https://github.com/schedule-x/schedule-x/commit/a16a6e2a920068a2da138355249e0add0a5fc284))
+
 ## [1.46.4](https://github.com/schedule-x/schedule-x/compare/v1.46.3...v1.46.4) (2024-06-18)
 
 **Note:** Version bump only for package @schedule-x/theme-default
