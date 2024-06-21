@@ -22,6 +22,8 @@
 }
 
 .sx__forward-backward-navigation {
+  height: 45px;
+
   .sx__is-calendar-small & {
     display: none;
   }
