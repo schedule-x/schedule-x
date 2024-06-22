@@ -6,6 +6,7 @@ import TimeIcon from './components/icons/time-icon'
 import UserIcon from './components/icons/user-icon'
 import DescriptionIcon from './components/icons/description-icon'
 import LocationPinIcon from './components/icons/location-pin-icon'
+import PluginBase from './interfaces/plugin.interface'
 
 export { deepCloneEvent } from './utils/stateless/calendar/deep-clone-event'
 export { concatenatePeople } from './utils/stateless/strings/concatenate-people'
@@ -19,7 +20,7 @@ export { toJSDate } from './utils/stateless/time/format-conversion/format-conver
 export type { CalendarConfigExternal } from './interfaces/calendar/calendar-config'
 export type { CalendarEvent, EventModalPlugin, CalendarEventInternal }
 export type { View, ViewConfig } from './types/calendar/view'
-export type { CalendarAppSingleton }
+export type { CalendarAppSingleton, PluginBase }
 export type { CustomComponentFns as CustomComponents } from './interfaces/calendar/custom-component-fns'
 export {
   addDays,
