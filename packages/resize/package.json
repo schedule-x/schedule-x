@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/resize",
-  "version": "1.46.5",
+  "version": "1.46.6",
   "description": "Resize events in the Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",

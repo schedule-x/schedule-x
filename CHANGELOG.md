@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.6](https://github.com/schedule-x/schedule-x/compare/v1.46.5...v1.46.6) (2024-06-22)
+
+### Bug Fixes
+
+- improve tolerance for app interface in plugins ([#493](https://github.com/schedule-x/schedule-x/issues/493)) ([ed9790d](https://github.com/schedule-x/schedule-x/commit/ed9790de9b587445808ee2d2b34b6fb8e47acd9e))
+
 ## [1.46.5](https://github.com/schedule-x/schedule-x/compare/v1.46.4...v1.46.5) (2024-06-21)
 
 ### Bug Fixes
