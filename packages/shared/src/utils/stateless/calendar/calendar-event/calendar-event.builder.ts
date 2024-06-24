@@ -16,7 +16,7 @@ export default class CalendarEventBuilder
   private title: string | undefined
   private calendarId: string | undefined
   private _foreignProperties: Record<string, unknown> = {}
-  private _options: CalendarEventOptions | undefined = {}
+  private _options: CalendarEventOptions | undefined = undefined
 
   constructor(
     private _config: CalendarConfigInternal,

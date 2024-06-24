@@ -33,7 +33,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     public location?: string,
     public description?: string,
     public calendarId?: string,
-    public _options: CalendarEventOptions = {},
+    public _options: CalendarEventOptions | undefined = undefined,
     private _foreignProperties: Record<string, unknown> = {}
   ) {}
 
