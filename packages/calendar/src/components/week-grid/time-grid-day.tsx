@@ -72,9 +72,10 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   }
 
   const handlePointerUp = () => {
+    const msWaitToEnsureThatClickEventWasDispatched = 10
     setTimeout(() => {
       setMouseDownOnChild(false)
-    }, 10)
+    }, msWaitToEnsureThatClickEventWasDispatched)
   }
 
   return (
