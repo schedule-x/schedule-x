@@ -65,7 +65,7 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   }
 
   const handlePointerDown = (e: UIEvent) => {
-    // Prevents the click event from firing when dragging an event
+    // mousedown or touchstart occurred on a child element
     if (e.target !== e.currentTarget) {
       setMouseDownOnChild(true)
     }
