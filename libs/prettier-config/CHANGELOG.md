@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.7](https://github.com/schedule-x/schedule-x/compare/v1.46.6...v1.46.7) (2024-06-24)
+
+**Note:** Version bump only for package @schedule-x/prettier-config
+
 ## [1.46.6](https://github.com/schedule-x/schedule-x/compare/v1.46.5...v1.46.6) (2024-06-22)
 
 **Note:** Version bump only for package @schedule-x/prettier-config

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.7](https://github.com/schedule-x/schedule-x/compare/v1.46.6...v1.46.7) (2024-06-24)
+
+### Bug Fixes
+
+- **calendar:** prevent click events to fire when dragging ([0bf2905](https://github.com/schedule-x/schedule-x/commit/0bf290557187579786fd82e4a1e906e52529613b))
+- **calendar:** prevent onClickDateTime from firing when dragging ([#499](https://github.com/schedule-x/schedule-x/issues/499)) ([80f168d](https://github.com/schedule-x/schedule-x/commit/80f168d076bee4d55a79fcf5b7b976341ec9f8eb))
+
 ## [1.46.6](https://github.com/schedule-x/schedule-x/compare/v1.46.5...v1.46.6) (2024-06-22)
 
 **Note:** Version bump only for package @schedule-x/calendar
