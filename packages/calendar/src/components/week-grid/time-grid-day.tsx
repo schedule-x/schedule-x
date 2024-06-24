@@ -64,13 +64,6 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
     }
   }
 
-  const handlePointerDown = (e: UIEvent) => {
-    // mousedown or touchstart occurred on a child element
-    if (e.target !== e.currentTarget) {
-      setMouseDownOnChild(true)
-    }
-  }
-
   const handlePointerUp = () => {
     const msWaitToEnsureThatClickEventWasDispatched = 10
     setTimeout(() => {
@@ -88,8 +81,6 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
       }
       aria-label={getLocalizedDate(date, $app.config.locale)}
       onMouseLeave={() => setMouseDownOnChild(false)}
-      onMouseDown={handlePointerDown}
-      onTouchStart={handlePointerDown}
       onMouseUp={handlePointerUp}
       onTouchEnd={handlePointerUp}
     >
@@ -98,6 +89,7 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
           key={event.id}
           calendarEvent={event}
           dayBoundariesDateTime={dayBoundariesDateTime}
+          setMouseDown={setMouseDownOnChild}
         />
       ))}
     </div>

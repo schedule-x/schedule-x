@@ -6,7 +6,7 @@ import {
   getLeftRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
-import { useContext, useEffect } from 'preact/hooks'
+import { StateUpdater, useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
@@ -27,6 +27,7 @@ import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless
 type props = {
   calendarEvent: CalendarEventInternal
   dayBoundariesDateTime?: DayBoundariesDateTime
+  setMouseDown: StateUpdater<boolean>
   isCopy?: boolean
 }
 
@@ -34,6 +35,7 @@ export default function TimeGridEvent({
   calendarEvent,
   dayBoundariesDateTime,
   isCopy,
+  setMouseDown,
 }: props) {
   const $app = useContext(AppContext)
 
@@ -103,6 +105,7 @@ export default function TimeGridEvent({
   }
 
   const startResize = (e: MouseEvent) => {
+    setMouseDown(true)
     e.stopPropagation()
 
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
@@ -126,6 +129,16 @@ export default function TimeGridEvent({
   if (calendarEvent._options?.additionalClasses)
     classNames.push(...calendarEvent._options.additionalClasses)
 
+  const handlePointerDown = (e: UIEvent) => {
+    setMouseDown(true)
+    createDragStartTimeout(handleStartDrag, e)
+  }
+
+  const handlePointerUp = (e: UIEvent) => {
+    setMouseDown(false)
+    setClickedEventIfNotDragging(calendarEvent, e)
+  }
+
   return (
     <>
       <div
@@ -134,10 +147,10 @@ export default function TimeGridEvent({
         }
         data-event-id={calendarEvent.id}
         onClick={handleOnClick}
-        onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
-        onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-        onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
-        onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
+        onMouseDown={handlePointerDown}
+        onMouseUp={handlePointerUp}
+        onTouchStart={handlePointerDown}
+        onTouchEnd={handlePointerUp}
         className={classNames.join(' ')}
         tabIndex={0}
         style={{
@@ -203,7 +216,13 @@ export default function TimeGridEvent({
         </div>
       </div>
 
-      {eventCopy && <TimeGridEvent calendarEvent={eventCopy} isCopy={true} />}
+      {eventCopy && (
+        <TimeGridEvent
+          calendarEvent={eventCopy}
+          isCopy={true}
+          setMouseDown={setMouseDown}
+        />
+      )}
     </>
   )
 }
