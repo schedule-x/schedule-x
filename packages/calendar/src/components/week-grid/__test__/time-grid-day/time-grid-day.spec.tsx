@@ -93,13 +93,19 @@ describe('TimeGridDay', () => {
         callbacks: {
           onClickDateTime,
         },
+        events: [
+          {
+            start: '2023-09-11 00:00',
+            end: '2023-09-11 01:00',
+            id: '1',
+          },
+        ],
       })
-      renderComponent($app, [], '2023-09-11')
+      renderComponent($app, $app.calendarEvents.list.value, '2023-09-11')
 
       const dayElement = document.querySelector('.sx__time-grid-day') as Element
-      const childElement = document.createElement('div')
-      dayElement.appendChild(childElement)
-      fireEvent.mouseDown(childElement)
+      const eventElement = document.querySelector('.sx__event') as Element
+      fireEvent.mouseDown(eventElement)
       fireEvent.click(dayElement)
 
       expect(onClickDateTime).not.toHaveBeenCalled()
