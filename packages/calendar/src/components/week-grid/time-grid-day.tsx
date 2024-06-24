@@ -17,6 +17,11 @@ type props = {
 }
 
 export default function TimeGridDay({ calendarEvents, date }: props) {
+  /**
+   * The time grid day needs to keep track of whether the mousedown event happened on a calendar event, in order to prevent
+   * click events from firing when dragging an event.
+   * */
+  const [mouseDownOnChild, setMouseDownOnChild] = useState<boolean>(false)
   const $app = useContext(AppContext)
 
   const timeStringFromDayBoundary = timeStringFromTimePoints(
@@ -51,12 +56,25 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
     e: MouseEvent,
     callback: ((dateTime: string) => void) | undefined
   ) => {
-    if (!callback) return
+    if (!callback || mouseDownOnChild) return
 
     const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
     if (clickDateTime) {
       callback(clickDateTime)
     }
+  }
+
+  const handlePointerDown = (e: UIEvent) => {
+    // Prevents the click event from firing when dragging an event
+    if (e.target !== e.currentTarget) {
+      setMouseDownOnChild(true)
+    }
+  }
+
+  const handlePointerUp = () => {
+    setTimeout(() => {
+      setMouseDownOnChild(false)
+    }, 10)
   }
 
   return (
@@ -68,6 +86,11 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
         handleOnClick(e, $app.config.callbacks.onDoubleClickDateTime)
       }
       aria-label={getLocalizedDate(date, $app.config.locale)}
+      onMouseLeave={() => setMouseDownOnChild(false)}
+      onMouseDown={handlePointerDown}
+      onTouchStart={handlePointerDown}
+      onMouseUp={handlePointerUp}
+      onTouchEnd={handlePointerUp}
     >
       {eventsWithConcurrency.map((event) => (
         <TimeGridEvent
