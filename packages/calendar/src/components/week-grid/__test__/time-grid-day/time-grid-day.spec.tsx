@@ -4,10 +4,11 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup } from '@testing-library/preact'
+import { cleanup, fireEvent } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { vi } from 'vitest'
 
 describe('TimeGridDay', () => {
   afterEach(() => {
@@ -67,6 +68,41 @@ describe('TimeGridDay', () => {
           .querySelector('.sx__time-grid-event')
           ?.attributes.getNamedItem('style')?.value
       ).toContain('top: 75%')
+    })
+
+    it('fires onClickDateTime if the user clicks on the day', () => {
+      const onClickDateTime = vi.fn()
+      const $app = __createAppWithViews__({
+        selectedDate: '2023-09-11',
+        callbacks: {
+          onClickDateTime,
+        },
+      })
+      renderComponent($app, [], '2023-09-11')
+
+      const dayElement = document.querySelector('.sx__time-grid-day')
+      fireEvent.click(dayElement as Element)
+
+      expect(onClickDateTime).toHaveBeenCalled()
+    })
+
+    it('does not fire onClickDateTime if the user clicks on a child element', () => {
+      const onClickDateTime = vi.fn()
+      const $app = __createAppWithViews__({
+        selectedDate: '2023-09-11',
+        callbacks: {
+          onClickDateTime,
+        },
+      })
+      renderComponent($app, [], '2023-09-11')
+
+      const dayElement = document.querySelector('.sx__time-grid-day') as Element
+      const childElement = document.createElement('div')
+      dayElement.appendChild(childElement)
+      fireEvent.mouseDown(childElement)
+      fireEvent.click(dayElement)
+
+      expect(onClickDateTime).not.toHaveBeenCalled()
     })
   })
 
