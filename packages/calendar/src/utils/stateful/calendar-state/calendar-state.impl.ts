@@ -1,5 +1,5 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
-import { effect, Signal, signal } from '@preact/signals'
+import { computed, effect, Signal, signal } from '@preact/signals'
 import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -13,11 +13,14 @@ export const createCalendarState = (
   timeUnitsImpl: TimeUnits,
   selectedDate?: string
 ): CalendarState => {
-  const view = signal<ViewName>(
+  const _view = signal<ViewName>(
     calendarConfig.views.find(
       (view) => view.name === calendarConfig.defaultView
     )?.name || calendarConfig.views[0].name
   )
+  const view = computed(() => {
+    return _view.value
+  })
   const range = signal<DateRange | null>(null)
 
   let wasInitialized = false
@@ -37,7 +40,7 @@ export const createCalendarState = (
 
   const setRange = (date: string) => {
     const selectedView = calendarConfig.views.find(
-      (availableView) => availableView.name === view.value
+      (availableView) => availableView.name === _view.value
     )
     const newRange = (selectedView as View).setDateRange({
       calendarConfig,
@@ -70,10 +73,14 @@ export const createCalendarState = (
   })
 
   return {
-    isDark,
     view,
+    isDark,
     setRange,
     range,
     isCalendarSmall,
+    setView: (newView: ViewName, selectedDate: string) => {
+      _view.value = newView
+      setRange(selectedDate)
+    },
   }
 }

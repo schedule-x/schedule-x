@@ -37,7 +37,7 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
     // Timeout to display the ripple effect
     setTimeout(() => {
       $app.datePickerState.selectedDate.value = day.date
-      $app.calendarState.view.value = InternalViewName.Day
+      $app.calendarState.setView(InternalViewName.Day, day.date)
     }, 250)
   }
 
