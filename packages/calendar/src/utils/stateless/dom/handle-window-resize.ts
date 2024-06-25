@@ -15,8 +15,10 @@ const setScreenSizeCompatibleView = (
       (view) => view.hasSmallScreenCompat
     )
     if (smallScreenCompatibleView) {
-      $app.calendarState.view.value = smallScreenCompatibleView.name
-      $app.calendarState.setRange($app.datePickerState.selectedDate.value)
+      $app.calendarState.setView(
+        smallScreenCompatibleView.name,
+        $app.datePickerState.selectedDate.value
+      )
     }
   } else {
     if (currentView.hasWideScreenCompat) return
@@ -25,8 +27,10 @@ const setScreenSizeCompatibleView = (
       (view) => view.hasWideScreenCompat
     )
     if (wideScreenCompatibleView) {
-      $app.calendarState.view.value = wideScreenCompatibleView.name
-      $app.calendarState.setRange($app.datePickerState.selectedDate.value)
+      $app.calendarState.setView(
+        wideScreenCompatibleView.name,
+        $app.datePickerState.selectedDate.value
+      )
     }
   }
 }

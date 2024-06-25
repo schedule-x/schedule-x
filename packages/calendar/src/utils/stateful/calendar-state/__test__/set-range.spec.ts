@@ -19,7 +19,7 @@ describe('calendar state', () => {
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.view.value = InternalViewName.Week
+      state.setView(InternalViewName.Week, '2023-09-13')
 
       state.setRange('2023-09-13')
 
@@ -31,7 +31,7 @@ describe('calendar state', () => {
 
     it('should set the range for the month', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.view.value = InternalViewName.MonthGrid
+      state.setView(InternalViewName.MonthGrid, '2023-09-13')
 
       state.setRange('2023-09-13')
 
@@ -43,7 +43,7 @@ describe('calendar state', () => {
 
     it('should set the range for the day', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.view.value = InternalViewName.Day
+      state.setView(InternalViewName.Day, '2023-09-13')
 
       state.setRange('2023-09-13')
 
@@ -55,7 +55,7 @@ describe('calendar state', () => {
 
     it('should not update the range if both start and end remain the same', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.view.value = InternalViewName.Day
+      state.setView(InternalViewName.Day, '2023-09-13')
       state.range.value = {
         start: '2023-09-13 00:00',
         end: '2023-09-13 23:59',
@@ -80,7 +80,7 @@ describe('calendar state', () => {
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.view.value = InternalViewName.Week
+      state.setView(InternalViewName.Week, '2023-09-13')
 
       state.setRange('2023-09-13')
 
@@ -92,7 +92,7 @@ describe('calendar state', () => {
 
     it('should set the range for the month', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.view.value = InternalViewName.MonthGrid
+      state.setView(InternalViewName.MonthGrid, '2023-09-13')
 
       state.setRange('2023-09-13')
 
@@ -104,7 +104,7 @@ describe('calendar state', () => {
 
     it('should set the range for the day', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.view.value = InternalViewName.Day
+      state.setView(InternalViewName.Day, '2023-09-13')
 
       state.setRange('2023-09-13')
 

@@ -26,8 +26,8 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
         `Invalid view name. Expected one of ${this.$app.config.views.map((v) => v.name).join(', ')}`
       )
 
-    this.$app.calendarState.view.value = view
-    this.$app.calendarState.setRange(
+    this.$app.calendarState.setView(
+      view,
       this.$app.datePickerState.selectedDate.value
     )
   }

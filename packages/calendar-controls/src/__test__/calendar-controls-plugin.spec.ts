@@ -117,7 +117,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.MonthGrid,
       })
       controlsPlugin.init($app)
-      $app.calendarState.view.value = InternalViewName.Day
+      $app.calendarState.setView(InternalViewName.Day, '2021-01-01')
 
       expect(controlsPlugin.getView()).toBe(InternalViewName.Day)
     })
