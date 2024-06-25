@@ -14,8 +14,7 @@ export default function YearAgendaMonth({ month }: props) {
   const $app = useContext(AppContext)
 
   const monthName = toLocalizedMonth(new Date(month.date), $app.config.locale)
-  let events = month.weeks.flatMap((week) => week.flatMap((day) => day.events))
-
+  let events = month.events
   events = events.filter(
     (e, index) => events.findIndex((f) => f.id === e.id) === index
   )

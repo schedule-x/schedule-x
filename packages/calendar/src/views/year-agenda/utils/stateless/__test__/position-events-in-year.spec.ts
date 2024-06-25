@@ -30,8 +30,8 @@ describe('Positioning events for in month view', () => {
 
     it('should position two events on first two levels of 1st of January', () => {
       const result = positionEventsInYear(month, sortedEvents)
-      expect(result[0].weeks[0][0].events[0]).toBe(event1)
-      expect(result[0].weeks[0][0].events[1]).toBe(event2)
+      expect(result[0].events[0]).toBe(event1)
+      expect(result[0].events[1]).toBe(event2)
     })
   })
 
