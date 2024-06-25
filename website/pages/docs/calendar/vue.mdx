@@ -33,6 +33,7 @@ import {
   viewWeek,
   viewMonthGrid,
   viewMonthAgenda,
+  viewYearAgenda
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
@@ -102,7 +103,7 @@ The Schedule-X calendar is built with customization in mind. Using Vue slots or 
 control over the rendering in parts of the UI. Currently, these components can be customized:
 
 | Slot / Component name | Description                                                      | Props                           |
-|-----------------------|------------------------------------------------------------------|---------------------------------|
+| --------------------- | ---------------------------------------------------------------- | ------------------------------- |
 | `timeGridEvent`       | The component for timed events used in the week- and day views   | `calendarEvent`                 |
 | `dateGridEvent`       | The component for all-day events used in the week- and day views | `calendarEvent`                 |
 | `monthGridEvent`      | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |

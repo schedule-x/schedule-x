@@ -2,6 +2,7 @@ import { createCalendar } from './factory'
 import { viewWeek } from './views/week'
 import { viewMonthGrid } from './views/month-grid'
 import { viewDay } from './views/day'
+import { viewYearAgenda } from './views/year-agenda'
 import { viewMonthAgenda } from './views/month-agenda'
 import {
   CalendarConfigExternal as CalendarConfig,
@@ -25,6 +26,7 @@ export {
   viewMonthGrid,
   viewDay,
   viewMonthAgenda,
+  viewYearAgenda,
   CalendarApp,
   createPreactView,
   setRangeForDay,

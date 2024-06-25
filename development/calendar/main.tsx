@@ -11,6 +11,7 @@ import {
   viewMonthGrid,
   viewDay,
   viewMonthAgenda,
+  viewYearAgenda,
 } from '@schedule-x/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
@@ -19,7 +20,10 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
-import { createEventRecurrencePlugin, createEventsServicePlugin } from '@schedule-x/event-recurrence/src'
+import {
+  createEventRecurrencePlugin,
+  createEventsServicePlugin,
+} from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
@@ -78,7 +82,7 @@ const calendar = createCalendar({
   // locale: 'id-ID',
   // locale: 'cs-CZ',
   locale: 'de-DE',
-  views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
+  views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda, viewYearAgenda],
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',

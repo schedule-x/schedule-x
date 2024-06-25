@@ -1,4 +1,5 @@
 import { createCalendarAppSingleton } from '../../../../factory'
+import { viewYearAgenda } from '../../../../views/year-agenda'
 import { viewDay } from '../../../../views/day'
 import { viewWeek } from '../../../../views/week'
 import { viewMonthGrid } from '../../../../views/month-grid'
@@ -9,7 +10,7 @@ import { viewMonthAgenda } from '../../../../views/month-agenda'
 
 export const renderComponent = () => {
   const $app = createCalendarAppSingleton({
-    views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
+    views: [viewDay, viewWeek, viewMonthGrid, viewYearAgenda, viewMonthAgenda],
   })
 
   render(

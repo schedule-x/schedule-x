@@ -53,6 +53,14 @@ export const setRangeForWeek = (config: RangeSetterConfig): DateRange => {
   }
 }
 
+export const setRangeForYear = (config: RangeSetterConfig): DateRange => {
+  const { year } = toIntegers(config.date)
+  return {
+    start: toDateTimeString(new Date(year, 0, 1, 0, 0, 0, 0)),
+    end: toDateTimeString(new Date(year, 11, 31, 23, 59, 59, 999)),
+  }
+}
+
 export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
   const { year, month } = toIntegers(config.date)
   const monthForDate = config.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(

@@ -1,0 +1,23 @@
+.sx__year-agenda-month__events {
+  display: grid;
+  grid-gap: 4px;
+}
+
+.sx__year-agenda-cell {
+  height: clamp(20px, 1.25rem, 24px);
+}
+
+.sx__year-agenda-event {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: var(--sx-spacing-padding1);
+  border-radius: var(--sx-rounding-extra-small);
+  font-size: clamp(12px, var(--sx-font-extra-small), 14px);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sx__year-agenda-blocker {
+  pointer-events: none;
+}

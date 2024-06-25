@@ -5,6 +5,7 @@ import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal
 import {
   getMonthAndYearForSelectedDate,
   getMonthAndYearForDateRange,
+  getYearForSelectedDate,
 } from '../../utils/stateless/range-heading'
 
 export default function RangeHeading() {
@@ -29,6 +30,10 @@ export default function RangeHeading() {
       $app.calendarState.view.value === InternalViewName.MonthAgenda
     ) {
       setCurrentHeading(getMonthAndYearForSelectedDate($app))
+    }
+
+    if ($app.calendarState.view.value === InternalViewName.YearAgenda) {
+      setCurrentHeading(getYearForSelectedDate($app))
     }
   }, [$app.calendarState.range.value])
 

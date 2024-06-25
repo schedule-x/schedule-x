@@ -1,0 +1,86 @@
+.sx__year-agenda-container {
+  border-top: var(--sx-border);
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+// Flex options
+// 15% > 6 cols x 2 rows
+// 25% > 4x3
+// 30% > 3x4
+
+.sx__year-agenda-month {
+  padding: var(--sx-spacing-padding2) 0;
+  flex: 1 25%;
+  min-width: 300px;
+  border-bottom: var(--sx-border);
+
+  &:not(:last-child) {
+    border-right: var(--sx-border);
+  }
+}
+
+.sx__year-agenda-month--dragover {
+  background-color: var(--sx-color-surface-container);
+}
+
+.sx__year-agenda-month__header {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.sx__year-agenda-month__header-day-name {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--sx-color-neutral);
+}
+
+.sx__year-agenda-month__header-month-name {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: var(--sx-color-neutral);
+  padding: 4px;
+  margin: 0 0 8px;
+
+  &.sx__is-today {
+    background-color: var(--sx-color-primary);
+    color: var(--sx-color-on-primary);
+    border-radius: 4px;
+  }
+}
+
+.sx__year-agenda-month__header-date {
+  font-size: var(--sx-font-extra-small);
+  margin-bottom: var(--sx-spacing-padding1);
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.sx__is-today {
+    background-color: var(--sx-color-primary);
+    color: var(--sx-color-on-primary);
+  }
+}
+
+.sx__year-agenda-month__events-more {
+  width: calc(100% - 10px); // CORRELATION ID: 2 (10px subtracted from width)
+  font-size: var(--sx-font-extra-small);
+  color: var(--sx-color-neutral);
+  margin: var(--sx-spacing-padding1) 0;
+  padding: var(--sx-spacing-padding1);
+  border-radius: var(--sx-rounding-extra-small);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--sx-color-surface-container);
+    color: var(--sx-color-on-surface);
+  }
+}
