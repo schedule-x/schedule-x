@@ -19,7 +19,10 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
-import { createEventRecurrencePlugin, createEventsServicePlugin } from '@schedule-x/event-recurrence/src'
+import {
+  createEventRecurrencePlugin,
+  createEventsServicePlugin,
+} from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'

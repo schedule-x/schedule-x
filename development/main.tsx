@@ -8,26 +8,24 @@ import './app.css'
 import '../packages/theme-default/src/date-picker.scss'
 import { createDatePicker } from '../packages/date-picker/src'
 
-const datePicker = createDatePicker(
-  {
-    locale: 'de-DE',
-    style: {
-      fullWidth: true,
-    },
-    // locale: 'sv-SE',
-    firstDayOfWeek: 0,
-    selectedDate: '',
-    // selectedDate: '1991-07-13',
-    // placement: 'top-end',
-    // min: '2021-03-01',
-    // max: '2021-03-31',
-    // listeners: {
-    //   onChange: (value) => {
-    //     console.log('onChange', value)
-    //   },
-    // },
-  }
-)
+const datePicker = createDatePicker({
+  locale: 'de-DE',
+  style: {
+    fullWidth: true,
+  },
+  // locale: 'sv-SE',
+  firstDayOfWeek: 0,
+  selectedDate: '',
+  // selectedDate: '1991-07-13',
+  // placement: 'top-end',
+  // min: '2021-03-01',
+  // max: '2021-03-31',
+  // listeners: {
+  //   onChange: (value) => {
+  //     console.log('onChange', value)
+  //   },
+  // },
+})
 datePicker.render(document.querySelector('#app') as HTMLElement)
 
 // document.addEventListener('dblclick', () => {
