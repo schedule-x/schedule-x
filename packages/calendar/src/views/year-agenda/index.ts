@@ -9,7 +9,7 @@ export const viewYearAgenda = createPreactView({
   label: 'Year',
   setDateRange: setRangeForYear,
   Component: YearAgendaWrapper,
-  hasSmallScreenCompat: true,
+  hasSmallScreenCompat: false,
   hasWideScreenCompat: true,
   backwardForwardFn: addYears,
   backwardForwardUnits: 1,

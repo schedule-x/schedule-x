@@ -7,16 +7,13 @@
 .sx__year-agenda-month {
   padding: var(--sx-spacing-padding2) 0;
   width: calc(100% / 4);
+  height: calc(100% / 3);
   border-top: var(--sx-border);
 
   &:not(:nth-child(4n)) {
     border-right: var(--sx-border);
   }
 
-  &.isSmall {
-    width: 100%;
-    border-right: none !important;
-  }
 }
 
 .sx__year-agenda-month--dragover {
