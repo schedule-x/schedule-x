@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarDaDK: CalendarTranslations = {
   Today: 'I dag',
+  Year: 'År',
   Month: 'Måned',
   Week: 'Uge',
   Day: 'Dag',

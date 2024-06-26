@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarSkSK: CalendarTranslations = {
   Today: 'Dnes',
+  Year: 'Rok',
   Month: 'Mesiac',
   Week: 'Týždeň',
   Day: 'Deň',

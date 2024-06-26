@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarPtBR: CalendarTranslations = {
   Today: 'Hoje',
+  Year: 'Ano',
   Month: 'Mês',
   Week: 'Semana',
   Day: 'Dia',

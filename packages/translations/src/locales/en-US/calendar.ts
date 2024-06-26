@@ -2,8 +2,8 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarEnUS: CalendarTranslations = {
   Today: 'Today',
-  Month: 'Month',
   Year: 'Year',
+  Month: 'Month',
   Week: 'Week',
   Day: 'Day',
   events: 'events',

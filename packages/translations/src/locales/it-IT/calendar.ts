@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarItIT: CalendarTranslations = {
   Today: 'Oggi',
+  Year: 'Anno',
   Month: 'Mese',
   Week: 'Settimana',
   Day: 'Giorno',

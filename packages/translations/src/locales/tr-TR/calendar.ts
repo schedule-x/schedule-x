@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarTrTR: CalendarTranslations = {
   Today: 'Bugün',
+  Year: 'Yıl',
   Month: 'Aylık',
   Week: 'Haftalık',
   Day: 'Günlük',

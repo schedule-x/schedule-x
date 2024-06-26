@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarRuRU: CalendarTranslations = {
   Today: 'Сегодня',
+  Year: 'Год',
   Month: 'Месяц',
   Week: 'Неделя',
   Day: 'День',

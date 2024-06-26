@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarEsES: CalendarTranslations = {
   Today: 'Hoy',
+  Year: 'Año',
   Month: 'Mes',
   Week: 'Semana',
   Day: 'Día',

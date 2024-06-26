@@ -2,8 +2,8 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarCsCZ: CalendarTranslations = {
   Today: 'Dnes',
-  Month: 'Měsíc',
   Year: 'Rok',
+  Month: 'Měsíc',
   Week: 'Týden',
   Day: 'Den',
   events: 'události',

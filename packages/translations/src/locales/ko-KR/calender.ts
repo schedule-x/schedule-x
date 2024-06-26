@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarKoKR: CalendarTranslations = {
   Today: '오늘',
+  Year: '년',
   Month: '월',
   Week: '주',
   Day: '일',

@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarNlNL: CalendarTranslations = {
   Today: 'Vandaag',
+  Year: 'Jaar',
   Month: 'Maand',
   Week: 'Week',
   Day: 'Dag',

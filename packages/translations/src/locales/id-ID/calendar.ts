@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarIdID: CalendarTranslations = {
   Today: 'Hari Ini',
+  Year: 'Tahun',
   Month: 'Bulan',
   Week: 'Minggu',
   Day: 'Hari',

@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarMkMK: CalendarTranslations = {
   Today: 'Денес',
+  Year: 'Година',
   Month: 'Месец',
   Week: 'Недела',
   Day: 'Ден',

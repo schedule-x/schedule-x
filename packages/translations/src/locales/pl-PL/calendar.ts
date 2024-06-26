@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarPlPL: CalendarTranslations = {
   Today: 'Dzisiaj',
+  Year: 'Rok',
   Month: 'Miesiąc',
   Week: 'Tydzień',
   Day: 'Dzień',

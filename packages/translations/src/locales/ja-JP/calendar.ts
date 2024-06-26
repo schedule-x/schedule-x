@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarJaJP: CalendarTranslations = {
   Today: '今日',
+  Year: '年',
   Month: '月',
   Week: '週',
   Day: '日',

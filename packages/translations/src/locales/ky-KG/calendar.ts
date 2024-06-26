@@ -2,6 +2,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 
 export const calendarKyKG: CalendarTranslations = {
   Today: 'Бүгүн',
+  Year: 'Жыл',
   Month: 'Ай',
   Week: 'Апта',
   Day: 'Күн',
