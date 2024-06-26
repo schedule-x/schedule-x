@@ -3,6 +3,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 export const calendarFrFR: CalendarTranslations = {
   Today: "Aujourd'hui",
   Month: 'Mois',
+  Year: 'Année',
   Week: 'Semaine',
   Day: 'Jour',
   events: 'événements',

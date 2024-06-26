@@ -1,23 +1,21 @@
 .sx__year-agenda-container {
-  border-top: var(--sx-border);
   flex: 1;
   display: flex;
   flex-flow: row wrap;
 }
 
-// Flex options
-// 15% > 6 cols x 2 rows
-// 25% > 4x3
-// 30% > 3x4
-
 .sx__year-agenda-month {
   padding: var(--sx-spacing-padding2) 0;
-  flex: 1 25%;
-  min-width: 300px;
-  border-bottom: var(--sx-border);
+  width: calc(100% / 4);
+  border-top: var(--sx-border);
 
-  &:not(:last-child) {
+  &:not(:nth-child(4n)) {
     border-right: var(--sx-border);
+  }
+
+  &.isSmall {
+    width: 100%;
+    border-right: none !important;
   }
 }
 

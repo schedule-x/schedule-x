@@ -19,8 +19,6 @@ export default function YearAgendaMonth({ month }: props) {
     (e, index) => events.findIndex((f) => f.id === e.id) === index
   )
 
-  console.log('dove events ', events)
-
   const nEventsInDay = events.filter(
     (event) => typeof event === 'object' || event === DATE_GRID_BLOCKER
   ).length
@@ -50,9 +48,14 @@ export default function YearAgendaMonth({ month }: props) {
   if (isSameMonth(new Date(), new Date(month.date)))
     dateClassNames.push('sx__is-today')
 
+  const containerClassNames = [
+    'sx__year-agenda-month',
+    $app.calendarState.isCalendarSmall.value ? 'isSmall' : null,
+  ]
+
   return (
     <div
-      className="sx__year-agenda-month"
+      className={containerClassNames.join(' ')}
       data-date={month.date}
       onClick={() =>
         $app.config.callbacks.onClickDate &&

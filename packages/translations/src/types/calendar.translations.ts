@@ -1,6 +1,7 @@
 export interface CalendarTranslations {
   Today: string
   Month: string
+  Year: string
   Week: string
   Day: string
   events: string

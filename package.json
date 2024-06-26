@@ -28,7 +28,7 @@
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact",
     "clean:deps": "lerna clean",
-    "clean:build": "rm -rf ./packages/*/dist",
+    "clean:build": "",
     "release": "npm run build && lerna publish --conventional-commits --no-commit-hooks --force-publish --no-private",
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease --force-publish",
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease --force-publish",

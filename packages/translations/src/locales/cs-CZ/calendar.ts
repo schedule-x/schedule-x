@@ -3,6 +3,7 @@ import { CalendarTranslations } from '../../types/calendar.translations'
 export const calendarCsCZ: CalendarTranslations = {
   Today: 'Dnes',
   Month: 'Měsíc',
+  Year: 'Rok',
   Week: 'Týden',
   Day: 'Den',
   events: 'události',
