@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.47.0](https://github.com/schedule-x/schedule-x/compare/v1.46.7...v1.47.0) (2024-06-28)
+
+### Bug Fixes
+
+- **calendar:** update range automatically when setting view ([#506](https://github.com/schedule-x/schedule-x/issues/506)) ([1ca4928](https://github.com/schedule-x/schedule-x/commit/1ca4928e17de382159e6d01f5035dd5068021ed5))
+
 ## [1.46.7](https://github.com/schedule-x/schedule-x/compare/v1.46.6...v1.46.7) (2024-06-24)
 
 **Note:** Version bump only for package @schedule-x/calendar-controls

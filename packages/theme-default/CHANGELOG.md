@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.47.0](https://github.com/schedule-x/schedule-x/compare/v1.46.7...v1.47.0) (2024-06-28)
+
+### Features
+
+- **calendar:** create slots for header content ([#501](https://github.com/schedule-x/schedule-x/issues/501)) ([ed5ced5](https://github.com/schedule-x/schedule-x/commit/ed5ced5f395cf159bfe1ba3e767df2dcbb534c2d))
+
 ## [1.46.7](https://github.com/schedule-x/schedule-x/compare/v1.46.6...v1.46.7) (2024-06-24)
 
 **Note:** Version bump only for package @schedule-x/theme-default
