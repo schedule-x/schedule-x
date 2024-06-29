@@ -20,6 +20,12 @@ For bug reports and feature requests, please use the issue tracker of this repos
 
 For any other questions or comments, feel free to join the chat on Discord: https://discord.gg/yHbT3C4M8w
 
+## Sponsoring
+
+The longevity and success of this project benefits from financial support, mainly to cover compute- and DNS costs.
+
+Sponsor today, and get mentioned in the README or on the project website: https://opencollective.com/schedule-x
+
 ## License
 
 MIT
