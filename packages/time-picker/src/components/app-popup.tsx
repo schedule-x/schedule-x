@@ -12,7 +12,18 @@ export default function AppPopup() {
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
   const OKButtonRef = useRef<HTMLButtonElement>(null)
-  const popupClasses = [POPUP_CLASS_NAME, $app.config.placement]
+  const [classList, setClassList] = useState([
+    POPUP_CLASS_NAME,
+    $app.config.placement,
+  ])
+
+  useEffect(() => {
+    setClassList([
+      POPUP_CLASS_NAME,
+      $app.config.placement,
+      $app.config.dark.value ? 'is-dark' : '',
+    ])
+  }, [$app.config.dark.value, $app.config.placement.value])
 
   const [initialStart, initialEnd] =
     $app.timePickerState.currentTime.value.split(':')
@@ -92,7 +103,7 @@ export default function AppPopup() {
 
   return (
     <div
-      className={popupClasses.join(' ')}
+      className={classList.join(' ')}
       style={$app.config.teleportTo.value ? fixedPositionStyle : undefined}
     >
       <div className="sx__time-picker-popup-label">Select time</div>
