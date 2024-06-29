@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.47.1](https://github.com/schedule-x/schedule-x/compare/v1.47.0...v1.47.1) (2024-06-29)
+
+### Bug Fixes
+
+- **date-picker:** fix dark theme when teleporting popup ([#509](https://github.com/schedule-x/schedule-x/issues/509)) ([f331ac0](https://github.com/schedule-x/schedule-x/commit/f331ac097be3857bf57d0390db4ba210a284cc5f))
+
 # [1.47.0](https://github.com/schedule-x/schedule-x/compare/v1.46.7...v1.47.0) (2024-06-28)
 
 ### Features
