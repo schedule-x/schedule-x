@@ -39,6 +39,19 @@ const config = {
    * */
   defaultView: viewMonthGrid.name,
 
+   /**
+   * Toggle automatic view change when the calendar is resized below a certain width breakpoint.
+   * Defaults to true
+   * */
+  isResponsive: false,
+
+   /**
+   * Pass a function that will be used to calculate a break point used for calculating the current view type.
+   * Given standard browser settings where 1rem = 16px, the calendar has an default break point of 700px.
+   * More information on the default function: https://schedule-x.dev/docs/calendar/views#a-note-on-screen-sizes
+   * */
+  customBreakpointFunction: () => window.innerWidth <= 800,
+
   /**
    * The default date to display when the calendar is first rendered. Only accepts YYYY-MM-DD format.
    * Defaults to the current date

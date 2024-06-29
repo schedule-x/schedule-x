@@ -12,6 +12,8 @@ export const createInternalConfig = (config: CalendarConfigExternal) => {
     .withCalendars(config.calendars)
     .withPlugins(config.plugins)
     .withIsDark(config.isDark)
+    .withIsResponsive(config.isResponsive)
+    .withCustomBreakpointFunction(config.customBreakpointFunction)
     .withCallbacks(config.callbacks)
     .withMinDate(config.minDate)
     .withMaxDate(config.maxDate)
