@@ -14,6 +14,7 @@
 .sx__date-picker__month-view-header__month-year {
   font-size: 1.5rem;
   font-weight: 300;
+  color: var(--sx-internal-color-text);
 
   &:hover {
     color: var(--sx-color-primary);

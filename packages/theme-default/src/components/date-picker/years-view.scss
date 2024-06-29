@@ -9,6 +9,7 @@
   font-size: 1rem;
   padding: 1em;
   transition: background-color 0.2s ease-in-out;
+  color: var(--sx-internal-color-text);
 
   .sx__is-expanded & {
     background-color: var(--sx-color-surface-container);
@@ -35,6 +36,7 @@
   font-size: 0.9rem;
   padding: 0.5em 0;
   border-radius: 25px;
+  color: var(--sx-internal-color-text);
 
   &:hover {
     background-color: var(--sx-color-primary);

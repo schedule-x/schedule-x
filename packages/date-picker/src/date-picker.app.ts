@@ -21,4 +21,12 @@ export default class DatePickerApp {
   set value(value: string) {
     this.$app.datePickerState.selectedDate.value = value
   }
+
+  setTheme(theme: 'light' | 'dark') {
+    this.$app.datePickerState.isDark.value = theme === 'dark'
+  }
+
+  getTheme() {
+    return this.$app.datePickerState.isDark.value ? 'dark' : 'light'
+  }
 }

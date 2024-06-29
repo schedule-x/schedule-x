@@ -14,6 +14,7 @@ const datePicker = createDatePicker({
   // locale: 'fr-FR',
   style: {
     fullWidth: true,
+    // dark: true,
   },
   // locale: 'sv-SE',
   firstDayOfWeek: 0,
