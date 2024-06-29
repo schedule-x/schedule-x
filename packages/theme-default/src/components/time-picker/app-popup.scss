@@ -36,7 +36,7 @@
     color: var(--sx-color-neutral);
 
     .is-dark & {
-      color: var(--sx-color-text);
+      color: var(--sx-internal-color-text);
     }
   }
 
@@ -48,7 +48,7 @@
 
   .sx__time-picker-colon {
     font-size: 2.5rem;
-    color: var(--sx-color-text);
+    color: var(--sx-internal-color-text);
     margin: 0 var(--sx-spacing-padding1);
   }
 

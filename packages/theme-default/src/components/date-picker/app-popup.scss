@@ -4,8 +4,9 @@
   @include popup.popup-base;
 
   background-color: var(--sx-color-background);
+  color: var(--sx-internal-color-text);
 
-  .is-dark & {
+  &.is-dark {
     background-color: var(--sx-color-surface-container-high);
   }
 

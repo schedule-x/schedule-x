@@ -14,7 +14,15 @@ export default function AppPopup() {
     DatePickerView.MONTH_DAYS
   )
 
-  const popupClasses = [POPUP_CLASS_NAME, $app.config.placement]
+  const basePopupClasses = [POPUP_CLASS_NAME, $app.config.placement]
+  const [classList, setClassList] = useState(basePopupClasses)
+
+  useEffect(() => {
+    setClassList([
+      ...basePopupClasses,
+      $app.datePickerState.isDark.value ? 'is-dark' : '',
+    ])
+  }, [$app.datePickerState.isDark.value])
 
   const clickOutsideListener = (event: Event) => {
     const target = event.target as HTMLElement
@@ -76,7 +84,7 @@ export default function AppPopup() {
       <div
         style={$app.config.teleportTo ? fixedPositionStyle : undefined}
         data-testid="date-picker-popup"
-        className={popupClasses.join(' ')}
+        className={classList.join(' ')}
       >
         {datePickerView === DatePickerView.MONTH_DAYS ? (
           <MonthView

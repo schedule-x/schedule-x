@@ -19,6 +19,7 @@ export const createDatePickerState = (
   const datePickerView = signal(DatePickerView.MONTH_DAYS)
   const selectedDate = signal(initialSelectedDate)
   const datePickerDate = signal(initialSelectedDate || currentDayDateString)
+  const isDark = signal(config.style?.dark || false)
 
   const inputDisplayedValue = signal(selectedDateParam || '')
   const lastValidDisplayedValue = signal(selectedDateParam || '')
@@ -59,6 +60,7 @@ export const createDatePickerState = (
     selectedDate,
     datePickerDate,
     inputDisplayedValue,
+    isDark,
     open: () => (isOpen.value = true),
     close: () => (isOpen.value = false),
     toggle: () => (isOpen.value = !isOpen.value),
