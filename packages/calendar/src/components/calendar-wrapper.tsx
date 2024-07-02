@@ -32,9 +32,11 @@ export default function CalendarWrapper({ $app }: props) {
   }
 
   useEffect(() => {
-    onResize()
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
+    if ($app.config.isResponsive) {
+      onResize()
+      window.addEventListener('resize', onResize)
+      return () => window.removeEventListener('resize', onResize)
+    }
   }, [])
 
   const wrapperClasses = useWrapperClasses($app)

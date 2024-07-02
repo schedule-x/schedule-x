@@ -47,7 +47,9 @@ export const handleWindowResize = ($app: CalendarAppSingleton) => {
 
   if (!calendarRoot) return
 
-  const isSmall = calendarRoot.clientWidth < smallCalendarBreakpoint
+  const isSmall = $app.config.callbacks.isCalendarSmall
+    ? $app.config.callbacks.isCalendarSmall($app)
+    : calendarRoot.clientWidth < smallCalendarBreakpoint
   const didIsSmallScreenChange =
     isSmall !== $app.calendarState.isCalendarSmall.value
   if (!didIsSmallScreenChange) return

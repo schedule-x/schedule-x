@@ -1,5 +1,6 @@
 import CalendarEventExternal from './calendar-event.interface'
 import { DateRange } from '../../types/date-range'
+import CalendarAppSingleton from './calendar-app-singleton'
 
 export interface CalendarCallbacks {
   onEventUpdate?: (event: CalendarEventExternal) => void
@@ -12,4 +13,6 @@ export interface CalendarCallbacks {
   onDoubleClickDateTime?: (dateTime: string) => void
   onClickAgendaDate?: (date: string) => void
   onClickPlusEvents?: (date: string) => void
+
+  isCalendarSmall?: ($app: CalendarAppSingleton) => boolean
 }

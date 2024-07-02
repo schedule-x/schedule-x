@@ -18,6 +18,7 @@ describe('handle window resize', () => {
       $app.config = {
         ...stubInterface(),
         views: [viewDay, viewMonthGrid],
+        callbacks: {},
       }
       document.documentElement.style.fontSize = '16px'
       $app.calendarState = {
@@ -46,6 +47,40 @@ describe('handle window resize', () => {
         'day',
         $app.datePickerState.selectedDate.value
       )
+    })
+
+    it('should call the isCalendarSmall callback', () => {
+      const $app = stubInterface<CalendarAppSingleton>()
+      $app.config = {
+        ...stubInterface(),
+        views: [viewDay, viewMonthGrid],
+        callbacks: {
+          isCalendarSmall: vi.fn(),
+        },
+      }
+      document.documentElement.style.fontSize = '16px'
+      $app.calendarState = {
+        ...stubInterface(),
+        isCalendarSmall: signal(false),
+        view: signal('month-grid'),
+        setRange: vi.fn(),
+        setView: vi.fn(),
+      }
+      $app.elements = {
+        calendarWrapper: {
+          ...stubInterface<HTMLDivElement>(),
+          clientWidth: 699,
+        },
+      }
+      $app.datePickerState = {
+        ...stubInterface(),
+        selectedDate: signal('2021-01-01'),
+      }
+      expect($app.calendarState.view.value).toBe('month-grid')
+
+      handleWindowResize($app)
+
+      expect($app.config.callbacks.isCalendarSmall).toHaveBeenCalledTimes(1)
     })
   })
 })

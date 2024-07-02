@@ -30,6 +30,7 @@ export default class CalendarConfigBuilder
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
   isDark: boolean | undefined = false
+  isResponsive: boolean | undefined = true
   callbacks: CalendarCallbacks | undefined
   minDate: string | undefined
   maxDate: string | undefined
@@ -45,6 +46,7 @@ export default class CalendarConfigBuilder
       this.calendars,
       this.plugins,
       this.isDark,
+      this.isResponsive,
       this.callbacks,
       {},
       this.minDate,
@@ -111,6 +113,11 @@ export default class CalendarConfigBuilder
 
   withIsDark(isDark: boolean | undefined): CalendarConfigBuilder {
     this.isDark = isDark
+    return this
+  }
+
+  withIsResponsive(isDark: boolean | undefined): CalendarConfigBuilder {
+    this.isResponsive = isDark
     return this
   }
 

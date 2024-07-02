@@ -83,6 +83,12 @@ const config = {
   },
 
   /**
+   * Toggle automatic view change when the calendar is resized below a certain width breakpoint.
+   * Defaults to true
+   * */
+  isResponsive: false,
+
+  /**
    * Callbacks for events that occur in the calendar
    * */
   callbacks: {
@@ -158,6 +164,15 @@ const config = {
     onSelectedDateUpdate(date) {
       console.log('onSelectedDateUpdate', date)
     },
+
+
+    /**
+     * Runs on resizing the calendar, to decide if the calendar should be small or not.
+     * This in turn affects what views are rendered.
+     * */
+    isCalendarSmall($app) {
+      return $app.elements.calendarWrapper?.clientWidth! < 500
+    }
   },
 }
 
