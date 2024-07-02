@@ -133,7 +133,7 @@ const calendar = createCalendar({
     },
 
     isCalendarSmall($app) {
-      return $app.elements.calendarWrapper?.clientWidth! < 500
+      return $app.elements.calendarWrapper!.clientWidth! < 500
     }
   },
   calendars: {
