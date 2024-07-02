@@ -61,7 +61,6 @@ export default interface CalendarConfigInternal extends Config {
   plugins: Plugins
   isDark: boolean
   isResponsive: boolean
-  customBreakpointFunction?: Function
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
   minDate?: string

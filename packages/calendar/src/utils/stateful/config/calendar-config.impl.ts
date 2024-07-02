@@ -35,7 +35,6 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public plugins = {},
     public isDark = false,
     public isResponsive = true,
-    public customBreakpointFunction: Function | undefined = undefined,
     public callbacks = {},
     public _customComponentFns = {},
     public minDate: string | undefined = undefined,

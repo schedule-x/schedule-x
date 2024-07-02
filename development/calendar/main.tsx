@@ -131,6 +131,10 @@ const calendar = createCalendar({
     onDoubleClickDate(date) {
       console.log('onDoubleClickDate', date)
     },
+
+    isCalendarSmall($app) {
+      return $app.elements.calendarWrapper?.clientWidth! < 500
+    }
   },
   calendars: {
     personal: {
