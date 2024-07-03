@@ -120,6 +120,10 @@ const calendar = createCalendar({
       console.log('onClickAgendaDate', date)
     },
 
+    onClickPlusEvents(date) {
+      console.log('onClickPlusEvents', date)
+    },
+
     onSelectedDateUpdate(date) {
       console.log('onSelectedDateUpdate', date)
     },
