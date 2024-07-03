@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/schedule-x/schedule-x/compare/v1.47.1...v1.48.0) (2024-07-03)
+
+### Bug Fixes
+
+- **theme-default:** prevent modal from overflowing on small screens ([#514](https://github.com/schedule-x/schedule-x/issues/514)) ([2d6bae5](https://github.com/schedule-x/schedule-x/commit/2d6bae57ad6f9ff308e1a3f15a9ed5d3944e2f74))
+
 ## [1.47.1](https://github.com/schedule-x/schedule-x/compare/v1.47.0...v1.47.1) (2024-06-29)
 
 ### Bug Fixes

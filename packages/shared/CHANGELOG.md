@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/schedule-x/schedule-x/compare/v1.47.1...v1.48.0) (2024-07-03)
+
+### Features
+
+- **calendar:** add isResponsive option and isCalendarSmall callback ([#504](https://github.com/schedule-x/schedule-x/issues/504)) ([9014bf4](https://github.com/schedule-x/schedule-x/commit/9014bf44acf152c9c022ce336ea53de5fa77d690))
+
 ## [1.47.1](https://github.com/schedule-x/schedule-x/compare/v1.47.0...v1.47.1) (2024-06-29)
 
 ### Bug Fixes

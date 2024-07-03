@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/schedule-x/schedule-x/compare/v1.47.1...v1.48.0) (2024-07-03)
+
+### Features
+
+- enable using calendar controls plugin before calendar has rendered ([#519](https://github.com/schedule-x/schedule-x/issues/519)) ([8e60f9e](https://github.com/schedule-x/schedule-x/commit/8e60f9ea7b2abf155021b16f39fcb80c3d29f0d1))
+
 ## [1.47.1](https://github.com/schedule-x/schedule-x/compare/v1.47.0...v1.47.1) (2024-06-29)
 
 **Note:** Version bump only for package @schedule-x/calendar-controls

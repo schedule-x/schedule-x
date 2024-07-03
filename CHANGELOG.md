@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/schedule-x/schedule-x/compare/v1.47.1...v1.48.0) (2024-07-03)
+
+### Bug Fixes
+
+- **calendar:** stop propagation of clicks on n-events button ([#518](https://github.com/schedule-x/schedule-x/issues/518)) ([6a49c1e](https://github.com/schedule-x/schedule-x/commit/6a49c1e2641426199e0f0dc33514eb66e3486aaa))
+- **theme-default:** prevent modal from overflowing on small screens ([#514](https://github.com/schedule-x/schedule-x/issues/514)) ([2d6bae5](https://github.com/schedule-x/schedule-x/commit/2d6bae57ad6f9ff308e1a3f15a9ed5d3944e2f74))
+
+### Features
+
+- **calendar:** add isResponsive option and isCalendarSmall callback ([#504](https://github.com/schedule-x/schedule-x/issues/504)) ([9014bf4](https://github.com/schedule-x/schedule-x/commit/9014bf44acf152c9c022ce336ea53de5fa77d690))
+- enable using calendar controls plugin before calendar has rendered ([#519](https://github.com/schedule-x/schedule-x/issues/519)) ([8e60f9e](https://github.com/schedule-x/schedule-x/commit/8e60f9ea7b2abf155021b16f39fcb80c3d29f0d1))
+
 ## [1.47.1](https://github.com/schedule-x/schedule-x/compare/v1.47.0...v1.47.1) (2024-06-29)
 
 ### Bug Fixes
