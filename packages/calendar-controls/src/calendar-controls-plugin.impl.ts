@@ -8,6 +8,13 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name: string = PluginName.CalendarControls
   $app!: CalendarAppSingleton
 
+  beforeInit($app: CalendarAppSingleton) {
+    this.$app = $app
+  }
+
+  /**
+   * TODO v2: remove this method
+   * */
   init($app: CalendarAppSingleton): void {
     this.$app = $app
   }
