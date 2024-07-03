@@ -98,9 +98,11 @@ describe('MonthDay component', () => {
 
   describe('displaying 2 more events than the limit', () => {
     const onClickPlusEvents = vi.fn()
+    const onClickDate = vi.fn()
     const $app = __createAppWithViews__({
       callbacks: {
         onClickPlusEvents,
+        onClickDate,
       },
     })
     const dayWithEventLimitPlus2: MonthDayType = {
@@ -154,6 +156,18 @@ describe('MonthDay component', () => {
       await waitFor(() => {
         expect($app.calendarState.view.value).toBe(InternalViewName.Day)
       })
+    })
+
+    it('should not propagate click to the day, when clicking on the more events button', () => {
+      renderComponent($app, dayWithEventLimitPlus2)
+      const moreEventsButton = document.querySelector(
+        '.sx__month-grid-day__events-more'
+      )
+      moreEventsButton?.dispatchEvent(
+        new MouseEvent('click', { bubbles: true })
+      )
+
+      expect(onClickDate).not.toHaveBeenCalled()
     })
   })
 

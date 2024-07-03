@@ -28,7 +28,9 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
     return $app.translate('events')
   }
 
-  const handleClickAdditionalEvents = () => {
+  const handleClickAdditionalEvents = (e: MouseEvent | TouchEvent) => {
+    e.stopPropagation()
+
     if ($app.config.callbacks.onClickPlusEvents)
       $app.config.callbacks.onClickPlusEvents(day.date)
     if (!$app.config.views.find((view) => view.name === InternalViewName.Day))
