@@ -10,6 +10,7 @@ import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { DATE_GRID_BLOCKER } from '../../../constants'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   day: MonthDayType
@@ -63,6 +64,7 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
         $app.config.callbacks.onClickDate &&
         $app.config.callbacks.onClickDate(day.date)
       }
+      aria-label={getLocalizedDate(day.date, $app.config.locale)}
       onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
     >
       <div className="sx__month-grid-day__header">

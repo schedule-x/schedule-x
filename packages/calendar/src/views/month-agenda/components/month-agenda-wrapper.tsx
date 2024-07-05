@@ -36,6 +36,24 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
     $app.calendarEvents.filterPredicate.value,
   ])
 
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        const mutatedElement = mutation.target as HTMLElement
+        if (mutatedElement.dataset.agendaFocus === 'true')
+          mutatedElement.focus()
+      })
+    })
+    const monthViewElement = document.getElementById(id) as HTMLElement
+    observer.observe(monthViewElement, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__month-agenda-wrapper">

@@ -85,7 +85,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
-  defaultView: 'week',
+  defaultView: 'month-agenda',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
@@ -135,10 +135,10 @@ const calendar = createCalendar({
     onDoubleClickDate(date) {
       console.log('onDoubleClickDate', date)
     },
-
-    isCalendarSmall($app) {
-      return $app.elements.calendarWrapper!.clientWidth! < 500
-    }
+    //
+    // isCalendarSmall($app) {
+    //   return $app.elements.calendarWrapper!.clientWidth! < 500
+    // }
   },
   calendars: {
     personal: {
