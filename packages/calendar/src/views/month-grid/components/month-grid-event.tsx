@@ -98,6 +98,7 @@ export default function MonthGridEvent({
           ? undefined
           : eventCSSVariables.backgroundColor,
       }}
+      tabIndex={0}
     >
       {!customComponent && (
         <div className="sx__month-grid-event-title">{calendarEvent.title}</div>

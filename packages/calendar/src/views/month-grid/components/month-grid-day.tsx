@@ -10,6 +10,7 @@ import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { DATE_GRID_BLOCKER } from '../../../constants'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   day: MonthDayType
@@ -26,6 +27,19 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
     if (nOfAdditionalEvents === 1) return $app.translate('event')
 
     return $app.translate('events')
+  }
+
+  const getAriaLabelSingularOrPlural = (nOfAdditionalEvents: number) => {
+    if (nOfAdditionalEvents === 1) {
+      return $app.translate('Link to 1 more event on {{date}}', {
+        date: getLocalizedDate(day.date, $app.config.locale),
+      })
+    }
+
+    return $app.translate('Link to {{n}} more events on {{date}}', {
+      date: getLocalizedDate(day.date, $app.config.locale),
+      n: nEventsInDay - $app.config.monthGridOptions.nEventsPerDay,
+    })
   }
 
   const handleClickAdditionalEvents = (e: MouseEvent | TouchEvent) => {
@@ -63,6 +77,7 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
         $app.config.callbacks.onClickDate &&
         $app.config.callbacks.onClickDate(day.date)
       }
+      aria-label={getLocalizedDate(day.date, $app.config.locale)}
       onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
     >
       <div className="sx__month-grid-day__header">
@@ -100,6 +115,9 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
       {nEventsInDay > $app.config.monthGridOptions.nEventsPerDay ? (
         <button
           className="sx__month-grid-day__events-more sx__ripple--wide"
+          aria-label={getAriaLabelSingularOrPlural(
+            nEventsInDay - $app.config.monthGridOptions.nEventsPerDay
+          )}
           onClick={handleClickAdditionalEvents}
         >
           {`+ ${

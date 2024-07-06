@@ -5,6 +5,8 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
+import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { addDays } from '@schedule-x/shared/src'
 
 type props = {
   day: MonthAgendaDayType
@@ -33,8 +35,31 @@ export default function MonthAgendaDay({
     $app.config.callbacks.onClickAgendaDate?.(day.date)
   }
 
+  const hasFocus = (weekDay: MonthAgendaDayType) =>
+    weekDay.date === $app.datePickerState.selectedDate.value
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    const keyMapDaysToAdd = new Map([
+      ['ArrowDown', 7],
+      ['ArrowUp', -7],
+      ['ArrowLeft', -1],
+      ['ArrowRight', 1],
+    ])
+    $app.datePickerState.selectedDate.value = addDays(
+      $app.datePickerState.selectedDate.value,
+      keyMapDaysToAdd.get(event.key) || 0
+    )
+  }
+
   return (
-    <div className={dayClasses.join(' ')} onClick={handleClick}>
+    <button
+      className={dayClasses.join(' ')}
+      onClick={handleClick}
+      aria-label={getLocalizedDate(day.date, $app.config.locale)}
+      tabIndex={hasFocus(day) ? 0 : -1}
+      data-agenda-focus={hasFocus(day) ? 'true' : undefined}
+      onKeyDown={handleKeyDown}
+    >
       <div>{toJSDate(day.date).getDate()}</div>
 
       <div className="sx__month-agenda-day__event-icons">
@@ -48,6 +73,6 @@ export default function MonthAgendaDay({
           />
         ))}
       </div>
-    </div>
+    </button>
   )
 }

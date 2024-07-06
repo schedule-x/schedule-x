@@ -241,4 +241,44 @@ describe('MonthDay component', () => {
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
   })
+
+  describe('getting the aria label for the more events button', () => {
+    it.each([
+      [
+        'de-DE',
+        '+ 1 Ereignis',
+        'Link zu 1 weiteren Ereignis am 1. Januar 2020',
+      ],
+      ['en-US', '+ 1 event', 'Link to 1 more event on January 1, 2020'],
+      ['es-ES', '+ 1 evento', 'Enlace a 1 evento más el 1 de enero de 2020'],
+      [
+        'fr-FR',
+        '+ 1 événement',
+        'Lien vers 1 autre événement le 1 janvier 2020',
+      ],
+    ])(
+      'should return the singular translation',
+      (locale, buttonText, expectedAriaLabel) => {
+        const $app = __createAppWithViews__({
+          locale: locale,
+        })
+        const day: MonthDayType = {
+          date: '2020-01-01',
+          events: {
+            '0': getTestEvent($app),
+            '1': getTestEvent($app),
+            '2': getTestEvent($app),
+            '3': getTestEvent($app),
+            '4': getTestEvent($app),
+          },
+        }
+
+        renderComponent($app, day)
+
+        expect(screen.getByText(buttonText).getAttribute('aria-label')).toBe(
+          expectedAriaLabel
+        )
+      }
+    )
+  })
 })

@@ -54,6 +54,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
         padding: customComponent ? '0px' : undefined,
       }}
       onClick={(e) => onClick(e)}
+      tabIndex={0}
     >
       {!customComponent && (
         <Fragment>
