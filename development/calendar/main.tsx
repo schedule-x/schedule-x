@@ -68,9 +68,10 @@ const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
 const eventRecurrencePlugin = createEventRecurrencePlugin()
 const calendar = createCalendar({
-  // weekOptions: {
-  //   gridHeight: 3000,
-  // },
+  weekOptions: {
+    // gridHeight: 3000,
+    nDays: 4,
+  },
   // monthGridOptions: {
   //   nEventsPerDay: 7
   // },
@@ -85,7 +86,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
-  defaultView: 'month-agenda',
+  defaultView: 'week',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
