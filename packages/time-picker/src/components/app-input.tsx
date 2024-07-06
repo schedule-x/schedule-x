@@ -38,7 +38,7 @@ export default function AppInput() {
         </label>
 
         <input
-          value={$app.timePickerState.currentTime.value}
+          value={$app.timePickerState.currentTimeDisplayedValue.value}
           readOnly={true}
           id={inputId}
           className="sx__time-picker-input"

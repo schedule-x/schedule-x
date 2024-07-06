@@ -17,6 +17,7 @@ export default function TimeInput({
   nextTabIndexRef,
   validRange,
 }: props) {
+  console.log(initialValue)
   const [inputValue, setInputValue] = useState(initialValue)
 
   const handleInput = (e: Event) => {
@@ -45,7 +46,7 @@ export default function TimeInput({
     const value = +inputValue
 
     if (value < min || value > max || isNaN(value)) {
-      setInputValue('00')
+      setInputValue(min < 10 ? `0${min}` : String(min))
       return
     }
     if (inputValue.length === 1) {
