@@ -36,7 +36,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     )
     this.rangeEndDate = addDays(
       this.rangeStartDate,
-      7 - 1 // 7 days in a week. This needs to change, if the number of days in a week becomes configurable
+      $app.config.weekOptions.nDays - 1
     )
     this.init()
   }

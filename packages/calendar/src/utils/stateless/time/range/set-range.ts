@@ -39,7 +39,9 @@ const getRangeEndGivenDayBoundaries = (
 }
 
 export const setRangeForWeek = (config: RangeSetterConfig): DateRange => {
-  const weekForDate = config.timeUnitsImpl.getWeekFor(toJSDate(config.date))
+  const weekForDate = config.timeUnitsImpl
+    .getWeekFor(toJSDate(config.date))
+    .slice(0, config.calendarConfig.weekOptions.nDays)
 
   return {
     start: getRangeStartGivenDayBoundaries(

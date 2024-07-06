@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   afterEach,
   describe,
@@ -137,5 +138,24 @@ describe('Week view', () => {
 
   describe('a week with hybrid days', () => {
     it.todo('renders an event at 3AM')
+  })
+
+  describe('using the nDays option', () => {
+    it.each([[1], [2], [3], [4], [5], [6], [7]])(
+      'should render %s days',
+      (nDays) => {
+        const $app = __createAppWithViews__({
+          selectedDate: '2021-01-01',
+          events: [],
+          weekOptions: {
+            nDays: nDays,
+          },
+        })
+        renderComponent($app)
+
+        const renderedDays = document.querySelectorAll('.sx__time-grid-day')
+        expect(renderedDays.length).toBe(nDays)
+      }
+    )
   })
 })

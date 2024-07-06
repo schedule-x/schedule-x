@@ -18,6 +18,7 @@ import { Signal } from '@preact/signals'
 
 export type WeekOptions = {
   gridHeight: number
+  nDays: number
 }
 
 export type MonthGridOptions = {
@@ -84,6 +85,7 @@ interface ReducedCalendarConfigInternal
     | 'views'
     | '_customComponentFns'
     | 'calendars'
+    | 'weekOptions'
   > {}
 
 export interface CalendarConfigExternal
@@ -95,4 +97,5 @@ export interface CalendarConfigExternal
   views: [View, ...View[]]
   selectedDate?: string
   calendars?: Record<string, CalendarType>
+  weekOptions?: Partial<WeekOptions>
 }
