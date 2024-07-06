@@ -23,14 +23,9 @@ export const createWeek = ($app: CalendarAppSingleton) => {
       toJSDate(($app.calendarState.range.value as DateRange).start)
     )
 
-  const nDays =
-    typeof $app.config.weekOptions.nDays === 'number'
-      ? $app.config.weekOptions.nDays
-      : 7
-
   // Week mode
   return $app.timeUnitsImpl
     .getWeekFor(toJSDate(($app.calendarState.range.value as DateRange).start))
-    .slice(0, nDays)
+    .slice(0, $app.config.weekOptions.nDays)
     .reduce(createOneDay, {} as Week)
 }
