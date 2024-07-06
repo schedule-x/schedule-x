@@ -29,6 +29,9 @@
   "angular": {
     "title": "Angular component"
   },
+  "svelte": {
+    "title": "Svelte component"
+  },
   "demo": {
     "title": "Demo",
     "href": "/demos/calendar"
