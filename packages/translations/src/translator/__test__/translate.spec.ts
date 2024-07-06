@@ -119,4 +119,31 @@ describe('translate', () => {
     expect(underTest(key)).toEqual(translations[key])
     expect(underTest(key)).toEqual(translations[key])
   })
+
+  it('should pass one translation variables to the translation', () => {
+    const locale = 'en-US'
+    const translations = {
+      hello: 'world {{name}}',
+    }
+    const key = 'hello'
+    const name = 'Alice'
+
+    const underTest = translate(locale, { enUS: translations })
+
+    expect(underTest(key, { name })).toEqual('world Alice')
+  })
+
+  it('should pass multiple translation variables to the translation', () => {
+    const locale = 'en-US'
+    const translations = {
+      hello: 'world {{name}} {{lastName}}',
+    }
+    const key = 'hello'
+    const name = 'Alice'
+    const lastName = 'Smith'
+
+    const underTest = translate(locale, { enUS: translations })
+
+    expect(underTest(key, { name, lastName })).toEqual('world Alice Smith')
+  })
 })

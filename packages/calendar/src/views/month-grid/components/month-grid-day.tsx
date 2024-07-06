@@ -29,6 +29,19 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
     return $app.translate('events')
   }
 
+  const getAriaLabelSingularOrPlural = (nOfAdditionalEvents: number) => {
+    if (nOfAdditionalEvents === 1) {
+      return $app.translate('Link to 1 more event on {{date}}', {
+        date: getLocalizedDate(day.date, $app.config.locale),
+      })
+    }
+
+    return $app.translate('Link to {{n}} more events on {{date}}', {
+      date: getLocalizedDate(day.date, $app.config.locale),
+      n: nEventsInDay - $app.config.monthGridOptions.nEventsPerDay,
+    })
+  }
+
   const handleClickAdditionalEvents = (e: MouseEvent | TouchEvent) => {
     e.stopPropagation()
 
@@ -102,6 +115,9 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
       {nEventsInDay > $app.config.monthGridOptions.nEventsPerDay ? (
         <button
           className="sx__month-grid-day__events-more sx__ripple--wide"
+          aria-label={getAriaLabelSingularOrPlural(
+            nEventsInDay - $app.config.monthGridOptions.nEventsPerDay
+          )}
           onClick={handleClickAdditionalEvents}
         >
           {`+ ${
