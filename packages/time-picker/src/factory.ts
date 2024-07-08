@@ -25,26 +25,26 @@ const getTimePickerState = (
     handleCurrentTimeChanged(config, currentTime.value)
   })
 
-  const isArm = signal(true)
+  const isAM = signal(true)
   return {
     isOpen: signal(false),
-    currentTime: currentTime,
+    currentTime,
     currentTimeDisplayedValue: computed(() => {
       const [hours, minutes] = currentTime.value.split(':')
-      const hoursIntParsed = parseInt(hours)
-      const hoursInt = hoursIntParsed === 0 ? 12 : hoursIntParsed
+      const parsedHours = parseInt(hours)
+      let hoursInt = parsedHours
       const minutesInt = parseInt(minutes)
+
       if (is12HourClock) {
+        hoursInt = hoursInt === 0 ? 12 : hoursInt
         const hours12 = hoursInt > 12 ? hoursInt - 12 : hoursInt
-        return `${hours12}:${minutesInt.toString().padStart(2, '0')} ${
-          hoursInt >= 12 ? 'PM' : 'AM'
-        }`
+        return `${hours12}:${minutesInt.toString().padStart(2, '0')} ${parsedHours >= 12 ? 'PM' : 'AM'}`
       }
 
-      return `${hoursInt}:${minutesInt.toString().padStart(2, '0')}`
+      return `${hoursInt.toString().padStart(2, '0')}:${minutesInt.toString().padStart(2, '0')}`
     }),
     inputWrapperElement: signal(undefined),
-    isAM: isArm,
+    isAM,
   }
 }
 

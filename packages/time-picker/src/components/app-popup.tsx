@@ -4,6 +4,7 @@ import { AppContext } from '../utils/stateful/app-context'
 import { useContext, useRef } from 'preact/compat'
 import { useEffect, useState } from 'preact/hooks'
 import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
+import { convert12HourTo24HourTimeString } from '../utils/stateless/convert-time-strings'
 
 export default function AppPopup() {
   const $app = useContext(AppContext)
@@ -63,15 +64,7 @@ export default function AppPopup() {
 
   const handleAccept = () => {
     if ($app.config.is12Hour.value) {
-      const hoursInt = Number(hoursValue)
-      const isAM = $app.timePickerState.isAM.value
-      if (isAM && hoursInt === 12) {
-        $app.timePickerState.currentTime.value = `00:${minutesValue}`
-      } else if (!isAM && hoursInt < 12) {
-        $app.timePickerState.currentTime.value = `${hoursInt + 12}:${minutesValue}`
-      } else {
-        $app.timePickerState.currentTime.value = `${hoursValue}:${minutesValue}`
-      }
+      convert12HourTo24HourTimeString(hoursValue, minutesValue, $app)
     } else {
       $app.timePickerState.currentTime.value = `${hoursValue}:${minutesValue}`
     }

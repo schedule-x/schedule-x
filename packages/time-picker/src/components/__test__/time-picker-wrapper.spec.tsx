@@ -7,7 +7,7 @@ import { TimePickerAppContext } from '../../types/time-picker-app.context'
 import { cleanup, render } from '@testing-library/preact'
 import TimePickerWrapper from '../time-picker-wrapper'
 import { stubInterface } from 'ts-sinon'
-import { signal } from '@preact/signals'
+import { computed, signal } from '@preact/signals'
 import { afterEach } from 'vitest'
 
 const renderComponent = ($app: TimePickerAppContext) => {
@@ -22,11 +22,14 @@ const setDefaultApp = ($app: TimePickerAppContext) => {
     dark: signal(true),
     teleportTo: signal(null),
     label: signal('Time'),
+    is12Hour: signal(false),
   }
   $app.timePickerState = {
     ...$app.timePickerState,
     isOpen: signal(false),
     currentTime: signal(''),
+    currentTimeDisplayedValue: computed(() => ''),
+    isAM: signal(true),
   }
 }
 
