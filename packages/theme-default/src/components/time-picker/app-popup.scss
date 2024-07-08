@@ -7,6 +7,11 @@
   flex-direction: column;
   gap: var(--sx-spacing-padding3);
   background-color: var(--sx-color-background);
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
 
   .is-dark & {
     background-color: var(--sx-color-surface-container-high);
@@ -43,7 +48,6 @@
 
   .sx__time-picker-time-inputs {
     display: flex;
-    align-items: stretch;
     gap: var(--sx-spacing-padding2);
   }
 

@@ -76,7 +76,7 @@ export default function AppPopup() {
     getComputedStyle(document.documentElement).fontSize.split('px')[0]
   )
   const popupHeight = 362
-  const popupWidth = $app.config.is12Hour.value ? 350 : 332
+  const popupWidth = 332
 
   const getFixedPositionStyles = () => {
     const inputRect =
