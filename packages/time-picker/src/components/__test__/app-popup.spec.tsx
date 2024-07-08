@@ -47,6 +47,27 @@ describe('Time picker popup', () => {
       assertElementType<HTMLInputElement>(hoursInput, HTMLInputElement)
       expect(document.activeElement).toBe(hoursInput)
     })
+
+    it.each([
+      { initialValue: '00:00', expectedInitialHours: '12' },
+      { initialValue: '12:00', expectedInitialHours: '12' },
+      { initialValue: '23:59', expectedInitialHours: '11' },
+    ])(
+      'should render in 12-hour mode',
+      ({ initialValue, expectedInitialHours }) => {
+        const $app = createTimePickerAppContext()
+        $app.config.is12Hour.value = true
+        $app.timePickerState.currentTime.value = initialValue
+        render(
+          <AppContext.Provider value={$app}>
+            <AppPopup />
+          </AppContext.Provider>
+        )
+        const hoursInput = document.querySelectorAll('.sx__time-input')[0]
+        assertElementType<HTMLInputElement>(hoursInput, HTMLInputElement)
+        expect(hoursInput.value).toBe(expectedInitialHours)
+      }
+    )
   })
 
   describe('Interacting with the input and buttons', () => {
