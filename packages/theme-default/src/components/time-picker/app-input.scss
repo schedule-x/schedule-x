@@ -10,6 +10,10 @@
   width: 6rem;
   text-align: center;
 
+  .is-12-hour & {
+    width: 6.4rem;
+  }
+
   .sx__time-input--active & {
     border-color: var(--sx-color-primary);
     outline: 1px solid var(--sx-color-primary);

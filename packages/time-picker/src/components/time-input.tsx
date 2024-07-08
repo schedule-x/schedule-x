@@ -45,7 +45,7 @@ export default function TimeInput({
     const value = +inputValue
 
     if (value < min || value > max || isNaN(value)) {
-      setInputValue('00')
+      setInputValue(min < 10 ? `0${min}` : String(min))
       return
     }
     if (inputValue.length === 1) {

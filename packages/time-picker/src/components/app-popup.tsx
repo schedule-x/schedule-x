@@ -1,8 +1,10 @@
+/* eslint-disable max-lines */
 import TimeInput from './time-input'
 import { AppContext } from '../utils/stateful/app-context'
 import { useContext, useRef } from 'preact/compat'
 import { useEffect, useState } from 'preact/hooks'
 import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
+import { convert12HourTo24HourTimeString } from '../utils/stateless/convert-time-strings'
 
 export default function AppPopup() {
   const $app = useContext(AppContext)
@@ -25,9 +27,20 @@ export default function AppPopup() {
     ])
   }, [$app.config.dark.value, $app.config.placement.value])
 
+  const getInitialStart12Hour = (hours: string) => {
+    const hoursInt = Number(hours)
+    if (hoursInt === 0) return '12'
+    if (hoursInt > 12) return String(hoursInt - 12)
+    return hours
+  }
+
   const [initialStart, initialEnd] =
     $app.timePickerState.currentTime.value.split(':')
-  const [hoursValue, setHoursValue] = useState(initialStart)
+  const [hoursValue, setHoursValue] = useState(
+    $app.config.is12Hour.value
+      ? getInitialStart12Hour(initialStart)
+      : initialStart
+  )
   const [minutesValue, setMinutesValue] = useState(initialEnd)
 
   const clickOutsideListener = (event: Event) => {
@@ -50,7 +63,12 @@ export default function AppPopup() {
   }, [])
 
   const handleAccept = () => {
-    $app.timePickerState.currentTime.value = `${hoursValue}:${minutesValue}`
+    if ($app.config.is12Hour.value) {
+      convert12HourTo24HourTimeString(hoursValue, minutesValue, $app)
+    } else {
+      $app.timePickerState.currentTime.value = `${hoursValue}:${minutesValue}`
+    }
+
     $app.timePickerState.isOpen.value = false
   }
 
@@ -114,7 +132,7 @@ export default function AppPopup() {
           onChange={(newHours) => setHoursValue(newHours)}
           inputRef={hoursRef}
           nextTabIndexRef={minutesRef}
-          validRange={[0, 23]}
+          validRange={$app.config.is12Hour.value ? [1, 12] : [0, 23]}
         />
 
         <span className="sx__time-picker-colon">:</span>
@@ -126,6 +144,24 @@ export default function AppPopup() {
           validRange={[0, 59]}
           nextTabIndexRef={OKButtonRef}
         />
+
+        {$app.config.is12Hour.value && (
+          <div className="sx__time-picker-12-hour-switches">
+            <button
+              className={`sx__time-picker-12-hour-switch${$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
+              onClick={() => ($app.timePickerState.isAM.value = true)}
+            >
+              AM
+            </button>
+
+            <button
+              className={`sx__time-picker-12-hour-switch${!$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
+              onClick={() => ($app.timePickerState.isAM.value = false)}
+            >
+              PM
+            </button>
+          </div>
+        )}
       </div>
 
       <div class="sx__time-picker-actions">

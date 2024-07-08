@@ -10,7 +10,10 @@ type props = {
 }
 
 export default function TimePickerWrapper({ $app }: props) {
-  const baseClassList = ['sx__time-picker-wrapper']
+  const baseClassList = [
+    'sx__time-picker-wrapper',
+    $app.config.is12Hour.value ? 'is-12-hour' : '',
+  ]
   const [classList, setClassList] = useState<string[]>(baseClassList)
 
   useEffect(() => {
