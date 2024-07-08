@@ -25,7 +25,8 @@ const getTimePickerState = (
     handleCurrentTimeChanged(config, currentTime.value)
   })
 
-  const isAM = signal(true)
+  const initialIsAM = parseInt(currentTime.value.split(':')[0]) < 12
+  const isAM = signal(initialIsAM)
   return {
     isOpen: signal(false),
     currentTime,

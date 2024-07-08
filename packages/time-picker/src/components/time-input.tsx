@@ -17,7 +17,6 @@ export default function TimeInput({
   nextTabIndexRef,
   validRange,
 }: props) {
-  console.log(initialValue)
   const [inputValue, setInputValue] = useState(initialValue)
 
   const handleInput = (e: Event) => {

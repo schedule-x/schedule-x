@@ -67,5 +67,22 @@ describe('TimePickerFactory', () => {
 
       expect(underTest).toBe(false)
     })
+
+    it.each([
+      { initialValue: '00:00', expected: true },
+      { initialValue: '11:59', expected: true },
+      { initialValue: '12:00', expected: false },
+      { initialValue: '23:59', expected: false },
+    ])(
+      'should set initial isAM depending on the initial time',
+      ({ initialValue, expected }) => {
+        const timePickerAppContext = createTimePickerAppContext({
+          initialValue: initialValue,
+        })
+        const underTest = timePickerAppContext.timePickerState.isAM.value
+
+        expect(underTest).toBe(expected)
+      }
+    )
   })
 })
