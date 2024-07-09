@@ -18,6 +18,7 @@ export default function TimeInput({
   validRange,
 }: props) {
   const [inputValue, setInputValue] = useState(initialValue)
+  const [tabBlocker, setTabBlocker] = useState(false)
 
   const handleInput = (e: Event) => {
     if (!(e.target instanceof HTMLInputElement)) return
@@ -27,6 +28,8 @@ export default function TimeInput({
 
   useEffect(() => {
     onChange(inputValue)
+
+    if (tabBlocker) return
 
     if (
       inputValue.length === 2 &&
@@ -53,12 +56,28 @@ export default function TimeInput({
     }
   }
 
+  const incrementOrDecrementOnKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      e.preventDefault()
+      const [min, max] = validRange
+      const value = +inputValue
+      const newValue = e.key === 'ArrowUp' ? value + 1 : value - 1
+
+      if (newValue < min || newValue > max) return
+
+      setInputValue(newValue < 10 ? `0${newValue}` : String(newValue))
+      setTabBlocker(true)
+      setTimeout(() => setTabBlocker(false))
+    }
+  }
+
   return (
     <input
       ref={inputRef}
       maxLength={2}
       className="sx__time-input"
       type="text"
+      onKeyDown={incrementOrDecrementOnKeyDown}
       value={inputValue}
       onInput={handleInput}
       onBlur={handleOnBlur}

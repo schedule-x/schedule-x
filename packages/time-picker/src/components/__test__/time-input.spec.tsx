@@ -79,4 +79,56 @@ describe('TimeInput', () => {
       }
     )
   })
+
+  describe('incrementing and decrementing the value with arrow keys', () => {
+    it('should increment the value when the ArrowUp key is pressed', async () => {
+      const onChangeMock = vi.fn()
+      const inputRef = stubInterface<RefObject<HTMLInputElement>>()
+      render(
+        <TimeInput
+          initialValue="12"
+          onChange={onChangeMock}
+          inputRef={inputRef}
+          validRange={[0, 23]}
+        />
+      )
+
+      const htmlInputElement = document.querySelector('input')!
+      fireEvent.keyDown(htmlInputElement, { key: 'ArrowUp' })
+      fireEvent.keyDown(htmlInputElement, { key: 'ArrowUp' })
+      fireEvent.keyDown(htmlInputElement, { key: 'ArrowUp' })
+
+      await waitFor(() => {
+        expect(onChangeMock).toHaveBeenCalledWith('13')
+        expect(onChangeMock).toHaveBeenCalledWith('14')
+        expect(onChangeMock).toHaveBeenCalledWith('15')
+        expect(onChangeMock).not.toHaveBeenCalledWith('16')
+      })
+    })
+
+    it('should decrement the value when the ArrowDown key is pressed', async () => {
+      const onChangeMock = vi.fn()
+      const inputRef = stubInterface<RefObject<HTMLInputElement>>()
+      render(
+        <TimeInput
+          initialValue="12"
+          onChange={onChangeMock}
+          inputRef={inputRef}
+          validRange={[0, 23]}
+        />
+      )
+
+      const htmlInputElement = document.querySelector('input')!
+      fireEvent.keyDown(htmlInputElement, { key: 'ArrowDown' })
+      fireEvent.keyDown(htmlInputElement, { key: 'ArrowDown' })
+      fireEvent.keyDown(htmlInputElement, { key: 'ArrowDown' })
+
+      await waitFor(() => {
+        expect(onChangeMock).toHaveBeenCalledWith('11')
+        expect(onChangeMock).toHaveBeenCalledWith('10')
+        expect(onChangeMock).toHaveBeenCalledWith('09')
+        expect(onChangeMock).not.toHaveBeenCalledWith('8')
+      })
+    })
+  })
 })
