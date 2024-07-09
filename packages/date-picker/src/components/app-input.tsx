@@ -94,6 +94,7 @@ export default function AppInput() {
 
         <input
           id={datePickerInputId}
+          name={$app.config.name || 'date'}
           aria-describedby={datePickerLabelId}
           value={$app.datePickerState.inputDisplayedValue.value}
           data-testid="date-picker-input"

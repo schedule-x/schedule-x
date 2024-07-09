@@ -23,6 +23,7 @@ const setDefaultApp = ($app: TimePickerAppContext) => {
     teleportTo: signal(null),
     label: signal('Time'),
     is12Hour: signal(false),
+    name: signal('time'),
   }
   $app.timePickerState = {
     ...$app.timePickerState,

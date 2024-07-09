@@ -58,6 +58,7 @@ export const createTimePickerAppContext = (
     teleportTo: signal(config.teleportTo ?? null),
     label: signal(config.label ?? null),
     is12Hour: signal(config.is12Hour ?? false),
+    name: signal(config.name ?? ''),
   },
   timePickerState: getTimePickerState(config, config.is12Hour ?? false),
 })

@@ -11,6 +11,7 @@ export default interface DatePickerConfigInternal extends Config {
   style: DatePickerStyle
   teleportTo?: HTMLElement
   label?: string
+  name?: string
 }
 
 export interface DatePickerConfigExternal

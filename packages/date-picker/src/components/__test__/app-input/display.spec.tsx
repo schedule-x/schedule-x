@@ -69,4 +69,25 @@ describe('date picker input', () => {
       label
     )
   })
+
+  it('should use the default label', () => {
+    renderComponent(createAppSingleton({}))
+
+    expect(document.querySelector('.sx__date-input-label')?.textContent).toBe(
+      'Date'
+    )
+  })
+
+  it('should use a custom input name', () => {
+    const name = 'Custom name'
+    renderComponent(createAppSingleton({ name }))
+
+    expect(getInputElement().getAttribute('name')).toBe(name)
+  })
+
+  it('should use the default input name', () => {
+    renderComponent(createAppSingleton({}))
+
+    expect(getInputElement().getAttribute('name')).toBe('date')
+  })
 })
