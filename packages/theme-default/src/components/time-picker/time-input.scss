@@ -13,4 +13,9 @@
   border: none;
   padding: var(--sx-spacing-padding3);
   text-align: center;
+
+  &:focus {
+    background-color: var(--sx-color-secondary-container);
+    outline: 3px solid var(--sx-color-primary);
+  }
 }
