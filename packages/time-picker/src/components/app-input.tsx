@@ -41,6 +41,7 @@ export default function AppInput() {
           value={$app.timePickerState.currentTimeDisplayedValue.value}
           readOnly={true}
           id={inputId}
+          name={$app.config.name.value ? $app.config.name.value : 'time'}
           className="sx__time-picker-input"
           type="text"
           onFocus={openPopup}

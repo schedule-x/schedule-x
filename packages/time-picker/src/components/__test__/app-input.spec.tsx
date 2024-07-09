@@ -45,6 +45,34 @@ describe('The time picker input (readonly, value display field)', () => {
     })
   })
 
+  describe('rendering the input name', () => {
+    it('should render with the default name', () => {
+      const $app = createTimePickerAppContext()
+      render(
+        <AppContext.Provider value={$app}>
+          <AppInput />
+        </AppContext.Provider>
+      )
+
+      const input = document.querySelector('.sx__time-picker-input')
+      assertElementType<HTMLInputElement>(input, HTMLInputElement)
+      expect(input?.name).toBe('time')
+    })
+
+    it('should render the input field with the correct name', () => {
+      const $app = createTimePickerAppContext({ name: 'custom-name' })
+      render(
+        <AppContext.Provider value={$app}>
+          <AppInput />
+        </AppContext.Provider>
+      )
+
+      const input = document.querySelector('.sx__time-picker-input')
+      assertElementType<HTMLInputElement>(input, HTMLInputElement)
+      expect(input?.name).toBe('custom-name')
+    })
+  })
+
   describe('when the popup is opened', () => {
     it('should add the active class to the wrapper', async () => {
       const $app = createTimePickerAppContext()

@@ -8,6 +8,7 @@ export type TimePickerConfigExternal = {
   onChange?: (value: string) => void
   teleportTo?: HTMLElement | null
   label?: string | null
+  name?: string
   is12Hour?: boolean
 }
 
