@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/schedule-x/schedule-x/compare/v1.49.0...v1.50.0) (2024-07-09)
+
+### Features
+
+- time picker design ([#532](https://github.com/schedule-x/schedule-x/issues/532)) ([975c4c7](https://github.com/schedule-x/schedule-x/commit/975c4c7e21d8d82ceda953fad8acf0e5a7edecd6))
+- **time-picker:** 12-hour clock ([#528](https://github.com/schedule-x/schedule-x/issues/528)) ([9d469d9](https://github.com/schedule-x/schedule-x/commit/9d469d9550cf6cdf249ba556753e58b93d9b94eb))
+
 # [1.49.0](https://github.com/schedule-x/schedule-x/compare/v1.48.0...v1.49.0) (2024-07-06)
 
 ### Features

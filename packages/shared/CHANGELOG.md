@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/schedule-x/schedule-x/compare/v1.49.0...v1.50.0) (2024-07-09)
+
+### Features
+
+- add name option to date- and time picker configs ([#533](https://github.com/schedule-x/schedule-x/issues/533)) ([56357e5](https://github.com/schedule-x/schedule-x/commit/56357e59950c1b637a1e4ae391298e66129fd46d))
+
 # [1.49.0](https://github.com/schedule-x/schedule-x/compare/v1.48.0...v1.49.0) (2024-07-06)
 
 ### Features
