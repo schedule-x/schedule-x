@@ -71,6 +71,11 @@
     flex: 1;
     cursor: pointer;
     border-radius: inherit;
+    color: var(--sx-internal-color-text);
+
+    &:focus {
+      outline: 1px solid var(--sx-color-primary);
+    }
 
     &:first-child {
       border: 1px solid var(--sx-color-neutral);
@@ -86,8 +91,8 @@
     }
 
     &.is-selected {
-      background-color: var(--sx-color-primary);
-      color: var(--sx-color-on-primary);
+      background-color: var(--sx-color-primary-container);
+      color: var(--sx-color-on-primary-container);
     }
   }
 
