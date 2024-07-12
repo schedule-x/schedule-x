@@ -37,7 +37,12 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__month-grid-wrapper">
         {month.map((week, index) => (
-          <MonthGridWeek key={index} week={week} isFirstWeek={index === 0} />
+          <MonthGridWeek
+            key={index}
+            week={week}
+            isFirstWeek={index === 0}
+            isLastWeek={index === month.length - 1}
+          />
         ))}
       </div>
     </AppContext.Provider>

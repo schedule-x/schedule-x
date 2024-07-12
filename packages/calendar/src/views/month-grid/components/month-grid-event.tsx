@@ -12,14 +12,28 @@ type props = {
   gridRow: number
   calendarEvent: CalendarEventInternal
   date: string
+  isFirstWeek: boolean
+  isLastWeek: boolean
 }
 
 export default function MonthGridEvent({
   gridRow,
   calendarEvent,
   date,
+  isFirstWeek,
+  isLastWeek,
 }: props) {
   const $app = useContext(AppContext)
+  const hasOverflowLeft =
+    isFirstWeek &&
+    $app.calendarState.range.value?.start &&
+    dateFromDateTime(calendarEvent.start) <
+      dateFromDateTime($app.calendarState.range.value.start)
+  const hasOverflowRight =
+    isLastWeek &&
+    $app.calendarState.range.value?.end &&
+    dateFromDateTime(calendarEvent.end) >
+      dateFromDateTime($app.calendarState.range.value.end)
   const { createDragStartTimeout, setClickedEventIfNotDragging } =
     useEventInteractions($app)
 
@@ -76,6 +90,8 @@ export default function MonthGridEvent({
   if (calendarEvent._options?.additionalClasses) {
     classNames.push(...calendarEvent._options.additionalClasses)
   }
+  if (hasOverflowLeft) classNames.push('sx__month-grid-event--overflow-left')
+  if (hasOverflowRight) classNames.push('sx__month-grid-event--overflow-right')
 
   return (
     <div

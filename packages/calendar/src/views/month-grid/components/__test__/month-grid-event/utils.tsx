@@ -6,7 +6,9 @@ import MonthGridEvent from '../../month-grid-event'
 
 export const renderComponent = (
   $app: CalendarAppSingleton,
-  calendarEvent: CalendarEventInternal
+  calendarEvent: CalendarEventInternal,
+  isFirstWeek = false,
+  isLastWeek = false
 ) => {
   return render(
     <AppContext.Provider value={$app}>
@@ -14,6 +16,8 @@ export const renderComponent = (
         calendarEvent={calendarEvent}
         gridRow={0}
         date={'2020-01-01'}
+        isFirstWeek={isFirstWeek}
+        isLastWeek={isLastWeek}
       />
     </AppContext.Provider>
   )
