@@ -11,6 +11,7 @@ import {
   CalendarEvent,
   toDateString,
   toTimeString,
+  toDateTimeString,
   toJSDate,
 } from '@schedule-x/shared/src'
 import CalendarApp from './calendar.app'
@@ -32,6 +33,7 @@ export {
   CalendarApp,
   toDateString,
   toTimeString,
+  toDateTimeString,
   toJSDate,
   createPreactView,
   setRangeForDay,
