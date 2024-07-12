@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.51.0](https://github.com/schedule-x/schedule-x/compare/v1.50.0...v1.51.0) (2024-07-12)
+
+### Features
+
+- **calendar:** add overflow classes to month grid events ([#543](https://github.com/schedule-x/schedule-x/issues/543)) ([02719a3](https://github.com/schedule-x/schedule-x/commit/02719a39550e6f1c322cc83aed77e33afa64f704))
+- export functions for converting between Date object and string ([#542](https://github.com/schedule-x/schedule-x/issues/542)) ([0f5dd4e](https://github.com/schedule-x/schedule-x/commit/0f5dd4e28b73709bc2589a7dd81d0146e73274c6))
+
 # [1.50.0](https://github.com/schedule-x/schedule-x/compare/v1.49.0...v1.50.0) (2024-07-09)
 
 ### Features
