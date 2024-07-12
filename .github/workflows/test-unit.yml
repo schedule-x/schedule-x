@@ -36,7 +36,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npm run test:unit:changed
+        run: npm run test:unit:changed -- -- --reporter=verbose
 
   test_mountain_view:
     name: Mountain View time
@@ -58,7 +58,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npm run test:unit:changed
+        run: npm run test:unit:changed -- -- --reporter=verbose
 
   test_tokyo:
     name: Tokyo time
@@ -80,4 +80,4 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npm run test:unit:changed
+        run: npm run test:unit:changed -- -- --reporter=verbose
