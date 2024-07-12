@@ -13,7 +13,10 @@ export { concatenatePeople } from './utils/stateless/strings/concatenate-people'
 export { getTimeStamp } from './utils/stateless/time/date-time-localization/get-time-stamp'
 export { TimeIcon, UserIcon, DescriptionIcon, LocationPinIcon }
 export { randomStringId } from './utils/stateless/strings/random'
-export { toTimeString } from './utils/stateless/time/format-conversion/date-to-strings'
+export {
+  toTimeString,
+  toDateTimeString,
+} from './utils/stateless/time/format-conversion/date-to-strings'
 export { dateStringRegex } from './utils/stateless/time/validation/regex'
 export { toDateString } from './utils/stateless/time/format-conversion/date-to-strings'
 export { toJSDate } from './utils/stateless/time/format-conversion/format-conversion'
