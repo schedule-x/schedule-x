@@ -8,12 +8,6 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
-    inputs:
-      timezone:
-        description: 'The timezone to use for the test run'
-        required: false
-        default: 'Europe/London'
 
 jobs:
   test_london:
@@ -36,7 +30,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npm run test:unit:changed -- -- --reporter=verbose
+        run: npm run test:unit:changed -- -- --silent
 
   test_mountain_view:
     name: Mountain View time
@@ -58,7 +52,7 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npm run test:unit:changed -- -- --reporter=verbose
+        run: npm run test:unit:changed -- -- --silent
 
   test_tokyo:
     name: Tokyo time
@@ -80,4 +74,4 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
-        run: npm run test:unit:changed -- -- --reporter=verbose
+        run: npm run test:unit:changed -- -- --silent
