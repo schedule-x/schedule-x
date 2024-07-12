@@ -15,9 +15,10 @@ import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/da
 type props = {
   day: MonthDayType
   isFirstWeek: boolean
+  isLastWeek: boolean
 }
 
-export default function MonthGridDay({ day, isFirstWeek }: props) {
+export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   const $app = useContext(AppContext)
   const nEventsInDay = Object.values(day.events).filter(
     (event) => typeof event === 'object' || event === DATE_GRID_BLOCKER
@@ -107,6 +108,8 @@ export default function MonthGridDay({ day, isFirstWeek }: props) {
                 gridRow={index + 1}
                 calendarEvent={event}
                 date={day.date}
+                isFirstWeek={isFirstWeek}
+                isLastWeek={isLastWeek}
               />
             )
           })}
