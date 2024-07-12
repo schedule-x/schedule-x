@@ -9,6 +9,11 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      timezone:
+        description: 'The timezone to use for the test run'
+        required: false
+        default: 'Europe/London'
 
 jobs:
   test_london:
