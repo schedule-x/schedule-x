@@ -23,6 +23,7 @@ import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -135,7 +136,7 @@ export default function TimeGridEvent({
   }
 
   const handlePointerUp = (e: UIEvent) => {
-    setMouseDown(false)
+    nextTick(() => setMouseDown(false))
     setClickedEventIfNotDragging(calendarEvent, e)
   }
 
