@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/schedule-x/schedule-x/compare/v1.51.0...v1.52.0) (2024-07-19)
+
+### Bug Fixes
+
+- **calendar:** event bubbling order in firefox ([#550](https://github.com/schedule-x/schedule-x/issues/550)) ([0d496ea](https://github.com/schedule-x/schedule-x/commit/0d496ea1c8e4e0e6d13d90372c1fd2535e4d3134))
+
 # [1.51.0](https://github.com/schedule-x/schedule-x/compare/v1.50.0...v1.51.0) (2024-07-12)
 
 **Note:** Version bump only for package @schedule-x/time-picker

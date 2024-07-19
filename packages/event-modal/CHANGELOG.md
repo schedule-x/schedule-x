@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/schedule-x/schedule-x/compare/v1.51.0...v1.52.0) (2024-07-19)
+
+### Features
+
+- **event-modal:** add close method ([#551](https://github.com/schedule-x/schedule-x/issues/551)) ([b691a57](https://github.com/schedule-x/schedule-x/commit/b691a57f697ca552c9b98ed8b80e03e52de109a8))
+
 # [1.51.0](https://github.com/schedule-x/schedule-x/compare/v1.50.0...v1.51.0) (2024-07-12)
 
 **Note:** Version bump only for package @schedule-x/event-modal

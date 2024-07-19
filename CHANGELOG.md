@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/schedule-x/schedule-x/compare/v1.51.0...v1.52.0) (2024-07-19)
+
+### Bug Fixes
+
+- **calendar:** event bubbling order in firefox ([#550](https://github.com/schedule-x/schedule-x/issues/550)) ([0d496ea](https://github.com/schedule-x/schedule-x/commit/0d496ea1c8e4e0e6d13d90372c1fd2535e4d3134))
+
+### Features
+
+- **calendar:** add weekday class names ([#549](https://github.com/schedule-x/schedule-x/issues/549)) ([d92a216](https://github.com/schedule-x/schedule-x/commit/d92a21621a11a1b69668924d061feaf0f957f49c))
+- **event-modal:** add close method ([#551](https://github.com/schedule-x/schedule-x/issues/551)) ([b691a57](https://github.com/schedule-x/schedule-x/commit/b691a57f697ca552c9b98ed8b80e03e52de109a8))
+
 # [1.51.0](https://github.com/schedule-x/schedule-x/compare/v1.50.0...v1.51.0) (2024-07-12)
 
 ### Features
