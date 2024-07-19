@@ -1,6 +1,7 @@
 import { Ref } from 'preact'
 import { useState } from 'preact/hooks'
 import { useEffect } from 'preact/compat'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 
 type props = {
   initialValue: string
@@ -67,7 +68,7 @@ export default function TimeInput({
 
       setInputValue(newValue < 10 ? `0${newValue}` : String(newValue))
       setTabBlocker(true)
-      setTimeout(() => setTabBlocker(false))
+      nextTick(() => setTabBlocker(false))
     }
   }
 
