@@ -11,6 +11,7 @@ import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal
 import { DATE_GRID_BLOCKER } from '../../../constants'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 
 type props = {
   day: MonthDayType
@@ -59,14 +60,18 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   }
 
   const dateClassNames = ['sx__month-grid-day__header-date']
-  const dayDate = toJSDate(day.date)
+  const jsDate = toJSDate(day.date)
+  const dayDate = jsDate
   if (isToday(dayDate)) dateClassNames.push('sx__is-today')
 
   const { month: selectedDateMonth } = toIntegers(
     $app.datePickerState.selectedDate.value
   )
   const { month: dayMonth } = toIntegers(day.date)
-  const wrapperClasses = ['sx__month-grid-day']
+  const wrapperClasses = [
+    'sx__month-grid-day',
+    getClassNameForWeekday(jsDate.getDay()),
+  ]
   if (dayMonth !== selectedDateMonth)
     wrapperClasses.push('is-leading-or-trailing')
 

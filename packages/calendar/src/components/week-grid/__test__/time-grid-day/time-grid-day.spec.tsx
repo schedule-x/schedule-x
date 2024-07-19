@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   afterEach,
   describe,
@@ -144,6 +145,19 @@ describe('TimeGridDay', () => {
           .querySelector('.sx__time-grid-event')
           ?.attributes.getNamedItem('style')?.value
       ).toContain('top: 50%')
+    })
+  })
+
+  describe('rendering the week day class', () => {
+    it('renders the week day class', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2023-09-11',
+      })
+      renderComponent($app, [], '2023-09-11')
+
+      expect(document.querySelector('.sx__time-grid-day')?.classList).toContain(
+        'sx__monday'
+      )
     })
   })
 })

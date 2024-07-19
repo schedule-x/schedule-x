@@ -19,7 +19,7 @@ import { beforeEach, vi } from 'vitest'
 const renderComponent = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(
     <AppContext.Provider value={$app}>
-      <MonthGridDay day={day} isFirstWeek={false} />
+      <MonthGridDay day={day} isFirstWeek={false} isLastWeek={false} />
     </AppContext.Provider>
   )
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -115,6 +116,57 @@ describe('MonthWrapper', () => {
       await waitFor(() => {
         expect(document.querySelectorAll('.sx__event').length).toBe(1)
       })
+    })
+  })
+
+  describe('setting weekday classes', () => {
+    const $app = __createAppWithViews__({
+      selectedDate: '2020-01-01',
+    })
+
+    it('should set weekday classes for all days of the month', () => {
+      renderComponent($app)
+
+      const days = document.querySelectorAll('.sx__month-grid-day')
+      expect(days[0].classList).toContain('sx__monday')
+      expect(days[1].classList).toContain('sx__tuesday')
+      expect(days[2].classList).toContain('sx__wednesday')
+      expect(days[3].classList).toContain('sx__thursday')
+      expect(days[4].classList).toContain('sx__friday')
+      expect(days[5].classList).toContain('sx__saturday')
+      expect(days[6].classList).toContain('sx__sunday')
+
+      expect(days[7].classList).toContain('sx__monday')
+      expect(days[8].classList).toContain('sx__tuesday')
+      expect(days[9].classList).toContain('sx__wednesday')
+      expect(days[10].classList).toContain('sx__thursday')
+      expect(days[11].classList).toContain('sx__friday')
+      expect(days[12].classList).toContain('sx__saturday')
+      expect(days[13].classList).toContain('sx__sunday')
+
+      expect(days[14].classList).toContain('sx__monday')
+      expect(days[15].classList).toContain('sx__tuesday')
+      expect(days[16].classList).toContain('sx__wednesday')
+      expect(days[17].classList).toContain('sx__thursday')
+      expect(days[18].classList).toContain('sx__friday')
+      expect(days[19].classList).toContain('sx__saturday')
+      expect(days[20].classList).toContain('sx__sunday')
+
+      expect(days[21].classList).toContain('sx__monday')
+      expect(days[22].classList).toContain('sx__tuesday')
+      expect(days[23].classList).toContain('sx__wednesday')
+      expect(days[24].classList).toContain('sx__thursday')
+      expect(days[25].classList).toContain('sx__friday')
+      expect(days[26].classList).toContain('sx__saturday')
+      expect(days[27].classList).toContain('sx__sunday')
+
+      expect(days[28].classList).toContain('sx__monday')
+      expect(days[29].classList).toContain('sx__tuesday')
+      expect(days[30].classList).toContain('sx__wednesday')
+      expect(days[31].classList).toContain('sx__thursday')
+      expect(days[32].classList).toContain('sx__friday')
+      expect(days[33].classList).toContain('sx__saturday')
+      expect(days[34].classList).toContain('sx__sunday')
     })
   })
 })

@@ -16,7 +16,10 @@ const renderComponent = (
 ) => {
   return render(
     <AppContext.Provider value={$app}>
-      <TimeGridEvent calendarEvent={calendarEvent} />
+      <TimeGridEvent
+        calendarEvent={calendarEvent}
+        setMouseDown={() => undefined}
+      />
     </AppContext.Provider>
   )
 }
