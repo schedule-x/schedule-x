@@ -7,6 +7,9 @@ import { cleanup, render, screen } from '@testing-library/preact'
 import EventModal from '../event-modal'
 import { getDescriptionEl, getLocationEl, getPeopleEl, setup } from './utils'
 import { beforeEach, vi } from 'vitest'
+import { createEventModalPlugin } from '../event-modal-plugin.impl'
+import { stubInterface } from 'ts-sinon'
+import { CalendarEventInternal } from '@schedule-x/shared/src'
 
 describe('EventModal', () => {
   beforeEach(() => {
@@ -105,6 +108,20 @@ describe('EventModal', () => {
       expect(getLocationEl()).toBeFalsy()
       expect(getPeopleEl()).toBeFalsy()
       expect(getDescriptionEl()).toBeFalsy()
+    })
+  })
+
+  describe('Closing the modal', () => {
+    it('should reset calendar event and its dom react', () => {
+      const modalPlugin = createEventModalPlugin()
+
+      modalPlugin.calendarEvent.value = stubInterface<CalendarEventInternal>()
+      modalPlugin.calendarEventDOMRect.value = new DOMRect()
+
+      modalPlugin.close()
+
+      expect(modalPlugin.calendarEvent.value).toBeNull()
+      expect(modalPlugin.calendarEventDOMRect.value).toBeNull()
     })
   })
 })

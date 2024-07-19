@@ -13,6 +13,8 @@ export default interface EventModalPlugin extends PluginBase {
   calendarEventDOMRect: Signal<DOMRect | null>
   calendarEventElement: Signal<HTMLElement | null>
 
+  close(): void
+
   setCalendarEvent(
     event: CalendarEventInternal | null,
     eventTargetDOMRect: DOMRect | null
