@@ -70,12 +70,12 @@ const eventRecurrencePlugin = createEventRecurrencePlugin()
 const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,
-    nDays: 4,
+    // nDays: 4,
   },
   // monthGridOptions: {
   //   nEventsPerDay: 7
   // },
-  // firstDayOfWeek: 1,
+  firstDayOfWeek: 0,
   // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',

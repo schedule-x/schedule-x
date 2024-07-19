@@ -10,6 +10,8 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datetime/grid-click-to-datetime'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
+import { toJSDate } from '@schedule-x/shared/src'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -73,7 +75,10 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
 
   return (
     <div
-      className="sx__time-grid-day"
+      className={[
+        'sx__time-grid-day',
+        getClassNameForWeekday(toJSDate(date).getDay()),
+      ].join(' ')}
       data-time-grid-date={date}
       onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
       onDblClick={(e) =>

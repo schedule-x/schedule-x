@@ -3,6 +3,7 @@ import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/dat
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
 
 type props = {
   week: WeekWithDates
@@ -12,7 +13,10 @@ export default function DateAxis({ week }: props) {
   const $app = useContext(AppContext)
 
   const getClassNames = (date: Date) => {
-    const classNames = ['sx__week-grid__date']
+    const classNames = [
+      'sx__week-grid__date',
+      getClassNameForWeekday(date.getDay()),
+    ]
     if (isToday(date)) {
       classNames.push('sx__week-grid__date--is-today')
     }

@@ -294,4 +294,47 @@ describe('MonthAgendaWrapper', () => {
       })
     })
   })
+
+  describe('adding the weekday classes', () => {
+    it('should add weekday classes', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-02-27',
+        events: [],
+      })
+      renderComponent($app)
+
+      const allDays = document.querySelectorAll('.sx__month-agenda-day')
+      expect(allDays[0].classList).toContain('sx__monday')
+      expect(allDays[1].classList).toContain('sx__tuesday')
+      expect(allDays[2].classList).toContain('sx__wednesday')
+      expect(allDays[3].classList).toContain('sx__thursday')
+      expect(allDays[4].classList).toContain('sx__friday')
+      expect(allDays[5].classList).toContain('sx__saturday')
+      expect(allDays[6].classList).toContain('sx__sunday')
+
+      expect(allDays[7].classList).toContain('sx__monday')
+      expect(allDays[8].classList).toContain('sx__tuesday')
+      expect(allDays[9].classList).toContain('sx__wednesday')
+      expect(allDays[10].classList).toContain('sx__thursday')
+      expect(allDays[11].classList).toContain('sx__friday')
+      expect(allDays[12].classList).toContain('sx__saturday')
+      expect(allDays[13].classList).toContain('sx__sunday')
+
+      expect(allDays[14].classList).toContain('sx__monday')
+      expect(allDays[15].classList).toContain('sx__tuesday')
+      expect(allDays[16].classList).toContain('sx__wednesday')
+      expect(allDays[17].classList).toContain('sx__thursday')
+      expect(allDays[18].classList).toContain('sx__friday')
+      expect(allDays[19].classList).toContain('sx__saturday')
+      expect(allDays[20].classList).toContain('sx__sunday')
+
+      expect(allDays[21].classList).toContain('sx__monday')
+      expect(allDays[22].classList).toContain('sx__tuesday')
+      expect(allDays[23].classList).toContain('sx__wednesday')
+      expect(allDays[24].classList).toContain('sx__thursday')
+      expect(allDays[25].classList).toContain('sx__friday')
+      expect(allDays[26].classList).toContain('sx__saturday')
+      expect(allDays[27].classList).toContain('sx__sunday')
+    })
+  })
 })

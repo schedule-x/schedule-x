@@ -11,6 +11,7 @@ import DateAxis from '../date-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { __createAppWithViews__ } from '../../../utils/stateless/testing/__create-app-with-views__'
+import { beforeEach } from 'vitest'
 
 const renderComponent = ($app: CalendarAppSingleton, week: Date[]) => {
   render(
@@ -21,13 +22,17 @@ const renderComponent = ($app: CalendarAppSingleton, week: Date[]) => {
 }
 
 describe('DateAxis', () => {
+  let timeUnitsImpl = new TimeUnitsBuilder().build()
+
+  beforeEach(() => {
+    timeUnitsImpl = new TimeUnitsBuilder().build()
+  })
+
+  afterEach(() => {
+    cleanup()
+  })
+
   describe('displaying dates for a week', () => {
-    const timeUnitsImpl = new TimeUnitsBuilder().build()
-
-    afterEach(() => {
-      cleanup()
-    })
-
     it('should display dates for the week of 2023-09-09', () => {
       const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 9))
       renderComponent(__createAppWithViews__(), week)
@@ -60,6 +65,44 @@ describe('DateAxis', () => {
       expect(
         document.querySelector('.sx__week-grid__date--is-today')
       ).not.toBeNull()
+    })
+  })
+
+  describe('a week starting on Monday', () => {
+    it('should display the day names in the correct order', () => {
+      const week = timeUnitsImpl.getWeekFor(new Date())
+      renderComponent(__createAppWithViews__(), week)
+
+      const allDayElements = document.querySelectorAll('.sx__week-grid__date')
+      expect(allDayElements[0]?.classList).toContain('sx__monday')
+      expect(allDayElements[1]?.classList).toContain('sx__tuesday')
+      expect(allDayElements[2]?.classList).toContain('sx__wednesday')
+      expect(allDayElements[3]?.classList).toContain('sx__thursday')
+      expect(allDayElements[4]?.classList).toContain('sx__friday')
+      expect(allDayElements[5]?.classList).toContain('sx__saturday')
+      expect(allDayElements[6]?.classList).toContain('sx__sunday')
+    })
+  })
+
+  describe('a week starting on Sunday', () => {
+    it('should display the day names in the correct order', () => {
+      timeUnitsImpl = new TimeUnitsBuilder().withFirstDayOfWeek(0).build()
+      const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 3))
+      renderComponent(
+        __createAppWithViews__({
+          firstDayOfWeek: 0,
+        }),
+        week
+      )
+
+      const allDayElements = document.querySelectorAll('.sx__week-grid__date')
+      expect(allDayElements[0]?.classList).toContain('sx__sunday')
+      expect(allDayElements[1]?.classList).toContain('sx__monday')
+      expect(allDayElements[2]?.classList).toContain('sx__tuesday')
+      expect(allDayElements[3]?.classList).toContain('sx__wednesday')
+      expect(allDayElements[4]?.classList).toContain('sx__thursday')
+      expect(allDayElements[5]?.classList).toContain('sx__friday')
+      expect(allDayElements[6]?.classList).toContain('sx__saturday')
     })
   })
 })

@@ -7,6 +7,7 @@ import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { addDays } from '@schedule-x/shared/src'
+import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 
 type props = {
   day: MonthAgendaDayType
@@ -26,7 +27,11 @@ export default function MonthAgendaDay({
   )
 
   const { month: monthOfDay } = toIntegers(day.date)
-  const dayClasses = ['sx__month-agenda-day']
+  const jsDate = toJSDate(day.date)
+  const dayClasses = [
+    'sx__month-agenda-day',
+    getClassNameForWeekday(jsDate.getDay()),
+  ]
   if (isActive) dayClasses.push('sx__month-agenda-day--active')
   if (monthOfDay !== monthSelected) dayClasses.push('is-leading-or-trailing')
 
@@ -60,7 +65,7 @@ export default function MonthAgendaDay({
       data-agenda-focus={hasFocus(day) ? 'true' : undefined}
       onKeyDown={handleKeyDown}
     >
-      <div>{toJSDate(day.date).getDate()}</div>
+      <div>{jsDate.getDate()}</div>
 
       <div className="sx__month-agenda-day__event-icons">
         {day.events.slice(0, 3).map((event) => (
