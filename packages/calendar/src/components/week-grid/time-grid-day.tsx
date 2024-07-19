@@ -11,7 +11,7 @@ import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundari
 import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datetime/grid-click-to-datetime'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
-import { toJSDate } from '@schedule-x/shared'
+import { toJSDate } from '@schedule-x/shared/src'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
