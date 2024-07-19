@@ -21,5 +21,9 @@ export const createEventModalPlugin = (): EventModalPlugin => {
       calendarEvent.value = event
       calendarEventDOMRect.value = eventTargetDOMRect
     },
+    close: () => {
+      calendarEvent.value = null
+      calendarEventDOMRect.value = null
+    },
   }
 }
