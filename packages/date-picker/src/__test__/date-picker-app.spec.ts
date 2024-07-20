@@ -65,4 +65,12 @@ describe('date picker app', () => {
     app.setTheme('dark')
     expect(app.getTheme()).toBe('dark')
   })
+
+  it('should set & get disabled', () => {
+    const app = createApp()
+
+    expect(app.disabled).toBe(false)
+    app.disabled = true
+    expect(app.disabled).toBe(true)
+  })
 })

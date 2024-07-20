@@ -17,6 +17,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   teleportTo?: HTMLElement
   label?: string
   name?: string
+  disabled?: boolean
 
   build(): DatePickerConfigInternal {
     return new ConfigImpl(
@@ -29,7 +30,8 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
       this.style,
       this.teleportTo,
       this.label,
-      this.name
+      this.name,
+      this.disabled
     )
   }
 
@@ -89,6 +91,12 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
 
   withName(name: string | undefined): ConfigBuilder {
     this.name = name
+
+    return this
+  }
+
+  withDisabled(disabled: boolean | undefined): ConfigBuilder {
+    this.disabled = disabled
 
     return this
   }

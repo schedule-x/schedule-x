@@ -14,12 +14,12 @@ export default function AppWrapper({ $app }: props) {
   const [classList, setClassList] = useState(initialClassList)
 
   useEffect(() => {
-    setClassList([
-      ...initialClassList,
-      $app.datePickerState.isDark.value ? 'is-dark' : '',
-      $app.config.style?.fullWidth ? 'has-full-width' : '',
-    ])
-  }, [$app.datePickerState.isDark.value])
+    const list = [...initialClassList]
+    if ($app.datePickerState.isDark.value) list.push('is-dark')
+    if ($app.config.style?.fullWidth) list.push('has-full-width')
+    if ($app.datePickerState.isDisabled.value) list.push('is-disabled')
+    setClassList(list)
+  }, [$app.datePickerState.isDark.value, $app.datePickerState.isDisabled.value])
 
   let appPopupJSX = <AppPopup />
   if ($app.config.teleportTo)

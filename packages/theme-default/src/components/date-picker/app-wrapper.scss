@@ -7,6 +7,11 @@
     width: 100%;
   }
 
+  &.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   * {
     color: var(--sx-color-on-background);
     box-sizing: border-box;

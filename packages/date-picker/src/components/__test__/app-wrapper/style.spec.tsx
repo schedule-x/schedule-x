@@ -64,4 +64,19 @@ describe('date picker wrapper', () => {
 
     expect(wrapper.classList.contains('has-full-width')).toBe(true)
   })
+
+  it('should not have is-disabled class', () => {
+    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
+    const wrapper = getAppWrapper()
+
+    expect(wrapper.classList.contains('is-disabled')).toBe(false)
+  })
+
+  it('should have is-disabled class', () => {
+    $app = createAppSingleton({ disabled: true })
+    render(<AppWrapper $app={$app as DatePickerAppSingleton} />)
+    const wrapper = getAppWrapper()
+
+    expect(wrapper.classList.contains('is-disabled')).toBe(true)
+  })
 })
