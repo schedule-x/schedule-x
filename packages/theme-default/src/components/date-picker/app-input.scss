@@ -18,6 +18,11 @@
     border: 2px solid var(--sx-color-primary);
   }
 
+  .is-disabled & {
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
   .sx__date-input--active & {
     transform: translateY(-50%) rotate(180deg);
   }

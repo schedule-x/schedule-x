@@ -38,4 +38,8 @@ const themeToggle = document.querySelector('#theme-toggle') as HTMLElement
 themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('is-dark')
 })
-console.log('hello from calendar')
+
+const disabledToggle = document.querySelector('#disabled-toggle') as HTMLElement
+disabledToggle.addEventListener('click', () => {
+  datePicker.disabled = !datePicker.disabled
+})

@@ -94,6 +94,7 @@ export default function AppInput() {
 
         <input
           id={datePickerInputId}
+          tabIndex={$app.datePickerState.isDisabled.value ? -1 : 0}
           name={$app.config.name || 'date'}
           aria-describedby={datePickerLabelId}
           value={$app.datePickerState.inputDisplayedValue.value}
@@ -105,6 +106,7 @@ export default function AppInput() {
         />
 
         <button
+          tabIndex={$app.datePickerState.isDisabled.value ? -1 : 0}
           aria-label={$app.translate('Choose Date')}
           onKeyDown={handleButtonKeyDown}
           onClick={() => $app.datePickerState.open()}
