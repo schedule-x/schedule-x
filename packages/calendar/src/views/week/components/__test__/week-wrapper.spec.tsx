@@ -158,4 +158,32 @@ describe('Week view', () => {
       }
     )
   })
+
+  describe('the is-selected class', () => {
+    it('should have an is-selected class for the selected date', async () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2024-07-20',
+        events: [],
+      })
+      renderComponent($app)
+
+      const selectedDay = document.querySelector(
+        '.sx__time-grid-day.is-selected'
+      )
+      expect(selectedDay?.getAttribute('data-time-grid-date')).toBe(
+        '2024-07-20'
+      )
+
+      $app.datePickerState.selectedDate.value = '2024-07-19'
+
+      await waitFor(() => {
+        const selectedDayAfterChange = document.querySelector(
+          '.sx__time-grid-day.is-selected'
+        )
+        expect(
+          selectedDayAfterChange?.getAttribute('data-time-grid-date')
+        ).toBe('2024-07-19')
+      })
+    })
+  })
 })

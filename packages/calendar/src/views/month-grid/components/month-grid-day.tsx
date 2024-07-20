@@ -4,7 +4,7 @@ import {
   toJSDate,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
@@ -68,12 +68,20 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     $app.datePickerState.selectedDate.value
   )
   const { month: dayMonth } = toIntegers(day.date)
-  const wrapperClasses = [
+  const baseClasses = [
     'sx__month-grid-day',
     getClassNameForWeekday(jsDate.getDay()),
   ]
-  if (dayMonth !== selectedDateMonth)
-    wrapperClasses.push('is-leading-or-trailing')
+  const [wrapperClasses, setWrapperClasses] = useState(baseClasses)
+
+  useEffect(() => {
+    const classes = [...baseClasses]
+
+    if (dayMonth !== selectedDateMonth) classes.push('is-leading-or-trailing')
+    if ($app.datePickerState.selectedDate.value === day.date)
+      classes.push('is-selected')
+    setWrapperClasses(classes)
+  }, [$app.datePickerState.selectedDate.value])
 
   return (
     <div
