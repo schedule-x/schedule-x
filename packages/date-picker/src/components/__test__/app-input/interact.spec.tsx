@@ -81,4 +81,38 @@ describe('date picker input', () => {
 
     expect($app.datePickerState.inputDisplayedValue.value).toBe('1/1/2021')
   })
+
+  it('should have tabindex of 0 when enabled', () => {
+    const $app = createAppSingleton()
+    renderComponent($app)
+    const inputElement = getInputElement()
+
+    expect(inputElement.tabIndex).toBe(0)
+  })
+
+  it('should have tabindex of -1 when disabled', () => {
+    const $app = createAppSingleton({ disabled: true })
+    renderComponent($app)
+    const inputElement = getInputElement()
+
+    expect(inputElement.tabIndex).toBe(-1)
+  })
+
+  it('should have a chevron button with tabindex of 0 when enabled', () => {
+    const $app = createAppSingleton()
+    renderComponent($app)
+    const chevron = document.querySelector('.sx__date-input-chevron-wrapper')
+    if (!(chevron instanceof HTMLElement)) throw new Error('Chevron not found')
+
+    expect(chevron?.tabIndex).toBe(0)
+  })
+
+  it('should have a chevron button with tabindex of -1 when disabled', () => {
+    const $app = createAppSingleton({ disabled: true })
+    renderComponent($app)
+    const chevron = document.querySelector('.sx__date-input-chevron-wrapper')
+    if (!(chevron instanceof HTMLElement)) throw new Error('Chevron not found')
+
+    expect(chevron?.tabIndex).toBe(-1)
+  })
 })
