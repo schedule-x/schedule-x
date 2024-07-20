@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.53.0](https://github.com/schedule-x/schedule-x/compare/v1.52.0...v1.53.0) (2024-07-20)
+
+### Features
+
+- date picker disabled ([#552](https://github.com/schedule-x/schedule-x/issues/552)) ([60c791e](https://github.com/schedule-x/schedule-x/commit/60c791eb952e1573f5c862664d807d93bcccb4db))
+
 # [1.52.0](https://github.com/schedule-x/schedule-x/compare/v1.51.0...v1.52.0) (2024-07-19)
 
 ### Bug Fixes
