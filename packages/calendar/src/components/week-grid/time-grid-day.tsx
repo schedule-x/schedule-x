@@ -73,12 +73,22 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
     }, msWaitToEnsureThatClickEventWasDispatched)
   }
 
+  const baseClasses = [
+    'sx__time-grid-day',
+    getClassNameForWeekday(toJSDate(date).getDay()),
+  ]
+  const [classNames, setClassNames] = useState<string[]>(baseClasses)
+
+  useEffect(() => {
+    const newClassNames = [...baseClasses]
+    if ($app.datePickerState.selectedDate.value === date)
+      newClassNames.push('is-selected')
+    setClassNames(newClassNames)
+  }, [$app.datePickerState.selectedDate.value])
+
   return (
     <div
-      className={[
-        'sx__time-grid-day',
-        getClassNameForWeekday(toJSDate(date).getDay()),
-      ].join(' ')}
+      className={classNames.join(' ')}
       data-time-grid-date={date}
       onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
       onDblClick={(e) =>

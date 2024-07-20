@@ -169,4 +169,27 @@ describe('MonthWrapper', () => {
       expect(days[34].classList).toContain('sx__sunday')
     })
   })
+
+  describe('the selected class', () => {
+    it('should add the selected class to the selected date', async () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2024-07-01',
+      })
+      renderComponent($app)
+
+      const selectedDay = document.querySelector(
+        '.sx__month-grid-day.is-selected'
+      )
+      expect(selectedDay?.getAttribute('data-date')).toBe('2024-07-01')
+
+      $app.datePickerState.selectedDate.value = '2024-07-02'
+
+      await waitFor(() => {
+        const selectedDay = document.querySelector(
+          '.sx__month-grid-day.is-selected'
+        )
+        expect(selectedDay?.getAttribute('data-date')).toBe('2024-07-02')
+      })
+    })
+  })
 })
