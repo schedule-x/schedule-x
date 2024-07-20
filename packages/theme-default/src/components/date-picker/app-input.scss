@@ -34,6 +34,10 @@
 
   width: 100%;
 
+  .is-disabled & {
+    pointer-events: none;
+  }
+
   .sx__date-input--active & {
     border-color: var(--sx-color-primary);
     outline: 1px solid var(--sx-color-primary);

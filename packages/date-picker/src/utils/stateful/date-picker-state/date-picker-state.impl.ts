@@ -16,6 +16,7 @@ export const createDatePickerState = (
       : currentDayDateString
 
   const isOpen = signal(false)
+  const isDisabled = signal(config.disabled || false)
   const datePickerView = signal(DatePickerView.MONTH_DAYS)
   const selectedDate = signal(initialSelectedDate)
   const datePickerDate = signal(initialSelectedDate || currentDayDateString)
@@ -56,6 +57,7 @@ export const createDatePickerState = (
   return {
     inputWrapperElement: signal(undefined),
     isOpen,
+    isDisabled,
     datePickerView,
     selectedDate,
     datePickerDate,
