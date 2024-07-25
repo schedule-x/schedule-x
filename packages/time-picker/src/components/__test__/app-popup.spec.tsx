@@ -127,4 +127,23 @@ describe('Time picker popup', () => {
       expect($app.timePickerState.isOpen.value).toBe(false)
     })
   })
+
+  describe('pressing escape', () => {
+    it('should close the popup', () => {
+      const $app = createTimePickerAppContext()
+      $app.timePickerState.isOpen.value = true
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+      const popup = document.querySelector('.sx__time-picker-popup')
+      assertElementType<HTMLElement>(popup, HTMLElement)
+      expect($app.timePickerState.isOpen.value).toBe(true)
+
+      fireEvent.keyDown(document.body, { key: 'Escape' })
+
+      expect($app.timePickerState.isOpen.value).toBe(false)
+    })
+  })
 })

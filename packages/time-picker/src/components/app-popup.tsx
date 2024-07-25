@@ -55,11 +55,21 @@ export default function AppPopup() {
     }
   }
 
+  const escapeKeyListener = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      $app.timePickerState.isOpen.value = false
+    }
+  }
+
   useEffect(() => {
     hoursRef.current?.focus()
     hoursRef.current?.select()
     document.addEventListener('click', clickOutsideListener)
-    return () => document.removeEventListener('click', clickOutsideListener)
+    document.addEventListener('keydown', escapeKeyListener)
+    return () => {
+      document.removeEventListener('click', clickOutsideListener)
+      document.removeEventListener('keydown', escapeKeyListener)
+    }
   }, [])
 
   const handleAccept = () => {
