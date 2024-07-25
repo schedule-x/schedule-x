@@ -30,9 +30,17 @@ export default function AppPopup() {
     if (!target.closest(`.${POPUP_CLASS_NAME}`)) $app.datePickerState.close()
   }
 
+  const escapeKeyListener = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') $app.datePickerState.close()
+  }
+
   useEffect(() => {
     document.addEventListener('click', clickOutsideListener)
-    return () => document.removeEventListener('click', clickOutsideListener)
+    document.addEventListener('keydown', escapeKeyListener)
+    return () => {
+      document.removeEventListener('click', clickOutsideListener)
+      document.removeEventListener('keydown', escapeKeyListener)
+    }
   }, [])
 
   const remSize: number = Number(
