@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.54.0](https://github.com/schedule-x/schedule-x/compare/v1.53.0...v1.54.0) (2024-07-25)
+
+### Features
+
+- close popups on escape press ([#557](https://github.com/schedule-x/schedule-x/issues/557)) ([eff1036](https://github.com/schedule-x/schedule-x/commit/eff1036bea065083b68d11ac0acca57232160778))
+
 # [1.53.0](https://github.com/schedule-x/schedule-x/compare/v1.52.0...v1.53.0) (2024-07-20)
 
 ### Features

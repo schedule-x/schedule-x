@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.54.0](https://github.com/schedule-x/schedule-x/compare/v1.53.0...v1.54.0) (2024-07-25)
+
+### Features
+
+- **calendar:** add data-date-grid-date attribute ([#556](https://github.com/schedule-x/schedule-x/issues/556)) ([dea82fc](https://github.com/schedule-x/schedule-x/commit/dea82fc6db96961b9c1bceebc2d562db94b58a50))
+
 # [1.53.0](https://github.com/schedule-x/schedule-x/compare/v1.52.0...v1.53.0) (2024-07-20)
 
 ### Features
