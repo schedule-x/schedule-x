@@ -68,6 +68,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
                 {Object.values(week).map((day) => (
                   <DateGridDay
                     key={day.date}
+                    date={day.date}
                     calendarEvents={day.dateGridEvents}
                   />
                 ))}

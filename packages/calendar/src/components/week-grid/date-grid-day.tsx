@@ -6,11 +6,12 @@ type props = {
   calendarEvents: {
     [key: string]: CalendarEventInternal | typeof DATE_GRID_BLOCKER | undefined
   }
+  date: string
 }
 
-export default function DateGridDay({ calendarEvents }: props) {
+export default function DateGridDay({ calendarEvents, date }: props) {
   return (
-    <div className="sx__date-grid-day">
+    <div className="sx__date-grid-day" data-date-grid-date={date}>
       {Object.values(calendarEvents).map((event, index) => {
         if (event === DATE_GRID_BLOCKER || !event)
           return (
