@@ -5,16 +5,17 @@ import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placeme
 import { createAppSingleton } from '../../../factory'
 
 export const renderComponent = (placement?: Placement) => {
+  const app = createAppSingleton({
+    placement,
+    locale: 'en-US',
+  })
   const { container } = render(
     <AppContext.Provider
-      value={createAppSingleton({
-        placement,
-        locale: 'en-US',
-      })}
+      value={app}
     >
       <AppPopup />
     </AppContext.Provider>
   )
 
-  return container
+  return { container, app }
 }

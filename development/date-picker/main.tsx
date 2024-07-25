@@ -11,7 +11,7 @@ import { createDatePicker } from '@schedule-x/date-picker/src'
 const datePicker = createDatePicker({
   teleportTo: document.body,
   locale: 'de-DE',
-  disabled: true,
+  // disabled: true,
   // locale: 'fr-FR',
   style: {
     fullWidth: true,
