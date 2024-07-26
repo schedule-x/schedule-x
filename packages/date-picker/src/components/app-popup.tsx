@@ -31,7 +31,11 @@ export default function AppPopup() {
   }
 
   const escapeKeyListener = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') $app.datePickerState.close()
+    if (e.key === 'Escape') {
+      if ($app.config.listeners.onEscapeKeyDown)
+        $app.config.listeners.onEscapeKeyDown($app)
+      else $app.datePickerState.close()
+    }
   }
 
   useEffect(() => {

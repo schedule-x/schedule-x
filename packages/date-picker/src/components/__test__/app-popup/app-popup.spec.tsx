@@ -8,6 +8,7 @@ import { cleanup, fireEvent, screen, waitFor } from '@testing-library/preact'
 import { MONTH_VIEW } from '../../../constants/test-ids'
 import { renderComponent } from './utils'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
+import { vi } from 'vitest'
 
 describe('AppPopup', () => {
   beforeEach(() => {
@@ -78,5 +79,15 @@ describe('AppPopup', () => {
     fireEvent.keyDown(document.body, { key: 'Escape' })
 
     expect(app.datePickerState.isOpen.value).to.equal(false)
+  })
+
+  it('should call onEscapeKeyDown callback if provided', () => {
+    const onEscapeKeyDown = vi.fn()
+    renderComponent(undefined, onEscapeKeyDown)
+    expect(onEscapeKeyDown).toHaveBeenCalledTimes(0)
+
+    fireEvent.keyDown(document.body, { key: 'Escape' })
+
+    expect(onEscapeKeyDown).toHaveBeenCalledTimes(1)
   })
 })

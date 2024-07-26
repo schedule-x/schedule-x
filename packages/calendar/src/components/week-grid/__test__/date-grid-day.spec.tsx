@@ -26,7 +26,8 @@ describe('DateGridDay', () => {
       renderComponent($app, date)
 
       const dateGridDay = document.querySelector('.sx__date-grid-day')
-      if (!(dateGridDay instanceof HTMLElement)) throw new Error('dateGridDay not found')
+      if (!(dateGridDay instanceof HTMLElement))
+        throw new Error('dateGridDay not found')
       expect(dateGridDay.getAttribute('data-date-grid-date')).equals(date)
     })
   })

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -8,7 +9,7 @@ import { cleanup, fireEvent, render } from '@testing-library/preact'
 import { AppContext } from '../../utils/stateful/app-context'
 import AppPopup from '../app-popup'
 import { assertElementType } from '../../../../../libs/assertions/src'
-import { afterEach } from 'vitest'
+import { afterEach, vi } from 'vitest'
 
 describe('Time picker popup', () => {
   afterEach(() => {
@@ -144,6 +145,23 @@ describe('Time picker popup', () => {
       fireEvent.keyDown(document.body, { key: 'Escape' })
 
       expect($app.timePickerState.isOpen.value).toBe(false)
+    })
+
+    it('should call the onEscapeKeyDown callback if provided', () => {
+      const onEscapeKeyDown = vi.fn()
+      const $app = createTimePickerAppContext({ onEscapeKeyDown })
+      $app.timePickerState.isOpen.value = true
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+
+      expect(onEscapeKeyDown).not.toHaveBeenCalled()
+
+      fireEvent.keyDown(document.body, { key: 'Escape' })
+
+      expect(onEscapeKeyDown).toHaveBeenCalled()
     })
   })
 })

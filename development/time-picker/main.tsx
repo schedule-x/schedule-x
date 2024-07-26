@@ -17,6 +17,9 @@ const timePicker = createTimePicker({
   teleportTo: document.body,
   is12Hour: true,
   // dark: true,
-  initialValue: '23:59'
+  initialValue: '23:59',
+  onEscapeKeyDown: ($app) => {
+    $app.timePickerState.isOpen.value = false
+  }
 })
 timePicker.render(document.querySelector('#app') as HTMLElement)
