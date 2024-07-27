@@ -4,6 +4,7 @@ import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
+import { toDateString } from '@schedule-x/shared'
 
 type props = {
   week: WeekWithDates
@@ -28,7 +29,7 @@ export default function DateAxis({ week }: props) {
     <>
       <div className="sx__week-grid__date-axis">
         {week.map((date) => (
-          <div className={getClassNames(date)}>
+          <div className={getClassNames(date)} data-date={toDateString(date)}>
             <div className="sx__week-grid__day-name">
               {getDayNameShort(date, $app.config.locale)}
             </div>
