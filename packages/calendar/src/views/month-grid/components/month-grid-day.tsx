@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { MonthDay as MonthDayType } from '../types/month'
 import {
   toIntegers,
