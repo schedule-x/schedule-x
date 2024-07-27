@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
+
+### Features
+
+- **date-picker:** add onEscapeKeyDown ([#564](https://github.com/schedule-x/schedule-x/issues/564)) ([01add2b](https://github.com/schedule-x/schedule-x/commit/01add2b7a5a52320e0d3adcce9d606b82389f810))
+
 # [1.54.0](https://github.com/schedule-x/schedule-x/compare/v1.53.0...v1.54.0) (2024-07-25)
 
 **Note:** Version bump only for package @schedule-x/e2e-testing

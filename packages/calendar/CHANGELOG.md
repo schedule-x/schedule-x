@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
+
+### Bug Fixes
+
+- **calendar:** fix faulty number of +n events in month grid ([#560](https://github.com/schedule-x/schedule-x/issues/560)) ([5ac3c0c](https://github.com/schedule-x/schedule-x/commit/5ac3c0cfe3e5cb3356515ddd821002484dc34627))
+
+### Features
+
+- **calendar:** add data-date attribute for date axis dates ([#561](https://github.com/schedule-x/schedule-x/issues/561)) ([9a503c6](https://github.com/schedule-x/schedule-x/commit/9a503c6aba5755656c484ab921965c9c0b5318df))
+- **calendar:** set event width in time grid ([#562](https://github.com/schedule-x/schedule-x/issues/562)) ([8cec16e](https://github.com/schedule-x/schedule-x/commit/8cec16e75d9e619c9c599d91b7757a2156bdc57d))
+- **date-picker:** add onEscapeKeyDown ([#564](https://github.com/schedule-x/schedule-x/issues/564)) ([01add2b](https://github.com/schedule-x/schedule-x/commit/01add2b7a5a52320e0d3adcce9d606b82389f810))
+
 # [1.54.0](https://github.com/schedule-x/schedule-x/compare/v1.53.0...v1.54.0) (2024-07-25)
 
 ### Features

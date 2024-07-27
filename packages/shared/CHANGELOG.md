@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
+
+### Features
+
+- **calendar:** set event width in time grid ([#562](https://github.com/schedule-x/schedule-x/issues/562)) ([8cec16e](https://github.com/schedule-x/schedule-x/commit/8cec16e75d9e619c9c599d91b7757a2156bdc57d))
+- **date-picker:** add onEscapeKeyDown ([#564](https://github.com/schedule-x/schedule-x/issues/564)) ([01add2b](https://github.com/schedule-x/schedule-x/commit/01add2b7a5a52320e0d3adcce9d606b82389f810))
+
 # [1.54.0](https://github.com/schedule-x/schedule-x/compare/v1.53.0...v1.54.0) (2024-07-25)
 
 **Note:** Version bump only for package @schedule-x/shared
