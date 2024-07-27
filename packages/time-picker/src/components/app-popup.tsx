@@ -57,7 +57,11 @@ export default function AppPopup() {
 
   const escapeKeyListener = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      $app.timePickerState.isOpen.value = false
+      if (typeof $app.config.onEscapeKeyDown.value === 'function') {
+        $app.config.onEscapeKeyDown.value($app)
+      } else {
+        $app.timePickerState.isOpen.value = false
+      }
     }
   }
 

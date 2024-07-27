@@ -53,6 +53,7 @@ export const createTimePickerAppContext = (
   config: TimePickerConfigExternal = {}
 ) => ({
   config: {
+    onEscapeKeyDown: signal(config.onEscapeKeyDown ?? undefined),
     dark: signal(config.dark ?? false),
     placement: signal(config.placement ?? 'bottom-start'),
     teleportTo: signal(config.teleportTo ?? null),

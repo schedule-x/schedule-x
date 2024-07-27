@@ -87,7 +87,9 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   const getNumberOfNonDisplayedEvents = () => {
     return Object.values(day.events)
       .slice($app.config.monthGridOptions.nEventsPerDay)
-      .filter((event) => event === DATE_GRID_BLOCKER || typeof event === 'object').length
+      .filter(
+        (event) => event === DATE_GRID_BLOCKER || typeof event === 'object'
+      ).length
   }
 
   const numberOfNonDisplayedEvents = getNumberOfNonDisplayedEvents()
@@ -140,16 +142,12 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       {numberOfNonDisplayedEvents > 0 ? (
         <button
           className="sx__month-grid-day__events-more sx__ripple--wide"
-          aria-label={getAriaLabelSingularOrPlural(
-            numberOfNonDisplayedEvents
-          )}
+          aria-label={getAriaLabelSingularOrPlural(numberOfNonDisplayedEvents)}
           onClick={handleClickAdditionalEvents}
         >
           {`+ ${
             numberOfNonDisplayedEvents
-          } ${getEventTranslationSingularOrPlural(
-            numberOfNonDisplayedEvents
-          )}`}
+          } ${getEventTranslationSingularOrPlural(numberOfNonDisplayedEvents)}`}
         </button>
       ) : null}
     </div>

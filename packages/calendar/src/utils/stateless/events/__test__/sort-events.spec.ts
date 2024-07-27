@@ -5,7 +5,10 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
-import { sortEventsByStartAndEnd, sortEventsByStartAndEndWithoutConsideringTime } from '../sort-by-start-date'
+import {
+  sortEventsByStartAndEnd,
+  sortEventsByStartAndEndWithoutConsideringTime,
+} from '../sort-by-start-date'
 
 describe('sorting events', () => {
   const config = new CalendarConfigBuilder().build()
