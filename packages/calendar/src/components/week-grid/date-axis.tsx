@@ -4,7 +4,7 @@ import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
-import { toDateString } from '@schedule-x/shared'
+import { toDateString } from '@schedule-x/shared/src'
 
 type props = {
   week: WeekWithDates
