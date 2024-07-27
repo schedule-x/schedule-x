@@ -21,6 +21,11 @@
     "href": "https://premium.schedule-x.dev/docs/sidebar",
     "newWindow": true
   },
+  "drag-to-create": {
+    "title": "⭐ Drag to create",
+    "href": "https://premium.schedule-x.dev/docs/drag-to-create",
+    "newWindow": true
+  },
   "events-service": {
     "title": "Events Service"
   },

@@ -281,4 +281,29 @@ describe('MonthDay component', () => {
       }
     )
   })
+
+  // see: https://github.com/schedule-x/schedule-x/issues/559
+  // there might be a way to improve this, if the events are sorted again in each month-week, only considering each event's
+  // start and end dates within that week, as compared to considering their original start and end dates
+  // this will mean having to rewrite large chunks of the current positioning algorithm though
+  describe('having a day with undefined events occupying visible slots and still having more events to show', () => {
+    it('should show correct number of extra events', () => {
+      const $app = __createAppWithViews__()
+      const day: MonthDayType = {
+        date: '2020-01-01',
+        events: {
+          '0': undefined,
+          '1': undefined,
+          '2': undefined,
+          '3': getTestEvent($app),
+          '4': getTestEvent($app),
+          '5': getTestEvent($app),
+        },
+      }
+
+      renderComponent($app, day)
+
+      expect(screen.getByText('+ 2 events')).not.toBeNull()
+    })
+  })
 })

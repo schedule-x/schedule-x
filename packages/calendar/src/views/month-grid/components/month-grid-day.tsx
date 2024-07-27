@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { MonthDay as MonthDayType } from '../types/month'
 import {
   toIntegers,
@@ -83,6 +84,14 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     setWrapperClasses(classes)
   }, [$app.datePickerState.selectedDate.value])
 
+  const getNumberOfNonDisplayedEvents = () => {
+    return Object.values(day.events)
+      .slice($app.config.monthGridOptions.nEventsPerDay)
+      .filter((event) => event === DATE_GRID_BLOCKER || typeof event === 'object').length
+  }
+
+  const numberOfNonDisplayedEvents = getNumberOfNonDisplayedEvents()
+
   return (
     <div
       className={wrapperClasses.join(' ')}
@@ -128,18 +137,18 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
           })}
       </div>
 
-      {nEventsInDay > $app.config.monthGridOptions.nEventsPerDay ? (
+      {numberOfNonDisplayedEvents > 0 ? (
         <button
           className="sx__month-grid-day__events-more sx__ripple--wide"
           aria-label={getAriaLabelSingularOrPlural(
-            nEventsInDay - $app.config.monthGridOptions.nEventsPerDay
+            numberOfNonDisplayedEvents
           )}
           onClick={handleClickAdditionalEvents}
         >
           {`+ ${
-            nEventsInDay - $app.config.monthGridOptions.nEventsPerDay
+            numberOfNonDisplayedEvents
           } ${getEventTranslationSingularOrPlural(
-            nEventsInDay - $app.config.monthGridOptions.nEventsPerDay
+            numberOfNonDisplayedEvents
           )}`}
         </button>
       ) : null}
