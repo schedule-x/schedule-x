@@ -86,14 +86,14 @@ const calendar = createCalendar({
 
 ## Supported rules
 
-| Rule                                         | Supported values                                                                                                                                                                     | Required |
-|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| FREQ                                         | `DAILY`, `WEEKLY`, `MONTHLY` or `YEARLY`                                                                                                                                             | Yes      |
-| COUNT                                        | Number                                                                                                                                                                               | No       |
-| INTERVAL                                     | Number                                                                                                                                                                               | No       |
-| BYDAY - compatible with `DAILY` and `WEEKLY` | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
-| BYMONTHDAY  - compatible with `MONTHLY`      | Positive integer 1-31                                                                                                                                                                | No       |
-| UNTIL                                        | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No       |
+| Rule                                         | Supported values                                                                                                                                                                     | Required                       |
+|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| FREQ                                         | `DAILY`, `WEEKLY`, `MONTHLY` or `YEARLY`                                                                                                                                             | Yes                            |
+| COUNT                                        | Number                                                                                                                                                                               | Yes (unless UNTIL is provided) |
+| INTERVAL                                     | Number                                                                                                                                                                               | No                             |
+| BYDAY - compatible with `DAILY` and `WEEKLY` | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No                             |
+| BYMONTHDAY  - compatible with `MONTHLY`      | Positive integer 1-31                                                                                                                                                                | Yes (unless COUNT is provided) |
+| UNTIL                                        | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No                             |
 
 ## Events service
 
