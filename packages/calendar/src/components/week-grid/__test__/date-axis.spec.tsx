@@ -66,6 +66,20 @@ describe('DateAxis', () => {
         document.querySelector('.sx__week-grid__date--is-today')
       ).not.toBeNull()
     })
+
+    it('should have data-date attributes for every day', () => {
+      const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 1))
+      renderComponent(__createAppWithViews__(), week)
+
+      const allDayElements = document.querySelectorAll('.sx__week-grid__date')
+      expect(allDayElements[0]?.getAttribute('data-date')).toBe('2023-08-28')
+      expect(allDayElements[1]?.getAttribute('data-date')).toBe('2023-08-29')
+      expect(allDayElements[2]?.getAttribute('data-date')).toBe('2023-08-30')
+      expect(allDayElements[3]?.getAttribute('data-date')).toBe('2023-08-31')
+      expect(allDayElements[4]?.getAttribute('data-date')).toBe('2023-09-01')
+      expect(allDayElements[5]?.getAttribute('data-date')).toBe('2023-09-02')
+      expect(allDayElements[6]?.getAttribute('data-date')).toBe('2023-09-03')
+    })
   })
 
   describe('a week starting on Monday', () => {
