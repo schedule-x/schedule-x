@@ -38,8 +38,8 @@ export const getLeftRule = (calendarEvent: CalendarEventInternal) => {
   )
 }
 
-export const getWidthRule = (leftRule: number) => {
-  return 100 - leftRule
+export const getWidthRule = (leftRule: number, eventWidth: number) => {
+  return eventWidth - leftRule
 }
 
 export const getBorderRule = (calendarEvent: CalendarEventInternal) => {

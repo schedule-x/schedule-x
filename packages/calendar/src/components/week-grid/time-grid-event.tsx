@@ -167,7 +167,7 @@ export default function TimeGridEvent({
             $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
-          width: `${getWidthRule(leftRule)}%`,
+          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.eventWidth)}%`,
           backgroundColor: customComponent
             ? undefined
             : eventCSSVariables.backgroundColor,
