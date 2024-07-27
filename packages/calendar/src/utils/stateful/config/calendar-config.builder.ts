@@ -30,6 +30,7 @@ export default class CalendarConfigBuilder
   weekOptions: WeekOptions = {
     gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
     nDays: 7,
+    eventWidth: 100,
   }
   monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined

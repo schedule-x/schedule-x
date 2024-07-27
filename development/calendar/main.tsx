@@ -71,6 +71,7 @@ const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,
     // nDays: 4,
+    eventWidth: 95,
   },
   // monthGridOptions: {
   //   nEventsPerDay: 7

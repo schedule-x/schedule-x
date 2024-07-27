@@ -19,6 +19,7 @@ import { Signal } from '@preact/signals'
 export type WeekOptions = {
   gridHeight: number
   nDays: number
+  eventWidth: number
 }
 
 export type MonthGridOptions = {
