@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
+
+### Bug Fixes
+
+- **calendar:** custom event not updating on drag and drop ([#565](https://github.com/schedule-x/schedule-x/issues/565)) ([b653b51](https://github.com/schedule-x/schedule-x/commit/b653b513002f9f353ee4a706b3200618fad72afb))
+- event left property when using eventWidth config ([#569](https://github.com/schedule-x/schedule-x/issues/569)) ([0a78440](https://github.com/schedule-x/schedule-x/commit/0a78440a265d346778b5ccf294c36eeb513c476e))
+- throw away state of month grid days when navigating through months ([#570](https://github.com/schedule-x/schedule-x/issues/570)) ([0885f95](https://github.com/schedule-x/schedule-x/commit/0885f9543708d999f221b0c71a1bffbd6bc86bf3))
+
 # [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
+
+### Bug Fixes
+
+- event left property when using eventWidth config ([#569](https://github.com/schedule-x/schedule-x/issues/569)) ([0a78440](https://github.com/schedule-x/schedule-x/commit/0a78440a265d346778b5ccf294c36eeb513c476e))
+
 # [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
 
 ### Features

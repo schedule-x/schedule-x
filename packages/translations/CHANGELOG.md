@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
+
+### Features
+
+- add Estonian language support ([#568](https://github.com/schedule-x/schedule-x/issues/568)) ([8f3c4d9](https://github.com/schedule-x/schedule-x/commit/8f3c4d91e63e66680d6626b2f849dd3d12e97332))
+
 # [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
 
 ### Features
