@@ -24,7 +24,10 @@ export const getEventHeight = (
   )
 }
 
-export const getLeftRule = (calendarEvent: CalendarEventInternal) => {
+export const getLeftRule = (
+  calendarEvent: CalendarEventInternal,
+  eventWidth: number
+) => {
   if (
     !calendarEvent._totalConcurrentEvents ||
     !calendarEvent._previousConcurrentEvents
@@ -34,7 +37,7 @@ export const getLeftRule = (calendarEvent: CalendarEventInternal) => {
   return (
     ((calendarEvent._previousConcurrentEvents || 0) /
       (calendarEvent._totalConcurrentEvents || 0)) *
-    100
+    eventWidth
   )
 }
 
