@@ -1,8 +1,11 @@
 import '@schedule-x/theme-default/dist/index.css'
 import Card from '../partials/card/card'
-import darkModeIcon from '../../assets/icons/dark-mode.svg'
-import dragAndDropIcon from '../../assets/icons/drag-drop.svg'
-import customizeIcon from '../../assets/icons/customize.svg'
+import dragAndDropIconWhite from '../../assets/icons/drag-and-drop-white.svg'
+import darkModeWhite from '../../assets/icons/dark-mode-white.svg'
+import customizeIconWhite from '../../assets/icons/customize-white.svg'
+import resizeWhite from '../../assets/icons/resize-white.svg'
+import i18nWhite from '../../assets/icons/i18n-white.svg'
+import responsiveWhite from '../../assets/icons/responsive-white.svg'
 import Link from 'next/link'
 import AppCalendar from '../partials/app-calendar/app-calendar'
 
@@ -41,9 +44,19 @@ export default function LandingPage() {
 
         <AppCalendar/>
 
+        <div className={'features-heading'}>
+          <h3>
+            Your own <span>high-end</span> calendar
+          </h3>
+
+          <p>
+            Getting it right when building a calendar takes time. Schedule-X already has a lot of things figured out for you, so you can save yourself the year it might take to build a calendar from scratch.
+          </p>
+        </div>
+
         <div className={'landingPageCards'}>
           <Card
-            icon={customizeIcon}
+            icon={customizeIconWhite}
             title={'Customizable'}
             description={
               'Choose which views to display, set custom day boundaries or even write a plugin.'
@@ -51,16 +64,40 @@ export default function LandingPage() {
           />
 
           <Card
-            icon={dragAndDropIcon}
+            icon={dragAndDropIconWhite}
             title={'Drag and drop'}
             description={'Reschedule events through a classic drag and drop.'}
           />
 
           <Card
-            icon={darkModeIcon}
+            icon={resizeWhite}
+            title={'Event resizing'}
+            description={
+              'Resize events by dragging the edges.'
+            }
+          />
+        </div>
+
+        <div className={'landingPageCards'}>
+          <Card
+            icon={darkModeWhite}
             title={'Dark mode'}
             description={
               'Built with light- and dark modes in mind. Toggle between them, simply by calling a method.'
+            }
+          />
+
+          <Card
+            icon={i18nWhite}
+            title={'i18n'}
+            description={'Supports multiple languages out of the box.'}
+          />
+
+          <Card
+            icon={responsiveWhite}
+            title={'Responsive'}
+            description={
+              'Works on all devices, from desktop to mobile'
             }
           />
         </div>

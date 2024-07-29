@@ -35,5 +35,14 @@
       "sidebar": false,
       "toc": true
     }
+  },
+  "attributions": {
+    "display": "hidden",
+    "title": "Attributions",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
   }
 }
