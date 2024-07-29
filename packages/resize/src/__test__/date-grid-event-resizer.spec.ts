@@ -63,6 +63,8 @@ describe('Resizing events in the date grid', () => {
           clientWidth: 100,
         }
       }
+
+      return
     }
     calendarWrapper = $app.elements.calendarWrapper
   })

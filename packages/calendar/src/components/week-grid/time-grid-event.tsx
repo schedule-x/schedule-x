@@ -66,7 +66,10 @@ export default function TimeGridEvent({
     iconStroke: `var(--sx-color-on-${calendarEvent._color}-container)`,
   } as const
 
-  const leftRule = getLeftRule(calendarEvent)
+  const leftRule = getLeftRule(
+    calendarEvent,
+    $app.config.weekOptions.eventWidth
+  )
 
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
