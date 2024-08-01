@@ -20,7 +20,13 @@ describe('Resizing events in the date grid', () => {
   let eventCopy: CalendarEventInternal
   let eventUpdater: Mock
   let twoDayEvent: CalendarEventInternal
+  // TODO: remove when ts eslint fixes this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let twoDayEventCopy: CalendarEventInternal
   let eventStartingInPreviousWeek: CalendarEventInternal
+  // TODO: remove when ts eslint fixes this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let eventStartingInPreviousWeekCopy: CalendarEventInternal
   let calendarWrapper: HTMLDivElement
 
   beforeEach(() => {
