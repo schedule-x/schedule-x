@@ -20,18 +20,6 @@
   "custom-views": {
     "title": "Custom views"
   },
-  "react": {
-    "title": "React component"
-  },
-  "vue": {
-    "title": "Vue component"
-  },
-  "angular": {
-    "title": "Angular component"
-  },
-  "svelte": {
-    "title": "Svelte component"
-  },
   "demo": {
     "title": "Demo",
     "href": "/demos/calendar"
