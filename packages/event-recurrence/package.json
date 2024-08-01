@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/event-recurrence",
-  "version": "1.56.0",
+  "version": "1.57.0",
   "description": "Create recurring events for the Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",

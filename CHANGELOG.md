@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.57.0](https://github.com/schedule-x/schedule-x/compare/v1.56.0...v1.57.0) (2024-08-01)
+
+### Features
+
+- add Ukrainian language support ([#576](https://github.com/schedule-x/schedule-x/issues/576)) ([634cba8](https://github.com/schedule-x/schedule-x/commit/634cba8c26c5658912157113e08f1554cb2aa11c))
+
 # [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
 
 ### Bug Fixes
