@@ -18,3 +18,7 @@ npm publish --access public
 cd ../translations
 
 npm publish --access public
+
+cd ../calendar-controls
+
+npm publish --access public

@@ -7,6 +7,8 @@ export const calendarUkUA: CalendarTranslations = {
   Day: 'День',
   events: 'події',
   event: 'подія',
+  'My appointments': 'Мої зустрічі',
+  'Add time off': 'Додати час відпочинку',
   'No events': 'Немає подій',
   'Next period': 'Наступний період',
   'Previous period': 'Минулий період',

@@ -7,6 +7,8 @@ export const calendarEtEE: CalendarTranslations = {
   Day: 'Päev',
   events: 'sündmused',
   event: 'sündmus',
+  'My appointments': 'Minu kohtumised',
+  'Add time off': 'Lisa puhkeaeg',
   'No events': 'Pole sündmusi',
   'Next period': 'Järgmine periood',
   'Previous period': 'Eelmine periood',

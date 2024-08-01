@@ -8,15 +8,10 @@ export const ToggleBtnsViewSelection = () => {
   const handleChangeTimeFrame = (
     timeframe: 'day' | 'week' | 'month-grid' | 'month-agenda'
   ) => {
-    if (timeframe == 'day') {
-      $app.calendarState.view.value = InternalViewName.Day
-    } else if (timeframe == 'week') {
-      $app.calendarState.view.value = InternalViewName.Week
-    } else if (timeframe == 'month-grid') {
-      $app.calendarState.view.value = InternalViewName.MonthGrid
-    } else if (timeframe == 'month-agenda') {
-      $app.calendarState.view.value = InternalViewName.MonthAgenda
-    }
+    $app.calendarState.setView(
+      timeframe,
+      $app.datePickerState.selectedDate.value
+    )
   }
 
   return (

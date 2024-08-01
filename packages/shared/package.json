@@ -26,7 +26,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/schedule-x/schedule-x",
+    "url": "https://github.com/astowny/schedule-x",
     "directory": "packages/shared"
   },
   "gitHead": "e107e76362346f2d961b429936f7ee55b25695e7"

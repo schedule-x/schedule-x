@@ -7,6 +7,8 @@ export const calendarIdID: CalendarTranslations = {
   Day: 'Hari',
   events: 'Acara',
   event: 'Acara',
+  'My appointments': 'Janji temu saya',
+  'Add time off': 'Tambahkan waktu libur',
   'No events': 'Tidak ada acara',
   'Next period': 'Periode selanjutnya',
   'Previous period': 'Periode sebelumnya',
