@@ -21,9 +21,7 @@ describe('styles of DateGridEvent', () => {
     const threeDayEventTitle = 'My event 2'
 
     const $app = __createAppWithViews__({
-      datePicker: {
-        selectedDate: selectedDate,
-      },
+      selectedDate: selectedDate,
       events: [
         {
           id: oneDayEventId,
@@ -74,9 +72,7 @@ describe('styles of DateGridEvent', () => {
     const eventWithOverflowBothTitle = 'My event 2'
 
     const $app = __createAppWithViews__({
-      datePicker: {
-        selectedDate: selectedDate,
-      },
+      selectedDate: selectedDate,
       events: [
         {
           id: eventWithOverflowLeftId,

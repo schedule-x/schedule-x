@@ -19,7 +19,10 @@ import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
 import { createResizePlugin } from '../../packages/resize/src'
-import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
+import {
+  createEventRecurrencePlugin,
+  createEventsServicePlugin,
+} from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
@@ -86,23 +89,28 @@ const calendar = createCalendar({
     onAddTimeOff: () =>
       console.log('successful on add time off added function'),
   },
-  // weekOptions: {
-  //   gridHeight: 3000,
-  // },
+  weekOptions: {
+    // gridHeight: 3000,
+    // nDays: 4,
+    eventWidth: 95,
+  },
   // monthGridOptions: {
   //   nEventsPerDay: 7
   // },
-  // firstDayOfWeek: 1,
+  firstDayOfWeek: 0,
   // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',
+  // locale: 'id-ID',
+  // locale: 'cs-CZ',
+  // locale: 'et-EE',
   locale: 'de-DE',
   views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
   defaultView: 'week',
-  // selectedDate: '2024-02-01',
+  // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
   // },
@@ -140,6 +148,30 @@ const calendar = createCalendar({
     onClickDateTime(dateTime) {
       console.log('onClickDateTime', dateTime)
     },
+
+    onClickAgendaDate(date) {
+      console.log('onClickAgendaDate', date)
+    },
+
+    onClickPlusEvents(date) {
+      console.log('onClickPlusEvents', date)
+    },
+
+    onSelectedDateUpdate(date) {
+      console.log('onSelectedDateUpdate', date)
+    },
+
+    onDoubleClickDateTime(dateTime) {
+      console.log('onDoubleClickDateTime', dateTime)
+    },
+
+    onDoubleClickDate(date) {
+      console.log('onDoubleClickDate', date)
+    },
+    //
+    // isCalendarSmall($app) {
+    //   return $app.elements.calendarWrapper!.clientWidth! < 500
+    // }
   },
   calendars: {
     personal: {
@@ -201,7 +233,7 @@ const calendar = createCalendar({
     eventsServicePlugin,
     scrollControllerPlugin,
     createResizePlugin(30),
-    createEventRecurrencePlugin(),
+    eventRecurrencePlugin,
     calendarControlsPlugin,
     calendarsUpdaterPlugin,
     createCurrentTimePlugin(),
@@ -296,8 +328,8 @@ addEventButton.addEventListener('click', () => {
   eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
-    start: '2023-12-18',
-    end: '2023-12-19',
+    start: '2024-06-06',
+    end: '2024-06-06',
   })
 })
 

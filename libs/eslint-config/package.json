@@ -1,10 +1,10 @@
 {
   "name": "@schedule-x/eslint-config",
   "main": "src/index.js",
-  "version": "1.38.0",
+  "version": "1.56.0",
   "description": "Schedule-X eslint config",
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "981dc3c7e4f5d56288dfbb27b992ea73e8206675"
+  "gitHead": "e107e76362346f2d961b429936f7ee55b25695e7"
 }

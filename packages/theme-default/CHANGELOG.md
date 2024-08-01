@@ -32,6 +32,160 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **sidebar plugin:** add sidebar plugin ([1069163](https://github.com/schedule-x/schedule-x/commit/10691635ad7460d105c6b8821ee393c5605c1e8b))
 - **sidebar plugin:** fix scroll behaviour for calendar ([3132284](https://github.com/schedule-x/schedule-x/commit/3132284eb43be238509df8c9a5a819c02107601a))
 - **sidebar plugin:** fix scroll behaviour for calendar ([f9d3e81](https://github.com/schedule-x/schedule-x/commit/f9d3e81712ab81e254674feafbcaa53ccfcf8f9b))
+# [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
+
+### Features
+
+- **date-picker:** add onEscapeKeyDown ([#564](https://github.com/schedule-x/schedule-x/issues/564)) ([01add2b](https://github.com/schedule-x/schedule-x/commit/01add2b7a5a52320e0d3adcce9d606b82389f810))
+
+# [1.54.0](https://github.com/schedule-x/schedule-x/compare/v1.53.0...v1.54.0) (2024-07-25)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.53.0](https://github.com/schedule-x/schedule-x/compare/v1.52.0...v1.53.0) (2024-07-20)
+
+### Features
+
+- date picker disabled ([#552](https://github.com/schedule-x/schedule-x/issues/552)) ([60c791e](https://github.com/schedule-x/schedule-x/commit/60c791eb952e1573f5c862664d807d93bcccb4db))
+
+# [1.52.0](https://github.com/schedule-x/schedule-x/compare/v1.51.0...v1.52.0) (2024-07-19)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.51.0](https://github.com/schedule-x/schedule-x/compare/v1.50.0...v1.51.0) (2024-07-12)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.50.0](https://github.com/schedule-x/schedule-x/compare/v1.49.0...v1.50.0) (2024-07-09)
+
+### Features
+
+- time picker design ([#532](https://github.com/schedule-x/schedule-x/issues/532)) ([975c4c7](https://github.com/schedule-x/schedule-x/commit/975c4c7e21d8d82ceda953fad8acf0e5a7edecd6))
+- **time-picker:** 12-hour clock ([#528](https://github.com/schedule-x/schedule-x/issues/528)) ([9d469d9](https://github.com/schedule-x/schedule-x/commit/9d469d9550cf6cdf249ba556753e58b93d9b94eb))
+
+# [1.49.0](https://github.com/schedule-x/schedule-x/compare/v1.48.0...v1.49.0) (2024-07-06)
+
+### Features
+
+- enable navigating month views with screen reader ([#523](https://github.com/schedule-x/schedule-x/issues/523)) ([6577fe0](https://github.com/schedule-x/schedule-x/commit/6577fe096bcac1fa81fb8ed79bbb0d67e9492114))
+
+# [1.48.0](https://github.com/schedule-x/schedule-x/compare/v1.47.1...v1.48.0) (2024-07-03)
+
+### Bug Fixes
+
+- **theme-default:** prevent modal from overflowing on small screens ([#514](https://github.com/schedule-x/schedule-x/issues/514)) ([2d6bae5](https://github.com/schedule-x/schedule-x/commit/2d6bae57ad6f9ff308e1a3f15a9ed5d3944e2f74))
+
+## [1.47.1](https://github.com/schedule-x/schedule-x/compare/v1.47.0...v1.47.1) (2024-06-29)
+
+### Bug Fixes
+
+- **date-picker:** fix dark theme when teleporting popup ([#509](https://github.com/schedule-x/schedule-x/issues/509)) ([f331ac0](https://github.com/schedule-x/schedule-x/commit/f331ac097be3857bf57d0390db4ba210a284cc5f))
+
+# [1.47.0](https://github.com/schedule-x/schedule-x/compare/v1.46.7...v1.47.0) (2024-06-28)
+
+### Features
+
+- **calendar:** create slots for header content ([#501](https://github.com/schedule-x/schedule-x/issues/501)) ([ed5ced5](https://github.com/schedule-x/schedule-x/commit/ed5ced5f395cf159bfe1ba3e767df2dcbb534c2d))
+
+## [1.46.7](https://github.com/schedule-x/schedule-x/compare/v1.46.6...v1.46.7) (2024-06-24)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.46.6](https://github.com/schedule-x/schedule-x/compare/v1.46.5...v1.46.6) (2024-06-22)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.46.5](https://github.com/schedule-x/schedule-x/compare/v1.46.4...v1.46.5) (2024-06-21)
+
+### Bug Fixes
+
+- **calendar:** align items in header ([#495](https://github.com/schedule-x/schedule-x/issues/495)) ([a16a6e2](https://github.com/schedule-x/schedule-x/commit/a16a6e2a920068a2da138355249e0add0a5fc284))
+
+## [1.46.4](https://github.com/schedule-x/schedule-x/compare/v1.46.3...v1.46.4) (2024-06-18)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.46.3](https://github.com/schedule-x/schedule-x/compare/v1.46.2...v1.46.3) (2024-06-17)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.46.2](https://github.com/schedule-x/schedule-x/compare/v1.46.1...v1.46.2) (2024-06-17)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.46.1](https://github.com/schedule-x/schedule-x/compare/v1.46.0...v1.46.1) (2024-06-11)
+
+### Bug Fixes
+
+- **theme-default:** scope styles that were global by accident ([#481](https://github.com/schedule-x/schedule-x/issues/481)) ([d2af629](https://github.com/schedule-x/schedule-x/commit/d2af629f354bb377abd65d544132aa7395090950))
+
+# [1.46.0](https://github.com/schedule-x/schedule-x/compare/v1.45.1...v1.46.0) (2024-06-10)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.45.1](https://github.com/schedule-x/schedule-x/compare/v1.45.0...v1.45.1) (2024-06-08)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.45.0](https://github.com/schedule-x/schedule-x/compare/v1.44.0...v1.45.0) (2024-06-06)
+
+### Bug Fixes
+
+- **calendar-controls:** update range when setting view ([#463](https://github.com/schedule-x/schedule-x/issues/463)) ([ebfb4a6](https://github.com/schedule-x/schedule-x/commit/ebfb4a65b7152b39af6dcfc60dda18ae86fb9104))
+
+# [1.44.0](https://github.com/schedule-x/schedule-x/compare/v1.43.0...v1.44.0) (2024-06-06)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.43.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.42.3...v1.43.0-alpha.0) (2024-06-03)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.42.3](https://github.com/schedule-x/schedule-x/compare/v1.42.2...v1.42.3) (2024-05-31)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.42.2](https://github.com/schedule-x/schedule-x/compare/v1.42.1...v1.42.2) (2024-05-30)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.42.1](https://github.com/schedule-x/schedule-x/compare/v1.42.0...v1.42.1) (2024-05-24)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.42.0](https://github.com/schedule-x/schedule-x/compare/v1.41.2...v1.42.0) (2024-05-22)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.41.2](https://github.com/schedule-x/schedule-x/compare/v1.41.1...v1.41.2) (2024-05-17)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.41.1](https://github.com/schedule-x/schedule-x/compare/v1.41.0...v1.41.1) (2024-05-16)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.41.0](https://github.com/schedule-x/schedule-x/compare/v1.40.0...v1.41.0) (2024-05-11)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.40.0](https://github.com/schedule-x/schedule-x/compare/v1.39.0...v1.40.0) (2024-05-11)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.39.0](https://github.com/schedule-x/schedule-x/compare/v1.38.0...v1.39.0) (2024-05-08)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-06)
+
+### Features
+
+- hide forward backward nav based on css ([#410](https://github.com/schedule-x/schedule-x/issues/410)) ([314e0aa](https://github.com/schedule-x/schedule-x/commit/314e0aa5a1379ff5a923fcd7221111badaa818c3))
 
 # [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
 

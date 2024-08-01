@@ -5,7 +5,7 @@ import { Month } from '../types/month'
 import MonthGridWeek from './month-grid-week'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { positionInMonth } from '../utils/stateless/position-in-month'
-import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
+import { sortEventsByStartAndEndWithoutConsideringTime } from '../../../utils/stateless/events/sort-by-start-date'
 
 export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])
@@ -18,16 +18,22 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
       $app.datePickerState.selectedDate.value,
       $app.timeUnitsImpl
     )
+    const filteredEvents = $app.calendarEvents.filterPredicate.value
+      ? $app.calendarEvents.list.value.filter(
+          $app.calendarEvents.filterPredicate.value
+        )
+      : $app.calendarEvents.list.value
     setMonth(
       positionInMonth(
         newMonth,
-        $app.calendarEvents.list.value.sort(sortEventsByStartAndEnd)
+        filteredEvents.sort(sortEventsByStartAndEndWithoutConsideringTime)
       )
     )
   }, [
     $app.calendarState.range.value?.start,
     $app.calendarState.range.value?.end,
     $app.calendarEvents.list.value,
+    $app.calendarEvents.filterPredicate.value,
   ])
 
   return (
@@ -35,9 +41,10 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
       <div id={id} className="sx__month-grid-wrapper">
         {month.map((week, index) => (
           <MonthGridWeek
-            key={index + new Date().getTime()}
+            key={index}
             week={week}
             isFirstWeek={index === 0}
+            isLastWeek={index === month.length - 1}
           />
         ))}
       </div>

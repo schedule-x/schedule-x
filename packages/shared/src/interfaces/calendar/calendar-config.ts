@@ -21,6 +21,8 @@ import HeaderPlugin from './calendar-header.interface'
 
 export type WeekOptions = {
   gridHeight: number
+  nDays: number
+  eventWidth: number
 }
 
 export type MonthGridOptions = {
@@ -35,6 +37,7 @@ export type ColorDefinition = {
 
 export type CalendarType = {
   colorName: string
+  label?: string
   lightColors?: ColorDefinition
   darkColors?: ColorDefinition
 }
@@ -64,6 +67,7 @@ export default interface CalendarConfigInternal extends Config {
   calendars: Signal<Record<string, CalendarType>>
   plugins: Plugins
   isDark: boolean
+  isResponsive: boolean
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
   minDate?: string
@@ -87,6 +91,7 @@ interface ReducedCalendarConfigInternal
     | 'views'
     | '_customComponentFns'
     | 'calendars'
+    | 'weekOptions'
   > {}
 
 export interface CalendarConfigExternal
@@ -99,4 +104,5 @@ export interface CalendarConfigExternal
   selectedDate?: string
   calendars?: Record<string, CalendarType>
   customCallBacks?: CustomCallbacks
+  weekOptions?: Partial<WeekOptions>
 }

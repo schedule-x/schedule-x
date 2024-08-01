@@ -8,7 +8,29 @@ Add some additional controls, to programmatically change the calendar view and s
 npm i @schedule-x/calendar-controls
 ```
 
-## Usage
+## API
+
+### `setView(viewName: string)`
+
+Change the calendar view.
+
+### `setDate(date: string)`
+
+Set the date of the calendar. Format: `YYYY-MM-DD`.
+
+### `getView(): string`
+
+Get the name of the current view.
+
+### `getDate(): string`
+
+Get the currently selected date of the calendar.
+
+### `getRange(): { start: string, end: string }`
+
+Get the currently visible time range of the calendar.
+
+## Examples
 
 ```js
 import { createCalendarControlsPlugin } from '@schedule-x/calendar-controls'

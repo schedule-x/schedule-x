@@ -7,4 +7,8 @@ export type CustomComponentFns = {
   monthAgendaEvent?: CustomComponentFn
   eventModal?: CustomComponentFn
   sidebar?: CustomComponentFn
+  headerContentLeftPrepend?: CustomComponentFn
+  headerContentLeftAppend?: CustomComponentFn
+  headerContentRightPrepend?: CustomComponentFn
+  headerContentRightAppend?: CustomComponentFn
 }

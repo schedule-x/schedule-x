@@ -4,17 +4,15 @@
 
 .sx__date-picker__years-accordion__expand-button {
   width: 100%;
-  border: 0;
-  border-bottom: var(--sx-border);
   border-radius: 0;
   background-color: transparent;
   font-size: 1rem;
   padding: 1em;
   transition: background-color 0.2s ease-in-out;
+  color: var(--sx-internal-color-text);
 
   .sx__is-expanded & {
     background-color: var(--sx-color-surface-container);
-    border-bottom: 0;
   }
 
   &:hover {
@@ -38,6 +36,7 @@
   font-size: 0.9rem;
   padding: 0.5em 0;
   border-radius: 25px;
+  color: var(--sx-internal-color-text);
 
   &:hover {
     background-color: var(--sx-color-primary);

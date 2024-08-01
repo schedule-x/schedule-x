@@ -24,9 +24,7 @@ describe('WeekDayEvent', () => {
       'should display the time for an event in %s locale',
       (locale: string, expectedTime: string) => {
         const $app = __createAppWithViews__({
-          datePicker: {
-            selectedDate: '2020-12-01',
-          },
+          selectedDate: '2020-12-01',
           locale,
         })
         const calendarEvent = new CalendarEventBuilder(

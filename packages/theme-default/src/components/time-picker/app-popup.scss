@@ -7,6 +7,11 @@
   flex-direction: column;
   gap: var(--sx-spacing-padding3);
   background-color: var(--sx-color-background);
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
 
   .is-dark & {
     background-color: var(--sx-color-surface-container-high);
@@ -34,22 +39,61 @@
     font-size: 0.875rem;
     font-weight: 700;
     color: var(--sx-color-neutral);
+    font-family: inherit;
 
     .is-dark & {
-      color: var(--sx-color-text);
+      color: var(--sx-internal-color-text);
     }
   }
 
   .sx__time-picker-time-inputs {
     display: flex;
-    align-items: center;
     gap: var(--sx-spacing-padding2);
   }
 
   .sx__time-picker-colon {
     font-size: 2.5rem;
-    color: var(--sx-color-text);
+    color: var(--sx-internal-color-text);
     margin: 0 var(--sx-spacing-padding1);
+  }
+
+  .sx__time-picker-12-hour-switches {
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+    margin-left: var(--sx-spacing-padding1);
+  }
+
+  .sx__time-picker-12-hour-switch {
+    background-color: transparent;
+    padding: 0 var(--sx-spacing-padding3);
+    border: none;
+    flex: 1;
+    cursor: pointer;
+    border-radius: inherit;
+    color: var(--sx-internal-color-text);
+
+    &:focus {
+      outline: 1px solid var(--sx-color-primary);
+    }
+
+    &:first-child {
+      border: 1px solid var(--sx-color-neutral);
+      border-bottom: 1px solid var(--sx-color-neutral);
+      border-top-left-radius: var(--sx-rounding-small);
+      border-top-right-radius: var(--sx-rounding-small);
+    }
+
+    &:last-child {
+      border: 1px solid var(--sx-color-neutral);
+      border-bottom-left-radius: var(--sx-rounding-small);
+      border-bottom-right-radius: var(--sx-rounding-small);
+    }
+
+    &.is-selected {
+      background-color: var(--sx-color-primary-container);
+      color: var(--sx-color-on-primary-container);
+    }
   }
 
   .sx__time-picker-actions {
@@ -62,6 +106,7 @@
     font-size: 0.875rem;
     font-weight: 700;
     color: var(--sx-color-primary);
+    background-color: transparent;
     cursor: pointer;
     border: none;
 

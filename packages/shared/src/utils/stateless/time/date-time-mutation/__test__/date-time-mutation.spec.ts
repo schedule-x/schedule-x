@@ -75,6 +75,7 @@ describe('date time mutation', () => {
     it.each([
       ['2020-01-01', '2020-02-01'],
       ['2023-07-23', '2023-08-01'],
+      ['2024-01-31', '2024-02-01'],
     ])('should get first day of next month', (date, expectedResult) => {
       expect(underTest(date)).toBe(expectedResult)
     })

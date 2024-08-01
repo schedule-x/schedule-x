@@ -15,4 +15,8 @@ export const calendarRuRU: CalendarTranslations = {
   to: 'по', // as in 2/1/2020 to 2/2/2020
   'Full day- and multiple day events':
     'События на целый день и несколько дней подряд',
+  'Link to {{n}} more events on {{date}}':
+    'Ссылка на {{n}} дополнительных событий на {{date}}',
+  'Link to 1 more event on {{date}}':
+    'Ссылка на 1 дополнительное событие на {{date}}',
 }

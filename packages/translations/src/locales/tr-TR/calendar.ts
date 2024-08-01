@@ -14,4 +14,7 @@ export const calendarTrTR: CalendarTranslations = {
   'Previous period': 'Önceki dönem',
   to: 'dan', // as in 2/1/2020 to 2/2/2020
   'Full day- and multiple day events': 'Tüm gün ve çoklu gün etkinlikleri',
+  'Link to {{n}} more events on {{date}}':
+    '{{date}} tarihinde {{n}} etkinliğe bağlantı',
+  'Link to 1 more event on {{date}}': '{{date}} tarihinde 1 etkinliğe bağlantı',
 }

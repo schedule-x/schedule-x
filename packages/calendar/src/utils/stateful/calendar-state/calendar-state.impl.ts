@@ -1,28 +1,30 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
-import { effect, Signal, signal } from '@preact/signals'
+import { computed, effect, Signal, signal } from '@preact/signals'
 import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import EventColors from '../event-colors/event-colors'
+import { toDateString } from '@schedule-x/shared/src'
 
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
-  timeUnitsImpl: TimeUnits
+  timeUnitsImpl: TimeUnits,
+  selectedDate?: string
 ): CalendarState => {
-  const view = signal<ViewName>(
+  const _view = signal<ViewName>(
     calendarConfig.views.find(
       (view) => view.name === calendarConfig.defaultView
     )?.name || calendarConfig.views[0].name
   )
+  const view = computed(() => {
+    return _view.value
+  })
   const range = signal<DateRange | null>(null)
 
   let wasInitialized = false
-
   const callOnRangeUpdate = (_range: Signal<DateRange | null>) => {
-    // On the first call of this function (upon initializing the calendar), we don't want to call the callback.
-    // This is dirty. If a better way is found, please change this.
     if (!wasInitialized) return (wasInitialized = true)
 
     if (calendarConfig.callbacks.onRangeUpdate && _range.value) {
@@ -36,9 +38,9 @@ export const createCalendarState = (
     }
   })
 
-  const handleDateSelection = (date: string) => {
+  const setRange = (date: string) => {
     const selectedView = calendarConfig.views.find(
-      (availableView) => availableView.name === view.value
+      (availableView) => availableView.name === _view.value
     )
     const newRange = (selectedView as View).setDateRange({
       calendarConfig,
@@ -55,6 +57,9 @@ export const createCalendarState = (
     range.value = newRange
   }
 
+  // one initial call for setting the range
+  setRange(selectedDate || toDateString(new Date()))
+
   const isCalendarSmall = signal<boolean | undefined>(undefined)
   const isDark = signal<boolean>(calendarConfig.isDark || false)
 
@@ -68,10 +73,14 @@ export const createCalendarState = (
   })
 
   return {
-    isDark,
     view,
-    handleDateSelection,
+    isDark,
+    setRange,
     range,
     isCalendarSmall,
+    setView: (newView: ViewName, selectedDate: string) => {
+      _view.value = newView
+      setRange(selectedDate)
+    },
   }
 }

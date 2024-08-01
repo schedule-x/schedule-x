@@ -1,5 +1,21 @@
 @use 'mixins' as mixins;
 
+html {
+  .main {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    overflow: hidden;
+  }
+
+  scroll-behavior: smooth;
+}
+
+.heading-font {
+  /* stylelint-disable */
+  font-family: '__Podkova_f01382', '__Podkova_Fallback_f01382';
+  /* stylelint-enable */
+  font-weight: 700;
+}
+
 .page-wrapper {
   max-width: 90rem;
   min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
@@ -62,4 +78,10 @@
 
 .light .logo-dark {
   display: none;
+}
+
+.footer-theme-switch {
+  button {
+    padding: 0;
+  }
 }

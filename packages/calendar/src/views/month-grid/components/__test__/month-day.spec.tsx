@@ -14,12 +14,12 @@ import MonthGridDay from '../month-grid-day'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { getTestEvent } from './test-events'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
-import { vi } from 'vitest'
+import { beforeEach, vi } from 'vitest'
 
 const renderComponent = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(
     <AppContext.Provider value={$app}>
-      <MonthGridDay day={day} isFirstWeek={false} />
+      <MonthGridDay day={day} isFirstWeek={false} isLastWeek={false} />
     </AppContext.Provider>
   )
 }
@@ -98,9 +98,11 @@ describe('MonthDay component', () => {
 
   describe('displaying 2 more events than the limit', () => {
     const onClickPlusEvents = vi.fn()
+    const onClickDate = vi.fn()
     const $app = __createAppWithViews__({
       callbacks: {
         onClickPlusEvents,
+        onClickDate,
       },
     })
     const dayWithEventLimitPlus2: MonthDayType = {
@@ -155,6 +157,18 @@ describe('MonthDay component', () => {
         expect($app.calendarState.view.value).toBe(InternalViewName.Day)
       })
     })
+
+    it('should not propagate click to the day, when clicking on the more events button', () => {
+      renderComponent($app, dayWithEventLimitPlus2)
+      const moreEventsButton = document.querySelector(
+        '.sx__month-grid-day__events-more'
+      )
+      moreEventsButton?.dispatchEvent(
+        new MouseEvent('click', { bubbles: true })
+      )
+
+      expect(onClickDate).not.toHaveBeenCalled()
+    })
   })
 
   describe('configuring number of events to display', () => {
@@ -189,6 +203,106 @@ describe('MonthDay component', () => {
       expect(
         document.querySelector('.sx__month-grid-day__events-more')
       ).not.toBeNull()
+      expect(screen.getByText('+ 2 events')).not.toBeNull()
+    })
+  })
+
+  describe('leading and trailing dates', () => {
+    let $app: CalendarAppSingleton
+    let day: MonthDayType
+
+    beforeEach(() => {
+      $app = __createAppWithViews__({
+        selectedDate: '2020-01-01',
+      })
+      day = {
+        date: '2020-01-01',
+        events: {},
+      }
+    })
+
+    it('should not have the class "is-leading-or-trailing" when day is in selected month', () => {
+      renderComponent($app, day)
+
+      expect(document.querySelector('.is-leading-or-trailing')).toBeNull()
+    })
+
+    it('should have the class "is-leading-or-trailing" when day is in month previous to selected month', () => {
+      day.date = '2019-12-31'
+      renderComponent($app, day)
+
+      expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
+    })
+
+    it('should have the class "is-leading-or-trailing" when day is in month after selected month', () => {
+      day.date = '2020-02-01'
+      renderComponent($app, day)
+
+      expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
+    })
+  })
+
+  describe('getting the aria label for the more events button', () => {
+    it.each([
+      [
+        'de-DE',
+        '+ 1 Ereignis',
+        'Link zu 1 weiteren Ereignis am 1. Januar 2020',
+      ],
+      ['en-US', '+ 1 event', 'Link to 1 more event on January 1, 2020'],
+      ['es-ES', '+ 1 evento', 'Enlace a 1 evento más el 1 de enero de 2020'],
+      [
+        'fr-FR',
+        '+ 1 événement',
+        'Lien vers 1 autre événement le 1 janvier 2020',
+      ],
+    ])(
+      'should return the singular translation',
+      (locale, buttonText, expectedAriaLabel) => {
+        const $app = __createAppWithViews__({
+          locale: locale,
+        })
+        const day: MonthDayType = {
+          date: '2020-01-01',
+          events: {
+            '0': getTestEvent($app),
+            '1': getTestEvent($app),
+            '2': getTestEvent($app),
+            '3': getTestEvent($app),
+            '4': getTestEvent($app),
+          },
+        }
+
+        renderComponent($app, day)
+
+        expect(screen.getByText(buttonText).getAttribute('aria-label')).toBe(
+          expectedAriaLabel
+        )
+      }
+    )
+  })
+
+  // see: https://github.com/schedule-x/schedule-x/issues/559
+  // there might be a way to improve this, if the events are sorted again in each month-week, only considering each event's
+  // start and end dates within that week, as compared to considering their original start and end dates
+  // this will mean having to rewrite large chunks of the current positioning algorithm though
+  describe('having a day with undefined events occupying visible slots and still having more events to show', () => {
+    it('should show correct number of extra events', () => {
+      const $app = __createAppWithViews__()
+      const day: MonthDayType = {
+        date: '2020-01-01',
+        events: {
+          '0': undefined,
+          '1': undefined,
+          '2': undefined,
+          '3': getTestEvent($app),
+          '4': getTestEvent($app),
+          '5': getTestEvent($app),
+        },
+      }
+
+      renderComponent($app, day)
+
       expect(screen.getByText('+ 2 events')).not.toBeNull()
     })
   })

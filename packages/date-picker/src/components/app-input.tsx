@@ -24,20 +24,14 @@ export default function AppInput() {
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
-  const setInputDOMRect = () => {
+  const setInputElement = () => {
     const inputWrapperEl = document.getElementById(inputWrapperId)
-    if (inputWrapperEl === null) return
-
-    $app.datePickerState.inputRect.value = {
-      x: inputWrapperEl.getBoundingClientRect().left + window.scrollX,
-      y: inputWrapperEl.getBoundingClientRect().top + window.scrollY,
-      height: inputWrapperEl.getBoundingClientRect().height,
-      width: inputWrapperEl.getBoundingClientRect().width,
-    }
+    $app.datePickerState.inputWrapperElement.value =
+      inputWrapperEl instanceof HTMLDivElement ? inputWrapperEl : undefined
   }
 
   useEffect(() => {
-    if ($app.config.teleportTo) setInputDOMRect()
+    if ($app.config.teleportTo) setInputElement()
 
     const newClasses = ['sx__date-input-wrapper']
     if ($app.datePickerState.isOpen.value)
@@ -100,6 +94,8 @@ export default function AppInput() {
 
         <input
           id={datePickerInputId}
+          tabIndex={$app.datePickerState.isDisabled.value ? -1 : 0}
+          name={$app.config.name || 'date'}
           aria-describedby={datePickerLabelId}
           value={$app.datePickerState.inputDisplayedValue.value}
           data-testid="date-picker-input"
@@ -110,8 +106,10 @@ export default function AppInput() {
         />
 
         <button
+          tabIndex={$app.datePickerState.isDisabled.value ? -1 : 0}
           aria-label={$app.translate('Choose Date')}
           onKeyDown={handleButtonKeyDown}
+          onClick={() => $app.datePickerState.open()}
           className="sx__date-input-chevron-wrapper"
         >
           <img className="sx__date-input-chevron" src={chevronIcon} alt="" />

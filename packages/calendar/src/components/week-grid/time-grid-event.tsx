@@ -6,7 +6,7 @@ import {
   getLeftRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
-import { useContext, useEffect } from 'preact/hooks'
+import { StateUpdater, useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
@@ -23,10 +23,12 @@ import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 
 type props = {
   calendarEvent: CalendarEventInternal
   dayBoundariesDateTime?: DayBoundariesDateTime
+  setMouseDown: StateUpdater<boolean>
   isCopy?: boolean
 }
 
@@ -34,6 +36,7 @@ export default function TimeGridEvent({
   calendarEvent,
   dayBoundariesDateTime,
   isCopy,
+  setMouseDown,
 }: props) {
   const $app = useContext(AppContext)
 
@@ -63,13 +66,17 @@ export default function TimeGridEvent({
     iconStroke: `var(--sx-color-on-${calendarEvent._color}-container)`,
   } as const
 
-  const leftRule = getLeftRule(calendarEvent)
+  const leftRule = getLeftRule(
+    calendarEvent,
+    $app.config.weekOptions.eventWidth
+  )
 
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
     if (!uiEvent.target) return
     if (!$app.config.plugins.dragAndDrop) return
+    if (calendarEvent._options?.disableDND) return
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(newEventCopy)
@@ -94,7 +101,7 @@ export default function TimeGridEvent({
     customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
-  }, [])
+  }, [calendarEvent, eventCopy])
 
   const handleOnClick = (e: MouseEvent) => {
     e.stopPropagation()
@@ -102,6 +109,7 @@ export default function TimeGridEvent({
   }
 
   const startResize = (e: MouseEvent) => {
+    setMouseDown(true)
     e.stopPropagation()
 
     if (!dayBoundariesDateTime) return // this can only happen in eventCopy
@@ -119,6 +127,22 @@ export default function TimeGridEvent({
     }
   }
 
+  const borderRule = getBorderRule(calendarEvent)
+  const classNames = ['sx__time-grid-event', 'sx__event']
+  if (isCopy) classNames.push('is-event-copy')
+  if (calendarEvent._options?.additionalClasses)
+    classNames.push(...calendarEvent._options.additionalClasses)
+
+  const handlePointerDown = (e: UIEvent) => {
+    setMouseDown(true)
+    createDragStartTimeout(handleStartDrag, e)
+  }
+
+  const handlePointerUp = (e: UIEvent) => {
+    nextTick(() => setMouseDown(false))
+    setClickedEventIfNotDragging(calendarEvent, e)
+  }
+
   return (
     <>
       <div
@@ -127,13 +151,11 @@ export default function TimeGridEvent({
         }
         data-event-id={calendarEvent.id}
         onClick={handleOnClick}
-        onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
-        onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-        onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
-        onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-        className={
-          'sx__time-grid-event sx__event' + (isCopy ? ' is-event-copy' : '')
-        }
+        onMouseDown={handlePointerDown}
+        onMouseUp={handlePointerUp}
+        onTouchStart={handlePointerDown}
+        onTouchEnd={handlePointerUp}
+        className={classNames.join(' ')}
         tabIndex={0}
         style={{
           top: `${getYCoordinateInTimeGrid(
@@ -148,12 +170,14 @@ export default function TimeGridEvent({
             $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
-          width: `${getWidthRule(leftRule)}%`,
+          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.eventWidth)}%`,
           backgroundColor: customComponent
             ? undefined
             : eventCSSVariables.backgroundColor,
           color: customComponent ? undefined : eventCSSVariables.textColor,
-          border: customComponent ? undefined : getBorderRule(calendarEvent),
+          borderTop: borderRule,
+          borderRight: borderRule,
+          borderBottom: borderRule,
           borderLeft: customComponent
             ? undefined
             : eventCSSVariables.borderLeft,
@@ -177,7 +201,7 @@ export default function TimeGridEvent({
                 {getEventTime(calendarEvent.start, calendarEvent.end)}
               </div>
 
-              {calendarEvent.people && (
+              {calendarEvent.people && calendarEvent.people.length > 0 && (
                 <div className="sx__time-grid-event-people">
                   <UserIcon strokeColor={eventCSSVariables.iconStroke} />
                   {concatenatePeople(calendarEvent.people)}
@@ -186,16 +210,23 @@ export default function TimeGridEvent({
             </Fragment>
           )}
 
-          {$app.config.plugins.resize && (
-            <div
-              className={'sx__time-grid-event-resize-handle'}
-              onMouseDown={startResize}
-            />
-          )}
+          {$app.config.plugins.resize &&
+            !calendarEvent._options?.disableResize && (
+              <div
+                className={'sx__time-grid-event-resize-handle'}
+                onMouseDown={startResize}
+              />
+            )}
         </div>
       </div>
 
-      {eventCopy && <TimeGridEvent calendarEvent={eventCopy} isCopy={true} />}
+      {eventCopy && (
+        <TimeGridEvent
+          calendarEvent={eventCopy}
+          isCopy={true}
+          setMouseDown={setMouseDown}
+        />
+      )}
     </>
   )
 }

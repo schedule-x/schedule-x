@@ -17,19 +17,17 @@ export default function AppInput() {
   }, [$app.timePickerState.isOpen.value])
 
   const openPopup = () => {
-    $app.timePickerState.isOpen.value = true
-
-    const inputRect = document
-      .getElementById(wrapperId)
-      ?.getBoundingClientRect()
-    if (!(inputRect instanceof DOMRect)) return
-
-    $app.timePickerState.inputRect.value = {
-      x: inputRect.left + window.scrollX,
-      y: inputRect.top + window.scrollY,
-      height: inputRect.height,
-      width: inputRect.width,
+    if (!$app.config.teleportTo.value) {
+      $app.timePickerState.isOpen.value = true
+      return
     }
+
+    const inputWrapperElement = document.getElementById(wrapperId)
+    $app.timePickerState.inputWrapperElement.value =
+      inputWrapperElement instanceof HTMLDivElement
+        ? inputWrapperElement
+        : undefined
+    $app.timePickerState.isOpen.value = true
   }
 
   return (
@@ -40,9 +38,10 @@ export default function AppInput() {
         </label>
 
         <input
-          value={$app.timePickerState.currentTime.value}
+          value={$app.timePickerState.currentTimeDisplayedValue.value}
           readOnly={true}
           id={inputId}
+          name={$app.config.name.value ? $app.config.name.value : 'time'}
           className="sx__time-picker-input"
           type="text"
           onFocus={openPopup}

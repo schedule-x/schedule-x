@@ -84,29 +84,38 @@ const calendar = createCalendar({
 
 ## Supported rules
 
-| Rule                                         | Supported values                                                                                                                                                                     | Required |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- |
-| FREQ                                         | `DAILY`, `WEEKLY`, `MONTHLY` or `YEARLY`                                                                                                                                             | Yes      |
-| COUNT                                        | Number                                                                                                                                                                               | No       |
-| INTERVAL                                     | Number                                                                                                                                                                               | No       |
-| BYDAY - compatible with `DAILY` and `WEEKLY` | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
-| BYMONTHDAY - compatible with `MONTHLY`       | Positive integer 1-31                                                                                                                                                                | No       |
-| UNTIL                                        | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No       |
+| Rule                                         | Supported values                                                                                                                                                                     | Required                       |
+|----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| FREQ                                         | `DAILY`, `WEEKLY`, `MONTHLY` or `YEARLY`                                                                                                                                             | Yes                            |
+| COUNT                                        | Number                                                                                                                                                                               | Yes (unless UNTIL is provided) |
+| INTERVAL                                     | Number                                                                                                                                                                               | No                             |
+| BYDAY - compatible with `DAILY` and `WEEKLY` | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No                             |
+| BYMONTHDAY  - compatible with `MONTHLY`      | Positive integer 1-31                                                                                                                                                                | Yes (unless COUNT is provided) |
+| UNTIL                                        | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No                             |
 
-## Events facade
+## Events service
 
-When using this plugin, you should no longer use the normal events facade like `calendar.events.add(...)`. Instead, you
-can now interact with the events such as:
+When using this plugin, you can no longer use the regular events service plugin. Instead, you
+now need to import the events service plugin from this package:
 
 ```js
-const recurrencePlugin = createEventRecurrencePlugin()
+import { createEventRecurrencePlugin, createEventsServicePlugin } from "@schedule-x/event-recurrence";
+
+const recurrencePlugin = createEventRecurrencePlugin();
+const eventsServicePlugin = createEventsServicePlugin();
+
 const calendar = createCalendar({
   // ... other config options
-  plugins: [recurrencePlugin],
-})
+  plugins: [
+    recurrencePlugin,
+    eventsServicePlugin
+  ]
+});
+
+calendar.render(document.getElementById('calendar'));
 
 // Add an event
-recurrencePlugin.eventsFacade.add({
+eventsServicePlugin.add({
   id: 1,
   title: 'New event',
   start: '2024-02-05 14:00',
@@ -115,7 +124,7 @@ recurrencePlugin.eventsFacade.add({
 })
 
 // Update
-recurrencePlugin.eventsFacade.update({
+eventsServicePlugin.update({
   id: 1,
   title: 'New event',
   start: '2024-02-05 14:00',
@@ -124,11 +133,11 @@ recurrencePlugin.eventsFacade.update({
 })
 
 // Get one event with id 123
-const event = recurrencePlugin.eventsFacade.get(123)
+const event = eventsServicePlugin.get(123);
 
 // Get all
-const events = recurrencePlugin.eventsFacade.getAll()
+const events = eventsServicePlugin.getAll();
 
 // Remove an event with id 123
-recurrencePlugin.eventsFacade.remove(123)
+eventsServicePlugin.remove(123);
 ```

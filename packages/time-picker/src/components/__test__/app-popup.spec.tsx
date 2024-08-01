@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -8,7 +9,7 @@ import { cleanup, fireEvent, render } from '@testing-library/preact'
 import { AppContext } from '../../utils/stateful/app-context'
 import AppPopup from '../app-popup'
 import { assertElementType } from '../../../../../libs/assertions/src'
-import { afterEach } from 'vitest'
+import { afterEach, vi } from 'vitest'
 
 describe('Time picker popup', () => {
   afterEach(() => {
@@ -47,6 +48,27 @@ describe('Time picker popup', () => {
       assertElementType<HTMLInputElement>(hoursInput, HTMLInputElement)
       expect(document.activeElement).toBe(hoursInput)
     })
+
+    it.each([
+      { initialValue: '00:00', expectedInitialHours: '12' },
+      { initialValue: '12:00', expectedInitialHours: '12' },
+      { initialValue: '23:59', expectedInitialHours: '11' },
+    ])(
+      'should render in 12-hour mode',
+      ({ initialValue, expectedInitialHours }) => {
+        const $app = createTimePickerAppContext()
+        $app.config.is12Hour.value = true
+        $app.timePickerState.currentTime.value = initialValue
+        render(
+          <AppContext.Provider value={$app}>
+            <AppPopup />
+          </AppContext.Provider>
+        )
+        const hoursInput = document.querySelectorAll('.sx__time-input')[0]
+        assertElementType<HTMLInputElement>(hoursInput, HTMLInputElement)
+        expect(hoursInput.value).toBe(expectedInitialHours)
+      }
+    )
   })
 
   describe('Interacting with the input and buttons', () => {
@@ -85,6 +107,61 @@ describe('Time picker popup', () => {
       fireEvent.click(cancelButton)
 
       expect($app.timePickerState.isOpen.value).toBe(false)
+    })
+  })
+
+  describe('clicking outside', () => {
+    it('should close the popup when clicking outside', () => {
+      const $app = createTimePickerAppContext()
+      $app.timePickerState.isOpen.value = true
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+      const popup = document.querySelector('.sx__time-picker-popup')
+      assertElementType<HTMLElement>(popup, HTMLElement)
+      expect($app.timePickerState.isOpen.value).toBe(true)
+
+      fireEvent.click(document.body)
+
+      expect($app.timePickerState.isOpen.value).toBe(false)
+    })
+  })
+
+  describe('pressing escape', () => {
+    it('should close the popup', () => {
+      const $app = createTimePickerAppContext()
+      $app.timePickerState.isOpen.value = true
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+      const popup = document.querySelector('.sx__time-picker-popup')
+      assertElementType<HTMLElement>(popup, HTMLElement)
+      expect($app.timePickerState.isOpen.value).toBe(true)
+
+      fireEvent.keyDown(document.body, { key: 'Escape' })
+
+      expect($app.timePickerState.isOpen.value).toBe(false)
+    })
+
+    it('should call the onEscapeKeyDown callback if provided', () => {
+      const onEscapeKeyDown = vi.fn()
+      const $app = createTimePickerAppContext({ onEscapeKeyDown })
+      $app.timePickerState.isOpen.value = true
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+
+      expect(onEscapeKeyDown).not.toHaveBeenCalled()
+
+      fireEvent.keyDown(document.body, { key: 'Escape' })
+
+      expect(onEscapeKeyDown).toHaveBeenCalled()
     })
   })
 })

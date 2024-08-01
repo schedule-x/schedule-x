@@ -7,7 +7,13 @@ import {
   CalendarConfigExternal as CalendarConfig,
   CustomComponentFn,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
-import { CalendarEvent } from '@schedule-x/shared/src'
+import {
+  CalendarEvent,
+  toDateString,
+  toTimeString,
+  toDateTimeString,
+  toJSDate,
+} from '@schedule-x/shared/src'
 import CalendarApp from './calendar.app'
 import {
   PreactViewComponent,
@@ -18,7 +24,7 @@ import {
   setRangeForMonth,
   setRangeForDay,
 } from './utils/stateless/time/range/set-range'
-
+import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
 export type {
   CalendarConfig,
   CustomComponentFn,
@@ -33,8 +39,13 @@ export {
   viewDay,
   viewMonthAgenda,
   CalendarApp,
+  toDateString,
+  toTimeString,
+  toDateTimeString,
+  toJSDate,
   createPreactView,
   setRangeForDay,
   setRangeForWeek,
   setRangeForMonth,
+  externalEventToInternal,
 }

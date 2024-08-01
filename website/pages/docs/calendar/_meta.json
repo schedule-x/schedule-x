@@ -20,18 +20,11 @@
   "custom-views": {
     "title": "Custom views"
   },
-  "react": {
-    "title": "React component"
-  },
-  "vue": {
-    "title": "Vue component"
-  },
   "demo": {
     "title": "Demo",
     "href": "/demos/calendar"
   },
   "supported-languages": {
-    "title": "Supported languages",
-    "display": "hidden"
+    "title": "Supported languages"
   }
 }

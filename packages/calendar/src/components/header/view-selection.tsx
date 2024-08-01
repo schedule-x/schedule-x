@@ -8,7 +8,6 @@ import { ToggleBtnsViewSelection } from './toggle-btns-view-selection'
 interface props {
   toggleView: boolean
 }
-
 export default function ViewSelection({ toggleView = true }: props) {
   const $app = useContext(AppContext)
 
@@ -55,7 +54,10 @@ export default function ViewSelection({ toggleView = true }: props) {
 
   const handleClickOnSelectionItem = (viewName: ViewName) => {
     setIsOpen(false)
-    $app.calendarState.view.value = viewName
+    $app.calendarState.setView(
+      viewName,
+      $app.datePickerState.selectedDate.value
+    )
   }
 
   const [viewSelectionItems, setViewSelectionItems] =

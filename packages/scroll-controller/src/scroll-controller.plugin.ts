@@ -57,6 +57,11 @@ class ScrollControllerPlugin implements PluginBase {
    * @param {string} time - time in format 'HH:mm'
    * */
   scrollTo(time: string) {
+    if (!this.$app)
+      throw new Error(
+        '[Schedule-X error]: Plugin not yet initialized. You cannot scroll before the calendar is rendered. For configuring the initial scroll, use the `initialScroll` parameter'
+      )
+
     const $app = this.$app as CalendarAppSingleton
     const pixelsPerHour =
       $app.config.weekOptions.gridHeight / ($app.config.timePointsPerDay / 100)

@@ -24,9 +24,7 @@ describe('RangeHeading', () => {
       (locale, selectedDate, expectedRangeHeading) => {
         const $app = createCalendarAppSingleton({
           locale,
-          datePicker: {
-            selectedDate,
-          },
+          selectedDate,
           views: [viewMonthGrid, viewWeek, viewDay],
         })
         renderComponent($app)

@@ -13,8 +13,8 @@ export default function Card(props: props) {
         <Image
           className={'landing-page-card-icon'}
           src={props.icon}
-          width={50}
-          height={50}
+          width={35}
+          height={35}
           alt={props.title}
         />
 

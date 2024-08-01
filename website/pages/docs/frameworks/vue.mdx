@@ -5,8 +5,8 @@ description: 'Learn how to use the Schedule-X calendar in a Vue application'
 
 # Vue component
 
-This page offers documentation for the Vue-specific usage of the Schedule-X calendar. For general documentation on
-configuring and interacting with the calendar, refer to the rest of the calendar documentation. If you are using
+This page offers documentation for using the Schedule-X calendar in Vue. For general documentation on
+configuring the calendar, refer to the rest of the documentation. If you are using
 Schedule-X with Nuxt, all code examples below should work, but everything needs to be wrapped in a
 `<ClientOnly>` component.
 
@@ -16,7 +16,7 @@ Schedule-X with Nuxt, all code examples below should work, but everything needs 
 npm install @schedule-x/vue @schedule-x/theme-default
 ```
 
-This installs the Vue component and the default theme. If you're using a package manager that does not automatically
+If you're using a package manager that does not automatically
 download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
 `preact`. This is for example the case for **yarn** and **npm < v7**.
 
@@ -36,6 +36,8 @@ import {
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
+// Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
+// For updating events, use the events service plugin
 const calendarApp = createCalendar({
   selectedDate: '2023-12-19',
   views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
@@ -66,12 +68,6 @@ const calendarApp = createCalendar({
 
 ### Explanation
 
-#### Dependencies
-
-From `@schedule-x/vue` you need to import the `ScheduleXCalendar` component. From `@schedule-x/calendar` you need to
-import the views you want to use and the `createCalendar` function. Lastly, from `@schedule-x/theme-default` you
-import the default theme.
-
 #### The calendar instance
 
 The `createCalendar` function takes a [configuration object](/docs/calendar/configuration) as its single argument,
@@ -85,18 +81,37 @@ The `ScheduleXCalendar` component then takes the calendar instance as a prop `ca
 for you. This means you should not call the `render` method of the calendar instance yourself, as shown in other
 examples in the docs.
 
+## Styles
+
+The Schedule-X calendar is a responsive component. To achieve this,
+it cannot be delivered with a fixed height or width of its own. You need to define the height and width of the
+wrapping element `.sx-vue-calendar-wrapper` according to your needs. For a regular desktop application, something
+like this might do the trick for you:
+
+```css
+.sx-vue-calendar-wrapper {
+  width: 100%;
+  height: 800px;
+  max-height: 90vh;
+}
+```
+
 ## Slots & custom components
 
 The Schedule-X calendar is built with customization in mind. Using Vue slots or custom components, you can take
 control over the rendering in parts of the UI. Currently, these components can be customized:
 
-| Slot / Component name | Description                                                      | Props                           |
-| --------------------- | ---------------------------------------------------------------- | ------------------------------- |
-| `timeGridEvent`       | The component for timed events used in the week- and day views   | `calendarEvent`                 |
-| `dateGridEvent`       | The component for all-day events used in the week- and day views | `calendarEvent`                 |
-| `monthGridEvent`      | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
-| `monthAgendaEvent`    | The component for events used in the month agenda view           | `calendarEvent`                 |
-| `eventModal`          | The component for the modal that opens when clicking an event    | `calendarEvent`                 |
+| Slot / Component name       | Description                                                      | Props                           |
+|-----------------------------|------------------------------------------------------------------|---------------------------------|
+| `timeGridEvent`             | The component for timed events used in the week- and day views   | `calendarEvent`                 |
+| `dateGridEvent`             | The component for all-day events used in the week- and day views | `calendarEvent`                 |
+| `monthGridEvent`            | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
+| `monthAgendaEvent`          | The component for events used in the month agenda view           | `calendarEvent`                 |
+| `eventModal`                | The component for the modal that opens when clicking an event    | `calendarEvent`                 |
+| `headerContentLeftPrepend`  | Prepends content to the left part of the header                  |                                 |
+| `headerContentLeftAppend`   | Appends content to the left part of the header                   |                                 |
+| `headerContentRightPrepend` | Prepends content to the right part of the header                 |                                 |
+| `headerContentRightAppend`  | Appends content to the right part of the header                  |                                 |
 
 An example of how to use these components can be found here: https://github.com/schedule-x/vue-example/blob/main/src/App.vue
 

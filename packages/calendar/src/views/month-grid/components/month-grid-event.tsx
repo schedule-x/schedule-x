@@ -12,14 +12,28 @@ type props = {
   gridRow: number
   calendarEvent: CalendarEventInternal
   date: string
+  isFirstWeek: boolean
+  isLastWeek: boolean
 }
 
 export default function MonthGridEvent({
   gridRow,
   calendarEvent,
   date,
+  isFirstWeek,
+  isLastWeek,
 }: props) {
   const $app = useContext(AppContext)
+  const hasOverflowLeft =
+    isFirstWeek &&
+    $app.calendarState.range.value?.start &&
+    dateFromDateTime(calendarEvent.start) <
+      dateFromDateTime($app.calendarState.range.value.start)
+  const hasOverflowRight =
+    isLastWeek &&
+    $app.calendarState.range.value?.end &&
+    dateFromDateTime(calendarEvent.end) >
+      dateFromDateTime($app.calendarState.range.value.end)
   const { createDragStartTimeout, setClickedEventIfNotDragging } =
     useEventInteractions($app)
 
@@ -40,7 +54,8 @@ export default function MonthGridEvent({
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
     if (!uiEvent.target) return
-    if (!$app.config.plugins.dragAndDrop) return
+    if (!$app.config.plugins.dragAndDrop || calendarEvent._options?.disableDND)
+      return
 
     $app.config.plugins.dragAndDrop.createMonthGridDragHandler(
       calendarEvent,
@@ -60,12 +75,23 @@ export default function MonthGridEvent({
       calendarEvent: calendarEvent._getExternalEvent(),
       hasStartDate,
     })
-  }, [])
+  }, [calendarEvent])
 
   const handleOnClick = (e: MouseEvent) => {
     e.stopPropagation() // prevent the click from bubbling up to the day element
     invokeOnEventClickCallback($app, calendarEvent)
   }
+
+  const classNames = [
+    'sx__event',
+    'sx__month-grid-event',
+    'sx__month-grid-cell',
+  ]
+  if (calendarEvent._options?.additionalClasses) {
+    classNames.push(...calendarEvent._options.additionalClasses)
+  }
+  if (hasOverflowLeft) classNames.push('sx__month-grid-event--overflow-left')
+  if (hasOverflowRight) classNames.push('sx__month-grid-event--overflow-right')
 
   return (
     <div
@@ -77,7 +103,7 @@ export default function MonthGridEvent({
       onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
       onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       onClick={handleOnClick}
-      className="sx__event sx__month-grid-event sx__month-grid-cell"
+      className={classNames.join(' ')}
       style={{
         gridRow,
         width: eventCSSVariables.width,
@@ -88,6 +114,7 @@ export default function MonthGridEvent({
           ? undefined
           : eventCSSVariables.backgroundColor,
       }}
+      tabIndex={0}
     >
       {!customComponent && (
         <div className="sx__month-grid-event-title">{calendarEvent.title}</div>

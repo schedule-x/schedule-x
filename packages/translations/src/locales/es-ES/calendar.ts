@@ -15,4 +15,7 @@ export const calendarEsES: CalendarTranslations = {
   to: 'a', // as in 2/1/2020 to 2/2/2020
   'Full day- and multiple day events':
     'Día completo y eventos de múltiples días',
+  'Link to {{n}} more events on {{date}}':
+    'Enlace a {{n}} eventos más el {{date}}',
+  'Link to 1 more event on {{date}}': 'Enlace a 1 evento más el {{date}}',
 }

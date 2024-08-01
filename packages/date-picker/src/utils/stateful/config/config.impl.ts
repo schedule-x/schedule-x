@@ -21,6 +21,8 @@ export class ConfigImpl implements DatePickerConfigInternal {
     public listeners: DatePickerListeners = {},
     public style: DatePickerStyle = {},
     public teleportTo?: HTMLElement,
-    public label?: string
+    public label?: string,
+    public name?: string,
+    public disabled?: boolean
   ) {}
 }

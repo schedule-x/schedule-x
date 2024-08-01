@@ -35,7 +35,6 @@ describe('selected date in date picker state impl', () => {
       listeners: { onChange: onChangeSpy },
     }
     const underTest = createDatePickerState(appConfig, defaultSelectedDate)
-    expect(onChangeSpy).toHaveBeenCalledWith(defaultSelectedDate)
 
     const newSelectedDate = '2023-01-10'
     underTest.selectedDate.value = newSelectedDate

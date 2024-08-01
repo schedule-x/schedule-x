@@ -10,6 +10,8 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datetime/grid-click-to-datetime'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
+import { toJSDate } from '@schedule-x/shared/src'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -17,6 +19,11 @@ type props = {
 }
 
 export default function TimeGridDay({ calendarEvents, date }: props) {
+  /**
+   * The time grid day needs to keep track of whether the mousedown event happened on a calendar event, in order to prevent
+   * click events from firing when dragging an event.
+   * */
+  const [mouseDownOnChild, setMouseDownOnChild] = useState<boolean>(false)
   const $app = useContext(AppContext)
 
   const timeStringFromDayBoundary = timeStringFromTimePoints(
@@ -47,21 +54,50 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
     setEventsWithConcurrency(handleEventConcurrency(sortedEvents))
   }, [calendarEvents])
 
-  const handleOnClick = (e: MouseEvent) => {
-    if (!$app.config.callbacks.onClickDateTime) return
+  const handleOnClick = (
+    e: MouseEvent,
+    callback: ((dateTime: string) => void) | undefined
+  ) => {
+    if (!callback || mouseDownOnChild) return
 
     const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
     if (clickDateTime) {
-      $app.config.callbacks.onClickDateTime(clickDateTime)
+      callback(clickDateTime)
     }
   }
 
+  const handlePointerUp = () => {
+    const msWaitToEnsureThatClickEventWasDispatched = 10
+    setTimeout(() => {
+      setMouseDownOnChild(false)
+    }, msWaitToEnsureThatClickEventWasDispatched)
+  }
+
+  const baseClasses = [
+    'sx__time-grid-day',
+    getClassNameForWeekday(toJSDate(date).getDay()),
+  ]
+  const [classNames, setClassNames] = useState<string[]>(baseClasses)
+
+  useEffect(() => {
+    const newClassNames = [...baseClasses]
+    if ($app.datePickerState.selectedDate.value === date)
+      newClassNames.push('is-selected')
+    setClassNames(newClassNames)
+  }, [$app.datePickerState.selectedDate.value])
+
   return (
     <div
-      className="sx__time-grid-day"
+      className={classNames.join(' ')}
       data-time-grid-date={date}
-      onClick={handleOnClick}
+      onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
+      onDblClick={(e) =>
+        handleOnClick(e, $app.config.callbacks.onDoubleClickDateTime)
+      }
       aria-label={getLocalizedDate(date, $app.config.locale)}
+      onMouseLeave={() => setMouseDownOnChild(false)}
+      onMouseUp={handlePointerUp}
+      onTouchEnd={handlePointerUp}
     >
       {eventsWithConcurrency.map((event) => (
         <TimeGridEvent
@@ -69,6 +105,7 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
           calendarEvent={event}
           dayBoundariesDateTime={dayBoundariesDateTime}
           isCopy={event.isCopy}
+          setMouseDown={setMouseDownOnChild}
         />
       ))}
     </div>

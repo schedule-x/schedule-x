@@ -8,14 +8,20 @@ import { createCalendarEventsImpl } from './utils/stateful/calendar-events/calen
 import { createInternalConfig } from './utils/stateless/factories/create-internal-config'
 import { createTimeUnitsImpl } from './utils/stateless/factories/create-time-units-impl'
 import { createDatePickerConfig } from './utils/stateless/factories/create-date-picker-config'
+import { createDateSelectionCallback } from './utils/stateless/factories/create-date-selection-callback'
 
 export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const internalConfig = createInternalConfig(config)
   const timeUnitsImpl = createTimeUnitsImpl(internalConfig)
-  const calendarState = createCalendarState(internalConfig, timeUnitsImpl)
-  const dateSelectionCallback = (date: string) => {
-    calendarState.handleDateSelection(date)
-  }
+  const calendarState = createCalendarState(
+    internalConfig,
+    timeUnitsImpl,
+    config.selectedDate
+  )
+  const dateSelectionCallback = createDateSelectionCallback(
+    calendarState,
+    config
+  )
   const datePickerConfig = createDatePickerConfig(config, dateSelectionCallback)
   const datePickerState = createDatePickerState(
     datePickerConfig,

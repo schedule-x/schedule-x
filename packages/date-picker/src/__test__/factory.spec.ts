@@ -21,7 +21,7 @@ describe('date picker factory', () => {
       .withMax('2020-12-31')
       .build()
 
-    const app = underTest(document.createElement('div'), config)
+    const app = underTest(config)
     expect(app).toBeInstanceOf(DatePickerApp)
   })
 
@@ -29,7 +29,7 @@ describe('date picker factory', () => {
     const underTest = createDatePicker
     const config = new ConfigBuilder().withFirstDayOfWeek(0).build()
 
-    const app = underTest(document.createElement('div'), config)
+    const app = underTest(config)
     expect(app).toBeInstanceOf(DatePickerApp)
   })
 
@@ -37,7 +37,7 @@ describe('date picker factory', () => {
     const underTest = createDatePickerInternal
     const $app = createAppSingleton()
 
-    const app = underTest($app, document.createElement('div'))
+    const app = underTest($app)
 
     expect(app).toBeInstanceOf(DatePickerApp)
   })

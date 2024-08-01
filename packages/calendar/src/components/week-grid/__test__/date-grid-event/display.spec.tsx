@@ -22,9 +22,7 @@ describe('style attribute "display" of date grid event element', () => {
   const oneDayEventTitle = 'My event'
 
   const $app = __createAppWithViews__({
-    datePicker: {
-      selectedDate: selectedDate,
-    },
+    selectedDate,
     plugins: [createDragAndDropPlugin()],
     events: [
       {
@@ -132,6 +130,21 @@ describe('style attribute "display" of date grid event element', () => {
       expect(
         oneDayEvent.querySelector('.sx__date-grid-event-resize-handle')
       ).not.toBeNull()
+    })
+  })
+
+  describe('adding additional classes', () => {
+    it('should add 2 custom classes', () => {
+      const customClass1 = 'custom-class-1'
+      const customClass2 = 'custom-class-2'
+      $app.calendarEvents.list.value[0]._options = {
+        additionalClasses: [customClass1, customClass2],
+      }
+      renderComponent($app, oneDayEventId, 1)
+      const oneDayEvent = getEventByText(oneDayEventTitle)
+
+      expect(oneDayEvent.classList.contains(customClass1)).toBe(true)
+      expect(oneDayEvent.classList.contains(customClass2)).toBe(true)
     })
   })
 })

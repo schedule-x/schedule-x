@@ -12,10 +12,7 @@ import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
-import {
-  DEFAULT_DAY_BOUNDARIES,
-  DEFAULT_WEEK_GRID_HEIGHT,
-} from '../../../constants'
+import { DEFAULT_DAY_BOUNDARIES } from '../../../constants'
 import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
 import { Signal, signal } from '@preact/signals'
 
@@ -28,12 +25,11 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public defaultView: ViewName = InternalViewName.Week,
     public views: View[] = [],
     public dayBoundaries: DayBoundariesInternal = DEFAULT_DAY_BOUNDARIES,
-    public weekOptions: WeekOptions = {
-      gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
-    },
+    public weekOptions: WeekOptions,
     calendars = {},
     public plugins = {},
     public isDark = false,
+    public isResponsive = true,
     public callbacks = {},
     public _customComponentFns = {},
     public minDate: string | undefined = undefined,

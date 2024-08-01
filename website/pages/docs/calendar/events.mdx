@@ -5,21 +5,19 @@ description: 'Learn how events work in the Schedule-X calendar.'
 
 # Events
 
-At the center of any calendar, lie the events that are planned into it. An
-event can have the following properties:
+## Properties
 
-## Event Properties
-
-| Property      | Type                 | Description                                 | Required |
-| ------------- | -------------------- | ------------------------------------------- | -------- |
-| `id`          | `string` or `number` | A unique identifier for the event.          | Yes      |
-| `start`       | `string`             | The start time of the event.                | Yes      |
-| `end`         | `string`             | The end time of the event.                  | Yes      |
-| `title`       | `string`             | The title of the event.                     | No       |
-| `description` | `string`             | A description of the event.                 | No       |
-| `location`    | `string`             | The location of the event.                  | No       |
-| `people`      | `string[]`           | Names of the participants                   | No       |
-| `calendarId`  | `string`             | id of the calendar. See "calendars" section | No       |
+| Property      | Type                                                      | Description                                 | Required |
+|---------------|-----------------------------------------------------------|---------------------------------------------|----------|
+| `id`          | `string` or `number`                                      | A unique identifier for the event.          | Yes      |
+| `start`       | `string`                                                  | The start time of the event.                | Yes      |
+| `end`         | `string`                                                  | The end time of the event.                  | Yes      |
+| `title`       | `string`                                                  | The title of the event.                     | No       |
+| `description` | `string`                                                  | A description of the event.                 | No       |
+| `location`    | `string`                                                  | The location of the event.                  | No       |
+| `people`      | `string[]`                                                | Names of the participants                   | No       |
+| `calendarId`  | `string`                                                  | id of the calendar. See "calendars" section | No       |
+| `_options`    | [See "_options" section](/docs/calendar/events/#_options) | Configuration for the event.                | No       |
 
 ## Other properties
 
@@ -29,8 +27,8 @@ you upon interacting with the events.
 
 ## Event time
 
-The calendar internally distinguishes between a few types of events. The most basic distinction between them, is
-whether they are **timed events** or **full day events**.
+The timestamps of an event can have two different formats: `YYYY-MM-DD` or `YYYY-MM-DD HH:mm`. These cannot be mixed
+within the same event. For example:
 
 1. **Timed events** - Events that have a start and end time such as:
 
@@ -52,7 +50,7 @@ const fullDayEvent = {
 }
 ```
 
-Furthermore, both of these types then have the possibility to be either a **single day event** or a **multi day event**.
+Both of these types have the possibility to be either a **single day event** or a **multi day event**.
 
 import { Callout } from 'nextra/components'
 
@@ -62,6 +60,18 @@ import { Callout } from 'nextra/components'
   feature is important to you, feel free to open an issue on the GitHub
   repository to help prioritize this feature.
 </Callout>
+
+## _options
+
+Configure the behavior of individual events by adding an `_options` object to the event. All the following
+properties are optional:
+
+| Property          | Type       | Description                             | Default     |
+|-------------------|------------|-----------------------------------------|-------------|
+| disableDND        | `boolean`  | Disables drag and drop for the event.   | `undefined` |
+| disableResize     | `boolean`  | Disables resizing for the event.        | `undefined` |
+| additionalClasses | `string[]` | Additional classes to add to the event. | `undefined` |
+
 
 ## Updating events
 

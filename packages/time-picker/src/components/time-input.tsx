@@ -1,6 +1,7 @@
 import { Ref } from 'preact'
 import { useState } from 'preact/hooks'
 import { useEffect } from 'preact/compat'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 
 type props = {
   initialValue: string
@@ -18,6 +19,7 @@ export default function TimeInput({
   validRange,
 }: props) {
   const [inputValue, setInputValue] = useState(initialValue)
+  const [tabBlocker, setTabBlocker] = useState(false)
 
   const handleInput = (e: Event) => {
     if (!(e.target instanceof HTMLInputElement)) return
@@ -27,6 +29,8 @@ export default function TimeInput({
 
   useEffect(() => {
     onChange(inputValue)
+
+    if (tabBlocker) return
 
     if (
       inputValue.length === 2 &&
@@ -42,12 +46,29 @@ export default function TimeInput({
 
   const handleOnBlur = () => {
     const [min, max] = validRange
-    const value = parseInt(inputValue)
-    if (value < min || value > max) {
-      setInputValue('00')
+    const value = +inputValue
+
+    if (value < min || value > max || isNaN(value)) {
+      setInputValue(min < 10 ? `0${min}` : String(min))
+      return
     }
     if (inputValue.length === 1) {
       setInputValue(`0${inputValue}`)
+    }
+  }
+
+  const incrementOrDecrementOnKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+      e.preventDefault()
+      const [min, max] = validRange
+      const value = +inputValue
+      const newValue = e.key === 'ArrowUp' ? value + 1 : value - 1
+
+      if (newValue < min || newValue > max) return
+
+      setInputValue(newValue < 10 ? `0${newValue}` : String(newValue))
+      setTabBlocker(true)
+      nextTick(() => setTabBlocker(false))
     }
   }
 
@@ -57,6 +78,7 @@ export default function TimeInput({
       maxLength={2}
       className="sx__time-input"
       type="text"
+      onKeyDown={incrementOrDecrementOnKeyDown}
       value={inputValue}
       onInput={handleInput}
       onBlur={handleOnBlur}

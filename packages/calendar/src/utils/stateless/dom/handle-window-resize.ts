@@ -14,16 +14,24 @@ const setScreenSizeCompatibleView = (
     const smallScreenCompatibleView = $app.config.views.find(
       (view) => view.hasSmallScreenCompat
     )
-    if (smallScreenCompatibleView)
-      $app.calendarState.view.value = smallScreenCompatibleView.name
+    if (smallScreenCompatibleView) {
+      $app.calendarState.setView(
+        smallScreenCompatibleView.name,
+        $app.datePickerState.selectedDate.value
+      )
+    }
   } else {
     if (currentView.hasWideScreenCompat) return
 
     const wideScreenCompatibleView = $app.config.views.find(
       (view) => view.hasWideScreenCompat
     )
-    if (wideScreenCompatibleView)
-      $app.calendarState.view.value = wideScreenCompatibleView.name
+    if (wideScreenCompatibleView) {
+      $app.calendarState.setView(
+        wideScreenCompatibleView.name,
+        $app.datePickerState.selectedDate.value
+      )
+    }
   }
 }
 
@@ -39,7 +47,9 @@ export const handleWindowResize = ($app: CalendarAppSingleton) => {
 
   if (!calendarRoot) return
 
-  const isSmall = calendarRoot.clientWidth < smallCalendarBreakpoint
+  const isSmall = $app.config.callbacks.isCalendarSmall
+    ? $app.config.callbacks.isCalendarSmall($app)
+    : calendarRoot.clientWidth < smallCalendarBreakpoint
   const didIsSmallScreenChange =
     isSmall !== $app.calendarState.isCalendarSmall.value
   if (!didIsSmallScreenChange) return

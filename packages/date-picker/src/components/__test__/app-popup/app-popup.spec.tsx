@@ -4,10 +4,11 @@ import {
   expect,
   beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, screen, waitFor } from '@testing-library/preact'
+import { cleanup, fireEvent, screen, waitFor } from '@testing-library/preact'
 import { MONTH_VIEW } from '../../../constants/test-ids'
 import { renderComponent } from './utils'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
+import { vi } from 'vitest'
 
 describe('AppPopup', () => {
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe('AppPopup', () => {
   })
 
   it('should display years view', async () => {
-    const container = renderComponent()
+    const { container } = renderComponent()
     const toggleViewElement = container.querySelector(
       '.sx__date-picker__month-view-header__month-year'
     )
@@ -35,7 +36,7 @@ describe('AppPopup', () => {
   })
 
   it('should toggle from years to month view', async () => {
-    const container = renderComponent()
+    const { container } = renderComponent()
     const toggleViewElement = container.querySelector(
       '.sx__date-picker__month-view-header__month-year'
     )
@@ -69,4 +70,24 @@ describe('AppPopup', () => {
       expect(popup.classList.contains(placement)).toBe(true)
     }
   )
+
+  it('should close when pressing escape', () => {
+    const { app } = renderComponent()
+    app.datePickerState.isOpen.value = true
+    expect(app.datePickerState.isOpen.value).to.equal(true)
+
+    fireEvent.keyDown(document.body, { key: 'Escape' })
+
+    expect(app.datePickerState.isOpen.value).to.equal(false)
+  })
+
+  it('should call onEscapeKeyDown callback if provided', () => {
+    const onEscapeKeyDown = vi.fn()
+    renderComponent(undefined, onEscapeKeyDown)
+    expect(onEscapeKeyDown).toHaveBeenCalledTimes(0)
+
+    fireEvent.keyDown(document.body, { key: 'Escape' })
+
+    expect(onEscapeKeyDown).toHaveBeenCalledTimes(1)
+  })
 })

@@ -1,40 +1,39 @@
 @use '../../../theme/mixins' as mixins;
 
 .landing-page-card {
+  display: grid;
   width: 300px;
-  height: 250px;
-  padding: 2rem;
-  border-radius: 1rem;
-  background: #f6f6f7;
-  transition: all 0.2s ease;
-  color: rgb(60 60 67);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  grid-template-areas:
+    'icon title'
+    'icon description'
+    'icon button';
+  grid-template-rows: 1fr 2fr;
+
 
   @include mixins.mobile-screens {
     width: 100%;
     height: auto;
-    padding: 1.5rem;
-  }
-
-  .dark & {
-    background: #252529;
+    padding: 0.5rem 1.5rem;
   }
 
   .landing-page-card-icon {
-    margin-bottom: 1rem;
-
-    .dark & {
-      filter: invert(1);
-    }
+    grid-area: icon;
+    margin-top: 5px;
+    background: linear-gradient(145deg, var(--sx-color-primary), var(--sx-color-primary-container));
+    border-radius: 10%;
+    padding: 6px;
+    width: 40px;
+    height: 40px;
   }
 
   h2 {
+    grid-area: title;
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+    text-align: left;
+    color: #000;
 
     .dark & {
       color: rgb(255 255 245 / 86%);
@@ -42,7 +41,10 @@
   }
 
   p {
-    text-align: center;
+    grid-area: description;
+    text-align: left;
+    margin-left: 1rem;
+    color: #645d5d;
 
     .dark & {
       color: rgb(235 235 245 / 60%);

@@ -3,15 +3,23 @@ import { AppContext } from '../utils/stateful/app-context'
 import AppInput from './app-input'
 import AppPopup from './app-popup'
 import { createPortal } from 'preact/compat'
+import { useEffect, useState } from 'preact/hooks'
 
 type props = {
   $app: DatePickerAppSingleton
 }
 
 export default function AppWrapper({ $app }: props) {
-  const classes = ['sx__date-picker-wrapper']
-  if ($app.config.style?.dark) classes.push('is-dark')
-  if ($app.config.style?.fullWidth) classes.push('has-full-width')
+  const initialClassList = ['sx__date-picker-wrapper']
+  const [classList, setClassList] = useState(initialClassList)
+
+  useEffect(() => {
+    const list = [...initialClassList]
+    if ($app.datePickerState.isDark.value) list.push('is-dark')
+    if ($app.config.style?.fullWidth) list.push('has-full-width')
+    if ($app.datePickerState.isDisabled.value) list.push('is-disabled')
+    setClassList(list)
+  }, [$app.datePickerState.isDark.value, $app.datePickerState.isDisabled.value])
 
   let appPopupJSX = <AppPopup />
   if ($app.config.teleportTo)
@@ -19,7 +27,7 @@ export default function AppWrapper({ $app }: props) {
 
   return (
     <>
-      <div className={classes.join(' ')}>
+      <div className={classList.join(' ')}>
         <AppContext.Provider value={$app}>
           <AppInput />
 

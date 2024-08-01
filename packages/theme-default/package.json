@@ -1,6 +1,6 @@
 {
-  "name": "@holitime/schedule-x-theme-default",
-  "version": "1.38.0",
+"name": "@holitime/schedule-x-theme-default",
+"version": "1.56.0",
   "license": "MIT",
   "author": {
     "name": "Tony DUONG",
@@ -35,7 +35,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "gitHead": "981dc3c7e4f5d56288dfbb27b992ea73e8206675",
+  "gitHead": "e107e76362346f2d961b429936f7ee55b25695e7",
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",

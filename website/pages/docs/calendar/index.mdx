@@ -5,11 +5,46 @@ description: 'Learn how to install and start using the Schedule-X calendar'
 
 # Getting Started
 
+If you are using any of the following frameworks, you can start by checking out their respective setup guides:
+
+import {Cards} from 'nextra/components'
+
+<Cards num={3}>
+  <Cards.Card
+    arrow
+    title="React"
+    href="/docs/frameworks/react"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Vue"
+    href="/docs/frameworks/vue"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Angular"
+    href="/docs/frameworks/angular"
+  ></Cards.Card>
+</Cards>
+
+<Cards num={3}>
+  <Cards.Card
+    arrow
+    title="Svelte"
+    href="/docs/frameworks/svelte"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Preact"
+    href="/docs/frameworks/preact"
+  ></Cards.Card>
+</Cards>
+
+
+
 ## 1. Install
 
-We will start this tutorial by downloading the calendar and its styles. Please note, that using the
-styles is completely optional, and you could theoretically create your own
-theme. If doing so, however, please pin your dependency to a fixed version to avoid risking unwanted breaking changes.
+We will start by downloading the calendar and its theme.
 
 ```bash copy
 npm i @schedule-x/calendar @schedule-x/theme-default
@@ -17,9 +52,9 @@ npm i @schedule-x/calendar @schedule-x/theme-default
 
 ## 2. Setup
 
-After downloading and importing our dependencies, we can now move on to create an instance of the calendar using the
-`createCalendar` function. This function takes one argument, namely its configuration object. It is then rendered
-using the `render` method. This method takes a DOM element, which the calendar is then rendered onto, as its argument.
+After downloading and importing our dependencies, we can create an instance of the calendar using the
+`createCalendar` function. This function takes one argument: its configuration object. It is then rendered
+using the `render` method.
 
 ```ts
 import { createCalendar, viewMonthGrid } from '@schedule-x/calendar'
@@ -52,8 +87,8 @@ As a bare minimum, the configuration object needs two things:
 
 #### CSS of wrapping element
 
-You will need to decide on the styles of the element wrapping the calendar. This will be highly dependent on
-your use case. For many use cases, however, something like the following should suffice:
+You will need to decide on the styles of the element wrapping the calendar. This will depend on
+your use case. For many use cases, something like this should suffice:
 
 ```css
 #calendar {
@@ -66,8 +101,7 @@ your use case. For many use cases, however, something like the following should 
 #### Theme
 
 The calendar renders to light mode by default. If you want, you can either override this default through configuration,
-or set the theme programmatically
-through the `setTheme` method, like so:
+or set the theme programmatically:
 
 ```ts
 const calendar = createCalendar(/***/)

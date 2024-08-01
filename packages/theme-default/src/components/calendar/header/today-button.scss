@@ -1,5 +1,4 @@
 .sx__today-button {
-  border: var(--sx-border);
   padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
   border-radius: var(--sx-rounding-small);
   font-size: var(--sx-calendar-header-input-font-size);
@@ -11,6 +10,10 @@
 
   .sx__is-calendar-small & {
     display: none;
+  }
+
+  .sx__calendar-header & {
+    border: var(--sx-border);
   }
 
   &:hover,

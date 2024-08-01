@@ -20,7 +20,7 @@ describe('month view header', () => {
       ['Spanish', 'es-ES', 'enero'],
     ])(
       'should display the month name in %s when rendering',
-      (languageName, locale, januaryName) => {
+      (_languageName, locale, januaryName) => {
         const selectedDate = '2021-01-01'
         const expectedMonthName = januaryName
         const $app = createAppSingleton({

@@ -2,6 +2,7 @@ import CalendarControlsPlugin from '@schedule-x/shared/src/interfaces/calendar-c
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { dateStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 export type { CalendarControlsPlugin }
 
@@ -9,6 +10,13 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name: string = PluginName.CalendarControls
   $app!: CalendarAppSingleton
 
+  beforeInit($app: CalendarAppSingleton) {
+    this.$app = $app
+  }
+
+  /**
+   * TODO v2: remove this method
+   * */
   init($app: CalendarAppSingleton): void {
     this.$app = $app
   }
@@ -21,13 +29,28 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   }
 
   setView(view: string): void {
-    const viewExists = this.$app.config.views.some((v) => v.name === view)
-    if (!viewExists)
+    const viewToSet = this.$app.config.views.find((v) => v.name === view)
+    if (!viewToSet)
       throw new Error(
         `Invalid view name. Expected one of ${this.$app.config.views.map((v) => v.name).join(', ')}`
       )
 
-    this.$app.calendarState.view.value = view
+    this.$app.calendarState.setView(
+      view,
+      this.$app.datePickerState.selectedDate.value
+    )
+  }
+
+  getDate(): string {
+    return this.$app.datePickerState.selectedDate.value
+  }
+
+  getView(): string {
+    return this.$app.calendarState.view.value
+  }
+
+  getRange(): DateRange | null {
+    return this.$app.calendarState.range.value
   }
 }
 

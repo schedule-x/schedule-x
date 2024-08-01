@@ -18,9 +18,7 @@ describe('WeekDayEvent', () => {
 
   describe('conditionally displaying info', () => {
     const $app = __createAppWithViews__({
-      datePicker: {
-        selectedDate: '2020-12-01',
-      },
+      selectedDate: '2020-12-01',
     })
 
     it('should not contain a title element if the event has no title', () => {
@@ -65,6 +63,20 @@ describe('WeekDayEvent', () => {
       expect(document.querySelector('.sx__time-grid-event-people')).toBeNull()
     })
 
+    it('should not display any people if the event has an empty array of people', () => {
+      const calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        '1',
+        '2020-12-01 10:00',
+        '2020-12-01 11:00'
+      )
+        .withPeople([])
+        .build()
+      renderComponent($app, calendarEvent)
+
+      expect(document.querySelector('.sx__time-grid-event-people')).toBeNull()
+    })
+
     it('should display people info if the event has people', () => {
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
@@ -86,9 +98,7 @@ describe('WeekDayEvent', () => {
   describe('Usage of resize plugin', () => {
     it('should not display a resize handle', () => {
       const $app = __createAppWithViews__({
-        datePicker: {
-          selectedDate: '2020-12-01',
-        },
+        selectedDate: '2020-12-01',
       })
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
@@ -107,9 +117,7 @@ describe('WeekDayEvent', () => {
       const resizePlugin = stubInterface<ResizePlugin>()
       resizePlugin.name = 'resize'
       const $app = __createAppWithViews__({
-        datePicker: {
-          selectedDate: '2020-12-01',
-        },
+        selectedDate: '2020-12-01',
         plugins: [resizePlugin],
       })
       const calendarEvent = new CalendarEventBuilder(

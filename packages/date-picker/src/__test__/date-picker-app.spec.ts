@@ -51,4 +51,26 @@ describe('date picker app', () => {
 
     expect(onChangeSpy).toHaveBeenCalledWith(expectedNewValue)
   })
+
+  it('should get theme', () => {
+    const app = createApp()
+
+    expect(app.getTheme()).toBe('light')
+  })
+
+  it('should set theme', () => {
+    const app = createApp()
+
+    expect(app.getTheme()).toBe('light')
+    app.setTheme('dark')
+    expect(app.getTheme()).toBe('dark')
+  })
+
+  it('should set & get disabled', () => {
+    const app = createApp()
+
+    expect(app.disabled).toBe(false)
+    app.disabled = true
+    expect(app.disabled).toBe(true)
+  })
 })

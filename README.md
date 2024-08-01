@@ -11,8 +11,8 @@ I have started from the repository of TomOsterlund and this customized package i
 # Material design calendar and date picker
 
 This library offers a material design calendar and date picker for the web. They can be used regardless of your
-framework preferences, since they are built around a lightweight virtual-DOM implementation. The library also offers
-adapter components for React and Vue.
+framework preferences, since they are built around a lightweight virtual-DOM implementation. The library also offers 
+adapter components for React, Vue and Angular.
 
 Website for documentation and demo: https://schedule-x.dev/
 
@@ -23,6 +23,12 @@ Website for documentation and demo: https://schedule-x.dev/
 For bug reports and feature requests, please use the issue tracker of this repository.
 
 For any other questions or comments, feel free to join the chat on Discord: https://discord.gg/yHbT3C4M8w
+
+## Sponsoring
+
+The longevity and success of this project benefits from financial support, mainly to cover compute- and DNS costs.
+
+Sponsor today, and get mentioned in the README or on the project website: https://opencollective.com/schedule-x
 
 ## License
 

@@ -22,7 +22,7 @@ describe('CalendarHeader', () => {
     it('should set the view to month and update range heading, when selecting month view', async () => {
       const $app = createCalendarAppSingleton({
         defaultView: 'week',
-        datePicker: { selectedDate: '2010-01-01' },
+        selectedDate: '2010-01-01',
         views: [viewMonthGrid, viewWeek, viewDay],
       })
       renderComponent($app)
@@ -42,7 +42,7 @@ describe('CalendarHeader', () => {
     it('should set the view to week and update range heading, when selecting week view', async () => {
       const $app = createCalendarAppSingleton({
         defaultView: 'day',
-        datePicker: { selectedDate: '2010-01-01' },
+        selectedDate: '2010-01-01',
         views: [viewMonthGrid, viewWeek, viewDay],
       })
       renderComponent($app)

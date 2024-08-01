@@ -12,7 +12,11 @@ describe('The resize plugin', () => {
       const plugin = createResizePlugin()
       const consoleSpy = vi.spyOn(console, 'error')
 
-      plugin.createDateGridEventResizer(expect.any(Object), expect.any(Object))
+      plugin.createDateGridEventResizer(
+        expect.any(Object),
+        expect.any(Object),
+        expect.any(Object)
+      )
 
       expect(consoleSpy).toHaveBeenCalledWith(
         'The calendar is not yet initialized. Cannot resize events.'

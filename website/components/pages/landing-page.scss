@@ -1,6 +1,6 @@
 @use '../../theme/mixins' as mixins;
 
-$heading-width: 700px;
+$heading-width: 900px;
 
 .landingPage {
   position: relative;
@@ -29,7 +29,7 @@ $heading-width: 700px;
 
 .landingPage h1 {
   max-width: $heading-width;
-  font-size: 3.25rem;
+  font-size: 4.25rem;
   font-weight: 700;
   margin: 3rem auto 1rem;
   text-align: center;
@@ -41,9 +41,21 @@ $heading-width: 700px;
   }
 
   @include mixins.smaller-screens {
-    font-size: 2.5rem;
-    margin-top: 1rem;
+    font-size: 3rem;
     text-wrap: initial;
+  }
+}
+
+.headingGradient {
+  background: linear-gradient(to right, #deccfa 0%, #6750a4 100%);
+  text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  .dark & {
+    background: linear-gradient(to left, #deccfa 0%, #6750a4 100%);
+    text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+    background-clip: text;
   }
 }
 
@@ -61,8 +73,8 @@ $heading-width: 700px;
   }
 
   @include mixins.smaller-screens {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    margin: 1.5rem 0 3rem;
   }
 }
 
@@ -75,19 +87,6 @@ $heading-width: 700px;
   // lower on mobile
   @include mixins.mobile-screens {
     height: 500px;
-  }
-}
-
-.headingGradient {
-  background: linear-gradient(to right, #deccfa 0%, #6750a4 100%);
-  text-shadow: 0 0 90px rgb(0 0 0 / 30%);
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  .dark & {
-    background: linear-gradient(to left, #deccfa 0%, #6750a4 100%);
-    text-shadow: 0 0 90px rgb(0 0 0 / 30%);
-    background-clip: text;
   }
 }
 
@@ -190,3 +189,69 @@ $heading-width: 700px;
     margin-bottom: 3rem;
   }
 }
+
+.footer-links {
+  text-align: left;
+  padding-left: 1.5rem;
+
+  a {
+    color: rgb(75, 85, 99);
+
+    .dark & {
+      color:rgb(156, 163, 175)
+    }
+  }
+}
+
+.features-heading {
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: $heading-width;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #002c61;
+    margin-bottom: 0.75rem;
+    text-align: center;
+
+
+    span {
+      font-weight: 800;
+      background: linear-gradient(to right, #c0b1c9 0%, #8873be 100%);
+      text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .dark & {
+      color: #dacdf8;
+    }
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: #8290ac;
+
+    .dark & {
+      color: #e1daf1;
+    }
+  }
+}
+
+.landing-page-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  z-index: -1;
+
+  @include mixins.smaller-screens {
+   display: none;
+  }
+}
+

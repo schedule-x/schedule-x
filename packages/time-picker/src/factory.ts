@@ -1,10 +1,11 @@
 import { TimePickerConfigExternal } from './types/time-picker-config'
 import TimePickerApp from './time-picker.app'
-import { effect, signal } from '@preact/signals'
+import { computed, effect, signal } from '@preact/signals'
 import { TimePickerState } from './types/time-picker-state'
 
 const getTimePickerState = (
-  config: TimePickerConfigExternal
+  config: TimePickerConfigExternal,
+  is12HourClock: boolean
 ): TimePickerState => {
   const currentTime = signal(config.initialValue ?? '00:00')
   let wasInitialized = false
@@ -24,10 +25,27 @@ const getTimePickerState = (
     handleCurrentTimeChanged(config, currentTime.value)
   })
 
+  const initialIsAM = parseInt(currentTime.value.split(':')[0]) < 12
+  const isAM = signal(initialIsAM)
   return {
     isOpen: signal(false),
-    currentTime: currentTime,
-    inputRect: signal({ x: 0, y: 0, height: 0, width: 0 }),
+    currentTime,
+    currentTimeDisplayedValue: computed(() => {
+      const [hours, minutes] = currentTime.value.split(':')
+      const parsedHours = parseInt(hours)
+      let hoursInt = parsedHours
+      const minutesInt = parseInt(minutes)
+
+      if (is12HourClock) {
+        hoursInt = hoursInt === 0 ? 12 : hoursInt
+        const hours12 = hoursInt > 12 ? hoursInt - 12 : hoursInt
+        return `${hours12}:${minutesInt.toString().padStart(2, '0')} ${parsedHours >= 12 ? 'PM' : 'AM'}`
+      }
+
+      return `${hoursInt.toString().padStart(2, '0')}:${minutesInt.toString().padStart(2, '0')}`
+    }),
+    inputWrapperElement: signal(undefined),
+    isAM,
   }
 }
 
@@ -35,12 +53,15 @@ export const createTimePickerAppContext = (
   config: TimePickerConfigExternal = {}
 ) => ({
   config: {
+    onEscapeKeyDown: signal(config.onEscapeKeyDown ?? undefined),
     dark: signal(config.dark ?? false),
     placement: signal(config.placement ?? 'bottom-start'),
     teleportTo: signal(config.teleportTo ?? null),
     label: signal(config.label ?? null),
+    is12Hour: signal(config.is12Hour ?? false),
+    name: signal(config.name ?? ''),
   },
-  timePickerState: getTimePickerState(config),
+  timePickerState: getTimePickerState(config, config.is12Hour ?? false),
 })
 
 export const createTimePicker = (config: TimePickerConfigExternal = {}) => {

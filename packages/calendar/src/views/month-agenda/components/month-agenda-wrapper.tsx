@@ -10,24 +10,49 @@ import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by
 import MonthAgendaEvents from './month-agenda-events'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
-  const getMonth = () =>
-    positionEventsInAgenda(
+  const getMonth = () => {
+    const filteredEvents = $app.calendarEvents.filterPredicate.value
+      ? $app.calendarEvents.list.value.filter(
+          $app.calendarEvents.filterPredicate.value
+        )
+      : $app.calendarEvents.list.value
+
+    return positionEventsInAgenda(
       createAgendaMonth(
         $app.datePickerState.selectedDate.value,
         $app.timeUnitsImpl
       ),
-      $app.calendarEvents.list.value.sort(sortEventsByStartAndEnd)
+      filteredEvents.sort(sortEventsByStartAndEnd)
     )
+  }
 
   const [agendaMonth, setAgendaMonth] = useState<MonthAgenda>(getMonth())
 
   useEffect(() => {
     setAgendaMonth(getMonth())
-  }, [$app.datePickerState.selectedDate.value, $app.calendarEvents.list.value])
+  }, [
+    $app.datePickerState.selectedDate.value,
+    $app.calendarEvents.list.value,
+    $app.calendarEvents.filterPredicate.value,
+  ])
 
-  const [activeDate, setActiveDate] = useState(
-    $app.datePickerState.selectedDate.value
-  )
+  useEffect(() => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        const mutatedElement = mutation.target as HTMLElement
+        if (mutatedElement.dataset.agendaFocus === 'true')
+          mutatedElement.focus()
+      })
+    })
+    const monthViewElement = document.getElementById(id) as HTMLElement
+    observer.observe(monthViewElement, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <AppContext.Provider value={$app}>
@@ -37,19 +62,24 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
         <div className="sx__month-agenda-weeks">
           {agendaMonth.weeks.map((week, index) => (
             <MonthAgendaWeek
-              key={index + new Date().getTime()}
+              key={index}
               week={week}
-              setActiveDate={setActiveDate}
-              activeDate={activeDate}
+              setActiveDate={(dateString: string) =>
+                ($app.datePickerState.selectedDate.value = dateString)
+              }
+              activeDate={$app.datePickerState.selectedDate.value}
             />
           ))}
         </div>
 
         <MonthAgendaEvents
-          key={activeDate + new Date().getTime()}
+          key={$app.datePickerState.selectedDate.value}
           events={
-            agendaMonth.weeks.flat().find((day) => day.date === activeDate)
-              ?.events || []
+            agendaMonth.weeks
+              .flat()
+              .find(
+                (day) => day.date === $app.datePickerState.selectedDate.value
+              )?.events || []
           }
         />
       </div>

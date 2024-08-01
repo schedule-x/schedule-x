@@ -14,7 +14,20 @@
   "demos": {
     "display": "hidden",
     "title": "Demos",
-    "type": "page"
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
+  },
+  "imprint": {
+    "display": "hidden",
+    "title": "Imprint",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
   },
   "newsletter": {
     "display": "hidden",
@@ -22,6 +35,15 @@
       "layout": "raw",
       "sidebar": false,
       "toc": true
+    }
+  },
+  "attributions": {
+    "display": "hidden",
+    "title": "Attributions",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
     }
   }
 }

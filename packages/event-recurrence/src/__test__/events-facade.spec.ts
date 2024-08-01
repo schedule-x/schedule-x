@@ -12,7 +12,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should add one event without an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -28,7 +28,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should add one event with an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -44,27 +44,27 @@ describe('Events facade for recurrence plugin', () => {
   })
 
   describe('Getting a single event by id', () => {
-    it('should return the event if it exists', () => {
+    it.each([['1'], [1]])('should return the event if it exists', (id) => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
-        id: '1',
+        id,
         start: '2021-01-01',
         end: '2021-01-01',
         rrule: 'FREQ=WEEKLY;COUNT=3',
       }
       plugin.add(event)
 
-      expect(plugin.get('1')).toEqual(event)
+      expect(plugin.get(id)).toEqual(event)
     })
 
     it('should return undefined if the event does not exist', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       expect(plugin.get('1')).toBeUndefined()
@@ -75,7 +75,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should return all events', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event1 = {
@@ -103,28 +103,28 @@ describe('Events facade for recurrence plugin', () => {
   })
 
   describe('Removing events', () => {
-    it('should remove one event without an rrule', () => {
+    it.each([['1'], [1]])('should remove one event without an rrule', (id) => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
-        id: '1',
+        id,
         start: '2021-01-01',
         end: '2021-01-01',
       }
       plugin.add(event)
       expect($app.calendarEvents.list.value.length).toBe(1)
 
-      plugin.remove('1')
+      plugin.remove(id)
       expect($app.calendarEvents.list.value.length).toBe(0)
     })
 
     it('should remove one event with an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -145,7 +145,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should remove an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -173,7 +173,7 @@ describe('Events facade for recurrence plugin', () => {
         ],
       })
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(1)
 
       const event = {
@@ -199,7 +199,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should set the whole list of events', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.init!($app)
+      plugin.beforeInit!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event1 = {

@@ -48,6 +48,7 @@ export default function DateGridEvent({
 
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (!$app.config.plugins.dragAndDrop) return
+    if (calendarEvent._options?.disableDND) return
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
@@ -81,7 +82,7 @@ export default function DateGridEvent({
     customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
-  }, [])
+  }, [calendarEvent, eventCopy])
 
   const startResize = (mouseEvent: MouseEvent) => {
     mouseEvent.stopPropagation()
@@ -102,6 +103,8 @@ export default function DateGridEvent({
   if (isCopy) eventClasses.push('sx__date-grid-event--copy')
   if (hasOverflowLeft) eventClasses.push('sx__date-grid-event--overflow-left')
   if (hasOverflowRight) eventClasses.push('sx__date-grid-event--overflow-right')
+  if (calendarEvent._options?.additionalClasses)
+    eventClasses.push(...calendarEvent._options.additionalClasses)
 
   const borderLeftNonCustom = hasOverflowLeft
     ? 'none'
@@ -171,12 +174,14 @@ export default function DateGridEvent({
           </Fragment>
         )}
 
-        {$app.config.plugins.resize && !hasOverflowRight && (
-          <div
-            className="sx__date-grid-event-resize-handle"
-            onMouseDown={startResize}
-          />
-        )}
+        {$app.config.plugins.resize &&
+          !calendarEvent._options?.disableResize &&
+          !hasOverflowRight && (
+            <div
+              className="sx__date-grid-event-resize-handle"
+              onMouseDown={startResize}
+            />
+          )}
       </div>
 
       {eventCopy && (

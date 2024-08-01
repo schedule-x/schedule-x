@@ -36,6 +36,214 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **workflow:** build 1.30 custom packages ([157a472](https://github.com/schedule-x/schedule-x/commit/157a472158f14a09a5852e71ac7bfebbac49943a))
 - **workflow:** build 1.31 and 1.32 publish export sidebar lgin interface ([95b4b55](https://github.com/schedule-x/schedule-x/commit/95b4b559d70bbfc8c00ad687bf88f084ae9f08f5))
 
+# [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
+
+### Bug Fixes
+
+- **calendar:** custom event not updating on drag and drop ([#565](https://github.com/schedule-x/schedule-x/issues/565)) ([b653b51](https://github.com/schedule-x/schedule-x/commit/b653b513002f9f353ee4a706b3200618fad72afb))
+- event left property when using eventWidth config ([#569](https://github.com/schedule-x/schedule-x/issues/569)) ([0a78440](https://github.com/schedule-x/schedule-x/commit/0a78440a265d346778b5ccf294c36eeb513c476e))
+- throw away state of month grid days when navigating through months ([#570](https://github.com/schedule-x/schedule-x/issues/570)) ([0885f95](https://github.com/schedule-x/schedule-x/commit/0885f9543708d999f221b0c71a1bffbd6bc86bf3))
+
+# [1.55.0](https://github.com/schedule-x/schedule-x/compare/v1.54.0...v1.55.0) (2024-07-27)
+
+### Bug Fixes
+
+- **calendar:** fix faulty number of +n events in month grid ([#560](https://github.com/schedule-x/schedule-x/issues/560)) ([5ac3c0c](https://github.com/schedule-x/schedule-x/commit/5ac3c0cfe3e5cb3356515ddd821002484dc34627))
+
+### Features
+
+- **calendar:** add data-date attribute for date axis dates ([#561](https://github.com/schedule-x/schedule-x/issues/561)) ([9a503c6](https://github.com/schedule-x/schedule-x/commit/9a503c6aba5755656c484ab921965c9c0b5318df))
+- **calendar:** set event width in time grid ([#562](https://github.com/schedule-x/schedule-x/issues/562)) ([8cec16e](https://github.com/schedule-x/schedule-x/commit/8cec16e75d9e619c9c599d91b7757a2156bdc57d))
+- **date-picker:** add onEscapeKeyDown ([#564](https://github.com/schedule-x/schedule-x/issues/564)) ([01add2b](https://github.com/schedule-x/schedule-x/commit/01add2b7a5a52320e0d3adcce9d606b82389f810))
+
+# [1.54.0](https://github.com/schedule-x/schedule-x/compare/v1.53.0...v1.54.0) (2024-07-25)
+
+### Features
+
+- **calendar:** add data-date-grid-date attribute ([#556](https://github.com/schedule-x/schedule-x/issues/556)) ([dea82fc](https://github.com/schedule-x/schedule-x/commit/dea82fc6db96961b9c1bceebc2d562db94b58a50))
+
+# [1.53.0](https://github.com/schedule-x/schedule-x/compare/v1.52.0...v1.53.0) (2024-07-20)
+
+### Features
+
+- **calendar:** set is-selected class in week- and month grids ([#553](https://github.com/schedule-x/schedule-x/issues/553)) ([5555acd](https://github.com/schedule-x/schedule-x/commit/5555acdb11d3d680259eecca850e6bab525896dd))
+
+# [1.52.0](https://github.com/schedule-x/schedule-x/compare/v1.51.0...v1.52.0) (2024-07-19)
+
+### Bug Fixes
+
+- **calendar:** event bubbling order in firefox ([#550](https://github.com/schedule-x/schedule-x/issues/550)) ([0d496ea](https://github.com/schedule-x/schedule-x/commit/0d496ea1c8e4e0e6d13d90372c1fd2535e4d3134))
+
+### Features
+
+- **calendar:** add weekday class names ([#549](https://github.com/schedule-x/schedule-x/issues/549)) ([d92a216](https://github.com/schedule-x/schedule-x/commit/d92a21621a11a1b69668924d061feaf0f957f49c))
+
+# [1.51.0](https://github.com/schedule-x/schedule-x/compare/v1.50.0...v1.51.0) (2024-07-12)
+
+### Features
+
+- **calendar:** add overflow classes to month grid events ([#543](https://github.com/schedule-x/schedule-x/issues/543)) ([02719a3](https://github.com/schedule-x/schedule-x/commit/02719a39550e6f1c322cc83aed77e33afa64f704))
+- export functions for converting between Date object and string ([#542](https://github.com/schedule-x/schedule-x/issues/542)) ([0f5dd4e](https://github.com/schedule-x/schedule-x/commit/0f5dd4e28b73709bc2589a7dd81d0146e73274c6))
+
+# [1.50.0](https://github.com/schedule-x/schedule-x/compare/v1.49.0...v1.50.0) (2024-07-09)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [1.49.0](https://github.com/schedule-x/schedule-x/compare/v1.48.0...v1.49.0) (2024-07-06)
+
+### Features
+
+- add nDays to weekOptions ([#525](https://github.com/schedule-x/schedule-x/issues/525)) ([76589f6](https://github.com/schedule-x/schedule-x/commit/76589f654c1315eeffcb4bd98cf0d131644f8f40))
+- enable navigating month views with screen reader ([#523](https://github.com/schedule-x/schedule-x/issues/523)) ([6577fe0](https://github.com/schedule-x/schedule-x/commit/6577fe096bcac1fa81fb8ed79bbb0d67e9492114))
+
+# [1.48.0](https://github.com/schedule-x/schedule-x/compare/v1.47.1...v1.48.0) (2024-07-03)
+
+### Bug Fixes
+
+- **calendar:** stop propagation of clicks on n-events button ([#518](https://github.com/schedule-x/schedule-x/issues/518)) ([6a49c1e](https://github.com/schedule-x/schedule-x/commit/6a49c1e2641426199e0f0dc33514eb66e3486aaa))
+
+### Features
+
+- **calendar:** add isResponsive option and isCalendarSmall callback ([#504](https://github.com/schedule-x/schedule-x/issues/504)) ([9014bf4](https://github.com/schedule-x/schedule-x/commit/9014bf44acf152c9c022ce336ea53de5fa77d690))
+
+## [1.47.1](https://github.com/schedule-x/schedule-x/compare/v1.47.0...v1.47.1) (2024-06-29)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [1.47.0](https://github.com/schedule-x/schedule-x/compare/v1.46.7...v1.47.0) (2024-06-28)
+
+### Bug Fixes
+
+- **calendar:** update range automatically when setting view ([#506](https://github.com/schedule-x/schedule-x/issues/506)) ([1ca4928](https://github.com/schedule-x/schedule-x/commit/1ca4928e17de382159e6d01f5035dd5068021ed5))
+
+### Features
+
+- **calendar:** create slots for header content ([#501](https://github.com/schedule-x/schedule-x/issues/501)) ([ed5ced5](https://github.com/schedule-x/schedule-x/commit/ed5ced5f395cf159bfe1ba3e767df2dcbb534c2d))
+
+## [1.46.7](https://github.com/schedule-x/schedule-x/compare/v1.46.6...v1.46.7) (2024-06-24)
+
+### Bug Fixes
+
+- **calendar:** prevent click events to fire when dragging ([0bf2905](https://github.com/schedule-x/schedule-x/commit/0bf290557187579786fd82e4a1e906e52529613b))
+- **calendar:** prevent onClickDateTime from firing when dragging ([#499](https://github.com/schedule-x/schedule-x/issues/499)) ([80f168d](https://github.com/schedule-x/schedule-x/commit/80f168d076bee4d55a79fcf5b7b976341ec9f8eb))
+
+## [1.46.6](https://github.com/schedule-x/schedule-x/compare/v1.46.5...v1.46.6) (2024-06-22)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [1.46.5](https://github.com/schedule-x/schedule-x/compare/v1.46.4...v1.46.5) (2024-06-21)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [1.46.4](https://github.com/schedule-x/schedule-x/compare/v1.46.3...v1.46.4) (2024-06-18)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [1.46.3](https://github.com/schedule-x/schedule-x/compare/v1.46.2...v1.46.3) (2024-06-17)
+
+### Bug Fixes
+
+- **calendar:** dont display people in time grid event when passed empty array ([#490](https://github.com/schedule-x/schedule-x/issues/490)) ([a5274bb](https://github.com/schedule-x/schedule-x/commit/a5274bbfeadc311bc64c0ef82ac563b84739aa90))
+
+## [1.46.2](https://github.com/schedule-x/schedule-x/compare/v1.46.1...v1.46.2) (2024-06-17)
+
+### Bug Fixes
+
+- change month agenda date when date picker date changes ([#488](https://github.com/schedule-x/schedule-x/issues/488)) ([083295a](https://github.com/schedule-x/schedule-x/commit/083295ac7be0f85e0b610bae8032a6c633418ae1))
+
+## [1.46.1](https://github.com/schedule-x/schedule-x/compare/v1.46.0...v1.46.1) (2024-06-11)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [1.46.0](https://github.com/schedule-x/schedule-x/compare/v1.45.1...v1.46.0) (2024-06-10)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [1.45.1](https://github.com/schedule-x/schedule-x/compare/v1.45.0...v1.45.1) (2024-06-08)
+
+### Bug Fixes
+
+- **calendar:** only update custom event component when event changes ([#474](https://github.com/schedule-x/schedule-x/issues/474)) ([0cddf8a](https://github.com/schedule-x/schedule-x/commit/0cddf8ac87a4adee52a1c6813b83f0d0e2dde421))
+
+# [1.45.0](https://github.com/schedule-x/schedule-x/compare/v1.44.0...v1.45.0) (2024-06-06)
+
+### Bug Fixes
+
+- **calendar-controls:** update range when setting view ([#463](https://github.com/schedule-x/schedule-x/issues/463)) ([ebfb4a6](https://github.com/schedule-x/schedule-x/commit/ebfb4a65b7152b39af6dcfc60dda18ae86fb9104))
+
+### Features
+
+- **calendar:** add double click callbacks ([#465](https://github.com/schedule-x/schedule-x/issues/465)) ([ddf22d0](https://github.com/schedule-x/schedule-x/commit/ddf22d044686574c0b9734228ec8b81c2169e5cb))
+- **calendar:** add onClickAgendaDate callback ([#464](https://github.com/schedule-x/schedule-x/issues/464)) ([cb403ba](https://github.com/schedule-x/schedule-x/commit/cb403bad43ece41558663739d9e5deb9551ac168))
+
+# [1.44.0](https://github.com/schedule-x/schedule-x/compare/v1.43.0...v1.44.0) (2024-06-06)
+
+### Features
+
+- add \_options property for events ([#457](https://github.com/schedule-x/schedule-x/issues/457)) ([23bddad](https://github.com/schedule-x/schedule-x/commit/23bddada52327134753885a838ab658ee0cfd254))
+- add beforeInit lifecycle hook for plugins ([#456](https://github.com/schedule-x/schedule-x/issues/456)) ([61830dd](https://github.com/schedule-x/schedule-x/commit/61830dd0b89edf37a6e677c5f160dfb7e0707485))
+
+# [1.43.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.42.3...v1.43.0-alpha.0) (2024-06-03)
+
+### Features
+
+- refactor day keys in time grid ([ca8fdef](https://github.com/schedule-x/schedule-x/commit/ca8fdefe707a596bbc4d61bdc490917748c995f3))
+- refactor day keys in time grid ([1f5716e](https://github.com/schedule-x/schedule-x/commit/1f5716efa1896cfd6308ced6d4ffb9622b67606a))
+- refactor day keys in time grid ([abcfc7d](https://github.com/schedule-x/schedule-x/commit/abcfc7d2760f32ee81ff02930616c1acf41c085c))
+- refactor event concurrency ([f29c62b](https://github.com/schedule-x/schedule-x/commit/f29c62b053fe4465b5927b3b58015a272cd1f383))
+
+## [1.42.3](https://github.com/schedule-x/schedule-x/compare/v1.42.2...v1.42.3) (2024-05-31)
+
+### Bug Fixes
+
+- update range on resize screen ([#448](https://github.com/schedule-x/schedule-x/issues/448)) ([94e50f2](https://github.com/schedule-x/schedule-x/commit/94e50f227687d6ceea325c07893766a4bc7b84d8))
+
+## [1.42.2](https://github.com/schedule-x/schedule-x/compare/v1.42.1...v1.42.2) (2024-05-30)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [1.42.1](https://github.com/schedule-x/schedule-x/compare/v1.42.0...v1.42.1) (2024-05-24)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [1.42.0](https://github.com/schedule-x/schedule-x/compare/v1.41.2...v1.42.0) (2024-05-22)
+
+### Features
+
+- add class for leading and trailing dates in month grid ([#434](https://github.com/schedule-x/schedule-x/issues/434)) ([7206e72](https://github.com/schedule-x/schedule-x/commit/7206e723285ed2786cc9c6fd8b8d6ea41b5ab145))
+
+## [1.41.2](https://github.com/schedule-x/schedule-x/compare/v1.41.1...v1.41.2) (2024-05-17)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [1.41.1](https://github.com/schedule-x/schedule-x/compare/v1.41.0...v1.41.1) (2024-05-16)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [1.41.0](https://github.com/schedule-x/schedule-x/compare/v1.40.0...v1.41.0) (2024-05-11)
+
+### Features
+
+- **calendar:** create possibility to add a filterPredicate for events ([#421](https://github.com/schedule-x/schedule-x/issues/421)) ([131490a](https://github.com/schedule-x/schedule-x/commit/131490a1dd6096c5def5881d707dc3f2627853d9))
+
+# [1.40.0](https://github.com/schedule-x/schedule-x/compare/v1.39.0...v1.40.0) (2024-05-11)
+
+### Features
+
+- add getDate and onSelectedDateUpdate apis ([#419](https://github.com/schedule-x/schedule-x/issues/419)) ([adfd5e6](https://github.com/schedule-x/schedule-x/commit/adfd5e60a6cb2c85c6cfeb31fc70b427205f87d5))
+- **calendar:** expose further public apis ([#418](https://github.com/schedule-x/schedule-x/issues/418)) ([e2be1b0](https://github.com/schedule-x/schedule-x/commit/e2be1b0915786794121d923aebe0e72860c0de2e))
+
+# [1.39.0](https://github.com/schedule-x/schedule-x/compare/v1.38.0...v1.39.0) (2024-05-08)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-06)
+
+### Features
+
+- **event-modal:** set modal position on scroll ([#403](https://github.com/schedule-x/schedule-x/issues/403)) ([518aa63](https://github.com/schedule-x/schedule-x/commit/518aa631d25c2bbc9700f0f68cf0f04d7fe6d4be))
+- hide forward backward nav based on css ([#410](https://github.com/schedule-x/schedule-x/issues/410)) ([314e0aa](https://github.com/schedule-x/schedule-x/commit/314e0aa5a1379ff5a923fcd7221111badaa818c3))
+
 # [1.37.0](https://github.com/schedule-x/schedule-x/compare/v1.36.0...v1.37.0) (2024-05-01)
 
 **Note:** Version bump only for package @schedule-x/calendar

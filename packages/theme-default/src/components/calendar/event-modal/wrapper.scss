@@ -4,6 +4,7 @@
   top: var(--sx-event-modal-top);
   left: var(--sx-event-modal-left);
   width: 400px;
+  max-width: 100%;
   height: fit-content;
   background-color: var(--sx-color-background);
   z-index: 1;

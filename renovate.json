@@ -13,6 +13,11 @@
     }
   ],
   "schedule": ["before 7am every weekday"],
-  "ignoreDeps": ["preact", "cypress", "cypress-visual-regression"],
+  "ignoreDeps": [
+    "preact",
+    "@preact/signals",
+    "cypress",
+    "cypress-visual-regression"
+  ],
   "ignorePaths": []
 }

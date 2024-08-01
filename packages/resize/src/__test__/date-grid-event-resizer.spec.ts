@@ -12,6 +12,7 @@ import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { Mock, vi } from 'vitest'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
+import { createResizePlugin } from '../resize.plugin'
 
 describe('Resizing events in the date grid', () => {
   let $app: CalendarAppSingleton
@@ -19,8 +20,12 @@ describe('Resizing events in the date grid', () => {
   let eventCopy: CalendarEventInternal
   let eventUpdater: Mock
   let twoDayEvent: CalendarEventInternal
+  // TODO: remove when ts eslint fixes this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let twoDayEventCopy: CalendarEventInternal
   let eventStartingInPreviousWeek: CalendarEventInternal
+  // TODO: remove when ts eslint fixes this
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let eventStartingInPreviousWeekCopy: CalendarEventInternal
   let calendarWrapper: HTMLDivElement
 
@@ -63,6 +68,8 @@ describe('Resizing events in the date grid', () => {
           clientWidth: 100,
         }
       }
+
+      return
     }
     calendarWrapper = $app.elements.calendarWrapper
   })
@@ -81,7 +88,14 @@ describe('Resizing events in the date grid', () => {
       expect(calendarEvent.start).toBe('2024-01-26')
       expect(calendarEvent.end).toBe('2024-01-26')
 
-      new DateGridEventResizer($app, eventCopy, eventUpdater, 1000)
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
+      resizePlugin.createDateGridEventResizer(
+        calendarEvent,
+        eventUpdater,
+        new MouseEvent('mousedown', { clientX: 1000 })
+      )
+
       calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 1100,
@@ -96,7 +110,13 @@ describe('Resizing events in the date grid', () => {
     it('should not be able to resize beyond the end of the week', () => {
       expect(calendarEvent.start).toBe('2024-01-26')
       expect(calendarEvent.end).toBe('2024-01-26')
-      new DateGridEventResizer($app, eventCopy, eventUpdater, 1000)
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
+      resizePlugin.createDateGridEventResizer(
+        calendarEvent,
+        eventUpdater,
+        new MouseEvent('mousedown', { clientX: 1000 })
+      )
 
       // iteratively move 100px to the right 8 times
       for (let i = 0; i < 8; i++) {
@@ -117,7 +137,14 @@ describe('Resizing events in the date grid', () => {
     it('should be able to resize a two-day event into being a one-day event', () => {
       expect(twoDayEvent.start).toBe('2024-01-26')
       expect(twoDayEvent.end).toBe('2024-01-27')
-      new DateGridEventResizer($app, twoDayEventCopy, eventUpdater, 1000)
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
+      resizePlugin.createDateGridEventResizer(
+        twoDayEvent,
+        eventUpdater,
+        new MouseEvent('mousedown', { clientX: 1000 })
+      )
+
       calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 900,
@@ -133,7 +160,14 @@ describe('Resizing events in the date grid', () => {
       expect(twoDayEvent.start).toBe('2024-01-26')
       expect(twoDayEvent.end).toBe('2024-01-27')
 
-      new DateGridEventResizer($app, eventCopy, eventUpdater, 1000)
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
+      resizePlugin.createDateGridEventResizer(
+        twoDayEvent,
+        eventUpdater,
+        new MouseEvent('mousedown', { clientX: 1000 })
+      )
+
       calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
           clientX: 900,
@@ -147,12 +181,13 @@ describe('Resizing events in the date grid', () => {
     it('should not be able to resize beyond the start of the week, if the event starts in the previous week', () => {
       expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
       // should first be able to resize one day to the left
-      new DateGridEventResizer(
-        $app,
-        eventStartingInPreviousWeekCopy,
+      resizePlugin.createDateGridEventResizer(
+        eventStartingInPreviousWeek,
         eventUpdater,
-        1000
+        new MouseEvent('mousedown', { clientX: 1000 })
       )
       calendarWrapper.dispatchEvent(
         new MouseEvent('mousemove', {
@@ -176,11 +211,12 @@ describe('Resizing events in the date grid', () => {
       $app.config.callbacks.onEventUpdate = mockCallback
       expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
-      new DateGridEventResizer(
-        $app,
-        eventStartingInPreviousWeekCopy,
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
+      resizePlugin.createDateGridEventResizer(
+        eventStartingInPreviousWeek,
         eventUpdater,
-        1000
+        new MouseEvent('mousedown', { clientX: 1000 })
       )
 
       // Dispatch 2 mousemove events to prove that the callback is still only called once on mouseup

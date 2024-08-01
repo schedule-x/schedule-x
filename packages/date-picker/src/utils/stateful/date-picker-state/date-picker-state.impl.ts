@@ -16,9 +16,11 @@ export const createDatePickerState = (
       : currentDayDateString
 
   const isOpen = signal(false)
+  const isDisabled = signal(config.disabled || false)
   const datePickerView = signal(DatePickerView.MONTH_DAYS)
   const selectedDate = signal(initialSelectedDate)
   const datePickerDate = signal(initialSelectedDate || currentDayDateString)
+  const isDark = signal(config.style?.dark || false)
 
   const inputDisplayedValue = signal(selectedDateParam || '')
   const lastValidDisplayedValue = signal(selectedDateParam || '')
@@ -41,18 +43,26 @@ export const createDatePickerState = (
     }
   })
 
+  let wasInitialized = false
+  const handleOnChange = (selectedDate: string) => {
+    if (!wasInitialized) return (wasInitialized = true)
+
+    config.listeners.onChange!(selectedDate)
+  }
+
   effect(() => {
-    if (config.listeners?.onChange)
-      config.listeners.onChange(selectedDate.value)
+    if (config.listeners?.onChange) handleOnChange(selectedDate.value)
   })
 
   return {
-    inputRect: signal({ x: 0, y: 0, width: 0, height: 0, right: 0 }),
+    inputWrapperElement: signal(undefined),
     isOpen,
+    isDisabled,
     datePickerView,
     selectedDate,
     datePickerDate,
     inputDisplayedValue,
+    isDark,
     open: () => (isOpen.value = true),
     close: () => (isOpen.value = false),
     toggle: () => (isOpen.value = !isOpen.value),

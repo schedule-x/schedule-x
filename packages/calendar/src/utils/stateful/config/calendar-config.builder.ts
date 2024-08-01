@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarConfigInternal, {
   CalendarType,
@@ -16,6 +17,7 @@ import {
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarCallbacks } from '@schedule-x/shared/src/interfaces/calendar/listeners.interface'
+import { DEFAULT_WEEK_GRID_HEIGHT } from '../../../constants'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -25,11 +27,16 @@ export default class CalendarConfigBuilder
   defaultView: ViewName | undefined
   views: View[] | undefined
   dayBoundaries: DayBoundariesInternal | undefined
-  weekOptions: WeekOptions | undefined
+  weekOptions: WeekOptions = {
+    gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
+    nDays: 7,
+    eventWidth: 100,
+  }
   monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
   isDark: boolean | undefined = false
+  isResponsive: boolean | undefined = true
   callbacks: CalendarCallbacks | undefined
   minDate: string | undefined
   maxDate: string | undefined
@@ -45,6 +52,7 @@ export default class CalendarConfigBuilder
       this.calendars,
       this.plugins,
       this.isDark,
+      this.isResponsive,
       this.callbacks,
       {},
       this.minDate,
@@ -87,8 +95,13 @@ export default class CalendarConfigBuilder
     return this
   }
 
-  withWeekOptions(weekOptions: WeekOptions | undefined): CalendarConfigBuilder {
-    this.weekOptions = weekOptions
+  withWeekOptions(
+    weekOptions: Partial<WeekOptions> | undefined
+  ): CalendarConfigBuilder {
+    this.weekOptions = {
+      ...this.weekOptions,
+      ...weekOptions,
+    }
     return this
   }
 
@@ -111,6 +124,11 @@ export default class CalendarConfigBuilder
 
   withIsDark(isDark: boolean | undefined): CalendarConfigBuilder {
     this.isDark = isDark
+    return this
+  }
+
+  withIsResponsive(isDark: boolean | undefined): CalendarConfigBuilder {
+    this.isResponsive = isDark
     return this
   }
 
