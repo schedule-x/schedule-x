@@ -16,6 +16,7 @@ import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-
 import { signal } from '@preact/signals'
 import { Mock, vi } from 'vitest'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
+import { createResizePlugin } from '../resize.plugin'
 
 describe('Resizing events in the time grid', () => {
   describe('When the calendar wrapper cannot be found', () => {
@@ -30,12 +31,12 @@ describe('Resizing events in the time grid', () => {
       const eventUpdater = vi.fn()
       const initialY = 500
 
-      new TimeGridEventResizer(
-        $app,
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
+      resizePlugin.createTimeGridEventResizer(
         calendarEvent,
         eventUpdater,
-        initialY,
-        25,
+        { clientY: initialY } as MouseEvent,
         {
           start: '2024-01-05 00:00',
           end: '2024-01-05 23:59',
@@ -87,10 +88,18 @@ describe('Resizing events in the time grid', () => {
     })
 
     it('should extend an event by 30 minutes', () => {
-      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
-      })
+      const resizePlugin = createResizePlugin()
+      resizePlugin.init!($app)
+      resizePlugin.createTimeGridEventResizer(
+        calendarEvent,
+        eventUpdater,
+        { clientY: initialY } as MouseEvent,
+        {
+          start: '2024-01-05 00:00',
+          end: '2024-01-05 23:59',
+        }
+      )
+
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
       // Drag 50 pixels down (half hour, because day = 2400px)

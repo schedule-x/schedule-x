@@ -14,6 +14,7 @@
   "demos": {
     "display": "hidden",
     "title": "Demos",
+    "type": "page",
     "theme": {
       "sidebar": false,
       "toc": false

@@ -1,0 +1,14 @@
+{
+  "react": {
+    "title": "React component"
+  },
+  "vue": {
+    "title": "Vue component"
+  },
+  "angular": {
+    "title": "Angular component"
+  },
+  "svelte": {
+    "title": "Svelte component"
+  }
+}

@@ -50,7 +50,8 @@ export default function LandingPage() {
           </h3>
 
           <p>
-            Getting it right when building a calendar takes time. Schedule-X already has a lot of things figured out for you, so you can save yourself the year it might take to build a calendar from scratch.
+            Getting it right when building a calendar takes time. Schedule-X already has a lot of things figured out for
+            you, so you can save yourself the year it might take to build a calendar from scratch.
           </p>
         </div>
 
