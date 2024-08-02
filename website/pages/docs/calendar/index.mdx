@@ -57,11 +57,11 @@ After downloading and importing our dependencies, we can create an instance of t
 using the `render` method.
 
 ```ts
-import { createCalendar, viewMonthGrid } from '@schedule-x/calendar'
+import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
 const calendar = createCalendar({
-  views: [viewMonthGrid],
+  views: [createViewMonthGrid()],
   events: [
     {
       id: 1,
@@ -79,8 +79,8 @@ calendar.render(document.getElementById('calendar'))
 
 As a bare minimum, the configuration object needs two things:
 
-1. A list of views. Currently available views are `viewMonthGrid`,
-   `viewWeek`, `viewDay` and `viewMonthAgenda`.
+1. A list of views. Currently available views are __month grid__,
+   __week__, __day__ and __month agenda__.
 2. A list of events.
 
 ### Style & theme
