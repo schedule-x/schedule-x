@@ -7,10 +7,6 @@ import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
 import {
   createCalendar,
-  viewWeek,
-  viewMonthGrid,
-  viewDay,
-  viewMonthAgenda,
 } from '@schedule-x/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
