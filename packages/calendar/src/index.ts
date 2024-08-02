@@ -1,8 +1,8 @@
 import { createCalendar } from './factory'
-import { viewWeek } from './views/week'
-import { viewMonthGrid } from './views/month-grid'
-import { viewDay } from './views/day'
-import { viewMonthAgenda } from './views/month-agenda'
+import { viewWeek, createViewWeek } from './views/week'
+import { viewMonthGrid, createViewMonthGrid } from './views/month-grid'
+import { viewDay, createViewDay } from './views/day'
+import { viewMonthAgenda, createViewMonthAgenda } from './views/month-agenda'
 import {
   CalendarConfigExternal as CalendarConfig,
   CustomComponentFn,
@@ -40,4 +40,8 @@ export {
   setRangeForWeek,
   setRangeForMonth,
   externalEventToInternal,
+  createViewWeek,
+  createViewMonthGrid,
+  createViewDay,
+  createViewMonthAgenda,
 }

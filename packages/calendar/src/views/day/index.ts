@@ -4,7 +4,7 @@ import { setRangeForDay } from '../../utils/stateless/time/range/set-range'
 import { DayWrapper } from './components/day-wrapper'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
-export const viewDay = createPreactView({
+const config = {
   name: InternalViewName.Day,
   label: 'Day',
   setDateRange: setRangeForDay,
@@ -13,4 +13,8 @@ export const viewDay = createPreactView({
   Component: DayWrapper,
   backwardForwardFn: addDays,
   backwardForwardUnits: 1,
-})
+}
+
+export const viewDay = createPreactView(config)
+
+export const createViewDay = () => createPreactView(config)

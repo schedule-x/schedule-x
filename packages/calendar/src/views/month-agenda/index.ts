@@ -4,7 +4,7 @@ import { setRangeForMonth } from '../../utils/stateless/time/range/set-range'
 import { MonthAgendaWrapper } from './components/month-agenda-wrapper'
 import { addMonths } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
-export const viewMonthAgenda = createPreactView({
+const config = {
   name: InternalViewName.MonthAgenda,
   label: 'Month',
   setDateRange: setRangeForMonth,
@@ -13,4 +13,6 @@ export const viewMonthAgenda = createPreactView({
   hasWideScreenCompat: false,
   backwardForwardFn: addMonths,
   backwardForwardUnits: 1,
-})
+}
+export const viewMonthAgenda = createPreactView(config)
+export const createViewMonthAgenda = () => createPreactView(config)

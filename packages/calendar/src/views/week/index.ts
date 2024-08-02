@@ -4,7 +4,7 @@ import { WeekWrapper } from './components/week-wrapper'
 import { setRangeForWeek } from '../../utils/stateless/time/range/set-range'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
-export const viewWeek = createPreactView({
+const config = {
   name: InternalViewName.Week,
   label: 'Week',
   Component: WeekWrapper,
@@ -13,4 +13,6 @@ export const viewWeek = createPreactView({
   hasWideScreenCompat: true,
   backwardForwardFn: addDays,
   backwardForwardUnits: 7,
-})
+}
+export const viewWeek = createPreactView(config)
+export const createViewWeek = () => createPreactView(config)
