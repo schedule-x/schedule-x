@@ -33,16 +33,16 @@ large screens.
 
 ```ts
 import {
-  createCalendar,
-  viewDay,
-  viewMonthAgenda,
-  viewMonthGrid,
-  viewWeek,
+  createViewDay,
+  createViewMonthAgenda,
+  createViewMonthGrid,
+  createViewWeek,
+  createCalendar
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
 const calendar = createCalendar({
-  views: [viewMonthGrid, viewDay, viewMonthAgenda, viewWeek],
+  views: [createViewDay(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek()],
   events: [],
 })
 

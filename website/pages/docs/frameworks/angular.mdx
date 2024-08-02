@@ -3,7 +3,9 @@ title: 'Angular component'
 description: 'Learn how to use the Schedule-X calendar in an Angular application'
 ---
 
-# Angular component
+import AngularIcon from "../../../components/partials/logos/angular-icon";
+
+# <AngularIcon /> Angular component
 
 This page offers documentation for using the Schedule-X calendar in Angular. For general documentation on
 configuring the calendar, refer to the rest of the documentation. If you are using
@@ -28,7 +30,7 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from "@schedule-x/angular";
-import { createCalendar, viewWeek } from "@schedule-x/calendar";
+import { createCalendar, createViewWeek } from "@schedule-x/calendar";
 import './calendar.css'
 
 @Component({
@@ -49,7 +51,7 @@ export class AppComponent {
         end: '2024-06-11 05:00',
       },
     ],
-    views: [viewWeek],
+    views: [createViewWeek()],
   })
 }
 

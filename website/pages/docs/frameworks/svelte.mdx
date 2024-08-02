@@ -3,7 +3,9 @@ title: 'Svelte component'
 description: 'Learn how to use the Schedule-X calendar in a Svelte application'
 ---
 
-# Svelte component
+import SvelteIcon from "../../../components/partials/logos/svelte-icon";
+
+# <SvelteIcon /> Svelte component
 
 This page offers documentation for using the Schedule-X calendar in Svelte. For general documentation on
 configuring the calendar, refer to the rest of the documentation.
@@ -29,11 +31,11 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 
 <script lang="ts">
 	import { ScheduleXCalendar } from '@schedule-x/svelte';
-	import { createCalendar, viewDay, viewWeek } from '@schedule-x/calendar';
+	import { createCalendar, createViewDay, createViewWeek } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
 
 	const calendarApp = createCalendar({
-		views: [viewDay, viewWeek],
+		views: [createViewDay(), createViewWeek()],
 		events: [
 			{
 				id: '1',
@@ -121,12 +123,12 @@ can be customized:
 
 <script lang="ts">
 	import { ScheduleXCalendar } from '@schedule-x/svelte';
-	import { createCalendar, viewDay, viewWeek } from '@schedule-x/calendar';
+	import { createCalendar, createViewDay, createViewWeek } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
 	import TimeGridEvent from '$lib/TimeGridEvent.svelte';
 
 	const calendarApp = createCalendar({
-		views: [viewDay, viewWeek],
+		views: [createViewWeek(), createViewDay()],
 		events: [
 			{
 				id: '2',
