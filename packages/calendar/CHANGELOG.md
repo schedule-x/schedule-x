@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.57.1](https://github.com/schedule-x/schedule-x/compare/v1.57.0...v1.57.1) (2024-08-02)
+
+### Bug Fixes
+
+- **calendar:** enable using multiple calendars with same views ([#587](https://github.com/schedule-x/schedule-x/issues/587)) ([6cb0f5e](https://github.com/schedule-x/schedule-x/commit/6cb0f5ea52ab51433c7434aa444c6edfa77651a4))
+
 # [1.57.0](https://github.com/schedule-x/schedule-x/compare/v1.56.0...v1.57.0) (2024-08-01)
 
 **Note:** Version bump only for package @schedule-x/calendar
