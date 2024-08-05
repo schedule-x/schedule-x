@@ -30,13 +30,14 @@ import { createSidebarPlugin } from '../../packages/sidebar/src/sidebar-plugin.i
 import { createHeaderPlugin } from '../../packages/header/src'
 import { Component } from 'preact'
 // import Sidebar from '../../packages/sidebar/src/sidebar.tsx'
-import { createEventsServicePlugin } from '../../packages/events-service/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const scrollControllerPlugin = createScrollControllerPlugin({
   initialScroll: '07:50',
 })
+
+const eventRecurrencePlugin = createEventRecurrencePlugin()
 
 class CalendarsUpdaterPlugin {
   name: string = 'calendars-updater'
@@ -373,4 +374,14 @@ const updateCalendarsButton = document.getElementById(
 ) as HTMLButtonElement
 updateCalendarsButton.addEventListener('click', () => {
   calendarsUpdaterPlugin.updateCalendars()
+})
+
+const setAllCalendarsButton = document.getElementById(
+  'set-all-events'
+) as HTMLButtonElement
+setAllCalendarsButton.addEventListener('click', () => {
+  eventsServicePlugin.set([])
+  console.log('set all events')
+
+  eventsServicePlugin.set([...seededEvents])
 })

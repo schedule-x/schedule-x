@@ -4,6 +4,6 @@
 yarn build
 
 # copy into the other project
-cp -r packages/ ../schedule-x-vue/
+cp -r packages/* ../holitime-front/packages
 
-rm -rf ../schedule-x-vue/packages/*/node_modules
+rm -rf ../holitime-front/packages/*/node_modules

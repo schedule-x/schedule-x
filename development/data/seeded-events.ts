@@ -2,6 +2,17 @@ export const seededEvents = [
   {
     title: 'English essay deadline',
     with: 'Robin Scherbatsky',
+    start: '2024-08-01 07:10',
+    end: '2024-08-01 08:40',
+    color: 'red',
+    isEditable: true,
+    id: 'a4a51630e84eaz',
+    description: 'Pick up the dry cleaning. 234 Center Str.',
+    topic: 'Maths',
+  },
+  {
+    title: 'English essay deadline',
+    with: 'Robin Scherbatsky',
     start: '2024-04-01 07:10',
     end: '2024-04-01 08:40',
     color: 'red',
