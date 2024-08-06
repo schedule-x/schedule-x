@@ -7,6 +7,8 @@ export const calendarEnUS: CalendarTranslations = {
   Day: 'Day',
   events: 'events',
   event: 'event',
+  'My appointments': 'My appointments',
+  'Add time off': 'Add time off',
   'No events': 'No events',
   'Next period': 'Next period',
   'Previous period': 'Previous period',

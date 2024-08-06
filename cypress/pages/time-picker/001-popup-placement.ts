@@ -2,14 +2,13 @@ import { createTimePicker } from '../../../packages/time-picker'
 // import '../../../packages/theme-default/src/time-picker.scss'
 import '@schedule-x/theme-default/dist/time-picker.css'
 
-
 const timePickerTopLeft = document.querySelector('.time-picker-top-left')
 const timePickerTopRight = document.querySelector('.time-picker-top-right')
 const timePickerBottomLeft = document.querySelector('.time-picker-bottom-left')
-const timePickerBottomRight = document.querySelector('.time-picker-bottom-right')
-const timePickerInModal = document.querySelector(
-  '.time-picker-in-modal'
+const timePickerBottomRight = document.querySelector(
+  '.time-picker-bottom-right'
 )
+const timePickerInModal = document.querySelector('.time-picker-in-modal')
 
 createTimePicker({
   placement: 'bottom-start',

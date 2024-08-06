@@ -1,11 +1,11 @@
 {
-  "name": "@schedule-x/theme-default",
+  "name": "@holitime/schedule-x-theme-default",
   "version": "1.57.1",
   "license": "MIT",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony DUONG",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "scripts": {
     "build": "node scripts/build.mjs",

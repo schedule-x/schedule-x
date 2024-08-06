@@ -4,6 +4,8 @@ import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { dateStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
+export type { CalendarControlsPlugin }
+
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name: string = PluginName.CalendarControls
   $app!: CalendarAppSingleton

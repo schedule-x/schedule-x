@@ -1,12 +1,12 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-title: ""
-labels: ""
-assignees: ""
+title: ''
+labels: ''
+assignees: ''
 ---
 
-Thank you for wanting to take the time to report a problem. In order to increase the chances of the issue being 
+Thank you for wanting to take the time to report a problem. In order to increase the chances of the issue being
 resolved,
 please take a moment to give as much relevant information as possible.
 

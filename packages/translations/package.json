@@ -1,11 +1,11 @@
 {
-  "name": "@schedule-x/translations",
+  "name": "@holitime/schedule-x-translations",
   "version": "1.57.1",
-  "description": "Schedule-X translations",
+  "description": "Schedule-X translations customized",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony DUONG",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "license": "MIT",
   "module": "./dist/core.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/schedule-x/schedule-x",
+    "url": "https://github.com/astowny/schedule-x",
     "directory": "packages/translations"
   },
   "homepage": "https://schedule-x.dev",

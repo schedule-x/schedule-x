@@ -1,11 +1,11 @@
 {
-  "name": "@schedule-x/calendar-controls",
+  "name": "@holitime/schedule-x-calendar-controls",
   "version": "1.57.1",
   "description": "Plugin for extra controls for the Schedule-X calendar",
   "author": {
-    "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
-    "url": "https://github.com/tomosterlund"
+    "name": "Tony Duong",
+    "email": "astowny@gmail.com",
+    "url": "https://github.com/astowny"
   },
   "license": "MIT",
   "module": "./dist/core.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/schedule-x/schedule-x",
+    "url": "https://github.com/astowny/schedule-x",
     "directory": "packages/calendar-controls"
   },
   "homepage": "https://schedule-x.dev",

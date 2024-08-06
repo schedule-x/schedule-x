@@ -7,6 +7,8 @@ export const calendarPlPL: CalendarTranslations = {
   Day: 'Dzień',
   events: 'wydarzenia',
   event: 'wydarzenie',
+  'My appointments': 'Moje spotkania',
+  'Add time off': 'Dodaj urlop',
   'No events': 'Brak wydarzeń',
   'Next period': 'Następny okres',
   'Previous period': 'Poprzedni okres',

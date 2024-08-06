@@ -13,6 +13,9 @@ export interface CalendarCallbacks {
   onDoubleClickDateTime?: (dateTime: string) => void
   onClickAgendaDate?: (date: string) => void
   onClickPlusEvents?: (date: string) => void
+  onChangeToAppointments?: () => void
+  onAddTimeOff?: () => void
+  onToggleSidePanel?: (isOpen: boolean) => void
 
   isCalendarSmall?: ($app: CalendarAppSingleton) => boolean
 }

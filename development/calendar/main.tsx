@@ -22,6 +22,10 @@ import {
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
+import { createSidebarPlugin } from '../../packages/sidebar/src/sidebar-plugin.impl.ts'
+import { createHeaderPlugin } from '../../packages/header/src'
+import { Component } from 'preact'
+// import Sidebar from '../../packages/sidebar/src/sidebar.tsx'
 import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
@@ -32,6 +36,8 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 const scrollControllerPlugin = createScrollControllerPlugin({
   initialScroll: '07:50',
 })
+
+const eventRecurrencePlugin = createEventRecurrencePlugin()
 
 class CalendarsUpdaterPlugin {
   name: string = 'calendars-updater'
@@ -61,13 +67,29 @@ class CalendarsUpdaterPlugin {
       },
     }
   }
-}
-const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
+  updateSidebar(val = true): void {
+    if (this.$app && this.$app.config.plugins.sidebar) {
+      this.$app.config.plugins.sidebar.isOpen.value = val
+    }
+  }
+
+  updateHeader(textSwitchBtn: string = ''): void {
+    if (this.$app && this.$app.config.plugins.header && textSwitchBtn) {
+      this.$app.config.plugins.header.textSwitchBtn.value = textSwitchBtn
+    }
+  }
+}
+
+const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
-const eventRecurrencePlugin = createEventRecurrencePlugin()
+const headerPlugin = createHeaderPlugin()
 const calendar = createCalendar({
+  customCallBacks: {
+    onAddTimeOff: () =>
+      console.log('successful on add time off added function'),
+  },
   weekOptions: {
     // gridHeight: 3000,
     // nDays: 4,
@@ -99,6 +121,15 @@ const calendar = createCalendar({
   // },
   // isDark: true,
   callbacks: {
+    onToggleSidePanel(isOpen) {
+      console.log('on toggle side panel cb test ' + isOpen)
+    },
+    onChangeToAppointments() {
+      console.log('handle change to appointments')
+    },
+    onAddTimeOff() {
+      console.log('Add time off')
+    },
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
     },
@@ -207,6 +238,8 @@ const calendar = createCalendar({
     calendarControlsPlugin,
     calendarsUpdaterPlugin,
     createCurrentTimePlugin(),
+    createSidebarPlugin(),
+    headerPlugin,
   ],
   events: [
     ...seededEvents,
@@ -263,8 +296,24 @@ const calendar = createCalendar({
     },
   ],
 })
+
+calendar._setCustomComponentFn('sidebar', (wrapper, props) => {
+  let elemt = document.createElement('div')
+  elemt.innerText = 'inner text '
+  wrapper.appendChild(elemt)
+
+  return <div>qqqq</div>
+})
+
 calendar.render(calendarElement)
 
+// const customVNodes = customComponentsMeta.map(
+//   ({ Component, wrapperElement }) => {
+//     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//     // @ts-ignore
+//     return h(Teleport, { to: wrapperElement }, Component)
+//   }
+// )
 // const calendar2Element = document.getElementById('calendar-2') as HTMLElement
 // const calendar2 = createCalendar({
 //   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
@@ -282,6 +331,7 @@ themeToggle.addEventListener('click', () => {
 
 const addEventButton = document.getElementById('add-event') as HTMLButtonElement
 addEventButton.addEventListener('click', () => {
+  calendarsUpdaterPlugin.updateHeader('mes consultations')
   eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
@@ -311,6 +361,9 @@ setDateButton.addEventListener('click', () => {
   const newDate = (document.getElementById('set-date') as HTMLInputElement)
     .value
   calendarControlsPlugin.setDate(newDate)
+  calendarsUpdaterPlugin.updateSidebar(
+    !calendarsUpdaterPlugin.$app.config.plugins.sidebar?.isOpen.value
+  )
 })
 
 const setViewButton = document.getElementById(
@@ -327,4 +380,14 @@ const updateCalendarsButton = document.getElementById(
 ) as HTMLButtonElement
 updateCalendarsButton.addEventListener('click', () => {
   calendarsUpdaterPlugin.updateCalendars()
+})
+
+const setAllCalendarsButton = document.getElementById(
+  'set-all-events'
+) as HTMLButtonElement
+setAllCalendarsButton.addEventListener('click', () => {
+  eventsServicePlugin.set([])
+  console.log('set all events')
+
+  eventsServicePlugin.set([...seededEvents])
 })

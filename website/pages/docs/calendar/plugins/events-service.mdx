@@ -39,7 +39,8 @@ Sets all events in the calendar. This will override all existing events in the c
 ```js
 import { createEventsServicePlugin } from '@schedule-x/events-service'
 
-const eventsServicePlugin = createEventsServicePlugin();const calendar = createCalendar({
+const eventsServicePlugin = createEventsServicePlugin()
+const calendar = createCalendar({
   // ...other configuration
   plugins: [eventsServicePlugin],
 })
@@ -49,7 +50,7 @@ eventsServicePlugin.add({
   title: 'Event 1',
   start: '2024-04-20',
   end: '2024-04-20',
-  id: 1
+  id: 1,
 })
 
 eventsServicePlugin.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }
@@ -60,7 +61,7 @@ eventsServicePlugin.update({
   title: 'Real title',
   start: '2024-04-20',
   end: '2024-04-20',
-  id: 1
+  id: 1,
 })
 
 eventsServicePlugin.remove(1)

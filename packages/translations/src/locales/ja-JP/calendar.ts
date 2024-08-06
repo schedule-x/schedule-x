@@ -7,6 +7,8 @@ export const calendarJaJP: CalendarTranslations = {
   Day: '日',
   events: 'イベント',
   event: 'イベント',
+  'My appointments': '私の予定',
+  'Add time off': '休暇を追加',
   'No events': 'イベントなし',
   'Next period': '次の期間',
   'Previous period': '前の期間',

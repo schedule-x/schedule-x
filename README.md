@@ -4,6 +4,10 @@
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true)](https://discord.gg/yHbT3C4M8w)
 ![npm](https://img.shields.io/npm/dm/@schedule-x/calendar)
 
+# Disclaimer
+
+I have started from the repository of TomOsterlund and this customized package is destined for an internal business purpose, I won't maintain it for the moment.
+
 # Material design calendar and date picker
 
 This library offers a material design calendar and date picker for the web. They can be used regardless of your
@@ -34,9 +38,8 @@ Copyright (c) 2023, Tom Österlund
 
 ## Code contributions & project insights
 
-Code contributions are welcome, but require communication. Please read [CONTRIBUTING.md](https://github.com/schedule-x/schedule-x/blob/main/.github/contributing.md) and open an issue before 
+Code contributions are welcome, but require communication. Please read [CONTRIBUTING.md](https://github.com/schedule-x/schedule-x/blob/main/.github/contributing.md) and open an issue before
 opening a PR.
 
 For insight into what's currently in progress, and what's coming up, refer to the [project board](https://github.com/orgs/schedule-x/projects/3/views/1).
 The "backlog" column is sorted by priority, so the topmost tasks are the ones that are most likely to be worked on next.
-

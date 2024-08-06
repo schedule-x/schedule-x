@@ -10,11 +10,14 @@ import {
 import DragAndDropPlugin from '../drag-and-drop/drag-and-drop-plugin.interface'
 import PluginBase from '../plugin.interface'
 import EventModalPlugin from '../event-modal/event-modal.plugin'
+import SidebarPlugin from './calendar-sidebar.interface'
 import { CalendarCallbacks } from './listeners.interface'
 import { CustomComponentFns } from './custom-component-fns'
 import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
+import CustomCallbacks from './custom-callbacks.interface'
+import HeaderPlugin from './calendar-header.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -42,9 +45,11 @@ export type CalendarType = {
 export type Plugins = {
   dragAndDrop?: DragAndDropPlugin
   eventModal?: EventModalPlugin
+  sidebar?: SidebarPlugin
   scrollController?: PluginBase
   eventRecurrence?: EventRecurrencePlugin
   resize?: ResizePlugin
+  header?: HeaderPlugin
   [key: string]: PluginBase | undefined
 }
 
@@ -98,5 +103,6 @@ export interface CalendarConfigExternal
   views: [View, ...View[]]
   selectedDate?: string
   calendars?: Record<string, CalendarType>
+  customCallBacks?: CustomCallbacks
   weekOptions?: Partial<WeekOptions>
 }

@@ -6,6 +6,7 @@ export type CustomComponentFns = {
   monthGridEvent?: CustomComponentFn
   monthAgendaEvent?: CustomComponentFn
   eventModal?: CustomComponentFn
+  sidebar?: CustomComponentFn
   headerContentLeftPrepend?: CustomComponentFn
   headerContentLeftAppend?: CustomComponentFn
   headerContentRightPrepend?: CustomComponentFn

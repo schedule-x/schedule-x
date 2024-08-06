@@ -1,4 +1,5 @@
 import CalendarAppSingleton from './interfaces/calendar/calendar-app-singleton'
+import CalendarEventExternal from './interfaces/calendar/calendar-event.interface'
 import type CalendarEvent from './interfaces/calendar/calendar-event.interface'
 import type { CalendarEventInternal } from './interfaces/calendar/calendar-event.interface'
 import type EventModalPlugin from './interfaces/event-modal/event-modal.plugin'
@@ -30,3 +31,6 @@ export {
   addMonths,
   addMinutes,
 } from './utils/stateless/time/date-time-mutation/adding'
+
+export type { SidebarPluginProps } from './interfaces/calendar/calendar-sidebar.interface'
+export type { CalendarEventExternal }

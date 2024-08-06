@@ -7,6 +7,8 @@ export const calendarItIT: CalendarTranslations = {
   Day: 'Giorno',
   events: 'eventi',
   event: 'evento',
+  'My appointments': 'I miei appuntamenti',
+  'Add time off': 'Aggiungi un periodo di ferie',
   'No events': 'Nessun evento',
   'Next period': 'Periodo successivo',
   'Previous period': 'Periodo precedente',

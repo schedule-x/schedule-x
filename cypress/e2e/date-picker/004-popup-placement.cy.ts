@@ -4,9 +4,15 @@ import { SNAPSHOT_FAULT_TOLERANCE } from '@schedule-x/e2e-testing'
 
 describe('Date Picker - Select Dates', () => {
   const datePickerTopLeft = createDatePickerPageObject('.date-picker-top-left')
-  const datePickerTopRight = createDatePickerPageObject('.date-picker-top-right')
-  const datePickerBottomLeft = createDatePickerPageObject('.date-picker-bottom-left')
-  const datePickerBottomRight = createDatePickerPageObject('.date-picker-bottom-right')
+  const datePickerTopRight = createDatePickerPageObject(
+    '.date-picker-top-right'
+  )
+  const datePickerBottomLeft = createDatePickerPageObject(
+    '.date-picker-bottom-left'
+  )
+  const datePickerBottomRight = createDatePickerPageObject(
+    '.date-picker-bottom-right'
+  )
   const datePickerInModal = createDatePickerPageObject('.date-picker-in-modal')
 
   beforeEach(() => {

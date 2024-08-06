@@ -7,6 +7,8 @@ export const calendarMkMK: CalendarTranslations = {
   Day: 'Ден',
   events: 'настани',
   event: 'настан',
+  'Add time off': 'додади слободен ден',
+  'My appointments': 'моите состаноци',
   'No events': 'Нема настани',
   'Next period': 'Следен период',
   'Previous period': 'Претходен период',

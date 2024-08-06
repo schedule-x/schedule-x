@@ -30,7 +30,10 @@ export default function LandingPage() {
             </button>
           </Link>
 
-          <Link href={'https://github.com/schedule-x/schedule-x'} target="_blank">
+          <Link
+            href={'https://github.com/schedule-x/schedule-x'}
+            target="_blank"
+          >
             <button className={'landingPageAction buttonOutlined'}>
               <span>View on GitHub</span>
               <svg className="github-icon" width="24" height="24" fill="currentColor" viewBox="3 3 18 18">

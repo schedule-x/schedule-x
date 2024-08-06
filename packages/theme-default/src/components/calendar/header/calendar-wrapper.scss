@@ -20,6 +20,24 @@
   overflow: hidden;
 }
 
+.sx__calendar-content {
+  display: flex;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+}
+
+.sx__calendar-view-container-wrapper {
+  display: flex;
+  flex-flow: column;
+
+  // background-color: var(--sx-color-background);
+  overflow: hidden;
+  position: relative;
+  flex: 1;
+  height: 100%;
+}
+
 .sx__view-container {
   position: relative;
   flex: 1;

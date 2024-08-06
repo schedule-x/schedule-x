@@ -80,10 +80,17 @@ export default function CalendarWrapper({ $app }: props) {
           <AppContext.Provider value={$app}>
             <CalendarHeader />
 
-            <div
-              className={['sx__view-container', transitionClass].join(' ')}
-              id={viewContainerId}
-            ></div>
+            <div className="sx__calendar-content">
+              {$app.config.plugins.sidebar && (
+                <$app.config.plugins.sidebar.ComponentFn $app={$app} />
+              )}
+              <div className="sx__calendar-view-container-wrapper">
+                <div
+                  className={['sx__view-container', transitionClass].join(' ')}
+                  id={viewContainerId}
+                ></div>
+              </div>
+            </div>
 
             {$app.config.plugins.eventModal &&
               $app.config.plugins.eventModal.calendarEvent.value && (

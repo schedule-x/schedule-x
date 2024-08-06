@@ -7,6 +7,8 @@ export const calendarCsCZ: CalendarTranslations = {
   Day: 'Den',
   events: 'události',
   event: 'událost',
+  'My appointments': 'Moje schůzky',
+  'Add time off': 'Přidat volno',
   'No events': 'Žádné události',
   'Next period': 'Příští období',
   'Previous period': 'Předchozí období',

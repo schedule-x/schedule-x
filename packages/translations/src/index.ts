@@ -70,7 +70,7 @@ const translations = {
   idID,
   csCZ,
   etEE,
-  ukUA
+  ukUA,
 }
 
 const datePickerTranslations = {
@@ -96,7 +96,7 @@ const datePickerTranslations = {
   idID: datePickerIdID,
   csCZ: datePickerCsCZ,
   etEE: datePickerEtEE,
-  ukUA: datePickerUkUA
+  ukUA: datePickerUkUA,
 }
 
 export {
@@ -125,5 +125,5 @@ export {
   idID,
   csCZ,
   etEE,
-  ukUA
+  ukUA,
 }

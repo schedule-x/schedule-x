@@ -9,8 +9,8 @@ import {
   addMonths,
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
-
-class PreactView implements View {
+export type { PreactViewComponent }
+export class PreactView implements View {
   private randomId = randomStringId()
 
   public name: string

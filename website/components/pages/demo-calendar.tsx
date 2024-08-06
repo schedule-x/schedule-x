@@ -21,7 +21,7 @@ import { useTheme } from 'nextra-theme-docs'
 export default function CalendarDemoPage() {
   const { resolvedTheme } = useTheme()
 
-  const [cal, setCal] = useState<CalendarApp|null>(null)
+  const [cal, setCal] = useState<CalendarApp | null>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined') return

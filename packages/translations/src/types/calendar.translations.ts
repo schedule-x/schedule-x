@@ -5,6 +5,8 @@ export interface CalendarTranslations {
   Day: string
   events: string
   event: string
+  'My appointments': string
+  'Add time off': string
   'No events': string
   'Next period': string
   'Previous period': string

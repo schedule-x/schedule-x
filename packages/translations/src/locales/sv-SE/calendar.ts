@@ -7,6 +7,8 @@ export const calendarSvSE: CalendarTranslations = {
   Day: 'Dag',
   events: 'händelser',
   event: 'händelse',
+  'My appointments': 'Mina möten',
+  'Add time off': 'Lägg till ledig tid',
   'No events': 'Inga händelser',
   'Next period': 'Nästa period',
   'Previous period': 'Föregående period',
