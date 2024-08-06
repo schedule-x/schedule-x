@@ -6,7 +6,7 @@ import ViewSelection from './view-selection'
 import ForwardBackwardNavigation from './forward-backward-navigation'
 import hideSidePanelIcon from './hide_sidebar_horizontal_icon_128227.svg'
 import showSidePanelIcon from './show_sidebar_horizontal_icon_128225.svg'
-import changeIcon from './change_icon.svg'
+// import changeIcon from './change_icon.svg'
 import calendarIcon from './calendar_icon.svg'
 import { randomStringId } from '@schedule-x/shared/src'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
@@ -17,11 +17,11 @@ export default function CalendarHeader() {
   if ($app.config.plugins.sidebar) {
     setIsOpen($app.config.plugins.sidebar.isOpen.value)
   }
-  const handleChangeAppointments = () => {
-    if ($app.config.callbacks.onChangeToAppointments) {
-      $app.config.callbacks.onChangeToAppointments()
-    }
-  }
+  // const handleChangeAppointments = () => {
+  //   if ($app.config.callbacks.onChangeToAppointments) {
+  //     $app.config.callbacks.onChangeToAppointments()
+  //   }
+  // }
   const handleAddTimeOff = () => {
     if ($app.config.callbacks.onAddTimeOff) {
       $app.config.callbacks.onAddTimeOff()
@@ -97,7 +97,7 @@ export default function CalendarHeader() {
                 onClick={handleToggleSidePanel}
               />
             ))}
-          <div
+          {/* <div
             className={'sx__calendar-header-change-btn-appointments'}
             onClick={handleChangeAppointments}
           >
@@ -106,7 +106,7 @@ export default function CalendarHeader() {
             $app.config.plugins.header.textSwitchBtn.value
               ? $app.config.plugins.header.textSwitchBtn.value
               : $app.translate('My appointments')}
-          </div>
+          </div> */}
         </div>
         <div>
           {headerContentLeftPrependId && (
