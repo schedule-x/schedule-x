@@ -3,7 +3,9 @@ title: 'Vue component'
 description: 'Learn how to use the Schedule-X calendar in a Vue application'
 ---
 
-# Vue component
+import VueIcon from "../../../components/partials/logos/vue-icon";
+
+# <VueIcon /> Vue component
 
 This page offers documentation for using the Schedule-X calendar in Vue. For general documentation on
 configuring the calendar, refer to the rest of the documentation. If you are using
@@ -29,10 +31,10 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 import { ScheduleXCalendar } from '@schedule-x/vue'
 import {
   createCalendar,
-  viewDay,
-  viewWeek,
-  viewMonthGrid,
-  viewMonthAgenda,
+  createViewDay,
+  createViewMonthAgenda,
+  createViewMonthGrid,
+  createViewWeek,
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
@@ -40,8 +42,12 @@ import '@schedule-x/theme-default/dist/index.css'
 // For updating events, use the events service plugin
 const calendarApp = createCalendar({
   selectedDate: '2023-12-19',
-  views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
-  defaultView: viewWeek.name,
+  views: [
+    createViewDay(),
+    createViewWeek(),
+    createViewMonthGrid(),
+    createViewMonthAgenda(),
+  ],
   events: [
     {
       id: 1,
@@ -134,9 +140,11 @@ An example of how to use these components can be found here: https://github.com/
 ```vue
 <script setup>
 import { ScheduleXCalendar } from '@schedule-x/vue'
-import { createCalendar, viewWeek } from '@schedule-x/calendar'
+import { createCalendar, createViewWeek } from '@schedule-x/calendar'
 import CustomTimeGridEvent from './some-path/CustomTimeGridEvent.vue'
 import '@schedule-x/theme-default/dist/index.css'
+
+const viewWeek = createViewWeek()
 
 const calendarApp = createCalendar({
   views: [viewWeek],

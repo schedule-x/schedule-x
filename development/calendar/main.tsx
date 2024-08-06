@@ -7,10 +7,6 @@ import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
 import {
   createCalendar,
-  viewWeek,
-  viewMonthGrid,
-  viewDay,
-  viewMonthAgenda,
 } from '@schedule-x/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
@@ -30,6 +26,10 @@ import { createSidebarPlugin } from '../../packages/sidebar/src/sidebar-plugin.i
 import { createHeaderPlugin } from '../../packages/header/src'
 import { Component } from 'preact'
 // import Sidebar from '../../packages/sidebar/src/sidebar.tsx'
+import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
+import { createViewWeek } from '@schedule-x/calendar/src/views/week'
+import { createViewDay } from '@schedule-x/calendar/src/views/day'
+import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -106,7 +106,7 @@ const calendar = createCalendar({
   // locale: 'cs-CZ',
   // locale: 'et-EE',
   locale: 'de-DE',
-  views: [viewMonthGrid, viewWeek, viewDay, viewMonthAgenda],
+  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
@@ -314,6 +314,12 @@ calendar.render(calendarElement)
 //     return h(Teleport, { to: wrapperElement }, Component)
 //   }
 // )
+// const calendar2Element = document.getElementById('calendar-2') as HTMLElement
+// const calendar2 = createCalendar({
+//   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
+//   events: [],
+// })
+// calendar2.render(calendar2Element)
 
 let darkToggle = 0
 

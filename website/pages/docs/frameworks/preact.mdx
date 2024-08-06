@@ -26,10 +26,10 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 ```tsx
 import { useCalendarApp, ScheduleXCalendar } from '@schedule-x/preact'
 import {
-  viewWeek,
-  viewDay,
-  viewMonthGrid,
-  viewMonthAgenda,
+  createViewDay,
+  createViewMonthAgenda,
+  createViewMonthGrid,
+  createViewWeek,
 } from '@schedule-x/calendar'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 
@@ -39,8 +39,12 @@ import '@schedule-x/theme-default/dist/index.css'
 
 function CalendarApp() {
   const calendar = useCalendarApp({
-    defaultView: viewMonthGrid.name,
-    views: [viewDay, viewWeek, viewMonthGrid, viewMonthAgenda],
+    views: [
+      createViewDay(),
+      createViewWeek(),
+      createViewMonthGrid(),
+      createViewMonthAgenda(),
+    ],
     events: [
       {
         id: '1',

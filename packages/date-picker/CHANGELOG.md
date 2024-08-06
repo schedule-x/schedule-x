@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
+## [1.57.1](https://github.com/schedule-x/schedule-x/compare/v1.57.0...v1.57.1) (2024-08-02)
+
+### Bug Fixes
+
+- **date-picker:** export config type as interface ([#586](https://github.com/schedule-x/schedule-x/issues/586)) ([27af897](https://github.com/schedule-x/schedule-x/commit/27af89750ddf92852c270d3cea22f3309439530b))
+
+# [1.57.0](https://github.com/schedule-x/schedule-x/compare/v1.56.0...v1.57.0) (2024-08-01)
 
 **Note:** Version bump only for package @schedule-x/date-picker
 

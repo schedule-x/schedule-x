@@ -3,70 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.38.0](https://github.com/astowny/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
-
-### Features
-
-- **calendar:** add header management and header plugin + format ([6f79e1e](https://github.com/astowny/schedule-x/commit/6f79e1e7b394f454cae4e7df80563f3b34179f2d))
-- **calendar:** fix copy id issue ([e368b0e](https://github.com/astowny/schedule-x/commit/e368b0e88269c73ed8ad930782c9bcba9e2e0d63))
-- **event-modal:** set modal position on scroll ([#403](https://github.com/astowny/schedule-x/issues/403)) ([518aa63](https://github.com/astowny/schedule-x/commit/518aa631d25c2bbc9700f0f68cf0f04d7fe6d4be))
-
-## [1.35.1](https://github.com/astowny/schedule-x/compare/v1.35.0...v1.35.1) (2024-04-28)
+## [1.57.1](https://github.com/schedule-x/schedule-x/compare/v1.57.0...v1.57.1) (2024-08-02)
 
 ### Bug Fixes
 
-- **calendar controls:** upgrade version ([5e70067](https://github.com/astowny/schedule-x/commit/5e70067d91f7e40bb4834aeb5dd33c6ef6902f68))
-- **calendar header:** manage responsive btns ([38b8dfb](https://github.com/astowny/schedule-x/commit/38b8dfb837fafa21adae8dc7a19f7d89aa31290b))
-- **calendar shared:** export CalendarEventExternal ([9483783](https://github.com/astowny/schedule-x/commit/94837837247f294c0282ac6c05ae1f7cbdae5e5b))
-- **calendar shared:** upgrade version ([7cf9b92](https://github.com/astowny/schedule-x/commit/7cf9b92abf12fc2252e0c48a9d49bf2512b95a2e))
-- **calendar shared:** upgrade version ([c2b3c01](https://github.com/astowny/schedule-x/commit/c2b3c0141831b32199b4d78e84e379ad30e4790e))
-- **theme-default:** upgrade version and fix flex wrap header ([394d41a](https://github.com/astowny/schedule-x/commit/394d41a04bc37f1f0c168be151047bb1d8b834d2))
-- **types:** add export types and doc ([2091958](https://github.com/astowny/schedule-x/commit/209195878d841aed5aae86a7b3220e585274a5e0))
+- **calendar:** enable using multiple calendars with same views ([#587](https://github.com/schedule-x/schedule-x/issues/587)) ([6cb0f5e](https://github.com/schedule-x/schedule-x/commit/6cb0f5ea52ab51433c7434aa444c6edfa77651a4))
+- **date-picker:** export config type as interface ([#586](https://github.com/schedule-x/schedule-x/issues/586)) ([27af897](https://github.com/schedule-x/schedule-x/commit/27af89750ddf92852c270d3cea22f3309439530b))
+
+# [1.57.0](https://github.com/schedule-x/schedule-x/compare/v1.56.0...v1.57.0) (2024-08-01)
 
 ### Features
 
-- **header:** add property on toggle side panel ([05f9f81](https://github.com/astowny/schedule-x/commit/05f9f81d9ee6bf1543b8a01c113919d19347a4d2))
-- **package names:** edit package names ([670fc4a](https://github.com/astowny/schedule-x/commit/670fc4a6d9818a522cd43053a829af99068eb45c))
-- **readme:** add disclaimer ([6b618a6](https://github.com/astowny/schedule-x/commit/6b618a6c8e195c66ff111f26be6303ecd4cccb54))
-- **readme:** add disclaimer ([4a964cd](https://github.com/astowny/schedule-x/commit/4a964cdc91b255b89b136adb60327c59b12ec682))
-- **sidebar:** clean code and add custom plugin to get and set the value of sidebar ([4c976a1](https://github.com/astowny/schedule-x/commit/4c976a10adb28265cfad7945e078a1234d090534))
-- **translation:** add lang ([015e7e9](https://github.com/astowny/schedule-x/commit/015e7e9060896f17db496062fb05ead835710f7e))
-- **translation:** fix ccid and isCopy for custom components + recurrence ([1730fd2](https://github.com/astowny/schedule-x/commit/1730fd23629bcf7ca06fd3a1772525c807ab7f21))
-- **translation:** fix vrsion ([95060de](https://github.com/astowny/schedule-x/commit/95060deff31b56cd7da6ed706715a1a3477a6f95))
-- **types:** add export types ([0280903](https://github.com/astowny/schedule-x/commit/02809035b4b0f8600fe24f753b947a4d8a6f59aa))
-- **workflow:** build 1.30 custom packages ([157a472](https://github.com/astowny/schedule-x/commit/157a472158f14a09a5852e71ac7bfebbac49943a))
-- **workflow:** build 1.31 and 1.32 publish export sidebar lgin interface ([95b4b55](https://github.com/astowny/schedule-x/commit/95b4b559d70bbfc8c00ad687bf88f084ae9f08f5))
-- **workflow:** custom build to publish packages ([9a350d0](https://github.com/astowny/schedule-x/commit/9a350d0f8e23b42d38fe9493b9d54cf30368edd1))
-- **workflow:** custom build to publish packages in a separated script ([5e41ecb](https://github.com/astowny/schedule-x/commit/5e41ecbf8b248c23c6cfeeafbc8735ad61c6d729))
+- add Ukrainian language support ([#576](https://github.com/schedule-x/schedule-x/issues/576)) ([634cba8](https://github.com/schedule-x/schedule-x/commit/634cba8c26c5658912157113e08f1554cb2aa11c))
 
-# [2.0.0](https://github.com/astowny/schedule-x/compare/v1.28.0...v2.0.0) (2024-04-04)
-
-### Bug Fixes
-
-- **header:** fix toggle view selection ([be66321](https://github.com/astowny/schedule-x/commit/be6632158fcf9f3ab205651d3d7c25fcda41ce53))
-
-### Features
-
-- **custom functions:** add custom callbacks + translations ([2407704](https://github.com/astowny/schedule-x/commit/2407704e8e3be8bf7b539ae10801b6229d5456dd))
-- **header:** add console log for custom add time off button ([3d0d49a](https://github.com/astowny/schedule-x/commit/3d0d49a3f4d8e5befdf2323b2f8affc191fb8b1e))
-- **header:** add side panel icon show and hide ([fcb54f9](https://github.com/astowny/schedule-x/commit/fcb54f96ee914ff0e8f825b4e83b8d9a9090d1c8))
-- **header:** add UI for custom add time off button ([a6bba4e](https://github.com/astowny/schedule-x/commit/a6bba4e62ea7c5013bbb7f82250fb770ba4baf59))
-- **header:** fix UI for custom add time off button ([08f5e8b](https://github.com/astowny/schedule-x/commit/08f5e8b140840653fc3808a30fbc3203b8e0d81c))
-- **husky:** add post-commit ([920925b](https://github.com/astowny/schedule-x/commit/920925bb0fd4e13ffa6730de4f5121239b82ecfd))
-- **post hook commit:** remove node modules on destination folder ([b463a83](https://github.com/astowny/schedule-x/commit/b463a8315ab3dcd738b4ac57cf43a32ef8f851d2))
-- **sidebar plugin:** add sidebar plugin ([1069163](https://github.com/astowny/schedule-x/commit/10691635ad7460d105c6b8821ee393c5605c1e8b))
-- **sidebar plugin:** add sidebar plugin is open prop ([3b79f4c](https://github.com/astowny/schedule-x/commit/3b79f4c23c4bbb070c9c3cd1841724979c5ab9fe))
-- **sidebar plugin:** fix scroll behaviour for calendar ([3132284](https://github.com/astowny/schedule-x/commit/3132284eb43be238509df8c9a5a819c02107601a))
-- **sidebar plugin:** fix scroll behaviour for calendar ([f9d3e81](https://github.com/astowny/schedule-x/commit/f9d3e81712ab81e254674feafbcaa53ccfcf8f9b))
-- **sidebar plugin:** remove use less comments ([5e2dea8](https://github.com/astowny/schedule-x/commit/5e2dea8ff444aa70a905a8a9006b6446fd170027))
-- **sidebar plugin:** remove vue from package ([d228d5d](https://github.com/astowny/schedule-x/commit/d228d5d175d6b5402597421a0564de5f6ad60710))
-- **test:** add post commit action ([6b046a8](https://github.com/astowny/schedule-x/commit/6b046a87cd22127bd6cc093ecf9583a8eca60758))
-- **test:** this is a test ([503b8a0](https://github.com/astowny/schedule-x/commit/503b8a077000f8498403e56dc9c03d924f1062aa))
-- **test:** this is a test ([5de1efb](https://github.com/astowny/schedule-x/commit/5de1efbadac379a76ca71e3b0480d449239d1906))
-- **test:** this is a test ([c5d7d52](https://github.com/astowny/schedule-x/commit/c5d7d525c2cfb210a749cdde5fd16297125b7d04))
-- **test:** this is a test ([d380c37](https://github.com/astowny/schedule-x/commit/d380c37f37303ec49862a865e886613e2c678fb6))
-- **test:** this is a test ([d79fa9b](https://github.com/astowny/schedule-x/commit/d79fa9b8d590d14d45a7321fd18682323be40a59))
-- **view selection:** add custom toggle view selection ([a87f563](https://github.com/astowny/schedule-x/commit/a87f563fd95c880bb96d44ddfb350a34c00087ce))
 # [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
 
 ### Bug Fixes

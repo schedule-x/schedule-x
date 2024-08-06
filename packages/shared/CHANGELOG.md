@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.38.0](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
+# [1.38.0astowny](https://github.com/schedule-x/schedule-x/compare/v1.37.0...v1.38.0) (2024-05-03)
 
 ### Bug Fixes
 
@@ -22,6 +22,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **translation:** add lang ([015e7e9](https://github.com/schedule-x/schedule-x/commit/015e7e9060896f17db496062fb05ead835710f7e))
 - **workflow:** build 1.30 custom packages ([157a472](https://github.com/schedule-x/schedule-x/commit/157a472158f14a09a5852e71ac7bfebbac49943a))
 - **workflow:** build 1.31 and 1.32 publish export sidebar lgin interface ([95b4b55](https://github.com/schedule-x/schedule-x/commit/95b4b559d70bbfc8c00ad687bf88f084ae9f08f5))
+
+## [1.57.1](https://github.com/schedule-x/schedule-x/compare/v1.57.0...v1.57.1) (2024-08-02)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+# [1.57.0](https://github.com/schedule-x/schedule-x/compare/v1.56.0...v1.57.0) (2024-08-01)
+
+**Note:** Version bump only for package @schedule-x/shared
 
 # [1.56.0](https://github.com/schedule-x/schedule-x/compare/v1.55.0...v1.56.0) (2024-07-29)
 

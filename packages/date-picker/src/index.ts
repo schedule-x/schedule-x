@@ -3,3 +3,6 @@ import { DatePickerConfigExternal } from '@schedule-x/shared/src/interfaces/date
 
 export { createDatePicker, createDatePickerInternal }
 export type DatePickerConfig = DatePickerConfigExternal
+
+// For the Vue component
+export interface IDatePickerConfig extends DatePickerConfig {}
