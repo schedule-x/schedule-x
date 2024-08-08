@@ -11,6 +11,7 @@ import {
   destroyPlugins,
   initPlugins,
 } from '../utils/stateless/plugins-lifecycle'
+import { useSignalEffect } from '@preact/signals'
 
 type props = {
   $app: CalendarAppSingleton
@@ -43,7 +44,7 @@ export default function CalendarWrapper({ $app }: props) {
 
   const [currentView, setCurrentView] = useState<View | null>()
 
-  const renderSelectedView = () => {
+  useSignalEffect(() => {
     const newView = $app.config.views.find(
       (view) => view.name === $app.calendarState.view.value
     )
@@ -54,13 +55,12 @@ export default function CalendarWrapper({ $app }: props) {
     if (currentView) currentView.destroy()
     setCurrentView(newView)
     newView.render(viewElement, $app)
-  }
-  useEffect(renderSelectedView, [$app.calendarState.view.value])
+  })
 
   const [previousRangeStart, setPreviousRangeStart] = useState('')
   const [transitionClass, setTransitionClass] = useState('')
 
-  useEffect(() => {
+  useSignalEffect(() => {
     const newRangeStartIsLaterThanPrevious =
       ($app.calendarState.range.value?.start || '') > previousRangeStart
     setTransitionClass(
@@ -71,7 +71,7 @@ export default function CalendarWrapper({ $app }: props) {
       setTransitionClass('')
     }, 300) // CORRELATION ID: 3
     setPreviousRangeStart($app.calendarState.range.value?.start || '')
-  }, [$app.calendarState.range.value])
+  })
 
   return (
     <>

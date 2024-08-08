@@ -3,6 +3,7 @@ import { AppContext } from '../../utils/stateful/app-context'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
+import { useSignalEffect } from '@preact/signals'
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
@@ -22,7 +23,7 @@ export default function ForwardBackwardNavigation() {
   }
 
   const [localizedRange, setLocalizedRange] = useState('')
-  useEffect(() => {
+  useSignalEffect(() => {
     setLocalizedRange(
       `${getLocalizedDate(
         $app.calendarState.range.value!.start,
@@ -32,7 +33,7 @@ export default function ForwardBackwardNavigation() {
         $app.config.locale
       )}`
     )
-  }, [$app.calendarState.range.value])
+  })
 
   const [rangeEndMinusOneRange, setRangeEndMinusOneRange] = useState('')
   const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState('')
