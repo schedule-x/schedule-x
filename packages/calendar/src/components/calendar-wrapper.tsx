@@ -60,7 +60,7 @@ export default function CalendarWrapper({ $app }: props) {
   const [previousRangeStart, setPreviousRangeStart] = useState('')
   const [transitionClass, setTransitionClass] = useState('')
 
-  useEffect(() => {
+  useSignalEffect(() => {
     const newRangeStartIsLaterThanPrevious =
       ($app.calendarState.range.value?.start || '') > previousRangeStart
     setTransitionClass(
@@ -71,7 +71,7 @@ export default function CalendarWrapper({ $app }: props) {
       setTransitionClass('')
     }, 300) // CORRELATION ID: 3
     setPreviousRangeStart($app.calendarState.range.value?.start || '')
-  }, [$app.calendarState.range.value])
+  })
 
   return (
     <>

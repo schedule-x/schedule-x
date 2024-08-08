@@ -12,6 +12,7 @@ import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datet
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
 import { toJSDate } from '@schedule-x/shared/src'
+import { useSignalEffect } from '@preact/signals'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -79,12 +80,12 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   ]
   const [classNames, setClassNames] = useState<string[]>(baseClasses)
 
-  useEffect(() => {
+  useSignalEffect(() => {
     const newClassNames = [...baseClasses]
     if ($app.datePickerState.selectedDate.value === date)
       newClassNames.push('is-selected')
     setClassNames(newClassNames)
-  }, [$app.datePickerState.selectedDate.value])
+  })
 
   return (
     <div
