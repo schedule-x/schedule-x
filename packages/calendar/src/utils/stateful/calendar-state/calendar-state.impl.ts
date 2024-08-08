@@ -1,5 +1,5 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
-import { computed, effect, Signal, signal } from '@preact/signals'
+import { batch, computed, effect, Signal, signal } from '@preact/signals'
 import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -79,8 +79,10 @@ export const createCalendarState = (
     range,
     isCalendarSmall,
     setView: (newView: ViewName, selectedDate: string) => {
-      _view.value = newView
-      setRange(selectedDate)
+      batch(() => {
+        _view.value = newView
+        setRange(selectedDate)
+      })
     },
   }
 }
