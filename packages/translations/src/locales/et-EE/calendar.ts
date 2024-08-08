@@ -14,5 +14,6 @@ export const calendarEtEE: CalendarTranslations = {
   'Full day- and multiple day events': 'Täispäeva- ja mitmepäevasündmused',
   'Link to {{n}} more events on {{date}}':
     'Link {{n}} rohkematele sündmustele kuupäeval {{date}}',
-  'Link to 1 more event on {{date}}': 'Link ühele lisasündmusele kuupäeval {{date}}',
+  'Link to 1 more event on {{date}}':
+    'Link ühele lisasündmusele kuupäeval {{date}}',
 }
