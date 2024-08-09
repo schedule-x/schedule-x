@@ -88,7 +88,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
-  defaultView: 'week',
+  defaultView: 'day',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
@@ -276,8 +276,8 @@ let darkToggle = 0
 
 const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement
 themeToggle.addEventListener('click', () => {
-  calendar.setTheme(darkToggle === 0 ? 'light' : 'dark')
-  darkToggle === 0 ? darkToggle++ : darkToggle--
+  calendar.setTheme(darkToggle % 2 === 0 ? 'dark' : 'light')
+  darkToggle++
 })
 
 const addEventButton = document.getElementById('add-event') as HTMLButtonElement

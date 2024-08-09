@@ -1,5 +1,5 @@
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
-import { useEffect, useState } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 import TimeGridDay from '../../../components/week-grid/time-grid-day'
 import TimeAxis from '../../../components/week-grid/time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
@@ -12,6 +12,7 @@ import { positionInTimeGrid } from '../../../utils/stateless/events/position-in-
 import { positionInDateGrid } from '../../../utils/stateless/events/position-in-date-grid'
 import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
 import DateGridDay from '../../../components/week-grid/date-grid-day'
+import { useSignalEffect } from '@preact/signals'
 
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
@@ -21,7 +22,11 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
 
   const [week, setWeek] = useState<Week>({})
 
-  const sortEventsIntoDateAndTimeGrids = () => {
+  useSignalEffect(() => {
+    const rangeStart = $app.calendarState.range.value?.start
+    const rangeEnd = $app.calendarState.range.value?.end
+    if (!rangeStart || !rangeEnd) return
+
     let newWeek = createWeek($app)
     const filteredEvents = $app.calendarEvents.filterPredicate.value
       ? $app.calendarEvents.list.value.filter(
@@ -36,20 +41,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
     )
     newWeek = positionInTimeGrid(timeGridEvents, newWeek, $app)
     setWeek(newWeek)
-  }
-
-  useEffect(() => {
-    const rangeStart = $app.calendarState.range.value?.start
-    const rangeEnd = $app.calendarState.range.value?.end
-    if (!rangeStart || !rangeEnd) return
-
-    sortEventsIntoDateAndTimeGrids()
-  }, [
-    $app.calendarState.range.value?.start,
-    $app.calendarState.range.value?.end,
-    $app.calendarEvents.list.value,
-    $app.calendarEvents.filterPredicate.value,
-  ])
+  })
 
   return (
     <>

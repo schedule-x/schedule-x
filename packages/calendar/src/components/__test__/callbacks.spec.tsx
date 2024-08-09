@@ -195,12 +195,14 @@ describe('Calendar callbacks', () => {
       })
       renderComponent($app)
 
-      const gridDayElement = document.querySelector('.sx__month-grid-day') // first day in grid
-      assertIsDIV(gridDayElement)
-      fireEvent(gridDayElement, new MouseEvent('click'))
+      await waitFor(() => {
+        const gridDayElement = document.querySelector('.sx__month-grid-day') // first day in grid
+        assertIsDIV(gridDayElement)
+        fireEvent(gridDayElement, new MouseEvent('click'))
 
-      expect(onClickDate).toHaveBeenCalledTimes(1)
-      expect(onClickDate).toHaveBeenCalledWith('2027-11-01')
+        expect(onClickDate).toHaveBeenCalledTimes(1)
+        expect(onClickDate).toHaveBeenCalledWith('2027-11-01')
+      })
     })
   })
 
@@ -217,12 +219,14 @@ describe('Calendar callbacks', () => {
       })
       renderComponent($app)
 
-      const gridDayElement = document.querySelector('.sx__month-grid-day') // first day in grid
-      assertIsDIV(gridDayElement)
-      fireEvent(gridDayElement, new MouseEvent('dblclick'))
+      await waitFor(() => {
+        const gridDayElement = document.querySelector('.sx__month-grid-day') // first day in grid
+        assertIsDIV(gridDayElement)
+        fireEvent(gridDayElement, new MouseEvent('dblclick'))
 
-      expect(onDoubleClickDate).toHaveBeenCalledTimes(1)
-      expect(onDoubleClickDate).toHaveBeenCalledWith('2027-11-01')
+        expect(onDoubleClickDate).toHaveBeenCalledTimes(1)
+        expect(onDoubleClickDate).toHaveBeenCalledWith('2027-11-01')
+      })
     })
   })
 
@@ -238,7 +242,7 @@ describe('Calendar callbacks', () => {
 
     it.each([InternalViewName.Day, InternalViewName.Week])(
       'should call onClickDateTime',
-      (view) => {
+      async (view) => {
         const onClickDateTime = vi.fn()
         const $app = createCalendarAppSingleton({
           views: [viewDay, viewWeek],
@@ -250,13 +254,15 @@ describe('Calendar callbacks', () => {
         })
         renderComponent($app)
 
-        // Click at the top of the day
-        const gridDayElement = document.querySelector('.sx__time-grid-day') // first day in grid
-        assertIsDIV(gridDayElement)
-        fireEvent(gridDayElement, new MouseEvent('click'))
+        await waitFor(() => {
+          // Click at the top of the day
+          const gridDayElement = document.querySelector('.sx__time-grid-day') // first day in grid
+          assertIsDIV(gridDayElement)
+          fireEvent(gridDayElement, new MouseEvent('click'))
 
-        expect(onClickDateTime).toHaveBeenCalledTimes(1)
-        expect(onClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
+          expect(onClickDateTime).toHaveBeenCalledTimes(1)
+          expect(onClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
+        })
       }
     )
   })
@@ -273,7 +279,7 @@ describe('Calendar callbacks', () => {
 
     it.each([InternalViewName.Day, InternalViewName.Week])(
       'should call onDoubleClickDateTime',
-      (view) => {
+      async (view) => {
         const onDoubleClickDateTime = vi.fn()
         const $app = createCalendarAppSingleton({
           views: [viewDay, viewWeek],
@@ -285,13 +291,15 @@ describe('Calendar callbacks', () => {
         })
         renderComponent($app)
 
-        // Click at the top of the day
-        const gridDayElement = document.querySelector('.sx__time-grid-day') // first day in grid
-        assertIsDIV(gridDayElement)
-        fireEvent(gridDayElement, new MouseEvent('dblclick'))
+        await waitFor(() => {
+          // Click at the top of the day
+          const gridDayElement = document.querySelector('.sx__time-grid-day') // first day in grid
+          assertIsDIV(gridDayElement)
+          fireEvent(gridDayElement, new MouseEvent('dblclick'))
 
-        expect(onDoubleClickDateTime).toHaveBeenCalledTimes(1)
-        expect(onDoubleClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
+          expect(onDoubleClickDateTime).toHaveBeenCalledTimes(1)
+          expect(onDoubleClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
+        })
       }
     )
   })
