@@ -46,6 +46,8 @@ import { ukUA } from './locales/uk-UA'
 import { datePickerUkUA } from './locales/uk-UA/date-picker'
 
 import { translate } from './translator/translate'
+import { caES } from './locales/ca-ES'
+import { datePickerCaES } from './locales/ca-ES/date-picker'
 
 const translations = {
   deDE,
@@ -71,6 +73,7 @@ const translations = {
   csCZ,
   etEE,
   ukUA,
+  caES,
 }
 
 const datePickerTranslations = {
@@ -97,6 +100,7 @@ const datePickerTranslations = {
   csCZ: datePickerCsCZ,
   etEE: datePickerEtEE,
   ukUA: datePickerUkUA,
+  caES: datePickerCaES,
 }
 
 export {
@@ -126,4 +130,5 @@ export {
   csCZ,
   etEE,
   ukUA,
+  caES,
 }
