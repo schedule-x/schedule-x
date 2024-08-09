@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.1-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.58.0...v1.58.1-alpha.0) (2024-08-09)
+
+### Bug Fixes
+
+- **calendar:** fix out of order effect ([946f7fb](https://github.com/schedule-x/schedule-x/commit/946f7fb86473838ca39c4fd6493e90fac124e250))
+- **calendar:** prevent race condition when setting events on range update ([2f474d6](https://github.com/schedule-x/schedule-x/commit/2f474d635fa2c39f0df309e5a5288380cd547334))
+
 # [1.58.0](https://github.com/schedule-x/schedule-x/compare/v1.57.1...v1.58.0) (2024-08-09)
 
 **Note:** Version bump only for package @schedule-x/calendar
