@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.58.0](https://github.com/schedule-x/schedule-x/compare/v1.57.1...v1.58.0) (2024-08-09)
+
+### Features
+
+- add Catalan translations ([#590](https://github.com/schedule-x/schedule-x/issues/590)) ([45785ba](https://github.com/schedule-x/schedule-x/commit/45785ba63ccece7443bd835a6a4b64bcb2c78aab))
+
 ## [1.57.1](https://github.com/schedule-x/schedule-x/compare/v1.57.0...v1.57.1) (2024-08-02)
 
 **Note:** Version bump only for package @schedule-x/translations
