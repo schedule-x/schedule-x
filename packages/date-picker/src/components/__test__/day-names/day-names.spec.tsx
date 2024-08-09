@@ -29,4 +29,11 @@ describe('DayNames', () => {
     expect(screen.queryAllByTestId('day-name').length).toBe(7)
     assertDayNames(['周一', '周二', '周三', '周四', '周五', '周六', '周日'])
   })
+
+  it('should render day names in Catalan', () => {
+    renderComponent(appSingletonWithLocale('ca-ES'))
+
+    expect(screen.queryAllByTestId('day-name').length).toBe(7)
+    assertDayNames(['dl.', 'dt.', 'dc.', 'dj.', 'dv.', 'ds.', 'dg.'])
+  })
 })
