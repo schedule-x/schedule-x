@@ -88,7 +88,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
-  defaultView: 'week',
+  defaultView: 'day',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
