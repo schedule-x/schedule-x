@@ -4,4 +4,5 @@ export default interface CurrentTimePlugin extends PluginBase {}
 
 export type CurrentTimePluginConfig = {
   fullWeekWidth?: boolean
+  timeZoneOffset?: number
 }

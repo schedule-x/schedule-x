@@ -7,13 +7,20 @@ import {
   toDateTimeString,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
+import { addMinutes } from '@schedule-x/shared/src'
 
 class CurrentTimePluginImpl implements CurrentTimePlugin {
   name = 'current-time-plugin'
   $app!: CalendarAppSingleton
   observer: MutationObserver | null = null
 
-  constructor(private config: CurrentTimePluginConfig = {}) {}
+  constructor(private config: CurrentTimePluginConfig = {}) {
+    if (typeof config.timeZoneOffset === 'number') {
+      if (config.timeZoneOffset < -720 || config.timeZoneOffset > 840) {
+        throw new Error(`Invalid time zone offset: ` + config.timeZoneOffset)
+      }
+    }
+  }
 
   init($app: CalendarAppSingleton): void {
     this.$app = $app
@@ -39,7 +46,15 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
 
   private setIndicator(isRecursion = false) {
     const todayDateString = toDateString(new Date())
-    const nowDateTimeString = toDateTimeString(new Date())
+    let nowDateTimeString = toDateTimeString(new Date())
+
+    if (this.config.timeZoneOffset) {
+      nowDateTimeString = addMinutes(
+        nowDateTimeString,
+        this.config.timeZoneOffset
+      )
+    }
+
     const todayElement = this.$app.elements.calendarWrapper!.querySelector(
       `[data-time-grid-date="${todayDateString}"]`
     )
