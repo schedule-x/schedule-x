@@ -7,7 +7,7 @@ import {
   toDateTimeString,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
-import { addMinutes } from '@schedule-x/shared'
+import { addMinutes } from '@schedule-x/shared/src'
 
 class CurrentTimePluginImpl implements CurrentTimePlugin {
   name = 'current-time-plugin'
