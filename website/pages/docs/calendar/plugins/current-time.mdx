@@ -26,6 +26,9 @@ const calendar = createCalendar({
 ```js
 createCurrentTimePlugin({
   // Whether the indicator should be displayed in the full width of the week. Defaults to false
-  fullWeekWidth: true
+  fullWeekWidth: true,
+
+  // Time zone offset in minutes. Can be any offset valid according to UTC (-720 to 840)
+  timeZoneOffset: 120
 })
 ```

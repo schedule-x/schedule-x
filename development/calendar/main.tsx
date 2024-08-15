@@ -83,12 +83,12 @@ const calendar = createCalendar({
   // locale: 'id-ID',
   // locale: 'cs-CZ',
   // locale: 'et-EE',
-  locale: 'ca-ES',
+  // locale: 'ca-ES',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
-  defaultView: 'day',
+  defaultView: 'week',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
