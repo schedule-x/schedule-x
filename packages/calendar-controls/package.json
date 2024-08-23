@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/calendar-controls",
+  "umdName": "SXCalendarControls",
   "version": "1.58.1",
   "description": "Plugin for extra controls for the Schedule-X calendar",
   "author": {

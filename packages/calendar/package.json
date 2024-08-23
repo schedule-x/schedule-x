@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/calendar",
+  "umdName": "SXCalendar",
   "version": "1.58.1",
   "description": "Schedule-X calendar component",
   "author": {

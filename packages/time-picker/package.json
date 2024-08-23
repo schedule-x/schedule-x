@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/time-picker",
+  "umdName": "SXTimePicker",
   "version": "1.58.1",
   "description": "Schedule-X time picker component",
   "author": {

@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/scroll-controller",
+  "umdName": "SXScrollController",
   "version": "1.58.1",
   "description": "Schedule-X calendar scroll controller",
   "author": {
