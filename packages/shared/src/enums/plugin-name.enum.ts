@@ -5,4 +5,5 @@ export enum PluginName {
   EventRecurrence = 'eventRecurrence',
   Resize = 'resize',
   CalendarControls = 'calendarControls',
+  UndoRedo = 'undoRedo',
 }

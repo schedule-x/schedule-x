@@ -26,6 +26,7 @@ import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
+import { createUndoRedoPlugin } from '../../packages/undo-redo/src/undo-redo.plugin.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -207,6 +208,7 @@ const calendar = createCalendar({
     calendarControlsPlugin,
     calendarsUpdaterPlugin,
     createCurrentTimePlugin(),
+    createUndoRedoPlugin(),
   ],
   events: [
     ...seededEvents,

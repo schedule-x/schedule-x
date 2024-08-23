@@ -15,6 +15,7 @@ import { CustomComponentFns } from './custom-component-fns'
 import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
+import { UndoRedoPlugin } from '../undo-redo/undo-redo-plugin.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -45,6 +46,7 @@ export type Plugins = {
   scrollController?: PluginBase
   eventRecurrence?: EventRecurrencePlugin
   resize?: ResizePlugin
+  undoRedo?: UndoRedoPlugin
   [key: string]: PluginBase | undefined
 }
 

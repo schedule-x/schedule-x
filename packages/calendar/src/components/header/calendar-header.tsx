@@ -81,6 +81,13 @@ export default function CalendarHeader() {
           <div data-ccid={headerContentRightPrependId} />
         )}
 
+        {$app.config.plugins.undoRedo &&
+          $app.config.plugins.undoRedo.UndoRedoUI && (
+            <$app.config.plugins.undoRedo.UndoRedoUI
+              undoRedoPlugin={$app.config.plugins.undoRedo}
+            />
+          )}
+
         <ViewSelection />
 
         <AppWrapper $app={datePickerAppSingleton}></AppWrapper>

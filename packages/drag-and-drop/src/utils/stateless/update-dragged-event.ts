@@ -1,47 +1,70 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
-const updateRecurringEvent = (
-  $app: CalendarAppSingleton,
-  eventCopy: CalendarEventInternal,
-  startPreDrag: string
-) => {
-  $app.config.plugins.eventRecurrence?.updateRecurrenceDND(
-    eventCopy.id,
-    startPreDrag,
-    eventCopy.start
-  )
-}
+export class EventUpdater {
+  constructor(
+    private $app: CalendarAppSingleton,
+    private startPreDrag: string,
+    private endPreDrag: string
+  ) {}
 
-const updateNonRecurringEvent = (
-  $app: CalendarAppSingleton,
-  eventCopy: CalendarEventInternal
-) => {
-  const eventToUpdate = $app.calendarEvents.list.value.find(
-    (event) => event.id === eventCopy.id
-  )
-  if (!eventToUpdate) return
+  updateDraggedEvent = (eventCopy: CalendarEventInternal) => {
+    if (
+      'rrule' in eventCopy._getForeignProperties() &&
+      this.$app.config.plugins.eventRecurrence
+    ) {
+      this.updateRecurringEvent(eventCopy, this.startPreDrag)
+    } else {
+      this.updateNonRecurringEvent(eventCopy)
+    }
 
-  eventToUpdate.start = eventCopy.start
-  eventToUpdate.end = eventCopy.end
-  $app.calendarEvents.list.value = [...$app.calendarEvents.list.value]
-}
-
-export const updateDraggedEvent = (
-  $app: CalendarAppSingleton,
-  eventCopy: CalendarEventInternal,
-  startPreDrag: string
-) => {
-  if (
-    'rrule' in eventCopy._getForeignProperties() &&
-    $app.config.plugins.eventRecurrence
-  ) {
-    updateRecurringEvent($app, eventCopy, startPreDrag)
-  } else {
-    updateNonRecurringEvent($app, eventCopy)
+    if (this.$app.config.callbacks.onEventUpdate) {
+      this.$app.config.callbacks.onEventUpdate(eventCopy._getExternalEvent())
+    }
   }
 
-  if ($app.config.callbacks.onEventUpdate) {
-    $app.config.callbacks.onEventUpdate(eventCopy._getExternalEvent())
+  updateRecurringEvent = (
+    eventCopy: CalendarEventInternal,
+    startPreDrag: string
+  ) => {
+    this.$app.config.plugins.eventRecurrence?.updateRecurrenceDND(
+      eventCopy.id,
+      startPreDrag,
+      eventCopy.start
+    )
+  }
+
+  updateNonRecurringEvent = (eventCopy: CalendarEventInternal) => {
+    const eventToUpdate = this.$app.calendarEvents.list.value.find(
+      (event) => event.id === eventCopy.id
+    )
+    if (!eventToUpdate) return
+
+    eventToUpdate.start = eventCopy.start
+    eventToUpdate.end = eventCopy.end
+    this.$app.calendarEvents.list.value = [
+      ...this.$app.calendarEvents.list.value,
+    ]
+
+    const undoRedoPlugin = this.$app.config.plugins.undoRedo
+
+    if (undoRedoPlugin) {
+      undoRedoPlugin.addUndoAction(
+        () => {
+          eventToUpdate.start = this.startPreDrag
+          eventToUpdate.end = this.endPreDrag
+          this.$app.calendarEvents.list.value = [
+            ...this.$app.calendarEvents.list.value,
+          ]
+        },
+        () => {
+          eventToUpdate.start = eventCopy.start
+          eventToUpdate.end = eventCopy.end
+          this.$app.calendarEvents.list.value = [
+            ...this.$app.calendarEvents.list.value,
+          ]
+        }
+      )
+    }
   }
 }

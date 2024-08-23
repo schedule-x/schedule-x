@@ -9,10 +9,10 @@ import { setDateInDateTimeString } from '@schedule-x/shared/src/utils/stateless/
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
-import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
+import { EventUpdater } from './utils/stateless/update-dragged-event'
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number
@@ -21,6 +21,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private lastIntervalDiff = 0
   private lastDaysDiff = 0
   private originalStart: string
+  private originalEnd: string
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -38,6 +39,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     this.startY = this.eventCoordinates.clientY
     this.startX = this.eventCoordinates.clientX
     this.originalStart = this.eventCopy.start
+    this.originalEnd = this.eventCopy.end
     this.init()
   }
 
@@ -152,6 +154,10 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
       !dayIsSame && eventElement instanceof HTMLElement
     if (shouldHideEventToPreventFlickering) eventElement.style.display = 'none'
 
-    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
+    new EventUpdater(
+      this.$app,
+      this.originalStart,
+      this.originalEnd
+    ).updateDraggedEvent(this.eventCopy)
   }
 }

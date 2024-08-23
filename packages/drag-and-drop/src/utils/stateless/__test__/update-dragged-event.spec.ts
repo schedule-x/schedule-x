@@ -5,8 +5,8 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { updateDraggedEvent } from '../update-dragged-event'
 import { vi } from 'vitest'
+import { EventUpdater } from '../update-dragged-event'
 
 describe('Updating a dragged event', () => {
   describe('invoking listener for event update', () => {
@@ -20,7 +20,9 @@ describe('Updating a dragged event', () => {
     const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
 
     it('should invoke the listener with the copy of the original event', () => {
-      updateDraggedEvent($app, eventCopy, eventCopy.start)
+      new EventUpdater($app, eventCopy.start, eventCopy.end).updateDraggedEvent(
+        eventCopy
+      )
 
       expect(onEventUpdateSpy).toHaveBeenCalledWith(
         eventCopy._getExternalEvent()
