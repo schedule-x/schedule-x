@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/date-picker",
+  "umdName": "SXDatePicker",
   "version": "1.58.1",
   "description": "Schedule-X date picker component",
   "author": {

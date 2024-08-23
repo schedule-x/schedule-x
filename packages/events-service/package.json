@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/events-service",
+  "umdName": "SXEventsService",
   "version": "1.58.1",
   "publishConfig": {
     "access": "public"

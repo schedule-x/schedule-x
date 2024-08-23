@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/event-recurrence",
+  "umdName": "SXEventRecurrence",
   "version": "1.58.1",
   "description": "Create recurring events for the Schedule-X calendar",
   "author": {

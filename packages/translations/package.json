@@ -1,5 +1,6 @@
 {
   "name": "@schedule-x/translations",
+  "umdName": "SXTranslations",
   "version": "1.58.1",
   "description": "Schedule-X translations",
   "author": {
