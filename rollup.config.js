@@ -41,7 +41,7 @@ async function build(commandLineArgs) {
   packages.forEach((pkg) => {
     const basePath = path.relative(__dirname, pkg.location)
     const input = path.join(basePath, 'src/index.ts')
-    const { name, main, umd, module } = pkg.toJSON()
+    const { name, main, umd, module, umdName } = pkg.toJSON()
 
     const basePlugins = [
       resolve(),
@@ -57,9 +57,16 @@ async function build(commandLineArgs) {
       input,
       output: [
         {
-          name,
+          name: umdName || name,
           file: path.join(basePath, umd),
           format: 'umd',
+          globals: {
+            preact: 'preact',
+            '@preact/signals': 'preactSignals',
+            '@preact/signals-core': 'preactSignalsCore',
+            'preact/hooks': 'preactHooks',
+            'preact/compat': 'preactCompat',
+          }
         },
         {
           name,
