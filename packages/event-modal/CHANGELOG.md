@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.59.0](https://github.com/schedule-x/schedule-x/compare/v1.58.1...v1.59.0) (2024-08-24)
+
+### Bug Fixes
+
+- set names for globals in umd bundle ([#606](https://github.com/schedule-x/schedule-x/issues/606)) ([d36a6a2](https://github.com/schedule-x/schedule-x/commit/d36a6a2d6ce638ef3ac36c32dcbc289602b3a43b))
+
 ## [1.58.1-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.58.0...v1.58.1-alpha.0) (2024-08-09)
 
 **Note:** Version bump only for package @schedule-x/event-modal
