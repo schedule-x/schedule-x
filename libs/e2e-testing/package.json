@@ -17,5 +17,5 @@
     "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
     "format": "prettier . --write"
   },
-  "gitHead": "e107e76362346f2d961b429936f7ee55b25695e7"
+  "gitHead": "1869e796b356e5014febb657ecb38e0755c2f66f"
 }
