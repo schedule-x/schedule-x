@@ -18,7 +18,7 @@
 
 .sx__has-icon {
   display: grid;
-  align-items: start;
+  align-items: flex-start;
   grid-template-columns: 30px 1fr;
   margin-bottom: var(--sx-spacing-padding2);
 
