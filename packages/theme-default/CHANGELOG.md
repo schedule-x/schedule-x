@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.1](https://github.com/schedule-x/schedule-x/compare/v1.59.0...v1.59.1) (2024-08-26)
+
+### Bug Fixes
+
+- **theme-default:** enable using styles in angular.json ([#612](https://github.com/schedule-x/schedule-x/issues/612)) ([ce2d903](https://github.com/schedule-x/schedule-x/commit/ce2d903860073653f0f0a9f7bbda88b71b55525b))
+
 # [1.59.0](https://github.com/schedule-x/schedule-x/compare/v1.58.1...v1.59.0) (2024-08-24)
 
 **Note:** Version bump only for package @schedule-x/theme-default
