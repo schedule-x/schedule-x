@@ -1,7 +1,7 @@
 .sx__calendar-header {
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
   padding: var(--sx-spacing-padding4);
   gap: var(--sx-spacing-padding4);
 
