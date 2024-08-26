@@ -9,7 +9,7 @@ If you are using any of the following frameworks, you can start by checking out 
 
 import {Cards} from 'nextra/components'
 
-<Cards num={3}>
+<Cards num={2}>
   <Cards.Card
     arrow
     title="React"
@@ -20,14 +20,14 @@ import {Cards} from 'nextra/components'
     title="Vue"
     href="/docs/frameworks/vue"
   ></Cards.Card>
+</Cards>
+
+<Cards num={3}>
   <Cards.Card
     arrow
     title="Angular"
     href="/docs/frameworks/angular"
   ></Cards.Card>
-</Cards>
-
-<Cards num={3}>
   <Cards.Card
     arrow
     title="Svelte"
@@ -109,4 +109,61 @@ const calendar = createCalendar(/***/)
 calendar.setTheme('dark')
 // or
 calendar.setTheme('light')
+```
+
+### Usage over CDN
+
+For testing purposes, or if you're in a setup that predates modern build tools, you can use the calendar over a CDN like this:
+
+```html
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Do not change the order of these dependencies, since some of them depend on others -->
+  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/dist/preact.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/hooks/dist/hooks.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@preact/signals-core@1.8.0/dist/signals-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@preact/signals@1.3.0/dist/signals.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/jsx-runtime/dist/jsxRuntime.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/compat/dist/compat.umd.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/calendar@1.59.0/dist/core.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/drag-and-drop@1.59.0/dist/core.umd.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@schedule-x/theme-default@1.59.0/dist/index.css">
+</head>
+
+<body>
+  <div class="calendar"></div>
+
+  <script type="module">
+    const { createCalendar, viewWeek } = window.SXCalendar;
+    const { createDragAndDropPlugin } = window.SXDragAndDrop;
+
+    const calendar = createCalendar({
+      views: [viewWeek],
+      events: [
+        {
+          id: '1',
+          title: 'Event 1',
+          start: '2024-08-23 09:00',
+          end: '2024-08-23 10:00'
+        },
+      ],
+      plugins: [
+        eventsService,
+        createDragAndDropPlugin(),
+      ]
+    })
+
+    calendar.render(document.querySelector('.calendar'))
+  </script>
+</body>
+
+</html>
+
 ```

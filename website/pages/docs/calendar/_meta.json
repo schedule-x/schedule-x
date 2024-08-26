@@ -20,6 +20,9 @@
   "custom-views": {
     "title": "Custom views"
   },
+  "theme": {
+    "title": "Theme"
+  },
   "demo": {
     "title": "Demo",
     "href": "/demos/calendar"
