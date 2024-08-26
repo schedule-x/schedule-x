@@ -8,7 +8,7 @@
   "description": "Plugin for querying and updating events in the Schedule-x calendar",
   "author": {
     "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
+    "email": "tom@schedule-x.dev",
     "url": "https://github.com/tomosterlund"
   },
   "license": "MIT",

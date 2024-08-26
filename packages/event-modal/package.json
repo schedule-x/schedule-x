@@ -5,7 +5,7 @@
   "description": "Plugin for Schedule-X to show a modal when clicking on an event",
   "author": {
     "name": "Tom Österlund",
-    "email": "tom@oesterlund.de",
+    "email": "tom@schedule-x.dev",
     "url": "https://github.com/tomosterlund"
   },
   "license": "MIT",
