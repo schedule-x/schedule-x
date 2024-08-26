@@ -12,22 +12,10 @@
     "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
   },
   "exports": {
-    "./dist/index.css": {
-      "import": "./dist/index.css",
-      "require": "./dist/index.css"
-    },
-    "./dist/date-picker.css": {
-      "import": "./dist/date-picker.css",
-      "require": "./dist/date-picker.css"
-    },
-    "./dist/time-picker.css": {
-      "import": "./dist/time-picker.css",
-      "require": "./dist/time-picker.css"
-    },
-    "./dist/calendar.css": {
-      "import": "./dist/calendar.css",
-      "require": "./dist/calendar.css"
-    }
+    "./dist/index.css": "./dist/index.css",
+    "./dist/date-picker.css": "./dist/date-picker.css",
+    "./dist/time-picker.css": "./dist/time-picker.css",
+    "./dist/calendar.css": "./dist/calendar.css"
   },
   "files": [
     "dist"
