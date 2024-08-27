@@ -11,13 +11,21 @@ Schedule-X in an app with SSR, you need to make sure the component only renders 
 
 ## Installing
 
-```bash copy
-npm install @schedule-x/angular @schedule-x/theme-default
-```
+import { Tabs } from 'nextra/components'
 
-If you're using a package manager that does not automatically
-download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
-`preact`. This is for example the case for **yarn** and **npm < v7**.
+<Tabs items={['npm', 'pnpm/yarn']}>
+  <Tabs.Tab>
+    ```bash copy
+      npm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      pnpm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ## Basic usage
 
