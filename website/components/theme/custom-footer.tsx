@@ -1,9 +1,4 @@
-import { ThemeSwitch } from 'nextra-theme-docs'
-import { usePathname } from 'next/navigation'
-
 export default function CustomFooter() {
-  const path = usePathname()
-
   return (
     <footer
       style={{ paddingTop: '1.5em', paddingBottom: '1.5em', borderTop: '1px solid rgba(0, 0, 0, 0.06)' }}

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import '@schedule-x/theme-default/dist/index.css'
 import Card from '../partials/card/card'
 import dragAndDropIconWhite from '../../assets/icons/drag-and-drop-white.svg'
