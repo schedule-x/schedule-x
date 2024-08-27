@@ -11,17 +11,23 @@ export default function CustomFooter() {
 
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', maxWidth: '1440px', margin: '0 auto' }}>
         <div>
-          {path === '/' && (
-            <div style={{ marginBottom: '1em' }}
-                 className="footer-theme-switch nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
-              <ThemeSwitch/>
-            </div>
-          )}
+          {/*{path === '/' && (*/}
+          {/*  <div style={{ marginBottom: '1em' }}*/}
+          {/*       className="footer-theme-switch nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">*/}
+          {/*    <ThemeSwitch/>*/}
+          {/*  </div>*/}
+          {/*)}*/}
 
           <div
             style={{ marginBottom: '1em' }}
             className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">©
-            2023-present Tom Österlund, Schedule-X
+            2023-present
+          </div>
+
+          <div
+            style={{ marginBottom: '1em' }}
+            className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
+            Tom Österlund, Schedule-X
           </div>
         </div>
 
