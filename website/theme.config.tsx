@@ -26,8 +26,13 @@ const config: DocsThemeConfig = {
       }
     }
   },
+  darkMode: false,
   feedback: {
     useLink: () => 'https://github.com/schedule-x/schedule-x/issues/new/choose'
+  },
+
+  nextThemes: {
+    forcedTheme: 'light',
   },
 
   head: () => {
@@ -77,7 +82,7 @@ const config: DocsThemeConfig = {
   //   )
   // }
   banner: {
-      key: 'premium-1.0',
+      key: 'premium-1.1',
       text: (
         <a href="https://premium.schedule-x.dev" target="_blank">
           Schedule-X Premium is now here 🚀

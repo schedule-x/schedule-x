@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import '@schedule-x/theme-default/dist/index.css'
 import Card from '../partials/card/card'
 import dragAndDropIconWhite from '../../assets/icons/drag-and-drop-white.svg'
@@ -8,6 +9,8 @@ import i18nWhite from '../../assets/icons/i18n-white.svg'
 import responsiveWhite from '../../assets/icons/responsive-white.svg'
 import Link from 'next/link'
 import AppCalendar from '../partials/app-calendar/app-calendar'
+import Image from 'next/image'
+import { AppReveal } from '../partials/reveal/AppReveal'
 
 export default function LandingPage() {
   return (
@@ -44,64 +47,118 @@ export default function LandingPage() {
 
         <AppCalendar/>
 
-        <div className={'features-heading'}>
-          <h3>
-            Your own <span>high-end</span> calendar
-          </h3>
+        <section className={'landingPageSection'}>
+          <Image className={'sectionImage'} src={'/images/website_section_fade_inclined.svg'} alt={'hello'} width={1400}
+                 height={479}/>
 
-          <p>
-            Getting it right when building a calendar takes time. Schedule-X already has a lot of things figured out for
-            you, so you can save yourself the year it might take to build a calendar from scratch.
-          </p>
-        </div>
 
-        <div className={'landingPageCards'}>
-          <Card
-            icon={customizeIconWhite}
-            title={'Customizable'}
-            description={
-              'Choose which views to display, set custom day boundaries or even write a plugin.'
-            }
-          />
+          <div className={'features-heading'}>
+            <AppReveal width={'fit-content'}>
+              <div className="featuresText">
+                For web devs
+              </div>
 
-          <Card
-            icon={dragAndDropIconWhite}
-            title={'Drag and drop'}
-            description={'Reschedule events through a classic drag and drop.'}
-          />
 
-          <Card
-            icon={resizeWhite}
-            title={'Event resizing'}
-            description={
-              'Resize events by dragging the edges.'
-            }
-          />
-        </div>
+              <h3>
+                Ship a calendar in no time
+              </h3>
 
-        <div className={'landingPageCards'}>
-          <Card
-            icon={darkModeWhite}
-            title={'Dark mode'}
-            description={
-              'Built with light- and dark modes in mind. Toggle between them, simply by calling a method.'
-            }
-          />
+              <p>
+                Getting it right when building a calendar takes time. Schedule-X already has a lot of things figured out
+                for
+                you, so you can save yourself the months it would take to build a calendar from scratch.
+              </p>
+            </AppReveal>
+          </div>
 
-          <Card
-            icon={i18nWhite}
-            title={'i18n'}
-            description={'Supports multiple languages out of the box.'}
-          />
+          <div className={'landingPageCards'}>
+            <Card
+              icon={customizeIconWhite}
+              title={'Customizable'}
+              description={
+                'Choose which views to display, set custom day boundaries or even write a plugin.'
+              }
+            />
 
-          <Card
-            icon={responsiveWhite}
-            title={'Responsive'}
-            description={
-              'Works on all devices, from desktop to mobile'
-            }
-          />
-        </div>
+            <Card
+              icon={dragAndDropIconWhite}
+              title={'Drag and drop'}
+              description={'Reschedule events through a classic drag and drop.'}
+            />
+
+            <Card
+              icon={resizeWhite}
+              title={'Event resizing'}
+              description={
+                'Resize events by dragging the edges.'
+              }
+            />
+          </div>
+
+          <div className={'landingPageCards'}>
+            <Card
+              icon={darkModeWhite}
+              title={'Dark mode'}
+              description={
+                'Built with light- and dark modes in mind. Toggle between them, simply by calling a method.'
+              }
+            />
+
+            <Card
+              icon={i18nWhite}
+              title={'i18n'}
+              description={'Supports multiple languages out of the box.'}
+            />
+
+            <Card
+              icon={responsiveWhite}
+              title={'Responsive'}
+              description={
+                'Works on all devices, from desktop to mobile'
+              }
+            />
+          </div>
+        </section>
+
+        <section className={'landingPageSection hasMarginBottom'}>
+          <Image className={'sectionImage'} src={'/images/website_section_fade_pink_boxes.svg'} alt={'hello'}
+                 width={1400}
+                 height={479}/>
+
+          <div className={'features-heading'}>
+            <AppReveal width={'fit-content'}>
+              <div className="featuresText">
+                The all inclusive-way
+              </div>
+
+              <h3>
+                Schedule-X Premium
+              </h3>
+
+              <p>Someone already took care of the complex details you need for an all-inclusive calendar experience. No
+                need to build it yourself.</p>
+            </AppReveal>
+
+
+            <ul>
+              <li>Build event modal with a form ~30 hours ❌</li>
+              <li>Build Drag-to-create ~40 hours ❌</li>
+              <li>Build Resource view ~100 hours ❌</li>
+              <li>Install and configure Schedule-X premium ~1 hour ✅</li>
+            </ul>
+
+            <Link href={'https://premium.schedule-x.dev/#pricing'} target={'_blank'}>
+              <button className={'landingPageAction buttonPrimary hasMarginBottom'}>
+                Get premium →
+              </button>
+            </Link>
+
+            <video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={1000}
+                   height={390}>
+              <source src={'/videos/premium-demo.mp4'} type={'video/mp4'}/>
+            </video>
+          </div>
+        </section>
       </div>
     </>
   )
