@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.2](https://github.com/schedule-x/schedule-x/compare/v1.59.1...v1.59.2) (2024-08-28)
+
+### Bug Fixes
+
+- **theme-default:** remove source maps ([#613](https://github.com/schedule-x/schedule-x/issues/613)) ([929a290](https://github.com/schedule-x/schedule-x/commit/929a29049ba09e46ffea6ad0baecce5c41d94b7d))
+
 ## [1.59.1](https://github.com/schedule-x/schedule-x/compare/v1.59.0...v1.59.1) (2024-08-26)
 
 **Note:** Version bump only for package @schedule-x/shared
