@@ -18,15 +18,18 @@ export default function TimeAxis() {
     )
   }, [])
 
+  const formatter = new Intl.DateTimeFormat(
+    $app.config.locale,
+    $app.config.weekOptions.timeAxisFormatOptions
+  )
+
   return (
     <>
       <div className="sx__week-grid__time-axis">
         {hours.map((hour) => (
           <div className="sx__week-grid__hour">
             <span className="sx__week-grid__hour-text">
-              {new Date(0, 0, 0, hour).toLocaleTimeString($app.config.locale, {
-                hour: 'numeric',
-              })}
+              {formatter.format(new Date(0, 0, 0, hour))}
             </span>
           </div>
         ))}

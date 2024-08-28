@@ -20,6 +20,7 @@ export type WeekOptions = {
   gridHeight: number
   nDays: number
   eventWidth: number
+  timeAxisFormatOptions: Intl.DateTimeFormatOptions
 }
 
 export type MonthGridOptions = {
