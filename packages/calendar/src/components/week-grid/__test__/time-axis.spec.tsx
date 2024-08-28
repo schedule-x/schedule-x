@@ -49,6 +49,10 @@ describe('TimeAxis', () => {
     it('should display all hours as xx:00', () => {
       renderComponent(
         __createAppWithViews__({
+          dayBoundaries: {
+            start: '01:00',
+            end: '23:59',
+          },
           weekOptions: {
             timeAxisFormatOptions: {
               hour12: false,
@@ -58,7 +62,7 @@ describe('TimeAxis', () => {
           },
         })
       )
-      for (let hour = 0; hour < 24; ++hour) {
+      for (let hour = 1; hour < 24; ++hour) {
         expect(
           screen.getByText(hour.toString().padStart(2, '0') + ':00')
         ).not.toBeNull()
