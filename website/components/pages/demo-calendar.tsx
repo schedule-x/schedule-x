@@ -30,9 +30,7 @@ export default function CalendarDemoPage() {
 
     const calendar = createCalendar({
       views: [viewMonthGrid, viewMonthAgenda, viewWeek, viewDay],
-      datePicker: {
-        selectedDate: '2023-12-01',
-      },
+      selectedDate: '2023-12-01',
       isDark: resolvedTheme === 'dark',
       defaultView: viewWeek.name,
       events: [
