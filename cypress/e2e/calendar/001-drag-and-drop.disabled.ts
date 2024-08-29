@@ -1,7 +1,10 @@
 import { createWeekViewPageObject } from '../../../libs/e2e-testing/src/page-objects/week-view.page-object.ts'
 import { cypressPageUrls } from '../../pages/urls.ts'
 
-describe('Dragging events', () => {
+describe('Dragging events', {
+  viewportHeight: 800,
+  viewportWidth: 1280
+},() => {
   describe('Dragging an event vertically', () => {
     const weekView = createWeekViewPageObject()
 

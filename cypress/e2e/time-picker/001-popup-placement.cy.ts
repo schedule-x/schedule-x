@@ -2,7 +2,10 @@ import { cypressPageUrls } from '../../pages/urls.ts'
 import { SNAPSHOT_FAULT_TOLERANCE } from '@schedule-x/e2e-testing'
 import { createTimePickerPageObject } from '@schedule-x/e2e-testing/src/page-objects/time-picker.page-object.ts'
 
-describe('Time Picker - Placement', () => {
+describe('Time Picker - Placement', {
+  viewportHeight: 800,
+  viewportWidth: 1280
+}, () => {
   const timePickerTopLeft = createTimePickerPageObject('.time-picker-top-left')
   const timePickerTopRight = createTimePickerPageObject('.time-picker-top-right')
   const timePickerBottomLeft = createTimePickerPageObject('.time-picker-bottom-left')

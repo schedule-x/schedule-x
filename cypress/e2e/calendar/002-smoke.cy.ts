@@ -2,7 +2,10 @@ import { cypressPageUrls } from '../../pages/urls.ts'
 import { createCalendarHeaderPageObject } from '../../../libs/e2e-testing/src/page-objects/calendar-header.page-object.ts'
 import { SNAPSHOT_FAULT_TOLERANCE } from '../../../libs/e2e-testing/src/index.ts'
 
-describe('Calendar Smoke Test', () => {
+describe('Calendar Smoke Test', {
+  viewportHeight: 800,
+  viewportWidth: 1280
+}, () => {
   const calendarHeader = createCalendarHeaderPageObject()
 
   beforeEach(() => {

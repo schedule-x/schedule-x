@@ -1,7 +1,10 @@
 import { cypressPageUrls } from '../../pages/urls.ts'
 import { createWeekViewPageObject } from '../../../libs/e2e-testing'
 
-describe('Updating calendar events', () => {
+describe('Updating calendar events', {
+  viewportHeight: 800,
+  viewportWidth: 1280
+}, () => {
   const weekView = createWeekViewPageObject()
 
   beforeEach(() => {
