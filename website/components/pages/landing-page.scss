@@ -60,12 +60,12 @@ $heading-width: 900px;
 }
 
 .landingPage h2 {
-  max-width: $heading-width;
+  max-width: calc(#{$heading-width} - 150px);
   font-size: 1.75rem;
   font-weight: 400;
   margin: 0 auto 2rem;
   text-align: center;
-  text-wrap: balance;
+  //text-wrap: balance;
   color: #8290ac;
 
   .dark & {

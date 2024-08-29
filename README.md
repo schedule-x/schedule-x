@@ -5,10 +5,12 @@
 [![npm](https://img.shields.io/npm/dm/@schedule-x/calendar)](https://www.npmjs.com/package/@schedule-x/calendar)
 [![X](https://img.shields.io/twitter/url?url=https://x.com/ScheduleX_&label=Follow%20on%20X)](https://x.com/ScheduleX_)
 
-# Material design calendar and date picker
+# The modern JavaScript event calendar
 
-This library offers a material design calendar and date picker for the web. They can be used regardless of your
-stack, and there are components for the following frameworks:
+Schedule-X is an event calendar focused on covering the needs of modern web apps: responsive design, 
+internationalization, and extensibility. You can ship it with default settings in a matter of minutes, or customize
+it to look- and work like you want. If you're using a JS-framework, you can even inject components written in your 
+own framework, into the UI of the calendar. Currently, there are components for the following frameworks:
 
 [React](https://schedule-x.dev/docs/frameworks/react) | [Angular](https://schedule-x.dev/docs/frameworks/angular) | [Vue](https://schedule-x.dev/docs/frameworks/vue) | [Svelte](https://schedule-x.dev/docs/frameworks/svelte) | [Preact](https://schedule-x.dev/docs/frameworks/preact)
 
@@ -32,7 +34,7 @@ Sponsor today, and get mentioned in the README or on the project website: https:
 
 MIT
 
-Copyright (c) 2023, Tom Österlund
+Copyright (c) 2023 - present, Tom Österlund
 
 ## Code contributions & project insights
 
