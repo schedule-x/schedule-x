@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.60.0](https://github.com/schedule-x/schedule-x/compare/v1.59.2...v1.60.0) (2024-08-29)
+
+### Features
+
+- add an option for hour labels format on the time axis ([#622](https://github.com/schedule-x/schedule-x/issues/622)) ([ca05bf3](https://github.com/schedule-x/schedule-x/commit/ca05bf356c4860ecbe64a4f299b3b7892ca6ea90))
+
 ## [1.59.2](https://github.com/schedule-x/schedule-x/compare/v1.59.1...v1.59.2) (2024-08-28)
 
 ### Bug Fixes
