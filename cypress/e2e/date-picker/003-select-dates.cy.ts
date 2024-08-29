@@ -1,7 +1,10 @@
 import { cypressPageUrls } from '../../pages/urls.ts'
 import { createDatePickerPageObject } from '../../../libs/e2e-testing/src/page-objects/date-picker.page-object.ts'
 
-describe('Date Picker - Select Dates', () => {
+describe('Date Picker - Select Dates', {
+  viewportHeight: 800,
+  viewportWidth: 1280
+}, () => {
   const datePicker = createDatePickerPageObject()
 
   beforeEach(() => {
