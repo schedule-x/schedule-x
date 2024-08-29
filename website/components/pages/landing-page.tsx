@@ -17,13 +17,11 @@ export default function LandingPage() {
     <>
       <div className={'landingPage page-wrapper'}>
         <h1>
-          <span className={'headingGradient'}>Material design</span> calendar
-          and date picker
+          <span className={'headingGradient'}>The modern</span> JavaScript event calendar
         </h1>
 
         <h2>
-          Components that make scheduling simple and
-          elegant in your web project, regardless of stack.
+          Ship an event calendar with ease, regardless of tech-stack. Modern alternative to FullCalendar.
         </h2>
 
         <div className={'landingPageActions'}>
