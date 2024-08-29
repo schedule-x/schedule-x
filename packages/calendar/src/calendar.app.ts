@@ -16,6 +16,7 @@ export default class CalendarApp {
   }
 
   render(el: HTMLElement): void {
+    // todo: nothing
     render(createElement(CalendarWrapper, { $app: this.$app }), el)
   }
 

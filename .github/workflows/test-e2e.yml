@@ -1,5 +1,6 @@
 name: End-to-end tests
 on:
+  workflow_dispatch:
   pull_request:
     paths:
       - 'packages/**'

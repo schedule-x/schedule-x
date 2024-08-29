@@ -72,6 +72,11 @@ const calendar = createCalendar({
     // gridHeight: 3000,
     // nDays: 4,
     eventWidth: 95,
+    timeAxisFormatOptions: {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+    }
   },
   // monthGridOptions: {
   //   nEventsPerDay: 7
