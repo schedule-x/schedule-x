@@ -31,6 +31,7 @@ export default class CalendarConfigBuilder
     gridHeight: DEFAULT_WEEK_GRID_HEIGHT,
     nDays: 7,
     eventWidth: 100,
+    timeAxisFormatOptions: { hour: 'numeric' },
   }
   monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined
