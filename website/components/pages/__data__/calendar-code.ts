@@ -5,9 +5,7 @@ import '@schedule-x/theme-default/dist/index.css'
 
 const calendar = createCalendar({
   views: [viewMonthGrid, viewMonthAgenda, viewWeek, viewDay],
-  datePicker: {
-    selectedDate: '2023-12-01'
-  },
+  selectedDate: '2023-12-01'
   defaultView: viewWeek.name,
   events: [
     {
