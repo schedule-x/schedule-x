@@ -1,0 +1,111 @@
+# Sidebar
+
+A component for adding a sidebar to the calendar. Enables you to toggle the visibility of calendars, adds a button
+for opening the interactive event modal, and enables you to create events through dragging and dropping placeholder
+events.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active subscription to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+## Features
+import FeaturesList from "../../../../components/partials/features-list/features-list";
+
+<FeaturesList features={[
+    'Toggle visibility of calendars',
+    'Open interactive event modal',
+    'Drag to create events'
+]} />
+
+<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
+  <source src={'/videos/sidebar-demo.mp4'} type={'video/mp4'} />
+</video>
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
+
+```bash copy
+npm install @sx-premium/sidebar
+```
+
+## Usage
+
+```js
+import { createCalendar } from '@schedule-x/calendar'
+import { createSidebarPlugin } from "@sx-premium/sidebar";
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createDragToCreatePlugin } from "@sx-premium/drag-to-create";
+
+import '@sx-premium/sidebar/index.css'
+import '@sx-premium/interactive-event-modal/index.css'
+import '@schedule-x/theme-default/dist/time-picker.css'
+
+const eventsService = createEventsServicePlugin()
+const interactiveEventModal = createInteractiveEventModal({
+  eventsService,
+  availablePeople: ['John Doe', 'Jane Doe'],
+  onAddEvent: (event) => {
+    console.log('Event added', event)
+  }
+})
+const sidebar = createSidebarPlugin({
+  eventsService,
+
+  // Optional: Should the sidebar be open on render
+  openOnRender: false,
+
+  // Optional: Which calendars should be active on render
+  activeCalendarIds: ['personal', 'work', 'leisure', 'school'],
+
+  // Optional: Should there be calendar toggles
+  hasCalendarToggles: true,
+
+  // Optional: placeholder events for drag-to-create
+  placeholderEvents: [
+    {
+      title: 'Morning brief',
+      calendarId: 'internal',
+      people: ['John Doe', 'Jane Doe', 'Steve Smith'],
+    },
+    {
+      title: 'Client demo',
+      calendarId: 'internal',
+      people: ['John Doe', 'Jane Doe'],
+    },
+    {
+      title: 'Team meeting',
+      calendarId: 'clients',
+      people: ['John Doe', 'Jane Doe', 'Steve Smith'],
+    }
+  ],
+
+  // Optional: factory function for generating event ids when events are created
+  idFactory: () => uuidv4() // or any other id generator
+})
+
+const calendar = createCalendar({
+  // ... other configuration
+  plugins: [
+    eventsService,
+    sidebar,
+    interactiveEventModal,
+    createDragToCreatePlugin(/* drag-to-create options */)
+  ]
+})
+
+calendar.render(document.getElementById('your-calendar-wrapper'))
+
+```
+
+## Changelog
+
+See [changelog](/docs/calendar/premium-changelog) page.

@@ -1,0 +1,166 @@
+# Interactive event modal
+
+A plugin for displaying an interactive modal for adding, editing and removing events.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active subscription to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+## Features
+
+import FeaturesList from "../../../../components/partials/features-list/features-list";
+
+<FeaturesList features={[
+  'Adding, updating and deleting events',
+  'Click to create',
+  'Recurring events',
+  'Validation'
+]} />
+
+<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
+    <source src={'/videos/interactive-modal-demo.mp4'} type={'video/mp4'} />
+</video>
+
+## 2. Install the packages
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
+
+```bash copy
+npm i @sx-premium/interactive-event-modal
+```
+## Usage
+
+```js
+import { createCalendar } from '@schedule-x/calendar'
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+
+import '@sx-premium/interactive-event-modal/index.css'
+
+const eventsService = createEventsServicePlugin()
+
+const eventModal = createInteractiveEventModal({
+  // dependency needed to add events
+  eventsService,
+
+  // (Optional): Available people for the event form
+  availablePeople: ['John Doe', 'Jane Doe'],
+
+  // (Optional): callback for when an event is added
+  onAddEvent: (event) => {
+    console.log(event)
+  },
+
+  // (Optional): callback for when an event is updated
+  onDeleteEvent: (eventId) => {
+    console.log(eventId)
+  },
+
+  // (Optional): callback for when an event start property is updated
+  onStartUpdate(start) {
+    console.log(start)
+  },
+
+  // (Optional): callback for when an event end property is updated
+  onEndUpdate(end) {
+    console.log(end)
+  },
+
+  // (Optional): callback which is invoked before opening the modal. Return false to prevent the modal from opening
+  canOpenModal: (event) => {
+    return event.calendarId === 'calendar-1';
+  },
+
+  // (Optional): configure the time picker to use 12-hour format
+  has12HourTimeFormat: true,
+
+  // (Optional): configuration for the field "title"
+  fields: {
+    title: {
+      label: 'Event Title',
+      name: 'event-title',
+      validator: (value) => {
+        return {
+          isValid: !!value && value.length >= 3,
+          message: 'Title must be at least 3 characters long'
+        }
+      }
+    },
+    description: {},
+  }
+})
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [
+    eventModal,
+    eventsService,
+  ],
+
+  callbacks: {
+    onDoubleClickDateTime(dateTime) {
+      eventModal.clickToCreate(dateTime, {
+        id: 'some-event-id',
+      })
+    }
+  }
+})
+
+calendar.render(document.getElementById('your-calendar-wrapper'))
+```
+
+## Public methods
+
+### `openEventCreationModal(id: string | number, start?: string, otherEventProperties?: Partial<CalendarEvent>)`
+
+Method for programmatically opening the event creation modal. The id parameter is used for setting an id of the event that will be created, if the user chooses to click save.
+
+#### Parameters
+- `id` - id of the event that will be created
+- `start` - start date or datetime of the event that will be created
+- `otherEventProperties` - additional properties that will be added to the event that will be created
+
+### `clickToCreate: (start: string, otherEventProperties?: Partial<CalendarEvent>) => void`
+
+Method for adding an event and opening the event editing modal. Preferably used with the `onDoubleClickDateTime` and `onDoubleClickDate` callbacks, to add events by clicking.
+
+## `fields` configuration option
+
+Please note, that by default, all fields are displayed.
+
+If you, however, configure one of them, the rest will be hidden by default. Date and time pickers are an exception here, since these are required at least when adding an event. For adding a field but without custom configuration, simply add it with an empty object like so:
+
+```ts
+fields: {
+  description: {}
+  // other fields
+}
+```
+
+### Available fields
+
+| Field name     | Notes                                                             |
+|----------------|-------------------------------------------------------------------|
+| title          |                                                                   |
+| description    |                                                                   |
+| startDate      | Cannot have validator callback. Use `minDate` & `maxDate` instead |
+| startTime      | Cannot have validator callback. Use `minDate` & `maxDate` instead |
+| endDate        | Cannot have validator callback. Use `minDate` & `maxDate` instead |
+| endTime        | Cannot have validator callback. Use `minDate` & `maxDate` instead |
+| rruleFrequency | Cannot have validator callback.                                   |
+| rruleUntil     | Cannot have validator callback.                                   |
+| people         |                                                                   |
+| calendarId     |                                                                   |
+
+
+## Changelog
+
+See [changelog](/docs/calendar/premium-changelog) page.
+

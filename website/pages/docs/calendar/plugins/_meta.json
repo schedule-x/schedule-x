@@ -11,20 +11,14 @@
   "event-modal": {
     "title": "Event Modal"
   },
-  "event-modal-with-form": {
-    "title": "⭐ Premium Event Modal",
-    "href": "https://premium.schedule-x.dev/docs/interactive-event-modal",
-    "newWindow": true
+  "interactive-event-modal": {
+    "title": "⭐ Interactive Event Modal"
   },
   "sidebar": {
-    "title": "⭐ Sidebar",
-    "href": "https://premium.schedule-x.dev/docs/sidebar",
-    "newWindow": true
+    "title": "⭐ Sidebar"
   },
   "drag-to-create": {
-    "title": "⭐ Drag to create",
-    "href": "https://premium.schedule-x.dev/docs/drag-to-create",
-    "newWindow": true
+    "title": "⭐ Drag to create"
   },
   "events-service": {
     "title": "Events Service"

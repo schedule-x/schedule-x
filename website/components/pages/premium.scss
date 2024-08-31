@@ -1,0 +1,355 @@
+@use '../../theme/mixins' as mixins;
+
+$heading-width: 900px;
+
+html {
+  .main {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
+  scroll-behavior: smooth;
+}
+
+.heading-font {
+  font-weight: 700;
+}
+
+.premiumPage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .buttonPrimary {
+    background: linear-gradient(to right, #654e07 0%, #D4AF37 100%);
+    color: #fff;
+  }
+
+  .buttonOutlined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #D4AF37;
+    box-shadow: inset 0 0 0 2px #D4AF37;
+
+    .dark & {
+      color: #d0bcff;
+      border-color: #d0bcff;
+      box-shadow: inset 0 0 0 2px #d0bcff;
+    }
+
+    .github-icon {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .headingGradient {
+    position: relative;
+    background: linear-gradient(to right, #654e07 0%, #D4AF37 100%);
+    text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    @include mixins.smaller-screens {
+      font-size: 3.25rem;
+    }
+
+    .dark & {
+      background: linear-gradient(to left, #deccfa 0%, #6750a4 100%);
+      text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+      background-clip: text;
+    }
+
+    .app-underline {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -3rem;
+
+      @include mixins.smaller-screens {
+        transform: translateX(-50%) scale(80%);
+        bottom: -3.5rem;
+      }
+    }
+  }
+}
+
+.premiumPage__heroAndDemo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 64px);
+
+  @include mixins.smaller-screens {
+    padding: 0 1rem;
+  }
+}
+
+.premiumPage__pricing {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.premiumPageBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  background-repeat: repeat;
+  opacity: 0.05;
+}
+
+.premiumPage h1 {
+  max-width: $heading-width;
+  font-size: 4.25rem;
+  font-weight: 700;
+  margin: 3rem auto 5rem;
+  text-align: center;
+  text-wrap: balance;
+  color: #002c61;
+
+  .dark & {
+    color: #d0bcff;
+  }
+
+  @include mixins.smaller-screens {
+    font-size: 3rem;
+    margin-top: 1rem;
+    text-wrap: initial;
+  }
+}
+
+.premiumPage .heroSubHeading {
+  max-width: $heading-width;
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin: 0 auto 2rem;
+  text-align: center;
+  text-wrap: balance;
+  color: #8290ac;
+
+  @include mixins.smaller-screens {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.sx-react-calendar-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  height: 650px;
+  margin-bottom: 4rem;
+
+  // lower on mobile
+  @include mixins.mobile-screens {
+    height: 500px;
+  }
+}
+
+.premiumPageActions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+  }
+
+  @include mixins.mobile-screens {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.premiumPageAction {
+  font-size: 1.125rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+
+  @include mixins.smaller-screens {
+    font-size: 1rem;
+  }
+
+  @include mixins.mobile-screens {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (hover: hover) {
+  .premiumPageAction:hover {
+    transform: translateY(-2px);
+  }
+}
+
+
+.tabButtons {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.pricingHeading {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #002c61;
+
+  .dark & {
+      color: #d0bcff;
+  }
+
+  @include mixins.smaller-screens {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.premiumPageDemoVideo {
+  width: 100%;
+  max-width: 950px;
+  margin-bottom: 4rem;
+  border-radius: 1rem;
+}
+
+.premiumPageCards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.appCalendarWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+
+  :has(.sx__resource-view) {
+    .sx__view-selection {
+      display: none;
+    }
+
+    .sx__is-calendar-small .sx__today-button {
+      display: initial;
+    }
+  }
+
+  &.is-left-calendar {
+    transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), left 0.4s cubic-bezier(0.45, 0, 0.2, 1);
+    left: 0;
+
+    &:not(.is-visible) {
+      left: -200px;
+    }
+  }
+
+  &.is-right-calendar {
+    transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), right 0.4s cubic-bezier(0.45, 0, 0.2, 1);
+    right: 0;
+
+    &:not(.is-visible) {
+      right: -200px;
+    }
+  }
+
+  .sx__calendar {
+    line-height: initial;
+  }
+}
+
+.calendar-tip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: -160px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #005a9e;
+  border-left: 5px solid #1185dc;
+  background-color: #e6f0ff;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+  transition: top 0.4s ease, opacity 0.4s ease;
+
+  &.is-open {
+    visibility: initial;
+    opacity: 1;
+    top: -80px;
+  }
+
+  .tipTimer {
+    margin-left: 1rem;
+  }
+}
+
+@media (width <= 735px) {
+  .calendar-tip {
+    display: none;
+  }
+}
+
+.lampEmoji {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.tipClose {
+  margin-left: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  .dark & {
+    color: #5a585d;
+  }
+}
+
+.faq {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 4rem;
+
+  .rs-panel-group,
+  .rs-panel-btn {
+    font-size: 1.175rem;
+  }
+
+  .rs-panel-body {
+    color: #5a585d;
+  }
+}

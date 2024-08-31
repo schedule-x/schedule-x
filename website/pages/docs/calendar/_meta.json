@@ -20,6 +20,9 @@
   "custom-views": {
     "title": "Custom views"
   },
+  "resource-scheduler": {
+    "title": "⭐ Resource scheduler"
+  },
   "theme": {
     "title": "Theme"
   },
@@ -29,5 +32,13 @@
   },
   "supported-languages": {
     "title": "Supported languages"
+  },
+  "installing-premium": {
+    "display": "hidden",
+    "title": "Installing premium plugins"
+  },
+  "premium-changelog": {
+    "display": "hidden",
+    "title": "Changelog for Schedule-X premium"
   }
 }

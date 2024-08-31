@@ -28,6 +28,10 @@
     "@schedule-x/react": "^1.15.0",
     "@schedule-x/resize": "^1.17.0",
     "@schedule-x/theme-default": "^1.17.0",
+    "@sx-premium/drag-to-create": "^0.19.0",
+    "@sx-premium/interactive-event-modal": "^0.19.0",
+    "@sx-premium/resource-scheduler": "^0.19.0",
+    "@sx-premium/sidebar": "^0.19.0",
     "@uiw/codemirror-theme-github": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "framer-motion": "^11.3.30",
@@ -35,7 +39,9 @@
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-countdown-circle-timer": "^3.2.1",
+    "react-dom": "^18.2.0",
+    "rsuite": "^5.70.0"
   },
   "devDependencies": {
     "@types/node": "20.16.1",
