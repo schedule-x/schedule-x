@@ -21,6 +21,7 @@
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.1",
+    "@lemonsqueezy/lemonsqueezy.js": "^3.2.0",
     "@schedule-x/calendar": "^1.17.0",
     "@schedule-x/date-picker": "^1.17.0",
     "@schedule-x/drag-and-drop": "^1.17.0",
@@ -35,6 +36,7 @@
     "@uiw/codemirror-theme-github": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "framer-motion": "^11.3.30",
+    "mongodb": "^6.8.0",
     "next": "^14.1.0",
     "nextra": "latest",
     "nextra-theme-docs": "latest",

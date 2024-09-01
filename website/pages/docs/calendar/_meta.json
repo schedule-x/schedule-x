@@ -36,9 +36,5 @@
   "installing-premium": {
     "display": "hidden",
     "title": "Installing premium plugins"
-  },
-  "premium-changelog": {
-    "display": "hidden",
-    "title": "Changelog for Schedule-X premium"
   }
 }

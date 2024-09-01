@@ -63,5 +63,18 @@
       "sidebar": false,
       "toc": false
     }
+  },
+  "premium-changelog": {
+    "display": "hidden",
+    "title": "Changelog for Schedule-X premium"
+  },
+  "validate-license-key": {
+    "display": "hidden",
+    "title": "Imprint",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
   }
 }
