@@ -17,9 +17,7 @@ html {
 }
 
 #__next {
-
   :has(.appCalendarWrapper) {
-
     .nextra-toc {
       display: none;
     }
