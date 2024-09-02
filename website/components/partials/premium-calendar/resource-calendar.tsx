@@ -7,11 +7,7 @@ import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
 import {createResourceView} from "@sx-premium/resource-scheduler";
 import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
 
-type props = {
-  visible: boolean
-}
-
-export default function ResourceCalendar({ visible }: props) {
+export default function ResourceCalendar() {
   const eventsService = createEventsServicePlugin()
 
   const interactiveEventModalPlugin = createInteractiveEventModal({
@@ -211,8 +207,6 @@ export default function ResourceCalendar({ visible }: props) {
   })
 
   return <>
-    <div className={['appCalendarWrapper is-right-calendar', visible ? 'is-visible' : ''].join(' ')}>
-      <ScheduleXCalendar calendarApp={calendarApp} />
-    </div>
+    <ScheduleXCalendar calendarApp={calendarApp} />
   </>
 }
