@@ -29,12 +29,6 @@ export default function PremiumPage() {
                 Pricing →
               </button>
             </Link>
-
-            <Link href={'/docs'} target="_blank">
-              <button className={'premiumPageAction buttonOutlined'}>
-                <span>Discover all features</span>
-              </button>
-            </Link>
           </div>
 
           <video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={1000}

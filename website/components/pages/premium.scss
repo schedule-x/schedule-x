@@ -145,8 +145,8 @@ html {
 }
 
 .sx-react-calendar-wrapper {
-  width: 100%;
-  max-width: 1100px;
+  width: 1100px;
+  max-width: 90%;
   height: 650px;
   margin-bottom: 4rem;
 
@@ -198,11 +198,6 @@ html {
 }
 
 
-.tabButtons {
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-}
-
 .pricingHeading {
   font-size: 3rem;
   font-weight: 700;
@@ -241,9 +236,6 @@ html {
 }
 
 .appCalendarWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0 auto;
   width: 100%;
   position: relative;

@@ -7,6 +7,22 @@
       "toc": true
     }
   },
+  "resource-scheduler": {
+    "display": "hidden",
+    "theme": {
+      "layout": "raw",
+      "sidebar": false,
+      "toc": true
+    }
+  },
+  "modal-and-sidebar": {
+    "display": "hidden",
+    "theme": {
+      "layout": "raw",
+      "sidebar": false,
+      "toc": true
+    }
+  },
   "date-picker": {
     "display": "hidden",
     "theme": {

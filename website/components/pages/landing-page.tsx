@@ -145,7 +145,7 @@ export default function LandingPage() {
               <li>Install and configure Schedule-X premium ~1 hour ✅</li>
             </ul>
 
-            <Link href={'/premium'} target={'_blank'}>
+            <Link href={'/premium'}>
               <button className={'landingPageAction buttonPrimary hasMarginBottom'}>
                 Get premium →
               </button>

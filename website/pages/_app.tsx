@@ -7,7 +7,6 @@ import '../components/partials/card/card.scss'
 import '../components/pages/premium.scss'
 import '../components/partials/card/card.scss'
 import '../components/partials/sales-card/sales-card.scss'
-import '../components/partials/tab-buttons/tab-buttons.scss'
 
 import '@schedule-x/theme-default/dist/index.css'
 import '@sx-premium/sidebar/index.css'

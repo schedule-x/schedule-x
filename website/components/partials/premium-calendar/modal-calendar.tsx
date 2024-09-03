@@ -12,11 +12,7 @@ import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
 
-type props = {
-  visible: boolean
-}
-
-export default function AppCalendar({ visible }: props) {
+export default function ModalCalendar() {
   const eventsService = createEventsServicePlugin()
 
   const interactiveEventModalPlugin = createInteractiveEventModal({
@@ -200,7 +196,7 @@ export default function AppCalendar({ visible }: props) {
   }, []);
 
   return <>
-    <div className={['appCalendarWrapper is-left-calendar', visible ? 'is-visible' : ''].join(' ')}>
+    <div className="appCalendarWrapper">
       <div className={tipClasses.join(' ')}>
         <span className={'lampEmoji'}>💡</span> Double click somewhere in the grid to create an event
 
