@@ -34,8 +34,11 @@ export default function MonthGridEvent({
     $app.calendarState.range.value?.end &&
     dateFromDateTime(calendarEvent.end) >
       dateFromDateTime($app.calendarState.range.value.end)
-  const { createDragStartTimeout, setClickedEventIfNotDragging } =
-    useEventInteractions($app)
+  const {
+    createDragStartTimeout,
+    setClickedEventIfNotDragging,
+    setClickedEvent,
+  } = useEventInteractions($app)
 
   const hasStartDate = dateFromDateTime(calendarEvent.start) === date
   const nDays = calendarEvent._eventFragments[date]
@@ -82,6 +85,14 @@ export default function MonthGridEvent({
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.stopPropagation()
+      setClickedEvent(e, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent)
+    }
+  }
+
   const classNames = [
     'sx__event',
     'sx__month-grid-event',
@@ -103,6 +114,7 @@ export default function MonthGridEvent({
       onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
       onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       onClick={handleOnClick}
+      onKeyDown={handleKeyDown}
       className={classNames.join(' ')}
       style={{
         gridRow,
@@ -115,6 +127,7 @@ export default function MonthGridEvent({
           : eventCSSVariables.backgroundColor,
       }}
       tabIndex={0}
+      role="button"
     >
       {!customComponent && (
         <div className="sx__month-grid-event-title">{calendarEvent.title}</div>
