@@ -45,6 +45,7 @@ export default function TimeGridEvent({
     updateCopy,
     createDragStartTimeout,
     setClickedEventIfNotDragging,
+    setClickedEvent,
   } = useEventInteractions($app)
 
   const localizeArgs = [
@@ -108,6 +109,14 @@ export default function TimeGridEvent({
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.stopPropagation()
+      setClickedEvent(e, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent)
+    }
+  }
+
   const startResize = (e: MouseEvent) => {
     setMouseDown(true)
     e.stopPropagation()
@@ -151,12 +160,14 @@ export default function TimeGridEvent({
         }
         data-event-id={calendarEvent.id}
         onClick={handleOnClick}
+        onKeyDown={handleKeyDown}
         onMouseDown={handlePointerDown}
         onMouseUp={handlePointerUp}
         onTouchStart={handlePointerDown}
         onTouchEnd={handlePointerUp}
         className={classNames.join(' ')}
         tabIndex={0}
+        role="button"
         style={{
           top: `${getYCoordinateInTimeGrid(
             calendarEvent.start,

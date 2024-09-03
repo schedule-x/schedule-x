@@ -36,8 +36,16 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
   }, [calendarEvent])
 
   const onClick = (e: MouseEvent) => {
-    invokeOnEventClickCallback($app, calendarEvent)
     setClickedEvent(e, calendarEvent)
+    invokeOnEventClickCallback($app, calendarEvent)
+  }
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.stopPropagation()
+      setClickedEvent(e, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent)
+    }
   }
 
   return (
@@ -54,7 +62,9 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
         padding: customComponent ? '0px' : undefined,
       }}
       onClick={(e) => onClick(e)}
+      onKeyDown={onKeyDown}
       tabIndex={0}
+      role="button"
     >
       {!customComponent && (
         <Fragment>

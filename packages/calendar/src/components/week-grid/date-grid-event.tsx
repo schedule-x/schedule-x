@@ -36,8 +36,9 @@ export default function DateGridEvent({
   const {
     eventCopy,
     updateCopy,
-    setClickedEventIfNotDragging,
     createDragStartTimeout,
+    setClickedEventIfNotDragging,
+    setClickedEvent,
   } = useEventInteractions($app)
 
   const eventCSSVariables = {
@@ -95,6 +96,14 @@ export default function DateGridEvent({
     )
   }
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.stopPropagation()
+      setClickedEvent(e, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent)
+    }
+  }
+
   const eventClasses = [
     'sx__event',
     'sx__date-grid-event',
@@ -121,6 +130,7 @@ export default function DateGridEvent({
           ' ' +
           getTimeStamp(calendarEvent, $app.config.locale, $app.translate('to'))
         }
+        role="button"
         data-ccid={customComponentId}
         data-event-id={calendarEvent.id}
         onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
@@ -128,6 +138,7 @@ export default function DateGridEvent({
         onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
         onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
+        onKeyDown={handleKeyDown}
         className={eventClasses.join(' ')}
         style={{
           width: `calc(${
