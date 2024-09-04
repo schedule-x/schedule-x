@@ -208,6 +208,17 @@ const calendar = createCalendar({
     calendarsUpdaterPlugin,
     createCurrentTimePlugin(),
   ],
+  backgroundEvents: [
+    {
+      title: 'Background Event',
+      start: '2024-09-03',
+      end: '2024-09-03',
+      style: {
+        backgroundColor: 'blue',
+        opacity: 0.5,
+      },
+    }
+  ],
   events: [
     ...seededEvents,
     {

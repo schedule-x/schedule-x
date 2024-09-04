@@ -15,6 +15,7 @@ import { CustomComponentFns } from './custom-component-fns'
 import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
+import { BackgroundEvent } from './background-event'
 
 export type WeekOptions = {
   gridHeight: number
@@ -95,6 +96,7 @@ export interface CalendarConfigExternal
   extends Partial<ReducedCalendarConfigInternal> {
   datePicker?: CalendarDatePickerConfigExternal
   events?: CalendarEventExternal[]
+  backgroundEvents?: BackgroundEvent[]
   dayBoundaries?: DayBoundariesExternal
   plugins?: PluginBase[]
   views: [View, ...View[]]

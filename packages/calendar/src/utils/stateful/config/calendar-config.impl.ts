@@ -18,6 +18,7 @@ import { Signal, signal } from '@preact/signals'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   calendars: Signal<Record<string, CalendarType>>
+  locale: string = DEFAULT_LOCALE
 
   constructor(
     public locale: string = DEFAULT_LOCALE,
@@ -39,6 +40,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     }
   ) {
     this.calendars = signal(calendars)
+    if (locale) this.locale = locale
   }
 
   get isHybridDay(): boolean {
