@@ -45,6 +45,7 @@ describe('MonthDay component', () => {
       events: {
         '0': calendarEventInternal,
       },
+      backgroundEvents: [],
     }
 
     it('should display an event with title', () => {
@@ -62,6 +63,7 @@ describe('MonthDay component', () => {
       events: {
         '0': calendarEventInternal,
       },
+      backgroundEvents: [],
     }
 
     it('should display an event with title', () => {
@@ -84,6 +86,7 @@ describe('MonthDay component', () => {
         '3': getTestEvent($app),
         '4': getTestEvent($app),
       },
+      backgroundEvents: [],
     }
 
     it('should display an event with title', () => {
@@ -115,6 +118,7 @@ describe('MonthDay component', () => {
         '4': getTestEvent($app),
         '5': getTestEvent($app),
       },
+      backgroundEvents: [],
     }
 
     it('should display an event with title', () => {
@@ -189,6 +193,7 @@ describe('MonthDay component', () => {
         '6': getTestEvent($app),
         '7': getTestEvent($app),
       },
+      backgroundEvents: [],
     }
 
     it('should display 6 events', () => {
@@ -218,6 +223,7 @@ describe('MonthDay component', () => {
       day = {
         date: '2020-01-01',
         events: {},
+        backgroundEvents: [],
       }
     })
 
@@ -271,6 +277,7 @@ describe('MonthDay component', () => {
             '3': getTestEvent($app),
             '4': getTestEvent($app),
           },
+          backgroundEvents: [],
         }
 
         renderComponent($app, day)
@@ -299,6 +306,7 @@ describe('MonthDay component', () => {
           '4': getTestEvent($app),
           '5': getTestEvent($app),
         },
+        backgroundEvents: [],
       }
 
       renderComponent($app, day)

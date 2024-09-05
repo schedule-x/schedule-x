@@ -21,7 +21,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   locale: string = DEFAULT_LOCALE
 
   constructor(
-    public locale: string = DEFAULT_LOCALE,
+    locale: string = DEFAULT_LOCALE,
     public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
     public defaultView: ViewName = InternalViewName.Week,
     public views: View[] = [],

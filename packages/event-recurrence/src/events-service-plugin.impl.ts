@@ -1,11 +1,12 @@
-import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.interface'
 import { EventsFacadeImpl } from './util/stateful/events-facade'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
+import { EventsService } from '@schedule-x/shared/src/interfaces/events-service/events-service.interface'
+import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
-class EventsServicePluginImpl implements PluginBase {
+class EventsServicePluginImpl implements EventsService {
   name: string = 'EventsServicePlugin'
   $app!: CalendarAppSingleton
   eventsFacade!: EventsFacade
@@ -57,6 +58,10 @@ class EventsServicePluginImpl implements PluginBase {
     throw new Error(
       'Plugin not yet initialized. The events service plugin is not intended to add the initial events. For adding events upon rendering, add them directly to the configuration object passed to `createCalendar`, or `useCalendarApp` if you are using the React component'
     )
+  }
+
+  setBackgroundEvents(backgroundEvents: BackgroundEvent[]): void {
+    this.$app.calendarEvents.backgroundEvents.value = backgroundEvents
   }
 }
 
