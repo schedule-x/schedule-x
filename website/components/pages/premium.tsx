@@ -35,7 +35,7 @@ export default function PremiumPage() {
             </Link>
           </div>
 
-          <video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={1000}
+          <video autoPlay loop playsInline muted id={'demo'} className="premiumPageDemoVideo" width={1000}
                  height={390}>
             <source src={'/videos/premium-demo.mp4'} type={'video/mp4'}/>
           </video>
