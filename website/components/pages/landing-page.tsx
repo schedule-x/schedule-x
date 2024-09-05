@@ -119,7 +119,7 @@ export default function LandingPage() {
         </section>
 
         <section className={'landingPageSection hasMarginBottom'}>
-          <Image className={'sectionImage'} src={'/images/website_section_fade_pink_boxes.svg'} alt={'hello'}
+          <Image className={'sectionImage'} src={'/images/website_section_fade_pink_boxes.svg'} alt={''}
                  width={1400}
                  height={479}/>
 
@@ -145,7 +145,7 @@ export default function LandingPage() {
               <li>Install and configure Schedule-X premium ~1 hour ✅</li>
             </ul>
 
-            <Link href={'https://premium.schedule-x.dev/#pricing'} target={'_blank'}>
+            <Link href={'/premium'}>
               <button className={'landingPageAction buttonPrimary hasMarginBottom'}>
                 Get premium →
               </button>

@@ -3,6 +3,8 @@
   "rules": {
     "selector-class-pattern": null,
     "property-no-vendor-prefix": null,
-    "color-function-notation": null
+    "color-function-notation": null,
+    "selector-id-pattern": null,
+    "declaration-block-no-redundant-longhand-properties": null
   }
 }

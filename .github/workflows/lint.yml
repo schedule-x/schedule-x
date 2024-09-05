@@ -2,6 +2,9 @@ name: Lint
 on:
   pull_request:
 
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 jobs:
   release:
     name: Lint

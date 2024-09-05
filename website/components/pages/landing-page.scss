@@ -227,6 +227,7 @@ $heading-width: 900px;
   position: absolute;
   top: -200px;
   z-index: 0;
+  pointer-events: none;
 
   @include mixins.smaller-screens {
     max-width: initial;
@@ -283,9 +284,8 @@ $heading-width: 900px;
       margin-bottom: 0.75rem;
     }
   }
-
-  video {
-    border-radius: 10px;
-  }
 }
 
+.landingPageDemoVideo {
+  border-radius: 10px;
+}

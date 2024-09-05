@@ -3,6 +3,18 @@ import '../theme/index.scss'
 import '../components/pages/landing-page.scss'
 import '../components/pages/calendar-demo.scss'
 import '../components/partials/card/card.scss'
+
+import '../components/pages/premium.scss'
+import '../components/partials/card/card.scss'
+import '../components/partials/sales-card/sales-card.scss'
+
+import '@schedule-x/theme-default/dist/index.css'
+import '@sx-premium/sidebar/index.css'
+import '@sx-premium/interactive-event-modal/index.css'
+import '@sx-premium/drag-to-create/index.css'
+import '@sx-premium/resource-scheduler/index.css'
+import 'rsuite/dist/rsuite-no-reset.min.css';
+
 import Script from 'next/script'
 
 const podkova = Podkova({

@@ -84,7 +84,7 @@ const config: DocsThemeConfig = {
   banner: {
       key: 'premium-1.1',
       text: (
-        <a href="https://premium.schedule-x.dev" target="_blank">
+        <a href="/premium">
           Schedule-X Premium is now here 🚀
         </a>
       )

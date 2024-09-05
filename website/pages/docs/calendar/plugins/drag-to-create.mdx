@@ -1,0 +1,102 @@
+# Drag to create
+
+A plugin that allows you to create events by dragging an external placeholder element onto the calendar. Has support for week, day and month-grid views.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active subscription to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+## Features
+import FeaturesList from "../../../../components/partials/features-list/features-list";
+
+<FeaturesList features={[
+  'Drag events onto the day- and week views',
+  'Drag events onto the month-grid view',
+  'Customize event properties at creation-time',
+]}/>
+
+<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
+  <source src={'/videos/drag-to-create-feature-demo.mp4'} type={'video/mp4'} />
+</video>
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
+
+```bash copy
+npm install @sx-premium/drag-to-create
+```
+
+## Usage
+
+### API
+
+#### `createDragToCreatePlugin(config: DragToCreateConfig)`
+
+Create the plugin instance.
+
+#### `DragToCreateConfig`
+
+Configuration object for the plugin. Added as the first parameter to the `createDragToCreatePlugin` function.
+
+| Property   | type                           |
+|------------|--------------------------------|
+| onAddEvent | (event: CalendarEvent) => void |
+
+#### `dragToCreate(eventId: string, otherEventProperties: Partial<CalendarEvent>)`
+
+Call this method as a response to a dragstart event on your placeholder element, in order to start the drag-to-create process.
+The `eventId` is a required, unique id for the event being created. `otherEventProperties` is an optional object-parameter with the properties of the event being created (however, `start` and `end` properties will have no effect here).
+
+### Example
+
+```html
+// somewhere in your html structure
+<div id="event-placeholder" draggable="true">Create new event</div>
+```
+
+
+```js
+import { createCalendar } from '@schedule-x/calendar'
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createDragToCreatePlugin } from '@sx-premium/drag-to-create'
+
+import '@sx-premium/drag-to-create/index.css'
+import '@schedule-x/theme-default/dist/calendar.css'
+
+const onAddEvent = (event) => {
+  console.log('Event added', event)
+}
+
+const dragToCreatePlugin = createDragToCreatePlugin({ onAddEvent })
+
+const eventPlaceholder = document.getElementById('event-placeholder')
+eventPlaceholder.addEventListener('dragstart', () => {
+  dragToCreatePlugin.dragToCreate('yourEventId123', {
+    title: '(No title)',
+    calendarId: 'leisure',
+  })
+})
+
+const calendar = createCalendar({
+  // ... other configuration
+  plugins: [
+    createEventsServicePlugin(),
+    dragToCreatePlugin,
+  ]
+})
+
+calendar.render(document.getElementById('your-calendar-wrapper'))
+
+```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.

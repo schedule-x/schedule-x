@@ -16,6 +16,14 @@ html {
   font-weight: 700;
 }
 
+#__next {
+  :has(.appCalendarWrapper) {
+    .nextra-toc {
+      display: none;
+    }
+  }
+}
+
 .page-wrapper {
   max-width: 90rem;
   min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
@@ -35,6 +43,10 @@ html {
 
     box-shadow: unset;
     outline-offset: unset;
+  }
+
+  &.premiumPage {
+    max-width: 100vw;
   }
 }
 
