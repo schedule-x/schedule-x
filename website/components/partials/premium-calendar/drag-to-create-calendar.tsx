@@ -81,13 +81,13 @@ export default function DragToCreateCalendar() {
     const personal1 = document.getElementById('event-to-drag-personal-1')
     const personal2 = document.getElementById('event-to-drag-personal-2')
 
-    personal1?.addEventListener('dragstart', (event) => {
+    personal1?.addEventListener('dragstart', () => {
       dragToCreatePlugin.dragToCreate(randomStringId(), {
         calendarId: 'personal',
       })
     })
 
-    personal2?.addEventListener('dragstart', (event) => {
+    personal2?.addEventListener('dragstart', () => {
       dragToCreatePlugin.dragToCreate(randomStringId(), {
         calendarId: 'personal',
         people: ['John', 'Jane', 'Josephine'],
