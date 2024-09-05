@@ -1,24 +1,17 @@
 import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek } from '@schedule-x/calendar'
 import { seededEvents } from './data/seeded-events'
-import { useEffect } from 'react'
-import { useTheme } from 'nextra-theme-docs'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
 import { createResizePlugin } from '@schedule-x/resize'
 
-const getTheme = (resolvedTheme: string) => resolvedTheme === 'dark' ? 'dark' : 'light'
-
 export default function AppCalendar() {
-  const { resolvedTheme } = useTheme()
-
   const calendarApp = useNextCalendarApp({
     views: [viewWeek, viewMonthAgenda, viewDay, viewMonthGrid],
     defaultView: viewWeek.name,
     events: seededEvents,
     plugins: [createDragAndDropPlugin(), createEventModalPlugin(), createResizePlugin()],
     selectedDate: '2024-01-13',
-    isDark: getTheme(resolvedTheme) === 'dark',
     calendars: {
       personal: {
         colorName: 'personal',
@@ -74,12 +67,6 @@ export default function AppCalendar() {
       },
     }
   })
-
-  useEffect(() => {
-    if (calendarApp) {
-      calendarApp.setTheme(getTheme(resolvedTheme))
-    }
-  }, [resolvedTheme])
 
   return <>
     <ScheduleXCalendar calendarApp={calendarApp} />
