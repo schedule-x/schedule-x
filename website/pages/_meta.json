@@ -11,6 +11,15 @@
     "title": "Docs",
     "type": "page"
   },
+  "premium": {
+    "title": "Premium",
+    "type": "page",
+    "theme": {
+      "layout": "raw",
+      "sidebar": false,
+      "toc": false
+    }
+  },
   "demos": {
     "display": "hidden",
     "title": "Demos",
@@ -49,6 +58,19 @@
   "404": {
     "display": "hidden",
     "title": "Page not found",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
+  },
+  "premium-changelog": {
+    "display": "hidden",
+    "title": "Changelog for Schedule-X premium"
+  },
+  "validate-license-key": {
+    "display": "hidden",
+    "title": "Imprint",
     "type": "page",
     "theme": {
       "sidebar": false,

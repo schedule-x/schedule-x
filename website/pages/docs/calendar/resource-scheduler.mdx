@@ -1,0 +1,136 @@
+---
+title: 'Resource scheduler component'
+description: 'Learn how to use the Schedule-X resource scheduler.'
+---
+
+# Resource Scheduler
+
+A view for displaying resources (people, rooms, equipment etc.) in a time grid.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active subscription to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+<Callout emoji="❗">
+  This view is still in a beta version. It is not recommended to be used in production apps until the stable version
+  is released (October 2024). You can, however, already implement this in dev environments, in order to have as much as possible in place before
+  the stable version is released.
+</Callout>
+
+## Features & demo
+import FeaturesList from "../../../components/partials/features-list/features-list";
+
+<FeaturesList features={[
+  'Infinite scroll & lazy loading',
+  'Drag & drop',
+  'Resizing events',
+  'Interactive modal for adding, editing or deleting events',
+]} />
+
+[Go to Demo](/demos/resource-scheduler)
+
+<br />
+
+<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
+  <source src={'/videos/resource-demo.mp4'} type={'video/mp4'} />
+</video>
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
+
+
+```bash copy
+npm install @sx-premium/resource-scheduler
+```
+
+## Usage
+
+```js
+import { createCalendar } from '@schedule-x/calendar'
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createResourceView } from "@sx-premium/resource-scheduler";
+
+import '@sx-premium/resource-scheduler/index.css'
+import '@sx-premium/interactive-event-modal/index.css'
+import '@schedule-x/theme-default/dist/time-picker.css'
+
+const resourceView = createResourceView()
+
+resourceView.config.resources.value = [
+  {
+    label: 'Room 100',
+    id: '1'
+  },
+  {
+    labelHTML: '<span>Room <strong>101</strong></span>',
+    id: '2',
+    colorName: 'room-101',
+    lightColors: {
+      main: '#1c7df9',
+      container: '#d2e7ff',
+      onContainer: '#002859'
+    },
+    darkColors: {
+      main: '#c0dfff',
+      onContainer: '#dee6ff',
+      container: '#426aa2'
+    }
+  }
+]
+
+
+const eventsService = createEventsServicePlugin()
+
+const interactiveEventModal = createInteractiveEventModal({
+  eventsService,
+
+  onAddEvent: (event) => {
+    console.log('Event added', event)
+  },
+
+  fields: {
+    title: {},
+    resourceId: {}
+  }
+})
+
+const calendar = createCalendar({
+  events: [
+    {
+      id: 1,
+      title: 'Event 1',
+      start: '2024-05-11 14:00',
+      end: '2024-05-11 17:00',
+      resourceId: '1'
+    },
+    {
+      id: 2,
+      title: 'Event 2',
+      start: '2024-05-11 14:00',
+      end: '2024-05-11 16:00',
+      resourceId: '2'
+    }
+  ],
+  views: [resourceView],
+  plugins: [
+    eventsService,
+    interactiveEventModal
+  ]
+})
+
+calendar.render(document.getElementById('your-calendar-wrapper'))
+
+```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.

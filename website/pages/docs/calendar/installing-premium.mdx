@@ -1,0 +1,48 @@
+# Installing
+
+Upon purchasing a premium subscription you will receive an authentication token. This you will need for the following steps.
+
+## 1. `.npmrc`
+
+In order to download the premium packages you need to add an `.npmrc` file or edit your existing one. Exchange `${SX_PREMIUM_TOKEN}` with your actual token. This can also be done via environment variables.
+
+```
+@sx-premium:registry=https://npm.schedule-x.dev
+//npm.schedule-x.dev/:_authToken=${SX_PREMIUM_TOKEN}
+```
+
+## 2. Install the packages you need
+
+```bash copy
+npm i @sx-premium/interactive-event-modal
+```
+
+## Quick links
+
+import {Cards} from 'nextra/components'
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Interactive event modal"
+    href="/docs/calendar/plugins/interactive-event-modal"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Drag-to-create plugin"
+    href="/docs/calendar/plugins/drag-to-create"
+  ></Cards.Card>
+</Cards>
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Sidebar plugin"
+    href="/docs/calendar/plugins/sidebar"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Resource view"
+    href="/docs/calendar/resource-view"
+  ></Cards.Card>
+</Cards>

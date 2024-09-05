@@ -7,6 +7,9 @@ on:
     branches:
       - master
 
+env:
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 jobs:
   build_website:
     name: Website
