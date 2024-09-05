@@ -32,6 +32,7 @@ export default class CalendarConfigBuilder
     nDays: 7,
     eventWidth: 100,
     timeAxisFormatOptions: { hour: 'numeric' },
+    showLocation: false,
   }
   monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined

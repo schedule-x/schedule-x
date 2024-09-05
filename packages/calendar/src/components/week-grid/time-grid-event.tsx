@@ -11,6 +11,7 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
+import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pin-icon'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
@@ -45,6 +46,7 @@ export default function TimeGridEvent({
     updateCopy,
     createDragStartTimeout,
     setClickedEventIfNotDragging,
+    setClickedEvent,
   } = useEventInteractions($app)
 
   const localizeArgs = [
@@ -108,6 +110,14 @@ export default function TimeGridEvent({
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.stopPropagation()
+      setClickedEvent(e, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent)
+    }
+  }
+
   const startResize = (e: MouseEvent) => {
     setMouseDown(true)
     e.stopPropagation()
@@ -151,12 +161,14 @@ export default function TimeGridEvent({
         }
         data-event-id={calendarEvent.id}
         onClick={handleOnClick}
+        onKeyDown={handleKeyDown}
         onMouseDown={handlePointerDown}
         onMouseUp={handlePointerUp}
         onTouchStart={handlePointerDown}
         onTouchEnd={handlePointerUp}
         className={classNames.join(' ')}
         tabIndex={0}
+        role="button"
         style={{
           top: `${getYCoordinateInTimeGrid(
             calendarEvent.start,
@@ -207,6 +219,16 @@ export default function TimeGridEvent({
                   {concatenatePeople(calendarEvent.people)}
                 </div>
               )}
+
+              {calendarEvent.location &&
+                $app.config.weekOptions.showLocation && (
+                  <div className="sx__time-grid-event-location">
+                    <LocationPinIcon
+                      strokeColor={eventCSSVariables.iconStroke}
+                    />
+                    {calendarEvent.location}
+                  </div>
+                )}
             </Fragment>
           )}
 
