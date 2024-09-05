@@ -6,7 +6,7 @@ import DragToCreateCalendar from '../partials/premium-calendar/drag-to-create-ca
 export default function DragToCreateDemoPage() {
   return (
     <div className={['page-wrapper', styles.demoPageWrapper].join(' ')}>
-      <HeadingWithIcon icon={'🗓️'} text={'Premium modal and sidebar'} />
+      <HeadingWithIcon icon={'🗓️'} text={'Drag to create demo'} />
 
       <DragToCreateCalendar />
     </div>
