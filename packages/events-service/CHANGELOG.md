@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.62.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0-alpha.0) (2024-09-06)
+
+### Features
+
+- background events in day, week and month views ([33024e0](https://github.com/schedule-x/schedule-x/commit/33024e034a79043f67387960ebc01fe179efe04e))
+
 # [1.61.0](https://github.com/schedule-x/schedule-x/compare/v1.60.1...v1.61.0) (2024-09-04)
 
 **Note:** Version bump only for package @schedule-x/events-service
