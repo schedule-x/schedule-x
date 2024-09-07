@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.62.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0) (2024-09-07)
+
+### Features
+
+- **calendar:** header content custom component ([#647](https://github.com/schedule-x/schedule-x/issues/647)) ([b302bbc](https://github.com/schedule-x/schedule-x/commit/b302bbcd15c76d10dfc51291fa4d5d490ad4ceed))
+
 # [1.61.0](https://github.com/schedule-x/schedule-x/compare/v1.60.1...v1.61.0) (2024-09-04)
 
 ### Features
