@@ -209,6 +209,25 @@ const calendar = createCalendar({
     createCurrentTimePlugin(),
   ],
   events: [
+    {
+      id: 874574875,
+      start: '2024-09-09 07:45',
+      end: '2024-09-09 09:01',
+      _customContent: {
+        timeGrid: '<div class="custom-content">Custom Content</div>',
+        monthGrid: '<div class="custom-content">Custom Content</div>',
+      }
+    },
+    {
+      id: 874574875,
+      start: '2024-09-09',
+      end: '2024-09-09',
+      title: 'All Day Event',
+      _customContent: {
+        dateGrid: '<div class="custom-content">Custom Content</div>',
+        monthAgenda: '<div class="custom-content">Custom Content</div>',
+      }
+    },
     ...seededEvents,
     {
       id: 45678,

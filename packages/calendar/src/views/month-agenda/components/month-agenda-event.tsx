@@ -48,6 +48,8 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     }
   }
 
+  const hasCustomContent = calendarEvent._customContent?.monthAgenda
+
   return (
     <div
       className="sx__event sx__month-agenda-event"
@@ -66,7 +68,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
       tabIndex={0}
       role="button"
     >
-      {!customComponent && (
+      {!customComponent && !hasCustomContent && (
         <Fragment>
           <div className="sx__month-agenda-event__title">
             {calendarEvent.title}
@@ -80,6 +82,14 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
             {getTimeStamp(calendarEvent, $app.config.locale)}
           </div>
         </Fragment>
+      )}
+
+      {hasCustomContent && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: calendarEvent._customContent?.monthAgenda || '',
+          }}
+        />
       )}
     </div>
   )

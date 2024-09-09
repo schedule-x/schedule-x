@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -145,6 +146,20 @@ describe('style attribute "display" of date grid event element', () => {
 
       expect(oneDayEvent.classList.contains(customClass1)).toBe(true)
       expect(oneDayEvent.classList.contains(customClass2)).toBe(true)
+    })
+  })
+
+  describe('displaying custom content', () => {
+    it('should show custom html and no default', () => {
+      const customContent = '<div class="custom-content">Custom content</div>'
+      $app.calendarEvents.list.value[0]._customContent = {
+        dateGrid: customContent,
+      }
+      renderComponent($app, oneDayEventId, 1)
+
+      const customContentEl = document.querySelector('.custom-content')
+      if (!customContentEl) throw new Error('Custom content not found')
+      expect(customContentEl).not.toBeNull()
     })
   })
 })

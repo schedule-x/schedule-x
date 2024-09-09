@@ -16,6 +16,13 @@ export default interface CalendarEventExternal {
   location?: string
   description?: string
   calendarId?: string
+
+  _customContent?: {
+    timeGrid?: string
+    dateGrid?: string
+    monthGrid?: string
+    monthAgenda?: string
+  }
   _options?: CalendarEventOptions
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
