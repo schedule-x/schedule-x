@@ -128,8 +128,8 @@ describe('MonthGridEvent', () => {
             start: '2020-01-01',
             end: '2020-01-02',
             _customContent: {
-              monthGrid: '<div class="custom-content">My custom content</div>'
-            }
+              monthGrid: '<div class="custom-content">My custom content</div>',
+            },
           },
         ],
       })

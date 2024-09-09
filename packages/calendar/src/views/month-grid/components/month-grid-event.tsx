@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
@@ -7,6 +8,8 @@ import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../../utils/stateless/events/focus-modal'
 
 type props = {
   gridRow: number
@@ -90,6 +93,9 @@ export default function MonthGridEvent({
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
       invokeOnEventClickCallback($app, calendarEvent)
+      nextTick(() => {
+        focusModal($app)
+      })
     }
   }
 
@@ -136,9 +142,11 @@ export default function MonthGridEvent({
       )}
 
       {hasCustomContent && (
-        <div dangerouslySetInnerHTML={{
-          __html: calendarEvent._customContent?.monthGrid || '',
-        }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: calendarEvent._customContent?.monthGrid || '',
+          }}
+        />
       )}
     </div>
   )
