@@ -85,6 +85,7 @@ export default function EventModal({ $app }: EventModalProps) {
       {calendarEvent && (
         <div
           id={modalId}
+          tabIndex={0}
           data-ccid={modalId}
           className={`${eventWrapperStyle}${isDisplayed ? ' is-open' : ''}`}
         >
@@ -104,7 +105,11 @@ export default function EventModal({ $app }: EventModalProps) {
               <div className="sx__has-icon sx__event-modal__time">
                 <TimeIcon strokeColor={iconColor.value} />
 
-                {getTimeStamp(calendarEvent, $app.config.locale)}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: getTimeStamp(calendarEvent, $app.config.locale),
+                  }}
+                />
               </div>
 
               {calendarEvent.people && calendarEvent.people.length && (

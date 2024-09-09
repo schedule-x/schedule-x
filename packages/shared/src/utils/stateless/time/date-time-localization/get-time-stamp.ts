@@ -47,7 +47,7 @@ export const getTimeStamp = (
   }
 
   if (calendarEvent._isSingleDayTimed) {
-    return `${dateFn(eventTime.start, locale)} ⋅ ${timeFn(
+    return `${dateFn(eventTime.start, locale)} <span aria-hidden="true">⋅</span> ${timeFn(
       eventTime.start,
       locale
     )} ${delimiter} ${timeFn(eventTime.end, locale)}`

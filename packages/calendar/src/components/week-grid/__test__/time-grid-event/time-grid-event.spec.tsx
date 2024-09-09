@@ -125,7 +125,7 @@ describe('TimeGridEvent', () => {
           {
             id: '123',
             _customContent: {
-              timeGrid: '<div class="custom-content">Custom Content</div>'
+              timeGrid: '<div class="custom-content">Custom Content</div>',
             },
             start: '2020-01-01 00:00',
             end: '2020-01-02 01:00',

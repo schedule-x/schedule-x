@@ -7,6 +7,8 @@ import useEventInteractions from '../../../utils/stateful/hooks/use-event-intera
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../../utils/stateless/events/focus-modal'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -45,6 +47,9 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
       invokeOnEventClickCallback($app, calendarEvent)
+      nextTick(() => {
+        focusModal($app)
+      })
     }
   }
 

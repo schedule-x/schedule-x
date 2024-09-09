@@ -53,7 +53,9 @@ describe('MonthAgendaEvent', () => {
 
       expect(
         document.querySelector('.sx__month-agenda-event__time')?.textContent
-      ).toBe('March 12, 1999 ⋅ 2:45 PM – 3:45 PM')
+      ).toBe(
+        'March 12, 1999 <span aria-hidden="true">⋅</span> 2:45 PM – 3:45 PM'
+      )
     })
 
     it('should have a data-event-id attribute', () => {

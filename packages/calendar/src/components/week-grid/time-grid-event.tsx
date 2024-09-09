@@ -25,6 +25,7 @@ import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../utils/stateless/events/focus-modal'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -115,6 +116,9 @@ export default function TimeGridEvent({
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
       invokeOnEventClickCallback($app, calendarEvent)
+      nextTick(() => {
+        focusModal($app)
+      })
     }
   }
 
@@ -154,8 +158,6 @@ export default function TimeGridEvent({
   }
 
   const hasCustomContent = calendarEvent._customContent?.timeGrid
-  console.log(hasCustomContent)
-  console.log(calendarEvent._customContent)
 
   return (
     <>

@@ -19,6 +19,8 @@ import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../utils/stateless/events/focus-modal'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -101,6 +103,9 @@ export default function DateGridEvent({
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
       invokeOnEventClickCallback($app, calendarEvent)
+      nextTick(() => {
+        focusModal($app)
+      })
     }
   }
 
@@ -191,7 +196,7 @@ export default function DateGridEvent({
         {hasCustomContent && (
           <div
             dangerouslySetInnerHTML={{
-              __html: calendarEvent._customContent?.dateGrid || ''
+              __html: calendarEvent._customContent?.dateGrid || '',
             }}
           />
         )}
