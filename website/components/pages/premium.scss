@@ -240,16 +240,6 @@ html {
   width: 100%;
   position: relative;
 
-  :has(.sx__resource-view) {
-    .sx__view-selection {
-      display: none;
-    }
-
-    .sx__is-calendar-small .sx__today-button {
-      display: initial;
-    }
-  }
-
   &.is-left-calendar {
     transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), left 0.4s cubic-bezier(0.45, 0, 0.2, 1);
     left: 0;
