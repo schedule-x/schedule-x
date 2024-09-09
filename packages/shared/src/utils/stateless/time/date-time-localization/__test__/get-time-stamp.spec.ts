@@ -61,7 +61,8 @@ describe('Getting the time stamp for the event modal', () => {
     }
 
     it('should return a German time stamp for a single day timed event', () => {
-      const expected = '6. Oktober 2023 ⋅ 20:07 – 21:07'
+      const expected =
+        '6. Oktober 2023 <span aria-hidden="true">⋅</span> 20:07 – 21:07'
 
       const result = getTimeStamp(singleDayTimedEvent, 'de-DE')
 
@@ -69,7 +70,8 @@ describe('Getting the time stamp for the event modal', () => {
     })
 
     it('should return an English time stamp for a single day timed event', () => {
-      const expected = 'October 6, 2023 ⋅ 8:07 PM – 9:07 PM'
+      const expected =
+        'October 6, 2023 <span aria-hidden="true">⋅</span> 8:07 PM – 9:07 PM'
 
       const result = getTimeStamp(singleDayTimedEvent, 'en-US')
 
