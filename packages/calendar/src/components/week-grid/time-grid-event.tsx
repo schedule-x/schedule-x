@@ -153,6 +153,10 @@ export default function TimeGridEvent({
     setClickedEventIfNotDragging(calendarEvent, e)
   }
 
+  const hasCustomContent = calendarEvent._customContent?.timeGrid
+  console.log(hasCustomContent)
+  console.log(calendarEvent._customContent)
+
   return (
     <>
       <div
@@ -200,7 +204,7 @@ export default function TimeGridEvent({
           data-ccid={customComponentId}
           className="sx__time-grid-event-inner"
         >
-          {!customComponent && (
+          {!customComponent && !hasCustomContent && (
             <Fragment>
               {calendarEvent.title && (
                 <div className="sx__time-grid-event-title">
@@ -230,6 +234,14 @@ export default function TimeGridEvent({
                   </div>
                 )}
             </Fragment>
+          )}
+
+          {hasCustomContent && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: calendarEvent._customContent?.timeGrid || '',
+              }}
+            />
           )}
 
           {$app.config.plugins.resize &&

@@ -25,5 +25,6 @@ export const externalEventToInternal = (
     .withCalendarId(event.calendarId)
     .withOptions(_options)
     .withForeignProperties(foreignProperties)
+    .withCustomContent(event._customContent)
     .build()
 }

@@ -104,6 +104,8 @@ export default function MonthGridEvent({
   if (hasOverflowLeft) classNames.push('sx__month-grid-event--overflow-left')
   if (hasOverflowRight) classNames.push('sx__month-grid-event--overflow-right')
 
+  const hasCustomContent = calendarEvent._customContent?.monthGrid
+
   return (
     <div
       draggable={!!$app.config.plugins.dragAndDrop}
@@ -129,8 +131,14 @@ export default function MonthGridEvent({
       tabIndex={0}
       role="button"
     >
-      {!customComponent && (
+      {!customComponent && !hasCustomContent && (
         <div className="sx__month-grid-event-title">{calendarEvent.title}</div>
+      )}
+
+      {hasCustomContent && (
+        <div dangerouslySetInnerHTML={{
+          __html: calendarEvent._customContent?.monthGrid || '',
+        }} />
       )}
     </div>
   )

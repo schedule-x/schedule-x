@@ -118,6 +118,9 @@ export default function DateGridEvent({
   const borderLeftNonCustom = hasOverflowLeft
     ? 'none'
     : eventCSSVariables.borderLeft
+
+  const hasCustomContent = calendarEvent._customContent?.dateGrid
+
   return (
     <>
       <div
@@ -163,7 +166,7 @@ export default function DateGridEvent({
           ),
         }}
       >
-        {!customComponent && (
+        {!customComponent && !hasCustomContent && (
           <Fragment>
             {hasOverflowLeft && (
               <div
@@ -183,6 +186,14 @@ export default function DateGridEvent({
               />
             )}
           </Fragment>
+        )}
+
+        {hasCustomContent && (
+          <div
+            dangerouslySetInnerHTML={{
+              __html: calendarEvent._customContent?.dateGrid || ''
+            }}
+          />
         )}
 
         {$app.config.plugins.resize &&

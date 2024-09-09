@@ -7,17 +7,21 @@ description: 'Learn how events work in the Schedule-X calendar.'
 
 ## Properties
 
-| Property      | Type                                                      | Description                                 | Required |
-|---------------|-----------------------------------------------------------|---------------------------------------------|----------|
-| `id`          | `string` or `number`                                      | A unique identifier for the event.          | Yes      |
-| `start`       | `string`                                                  | The start time of the event.                | Yes      |
-| `end`         | `string`                                                  | The end time of the event.                  | Yes      |
-| `title`       | `string`                                                  | The title of the event.                     | No       |
-| `description` | `string`                                                  | A description of the event.                 | No       |
-| `location`    | `string`                                                  | The location of the event.                  | No       |
-| `people`      | `string[]`                                                | Names of the participants                   | No       |
-| `calendarId`  | `string`                                                  | id of the calendar. See "calendars" section | No       |
-| `_options`    | [See "_options" section](/docs/calendar/events/#_options) | Configuration for the event.                | No       |
+| Property                     | Type                                                      | Description                                                | Required |
+|------------------------------|-----------------------------------------------------------|------------------------------------------------------------|----------|
+| `id`                         | `string` or `number`                                      | A unique identifier for the event.                         | Yes      |
+| `start`                      | `string`                                                  | The start time of the event.                               | Yes      |
+| `end`                        | `string`                                                  | The end time of the event.                                 | Yes      |
+| `title`                      | `string`                                                  | The title of the event.                                    | No       |
+| `description`                | `string`                                                  | A description of the event.                                | No       |
+| `location`                   | `string`                                                  | The location of the event.                                 | No       |
+| `people`                     | `string[]`                                                | Names of the participants                                  | No       |
+| `calendarId`                 | `string`                                                  | id of the calendar. See "calendars" section                | No       |
+| `_options`                   | [See "_options" section](/docs/calendar/events/#_options) | Configuration for the event.                               | No       |
+| `_customContent.timeGrid`    | `string`                                                  | Custom HTML to display in the time grid of week/day views. | No       |
+| `_customContent.dateGrid`    | `string`                                                  | Custom HTML to display in the date grid of week/day views. | No       |
+| `_customContent.monthGrid`   | `string`                                                  | Custom HTML to display in the month view.                  | No       |
+| `_customContent.monthAgenda` | `string`                                                  | Custom HTML to display in the month agenda view.           | No       |
 
 ## Other properties
 
