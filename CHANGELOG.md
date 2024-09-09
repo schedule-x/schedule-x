@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.63.0](https://github.com/schedule-x/schedule-x/compare/v1.62.0...v1.63.0) (2024-09-09)
+
+### Features
+
+- enable using custom content in events ([#651](https://github.com/schedule-x/schedule-x/issues/651)) ([cbe7ccb](https://github.com/schedule-x/schedule-x/commit/cbe7ccba544fae1b95546a3992c43854107930c3))
+- focus modal when opening through keyboard ([#652](https://github.com/schedule-x/schedule-x/issues/652)) ([9749c1a](https://github.com/schedule-x/schedule-x/commit/9749c1ac73d217a740bc42f936f8507dd8f196e9))
+
 # [1.62.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0) (2024-09-07)
 
 ### Features
