@@ -25,7 +25,7 @@ export const positionInTimeGrid = (
       ) {
         date = addDays(date, -1)
       }
-      week[date].timeGridEvents.push(event)
+      week[date]?.timeGridEvents.push(event)
     }
   }
 
