@@ -72,7 +72,7 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
       const top =
         getYCoordinateInTimeGrid(
           nowDateTimeString,
-          this.$app.config.dayBoundaries,
+          this.$app.config.dayBoundaries.value,
           this.$app.config.timePointsPerDay
         ) + '%'
       currentTimeIndicator.style.top = top

@@ -136,7 +136,11 @@ export default function DateGridEvent({
         aria-label={
           calendarEvent.title +
           ' ' +
-          getTimeStamp(calendarEvent, $app.config.locale, $app.translate('to'))
+          getTimeStamp(
+            calendarEvent,
+            $app.config.locale.value,
+            $app.translate('to')
+          )
         }
         role="button"
         data-ccid={customComponentId}

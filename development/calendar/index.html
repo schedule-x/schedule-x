@@ -33,12 +33,31 @@
     </div>
 
     <div class="input-wrapper">
+      <input
+              id="set-first-day-of-week"
+              type="number"
+              min="0"
+              max="6"
+      />
+      <button id="set-first-day-of-week-button">Set first day of week</button>
+    </div>
+
+    <div class="input-wrapper">
+      <input
+              id="set-n-days"
+              type="number"
+              min="0"
+              max="6"
+      />
+      <button id="set-n-days-button">Set n days</button>
+    </div>
+
+    <div class="input-wrapper">
       <button id="update-calendars">Update calendars</button>
     </div>
 
     <div id="calendar"></div>
 <!--    <div id="calendar-2"></div>-->
-
     <script type="module" src="/development/calendar/main.tsx"></script>
   </body>
 </html>

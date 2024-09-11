@@ -36,7 +36,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     )
     this.rangeEndDate = addDays(
       this.rangeStartDate,
-      $app.config.weekOptions.nDays - 1
+      $app.config.weekOptions.value.nDays - 1
     )
     this.init()
   }

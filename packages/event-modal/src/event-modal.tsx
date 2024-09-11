@@ -107,7 +107,10 @@ export default function EventModal({ $app }: EventModalProps) {
 
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: getTimeStamp(calendarEvent, $app.config.locale),
+                    __html: getTimeStamp(
+                      calendarEvent,
+                      $app.config.locale.value
+                    ),
                   }}
                 />
               </div>

@@ -3,6 +3,7 @@ import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { dateStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
+import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name: string = PluginName.CalendarControls
@@ -27,10 +28,10 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   }
 
   setView(view: string): void {
-    const viewToSet = this.$app.config.views.find((v) => v.name === view)
+    const viewToSet = this.$app.config.views.value.find((v) => v.name === view)
     if (!viewToSet)
       throw new Error(
-        `Invalid view name. Expected one of ${this.$app.config.views.map((v) => v.name).join(', ')}`
+        `Invalid view name. Expected one of ${this.$app.config.views.value.map((v) => v.name).join(', ')}`
       )
 
     this.$app.calendarState.setView(
@@ -39,12 +40,28 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     )
   }
 
+  setFirstDayOfWeek(dayOfWeek: WeekDay) {
+    this.$app.config.firstDayOfWeek.value = dayOfWeek
+  }
+
+  setNDays(nDays: number) {
+    this.$app.config.weekOptions.value.nDays = nDays
+  }
+
   getDate(): string {
     return this.$app.datePickerState.selectedDate.value
   }
 
   getView(): string {
     return this.$app.calendarState.view.value
+  }
+
+  getFirstDayOfWeek(): WeekDay {
+    return this.$app.config.firstDayOfWeek.value
+  }
+
+  getNDays(): number {
+    return this.$app.config.weekOptions.value.nDays
   }
 
   getRange(): DateRange | null {

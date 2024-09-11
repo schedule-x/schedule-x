@@ -23,7 +23,7 @@ export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
     .withDisabled(config.disabled)
     .build()
   const timeUnitsImpl = new TimeUnitsBuilder()
-    .withFirstDayOfWeek(configInternal.firstDayOfWeek)
+    .withFirstDayOfWeek(configInternal.firstDayOfWeek.value)
     .build()
   return new DatePickerAppSingletonBuilder()
     .withConfig(configInternal)
@@ -31,7 +31,7 @@ export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
       createDatePickerState(configInternal, config.selectedDate)
     )
     .withTimeUnitsImpl(timeUnitsImpl)
-    .withTranslate(translate(configInternal.locale, translations))
+    .withTranslate(translate(configInternal.locale.value, translations))
     .build()
 }
 

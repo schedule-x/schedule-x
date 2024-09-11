@@ -12,7 +12,7 @@ export default function MonthAgendaDayNames({ week }: props) {
   const $app = useContext(AppContext)
   const localizedShortDayNames = getOneLetterOrShortDayNames(
     week.map((day) => toJSDate(day.date)),
-    $app.config.locale
+    $app.config.locale.value
   )
 
   return (

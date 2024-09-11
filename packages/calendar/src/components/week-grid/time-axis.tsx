@@ -8,10 +8,10 @@ export default function TimeAxis() {
   const [hours, setHours] = useState<number[]>([])
   useEffect(() => {
     setHours(
-      getTimeAxisHours($app.config.dayBoundaries, $app.config.isHybridDay)
+      getTimeAxisHours($app.config.dayBoundaries.value, $app.config.isHybridDay)
     )
     const hoursPerDay = $app.config.timePointsPerDay / 100
-    const pixelsPerHour = $app.config.weekOptions.gridHeight / hoursPerDay
+    const pixelsPerHour = $app.config.weekOptions.value.gridHeight / hoursPerDay
     document.documentElement.style.setProperty(
       '--sx-week-grid-hour-height',
       `${pixelsPerHour}px`
@@ -19,8 +19,8 @@ export default function TimeAxis() {
   }, [])
 
   const formatter = new Intl.DateTimeFormat(
-    $app.config.locale,
-    $app.config.weekOptions.timeAxisFormatOptions
+    $app.config.locale.value,
+    $app.config.weekOptions.value.timeAxisFormatOptions
   )
 
   return (

@@ -17,7 +17,7 @@ describe('handle window resize', () => {
       const $app = stubInterface<CalendarAppSingleton>()
       $app.config = {
         ...stubInterface(),
-        views: [viewDay, viewMonthGrid],
+        views: signal([viewDay, viewMonthGrid]),
         callbacks: {},
       }
       document.documentElement.style.fontSize = '16px'
@@ -53,7 +53,7 @@ describe('handle window resize', () => {
       const $app = stubInterface<CalendarAppSingleton>()
       $app.config = {
         ...stubInterface(),
-        views: [viewDay, viewMonthGrid],
+        views: signal([viewDay, viewMonthGrid]),
         callbacks: {
           isCalendarSmall: vi.fn(),
         },

@@ -60,7 +60,7 @@ describe('Resizing events in the time grid', () => {
       $app.elements = { calendarWrapper }
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
-        weekOptions: { gridHeight: 2400 },
+        weekOptions: signal({ gridHeight: 2400 }),
         timePointsPerDay: 2400,
       }
       calendarEvent = new CalendarEventBuilder(

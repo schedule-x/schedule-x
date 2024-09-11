@@ -5,13 +5,13 @@ const setScreenSizeCompatibleView = (
   $app: CalendarAppSingleton,
   isSmall: boolean
 ) => {
-  const currentView = $app.config.views.find(
+  const currentView = $app.config.views.value.find(
     (view) => view.name === $app.calendarState.view.value
   ) as View
   if (isSmall) {
     if (currentView.hasSmallScreenCompat) return
 
-    const smallScreenCompatibleView = $app.config.views.find(
+    const smallScreenCompatibleView = $app.config.views.value.find(
       (view) => view.hasSmallScreenCompat
     )
     if (smallScreenCompatibleView) {
@@ -23,7 +23,7 @@ const setScreenSizeCompatibleView = (
   } else {
     if (currentView.hasWideScreenCompat) return
 
-    const wideScreenCompatibleView = $app.config.views.find(
+    const wideScreenCompatibleView = $app.config.views.value.find(
       (view) => view.hasWideScreenCompat
     )
     if (wideScreenCompatibleView) {

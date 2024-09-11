@@ -45,7 +45,7 @@ export default function CalendarWrapper({ $app }: props) {
   const [currentView, setCurrentView] = useState<View | null>()
 
   useSignalEffect(() => {
-    const newView = $app.config.views.find(
+    const newView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
     const viewElement = document.getElementById(viewContainerId)

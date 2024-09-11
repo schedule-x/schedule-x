@@ -14,9 +14,9 @@ export const createCalendarState = (
   selectedDate?: string
 ): CalendarState => {
   const _view = signal<ViewName>(
-    calendarConfig.views.find(
-      (view) => view.name === calendarConfig.defaultView
-    )?.name || calendarConfig.views[0].name
+    calendarConfig.views.value.find(
+      (view) => view.name === calendarConfig.defaultView.value
+    )?.name || calendarConfig.views.value[0].name
   )
   const view = computed(() => {
     return _view.value
@@ -39,7 +39,7 @@ export const createCalendarState = (
   })
 
   const setRange = (date: string) => {
-    const selectedView = calendarConfig.views.find(
+    const selectedView = calendarConfig.views.value.find(
       (availableView) => availableView.name === _view.value
     )
     const newRange = (selectedView as View).setDateRange({
@@ -61,7 +61,7 @@ export const createCalendarState = (
   setRange(selectedDate || toDateString(new Date()))
 
   const isCalendarSmall = signal<boolean | undefined>(undefined)
-  const isDark = signal<boolean>(calendarConfig.isDark || false)
+  const isDark = signal<boolean>(calendarConfig.isDark.value || false)
 
   effect(() => {
     const eventColors = new EventColors(calendarConfig)

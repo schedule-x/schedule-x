@@ -15,6 +15,7 @@ import { CustomComponentFns } from './custom-component-fns'
 import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plugin.interface'
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
+import { WeekDay } from '../../enums/time/week-day.enum'
 
 export type WeekOptions = {
   gridHeight: number
@@ -56,19 +57,19 @@ export type CustomComponentFn = (
 ) => void
 
 export default interface CalendarConfigInternal extends Config {
-  defaultView: ViewName
-  views: View[]
-  dayBoundaries: DayBoundariesInternal
-  weekOptions: WeekOptions
-  monthGridOptions: MonthGridOptions
+  defaultView: Signal<ViewName>
+  views: Signal<View[]>
+  dayBoundaries: Signal<DayBoundariesInternal>
+  weekOptions: Signal<WeekOptions>
   calendars: Signal<Record<string, CalendarType>>
+  isDark: Signal<boolean>
+  minDate: Signal<string | undefined>
+  maxDate: Signal<string | undefined>
+  monthGridOptions: Signal<MonthGridOptions>
   plugins: Plugins
-  isDark: boolean
   isResponsive: boolean
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
-  minDate?: string
-  maxDate?: string
 
   // Getters
   isHybridDay: boolean
@@ -89,6 +90,13 @@ interface ReducedCalendarConfigInternal
     | '_customComponentFns'
     | 'calendars'
     | 'weekOptions'
+    | 'defaultView'
+    | 'isDark'
+    | 'minDate'
+    | 'maxDate'
+    | 'monthGridOptions'
+    | 'locale'
+    | 'firstDayOfWeek'
   > {}
 
 export interface CalendarConfigExternal
@@ -101,4 +109,11 @@ export interface CalendarConfigExternal
   selectedDate?: string
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
+  defaultView?: ViewName
+  isDark?: boolean
+  minDate?: string | undefined
+  maxDate?: string | undefined
+  monthGridOptions?: MonthGridOptions
+  locale?: string
+  firstDayOfWeek?: WeekDay
 }

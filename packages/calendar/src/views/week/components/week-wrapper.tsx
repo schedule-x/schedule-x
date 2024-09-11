@@ -17,7 +17,7 @@ import { useSignalEffect } from '@preact/signals'
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
     '--sx-week-grid-height',
-    `${$app.config.weekOptions.gridHeight}px`
+    `${$app.config.weekOptions.value.gridHeight}px`
   )
 
   const [week, setWeek] = useState<Week>({})

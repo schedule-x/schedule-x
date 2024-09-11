@@ -80,7 +80,7 @@ export default function MonthViewWeek({ week }: props) {
             disabled={!isDateSelectable(weekDay.day)}
             aria-label={getLocalizedDate(
               $app.datePickerState.datePickerDate.value,
-              $app.config.locale
+              $app.config.locale.value
             )}
             className={weekDay.classes.join(' ')}
             data-focus={hasFocus(weekDay) ? 'true' : undefined}

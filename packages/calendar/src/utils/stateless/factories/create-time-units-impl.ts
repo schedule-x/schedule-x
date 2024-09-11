@@ -3,6 +3,6 @@ import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/c
 
 export const createTimeUnitsImpl = (internalConfig: CalendarConfigInternal) => {
   return new TimeUnitsBuilder()
-    .withFirstDayOfWeek(internalConfig.firstDayOfWeek)
+    .withFirstDayOfWeek(internalConfig.firstDayOfWeek.value)
     .build()
 }

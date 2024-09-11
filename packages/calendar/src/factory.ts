@@ -38,7 +38,7 @@ export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
     .withCalendarEvents(calendarEvents)
     .withDatePickerConfig(datePickerConfig)
     .withCalendarState(calendarState)
-    .withTranslate(translate(internalConfig.locale, translations))
+    .withTranslate(translate(internalConfig.locale.value, translations))
     .build()
 }
 

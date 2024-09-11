@@ -17,42 +17,62 @@ import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/ti
 import { Signal, signal } from '@preact/signals'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
+  locale: Signal<string>
+  firstDayOfWeek: Signal<WeekDay>
+  defaultView: Signal<ViewName>
+  views: Signal<View[]>
+  dayBoundaries: Signal<DayBoundariesInternal>
+  weekOptions: Signal<WeekOptions>
   calendars: Signal<Record<string, CalendarType>>
+  isDark: Signal<boolean>
+  minDate: Signal<string | undefined>
+  maxDate: Signal<string | undefined>
+  monthGridOptions: Signal<MonthGridOptions>
 
   constructor(
-    public locale: string = DEFAULT_LOCALE,
-    public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
-    public defaultView: ViewName = InternalViewName.Week,
-    public views: View[] = [],
-    public dayBoundaries: DayBoundariesInternal = DEFAULT_DAY_BOUNDARIES,
-    public weekOptions: WeekOptions,
+    locale: string = DEFAULT_LOCALE,
+    firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
+    defaultView: ViewName = InternalViewName.Week,
+    views: View[] = [],
+    dayBoundaries: DayBoundariesInternal = DEFAULT_DAY_BOUNDARIES,
+    weekOptions: WeekOptions,
     calendars = {},
     public plugins = {},
-    public isDark = false,
+    isDark = false,
     public isResponsive = true,
     public callbacks = {},
     public _customComponentFns = {},
-    public minDate: string | undefined = undefined,
-    public maxDate: string | undefined = undefined,
-    public monthGridOptions: MonthGridOptions = {
+    minDate: string | undefined = undefined,
+    maxDate: string | undefined = undefined,
+    monthGridOptions: MonthGridOptions = {
       nEventsPerDay: 4,
     }
   ) {
+    this.locale = signal(locale)
+    this.firstDayOfWeek = signal(firstDayOfWeek)
+    this.defaultView = signal(defaultView)
+    this.views = signal(views)
+    this.dayBoundaries = signal(dayBoundaries)
+    this.weekOptions = signal(weekOptions)
     this.calendars = signal(calendars)
+    this.isDark = signal(isDark)
+    this.minDate = signal(minDate)
+    this.maxDate = signal(maxDate)
+    this.monthGridOptions = signal(monthGridOptions)
   }
 
   get isHybridDay(): boolean {
     return (
-      this.dayBoundaries.start > this.dayBoundaries.end ||
-      (this.dayBoundaries.start !== 0 &&
-        this.dayBoundaries.start === this.dayBoundaries.end)
+      this.dayBoundaries.value.start > this.dayBoundaries.value.end ||
+      (this.dayBoundaries.value.start !== 0 &&
+        this.dayBoundaries.value.start === this.dayBoundaries.value.end)
     )
   }
 
   get timePointsPerDay(): number {
     return timePointsPerDay(
-      this.dayBoundaries.start,
-      this.dayBoundaries.end,
+      this.dayBoundaries.value.start,
+      this.dayBoundaries.value.end,
       this.isHybridDay
     )
   }

@@ -12,18 +12,18 @@ export default function ViewSelection() {
   useEffect(() => {
     if ($app.calendarState.isCalendarSmall.value) {
       setAvailableViews(
-        $app.config.views.filter((view) => view.hasSmallScreenCompat)
+        $app.config.views.value.filter((view) => view.hasSmallScreenCompat)
       )
     } else {
       setAvailableViews(
-        $app.config.views.filter((view) => view.hasWideScreenCompat)
+        $app.config.views.value.filter((view) => view.hasWideScreenCompat)
       )
     }
   }, [$app.calendarState.isCalendarSmall.value])
 
   const [selectedViewLabel, setSelectedViewLabel] = useState('')
   useEffect(() => {
-    const selectedView = $app.config.views.find(
+    const selectedView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
     if (!selectedView) return

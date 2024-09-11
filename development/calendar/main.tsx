@@ -26,6 +26,7 @@ import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
+import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -70,7 +71,7 @@ const eventRecurrencePlugin = createEventRecurrencePlugin()
 const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,
-    // nDays: 4,
+    nDays: 3,
     eventWidth: 95,
   },
   // monthGridOptions: {
@@ -339,6 +340,24 @@ setViewButton.addEventListener('click', () => {
   const newView = (document.getElementById('set-view') as HTMLInputElement)
     .value
   calendarControlsPlugin.setView(newView)
+})
+
+const setFirstDayOfWeekButton = document.getElementById(
+    'set-first-day-of-week-button'
+) as HTMLButtonElement
+setFirstDayOfWeekButton.addEventListener('click', () => {
+  const newFirstDayOfWeek = (document.getElementById('set-first-day-of-week') as HTMLInputElement)
+      .value as unknown as WeekDay
+  calendarControlsPlugin.setFirstDayOfWeek(newFirstDayOfWeek)
+})
+
+const setNDaysButton = document.getElementById(
+    'set-n-days-button'
+) as HTMLButtonElement
+setNDaysButton.addEventListener('click', () => {
+  const newNDays = (document.getElementById('set-n-days') as HTMLInputElement)
+      .value as unknown as number
+  calendarControlsPlugin.setNDays(newNDays)
 })
 
 const updateCalendarsButton = document.getElementById(

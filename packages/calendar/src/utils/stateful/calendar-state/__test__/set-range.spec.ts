@@ -14,7 +14,7 @@ import { viewDay } from '../../../../views/day'
 describe('calendar state', () => {
   describe('setting the range in a non-hybrid day', () => {
     const config = new CalendarConfigBuilder().build()
-    config.views.push(...[viewWeek, viewMonthGrid, viewDay])
+    config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
     const timeUnitsImpl = new TimeUnitsBuilder().build()
 
     it('should set the range for the week', () => {
@@ -75,7 +75,7 @@ describe('calendar state', () => {
         end: '02:00',
       })
       .build()
-    config.views.push(...[viewWeek, viewMonthGrid, viewDay])
+    config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
     const timeUnitsImpl = new TimeUnitsBuilder().build()
 
     it('should set the range for the week', () => {
