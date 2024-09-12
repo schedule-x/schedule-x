@@ -63,7 +63,7 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app.config.defaultView.value = defaultView
   }
 
-  setViews(views: [View, ...View]) {
+  setViews(views: [View, ...View[]]) {
     const currentViewName = this.$app.calendarState.view.value
     const isCurrentViewInViews = views.some(
       (view: View) => view.name === currentViewName
@@ -117,7 +117,7 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 
   getDefaultView = (): ViewName => this.$app.config.defaultView.value
 
-  getViews = (): [View, ...View] => this.$app.config.views.value
+  getViews = (): View[] => this.$app.config.views.value
 
   getDayBoundaries = (): DayBoundariesExternal => ({
     start: timeStringFromTimePoints(this.$app.config.dayBoundaries.value.start),

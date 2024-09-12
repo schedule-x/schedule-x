@@ -18,7 +18,7 @@ export default interface CalendarControlsPlugin extends PluginBase {
   setFirstDayOfWeek(firstDayOfWeek: WeekDay): void
   setLocale(locale: string): void
   setDefaultView(defaultView: ViewName): void
-  setViews(views: [View, ...View]): void
+  setViews(views: [View, ...View[]]): void
   setDayBoundaries(dayBoundaries: DayBoundariesExternal): void
   setWeekOptions(weekOptions: WeekOptions): void
   setCalendars(calendars: Record<string, CalendarType>): void
@@ -31,7 +31,7 @@ export default interface CalendarControlsPlugin extends PluginBase {
   getFirstDayOfWeek(): WeekDay
   getLocale(): string
   getDefaultView(): ViewName
-  getViews(): [View, ...View]
+  getViews(): View[]
   getDayBoundaries(): DayBoundariesExternal
   getWeekOptions(): WeekOptions
   getCalendars(): Record<string, CalendarType>
