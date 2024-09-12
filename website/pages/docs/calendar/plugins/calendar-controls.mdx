@@ -18,6 +18,50 @@ Change the calendar view.
 
 Set the date of the calendar. Format: `YYYY-MM-DD`.
 
+### `setFirstDayOfWeek(firstDayOfWeek: WeekDay): void`
+
+Set the first day of the week for the calendar. Value must be between 0 and 6 where 0 is Sunday, 1 is Monday etc.
+
+### `setLocale(locale: string): void`
+
+Set the locale of the calendar.
+
+### `setDefaultView(defaultView: ViewName): void`
+
+Set the default view for the calendar.
+
+### `setViews(views: [View, ...View]): void`
+
+Set the available views for the calendar. The views to be set must include the currently active view name.
+
+### `setDayBoundaries(dayBoundaries: DayBoundariesExternal): void`
+
+Set the day boundaries of the calendar.
+
+### `setWeekOptions(weekOptions: WeekOptions): void`
+
+Set the week options of the calendar.
+
+### `setCalendars(calendars: Record<string, CalendarType>): void`
+
+Set the available calendars to be displayed in the calendar.
+
+### `setIsDark(isDark: boolean): void`
+
+Set whether the calendar is in dark mode or not.
+
+### `setMinDate(minDate: string|undefined): void`
+
+Set the min date for the calendar navigation.
+
+### `setMaxDate(maxDate: string|undefined): void`
+
+Set the max date for the calendar navigation.
+
+### `setMonthGridOptions(monthGridOptions: MonthGridOptions): void`
+
+Set the month grid options of the calendar.
+
 ### `getView(): string`
 
 Get the name of the current view.
@@ -29,6 +73,51 @@ Get the currently selected date of the calendar.
 ### `getRange(): { start: string, end: string }`
 
 Get the currently visible time range of the calendar.
+
+### `getFirstDayOfWeek(): WeekDay`
+
+Get the currently configured first day of week of the calendar.
+
+### `getLocale(): string`
+
+Get the current locale of the calendar.
+
+### `getDefaultView(): ViewName`
+
+Get the current default view of the calendar.
+
+### `getViews(): [View, ...View]`
+
+Get the currently available views of the calendar.
+
+### `getDayBoundaries(): DayBoundariesExternal`
+
+Get the day boundaries of the calendar.
+
+### `getWeekOptions(): WeekOptions`
+
+Get the week options of the calendar.
+
+### `getCalendars(): Record<string, CalendarType>`
+
+Get the calendars of the calendar.
+
+### `getIsDark(): boolean`
+
+Get whether the calendar is configured in dark mode or not.
+
+### `getMinDate(): string|undefined`
+
+Get the current min date for the calendar navigation.
+
+### `getMaxDate(): string|undefined`
+
+Get the current max date for the calendar navigation.
+
+### `getMonthGridOptions(): MonthGridOptions`
+
+Get the current month grid options of the calendar.
+
 
 ## Examples
 
