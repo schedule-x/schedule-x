@@ -2,10 +2,16 @@ import { CalendarAppSingleton, PluginBase } from '@schedule-x/shared/src'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import ICAL from 'ical.js'
+import { CalendarEvent } from '@schedule-x/shared/src'
+import { randomStringId, toDateTimeString } from '@schedule-x/shared/src'
+
+// type ICALDate = { toJSDate: () => Date }
 
 class IcalendarPluginImpl implements PluginBase {
   name = 'IcalendarPlugin'
   private $app!: CalendarAppSingleton
+
+  private events: ICAL.Event[] = []
 
   beforeInit($app: CalendarAppSingleton) {
     this.$app = $app
@@ -51,7 +57,23 @@ class IcalendarPluginImpl implements PluginBase {
     const events = component
       .getAllSubcomponents('vevent')
       .map((vevent) => new ICAL.Event(vevent))
-    console.log(events)
+      .forEach(this.expandEvent)
+  }
+
+  private expandEvent(eventComp: ICAL.Event) {
+    const sxEvent: CalendarEvent = {
+      start: toDateTimeString(eventComp.startDate.toJSDate()),
+      end: toDateTimeString(eventComp.endDate.toJSDate()),
+      title: eventComp.summary,
+      description: eventComp.description,
+      location: eventComp.location,
+      id: randomStringId(),
+    }
+
+    // todo: handle recurrence
+
+    this.events.push(eventComp)
+    console.log(sxEvent)
   }
 }
 
