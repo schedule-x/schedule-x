@@ -47,7 +47,6 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
     <>
       <AppContext.Provider value={$app}>
         <div className="sx__week-wrapper" id={id}>
-          <pre>{JSON.stringify($app.config.firstDayOfWeek)}</pre>
           <div className="sx__week-header">
             <div className="sx__week-header-content">
               <DateAxis

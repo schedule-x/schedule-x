@@ -129,8 +129,8 @@ export default class CalendarConfigBuilder
     return this
   }
 
-  withIsResponsive(isDark: boolean | undefined): CalendarConfigBuilder {
-    this.isResponsive = isDark
+  withIsResponsive(isResponsive: boolean | undefined): CalendarConfigBuilder {
+    this.isResponsive = isResponsive
     return this
   }
 
