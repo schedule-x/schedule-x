@@ -71,13 +71,13 @@ const eventRecurrencePlugin = createEventRecurrencePlugin()
 const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,
-    nDays: 3,
+    // nDays: 3,
     eventWidth: 95,
   },
   // monthGridOptions: {
   //   nEventsPerDay: 7
   // },
-  firstDayOfWeek: 0,
+  firstDayOfWeek: 1,
   // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',
@@ -347,8 +347,8 @@ const setFirstDayOfWeekButton = document.getElementById(
 ) as HTMLButtonElement
 setFirstDayOfWeekButton.addEventListener('click', () => {
   const newFirstDayOfWeek = (document.getElementById('set-first-day-of-week') as HTMLInputElement)
-      .value as unknown as WeekDay
-  calendarControlsPlugin.setFirstDayOfWeek(newFirstDayOfWeek)
+      .value
+  calendarControlsPlugin.setFirstDayOfWeek(parseInt(newFirstDayOfWeek, 10) as WeekDay)
 })
 
 const setNDaysButton = document.getElementById(

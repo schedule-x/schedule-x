@@ -40,12 +40,15 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     )
   }
 
-  setFirstDayOfWeek(dayOfWeek: WeekDay) {
-    this.$app.config.firstDayOfWeek.value = dayOfWeek
+  setFirstDayOfWeek(firstDayOfWeek: WeekDay) {
+    this.$app.config.firstDayOfWeek.value = firstDayOfWeek
   }
 
   setNDays(nDays: number) {
-    this.$app.config.weekOptions.value.nDays = nDays
+    this.$app.config.weekOptions.value = {
+      ...this.$app.config.weekOptions.value,
+      nDays,
+    }
   }
 
   getDate(): string {

@@ -9,6 +9,7 @@ import TimeUnitsBuilder from '@schedule-x/shared/src/utils/stateful/time-units/t
 import { Month } from '@schedule-x/shared/src/enums/time/month.enum'
 import { createAppSingleton } from '../../../factory'
 import { renderComponent } from './utils'
+import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
 
 describe('MonthViewWeek', () => {
   beforeEach(() => {
@@ -27,7 +28,13 @@ describe('MonthViewWeek', () => {
       expectedEnabledDatesCount: number
     ) => {
       const $app = createAppSingleton({ min: '2023-01-01' })
-      renderComponent($app, new TimeUnitsBuilder().build().getWeekFor(date))
+      renderComponent(
+        $app,
+        new TimeUnitsBuilder()
+          .withConfig(createBaseConfig())
+          .build()
+          .getWeekFor(date)
+      )
 
       const disabledButtons = document.querySelectorAll('button:disabled')
       expect(disabledButtons.length).toBe(expectedDisabledDatesCount)
@@ -48,7 +55,13 @@ describe('MonthViewWeek', () => {
       expectedEnabledDatesCount: number
     ) => {
       const $app = createAppSingleton({ max: '2022-12-31' })
-      renderComponent($app, new TimeUnitsBuilder().build().getWeekFor(date))
+      renderComponent(
+        $app,
+        new TimeUnitsBuilder()
+          .withConfig(createBaseConfig())
+          .build()
+          .getWeekFor(date)
+      )
 
       const disabledButtons = document.querySelectorAll('button:disabled')
       expect(disabledButtons.length).toBe(expectedDisabledDatesCount)

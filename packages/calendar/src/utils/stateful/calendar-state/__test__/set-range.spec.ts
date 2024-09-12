@@ -10,12 +10,15 @@ import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal
 import { viewWeek } from '../../../../views/week'
 import { viewMonthGrid } from '../../../../views/month-grid'
 import { viewDay } from '../../../../views/day'
+import { createBaseConfig } from '../../../../__test__/utils'
 
 describe('calendar state', () => {
   describe('setting the range in a non-hybrid day', () => {
     const config = new CalendarConfigBuilder().build()
     config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
-    const timeUnitsImpl = new TimeUnitsBuilder().build()
+    const timeUnitsImpl = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)
@@ -76,7 +79,9 @@ describe('calendar state', () => {
       })
       .build()
     config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
-    const timeUnitsImpl = new TimeUnitsBuilder().build()
+    const timeUnitsImpl = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)

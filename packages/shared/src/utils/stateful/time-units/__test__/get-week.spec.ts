@@ -6,10 +6,13 @@ import TimeUnitsBuilder from '../time-units.builder'
 import { Month } from '../../../../enums/time/month.enum'
 import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils'
 import { WeekDay } from '../../../../enums/time/week-day.enum'
+import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
 
 describe('get week', () => {
   it('should get week starting on Monday, for 2023-07-01', () => {
-    const underTest = new TimeUnitsBuilder().build()
+    const underTest = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     const result = underTest.getWeekFor(new Date(2023, Month.JULY, 1))
 
@@ -17,7 +20,9 @@ describe('get week', () => {
   })
 
   it('should get week starting on Monday, for 2023-07-09', () => {
-    const underTest = new TimeUnitsBuilder().build()
+    const underTest = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     const result = underTest.getWeekFor(new Date(2023, Month.JULY, 9))
 
@@ -25,7 +30,9 @@ describe('get week', () => {
   })
 
   it('should get week starting on Monday, for 2023-07-31', () => {
-    const underTest = new TimeUnitsBuilder().build()
+    const underTest = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     const result = underTest.getWeekFor(new Date(2023, Month.JULY, 31))
 
@@ -33,7 +40,7 @@ describe('get week', () => {
   })
   it('should get week starting on Sunday, for 2023-07-01', () => {
     const underTest = new TimeUnitsBuilder()
-      .withFirstDayOfWeek(WeekDay.SUNDAY)
+      .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SUNDAY }))
       .build()
 
     const result = underTest.getWeekFor(new Date(2023, Month.JULY, 1))
@@ -43,7 +50,7 @@ describe('get week', () => {
 
   it('should get a week starting on Sunday, for 2023-12-31', () => {
     const underTest = new TimeUnitsBuilder()
-      .withFirstDayOfWeek(WeekDay.SUNDAY)
+      .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SUNDAY }))
       .build()
 
     const result = underTest.getWeekFor(new Date(2023, Month.DECEMBER, 31))
@@ -53,7 +60,7 @@ describe('get week', () => {
 
   it('should get a week starting on Saturday, for 2024-02-29', () => {
     const underTest = new TimeUnitsBuilder()
-      .withFirstDayOfWeek(WeekDay.SATURDAY)
+      .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SATURDAY }))
       .build()
 
     const result = underTest.getWeekFor(new Date(2024, Month.FEBRUARY, 29))

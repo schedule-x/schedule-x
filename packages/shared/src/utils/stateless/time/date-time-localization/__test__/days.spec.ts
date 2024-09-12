@@ -10,10 +10,11 @@ import {
   getOneLetterDayNames,
 } from '../date-time-localization'
 import { Month } from '../../../../../enums/time/month.enum'
+import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
 
 describe('get localized day names', () => {
   const timeUnitsImpl = new TimeUnitsBuilder()
-    .withFirstDayOfWeek(WeekDay.MONDAY)
+    .withConfig(createBaseConfig())
     .build()
 
   it('should get one letter day names in English', () => {
@@ -50,7 +51,7 @@ describe('get localized day names', () => {
 
   it('should get one letter day names in English, for a week starting on Sunday', () => {
     const timeUnitsImplUS = new TimeUnitsBuilder()
-      .withFirstDayOfWeek(WeekDay.SUNDAY)
+      .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SUNDAY }))
       .build()
     const underTest = getOneLetterDayNames
     const date = new Date(2023, Month.JANUARY, 1)
