@@ -74,7 +74,7 @@
     "prettier": "^3.0.0",
     "rollup-plugin-ts": "^3.4.5",
     "sass": "^1.72.0",
-    "sinon": "^18.0.0",
+    "sinon": "^19.0.0",
     "stylelint": "^16.2.1",
     "stylelint-config-standard-scss": "^13.0.0",
     "ts-sinon": "^2.0.2",
