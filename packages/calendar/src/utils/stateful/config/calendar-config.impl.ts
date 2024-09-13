@@ -19,7 +19,6 @@ import { Signal, signal } from '@preact/signals'
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
-  defaultView: Signal<ViewName>
   views: Signal<View[]>
   dayBoundaries: Signal<DayBoundariesInternal>
   weekOptions: Signal<WeekOptions>
@@ -32,7 +31,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   constructor(
     locale: string = DEFAULT_LOCALE,
     firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
-    defaultView: ViewName = InternalViewName.Week,
+    public defaultView: ViewName = InternalViewName.Week,
     views: View[] = [],
     dayBoundaries: DayBoundariesInternal = DEFAULT_DAY_BOUNDARIES,
     weekOptions: WeekOptions,
@@ -50,7 +49,6 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
-    this.defaultView = signal(defaultView)
     this.views = signal(views)
     this.dayBoundaries = signal(dayBoundaries)
     this.weekOptions = signal(weekOptions)
