@@ -73,6 +73,10 @@ export default function CalendarWrapper({ $app }: props) {
     setPreviousRangeStart($app.calendarState.range.value?.start || '')
   })
 
+  useSignalEffect(() => {
+    $app.datePickerConfig.locale.value = $app.config.locale.value
+  })
+
   return (
     <>
       <div className={wrapperClasses.join(' ')} id={calendarId}>

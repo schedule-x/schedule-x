@@ -31,7 +31,7 @@ export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
       createDatePickerState(configInternal, config.selectedDate)
     )
     .withTimeUnitsImpl(timeUnitsImpl)
-    .withTranslate(translate(configInternal.locale.value, translations))
+    .withTranslate(translate(configInternal.locale, translations))
     .build()
 }
 

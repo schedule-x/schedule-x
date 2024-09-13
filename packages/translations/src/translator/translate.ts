@@ -1,13 +1,14 @@
 import { InvalidLocaleError } from '@schedule-x/shared/src/utils/stateless/errors/InvalidLocale.error'
 import { TranslationVariables } from '@schedule-x/shared/src/types/translations'
+import { Signal } from '@preact/signals'
 
 export const translate =
-  (locale: string, languages: Record<string, object>) =>
+  (locale: Signal<string>, languages: Record<string, object>) =>
   (key: string, translationVariables?: TranslationVariables): string => {
-    if (!/^[a-z]{2}-[A-Z]{2}$/.test(locale))
-      throw new InvalidLocaleError(locale)
+    if (!/^[a-z]{2}-[A-Z]{2}$/.test(locale.value))
+      throw new InvalidLocaleError(locale.value)
 
-    const deHyphenatedLocale = locale.replace('-', '')
+    const deHyphenatedLocale = locale.value.replace('-', '')
     const language = languages[deHyphenatedLocale]
     if (!language) return key
 

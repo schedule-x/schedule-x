@@ -20,7 +20,7 @@ export default function AppInput() {
     $app.datePickerState.inputDisplayedValue.value = getLocalizedDate(
       $app.datePickerState.selectedDate.value
     )
-  }, [$app.datePickerState.selectedDate.value])
+  }, [$app.datePickerState.selectedDate.value, $app.config.locale.value])
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
