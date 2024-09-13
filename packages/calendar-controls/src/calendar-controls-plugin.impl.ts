@@ -4,7 +4,6 @@ import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { dateStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
-import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 import {
   CalendarType,
@@ -59,10 +58,6 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app.config.locale.value = locale
   }
 
-  setDefaultView(defaultView: ViewName) {
-    this.$app.config.defaultView.value = defaultView
-  }
-
   setViews(views: [View, ...View[]]) {
     const currentViewName = this.$app.calendarState.view.value
     const isCurrentViewInViews = views.some(
@@ -114,8 +109,6 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   getFirstDayOfWeek = (): WeekDay => this.$app.config.firstDayOfWeek.value
 
   getLocale = (): string => this.$app.config.locale.value
-
-  getDefaultView = (): ViewName => this.$app.config.defaultView.value
 
   getViews = (): View[] => this.$app.config.views.value
 

@@ -26,13 +26,9 @@ Set the first day of the week for the calendar. Value must be between 0 and 6 wh
 
 Set the locale of the calendar.
 
-### `setDefaultView(defaultView: ViewName): void`
-
-Set the default view for the calendar.
-
 ### `setViews(views: [View, ...View]): void`
 
-Set the available views for the calendar. The views to be set must include the currently active view name.
+Set the available views for the calendar. The views to be set must include the currently active view name. At least one view must be passed into this function.
 
 ### `setDayBoundaries(dayBoundaries: DayBoundariesExternal): void`
 
@@ -82,11 +78,7 @@ Get the currently configured first day of week of the calendar.
 
 Get the current locale of the calendar.
 
-### `getDefaultView(): ViewName`
-
-Get the current default view of the calendar.
-
-### `getViews(): [View, ...View]`
+### `getViews(): View[]`
 
 Get the currently available views of the calendar.
 

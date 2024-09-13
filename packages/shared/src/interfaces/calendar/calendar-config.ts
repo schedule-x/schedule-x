@@ -57,7 +57,7 @@ export type CustomComponentFn = (
 ) => void
 
 export default interface CalendarConfigInternal extends Config {
-  defaultView: Signal<ViewName>
+  defaultView: ViewName
   views: Signal<View[]>
   dayBoundaries: Signal<DayBoundariesInternal>
   weekOptions: Signal<WeekOptions>
@@ -90,7 +90,6 @@ interface ReducedCalendarConfigInternal
     | '_customComponentFns'
     | 'calendars'
     | 'weekOptions'
-    | 'defaultView'
     | 'isDark'
     | 'minDate'
     | 'maxDate'
@@ -109,7 +108,6 @@ export interface CalendarConfigExternal
   selectedDate?: string
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
-  defaultView?: ViewName
   isDark?: boolean
   minDate?: string | undefined
   maxDate?: string | undefined
