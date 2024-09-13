@@ -15,7 +15,7 @@ export const createCalendarState = (
 ): CalendarState => {
   const _view = signal<ViewName>(
     calendarConfig.views.value.find(
-      (view) => view.name === calendarConfig.defaultView.value
+      (view) => view.name === calendarConfig.defaultView
     )?.name || calendarConfig.views.value[0].name
   )
   const view = computed(() => {
