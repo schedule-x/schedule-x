@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -5,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { translate } from '../translate'
 import { InvalidLocaleError } from '@schedule-x/shared/src/utils/stateless/errors/InvalidLocale.error'
-import { Signal, signal } from '@preact/signals'
+import { signal } from '@preact/signals'
 
 describe('translate', () => {
   it('should return the key if the locale is en-US', () => {
@@ -81,14 +82,15 @@ describe('translate', () => {
   })
 
   it.each([
-    [signal('enUS'), true],
-    [signal('en_US'), true],
-    [signal('en-us'), true],
-    [signal('en-US'), false],
-    [signal('en'), true], // TODO: write alias map for short locale -> long locale and change this to false
+    ['enUS', true],
+    ['en_US', true],
+    ['en-us', true],
+    ['en-US', false],
+    ['en', true], // TODO: write alias map for short locale -> long locale and change this to false
   ])(
     'should throw if called with a faulty locale format %s',
-    (locale: Signal<string>, shouldThrow) => {
+    (localeRaw: string, shouldThrow: boolean) => {
+      const locale = signal(localeRaw)
       const translations = {
         hello: 'world',
       }
