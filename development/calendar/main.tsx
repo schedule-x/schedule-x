@@ -357,7 +357,7 @@ const setNDaysButton = document.getElementById(
 setNDaysButton.addEventListener('click', () => {
   const newNDays = (document.getElementById('set-n-days') as HTMLInputElement)
       .value as unknown as number
-  calendarControlsPlugin.setNDays(newNDays)
+  calendarControlsPlugin.setWeekOptions({...calendarControlsPlugin.getWeekOptions(), nDays: newNDays})
 })
 
 const updateCalendarsButton = document.getElementById(
