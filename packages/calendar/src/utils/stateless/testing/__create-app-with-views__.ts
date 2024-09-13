@@ -8,7 +8,7 @@ export const __createAppWithViews__ = (
   config: Partial<CalendarConfigExternal> = {}
 ) => {
   return createCalendarAppSingleton({
-    ...config,
     views: [viewDay, viewWeek, viewMonthGrid],
+    ...config,
   })
 }

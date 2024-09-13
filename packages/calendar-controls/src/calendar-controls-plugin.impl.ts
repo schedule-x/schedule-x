@@ -86,10 +86,6 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app.config.calendars.value = calendars
   }
 
-  setIsDark(isDark: boolean) {
-    this.$app.config.isDark.value = isDark
-  }
-
   setMinDate(minDate: string | undefined) {
     this.$app.config.minDate.value = minDate
   }
@@ -121,8 +117,6 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 
   getCalendars = (): Record<string, CalendarType> =>
     this.$app.config.calendars.value
-
-  getIsDark = (): boolean => this.$app.config.isDark.value
 
   getMinDate = (): string | undefined => this.$app.config.minDate.value
 

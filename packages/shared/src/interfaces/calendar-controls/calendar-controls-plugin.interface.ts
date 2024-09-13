@@ -20,7 +20,6 @@ export default interface CalendarControlsPlugin extends PluginBase {
   setDayBoundaries(dayBoundaries: DayBoundariesExternal): void
   setWeekOptions(weekOptions: WeekOptions): void
   setCalendars(calendars: Record<string, CalendarType>): void
-  setIsDark(isDark: boolean): void
   setMinDate(minDate: string | undefined): void
   setMaxDate(maxDate: string | undefined): void
   setMonthGridOptions(monthGridOptions: MonthGridOptions): void
@@ -32,7 +31,6 @@ export default interface CalendarControlsPlugin extends PluginBase {
   getDayBoundaries(): DayBoundariesExternal
   getWeekOptions(): WeekOptions
   getCalendars(): Record<string, CalendarType>
-  getIsDark(): boolean
   getMinDate(): string | undefined
   getMaxDate(): string | undefined
   getMonthGridOptions(): MonthGridOptions

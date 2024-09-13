@@ -360,6 +360,14 @@ setNDaysButton.addEventListener('click', () => {
   calendarControlsPlugin.setWeekOptions({...calendarControlsPlugin.getWeekOptions(), nDays: newNDays})
 })
 
+const setLocaleSelect = document.getElementById(
+    'set-locale'
+) as HTMLSelectElement
+setLocaleSelect.addEventListener('change', () => {
+  const newLocale = (document.getElementById('set-locale') as HTMLSelectElement).value
+  calendarControlsPlugin.setLocale(newLocale)
+})
+
 const updateCalendarsButton = document.getElementById(
   'update-calendars'
 ) as HTMLButtonElement
