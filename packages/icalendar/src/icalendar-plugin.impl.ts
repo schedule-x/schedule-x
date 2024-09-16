@@ -11,7 +11,7 @@ class IcalendarPluginImpl implements PluginBase {
   name = 'IcalendarPlugin'
   private $app!: CalendarAppSingleton
 
-  private events: ICAL.Event[] = []
+  private events: CalendarEvent[] = []
 
   beforeInit($app: CalendarAppSingleton) {
     this.$app = $app
@@ -34,6 +34,7 @@ class IcalendarPluginImpl implements PluginBase {
         'END:VALARM\n' +
         'END:VEVENT\n' +
         'BEGIN:VEVENT\n' +
+        'RRULE:FREQ=DAILY;COUNT=3\n' +
         'SUMMARY:Access-A-Ride Pickup\n' +
         'DTSTART;TZID=America/New_York:20130802T200000\n' +
         'DTEND;TZID=America/New_York:20130802T203000\n' +
@@ -60,7 +61,7 @@ class IcalendarPluginImpl implements PluginBase {
       .forEach(this.expandEvent)
   }
 
-  private expandEvent(eventComp: ICAL.Event) {
+  private expandEvent = (eventComp: ICAL.Event) => {
     const sxEvent: CalendarEvent = {
       start: toDateTimeString(eventComp.startDate.toJSDate()),
       end: toDateTimeString(eventComp.endDate.toJSDate()),
@@ -70,10 +71,27 @@ class IcalendarPluginImpl implements PluginBase {
       id: randomStringId(),
     }
 
-    // todo: handle recurrence
+    this.events.push(sxEvent)
 
-    this.events.push(eventComp)
-    console.log(sxEvent)
+    if (eventComp.isRecurring()) {
+      this.expandOccurrences(eventComp)
+    }
+  }
+
+  private expandOccurrences(event: ICAL.Event) {
+    const iterator = event.iterator()
+    let occurrence: ICAL.Event | null
+    while ((occurrence = iterator.next())) {
+      const occurrence: CalendarEvent = {
+        start: toDateTimeString(occurrence.startDate.toJSDate()),
+        end: toDateTimeString(occurrence.endDate.toJSDate()),
+        title: occurrence.summary,
+        description: occurrence.description,
+        location: occurrence.location,
+        id: randomStringId(),
+      }
+      this.events.push(occurrence)
+    }
   }
 }
 
