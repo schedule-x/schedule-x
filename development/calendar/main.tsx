@@ -27,7 +27,6 @@ import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
 import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
-import {DEFAULT_DAY_BOUNDARIES} from "@schedule-x/calendar/src/constants";
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
