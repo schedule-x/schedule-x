@@ -27,6 +27,7 @@ import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
 import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
+import {DEFAULT_DAY_BOUNDARIES} from "@schedule-x/calendar/src/constants";
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -366,6 +367,17 @@ const setLocaleSelect = document.getElementById(
 setLocaleSelect.addEventListener('change', () => {
   const newLocale = (document.getElementById('set-locale') as HTMLSelectElement).value
   calendarControlsPlugin.setLocale(newLocale)
+})
+
+const setDayBoundariesButton = document.getElementById(
+    'set-day-boundaries-button'
+) as HTMLButtonElement
+
+setDayBoundariesButton.addEventListener('click', () => {
+  const newDayBoundariesStart = (document.getElementById('set-day-boundaries-start') as HTMLInputElement).value
+  const newDayBoundariesEnd = (document.getElementById('set-day-boundaries-end') as HTMLInputElement).value
+
+  calendarControlsPlugin.setDayBoundaries({start: `${newDayBoundariesStart.padStart(2, '0')}:00`, end: `${newDayBoundariesEnd.padStart(2, '0')}:00`})
 })
 
 const updateCalendarsButton = document.getElementById(

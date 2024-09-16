@@ -1,12 +1,13 @@
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { getTimeAxisHours } from '../../utils/stateless/time/time-axis/time-axis'
+import { useSignalEffect } from '@preact/signals'
 
 export default function TimeAxis() {
   const $app = useContext(AppContext)
 
   const [hours, setHours] = useState<number[]>([])
-  useEffect(() => {
+  useSignalEffect(() => {
     setHours(
       getTimeAxisHours($app.config.dayBoundaries.value, $app.config.isHybridDay)
     )
@@ -16,7 +17,7 @@ export default function TimeAxis() {
       '--sx-week-grid-hour-height',
       `${pixelsPerHour}px`
     )
-  }, [])
+  })
 
   const formatter = new Intl.DateTimeFormat(
     $app.config.locale.value,
