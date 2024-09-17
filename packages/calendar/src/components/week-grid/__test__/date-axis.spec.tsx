@@ -12,6 +12,8 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { __createAppWithViews__ } from '../../../utils/stateless/testing/__create-app-with-views__'
 import { beforeEach } from 'vitest'
+import { createBaseConfig } from '../../../__test__/utils'
+import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 
 const renderComponent = ($app: CalendarAppSingleton, week: Date[]) => {
   render(
@@ -22,10 +24,14 @@ const renderComponent = ($app: CalendarAppSingleton, week: Date[]) => {
 }
 
 describe('DateAxis', () => {
-  let timeUnitsImpl = new TimeUnitsBuilder().build()
+  let timeUnitsImpl = new TimeUnitsBuilder()
+    .withConfig(createBaseConfig())
+    .build()
 
   beforeEach(() => {
-    timeUnitsImpl = new TimeUnitsBuilder().build()
+    timeUnitsImpl = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
   })
 
   afterEach(() => {
@@ -100,7 +106,9 @@ describe('DateAxis', () => {
 
   describe('a week starting on Sunday', () => {
     it('should display the day names in the correct order', () => {
-      timeUnitsImpl = new TimeUnitsBuilder().withFirstDayOfWeek(0).build()
+      timeUnitsImpl = new TimeUnitsBuilder()
+        .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SUNDAY }))
+        .build()
       const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 3))
       renderComponent(
         __createAppWithViews__({

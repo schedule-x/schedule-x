@@ -65,6 +65,8 @@ export default function CalendarHeader() {
     }
   }, [])
 
+  const keyForRerenderingOnLocaleChange = $app.config.locale.value
+
   return (
     <header className={'sx__calendar-header'} data-ccid={headerContentId}>
       {!headerContent && (
@@ -90,7 +92,9 @@ export default function CalendarHeader() {
               <div data-ccid={headerContentRightPrependId} />
             )}
 
-            <ViewSelection />
+            <ViewSelection
+              key={keyForRerenderingOnLocaleChange + '-view-selection'}
+            />
 
             <AppWrapper $app={datePickerAppSingleton}></AppWrapper>
 

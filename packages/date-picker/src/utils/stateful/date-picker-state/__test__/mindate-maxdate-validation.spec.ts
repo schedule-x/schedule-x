@@ -6,12 +6,13 @@ import {
 import { createDatePickerState } from '../date-picker-state.impl'
 import { stubInterface } from 'ts-sinon'
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
+import { signal } from '@preact/signals'
 
 describe('Date-picker state', () => {
   describe('Validating the input according to min config option', () => {
     it('should not change the input value if it is less than the min date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
-      config.locale = 'en-US'
+      config.locale = signal('en-US')
       config.min = '2021-01-01'
       config.max = '2100-12-31'
       const originalSelectedDate = '2021-12-20'
@@ -24,7 +25,7 @@ describe('Date-picker state', () => {
 
     it('should change the input value if it is greater than the min date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
-      config.locale = 'en-US'
+      config.locale = signal('en-US')
       config.min = '2021-01-01'
       config.max = '2100-12-31'
       const state = createDatePickerState(config, '2021-12-31')
@@ -38,7 +39,7 @@ describe('Date-picker state', () => {
   describe('Validating the input according to max config option', () => {
     it('should not change the input value if it is greater than the max date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
-      config.locale = 'en-US'
+      config.locale = signal('en-US')
       config.min = '2000-01-01'
       config.max = '2021-12-31'
       const originalSelectedDate = '2021-12-20'
@@ -51,7 +52,7 @@ describe('Date-picker state', () => {
 
     it('should change the input value if it is less than the max date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
-      config.locale = 'en-US'
+      config.locale = signal('en-US')
       config.min = '2000-01-01'
       config.max = '2021-12-31'
       const state = createDatePickerState(config, '2021-12-31')

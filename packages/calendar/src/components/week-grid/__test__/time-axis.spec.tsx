@@ -4,11 +4,12 @@ import {
   expect,
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, render, screen } from '@testing-library/preact'
+import { cleanup, render, screen, waitFor } from '@testing-library/preact'
 import TimeAxis from '../time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { __createAppWithViews__ } from '../../../utils/stateless/testing/__create-app-with-views__'
+import { createCalendarControlsPlugin } from '@schedule-x/calendar-controls/src'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(
@@ -67,6 +68,37 @@ describe('TimeAxis', () => {
           screen.getByText(hour.toString().padStart(2, '0') + ':00')
         ).not.toBeNull()
       }
+    })
+  })
+
+  describe('changing the day boundaries of the calendar', () => {
+    it('should respect the day boundary configuration of the calendar', async () => {
+      const calendarControlsPlugin = createCalendarControlsPlugin()
+      const $app = __createAppWithViews__({
+        plugins: [calendarControlsPlugin],
+        locale: 'de-DE',
+      })
+      renderComponent($app)
+      calendarControlsPlugin.beforeInit?.($app)
+      for (let hour = 0; hour <= 23; ++hour) {
+        expect(
+          screen.getByText(`${hour.toString().padStart(2, '0')} Uhr`)
+        ).not.toBeNull()
+      }
+
+      calendarControlsPlugin.setDayBoundaries({ start: '08:00', end: '17:00' })
+
+      // We need to wait for the re-render here for the time axis to show the correct times
+      await waitFor(() => {
+        for (let hour = 0; hour <= 23; hour++) {
+          const query = `${hour.toString().padStart(2, '0')} Uhr`
+          if (hour >= 8 && hour <= 16) {
+            expect(screen.queryByText(query)).not.toBeNull()
+          } else {
+            expect(screen.queryByText(query)).toBeNull()
+          }
+        }
+      })
     })
   })
 })

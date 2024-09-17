@@ -20,7 +20,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
   const dateStringToLocalizedMonthName = (selectedDate: string) => {
     const selectedDateJS = toJSDate(selectedDate)
 
-    return toLocalizedMonth(selectedDateJS, $app.config.locale)
+    return toLocalizedMonth(selectedDateJS, $app.config.locale.value)
   }
 
   const getYearFrom = (datePickerDate: string) => {

@@ -28,7 +28,7 @@ export const createDatePickerState = (
     try {
       const newValue = formatToDateString(
         inputDisplayedValue.value,
-        config.locale
+        config.locale.value
       )
       if (newValue < config.min || newValue > config.max) {
         inputDisplayedValue.value = lastValidDisplayedValue.value

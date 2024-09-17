@@ -64,14 +64,15 @@ class ScrollControllerPlugin implements PluginBase {
 
     const $app = this.$app as CalendarAppSingleton
     const pixelsPerHour =
-      $app.config.weekOptions.gridHeight / ($app.config.timePointsPerDay / 100)
+      $app.config.weekOptions.value.gridHeight /
+      ($app.config.timePointsPerDay / 100)
     const scrollToTimePoint = timePointsFromString(time)
 
     const hoursFromDayStart =
       $app.config.isHybridDay &&
-      scrollToTimePoint < $app.config.dayBoundaries.start
-        ? 2400 - $app.config.dayBoundaries.start + scrollToTimePoint
-        : scrollToTimePoint - $app.config.dayBoundaries.start
+      scrollToTimePoint < $app.config.dayBoundaries.value.start
+        ? 2400 - $app.config.dayBoundaries.value.start + scrollToTimePoint
+        : scrollToTimePoint - $app.config.dayBoundaries.value.start
     const hoursPointsToScroll = hoursFromDayStart / 100
     const pixelsToScroll = hoursPointsToScroll * pixelsPerHour
 

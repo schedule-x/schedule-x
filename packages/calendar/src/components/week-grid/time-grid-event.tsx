@@ -51,7 +51,7 @@ export default function TimeGridEvent({
   } = useEventInteractions($app)
 
   const localizeArgs = [
-    $app.config.locale,
+    $app.config.locale.value,
     { hour: 'numeric', minute: 'numeric' },
   ] as const
   const getEventTime = (start: string, end: string) => {
@@ -71,7 +71,7 @@ export default function TimeGridEvent({
 
   const leftRule = getLeftRule(
     calendarEvent,
-    $app.config.weekOptions.eventWidth
+    $app.config.weekOptions.value.eventWidth
   )
 
   const handleStartDrag = (uiEvent: UIEvent) => {
@@ -178,17 +178,17 @@ export default function TimeGridEvent({
         style={{
           top: `${getYCoordinateInTimeGrid(
             calendarEvent.start,
-            $app.config.dayBoundaries,
+            $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
             calendarEvent.start,
             calendarEvent.end,
-            $app.config.dayBoundaries,
+            $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
-          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.eventWidth)}%`,
+          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.value.eventWidth)}%`,
           backgroundColor: customComponent
             ? undefined
             : eventCSSVariables.backgroundColor,
@@ -227,7 +227,7 @@ export default function TimeGridEvent({
               )}
 
               {calendarEvent.location &&
-                $app.config.weekOptions.showLocation && (
+                $app.config.weekOptions.value.showLocation && (
                   <div className="sx__time-grid-event-location">
                     <LocationPinIcon
                       strokeColor={eventCSSVariables.iconStroke}

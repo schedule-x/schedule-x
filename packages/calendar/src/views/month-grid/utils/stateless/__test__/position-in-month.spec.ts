@@ -10,12 +10,16 @@ import CalendarEventBuilder from '../../../../../../../shared/src/utils/stateles
 import { __createAppWithViews__ } from '../../../../../utils/stateless/testing/__create-app-with-views__'
 import { positionInMonth } from '../position-in-month'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { createBaseConfig } from '../../../../../__test__/utils'
 
 describe('Positioning events for in month view', () => {
   const $app = __createAppWithViews__()
 
   describe('Positioning single day events in first week', () => {
-    const month = createMonth('2020-01-01', new TimeUnitsBuilder().build())
+    const month = createMonth(
+      '2020-01-01',
+      new TimeUnitsBuilder().withConfig(createBaseConfig()).build()
+    )
     const event1 = new CalendarEventBuilder(
       $app.config,
       1,
@@ -39,7 +43,10 @@ describe('Positioning events for in month view', () => {
   })
 
   describe('Positioning multi day events in first week', () => {
-    const month = createMonth('2020-01-01', new TimeUnitsBuilder().build())
+    const month = createMonth(
+      '2020-01-01',
+      new TimeUnitsBuilder().withConfig(createBaseConfig()).build()
+    )
     const event1 = new CalendarEventBuilder(
       $app.config,
       1,
@@ -74,7 +81,10 @@ describe('Positioning events for in month view', () => {
   })
 
   describe('Positioning a multi day event in every week of month, alongside other events', () => {
-    const month = createMonth('2020-01-01', new TimeUnitsBuilder().build())
+    const month = createMonth(
+      '2020-01-01',
+      new TimeUnitsBuilder().withConfig(createBaseConfig()).build()
+    )
     const event1 = new CalendarEventBuilder(
       $app.config,
       1,

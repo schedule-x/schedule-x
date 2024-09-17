@@ -84,7 +84,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
               strokeColor={`var(--sx-color-on-${calendarEvent._color}-container)`}
             />
 
-            {getTimeStamp(calendarEvent, $app.config.locale)}
+            {getTimeStamp(calendarEvent, $app.config.locale.value)}
           </div>
         </Fragment>
       )}

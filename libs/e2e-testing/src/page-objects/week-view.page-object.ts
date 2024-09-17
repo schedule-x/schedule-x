@@ -22,6 +22,18 @@ class WeekViewPageObject {
   getTimeGridDayByIndex(index: number) {
     return cy.get('.sx__time-grid-day').eq(index)
   }
+
+  getFirstDayOfWeek() {
+    return cy.get('.sx__week-grid__date-axis').children().first()
+  }
+
+  getLastDayOfWeek() {
+    return cy.get('.sx__week-grid__date-axis').children().last()
+  }
+
+  getVisibleWeekDays() {
+    return cy.get('.sx__week-grid__date-axis').children()
+  }
 }
 
 export const createWeekViewPageObject = () => new WeekViewPageObject()

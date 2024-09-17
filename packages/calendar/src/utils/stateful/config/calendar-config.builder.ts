@@ -45,11 +45,11 @@ export default class CalendarConfigBuilder
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
-      this.locale,
-      this.firstDayOfWeek,
-      this.defaultView,
-      this.views,
-      this.dayBoundaries,
+      this.locale!,
+      this.firstDayOfWeek!,
+      this.defaultView!,
+      this.views!,
+      this.dayBoundaries!,
       this.weekOptions,
       this.calendars,
       this.plugins,
@@ -129,8 +129,8 @@ export default class CalendarConfigBuilder
     return this
   }
 
-  withIsResponsive(isDark: boolean | undefined): CalendarConfigBuilder {
-    this.isResponsive = isDark
+  withIsResponsive(isResponsive: boolean | undefined): CalendarConfigBuilder {
+    this.isResponsive = isResponsive
     return this
   }
 
