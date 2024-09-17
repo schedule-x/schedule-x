@@ -1,20 +1,19 @@
 import { cypressPageUrls } from '../../pages/urls.ts'
-import { createWeekViewPageObject } from '../../../libs/e2e-testing'
+import { createDatePickerPageObject, createWeekViewPageObject } from '../../../libs/e2e-testing'
 
-describe('Updating calendar events', {
+describe('Updating the calendar config', {
   viewportHeight: 800,
   viewportWidth: 1280
 }, () => {
   const weekView = createWeekViewPageObject()
+  const datePicker = createDatePickerPageObject()
 
   beforeEach(() => {
     cy.viewport(1440, 900)
     cy.visit(cypressPageUrls.calendar.updateConfig)
   })
 
-  it('should config', () => {
-    //weekView.getCalendarStartsWith('MON')
-
+  it('should update config', () => {
     weekView.getFirstDayOfWeek().should('contain', 'Mon')
     weekView.getLastDayOfWeek().should('contain', 'Sun')
     weekView.getVisibleWeekDays().should('have.length', 7)
@@ -31,5 +30,8 @@ describe('Updating calendar events', {
     weekView.getLastDayOfWeek().should('contain', 'Sat')
     weekView.getVisibleWeekDays().should('have.length', 5)
 
+    datePicker.getInputValue().should('contain', '9/21/2023')
+    cy.contains('set language to German').click()
+    datePicker.getInputValue().should('contain', '21.9.2023')
   })
 })

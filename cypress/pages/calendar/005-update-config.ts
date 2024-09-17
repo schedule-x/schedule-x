@@ -33,7 +33,6 @@ calendar.render(calendarElement)
 
 const setNDaysButton = document.getElementById('set-n-days-5') as HTMLButtonElement
 setNDaysButton.addEventListener('click', () => {
-  console.log('set n days to 5')
   calendarControls.setWeekOptions({
     ...calendarControls.getWeekOptions(),
     nDays: 5
@@ -44,6 +43,10 @@ const setFirstDayOfWeek = document.getElementById(
   'set-first-day-of-week-2'
 ) as HTMLButtonElement
 setFirstDayOfWeek.addEventListener('click', () => {
-  console.log('set first day of week to Tuesday')
   calendarControls.setFirstDayOfWeek(2)
+})
+
+const setGermanLocale = document.getElementById('set-german') as HTMLButtonElement
+setGermanLocale.addEventListener('click', () => {
+  calendarControls.setLocale('de-DE')
 })
