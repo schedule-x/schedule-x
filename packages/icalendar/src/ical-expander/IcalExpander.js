@@ -6,7 +6,7 @@ operates entirely in UTC
 */
 
 import * as ICAL from 'ical.js'
-import { randomStringId } from '@schedule-x/shared'
+import { randomStringId } from '@schedule-x/shared/src'
 
 export class IcalExpander {
   constructor(opts) {
@@ -14,11 +14,11 @@ export class IcalExpander {
     this.skipInvalidDates =
       opts.skipInvalidDates != null ? opts.skipInvalidDates : false
 
-    this.jCalData = ICAL.parse(opts.ics)
-    this.component = new ICAL.Component(this.jCalData)
+    this.jCalData = ICAL.default.parse(opts.ics)
+    this.component = new ICAL.default.Component(this.jCalData)
     this.events = this.component
       .getAllSubcomponents('vevent')
-      .map((vevent) => new ICAL.Event(vevent))
+      .map((vevent) => new ICAL.default.Event(vevent))
 
     if (this.skipInvalidDates) {
       this.events = this.events.filter((evt) => {

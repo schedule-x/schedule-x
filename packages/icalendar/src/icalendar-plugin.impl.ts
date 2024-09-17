@@ -1,11 +1,12 @@
 import {
   CalendarAppSingleton,
-  CalendarEvent,
+  CalendarEventInternal,
   PluginBase,
   toDateTimeString,
   toJSDate,
 } from '@schedule-x/shared/src'
 import { IcalExpander } from './ical-expander/IcalExpander'
+import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
 
 type ICalendarPluginOptions = {
   data: string
@@ -78,26 +79,34 @@ class IcalendarPluginImpl implements PluginBase {
     ]
   }
 
-  private icalOccurrenceToSXEvent(occurrence: ICalOccurrence): CalendarEvent {
-    return {
-      id: occurrence.eventId,
-      title: occurrence.item.summary,
-      description: occurrence.item.description,
-      location: occurrence.item.location,
-      start: toDateTimeString(occurrence.startDate.toJSDate()),
-      end: toDateTimeString(occurrence.endDate.toJSDate()),
-    }
+  private icalOccurrenceToSXEvent = (
+    occurrence: ICalOccurrence
+  ): CalendarEventInternal => {
+    return externalEventToInternal(
+      {
+        id: occurrence.eventId,
+        title: occurrence.item.summary,
+        description: occurrence.item.description,
+        location: occurrence.item.location,
+        start: toDateTimeString(occurrence.startDate.toJSDate()),
+        end: toDateTimeString(occurrence.endDate.toJSDate()),
+      },
+      this.$app.config
+    )
   }
 
-  private icalEventToSXEvent(event: ICalEvent): CalendarEvent {
-    return {
-      id: event.eventId,
-      title: event.summary,
-      description: event.description,
-      location: event.location,
-      start: toDateTimeString(event.startDate.toJSDate()),
-      end: toDateTimeString(event.endDate.toJSDate()),
-    }
+  private icalEventToSXEvent = (event: ICalEvent): CalendarEventInternal => {
+    return externalEventToInternal(
+      {
+        id: event.eventId,
+        title: event.summary,
+        description: event.description,
+        location: event.location,
+        start: toDateTimeString(event.startDate.toJSDate()),
+        end: toDateTimeString(event.endDate.toJSDate()),
+      },
+      this.$app.config
+    )
   }
 }
 
