@@ -1,49 +1,84 @@
-import { CalendarAppSingleton, CalendarEvent, PluginBase, toDateTimeString, toJSDate } from '@schedule-x/shared/src'
-import ICAL from 'ical.js'
+import {
+  CalendarAppSingleton,
+  CalendarEvent,
+  PluginBase,
+  toDateTimeString,
+  toJSDate,
+} from '@schedule-x/shared/src'
 import { IcalExpander } from './ical-expander/IcalExpander'
 
 type ICalendarPluginOptions = {
-  source: string
+  data: string
 }
+
+type ICalTime = {
+  startDate: { toJSDate: () => Date }
+  endDate: { toJSDate: () => Date }
+}
+
+type ICalOccurrence = {
+  eventId: string
+  item: {
+    summary: string
+    description: string
+    location: string
+  }
+} & ICalTime
+
+type ICalEvent = {
+  eventId: string
+  summary: string
+  description: string
+  location: string
+} & ICalTime
 
 class IcalendarPluginImpl implements PluginBase {
   name = 'ICalendarPlugin'
   private $app!: CalendarAppSingleton
-  private source: string = ''
-
-  private events: CalendarEvent[] = []
+  private readonly source: string = ''
 
   constructor(private options: ICalendarPluginOptions) {
-    this.source = options.source
+    this.source = options.data
   }
 
-  beforeInit($app: CalendarAppSingleton) {
+  public beforeInit($app: CalendarAppSingleton) {
     this.$app = $app
-    let dateRangeStart = $app.calendarState.range.value?.start
-    let dateRangeEnd = $app.calendarState.range.value?.end
+    const dateRangeStart = $app.calendarState.range.value?.start
+    const dateRangeEnd = $app.calendarState.range.value?.end
     if (!dateRangeStart || !dateRangeEnd) return
 
-    const after = toJSDate(dateRangeStart)
-    const before = toJSDate(dateRangeEnd)
-    this.parseIcalendarSource(after, before)
+    this.between(dateRangeStart, dateRangeEnd)
   }
 
-  private parseIcalendarSource(after: Date, before: Date) {
+  /**
+   * @param dateRangeStart - The start date of the range
+   * @param dateRangeEnd - The end date of the range
+   *
+   * @example
+   * ```ts
+   * plugin.between('2021-01-01', '2021-12-31')
+   * ```
+   * */
+  public between(dateRangeStart: string, dateRangeEnd: string) {
+    const after = toJSDate(dateRangeStart)
+    const before = toJSDate(dateRangeEnd)
+    this.parseIcalendarSourceForDatesBetween(after, before)
+  }
+
+  private parseIcalendarSourceForDatesBetween(after: Date, before: Date) {
     const icalExpander = new IcalExpander({
       ics: this.source,
     })
 
     const { occurrences, events } = icalExpander.between(after, before)
 
-    this.events = [
+    this.$app.calendarEvents.list.value = [
       ...occurrences.map(this.icalOccurrenceToSXEvent),
       ...events.map(this.icalEventToSXEvent),
     ]
-    console.log(this.events)
   }
 
-
-  private icalOccurrenceToSXEvent(occurrence: ICAL.Event): CalendarEvent {
+  private icalOccurrenceToSXEvent(occurrence: ICalOccurrence): CalendarEvent {
     return {
       id: occurrence.eventId,
       title: occurrence.item.summary,
@@ -54,7 +89,7 @@ class IcalendarPluginImpl implements PluginBase {
     }
   }
 
-  private icalEventToSXEvent(event: ICAL.Event): CalendarEvent {
+  private icalEventToSXEvent(event: ICalEvent): CalendarEvent {
     return {
       id: event.eventId,
       title: event.summary,

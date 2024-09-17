@@ -1,15 +1,17 @@
 import {
   describe,
   it,
+  expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { createIcalendarPlugin } from '../icalendar-plugin.impl'
 
 describe('IcalendarPluginImpl', () => {
-  describe('parse plugins', () => {
-    it('should parse icalendar source', () => {
+  describe('parsing events on init', () => {
+    it('should parse icalendar source with 1 recurring event and 1 normal event', () => {
       const plugin = createIcalendarPlugin({
-        source: 'BEGIN:VCALENDAR\n' +
+        data:
+          'BEGIN:VCALENDAR\n' +
           'VERSION:2.0\n' +
           'CALSCALE:GREGORIAN\n' +
           'BEGIN:VEVENT\n' +
@@ -31,13 +33,61 @@ describe('IcalendarPluginImpl', () => {
           'STATUS:CONFIRMED\n' +
           'SEQUENCE:3\n' +
           'END:VEVENT\n' +
-          'END:VCALENDAR'
+          'END:VCALENDAR',
       })
       const $app = __createAppWithViews__({
         plugins: [plugin],
         selectedDate: '2013-08-02',
       })
       plugin.beforeInit($app)
+
+      expect($app.calendarEvents.list.value.length).toBe(4)
+    })
+  })
+
+  describe('parsing events on range change', () => {
+    it('should first display an event on 2024-08-01 and then display 2 events on 2024-09-02', () => {
+      const plugin = createIcalendarPlugin({
+        data:
+          'BEGIN:VCALENDAR\n' +
+          'VERSION:2.0\n' +
+          'CALSCALE:GREGORIAN\n' +
+          'BEGIN:VEVENT\n' +
+          'SUMMARY:Good morning\n' +
+          'DTSTART;TZID=America/New_York:20240801T103400\n' +
+          'DTEND;TZID=America/New_York:20240801T110400\n' +
+          'LOCATION:1000 Broadway Ave.\\, Brooklyn\n' +
+          'DESCRIPTION: Access-A-Ride trip to 900 Jay St.\\, Brooklyn\n' +
+          'STATUS:CONFIRMED\n' +
+          'SEQUENCE:3\n' +
+          'END:VEVENT\n' +
+          'BEGIN:VEVENT\n' +
+          'RRULE:FREQ=DAILY;COUNT=3\n' +
+          'SUMMARY:Good night\n' +
+          'DTSTART;TZID=America/New_York:20240902T200000\n' +
+          'DTEND;TZID=America/New_York:20240902T203000\n' +
+          'LOCATION:900 Jay St.\\, Brooklyn\n' +
+          'DESCRIPTION: Access-A-Ride trip to 1000 Broadway Ave.\\, Brooklyn\n' +
+          'STATUS:CONFIRMED\n' +
+          'SEQUENCE:3\n' +
+          'END:VEVENT\n' +
+          'END:VCALENDAR',
+      })
+      const $app = __createAppWithViews__({
+        plugins: [plugin],
+        selectedDate: '2024-08-01',
+      })
+      plugin.beforeInit($app)
+
+      expect($app.calendarEvents.list.value.length).toBe(1)
+
+      $app.calendarState.range.value = {
+        start: '2024-09-01',
+        end: '2024-09-05',
+      }
+      plugin.between('2024-09-01 00:00', '2024-09-05 23:59')
+
+      expect($app.calendarEvents.list.value.length).toBe(3)
     })
   })
 })
