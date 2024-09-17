@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/shared",
   "umdName": "SXShared",
-  "version": "1.63.1",
+  "version": "1.64.0-alpha.0",
   "publishConfig": {
     "access": "public"
   },

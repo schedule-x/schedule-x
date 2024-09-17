@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.64.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.63.1...v1.64.0-alpha.0) (2024-09-17)
+
+### Features
+
+- make config values reactive ([#662](https://github.com/schedule-x/schedule-x/issues/662)) ([0ad317d](https://github.com/schedule-x/schedule-x/commit/0ad317dcb7b831cd82de9d33b154000f4dfc1182))
+
 ## [1.63.1](https://github.com/schedule-x/schedule-x/compare/v1.63.0...v1.63.1) (2024-09-12)
 
 **Note:** Version bump only for package @schedule-x/calendar-controls
