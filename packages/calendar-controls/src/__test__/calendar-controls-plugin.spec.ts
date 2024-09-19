@@ -284,7 +284,6 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 7,
         eventWidth: 100,
         gridHeight: 200,
-        showLocation: true,
         timeAxisFormatOptions: { hour: 'numeric' },
       }
       const $app = __createAppWithViews__({
@@ -301,7 +300,6 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 3,
         eventWidth: 200,
         gridHeight: 300,
-        showLocation: false,
         timeAxisFormatOptions: { hour: '2-digit' },
       }
       controlsPlugin.setWeekOptions(newWeekOptions)
