@@ -10,6 +10,8 @@ import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invo
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
+import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   gridRow: number
@@ -138,7 +140,17 @@ export default function MonthGridEvent({
       role="button"
     >
       {!customComponent && !hasCustomContent && (
-        <div className="sx__month-grid-event-title">{calendarEvent.title}</div>
+        <>
+          {dateTimeStringRegex.test(calendarEvent.start) && (
+            <div className="sx__month-grid-event-time">
+              {timeFn(calendarEvent.start, $app.config.locale.value)}
+            </div>
+          )}
+
+          <div className="sx__month-grid-event-title">
+            {calendarEvent.title}
+          </div>
+        </>
       )}
 
       {hasCustomContent && (
