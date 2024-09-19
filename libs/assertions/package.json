@@ -4,7 +4,7 @@
     "access": "public"
   },
   "description": "Assertion library for testing Schedule-X",
-  "version": "1.64.0-alpha.0",
+  "version": "2.0.0-alpha.0",
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",
