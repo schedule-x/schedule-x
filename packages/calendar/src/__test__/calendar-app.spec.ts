@@ -166,7 +166,7 @@ describe('CalendarApp', () => {
     it('should call the beforeInit method of a plugin', () => {
       const testPlugin = {
         name: 'test',
-        beforeInit: vi.fn(),
+        beforeRender: vi.fn(),
       }
       const calendarApp = createCalendar({
         views: [viewMonthGrid],
@@ -175,25 +175,25 @@ describe('CalendarApp', () => {
 
       calendarApp.render(document.createElement('div'))
 
-      expect(testPlugin.beforeInit).toHaveBeenCalled()
+      expect(testPlugin.beforeRender).toHaveBeenCalled()
     })
 
     it('should not call the init method of a plugin in the calendarApp constructor, but only after render', async () => {
       const testPlugin = {
         name: 'test',
-        init: vi.fn(),
+        onRender: vi.fn(),
       }
       const calendarApp = createCalendar({
         views: [viewMonthGrid],
         plugins: [testPlugin],
       })
 
-      expect(testPlugin.init).not.toHaveBeenCalled()
+      expect(testPlugin.onRender).not.toHaveBeenCalled()
 
       calendarApp.render(document.createElement('div'))
 
       await waitFor(() => {
-        expect(testPlugin.init).toHaveBeenCalled()
+        expect(testPlugin.onRender).toHaveBeenCalled()
       })
     })
   })

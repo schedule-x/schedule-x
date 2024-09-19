@@ -14,7 +14,7 @@ describe('Calendar wrapper', () => {
         name: string = 'calendars-updater'
         $app!: CalendarAppSingleton
 
-        init($app: CalendarAppSingleton): void {
+        onRender($app: CalendarAppSingleton): void {
           this.$app = $app
         }
 
