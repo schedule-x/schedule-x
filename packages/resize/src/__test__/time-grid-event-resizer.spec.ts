@@ -32,7 +32,7 @@ describe('Resizing events in the time grid', () => {
       const initialY = 500
 
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       resizePlugin.createTimeGridEventResizer(
         calendarEvent,
         eventUpdater,
@@ -89,7 +89,7 @@ describe('Resizing events in the time grid', () => {
 
     it('should extend an event by 30 minutes', () => {
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       resizePlugin.createTimeGridEventResizer(
         calendarEvent,
         eventUpdater,

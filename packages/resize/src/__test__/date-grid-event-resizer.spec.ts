@@ -89,7 +89,7 @@ describe('Resizing events in the date grid', () => {
       expect(calendarEvent.end).toBe('2024-01-26')
 
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
         calendarEvent,
         eventUpdater,
@@ -111,7 +111,7 @@ describe('Resizing events in the date grid', () => {
       expect(calendarEvent.start).toBe('2024-01-26')
       expect(calendarEvent.end).toBe('2024-01-26')
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
         calendarEvent,
         eventUpdater,
@@ -138,7 +138,7 @@ describe('Resizing events in the date grid', () => {
       expect(twoDayEvent.start).toBe('2024-01-26')
       expect(twoDayEvent.end).toBe('2024-01-27')
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
         twoDayEvent,
         eventUpdater,
@@ -161,7 +161,7 @@ describe('Resizing events in the date grid', () => {
       expect(twoDayEvent.end).toBe('2024-01-27')
 
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
         twoDayEvent,
         eventUpdater,
@@ -182,7 +182,7 @@ describe('Resizing events in the date grid', () => {
       expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       // should first be able to resize one day to the left
       resizePlugin.createDateGridEventResizer(
         eventStartingInPreviousWeek,
@@ -212,7 +212,7 @@ describe('Resizing events in the date grid', () => {
       expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
       const resizePlugin = createResizePlugin()
-      resizePlugin.init!($app)
+      resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
         eventStartingInPreviousWeek,
         eventUpdater,

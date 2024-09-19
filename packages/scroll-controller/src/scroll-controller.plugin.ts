@@ -17,7 +17,7 @@ class ScrollControllerPlugin implements PluginBase {
   /**
    * @internal
    * */
-  init($app: CalendarAppSingleton) {
+  onRender($app: CalendarAppSingleton) {
     this.$app = $app
     this.setInitialScroll($app)
     this.setUpViewChangeEffect()

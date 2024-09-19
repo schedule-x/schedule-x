@@ -11,7 +11,7 @@ import {
 } from '../calendar/calendar-config'
 
 export default interface CalendarControlsPlugin extends PluginBase {
-  init($app: CalendarAppSingleton): void
+  onRender($app: CalendarAppSingleton): void
   setDate(date: string): void
   setView(view: string): void
   setFirstDayOfWeek(firstDayOfWeek: WeekDay): void

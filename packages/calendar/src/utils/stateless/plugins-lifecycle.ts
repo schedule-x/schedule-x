@@ -2,8 +2,8 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 
 export const initPlugins = ($app: CalendarAppSingleton) => {
   Object.values($app.config.plugins).forEach((plugin) => {
-    if (plugin?.init) {
-      plugin.init($app)
+    if (plugin?.onRender) {
+      plugin.onRender($app)
     }
   })
 }
@@ -16,6 +16,6 @@ export const destroyPlugins = ($app: CalendarAppSingleton) => {
 
 export const beforeInitPlugins = ($app: CalendarAppSingleton) => {
   Object.values($app.config.plugins).forEach((plugin) => {
-    if (plugin?.beforeInit) plugin.beforeInit($app)
+    if (plugin?.beforeRender) plugin.beforeRender($app)
   })
 }
