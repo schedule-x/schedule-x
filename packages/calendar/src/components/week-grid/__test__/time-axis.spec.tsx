@@ -79,7 +79,7 @@ describe('TimeAxis', () => {
         locale: 'de-DE',
       })
       renderComponent($app)
-      calendarControlsPlugin.beforeInit?.($app)
+      calendarControlsPlugin.beforeRender?.($app)
       for (let hour = 0; hour <= 23; ++hour) {
         expect(
           screen.getByText(`${hour.toString().padStart(2, '0')} Uhr`)

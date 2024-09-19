@@ -14,7 +14,7 @@ import DragHandlerDependencies from '@schedule-x/shared/src/interfaces/drag-and-
 class DragAndDropPluginImpl implements DragAndDropPlugin {
   name = PluginName.DragAndDrop
 
-  init($app: CalendarAppSingleton) {
+  onRender($app: CalendarAppSingleton) {
     if (!$app.elements.calendarWrapper) return
 
     $app.elements.calendarWrapper.dataset.hasDnd = 'true'

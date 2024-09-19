@@ -59,7 +59,7 @@ describe('Scroll controller plugin', () => {
         const viewContainerScrollSpy = vi.spyOn(viewContainer, 'scroll')
         addGridDayToDOM(viewContainer)
 
-        underTest.init($app)
+        underTest.onRender($app)
 
         expect(viewContainerScrollSpy).toHaveBeenCalledWith(0, expectedScroll)
       }
@@ -71,7 +71,7 @@ describe('Scroll controller plugin', () => {
       })
       const viewContainerScrollSpy = vi.spyOn(viewContainer, 'scroll')
 
-      underTest.init($app)
+      underTest.onRender($app)
 
       expect(viewContainerScrollSpy).not.toHaveBeenCalled()
 
@@ -113,7 +113,7 @@ describe('Scroll controller plugin', () => {
         const viewContainerScrollSpy = vi.spyOn(viewContainer, 'scroll')
         addGridDayToDOM(viewContainer)
 
-        underTest.init($app)
+        underTest.onRender($app)
 
         expect(viewContainerScrollSpy).toHaveBeenCalledWith(0, expectedScroll)
       }

@@ -12,7 +12,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should add one event without an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -28,7 +28,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should add one event with an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -47,7 +47,7 @@ describe('Events facade for recurrence plugin', () => {
     it.each([['1'], [1]])('should return the event if it exists', (id) => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -64,7 +64,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should return undefined if the event does not exist', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       expect(plugin.get('1')).toBeUndefined()
@@ -75,7 +75,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should return all events', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event1 = {
@@ -106,7 +106,7 @@ describe('Events facade for recurrence plugin', () => {
     it.each([['1'], [1]])('should remove one event without an rrule', (id) => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -124,7 +124,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should remove one event with an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -145,7 +145,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should remove an rrule', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event = {
@@ -173,7 +173,7 @@ describe('Events facade for recurrence plugin', () => {
         ],
       })
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(1)
 
       const event = {
@@ -199,7 +199,7 @@ describe('Events facade for recurrence plugin', () => {
     it('should set the whole list of events', () => {
       const $app = __createAppWithViews__()
       const plugin = createEventsServicePlugin()
-      plugin.beforeInit!($app)
+      plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
 
       const event1 = {
