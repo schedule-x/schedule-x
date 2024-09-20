@@ -16,14 +16,6 @@ export default function LandingPage() {
   return (
     <>
       <div className={'landingPage page-wrapper'}>
-        {/*<a*/}
-        {/*  href="https://www.producthunt.com/posts/schedule-x?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-schedule&#0045;x"*/}
-        {/*  target="_blank"><img*/}
-        {/*  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=487112&theme=light"*/}
-        {/*  alt="Schedule&#0045;X - Material&#0032;Design&#0032;Event&#0032;Calendar&#0032;–&#0032;Schedule&#0045;X | Product Hunt"*/}
-        {/*  style={{ width: '250px', height: '54px', marginTop: '3rem', marginBottom: '-1rem' }} width="250" height="54"/>*/}
-        {/*</a>*/}
-
         <h1>
           <span className={'headingGradient'}>The modern</span> JavaScript event calendar
         </h1>
