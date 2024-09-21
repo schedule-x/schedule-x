@@ -13,7 +13,7 @@ export default interface PluginBase {
    * brittle to future changes in the library.
    * */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  beforeInit?($app: CalendarAppSingleton | any): void
+  beforeRender?($app: CalendarAppSingleton | any): void
   // TODO v2: change to `onRender` and remove $app parameter
   /**
    * Allow implementers to dynamically add any properties to the global app object as they see fit.
@@ -24,6 +24,6 @@ export default interface PluginBase {
    * brittle to future changes in the library.
    * */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  init?($app: CalendarAppSingleton | any): void
+  onRender?($app: CalendarAppSingleton | any): void
   destroy?(): void
 }

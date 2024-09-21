@@ -10,7 +10,7 @@ class EventsServicePluginImpl implements PluginBase {
   $app!: CalendarAppSingleton
   eventsFacade!: EventsFacade
 
-  beforeInit($app: CalendarAppSingleton): void {
+  beforeRender($app: CalendarAppSingleton): void {
     this.$app = $app
 
     // TODO v2: move methods from events facade to here, and remove events facade

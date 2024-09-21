@@ -22,7 +22,7 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
     }
   }
 
-  init($app: CalendarAppSingleton): void {
+  onRender($app: CalendarAppSingleton): void {
     this.$app = $app
 
     this.observer = new MutationObserver((mutationList) => {

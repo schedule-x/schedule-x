@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/prettier-config",
   "main": "src/index.json",
-  "version": "1.64.0-alpha.0",
+  "version": "2.0.0-alpha.0",
   "description": "Schedule-X prettier config",
   "publishConfig": {
     "access": "public"

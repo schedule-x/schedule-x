@@ -19,7 +19,7 @@ describe('CurrentTimePlugin', () => {
         '.sx__current-time-indicator'
       )
       expect(existingIndicator).toBeNull()
-      underTest.init(app)
+      underTest.onRender(app)
 
       const timeGridDayElement = document.createElement('div')
       timeGridDayElement.setAttribute('data-time-grid-date', '2024-01-01')
@@ -45,7 +45,7 @@ describe('CurrentTimePlugin', () => {
         '.sx__current-time-indicator'
       )
       expect(existingIndicator).toBeNull()
-      underTest.init(app)
+      underTest.onRender(app)
 
       const timeGridDayElement = document.createElement('div')
       timeGridDayElement.setAttribute(

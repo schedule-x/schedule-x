@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.64.0-alpha.0...v2.0.0-alpha.0) (2024-09-19)
+
+### Features
+
+- changes on ui of events and calendar header ([159f9c8](https://github.com/schedule-x/schedule-x/commit/159f9c8013a8ef81ac1884e6d65ec49df9584a6c))
+
+### BREAKING CHANGES
+
+- add time, if existing, to month grid events
+- add time, if existing, to date grid events
+- view location in time grid events by default, removing showLocation option
+- hide view selection when only one view is available
+
 # [1.64.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.63.1...v1.64.0-alpha.0) (2024-09-17)
 
 **Note:** Version bump only for package @schedule-x/theme-default

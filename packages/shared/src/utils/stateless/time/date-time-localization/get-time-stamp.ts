@@ -13,7 +13,7 @@ const dateFn = (dateTimeString: string, locale: string) => {
 
 export const getLocalizedDate = dateFn
 
-const timeFn = (dateTimeString: string, locale: string) => {
+export const timeFn = (dateTimeString: string, locale: string) => {
   const { year, month, date, hours, minutes } = toIntegers(dateTimeString)
 
   return new Date(year, month, date, hours, minutes).toLocaleTimeString(

@@ -13,7 +13,7 @@ import { ResizeUpdater } from './util/stateful/resize-updater'
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
   private $app: CalendarAppSingleton | null = null
-  init($app: CalendarAppSingleton): void {
+  onRender($app: CalendarAppSingleton): void {
     this.$app = $app
     this.createRecurrencesForEvents()
   }

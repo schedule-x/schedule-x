@@ -92,9 +92,11 @@ export default function CalendarHeader() {
               <div data-ccid={headerContentRightPrependId} />
             )}
 
-            <ViewSelection
-              key={keyForRerenderingOnLocaleChange + '-view-selection'}
-            />
+            {$app.config.views.value.length > 1 && (
+              <ViewSelection
+                key={keyForRerenderingOnLocaleChange + '-view-selection'}
+              />
+            )}
 
             <AppWrapper $app={datePickerAppSingleton}></AppWrapper>
 

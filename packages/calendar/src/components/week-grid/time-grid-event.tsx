@@ -226,15 +226,12 @@ export default function TimeGridEvent({
                 </div>
               )}
 
-              {calendarEvent.location &&
-                $app.config.weekOptions.value.showLocation && (
-                  <div className="sx__time-grid-event-location">
-                    <LocationPinIcon
-                      strokeColor={eventCSSVariables.iconStroke}
-                    />
-                    {calendarEvent.location}
-                  </div>
-                )}
+              {calendarEvent.location && (
+                <div className="sx__time-grid-event-location">
+                  <LocationPinIcon strokeColor={eventCSSVariables.iconStroke} />
+                  {calendarEvent.location}
+                </div>
+              )}
             </Fragment>
           )}
 

@@ -20,7 +20,7 @@ describe('Resize Recurrence', () => {
         events: [event],
       })
       const recurrencePlugin = createEventRecurrencePlugin()
-      recurrencePlugin.init!($app)
+      recurrencePlugin.onRender!($app)
 
       recurrencePlugin.updateRecurrenceOnResize(
         1,
@@ -52,7 +52,7 @@ describe('Resize Recurrence', () => {
         events: [event],
       })
       const recurrencePlugin = createEventRecurrencePlugin()
-      recurrencePlugin.init!($app)
+      recurrencePlugin.onRender!($app)
 
       recurrencePlugin.updateRecurrenceOnResize(1, '2024-02-06', '2024-02-07')
 
@@ -72,7 +72,7 @@ describe('Resize Recurrence', () => {
     it('should throw an error', () => {
       const $app = __createAppWithViews__()
       const recurrencePlugin = createEventRecurrencePlugin()
-      recurrencePlugin.init!($app)
+      recurrencePlugin.onRender!($app)
 
       expect(() => {
         recurrencePlugin.updateRecurrenceOnResize(1, '2024-02-06', '2024-02-07')

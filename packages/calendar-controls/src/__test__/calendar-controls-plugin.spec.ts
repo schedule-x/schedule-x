@@ -28,7 +28,7 @@ describe('createCalendarControlsPlugin', () => {
         selectedDate: '2021-01-01',
       })
       expect($app.datePickerState.selectedDate.value).toBe('2021-01-01')
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       controlsPlugin.setDate('2021-02-02')
 
@@ -42,7 +42,7 @@ describe('createCalendarControlsPlugin', () => {
         selectedDate: '2021-01-01',
       })
       expect($app.datePickerState.selectedDate.value).toBe('2021-01-01')
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(() => controlsPlugin.setDate('20210230T01:00:000Z')).toThrow(
         'Invalid date. Expected format YYYY-MM-DD'
@@ -59,7 +59,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.MonthGrid,
       })
       expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       controlsPlugin.setView(InternalViewName.Day)
 
@@ -74,7 +74,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.MonthGrid,
       })
       expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
       expect($app.calendarState.range.value).toEqual({
         start: '2020-12-28 00:00',
         end: '2021-01-31 23:59',
@@ -97,7 +97,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.MonthGrid,
       })
       expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(() => controlsPlugin.setView('NotAView')).toThrow(
         'Invalid view name. Expected one of day, week, month-grid'
@@ -112,7 +112,7 @@ describe('createCalendarControlsPlugin', () => {
         plugins: [controlsPlugin],
         selectedDate: '2021-01-01',
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
       $app.datePickerState.selectedDate.value = '2023-01-01'
 
       expect(controlsPlugin.getDate()).toBe('2023-01-01')
@@ -127,7 +127,7 @@ describe('createCalendarControlsPlugin', () => {
         selectedDate: '2021-01-01',
         defaultView: InternalViewName.MonthGrid,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
       $app.calendarState.setView(InternalViewName.Day, '2021-01-01')
 
       expect(controlsPlugin.getView()).toBe(InternalViewName.Day)
@@ -142,7 +142,7 @@ describe('createCalendarControlsPlugin', () => {
         selectedDate: '2021-01-01',
         defaultView: InternalViewName.MonthGrid,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
       $app.calendarState.range.value = {
         start: '2021-01-01 00:00',
         end: '2021-01-01 23:59',
@@ -164,7 +164,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         firstDayOfWeek: WeekDay.MONDAY,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
       controlsPlugin.setFirstDayOfWeek(WeekDay.FRIDAY)
 
       expect(controlsPlugin.getFirstDayOfWeek()).toEqual(WeekDay.FRIDAY)
@@ -181,7 +181,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         locale: 'en-US',
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(controlsPlugin.getLocale()).toEqual('en-US')
 
@@ -203,7 +203,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         views: [viewWeek],
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(() => controlsPlugin.setViews([viewDay])).toThrow(
         `Currently active view is not in given views. Expected to find ${InternalViewName.Week} in ${viewDay.name}`
@@ -220,7 +220,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         views: [viewWeek],
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       const expectViewsAreEqual = (
         actualViews: View[],
@@ -260,7 +260,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         dayBoundaries: initialDayBoundaries,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(controlsPlugin.getDayBoundaries()).toEqual(initialDayBoundaries)
 
@@ -284,7 +284,6 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 7,
         eventWidth: 100,
         gridHeight: 200,
-        showLocation: true,
         timeAxisFormatOptions: { hour: 'numeric' },
       }
       const $app = __createAppWithViews__({
@@ -293,7 +292,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         weekOptions: initialWeekOptions,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(controlsPlugin.getWeekOptions()).toEqual(initialWeekOptions)
 
@@ -301,7 +300,6 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 3,
         eventWidth: 200,
         gridHeight: 300,
-        showLocation: false,
         timeAxisFormatOptions: { hour: '2-digit' },
       }
       controlsPlugin.setWeekOptions(newWeekOptions)
@@ -335,7 +333,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         calendars: initialCalendars,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(controlsPlugin.getCalendars()).toEqual(initialCalendars)
 
@@ -371,7 +369,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         minDate: initialMinDate,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(controlsPlugin.getMinDate()).toEqual(initialMinDate)
 
@@ -392,7 +390,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         maxDate: initialMaxDate,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(controlsPlugin.getMaxDate()).toEqual(initialMaxDate)
 
@@ -415,7 +413,7 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.Week,
         monthGridOptions: initialMonthGridOptions,
       })
-      controlsPlugin.init($app)
+      controlsPlugin.onRender($app)
 
       expect(controlsPlugin.getMonthGridOptions()).toEqual(
         initialMonthGridOptions
