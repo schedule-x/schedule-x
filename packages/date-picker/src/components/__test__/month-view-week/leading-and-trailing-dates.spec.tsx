@@ -14,7 +14,7 @@ const setup = (date: Date) => {
   const $app = createAppSingleton({ selectedDate: toDateString(date) })
   const { container } = renderComponent(
     $app,
-    $app.timeUnitsImpl.getWeekFor(date)
+    $app.config.timeUnits.value.getWeekFor(date)
   )
   return container
 }

@@ -23,9 +23,9 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
 
   build(): DatePickerConfigInternal {
     return new ConfigImpl(
+      this.timeUnits!,
       this.locale,
       this.firstDayOfWeek,
-      this.timeUnits,
       this.min,
       this.max,
       this.placement,

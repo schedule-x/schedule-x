@@ -61,7 +61,7 @@ export default class CalendarConfigBuilder
       this.minDate,
       this.maxDate,
       this.monthGridOptions,
-      this.timeUnits
+      this.timeUnits!
     )
   }
 

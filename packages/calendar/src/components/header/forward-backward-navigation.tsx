@@ -48,7 +48,7 @@ export default function ForwardBackwardNavigation() {
       selectedView.setDateRange({
         range: $app.calendarState.range,
         calendarConfig: $app.config,
-        timeUnitsImpl: $app.timeUnitsImpl,
+        timeUnitsImpl: $app.config.timeUnits.value,
         date: selectedView.backwardForwardFn(
           $app.datePickerState.selectedDate.value,
           -selectedView.backwardForwardUnits
@@ -59,7 +59,7 @@ export default function ForwardBackwardNavigation() {
       selectedView.setDateRange({
         range: $app.calendarState.range,
         calendarConfig: $app.config,
-        timeUnitsImpl: $app.timeUnitsImpl,
+        timeUnitsImpl: $app.config.timeUnits.value,
         date: selectedView.backwardForwardFn(
           $app.datePickerState.selectedDate.value,
           selectedView.backwardForwardUnits

@@ -22,9 +22,12 @@ export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
     .withName(config.name)
     .withDisabled(config.disabled)
     .build()
-  const timeUnitsImpl = new TimeUnitsBuilder()
-    .withConfig(configInternal)
-    .build()
+
+  const timeUnitsImpl =
+    configInternal.timeUnits.value ??
+    new TimeUnitsBuilder().withConfig(configInternal).build()
+  configInternal.timeUnits.value ??= timeUnitsImpl
+
   return new DatePickerAppSingletonBuilder()
     .withConfig(configInternal)
     .withDatePickerState(

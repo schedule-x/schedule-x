@@ -28,7 +28,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   minDate: Signal<string | undefined>
   maxDate: Signal<string | undefined>
   monthGridOptions: Signal<MonthGridOptions>
-  timeUnits: Signal<TimeUnits | undefined>
+  timeUnits: Signal<TimeUnits>
 
   constructor(
     locale: string = DEFAULT_LOCALE,
@@ -48,7 +48,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     monthGridOptions: MonthGridOptions = {
       nEventsPerDay: 4,
     },
-    timeUnits: TimeUnits | undefined = undefined
+    timeUnits: TimeUnits
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)

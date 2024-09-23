@@ -14,12 +14,12 @@ import { TimeUnits } from '@schedule-x/shared/src'
 export class ConfigImpl implements DatePickerConfigInternal {
   locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
-  timeUnits: Signal<TimeUnits | undefined>
+  timeUnits: Signal<TimeUnits>
 
   constructor(
+    timeUnits: TimeUnits,
     locale: string = DEFAULT_LOCALE,
     firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
-    timeUnits: TimeUnits | undefined = undefined,
     public min: string = toDateString(new Date(1970, 0, 1)),
     public max: string = toDateString(
       new Date(new Date().getFullYear() + 1, 11, 31)

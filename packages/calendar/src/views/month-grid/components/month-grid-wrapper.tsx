@@ -16,7 +16,7 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
     })
     const newMonth = createMonth(
       $app.datePickerState.selectedDate.value,
-      $app.timeUnitsImpl
+      $app.config.timeUnits.value
     )
     const filteredEvents = $app.calendarEvents.filterPredicate.value
       ? $app.calendarEvents.list.value.filter(

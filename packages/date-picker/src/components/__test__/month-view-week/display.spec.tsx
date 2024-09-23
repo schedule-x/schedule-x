@@ -20,7 +20,7 @@ describe('MonthViewWeek', () => {
     const date = new Date(2023, Month.JULY, 23)
     const { container } = renderComponent(
       $app,
-      $app.timeUnitsImpl.getWeekFor(date)
+      $app.config.timeUnits.value.getWeekFor(date)
     )
 
     ;['17', '18', '19', '20', '21', '22', '23'].forEach((day) => {
@@ -33,7 +33,7 @@ describe('MonthViewWeek', () => {
     const $app = createAppSingleton({ selectedDate: toDateString(date) })
     const { container } = renderComponent(
       $app,
-      $app.timeUnitsImpl.getWeekFor(date)
+      $app.config.timeUnits.value.getWeekFor(date)
     )
 
     const selectedDay = getSelectedDay(container)
@@ -46,7 +46,7 @@ describe('MonthViewWeek', () => {
     const $app = createAppSingleton({ selectedDate: '2020-01-01' })
     const { container } = renderComponent(
       $app,
-      $app.timeUnitsImpl.getWeekFor(date)
+      $app.config.timeUnits.value.getWeekFor(date)
     )
 
     const selectedDay = getSelectedDay(container)
@@ -59,7 +59,7 @@ describe('MonthViewWeek', () => {
     const $app = createAppSingleton({ selectedDate: toDateString(today) })
     const { container } = renderComponent(
       $app,
-      $app.timeUnitsImpl.getWeekFor(today)
+      $app.config.timeUnits.value.getWeekFor(today)
     )
 
     const todaysDate = getToday(container)

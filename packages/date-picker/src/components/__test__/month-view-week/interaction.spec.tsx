@@ -21,7 +21,7 @@ describe('MonthViewWeek', () => {
     const closeSpy = spyOn($app.datePickerState, 'close')
     renderComponent(
       $app,
-      $app.timeUnitsImpl.getWeekFor(new Date(2023, Month.JULY, 23))
+      $app.config.timeUnits.value.getWeekFor(new Date(2023, Month.JULY, 23))
     )
     expect($app.datePickerState.isOpen.value).toBe(true)
 
@@ -42,7 +42,7 @@ describe('MonthViewWeek', () => {
   ])('should set new selected date', (dateOfMonth, expectedResult) => {
     const $app = createAppSingleton()
     const date = new Date(2023, Month.JULY, 23)
-    const week = $app.timeUnitsImpl.getWeekFor(date)
+    const week = $app.config.timeUnits.value.getWeekFor(date)
     renderComponent($app, week)
 
     clickByDate(dateOfMonth)

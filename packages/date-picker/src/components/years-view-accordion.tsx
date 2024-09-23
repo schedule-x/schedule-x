@@ -17,7 +17,7 @@ export default function YearsViewAccordion({
 }: props) {
   const $app = useContext(AppContext)
 
-  const yearWithDates = $app.timeUnitsImpl.getMonthsFor(year)
+  const yearWithDates = $app.config.timeUnits.value.getMonthsFor(year)
 
   const handleClickOnMonth = (event: MouseEvent, month: Date) => {
     event.stopPropagation()
