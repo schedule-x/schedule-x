@@ -2,4 +2,6 @@
 
 # @schedule-x/calendar
 
-This is the calendar package of Schedule-X. For documentation, please refer to: https://schedule-x.dev/
+Modern JavaScript event calendar and resource scheduler.
+
+Alternative to FullCalendar and react-big-calendar. For documentation, please refer to: https://schedule-x.dev/
