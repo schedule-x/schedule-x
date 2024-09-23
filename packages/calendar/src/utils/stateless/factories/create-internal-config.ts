@@ -17,5 +17,6 @@ export const createInternalConfig = (config: CalendarConfigExternal) => {
     .withMinDate(config.minDate)
     .withMaxDate(config.maxDate)
     .withMonthGridOptions(config.monthGridOptions)
+    .withTimeUnits(config.timeUnits)
     .build()
 }

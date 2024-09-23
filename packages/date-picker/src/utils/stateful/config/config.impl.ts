@@ -9,14 +9,17 @@ import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placeme
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
 import { signal, Signal } from '@preact/signals'
+import { TimeUnits } from '@schedule-x/shared/src'
 
 export class ConfigImpl implements DatePickerConfigInternal {
   locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
+  timeUnits: Signal<TimeUnits | undefined>
 
   constructor(
     locale: string = DEFAULT_LOCALE,
     firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
+    timeUnits: TimeUnits | undefined = undefined,
     public min: string = toDateString(new Date(1970, 0, 1)),
     public max: string = toDateString(
       new Date(new Date().getFullYear() + 1, 11, 31)
@@ -31,5 +34,6 @@ export class ConfigImpl implements DatePickerConfigInternal {
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
+    this.timeUnits = signal(timeUnits)
   }
 }

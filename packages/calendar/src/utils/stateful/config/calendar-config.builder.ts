@@ -18,6 +18,7 @@ import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/tim
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarCallbacks } from '@schedule-x/shared/src/interfaces/calendar/listeners.interface'
 import { DEFAULT_WEEK_GRID_HEIGHT } from '../../../constants'
+import { TimeUnits } from '@schedule-x/shared/src'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -41,6 +42,7 @@ export default class CalendarConfigBuilder
   callbacks: CalendarCallbacks | undefined
   minDate: string | undefined
   maxDate: string | undefined
+  timeUnits: TimeUnits | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -58,7 +60,8 @@ export default class CalendarConfigBuilder
       {},
       this.minDate,
       this.maxDate,
-      this.monthGridOptions
+      this.monthGridOptions,
+      this.timeUnits
     )
   }
 
@@ -154,6 +157,11 @@ export default class CalendarConfigBuilder
     monthOptions: MonthGridOptions | undefined
   ): CalendarConfigBuilder {
     this.monthGridOptions = monthOptions
+    return this
+  }
+
+  withTimeUnits(timeUnits: TimeUnits | undefined) {
+    this.timeUnits = timeUnits
     return this
   }
 }

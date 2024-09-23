@@ -8,5 +8,5 @@ import TimeUnits from '../utils/stateful/time-units/time-units.interface'
 export default interface Config {
   locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
-  timeUnits: TimeUnits
+  timeUnits: Signal<TimeUnits | undefined>
 }

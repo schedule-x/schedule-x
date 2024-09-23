@@ -5,10 +5,12 @@ import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
+import { TimeUnits } from '@schedule-x/shared/src'
 
 export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   locale: string | undefined
   firstDayOfWeek: WeekDay | undefined
+  timeUnits: TimeUnits | undefined
   min: string | undefined
   max: string | undefined
   placement: Placement | undefined
@@ -23,6 +25,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
     return new ConfigImpl(
       this.locale,
       this.firstDayOfWeek,
+      this.timeUnits,
       this.min,
       this.max,
       this.placement,
@@ -97,6 +100,12 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
 
   withDisabled(disabled: boolean | undefined): ConfigBuilder {
     this.disabled = disabled
+
+    return this
+  }
+
+  withTimeUnits(timeUnits: TimeUnits | undefined): ConfigBuilder {
+    this.timeUnits = timeUnits
 
     return this
   }

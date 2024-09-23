@@ -15,6 +15,7 @@ import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day
 import { DEFAULT_DAY_BOUNDARIES } from '../../../constants'
 import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
 import { Signal, signal } from '@preact/signals'
+import { TimeUnits } from '@schedule-x/shared/src'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   locale: Signal<string>
@@ -27,6 +28,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   minDate: Signal<string | undefined>
   maxDate: Signal<string | undefined>
   monthGridOptions: Signal<MonthGridOptions>
+  timeUnits: Signal<TimeUnits | undefined>
 
   constructor(
     locale: string = DEFAULT_LOCALE,
@@ -45,7 +47,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     maxDate: string | undefined = undefined,
     monthGridOptions: MonthGridOptions = {
       nEventsPerDay: 4,
-    }
+    },
+    timeUnits: TimeUnits | undefined = undefined
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
@@ -57,6 +60,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.minDate = signal(minDate)
     this.maxDate = signal(maxDate)
     this.monthGridOptions = signal(monthGridOptions)
+    this.timeUnits = signal(timeUnits)
   }
 
   get isHybridDay(): boolean {
