@@ -36,3 +36,8 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 
 If applicable, add screenshots to help explain your problem.
+
+**Things that could speed up the process**
+- [ ] I can picture implementing at least parts of this fix
+- [ ] I believe I know how to do this, and am willing to implement the whole thing.
+- [ ] I have a Schedule-X premium license
