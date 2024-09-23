@@ -12,7 +12,8 @@ import { createDateSelectionCallback } from './utils/stateless/factories/create-
 
 export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
   const internalConfig = createInternalConfig(config)
-  const timeUnitsImpl = createTimeUnitsImpl(internalConfig)
+  // Not sure if timeUnitsImpl not being a signal breaks reactivity. TODO: Check
+  const timeUnitsImpl = config.timeUnits ?? createTimeUnitsImpl(internalConfig)
   const calendarState = createCalendarState(
     internalConfig,
     timeUnitsImpl,
