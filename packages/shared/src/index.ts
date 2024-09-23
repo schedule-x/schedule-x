@@ -3,11 +3,13 @@ import type CalendarEvent from './interfaces/calendar/calendar-event.interface'
 import type { CalendarEventInternal } from './interfaces/calendar/calendar-event.interface'
 import type EventModalPlugin from './interfaces/event-modal/event-modal.plugin'
 import type TimeUnits from './utils/stateful/time-units/time-units.interface'
+import TimeUnitsImpl from './utils/stateful/time-units/time-units.impl'
 import TimeIcon from './components/icons/time-icon'
 import UserIcon from './components/icons/user-icon'
 import DescriptionIcon from './components/icons/description-icon'
 import LocationPinIcon from './components/icons/location-pin-icon'
 import PluginBase from './interfaces/plugin.interface'
+import ConfigBase from './interfaces/config.interface'
 export { WeekDay } from './enums/time/week-day.enum'
 export type { MonthWithDates, WeekWithDates } from './types/time'
 export { Month } from './enums/time/month.enum'
@@ -26,7 +28,8 @@ export { toJSDate } from './utils/stateless/time/format-conversion/format-conver
 export type { CalendarConfigExternal } from './interfaces/calendar/calendar-config'
 export type { CalendarEvent, EventModalPlugin, CalendarEventInternal }
 export type { View, ViewConfig } from './types/calendar/view'
-export type { CalendarAppSingleton, PluginBase, TimeUnits }
+export type { CalendarAppSingleton, PluginBase, TimeUnits, ConfigBase }
+export { TimeUnitsImpl }
 export type { CustomComponentFns as CustomComponents } from './interfaces/calendar/custom-component-fns'
 export {
   addDays,
