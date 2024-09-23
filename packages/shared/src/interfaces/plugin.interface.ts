@@ -14,7 +14,7 @@ export default interface PluginBase {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   beforeRender?($app: CalendarAppSingleton | any): void
 
-/**
+  /**
    * Allow implementers to dynamically add any properties to the global app object as they see fit.
    * In order to avoid conflict with future properties added to the library, we recommend
    * using the unique prefix `$` for any custom properties added to the global app object.

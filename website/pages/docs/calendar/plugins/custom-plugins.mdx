@@ -1,7 +1,7 @@
 # Write your own plugin
 
-A plugin can be any object that has a `name` property, and an `init` method. The `$app` object, the "control center"
-object of the calendar, is then received as the first argument of the `init` method. This gives you access to most
+A plugin can be any object that has a `name` property, and an `beforeRender` method. The `$app` object, the "control center"
+object of the calendar, is then received as the first argument of the `beforeRender` method. This gives you access to most
 of the calendar's global, internal APIs.
 
 If you're writing TypeScript, the type of this object is
