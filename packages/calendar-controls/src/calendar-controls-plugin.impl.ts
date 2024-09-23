@@ -23,9 +23,6 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app = $app
   }
 
-  /**
-   * TODO v2: remove this method
-   * */
   onRender($app: CalendarAppSingleton): void {
     this.$app = $app
   }
