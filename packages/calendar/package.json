@@ -10,8 +10,10 @@
   },
   "license": "MIT",
   "keywords": [
-    "calendar",
-    "event",
+    "event calendar",
+    "javascript calendar",
+    "scheduler",
+    "FullCalendar alternative",
     "dark-mode",
     "internationalization"
   ],
