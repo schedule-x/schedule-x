@@ -102,7 +102,6 @@ export interface CalendarConfigExternal
   datePicker?: CalendarDatePickerConfigExternal
   events?: CalendarEventExternal[]
   dayBoundaries?: DayBoundariesExternal
-  plugins?: PluginBase[]
   views: [View, ...View[]]
   selectedDate?: string
   calendars?: Record<string, CalendarType>

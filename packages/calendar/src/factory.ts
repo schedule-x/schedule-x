@@ -9,9 +9,13 @@ import { createInternalConfig } from './utils/stateless/factories/create-interna
 import { createTimeUnitsImpl } from './utils/stateless/factories/create-time-units-impl'
 import { createDatePickerConfig } from './utils/stateless/factories/create-date-picker-config'
 import { createDateSelectionCallback } from './utils/stateless/factories/create-date-selection-callback'
+import { PluginBase } from '@schedule-x/shared/src'
 
-export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
-  const internalConfig = createInternalConfig(config)
+export const createCalendarAppSingleton = (
+  config: CalendarConfigExternal,
+  plugins: PluginBase<any>[]
+) => {
+  const internalConfig = createInternalConfig(config, plugins)
   const timeUnitsImpl = createTimeUnitsImpl(internalConfig)
   const calendarState = createCalendarState(
     internalConfig,
@@ -42,6 +46,19 @@ export const createCalendarAppSingleton = (config: CalendarConfigExternal) => {
     .build()
 }
 
-export const createCalendar = (config: CalendarConfigExternal) => {
-  return new CalendarApp(createCalendarAppSingleton(config))
+export type Plugin<Name extends string> = {
+  name: Name
+}
+
+type CalendarAppWithPlugins<Plugins extends PluginBase<any>[]> = {
+  [Name in Plugins[number]['name']]: Extract<Plugins[number], { name: Name }>
+}
+
+export const createCalendar = <Plugins extends PluginBase<any>[]>(
+  config: CalendarConfigExternal,
+  plugins?: Plugins
+) => {
+  return new CalendarApp(
+    createCalendarAppSingleton(config, plugins || [])
+  ) as CalendarApp & CalendarAppWithPlugins<Plugins>
 }

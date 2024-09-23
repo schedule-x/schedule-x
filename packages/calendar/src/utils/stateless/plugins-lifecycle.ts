@@ -14,7 +14,7 @@ export const destroyPlugins = ($app: CalendarAppSingleton) => {
   })
 }
 
-export const beforeInitPlugins = ($app: CalendarAppSingleton) => {
+export const invokePluginsBeforeRender = ($app: CalendarAppSingleton) => {
   Object.values($app.config.plugins).forEach((plugin) => {
     if (plugin?.beforeRender) plugin.beforeRender($app)
   })

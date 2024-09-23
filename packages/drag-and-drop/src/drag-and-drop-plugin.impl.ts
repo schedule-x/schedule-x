@@ -10,6 +10,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
 import DragHandlerDependencies from '@schedule-x/shared/src/interfaces/drag-and-drop/drag-handler-dependencies.interface'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class DragAndDropPluginImpl implements DragAndDropPlugin {
   name = PluginName.DragAndDrop
@@ -61,5 +62,9 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
   }
 }
 
-export const createDragAndDropPlugin = (minutesPerInterval = 15) =>
-  new DragAndDropPluginImpl(minutesPerInterval)
+export const createDragAndDropPlugin = (minutesPerInterval = 15) => {
+  return definePlugin(
+    'dragAndDrop',
+    new DragAndDropPluginImpl(minutesPerInterval)
+  )
+}

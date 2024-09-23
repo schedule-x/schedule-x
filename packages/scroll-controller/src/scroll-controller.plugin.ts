@@ -5,6 +5,7 @@ import ScrollControllerConfig from './interfaces/config'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { effect } from '@preact/signals'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class ScrollControllerPlugin implements PluginBase {
   name = PluginName.ScrollController
@@ -113,4 +114,6 @@ class ScrollControllerPlugin implements PluginBase {
 
 export const createScrollControllerPlugin = (
   config: ScrollControllerConfig = {}
-) => new ScrollControllerPlugin(config)
+) => {
+  return definePlugin('scrollController', new ScrollControllerPlugin(config))
+}

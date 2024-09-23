@@ -14,6 +14,7 @@ import {
   timePointsFromString,
   timeStringFromTimePoints,
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name: string = PluginName.CalendarControls
@@ -126,5 +127,5 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 }
 
 export const createCalendarControlsPlugin = (): CalendarControlsPlugin => {
-  return new CalendarControlsPluginImpl()
+  return definePlugin('calendarControls', new CalendarControlsPluginImpl())
 }
