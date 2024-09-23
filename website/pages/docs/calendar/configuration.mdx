@@ -189,7 +189,21 @@ const config = {
      * */
     isCalendarSmall($app) {
       return $app.elements.calendarWrapper?.clientWidth! < 500
-    }
+    },
+
+    /**
+     * Runs before the calendar is rendered
+     * */
+    beforeRender($app) {
+      console.log('beforeRender', $app)
+    },
+
+    /**
+     * Runs after the calendar is rendered
+     * */
+    onRender($app) {
+      console.log('onRender', $app)
+    },
   },
 }
 

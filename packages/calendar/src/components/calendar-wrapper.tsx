@@ -25,6 +25,10 @@ export default function CalendarWrapper({ $app }: props) {
     setWrapperElement($app, calendarId)
     initPlugins($app)
 
+    if ($app.config.callbacks?.onRender) {
+      $app.config.callbacks.onRender($app)
+    }
+
     return () => destroyPlugins($app)
   }, [])
 

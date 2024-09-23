@@ -101,6 +101,14 @@ const calendar = createCalendar({
   // },
   // isDark: true,
   callbacks: {
+    beforeRender($app) {
+      console.log('beforeRender', $app)
+    },
+
+    onRender($app) {
+      console.log('onRender', $app)
+    },
+
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
     },
