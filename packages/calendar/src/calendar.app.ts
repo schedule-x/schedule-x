@@ -13,6 +13,10 @@ export default class CalendarApp {
   constructor(private $app: CalendarAppSingleton) {
     this.events = new EventsFacadeImpl(this.$app)
     beforeInitPlugins(this.$app)
+
+    if ($app.config.callbacks?.beforeRender) {
+      $app.config.callbacks.beforeRender($app)
+    }
   }
 
   render(el: HTMLElement): void {

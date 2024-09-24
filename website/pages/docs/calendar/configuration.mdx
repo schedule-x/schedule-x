@@ -189,7 +189,22 @@ const config = {
      * */
     isCalendarSmall($app) {
       return $app.elements.calendarWrapper?.clientWidth! < 500
-    }
+    },
+
+    /**
+     * Runs before the calendar is rendered
+     * */
+    beforeRender($app) {
+      const range = $app.calendarState.range.value
+      fetchYourEventsFor(range.start, range.end)
+    },
+
+    /**
+     * Runs after the calendar is rendered
+     * */
+    onRender($app) {
+      console.log('onRender', $app)
+    },
   },
 }
 
