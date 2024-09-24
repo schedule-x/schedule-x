@@ -197,4 +197,38 @@ describe('CalendarApp', () => {
       })
     })
   })
+
+  describe('calling calendar lifecycle methods', () => {
+    it('should call the beforeRender method', () => {
+      const beforeRenderSpy = vi.fn()
+
+      createCalendar({
+        views: [viewMonthGrid],
+        callbacks: {
+          beforeRender: beforeRenderSpy,
+        },
+      })
+
+      expect(beforeRenderSpy).toHaveBeenCalled()
+    })
+
+    it('should call the onRender method', async () => {
+      const onRenderSpy = vi.fn()
+
+      const calendarApp = createCalendar({
+        views: [viewMonthGrid],
+        callbacks: {
+          onRender: onRenderSpy,
+        },
+      })
+
+      expect(onRenderSpy).not.toHaveBeenCalled()
+
+      calendarApp.render(document.createElement('div'))
+
+      await waitFor(() => {
+        expect(onRenderSpy).toHaveBeenCalled()
+      })
+    })
+  })
 })

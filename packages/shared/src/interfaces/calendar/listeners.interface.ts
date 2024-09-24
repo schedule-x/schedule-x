@@ -14,5 +14,8 @@ export interface CalendarCallbacks {
   onClickAgendaDate?: (date: string) => void
   onClickPlusEvents?: (date: string) => void
 
+  beforeRender?: ($app: CalendarAppSingleton) => void
+  onRender?: ($app: CalendarAppSingleton) => void
+
   isCalendarSmall?: ($app: CalendarAppSingleton) => boolean
 }
