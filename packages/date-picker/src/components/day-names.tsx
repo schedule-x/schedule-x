@@ -5,7 +5,7 @@ import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-con
 
 export default function DayNames() {
   const $app = useContext(AppContext)
-  const aWeek = $app.timeUnitsImpl.getWeekFor(
+  const aWeek = $app.config.timeUnits.value.getWeekFor(
     toJSDate($app.datePickerState.datePickerDate.value)
   )
 

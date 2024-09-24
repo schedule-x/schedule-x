@@ -16,6 +16,7 @@ import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plug
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
 import { WeekDay } from '../../enums/time/week-day.enum'
+import TimeUnits from '../../utils/stateful/time-units/time-units.interface'
 
 export type WeekOptions = {
   gridHeight: number
@@ -95,6 +96,7 @@ interface ReducedCalendarConfigInternal
     | 'monthGridOptions'
     | 'locale'
     | 'firstDayOfWeek'
+    | 'timeUnits'
   > {}
 
 export interface CalendarConfigExternal
@@ -113,4 +115,5 @@ export interface CalendarConfigExternal
   monthGridOptions?: MonthGridOptions
   locale?: string
   firstDayOfWeek?: WeekDay
+  timeUnits?: TimeUnits
 }

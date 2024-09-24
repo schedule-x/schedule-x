@@ -19,7 +19,10 @@ describe('Positioning events in a month agenda', () => {
         },
       ],
     })
-    const agendaMonth = createAgendaMonth('2023-11-01', $app.timeUnitsImpl)
+    const agendaMonth = createAgendaMonth(
+      '2023-11-01',
+      $app.config.timeUnits.value
+    )
 
     it('should position event in all 10 days', () => {
       const result = positionEventsInAgenda(
@@ -68,7 +71,10 @@ describe('Positioning events in a month agenda', () => {
         },
       ],
     })
-    const agendaMonth = createAgendaMonth('2023-11-01', $app.timeUnitsImpl)
+    const agendaMonth = createAgendaMonth(
+      '2023-11-01',
+      $app.config.timeUnits.value
+    )
 
     it('should position events in all days', () => {
       const result = positionEventsInAgenda(

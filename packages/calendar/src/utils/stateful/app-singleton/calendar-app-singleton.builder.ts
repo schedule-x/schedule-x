@@ -3,7 +3,6 @@ import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import CalendarAppSingletonImpl from './calendar-app-singleton.impl'
 import DatePickerState from '@schedule-x/shared/src/interfaces/date-picker/date-picker-state.interface'
-import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import { TranslateFn } from '@schedule-x/shared/src/types/translations'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
@@ -14,7 +13,6 @@ export default class CalendarAppSingletonBuilder
   implements Builder<CalendarAppSingleton>
 {
   private config: CalendarConfigInternal | undefined
-  private timeUnitsImpl: TimeUnits | undefined
   private datePickerState: DatePickerState | undefined
   private calendarState: CalendarState | undefined
   private translate: TranslateFn | undefined
@@ -24,7 +22,6 @@ export default class CalendarAppSingletonBuilder
   build(): CalendarAppSingleton {
     return new CalendarAppSingletonImpl(
       this.config!,
-      this.timeUnitsImpl!,
       this.calendarState!,
       this.datePickerState!,
       this.translate!,
@@ -35,11 +32,6 @@ export default class CalendarAppSingletonBuilder
 
   withConfig(config: CalendarConfigInternal): CalendarAppSingletonBuilder {
     this.config = config
-    return this
-  }
-
-  withTimeUnitsImpl(timeUnitsImpl: TimeUnits): CalendarAppSingletonBuilder {
-    this.timeUnitsImpl = timeUnitsImpl
     return this
   }
 

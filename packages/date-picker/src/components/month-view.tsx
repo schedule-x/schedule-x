@@ -22,7 +22,7 @@ export default function MonthView({ seatYearsView }: props) {
       $app.datePickerState.datePickerDate.value
     )
     setMonth(
-      $app.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
+      $app.config.timeUnits.value.getMonthWithTrailingAndLeadingDays(
         newDatePickerDate.getFullYear(),
         newDatePickerDate.getMonth()
       )

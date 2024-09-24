@@ -16,7 +16,7 @@ export default function CalendarHeader() {
     .withDatePickerState($app.datePickerState)
     .withConfig($app.datePickerConfig)
     .withTranslate($app.translate)
-    .withTimeUnitsImpl($app.timeUnitsImpl)
+    .withTimeUnitsImpl($app.config.timeUnits.value)
     .build()
 
   const headerContent = $app.config._customComponentFns.headerContent
