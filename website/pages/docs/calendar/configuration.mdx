@@ -195,7 +195,8 @@ const config = {
      * Runs before the calendar is rendered
      * */
     beforeRender($app) {
-      console.log('beforeRender', $app)
+      const range = $app.calendarState.range.value
+      fetchYourEventsFor(range.start, range.end)
     },
 
     /**
