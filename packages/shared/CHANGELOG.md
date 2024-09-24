@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/schedule-x/schedule-x/compare/v2.0.0...v2.1.0) (2024-09-24)
+
+### Features
+
+- add beforeRender and onRender lifecycle methods ([#691](https://github.com/schedule-x/schedule-x/issues/691)) ([76846a2](https://github.com/schedule-x/schedule-x/commit/76846a2d923ce4c36b3da596de09d6fb1715fc55))
+
 # [2.0.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.64.0-alpha.0...v2.0.0-alpha.0) (2024-09-19)
 
 ### Features

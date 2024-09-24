@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/schedule-x/schedule-x/compare/v2.0.0...v2.1.0) (2024-09-24)
+
+### Bug Fixes
+
+- **event-modal:** fix positioning at the bottom of calendar ([#690](https://github.com/schedule-x/schedule-x/issues/690)) ([960378b](https://github.com/schedule-x/schedule-x/commit/960378b98ab2249439c4fff14b3870a4e9d95064))
+
+### Features
+
+- add beforeRender and onRender lifecycle methods ([#691](https://github.com/schedule-x/schedule-x/issues/691)) ([76846a2](https://github.com/schedule-x/schedule-x/commit/76846a2d923ce4c36b3da596de09d6fb1715fc55))
+- ical source ([#668](https://github.com/schedule-x/schedule-x/issues/668)) ([6060760](https://github.com/schedule-x/schedule-x/commit/606076002ceda2194a899afeb25ade03a9e9128c))
+
 # [2.0.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.64.0-alpha.0...v2.0.0-alpha.0) (2024-09-19)
 
 ### Features
