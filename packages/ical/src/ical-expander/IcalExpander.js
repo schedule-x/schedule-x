@@ -1,5 +1,7 @@
 /* eslint-disable */
 /*
+Slightly modified version of ical-expander:
+
 from https://github.com/mifi/ical-expander
 released under https://github.com/mifi/ical-expander/blob/master/LICENSE
 operates entirely in UTC

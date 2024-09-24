@@ -42,7 +42,7 @@ class IcalendarPluginImpl implements PluginBase {
     this.source = options.data
   }
 
-  public beforeInit($app: CalendarAppSingleton) {
+  public beforeRender($app: CalendarAppSingleton) {
     this.$app = $app
     const dateRangeStart = $app.calendarState.range.value?.start
     const dateRangeEnd = $app.calendarState.range.value?.end

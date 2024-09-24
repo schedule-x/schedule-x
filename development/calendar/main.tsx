@@ -68,31 +68,6 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
 const eventRecurrencePlugin = createEventRecurrencePlugin()
-let icalendarPlugin = createIcalendarPlugin({
-  data: 'BEGIN:VCALENDAR\n' +
-    'VERSION:2.0\n' +
-    'CALSCALE:GREGORIAN\n' +
-    'BEGIN:VEVENT\n' +
-    'SUMMARY:Good morning\n' +
-    'DTSTART;TZID=America/New_York:20240801T103400\n' +
-    'DTEND;TZID=America/New_York:20240801T110400\n' +
-    'LOCATION:1000 Broadway Ave.\\, Brooklyn\n' +
-    'DESCRIPTION: Access-A-Ride trip to 900 Jay St.\\, Brooklyn\n' +
-    'STATUS:CONFIRMED\n' +
-    'SEQUENCE:3\n' +
-    'END:VEVENT\n' +
-    'BEGIN:VEVENT\n' +
-    'RRULE:FREQ=DAILY;COUNT=3\n' +
-    'SUMMARY:Good night\n' +
-    'DTSTART;TZID=America/New_York:20240902T200000\n' +
-    'DTEND;TZID=America/New_York:20240902T203000\n' +
-    'LOCATION:900 Jay St.\\, Brooklyn\n' +
-    'DESCRIPTION: Access-A-Ride trip to 1000 Broadway Ave.\\, Brooklyn\n' +
-    'STATUS:CONFIRMED\n' +
-    'SEQUENCE:3\n' +
-    'END:VEVENT\n' +
-    'END:VCALENDAR',
-})
 const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,
@@ -136,7 +111,6 @@ const calendar = createCalendar({
 
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
-      icalendarPlugin.between(range.start, range.end)
     },
 
     onEventUpdate(event) {
@@ -234,7 +208,6 @@ const calendar = createCalendar({
     },
   },
   plugins: [
-    icalendarPlugin,
     createDragAndDropPlugin(),
     createEventModalPlugin(),
     eventsServicePlugin,
