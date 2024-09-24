@@ -39,7 +39,7 @@ describe('IcalendarPluginImpl', () => {
         plugins: [plugin],
         selectedDate: '2013-08-02',
       })
-      plugin.beforeInit($app)
+      plugin.beforeRender($app)
 
       expect($app.calendarEvents.list.value.length).toBe(4)
     })
@@ -77,7 +77,7 @@ describe('IcalendarPluginImpl', () => {
         plugins: [plugin],
         selectedDate: '2024-08-01',
       })
-      plugin.beforeInit($app)
+      plugin.beforeRender($app)
 
       expect($app.calendarEvents.list.value.length).toBe(1)
 
