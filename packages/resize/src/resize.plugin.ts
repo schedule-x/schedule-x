@@ -11,7 +11,7 @@ class ResizePluginImpl implements ResizePlugin {
 
   constructor(private minutesPerInterval: number) {}
 
-  init($app: CalendarAppSingleton) {
+  onRender($app: CalendarAppSingleton) {
     this.$app = $app
   }
 

@@ -26,7 +26,7 @@ import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
-import { createIcalendarPlugin } from '@schedule-x/icalendar/src/icalendar-plugin.impl.ts'
+import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -96,13 +96,14 @@ let icalendarPlugin = createIcalendarPlugin({
 const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,
-    // nDays: 4,
+    // nDays: 3,
     eventWidth: 95,
   },
   // monthGridOptions: {
   //   nEventsPerDay: 7
   // },
-  firstDayOfWeek: 0,
+  firstDayOfWeek: 1,
+  // locale: 'de-DE',
   // locale: 'ja-JP',
   // locale: 'en-US',
   // locale: 'zh-CN',
@@ -114,7 +115,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2024-03-31',
-  defaultView: 'week',
+  // defaultView: 'week',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
@@ -367,6 +368,43 @@ setViewButton.addEventListener('click', () => {
   const newView = (document.getElementById('set-view') as HTMLInputElement)
     .value
   calendarControlsPlugin.setView(newView)
+})
+
+const setFirstDayOfWeekButton = document.getElementById(
+    'set-first-day-of-week-button'
+) as HTMLButtonElement
+setFirstDayOfWeekButton.addEventListener('click', () => {
+  const newFirstDayOfWeek = (document.getElementById('set-first-day-of-week') as HTMLInputElement)
+      .value
+  calendarControlsPlugin.setFirstDayOfWeek(parseInt(newFirstDayOfWeek, 10) as WeekDay)
+})
+
+const setNDaysButton = document.getElementById(
+    'set-n-days-button'
+) as HTMLButtonElement
+setNDaysButton.addEventListener('click', () => {
+  const newNDays = (document.getElementById('set-n-days') as HTMLInputElement)
+      .value as unknown as number
+  calendarControlsPlugin.setWeekOptions({...calendarControlsPlugin.getWeekOptions(), nDays: newNDays})
+})
+
+const setLocaleSelect = document.getElementById(
+    'set-locale'
+) as HTMLSelectElement
+setLocaleSelect.addEventListener('change', () => {
+  const newLocale = (document.getElementById('set-locale') as HTMLSelectElement).value
+  calendarControlsPlugin.setLocale(newLocale)
+})
+
+const setDayBoundariesButton = document.getElementById(
+    'set-day-boundaries-button'
+) as HTMLButtonElement
+
+setDayBoundariesButton.addEventListener('click', () => {
+  const newDayBoundariesStart = (document.getElementById('set-day-boundaries-start') as HTMLInputElement).value
+  const newDayBoundariesEnd = (document.getElementById('set-day-boundaries-end') as HTMLInputElement).value
+
+  calendarControlsPlugin.setDayBoundaries({start: `${newDayBoundariesStart.padStart(2, '0')}:00`, end: `${newDayBoundariesEnd.padStart(2, '0')}:00`})
 })
 
 const updateCalendarsButton = document.getElementById(

@@ -9,7 +9,7 @@ export default function DayNames() {
     toJSDate($app.datePickerState.datePickerDate.value)
   )
 
-  const dayNames = getOneLetterOrShortDayNames(aWeek, $app.config.locale)
+  const dayNames = getOneLetterOrShortDayNames(aWeek, $app.config.locale.value)
 
   return (
     <div className="sx__date-picker__day-names">

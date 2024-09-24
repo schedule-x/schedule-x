@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/calendar",
   "umdName": "SXCalendar",
-  "version": "1.63.0",
+  "version": "2.0.0",
   "description": "Schedule-X calendar component",
   "author": {
     "name": "Tom Österlund",
@@ -10,8 +10,10 @@
   },
   "license": "MIT",
   "keywords": [
-    "calendar",
-    "event",
+    "event calendar",
+    "javascript calendar",
+    "scheduler",
+    "FullCalendar alternative",
     "dark-mode",
     "internationalization"
   ],
@@ -38,5 +40,5 @@
     "directory": "packages/calendar"
   },
   "homepage": "https://schedule-x.dev",
-  "gitHead": "1869e796b356e5014febb657ecb38e0755c2f66f"
+  "gitHead": "75957004c3f5ea0157f8a2b99808f463a530f4be"
 }

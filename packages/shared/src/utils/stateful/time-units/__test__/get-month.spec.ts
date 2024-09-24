@@ -7,10 +7,13 @@ import { WeekDay } from '../../../../enums/time/week-day.enum'
 import TimeUnitsBuilder from '../time-units.builder'
 import { Month } from '../../../../enums/time/month.enum'
 import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils'
+import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
 
 describe('get month', () => {
   it('should get month with trailing and leading days, for 2023-07', () => {
-    const underTest = new TimeUnitsBuilder().build()
+    const underTest = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     const result = underTest.getMonthWithTrailingAndLeadingDays(
       2023,
@@ -26,7 +29,9 @@ describe('get month', () => {
   })
 
   it('should get month with trailing and leading days, for 2023-12', () => {
-    const underTest = new TimeUnitsBuilder().build()
+    const underTest = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     const result = underTest.getMonthWithTrailingAndLeadingDays(
       2023,
@@ -42,7 +47,7 @@ describe('get month', () => {
 
   it('should get month for 2023-12, with sunday as first day of week', () => {
     const underTest = new TimeUnitsBuilder()
-      .withFirstDayOfWeek(WeekDay.SUNDAY)
+      .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SUNDAY }))
       .build()
 
     const result = underTest.getMonthWithTrailingAndLeadingDays(
@@ -60,7 +65,7 @@ describe('get month', () => {
 
   it('should get month for 2023-12, with saturday as first day of week', () => {
     const underTest = new TimeUnitsBuilder()
-      .withFirstDayOfWeek(WeekDay.SATURDAY)
+      .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SATURDAY }))
       .build()
 
     const result = underTest.getMonthWithTrailingAndLeadingDays(
@@ -77,7 +82,9 @@ describe('get month', () => {
   })
 
   it('should throw an error for year 0', () => {
-    const underTest = new TimeUnitsBuilder().build()
+    const underTest = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     expect(() =>
       underTest.getMonthWithTrailingAndLeadingDays(0, Month.JANUARY)

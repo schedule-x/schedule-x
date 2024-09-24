@@ -70,57 +70,11 @@ describe('TimeGridEvent', () => {
       const anotherClass = document.querySelector('.another-class')
       expect(anotherClass).not.toBeNull()
     })
-
-    it('should not show the location by default', () => {
-      const $app = __createAppWithViews__({
-        events: [
-          {
-            id: '123',
-            title: 'Event 1',
-            start: '2020-01-01 00:00',
-            end: '2020-01-02 01:00',
-            location: 'Location 1',
-          },
-        ],
-      })
-      renderComponent($app, $app.calendarEvents.list.value[0])
-
-      const timeGridEvent = document.querySelector(
-        '.sx__time-grid-event-location'
-      )
-      expect(timeGridEvent).toBeNull()
-    })
-
-    it('should show the location if showLocation is true', () => {
-      const $app = __createAppWithViews__({
-        weekOptions: {
-          showLocation: true,
-        },
-        events: [
-          {
-            id: '123',
-            title: 'Event 1',
-            start: '2020-01-01 00:00',
-            end: '2020-01-02 01:00',
-            location: 'Location 1',
-          },
-        ],
-      })
-      renderComponent($app, $app.calendarEvents.list.value[0])
-
-      const timeGridEvent = document.querySelector(
-        '.sx__time-grid-event-location'
-      )
-      expect(timeGridEvent).not.toBeNull()
-    })
   })
 
   describe('rendering custom content', () => {
     it('should render custom markup but no default markup', () => {
       const $app = __createAppWithViews__({
-        weekOptions: {
-          showLocation: true,
-        },
         events: [
           {
             id: '123',

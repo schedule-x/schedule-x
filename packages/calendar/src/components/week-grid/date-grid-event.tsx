@@ -16,11 +16,15 @@ import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
-import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import {
+  getTimeStamp,
+  timeFn,
+} from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
+import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -136,7 +140,11 @@ export default function DateGridEvent({
         aria-label={
           calendarEvent.title +
           ' ' +
-          getTimeStamp(calendarEvent, $app.config.locale, $app.translate('to'))
+          getTimeStamp(
+            calendarEvent,
+            $app.config.locale.value,
+            $app.translate('to')
+          )
         }
         role="button"
         data-ccid={customComponentId}
@@ -181,7 +189,12 @@ export default function DateGridEvent({
             )}
 
             <span className="sx__date-grid-event-text">
-              {calendarEvent.title}
+              {calendarEvent.title} &nbsp;
+              {dateTimeStringRegex.test(calendarEvent.start) && (
+                <span className="sx__date-grid-event-time">
+                  {timeFn(calendarEvent.start, $app.config.locale.value)}
+                </span>
+              )}
             </span>
 
             {hasOverflowRight && (

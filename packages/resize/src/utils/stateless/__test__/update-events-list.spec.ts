@@ -54,7 +54,7 @@ describe('Updating the events list after resizing an event', () => {
         ],
         plugins: [eventRecurrencePlugin],
       })
-      eventRecurrencePlugin.init!($app)
+      eventRecurrencePlugin.onRender!($app)
       const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
 
       updateEventsList($app, eventCopy, '2021-01-01 01:00', '2021-01-01 02:00')

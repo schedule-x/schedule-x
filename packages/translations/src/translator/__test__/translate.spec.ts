@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -5,10 +6,11 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { translate } from '../translate'
 import { InvalidLocaleError } from '@schedule-x/shared/src/utils/stateless/errors/InvalidLocale.error'
+import { signal } from '@preact/signals'
 
 describe('translate', () => {
   it('should return the key if the locale is en-US', () => {
-    const locale = 'en-US'
+    const locale = signal('en-US')
     const translations = {
       hello: 'world',
     }
@@ -20,7 +22,7 @@ describe('translate', () => {
   })
 
   it('should return the key if the locale is de-DE', () => {
-    const locale = 'de-DE'
+    const locale = signal('de-DE')
     const translations = {
       hello: 'welt',
     }
@@ -32,7 +34,7 @@ describe('translate', () => {
   })
 
   it('should return key if the locale is not supported', () => {
-    const locale = 'fr-FR'
+    const locale = signal('fr-FR')
     const translations = {
       hello: 'monde',
     }
@@ -44,7 +46,7 @@ describe('translate', () => {
   })
 
   it('should return the key if the locale is ko-KR', () => {
-    const locale = 'ko-KR'
+    const locale = signal('ko-KR')
     const translations = {
       hello: '월드',
     }
@@ -56,7 +58,7 @@ describe('translate', () => {
   })
 
   it('should return the key if the locale is fr-FR', () => {
-    const locale = 'fr-FR'
+    const locale = signal('fr-FR')
     const translations = {
       hello: 'monde',
     }
@@ -68,7 +70,7 @@ describe('translate', () => {
   })
 
   it('should return key if locale is supported, but key does not exist', () => {
-    const locale = 'en-US'
+    const locale = signal('en-US')
     const translations = {
       hello: 'world',
     }
@@ -87,7 +89,8 @@ describe('translate', () => {
     ['en', true], // TODO: write alias map for short locale -> long locale and change this to false
   ])(
     'should throw if called with a faulty locale format %s',
-    (locale, shouldThrow) => {
+    (localeRaw: string, shouldThrow: boolean) => {
+      const locale = signal(localeRaw)
       const translations = {
         hello: 'world',
       }
@@ -108,7 +111,7 @@ describe('translate', () => {
    * in unwanted mutation of the locale param for all calls but the first, leading to an error when de-DE becomes deDE etc.
    * */
   it('should be able to call the translate return value repeatedly', () => {
-    const locale = 'en-US'
+    const locale = signal('en-US')
     const translations = {
       hello: 'world',
     }
@@ -121,7 +124,7 @@ describe('translate', () => {
   })
 
   it('should pass one translation variables to the translation', () => {
-    const locale = 'en-US'
+    const locale = signal('en-US')
     const translations = {
       hello: 'world {{name}}',
     }
@@ -134,7 +137,7 @@ describe('translate', () => {
   })
 
   it('should pass multiple translation variables to the translation', () => {
-    const locale = 'en-US'
+    const locale = signal('en-US')
     const translations = {
       hello: 'world {{name}} {{lastName}}',
     }

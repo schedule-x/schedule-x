@@ -6,12 +6,15 @@ import {
 import TimeUnitsBuilder from '../time-units.builder'
 import { Month } from '../../../../enums/time/month.enum'
 import { NoYearZeroError } from '../../../stateless/errors/no-year-zero.error'
+import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
 
 describe('get year', () => {
   it.each([[-100], [-1], [1], [2023], [2024], [5000]])(
     'should get months for year %s',
     (year) => {
-      const underTest = new TimeUnitsBuilder().build()
+      const underTest = new TimeUnitsBuilder()
+        .withConfig(createBaseConfig())
+        .build()
 
       const result = underTest.getMonthsFor(year)
 
@@ -34,7 +37,9 @@ describe('get year', () => {
   )
 
   it('should throw an error for year 0', () => {
-    const underTest = new TimeUnitsBuilder().build()
+    const underTest = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
 
     expect(() => underTest.getMonthsFor(0)).toThrow(NoYearZeroError)
   })

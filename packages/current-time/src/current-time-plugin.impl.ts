@@ -22,7 +22,7 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
     }
   }
 
-  init($app: CalendarAppSingleton): void {
+  onRender($app: CalendarAppSingleton): void {
     this.$app = $app
 
     this.observer = new MutationObserver((mutationList) => {
@@ -72,7 +72,7 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
       const top =
         getYCoordinateInTimeGrid(
           nowDateTimeString,
-          this.$app.config.dayBoundaries,
+          this.$app.config.dayBoundaries.value,
           this.$app.config.timePointsPerDay
         ) + '%'
       currentTimeIndicator.style.top = top

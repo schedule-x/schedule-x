@@ -4,10 +4,18 @@ import { Month } from '../../../enums/time/month.enum'
 import { WeekWithDates } from '../../../types/time'
 import { NoYearZeroError } from '../../stateless/errors/no-year-zero.error'
 import ExtendedDateImpl from '../time/extended-date/extended-date.impl'
-import { DEFAULT_FIRST_DAY_OF_WEEK } from '../../../values'
+import Config from '../../../interfaces/config.interface'
 
 export default class TimeUnitsImpl implements TimeUnits {
-  constructor(public firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK) {}
+  constructor(private config: Config) {}
+
+  get firstDayOfWeek() {
+    return this.config.firstDayOfWeek.value
+  }
+
+  set firstDayOfWeek(firstDayOfWeek: WeekDay) {
+    this.config.firstDayOfWeek.value = firstDayOfWeek
+  }
 
   getMonthWithTrailingAndLeadingDays(year: number, month: Month) {
     if (year === 0) throw new NoYearZeroError()

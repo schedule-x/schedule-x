@@ -28,5 +28,9 @@ export default function MyApp({ Component, pageProps }) {
 
   return <main className={podkova.className + ' main'}><Component {...pageProps} />
     {alxScript && window?.location.hostname !== 'localhost' && <Script data-domain="schedule-x.dev" src="https://analytics.schedule-x.com/js/script.js" defer />}
+    <Script>
+      {`window.lemonSqueezyAffiliateConfig = { store: "schedule-x" };`}
+    </Script>
+    <Script src="https://lmsqueezy.com/affiliate.js" defer/>
   </main>
 }

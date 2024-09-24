@@ -26,6 +26,7 @@ describe('TimePointsFromString', () => {
       ['12:00', 1200],
       ['23:30', 2350],
       ['23:59', 2398.3333333333335],
+      ['24:00', 2400],
     ])(
       'should turn time string %s into time point %s',
       (timeString, expectedTimePoint) => {
@@ -34,7 +35,7 @@ describe('TimePointsFromString', () => {
     )
 
     it.each([
-      ['24:00'],
+      ['24:01'],
       ['25:00'],
       ['00:60'],
       ['00:61'],

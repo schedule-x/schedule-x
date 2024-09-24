@@ -23,6 +23,10 @@ export default class CalendarApp {
     this.$app.calendarState.isDark.value = theme === 'dark'
   }
 
+  getTheme(): 'light' | 'dark' {
+    return this.$app.calendarState.isDark.value ? 'dark' : 'light'
+  }
+
   /**
    * @internal
    * Purpose: To be consumed by framework adapters for custom component rendering.

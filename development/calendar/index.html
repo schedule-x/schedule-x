@@ -33,12 +33,60 @@
     </div>
 
     <div class="input-wrapper">
+      <input
+              id="set-first-day-of-week"
+              type="number"
+              min="0"
+              max="6"
+              placeholder="1"
+      />
+      <button id="set-first-day-of-week-button">Set first day of week</button>
+    </div>
+
+    <div class="input-wrapper">
+      <input
+              id="set-n-days"
+              type="number"
+              min="1"
+              max="7"
+              placeholder="7"
+      />
+      <button id="set-n-days-button">Set n days</button>
+    </div>
+    <div class="input-wrapper">
+      Locale&nbsp;
+      <select
+              id="set-locale"
+      >
+        <option value="en-US" selected>English</option>
+        <option value="de-DE">German</option>
+      </select>
+    </div>
+
+    <div class="input-wrapper">
+      <input
+              id="set-day-boundaries-start"
+              type="number"
+              min="0"
+              max="24"
+              placeholder="0"
+      />
+      <input
+              id="set-day-boundaries-end"
+              type="number"
+              min="0"
+              max="24"
+              placeholder="24"
+      />
+      <button id="set-day-boundaries-button">Set day boundaries</button>
+    </div>
+
+    <div class="input-wrapper">
       <button id="update-calendars">Update calendars</button>
     </div>
 
     <div id="calendar"></div>
 <!--    <div id="calendar-2"></div>-->
-
     <script type="module" src="/development/calendar/main.tsx"></script>
   </body>
 </html>

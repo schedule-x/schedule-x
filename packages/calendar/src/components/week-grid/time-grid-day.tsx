@@ -28,10 +28,10 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
   const $app = useContext(AppContext)
 
   const timeStringFromDayBoundary = timeStringFromTimePoints(
-    $app.config.dayBoundaries.start
+    $app.config.dayBoundaries.value.start
   )
   const timeStringFromDayBoundaryEnd = timeStringFromTimePoints(
-    $app.config.dayBoundaries.end
+    $app.config.dayBoundaries.value.end
   )
   const dayStartDateTime = setTimeInDateTimeString(
     date,
@@ -95,7 +95,7 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
       onDblClick={(e) =>
         handleOnClick(e, $app.config.callbacks.onDoubleClickDateTime)
       }
-      aria-label={getLocalizedDate(date, $app.config.locale)}
+      aria-label={getLocalizedDate(date, $app.config.locale.value)}
       onMouseLeave={() => setMouseDownOnChild(false)}
       onMouseUp={handlePointerUp}
       onTouchEnd={handlePointerUp}
