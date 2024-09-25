@@ -82,10 +82,10 @@ const config: DocsThemeConfig = {
   //   )
   // }
   banner: {
-      key: 'premium-1.1',
+      key: 'v2-1.0',
       text: (
-        <a href="/premium">
-          Schedule-X Premium is now here 🚀
+        <a href="/docs/migration-v2">
+          v2 is now here 🎉 Click here for the migration guide!
         </a>
       )
     }
