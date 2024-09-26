@@ -20,10 +20,10 @@ npm i @schedule-x/current-time
 ```js
 import { createCurrentTimePlugin } from '@schedule-x/current-time'
 
-const calendar = createCalendar({
-  // ...other configuration
-  plugins: [createCurrentTimePlugin()],
-})
+const calendar = createCalendar(
+  { /* calendar config */ },
+  [createCurrentTimePlugin()]
+)
 ```
 
 ## Configuration

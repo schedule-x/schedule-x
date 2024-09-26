@@ -6,10 +6,13 @@ import {
   createViewMonthGrid,
   createViewWeek,
 } from '@schedule-x/calendar'
+import { createEventsServicePlugin } from '@schedule-x/events-service'
 
 import '@schedule-x/theme-default/dist/index.css'
 
 function CalendarApp() {
+  const plugins = [createEventsServicePlugin()]
+
   const calendar = useCalendarApp({
     views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
     events: [
@@ -20,7 +23,12 @@ function CalendarApp() {
         end: '2023-12-16',
       },
     ],
-  })
+  }, plugins)
+
+  useEffect(() => {
+    // get all events
+    calendar.eventsService.getAll()
+  }, [])
 
   return (
     <div>
