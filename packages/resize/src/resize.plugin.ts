@@ -4,6 +4,7 @@ import { TimeGridEventResizer } from './time-grid-event-resizer'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { DateGridEventResizer } from './date-grid-event-resizer'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class ResizePluginImpl implements ResizePlugin {
   name = PluginName.Resize
@@ -59,5 +60,6 @@ class ResizePluginImpl implements ResizePlugin {
   }
 }
 
-export const createResizePlugin = (minutesPerInterval = 15): ResizePlugin =>
-  new ResizePluginImpl(minutesPerInterval)
+export const createResizePlugin = (minutesPerInterval = 15) => {
+  return definePlugin('resize', new ResizePluginImpl(minutesPerInterval))
+}

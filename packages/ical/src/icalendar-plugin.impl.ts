@@ -7,6 +7,7 @@ import {
 } from '@schedule-x/shared/src'
 import { IcalExpander } from './ical-expander/IcalExpander'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 type ICalendarPluginOptions = {
   data: string
@@ -33,7 +34,7 @@ type ICalEvent = {
   location: string
 } & ICalTime
 
-class IcalendarPluginImpl implements PluginBase {
+class IcalendarPluginImpl implements PluginBase<string> {
   name = 'ICalendarPlugin'
   private $app!: CalendarAppSingleton
   private readonly source: string = ''
@@ -111,5 +112,5 @@ class IcalendarPluginImpl implements PluginBase {
 }
 
 export const createIcalendarPlugin = (options: ICalendarPluginOptions) => {
-  return new IcalendarPluginImpl(options)
+  return definePlugin('ICalendarPlugin', new IcalendarPluginImpl(options))
 }

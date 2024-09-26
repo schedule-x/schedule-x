@@ -1,7 +1,7 @@
 import CalendarAppSingleton from './calendar/calendar-app-singleton'
 
-export default interface PluginBase {
-  name: string
+export default interface PluginBase<Name extends string> {
+  name: Name
 
   /**
    * Allow implementers to dynamically add any properties to the global app object as they see fit.
@@ -24,5 +24,6 @@ export default interface PluginBase {
    * */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onRender?($app: CalendarAppSingleton | any): void
+
   destroy?(): void
 }

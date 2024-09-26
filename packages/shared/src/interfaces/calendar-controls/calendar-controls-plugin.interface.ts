@@ -10,7 +10,7 @@ import {
   WeekOptions,
 } from '../calendar/calendar-config'
 
-export default interface CalendarControlsPlugin extends PluginBase {
+export default interface CalendarControlsPlugin extends PluginBase<string> {
   onRender($app: CalendarAppSingleton): void
   setDate(date: string): void
   setView(view: string): void

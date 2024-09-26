@@ -8,9 +8,10 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { addMinutes } from '@schedule-x/shared/src'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class CurrentTimePluginImpl implements CurrentTimePlugin {
-  name = 'current-time-plugin'
+  name = 'currentTime'
   $app!: CalendarAppSingleton
   observer: MutationObserver | null = null
 
@@ -114,5 +115,6 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   }
 }
 
-export const createCurrentTimePlugin = (config?: CurrentTimePluginConfig) =>
-  new CurrentTimePluginImpl(config)
+export const createCurrentTimePlugin = (config?: CurrentTimePluginConfig) => {
+  return definePlugin('currentTime', new CurrentTimePluginImpl(config))
+}

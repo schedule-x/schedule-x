@@ -44,10 +44,10 @@ export type CalendarType = {
 export type Plugins = {
   dragAndDrop?: DragAndDropPlugin
   eventModal?: EventModalPlugin
-  scrollController?: PluginBase
+  scrollController?: PluginBase<string>
   eventRecurrence?: EventRecurrencePlugin
   resize?: ResizePlugin
-  [key: string]: PluginBase | undefined
+  [key: string]: PluginBase<string> | undefined
 }
 
 export type CustomComponentFn = (
@@ -102,9 +102,9 @@ export interface CalendarConfigExternal
   datePicker?: CalendarDatePickerConfigExternal
   events?: CalendarEventExternal[]
   dayBoundaries?: DayBoundariesExternal
-  plugins?: PluginBase[]
   views: [View, ...View[]]
   selectedDate?: string
+  plugins?: PluginBase<string>[]
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
   isDark?: boolean

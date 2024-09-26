@@ -67,7 +67,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
-const eventRecurrencePlugin = createEventRecurrencePlugin()
+
 const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,
@@ -207,17 +207,6 @@ const calendar = createCalendar({
       },
     },
   },
-  plugins: [
-    createDragAndDropPlugin(),
-    createEventModalPlugin(),
-    eventsServicePlugin,
-    scrollControllerPlugin,
-    createResizePlugin(30),
-    eventRecurrencePlugin,
-    calendarControlsPlugin,
-    calendarsUpdaterPlugin,
-    createCurrentTimePlugin(),
-  ],
   events: [
     {
       id: 874574875,
@@ -291,8 +280,25 @@ const calendar = createCalendar({
       id: 874367853,
     },
   ],
-})
+}, [
+  createDragAndDropPlugin(),
+  createCalendarControlsPlugin(),
+  createScrollControllerPlugin(),
+  createEventsServicePlugin(),
+  createCurrentTimePlugin(),
+  createEventModalPlugin(),
+  createEventRecurrencePlugin(),
+  createResizePlugin(),
+])
 calendar.render(calendarElement)
+
+console.log(calendar.scrollController.scrollTo)
+console.log(calendar.dragAndDrop.getTimePointsForIntervalConfig)
+console.log(calendar.calendarControls)
+console.log(calendar.eventsService.getAll())
+console.log(calendar.resize.minutesPerInterval)
+console.log(calendar.eventRecurrence.updateRecurrenceOnResize)
+console.log(calendar.eventModal.close)
 
 // const calendar2Element = document.getElementById('calendar-2') as HTMLElement
 // const calendar2 = createCalendar({

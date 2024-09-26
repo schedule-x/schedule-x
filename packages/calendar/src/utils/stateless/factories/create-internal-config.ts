@@ -1,7 +1,11 @@
 import { CalendarConfigExternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarConfigBuilder from '../../stateful/config/calendar-config.builder'
+import { PluginBase } from '@schedule-x/shared/src'
 
-export const createInternalConfig = (config: CalendarConfigExternal) => {
+export const createInternalConfig = (
+  config: CalendarConfigExternal,
+  plugins: PluginBase<string>[]
+) => {
   return new CalendarConfigBuilder()
     .withLocale(config.locale)
     .withFirstDayOfWeek(config.firstDayOfWeek)
@@ -10,7 +14,7 @@ export const createInternalConfig = (config: CalendarConfigExternal) => {
     .withDayBoundaries(config.dayBoundaries)
     .withWeekOptions(config.weekOptions)
     .withCalendars(config.calendars)
-    .withPlugins(config.plugins)
+    .withPlugins(plugins)
     .withIsDark(config.isDark)
     .withIsResponsive(config.isResponsive)
     .withCallbacks(config.callbacks)

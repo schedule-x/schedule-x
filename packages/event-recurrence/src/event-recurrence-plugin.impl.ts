@@ -9,6 +9,7 @@ import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/ev
 import { EventsFacadeImpl } from './util/stateful/events-facade'
 import { createRecurrencesForEvent } from './util/stateless/create-recurrences-for-event'
 import { ResizeUpdater } from './util/stateful/resize-updater'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -95,6 +96,9 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   }
 }
 
-export const createEventRecurrencePlugin = (): EventRecurrencePlugin => {
-  return new EventRecurrencePluginImpl() as EventRecurrencePlugin
+export const createEventRecurrencePlugin = () => {
+  return definePlugin(
+    'eventRecurrence',
+    new EventRecurrencePluginImpl() as EventRecurrencePlugin
+  )
 }

@@ -7,7 +7,7 @@ import MonthGridDragHandler from './month-grid-drag-handler.interface'
 import CalendarAppSingleton from '../calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '../calendar/calendar-event.interface'
 
-export default interface DragAndDropPlugin extends PluginBase {
+export default interface DragAndDropPlugin extends PluginBase<string> {
   createTimeGridDragHandler(
     dependencies: DragHandlerDependencies,
     dayBoundariesDateTime: DayBoundariesDateTime
