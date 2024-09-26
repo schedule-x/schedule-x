@@ -9,7 +9,8 @@
   },
   "docs": {
     "title": "Docs",
-    "type": "page"
+    "type": "page",
+    "href": "/docs/calendar"
   },
   "premium": {
     "title": "Premium",
