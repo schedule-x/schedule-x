@@ -8,6 +8,7 @@ import DescriptionIcon from './components/icons/description-icon'
 import LocationPinIcon from './components/icons/location-pin-icon'
 import PluginBase from './interfaces/plugin.interface'
 
+export { definePlugin } from './utils/stateless/calendar/define-plugin'
 export { deepCloneEvent } from './utils/stateless/calendar/deep-clone-event'
 export { concatenatePeople } from './utils/stateless/strings/concatenate-people'
 export { getTimeStamp } from './utils/stateless/time/date-time-localization/get-time-stamp'
