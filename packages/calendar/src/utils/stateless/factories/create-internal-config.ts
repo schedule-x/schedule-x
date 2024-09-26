@@ -4,7 +4,7 @@ import { PluginBase } from '@schedule-x/shared/src'
 
 export const createInternalConfig = (
   config: CalendarConfigExternal,
-  plugins: PluginBase[]
+  plugins: PluginBase<string>[]
 ) => {
   return new CalendarConfigBuilder()
     .withLocale(config.locale)

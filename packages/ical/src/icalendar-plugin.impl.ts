@@ -34,7 +34,7 @@ type ICalEvent = {
   location: string
 } & ICalTime
 
-class IcalendarPluginImpl implements PluginBase {
+class IcalendarPluginImpl implements PluginBase<string> {
   name = 'ICalendarPlugin'
   private $app!: CalendarAppSingleton
   private readonly source: string = ''

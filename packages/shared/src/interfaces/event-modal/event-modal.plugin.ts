@@ -8,7 +8,7 @@ export type EventModalProps = {
   $app: CalendarAppSingleton
 }
 
-export default interface EventModalPlugin extends PluginBase {
+export default interface EventModalPlugin extends PluginBase<string> {
   calendarEvent: Signal<CalendarEventInternal | null>
   calendarEventDOMRect: Signal<DOMRect | null>
   calendarEventElement: Signal<HTMLElement | null>

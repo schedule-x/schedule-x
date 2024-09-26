@@ -6,7 +6,7 @@ import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/ca
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
-class EventsServicePluginImpl implements PluginBase {
+class EventsServicePluginImpl implements PluginBase<string> {
   name = 'eventsService'
   $app!: CalendarAppSingleton
   eventsFacade!: EventsFacade

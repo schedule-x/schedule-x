@@ -113,7 +113,9 @@ export default class CalendarConfigBuilder
     return this
   }
 
-  withPlugins(plugins: PluginBase[] | undefined): CalendarConfigBuilder {
+  withPlugins(
+    plugins: PluginBase<string>[] | undefined
+  ): CalendarConfigBuilder {
     if (!plugins) return this
 
     plugins.forEach((plugin) => {

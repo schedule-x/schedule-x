@@ -7,7 +7,7 @@ import { effect } from '@preact/signals'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
-class ScrollControllerPlugin implements PluginBase {
+class ScrollControllerPlugin implements PluginBase<string> {
   name = PluginName.ScrollController
   private $app: CalendarAppSingleton | null = null
   private observer: MutationObserver | null = null

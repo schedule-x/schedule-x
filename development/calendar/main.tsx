@@ -27,7 +27,6 @@ import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
 import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
-import { calendarKyKG } from '@schedule-x/translations/src/locales/ky-KG/calendar.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -68,9 +67,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
-let calendarControlsPlugin1 = createCalendarControlsPlugin()
 
-let dragAndDropPlugin1 = createDragAndDropPlugin()
 const calendar = createCalendar({
   weekOptions: {
     // gridHeight: 3000,

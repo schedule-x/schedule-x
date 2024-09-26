@@ -1,4 +1,6 @@
-export const definePlugin = <Name extends string, T extends object>(
+import PluginBase from '../../../interfaces/plugin.interface'
+
+export const definePlugin = <Name extends string, T extends PluginBase<string>>(
   name: Name,
   definition: T
 ) => {

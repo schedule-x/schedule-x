@@ -17,7 +17,7 @@ import {
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
-  name: string = PluginName.CalendarControls
+  name = PluginName.CalendarControls
   $app!: CalendarAppSingleton
 
   beforeRender($app: CalendarAppSingleton) {

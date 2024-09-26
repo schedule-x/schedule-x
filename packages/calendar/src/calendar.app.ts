@@ -17,8 +17,10 @@ export default class CalendarApp {
     Object.values(this.$app.config.plugins).forEach((plugin) => {
       if (!plugin?.name) return
 
-      this[plugin.name] = plugin
-      console.log(this[plugin.name])
+      // "hack" for enabling accessing plugins via calendarApp[pluginName]
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this[plugin.name] = plugin as PluginBase<string>
     })
 
     if ($app.config.callbacks?.beforeRender) {
