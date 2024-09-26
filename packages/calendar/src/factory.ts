@@ -10,6 +10,7 @@ import { createTimeUnitsImpl } from './utils/stateless/factories/create-time-uni
 import { createDatePickerConfig } from './utils/stateless/factories/create-date-picker-config'
 import { createDateSelectionCallback } from './utils/stateless/factories/create-date-selection-callback'
 import { PluginBase } from '@schedule-x/shared/src'
+import { validatePlugins } from './utils/stateless/validation/validate-plugins'
 
 export const createCalendarAppSingleton = (
   config: CalendarConfigExternal,
@@ -46,10 +47,6 @@ export const createCalendarAppSingleton = (
     .build()
 }
 
-export type Plugin<Name extends string> = {
-  name: Name
-}
-
 type CalendarAppWithPlugins<Plugins extends PluginBase<string>[]> = {
   [Name in Plugins[number]['name']]: Extract<Plugins[number], { name: Name }>
 }
@@ -58,6 +55,8 @@ export const createCalendar = <Plugins extends PluginBase<string>[]>(
   config: CalendarConfigExternal,
   plugins?: Plugins
 ) => {
+  validatePlugins(config.plugins, plugins)
+
   return new CalendarApp(
     createCalendarAppSingleton(config, plugins || config.plugins || [])
   ) as CalendarApp & CalendarAppWithPlugins<Plugins>

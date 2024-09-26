@@ -17,4 +17,18 @@ describe('The calendar factory', () => {
 
     expect(result).toBeInstanceOf(CalendarApp)
   })
+
+  it('should throw an error if initializing with double plugin lists', () => {
+    const underTest = createCalendar
+
+    expect(() => {
+      underTest(
+        {
+          views: [viewMonthGrid],
+          plugins: [],
+        },
+        []
+      )
+    }).toThrow()
+  })
 })
