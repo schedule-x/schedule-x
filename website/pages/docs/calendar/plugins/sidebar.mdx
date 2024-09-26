@@ -101,15 +101,15 @@ const sidebar = createSidebarPlugin({
   idFactory: () => uuidv4() // or any other id generator
 })
 
-const calendar = createCalendar({
-  // ... other configuration
-  plugins: [
+const calendar = createCalendar(
+  { /* config */ },
+  [
     eventsService,
     sidebar,
     interactiveEventModal,
     createDragToCreatePlugin(/* drag-to-create options */)
   ]
-})
+)
 
 calendar.render(document.getElementById('your-calendar-wrapper'))
 

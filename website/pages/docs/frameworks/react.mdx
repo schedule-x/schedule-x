@@ -12,8 +12,10 @@ configuring and interacting with the calendar, refer to the rest of the calendar
 
 ## Installing
 
+In this example we will set up a calendar with the default theme, and a plugin for retrieving and updating events.
+
 ```bash copy
-npm install @schedule-x/react @schedule-x/theme-default
+npm install @schedule-x/react @schedule-x/theme-default @schedule-x/events-service
 ```
 
 If you're using a package manager that does not automatically
@@ -46,27 +48,6 @@ import {Callout} from "nextra/components";
     <NextjsExample />
   </Tabs.Tab>
 </Tabs>
-
-### Explanation
-
-#### Dependencies
-
-From `@schedule-x/react` you need to import the `Calendar` component and the `useCalendarApp` hook.  If you are
-working with an SSR framework, you will need to use the `useNextCalendarApp` instead. From `@schedule-x/calendar` you
-need to import the views you want to use. This example uses all the available default views. Lastly, from
-`@schedule-x/theme-default` you import the default theme.
-
-#### Calendar app
-
-The `useCalendarApp` takes a [configuration object](/docs/calendar/configuration) as its single argument, and returns an
-instance of the calendar app. This instance contains some methods that you can use to interact with
-the calendar events and toggle between light and dark mode.
-
-#### Calendar component
-
-After configuring the calendar instance to your liking, you can pass it to the `Calendar` component as a prop. The
-component will then take care of rendering the calendar and all its views, meaning you should not call the `render`
-method on your own, as documented in other parts of this site.
 
 ## Styles
 

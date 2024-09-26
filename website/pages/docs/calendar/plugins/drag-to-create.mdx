@@ -82,20 +82,20 @@ const onAddEvent = (event) => {
 
 const dragToCreatePlugin = createDragToCreatePlugin({ onAddEvent })
 
-const eventPlaceholder = document.getElementById('event-placeholder')
-eventPlaceholder.addEventListener('dragstart', () => {
-  dragToCreatePlugin.dragToCreate('yourEventId123', {
-    title: '(No title)',
-    calendarId: 'leisure',
-  })
-})
-
-const calendar = createCalendar({
-  // ... other configuration
-  plugins: [
+const calendar = createCalendar(
+  { /* config */ },
+  [
     createEventsServicePlugin(),
     dragToCreatePlugin,
   ]
+)
+
+const eventPlaceholder = document.getElementById('event-placeholder')
+eventPlaceholder.addEventListener('dragstart', () => {
+  calendar.dragToCreate.dragToCreate('yourEventId123', {
+    title: '(No title)',
+    calendarId: 'leisure',
+  })
 })
 
 calendar.render(document.getElementById('your-calendar-wrapper'))
