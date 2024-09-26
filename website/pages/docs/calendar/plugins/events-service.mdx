@@ -44,7 +44,9 @@ Sets all events in the calendar. This will override all existing events in the c
 ```js
 import { createEventsServicePlugin } from '@schedule-x/events-service'
 
-const eventsServicePlugin = createEventsServicePlugin();const calendar = createCalendar(
+const eventsServicePlugin = createEventsServicePlugin();
+
+const calendar = createCalendar(
   { /* config */ },
   [eventsServicePlugin]
 )
