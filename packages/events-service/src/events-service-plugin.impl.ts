@@ -4,9 +4,10 @@ import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/ev
 import EventsFacadeImpl from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.impl'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class EventsServicePluginImpl implements PluginBase {
-  name = 'EventsServicePlugin'
+  name = 'eventsService'
   $app!: CalendarAppSingleton
   eventsFacade!: EventsFacade
 
@@ -43,5 +44,5 @@ class EventsServicePluginImpl implements PluginBase {
 }
 
 export const createEventsServicePlugin = () => {
-  return new EventsServicePluginImpl()
+  return definePlugin('eventsService', new EventsServicePluginImpl())
 }

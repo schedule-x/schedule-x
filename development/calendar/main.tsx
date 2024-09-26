@@ -27,6 +27,7 @@ import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
 import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
+import { calendarKyKG } from '@schedule-x/translations/src/locales/ky-KG/calendar.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -67,19 +68,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
-const eventRecurrencePlugin = createEventRecurrencePlugin()
 let calendarControlsPlugin1 = createCalendarControlsPlugin()
-const plugins = [
-  createDragAndDropPlugin(),
-  createEventModalPlugin(),
-  eventsServicePlugin,
-  scrollControllerPlugin,
-  createResizePlugin(30),
-  eventRecurrencePlugin,
-  calendarControlsPlugin,
-  calendarsUpdaterPlugin,
-  createCurrentTimePlugin(),
-]
 
 let dragAndDropPlugin1 = createDragAndDropPlugin()
 const calendar = createCalendar({
@@ -294,12 +283,25 @@ const calendar = createCalendar({
       id: 874367853,
     },
   ],
-}, [dragAndDropPlugin1, calendarControlsPlugin1, createScrollControllerPlugin()])
+}, [
+  createDragAndDropPlugin(),
+  createCalendarControlsPlugin(),
+  createScrollControllerPlugin(),
+  createEventsServicePlugin(),
+  createCurrentTimePlugin(),
+  createEventModalPlugin(),
+  createEventRecurrencePlugin(),
+  createResizePlugin(),
+])
 calendar.render(calendarElement)
 
 console.log(calendar.scrollController.scrollTo)
 console.log(calendar.dragAndDrop.getTimePointsForIntervalConfig)
 console.log(calendar.calendarControls)
+console.log(calendar.eventsService.getAll())
+console.log(calendar.resize.minutesPerInterval)
+console.log(calendar.eventRecurrence.updateRecurrenceOnResize)
+console.log(calendar.eventModal.close)
 
 // const calendar2Element = document.getElementById('calendar-2') as HTMLElement
 // const calendar2 = createCalendar({

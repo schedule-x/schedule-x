@@ -126,6 +126,6 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   getRange = (): DateRange | null => this.$app.calendarState.range.value
 }
 
-export const createCalendarControlsPlugin = (): CalendarControlsPlugin => {
+export const createCalendarControlsPlugin = () => {
   return definePlugin('calendarControls', new CalendarControlsPluginImpl())
 }

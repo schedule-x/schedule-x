@@ -13,7 +13,7 @@ import { PluginBase } from '@schedule-x/shared/src'
 
 export const createCalendarAppSingleton = (
   config: CalendarConfigExternal,
-  plugins: PluginBase<any>[]
+  plugins: PluginBase<string>[]
 ) => {
   const internalConfig = createInternalConfig(config, plugins)
   const timeUnitsImpl = createTimeUnitsImpl(internalConfig)
@@ -50,11 +50,11 @@ export type Plugin<Name extends string> = {
   name: Name
 }
 
-type CalendarAppWithPlugins<Plugins extends PluginBase<any>[]> = {
+type CalendarAppWithPlugins<Plugins extends PluginBase<string>[]> = {
   [Name in Plugins[number]['name']]: Extract<Plugins[number], { name: Name }>
 }
 
-export const createCalendar = <Plugins extends PluginBase<any>[]>(
+export const createCalendar = <Plugins extends PluginBase<string>[]>(
   config: CalendarConfigExternal,
   plugins?: Plugins
 ) => {
