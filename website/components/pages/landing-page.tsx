@@ -20,14 +20,6 @@ export default function LandingPage() {
           <span className={'headingGradient'}>The modern</span> JavaScript event calendar
         </h1>
 
-        <a
-          href="https://www.producthunt.com/posts/schedule-x?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-schedule&#0045;x"
-          target="_blank"><img
-          src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=487112&theme=light"
-          alt="Schedule&#0045;X - Material&#0032;Design&#0032;Event&#0032;Calendar&#0032;–&#0032;Schedule&#0045;X | Product Hunt"
-          style={{ width: '250px', height: '54px', marginTop: '2.5rem', marginBottom: '3rem', filter: 'hue-rotate(250deg) saturate(70%) brightness(100%)' }} width="250" height="54"/>
-        </a>
-
         <h2>
           Ship an event calendar with ease, regardless of tech-stack. Modern alternative to FullCalendar.
         </h2>
