@@ -7,8 +7,11 @@ import { viewMonthGrid } from '../../../views/month-grid'
 export const __createAppWithViews__ = (
   config: Partial<CalendarConfigExternal> = {}
 ) => {
-  return createCalendarAppSingleton({
-    views: [viewDay, viewWeek, viewMonthGrid],
-    ...config,
-  })
+  return createCalendarAppSingleton(
+    {
+      views: [viewDay, viewWeek, viewMonthGrid],
+      ...config,
+    },
+    config.plugins || []
+  )
 }

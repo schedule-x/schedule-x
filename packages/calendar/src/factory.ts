@@ -59,6 +59,6 @@ export const createCalendar = <Plugins extends PluginBase<string>[]>(
   plugins?: Plugins
 ) => {
   return new CalendarApp(
-    createCalendarAppSingleton(config, plugins || [])
+    createCalendarAppSingleton(config, plugins || config.plugins || [])
   ) as CalendarApp & CalendarAppWithPlugins<Plugins>
 }

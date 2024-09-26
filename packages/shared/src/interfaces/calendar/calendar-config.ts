@@ -104,6 +104,7 @@ export interface CalendarConfigExternal
   dayBoundaries?: DayBoundariesExternal
   views: [View, ...View[]]
   selectedDate?: string
+  plugins?: PluginBase[]
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
   isDark?: boolean
