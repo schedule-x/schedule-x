@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/schedule-x/schedule-x/compare/v2.2.0...v2.2.1) (2024-09-27)
+
+### Bug Fixes
+
+- plugin type declarations ([#705](https://github.com/schedule-x/schedule-x/issues/705)) ([53e3796](https://github.com/schedule-x/schedule-x/commit/53e379692d4ba253dc696868af74490cc49e39a0))
+
 # [2.2.0](https://github.com/schedule-x/schedule-x/compare/v2.1.0...v2.2.0) (2024-09-26)
 
 ### Features

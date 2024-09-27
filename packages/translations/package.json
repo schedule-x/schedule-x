@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/translations",
   "umdName": "SXTranslations",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Schedule-X translations",
   "author": {
     "name": "Tom Österlund",
