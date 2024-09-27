@@ -61,5 +61,10 @@ class ResizePluginImpl implements ResizePlugin {
 }
 
 export const createResizePlugin = (minutesPerInterval = 15) => {
-  return definePlugin('resize', new ResizePluginImpl(minutesPerInterval))
+  return definePlugin(
+    'resize',
+    new ResizePluginImpl(minutesPerInterval)
+  ) as ResizePluginImpl & {
+    name: 'resize'
+  }
 }
