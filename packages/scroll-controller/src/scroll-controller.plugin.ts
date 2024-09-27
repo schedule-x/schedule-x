@@ -115,5 +115,10 @@ class ScrollControllerPlugin implements PluginBase<string> {
 export const createScrollControllerPlugin = (
   config: ScrollControllerConfig = {}
 ) => {
-  return definePlugin('scrollController', new ScrollControllerPlugin(config))
+  return definePlugin(
+    'scrollController',
+    new ScrollControllerPlugin(config)
+  ) as ScrollControllerPlugin & {
+    name: PluginName.ScrollController
+  }
 }

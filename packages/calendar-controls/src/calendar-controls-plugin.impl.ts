@@ -127,5 +127,10 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 }
 
 export const createCalendarControlsPlugin = () => {
-  return definePlugin('calendarControls', new CalendarControlsPluginImpl())
+  return definePlugin(
+    'calendarControls',
+    new CalendarControlsPluginImpl()
+  ) as CalendarControlsPluginImpl & {
+    name: PluginName.CalendarControls
+  }
 }

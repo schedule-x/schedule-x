@@ -66,5 +66,7 @@ export const createDragAndDropPlugin = (minutesPerInterval = 15) => {
   return definePlugin(
     'dragAndDrop',
     new DragAndDropPluginImpl(minutesPerInterval)
-  )
+  ) as DragAndDropPluginImpl & {
+    name: PluginName.DragAndDrop
+  }
 }

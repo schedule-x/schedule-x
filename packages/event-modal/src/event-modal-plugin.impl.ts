@@ -28,5 +28,8 @@ class EventModalPluginImpl implements EventModalPlugin {
 }
 
 export const createEventModalPlugin = () => {
-  return definePlugin('eventModal', new EventModalPluginImpl())
+  return definePlugin(
+    'eventModal',
+    new EventModalPluginImpl()
+  ) as EventModalPlugin & { name: PluginName.EventModal }
 }
