@@ -306,6 +306,37 @@ describe('createCalendarControlsPlugin', () => {
       expect(controlsPlugin.getWeekOptions()).toEqual(newWeekOptions)
       expect($app.config.weekOptions.value).toEqual(newWeekOptions)
     })
+
+    it('should set a partial week options object', () => {
+      const controlsPlugin = createCalendarControlsPlugin()
+      const initialWeekOptions: WeekOptions = {
+        nDays: 7,
+        eventWidth: 100,
+        gridHeight: 200,
+        timeAxisFormatOptions: { hour: 'numeric' },
+      }
+      const $app = __createAppWithViews__({
+        plugins: [controlsPlugin],
+        selectedDate: '2021-01-01',
+        defaultView: InternalViewName.Week,
+        weekOptions: initialWeekOptions,
+      })
+      controlsPlugin.onRender($app)
+
+      expect(controlsPlugin.getWeekOptions()).toEqual(initialWeekOptions)
+
+      const newWeekOptions: Partial<WeekOptions> = {
+        nDays: 3,
+        eventWidth: 200,
+      }
+      controlsPlugin.setWeekOptions(newWeekOptions)
+      expect(controlsPlugin.getWeekOptions()).toEqual({
+        nDays: 3,
+        eventWidth: 200,
+        gridHeight: 200,
+        timeAxisFormatOptions: { hour: 'numeric' },
+      })
+    })
   })
 
   describe('Setting/Getting the calendars', () => {

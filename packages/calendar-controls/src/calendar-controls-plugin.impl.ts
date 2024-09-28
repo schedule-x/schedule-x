@@ -77,7 +77,10 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   }
 
   setWeekOptions(weekOptions: WeekOptions) {
-    this.$app.config.weekOptions.value = weekOptions
+    this.$app.config.weekOptions.value = {
+      ...this.$app.config.weekOptions.value,
+      ...weekOptions,
+    }
   }
 
   setCalendars(calendars: Record<string, CalendarType>) {
