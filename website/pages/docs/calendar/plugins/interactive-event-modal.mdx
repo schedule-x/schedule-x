@@ -171,6 +171,47 @@ fields: {
 | people         |                                                                   |
 | calendarId     |                                                                   |
 
+### Custom fields
+
+Additional to the default fields, you can add custom fields to a `customFields` property. The fields of this property
+follow the same structure as the default fields, but additionally you need to add one of the supported types: `text`,
+`textarea`, `select` or `combobox`. For example:
+
+```ts
+import { createCalendar } from '@schedule-x/calendar'
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+
+import '@sx-premium/interactive-event-modal/index.css'
+
+const eventsService = createEventsServicePlugin()
+
+const eventModal = createInteractiveEventModal({
+  eventsService,
+
+  fields: {
+    title: {},
+  },
+
+  customFields: {
+    additionalNotes: {
+      label: 'Additional notes',
+      name: 'additional-notes',
+      type: 'textarea',
+      validator: (value) => {
+        return {
+          isValid: !!value && value.length >= 3,
+          message: 'Custom field must be at least 3 characters long'
+        }
+      }
+    }
+  }
+})
+```
+
+If you need to display these custom fields in the view mode of the modal, you can write a custom component for
+`interactiveModalAdditionalFields`, which then receives `calendarEvent` as a prop. View the docs for your framework
+(Vue, React etc.) to learn how custom components work in Schedule-X.
 
 ## Changelog
 
