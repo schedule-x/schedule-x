@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/schedule-x/schedule-x/compare/v2.2.1...v2.3.0) (2024-10-01)
+
+### Bug Fixes
+
+- **calendar-controls:** enable overriding parts of week options ([#707](https://github.com/schedule-x/schedule-x/issues/707)) ([5ce464e](https://github.com/schedule-x/schedule-x/commit/5ce464e434c9069aca212a6cc947e495f8f2f5e6))
+
+### Features
+
+- add custom component typing for interactive modal ([#710](https://github.com/schedule-x/schedule-x/issues/710)) ([805b432](https://github.com/schedule-x/schedule-x/commit/805b4320e6e6ccd93a3ed36e9ad738102dd94e1c))
+
 ## [2.2.1](https://github.com/schedule-x/schedule-x/compare/v2.2.0...v2.2.1) (2024-09-27)
 
 ### Bug Fixes
