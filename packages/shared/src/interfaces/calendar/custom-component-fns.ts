@@ -11,4 +11,5 @@ export type CustomComponentFns = {
   headerContentRightPrepend?: CustomComponentFn
   headerContentRightAppend?: CustomComponentFn
   headerContent?: CustomComponentFn
+  interactiveModalAdditionalFields?: CustomComponentFn
 }
