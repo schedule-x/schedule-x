@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/schedule-x/schedule-x/compare/v2.3.0...v2.4.0) (2024-10-04)
+
+### Features
+
+- add serbian translations ([#714](https://github.com/schedule-x/schedule-x/issues/714)) ([e941cce](https://github.com/schedule-x/schedule-x/commit/e941ccea52d9b529e5bf83f4857cf83ce0bdb468))
+
 # [2.3.0](https://github.com/schedule-x/schedule-x/compare/v2.2.1...v2.3.0) (2024-10-01)
 
 ### Bug Fixes
