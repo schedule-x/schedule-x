@@ -11,6 +11,7 @@ const createOneDay = (week: Week, date: Date) => {
     date: dateString,
     timeGridEvents: [],
     dateGridEvents: {},
+    backgroundEvents: [],
   }
 
   return week

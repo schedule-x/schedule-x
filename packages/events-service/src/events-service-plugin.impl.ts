@@ -1,13 +1,14 @@
-import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.interface'
 import EventsFacadeImpl from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.impl'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import { EventsService } from '@schedule-x/shared/src/interfaces/events-service/events-service.interface'
+import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
-class EventsServicePluginImpl implements PluginBase<string> {
-  name = 'eventsService'
+class EventsServicePluginImpl implements EventsService {
+  name = 'EventsServicePlugin'
   $app!: CalendarAppSingleton
   eventsFacade!: EventsFacade
 
@@ -40,6 +41,10 @@ class EventsServicePluginImpl implements PluginBase<string> {
 
   set(events: CalendarEventExternal[]) {
     this.eventsFacade.set(events)
+  }
+
+  setBackgroundEvents(backgroundEvents: BackgroundEvent[]): void {
+    this.$app.calendarEvents.backgroundEvents.value = backgroundEvents
   }
 }
 

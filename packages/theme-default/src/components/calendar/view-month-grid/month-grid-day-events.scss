@@ -16,6 +16,7 @@
   font-size: clamp(12px, var(--sx-font-extra-small), 14px);
   overflow: hidden;
   white-space: nowrap;
+  z-index: 1;
 }
 
 .sx__month-grid-event-time {

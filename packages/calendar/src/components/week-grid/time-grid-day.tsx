@@ -13,13 +13,20 @@ import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/da
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
 import { toJSDate } from '@schedule-x/shared/src'
 import { useSignalEffect } from '@preact/signals'
+import TimeGridBackgroundEvent from './background-event'
+import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
+  backgroundEvents: BackgroundEvent[]
   date: string
 }
 
-export default function TimeGridDay({ calendarEvents, date }: props) {
+export default function TimeGridDay({
+  calendarEvents,
+  date,
+  backgroundEvents,
+}: props) {
   /**
    * The time grid day needs to keep track of whether the mousedown event happened on a calendar event, in order to prevent
    * click events from firing when dragging an event.
@@ -100,6 +107,12 @@ export default function TimeGridDay({ calendarEvents, date }: props) {
       onMouseUp={handlePointerUp}
       onTouchEnd={handlePointerUp}
     >
+      {backgroundEvents.map((event) => (
+        <>
+          <TimeGridBackgroundEvent backgroundEvent={event} date={date} />
+        </>
+      ))}
+
       {eventsWithConcurrency.map((event) => (
         <TimeGridEvent
           key={event.id}

@@ -13,7 +13,9 @@ import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/de
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
+
   private $app: CalendarAppSingleton | null = null
+
   onRender($app: CalendarAppSingleton): void {
     this.$app = $app
     this.createRecurrencesForEvents()
