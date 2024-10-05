@@ -82,10 +82,10 @@ const config: DocsThemeConfig = {
   //   )
   // }
   banner: {
-      key: 'v2-1.0',
+      key: 'resource-v1',
       text: (
-        <a href="/docs/migration-v2">
-          v2 is now here 🎉 Click here for the migration guide!
+        <a href="/docs/calendar/resource-scheduler">
+          Resource scheduler just got released 🎉 Limited offer: 20% off using code Y3NDE5NW
         </a>
       )
     }

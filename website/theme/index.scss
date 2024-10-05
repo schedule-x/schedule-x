@@ -100,10 +100,6 @@ html {
 
 .sx-react-calendar-wrapper {
   :has(.sx__resource-view) {
-    .sx__view-selection {
-      display: none;
-    }
-
     .sx__is-calendar-small .sx__today-button {
       display: initial;
     }

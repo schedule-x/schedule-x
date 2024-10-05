@@ -153,7 +153,7 @@ export default function LandingPage() {
 
             <video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={1000}
                    height={390}>
-              <source src={'/videos/premium-demo.mp4'} type={'video/mp4'}/>
+              <source src={'https://d19hgxvhjb2new.cloudfront.net/website/premium-demo.mp4'} type={'video/mp4'}/>
             </video>
           </div>
         </section>

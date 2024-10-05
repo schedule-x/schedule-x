@@ -37,7 +37,7 @@ export default function PremiumPage() {
 
           <video autoPlay loop playsInline muted id={'demo'} className="premiumPageDemoVideo" width={1000}
                  height={390}>
-            <source src={'/videos/premium-demo.mp4'} type={'video/mp4'}/>
+            <source src={'https://d19hgxvhjb2new.cloudfront.net/website/premium-demo.mp4'} type={'video/mp4'}/>
           </video>
         </section>
 
