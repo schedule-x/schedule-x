@@ -104,7 +104,7 @@ const datePickerTranslations = {
   etEE: datePickerEtEE,
   ukUA: datePickerUkUA,
   caES: datePickerCaES,
-  srRs: datePickerSrRs
+  srRs: datePickerSrRs,
 }
 
 export {
@@ -135,5 +135,5 @@ export {
   etEE,
   ukUA,
   caES,
-  srRs
+  srRs,
 }

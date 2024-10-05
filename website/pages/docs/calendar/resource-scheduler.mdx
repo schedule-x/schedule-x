@@ -10,13 +10,7 @@ A view for displaying resources (people, rooms, equipment etc.) in a time grid.
 import {Callout} from "nextra/components";
 
 <Callout type="info">
-  This is a premium plugin which requires an active subscription to be used. Learn more at [Schedule-X premium](/premium).
-</Callout>
-
-<Callout emoji="❗">
-  This view is still in a beta version. It is not recommended to be used in production apps until the stable version
-  is released (October 2024). You can, however, already implement this in dev environments, in order to have as much as possible in place before
-  the stable version is released.
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
 </Callout>
 
 ## Features & demo
@@ -34,7 +28,7 @@ import FeaturesList from "../../../components/partials/features-list/features-li
 <br />
 
 <video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
-  <source src={'/videos/resource-demo.mp4'} type={'video/mp4'} />
+  <source src={'https://d19hgxvhjb2new.cloudfront.net/website/resource-demo.mp4'} type={'video/mp4'} />
 </video>
 
 ## 2. Installation
@@ -57,15 +51,17 @@ npm install @sx-premium/resource-scheduler
 import { createCalendar } from '@schedule-x/calendar'
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
-import { createResourceView } from "@sx-premium/resource-scheduler";
+import { createHourlyView, createDailyView, createConfig } from "@sx-premium/resource-scheduler";
 
 import '@sx-premium/resource-scheduler/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
 import '@schedule-x/theme-default/dist/time-picker.css'
 
-const resourceView = createResourceView()
+const resourceConfig = createConfig();
+const hourlyView = createHourlyView(resourceConfig);
+const dailyView = createDailyView(resourceConfig);
 
-resourceView.config.resources.value = [
+resourceConfig.resources.value = [
   {
     label: 'Room 100',
     id: '1'
@@ -120,7 +116,7 @@ const calendar = createCalendar({
       resourceId: '2'
     }
   ],
-  views: [resourceView],
+  views: [hourlyView, dailyView],
   plugins: [
     eventsService,
     interactiveEventModal
