@@ -69,6 +69,10 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   text-overflow: ellipsis;
   overflow-x: hidden;
   white-space: nowrap;
+
+  .sx__date-grid-event-time {
+    font-weight: initial;
+  }
 }
 
 .sx__date-grid-cell {

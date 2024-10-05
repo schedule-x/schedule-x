@@ -1,11 +1,11 @@
 {
-  "index": {
-    "title": "Start"
-  },
   "calendar": {
     "title": "Calendar"
   },
   "frameworks": {
     "title": "Frameworks"
+  },
+  "migration-v2": {
+    "title": "Migration guide: v2"
   }
 }

@@ -90,12 +90,6 @@ const config = {
     * Default: { hour: 'numeric' }
     */
     timeAxisFormatOptions: { hour: '2-digit', minute: '2-digit' },
-
-    /**
-    * Show the location of the events in the week grid
-    * Defaults to false
-    */
-    showLocation: true,
   },
 
   monthGridOptions: {
@@ -195,7 +189,22 @@ const config = {
      * */
     isCalendarSmall($app) {
       return $app.elements.calendarWrapper?.clientWidth! < 500
-    }
+    },
+
+    /**
+     * Runs before the calendar is rendered
+     * */
+    beforeRender($app) {
+      const range = $app.calendarState.range.value
+      fetchYourEventsFor(range.start, range.end)
+    },
+
+    /**
+     * Runs after the calendar is rendered
+     * */
+    onRender($app) {
+      console.log('onRender', $app)
+    },
   },
 }
 

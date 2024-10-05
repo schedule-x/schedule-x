@@ -1,3 +1,8 @@
+---
+title: 'Current time plugin'
+description: 'Add a current time indicator to the calendar.'
+---
+
 # Current time indicator
 
 This plugin adds a current time indicator to the calendar. It will automatically update every minute.
@@ -15,10 +20,10 @@ npm i @schedule-x/current-time
 ```js
 import { createCurrentTimePlugin } from '@schedule-x/current-time'
 
-const calendar = createCalendar({
-  // ...other configuration
-  plugins: [createCurrentTimePlugin()],
-})
+const calendar = createCalendar(
+  { /* calendar config */ },
+  [createCurrentTimePlugin()]
+)
 ```
 
 ## Configuration

@@ -17,7 +17,7 @@ const getRangeStartGivenDayBoundaries = (
   date: Date
 ) => {
   return `${toDateString(date)} ${timeStringFromTimePoints(
-    calendarConfig.dayBoundaries.start
+    calendarConfig.dayBoundaries.value.start
   )}`
 }
 
@@ -26,13 +26,13 @@ const getRangeEndGivenDayBoundaries = (
   date: Date
 ) => {
   let dayEndTimeString = timeStringFromTimePoints(
-    calendarConfig.dayBoundaries.end
+    calendarConfig.dayBoundaries.value.end
   )
   let newRangeEndDate = toDateString(date)
   if (calendarConfig.isHybridDay) {
     newRangeEndDate = addDays(newRangeEndDate, 1)
   }
-  if (calendarConfig.dayBoundaries.end === 2400) {
+  if (calendarConfig.dayBoundaries.value.end === 2400) {
     dayEndTimeString = '23:59'
   }
   return `${newRangeEndDate} ${dayEndTimeString}`
@@ -41,7 +41,7 @@ const getRangeEndGivenDayBoundaries = (
 export const setRangeForWeek = (config: RangeSetterConfig): DateRange => {
   const weekForDate = config.timeUnitsImpl
     .getWeekFor(toJSDate(config.date))
-    .slice(0, config.calendarConfig.weekOptions.nDays)
+    .slice(0, config.calendarConfig.weekOptions.value.nDays)
 
   return {
     start: getRangeStartGivenDayBoundaries(

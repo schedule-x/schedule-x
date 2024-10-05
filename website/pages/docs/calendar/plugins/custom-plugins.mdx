@@ -1,7 +1,12 @@
+---
+title: 'Custom plugins'
+description: 'Write your own plugins to extend the functionality of the calendar.'
+---
+
 # Write your own plugin
 
-A plugin can be any object that has a `name` property, and an `init` method. The `$app` object, the "control center"
-object of the calendar, is then received as the first argument of the `init` method. This gives you access to most
+A plugin can be any object that has a `name` property, and an `beforeRender` method. The `$app` object, the "control center"
+object of the calendar, is then received as the first argument of the `beforeRender` method. This gives you access to most
 of the calendar's global, internal APIs.
 
 If you're writing TypeScript, the type of this object is
@@ -12,19 +17,24 @@ study the following interface and its nested interfaces to get an idea of what's
 
 ```ts
 import { CalendarAppSingleton } from '@schedule-x/shared'
+import { createCalendar } from '@schedule-x/calendar'
 
 class LoggerPlugin {
   name = 'logger-plugin'
 
-  init($app: CalendarAppSingleton) {
+  beforeRender($app: CalendarAppSingleton) {
     $app.calendarEvents.list.value.forEach((event) => {
       console.log('init', event)
     })
   }
+
+  onRender($app: CalendarAppSingleton) {
+    console.log('do something else')
+  }
 }
 
-const calendar = createCalendar({
-  // ...other configuration
-  plugins: [new LoggerPlugin()],
-})
+const calendar = createCalendar(
+  { /* config */ },
+  [new LoggerPlugin()]
+)
 ```

@@ -1,7 +1,7 @@
 import PluginBase from '../plugin.interface'
 import { CalendarEventInternal } from '../calendar/calendar-event.interface'
 
-export interface ResizePlugin extends PluginBase {
+export interface ResizePlugin extends PluginBase<string> {
   createTimeGridEventResizer(
     calendarEvent: CalendarEventInternal,
     updateCopy: (newCopy: CalendarEventInternal | undefined) => void,

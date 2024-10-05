@@ -1,3 +1,8 @@
+---
+title: 'Drag and drop plugin'
+description: 'Update event time and date using a classical drag and drop.'
+---
+
 # Drag and Drop
 
 Update event time and date using a classical drag and drop. Available in all views except the month agenda view.
@@ -13,10 +18,10 @@ npm i @schedule-x/drag-and-drop
 ```js
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 
-const calendar = createCalendar({
-  // ...other configuration
-  plugins: [createDragAndDropPlugin()],
-})
+const calendar = createCalendar(
+  { /* other configuration */ },
+  [createDragAndDropPlugin()]
+)
 ```
 
 ## Configuration
@@ -26,10 +31,10 @@ You can configure the length, in minutes, of the intervals that are used when dr
 ```js
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 
-const calendar = createCalendar({
-  // ...other configuration
-  plugins: [createDragAndDropPlugin(30)], // drag 30 minute intervals
-})
+const calendar = createCalendar(
+  { /* other configuration */ },
+  [createDragAndDropPlugin(30)] // drag with 30 minutes intervals
+)
 ```
 
 Available values are `15` (default), `30` and `60`

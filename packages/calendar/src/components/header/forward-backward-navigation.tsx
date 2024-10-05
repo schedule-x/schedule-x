@@ -9,7 +9,7 @@ export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
 
   const navigate = (direction: 'forwards' | 'backwards') => {
-    const currentView = $app.config.views.find(
+    const currentView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
     if (!currentView) return
@@ -27,10 +27,10 @@ export default function ForwardBackwardNavigation() {
     setLocalizedRange(
       `${getLocalizedDate(
         $app.calendarState.range.value!.start,
-        $app.config.locale
+        $app.config.locale.value
       )} ${$app.translate('to')} ${getLocalizedDate(
         $app.calendarState.range.value!.end,
-        $app.config.locale
+        $app.config.locale.value
       )}`
     )
   })
@@ -39,7 +39,7 @@ export default function ForwardBackwardNavigation() {
   const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState('')
 
   useEffect(() => {
-    const selectedView = $app.config.views.find(
+    const selectedView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
     if (!selectedView) return
@@ -78,8 +78,9 @@ export default function ForwardBackwardNavigation() {
         <Chevron
           disabled={
             !!(
-              $app.config.minDate &&
-              dateFromDateTime(rangeEndMinusOneRange) < $app.config.minDate
+              $app.config.minDate.value &&
+              dateFromDateTime(rangeEndMinusOneRange) <
+                $app.config.minDate.value
             )
           }
           onClick={() => navigate('backwards')}
@@ -90,8 +91,9 @@ export default function ForwardBackwardNavigation() {
         <Chevron
           disabled={
             !!(
-              $app.config.maxDate &&
-              dateFromDateTime(rangeStartPlusOneRange) > $app.config.maxDate
+              $app.config.maxDate.value &&
+              dateFromDateTime(rangeStartPlusOneRange) >
+                $app.config.maxDate.value
             )
           }
           onClick={() => navigate('forwards')}

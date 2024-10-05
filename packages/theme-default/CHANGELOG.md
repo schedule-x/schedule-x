@@ -3,11 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.62.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0-alpha.0) (2024-09-06)
+# [2.4.0](https://github.com/schedule-x/schedule-x/compare/v2.3.0...v2.4.0) (2024-10-04)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [2.3.0](https://github.com/schedule-x/schedule-x/compare/v2.2.1...v2.3.0) (2024-10-01)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [2.2.1](https://github.com/schedule-x/schedule-x/compare/v2.2.0...v2.2.1) (2024-09-27)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [2.2.0](https://github.com/schedule-x/schedule-x/compare/v2.1.0...v2.2.0) (2024-09-26)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [2.1.0](https://github.com/schedule-x/schedule-x/compare/v2.0.0...v2.1.0) (2024-09-24)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [2.0.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.64.0-alpha.0...v2.0.0-alpha.0) (2024-09-19)
 
 ### Features
 
-- background events in day, week and month views ([33024e0](https://github.com/schedule-x/schedule-x/commit/33024e034a79043f67387960ebc01fe179efe04e))
+- changes on ui of events and calendar header ([159f9c8](https://github.com/schedule-x/schedule-x/commit/159f9c8013a8ef81ac1884e6d65ec49df9584a6c))
+
+### BREAKING CHANGES
+
+- add time, if existing, to month grid events
+- add time, if existing, to date grid events
+- view location in time grid events by default, removing showLocation option
+- hide view selection when only one view is available
+
+# [1.64.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.63.1...v1.64.0-alpha.0) (2024-09-17)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+## [1.63.1](https://github.com/schedule-x/schedule-x/compare/v1.63.0...v1.63.1) (2024-09-12)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.63.0](https://github.com/schedule-x/schedule-x/compare/v1.62.0...v1.63.0) (2024-09-09)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [1.62.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0) (2024-09-07)
+
+**Note:** Version bump only for package @schedule-x/theme-default
 
 # [1.61.0](https://github.com/schedule-x/schedule-x/compare/v1.60.1...v1.61.0) (2024-09-04)
 

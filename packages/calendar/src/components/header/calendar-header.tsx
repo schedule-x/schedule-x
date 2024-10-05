@@ -19,6 +19,10 @@ export default function CalendarHeader() {
     .withTimeUnitsImpl($app.timeUnitsImpl)
     .build()
 
+  const headerContent = $app.config._customComponentFns.headerContent
+  const headerContentId = useState(
+    headerContent ? randomStringId() : undefined
+  )[0]
   const headerContentLeftPrepend =
     $app.config._customComponentFns.headerContentLeftPrepend
   const headerContentLeftPrependId = useState(
@@ -41,6 +45,9 @@ export default function CalendarHeader() {
   )[0]
 
   useEffect(() => {
+    if (headerContent) {
+      headerContent(getElementByCCID(headerContentId), {})
+    }
     if (headerContentLeftPrepend && headerContentLeftPrependId) {
       headerContentLeftPrepend(getElementByCCID(headerContentLeftPrependId), {})
     }
@@ -58,37 +65,47 @@ export default function CalendarHeader() {
     }
   }, [])
 
+  const keyForRerenderingOnLocaleChange = $app.config.locale.value
+
   return (
-    <header className={'sx__calendar-header'}>
-      <div className={'sx__calendar-header-content'}>
-        {headerContentLeftPrependId && (
-          <div data-ccid={headerContentLeftPrependId} />
-        )}
+    <header className={'sx__calendar-header'} data-ccid={headerContentId}>
+      {!headerContent && (
+        <>
+          <div className={'sx__calendar-header-content'}>
+            {headerContentLeftPrependId && (
+              <div data-ccid={headerContentLeftPrependId} />
+            )}
 
-        <TodayButton />
+            <TodayButton />
 
-        <ForwardBackwardNavigation />
+            <ForwardBackwardNavigation />
 
-        <RangeHeading />
+            <RangeHeading />
 
-        {headerContentLeftAppendId && (
-          <div data-ccid={headerContentLeftAppendId} />
-        )}
-      </div>
+            {headerContentLeftAppendId && (
+              <div data-ccid={headerContentLeftAppendId} />
+            )}
+          </div>
 
-      <div className={'sx__calendar-header-content'}>
-        {headerContentRightPrependId && (
-          <div data-ccid={headerContentRightPrependId} />
-        )}
+          <div className={'sx__calendar-header-content'}>
+            {headerContentRightPrependId && (
+              <div data-ccid={headerContentRightPrependId} />
+            )}
 
-        <ViewSelection />
+            {$app.config.views.value.length > 1 && (
+              <ViewSelection
+                key={keyForRerenderingOnLocaleChange + '-view-selection'}
+              />
+            )}
 
-        <AppWrapper $app={datePickerAppSingleton}></AppWrapper>
+            <AppWrapper $app={datePickerAppSingleton}></AppWrapper>
 
-        {headerContentRightAppendId && (
-          <div data-ccid={headerContentRightAppendId} />
-        )}
-      </div>
+            {headerContentRightAppendId && (
+              <div data-ccid={headerContentRightAppendId} />
+            )}
+          </div>
+        </>
+      )}
     </header>
   )
 }

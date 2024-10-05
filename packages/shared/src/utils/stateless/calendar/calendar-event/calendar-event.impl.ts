@@ -34,6 +34,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     public description?: string,
     public calendarId?: string,
     public _options: CalendarEventOptions | undefined = undefined,
+    public _customContent: CalendarEventInternal['_customContent'] = {},
     private _foreignProperties: Record<string, unknown> = {}
   ) {}
 
@@ -84,7 +85,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     )
     if (startDate !== endDate && startDate !== endDateMinusOneDay) return false
 
-    const dayBoundaries = this._config.dayBoundaries
+    const dayBoundaries = this._config.dayBoundaries.value
     const eventStartTimePoints = timePointsFromString(
       timeFromDateTime(this.start)
     )

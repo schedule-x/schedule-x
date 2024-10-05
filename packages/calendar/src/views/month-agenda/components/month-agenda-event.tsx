@@ -7,6 +7,8 @@ import useEventInteractions from '../../../utils/stateful/hooks/use-event-intera
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../../utils/stateless/events/focus-modal'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -45,8 +47,13 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
       invokeOnEventClickCallback($app, calendarEvent)
+      nextTick(() => {
+        focusModal($app)
+      })
     }
   }
+
+  const hasCustomContent = calendarEvent._customContent?.monthAgenda
 
   return (
     <div
@@ -66,7 +73,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
       tabIndex={0}
       role="button"
     >
-      {!customComponent && (
+      {!customComponent && !hasCustomContent && (
         <Fragment>
           <div className="sx__month-agenda-event__title">
             {calendarEvent.title}
@@ -77,9 +84,21 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
               strokeColor={`var(--sx-color-on-${calendarEvent._color}-container)`}
             />
 
-            {getTimeStamp(calendarEvent, $app.config.locale)}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: getTimeStamp(calendarEvent, $app.config.locale.value),
+              }}
+            ></div>
           </div>
         </Fragment>
+      )}
+
+      {hasCustomContent && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: calendarEvent._customContent?.monthAgenda || '',
+          }}
+        />
       )}
     </div>
   )

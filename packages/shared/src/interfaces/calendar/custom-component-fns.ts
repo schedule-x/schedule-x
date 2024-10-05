@@ -10,4 +10,6 @@ export type CustomComponentFns = {
   headerContentLeftAppend?: CustomComponentFn
   headerContentRightPrepend?: CustomComponentFn
   headerContentRightAppend?: CustomComponentFn
+  headerContent?: CustomComponentFn
+  interactiveModalAdditionalFields?: CustomComponentFn
 }

@@ -13,14 +13,14 @@ export default function AppInput() {
   const $app = useContext(AppContext)
   const getLocalizedDate = (dateString: string) => {
     if (dateString === '') return $app.translate('MM/DD/YYYY')
-    return toLocalizedDateString(toJSDate(dateString), $app.config.locale)
+    return toLocalizedDateString(toJSDate(dateString), $app.config.locale.value)
   }
 
   useEffect(() => {
     $app.datePickerState.inputDisplayedValue.value = getLocalizedDate(
       $app.datePickerState.selectedDate.value
     )
-  }, [$app.datePickerState.selectedDate.value])
+  }, [$app.datePickerState.selectedDate.value, $app.config.locale.value])
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 

@@ -1,3 +1,8 @@
+---
+title: 'Event recurrence plugin'
+description: 'Plugin for creating recurring events according to the RFC5545 specification.'
+---
+
 import {Callout} from "nextra/components";
 
 # Event recurrence
@@ -106,18 +111,18 @@ import { createEventRecurrencePlugin, createEventsServicePlugin } from "@schedul
 const recurrencePlugin = createEventRecurrencePlugin();
 const eventsServicePlugin = createEventsServicePlugin();
 
-const calendar = createCalendar({
-  // ... other config options
-  plugins: [
+const calendar = createCalendar(
+  { /* config */ },
+  [
     recurrencePlugin,
     eventsServicePlugin
   ]
-});
+);
 
 calendar.render(document.getElementById('calendar'));
 
 // Add an event
-eventsServicePlugin.add({
+calendar.eventsService.add({
   id: 1,
   title: 'New event',
   start: '2024-02-05 14:00',
@@ -126,7 +131,7 @@ eventsServicePlugin.add({
 });
 
 // Update
-eventsServicePlugin.update({
+calendar.eventsService.update({
   id: 1,
   title: 'New event',
   start: '2024-02-05 14:00',
@@ -135,13 +140,13 @@ eventsServicePlugin.update({
 })
 
 // Get one event with id 123
-const event = eventsServicePlugin.get(123);
+const event = calendar.eventsService.get(123);
 
 // Get all
-const events = eventsServicePlugin.getAll();
+const events = calendar.eventsService.getAll();
 
 // Remove an event with id 123
-eventsServicePlugin.remove(123);
+calendar.eventsService.remove(123);
 ```
 
 

@@ -25,6 +25,7 @@ import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../utils/stateless/events/focus-modal'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -50,7 +51,7 @@ export default function TimeGridEvent({
   } = useEventInteractions($app)
 
   const localizeArgs = [
-    $app.config.locale,
+    $app.config.locale.value,
     { hour: 'numeric', minute: 'numeric' },
   ] as const
   const getEventTime = (start: string, end: string) => {
@@ -70,7 +71,7 @@ export default function TimeGridEvent({
 
   const leftRule = getLeftRule(
     calendarEvent,
-    $app.config.weekOptions.eventWidth
+    $app.config.weekOptions.value.eventWidth
   )
 
   const handleStartDrag = (uiEvent: UIEvent) => {
@@ -115,6 +116,9 @@ export default function TimeGridEvent({
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
       invokeOnEventClickCallback($app, calendarEvent)
+      nextTick(() => {
+        focusModal($app)
+      })
     }
   }
 
@@ -153,6 +157,8 @@ export default function TimeGridEvent({
     setClickedEventIfNotDragging(calendarEvent, e)
   }
 
+  const hasCustomContent = calendarEvent._customContent?.timeGrid
+
   return (
     <>
       <div
@@ -172,17 +178,17 @@ export default function TimeGridEvent({
         style={{
           top: `${getYCoordinateInTimeGrid(
             calendarEvent.start,
-            $app.config.dayBoundaries,
+            $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
             calendarEvent.start,
             calendarEvent.end,
-            $app.config.dayBoundaries,
+            $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
-          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.eventWidth)}%`,
+          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.value.eventWidth)}%`,
           backgroundColor: customComponent
             ? undefined
             : eventCSSVariables.backgroundColor,
@@ -200,7 +206,7 @@ export default function TimeGridEvent({
           data-ccid={customComponentId}
           className="sx__time-grid-event-inner"
         >
-          {!customComponent && (
+          {!customComponent && !hasCustomContent && (
             <Fragment>
               {calendarEvent.title && (
                 <div className="sx__time-grid-event-title">
@@ -220,16 +226,21 @@ export default function TimeGridEvent({
                 </div>
               )}
 
-              {calendarEvent.location &&
-                $app.config.weekOptions.showLocation && (
-                  <div className="sx__time-grid-event-location">
-                    <LocationPinIcon
-                      strokeColor={eventCSSVariables.iconStroke}
-                    />
-                    {calendarEvent.location}
-                  </div>
-                )}
+              {calendarEvent.location && (
+                <div className="sx__time-grid-event-location">
+                  <LocationPinIcon strokeColor={eventCSSVariables.iconStroke} />
+                  {calendarEvent.location}
+                </div>
+              )}
             </Fragment>
+          )}
+
+          {hasCustomContent && (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: calendarEvent._customContent?.timeGrid || '',
+              }}
+            />
           )}
 
           {$app.config.plugins.resize &&

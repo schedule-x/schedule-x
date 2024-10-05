@@ -4,7 +4,7 @@ import { calendars } from './data/calendars';
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
 import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
 import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
-import {createResourceView} from "@sx-premium/resource-scheduler";
+import {createHourlyView, createDailyView, createConfig} from "@sx-premium/resource-scheduler";
 import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
 
 export default function ResourceCalendar() {
@@ -36,8 +36,11 @@ export default function ResourceCalendar() {
     }
   });
 
-  const resourceView = createResourceView();
-  resourceView.config.resources.value = [
+  const rConfig = createConfig();
+  const hourlyView = createHourlyView(rConfig);
+  const dailyView = createDailyView(rConfig);
+
+  rConfig.resources.value = [
     {
       id: 'conveyor-belt-a',
       label: 'Conveyor Belt A',
@@ -105,7 +108,7 @@ export default function ResourceCalendar() {
       }
     },
     locale: 'en-US',
-    views: [resourceView],
+    views: [hourlyView, dailyView],
     selectedDate: '2024-05-06',
     events: [
       {

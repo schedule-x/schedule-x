@@ -3,12 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.62.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0-alpha.0) (2024-09-06)
+# [2.4.0](https://github.com/schedule-x/schedule-x/compare/v2.3.0...v2.4.0) (2024-10-04)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [2.3.0](https://github.com/schedule-x/schedule-x/compare/v2.2.1...v2.3.0) (2024-10-01)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [2.2.1](https://github.com/schedule-x/schedule-x/compare/v2.2.0...v2.2.1) (2024-09-27)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [2.2.0](https://github.com/schedule-x/schedule-x/compare/v2.1.0...v2.2.0) (2024-09-26)
 
 ### Features
 
-- background events ([6e950c0](https://github.com/schedule-x/schedule-x/commit/6e950c000a0590fba96f8b2f50f04fefce28a277))
-- background events in day, week and month views ([33024e0](https://github.com/schedule-x/schedule-x/commit/33024e034a79043f67387960ebc01fe179efe04e))
+- add new plugin api on calendar instance ([#702](https://github.com/schedule-x/schedule-x/issues/702)) ([5b8caa2](https://github.com/schedule-x/schedule-x/commit/5b8caa2e09baf33a0f7151b3ac19c198301f93b6))
+
+# [2.1.0](https://github.com/schedule-x/schedule-x/compare/v2.0.0...v2.1.0) (2024-09-24)
+
+### Features
+
+- add beforeRender and onRender lifecycle methods ([#691](https://github.com/schedule-x/schedule-x/issues/691)) ([76846a2](https://github.com/schedule-x/schedule-x/commit/76846a2d923ce4c36b3da596de09d6fb1715fc55))
+
+# [2.0.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.64.0-alpha.0...v2.0.0-alpha.0) (2024-09-19)
+
+### Features
+
+- changes on ui of events and calendar header ([159f9c8](https://github.com/schedule-x/schedule-x/commit/159f9c8013a8ef81ac1884e6d65ec49df9584a6c))
+- rename APIs on plugins ([34f4400](https://github.com/schedule-x/schedule-x/commit/34f44000bd3d3e14b6644fa3d4a9102739536224))
+
+### BREAKING CHANGES
+
+- add time, if existing, to month grid events
+- add time, if existing, to date grid events
+- view location in time grid events by default, removing showLocation option
+- hide view selection when only one view is available
+
+# [1.64.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.63.1...v1.64.0-alpha.0) (2024-09-17)
+
+### Features
+
+- make config values reactive ([#662](https://github.com/schedule-x/schedule-x/issues/662)) ([0ad317d](https://github.com/schedule-x/schedule-x/commit/0ad317dcb7b831cd82de9d33b154000f4dfc1182))
+
+## [1.63.1](https://github.com/schedule-x/schedule-x/compare/v1.63.0...v1.63.1) (2024-09-12)
+
+### Bug Fixes
+
+- prevent positionInTimeGrid from crashing if given event date is not in given week object ([#658](https://github.com/schedule-x/schedule-x/issues/658)) ([bc3de01](https://github.com/schedule-x/schedule-x/commit/bc3de01dc9d64dbfebc09aee59c64782a3bbad81))
+
+# [1.63.0](https://github.com/schedule-x/schedule-x/compare/v1.62.0...v1.63.0) (2024-09-09)
+
+### Features
+
+- enable using custom content in events ([#651](https://github.com/schedule-x/schedule-x/issues/651)) ([cbe7ccb](https://github.com/schedule-x/schedule-x/commit/cbe7ccba544fae1b95546a3992c43854107930c3))
+- focus modal when opening through keyboard ([#652](https://github.com/schedule-x/schedule-x/issues/652)) ([9749c1a](https://github.com/schedule-x/schedule-x/commit/9749c1ac73d217a740bc42f936f8507dd8f196e9))
+
+# [1.62.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0) (2024-09-07)
+
+### Features
+
+- **calendar:** header content custom component ([#647](https://github.com/schedule-x/schedule-x/issues/647)) ([b302bbc](https://github.com/schedule-x/schedule-x/commit/b302bbcd15c76d10dfc51291fa4d5d490ad4ceed))
 
 # [1.61.0](https://github.com/schedule-x/schedule-x/compare/v1.60.1...v1.61.0) (2024-09-04)
 

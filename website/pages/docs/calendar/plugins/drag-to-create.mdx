@@ -1,3 +1,8 @@
+---
+title: 'Drag to create plugin'
+description: 'Create events by dragging an external placeholder element onto the calendar.'
+---
+
 # Drag to create
 
 A plugin that allows you to create events by dragging an external placeholder element onto the calendar. Has support for week, day and month-grid views.
@@ -5,7 +10,7 @@ A plugin that allows you to create events by dragging an external placeholder el
 import {Callout} from "nextra/components";
 
 <Callout type="info">
-  This is a premium plugin which requires an active subscription to be used. Learn more at [Schedule-X premium](/premium).
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
 </Callout>
 
 ## Features
@@ -18,7 +23,7 @@ import FeaturesList from "../../../../components/partials/features-list/features
 ]}/>
 
 <video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
-  <source src={'/videos/drag-to-create-feature-demo.mp4'} type={'video/mp4'} />
+  <source src={'https://d19hgxvhjb2new.cloudfront.net/website/drag-to-create-feature-demo.mp4'} type={'video/mp4'} />
 </video>
 
 ## 2. Installation
@@ -77,20 +82,20 @@ const onAddEvent = (event) => {
 
 const dragToCreatePlugin = createDragToCreatePlugin({ onAddEvent })
 
-const eventPlaceholder = document.getElementById('event-placeholder')
-eventPlaceholder.addEventListener('dragstart', () => {
-  dragToCreatePlugin.dragToCreate('yourEventId123', {
-    title: '(No title)',
-    calendarId: 'leisure',
-  })
-})
-
-const calendar = createCalendar({
-  // ... other configuration
-  plugins: [
+const calendar = createCalendar(
+  { /* config */ },
+  [
     createEventsServicePlugin(),
     dragToCreatePlugin,
   ]
+)
+
+const eventPlaceholder = document.getElementById('event-placeholder')
+eventPlaceholder.addEventListener('dragstart', () => {
+  calendar.dragToCreate.dragToCreate('yourEventId123', {
+    title: '(No title)',
+    calendarId: 'leisure',
+  })
 })
 
 calendar.render(document.getElementById('your-calendar-wrapper'))

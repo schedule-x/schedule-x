@@ -1,7 +1,40 @@
+---
+title: 'Plugins'
+description: 'Extend the calendar with additional features through plugins.'
+---
+
 # Plugins
 
 The calendar can be extended with additional features through plugins. The library offers a range of plugins that can be downloaded separately.
 You can also write your own custom plugins.
+
+## Basic example
+
+You can add plugins to the calendar, by passing them as the second argument to `createCalendar`.
+
+```ts
+import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import '@schedule-x/theme-default/dist/index.css'
+
+const plugins = [
+  createDragAndDropPlugin(),
+]
+
+const calendar = createCalendar({
+  views: [createViewMonthGrid()],
+  events: [
+    {
+      id: 1,
+      title: 'Coffee with John',
+      start: '2023-12-04 10:05',
+      end: '2023-12-04 10:35',
+    },
+  ],
+}, plugins)
+
+calendar.render(document.getElementById('calendar'))
+```
 
 ## Available plugins
 

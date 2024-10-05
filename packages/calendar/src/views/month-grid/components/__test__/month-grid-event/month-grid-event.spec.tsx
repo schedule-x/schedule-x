@@ -118,4 +118,26 @@ describe('MonthGridEvent', () => {
       ).toBeTruthy()
     })
   })
+
+  describe('rendering custom content', () => {
+    it('should render the custom html and not the default', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1234',
+            start: '2020-01-01',
+            end: '2020-01-02',
+            _customContent: {
+              monthGrid: '<div class="custom-content">My custom content</div>',
+            },
+          },
+        ],
+      })
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      expect(document.querySelector('.custom-content')).toBeTruthy()
+      // no title
+      expect(document.querySelector('.sx__month-grid-event-title')).toBeFalsy()
+    })
+  })
 })

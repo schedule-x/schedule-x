@@ -18,7 +18,7 @@ import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
     '--sx-week-grid-height',
-    `${$app.config.weekOptions.gridHeight}px`
+    `${$app.config.weekOptions.value.gridHeight}px`
   )
 
   const [week, setWeek] = useState<Week>({})

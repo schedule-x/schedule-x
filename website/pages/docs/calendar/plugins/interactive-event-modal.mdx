@@ -1,3 +1,8 @@
+---
+title: 'Interactive event modal'
+description: 'A plugin for displaying an interactive modal for adding, editing, viewing and removing events.'
+---
+
 # Interactive event modal
 
 A plugin for displaying an interactive modal for adding, editing and removing events.
@@ -5,7 +10,7 @@ A plugin for displaying an interactive modal for adding, editing and removing ev
 import {Callout} from "nextra/components";
 
 <Callout type="info">
-  This is a premium plugin which requires an active subscription to be used. Learn more at [Schedule-X premium](/premium).
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
 </Callout>
 
 ## Features & demo
@@ -24,7 +29,7 @@ import FeaturesList from "../../../../components/partials/features-list/features
 <br />
 
 <video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
-    <source src={'/videos/interactive-modal-demo.mp4'} type={'video/mp4'} />
+    <source src={'https://d19hgxvhjb2new.cloudfront.net/website/interactive-modal-demo.mp4'} type={'video/mp4'} />
 </video>
 
 ## 2. Install the packages
@@ -84,6 +89,9 @@ const eventModal = createInteractiveEventModal({
 
   // (Optional): configure the time picker to use 12-hour format
   has12HourTimeFormat: true,
+
+  // (Optional): add a gray "move-bar" bar at the top of the modal, which can be used to move the modal
+  movable: true,
 
   // (Optional): configuration for the field "title"
   fields: {
@@ -163,6 +171,57 @@ fields: {
 | people         |                                                                   |
 | calendarId     |                                                                   |
 
+### Custom fields
+
+Additional to the default fields, you can add custom fields to a `customFields` property. The fields of this property
+follow the same structure as the default fields, but additionally you need to add one of the supported types: `text`,
+`textarea`, `select` or `combobox`. For example:
+
+```ts
+import { createCalendar } from '@schedule-x/calendar'
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+
+import '@sx-premium/interactive-event-modal/index.css'
+
+const eventsService = createEventsServicePlugin()
+
+const eventModal = createInteractiveEventModal({
+  eventsService,
+
+  fields: {
+    title: {},
+  },
+
+  customFields: {
+    additionalNotes: { // will correspond to an event property "additionalNotes"
+      label: 'Additional notes',
+      name: 'additional-notes',
+      type: 'textarea',
+      validator: (value) => {
+        return {
+          isValid: !!value && value.length >= 3,
+          message: 'Custom field must be at least 3 characters long'
+        }
+      }
+    },
+
+    locationSelect: { // will correspond to an event property "locationSelect"
+      label: 'Location',
+      type: 'select',
+      items: [
+        { label: 'Lake view office', value: 'lake-view' },
+        { label: 'City center office', value: 'city-center' },
+        { label: 'Home office', value: 'home' },
+      ]
+    },
+  }
+})
+```
+
+If you need to display these custom fields in the view mode of the modal, you can write a custom component for
+`interactiveModalAdditionalFields`, which then receives `calendarEvent` as a prop. View the docs for your framework
+(Vue, React etc.) to learn how custom components work in Schedule-X.
 
 ## Changelog
 

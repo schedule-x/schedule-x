@@ -1,3 +1,8 @@
+---
+title: 'Resize plugin'
+description: 'Plugin for resizing events in the week- and day views.'
+---
+
 # Resize
 
 Resize events in the time grid by dragging their bottom edge, and fullday/multiple-day events by dragging their right
@@ -14,10 +19,10 @@ npm i @schedule-x/resize
 ```js
 import { createResizePlugin } from '@schedule-x/resize'
 
-const calendar = createCalendar({
-  // ...other configuration
-  plugins: [createResizePlugin()],
-})
+const calendar = createCalendar(
+  { /* config */ },
+  [createResizePlugin()]
+)
 ```
 
 ## Configuration
@@ -27,10 +32,10 @@ You can configure the length, in minutes, of the intervals that are used when re
 ```js
 import { createResizePlugin } from '@schedule-x/resize'
 
-const calendar = createCalendar({
-  // ...other configuration
-  plugins: [createResizePlugin(30)], // 30 minute intervals when resizing
-})
+const calendar = createCalendar(
+  { /* config */ },
+  [createResizePlugin(30)] // 30 minute intervals when resizing
+)
 ```
 
 Available values are `15` (default), `30` and `60`

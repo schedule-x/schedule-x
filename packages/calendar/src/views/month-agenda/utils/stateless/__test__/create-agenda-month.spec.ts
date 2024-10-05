@@ -6,6 +6,7 @@ import {
 import { createAgendaMonth } from '../create-agenda-month'
 import TimeUnitsBuilder from '@schedule-x/shared/src/utils/stateful/time-units/time-units.builder'
 import { MonthAgendaDay } from '../../../types/month-agenda'
+import { createBaseConfig } from '../../../../../__test__/utils'
 
 const assertDate = (agendaMonthDate: MonthAgendaDay, expectedDate: string) => {
   expect(agendaMonthDate.date).toBe(expectedDate)
@@ -14,7 +15,9 @@ const assertDate = (agendaMonthDate: MonthAgendaDay, expectedDate: string) => {
 
 describe('createAgendaMonth', () => {
   it('should create a month for 15th of December 2023', () => {
-    const timeUnitsImpl = new TimeUnitsBuilder().build()
+    const timeUnitsImpl = new TimeUnitsBuilder()
+      .withConfig(createBaseConfig())
+      .build()
     const result = createAgendaMonth('2023-12-15', timeUnitsImpl)
 
     expect(result.weeks.length).toBe(5)

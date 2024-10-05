@@ -41,7 +41,6 @@ export default class CalendarConfigBuilder
     nDays: 7,
     eventWidth: 100,
     timeAxisFormatOptions: { hour: 'numeric' },
-    showLocation: false,
   }
   monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined
@@ -124,7 +123,9 @@ export default class CalendarConfigBuilder
     return this
   }
 
-  withPlugins(plugins: PluginBase[] | undefined): CalendarConfigBuilder {
+  withPlugins(
+    plugins: PluginBase<string>[] | undefined
+  ): CalendarConfigBuilder {
     if (!plugins) return this
 
     plugins.forEach((plugin) => {
@@ -139,8 +140,8 @@ export default class CalendarConfigBuilder
     return this
   }
 
-  withIsResponsive(isDark: boolean | undefined): CalendarConfigBuilder {
-    this.isResponsive = isDark
+  withIsResponsive(isResponsive: boolean | undefined): CalendarConfigBuilder {
+    this.isResponsive = isResponsive
     return this
   }
 

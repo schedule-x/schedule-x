@@ -1,3 +1,8 @@
+---
+title: 'Event modal plugin'
+description: 'Display more information about events in a modal.'
+---
+
 # Event modal
 
 If your events have more information than just their time and a short title, chances are it would be helpful to
@@ -18,6 +23,8 @@ const calendar = createCalendar({
   // ...other configuration
   plugins: [createEventModalPlugin()],
 })
+
+calendar.eventModal.close(); // close the modal
 ```
 
 ## Methods

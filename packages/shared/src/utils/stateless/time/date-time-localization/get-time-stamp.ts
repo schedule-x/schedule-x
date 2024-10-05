@@ -13,7 +13,7 @@ const dateFn = (dateTimeString: string, locale: string) => {
 
 export const getLocalizedDate = dateFn
 
-const timeFn = (dateTimeString: string, locale: string) => {
+export const timeFn = (dateTimeString: string, locale: string) => {
   const { year, month, date, hours, minutes } = toIntegers(dateTimeString)
 
   return new Date(year, month, date, hours, minutes).toLocaleTimeString(
@@ -47,7 +47,7 @@ export const getTimeStamp = (
   }
 
   if (calendarEvent._isSingleDayTimed) {
-    return `${dateFn(eventTime.start, locale)} ⋅ ${timeFn(
+    return `${dateFn(eventTime.start, locale)} <span aria-hidden="true">⋅</span> ${timeFn(
       eventTime.start,
       locale
     )} ${delimiter} ${timeFn(eventTime.end, locale)}`

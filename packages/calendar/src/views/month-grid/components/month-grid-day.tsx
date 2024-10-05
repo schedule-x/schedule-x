@@ -36,13 +36,13 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   const getAriaLabelSingularOrPlural = (nOfAdditionalEvents: number) => {
     if (nOfAdditionalEvents === 1) {
       return $app.translate('Link to 1 more event on {{date}}', {
-        date: getLocalizedDate(day.date, $app.config.locale),
+        date: getLocalizedDate(day.date, $app.config.locale.value),
       })
     }
 
     return $app.translate('Link to {{n}} more events on {{date}}', {
-      date: getLocalizedDate(day.date, $app.config.locale),
-      n: nEventsInDay - $app.config.monthGridOptions.nEventsPerDay,
+      date: getLocalizedDate(day.date, $app.config.locale.value),
+      n: nEventsInDay - $app.config.monthGridOptions.value.nEventsPerDay,
     })
   }
 
@@ -51,7 +51,11 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
     if ($app.config.callbacks.onClickPlusEvents)
       $app.config.callbacks.onClickPlusEvents(day.date)
-    if (!$app.config.views.find((view) => view.name === InternalViewName.Day))
+    if (
+      !$app.config.views.value.find(
+        (view) => view.name === InternalViewName.Day
+      )
+    )
       return
 
     // Timeout to display the ripple effect
@@ -87,7 +91,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const getNumberOfNonDisplayedEvents = () => {
     return Object.values(day.events)
-      .slice($app.config.monthGridOptions.nEventsPerDay)
+      .slice($app.config.monthGridOptions.value.nEventsPerDay)
       .filter(
         (event) => event === DATE_GRID_BLOCKER || typeof event === 'object'
       ).length
@@ -118,7 +122,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
         $app.config.callbacks.onClickDate &&
         $app.config.callbacks.onClickDate(day.date)
       }
-      aria-label={getLocalizedDate(day.date, $app.config.locale)}
+      aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
       onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
     >
       {fullDayEvent && (
@@ -135,7 +139,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
           <div className="sx__month-grid-day__header-day-name">
-            {getDayNameShort(dayDate, $app.config.locale)}
+            {getDayNameShort(dayDate, $app.config.locale.value)}
           </div>
         ) : null}
 
@@ -144,7 +148,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
       <div className="sx__month-grid-day__events">
         {Object.values(day.events)
-          .slice(0, $app.config.monthGridOptions.nEventsPerDay)
+          .slice(0, $app.config.monthGridOptions.value.nEventsPerDay)
           .map((event, index) => {
             if (typeof event !== 'object')
               return (

@@ -5,14 +5,27 @@ import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/ev
 import EventsFacadeImpl from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.impl'
 import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { CustomComponentFns } from '@schedule-x/shared/src/interfaces/calendar/custom-component-fns'
-import { beforeInitPlugins } from './utils/stateless/plugins-lifecycle'
+import { invokePluginsBeforeRender } from './utils/stateless/plugins-lifecycle'
 
 export default class CalendarApp {
   public events: EventsFacade
 
   constructor(private $app: CalendarAppSingleton) {
     this.events = new EventsFacadeImpl(this.$app)
-    beforeInitPlugins(this.$app)
+    invokePluginsBeforeRender(this.$app)
+
+    Object.values(this.$app.config.plugins).forEach((plugin) => {
+      if (!plugin?.name) return
+
+      // "hack" for enabling accessing plugins via calendarApp[pluginName]
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this[plugin.name] = plugin as PluginBase<string>
+    })
+
+    if ($app.config.callbacks?.beforeRender) {
+      $app.config.callbacks.beforeRender($app)
+    }
   }
 
   render(el: HTMLElement): void {
@@ -21,6 +34,10 @@ export default class CalendarApp {
 
   setTheme(theme: 'light' | 'dark'): void {
     this.$app.calendarState.isDark.value = theme === 'dark'
+  }
+
+  getTheme(): 'light' | 'dark' {
+    return this.$app.calendarState.isDark.value ? 'dark' : 'light'
   }
 
   /**

@@ -14,6 +14,7 @@ import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-t
 import { useIconColors } from './utils/stateful/use-icon-colors'
 import { Fragment } from 'preact/jsx-runtime'
 import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 
 export default function EventModal({ $app }: EventModalProps) {
   const [modalId] = useState(randomStringId())
@@ -56,7 +57,9 @@ export default function EventModal({ $app }: EventModalProps) {
     } else {
       setEventWrapperStyle(eventWrapperStyle.concat(' sx__event-modal-default'))
     }
-    callSetPosition()
+    nextTick(() => {
+      callSetPosition()
+    })
 
     setIsDisplayed(true)
     const clickOutsideListener = createClickOutsideListener($app, modalId)
@@ -85,6 +88,7 @@ export default function EventModal({ $app }: EventModalProps) {
       {calendarEvent && (
         <div
           id={modalId}
+          tabIndex={0}
           data-ccid={modalId}
           className={`${eventWrapperStyle}${isDisplayed ? ' is-open' : ''}`}
         >
@@ -104,7 +108,14 @@ export default function EventModal({ $app }: EventModalProps) {
               <div className="sx__has-icon sx__event-modal__time">
                 <TimeIcon strokeColor={iconColor.value} />
 
-                {getTimeStamp(calendarEvent, $app.config.locale)}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: getTimeStamp(
+                      calendarEvent,
+                      $app.config.locale.value
+                    ),
+                  }}
+                />
               </div>
 
               {calendarEvent.people && calendarEvent.people.length && (

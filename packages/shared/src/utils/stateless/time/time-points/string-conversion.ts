@@ -7,7 +7,7 @@ import { doubleDigit } from '../date-time-mutation/double-digit'
 const minuteTimePointMultiplier = 1.6666666666666667 // 100 / 60
 
 export const timePointsFromString = (timeString: string): number => {
-  if (!timeStringRegex.test(timeString))
+  if (!timeStringRegex.test(timeString) && timeString !== '24:00')
     throw new InvalidTimeStringError(timeString)
   const [hoursInt, minutesInt] = timeString
     .split(':')

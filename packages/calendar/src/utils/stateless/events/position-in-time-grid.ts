@@ -21,11 +21,12 @@ export const positionInTimeGrid = (
       let date = dateFromDateTime(event.start)
       const timeFromStart = timeFromDateTime(event.start)
       if (
-        timePointsFromString(timeFromStart) < $app.config.dayBoundaries.start
+        timePointsFromString(timeFromStart) <
+        $app.config.dayBoundaries.value.start
       ) {
         date = addDays(date, -1)
       }
-      week[date].timeGridEvents.push(event)
+      week[date]?.timeGridEvents.push(event)
     }
   }
 

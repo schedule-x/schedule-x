@@ -82,10 +82,10 @@ const config: DocsThemeConfig = {
   //   )
   // }
   banner: {
-      key: 'premium-1.1',
+      key: 'resource-v1',
       text: (
-        <a href="/premium">
-          Schedule-X Premium is now here 🚀
+        <a href="/docs/calendar/resource-scheduler">
+          Resource scheduler just got released 🎉 Limited offer: 20% off using code Y3NDE5NW
         </a>
       )
     }

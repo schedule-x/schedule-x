@@ -11,6 +11,7 @@ export const cypressPageUrls = Object.freeze({
     smoke: '/cypress/pages/calendar/002-smoke.html',
     darkMode: '/cypress/pages/calendar/003-dark-mode.html',
     updateEvents: '/cypress/pages/calendar/004-update-events.html',
+    updateConfig: '/cypress/pages/calendar/005-update-config.html',
   },
   timePicker: {
     placement: '/cypress/pages/time-picker/001-popup-placement.html',

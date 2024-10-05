@@ -31,7 +31,7 @@ export default function DateAxis({ week }: props) {
         {week.map((date) => (
           <div className={getClassNames(date)} data-date={toDateString(date)}>
             <div className="sx__week-grid__day-name">
-              {getDayNameShort(date, $app.config.locale)}
+              {getDayNameShort(date, $app.config.locale.value)}
             </div>
 
             <div className="sx__week-grid__date-number">{date.getDate()}</div>

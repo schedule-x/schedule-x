@@ -60,7 +60,7 @@ export default function MonthAgendaDay({
     <button
       className={dayClasses.join(' ')}
       onClick={handleClick}
-      aria-label={getLocalizedDate(day.date, $app.config.locale)}
+      aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
       tabIndex={hasFocus(day) ? 0 : -1}
       data-agenda-focus={hasFocus(day) ? 'true' : undefined}
       onKeyDown={handleKeyDown}

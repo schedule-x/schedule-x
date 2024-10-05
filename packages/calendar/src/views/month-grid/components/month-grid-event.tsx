@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
@@ -7,6 +8,10 @@ import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
+import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   gridRow: number
@@ -90,6 +95,9 @@ export default function MonthGridEvent({
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
       invokeOnEventClickCallback($app, calendarEvent)
+      nextTick(() => {
+        focusModal($app)
+      })
     }
   }
 
@@ -103,6 +111,8 @@ export default function MonthGridEvent({
   }
   if (hasOverflowLeft) classNames.push('sx__month-grid-event--overflow-left')
   if (hasOverflowRight) classNames.push('sx__month-grid-event--overflow-right')
+
+  const hasCustomContent = calendarEvent._customContent?.monthGrid
 
   return (
     <div
@@ -129,8 +139,26 @@ export default function MonthGridEvent({
       tabIndex={0}
       role="button"
     >
-      {!customComponent && (
-        <div className="sx__month-grid-event-title">{calendarEvent.title}</div>
+      {!customComponent && !hasCustomContent && (
+        <>
+          {dateTimeStringRegex.test(calendarEvent.start) && (
+            <div className="sx__month-grid-event-time">
+              {timeFn(calendarEvent.start, $app.config.locale.value)}
+            </div>
+          )}
+
+          <div className="sx__month-grid-event-title">
+            {calendarEvent.title}
+          </div>
+        </>
+      )}
+
+      {hasCustomContent && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: calendarEvent._customContent?.monthGrid || '',
+          }}
+        />
       )}
     </div>
   )

@@ -1,3 +1,8 @@
+---
+title: 'Events service plugin'
+description: 'Add, update, retrieve and remove events from the calendar.'
+---
+
 # Events Service Plugin
 
 This plugin provides APIs to add, update and remove events.
@@ -39,29 +44,31 @@ Sets all events in the calendar. This will override all existing events in the c
 ```js
 import { createEventsServicePlugin } from '@schedule-x/events-service'
 
-const eventsServicePlugin = createEventsServicePlugin();const calendar = createCalendar({
-  // ...other configuration
-  plugins: [eventsServicePlugin],
-})
+const eventsServicePlugin = createEventsServicePlugin();
+
+const calendar = createCalendar(
+  { /* config */ },
+  [eventsServicePlugin]
+)
 calendar.render(document.getElementById('calendar'))
 
-eventsServicePlugin.add({
+calendar.eventsService.add({
   title: 'Event 1',
   start: '2024-04-20',
   end: '2024-04-20',
   id: 1
 })
 
-eventsServicePlugin.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }
+calendar.eventsService.get(1) // { title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }
 
-eventsServicePlugin.getAll() // [{ title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }]
+calendar.eventsService.getAll() // [{ title: 'Event 1', start: '2024-04-20', end: '2024-04-20', id: 1 }]
 
-eventsServicePlugin.update({
+calendar.eventsService.update({
   title: 'Real title',
   start: '2024-04-20',
   end: '2024-04-20',
   id: 1
 })
 
-eventsServicePlugin.remove(1)
+calendar.eventsService.remove(1)
 ```

@@ -1,0 +1,40 @@
+---
+title: 'Migration guide for v2'
+description: 'Learn how to migrate your application from v1 to v2 of the Schedule-X calendar'
+---
+
+# Migration guide for v2
+
+V2 brought a few breaking changes in the UI and internal APIs.
+
+If you haven't built your own custom plugins, you will probably be able to migrate effortlessly.
+
+## Migrating with custom plugins
+
+If you have built custom plugins that use the internal config in some way, you will need to change the
+way you access the config values. This is because the config values are now mostly reactive. So for example:
+
+v1.x.x: `$app.config.locale` ➡️ v2.x.x: `$app.config.locale.value`
+
+And this pattern repeats itself across the different config values.
+
+Also, the `init` function on plugins has been renamed into `onRender`, to better reflect when it is invoked. It is
+now accompanied by another method for plugins, `beforeRender`.
+
+## Breaking changes in the UI
+
+The UI had a few breaking changes:
+- The time grid event now displays a location by default, if one exists on the event. The `showLocation` option has
+now been removed.
+- Month grid- and date grid events now display a timestamp next to their title, for all timed events.
+- The view selection component is now hidden, if there is only one view available.
+
+## Premium plugins
+
+The premium plugins are trailing one major version behind. When updating to v2, make sure to update your premium plugins to
+the latest version as well (1.X.X).
+
+## `@schedule-x/react`
+
+The `Calendar` alias for the `ScheduleXCalendar` component has been removed. If you were using this API, use `ScheduleXCalendar` instead.
+

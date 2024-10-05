@@ -5,8 +5,9 @@ import ScrollControllerConfig from './interfaces/config'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { effect } from '@preact/signals'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
-class ScrollControllerPlugin implements PluginBase {
+class ScrollControllerPlugin implements PluginBase<string> {
   name = PluginName.ScrollController
   private $app: CalendarAppSingleton | null = null
   private observer: MutationObserver | null = null
@@ -17,7 +18,7 @@ class ScrollControllerPlugin implements PluginBase {
   /**
    * @internal
    * */
-  init($app: CalendarAppSingleton) {
+  onRender($app: CalendarAppSingleton) {
     this.$app = $app
     this.setInitialScroll($app)
     this.setUpViewChangeEffect()
@@ -64,14 +65,15 @@ class ScrollControllerPlugin implements PluginBase {
 
     const $app = this.$app as CalendarAppSingleton
     const pixelsPerHour =
-      $app.config.weekOptions.gridHeight / ($app.config.timePointsPerDay / 100)
+      $app.config.weekOptions.value.gridHeight /
+      ($app.config.timePointsPerDay / 100)
     const scrollToTimePoint = timePointsFromString(time)
 
     const hoursFromDayStart =
       $app.config.isHybridDay &&
-      scrollToTimePoint < $app.config.dayBoundaries.start
-        ? 2400 - $app.config.dayBoundaries.start + scrollToTimePoint
-        : scrollToTimePoint - $app.config.dayBoundaries.start
+      scrollToTimePoint < $app.config.dayBoundaries.value.start
+        ? 2400 - $app.config.dayBoundaries.value.start + scrollToTimePoint
+        : scrollToTimePoint - $app.config.dayBoundaries.value.start
     const hoursPointsToScroll = hoursFromDayStart / 100
     const pixelsToScroll = hoursPointsToScroll * pixelsPerHour
 
@@ -112,4 +114,11 @@ class ScrollControllerPlugin implements PluginBase {
 
 export const createScrollControllerPlugin = (
   config: ScrollControllerConfig = {}
-) => new ScrollControllerPlugin(config)
+) => {
+  return definePlugin(
+    'scrollController',
+    new ScrollControllerPlugin(config)
+  ) as ScrollControllerPlugin & {
+    name: PluginName.ScrollController
+  }
+}

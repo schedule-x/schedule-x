@@ -3,7 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.62.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0-alpha.0) (2024-09-06)
+# [2.4.0](https://github.com/schedule-x/schedule-x/compare/v2.3.0...v2.4.0) (2024-10-04)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.3.0](https://github.com/schedule-x/schedule-x/compare/v2.2.1...v2.3.0) (2024-10-01)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+## [2.2.1](https://github.com/schedule-x/schedule-x/compare/v2.2.0...v2.2.1) (2024-09-27)
+
+### Bug Fixes
+
+- plugin type declarations ([#705](https://github.com/schedule-x/schedule-x/issues/705)) ([53e3796](https://github.com/schedule-x/schedule-x/commit/53e379692d4ba253dc696868af74490cc49e39a0))
+
+# [2.2.0](https://github.com/schedule-x/schedule-x/compare/v2.1.0...v2.2.0) (2024-09-26)
+
+### Features
+
+- add new plugin api on calendar instance ([#702](https://github.com/schedule-x/schedule-x/issues/702)) ([5b8caa2](https://github.com/schedule-x/schedule-x/commit/5b8caa2e09baf33a0f7151b3ac19c198301f93b6))
+
+# [2.1.0](https://github.com/schedule-x/schedule-x/compare/v2.0.0...v2.1.0) (2024-09-24)
+
+### Bug Fixes
+
+- **event-modal:** fix positioning at the bottom of calendar ([#690](https://github.com/schedule-x/schedule-x/issues/690)) ([960378b](https://github.com/schedule-x/schedule-x/commit/960378b98ab2249439c4fff14b3870a4e9d95064))
+
+# [2.0.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.64.0-alpha.0...v2.0.0-alpha.0) (2024-09-19)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [1.64.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v1.63.1...v1.64.0-alpha.0) (2024-09-17)
+
+### Features
+
+- make config values reactive ([#662](https://github.com/schedule-x/schedule-x/issues/662)) ([0ad317d](https://github.com/schedule-x/schedule-x/commit/0ad317dcb7b831cd82de9d33b154000f4dfc1182))
+
+## [1.63.1](https://github.com/schedule-x/schedule-x/compare/v1.63.0...v1.63.1) (2024-09-12)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [1.63.0](https://github.com/schedule-x/schedule-x/compare/v1.62.0...v1.63.0) (2024-09-09)
+
+### Features
+
+- focus modal when opening through keyboard ([#652](https://github.com/schedule-x/schedule-x/issues/652)) ([9749c1a](https://github.com/schedule-x/schedule-x/commit/9749c1ac73d217a740bc42f936f8507dd8f196e9))
+
+# [1.62.0](https://github.com/schedule-x/schedule-x/compare/v1.61.0...v1.62.0) (2024-09-07)
 
 **Note:** Version bump only for package @schedule-x/event-modal
 

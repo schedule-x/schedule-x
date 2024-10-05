@@ -17,6 +17,7 @@ export default class CalendarEventBuilder
   private calendarId: string | undefined
   private _foreignProperties: Record<string, unknown> = {}
   private _options: CalendarEventOptions | undefined = undefined
+  private _customContent: CalendarEventInternal['_customContent'] = {}
 
   constructor(
     private _config: CalendarConfigInternal,
@@ -37,6 +38,7 @@ export default class CalendarEventBuilder
       this.description,
       this.calendarId,
       this._options,
+      this._customContent,
       this._foreignProperties
     )
   }
@@ -75,6 +77,13 @@ export default class CalendarEventBuilder
 
   withOptions(options: CalendarEventOptions | undefined): CalendarEventBuilder {
     this._options = options
+    return this
+  }
+
+  withCustomContent(
+    customContent: CalendarEventInternal['_customContent']
+  ): CalendarEventBuilder {
+    this._customContent = customContent
     return this
   }
 }

@@ -3,18 +3,19 @@ import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/ev
 import { EventsFacadeImpl } from './util/stateful/events-facade'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
+import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { EventsService } from '@schedule-x/shared/src/interfaces/events-service/events-service.interface'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
 class EventsServicePluginImpl implements EventsService {
-  name: string = 'EventsServicePlugin'
+  name: string = 'eventsService'
   $app!: CalendarAppSingleton
   eventsFacade!: EventsFacade
 
-  beforeInit($app: CalendarAppSingleton): void {
+  beforeRender($app: CalendarAppSingleton): void {
     this.$app = $app
 
-    // TODO v2: move methods from events facade to here, and remove events facade
+    // TODO v3: move methods from events facade to here, and remove events facade
     this.eventsFacade = new EventsFacadeImpl(this.$app)
   }
 
@@ -65,5 +66,6 @@ class EventsServicePluginImpl implements EventsService {
   }
 }
 
-export const createEventsServicePlugin = (): EventsServicePluginImpl =>
-  new EventsServicePluginImpl()
+export const createEventsServicePlugin = () => {
+  return definePlugin('eventsService', new EventsServicePluginImpl())
+}

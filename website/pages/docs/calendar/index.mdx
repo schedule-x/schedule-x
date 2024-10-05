@@ -53,8 +53,12 @@ npm i @schedule-x/calendar @schedule-x/theme-default
 ## 2. Setup
 
 After downloading and importing our dependencies, we can create an instance of the calendar using the
-`createCalendar` function. This function takes one argument: its configuration object. It is then rendered
-using the `render` method.
+`createCalendar` function. This function takes two arguments:
+
+1) The configuration object
+2) An array of plugins
+
+Here we will start by only adding the config. The calendar is then rendered using the `render` method.
 
 ```ts
 import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
@@ -131,10 +135,10 @@ For testing purposes, or if you're in a setup that predates modern build tools, 
   <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/jsx-runtime/dist/jsxRuntime.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/compat/dist/compat.umd.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/calendar@1.59.0/dist/core.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/drag-and-drop@1.59.0/dist/core.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/calendar@2.2.0/dist/core.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/drag-and-drop@2.2.0/dist/core.umd.js"></script>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@schedule-x/theme-default@1.59.0/dist/index.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@schedule-x/theme-default@2.2.0/dist/index.css">
 </head>
 
 <body>
@@ -143,6 +147,10 @@ For testing purposes, or if you're in a setup that predates modern build tools, 
   <script type="module">
     const { createCalendar, viewWeek } = window.SXCalendar;
     const { createDragAndDropPlugin } = window.SXDragAndDrop;
+
+    const plugins = [
+      createDragAndDropPlugin(),
+    ]
 
     const calendar = createCalendar({
       views: [viewWeek],
@@ -154,11 +162,7 @@ For testing purposes, or if you're in a setup that predates modern build tools, 
           end: '2024-08-23 10:00'
         },
       ],
-      plugins: [
-        eventsService,
-        createDragAndDropPlugin(),
-      ]
-    })
+    }, plugins)
 
     calendar.render(document.querySelector('.calendar'))
   </script>

@@ -25,6 +25,10 @@ export default function CalendarWrapper({ $app }: props) {
     setWrapperElement($app, calendarId)
     initPlugins($app)
 
+    if ($app.config.callbacks?.onRender) {
+      $app.config.callbacks.onRender($app)
+    }
+
     return () => destroyPlugins($app)
   }, [])
 
@@ -45,7 +49,7 @@ export default function CalendarWrapper({ $app }: props) {
   const [currentView, setCurrentView] = useState<View | null>()
 
   useSignalEffect(() => {
-    const newView = $app.config.views.find(
+    const newView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
     const viewElement = document.getElementById(viewContainerId)
@@ -71,6 +75,10 @@ export default function CalendarWrapper({ $app }: props) {
       setTransitionClass('')
     }, 300) // CORRELATION ID: 3
     setPreviousRangeStart($app.calendarState.range.value?.start || '')
+  })
+
+  useSignalEffect(() => {
+    $app.datePickerConfig.locale.value = $app.config.locale.value
   })
 
   return (
