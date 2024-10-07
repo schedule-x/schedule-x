@@ -77,7 +77,17 @@ class IcalendarPluginImpl implements PluginBase<string> {
     this.$app.calendarEvents.list.value = [
       ...occurrences.map(this.icalOccurrenceToSXEvent),
       ...events.map(this.icalEventToSXEvent),
-    ]
+    ].map((eventOrOccurrence: CalendarEventInternal) => {
+      const { start, end, ...restProps } = eventOrOccurrence
+      const shouldTrim =
+        restProps._isMultiDayFullDay || restProps._isSingleDayFullDay
+      const newStart = shouldTrim ? start.split(' ')[0] : start
+      const newEnd = shouldTrim ? end.split(' ')[0] : end
+      const res = { ...restProps, start: newStart, end: newEnd }
+      console.log('RES:', res)
+
+      return res
+    })
   }
 
   private icalOccurrenceToSXEvent = (
