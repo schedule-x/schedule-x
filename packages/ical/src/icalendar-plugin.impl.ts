@@ -79,10 +79,15 @@ class IcalendarPluginImpl implements PluginBase<string> {
       ...occurrences.map(this.icalOccurrenceToSXEvent),
       ...events.map(this.icalEventToSXEvent),
     ].map((eventOrOccurrence: CalendarEventInternal) => {
-      // the boolean props are not enumerable
+      const midnight = '00:00'
       const shouldTrim =
-        eventOrOccurrence._isMultiDayFullDay ||
-        eventOrOccurrence._isSingleDayFullDay
+        eventOrOccurrence.start.split(' ')[1] === midnight &&
+        eventOrOccurrence.start.split(' ')[1] === midnight
+      //   these were false for all day event
+      //   eventOrOccurrence._isMultiDayFullDay ||
+      //   eventOrOccurrence._isSingleDayFullDay
+      // the boolean props are not enumerable
+
       if (shouldTrim) {
         eventOrOccurrence.start = eventOrOccurrence.start.split(' ')[0]
         eventOrOccurrence.end = addDays(eventOrOccurrence.end, -1).split(' ')[0]
