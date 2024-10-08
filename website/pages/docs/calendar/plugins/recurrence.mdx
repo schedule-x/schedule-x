@@ -122,7 +122,7 @@ const calendar = createCalendar(
 calendar.render(document.getElementById('calendar'));
 
 // Add an event
-calendar.eventsService.add({
+eventsServicePlugin.add({
   id: 1,
   title: 'New event',
   start: '2024-02-05 14:00',
@@ -131,7 +131,7 @@ calendar.eventsService.add({
 });
 
 // Update
-calendar.eventsService.update({
+eventsServicePlugin.update({
   id: 1,
   title: 'New event',
   start: '2024-02-05 14:00',
@@ -140,13 +140,13 @@ calendar.eventsService.update({
 })
 
 // Get one event with id 123
-const event = calendar.eventsService.get(123);
+const event = eventsServicePlugin.get(123);
 
 // Get all
-const events = calendar.eventsService.getAll();
+const events = eventsServicePlugin.getAll();
 
 // Remove an event with id 123
-calendar.eventsService.remove(123);
+eventsServicePlugin.remove(123);
 ```
 
 

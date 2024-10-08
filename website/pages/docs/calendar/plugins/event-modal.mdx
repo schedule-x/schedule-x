@@ -19,12 +19,14 @@ npm i @schedule-x/event-modal
 ```js
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 
+const eventModal = createEventModalPlugin()
+
 const calendar = createCalendar({
   // ...other configuration
-  plugins: [createEventModalPlugin()],
+  plugins: [eventModal],
 })
 
-calendar.eventModal.close(); // close the modal
+eventModal.close(); // close the modal
 ```
 
 ## Methods
