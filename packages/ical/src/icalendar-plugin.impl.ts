@@ -4,6 +4,7 @@ import {
   PluginBase,
   toDateTimeString,
   toJSDate,
+  addDays,
 } from '@schedule-x/shared/src'
 import { IcalExpander } from './ical-expander/IcalExpander'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
@@ -78,15 +79,15 @@ class IcalendarPluginImpl implements PluginBase<string> {
       ...occurrences.map(this.icalOccurrenceToSXEvent),
       ...events.map(this.icalEventToSXEvent),
     ].map((eventOrOccurrence: CalendarEventInternal) => {
-      const { start, end, ...restProps } = eventOrOccurrence
+      // the boolean props are not enumerable
       const shouldTrim =
-        restProps._isMultiDayFullDay || restProps._isSingleDayFullDay
-      const newStart = shouldTrim ? start.split(' ')[0] : start
-      const newEnd = shouldTrim ? end.split(' ')[0] : end
-      const res = { ...restProps, start: newStart, end: newEnd }
-      console.log('RES:', res)
-
-      return res
+        eventOrOccurrence._isMultiDayFullDay ||
+        eventOrOccurrence._isSingleDayFullDay
+      if (shouldTrim) {
+        eventOrOccurrence.start = eventOrOccurrence.start.split(' ')[0]
+        eventOrOccurrence.end = addDays(eventOrOccurrence.end, -1).split(' ')[0]
+      }
+      return eventOrOccurrence
     })
   }
 
