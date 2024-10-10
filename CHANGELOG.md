@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/schedule-x/schedule-x/compare/v2.4.0...v2.4.1) (2024-10-10)
+
+### Bug Fixes
+
+- **date-picker:** increase default max date ([#727](https://github.com/schedule-x/schedule-x/issues/727)) ([d385f05](https://github.com/schedule-x/schedule-x/commit/d385f05f8b39fc6ad9321a1eecc92e66c5bd7c03))
+- serbian translations ([#726](https://github.com/schedule-x/schedule-x/issues/726)) ([f9fee04](https://github.com/schedule-x/schedule-x/commit/f9fee04590b69fcd7addd484a47e386cb3af5820))
+
 # [2.4.0](https://github.com/schedule-x/schedule-x/compare/v2.3.0...v2.4.0) (2024-10-04)
 
 ### Features
