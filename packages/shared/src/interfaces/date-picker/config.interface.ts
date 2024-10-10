@@ -5,8 +5,8 @@ import { DatePickerStyle } from './style.interface'
 import { WeekDay } from '../../enums/time/week-day.enum'
 
 export default interface DatePickerConfigInternal extends Config {
-  min: string | undefined
-  max: string | undefined
+  min: string
+  max: string
   placement: Placement
   listeners: DatePickerListeners
   style: DatePickerStyle

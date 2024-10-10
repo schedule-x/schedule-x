@@ -14,12 +14,8 @@ type props = {
 
 export default function YearsView({ setMonthView }: props) {
   const $app = useContext(AppContext)
-  const defaultMin = toDateString(new Date(1970, 0, 1))
-  const defaultMax = toDateString(
-    new Date(new Date().getFullYear() + 50, 11, 31)
-  )
-  const minYear = toJSDate($app.config.min || defaultMin).getFullYear()
-  const maxYear = toJSDate($app.config.max || defaultMax).getFullYear()
+  const minYear = toJSDate($app.config.min).getFullYear()
+  const maxYear = toJSDate($app.config.max).getFullYear()
   const years = Array.from(
     { length: maxYear - minYear + 1 },
     (_, i) => minYear + i
