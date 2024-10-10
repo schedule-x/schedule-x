@@ -48,7 +48,7 @@
     "rsuite": "^5.70.0"
   },
   "devDependencies": {
-    "@types/node": "20.16.7",
+    "@types/node": "20.16.11",
     "sass": "^1.72.0",
     "typescript": "^5.3.3"
   }
