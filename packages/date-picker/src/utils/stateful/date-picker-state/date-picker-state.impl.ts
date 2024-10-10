@@ -30,7 +30,10 @@ export const createDatePickerState = (
         inputDisplayedValue.value,
         config.locale.value
       )
-      if (newValue < config.min || newValue > config.max) {
+      if (
+        (config.min && newValue < config.min) ||
+        (config.max && newValue > config.max)
+      ) {
         inputDisplayedValue.value = lastValidDisplayedValue.value
         return
       }
