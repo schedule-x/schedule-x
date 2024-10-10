@@ -40,9 +40,11 @@ export default function MonthViewWeek({ week }: props) {
   const isDateSelectable = (date: Date) => {
     if (!$app.config.min && !$app.config.max) return true
 
-    if (!$app.config.min) return toDateString(date) <= $app.config.max
+    if (!$app.config.min && $app.config.max)
+      return toDateString(date) <= $app.config.max
 
-    if (!$app.config.max) return toDateString(date) >= $app.config.min
+    if (!$app.config.max && $app.config.min)
+      return toDateString(date) >= $app.config.min
 
     const dateString = toDateString(date)
 
