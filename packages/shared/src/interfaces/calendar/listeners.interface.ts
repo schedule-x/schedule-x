@@ -3,7 +3,10 @@ import { DateRange } from '../../types/date-range'
 import CalendarAppSingleton from './calendar-app-singleton'
 
 export interface CalendarCallbacks {
-  onEventUpdate?: (event: CalendarEventExternal) => void
+  onEventUpdate?: (
+    event: CalendarEventExternal,
+    isDuplicateEvent?: boolean
+  ) => void
   onEventClick?: (event: CalendarEventExternal) => void
   onRangeUpdate?: (range: DateRange) => void
   onSelectedDateUpdate?: (date: string) => void
@@ -16,6 +19,7 @@ export interface CalendarCallbacks {
 
   beforeRender?: ($app: CalendarAppSingleton) => void
   onRender?: ($app: CalendarAppSingleton) => void
+  idFactory?: () => string
 
   isCalendarSmall?: ($app: CalendarAppSingleton) => boolean
 }

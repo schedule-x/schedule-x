@@ -61,7 +61,7 @@ describe('MonthGridDragHandler', () => {
       new MonthGridDragHandlerImpl(calendarEvent, $app)
 
       fourthOfJanuaryElement.dispatchEvent(new MouseEvent('dragover'))
-      expect(otherEvent.style.pointerEvents).toBe('none')
+      expect(otherEvent.style.pointerEvents).toBe('auto')
 
       document.dispatchEvent(new MouseEvent('dragend'))
       expect(otherEvent.style.pointerEvents).toBe('auto')

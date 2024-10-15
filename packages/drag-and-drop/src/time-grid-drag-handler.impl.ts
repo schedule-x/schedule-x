@@ -21,6 +21,9 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private lastIntervalDiff = 0
   private lastDaysDiff = 0
   private originalStart: string
+  private ctrlKeyPressed = false // ctrl key pressed
+  private gridElements: NodeListOf<HTMLDivElement> // time grid elements
+  private eventCopyElement: HTMLElement | null
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -35,13 +38,22 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
         '.sx__time-grid-day'
       ) as HTMLDivElement
     ).clientWidth
+    this.gridElements = this.$app.elements.calendarWrapper?.querySelectorAll(
+      '.sx__time-grid-day'
+    ) as NodeListOf<HTMLDivElement>
     this.startY = this.eventCoordinates.clientY
     this.startX = this.eventCoordinates.clientX
     this.originalStart = this.eventCopy.start
+    this.eventCopyElement = document.querySelector(
+      `[data-event-id="${this.eventCopy.id}"]`
+    )
     this.init()
   }
 
   private init() {
+    this.gridElements.forEach((el) => {
+      el.style.cursor = 'move'
+    })
     document.addEventListener('mousemove', this.handleMouseOrTouchMove)
     document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
       once: true,
@@ -55,7 +67,25 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     })
   }
 
-  private handleMouseOrTouchMove = (uiEvent: UIEvent) => {
+  private handleMouseOrTouchMove = (uiEvent: MouseEvent | TouchEvent) => {
+    this.ctrlKeyPressed = uiEvent.ctrlKey
+    if (this.gridElements)
+      if (this.ctrlKeyPressed) {
+        this.gridElements.forEach((el) => {
+          el.style.cursor = 'copy'
+        })
+        if (this.eventCopyElement) {
+          this.eventCopyElement.style.display = 'block'
+        }
+      } else {
+        this.gridElements.forEach((el) => {
+          el.style.cursor = 'move'
+        })
+        if (this.eventCopyElement) {
+          this.eventCopyElement.style.display = 'none'
+        }
+      }
+
     const { clientX, clientY } = getEventCoordinates(uiEvent)
     const pixelDiffY = clientY - this.startY
     const timePointsDiffY = pixelDiffY * this.timePointsPerPixel()
@@ -137,6 +167,11 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private handleMouseUpOrTouchEnd = () => {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
+
+    this.gridElements.forEach((el) => {
+      el.style.cursor = 'auto'
+    })
+
     this.updateCopy(undefined)
     this.updateOriginalEvent()
   }
@@ -145,13 +180,21 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     if (this.lastIntervalDiff === 0 && this.lastDaysDiff === 0) return
 
     const dayIsSame = this.lastDaysDiff === 0
-    const eventElement = document.querySelector(
-      `[data-event-id="${this.eventCopy.id}"]`
-    )
-    const shouldHideEventToPreventFlickering =
-      !dayIsSame && eventElement instanceof HTMLElement
-    if (shouldHideEventToPreventFlickering) eventElement.style.display = 'none'
 
-    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
+    const shouldHideEventToPreventFlickering =
+      dayIsSame &&
+      this.eventCopyElement instanceof HTMLElement &&
+      !this.ctrlKeyPressed
+
+    if (this.eventCopyElement && shouldHideEventToPreventFlickering) {
+      this.eventCopyElement.style.display = 'block'
+    }
+
+    updateDraggedEvent(
+      this.$app,
+      this.eventCopy,
+      this.originalStart,
+      this.ctrlKeyPressed // to determine if the event must be copied or not
+    )
   }
 }

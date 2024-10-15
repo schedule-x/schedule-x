@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import DateGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/date-grid-drag-handler.interface'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
@@ -20,6 +21,11 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private readonly rangeStartDate: string
   private readonly rangeEndDate: string
   private lastDaysDiff = 0
+  private ctrlKeyPressed = false // ctrl key pressed
+  private dateGridElement: HTMLDivElement // date grid element
+  private maxGridRow = 0 // max grid row to place the event copy
+  private currenteventCopyGridRow = '0' // current event copy grid row
+  private eventCopyElement: HTMLElement | null
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -38,10 +44,33 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
       this.rangeStartDate,
       $app.config.weekOptions.value.nDays - 1
     )
+    this.dateGridElement = (
+      this.$app.elements.calendarWrapper as HTMLElement
+    ).querySelector('.sx__date-grid') as HTMLDivElement // HTML element of the date grid
+
+    this.eventCopyElement = (
+      this.$app.elements.calendarWrapper as HTMLElement
+    ).querySelector(`[data-event-id="${this.eventCopy.id}"]`) // HTML element of the event copy
     this.init()
   }
 
   private init() {
+    // determine the max grid row of the date grid
+    ;(
+      (this.$app.elements.calendarWrapper as HTMLElement).querySelectorAll(
+        '.sx__date-grid-cell'
+      ) as NodeListOf<HTMLDivElement>
+    ).forEach((el) => {
+      if (parseInt(el.style.gridRow) > this.maxGridRow) {
+        this.maxGridRow = parseInt(el.style.gridRow)
+      }
+    })
+
+    this.maxGridRow++
+
+    // set the cursor to move
+    this.dateGridElement.style.cursor = 'move'
+
     document.addEventListener('mousemove', this.handleMouseOrTouchMove)
     document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
       once: true,
@@ -53,9 +82,38 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     document.addEventListener('touchend', this.handleMouseUpOrTouchEnd, {
       once: true,
     })
+
+    // store the current grid row of the event copy
+    this.currenteventCopyGridRow = (
+      (this.$app.elements.calendarWrapper as HTMLElement).querySelector(
+        `[data-event-id="${this.eventCopy.id}"]`
+      ) as HTMLElement
+    ).style.gridRow
+
+    // move the event copy to the max grid row
+    ;(
+      (this.$app.elements.calendarWrapper as HTMLElement).querySelector(
+        `[data-event-id="${this.eventCopy.id}"]`
+      ) as HTMLElement
+    ).style.gridRow = this.maxGridRow.toString()
   }
 
-  private handleMouseOrTouchMove = (uiEvent: UIEvent) => {
+  private handleMouseOrTouchMove = (uiEvent: MouseEvent | TouchEvent) => {
+    // if the ctrl key is pressed, set the cursor to copy and display the event copy
+    this.ctrlKeyPressed = uiEvent.ctrlKey
+    if (this.dateGridElement)
+      if (this.ctrlKeyPressed) {
+        this.dateGridElement.style.cursor = 'copy'
+        if (this.eventCopyElement) {
+          this.eventCopyElement.style.display = 'block'
+        }
+      } else {
+        this.dateGridElement.style.cursor = 'move'
+        if (this.eventCopyElement) {
+          this.eventCopyElement.style.display = 'none'
+        }
+      }
+
     const { clientX } = getEventCoordinates(uiEvent)
     const pixelDiffX = clientX - this.startX
     const currentDaysDiff = Math.round(pixelDiffX / this.dayWidth)
@@ -114,9 +172,14 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private handleMouseUpOrTouchEnd = () => {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
+    this.dateGridElement.style.cursor = 'auto' // set the cursor to auto
+    ;(
+      (this.$app.elements.calendarWrapper as HTMLElement).querySelector(
+        `[data-event-id="${this.eventCopy.id}"]`
+      ) as HTMLElement
+    ).style.gridRow = this.currenteventCopyGridRow //set back the event copy to its original grid row
 
     this.updateOriginalEvent()
-
     setTimeout(() => {
       this.updateCopy(undefined)
     }, 10) // Timeout needed to prevent the original from being displayed for a split second, before being removed from DOM.
@@ -124,7 +187,11 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
 
   private updateOriginalEvent() {
     if (this.lastDaysDiff === 0) return
-
-    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
+    updateDraggedEvent(
+      this.$app,
+      this.eventCopy,
+      this.originalStart,
+      this.ctrlKeyPressed // to determine if the event should be copied or moved
+    )
   }
 }

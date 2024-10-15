@@ -19,6 +19,7 @@
 [data-has-dnd='true'] {
   .sx__time-grid-event {
     touch-action: none;
+    cursor: inherit;
   }
 }
 

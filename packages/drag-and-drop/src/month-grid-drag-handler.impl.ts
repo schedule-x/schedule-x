@@ -12,6 +12,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private currentDragoverDate: string | undefined
   private eventNDays: number
   private originalStart: string
+  private ctrlKeyPressed = false // ctrl key pressed
 
   private readonly MONTH_DAY_CLASS_NAME = 'sx__month-grid-day'
   private readonly MONTH_DAY_SELECTOR = `.${this.MONTH_DAY_CLASS_NAME}`
@@ -38,12 +39,20 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     this.allDayElements.forEach((el) => {
       el.addEventListener('dragover', this.handleDragOver)
     })
-    this.setCalendarEventPointerEventsTo('none')
+    this.setCalendarEventPointerEventsTo('auto')
   }
 
-  private handleDragOver = (e: MouseEvent) => {
+  private handleDragOver = (e: DragEvent) => {
     e.preventDefault()
     let dayElement: HTMLDivElement = e.target as HTMLDivElement
+    this.ctrlKeyPressed = e.ctrlKey
+
+    if (e.dataTransfer) {
+      // set drop effect
+      e.ctrlKey
+        ? (e.dataTransfer.dropEffect = 'copy')
+        : (e.dataTransfer.dropEffect = 'none')
+    }
     if (
       !(dayElement instanceof HTMLDivElement) ||
       !dayElement.classList.contains(this.MONTH_DAY_CLASS_NAME)
@@ -75,7 +84,6 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
       el.removeEventListener('dragover', this.handleDragOver)
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
     })
-    this.setCalendarEventPointerEventsTo('auto')
     this.updateCalendarEvent()
   }
 
@@ -101,6 +109,11 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     )
     eventCopy.start = addDays(eventCopy.start, diffOldDateAndNewDate)
     eventCopy.end = addDays(eventCopy.end, diffOldDateAndNewDate)
-    updateDraggedEvent(this.$app, eventCopy, this.originalStart)
+    updateDraggedEvent(
+      this.$app,
+      eventCopy,
+      this.originalStart,
+      this.ctrlKeyPressed
+    ) // to determine if the event must be copied or not
   }
 }

@@ -34,10 +34,42 @@ describe('style attribute "display" of date grid event element', () => {
       },
     ],
   })
-  $app.elements.calendarWrapper = document.createElement('div')
-  const day = document.createElement('div')
-  day.classList.add('sx__time-grid-day')
-  $app.elements.calendarWrapper.appendChild(day)
+
+  $app.elements.calendarWrapper = {
+    querySelector: (selector: string) => {
+      if (selector === '.sx__time-grid-day') {
+        return {
+          clientWidth: 100,
+        } as HTMLDivElement
+      }
+      if (selector === '[data-event-id="1"]') {
+        const div = document.createElement('div')
+        div.setAttribute('data-event-id', '1')
+        div.style.gridRow = '1'
+        return div
+      }
+
+      return document.createElement('div')
+    },
+    querySelectorAll: (selector: string) => {
+      if (selector === '.sx__date-grid-cell') {
+        // Mocking a NodeListOf<HTMLDivElement>
+        const div = document.createElement('div')
+        div.style.gridRow = '1'
+        return {
+          length: 1,
+          item: (index: number) => (index === 0 ? div : null),
+          forEach: () => {},
+        } as NodeListOf<HTMLDivElement>
+      }
+      // Return an empty NodeList if the selector does not match
+      return {
+        length: 0,
+        item: () => null,
+        forEach: () => {},
+      } as unknown as NodeListOf<HTMLDivElement>
+    },
+  } as HTMLDivElement
 
   describe('Every event', () => {
     it('should have a data-event-id attribute', () => {
