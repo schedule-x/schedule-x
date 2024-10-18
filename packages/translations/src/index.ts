@@ -44,8 +44,8 @@ import { etEE } from './locales/et-EE'
 import { datePickerEtEE } from './locales/et-EE/date-picker'
 import { ukUA } from './locales/uk-UA'
 import { datePickerUkUA } from './locales/uk-UA/date-picker'
-import { srRs } from './locales/sr-RS'
-import { datePickerSrRs } from './locales/sr-RS/date-picker'
+import { srRS } from './locales/sr-RS'
+import { datePickerSrRS } from './locales/sr-RS/date-picker'
 
 import { translate } from './translator/translate'
 import { caES } from './locales/ca-ES'
@@ -76,7 +76,7 @@ const translations = {
   etEE,
   ukUA,
   caES,
-  srRs,
+  srRS,
 }
 
 const datePickerTranslations = {
@@ -104,7 +104,7 @@ const datePickerTranslations = {
   etEE: datePickerEtEE,
   ukUA: datePickerUkUA,
   caES: datePickerCaES,
-  srRs: datePickerSrRs,
+  srRS: datePickerSrRS,
 }
 
 export {
@@ -135,5 +135,5 @@ export {
   etEE,
   ukUA,
   caES,
-  srRs,
+  srRS,
 }
