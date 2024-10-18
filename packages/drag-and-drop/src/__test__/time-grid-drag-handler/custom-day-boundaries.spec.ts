@@ -21,6 +21,9 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
     start: string
     end: string
   }
+
+  let eventCopyElement: HTMLDivElement
+
   let eventId: string | number
 
   beforeEach(() => {
@@ -40,12 +43,18 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
     eventId = calendarEvent.id
     $app.calendarEvents.list.value = [calendarEvent]
     eventCopy = calendarEvent
+    eventCopyElement = document.createElement('div')
+    eventCopyElement.id = ('time-grid-event-copy-' + eventCopy.id) as string
     $app.elements.calendarWrapper = {
       querySelector: (selector: string) => {
         if (selector === '.sx__time-grid-day') {
           return {
             clientWidth: 100,
           } as HTMLDivElement
+        }
+
+        if (selector === '#' + eventCopyElement.id) {
+          return eventCopyElement
         }
       },
     } as HTMLDivElement
@@ -75,24 +84,37 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
        * Drag event to 15:15
        * */
       dragEventNQuarters12HourGrid(clickEvent, 1, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:15')
-      expect(eventCopy.end).toBe('2024-02-02 03:45')
+      expect(eventCopyElement.style.transform).toEqual(
+        'translate(calc(0% + 0px), calc(-33.33333333339999px))'
+      )
+      // expect(eventCopy.start).toBe('2024-02-02 03:15')
+      // expect(eventCopy.end).toBe('2024-02-02 03:45')
 
       /**
        * Drag event to 15:00
        * */
       dragEventNQuarters12HourGrid(clickEvent, 2, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:00')
-      expect(eventCopy.end).toBe('2024-02-02 03:30')
+      expect(eventCopyElement.style.transform).toEqual(
+        'translate(calc(0% + 0px), calc(-66.66666666679998px))'
+      )
+      //expect(eventCopy.start).toBe('2024-02-02 03:00')
+      //expect(eventCopy.end).toBe('2024-02-02 03:30')
 
       /**
        * Try dragging event to 14:45 (which should do nothing)
        * */
-      dragEventNQuarters12HourGrid(clickEvent, 3, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:00')
-      expect(eventCopy.end).toBe('2024-02-02 03:30')
 
-      document.dispatchEvent(new MouseEvent('mouseup'))
+      expect(eventCopyElement.style.transform).toEqual(
+        'translate(calc(0% + 0px), calc(-66.66666666679998px))'
+      )
+      const event = dragEventNQuarters12HourGrid(clickEvent, 3, 'up')
+      expect(eventCopyElement.style.transform).toEqual(
+        'translate(calc(0% + 0px), calc(-66.66666666679998px))'
+      )
+      /*  expect(eventCopy.start).toBe('2024-02-02 03:00')
+      expect(eventCopy.end).toBe('2024-02-02 03:30') */
+
+      document.dispatchEvent(new MouseEvent('mouseup', event))
       expect(updateCopyFn).toHaveBeenCalled()
       expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 03:00')
       expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 03:30')
