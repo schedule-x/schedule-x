@@ -97,7 +97,7 @@ const calendar = createCalendar({
   // },
   // dayBoundaries: {
   //   start: '06:00',
-  //   end: '20:00',
+  //   end: '02:00',
   // },
   // isDark: true,
   callbacks: {

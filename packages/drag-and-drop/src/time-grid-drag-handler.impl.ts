@@ -21,6 +21,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private lastIntervalDiff = 0
   private lastDaysDiff = 0
   private originalStart: string
+  private yTranslate = 'calc(0px)'
+  private lastpixelDiffY = 0
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -62,10 +64,16 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     const currentIntervalDiff = Math.round(
       timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
     )
+
     const pixelDiffX = clientX - this.startX
+
     const currentDaysDiff = Math.round(pixelDiffX / this.dayWidth)
 
-    this.handleVerticalMouseOrTouchMove(currentIntervalDiff)
+    this.handleVerticalMouseOrTouchMove(
+      currentIntervalDiff,
+      pixelDiffY,
+      currentDaysDiff
+    )
     this.handleHorizontalMouseOrTouchMove(currentDaysDiff)
   }
 
@@ -73,28 +81,51 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     return getTimePointsPerPixel(this.$app)
   }
 
-  private handleVerticalMouseOrTouchMove(currentIntervalDiff: number) {
+  private handleVerticalMouseOrTouchMove(
+    currentIntervalDiff: number,
+    pixelDiffY: number,
+    currentDaysDiff: number
+  ) {
     if (currentIntervalDiff === this.lastIntervalDiff) return
 
     const pointsToAdd =
       currentIntervalDiff > this.lastIntervalDiff
         ? this.CHANGE_THRESHOLD_IN_TIME_POINTS
         : -this.CHANGE_THRESHOLD_IN_TIME_POINTS
-    this.setTimeForEventCopy(pointsToAdd)
+    this.setTimeForEventCopy(pointsToAdd, pixelDiffY, currentDaysDiff)
     this.lastIntervalDiff = currentIntervalDiff
   }
 
-  private setTimeForEventCopy(pointsToAdd: number) {
-    const newStart = addTimePointsToDateTime(this.eventCopy.start, pointsToAdd)
-    const newEnd = addTimePointsToDateTime(this.eventCopy.end, pointsToAdd)
+  private setTimeForEventCopy(
+    pointsToAdd: number,
+    pixelDiffY: number,
+    currentDaysDiff: number
+  ) {
+    const newStart = addTimePointsToDateTime(
+      this.eventCopy.start,
+      pixelDiffY * this.timePointsPerPixel()
+    )
+    const newEnd = addTimePointsToDateTime(
+      this.eventCopy.end,
+      pixelDiffY * this.timePointsPerPixel()
+    )
     if (newStart < addDays(this.dayBoundariesDateTime.start, this.lastDaysDiff))
       return
     if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff))
       return
 
-    this.eventCopy.start = newStart
-    this.eventCopy.end = newEnd
-    this.updateCopy(this.eventCopy)
+    this.yTranslate = 'calc(' + pixelDiffY + 'px)'
+
+    this.lastpixelDiffY = pixelDiffY
+    const copyElement = (
+      this.$app.elements.calendarWrapper as HTMLElement
+    ).querySelector(
+      '#' + getTimeGridEventCopyElementId(this.eventCopy.id)
+    ) as HTMLDivElement
+
+    copyElement.style.transform = `translate(calc(${
+      currentDaysDiff * 100
+    }% + ${currentDaysDiff}px), ${this.yTranslate})`
   }
 
   private handleHorizontalMouseOrTouchMove(totalDaysDiff: number) {
@@ -120,7 +151,6 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private setDateForEventCopy(newStart: string, newEnd: string) {
     this.eventCopy.start = newStart
     this.eventCopy.end = newEnd
-    this.updateCopy(this.eventCopy)
   }
 
   private transformEventCopyPosition(totalDaysDiff: number) {
@@ -129,14 +159,50 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     ).querySelector(
       '#' + getTimeGridEventCopyElementId(this.eventCopy.id)
     ) as HTMLDivElement
-    copyElement.style.transform = `translateX(calc(${
+    copyElement.style.transform = `translate(calc(${
       totalDaysDiff * 100
-    }% + ${totalDaysDiff}px))`
+    }% + ${totalDaysDiff}px), ${this.yTranslate})`
   }
 
-  private handleMouseUpOrTouchEnd = () => {
+  private handleMouseUpOrTouchEnd = (uiEvent: MouseEvent | TouchEvent) => {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
+
+    const { clientY } = getEventCoordinates(uiEvent)
+    const pixelDiffY = clientY - this.startY
+    const timePointsDiffY = pixelDiffY * this.timePointsPerPixel()
+
+    let newStart = addTimePointsToDateTime(
+      this.eventCopy.start,
+      timePointsDiffY
+    )
+    let newEnd = addTimePointsToDateTime(this.eventCopy.end, timePointsDiffY)
+
+    if (
+      newStart < addDays(this.dayBoundariesDateTime.start, this.lastDaysDiff)
+    ) {
+      newStart = addTimePointsToDateTime(
+        this.eventCopy.start,
+        this.lastpixelDiffY * this.timePointsPerPixel()
+      )
+      newEnd = addTimePointsToDateTime(
+        this.eventCopy.end,
+        this.lastpixelDiffY * this.timePointsPerPixel()
+      )
+    }
+
+    if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff)) {
+      newEnd = addTimePointsToDateTime(
+        this.eventCopy.end,
+        this.lastpixelDiffY * this.timePointsPerPixel()
+      )
+      newStart = addTimePointsToDateTime(
+        this.eventCopy.start,
+        this.lastpixelDiffY * this.timePointsPerPixel()
+      )
+    }
+    this.eventCopy.start = newStart
+    this.eventCopy.end = newEnd
     this.updateCopy(undefined)
     this.updateOriginalEvent()
   }
