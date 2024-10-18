@@ -158,18 +158,46 @@ fields: {
 
 ### Available fields
 
-| Field name     | Notes                                                             |
-|----------------|-------------------------------------------------------------------|
-| title          |                                                                   |
-| description    |                                                                   |
-| startDate      | Cannot have validator callback. Use `minDate` & `maxDate` instead |
-| startTime      | Cannot have validator callback. Use `minDate` & `maxDate` instead |
-| endDate        | Cannot have validator callback. Use `minDate` & `maxDate` instead |
-| endTime        | Cannot have validator callback. Use `minDate` & `maxDate` instead |
-| rruleFrequency | Cannot have validator callback.                                   |
-| rruleUntil     | Cannot have validator callback.                                   |
-| people         |                                                                   |
-| calendarId     |                                                                   |
+| Field name     | Type                     |
+|----------------|--------------------------|
+| title          | InputFieldWithValidation |
+| description    | InputFieldWithValidation |
+| startDate      | InputField               |
+| startTime      | InputField               |
+| endDate        | InputField               |
+| endTime        | InputField               |
+| rruleFrequency | InputField               |
+| rruleUntil     | InputField               |
+| people         | InputFieldWithValidation |
+| calendarId     | InputFieldWithValidation |
+
+#### Input field types
+
+```ts
+type InputField<T extends undefined | string | string[]> = {
+  label?: string
+  name?: string
+  onChange?: (value: T) => void
+}
+
+type InputFieldWithValidation<T extends undefined | string | string[]> =
+  InputField<T> & {
+    validator?: (fieldValue: T) => ValidationResult
+  }
+
+type CustomInputField<T extends undefined | string | string[]> =
+  InputFieldWithValidation<T> & {
+    type: 'text' | 'select' | 'textarea' | 'combobox'
+    items?: SelectItem[]
+  }
+
+type ValidationResult = {
+  isValid: boolean
+  message?: string
+}
+
+export type SelectItem = { label: string; value: string }
+```
 
 ### Custom fields
 
@@ -178,7 +206,6 @@ follow the same structure as the default fields, but additionally you need to ad
 `textarea`, `select` or `combobox`. For example:
 
 ```ts
-import { createCalendar } from '@schedule-x/calendar'
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
 
