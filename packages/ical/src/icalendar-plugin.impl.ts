@@ -9,6 +9,10 @@ import {
 import { IcalExpander } from './ical-expander/IcalExpander'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import {
+  dateFromDateTime,
+  timeFromDateTime,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 
 type ICalendarPluginOptions = {
   data: string
@@ -80,17 +84,16 @@ class IcalendarPluginImpl implements PluginBase<string> {
       ...events.map(this.icalEventToSXEvent),
     ].map((eventOrOccurrence: CalendarEventInternal) => {
       const midnight = '00:00'
-      const shouldTrim =
-        eventOrOccurrence.start.split(' ')[1] === midnight &&
-        eventOrOccurrence.start.split(' ')[1] === midnight
-      //   these were false for all day event
-      //   eventOrOccurrence._isMultiDayFullDay ||
-      //   eventOrOccurrence._isSingleDayFullDay
-      // the boolean props are not enumerable
+      const isInferredFullDayEvent =
+        timeFromDateTime(eventOrOccurrence.start) === midnight &&
+        timeFromDateTime(eventOrOccurrence.end) === midnight
 
-      if (shouldTrim) {
-        eventOrOccurrence.start = eventOrOccurrence.start.split(' ')[0]
-        eventOrOccurrence.end = addDays(eventOrOccurrence.end, -1).split(' ')[0]
+      if (isInferredFullDayEvent) {
+        eventOrOccurrence.start = dateFromDateTime(eventOrOccurrence.start)
+        eventOrOccurrence.end = addDays(
+          dateFromDateTime(eventOrOccurrence.end),
+          -1
+        )
       }
       return eventOrOccurrence
     })
