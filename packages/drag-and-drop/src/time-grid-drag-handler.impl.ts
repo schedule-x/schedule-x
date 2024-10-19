@@ -22,7 +22,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private lastDaysDiff = 0
   private originalStart: string
   private yTranslate = 'calc(0px)'
-  private lastpixelDiffY = 0
+  private normalizedLastpixelDiffY = 0
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -114,9 +114,16 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff))
       return
 
-    this.yTranslate = 'calc(' + pixelDiffY + 'px)'
+    const timePointsDiffY = pixelDiffY * this.timePointsPerPixel()
+    const normalizedPixelDiffY =
+      (Math.round(timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS) *
+        this.CHANGE_THRESHOLD_IN_TIME_POINTS) /
+      this.timePointsPerPixel()
 
-    this.lastpixelDiffY = pixelDiffY
+    this.yTranslate = 'calc(' + normalizedPixelDiffY + 'px)'
+
+    this.normalizedLastpixelDiffY = normalizedPixelDiffY
+
     const copyElement = (
       this.$app.elements.calendarWrapper as HTMLElement
     ).querySelector(
@@ -172,33 +179,40 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     const pixelDiffY = clientY - this.startY
     const timePointsDiffY = pixelDiffY * this.timePointsPerPixel()
 
+    const normalizeTimePointsDiff =
+      Math.round(timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS) *
+      this.CHANGE_THRESHOLD_IN_TIME_POINTS
+
     let newStart = addTimePointsToDateTime(
       this.eventCopy.start,
-      timePointsDiffY
+      normalizeTimePointsDiff
     )
-    let newEnd = addTimePointsToDateTime(this.eventCopy.end, timePointsDiffY)
+    let newEnd = addTimePointsToDateTime(
+      this.eventCopy.end,
+      normalizeTimePointsDiff
+    )
 
     if (
       newStart < addDays(this.dayBoundariesDateTime.start, this.lastDaysDiff)
     ) {
       newStart = addTimePointsToDateTime(
         this.eventCopy.start,
-        this.lastpixelDiffY * this.timePointsPerPixel()
+        this.normalizedLastpixelDiffY * this.timePointsPerPixel()
       )
       newEnd = addTimePointsToDateTime(
         this.eventCopy.end,
-        this.lastpixelDiffY * this.timePointsPerPixel()
+        this.normalizedLastpixelDiffY * this.timePointsPerPixel()
       )
     }
 
     if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff)) {
       newEnd = addTimePointsToDateTime(
         this.eventCopy.end,
-        this.lastpixelDiffY * this.timePointsPerPixel()
+        this.normalizedLastpixelDiffY * this.timePointsPerPixel()
       )
       newStart = addTimePointsToDateTime(
         this.eventCopy.start,
-        this.lastpixelDiffY * this.timePointsPerPixel()
+        this.normalizedLastpixelDiffY * this.timePointsPerPixel()
       )
     }
     this.eventCopy.start = newStart
