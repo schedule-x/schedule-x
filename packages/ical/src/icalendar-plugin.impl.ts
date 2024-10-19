@@ -82,7 +82,7 @@ class IcalendarPluginImpl implements PluginBase<string> {
       const midnight = '00:00'
       const shouldTrim =
         eventOrOccurrence.start.split(' ')[1] === midnight &&
-        eventOrOccurrence.start.split(' ')[1] === midnight
+        eventOrOccurrence.end.split(' ')[1] === midnight
       //   these were false for all day event
       //   eventOrOccurrence._isMultiDayFullDay ||
       //   eventOrOccurrence._isSingleDayFullDay
