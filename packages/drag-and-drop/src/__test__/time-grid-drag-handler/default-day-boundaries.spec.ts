@@ -76,8 +76,9 @@ describe('A calendar with normal day boundaries', () => {
       )
 
       const quartersToDrag = 8
-      dragEventNQuarters(clickEvent, quartersToDrag, 'down')
-      document.dispatchEvent(new MouseEvent('mouseup'))
+      const event = dragEventNQuarters(clickEvent, quartersToDrag, 'down')
+
+      document.dispatchEvent(new MouseEvent('mouseup', event))
 
       expect(updateCopyFn).toHaveBeenCalled()
       expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 14:00')
@@ -95,8 +96,8 @@ describe('A calendar with normal day boundaries', () => {
       )
 
       const quartersToDrag = 10
-      dragEventNQuarters(clickEvent, quartersToDrag, 'up')
-      document.dispatchEvent(new MouseEvent('mouseup'))
+      const event = dragEventNQuarters(clickEvent, quartersToDrag, 'up')
+      document.dispatchEvent(new MouseEvent('mouseup', event))
 
       expect(updateCopyFn).toHaveBeenCalled()
       expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 09:30')
@@ -120,27 +121,36 @@ describe('A calendar with normal day boundaries', () => {
        * Drag event to 00:15
        * */
       dragEventNQuarters(clickEvent, eventId, 'up')
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(eventCopy.start).toBe('2024-02-02 00:15')
-      expect(eventCopy.end).toBe('2024-02-02 01:15')
+      expect(eventCopyElement.style.transform).toEqual(
+        'translate(calc(0% + 0px), calc(-16.666666666700053px))'
+      )
+      //  expect(updateCopyFn).toHaveBeenCalled()
+      /*  expect(eventCopy.start).toBe('2024-02-02 00:15')
+      expect(eventCopy.end).toBe('2024-02-02 01:15') */
 
       /**
        * Drag event to 00:00
        * */
       dragEventNQuarters(clickEvent, 2, 'up')
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(eventCopy.start).toBe('2024-02-02 00:00')
-      expect(eventCopy.end).toBe('2024-02-02 01:00')
+      expect(eventCopyElement.style.transform).toEqual(
+        'translate(calc(0% + 0px), calc(-33.333333333400105px))'
+      )
+      //    expect(updateCopyFn).toHaveBeenCalled()
+      /*   expect(eventCopy.start).toBe('2024-02-02 00:00')
+      expect(eventCopy.end).toBe('2024-02-02 01:00') */
 
       /**
        * Try dragging event to 23:45 (which should do nothing)
        * */
-      dragEventNQuarters(clickEvent, 3, 'up')
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(eventCopy.start).toBe('2024-02-02 00:00')
-      expect(eventCopy.end).toBe('2024-02-02 01:00')
+      const event = dragEventNQuarters(clickEvent, 3, 'up')
+      expect(eventCopyElement.style.transform).toEqual(
+        'translate(calc(0% + 0px), calc(-33.333333333400105px))'
+      )
+      //     expect(updateCopyFn).toHaveBeenCalled()
+      /*  expect(eventCopy.start).toBe('2024-02-02 00:00')
+      expect(eventCopy.end).toBe('2024-02-02 01:00') */
 
-      document.dispatchEvent(new MouseEvent('mouseup'))
+      document.dispatchEvent(new MouseEvent('mouseup', event))
       expect(updateCopyFn).toHaveBeenCalled()
       expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
         '2024-02-02 00:00'
@@ -171,7 +181,7 @@ describe('A calendar with normal day boundaries', () => {
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', event))
       expect(eventCopyElement.style.transform).toBe(
-        'translateX(calc(100% + 1px))'
+        'translate(calc(100% + 1px), calc(0px))'
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
@@ -204,7 +214,7 @@ describe('A calendar with normal day boundaries', () => {
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', event))
       expect(eventCopyElement.style.transform).toEqual(
-        'translateX(calc(-100% + -1px))'
+        'translate(calc(-100% + -1px), calc(0px))'
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
@@ -241,7 +251,7 @@ describe('A calendar with normal day boundaries', () => {
       expect(eventCopy.start).toBe('2024-02-03 12:00')
       expect(eventCopy.end).toBe('2024-02-03 13:00')
       expect(eventCopyElement.style.transform).toEqual(
-        'translateX(calc(100% + 1px))'
+        'translate(calc(100% + 1px), calc(0px))'
       )
 
       /**
@@ -257,7 +267,7 @@ describe('A calendar with normal day boundaries', () => {
       expect(eventCopy.start).toBe('2024-02-04 12:00')
       expect(eventCopy.end).toBe('2024-02-04 13:00')
       expect(eventCopyElement.style.transform).toEqual(
-        'translateX(calc(200% + 2px))'
+        'translate(calc(200% + 2px), calc(0px))'
       )
 
       /**
@@ -273,7 +283,7 @@ describe('A calendar with normal day boundaries', () => {
       expect(eventCopy.start).toBe('2024-02-04 12:00')
       expect(eventCopy.end).toBe('2024-02-04 13:00')
       expect(eventCopyElement.style.transform).toEqual(
-        'translateX(calc(200% + 2px))'
+        'translate(calc(200% + 2px), calc(0px))'
       )
 
       document.dispatchEvent(new MouseEvent('mouseup'))

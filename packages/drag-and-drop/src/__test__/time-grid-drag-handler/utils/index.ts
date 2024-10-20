@@ -31,7 +31,12 @@ export const dragEventNQuarters12HourGrid = (
   nStepsToDrag: number,
   direction: 'up' | 'down'
 ) => {
-  dragEventNQuarters(clickEvent, nStepsToDrag, direction, 16.6666666667 * 2)
+  return dragEventNQuarters(
+    clickEvent,
+    nStepsToDrag,
+    direction,
+    16.6666666667 * 2
+  )
 }
 
 export const getEventWithId = (
