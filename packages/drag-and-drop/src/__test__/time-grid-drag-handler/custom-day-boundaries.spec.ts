@@ -48,7 +48,25 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
           } as HTMLDivElement
         }
       },
+      querySelectorAll: (selector: string) => {
+        if (selector === '.sx__time-grid-day') {
+          // Mocking a NodeListOf<HTMLDivElement>
+          const div = document.createElement('div')
+          return {
+            length: 1,
+            item: (index: number) => (index === 0 ? div : null),
+            forEach: () => {},
+          } as NodeListOf<HTMLDivElement>
+        }
+        // Return an empty NodeList if the selector does not match
+        return {
+          length: 0,
+          item: () => null,
+          forEach: () => {},
+        } as unknown as NodeListOf<HTMLDivElement>
+      },
     } as HTMLDivElement
+
     clickEvent = {
       clientX: 1000,
       clientY: 1000,

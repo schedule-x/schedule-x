@@ -4,3 +4,9 @@
   height: 100%;
   border-left: var(--sx-border);
 }
+
+[data-has-dnd='true'] {
+  .sx__time-grid-day {
+    cursor: inherit;
+  }
+}
