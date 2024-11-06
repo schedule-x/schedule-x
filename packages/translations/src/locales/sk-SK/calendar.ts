@@ -5,6 +5,7 @@ export const calendarSkSK: CalendarTranslations = {
   Month: 'Mesiac',
   Week: 'Týždeň',
   Day: 'Deň',
+  'Select View': 'Vyberte zobrazenie',
   events: 'udalosti',
   event: 'udalosť',
   'No events': 'Žiadne udalosti',

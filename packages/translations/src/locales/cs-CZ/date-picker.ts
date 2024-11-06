@@ -6,5 +6,4 @@ export const datePickerCsCZ: DatePickerTranslations = {
   'Next month': 'Další měsíc',
   'Previous month': 'Předchozí měsíc',
   'Choose Date': 'Vyberte datum',
-  'Select View': 'Vyberte zobrazení',
 }

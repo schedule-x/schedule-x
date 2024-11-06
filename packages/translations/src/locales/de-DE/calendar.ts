@@ -5,6 +5,7 @@ export const calendarDeDE: CalendarTranslations = {
   Month: 'Monat',
   Week: 'Woche',
   Day: 'Tag',
+  'Select View': 'Ansicht auswählen',
   events: 'Ereignisse',
   event: 'Ereignis',
   'No events': 'Keine Ereignisse',

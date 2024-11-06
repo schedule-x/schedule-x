@@ -6,5 +6,4 @@ export const datePickerKoKR: DatePickerTranslations = {
   'Next month': '다음 달',
   'Previous month': '이전 달',
   'Choose Date': '날짜 선택',
-  'Select View': '보기 선택',
 }

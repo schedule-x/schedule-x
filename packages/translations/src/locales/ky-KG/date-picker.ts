@@ -6,5 +6,4 @@ export const datePickerKyKG: DatePickerTranslations = {
   'Next month': 'Кийинки ай',
   'Previous month': 'Өткөн ай',
   'Choose Date': 'Күндү тандаңыз',
-  'Select View': 'Көрүнүштү тандаңыз',
 }

@@ -6,5 +6,4 @@ export const datePickerUkUA: DatePickerTranslations = {
   'Next month': 'Наступний місяць',
   'Previous month': 'Минулий місяць',
   'Choose Date': 'Виберіть дату',
-  'Select View': 'Виберіть вигляд',
 }
