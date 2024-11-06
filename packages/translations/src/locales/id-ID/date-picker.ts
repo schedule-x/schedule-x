@@ -6,5 +6,4 @@ export const datePickerIdID: DatePickerTranslations = {
   'Next month': 'Bulan depan',
   'Previous month': 'Bulan sebelumnya',
   'Choose Date': 'Pilih tanggal',
-  'Select View': 'Pilih tampilan',
 }

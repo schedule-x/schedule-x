@@ -3,6 +3,7 @@ export interface CalendarTranslations {
   Month: string
   Week: string
   Day: string
+  'Select View': string
   events: string
   event: string
   'No events': string

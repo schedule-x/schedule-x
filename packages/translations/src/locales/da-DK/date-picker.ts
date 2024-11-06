@@ -6,5 +6,4 @@ export const datePickerDaDK: DatePickerTranslations = {
   'Next month': 'Næste måned',
   'Previous month': 'Foregående måned',
   'Choose Date': 'Vælg dato',
-  'Select View': 'Vælg visning',
 }

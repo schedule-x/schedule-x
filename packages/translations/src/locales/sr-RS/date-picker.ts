@@ -6,5 +6,4 @@ export const datePickerSrRS: DatePickerTranslations = {
   'Next month': 'Sledeći mesec',
   'Previous month': 'Prethodni mesec',
   'Choose Date': 'Izaberite datum',
-  'Select View': 'Odaberite pregled',
 }

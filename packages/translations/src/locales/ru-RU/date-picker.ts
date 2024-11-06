@@ -6,5 +6,4 @@ export const datePickerRuRU: DatePickerTranslations = {
   'Next month': 'Следующий месяц',
   'Previous month': 'Прошлый месяц',
   'Choose Date': 'Выберите дату',
-  'Select View': 'Выберите вид',
 }

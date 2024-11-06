@@ -6,5 +6,4 @@ export const datePickerMkMK: DatePickerTranslations = {
   'Next month': 'Следен месец',
   'Previous month': 'Претходен месец',
   'Choose Date': 'Избери Датум',
-  'Select View': 'Избери Преглед',
 }

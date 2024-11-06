@@ -6,5 +6,4 @@ export const datePickerEtEE: DatePickerTranslations = {
   'Next month': 'Järgmine kuu',
   'Previous month': 'Eelmine kuu',
   'Choose Date': 'Vali kuupäev',
-  'Select View': 'Vali vaade',
 }

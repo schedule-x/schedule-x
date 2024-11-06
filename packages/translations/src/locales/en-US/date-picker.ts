@@ -6,5 +6,4 @@ export const datePickerEnUS: DatePickerTranslations = {
   'Next month': 'Next month',
   'Previous month': 'Previous month',
   'Choose Date': 'Choose Date',
-  'Select View': 'Select View',
 }

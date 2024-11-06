@@ -6,5 +6,4 @@ export const datePickerNlNL: DatePickerTranslations = {
   'Next month': 'Volgende maand',
   'Previous month': 'Vorige maand',
   'Choose Date': 'Kies datum',
-  'Select View': 'Kies weergave',
 }
