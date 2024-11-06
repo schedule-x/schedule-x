@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://github.com/schedule-x/schedule-x/compare/v2.4.1...v2.4.2) (2024-11-06)
+
+### Bug Fixes
+
+- **ical:** infer all-day events ([#724](https://github.com/schedule-x/schedule-x/issues/724)) ([af24a89](https://github.com/schedule-x/schedule-x/commit/af24a89cca2b0b122bf8f323f98eb217b48845ca))
+- remove node step in build workflow ([#754](https://github.com/schedule-x/schedule-x/issues/754)) ([4cbf89a](https://github.com/schedule-x/schedule-x/commit/4cbf89afbab9b18050647ab03676e80a5b02a80f))
+- update Dutch translations ([#745](https://github.com/schedule-x/schedule-x/issues/745)) ([151fa56](https://github.com/schedule-x/schedule-x/commit/151fa569a0cd53f0a1441f75ba41c0fe06e315e3))
+
 ## [2.4.1](https://github.com/schedule-x/schedule-x/compare/v2.4.0...v2.4.1) (2024-10-10)
 
 ### Bug Fixes
