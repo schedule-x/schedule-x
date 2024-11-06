@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies ⬇️
         run: npm install
       - name: Build lib 🔨
-        run: npm run build
+        run: npm run build:ci
       - name: Build test pages 🔨
         run: npm run build:e2e
       - uses: cypress-io/github-action@v4

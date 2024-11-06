@@ -13,6 +13,7 @@
     "serve": "vite serve",
     "preview": "vite preview",
     "build": "npm run clean:build && rollup -c && lerna run build",
+    "build:ci": "rollup -c && lerna run build",
     "build:e2e": "vite build --config packages/shared/src/config/e2e.vite.mts",
     "test:unit:all": "vitest run",
     "test:unit:changed": "lerna run test --since origin/main",
