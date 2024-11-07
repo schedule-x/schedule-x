@@ -29,11 +29,11 @@ const getRangeEndGivenDayBoundaries = (
     calendarConfig.dayBoundaries.value.end
   )
   let newRangeEndDate = toDateString(date)
-  if (calendarConfig.isHybridDay) {
-    newRangeEndDate = addDays(newRangeEndDate, 1)
-  }
+  //if (calendarConfig.isHybridDay) {
+  newRangeEndDate = addDays(newRangeEndDate, 1)
+  //}
   if (calendarConfig.dayBoundaries.value.end === 2400) {
-    dayEndTimeString = '23:59'
+    dayEndTimeString = '00:00'
   }
   return `${newRangeEndDate} ${dayEndTimeString}`
 }

@@ -3,6 +3,7 @@ import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/fo
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 import { timePointToPercentage } from '@schedule-x/shared/src/utils/stateless/time/interpolation/time-point-to-grid-percentage'
+import { isSameDayEndingMidnight } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 export const getEventHeight = (
   start: string,
@@ -14,7 +15,9 @@ export const getEventHeight = (
     timePointToPercentage(
       pointsPerDay,
       dayBoundaries,
-      timePointsFromString(timeFromDateTime(end))
+      timePointsFromString(
+        isSameDayEndingMidnight(start, end) ? '24:00' : timeFromDateTime(end)
+      )
     ) -
     timePointToPercentage(
       pointsPerDay,

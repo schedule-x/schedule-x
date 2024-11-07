@@ -15,6 +15,7 @@ import {
   dateFromDateTime,
   timeFromDateTime,
 } from '../../time/format-conversion/string-to-string'
+import { isSameDayEndingMidnight } from '../../time/comparison'
 import { EventFragments } from '../../../../interfaces/calendar/event-fragments'
 import { DEFAULT_EVENT_COLOR_NAME } from '../../../../values'
 
@@ -40,9 +41,10 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
   get _isSingleDayTimed(): boolean {
     return (
-      dateTimeStringRegex.test(this.start) &&
-      dateTimeStringRegex.test(this.end) &&
-      dateFromDateTime(this.start) === dateFromDateTime(this.end)
+      isSameDayEndingMidnight(this.start, this.end) ||
+      (dateTimeStringRegex.test(this.start) &&
+        dateTimeStringRegex.test(this.end) &&
+        dateFromDateTime(this.start) === dateFromDateTime(this.end))
     )
   }
 
@@ -56,9 +58,10 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
   get _isMultiDayTimed(): boolean {
     return (
-      dateTimeStringRegex.test(this.start) &&
-      dateTimeStringRegex.test(this.end) &&
-      dateFromDateTime(this.start) !== dateFromDateTime(this.end)
+      !isSameDayEndingMidnight(this.start, this.end) ||
+      (dateTimeStringRegex.test(this.start) &&
+        dateTimeStringRegex.test(this.end) &&
+        dateFromDateTime(this.start) !== dateFromDateTime(this.end))
     )
   }
 
