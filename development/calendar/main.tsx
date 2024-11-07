@@ -101,14 +101,6 @@ const calendar = createCalendar({
   // },
   // isDark: true,
   callbacks: {
-    beforeRender($app) {
-      console.log('beforeRender', $app)
-    },
-
-    onRender($app) {
-      console.log('onRender', $app)
-    },
-
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
     },
@@ -291,14 +283,6 @@ const calendar = createCalendar({
   createResizePlugin(),
 ])
 calendar.render(calendarElement)
-
-console.log(calendar.scrollController.scrollTo)
-console.log(calendar.dragAndDrop.getTimePointsForIntervalConfig)
-console.log(calendar.calendarControls)
-console.log(calendar.eventsService.getAll())
-console.log(calendar.resize.minutesPerInterval)
-console.log(calendar.eventRecurrence.updateRecurrenceOnResize)
-console.log(calendar.eventModal.close)
 
 // const calendar2Element = document.getElementById('calendar-2') as HTMLElement
 // const calendar2 = createCalendar({
