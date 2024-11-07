@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.3](https://github.com/schedule-x/schedule-x/compare/v2.4.2...v2.4.3) (2024-11-07)
+
+### Bug Fixes
+
+- missing \_options after dnd ([#761](https://github.com/schedule-x/schedule-x/issues/761)) ([ebe80a6](https://github.com/schedule-x/schedule-x/commit/ebe80a6ce3de5f834ddea6e35090aac661b0ccc2))
+
 ## [2.4.2](https://github.com/schedule-x/schedule-x/compare/v2.4.1...v2.4.2) (2024-11-06)
 
 ### Bug Fixes
