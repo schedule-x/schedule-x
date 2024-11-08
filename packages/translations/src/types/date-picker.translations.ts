@@ -4,5 +4,4 @@ export interface DatePickerTranslations {
   'Next month': string
   'Previous month': string
   'Choose Date': string
-  'Select View': string
 }

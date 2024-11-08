@@ -20,6 +20,8 @@ export const deepCloneEvent = (
     )
     .withLocation(calendarEvent.location)
     .withDescription(calendarEvent.description)
+    .withOptions(calendarEvent._options)
+    .withCustomContent(calendarEvent._customContent)
     .build()
   calendarEventInternal._nDaysInGrid = calendarEvent._nDaysInGrid
 

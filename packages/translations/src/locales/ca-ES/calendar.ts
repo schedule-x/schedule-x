@@ -5,6 +5,7 @@ export const calendarCaES: CalendarTranslations = {
   Month: 'Mes',
   Week: 'Setmana',
   Day: 'Dia',
+  'Select View': 'Selecciona una vista',
   events: 'Esdeveniments',
   event: 'Esdeveniment',
   'No events': 'Sense esdeveniments',

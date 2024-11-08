@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.3](https://github.com/schedule-x/schedule-x/compare/v2.4.2...v2.4.3) (2024-11-07)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+## [2.4.2](https://github.com/schedule-x/schedule-x/compare/v2.4.1...v2.4.2) (2024-11-06)
+
+### Bug Fixes
+
+- update Dutch translations ([#745](https://github.com/schedule-x/schedule-x/issues/745)) ([151fa56](https://github.com/schedule-x/schedule-x/commit/151fa569a0cd53f0a1441f75ba41c0fe06e315e3))
+
+## [2.4.1](https://github.com/schedule-x/schedule-x/compare/v2.4.0...v2.4.1) (2024-10-10)
+
+### Bug Fixes
+
+- serbian translations ([#726](https://github.com/schedule-x/schedule-x/issues/726)) ([f9fee04](https://github.com/schedule-x/schedule-x/commit/f9fee04590b69fcd7addd484a47e386cb3af5820))
+
 # [2.4.0](https://github.com/schedule-x/schedule-x/compare/v2.3.0...v2.4.0) (2024-10-04)
 
 ### Features

@@ -5,6 +5,7 @@ export const calendarFrFR: CalendarTranslations = {
   Month: 'Mois',
   Week: 'Semaine',
   Day: 'Jour',
+  'Select View': 'Choisir la vue',
   events: 'événements',
   event: 'événement',
   'No events': 'Aucun événement',

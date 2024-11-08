@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.3](https://github.com/schedule-x/schedule-x/compare/v2.4.2...v2.4.3) (2024-11-07)
+
+**Note:** Version bump only for package @schedule-x/ical
+
+## [2.4.2](https://github.com/schedule-x/schedule-x/compare/v2.4.1...v2.4.2) (2024-11-06)
+
+### Bug Fixes
+
+- **ical:** infer all-day events ([#724](https://github.com/schedule-x/schedule-x/issues/724)) ([af24a89](https://github.com/schedule-x/schedule-x/commit/af24a89cca2b0b122bf8f323f98eb217b48845ca))
+
+## [2.4.1](https://github.com/schedule-x/schedule-x/compare/v2.4.0...v2.4.1) (2024-10-10)
+
+**Note:** Version bump only for package @schedule-x/ical
+
 # [2.4.0](https://github.com/schedule-x/schedule-x/compare/v2.3.0...v2.4.0) (2024-10-04)
 
 **Note:** Version bump only for package @schedule-x/ical

@@ -5,6 +5,7 @@ export const calendarZhCN: CalendarTranslations = {
   Month: '月',
   Week: '周',
   Day: '日',
+  'Select View': '选择视图',
   events: '场活动',
   event: '活动',
   'No events': '没有活动',

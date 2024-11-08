@@ -23,10 +23,6 @@ jobs:
         uses: szenius/set-timezone@v2.0
         with:
           timezoneLinux: 'Europe/London'
-      - name: Setup Node.js 🔧
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
@@ -45,10 +41,6 @@ jobs:
         uses: szenius/set-timezone@v2.0
         with:
           timezoneLinux: 'US/Pacific'
-      - name: Setup Node.js 🔧
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪
@@ -67,10 +59,6 @@ jobs:
         uses: szenius/set-timezone@v2.0
         with:
           timezoneLinux: 'Asia/Tokyo'
-      - name: Setup Node.js 🔧
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'lts/*'
       - name: Install dependencies 🛠️
         run: npm i
       - name: Run Vitest 🧪

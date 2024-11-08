@@ -5,6 +5,7 @@ export const calendarSvSE: CalendarTranslations = {
   Month: 'Månad',
   Week: 'Vecka',
   Day: 'Dag',
+  'Select View': 'Välj vy',
   events: 'händelser',
   event: 'händelse',
   'No events': 'Inga händelser',

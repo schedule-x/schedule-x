@@ -79,17 +79,17 @@ const calendar = createCalendar({
   // },
   firstDayOfWeek: 1,
   // locale: 'de-DE',
-  // locale: 'ja-JP',
+  // locale: 'pt-BR',
   // locale: 'en-US',
   // locale: 'zh-CN',
   // locale: 'id-ID',
-  // locale: 'cs-CZ',
+  locale: 'sr-RS',
   // locale: 'et-EE',
   // locale: 'ca-ES',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
-  // maxDate: '2024-03-31',
+  // maxDate: '2025-03-31',
   // defaultView: 'month-grid',
   // selectedDate: '2024-12-01',
   // datePicker: {
@@ -101,14 +101,6 @@ const calendar = createCalendar({
   // },
   // isDark: true,
   callbacks: {
-    beforeRender($app) {
-      console.log('beforeRender', $app)
-    },
-
-    onRender($app) {
-      console.log('onRender', $app)
-    },
-
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
     },
@@ -330,14 +322,6 @@ const calendar = createCalendar({
   createResizePlugin(),
 ])
 calendar.render(calendarElement)
-
-console.log(calendar.scrollController.scrollTo)
-console.log(calendar.dragAndDrop.getTimePointsForIntervalConfig)
-console.log(calendar.calendarControls)
-console.log(calendar.eventsService.getAll())
-console.log(calendar.resize.minutesPerInterval)
-console.log(calendar.eventRecurrence.updateRecurrenceOnResize)
-console.log(calendar.eventModal.close)
 
 // const calendar2Element = document.getElementById('calendar-2') as HTMLElement
 // const calendar2 = createCalendar({

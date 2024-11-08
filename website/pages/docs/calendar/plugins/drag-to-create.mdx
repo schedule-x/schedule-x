@@ -92,7 +92,7 @@ const calendar = createCalendar(
 
 const eventPlaceholder = document.getElementById('event-placeholder')
 eventPlaceholder.addEventListener('dragstart', () => {
-  calendar.dragToCreate.dragToCreate('yourEventId123', {
+  dragToCreatePlugin.dragToCreate('yourEventId123', {
     title: '(No title)',
     calendarId: 'leisure',
   })
