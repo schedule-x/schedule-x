@@ -14,6 +14,7 @@ import useEventInteractions from '../../utils/stateful/hooks/use-event-interacti
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
+import { invokeOnEventDoubleClickCallback } from '../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import {
@@ -154,6 +155,7 @@ export default function DateGridEvent({
         onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
         onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
+        onDblClick={() => invokeOnEventDoubleClickCallback($app, calendarEvent)}
         onKeyDown={handleKeyDown}
         className={eventClasses.join(' ')}
         style={{

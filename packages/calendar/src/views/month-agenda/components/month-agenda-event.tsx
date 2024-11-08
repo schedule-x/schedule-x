@@ -7,6 +7,7 @@ import useEventInteractions from '../../../utils/stateful/hooks/use-event-intera
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
+import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
 
@@ -42,6 +43,11 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const onDoubleClick = (e: MouseEvent) => {
+    setClickedEvent(e, calendarEvent)
+    invokeOnEventDoubleClickCallback($app, calendarEvent)
+  }
+
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.stopPropagation()
@@ -69,6 +75,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
         padding: customComponent ? '0px' : undefined,
       }}
       onClick={(e) => onClick(e)}
+      onDblClick={(e) => onDoubleClick(e)}
       onKeyDown={onKeyDown}
       tabIndex={0}
       role="button"
