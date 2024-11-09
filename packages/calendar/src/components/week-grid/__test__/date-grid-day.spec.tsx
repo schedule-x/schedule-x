@@ -79,5 +79,24 @@ describe('DateGridDay', () => {
       )
       expect(backgroundEvent).not.toBeNull()
     })
+
+    it('should render a full day event if it starts before and ends after the day', () => {
+      const $app = __createAppWithViews__()
+      const date = '2021-01-01'
+      const backgroundEvents: BackgroundEvent[] = [
+        {
+          start: '2020-12-31',
+          end: '2021-01-02',
+          style: {},
+        },
+      ]
+
+      renderComponent($app, date, backgroundEvents)
+
+      const backgroundEvent = document.querySelector(
+        '.sx__date-grid-background-event'
+      )
+      expect(backgroundEvent).not.toBeNull()
+    })
   })
 })

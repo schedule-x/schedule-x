@@ -26,7 +26,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   minDate: Signal<string | undefined>
   maxDate: Signal<string | undefined>
   monthGridOptions: Signal<MonthGridOptions>
-  locale: string = DEFAULT_LOCALE
+  locale: Signal<string> = signal(DEFAULT_LOCALE)
 
   constructor(
     locale: string = DEFAULT_LOCALE,

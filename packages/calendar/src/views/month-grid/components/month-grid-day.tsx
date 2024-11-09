@@ -101,7 +101,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const dayStartDateTime = day.date + ' 00:00'
   const dayEndDateTime = day.date + ' 23:59'
-  const fullDayEvent = day.backgroundEvents.find((event) => {
+  const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
     const eventStartWithTime = dateStringRegex.test(event.start)
       ? event.start + ' 00:00'
       : event.start
@@ -125,12 +125,13 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
       onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
     >
-      {fullDayEvent && (
+      {fullDayBackgroundEvent && (
         <>
           <div
             className="sx__month-grid-background-event"
+            title={fullDayBackgroundEvent.title}
             style={{
-              ...fullDayEvent.style,
+              ...fullDayBackgroundEvent.style,
             }}
           />
         </>

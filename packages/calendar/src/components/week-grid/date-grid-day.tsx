@@ -20,7 +20,7 @@ export default function DateGridDay({
   const dateStart = date + ' 00:00'
   const dateEnd = date + ' 23:59'
 
-  const fullDayEvent = backgroundEvents.find((event) => {
+  const fullDayBackgroundEvent = backgroundEvents.find((event) => {
     const eventStartWithTime = dateStringRegex.test(event.start)
       ? event.start + ' 00:00'
       : event.start
@@ -32,11 +32,12 @@ export default function DateGridDay({
 
   return (
     <div className="sx__date-grid-day" data-date-grid-date={date}>
-      {fullDayEvent && (
+      {fullDayBackgroundEvent && (
         <div
           className="sx__date-grid-background-event"
+          title={fullDayBackgroundEvent.title}
           style={{
-            ...fullDayEvent.style,
+            ...fullDayBackgroundEvent.style,
           }}
         />
       )}

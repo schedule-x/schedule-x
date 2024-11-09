@@ -29,6 +29,7 @@ export default function TimeGridBackgroundEvent({
     <>
       <div
         class="sx__time-grid-background-event"
+        title={backgroundEvent.title}
         style={{
           ...backgroundEvent.style,
           position: 'absolute',

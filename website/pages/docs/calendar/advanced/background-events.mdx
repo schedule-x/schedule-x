@@ -1,0 +1,59 @@
+---
+title: 'Background events'
+description: 'Learn how to use background events in Schedule-X'
+---
+
+# Background events
+
+Additional to the regular calendar events, you can also add background events. These are thought to be used for
+displaying things such as out-of-office hours, public holidays or other events that your users won't interact with or
+have the possibility to change.
+
+You can then style these background events to your taste via a `style` property, and add a `title` which will be
+added as a title-property to the HTML element for the background event (thus creating a tooltip).
+
+## API
+
+```ts
+import { createCalendar, createViewWeek } from '@schedule-x/calendar'
+
+const calendar = createCalendar({
+  // ... other config
+  backgroundEvents: [
+
+    // full day event
+    {
+      title: 'Out of office',
+      start: '2024-09-03',
+      end: '2024-09-03',
+      style: {
+        // create tilted 5px thick gray lines
+        backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
+        opacity: 0.5,
+      },
+    },
+
+    // timed event
+    {
+      title: 'Out of office',
+      start: '2024-09-02 00:00',
+      end: '2024-09-02 02:00',
+      style: {
+        background: 'linear-gradient(45deg, #f91c45, #1c7df9)',
+        opacity: 0.5,
+      },
+    },
+
+    // multi-day event
+    {
+      title: 'Holiday',
+      start: '2024-09-05',
+      end: '2024-09-07',
+      style: {
+        backgroundImage: 'repeating-linear-gradient(45deg, #1cf9b0, #1cf9b0 5px, transparent 5px, transparent 10px)',
+        opacity: 0.5,
+      },
+    }
+  ],
+})
+```
