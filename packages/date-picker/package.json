@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/date-picker",
   "umdName": "SXDatePicker",
-  "version": "2.4.3",
+  "version": "2.5.0",
   "description": "Schedule-X date picker component",
   "author": {
     "name": "Tom Österlund",

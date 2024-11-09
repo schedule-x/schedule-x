@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/recurrence",
   "umdName": "SXRecurrence",
-  "version": "2.4.3",
+  "version": "2.5.0",
   "description": "A library for working with recurring events according to the iCalendar specification",
   "author": {
     "name": "Tom Österlund",

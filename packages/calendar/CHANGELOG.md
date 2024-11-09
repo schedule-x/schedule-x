@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/schedule-x/schedule-x/compare/v2.4.3...v2.5.0) (2024-11-09)
+
+### Bug Fixes
+
+- reactivity errors from using preact useEffect for signals ([#770](https://github.com/schedule-x/schedule-x/issues/770)) ([79b3199](https://github.com/schedule-x/schedule-x/commit/79b3199fa1d3be45e117ad3be5f922bdb7621875))
+
+### Features
+
+- background events ([#646](https://github.com/schedule-x/schedule-x/issues/646)) ([489f396](https://github.com/schedule-x/schedule-x/commit/489f396302c9f9d745dfc75128c3aa0e58ac80da))
+
 ## [2.4.3](https://github.com/schedule-x/schedule-x/compare/v2.4.2...v2.4.3) (2024-11-07)
 
 **Note:** Version bump only for package @schedule-x/calendar
