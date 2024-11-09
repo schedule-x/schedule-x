@@ -1,5 +1,5 @@
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
-import { useEffect, useState } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 import { createMonth } from '../utils/stateless/create-month'
 import { Month } from '../types/month'
 import MonthGridWeek from './month-grid-week'
@@ -7,11 +7,12 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import { positionInMonth } from '../utils/stateless/position-in-month'
 import { sortEventsByStartAndEndWithoutConsideringTime } from '../../../utils/stateless/events/sort-by-start-date'
 import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
+import { useSignalEffect } from '@preact/signals'
 
 export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])
 
-  useEffect(() => {
+  useSignalEffect(() => {
     $app.calendarEvents.list.value.forEach((event) => {
       event._eventFragments = {}
     })
@@ -41,13 +42,7 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
         filteredEvents.sort(sortEventsByStartAndEndWithoutConsideringTime)
       )
     )
-  }, [
-    $app.calendarState.range.value?.start,
-    $app.calendarState.range.value?.end,
-    $app.calendarEvents.list.value,
-    $app.calendarEvents.filterPredicate.value,
-    $app.calendarEvents.backgroundEvents.value,
-  ])
+  })
 
   return (
     <AppContext.Provider value={$app}>
