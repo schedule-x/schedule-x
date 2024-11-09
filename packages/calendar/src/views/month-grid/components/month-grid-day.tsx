@@ -13,6 +13,7 @@ import { DATE_GRID_BLOCKER } from '../../../constants'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
+import { dateStringRegex } from '@schedule-x/shared/src'
 
 type props = {
   day: MonthDayType
@@ -98,6 +99,21 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const numberOfNonDisplayedEvents = getNumberOfNonDisplayedEvents()
 
+  const dayStartDateTime = day.date + ' 00:00'
+  const dayEndDateTime = day.date + ' 23:59'
+  const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
+    const eventStartWithTime = dateStringRegex.test(event.start)
+      ? event.start + ' 00:00'
+      : event.start
+    const eventEndWithTime = dateStringRegex.test(event.end)
+      ? event.end + ' 23:59'
+      : event.end
+    return (
+      eventStartWithTime <= dayStartDateTime &&
+      eventEndWithTime >= dayEndDateTime
+    )
+  })
+
   return (
     <div
       className={wrapperClasses.join(' ')}
@@ -109,6 +125,18 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
       onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
     >
+      {fullDayBackgroundEvent && (
+        <>
+          <div
+            className="sx__month-grid-background-event"
+            title={fullDayBackgroundEvent.title}
+            style={{
+              ...fullDayBackgroundEvent.style,
+            }}
+          />
+        </>
+      )}
+
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
           <div className="sx__month-grid-day__header-day-name">

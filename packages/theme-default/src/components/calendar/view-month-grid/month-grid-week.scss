@@ -5,6 +5,7 @@
 }
 
 .sx__month-grid-day {
+  position: relative;
   padding: var(--sx-spacing-padding2) 0;
   flex: 1;
 
@@ -61,4 +62,12 @@
     background-color: var(--sx-color-surface-container);
     color: var(--sx-color-on-surface);
   }
+}
+
+.sx__month-grid-background-event {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }

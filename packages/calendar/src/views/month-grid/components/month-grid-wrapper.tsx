@@ -6,6 +6,7 @@ import MonthGridWeek from './month-grid-week'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { positionInMonth } from '../utils/stateless/position-in-month'
 import { sortEventsByStartAndEndWithoutConsideringTime } from '../../../utils/stateless/events/sort-by-start-date'
+import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
 
 export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])
@@ -18,6 +19,17 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
       $app.datePickerState.selectedDate.value,
       $app.timeUnitsImpl
     )
+    newMonth.forEach((week) => {
+      week.forEach((day) => {
+        day.backgroundEvents = filterByRange(
+          $app.calendarEvents.backgroundEvents.value,
+          {
+            start: day.date,
+            end: day.date,
+          }
+        )
+      })
+    })
     const filteredEvents = $app.calendarEvents.filterPredicate.value
       ? $app.calendarEvents.list.value.filter(
           $app.calendarEvents.filterPredicate.value
@@ -34,6 +46,7 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
     $app.calendarState.range.value?.end,
     $app.calendarEvents.list.value,
     $app.calendarEvents.filterPredicate.value,
+    $app.calendarEvents.backgroundEvents.value,
   ])
 
   return (

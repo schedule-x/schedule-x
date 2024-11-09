@@ -90,7 +90,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2025-03-31',
-  // defaultView: 'week',
+  // defaultView: 'month-grid',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   selectedDate: '2023-11-01'
@@ -199,6 +199,45 @@ const calendar = createCalendar({
       },
     },
   },
+  backgroundEvents: [
+    {
+      title: 'Out of office',
+      start: '2024-09-03',
+      end: '2024-09-03',
+      style: {
+        // create tilted 5px thick gray lines
+        backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
+        opacity: 0.5,
+      },
+    },
+    {
+      title: 'Out of office',
+      start: '2024-09-02 00:00',
+      end: '2024-09-02 02:00',
+      style: {
+        background: 'linear-gradient(45deg, #f91c45, #1c7df9)',
+        opacity: 0.5,
+      },
+    },
+    {
+      title: 'Out of office',
+      start: '2024-09-02 04:00',
+      end: '2024-09-02 07:00',
+      style: {
+        backgroundColor: '#f91c45',
+        opacity: 0.5,
+      },
+    },
+    {
+      title: 'Holiday',
+      start: '2024-09-05',
+      end: '2024-09-07',
+      style: {
+        backgroundImage: 'repeating-linear-gradient(45deg, #1cf9b0, #1cf9b0 5px, transparent 5px, transparent 10px)',
+        opacity: 0.5,
+      },
+    }
+  ],
   events: [
     {
       id: 874574875,
@@ -383,4 +422,48 @@ const updateCalendarsButton = document.getElementById(
 ) as HTMLButtonElement
 updateCalendarsButton.addEventListener('click', () => {
   calendarsUpdaterPlugin.updateCalendars()
+})
+
+const updateBackgroundEventsButton = document.getElementById(
+  'update-background-events'
+) as HTMLButtonElement
+updateBackgroundEventsButton.addEventListener('click', () => {
+  eventsServicePlugin.setBackgroundEvents([
+    {
+      title: 'Out of office',
+      start: '2024-09-03',
+      end: '2024-09-03',
+      style: {
+        backgroundColor: '#1c39f9',
+        opacity: 0.5,
+      },
+    },
+    {
+      title: 'Out of office',
+      start: '2024-09-02 00:00',
+      end: '2024-09-02 02:00',
+      style: {
+        background: 'linear-gradient(45deg, #f91c45, #1c7df9)',
+        opacity: 0.5,
+      },
+    },
+    {
+      title: 'Out of office',
+      start: '2024-09-02 04:00',
+      end: '2024-09-02 07:00',
+      style: {
+        backgroundColor: '#f9ba1c',
+        opacity: 0.5,
+      },
+    },
+    {
+      title: 'Holiday',
+      start: '2024-09-05',
+      end: '2024-09-07',
+      style: {
+        backgroundColor: '#f9501c',
+        opacity: 0.5,
+      },
+    }
+  ])
 })
