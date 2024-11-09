@@ -21,7 +21,8 @@ export default function TimeGridBackgroundEvent({
   if (dateStringRegex.test(start)) start += ' 00:00'
   if (dateStringRegex.test(end)) end += ' 23:59'
 
-  // make sure the date is correct
+  // The date in event.start and event.end does not necessarily have to be during this date, since it might start before
+  // this date or end after. Nonetheless, it should appear as an event from 00:00 to 23:59 on this date in that case, and thus the start- and end-dates might have to be adjusted.
   if (dateFromDateTime(start) !== date) start = date + ' ' + start.split(' ')[1]
   if (dateFromDateTime(end) !== date) end = date + ' ' + end.split(' ')[1]
 
