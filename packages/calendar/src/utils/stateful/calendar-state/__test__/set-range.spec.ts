@@ -28,7 +28,7 @@ describe('calendar state', () => {
 
       expect(state.range.value).toEqual({
         start: '2023-09-11 00:00',
-        end: '2023-09-17 23:59',
+        end: '2023-09-18 00:00',
       })
     })
 
@@ -52,7 +52,7 @@ describe('calendar state', () => {
 
       expect(state.range.value).toEqual({
         start: '2023-09-13 00:00',
-        end: '2023-09-13 23:59',
+        end: '2023-09-14 00:00',
       })
     })
 
@@ -61,7 +61,7 @@ describe('calendar state', () => {
       state.setView(InternalViewName.Day, '2023-09-13')
       state.range.value = {
         start: '2023-09-13 00:00',
-        end: '2023-09-13 23:59',
+        end: '2023-09-14 00:00',
       }
       const originalRange = state.range.value
 

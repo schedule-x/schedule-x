@@ -26,3 +26,13 @@ export const isSameDayEndingMidnight = (
     calculateDaysDifference(start, end) === 1
   )
 }
+
+export const isNotSameDayEndingMidnight = (
+  start: string,
+  end: string
+): boolean => {
+  return (
+    timeFromDateTime(end) !== '00:00' &&
+    calculateDaysDifference(start, end) !== 1
+  )
+}

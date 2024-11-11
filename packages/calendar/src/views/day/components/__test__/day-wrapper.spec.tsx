@@ -27,7 +27,7 @@ describe('DayWrapper', () => {
       const calendarEvent = {
         id: 1,
         start: '2023-10-12 00:00',
-        end: '2023-10-13 00:00',
+        end: '2023-10-13 00:01',
       }
       const $app = __createAppWithViews__({
         events: [calendarEvent],
@@ -42,12 +42,12 @@ describe('DayWrapper', () => {
     })
   })
 
-  describe('When an event ends 23:59 and therefore fits in the time grid', () => {
+  describe('When an event ends 00:00 and therefore fits in the time grid', () => {
     it('should render a time grid event but no date grid event', () => {
       const calendarEvent = {
         id: 1,
         start: '2023-10-12 00:00',
-        end: '2023-10-12 23:59',
+        end: '2023-10-13 00:00',
       }
       const $app = __createAppWithViews__({
         events: [calendarEvent],

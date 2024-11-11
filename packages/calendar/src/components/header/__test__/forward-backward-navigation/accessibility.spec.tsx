@@ -23,8 +23,8 @@ describe('ForwardBackwardNavigation', () => {
 
   describe('navigating with keyboard', () => {
     it.each([
-      ['en-US', 'December 25, 2023 to December 31, 2023'],
-      ['de-DE', '25. Dezember 2023 bis 31. Dezember 2023'],
+      ['en-US', 'December 25, 2023 to January 1, 2024'],
+      ['de-DE', '25. Dezember 2023 bis 1. Januar 2024'],
     ])('should navigate backwards', async (locale, localizedRange) => {
       const $app = getApp(locale)
       renderComponent($app)
@@ -43,8 +43,8 @@ describe('ForwardBackwardNavigation', () => {
     })
 
     it.each([
-      ['en-US', 'January 8, 2024 to January 14, 2024'],
-      ['de-DE', '8. Januar 2024 bis 14. Januar 2024'],
+      ['en-US', 'January 8, 2024 to January 15, 2024'],
+      ['de-DE', '8. Januar 2024 bis 15. Januar 2024'],
     ])('should navigate forwards', async (locale, localizedRange) => {
       const $app = getApp(locale)
       renderComponent($app)

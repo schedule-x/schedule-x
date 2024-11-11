@@ -65,7 +65,7 @@ describe('ForwardBackwardNavigation', () => {
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
         start: '2023-01-02 00:00',
-        end: '2023-01-08 23:59',
+        end: '2023-01-09 00:00',
       })
     })
 
@@ -79,7 +79,7 @@ describe('ForwardBackwardNavigation', () => {
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
         start: '2022-12-19 00:00',
-        end: '2022-12-25 23:59',
+        end: '2022-12-26 00:00',
       })
     })
   })
@@ -95,7 +95,7 @@ describe('ForwardBackwardNavigation', () => {
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
         start: '2023-01-02 00:00',
-        end: '2023-01-02 23:59',
+        end: '2023-01-03 00:00',
       })
     })
 
@@ -109,7 +109,7 @@ describe('ForwardBackwardNavigation', () => {
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
         start: '2022-12-31 00:00',
-        end: '2022-12-31 23:59',
+        end: '2023-01-01 00:00',
       })
     })
   })

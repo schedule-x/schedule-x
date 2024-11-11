@@ -51,7 +51,7 @@ describe('CalendarEventImpl', () => {
       },
       {
         start: '2020-01-01 23:59',
-        end: '2020-01-02 00:00',
+        end: '2020-01-02 00:01',
       },
     ])(
       'should be classified as a single hybrid day event and a multi day timed event',

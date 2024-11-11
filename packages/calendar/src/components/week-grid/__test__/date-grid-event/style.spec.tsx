@@ -106,10 +106,10 @@ describe('styles of DateGridEvent', () => {
       renderComponent($app, eventWithOverflowBothId, 7)
       const event = getEventByText(eventWithOverflowBothTitle)
 
-      expect(event.style.width).toBe('calc(700% - 22px)')
+      expect(event.style.width).toBe('calc(700% - 12px)')
       expect(
         event.classList.contains('sx__date-grid-event--overflow-right')
-      ).toBe(true)
+      ).toBe(false)
       expect(
         event.classList.contains('sx__date-grid-event--overflow-left')
       ).toBe(true)
@@ -132,8 +132,8 @@ describe('styles of DateGridEvent', () => {
 
       expect(event.style.borderTopLeftRadius).toBe('0px')
       expect(event.style.borderBottomLeftRadius).toBe('0px')
-      expect(event.style.borderTopRightRadius).toBe('0px')
-      expect(event.style.borderBottomRightRadius).toBe('0px')
+      expect(event.style.borderTopRightRadius).toBe('')
+      expect(event.style.borderBottomRightRadius).toBe('')
     })
   })
 })
