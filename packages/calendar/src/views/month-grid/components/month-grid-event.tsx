@@ -7,6 +7,7 @@ import { useContext, useEffect } from 'preact/hooks'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
+import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
@@ -90,6 +91,11 @@ export default function MonthGridEvent({
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const handleOnDoubleClick = (e: MouseEvent) => {
+    e.stopPropagation() // prevent the click from bubbling up to the day element
+    invokeOnEventDoubleClickCallback($app, calendarEvent)
+  }
+
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.stopPropagation()
@@ -124,6 +130,7 @@ export default function MonthGridEvent({
       onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
       onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       onClick={handleOnClick}
+      onDblClick={handleOnDoubleClick}
       onKeyDown={handleKeyDown}
       className={classNames.join(' ')}
       style={{

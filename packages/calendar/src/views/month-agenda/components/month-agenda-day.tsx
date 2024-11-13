@@ -35,9 +35,15 @@ export default function MonthAgendaDay({
   if (isActive) dayClasses.push('sx__month-agenda-day--active')
   if (monthOfDay !== monthSelected) dayClasses.push('is-leading-or-trailing')
 
-  const handleClick = () => {
+  const handleClick = (
+    e: MouseEvent,
+    callback: ((dateTime: string) => void) | undefined
+  ) => {
     setActiveDate(day.date)
-    $app.config.callbacks.onClickAgendaDate?.(day.date)
+
+    if (!callback) return
+
+    callback(day.date)
   }
 
   const hasFocus = (weekDay: MonthAgendaDayType) =>
@@ -59,7 +65,10 @@ export default function MonthAgendaDay({
   return (
     <button
       className={dayClasses.join(' ')}
-      onClick={handleClick}
+      onClick={(e) => handleClick(e, $app.config.callbacks.onClickAgendaDate)}
+      onDblClick={(e) =>
+        handleClick(e, $app.config.callbacks.onDoubleClickAgendaDate)
+      }
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
       tabIndex={hasFocus(day) ? 0 : -1}
       data-agenda-focus={hasFocus(day) ? 'true' : undefined}

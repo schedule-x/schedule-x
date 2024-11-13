@@ -18,7 +18,10 @@ import { viewMonthGrid } from '../../views/month-grid'
 import { viewMonthAgenda } from '../../views/month-agenda'
 import { viewDay } from '../../views/day'
 import { viewWeek } from '../../views/week'
-import { clickByText } from '../../utils/stateless/testing/click-by-text'
+import {
+  clickByText,
+  doubleClickByText,
+} from '../../utils/stateless/testing/click-by-text'
 import { assertIsDIV } from '../../../../../libs/assertions/src'
 
 describe('Calendar callbacks', () => {
@@ -127,6 +130,41 @@ describe('Calendar callbacks', () => {
         expect(onEventClick).toHaveBeenCalledTimes(1)
 
         expect(onEventClick).toHaveBeenCalledWith(calendarEvent)
+      })
+    })
+
+    describe('Double clicking an event', () => {
+      it.each([
+        InternalViewName.Week,
+        InternalViewName.MonthGrid,
+        InternalViewName.MonthAgenda,
+        InternalViewName.Day,
+      ])('should call onDoubleClickEvent in view %s', async (viewName) => {
+        const onDoubleClickEvent = vi.fn()
+        const calendarEvent = {
+          id: '1',
+          start: '2023-12-01 00:00',
+          end: '2023-12-01 23:59',
+          title: 'Event 1',
+        }
+        const $app = createCalendarAppSingleton({
+          views: [viewMonthGrid, viewMonthAgenda, viewDay, viewWeek],
+          callbacks: {
+            onDoubleClickEvent,
+          },
+          selectedDate: '2023-12-01',
+          defaultView: viewName,
+          events: [calendarEvent],
+        })
+        renderComponent($app)
+  
+        await doubleClickByText('Event 1')
+  
+        await waitFor(() => {
+          expect(onDoubleClickEvent).toHaveBeenCalledTimes(1)
+  
+          expect(onDoubleClickEvent).toHaveBeenCalledWith(calendarEvent)
+        })
       })
     })
 

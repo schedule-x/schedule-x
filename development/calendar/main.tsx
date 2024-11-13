@@ -113,6 +113,10 @@ const calendar = createCalendar({
       console.log('onEventClick', event)
     },
 
+    onDoubleClickEvent(event) {
+      console.log('onDoubleClickEvent', event)
+    },
+
     onClickDate(date) {
       console.log('onClickDate', date)
     },
@@ -123,6 +127,10 @@ const calendar = createCalendar({
 
     onClickAgendaDate(date) {
       console.log('onClickAgendaDate', date)
+    },
+
+    onDoubleClickAgendaDate(date) {
+      console.log('onDoubleClickAgendaDate', date)
     },
 
     onClickPlusEvents(date) {

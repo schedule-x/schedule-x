@@ -21,6 +21,7 @@ import { Fragment } from 'preact'
 import { getCCID } from './time-grid-event-utils'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
+import { invokeOnEventDoubleClickCallback } from '../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
@@ -111,6 +112,11 @@ export default function TimeGridEvent({
     invokeOnEventClickCallback($app, calendarEvent)
   }
 
+  const handleOnDoubleClick = (e: MouseEvent) => {
+    e.stopPropagation()
+    invokeOnEventDoubleClickCallback($app, calendarEvent)
+  }
+
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.stopPropagation()
@@ -167,6 +173,7 @@ export default function TimeGridEvent({
         }
         data-event-id={calendarEvent.id}
         onClick={handleOnClick}
+        onDblClick={handleOnDoubleClick}
         onKeyDown={handleKeyDown}
         onMouseDown={handlePointerDown}
         onMouseUp={handlePointerUp}
