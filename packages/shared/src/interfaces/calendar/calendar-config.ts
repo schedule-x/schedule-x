@@ -16,6 +16,7 @@ import { EventRecurrencePlugin } from '../event-recurrence/event-recurrence-plug
 import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
 import { WeekDay } from '../../enums/time/week-day.enum'
+import { BackgroundEvent } from './background-event'
 
 export type WeekOptions = {
   gridHeight: number
@@ -101,6 +102,7 @@ export interface CalendarConfigExternal
   extends Partial<ReducedCalendarConfigInternal> {
   datePicker?: CalendarDatePickerConfigExternal
   events?: CalendarEventExternal[]
+  backgroundEvents?: BackgroundEvent[]
   dayBoundaries?: DayBoundariesExternal
   views: [View, ...View[]]
   selectedDate?: string

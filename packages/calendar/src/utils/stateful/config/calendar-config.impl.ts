@@ -17,7 +17,6 @@ import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/ti
 import { Signal, signal } from '@preact/signals'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
-  locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
   views: Signal<View[]>
   dayBoundaries: Signal<DayBoundariesInternal>
@@ -27,6 +26,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   minDate: Signal<string | undefined>
   maxDate: Signal<string | undefined>
   monthGridOptions: Signal<MonthGridOptions>
+  locale: Signal<string> = signal(DEFAULT_LOCALE)
 
   constructor(
     locale: string = DEFAULT_LOCALE,

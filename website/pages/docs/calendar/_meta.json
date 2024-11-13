@@ -17,9 +17,6 @@
   "plugins": {
     "title": "Plugins"
   },
-  "custom-views": {
-    "title": "Custom views"
-  },
   "resource-scheduler": {
     "title": "⭐ Resource scheduler"
   },
@@ -36,5 +33,8 @@
   "installing-premium": {
     "display": "hidden",
     "title": "Installing premium plugins"
+  },
+  "advanced": {
+    "title": "Advanced usage"
   }
 }

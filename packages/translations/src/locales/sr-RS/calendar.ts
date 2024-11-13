@@ -1,10 +1,11 @@
 import { CalendarTranslations } from '../../types/calendar.translations'
 
-export const calendarSrRs: CalendarTranslations = {
+export const calendarSrRS: CalendarTranslations = {
   Today: 'Danas',
   Month: 'Mesec',
   Week: 'Nedelja',
   Day: 'Dan',
+  'Select View': 'Odaberite pregled',
   events: 'Događaji',
   event: 'Događaj',
   'No events': 'Nema događaja',

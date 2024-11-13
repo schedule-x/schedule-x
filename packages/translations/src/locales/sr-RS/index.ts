@@ -1,8 +1,8 @@
-import { datePickerSrRs } from './date-picker'
+import { datePickerSrRS } from './date-picker'
 import { Language } from '../../types/language.translations'
-import { calendarSrRs } from './calendar'
+import { calendarSrRS } from './calendar'
 
-export const srRs: Language = {
-  ...datePickerSrRs,
-  ...calendarSrRs,
+export const srRS: Language = {
+  ...datePickerSrRS,
+  ...calendarSrRS,
 }

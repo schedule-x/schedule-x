@@ -7,9 +7,11 @@ import CalendarEvents, {
 import { signal } from '@preact/signals'
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
+import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
 export const createCalendarEventsImpl = (
   events: CalendarEventExternal[],
+  backgroundEvents: BackgroundEvent[],
   config: CalendarConfigInternal
 ): CalendarEvents => {
   const list = signal<CalendarEventInternal[]>(
@@ -23,5 +25,6 @@ export const createCalendarEventsImpl = (
   return {
     list,
     filterPredicate,
+    backgroundEvents: signal(backgroundEvents),
   }
 }

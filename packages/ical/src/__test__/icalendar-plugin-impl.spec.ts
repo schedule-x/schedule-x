@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -88,6 +89,64 @@ describe('IcalendarPluginImpl', () => {
       plugin.between('2024-09-01 00:00', '2024-09-05 23:59')
 
       expect($app.calendarEvents.list.value.length).toBe(3)
+    })
+  })
+
+  describe('parsing a full day event', () => {
+    it('should parse a full day event with date type', () => {
+      const plugin = createIcalendarPlugin({
+        data:
+          'BEGIN:VCALENDAR\n' +
+          'VERSION:2.0\n' +
+          'CALSCALE:GREGORIAN\n' +
+          'BEGIN:VEVENT\n' +
+          'SUMMARY:Good morning\n' +
+          'DTSTART;VALUE=DATE:20230801\n' +
+          'DTEND;VALUE=DATE:20230802\n' +
+          'LOCATION:1000 Broadway Ave.\\, Brooklyn\n' +
+          'DESCRIPTION: Access-A-Ride trip to 900 Jay St.\\, Brooklyn\n' +
+          'STATUS:CONFIRMED\n' +
+          'SEQUENCE:3\n' +
+          'END:VEVENT\n' +
+          'END:VCALENDAR',
+      })
+      const $app = __createAppWithViews__({
+        plugins: [plugin],
+        selectedDate: '2023-08-01',
+      })
+      plugin.beforeRender($app)
+
+      expect($app.calendarEvents.list.value.length).toBe(1)
+      expect($app.calendarEvents.list.value[0].start).toBe('2023-08-01')
+      expect($app.calendarEvents.list.value[0].end).toBe('2023-08-01')
+    })
+
+    it('should parse a full day event with date-time type', () => {
+      const plugin = createIcalendarPlugin({
+        data:
+          'BEGIN:VCALENDAR\n' +
+          'VERSION:2.0\n' +
+          'CALSCALE:GREGORIAN\n' +
+          'BEGIN:VEVENT\n' +
+          'SUMMARY:Good morning\n' +
+          'DTSTART;VALUE=DATE-TIME:20230801T000000\n' +
+          'DTEND;VALUE=DATE-TIME:20230802T000000\n' +
+          'LOCATION:1000 Broadway Ave.\\, Brooklyn\n' +
+          'DESCRIPTION: Access-A-Ride trip to 900 Jay St.\\, Brooklyn\n' +
+          'STATUS:CONFIRMED\n' +
+          'SEQUENCE:3\n' +
+          'END:VEVENT\n' +
+          'END:VCALENDAR',
+      })
+      const $app = __createAppWithViews__({
+        plugins: [plugin],
+        selectedDate: '2023-08-01',
+      })
+      plugin.beforeRender($app)
+
+      expect($app.calendarEvents.list.value.length).toBe(1)
+      expect($app.calendarEvents.list.value[0].start).toBe('2023-08-01')
+      expect($app.calendarEvents.list.value[0].end).toBe('2023-08-01')
     })
   })
 })

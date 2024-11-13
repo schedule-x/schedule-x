@@ -5,6 +5,7 @@ export const calendarNlNL: CalendarTranslations = {
   Month: 'Maand',
   Week: 'Week',
   Day: 'Dag',
+  'Select View': 'Kies weergave',
   events: 'gebeurtenissen',
   event: 'gebeurtenis',
   'No events': 'Geen gebeurtenissen',

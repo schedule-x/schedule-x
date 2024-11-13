@@ -3,13 +3,14 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
+import { useSignalEffect } from '@preact/signals'
 
 export default function ViewSelection() {
   const $app = useContext(AppContext)
 
   const [availableViews, setAvailableViews] = useState<View[]>([])
 
-  useEffect(() => {
+  useSignalEffect(() => {
     if ($app.calendarState.isCalendarSmall.value) {
       setAvailableViews(
         $app.config.views.value.filter((view) => view.hasSmallScreenCompat)
@@ -19,17 +20,17 @@ export default function ViewSelection() {
         $app.config.views.value.filter((view) => view.hasWideScreenCompat)
       )
     }
-  }, [$app.calendarState.isCalendarSmall.value])
+  })
 
   const [selectedViewLabel, setSelectedViewLabel] = useState('')
-  useEffect(() => {
+  useSignalEffect(() => {
     const selectedView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
     if (!selectedView) return
 
     setSelectedViewLabel($app.translate(selectedView.label))
-  }, [$app.calendarState.view.value])
+  })
 
   const [isOpen, setIsOpen] = useState(false)
 

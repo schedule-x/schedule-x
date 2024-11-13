@@ -68,7 +68,8 @@ describe('YearsView', () => {
     expect(screen.queryByText('1969')).toBeNull()
     expect(screen.queryByText('1970')).not.toBeNull()
     expect(screen.queryByText(currentYear + 1)).not.toBeNull()
-    expect(screen.queryByText(currentYear + 2)).toBeNull()
+    expect(screen.queryByText(currentYear + 50)).not.toBeNull()
+    expect(screen.queryByText(currentYear + 51)).toBeNull()
   })
 
   it('should display years based on min- & max dates in config', () => {
