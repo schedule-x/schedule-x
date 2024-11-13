@@ -34,6 +34,10 @@
     "display": "hidden",
     "title": "Installing premium plugins"
   },
+  "incident-registry": {
+    "display": "hidden",
+    "title": "Incident with private package registry"
+  },
   "advanced": {
     "title": "Advanced usage"
   }
