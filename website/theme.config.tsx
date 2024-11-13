@@ -81,14 +81,6 @@ const config: DocsThemeConfig = {
   //     </a>
   //   )
   // }
-  banner: {
-      key: 'resource-v1',
-      text: (
-        <a href="/docs/calendar/resource-scheduler">
-          Resource scheduler just got released 🎉 Limited offer: 20% off using code Y3NDE5NW
-        </a>
-      )
-    }
 }
 
 export default config

@@ -1,0 +1,29 @@
+# Incident with private package registry
+
+On November 9th 2024, a user of Schedule-X premium reported that they were unable to download some older versions
+of the premium plugins. After a quick investigation of the DB on the registry server, it turned out that the
+versions were **actually** missing. The issue has been reported in the GitHub repository of the open source software
+used for the registry: https://github.com/verdaccio/verdaccio/issues/2390.
+
+Since this was a fairly critical issue, and I don't want to risk more similar incidents, I decided to move the registry
+to a self-hosted GitLab instance, which is up and running as of November 13th.
+
+This means that all customers of Schedule-X premium will have to update their `.npmrc` file, and add the token that
+you will all receive over the email address you used to purchase the premium version. The .npmrc file should now
+look as follows:
+
+```bash
+@sx-premium:registry=https://gitlab.schedule-x.com/api/v4/packages/npm/
+//gitlab.schedule-x.com/api/v4/packages/npm/:_authToken=YOUR_TOKEN
+```
+
+`YOUR_TOKEN` then needs to be replaced with the token you will receive in the email.
+
+The old registry `npm.schedule-x.dev`, with the latest couple of releases still available, will be kept up and running until 1st of January 2025,
+and will then be taken out of service.
+
+I apologize for the inconvenience, and will always be committed to try and have zero unwanted downtimes or incidents
+of this sort.
+
+Kind greetings,
+Tom
