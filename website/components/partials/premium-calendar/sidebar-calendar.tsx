@@ -1,13 +1,21 @@
 /* eslint-disable max-lines */
-import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek } from '@schedule-x/calendar'
+import {
+  viewDay,
+  viewMonthAgenda,
+  viewMonthGrid,
+  viewWeek,
+} from '@schedule-x/calendar'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+import {
+  ScheduleXCalendar,
+  useNextCalendarApp,
+} from '@schedule-x/react/dist/index'
 import { calendars } from './data/calendars'
-import { createScrollControllerPlugin } from "@schedule-x/scroll-controller";
-import { createSidebarPlugin } from "@sx-premium/sidebar";
-import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
-import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
-import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
+import { createScrollControllerPlugin } from '@schedule-x/scroll-controller'
+import { createSidebarPlugin } from '@sx-premium/sidebar'
+import { createEventsServicePlugin } from '@schedule-x/event-recurrence'
+import { createDragToCreatePlugin } from '@sx-premium/drag-to-create'
+import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence'
 
 export default function SidebarCalendar() {
   const eventsService = createEventsServicePlugin()
@@ -24,7 +32,7 @@ export default function SidebarCalendar() {
         end: '2024-05-11 12:00',
         calendarId: 'personal',
         people: ['Ted Mosby', 'Barney Stinson'],
-        rrule: 'FREQ=WEEKLY;UNTIL=20240701T235959'
+        rrule: 'FREQ=WEEKLY;UNTIL=20240701T235959',
       },
       {
         id: 2,
@@ -60,7 +68,7 @@ export default function SidebarCalendar() {
         start: '2024-05-07',
         end: '2024-05-07',
         calendarId: 'clients',
-      }
+      },
     ],
     calendars: calendars,
     plugins: [
@@ -88,15 +96,17 @@ export default function SidebarCalendar() {
             title: 'Team meeting',
             calendarId: 'clients',
             people: ['John Doe', 'Jane Doe', 'Steve Smith'],
-          }
-        ]
-      })
+          },
+        ],
+      }),
     ],
   })
 
-  return <>
-    <div className={['appCalendarWrapper'].join(' ')}>
-      <ScheduleXCalendar calendarApp={calendarApp} />
-    </div>
-  </>
+  return (
+    <>
+      <div className={['appCalendarWrapper'].join(' ')}>
+        <ScheduleXCalendar calendarApp={calendarApp} />
+      </div>
+    </>
+  )
 }

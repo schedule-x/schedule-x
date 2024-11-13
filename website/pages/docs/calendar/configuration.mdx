@@ -52,10 +52,10 @@ const config = {
   isDark: true,
 
   /**
-  * Decides which hours should be displayed in the week and day grids. Defaults to midnight - midnight (a full day)
-  * Can also be set to a "hybrid" day, such as { start: '06:00', end: '03:00' }, meaning each day starts at 6am but
-  * extends into the next day until 3am.
-  * */
+   * Decides which hours should be displayed in the week and day grids. Defaults to midnight - midnight (a full day)
+   * Can also be set to a "hybrid" day, such as { start: '06:00', end: '03:00' }, meaning each day starts at 6am but
+   * extends into the next day until 3am.
+   * */
   dayBoundaries: {
     start: '06:00',
     end: '18:00',
@@ -69,33 +69,33 @@ const config = {
 
   weekOptions: {
     /**
-    * The total height in px of the week grid (week- and day views)
-    * */
+     * The total height in px of the week grid (week- and day views)
+     * */
     gridHeight: 2500,
 
     /**
-    * The number of days to display in week view
-    */
+     * The number of days to display in week view
+     */
     nDays: 5,
 
     /**
-    * The width in percentage of the event element in the week grid
-    * Defaults to 100, but can be used to leave a small margin to the right of the event
-    */
+     * The width in percentage of the event element in the week grid
+     * Defaults to 100, but can be used to leave a small margin to the right of the event
+     */
     eventWidth: 95,
 
     /**
-    * Intl.DateTimeFormatOptions used to format the hour labels on the time axis
-    * Default: { hour: 'numeric' }
-    */
+     * Intl.DateTimeFormatOptions used to format the hour labels on the time axis
+     * Default: { hour: 'numeric' }
+     */
     timeAxisFormatOptions: { hour: '2-digit', minute: '2-digit' },
   },
 
   monthGridOptions: {
     /**
-    * Number of events to display in a day cell before the "+ N events" button is shown
-    * */
-    nEventsPerDay: 8
+     * Number of events to display in a day cell before the "+ N events" button is shown
+     * */
+    nEventsPerDay: 8,
   },
 
   /**
@@ -126,61 +126,60 @@ const config = {
     },
 
     /**
-    * Is called when an event is clicked
-    * */
+     * Is called when an event is clicked
+     * */
     onEventClick(calendarEvent) {
       console.log('onEventClick', calendarEvent)
     },
 
     /**
-    * Is called when clicking a date in the month grid
-    * */
+     * Is called when clicking a date in the month grid
+     * */
     onClickDate(date) {
       console.log('onClickDate', date) // e.g. 2024-01-01
     },
 
     /**
-    * Is called when clicking somewhere in the time grid of a week or day view
-    * */
+     * Is called when clicking somewhere in the time grid of a week or day view
+     * */
     onClickDateTime(dateTime) {
       console.log('onClickDateTime', dateTime) // e.g. 2024-01-01 12:37
     },
 
     /**
-    * Is called when selecting a day in the month agenda
-    * */
+     * Is called when selecting a day in the month agenda
+     * */
     onClickAgendaDate(date) {
       console.log('onClickAgendaDate', date) // e.g. 2024-01-01
     },
 
     /**
-    * Is called when double clicking a date in the month grid
-    * */
+     * Is called when double clicking a date in the month grid
+     * */
     onDoubleClickDate(date) {
       console.log('onClickDate', date) // e.g. 2024-01-01
     },
 
     /**
-    * Is called when double clicking somewhere in the time grid of a week or day view
-    * */
+     * Is called when double clicking somewhere in the time grid of a week or day view
+     * */
     onDoubleClickDateTime(dateTime) {
       console.log('onDoubleClickDateTime', dateTime) // e.g. 2024-01-01 12:37
     },
 
     /**
-    * Is called when clicking the "+ N events" button of a month grid-day
-    * */
+     * Is called when clicking the "+ N events" button of a month grid-day
+     * */
     onClickPlusEvents(date) {
       console.log('onClickPlusEvents', date) // e.g. 2024-01-01
     },
 
     /**
-    * Is called when the selected date is updated
-    * */
+     * Is called when the selected date is updated
+     * */
     onSelectedDateUpdate(date) {
       console.log('onSelectedDateUpdate', date)
     },
-
 
     /**
      * Runs on resizing the calendar, to decide if the calendar should be small or not.

@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 # The service dependencies only serve the purpose of making the test logs appear more orderly
 services:
@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: test-runner.dockerfile
     environment:
-      TZ: "Europe/London"
+      TZ: 'Europe/London'
     networks:
       - test
   test_mountain_view:
@@ -15,7 +15,7 @@ services:
       context: .
       dockerfile: test-runner.dockerfile
     environment:
-      TZ: "US/Pacific"
+      TZ: 'US/Pacific'
     networks:
       - test
     depends_on:
@@ -25,7 +25,7 @@ services:
       context: .
       dockerfile: test-runner.dockerfile
     environment:
-      TZ: "Asia/Tokyo"
+      TZ: 'Asia/Tokyo'
     networks:
       - test
     depends_on:

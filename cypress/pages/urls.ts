@@ -15,5 +15,5 @@ export const cypressPageUrls = Object.freeze({
   },
   timePicker: {
     placement: '/cypress/pages/time-picker/001-popup-placement.html',
-  }
+  },
 })

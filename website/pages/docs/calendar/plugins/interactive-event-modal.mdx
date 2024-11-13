@@ -7,29 +7,46 @@ description: 'A plugin for displaying an interactive modal for adding, editing, 
 
 A plugin for displaying an interactive modal for adding, editing and removing events.
 
-import {Callout} from "nextra/components";
+import { Callout } from 'nextra/components'
 
 <Callout type="info">
-  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+  This is a premium plugin which requires an active license to be used. Learn
+  more at [Schedule-X premium](/premium).
 </Callout>
 
 ## Features & demo
 
-import FeaturesList from "../../../../components/partials/features-list/features-list";
+import FeaturesList from '../../../../components/partials/features-list/features-list'
 
-<FeaturesList features={[
-  'Adding, updating and deleting events',
-  'Click to create',
-  'Recurring events',
-  'Validation'
-]} />
+<FeaturesList
+  features={[
+    'Adding, updating and deleting events',
+    'Click to create',
+    'Recurring events',
+    'Validation',
+  ]}
+/>
 
 [Go to Demo](/demos/modal-and-sidebar)
 
 <br />
 
-<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
-    <source src={'https://d19hgxvhjb2new.cloudfront.net/website/interactive-modal-demo.mp4'} type={'video/mp4'} />
+<video
+  autoPlay
+  loop
+  playsInline
+  muted
+  id={'demo'}
+  className="landingPageDemoVideo"
+  width={800}
+  height={250}
+>
+  <source
+    src={
+      'https://d19hgxvhjb2new.cloudfront.net/website/interactive-modal-demo.mp4'
+    }
+    type={'video/mp4'}
+  />
 </video>
 
 ## 2. Install the packages
@@ -38,18 +55,18 @@ import FeaturesList from "../../../../components/partials/features-list/features
 
 Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
 
-
 ### 2.2 Install
 
 ```bash copy
 npm i @sx-premium/interactive-event-modal
 ```
+
 ## Usage
 
 ```js
 import { createCalendar } from '@schedule-x/calendar'
-import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createEventsServicePlugin } from '@schedule-x/events-service'
+import { createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
 
 import '@sx-premium/interactive-event-modal/index.css'
 
@@ -84,7 +101,7 @@ const eventModal = createInteractiveEventModal({
 
   // (Optional): callback which is invoked before opening the modal. Return false to prevent the modal from opening
   canOpenModal: (event) => {
-    return event.calendarId === 'calendar-1';
+    return event.calendarId === 'calendar-1'
   },
 
   // (Optional): configure the time picker to use 12-hour format
@@ -101,28 +118,25 @@ const eventModal = createInteractiveEventModal({
       validator: (value) => {
         return {
           isValid: !!value && value.length >= 3,
-          message: 'Title must be at least 3 characters long'
+          message: 'Title must be at least 3 characters long',
         }
-      }
+      },
     },
     description: {},
-  }
+  },
 })
 
 const calendar = createCalendar({
   // ...other configuration
-  plugins: [
-    eventModal,
-    eventsService,
-  ],
+  plugins: [eventModal, eventsService],
 
   callbacks: {
     onDoubleClickDateTime(dateTime) {
       eventModal.clickToCreate(dateTime, {
         id: 'some-event-id',
       })
-    }
-  }
+    },
+  },
 })
 
 calendar.render(document.getElementById('your-calendar-wrapper'))
@@ -135,6 +149,7 @@ calendar.render(document.getElementById('your-calendar-wrapper'))
 Method for programmatically opening the event creation modal. The id parameter is used for setting an id of the event that will be created, if the user chooses to click save.
 
 #### Parameters
+
 - `id` - id of the event that will be created
 - `start` - start date or datetime of the event that will be created
 - `otherEventProperties` - additional properties that will be added to the event that will be created
@@ -151,7 +166,8 @@ If you, however, configure one of them, the rest will be hidden by default. Date
 
 ```ts
 fields: {
-  description: {}
+  description: {
+  }
   // other fields
 }
 ```
@@ -159,7 +175,7 @@ fields: {
 ### Available fields
 
 | Field name     | Type                     |
-|----------------|--------------------------|
+| -------------- | ------------------------ |
 | title          | InputFieldWithValidation |
 | description    | InputFieldWithValidation |
 | startDate      | InputField               |
@@ -206,8 +222,8 @@ follow the same structure as the default fields, but additionally you need to ad
 `textarea`, `select` or `combobox`. For example:
 
 ```ts
-import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createEventsServicePlugin } from '@schedule-x/events-service'
+import { createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
 
 import '@sx-premium/interactive-event-modal/index.css'
 
@@ -221,28 +237,30 @@ const eventModal = createInteractiveEventModal({
   },
 
   customFields: {
-    additionalNotes: { // will correspond to an event property "additionalNotes"
+    additionalNotes: {
+      // will correspond to an event property "additionalNotes"
       label: 'Additional notes',
       name: 'additional-notes',
       type: 'textarea',
       validator: (value) => {
         return {
           isValid: !!value && value.length >= 3,
-          message: 'Custom field must be at least 3 characters long'
+          message: 'Custom field must be at least 3 characters long',
         }
-      }
+      },
     },
 
-    locationSelect: { // will correspond to an event property "locationSelect"
+    locationSelect: {
+      // will correspond to an event property "locationSelect"
       label: 'Location',
       type: 'select',
       items: [
         { label: 'Lake view office', value: 'lake-view' },
         { label: 'City center office', value: 'city-center' },
         { label: 'Home office', value: 'home' },
-      ]
+      ],
     },
-  }
+  },
 })
 ```
 
@@ -253,4 +271,3 @@ If you need to display these custom fields in the view mode of the modal, you ca
 ## Changelog
 
 See [changelog](/premium-changelog) page.
-

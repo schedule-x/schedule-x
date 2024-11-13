@@ -19,7 +19,9 @@ npm i @schedule-x/drag-and-drop
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 
 const calendar = createCalendar(
-  { /* other configuration */ },
+  {
+    /* other configuration */
+  },
   [createDragAndDropPlugin()]
 )
 ```
@@ -32,7 +34,9 @@ You can configure the length, in minutes, of the intervals that are used when dr
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 
 const calendar = createCalendar(
-  { /* other configuration */ },
+  {
+    /* other configuration */
+  },
   [createDragAndDropPlugin(30)] // drag with 30 minutes intervals
 )
 ```

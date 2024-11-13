@@ -19,7 +19,8 @@ npm install @schedule-x/ical
 import { createIcalendarPlugin } from '@schedule-x/ical'
 
 const icalendarPlugin = createIcalendarPlugin({
-  data: 'BEGIN:VCALENDAR\n' +
+  data:
+    'BEGIN:VCALENDAR\n' +
     'VERSION:2.0\n' +
     'CALSCALE:GREGORIAN\n' +
     'BEGIN:VEVENT\n' +
@@ -44,15 +45,18 @@ const icalendarPlugin = createIcalendarPlugin({
     'END:VCALENDAR',
 })
 
-const calendar = createCalendar({
-  // other config...
-  callbacks: {
-    onRangeUpdate(range) {
-      console.log('rendering events for new range', range)
-      icalendarPlugin.between(range.start, range.end)
+const calendar = createCalendar(
+  {
+    // other config...
+    callbacks: {
+      onRangeUpdate(range) {
+        console.log('rendering events for new range', range)
+        icalendarPlugin.between(range.start, range.end)
+      },
     },
-  }
-}, [icalendarPlugin])
+  },
+  [icalendarPlugin]
+)
 
 calendar.render(document.getElementById('your-calendar'))
 ```

@@ -1,11 +1,18 @@
 /* eslint-disable max-lines */
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
-import { calendars } from './data/calendars';
-import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
-import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
-import {createHourlyView, createDailyView, createConfig} from "@sx-premium/resource-scheduler";
-import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
+import {
+  ScheduleXCalendar,
+  useNextCalendarApp,
+} from '@schedule-x/react/dist/index'
+import { calendars } from './data/calendars'
+import { createEventsServicePlugin } from '@schedule-x/event-recurrence'
+import { createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
+import { createDragToCreatePlugin } from '@sx-premium/drag-to-create'
+import {
+  createHourlyView,
+  createDailyView,
+  createConfig,
+} from '@sx-premium/resource-scheduler'
+import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence'
 
 export default function ResourceCalendar() {
   const eventsService = createEventsServicePlugin()
@@ -17,7 +24,7 @@ export default function ResourceCalendar() {
         validator: (value) => {
           return {
             message: 'Title is required',
-            isValid: !!value
+            isValid: !!value,
           }
         },
       },
@@ -33,12 +40,12 @@ export default function ResourceCalendar() {
     },
     onDeleteEvent: (eventId) => {
       console.log(eventId)
-    }
-  });
+    },
+  })
 
-  const rConfig = createConfig();
-  const hourlyView = createHourlyView(rConfig);
-  const dailyView = createDailyView(rConfig);
+  const rConfig = createConfig()
+  const hourlyView = createHourlyView(rConfig)
+  const dailyView = createDailyView(rConfig)
 
   rConfig.resources.value = [
     {
@@ -94,18 +101,22 @@ export default function ResourceCalendar() {
         container: '#d2e7ff',
         onContainer: '#002859',
       },
-    }
+    },
   ]
 
   const calendarApp = useNextCalendarApp({
     callbacks: {
       onDoubleClickDateTime: (dateTime: string) => {
-        interactiveEventModalPlugin.clickToCreate(dateTime, { calendarId: 'clients' })
+        interactiveEventModalPlugin.clickToCreate(dateTime, {
+          calendarId: 'clients',
+        })
       },
 
       onDoubleClickDate: (date: string) => {
-        interactiveEventModalPlugin.clickToCreate(date, { calendarId: 'clients' })
-      }
+        interactiveEventModalPlugin.clickToCreate(date, {
+          calendarId: 'clients',
+        })
+      },
     },
     locale: 'en-US',
     views: [hourlyView, dailyView],
@@ -117,7 +128,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 02:00',
         end: '2024-05-06 07:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 2,
@@ -125,7 +136,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 02:00',
         end: '2024-05-06 07:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 3,
@@ -133,7 +144,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 00:00',
         end: '2024-05-06 03:00',
         resourceId: 'welding',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 4,
@@ -141,7 +152,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 01:30',
         end: '2024-05-06 03:30',
         resourceId: 'cnc',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 5,
@@ -149,7 +160,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 00:00',
         end: '2024-05-06 08:00',
         resourceId: 'supervision-1',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 6,
@@ -157,7 +168,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 06:00',
         end: '2024-05-06 09:00',
         resourceId: 'welding',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 7,
@@ -165,7 +176,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 07:30',
         end: '2024-05-06 09:30',
         resourceId: 'cnc',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 8,
@@ -173,7 +184,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 08:00',
         end: '2024-05-06 14:00',
         resourceId: 'conveyor-belt-a',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 0,
@@ -181,7 +192,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 08:00',
         end: '2024-05-06 14:00',
         resourceId: 'conveyor-belt-a',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 9,
@@ -189,7 +200,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 08:00',
         end: '2024-05-06 13:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
       {
         id: 10,
@@ -197,7 +208,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 08:00',
         end: '2024-05-06 13:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;UNTIL=20240510T235959',
       },
     ],
     calendars: calendars,
@@ -209,7 +220,9 @@ export default function ResourceCalendar() {
     ],
   })
 
-  return <>
-    <ScheduleXCalendar calendarApp={calendarApp} />
-  </>
+  return (
+    <>
+      <ScheduleXCalendar calendarApp={calendarApp} />
+    </>
+  )
 }

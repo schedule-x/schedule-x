@@ -107,7 +107,6 @@ Get the current max date for the calendar navigation.
 
 Get the current month grid options of the calendar.
 
-
 ## Examples
 
 ```js
@@ -116,7 +115,9 @@ import { createCalendarControlsPlugin } from '@schedule-x/calendar-controls'
 const calendarControls = createCalendarControlsPlugin()
 
 const calendar = createCalendar(
-  { /** config */ },
+  {
+    /** config */
+  },
   [calendarControls]
 )
 calendar.render(/** your calendar element */)

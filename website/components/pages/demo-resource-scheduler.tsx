@@ -8,9 +8,9 @@ import ResourceCalendarWithCustomLabels from '../partials/premium-calendar/resou
 export default function CalendarDemoPage() {
   return (
     <div className={['page-wrapper', styles.demoPageWrapper].join(' ')}>
-      <HeadingWithIcon icon={'🗓️'} text={'Resource scheduler demo'}/>
+      <HeadingWithIcon icon={'🗓️'} text={'Resource scheduler demo'} />
 
-      <ResourceCalendar/>
+      <ResourceCalendar />
 
       <h2 className={headingWithIconStyles.headingWithIcon}>
         <span className={headingWithIconStyles.calendarIcon}>🏷️️</span>

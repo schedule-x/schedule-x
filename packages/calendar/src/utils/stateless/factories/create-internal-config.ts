@@ -22,5 +22,6 @@ export const createInternalConfig = (
     .withMaxDate(config.maxDate)
     .withMonthGridOptions(config.monthGridOptions)
     .withBackgroundEvents(config.backgroundEvents)
+    .withCustomLocale(config.customLocale)
     .build()
 }

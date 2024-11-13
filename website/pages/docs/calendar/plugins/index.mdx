@@ -17,28 +17,29 @@ import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import '@schedule-x/theme-default/dist/index.css'
 
-const plugins = [
-  createDragAndDropPlugin(),
-]
+const plugins = [createDragAndDropPlugin()]
 
-const calendar = createCalendar({
-  views: [createViewMonthGrid()],
-  events: [
-    {
-      id: 1,
-      title: 'Coffee with John',
-      start: '2023-12-04 10:05',
-      end: '2023-12-04 10:35',
-    },
-  ],
-}, plugins)
+const calendar = createCalendar(
+  {
+    views: [createViewMonthGrid()],
+    events: [
+      {
+        id: 1,
+        title: 'Coffee with John',
+        start: '2023-12-04 10:05',
+        end: '2023-12-04 10:35',
+      },
+    ],
+  },
+  plugins
+)
 
 calendar.render(document.getElementById('calendar'))
 ```
 
 ## Available plugins
 
-import {Cards} from 'nextra/components'
+import { Cards } from 'nextra/components'
 
 <Cards num={2}>
   <Cards.Card
@@ -65,7 +66,6 @@ import {Cards} from 'nextra/components'
     href="/docs/calendar/plugins/recurrence"
   ></Cards.Card>
 </Cards>
-
 
 <Cards num={2}>
   <Cards.Card
@@ -100,10 +100,3 @@ import {Cards} from 'nextra/components'
     href="/docs/calendar/plugins/custom-plugins"
   ></Cards.Card>
 </Cards>
-
-
-
-
-
-
-

@@ -33,10 +33,10 @@ import { Tabs } from 'nextra/components'
 
 ```ts
 // app.component.ts
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { CalendarComponent } from "@schedule-x/angular";
-import { createCalendar, createViewWeek } from "@schedule-x/calendar";
+import { Component } from '@angular/core'
+import { RouterOutlet } from '@angular/router'
+import { CalendarComponent } from '@schedule-x/angular'
+import { createCalendar, createViewWeek } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css' // can alternatively be added in your angular.json
 
 @Component({
@@ -44,10 +44,10 @@ import '@schedule-x/theme-default/dist/index.css' // can alternatively be added 
   standalone: true,
   imports: [RouterOutlet, CalendarComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'angular-example';
+  title = 'angular-example'
   calendarApp = createCalendar({
     events: [
       {
@@ -60,7 +60,6 @@ export class AppComponent {
     views: [createViewWeek()],
   })
 }
-
 ```
 
 ```html
@@ -73,7 +72,6 @@ export class AppComponent {
 </main>
 
 <router-outlet />
-
 ```
 
 ### Explanation
@@ -108,8 +106,10 @@ can create a custom event for the time grid, in the week- and day views, like th
 
 ```html
 <ng-template #timeGridEvent let-arg>
-  <div style="background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%; border-radius: 5px;
-padding: 5px">
+  <div
+    style="background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%; border-radius: 5px;
+padding: 5px"
+  >
     <div>Time grid event: {{ arg.calendarEvent.title }}</div>
   </div>
 </ng-template>
@@ -118,7 +118,7 @@ padding: 5px">
 All available templates are:
 
 | Template name               | Description                                                      | Args                            |
-|-----------------------------|------------------------------------------------------------------|---------------------------------|
+| --------------------------- | ---------------------------------------------------------------- | ------------------------------- |
 | `timeGridEvent`             | The component for timed events used in the week- and day views   | `calendarEvent`                 |
 | `dateGridEvent`             | The component for all-day events used in the week- and day views | `calendarEvent`                 |
 | `monthGridEvent`            | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |

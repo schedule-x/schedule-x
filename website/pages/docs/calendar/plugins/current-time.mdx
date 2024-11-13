@@ -21,7 +21,9 @@ npm i @schedule-x/current-time
 import { createCurrentTimePlugin } from '@schedule-x/current-time'
 
 const calendar = createCalendar(
-  { /* calendar config */ },
+  {
+    /* calendar config */
+  },
   [createCurrentTimePlugin()]
 )
 ```
@@ -34,6 +36,6 @@ createCurrentTimePlugin({
   fullWeekWidth: true,
 
   // Time zone offset in minutes. Can be any offset valid according to UTC (-720 to 840)
-  timeZoneOffset: 120
+  timeZoneOffset: 120,
 })
 ```

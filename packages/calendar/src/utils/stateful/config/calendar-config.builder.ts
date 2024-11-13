@@ -27,6 +27,7 @@ import {
 } from '@schedule-x/shared/src/values'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
+import { CustomLocale } from '../../../../../shared/src/types/customLocale'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -51,10 +52,13 @@ export default class CalendarConfigBuilder
   minDate: string | undefined
   maxDate: string | undefined
   backgroundEvents: BackgroundEvent[] | undefined
+  customLocale: CustomLocale | undefined
 
   build(): CalendarConfigInternal {
+    // @ts-expect-error why
     return new CalendarConfigImpl(
       this.locale || DEFAULT_LOCALE,
+      this.customLocale,
       this.firstDayOfWeek || DEFAULT_FIRST_DAY_OF_WEEK,
       this.defaultView || InternalViewName.Week,
       this.views || [],
@@ -74,6 +78,13 @@ export default class CalendarConfigBuilder
 
   withLocale(locale: string | undefined): CalendarConfigBuilder {
     this.locale = locale
+    return this
+  }
+
+  withCustomLocale(
+    customLocale: CustomLocale | undefined
+  ): CalendarConfigBuilder {
+    this.customLocale = customLocale
     return this
   }
 

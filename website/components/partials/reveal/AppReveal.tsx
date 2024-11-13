@@ -2,8 +2,8 @@ import { motion, useInView, useAnimation } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 
 type props = {
-  children: React.ReactNode;
-  width?: 'fit-content' | '100%';
+  children: React.ReactNode
+  width?: 'fit-content' | '100%'
 }
 
 export const AppReveal = ({ children, width = 'fit-content' }: props) => {
@@ -22,12 +22,14 @@ export const AppReveal = ({ children, width = 'fit-content' }: props) => {
       <motion.div
         variants={{
           hidden: { opacity: 0, y: 35 },
-          visible: { opacity: 1, y: 0 }
+          visible: { opacity: 1, y: 0 },
         }}
         initial={'hidden'}
         animate={mainControls}
         transition={{ duration: 0.45, delay: 0.25, ease: 'easeOut' }}
-      >{children}</motion.div>
+      >
+        {children}
+      </motion.div>
     </div>
   )
 }

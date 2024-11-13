@@ -32,7 +32,7 @@
     "release": "npm run build && lerna publish --conventional-commits --no-commit-hooks --force-publish --no-private",
     "release:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-prerelease --force-publish",
     "release:bump:pre": "npm run build && lerna publish --no-commit-hooks --conventional-commits --conventional-bump-prerelease --force-publish",
-    "prepare": "husky install",
+    "prepare": "husky",
     "seed": "npx tsx development/seeder/seed.ts"
   },
   "dependencies": {
@@ -67,7 +67,7 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-boundaries": "^4.0.0",
-    "husky": "^9.0.0",
+    "husky": "^9.1.6",
     "jsdom": "^25.0.0",
     "lerna": "8.1.9",
     "minimist": "^1.2.8",

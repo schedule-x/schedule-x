@@ -1,11 +1,14 @@
 /* eslint-disable max-lines */
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
-import { calendars } from './data/calendars';
-import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
-import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
-import {createHourlyView, createConfig} from "@sx-premium/resource-scheduler";
-import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
+import {
+  ScheduleXCalendar,
+  useNextCalendarApp,
+} from '@schedule-x/react/dist/index'
+import { calendars } from './data/calendars'
+import { createEventsServicePlugin } from '@schedule-x/event-recurrence'
+import { createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
+import { createDragToCreatePlugin } from '@sx-premium/drag-to-create'
+import { createHourlyView, createConfig } from '@sx-premium/resource-scheduler'
+import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence'
 
 export default function ResourceCalendarWithCustomLabels() {
   const eventsService = createEventsServicePlugin()
@@ -17,7 +20,7 @@ export default function ResourceCalendarWithCustomLabels() {
         validator: (value) => {
           return {
             message: 'Title is required',
-            isValid: !!value
+            isValid: !!value,
           }
         },
       },
@@ -33,11 +36,11 @@ export default function ResourceCalendarWithCustomLabels() {
     },
     onDeleteEvent: (eventId) => {
       console.log(eventId)
-    }
-  });
+    },
+  })
 
-  const rConfig = createConfig();
-  const hourlyView = createHourlyView(rConfig);
+  const rConfig = createConfig()
+  const hourlyView = createHourlyView(rConfig)
 
   rConfig.resourceHeight.value = 100
 
@@ -71,12 +74,16 @@ export default function ResourceCalendarWithCustomLabels() {
   const calendarApp = useNextCalendarApp({
     callbacks: {
       onDoubleClickDateTime: (dateTime: string) => {
-        interactiveEventModalPlugin.clickToCreate(dateTime, { calendarId: 'clients' })
+        interactiveEventModalPlugin.clickToCreate(dateTime, {
+          calendarId: 'clients',
+        })
       },
 
       onDoubleClickDate: (date: string) => {
-        interactiveEventModalPlugin.clickToCreate(date, { calendarId: 'clients' })
-      }
+        interactiveEventModalPlugin.clickToCreate(date, {
+          calendarId: 'clients',
+        })
+      },
     },
     locale: 'en-US',
     views: [hourlyView],
@@ -120,7 +127,9 @@ export default function ResourceCalendarWithCustomLabels() {
     ],
   })
 
-  return <>
-    <ScheduleXCalendar calendarApp={calendarApp} />
-  </>
+  return (
+    <>
+      <ScheduleXCalendar calendarApp={calendarApp} />
+    </>
+  )
 }

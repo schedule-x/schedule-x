@@ -26,7 +26,12 @@ const calendar = createCalendar({
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
-  plugins: [createDragAndDropPlugin(), createEventModalPlugin(), createScrollControllerPlugin(), createResizePlugin()],
+  plugins: [
+    createDragAndDropPlugin(),
+    createEventModalPlugin(),
+    createScrollControllerPlugin(),
+    createResizePlugin(),
+  ],
   events: smokeTestEvents,
 })
 

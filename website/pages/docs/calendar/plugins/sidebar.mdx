@@ -9,27 +9,43 @@ A component for adding a sidebar to the calendar. Enables you to toggle the visi
 for opening the interactive event modal, and enables you to create events through dragging and dropping placeholder
 events.
 
-import {Callout} from "nextra/components";
+import { Callout } from 'nextra/components'
 
 <Callout type="info">
-  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+  This is a premium plugin which requires an active license to be used. Learn
+  more at [Schedule-X premium](/premium).
 </Callout>
 
 ## Features & demo
-import FeaturesList from "../../../../components/partials/features-list/features-list";
 
-<FeaturesList features={[
+import FeaturesList from '../../../../components/partials/features-list/features-list'
+
+<FeaturesList
+  features={[
     'Toggle visibility of calendars',
     'Open interactive event modal',
-    'Drag to create events'
-]} />
+    'Drag to create events',
+  ]}
+/>
 
 [Go to Demo](/demos/modal-and-sidebar)
 
 <br />
 
-<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
-  <source src={'https://d19hgxvhjb2new.cloudfront.net/website/sidebar-demo.mp4'} type={'video/mp4'} />
+<video
+  autoPlay
+  loop
+  playsInline
+  muted
+  id={'demo'}
+  className="landingPageDemoVideo"
+  width={800}
+  height={250}
+>
+  <source
+    src={'https://d19hgxvhjb2new.cloudfront.net/website/sidebar-demo.mp4'}
+    type={'video/mp4'}
+  />
 </video>
 
 ## 2. Installation
@@ -37,7 +53,6 @@ import FeaturesList from "../../../../components/partials/features-list/features
 ### 2.1 Set up premium auth (only once)
 
 Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
-
 
 ### 2.2 Install
 
@@ -49,10 +64,10 @@ npm install @sx-premium/sidebar
 
 ```js
 import { createCalendar } from '@schedule-x/calendar'
-import { createSidebarPlugin } from "@sx-premium/sidebar";
-import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
-import { createDragToCreatePlugin } from "@sx-premium/drag-to-create";
+import { createSidebarPlugin } from '@sx-premium/sidebar'
+import { createEventsServicePlugin } from '@schedule-x/events-service'
+import { createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
+import { createDragToCreatePlugin } from '@sx-premium/drag-to-create'
 
 import '@sx-premium/sidebar/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
@@ -64,7 +79,7 @@ const interactiveEventModal = createInteractiveEventModal({
   availablePeople: ['John Doe', 'Jane Doe'],
   onAddEvent: (event) => {
     console.log('Event added', event)
-  }
+  },
 })
 const sidebar = createSidebarPlugin({
   eventsService,
@@ -94,25 +109,26 @@ const sidebar = createSidebarPlugin({
       title: 'Team meeting',
       calendarId: 'clients',
       people: ['John Doe', 'Jane Doe', 'Steve Smith'],
-    }
+    },
   ],
 
   // Optional: factory function for generating event ids when events are created
-  idFactory: () => uuidv4() // or any other id generator
+  idFactory: () => uuidv4(), // or any other id generator
 })
 
 const calendar = createCalendar(
-  { /* config */ },
+  {
+    /* config */
+  },
   [
     eventsService,
     sidebar,
     interactiveEventModal,
-    createDragToCreatePlugin(/* drag-to-create options */)
+    createDragToCreatePlugin(/* drag-to-create options */),
   ]
 )
 
 calendar.render(document.getElementById('your-calendar-wrapper'))
-
 ```
 
 ## Changelog

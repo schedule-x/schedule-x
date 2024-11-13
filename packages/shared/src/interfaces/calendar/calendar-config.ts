@@ -17,6 +17,7 @@ import { ResizePlugin } from '../resize/resize-plugin.interface'
 import { Signal } from '@preact/signals'
 import { WeekDay } from '../../enums/time/week-day.enum'
 import { BackgroundEvent } from './background-event'
+import { CustomLocale } from 'src/types/customLocale'
 
 export type WeekOptions = {
   gridHeight: number
@@ -70,6 +71,7 @@ export default interface CalendarConfigInternal extends Config {
   isResponsive: boolean
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
+  customLocale: CustomLocale | undefined
 
   // Getters
   isHybridDay: boolean
@@ -96,10 +98,12 @@ interface ReducedCalendarConfigInternal
     | 'monthGridOptions'
     | 'locale'
     | 'firstDayOfWeek'
+    | 'customLocale'
   > {}
 
 export interface CalendarConfigExternal
   extends Partial<ReducedCalendarConfigInternal> {
+  customLocale?: CustomLocale
   datePicker?: CalendarDatePickerConfigExternal
   events?: CalendarEventExternal[]
   backgroundEvents?: BackgroundEvent[]

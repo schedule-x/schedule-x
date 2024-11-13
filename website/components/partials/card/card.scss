@@ -9,7 +9,6 @@
     'icon button';
   grid-template-rows: 1fr 2fr;
 
-
   @include mixins.mobile-screens {
     width: 100%;
     height: auto;
@@ -19,7 +18,11 @@
   .landing-page-card-icon {
     grid-area: icon;
     margin-top: 5px;
-    background: linear-gradient(145deg, var(--sx-color-primary), var(--sx-color-primary-container));
+    background: linear-gradient(
+      145deg,
+      var(--sx-color-primary),
+      var(--sx-color-primary-container)
+    );
     border-radius: 10%;
     padding: 6px;
     width: 40px;

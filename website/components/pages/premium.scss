@@ -4,7 +4,23 @@ $heading-width: 900px;
 
 html {
   .main {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Noto Sans',
+      Ubuntu,
+      Cantarell,
+      'Helvetica Neue',
+      Arial,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
+      'Noto Color Emoji';
   }
 
   scroll-behavior: smooth;
@@ -22,7 +38,7 @@ html {
   align-items: center;
 
   .buttonPrimary {
-    background: linear-gradient(to right, #654e07 0%, #D4AF37 100%);
+    background: linear-gradient(to right, #654e07 0%, #d4af37 100%);
     color: #fff;
   }
 
@@ -31,8 +47,8 @@ html {
     align-items: center;
     justify-content: center;
     background: transparent;
-    color: #D4AF37;
-    box-shadow: inset 0 0 0 2px #D4AF37;
+    color: #d4af37;
+    box-shadow: inset 0 0 0 2px #d4af37;
 
     .dark & {
       color: #d0bcff;
@@ -47,7 +63,7 @@ html {
 
   .headingGradient {
     position: relative;
-    background: linear-gradient(to right, #654e07 0%, #D4AF37 100%);
+    background: linear-gradient(to right, #654e07 0%, #d4af37 100%);
     text-shadow: 0 0 90px rgb(0 0 0 / 30%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -197,7 +213,6 @@ html {
   }
 }
 
-
 .premiumSectionHeading {
   font-size: 3rem;
   font-weight: 700;
@@ -205,7 +220,7 @@ html {
   color: #002c61;
 
   .dark & {
-      color: #d0bcff;
+    color: #d0bcff;
   }
 
   @include mixins.smaller-screens {
@@ -241,7 +256,9 @@ html {
   position: relative;
 
   &.is-left-calendar {
-    transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), left 0.4s cubic-bezier(0.45, 0, 0.2, 1);
+    transition:
+      opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      left 0.4s cubic-bezier(0.45, 0, 0.2, 1);
     left: 0;
 
     &:not(.is-visible) {
@@ -250,7 +267,9 @@ html {
   }
 
   &.is-right-calendar {
-    transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1), right 0.4s cubic-bezier(0.45, 0, 0.2, 1);
+    transition:
+      opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      right 0.4s cubic-bezier(0.45, 0, 0.2, 1);
     right: 0;
 
     &:not(.is-visible) {
@@ -285,7 +304,9 @@ html {
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   box-shadow: 0 0 10px rgb(0 0 0 / 10%);
-  transition: top 0.4s ease, opacity 0.4s ease;
+  transition:
+    top 0.4s ease,
+    opacity 0.4s ease;
 
   &.is-open {
     visibility: initial;
@@ -360,9 +381,9 @@ html {
   grid-template-columns: 50px 1fr;
   grid-template-rows: 35px auto auto;
   grid-template-areas:
-    "icon title"
-    "icon description"
-    "icon links";
+    'icon title'
+    'icon description'
+    'icon links';
   border-radius: 20px;
   padding: 1.5rem;
 
@@ -413,4 +434,3 @@ html {
     left: -5px;
   }
 }
-

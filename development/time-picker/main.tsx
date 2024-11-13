@@ -20,6 +20,6 @@ const timePicker = createTimePicker({
   initialValue: '23:59',
   onEscapeKeyDown: ($app) => {
     $app.timePickerState.isOpen.value = false
-  }
+  },
 })
 timePicker.render(document.querySelector('#app') as HTMLElement)

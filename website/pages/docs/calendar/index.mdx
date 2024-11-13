@@ -7,19 +7,11 @@ description: 'Learn how to install and start using the Schedule-X calendar'
 
 If you are using any of the following frameworks, you can start by checking out their respective setup guides:
 
-import {Cards} from 'nextra/components'
+import { Cards } from 'nextra/components'
 
 <Cards num={2}>
-  <Cards.Card
-    arrow
-    title="React"
-    href="/docs/frameworks/react"
-  ></Cards.Card>
-  <Cards.Card
-    arrow
-    title="Vue"
-    href="/docs/frameworks/vue"
-  ></Cards.Card>
+  <Cards.Card arrow title="React" href="/docs/frameworks/react"></Cards.Card>
+  <Cards.Card arrow title="Vue" href="/docs/frameworks/vue"></Cards.Card>
 </Cards>
 
 <Cards num={3}>
@@ -28,19 +20,9 @@ import {Cards} from 'nextra/components'
     title="Angular"
     href="/docs/frameworks/angular"
   ></Cards.Card>
-  <Cards.Card
-    arrow
-    title="Svelte"
-    href="/docs/frameworks/svelte"
-  ></Cards.Card>
-  <Cards.Card
-    arrow
-    title="Preact"
-    href="/docs/frameworks/preact"
-  ></Cards.Card>
+  <Cards.Card arrow title="Svelte" href="/docs/frameworks/svelte"></Cards.Card>
+  <Cards.Card arrow title="Preact" href="/docs/frameworks/preact"></Cards.Card>
 </Cards>
-
-
 
 ## 1. Install
 
@@ -55,8 +37,8 @@ npm i @schedule-x/calendar @schedule-x/theme-default
 After downloading and importing our dependencies, we can create an instance of the calendar using the
 `createCalendar` function. This function takes two arguments:
 
-1) The configuration object
-2) An array of plugins
+1. The configuration object
+2. An array of plugins
 
 Here we will start by only adding the config. The calendar is then rendered using the `render` method.
 
@@ -83,8 +65,8 @@ calendar.render(document.getElementById('calendar'))
 
 As a bare minimum, the configuration object needs two things:
 
-1. A list of views. Currently available views are __month grid__,
-   __week__, __day__ and __month agenda__.
+1. A list of views. Currently available views are **month grid**,
+   **week**, **day** and **month agenda**.
 2. A list of events.
 
 ### Style & theme
@@ -122,52 +104,53 @@ For testing purposes, or if you're in a setup that predates modern build tools, 
 ```html
 <!doctype html>
 <html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Do not change the order of these dependencies, since some of them depend on others -->
+    <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/dist/preact.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/hooks/dist/hooks.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preact/signals-core@1.8.0/dist/signals-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@preact/signals@1.3.0/dist/signals.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/jsx-runtime/dist/jsxRuntime.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/compat/dist/compat.umd.js"></script>
 
-  <!-- Do not change the order of these dependencies, since some of them depend on others -->
-  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/dist/preact.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/hooks/dist/hooks.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@preact/signals-core@1.8.0/dist/signals-core.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@preact/signals@1.3.0/dist/signals.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/jsx-runtime/dist/jsxRuntime.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/preact@10.23.2/compat/dist/compat.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@schedule-x/calendar@2.2.0/dist/core.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@schedule-x/drag-and-drop@2.2.0/dist/core.umd.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/calendar@2.2.0/dist/core.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@schedule-x/drag-and-drop@2.2.0/dist/core.umd.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@schedule-x/theme-default@2.2.0/dist/index.css"
+    />
+  </head>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@schedule-x/theme-default@2.2.0/dist/index.css">
-</head>
+  <body>
+    <div class="calendar"></div>
 
-<body>
-  <div class="calendar"></div>
+    <script type="module">
+      const { createCalendar, viewWeek } = window.SXCalendar
+      const { createDragAndDropPlugin } = window.SXDragAndDrop
 
-  <script type="module">
-    const { createCalendar, viewWeek } = window.SXCalendar;
-    const { createDragAndDropPlugin } = window.SXDragAndDrop;
+      const plugins = [createDragAndDropPlugin()]
 
-    const plugins = [
-      createDragAndDropPlugin(),
-    ]
-
-    const calendar = createCalendar({
-      views: [viewWeek],
-      events: [
+      const calendar = createCalendar(
         {
-          id: '1',
-          title: 'Event 1',
-          start: '2024-08-23 09:00',
-          end: '2024-08-23 10:00'
+          views: [viewWeek],
+          events: [
+            {
+              id: '1',
+              title: 'Event 1',
+              start: '2024-08-23 09:00',
+              end: '2024-08-23 10:00',
+            },
+          ],
         },
-      ],
-    }, plugins)
+        plugins
+      )
 
-    calendar.render(document.querySelector('.calendar'))
-  </script>
-</body>
-
+      calendar.render(document.querySelector('.calendar'))
+    </script>
+  </body>
 </html>
-
 ```

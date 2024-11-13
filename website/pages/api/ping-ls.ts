@@ -1,23 +1,23 @@
 import {
   getAuthenticatedUser,
   lemonSqueezySetup,
-} from "@lemonsqueezy/lemonsqueezy.js";
+} from '@lemonsqueezy/lemonsqueezy.js'
 
-const apiKey = process.env.LEMON_SQUEEZY_API;
-
-lemonSqueezySetup({
-  apiKey,
-  onError: (error) => console.error("Error!", error),
-});
+const apiKey = process.env.LEMON_SQUEEZY_API
 
 lemonSqueezySetup({
   apiKey,
-  onError: (error) => console.error("Error!", error),
-});
+  onError: (error) => console.error('Error!', error),
+})
+
+lemonSqueezySetup({
+  apiKey,
+  onError: (error) => console.error('Error!', error),
+})
 
 export default async (req, res) => {
   try {
-    const response =  await getAuthenticatedUser()
+    const response = await getAuthenticatedUser()
 
     const authUserEmail = response.data.data.attributes.email
 
@@ -30,4 +30,4 @@ export default async (req, res) => {
       message: 'error',
     })
   }
-};
+}

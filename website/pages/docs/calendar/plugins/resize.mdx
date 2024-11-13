@@ -20,7 +20,9 @@ npm i @schedule-x/resize
 import { createResizePlugin } from '@schedule-x/resize'
 
 const calendar = createCalendar(
-  { /* config */ },
+  {
+    /* config */
+  },
   [createResizePlugin()]
 )
 ```
@@ -33,7 +35,9 @@ You can configure the length, in minutes, of the intervals that are used when re
 import { createResizePlugin } from '@schedule-x/resize'
 
 const calendar = createCalendar(
-  { /* config */ },
+  {
+    /* config */
+  },
   [createResizePlugin(30)] // 30 minute intervals when resizing
 )
 ```

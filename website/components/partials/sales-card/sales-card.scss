@@ -4,10 +4,10 @@
 .sales-card {
   display: grid;
   grid-template-areas:
-    "title"
-    "description"
-    "features"
-    "button";
+    'title'
+    'description'
+    'features'
+    'button';
   grid-template-rows: 1fr 1fr 180px 1fr;
   border-radius: 1rem;
   padding: 2rem;

@@ -23,7 +23,7 @@ large screens.
 ## The available views
 
 | View name                                                    | Large screens | Small screens |
-|--------------------------------------------------------------|---------------|---------------|
+| ------------------------------------------------------------ | ------------- | ------------- |
 | Day                                                          | Yes           | Yes           |
 | Month grid                                                   | Yes           | No            |
 | Month agenda                                                 | No            | Yes           |
@@ -38,12 +38,17 @@ import {
   createViewMonthAgenda,
   createViewMonthGrid,
   createViewWeek,
-  createCalendar
+  createCalendar,
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
 const calendar = createCalendar({
-  views: [createViewDay(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek()],
+  views: [
+    createViewDay(),
+    createViewMonthAgenda(),
+    createViewMonthGrid(),
+    createViewWeek(),
+  ],
   events: [],
 })
 
