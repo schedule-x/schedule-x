@@ -6,5 +6,4 @@ export const datePickerTrTR: DatePickerTranslations = {
   'Next month': 'Sonraki ay',
   'Previous month': 'Önceki ay',
   'Choose Date': 'Tarih Seç',
-  'Select View': 'Görünüm Seç',
 }

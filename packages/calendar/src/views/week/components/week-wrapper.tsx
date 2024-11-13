@@ -13,6 +13,7 @@ import { positionInDateGrid } from '../../../utils/stateless/events/position-in-
 import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
 import DateGridDay from '../../../components/week-grid/date-grid-day'
 import { useSignalEffect } from '@preact/signals'
+import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
 
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
@@ -39,6 +40,15 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
       dateGridEvents.sort(sortEventsByStartAndEnd),
       newWeek
     )
+    Object.entries(newWeek).forEach(([date, day]) => {
+      day.backgroundEvents = filterByRange(
+        $app.calendarEvents.backgroundEvents.value,
+        {
+          start: date,
+          end: date,
+        }
+      )
+    })
     newWeek = positionInTimeGrid(timeGridEvents, newWeek, $app)
     setWeek(newWeek)
   })
@@ -62,6 +72,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
                     key={day.date}
                     date={day.date}
                     calendarEvents={day.dateGridEvents}
+                    backgroundEvents={day.backgroundEvents}
                   />
                 ))}
               </div>
@@ -76,6 +87,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
             {Object.values(week).map((day) => (
               <TimeGridDay
                 calendarEvents={day.timeGridEvents}
+                backgroundEvents={day.backgroundEvents}
                 date={day.date}
                 key={day.date}
               />

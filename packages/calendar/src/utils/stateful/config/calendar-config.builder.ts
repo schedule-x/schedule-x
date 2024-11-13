@@ -17,7 +17,16 @@ import {
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { CalendarCallbacks } from '@schedule-x/shared/src/interfaces/calendar/listeners.interface'
-import { DEFAULT_WEEK_GRID_HEIGHT } from '../../../constants'
+import {
+  DEFAULT_DAY_BOUNDARIES,
+  DEFAULT_WEEK_GRID_HEIGHT,
+} from '../../../constants'
+import {
+  DEFAULT_FIRST_DAY_OF_WEEK,
+  DEFAULT_LOCALE,
+} from '@schedule-x/shared/src/values'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -41,14 +50,15 @@ export default class CalendarConfigBuilder
   callbacks: CalendarCallbacks | undefined
   minDate: string | undefined
   maxDate: string | undefined
+  backgroundEvents: BackgroundEvent[] | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
-      this.locale!,
-      this.firstDayOfWeek!,
-      this.defaultView!,
-      this.views!,
-      this.dayBoundaries!,
+      this.locale || DEFAULT_LOCALE,
+      this.firstDayOfWeek || DEFAULT_FIRST_DAY_OF_WEEK,
+      this.defaultView || InternalViewName.Week,
+      this.views || [],
+      this.dayBoundaries || DEFAULT_DAY_BOUNDARIES,
       this.weekOptions,
       this.calendars,
       this.plugins,
@@ -156,6 +166,11 @@ export default class CalendarConfigBuilder
     monthOptions: MonthGridOptions | undefined
   ): CalendarConfigBuilder {
     this.monthGridOptions = monthOptions
+    return this
+  }
+
+  withBackgroundEvents(backgroundEvents: BackgroundEvent[] | undefined) {
+    this.backgroundEvents = backgroundEvents
     return this
   }
 }

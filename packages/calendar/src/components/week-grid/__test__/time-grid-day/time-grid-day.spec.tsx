@@ -160,4 +160,54 @@ describe('TimeGridDay', () => {
       )
     })
   })
+
+  describe('background events', () => {
+    it('renders a full height background event for event that matches date', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2023-09-11',
+      })
+      renderComponent($app, [], '2023-09-11', [
+        {
+          start: '2023-09-11',
+          end: '2023-09-11',
+          style: {},
+        },
+      ])
+
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('top: 0%')
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('height: 99.93055555555557%')
+    })
+
+    it('renders a full height background event for event that starts before date and ends after', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2023-09-11',
+      })
+      renderComponent($app, [], '2023-09-11', [
+        {
+          start: '2023-09-10',
+          end: '2023-09-12',
+          style: {},
+        },
+      ])
+
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('top: 0%')
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('height: 99.93055555555557%')
+    })
+  })
 })

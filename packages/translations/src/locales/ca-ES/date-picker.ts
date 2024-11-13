@@ -6,5 +6,4 @@ export const datePickerCaES: DatePickerTranslations = {
   'Next month': 'Següent mes',
   'Previous month': 'Mes anterior',
   'Choose Date': 'Selecciona una data',
-  'Select View': 'Selecciona una vista',
 }

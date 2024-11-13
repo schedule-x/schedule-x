@@ -7,6 +7,7 @@ const createWeekForMonth = (week: MonthWeek, day: Date) => {
   week.push({
     date: toDateString(day),
     events: {},
+    backgroundEvents: [],
   })
 
   return week

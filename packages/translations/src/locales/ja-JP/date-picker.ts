@@ -6,5 +6,4 @@ export const datePickerJaJP: DatePickerTranslations = {
   'Next month': '次の月',
   'Previous month': '前の月',
   'Choose Date': '日付を選択',
-  'Select View': 'ビューを選択',
 }

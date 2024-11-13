@@ -19,23 +19,25 @@ issues.
 
 1. Click the fork button in GitHub
 2. Clone your fork to your local machine
-3. **Check out a new branch**!!! (Do not work on **main**) This helps maintainers when checking out your branch 
-   locally. If you work on your main branch, the maintainers will have to delete their own local main branch to check 
-   out yours.
+3. Check out a feature branch
 4. Commit message should adhere to [Conventional commits](https://www.conventionalcommits.org/en). For 
    example:
 * `feat: add new feature`
 * `fix: fix bug`
 * `docs: update readme`
 * `chore: update dependencies`
+5. Push your changes to your fork and open a pull request to the main-branch of the Schedule-X repository
 
 #### Code stuff
 
 - `npm i`
-- `husky install` - configuring the gitHooks
+- `husky install` - configuring the gitHooks. Might not work on windows. In this case just need to make sure to lint and format on your own.
 - `npm run dev`
 
 Voila! You should now have a working version of Schedule-X running on your machine.
+
+In `development/main.tsx` you can find a "workbench" type file, which is used as the entry point for development.
+You can modify this to fit your needs while developing.
 
 ## Running tests
 

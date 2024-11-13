@@ -5,6 +5,7 @@ export const calendarSrRS: CalendarTranslations = {
   Month: 'Mesec',
   Week: 'Nedelja',
   Day: 'Dan',
+  'Select View': 'Odaberite pregled',
   events: 'Događaji',
   event: 'Događaj',
   'No events': 'Nema događaja',

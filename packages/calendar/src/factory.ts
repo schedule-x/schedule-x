@@ -34,6 +34,7 @@ export const createCalendarAppSingleton = (
   )
   const calendarEvents = createCalendarEventsImpl(
     config.events || [],
+    config.backgroundEvents || [],
     internalConfig
   )
   return new CalendarAppSingletonBuilder()

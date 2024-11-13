@@ -6,5 +6,4 @@ export const datePickerSvSE: DatePickerTranslations = {
   'Next month': 'Nästa månad',
   'Previous month': 'Föregående månad',
   'Choose Date': 'Välj datum',
-  'Select View': 'Välj vy',
 }
