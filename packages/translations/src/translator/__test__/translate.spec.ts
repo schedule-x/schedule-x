@@ -81,6 +81,30 @@ describe('translate', () => {
     expect(underTest(key)).toEqual(key)
   })
 
+  it('should not throw for locale srLatnRS', () => {
+    const locale = signal('sr-Latn-RS')
+    const translations = {
+      hello: 'world',
+    }
+    const key = 'hello'
+
+    const underTest = translate(locale, { srLatnRS: translations })
+
+    expect(() => underTest(key)).not.toThrow()
+  })
+
+  it('should return Serbian translations with sr-Latn-RS locale', () => {
+    const locale = signal('sr-Latn-RS')
+    const translations = {
+      hello: 'svet',
+    }
+    const key = 'hello'
+
+    const underTest = translate(locale, { srLatnRS: translations })
+
+    expect(underTest(key)).toEqual(translations[key])
+  })
+
   it.each([
     ['enUS', true],
     ['en_US', true],
