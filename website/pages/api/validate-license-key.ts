@@ -43,7 +43,10 @@ export default async (req, res) => {
     await db.collection(LICENSE_KEY_COLLECTION_NAME).insertOne({
       key: parsedBody.key,
       email: response.data.meta.customer_email,
-      accessToken: availableToken.token
+      accessToken: availableToken.token,
+
+      // name needed to identify the token in the registry server
+      accessTokenName: availableToken.name || 'n/a',
     });
 
     await db.collection(ACCESS_TOKEN_COLLECTION_NAME).deleteOne({ token: availableToken.token });
