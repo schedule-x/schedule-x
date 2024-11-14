@@ -18,6 +18,9 @@ Website for documentation and demo: https://schedule-x.dev/
 
 ![Schedule-X calendar demo](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-demo-readme-480p-15fps.gif)
 
+## Usage Trend
+[Usage Trend of schedule-x Family](https://npm-compare.com/@schedule-x/angular,@schedule-x/calendar,@schedule-x/events-service,@schedule-x/preact,@schedule-x/react,@schedule-x/svelte,@schedule-x/theme-default,@schedule-x/vue)
+
 ## Contact
 
 For bug reports and feature requests, please use the issue tracker of this repository.
