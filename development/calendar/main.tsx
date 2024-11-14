@@ -71,38 +71,63 @@ const calendar = createCalendar(
   {
     weekOptions: {
       // gridHeight: 3000,
-      // nDays: 3,
+      nDays: 3,
       eventWidth: 95,
     },
-    // monthGridOptions: {
-    //   nEventsPerDay: 7
-    // },
+    monthGridOptions: {
+       nEventsPerDay: 7
+    },
     firstDayOfWeek: 1,
 
-    // locale: 'test',
+     locale: 'lt-LT',
     // locale: 'pt-BR',
     // locale: 'en-US',
     customLocale: {
-      Today: 'Heute',
-      Month: 'Monat',
-      Week: 'Woche',
-      Day: 'Tag',
-      'Select View': 'Select View',
-      events: 'Events',
-      event: 'event',
-      'No events': 'No events',
-      'Next period': 'Next period',
-      'Previous period': 'Previous period',
-      to: 'to', // as in 2/1/2020 to 2/2/2020
-      'Full day- and multiple day events': 'Full day- and multiple day events',
-      'Link to {{n}} more events on {{date}}':
-        'Link to {{n}} more events on {{date}}',
-      'Link to 1 more event on {{date}}': 'Link to 1 more event on {{date}}',
-      Date: 'Date',
-      'MM/DD/YYYY': 'DD/MM/YYYY',
-      'Next month': 'Next month',
-      'Previous month': 'Previous month',
-      'Choose Date': 'Choose Date',
+      "lt-LT":{
+        Today: 'Heute',
+        Month: 'Monat',
+        Week: 'Woche test',
+        Day: 'Tag',
+        'Select View': 'Select View',
+        events: 'Events',
+        event: 'event',
+        'No events': 'No events',
+        'Next period': 'Next period',
+        'Previous period': 'Previous period',
+        to: 'to', // as in 2/1/2020 to 2/2/2020
+        'Full day- and multiple day events': 'Full day- and multiple day events',
+        'Link to {{n}} more events on {{date}}':
+          'Link to {{n}} more events on {{date}}',
+        'Link to 1 more event on {{date}}': 'Link to 1 more event on {{date}}',
+        Date: 'Date',
+        'MM/DD/YYYY': 'DD/MM/YYYY',
+        'Next month': 'Next month',
+        'Previous month': 'Previous month',
+        'Choose Date': 'Choose Date',
+      },
+      "de-BL":{
+        Today: 'Heute',
+        Month: 'Monat',
+        Week: 'Woche test',
+        Day: 'Tag',
+        'Select View': 'Select View',
+        events: 'Events',
+        event: 'event',
+        'No events': 'No events',
+        'Next period': 'Next period',
+        'Previous period': 'Previous period',
+        to: 'to', // as in 2/1/2020 to 2/2/2020
+        'Full day- and multiple day events': 'Full day- and multiple day events',
+        'Link to {{n}} more events on {{date}}':
+          'Link to {{n}} more events on {{date}}',
+        'Link to 1 more event on {{date}}': 'Link to 1 more event on {{date}}',
+        Date: 'Date',
+        'MM/DD/YYYY': 'DD/MM/YYYY',
+        'Next month': 'Next month',
+        'Previous month': 'Previous month',
+        'Choose Date': 'Choose Date',
+      }
+
     },
     //locale: 'zh-CN',
     // locale: 'id-ID',

@@ -14,14 +14,18 @@ export const translate =
       throw new InvalidLocaleError(locale.value)
 
     let language = {}
-    // Überprüfe, ob ein customLocale vorhanden ist und verwende es
-    if (customLocale.value) {
-      language = customLocale.value
-      console.log(language)
+    const custom=customLocale.value
+
+    // @ts-expect-error nothing
+    if (custom[locale.value]) {
+
+
+
+      // @ts-expect-error nothing
+      language = custom[locale.value]
     } else {
       const deHyphenatedLocale = locale.value.replace('-', '')
       language = languages[deHyphenatedLocale]
-      console.log(language)
     }
 
     if (!language) return key
