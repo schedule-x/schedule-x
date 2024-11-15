@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/shuding/nextra-docs-template#readme",
   "dependencies": {
+    "@fontsource-variable/podkova": "^5.1.0",
     "@codemirror/lang-javascript": "^6.2.1",
     "@lemonsqueezy/lemonsqueezy.js": "^3.2.0",
     "@schedule-x/calendar": "^2.4.0",

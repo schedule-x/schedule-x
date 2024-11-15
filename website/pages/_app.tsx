@@ -1,4 +1,3 @@
-import { Podkova } from 'next/font/google'
 import '../theme/index.scss'
 import '../components/pages/landing-page.scss'
 import '../components/pages/calendar-demo.scss'

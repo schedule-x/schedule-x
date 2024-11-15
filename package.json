@@ -36,7 +36,6 @@
     "seed": "npx tsx development/seeder/seed.ts"
   },
   "dependencies": {
-    "@fontsource-variable/podkova": "^5.1.0",
     "@preact/signals": "1.2.2",
     "preact": "10.19.2"
   },
