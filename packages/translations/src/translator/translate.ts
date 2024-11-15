@@ -5,10 +5,14 @@ import { Signal } from '@preact/signals'
 export const translate =
   (locale: Signal<string>, languages: Record<string, object>) =>
   (key: string, translationVariables?: TranslationVariables): string => {
-    if (!/^[a-z]{2}-[A-Z]{2}$/.test(locale.value))
+    if (
+      !/^[a-z]{2}-[A-Z]{2}$/.test(locale.value) &&
+      'sr-Latn-RS' !== locale.value
+    ) {
       throw new InvalidLocaleError(locale.value)
+    }
 
-    const deHyphenatedLocale = locale.value.replace('-', '')
+    const deHyphenatedLocale = locale.value.replaceAll('-', '')
     const language = languages[deHyphenatedLocale]
     if (!language) return key
 
