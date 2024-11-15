@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/schedule-x/schedule-x/compare/v2.5.0...v2.6.0) (2024-11-15)
+
+### Features
+
+- implement callbacks onDoubleClickAgendaDate and onDoubleClickEvent ([#769](https://github.com/schedule-x/schedule-x/issues/769)) ([1823fa8](https://github.com/schedule-x/schedule-x/commit/1823fa8379788d744649295abdc18067380d8eda))
+
 # [2.5.0](https://github.com/schedule-x/schedule-x/compare/v2.4.3...v2.5.0) (2024-11-09)
 
 ### Features

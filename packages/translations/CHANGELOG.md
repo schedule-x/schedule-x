@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/schedule-x/schedule-x/compare/v2.5.0...v2.6.0) (2024-11-15)
+
+### Features
+
+- separate between Serbian with latin letters and cyrillic ([#778](https://github.com/schedule-x/schedule-x/issues/778)) ([dc06d2d](https://github.com/schedule-x/schedule-x/commit/dc06d2d2f4b09e21ec832c01e3588c9c29212366))
+
 # [2.5.0](https://github.com/schedule-x/schedule-x/compare/v2.4.3...v2.5.0) (2024-11-09)
 
 **Note:** Version bump only for package @schedule-x/translations
