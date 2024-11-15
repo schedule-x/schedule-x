@@ -86,11 +86,16 @@ describe('MonthAgendaDay', () => {
       const setActiveDate = vi.fn()
       const date = '2020-01-01'
 
-      renderComponent(__createAppWithViews__({
-        callbacks: {
-          onDoubleClickAgendaDate,
-        }
-      }), { date, events: [] }, false, setActiveDate)
+      renderComponent(
+        __createAppWithViews__({
+          callbacks: {
+            onDoubleClickAgendaDate,
+          },
+        }),
+        { date, events: [] },
+        false,
+        setActiveDate
+      )
 
       fireEvent(
         document.querySelector(DAY_SELECTOR) as Element,
@@ -103,9 +108,6 @@ describe('MonthAgendaDay', () => {
       expect(onDoubleClickAgendaDate).toHaveBeenCalledWith(date)
     })
   })
-
-
- 
 
   describe('displaying event icons for the number of events in the day', () => {
     it('should display 0 event icons', () => {

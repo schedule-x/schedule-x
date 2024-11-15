@@ -157,12 +157,12 @@ describe('Calendar callbacks', () => {
           events: [calendarEvent],
         })
         renderComponent($app)
-  
+
         await doubleClickByText('Event 1')
-  
+
         await waitFor(() => {
           expect(onDoubleClickEvent).toHaveBeenCalledTimes(1)
-  
+
           expect(onDoubleClickEvent).toHaveBeenCalledWith(calendarEvent)
         })
       })
