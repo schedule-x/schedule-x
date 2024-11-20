@@ -7,7 +7,11 @@ export const sortEventsForWeekView = (
   const timeGridEvents: CalendarEventInternal[] = []
 
   for (const event of allCalendarEvents) {
-    if (event._isSingleDayTimed || event._isSingleHybridDayTimed) {
+    if (
+      event._isSingleDayTimed ||
+      event._isSingleHybridDayTimed ||
+      event._isSingleTime
+    ) {
       timeGridEvents.push(event)
       continue
     }

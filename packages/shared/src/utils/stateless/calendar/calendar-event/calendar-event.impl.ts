@@ -42,7 +42,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     return (
       dateTimeStringRegex.test(this.start) &&
       dateTimeStringRegex.test(this.end) &&
-      dateFromDateTime(this.start) === dateFromDateTime(this.end)
+      dateFromDateTime(this.start) === dateFromDateTime(this.end) &&
+      this.start !== this.end
     )
   }
 
@@ -72,6 +73,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
   get _isSingleHybridDayTimed(): boolean {
     if (!this._config.isHybridDay) return false
+    if (this.start === this.end) return false
     if (
       !dateTimeStringRegex.test(this.start) ||
       !dateTimeStringRegex.test(this.end)
@@ -97,6 +99,14 @@ export default class CalendarEventImpl implements CalendarEventInternal {
           eventEndTimePoints > eventStartTimePoints)) ||
       (eventStartTimePoints < dayBoundaries.end &&
         eventEndTimePoints <= dayBoundaries.end)
+    )
+  }
+
+  get _isSingleTime(): boolean {
+    return (
+      dateTimeStringRegex.test(this.start) &&
+      dateTimeStringRegex.test(this.end) &&
+      this.start === this.end
     )
   }
 

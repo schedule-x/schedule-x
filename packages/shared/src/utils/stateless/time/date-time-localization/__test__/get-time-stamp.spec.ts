@@ -102,4 +102,28 @@ describe('Getting the time stamp for the event modal', () => {
       expect(result).toEqual(expected)
     })
   })
+
+  describe('Time stamps for ponctual events', () => {
+    const singleTimeEvent: Partial<CalendarEventInternal> = {
+      start: '2023-10-06 20:07',
+      end: '2023-10-06 20:07',
+      _isSingleTime: true,
+    }
+
+    it('should return a German time stamp for a ponctual event', () => {
+      const expected = '6. Oktober 2023, 20:07'
+
+      const result = getTimeStamp(singleTimeEvent, 'de-DE')
+
+      expect(result).toEqual(expected)
+    })
+
+    it('should return an English time stamp for a multi day timed event', () => {
+      const expected = 'October 6, 2023, 8:07 PM'
+
+      const result = getTimeStamp(singleTimeEvent, 'en-US')
+
+      expect(result).toEqual(expected)
+    })
+  })
 })

@@ -53,6 +53,13 @@ export const getTimeStamp = (
     )} ${delimiter} ${timeFn(eventTime.end, locale)}`
   }
 
+  if (calendarEvent._isSingleTime) {
+    return `${dateFn(eventTime.start, locale)}, ${timeFn(
+      eventTime.start,
+      locale
+    )}`
+  }
+
   return `${dateFn(eventTime.start, locale)}, ${timeFn(
     eventTime.start,
     locale

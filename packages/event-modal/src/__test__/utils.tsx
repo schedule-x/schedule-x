@@ -15,6 +15,7 @@ const createCalendarEvent = () => {
   calendarEvent._isSingleDayFullDay = false
   calendarEvent._isSingleDayTimed = false
   calendarEvent._isMultiDayTimed = false
+  calendarEvent._isSingleTime = false
   return calendarEvent
 }
 

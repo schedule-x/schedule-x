@@ -35,6 +35,7 @@ export interface CalendarEventInternal extends CalendarEventExternal {
   _isSingleHybridDayTimed: boolean
   _isMultiDayTimed: boolean
   _isMultiDayFullDay: boolean
+  _isSingleTime: boolean
 
   // week time grid
   _previousConcurrentEvents: number | undefined
