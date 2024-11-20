@@ -92,9 +92,9 @@ const calendar = createCalendar({
   // maxDate: '2025-03-31',
   // defaultView: 'month-grid',
   // selectedDate: '2024-12-01',
-  datePicker: {
-    teleportTo: document.body,
-  },
+  // datePicker: {
+  //   teleportTo: document.body,
+  // },
   // dayBoundaries: {
   //   start: '06:00',
   //   end: '20:00',
