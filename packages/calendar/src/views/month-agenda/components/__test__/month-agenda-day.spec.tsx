@@ -196,4 +196,40 @@ describe('MonthAgendaDay', () => {
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
   })
+
+  describe('disabling the day', () => {
+    it('should disable the day if it is before the min date', () => {
+      const $app = __createAppWithViews__({
+        minDate: '2021-04-01',
+      })
+      renderComponent($app, { date: '2021-03-31', events: [] })
+
+      expect(document.querySelector(DAY_SELECTOR)?.attributes).toHaveProperty(
+        'disabled'
+      )
+    })
+
+    it('should disable the day if it is after the max date', () => {
+      const $app = __createAppWithViews__({
+        maxDate: '2021-04-01',
+      })
+      renderComponent($app, { date: '2021-05-01', events: [] })
+
+      expect(document.querySelector(DAY_SELECTOR)?.attributes).toHaveProperty(
+        'disabled'
+      )
+    })
+
+    it('should not disable the day if it is between the min and max date', () => {
+      const $app = __createAppWithViews__({
+        minDate: '2021-04-01',
+        maxDate: '2021-04-30',
+      })
+      renderComponent($app, { date: '2021-04-15', events: [] })
+
+      expect(
+        document.querySelector(DAY_SELECTOR)?.attributes
+      ).not.toHaveProperty('disabled')
+    })
+  })
 })

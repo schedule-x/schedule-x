@@ -62,6 +62,12 @@ export default function MonthAgendaDay({
     )
   }
 
+  const isBeforeMinDate = !!(
+    $app.config.minDate.value && day.date < $app.config.minDate.value
+  )
+  const isPastMaxDate = !!(
+    $app.config.maxDate.value && day.date > $app.config.maxDate.value
+  )
   return (
     <button
       className={dayClasses.join(' ')}
@@ -69,6 +75,7 @@ export default function MonthAgendaDay({
       onDblClick={(e) =>
         handleClick(e, $app.config.callbacks.onDoubleClickAgendaDate)
       }
+      disabled={isBeforeMinDate || isPastMaxDate}
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
       tabIndex={hasFocus(day) ? 0 : -1}
       data-agenda-focus={hasFocus(day) ? 'true' : undefined}
