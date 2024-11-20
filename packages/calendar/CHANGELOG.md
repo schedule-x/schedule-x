@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/schedule-x/schedule-x/compare/v2.6.0...v2.7.0) (2024-11-20)
+
+### Bug Fixes
+
+- **calendar:** consider minDate and maxDate in month agenda ([#789](https://github.com/schedule-x/schedule-x/issues/789)) ([f1efa65](https://github.com/schedule-x/schedule-x/commit/f1efa658e71f8ffc8920b07debb8b003c7e4325c))
+
+### Features
+
+- **calendar:** validate events ([#788](https://github.com/schedule-x/schedule-x/issues/788)) ([c45e7ad](https://github.com/schedule-x/schedule-x/commit/c45e7ad8f3aecdb1a104fb13e64a834d24f89e62))
+- enable teleporting date picker ([#786](https://github.com/schedule-x/schedule-x/issues/786)) ([cab3758](https://github.com/schedule-x/schedule-x/commit/cab3758e37625e6b29c74d10050855b0f180d623))
+
 # [2.6.0](https://github.com/schedule-x/schedule-x/compare/v2.5.0...v2.6.0) (2024-11-15)
 
 ### Features

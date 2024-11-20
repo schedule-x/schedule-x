@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/schedule-x/schedule-x/compare/v2.6.0...v2.7.0) (2024-11-20)
+
+### Features
+
+- **calendar:** validate events ([#788](https://github.com/schedule-x/schedule-x/issues/788)) ([c45e7ad](https://github.com/schedule-x/schedule-x/commit/c45e7ad8f3aecdb1a104fb13e64a834d24f89e62))
+
 # [2.6.0](https://github.com/schedule-x/schedule-x/compare/v2.5.0...v2.6.0) (2024-11-15)
 
 ### Features
