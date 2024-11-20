@@ -11,6 +11,7 @@ export const createDatePickerConfig = (
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .withMin(config.minDate)
     .withMax(config.maxDate)
+    .withTeleportTo(config.datePicker?.teleportTo)
     .withStyle(config.datePicker?.style)
     .withPlacement(Placement.BOTTOM_END)
     .withListeners({ onChange: dateSelectionCallback })
