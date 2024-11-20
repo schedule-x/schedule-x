@@ -105,6 +105,12 @@ const config = {
   isResponsive: false,
 
   /**
+   * Skip validating events when initializing the calendar. This can help you gain a bit of performance if you are loading a lot of events,
+   * and you are sure that the events are valid.
+   * */
+  skipValidation: true,
+
+  /**
    * Callbacks for events that occur in the calendar
    * */
   callbacks: {
