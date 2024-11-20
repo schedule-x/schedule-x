@@ -115,4 +115,5 @@ export interface CalendarConfigExternal
   monthGridOptions?: MonthGridOptions
   locale?: string
   firstDayOfWeek?: WeekDay
+  skipValidation?: boolean
 }
