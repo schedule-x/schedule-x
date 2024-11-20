@@ -93,7 +93,7 @@ const calendar = createCalendar({
   // defaultView: 'month-grid',
   // selectedDate: '2024-12-01',
   // datePicker: {
-  //   selectedDate: '2023-11-01'
+  //   teleportTo: document.body,
   // },
   // dayBoundaries: {
   //   start: '06:00',
