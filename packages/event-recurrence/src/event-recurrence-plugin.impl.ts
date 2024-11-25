@@ -16,7 +16,11 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   private $app: CalendarAppSingleton | null = null
 
-  onRender($app: CalendarAppSingleton): void {
+  /**
+   * Must be before render, because if we run it onRender, we will create recurrences for the recurrences that were added
+   * by people using the callbacks.beforeRender hook to add events.
+   * */
+  beforeRender($app: CalendarAppSingleton): void {
     this.$app = $app
     this.createRecurrencesForEvents()
   }
