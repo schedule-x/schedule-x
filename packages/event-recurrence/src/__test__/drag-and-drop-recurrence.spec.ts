@@ -20,7 +20,7 @@ describe('Drag and drop recurring events', () => {
         events: [eventWithRRule],
       })
       const eventRecurrencePlugin = createEventRecurrencePlugin()
-      eventRecurrencePlugin.onRender!($app)
+      eventRecurrencePlugin.beforeRender!($app)
 
       eventRecurrencePlugin.updateRecurrenceDND(
         eventWithRRule.id,
@@ -53,7 +53,7 @@ describe('Drag and drop recurring events', () => {
         events: [eventWithRRule],
       })
       const eventRecurrencePlugin = createEventRecurrencePlugin()
-      eventRecurrencePlugin.onRender!($app)
+      eventRecurrencePlugin.beforeRender!($app)
 
       // Drag the second occurrence of the event to 3 days earlier
       eventRecurrencePlugin.updateRecurrenceDND(
@@ -79,7 +79,7 @@ describe('Drag and drop recurring events', () => {
     it('should throw an error', () => {
       const $app = __createAppWithViews__()
       const eventRecurrencePlugin = createEventRecurrencePlugin()
-      eventRecurrencePlugin.onRender!($app)
+      eventRecurrencePlugin.beforeRender!($app)
 
       expect(() =>
         eventRecurrencePlugin.updateRecurrenceDND(
