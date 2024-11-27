@@ -22,7 +22,12 @@ import {
   setRangeForDay,
 } from './utils/stateless/time/range/set-range'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
-export type { CalendarConfig, CustomComponentFn, CalendarEvent }
+export type {
+  CalendarConfig,
+  CustomComponentFn,
+  CalendarEvent,
+  CalendarEvent as CalendarEventExternal,
+}
 
 export {
   createCalendar,
