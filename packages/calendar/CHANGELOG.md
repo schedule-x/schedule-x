@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/schedule-x/schedule-x/compare/v2.7.0...v2.8.0) (2024-11-27)
+
+### Features
+
+- **calendar:** export unaliased calendar event type ([#793](https://github.com/schedule-x/schedule-x/issues/793)) ([cfbd58c](https://github.com/schedule-x/schedule-x/commit/cfbd58c682ecfbad0f92ea7ab8f667f967b8fde9))
+
 # [2.7.0](https://github.com/schedule-x/schedule-x/compare/v2.6.0...v2.7.0) (2024-11-20)
 
 ### Bug Fixes
