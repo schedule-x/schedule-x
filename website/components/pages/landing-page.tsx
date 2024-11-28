@@ -45,6 +45,12 @@ export default function LandingPage() {
 
         <AppCalendar/>
 
+
+        <div className="senja-embed" data-id="68874853-36dd-407e-86f3-b6f17ba0fa99" data-mode="shadow"
+             data-lazyload="false"
+             style={{ display: 'block', width: '90%', maxWidth: '950px', marginBottom: '40px' }}>
+        </div>
+
         <section className={'landingPageSection'}>
           <Image className={'sectionImage'} src={'/images/website_section_fade_inclined.svg'} alt={'hello'} width={1400}
                  height={479}/>

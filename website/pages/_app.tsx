@@ -23,10 +23,13 @@ export default function MyApp({ Component, pageProps }) {
   if (typeof window === 'object') alxScript = true
 
   return <main className={'main'}><Component {...pageProps} />
-    {alxScript && window?.location.hostname !== 'localhost' && <Script data-domain="schedule-x.dev" src="https://analytics.schedule-x.com/js/script.js" defer />}
+    {alxScript && window?.location.hostname !== 'localhost' &&
+      <Script data-domain="schedule-x.dev" src="https://analytics.schedule-x.com/js/script.js" defer/>}
     <Script>
       {`window.lemonSqueezyAffiliateConfig = { store: "schedule-x" };`}
     </Script>
     <Script src="https://lmsqueezy.com/affiliate.js" defer/>
+    <Script src="https://widget.senja.io/widget/68874853-36dd-407e-86f3-b6f17ba0fa99/platform.js"
+            type="text/javascript" async></Script>
   </main>
 }
