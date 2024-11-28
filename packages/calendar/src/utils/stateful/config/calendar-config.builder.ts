@@ -55,7 +55,9 @@ export default class CalendarConfigBuilder
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
       this.locale || DEFAULT_LOCALE,
-      this.firstDayOfWeek || DEFAULT_FIRST_DAY_OF_WEEK,
+      typeof this.firstDayOfWeek === 'number'
+        ? this.firstDayOfWeek
+        : DEFAULT_FIRST_DAY_OF_WEEK,
       this.defaultView || InternalViewName.Week,
       this.views || [],
       this.dayBoundaries || DEFAULT_DAY_BOUNDARIES,

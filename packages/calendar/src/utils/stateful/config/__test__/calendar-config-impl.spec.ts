@@ -37,4 +37,20 @@ describe('CalendarConfigImpl', () => {
       }
     )
   })
+
+  describe('configuring first day of week', () => {
+    /**
+     * Might look like a stupid test, but since 0 is falsy, lacking this test led to an error in v2.0.0
+     * */
+    it.each([[0], [1], [2], [3], [4], [5], [6]])(
+      'should set the first day of the week to %s',
+      (firstDayOfWeek) => {
+        const config = new CalendarConfigBuilder()
+          .withFirstDayOfWeek(firstDayOfWeek)
+          .build()
+
+        expect(config.firstDayOfWeek.value).toBe(firstDayOfWeek)
+      }
+    )
+  })
 })
