@@ -65,6 +65,24 @@ export class TimeGridEventResizer {
   }
 
   private handleMouseUp = () => {
+    const onBeforeEventUpdate = this.$app.config.callbacks.onBeforeEventUpdate
+    if (onBeforeEventUpdate) {
+      const oldEvent = this.eventCopy._getExternalEvent()
+      oldEvent.end = this.originalEventEnd
+      const newEvent = this.eventCopy._getExternalEvent()
+      const validationResult = onBeforeEventUpdate(
+        oldEvent,
+        newEvent,
+        this.$app
+      )
+
+      if (!validationResult) {
+        this.eventCopy.end = this.originalEventEnd
+        this.finish()
+        return
+      }
+    }
+
     this.setNewTimeForEventEnd(
       this.CHANGE_THRESHOLD_IN_TIME_POINTS * this.lastIntervalDiff
     )
@@ -74,6 +92,16 @@ export class TimeGridEventResizer {
       this.originalEventEnd,
       this.lastValidEnd
     )
+    this.finish()
+
+    if (this.$app.config.callbacks.onEventUpdate) {
+      this.$app.config.callbacks.onEventUpdate(
+        this.eventCopy._getExternalEvent()
+      )
+    }
+  }
+
+  private finish() {
     this.updateCopy(undefined)
     ;(this.$app.elements.calendarWrapper as HTMLElement).classList.remove(
       'sx__is-resizing'
@@ -82,11 +110,5 @@ export class TimeGridEventResizer {
       'mousemove',
       this.handleMouseMove
     )
-
-    if (this.$app.config.callbacks.onEventUpdate) {
-      this.$app.config.callbacks.onEventUpdate(
-        this.eventCopy._getExternalEvent()
-      )
-    }
   }
 }
