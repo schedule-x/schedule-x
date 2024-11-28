@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/schedule-x/schedule-x/compare/v2.8.0...v2.8.1) (2024-11-28)
+
+### Bug Fixes
+
+- **calendar:** enable setting firstDayOfWeek to 0 ([#799](https://github.com/schedule-x/schedule-x/issues/799)) ([8f0052d](https://github.com/schedule-x/schedule-x/commit/8f0052d4d021aad00381ccb70a9654d999d04b9e))
+
 # [2.8.0](https://github.com/schedule-x/schedule-x/compare/v2.7.0...v2.8.0) (2024-11-27)
 
 ### Bug Fixes
