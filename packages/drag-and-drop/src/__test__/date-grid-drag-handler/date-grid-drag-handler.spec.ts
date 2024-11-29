@@ -13,7 +13,7 @@ import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless
 import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import DateGridDragHandlerImpl from '../../date-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
-import { deepCloneEvent } from '@schedule-x/shared'
+import { deepCloneEvent } from '@schedule-x/shared/src'
 
 describe('A calendar with custom, non-hybrid day boundaries', () => {
   let $app: CalendarAppSingleton

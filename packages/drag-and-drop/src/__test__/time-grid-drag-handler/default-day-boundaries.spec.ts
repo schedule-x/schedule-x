@@ -13,7 +13,7 @@ import TimeGridDragHandlerImpl from '../../time-grid-drag-handler.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dragEventNQuarters, getEventWithId } from './utils'
-import { deepCloneEvent } from '@schedule-x/shared'
+import { deepCloneEvent } from '@schedule-x/shared/src'
 
 describe('A calendar with normal day boundaries', () => {
   let $app: CalendarAppSingleton
