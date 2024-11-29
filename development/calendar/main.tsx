@@ -101,9 +101,9 @@ const calendar = createCalendar({
   // },
   // isDark: true,
   callbacks: {
-    onBeforeEventUpdate(oldEvent, newEvent, $app) {
-        return false
-    },
+    // onBeforeEventUpdate(oldEvent, newEvent, $app) {
+    //     return false
+    // },
 
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range)
