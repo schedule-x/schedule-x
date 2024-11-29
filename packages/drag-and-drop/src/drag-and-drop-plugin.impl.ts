@@ -38,9 +38,14 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
   }
 
   private getTimePointsForIntervalConfig(): number {
-    if (this.minutesPerInterval === 60) return 100
-    if (this.minutesPerInterval === 30) return 50
-    return 25
+    if (this.minutesPerInterval < 1 || this.minutesPerInterval > 60) {
+      console.warn(
+        `Invalid value for minutesPerInterval: ${this.minutesPerInterval} (must be between 1-60).\nDefaulting to 15 minutes`
+      )
+      this.minutesPerInterval = 15
+    }
+
+    return Math.round((this.minutesPerInterval / 60) * 100)
   }
 
   createDateGridDragHandler(
