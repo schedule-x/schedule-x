@@ -18,6 +18,7 @@ import { signal } from '@preact/signals'
 import { Mock, vi } from 'vitest'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { createResizePlugin } from '../resize.plugin'
+import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 
 describe('Resizing events in the time grid', () => {
   describe('When the calendar wrapper cannot be found', () => {
@@ -32,7 +33,7 @@ describe('Resizing events in the time grid', () => {
       const eventUpdater = vi.fn()
       const initialY = 500
 
-      const resizePlugin = createResizePlugin()
+      const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createTimeGridEventResizer(
         calendarEvent,
@@ -61,7 +62,12 @@ describe('Resizing events in the time grid', () => {
       $app.elements = { calendarWrapper }
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
-        weekOptions: signal({ gridHeight: 2400 }),
+        weekOptions: signal({
+          gridHeight: 2400,
+          nDays: 1,
+          eventWidth: 100,
+          timeAxisFormatOptions: { hour: 'numeric', minute: '2-digit' },
+        }),
         timePointsPerDay: 2400,
       }
       calendarEvent = new CalendarEventBuilder(
@@ -89,7 +95,7 @@ describe('Resizing events in the time grid', () => {
     })
 
     it('should extend an event by 30 minutes', () => {
-      const resizePlugin = createResizePlugin()
+      const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createTimeGridEventResizer(
         calendarEvent,
