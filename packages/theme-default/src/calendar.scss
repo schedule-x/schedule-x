@@ -1,21 +1,21 @@
 // Internal setup
-@import 'user-agent-overrides/index';
-@import 'variables/index';
-@import 'variables/calendar-only';
-@import 'util/index';
+@use 'user-agent-overrides/index';
+@use 'variables/index' as variables;
+@use 'variables/calendar-only';
+@use 'util/index' as utils;
 
 // Other components
-@import 'date-picker';
+@use 'date-picker';
 
 // Calendar components
-@import 'components/calendar/header/calendar-wrapper';
-@import 'components/calendar/header/calendar-header';
-@import 'components/calendar/header/range-heading';
-@import 'components/calendar/header/today-button';
-@import 'components/calendar/header/view-selection';
-@import 'components/calendar/view-month-grid';
-@import 'components/calendar/view-month-agenda';
-@import 'components/calendar/view-week';
-@import 'components/calendar/week-grid';
-@import 'components/calendar/event-modal';
-@import 'components/calendar/current-time';
+@use 'components/calendar/header/calendar-wrapper';
+@use 'components/calendar/header/calendar-header';
+@use 'components/calendar/header/range-heading';
+@use 'components/calendar/header/today-button';
+@use 'components/calendar/header/view-selection';
+@use 'components/calendar/view-month-grid';
+@use 'components/calendar/view-month-agenda';
+@use 'components/calendar/view-week';
+@use 'components/calendar/week-grid';
+@use 'components/calendar/event-modal';
+@use 'components/calendar/current-time';
