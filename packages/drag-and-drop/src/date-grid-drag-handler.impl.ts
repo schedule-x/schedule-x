@@ -9,6 +9,7 @@ import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { getDateGridEventCopy } from './utils/stateless/get-date-grid-event-copy'
 import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
+import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24
 
@@ -114,6 +115,15 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private handleMouseUpOrTouchEnd = () => {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
+
+    const shouldAbort = testIfShouldAbort(
+      this.$app,
+      this.eventCopy,
+      this.originalStart,
+      this.originalEnd,
+      this.updateCopy
+    )
+    if (shouldAbort) return
 
     this.updateOriginalEvent()
 

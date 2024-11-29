@@ -6,12 +6,14 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
+import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 
 export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private allDayElements: NodeListOf<HTMLDivElement>
   private currentDragoverDate: string | undefined
   private eventNDays: number
-  private originalStart: string
+  private readonly originalStart: string
+  private readonly originalEnd: string
 
   private readonly MONTH_DAY_CLASS_NAME = 'sx__month-grid-day'
   private readonly MONTH_DAY_SELECTOR = `.${this.MONTH_DAY_CLASS_NAME}`
@@ -22,6 +24,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     private $app: CalendarAppSingleton
   ) {
     this.originalStart = this.calendarEvent.start
+    this.originalEnd = this.calendarEvent.end
     this.allDayElements = (
       $app.elements.calendarWrapper as HTMLElement
     ).querySelectorAll(this.MONTH_DAY_SELECTOR) as NodeListOf<HTMLDivElement>
@@ -76,6 +79,14 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
     })
     this.setCalendarEventPointerEventsTo('auto')
+    const shouldAbort = testIfShouldAbort(
+      this.$app,
+      this.calendarEvent,
+      this.originalStart,
+      this.originalEnd
+    )
+    if (shouldAbort) return
+
     this.updateCalendarEvent()
   }
 

@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   describe,
   it,
@@ -12,6 +13,7 @@ import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless
 import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import DateGridDragHandlerImpl from '../../date-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
+import { deepCloneEvent } from '@schedule-x/shared/src'
 
 describe('A calendar with custom, non-hybrid day boundaries', () => {
   let $app: CalendarAppSingleton
@@ -37,7 +39,7 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
     ).build()
     eventId = calendarEvent.id
     $app.calendarEvents.list.value = [calendarEvent]
-    eventCopy = calendarEvent
+    eventCopy = deepCloneEvent(calendarEvent, $app)
     $app.elements.calendarWrapper = {
       querySelector: (selector: string) => {
         if (selector === '.sx__time-grid-day') {
@@ -189,6 +191,69 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       vi.runAllTimers()
       expect(updateCopyFn).toHaveBeenCalledTimes(3)
       expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+    })
+  })
+
+  describe('aborting an update via onBeforeEventUpdate', () => {
+    it('should not update the event if the callback returns false', () => {
+      $app.config.callbacks.onBeforeEventUpdate = (
+        _oldEvent,
+        _newEvent,
+        $app
+      ) => {
+        return false
+      }
+      $app.config.callbacks.onEventUpdate = vi.fn()
+
+      new DateGridDragHandlerImpl(
+        $app,
+        eventCoordinates,
+        eventCopy,
+        updateCopyFn
+      )
+
+      const mouseMoveEvent = {
+        clientX: eventCoordinates.clientX + 100,
+        clientY: 1000,
+      } as MouseEvent
+      document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      const originalEvent = getEventWithId(eventId, $app)
+      expect(originalEvent?.start).toBe('2024-02-23 03:30')
+      expect(originalEvent?.end).toBe('2024-02-24 04:00')
+      expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
+    })
+
+    it('should update the event if the callback returns true', () => {
+      $app.config.callbacks.onBeforeEventUpdate = (
+        _oldEvent,
+        _newEvent,
+        $app
+      ) => {
+        return true
+      }
+      $app.config.callbacks.onEventUpdate = vi.fn()
+
+      new DateGridDragHandlerImpl(
+        $app,
+        eventCoordinates,
+        eventCopy,
+        updateCopyFn
+      )
+
+      const mouseMoveEvent = {
+        clientX: eventCoordinates.clientX + 100,
+        clientY: 1000,
+      } as MouseEvent
+      document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      const originalEvent = getEventWithId(eventId, $app)
+      expect(originalEvent?.start).toBe('2024-02-24 03:30')
+      expect(originalEvent?.end).toBe('2024-02-25 04:00')
+      expect(updateCopyFn).toHaveBeenCalled()
+      expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
     })
   })
 })

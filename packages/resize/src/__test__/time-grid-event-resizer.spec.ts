@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   describe,
   it,
@@ -17,6 +18,7 @@ import { signal } from '@preact/signals'
 import { Mock, vi } from 'vitest'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { createResizePlugin } from '../resize.plugin'
+import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 
 describe('Resizing events in the time grid', () => {
   describe('When the calendar wrapper cannot be found', () => {
@@ -31,7 +33,7 @@ describe('Resizing events in the time grid', () => {
       const eventUpdater = vi.fn()
       const initialY = 500
 
-      const resizePlugin = createResizePlugin()
+      const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createTimeGridEventResizer(
         calendarEvent,
@@ -60,7 +62,12 @@ describe('Resizing events in the time grid', () => {
       $app.elements = { calendarWrapper }
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
-        weekOptions: signal({ gridHeight: 2400 }),
+        weekOptions: signal({
+          gridHeight: 2400,
+          nDays: 1,
+          eventWidth: 100,
+          timeAxisFormatOptions: { hour: 'numeric', minute: '2-digit' },
+        }),
         timePointsPerDay: 2400,
       }
       calendarEvent = new CalendarEventBuilder(
@@ -88,7 +95,7 @@ describe('Resizing events in the time grid', () => {
     })
 
     it('should extend an event by 30 minutes', () => {
-      const resizePlugin = createResizePlugin()
+      const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createTimeGridEventResizer(
         calendarEvent,
@@ -229,6 +236,96 @@ describe('Resizing events in the time grid', () => {
         start: '2024-01-05 06:00',
         end: '2024-01-05 07:45',
       })
+    })
+  })
+
+  describe('aborting an update via onBeforeEventUpdate', () => {
+    let $app: CalendarAppSingleton
+    let calendarEvent: CalendarEventInternal
+    let eventCopy: CalendarEventInternal
+    let calendarWrapper: HTMLDivElement
+    const initialY = 500
+    let eventUpdater: Mock
+
+    beforeEach(() => {
+      calendarWrapper = document.createElement('div')
+      $app = stubInterface<CalendarAppSingleton>()
+      $app.elements = { calendarWrapper }
+      $app.config = {
+        ...stubInterface<CalendarConfigInternal>(),
+        weekOptions: signal({
+          gridHeight: 2400,
+          nDays: 1,
+          dayBoundaries: { start: '00:00', end: '24:00' },
+          eventWidth: 100,
+          timeAxisFormatOptions: { hour: 'numeric', minute: '2-digit' },
+        }),
+        timePointsPerDay: 2400,
+      }
+      calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        1,
+        '2024-01-05 06:00',
+        '2024-01-05 07:00'
+      ).build()
+      eventCopy = deepCloneEvent(calendarEvent, $app)
+
+      $app.calendarEvents = stubInterface<CalendarEvents>()
+      $app.calendarEvents.list = signal([calendarEvent])
+      $app.config.callbacks = {
+        onEventUpdate: vi.fn(),
+      }
+      eventUpdater = vi.fn()
+    })
+
+    it('should not update the event if the callback returns false', () => {
+      $app.config.callbacks = {
+        ...$app.config.callbacks,
+        onBeforeEventUpdate(_oldEvent, _newEvent, _$app) {
+          return false
+        },
+      }
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      // Drag 50 pixels down (half hour, because day = 2400px)
+      calendarWrapper.dispatchEvent(
+        new MouseEvent('mousemove', { clientX: 0, clientY: initialY + 50 })
+      )
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      expect(updateEventSpy).not.toHaveBeenCalled()
+      const eventInternal = $app.calendarEvents.list.value[0]
+      expect(eventInternal.start).toBe('2024-01-05 06:00')
+      expect(eventInternal.end).toBe('2024-01-05 07:00')
+    })
+
+    it('should update the event if the callback returns true', () => {
+      $app.config.callbacks = {
+        ...$app.config.callbacks,
+        onBeforeEventUpdate(_oldEvent, _newEvent, _$app) {
+          return true
+        },
+      }
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      // Drag 50 pixels down (half hour, because day = 2400px)
+      calendarWrapper.dispatchEvent(
+        new MouseEvent('mousemove', { clientX: 0, clientY: initialY + 50 })
+      )
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      expect(updateEventSpy).toHaveBeenCalled()
+      const eventInternal = $app.calendarEvents.list.value[0]
+      expect(eventInternal.start).toBe('2024-01-05 06:00')
+      expect(eventInternal.end).toBe('2024-01-05 07:30')
     })
   })
 })
