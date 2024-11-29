@@ -1,13 +1,13 @@
-@import 'user-agent-overrides/index';
-@import 'variables/index';
-@import 'util/index';
-@import 'components/shared/chevron';
+@use 'user-agent-overrides/index';
+@use 'variables/index' as variables;
+@use 'util/index' as utils;
+@use 'components/shared/chevron';
 
 // Components
-@import 'components/date-picker/app-wrapper';
-@import 'components/date-picker/app-input';
-@import 'components/date-picker/app-popup';
-@import 'components/date-picker/years-view';
-@import 'components/date-picker/month-view/day-names';
-@import 'components/date-picker/month-view/month-view-header';
-@import 'components/date-picker/month-view/month-view-week';
+@use 'components/date-picker/app-wrapper';
+@use 'components/date-picker/app-input';
+@use 'components/date-picker/app-popup';
+@use 'components/date-picker/years-view';
+@use 'components/date-picker/month-view/day-names';
+@use 'components/date-picker/month-view/month-view-header';
+@use 'components/date-picker/month-view/month-view-week';

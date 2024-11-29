@@ -1,10 +1,10 @@
-@import 'user-agent-overrides/index';
-@import 'variables/index';
-@import 'util/index';
-@import 'components/shared/chevron';
+@use 'user-agent-overrides/index';
+@use 'variables/index' as variables;
+@use 'util/index' as utils;
+@use 'components/shared/chevron';
 
 // Components
-@import 'components/time-picker/time-picker-wrapper';
-@import 'components/time-picker/app-input';
-@import 'components/time-picker/app-popup';
-@import 'components/time-picker/time-input';
+@use 'components/time-picker/time-picker-wrapper';
+@use 'components/time-picker/app-input';
+@use 'components/time-picker/app-popup';
+@use 'components/time-picker/time-input';
