@@ -102,7 +102,7 @@ const calendar = createCalendar({
   // isDark: true,
   callbacks: {
     // onBeforeEventUpdate(oldEvent, newEvent, $app) {
-    //     return false
+    //   return false
     // },
 
     onRangeUpdate(range) {

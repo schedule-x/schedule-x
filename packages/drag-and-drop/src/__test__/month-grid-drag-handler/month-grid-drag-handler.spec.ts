@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -9,6 +10,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import MonthGridDragHandlerImpl from '../../month-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
+import { vi } from 'vitest'
 
 describe('MonthGridDragHandler', () => {
   describe('Dragging an event forwards', () => {
@@ -97,6 +99,68 @@ describe('MonthGridDragHandler', () => {
       expect(
         fifthOfJanuaryElement.classList.contains('sx__month-grid-day--dragover')
       ).toBe(true)
+    })
+  })
+
+  describe('aborting the update through onBeforeEventUpdate', () => {
+    it('should not update the event if onBeforeEventUpdate returns false', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1',
+            start: '2021-01-01',
+            end: '2021-01-03',
+          },
+        ],
+        selectedDate: '2021-01-01',
+        defaultView: 'month-grid',
+      })
+      $app.elements.calendarWrapper = document.createElement('div')
+      const calendarEvent = $app.calendarEvents.list.value[0]
+      const fourthOfJanuaryElement = document.createElement('div')
+      fourthOfJanuaryElement.classList.add('sx__month-grid-day')
+      fourthOfJanuaryElement.dataset.date = '2021-01-04'
+      $app.elements.calendarWrapper!.appendChild(fourthOfJanuaryElement)
+      new MonthGridDragHandlerImpl(calendarEvent, $app)
+
+      $app.config.callbacks.onBeforeEventUpdate = () => false
+      $app.config.callbacks.onEventUpdate = vi.fn()
+      fourthOfJanuaryElement.dispatchEvent(new MouseEvent('dragover'))
+      document.dispatchEvent(new MouseEvent('dragend'))
+
+      expect(calendarEvent.start).toBe('2021-01-01')
+      expect(calendarEvent.end).toBe('2021-01-03')
+      expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
+    })
+
+    it('should update the event if onBeforeEventUpdate returns true', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1',
+            start: '2021-01-01',
+            end: '2021-01-03',
+          },
+        ],
+        selectedDate: '2021-01-01',
+        defaultView: 'month-grid',
+      })
+      $app.elements.calendarWrapper = document.createElement('div')
+      const calendarEvent = $app.calendarEvents.list.value[0]
+      const fourthOfJanuaryElement = document.createElement('div')
+      fourthOfJanuaryElement.classList.add('sx__month-grid-day')
+      fourthOfJanuaryElement.dataset.date = '2021-01-04'
+      $app.elements.calendarWrapper!.appendChild(fourthOfJanuaryElement)
+      new MonthGridDragHandlerImpl(calendarEvent, $app)
+
+      $app.config.callbacks.onBeforeEventUpdate = () => true
+      $app.config.callbacks.onEventUpdate = vi.fn()
+      fourthOfJanuaryElement.dispatchEvent(new MouseEvent('dragover'))
+      document.dispatchEvent(new MouseEvent('dragend'))
+
+      expect(calendarEvent.start).toBe('2021-01-04')
+      expect(calendarEvent.end).toBe('2021-01-06')
+      expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
     })
   })
 })

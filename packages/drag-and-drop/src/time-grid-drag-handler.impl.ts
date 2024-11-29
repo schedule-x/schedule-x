@@ -13,6 +13,7 @@ import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
+import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number
@@ -20,7 +21,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly startX
   private lastIntervalDiff = 0
   private lastDaysDiff = 0
-  private originalStart: string
+  private readonly originalStart: string
+  private readonly originalEnd: string
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -38,6 +40,7 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     this.startY = this.eventCoordinates.clientY
     this.startX = this.eventCoordinates.clientX
     this.originalStart = this.eventCopy.start
+    this.originalEnd = this.eventCopy.end
     this.init()
   }
 
@@ -138,6 +141,16 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
     this.updateCopy(undefined)
+
+    const shouldAbort = testIfShouldAbort(
+      this.$app,
+      this.eventCopy,
+      this.originalStart,
+      this.originalEnd,
+      this.updateCopy
+    )
+    if (shouldAbort) return
+
     this.updateOriginalEvent()
   }
 

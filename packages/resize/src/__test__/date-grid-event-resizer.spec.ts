@@ -247,6 +247,7 @@ describe('Resizing events in the date grid', () => {
 
   describe('aborting an update', () => {
     it('should not update the event when the onBeforeEventUpdate callback returns false', () => {
+      $app.config.callbacks.onEventUpdate = vi.fn()
       $app.config.callbacks.onBeforeEventUpdate = (
         _oldEvent,
         _newEvent,
@@ -273,6 +274,7 @@ describe('Resizing events in the date grid', () => {
 
       expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
+      expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
     })
 
     it('should update the event when the onBeforeEventUpdate callback returns true', () => {

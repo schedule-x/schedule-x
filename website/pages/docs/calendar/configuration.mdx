@@ -132,6 +132,17 @@ const config = {
     },
 
     /**
+    * Is called before an event is updated by drag & drop or resizing.
+    * If you return false, the update will be aborted,
+    * and the event will be reset to its original position.
+    * If you return true, the event will be updated.
+    * */
+    onBeforeEventUpdate(oldEvent, newEvent, $app) {
+      // run your validation or side effects
+      return false
+    },
+
+    /**
      * Is called when an event is clicked
      * */
     onEventClick(calendarEvent) {
