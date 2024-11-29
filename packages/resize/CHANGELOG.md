@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/schedule-x/schedule-x/compare/v2.8.1...v2.9.0) (2024-11-29)
+
+### Features
+
+- add callback onBeforeEventUpdate for aborting updates ([#796](https://github.com/schedule-x/schedule-x/issues/796)) ([23de9bf](https://github.com/schedule-x/schedule-x/commit/23de9bfb14a535589c88c579aeb65c72c92675c8))
+
 ## [2.8.1](https://github.com/schedule-x/schedule-x/compare/v2.8.0...v2.8.1) (2024-11-28)
 
 **Note:** Version bump only for package @schedule-x/resize

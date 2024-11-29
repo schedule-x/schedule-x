@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/schedule-x/schedule-x/compare/v2.8.1...v2.9.0) (2024-11-29)
+
+### Features
+
+- expose types used by external config ([#803](https://github.com/schedule-x/schedule-x/issues/803)) ([e68cc6b](https://github.com/schedule-x/schedule-x/commit/e68cc6bab7dac7480ce933e25ad7bb3d38947bfc))
+
 ## [2.8.1](https://github.com/schedule-x/schedule-x/compare/v2.8.0...v2.8.1) (2024-11-28)
 
 ### Bug Fixes
