@@ -59,6 +59,11 @@ export default function TimeGridEvent({
     const localizedStartTime = toJSDate(start).toLocaleTimeString(
       ...localizeArgs
     )
+
+    if (start === end) {
+      return localizedStartTime
+    }
+
     const localizedEndTime = toJSDate(end).toLocaleTimeString(...localizeArgs)
     return `${localizedStartTime} – ${localizedEndTime}`
   }

@@ -10,6 +10,7 @@ export const assertIsSingleDayTimedAndHybridDayTimed = (
   expect(calendarEvent._isMultiDayFullDay).toBe(false)
   expect(calendarEvent._isSingleHybridDayTimed).toBe(true)
 }
+
 export const assertIsSingleHybridTimedAndMultipleDayTimed = (
   calendarEvent: CalendarEventInternal
 ) => {
@@ -19,6 +20,7 @@ export const assertIsSingleHybridTimedAndMultipleDayTimed = (
   expect(calendarEvent._isMultiDayFullDay).toBe(false)
   expect(calendarEvent._isSingleHybridDayTimed).toBe(true)
 }
+
 export const assertIsSingleDayTimed = (
   calendarEvent: CalendarEventInternal
 ) => {
@@ -28,6 +30,7 @@ export const assertIsSingleDayTimed = (
   expect(calendarEvent._isMultiDayFullDay).toBe(false)
   expect(calendarEvent._isSingleHybridDayTimed).toBe(false)
 }
+
 export const assertIsMultiDayTimed = (calendarEvent: CalendarEventInternal) => {
   expect(calendarEvent._isSingleDayTimed).toBe(false)
   expect(calendarEvent._isSingleDayFullDay).toBe(false)
