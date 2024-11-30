@@ -70,6 +70,44 @@ describe('TimeGridEvent', () => {
       const anotherClass = document.querySelector('.another-class')
       expect(anotherClass).not.toBeNull()
     })
+
+    it('should show start time and end time if they are different', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            title: 'Event 1',
+            start: '2020-01-01 00:00',
+            end: '2020-01-01 01:00',
+          },
+        ],
+      })
+
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      const eventContent = document.querySelector('.sx__time-grid-event-time')
+      expect(eventContent?.lastChild?.textContent).toStrictEqual(
+        '12:00 AM – 1:00 AM'
+      )
+    })
+
+    it('should only show start time if end time is the same', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            title: 'Ponctual event',
+            start: '2020-01-01 00:00',
+            end: '2020-01-01 00:00',
+          },
+        ],
+      })
+
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      const eventContent = document.querySelector('.sx__time-grid-event-time')
+      expect(eventContent?.lastChild?.textContent).toStrictEqual('12:00 AM')
+    })
   })
 
   describe('rendering custom content', () => {
