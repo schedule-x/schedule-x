@@ -6,7 +6,6 @@ import {
   assertIsSingleDayTimed,
   assertIsSingleDayTimedAndHybridDayTimed,
   assertIsSingleHybridTimedAndMultipleDayTimed,
-  assertIsSingleTime,
 } from './utils'
 
 describe('CalendarEventImpl', () => {
@@ -90,26 +89,6 @@ describe('CalendarEventImpl', () => {
       'should not be classified as a single hybrid day event, only as multi day timed',
       (eventTime) => {
         assertIsMultiDayTimed(createEvent(eventTime))
-      }
-    )
-
-    it.each([
-      {
-        start: '2020-01-01 00:00',
-        end: '2020-01-01 00:00',
-      },
-      {
-        start: '2020-01-01 16:32',
-        end: '2020-01-01 16:32',
-      },
-      {
-        start: '2020-01-01 11:59',
-        end: '2020-01-01 11:59',
-      },
-    ])(
-      'should not be classified as a single hybrid day event, only as single time',
-      (eventTime) => {
-        assertIsSingleTime(createEvent(eventTime))
       }
     )
   })

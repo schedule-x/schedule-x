@@ -34,7 +34,6 @@ describe('CalendarEventImpl', () => {
       expect(calendarEvent._isMultiDayTimed).toBe(false)
       expect(calendarEvent._isMultiDayFullDay).toBe(false)
       expect(calendarEvent._isSingleHybridDayTimed).toBe(false)
-      expect(calendarEvent._isSingleTime).toBe(false)
     })
   })
 })

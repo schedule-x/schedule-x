@@ -46,14 +46,17 @@ export const getTimeStamp = (
     )}`
   }
 
-  if (calendarEvent._isSingleDayTimed) {
+  if (calendarEvent._isSingleDayTimed && eventTime.start !== eventTime.end) {
     return `${dateFn(eventTime.start, locale)} <span aria-hidden="true">⋅</span> ${timeFn(
       eventTime.start,
       locale
     )} ${delimiter} ${timeFn(eventTime.end, locale)}`
   }
 
-  if (calendarEvent._isSingleTime) {
+  if (
+    calendarEvent._isSingleDayTimed &&
+    calendarEvent.start === calendarEvent.end
+  ) {
     return `${dateFn(eventTime.start, locale)}, ${timeFn(
       eventTime.start,
       locale

@@ -322,12 +322,6 @@ const calendar = createCalendar({
       end: '2024-02-08 17:55',
       id: 874367853,
     },
-    {
-      title: 'I am ponctual',
-      start: '2024-10-20 16:00',
-      end: '2024-10-20 16:00',
-      id: 777
-    }
   ],
 }, [
   createDragAndDropPlugin(),

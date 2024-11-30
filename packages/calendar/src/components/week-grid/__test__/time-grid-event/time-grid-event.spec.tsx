@@ -96,7 +96,7 @@ describe('TimeGridEvent', () => {
         events: [
           {
             id: '123',
-            title: 'Ponctual event',
+            title: '1-minute event',
             start: '2020-01-01 00:00',
             end: '2020-01-01 00:00',
           },
