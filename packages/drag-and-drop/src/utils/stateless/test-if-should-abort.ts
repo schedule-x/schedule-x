@@ -24,7 +24,7 @@ export const testIfShouldAbort = (
 
     if (!validationResult) {
       updateCopy?.(undefined)
-      return true
+      return true // abort
     }
   }
 

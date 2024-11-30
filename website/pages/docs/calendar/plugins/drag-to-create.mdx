@@ -80,15 +80,22 @@ const onAddEvent = (event) => {
   console.log('Event added', event)
 }
 
-const dragToCreatePlugin = createDragToCreatePlugin({ onAddEvent })
+const dragToCreatePlugin = createDragToCreatePlugin({
+  onAddEvent,
 
-const calendar = createCalendar(
-  { /* config */ },
-  [
+  // Optional: add a validation hook. Return false to prevent the event from being added.
+  onBeforeAddEvent: (event, $app) => {
+    // Your validation logic
+    return true
+  }
+})
+
+const calendar = createCalendar({
+  plugins: [
     createEventsServicePlugin(),
     dragToCreatePlugin,
-  ]
-)
+  ],
+})
 
 const eventPlaceholder = document.getElementById('event-placeholder')
 eventPlaceholder.addEventListener('dragstart', () => {
