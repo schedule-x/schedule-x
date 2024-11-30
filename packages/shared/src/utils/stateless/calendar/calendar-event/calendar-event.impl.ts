@@ -72,7 +72,6 @@ export default class CalendarEventImpl implements CalendarEventInternal {
 
   get _isSingleHybridDayTimed(): boolean {
     if (!this._config.isHybridDay) return false
-    if (this.start === this.end) return false
     if (
       !dateTimeStringRegex.test(this.start) ||
       !dateTimeStringRegex.test(this.end)
