@@ -85,8 +85,8 @@ describe('TimeGridEvent', () => {
 
       renderComponent($app, $app.calendarEvents.list.value[0])
 
-      const eventContent = document.querySelector('.sx__time-grid-event-time')
-      expect(eventContent?.lastChild?.textContent).toStrictEqual(
+      const eventTime = document.querySelector('.sx__time-grid-event-time')
+      expect(eventTime?.lastChild?.textContent).toStrictEqual(
         '12:00 AM – 1:00 AM'
       )
     })
@@ -105,8 +105,8 @@ describe('TimeGridEvent', () => {
 
       renderComponent($app, $app.calendarEvents.list.value[0])
 
-      const eventContent = document.querySelector('.sx__time-grid-event-time')
-      expect(eventContent?.lastChild?.textContent).toStrictEqual('12:00 AM')
+      const eventTime = document.querySelector('.sx__time-grid-event-time')
+      expect(eventTime?.lastChild?.textContent).toStrictEqual('12:00 AM')
     })
   })
 
