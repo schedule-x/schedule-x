@@ -38,7 +38,7 @@ export const getOneLetterOrShortDayNames = (
   week: Date[],
   locale: string
 ): string[] => {
-  if (['zh-cn', 'ca-es'].includes(locale.toLowerCase())) {
+  if (['zh-cn', 'zh-tw', 'ca-es'].includes(locale.toLowerCase())) {
     return getDayNamesShort(week, locale)
   }
 

@@ -83,7 +83,7 @@ const calendar = createCalendar({
   // locale: 'en-US',
   // locale: 'zh-CN',
   // locale: 'id-ID',
-  locale: 'sr-RS',
+  locale: 'zh-TW',
   // locale: 'et-EE',
   // locale: 'ca-ES',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
