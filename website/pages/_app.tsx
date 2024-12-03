@@ -13,6 +13,7 @@ import '@sx-premium/interactive-event-modal/index.css'
 import '@sx-premium/drag-to-create/index.css'
 import '@sx-premium/resource-scheduler/index.css'
 import 'rsuite/dist/rsuite-no-reset.min.css';
+import 'swiper/css';
 import '@fontsource-variable/podkova';
 
 import Script from 'next/script'
