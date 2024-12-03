@@ -213,7 +213,7 @@ follow the same structure as the default fields, but additionally you need to ad
 
 ```ts
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createInteractiveEventModal, createInputField } from "@sx-premium/interactive-event-modal";
 
 import '@sx-premium/interactive-event-modal/index.css'
 
@@ -227,7 +227,7 @@ const eventModal = createInteractiveEventModal({
   },
 
   customFields: {
-    additionalNotes: { // will correspond to an event property "additionalNotes"
+    additionalNotes: createInputField({ // will correspond to an event property "additionalNotes"
       label: 'Additional notes',
       name: 'additional-notes',
       type: 'textarea',
@@ -237,9 +237,9 @@ const eventModal = createInteractiveEventModal({
           message: 'Custom field must be at least 3 characters long'
         }
       }
-    },
+    }),
 
-    locationSelect: { // will correspond to an event property "locationSelect"
+    locationSelect: createInputField({ // will correspond to an event property "locationSelect"
       label: 'Location',
       type: 'select',
       items: [
@@ -247,7 +247,7 @@ const eventModal = createInteractiveEventModal({
         { label: 'City center office', value: 'city-center' },
         { label: 'Home office', value: 'home' },
       ]
-    },
+    }),
   }
 })
 ```
