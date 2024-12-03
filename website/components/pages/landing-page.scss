@@ -27,6 +27,42 @@ $heading-width: 900px;
   opacity: 0.05;
 }
 
+.marquee-wrapper {
+  width: 100%;
+  margin: 3rem 0;
+
+  /**
+   * The carousel looks kinda weird on smaller screens
+   */
+  @include mixins.smaller-screens {
+    display: none;
+  }
+
+  img {
+    filter: grayscale(100%);
+    transition: all 0.2s ease;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
+  }
+}
+.marquee {
+  width: 100%;
+  overflow: visible;
+}
+
+.swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
+  -o-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+}
+
+.marquee-wrapper .swiper {
+  overflow: visible;
+}
+
+
 .landingPage h1 {
   max-width: $heading-width;
   font-size: 4.25rem;
