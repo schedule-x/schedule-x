@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/schedule-x/schedule-x/compare/v2.9.0...v2.10.0) (2024-12-03)
+
+### Features
+
+- add translations for zh-TW ([#811](https://github.com/schedule-x/schedule-x/issues/811)) ([2a777f8](https://github.com/schedule-x/schedule-x/commit/2a777f8698ace194c29390563f225def9bf9b154))
+
 # [2.9.0](https://github.com/schedule-x/schedule-x/compare/v2.8.1...v2.9.0) (2024-11-29)
 
 **Note:** Version bump only for package @schedule-x/translations

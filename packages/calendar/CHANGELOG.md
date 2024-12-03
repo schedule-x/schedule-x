@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/schedule-x/schedule-x/compare/v2.9.0...v2.10.0) (2024-12-03)
+
+### Features
+
+- display only start time when start- and end time are the same ([#790](https://github.com/schedule-x/schedule-x/issues/790)) ([7c5600d](https://github.com/schedule-x/schedule-x/commit/7c5600dbee32a22c6efc14058fe1b28ba13cb734))
+
 # [2.9.0](https://github.com/schedule-x/schedule-x/compare/v2.8.1...v2.9.0) (2024-11-29)
 
 ### Features
