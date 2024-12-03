@@ -10,6 +10,8 @@ import { svSE } from './locales/sv-SE'
 import { datePickerSvSE } from './locales/sv-SE/date-picker'
 import { zhCN } from './locales/zh-CN'
 import { datePickerZhCN } from './locales/zh-CN/date-picker'
+import { zhTW } from './locales/zh-TW'
+import { datePickerZhTW } from './locales/zh-TW/date-picker'
 import { jaJP } from './locales/ja-JP'
 import { datePickerJaJP } from './locales/ja-JP/date-picker'
 import { ruRU } from './locales/ru-RU'
@@ -60,6 +62,7 @@ const translations = {
   enGB,
   svSE,
   zhCN,
+  zhTW,
   jaJP,
   ruRU,
   koKR,
@@ -89,6 +92,7 @@ const datePickerTranslations = {
   enGB: datePickerEnGB,
   svSE: datePickerSvSE,
   zhCN: datePickerZhCN,
+  zhTW: datePickerZhTW,
   jaJP: datePickerJaJP,
   ruRU: datePickerRuRU,
   koKR: datePickerKoKR,
@@ -121,6 +125,7 @@ export {
   enGB,
   svSE,
   zhCN,
+  zhTW,
   jaJP,
   ruRU,
   koKR,
