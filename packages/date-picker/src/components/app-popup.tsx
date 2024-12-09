@@ -21,6 +21,7 @@ export default function AppPopup() {
     setClassList([
       ...basePopupClasses,
       $app.datePickerState.isDark.value ? 'is-dark' : '',
+      $app.config.teleportTo ? 'is-teleported' : '',
     ])
   }, [$app.datePickerState.isDark.value])
 
