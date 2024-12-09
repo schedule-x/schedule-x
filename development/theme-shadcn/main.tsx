@@ -12,7 +12,7 @@ import {
   viewDay,
   viewMonthAgenda,
 } from '../../packages/calendar/src'
-import '../../packages/theme-default/src/index.scss'
+// import '../../packages/theme-default/src/index.scss'
 import '../../packages/theme-shadcn/src/index.scss'
 import './app.css'
 import { calendars } from "./calendars.ts";

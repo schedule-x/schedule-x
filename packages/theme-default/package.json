@@ -20,9 +20,6 @@
   "files": [
     "dist"
   ],
-  "workspaces": [
-    "packages/*"
-  ],
   "gitHead": "0f6a8b9595049e7f9a52bc8bb1462e611c63556f",
   "repository": {
     "type": "git",
