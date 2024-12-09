@@ -32,6 +32,7 @@
     "@schedule-x/resize": "^2.4.0",
     "@schedule-x/scroll-controller": "^2.4.0",
     "@schedule-x/theme-default": "^2.4.0",
+    "@schedule-x/theme-shadcn": "^2.10.0",
     "@sx-premium/drag-to-create": "^1.3.0",
     "@sx-premium/interactive-event-modal": "^1.3.0",
     "@sx-premium/resource-scheduler": "^1.3.0",
