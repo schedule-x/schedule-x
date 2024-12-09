@@ -57,6 +57,7 @@ export type CustomComponentFn = (
 ) => void
 
 export default interface CalendarConfigInternal extends Config {
+  theme: string | undefined
   defaultView: ViewName
   views: Signal<View[]>
   dayBoundaries: Signal<DayBoundariesInternal>

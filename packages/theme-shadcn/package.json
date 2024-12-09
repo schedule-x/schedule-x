@@ -1,5 +1,5 @@
 {
-  "name": "@schedule-x/theme-default",
+  "name": "@schedule-x/theme-shadcn",
   "version": "2.10.0",
   "license": "MIT",
   "author": {
@@ -8,14 +8,11 @@
     "url": "https://github.com/tomosterlund"
   },
   "scripts": {
-    "build": "node scripts/build.mjs",
+    "build": "sass --no-source-map src/index.scss dist/index.css",
     "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
   },
   "exports": {
-    "./dist/index.css": "./dist/index.css",
-    "./dist/date-picker.css": "./dist/date-picker.css",
-    "./dist/time-picker.css": "./dist/time-picker.css",
-    "./dist/calendar.css": "./dist/calendar.css"
+    "./dist/index.css": "./dist/index.css"
   },
   "files": [
     "dist"
@@ -24,7 +21,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/schedule-x/schedule-x",
-    "directory": "packages/theme-default"
+    "directory": "packages/theme-shadcn"
   },
   "homepage": "https://schedule-x.dev"
 }

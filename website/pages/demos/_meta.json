@@ -30,5 +30,13 @@
       "sidebar": false,
       "toc": true
     }
+  },
+  "shadcn-theme": {
+    "display": "hidden",
+    "theme": {
+      "layout": "raw",
+      "sidebar": false,
+      "toc": true
+    }
   }
 }

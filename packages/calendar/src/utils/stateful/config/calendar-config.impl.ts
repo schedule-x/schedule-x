@@ -27,6 +27,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   maxDate: Signal<string | undefined>
   monthGridOptions: Signal<MonthGridOptions>
   locale: Signal<string> = signal(DEFAULT_LOCALE)
+  theme: string | undefined
 
   constructor(
     locale: string = DEFAULT_LOCALE,
@@ -45,7 +46,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     maxDate: string | undefined = undefined,
     monthGridOptions: MonthGridOptions = {
       nEventsPerDay: 4,
-    }
+    },
+    theme: string | undefined = undefined
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
@@ -57,6 +59,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.minDate = signal(minDate)
     this.maxDate = signal(maxDate)
     this.monthGridOptions = signal(monthGridOptions)
+    this.theme = theme
   }
 
   get isHybridDay(): boolean {

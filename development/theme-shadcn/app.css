@@ -1,0 +1,44 @@
+@font-face {
+    font-family: Geist;
+    src:
+        url('Geist[wght].woff2'),
+        url('Geist-Black.woff2'),
+        url('Geist-Bold.woff2'),
+        url('Geist-ExtraBold.woff2'),
+        url('Geist-ExtraLight.woff2'),
+        url('Geist-Light.woff2'),
+        url('Geist-Medium.woff2'),
+        url('Geist-Regular.woff2'),
+        url('Geist-SemiBold.woff2'),
+        url('Geist-Thin.woff2')
+        format('woff2');
+}
+
+html {
+    font-family: 'Geist', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+#calendar {
+    width: 1200px;
+    max-width: 90%;
+    height: 800px;
+    max-height: 100vh;
+    /*margin-left: 200px;*/
+}
+
+/** Mimi är bäst */
+
+.read-the-docs {
+    color: #888;
+}

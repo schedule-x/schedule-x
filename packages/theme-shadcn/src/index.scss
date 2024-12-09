@@ -1,0 +1,98 @@
+/*
+Some portions of this code were copied from the shadcn-ui project. The original code is licensed under the MIT License.
+Copyright notice below copied from: https://github.com/shadcn-ui/ui
+________________________________________________________________________
+MIT License
+
+Copyright (c) 2023 shadcn
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+@use '../../theme-default/src/calendar.scss' as *;
+
+.is-shadcn {
+  .sx__view-selection-items {
+    overflow: hidden;
+    border-radius: var(--sx-rounding-extra-small);
+    border: var(--sx-border);
+  }
+
+  .sx__date-input-label {
+    display: none;
+  }
+
+  .sx__month-grid-event,
+  .sx__time-grid-event,
+  .sx__date-grid-event,
+  .sx__month-agenda-event {
+    border-radius: var(--sx-event-border-radius);
+  }
+
+  .sx__range-heading {
+    font-weight: 600;
+  }
+
+  .sx__week-grid__day-name,
+  .sx__week-grid__date-number {
+    font-weight: 400;
+  }
+}
+
+html:has(.is-shadcn) {
+  --sx-box-shadow-level3: rgba(0, 0, 0, 0%) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0%) 0px 0px 0px 0px, rgba(0, 0, 0, 10%) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 10%) 0px 2px 4px -2px;
+  --sx-color-primary-container: #000;
+  --sx-color-on-primary-container: #fff;
+  --radius: 0.5rem;
+  --sx-rounding-extra-small: calc(var(--radius) - 2px);
+  --sx-color-primary: #000;
+  --sx-event-border-radius: 4px;
+  --sx-color-surface-container: #f1f2f4;
+  --sx-color-surface-dim: hsl(840deg 4.8% 95.9%);
+  --sx-color-popup-border: rgb(228, 228, 231);
+  --sx-border: 1px solid hsl(240deg 5.9% 90%);
+
+  .is-dark {
+    --sx-color-popup-border: hsl(240deg 3.7% 15.9%);
+    --sx-border: 1px solid hsl(240deg 3.7% 15.9%);
+    --sx-color-primary: #fff;
+    --sx-color-primary-container: #fff;
+    --sx-color-on-primary-container: #000;
+    --sx-color-on-primary: #000;
+  }
+
+  .sx__date-picker-popup {
+    border: 1px solid var(--sx-color-popup-border);
+    border-radius: var(--sx-rounding-extra-small);
+  }
+
+  .sx__date-picker__day {
+    $date-picker-day-dimensions: 2.25rem;
+
+    height: $date-picker-day-dimensions;
+    width: $date-picker-day-dimensions;
+    border-radius: var(--sx-rounding-extra-small);
+  }
+
+  .sx__date-picker__years-accordion__expand-button {
+    border-radius: var(--sx-rounding-extra-small);
+
+    .sx__is-expanded & {
+      background-color: var(--sx-color-surface-container);
+    }
+  }
+
+  .sx__date-picker__years-view-accordion__month {
+    border-radius: var(--sx-rounding-extra-small);
+  }
+
+  .sx__date-picker__day--today {
+    background-color: var(--sx-color-surface-container);
+    color: var(--sx-internal-color-text);
+  }
+}

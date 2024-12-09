@@ -9,6 +9,29 @@ You are not required to use any of the styles from the `@schedule-x/theme-defaul
 create your own theme from scratch, or just override rules of the default theme. If you do so, however, you might want to pin
 your schedule-x dependencies to a specific version, to avoid unexpected updates that might break your custom styles.
 
+## Shadcn Theme
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Schedule-X is in no way affiliated with Shadcn, and this theme is not an official Shadcn software. It is merely a theme
+  for Schedule-X that is designed to match with the Shadcn design.
+</Callout>
+
+For apps that are using Shadcn with its default design, you may want to use `@schedule-x/theme-shadcn`.
+
+```bash copy
+npm i @schedule-x/theme-shadcn
+```
+
+```tsx
+// your-calendar-file.{ts,tsx,vue,svelte etc.}
+/**
+* You need to import the CSS of the default theme AND the Shadcn theme,
+* */
+import '@schedule-x/theme-shadcn/dist/index.css'
+```
+
 ## Customizing the default theme colors
 
 Schedule-X uses global CSS variables to define colors. Therefore, you can

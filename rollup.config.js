@@ -18,6 +18,7 @@ async function getSortedPackages(scope, ignore) {
   let filtered = filterPackages(packages, scope, ignore, true)
   const nonTSPackages = [
     '@schedule-x/theme-default',
+    '@schedule-x/theme-shadcn',
     '@schedule-x/eslint-config',
     '@schedule-x/prettier-config',
   ]

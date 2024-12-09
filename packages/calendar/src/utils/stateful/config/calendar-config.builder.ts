@@ -51,6 +51,7 @@ export default class CalendarConfigBuilder
   minDate: string | undefined
   maxDate: string | undefined
   backgroundEvents: BackgroundEvent[] | undefined
+  theme: string | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -70,7 +71,8 @@ export default class CalendarConfigBuilder
       {},
       this.minDate,
       this.maxDate,
-      this.monthGridOptions
+      this.monthGridOptions,
+      this.theme
     )
   }
 
@@ -173,6 +175,11 @@ export default class CalendarConfigBuilder
 
   withBackgroundEvents(backgroundEvents: BackgroundEvent[] | undefined) {
     this.backgroundEvents = backgroundEvents
+    return this
+  }
+
+  withTheme(theme: string | undefined) {
+    this.theme = theme
     return this
   }
 }
