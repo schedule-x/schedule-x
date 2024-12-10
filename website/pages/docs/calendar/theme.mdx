@@ -11,6 +11,10 @@ your schedule-x dependencies to a specific version, to avoid unexpected updates 
 
 ## Shadcn Theme
 
+For apps that are using Shadcn with its default design, you may want to use `@schedule-x/theme-shadcn`.
+
+[Demo app](https://schedule-x-shadcn.vercel.app/)
+
 import {Callout} from "nextra/components";
 
 <Callout type="info">
@@ -18,18 +22,18 @@ import {Callout} from "nextra/components";
   for Schedule-X that is designed to match with the Shadcn design.
 </Callout>
 
-For apps that are using Shadcn with its default design, you may want to use `@schedule-x/theme-shadcn`.
-
 ```bash copy
 npm i @schedule-x/theme-shadcn
 ```
 
 ```tsx
-// your-calendar-file.{ts,tsx,vue,svelte etc.}
-/**
-* You need to import the CSS of the default theme AND the Shadcn theme,
-* */
 import '@schedule-x/theme-shadcn/dist/index.css'
+import { createCalendar } from '@schedule-x/calendar'
+
+const calendar = createCalendar({
+  // ... other config,
+  theme: 'shadcn'
+})
 ```
 
 ## Customizing the default theme colors
