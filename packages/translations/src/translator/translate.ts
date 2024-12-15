@@ -16,15 +16,16 @@ export const translate =
     let language = {}
     const custom = customLocale.value
 
-    // @ts-expect-error nothing
-    if (custom[locale.value]) {
+    if (!custom === undefined) {
       // @ts-expect-error nothing
-      language = custom[locale.value]
-    } else {
-      const deHyphenatedLocale = locale.value.replace('-', '')
-      language = languages[deHyphenatedLocale]
+      if (custom[locale.value]) {
+        // @ts-expect-error nothing
+        language = custom[locale.value]
+      } else {
+        const deHyphenatedLocale = locale.value.replace('-', '')
+        language = languages[deHyphenatedLocale]
+      }
     }
-
     if (!language) return key
     let translation: string = language[key as keyof typeof language] || key
     Object.keys(translationVariables || {}).forEach((variable) => {

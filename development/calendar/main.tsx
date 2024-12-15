@@ -83,22 +83,8 @@ const calendar = createCalendar({
   // locale: 'en-US',
   // locale: 'zh-CN',
   // locale: 'id-ID',
-  locale: 'de-BL',
-  customLocale: {
-    "lt-LT":{
-      Today: 'Heute',
-      Month: 'Monat',
-      Week: 'Woche test',
-      Day: 'Tag',
-      events: 'Events',
-      event: 'event',
-      to: 'to', // as in 2/1/2020 to 2/2/2020
-      Date: 'Date',
-    },
-
-
-
-  },
+  locale: 'de-DE',
+  //customLocale: {"lt-LT":{Today: 'Heute', Month: 'Monat', Week: 'Woche test', Day: 'Tag', events: 'Events', event: 'event', to: 'to',Date: 'Date',},},
   // locale: 'et-EE',
   // locale: 'ca-ES',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
