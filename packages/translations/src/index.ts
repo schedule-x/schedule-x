@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { deDE } from './locales/de-DE'
 import { datePickerDeDE } from './locales/de-DE/date-picker'
 import { enUS } from './locales/en-US'
@@ -53,7 +54,7 @@ import { datePickerCaES } from './locales/ca-ES/date-picker'
 import { srRS } from './locales/sr-RS'
 import { datePickerSrRS } from './locales/sr-RS/date-picker'
 import { ltLT } from './locales/lt-LT'
-import { datePickerltLT } from './locales/lt-LT/date-picker'
+import { datePickerLtLT } from './locales/lt-LT/date-picker'
 
 import { translate } from './translator/translate'
 
@@ -116,7 +117,7 @@ const datePickerTranslations = {
   caES: datePickerCaES,
   srLatnRS: datePickerSrLatnRS,
   srRS: datePickerSrRS,
-  ltLT: datePickerltLT,
+  ltLT: datePickerLtLT,
 }
 
 export {
