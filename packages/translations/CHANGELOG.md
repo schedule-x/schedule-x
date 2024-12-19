@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/schedule-x/schedule-x/compare/v2.11.0...v2.12.0) (2024-12-19)
+
+### Features
+
+- **translations:** add lt-LT locale ([#826](https://github.com/schedule-x/schedule-x/issues/826)) ([722bb9e](https://github.com/schedule-x/schedule-x/commit/722bb9e069c7050d90697b8f8d3a4d99ed21d1b4))
+
 # [2.11.0](https://github.com/schedule-x/schedule-x/compare/v2.10.0...v2.11.0) (2024-12-09)
 
 **Note:** Version bump only for package @schedule-x/translations

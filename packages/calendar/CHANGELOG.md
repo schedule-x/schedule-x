@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/schedule-x/schedule-x/compare/v2.11.0...v2.12.0) (2024-12-19)
+
+### Bug Fixes
+
+- **backgroundEvents:** adjust background event start to dayBoundaries ([#828](https://github.com/schedule-x/schedule-x/issues/828)) ([7b6ac52](https://github.com/schedule-x/schedule-x/commit/7b6ac528445a995be383e57e8712d6a644f29372))
+
 # [2.11.0](https://github.com/schedule-x/schedule-x/compare/v2.10.0...v2.11.0) (2024-12-09)
 
 ### Features
