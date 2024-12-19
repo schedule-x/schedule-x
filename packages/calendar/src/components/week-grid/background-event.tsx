@@ -5,6 +5,10 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { useContext } from 'preact/hooks'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { getEventHeight } from '../../utils/stateless/events/event-styles'
+import {
+  timePointsFromString,
+  timeStringFromTimePoints,
+} from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
 type props = {
   backgroundEvent: BackgroundEvent
@@ -25,6 +29,16 @@ export default function TimeGridBackgroundEvent({
   // this date or end after. Nonetheless, it should appear as an event from 00:00 to 23:59 on this date in that case, and thus the start- and end-dates might have to be adjusted.
   if (dateFromDateTime(start) !== date) start = date + ' ' + start.split(' ')[1]
   if (dateFromDateTime(end) !== date) end = date + ' ' + end.split(' ')[1]
+
+  // adjust the start time according to the day boundaries
+  // otherwise the background event `top` is calculated incorrectly
+  const startTimePoints = timePointsFromString(start.split(' ')[1])
+  if (startTimePoints < $app.config.dayBoundaries.value.start) {
+    start =
+      date +
+      ' ' +
+      timeStringFromTimePoints($app.config.dayBoundaries.value.start)
+  }
 
   return (
     <>
