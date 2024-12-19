@@ -40,6 +40,13 @@ export default function TimeGridBackgroundEvent({
       timeStringFromTimePoints($app.config.dayBoundaries.value.start)
   }
 
+  // when start and end datetimes are equal, the rendering of the background event can be skipped completely.
+  // otherwise, `height` is calculated as 5% (by `getEventHeight`) and this is misleading for a background event like "out-of-office" hours.
+  // This comparison is safe also for full-day background events, because earlier in code we add time (00:00 - 23:59) to full-day events, making start and end no longer equal in full-day event case.
+  if (start === end) {
+    return null
+  }
+
   return (
     <>
       <div
