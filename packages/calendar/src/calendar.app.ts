@@ -6,6 +6,7 @@ import EventsFacadeImpl from '@schedule-x/shared/src/utils/stateful/events-facad
 import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { CustomComponentFns } from '@schedule-x/shared/src/interfaces/calendar/custom-component-fns'
 import { invokePluginsBeforeRender } from './utils/stateless/plugins-lifecycle'
+import { PluginBase } from '@schedule-x/shared/src'
 
 export default class CalendarApp {
   public events: EventsFacade

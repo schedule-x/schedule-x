@@ -18,6 +18,7 @@ import {
   toTimeString,
   toDateTimeString,
   toJSDate,
+  PluginBase,
 } from '@schedule-x/shared/src'
 import CalendarApp from './calendar.app'
 import { createPreactView } from './utils/stateful/preact-view/preact-view'
@@ -37,6 +38,7 @@ export type {
   DayBoundariesExternal,
   WeekOptions,
   MonthGridOptions,
+  PluginBase,
 }
 
 export {
