@@ -30,20 +30,14 @@ export default function TimeGridBackgroundEvent({
   if (dateFromDateTime(start) !== date) start = date + ' ' + start.split(' ')[1]
   if (dateFromDateTime(end) !== date) end = date + ' ' + end.split(' ')[1]
 
-  // clamp the start and end times to the day boundaries
-  // otherwise the background event `top` and `height` is calculated incorrectly
+  // adjust the start time according to the day boundaries
+  // otherwise the background event `top` is calculated incorrectly
   const startTimePoints = timePointsFromString(start.split(' ')[1])
   if (startTimePoints < $app.config.dayBoundaries.value.start) {
     start =
       date +
       ' ' +
       timeStringFromTimePoints($app.config.dayBoundaries.value.start)
-  }
-
-  const endTimePoints = timePointsFromString(end.split(' ')[1])
-  if (endTimePoints > $app.config.dayBoundaries.value.end) {
-    end =
-      date + ' ' + timeStringFromTimePoints($app.config.dayBoundaries.value.end)
   }
 
   return (
