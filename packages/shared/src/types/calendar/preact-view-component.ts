@@ -1,7 +1,7 @@
-import { JSXInternal } from 'preact/src/jsx'
+import { JSX } from 'preact'
 import CalendarAppSingleton from '../../interfaces/calendar/calendar-app-singleton'
 
 export type PreactViewComponent = (props: {
   $app: CalendarAppSingleton
   id: string
-}) => JSXInternal.Element
+}) => JSX.Element
