@@ -28,10 +28,10 @@
 }
 
 .sx__slide-left {
-  animation: slide-left 0.3s ease-out; // CORRELATION ID: 3
+  animation: sx-slide-left 0.3s ease-out; // CORRELATION ID: 3
 }
 
-@keyframes slide-left {
+@keyframes sx-slide-left {
   0% {
     transform: translateX(8%);
     filter: blur(0.25rem);
@@ -46,10 +46,10 @@
 }
 
 .sx__slide-right {
-  animation: slide-right 0.3s ease-out; // CORRELATION ID: 3
+  animation: sx-slide-right 0.3s ease-out; // CORRELATION ID: 3
 }
 
-@keyframes slide-right {
+@keyframes sx-slide-right {
   0% {
     transform: translateX(-8%);
     filter: blur(0.25rem);

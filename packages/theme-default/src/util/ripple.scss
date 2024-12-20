@@ -1,4 +1,4 @@
-@keyframes ripple {
+@keyframes sx-ripple {
   0% {
     width: 0;
     height: 0;
@@ -46,12 +46,12 @@
   @include ripple-element;
 
   &:not(:active)::before {
-    animation: ripple 0.75s cubic-bezier(0, 0.1, 0.8, 1);
+    animation: sx-ripple 0.75s cubic-bezier(0, 0.1, 0.8, 1);
     transition: visibility 0.75s step-end;
   }
 }
 
-@keyframes ripple-wide {
+@keyframes sx-ripple-wide {
   0% {
     width: 0;
     height: 0;
@@ -79,7 +79,7 @@
   }
 
   &:not(:active)::before {
-    animation: ripple-wide 0.75s cubic-bezier(0, 0.1, 0.8, 1);
+    animation: sx-ripple-wide 0.75s cubic-bezier(0, 0.1, 0.8, 1);
     transition: visibility 0.75s step-end;
   }
 }
