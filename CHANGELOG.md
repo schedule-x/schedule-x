@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/schedule-x/schedule-x/compare/v2.12.0...v2.12.1) (2024-12-20)
+
+### Bug Fixes
+
+- **calendar:** skip rendering background event when start and end datetimes are equal ([#830](https://github.com/schedule-x/schedule-x/issues/830)) ([7a59949](https://github.com/schedule-x/schedule-x/commit/7a599495d05ddd713ab65bb31a7f8eb194280565))
+- **calendar:** update range translation when locale is updated ([#834](https://github.com/schedule-x/schedule-x/issues/834)) ([98c808d](https://github.com/schedule-x/schedule-x/commit/98c808db0cc854043b0e75489d721228b9a32506))
+- **deps:** import `JSX` type from `preact` instead of `preact/src/jsx` ([#832](https://github.com/schedule-x/schedule-x/issues/832)) ([7c5e4e8](https://github.com/schedule-x/schedule-x/commit/7c5e4e8855ec16d57eb535760c744f6ce6c21887))
+
 # [2.12.0](https://github.com/schedule-x/schedule-x/compare/v2.11.0...v2.12.0) (2024-12-19)
 
 ### Bug Fixes
