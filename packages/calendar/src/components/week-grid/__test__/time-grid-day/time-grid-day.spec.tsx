@@ -209,5 +209,26 @@ describe('TimeGridDay', () => {
           ?.attributes.getNamedItem('style')?.value
       ).toContain('height: 99.93055555555557%')
     })
+
+    it('does not render a background event, if the background event ends on the start time of the day', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2023-09-11',
+        dayBoundaries: {
+          start: '06:00',
+          end: '23:00',
+        },
+      })
+      renderComponent($app, [], '2023-09-11', [
+        {
+          start: '2023-09-11 05:00',
+          end: '2023-09-11 06:00',
+          style: {},
+        },
+      ])
+
+      expect(
+        document.querySelector('.sx__time-grid-background-event')
+      ).toBeNull()
+    })
   })
 })
