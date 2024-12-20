@@ -80,7 +80,7 @@ export default function CalendarHeader() {
 
             <ForwardBackwardNavigation />
 
-            <RangeHeading />
+            <RangeHeading key={$app.config.locale.value} />
 
             {headerContentLeftAppendId && (
               <div data-ccid={headerContentLeftAppendId} />
