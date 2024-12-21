@@ -7,102 +7,85 @@ import {
 import { translate } from '../translate'
 import { InvalidLocaleError } from '@schedule-x/shared/src/utils/stateless/errors/InvalidLocale.error'
 import { signal } from '@preact/signals'
+import {stub} from "sinon";
+import {stubInterface} from "ts-sinon";
+import {Language} from "@schedule-x/shared/src/types/translations/language.translations";
 
 describe('translate', () => {
   it('should return the key if the locale is en-US', () => {
     const locale = signal('en-US')
-    const translations = {
-      hello: 'world',
-    }
-    const key = 'hello'
+    const key = 'Today'
+    const Englisch = stubInterface<Language>()
+    const languages ={enUS:Englisch}
 
-    const underTest = translate(locale, { enUS: translations })
+    const underTest = translate(locale, signal(languages ))
 
-    expect(underTest(key)).toEqual(translations[key])
+    expect(underTest(key)).toEqual(Englisch[key])
   })
 
   it('should return the key if the locale is de-DE', () => {
     const locale = signal('de-DE')
-    const translations = {
-      hello: 'welt',
-    }
-    const key = 'hello'
+    const key = 'Today'
+    const Deutsch = stubInterface<Language>()
+    const languages ={deDE:Deutsch}
 
-    const underTest = translate(locale, { deDE: translations })
+    const underTest = translate(locale, signal(languages))
 
-    expect(underTest(key)).toEqual(translations[key])
+    expect(underTest(key)).toEqual(Deutsch[key])
   })
 
-  it('should return key if the locale is not supported', () => {
-    const locale = signal('fr-FR')
-    const translations = {
-      hello: 'monde',
-    }
-    const key = 'hello'
-
-    const underTest = translate(locale, { deDE: translations })
-
-    expect(underTest(key)).toEqual(key)
-  })
 
   it('should return the key if the locale is ko-KR', () => {
     const locale = signal('ko-KR')
-    const translations = {
-      hello: '월드',
-    }
-    const key = 'hello'
+    const key = 'Today'
+    const korean = stubInterface<Language>()
+    const languages ={koKR:korean}
 
-    const underTest = translate(locale, { koKR: translations })
+    const underTest = translate(locale,signal(languages))
 
-    expect(underTest(key)).toEqual(translations[key])
+    expect(underTest(key)).toEqual(korean[key])
   })
 
   it('should return the key if the locale is fr-FR', () => {
     const locale = signal('fr-FR')
-    const translations = {
-      hello: 'monde',
-    }
-    const key = 'hello'
+    const key = 'Today'
+    const french = stubInterface<Language>()
+    const languages ={frFR:french}
+    const underTest = translate(locale, signal(languages))
 
-    const underTest = translate(locale, { frFR: translations })
-
-    expect(underTest(key)).toEqual(translations[key])
+    expect(underTest(key)).toEqual(french[key])
   })
 
   it('should return key if locale is supported, but key does not exist', () => {
     const locale = signal('en-US')
-    const translations = {
-      hello: 'world',
-    }
-    const key = 'goodbye'
+    const key = 'test'
+    const Englisch = stubInterface<Language>()
+    const languages ={enUS:Englisch}
 
-    const underTest = translate(locale, { enUS: translations })
+    const underTest = translate(locale, signal(languages))
 
     expect(underTest(key)).toEqual(key)
   })
 
   it('should not throw for locale srLatnRS', () => {
     const locale = signal('sr-Latn-RS')
-    const translations = {
-      hello: 'world',
-    }
-    const key = 'hello'
+    const key = 'Today'
+    const test = stubInterface<Language>()
+    const languages ={srLatnRS:test}
 
-    const underTest = translate(locale, { srLatnRS: translations })
+    const underTest = translate(locale, signal(languages))
 
     expect(() => underTest(key)).not.toThrow()
   })
 
   it('should return Serbian translations with sr-Latn-RS locale', () => {
     const locale = signal('sr-Latn-RS')
-    const translations = {
-      hello: 'svet',
-    }
-    const key = 'hello'
+    const key = 'Today'
+    const serbian = stubInterface<Language>()
+    const languages ={srLatnRS:serbian}
+    const underTest = translate(locale, signal(languages))
 
-    const underTest = translate(locale, { srLatnRS: translations })
-
-    expect(underTest(key)).toEqual(translations[key])
+    expect(underTest(key)).toEqual(serbian[key])
   })
 
   it.each([

@@ -23,5 +23,6 @@ export const createInternalConfig = (
     .withMonthGridOptions(config.monthGridOptions)
     .withBackgroundEvents(config.backgroundEvents)
     .withTheme(config.theme)
+    .withTranslations(config.translations)
     .build()
 }
