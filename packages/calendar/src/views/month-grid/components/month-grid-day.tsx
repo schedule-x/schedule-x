@@ -173,6 +173,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
       {numberOfNonDisplayedEvents > 0 ? (
         <button
+          type="button"
           className="sx__month-grid-day__events-more sx__ripple--wide"
           aria-label={getAriaLabelSingularOrPlural(numberOfNonDisplayedEvents)}
           onClick={handleClickAdditionalEvents}

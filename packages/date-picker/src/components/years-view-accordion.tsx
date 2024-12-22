@@ -28,6 +28,7 @@ export default function YearsViewAccordion({
     <>
       <li className={isExpanded ? 'sx__is-expanded' : ''}>
         <button
+          type="button"
           className="sx__date-picker__years-accordion__expand-button sx__ripple--wide"
           onClick={() => expand(year)}
         >
@@ -37,6 +38,7 @@ export default function YearsViewAccordion({
           <div className="sx__date-picker__years-view-accordion__panel">
             {yearWithDates.map((month) => (
               <button
+                type="button"
                 className="sx__date-picker__years-view-accordion__month"
                 onClick={(event) => handleClickOnMonth(event, month)}
               >

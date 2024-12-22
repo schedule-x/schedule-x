@@ -19,6 +19,7 @@ export default function Chevron({
 
   return (
     <button
+      type="button"
       disabled={disabled}
       className="sx__chevron-wrapper sx__ripple"
       onMouseUp={onClick}
