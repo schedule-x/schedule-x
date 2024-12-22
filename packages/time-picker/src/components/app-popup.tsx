@@ -162,6 +162,7 @@ export default function AppPopup() {
         {$app.config.is12Hour.value && (
           <div className="sx__time-picker-12-hour-switches">
             <button
+              type="button"
               className={`sx__time-picker-12-hour-switch${$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
               onClick={() => ($app.timePickerState.isAM.value = true)}
             >
@@ -169,6 +170,7 @@ export default function AppPopup() {
             </button>
 
             <button
+              type="button"
               className={`sx__time-picker-12-hour-switch${!$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
               onClick={() => ($app.timePickerState.isAM.value = false)}
             >
@@ -180,6 +182,7 @@ export default function AppPopup() {
 
       <div class="sx__time-picker-actions">
         <button
+          type="button"
           class="sx__time-picker-action sx__ripple sx__button-cancel"
           onClick={() => ($app.timePickerState.isOpen.value = false)}
         >
@@ -188,6 +191,7 @@ export default function AppPopup() {
 
         <button
           ref={OKButtonRef}
+          type="button"
           class="sx__time-picker-action sx__ripple sx__button-accept"
           onClick={handleAccept}
         >

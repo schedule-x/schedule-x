@@ -70,6 +70,7 @@ export default function MonthAgendaDay({
   )
   return (
     <button
+      type="button"
       className={dayClasses.join(' ')}
       onClick={(e) => handleClick(e, $app.config.callbacks.onClickAgendaDate)}
       onDblClick={(e) =>
