@@ -78,12 +78,12 @@ const calendar = createCalendar({
   //   nEventsPerDay: 7
   // },
   firstDayOfWeek: 1,
-  // locale: 'de-DE',
+   // locale: 'de-BL',
   // locale: 'pt-BR',
   // locale: 'en-US',
   // locale: 'zh-CN',
   // locale: 'id-ID',
-  locale: 'zh-TW',
+  //locale: 'zh-TW',
   // locale: 'et-EE',
   // locale: 'ca-ES',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
@@ -100,6 +100,30 @@ const calendar = createCalendar({
   //   end: '20:00',
   // },
   // isDark: true,
+  // translations:{
+  //   "deBL":{
+  //     Today: 'Heute',
+  //     Month: 'Monat',
+  //     Week: 'Woche test',
+  //     Day: 'Tag',
+  //     'Select View': 'Select View',
+  //     events: 'Events',
+  //     event: 'event',
+  //     'No events': 'No events',
+  //     'Next period': 'Next period',
+  //     'Previous period': 'Previous period',
+  //     to: 'to', // as in 2/1/2020 to 2/2/2020
+  //     'Full day- and multiple day events': 'Full day- and multiple day events',
+  //     'Link to {{n}} more events on {{date}}':
+  //         'Link to {{n}} more events on {{date}}',
+  //     'Link to 1 more event on {{date}}': 'Link to 1 more event on {{date}}',
+  //     Date: 'Date',
+  //     'MM/DD/YYYY': 'DD/MM/YYYY',
+  //     'Next month': 'Next month',
+  //     'Previous month': 'Previous month',
+  //     'Choose Date': 'Choose Date',
+  //   }
+  // },
   callbacks: {
     // onBeforeEventUpdate(oldEvent, newEvent, $app) {
     //   return false

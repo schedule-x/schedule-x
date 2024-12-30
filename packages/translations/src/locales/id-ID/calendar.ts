@@ -1,4 +1,4 @@
-import { CalendarTranslations } from '../../types/calendar.translations'
+import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/calendar.translations'
 
 export const calendarIdID: CalendarTranslations = {
   Today: 'Hari Ini',

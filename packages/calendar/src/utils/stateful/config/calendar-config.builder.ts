@@ -27,6 +27,7 @@ import {
 } from '@schedule-x/shared/src/values'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
+import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -51,7 +52,10 @@ export default class CalendarConfigBuilder
   minDate: string | undefined
   maxDate: string | undefined
   backgroundEvents: BackgroundEvent[] | undefined
+
   theme: string | undefined
+  //TODO:Change for V3
+  translations: Record<string, Language> | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -72,12 +76,20 @@ export default class CalendarConfigBuilder
       this.minDate,
       this.maxDate,
       this.monthGridOptions,
-      this.theme
+      this.theme,
+      this.translations
     )
   }
 
   withLocale(locale: string | undefined): CalendarConfigBuilder {
     this.locale = locale
+    return this
+  }
+
+  withTranslations(
+    translation: Record<string, Language> | undefined
+  ): CalendarConfigBuilder {
+    this.translations = translation
     return this
   }
 
