@@ -7,6 +7,7 @@ import DatePickerAppSingletonBuilder from '../../shared/src/utils/stateful/date-
 import { ConfigBuilder } from './utils/stateful/config/config.builder'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 import { translations, translate } from '../../translations/src'
+import { signal } from '@preact/signals'
 
 export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
   const configInternal = new ConfigBuilder()
@@ -31,7 +32,7 @@ export const createAppSingleton = (config: DatePickerConfigExternal = {}) => {
       createDatePickerState(configInternal, config.selectedDate)
     )
     .withTimeUnitsImpl(timeUnitsImpl)
-    .withTranslate(translate(configInternal.locale, translations))
+    .withTranslate(translate(configInternal.locale, signal(translations)))
     .build()
 }
 

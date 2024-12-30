@@ -1,4 +1,4 @@
-import { DatePickerTranslations } from '../../types/date-picker.translations'
+import { DatePickerTranslations } from '@schedule-x/shared/src/types/translations/date-picker.translations'
 
 export const datePickerLtLT: DatePickerTranslations = {
   Date: 'Data',

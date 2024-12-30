@@ -1,6 +1,7 @@
 import { CalendarConfigExternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarConfigBuilder from '../../stateful/config/calendar-config.builder'
 import { PluginBase } from '@schedule-x/shared/src'
+import { translations } from '@schedule-x/translations/src'
 
 export const createInternalConfig = (
   config: CalendarConfigExternal,
@@ -23,6 +24,6 @@ export const createInternalConfig = (
     .withMonthGridOptions(config.monthGridOptions)
     .withBackgroundEvents(config.backgroundEvents)
     .withTheme(config.theme)
-    .withTranslations(config.translations)
+    .withTranslations(config.translations || translations)
     .build()
 }

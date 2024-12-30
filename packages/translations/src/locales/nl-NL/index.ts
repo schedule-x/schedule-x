@@ -1,4 +1,4 @@
-import { Language } from '../../types/language.translations'
+import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 import { calendarNlNL } from './calendar'
 import { datePickerNlNL } from './date-picker'
 

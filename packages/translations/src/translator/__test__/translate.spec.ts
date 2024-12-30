@@ -7,18 +7,17 @@ import {
 import { translate } from '../translate'
 import { InvalidLocaleError } from '@schedule-x/shared/src/utils/stateless/errors/InvalidLocale.error'
 import { signal } from '@preact/signals'
-import {stub} from "sinon";
-import {stubInterface} from "ts-sinon";
-import {Language} from "@schedule-x/shared/src/types/translations/language.translations";
+import { stubInterface } from 'ts-sinon'
+import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 
 describe('translate', () => {
   it('should return the key if the locale is en-US', () => {
     const locale = signal('en-US')
     const key = 'Today'
     const Englisch = stubInterface<Language>()
-    const languages ={enUS:Englisch}
+    const languages = { enUS: Englisch }
 
-    const underTest = translate(locale, signal(languages ))
+    const underTest = translate(locale, signal(languages))
 
     expect(underTest(key)).toEqual(Englisch[key])
   })
@@ -27,21 +26,20 @@ describe('translate', () => {
     const locale = signal('de-DE')
     const key = 'Today'
     const Deutsch = stubInterface<Language>()
-    const languages ={deDE:Deutsch}
+    const languages = { deDE: Deutsch }
 
     const underTest = translate(locale, signal(languages))
 
     expect(underTest(key)).toEqual(Deutsch[key])
   })
 
-
   it('should return the key if the locale is ko-KR', () => {
     const locale = signal('ko-KR')
     const key = 'Today'
     const korean = stubInterface<Language>()
-    const languages ={koKR:korean}
+    const languages = { koKR: korean }
 
-    const underTest = translate(locale,signal(languages))
+    const underTest = translate(locale, signal(languages))
 
     expect(underTest(key)).toEqual(korean[key])
   })
@@ -50,7 +48,7 @@ describe('translate', () => {
     const locale = signal('fr-FR')
     const key = 'Today'
     const french = stubInterface<Language>()
-    const languages ={frFR:french}
+    const languages = { frFR: french }
     const underTest = translate(locale, signal(languages))
 
     expect(underTest(key)).toEqual(french[key])
@@ -58,9 +56,10 @@ describe('translate', () => {
 
   it('should return key if locale is supported, but key does not exist', () => {
     const locale = signal('en-US')
-    const key = 'test'
-    const Englisch = stubInterface<Language>()
-    const languages ={enUS:Englisch}
+    const key = 'Month'
+    const English = stubInterface<Language>()
+    English.Month = 'Month'
+    const languages = { enUS: English }
 
     const underTest = translate(locale, signal(languages))
 
@@ -71,7 +70,7 @@ describe('translate', () => {
     const locale = signal('sr-Latn-RS')
     const key = 'Today'
     const test = stubInterface<Language>()
-    const languages ={srLatnRS:test}
+    const languages = { srLatnRS: test }
 
     const underTest = translate(locale, signal(languages))
 
@@ -82,7 +81,7 @@ describe('translate', () => {
     const locale = signal('sr-Latn-RS')
     const key = 'Today'
     const serbian = stubInterface<Language>()
-    const languages ={srLatnRS:serbian}
+    const languages = { srLatnRS: serbian }
     const underTest = translate(locale, signal(languages))
 
     expect(underTest(key)).toEqual(serbian[key])
@@ -98,12 +97,11 @@ describe('translate', () => {
     'should throw if called with a faulty locale format %s',
     (localeRaw: string, shouldThrow: boolean) => {
       const locale = signal(localeRaw)
-      const translations = {
-        hello: 'world',
-      }
+      const English = stubInterface<Language>()
+      English.Month = 'Month'
       const key = 'hello'
 
-      const underTest = translate(locale, { enUS: translations })
+      const underTest = translate(locale, signal({ enUS: English }))
 
       if (shouldThrow) {
         expect(() => underTest(key)).toThrow(InvalidLocaleError)
@@ -119,41 +117,43 @@ describe('translate', () => {
    * */
   it('should be able to call the translate return value repeatedly', () => {
     const locale = signal('en-US')
-    const translations = {
-      hello: 'world',
-    }
-    const key = 'hello'
+    const English = stubInterface<Language>()
+    English.Week = 'Week'
+    const key = 'Week'
 
-    const underTest = translate(locale, { enUS: translations })
+    const reactiveTranslations = signal({ enUS: English })
+    const underTest = translate(locale, reactiveTranslations)
 
-    expect(underTest(key)).toEqual(translations[key])
-    expect(underTest(key)).toEqual(translations[key])
+    expect(underTest(key)).toEqual(key)
+    expect(underTest(key)).toEqual(key)
   })
 
   it('should pass one translation variables to the translation', () => {
     const locale = signal('en-US')
-    const translations = {
-      hello: 'world {{name}}',
-    }
-    const key = 'hello'
-    const name = 'Alice'
+    const English = stubInterface<Language>()
+    English['Link to 1 more event on {{date}}'] =
+      'Link to 1 more event on {{date}}'
 
-    const underTest = translate(locale, { enUS: translations })
+    const underTest = translate(locale, signal({ enUS: English }))
 
-    expect(underTest(key, { name })).toEqual('world Alice')
+    expect(
+      underTest('Link to 1 more event on {{date}}', { date: 'January 1' })
+    ).toEqual('Link to 1 more event on January 1')
   })
 
   it('should pass multiple translation variables to the translation', () => {
     const locale = signal('en-US')
-    const translations = {
-      hello: 'world {{name}} {{lastName}}',
-    }
-    const key = 'hello'
-    const name = 'Alice'
-    const lastName = 'Smith'
+    const English = stubInterface<Language>()
+    English['Link to {{n}} more events on {{date}}'] =
+      'Link to {{n}} more events on {{date}}'
 
-    const underTest = translate(locale, { enUS: translations })
+    const underTest = translate(locale, signal({ enUS: English }))
 
-    expect(underTest(key, { name, lastName })).toEqual('world Alice Smith')
+    expect(
+      underTest('Link to {{n}} more events on {{date}}', {
+        n: 1,
+        date: 'January 1',
+      })
+    ).toEqual('Link to 1 more events on January 1')
   })
 })
