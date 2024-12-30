@@ -6,7 +6,7 @@ import {
 import { useIconColors } from '../use-icon-colors'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 
-const LIGHT_MODE_COLOR = '#000'
+const LIGHT_MODE_COLOR = 'var(--sx-internal-color-text)'
 const DARK_MODE_COLOR = 'var(--sx-color-neutral-variant)'
 
 describe('Event modal icon colors', () => {
