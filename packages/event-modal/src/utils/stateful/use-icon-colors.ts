@@ -2,7 +2,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { effect, signal } from '@preact/signals'
 
 export const useIconColors = ($app: CalendarAppSingleton) => {
-  const ICON_COLOR_LIGHT_MODE = '#000'
+  const ICON_COLOR_LIGHT_MODE = 'var(--sx-internal-color-text)'
   const ICON_COLOR_DARK_MODE = 'var(--sx-color-neutral-variant)'
   const iconColor = signal(
     $app.calendarState.isDark.value
