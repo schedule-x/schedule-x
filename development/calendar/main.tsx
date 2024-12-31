@@ -238,8 +238,8 @@ const calendar = createCalendar({
   backgroundEvents: [
     {
       title: 'Out of office',
-      start: '2024-09-03',
-      end: '2024-09-03',
+      start: '2024-12-03',
+      end: '2024-12-03',
       style: {
         // create tilted 5px thick gray lines
         backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
@@ -248,8 +248,8 @@ const calendar = createCalendar({
     },
     {
       title: 'Out of office',
-      start: '2024-09-02 00:00',
-      end: '2024-09-02 02:00',
+      start: '2024-12-02 00:00',
+      end: '2024-12-02 02:00',
       style: {
         background: 'linear-gradient(45deg, #f91c45, #1c7df9)',
         opacity: 0.5,
@@ -257,8 +257,8 @@ const calendar = createCalendar({
     },
     {
       title: 'Out of office',
-      start: '2024-09-02 04:00',
-      end: '2024-09-02 07:00',
+      start: '2024-12-02 04:00',
+      end: '2024-12-02 07:00',
       style: {
         backgroundColor: '#f91c45',
         opacity: 0.5,
@@ -266,8 +266,8 @@ const calendar = createCalendar({
     },
     {
       title: 'Holiday',
-      start: '2024-09-05',
-      end: '2024-09-07',
+      start: '2024-12-05',
+      end: '2024-12-07',
       style: {
         backgroundImage: 'repeating-linear-gradient(45deg, #1cf9b0, #1cf9b0 5px, transparent 5px, transparent 10px)',
         opacity: 0.5,

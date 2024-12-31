@@ -12,6 +12,7 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   width: 100%;
   display: grid;
   grid-gap: 2px;
+  pointer-events: none;
 }
 
 .sx__date-grid-event {
@@ -23,6 +24,12 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   font-size: clamp(12px, var(--sx-font-extra-small), 14px);
   font-weight: 600;
   user-select: none;
+
+  /**
+   * Needed to cancel out the pointer-events: none; from the parent element
+   * so that multi-day events can be dragged and resized
+   */
+  pointer-events: initial;
 
   &:has(.sx__date-grid-event--left-overflow) {
     margin-left: $event-overflow-margin;
