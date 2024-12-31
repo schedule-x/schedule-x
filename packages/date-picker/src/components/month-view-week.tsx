@@ -76,6 +76,7 @@ export default function MonthViewWeek({ week }: props) {
       <div data-testid={DATE_PICKER_WEEK} className="sx__date-picker__week">
         {weekDays.map((weekDay) => (
           <button
+            type="button"
             tabIndex={hasFocus(weekDay) ? 0 : -1}
             disabled={!isDateSelectable(weekDay.day)}
             aria-label={getLocalizedDate(

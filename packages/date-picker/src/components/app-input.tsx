@@ -106,6 +106,7 @@ export default function AppInput() {
         />
 
         <button
+          type="button"
           tabIndex={$app.datePickerState.isDisabled.value ? -1 : 0}
           aria-label={$app.translate('Choose Date')}
           onKeyDown={handleButtonKeyDown}
