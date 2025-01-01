@@ -70,7 +70,7 @@ export default function PremiumPage() {
 
   function initLemonSqueezy() {
     if ('createLemonSqueezy' in window) {
-      // eslint-disable @typescript-eslint/ban-ts-comment
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       window.createLemonSqueezy()
     }
@@ -104,7 +104,7 @@ export default function PremiumPage() {
     })
       .then((response) => response.json())
       .then((data: { url: string }) => {
-        // eslint-disable @typescript-eslint/ban-ts-comment
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         LemonSqueezy.Url.Open(data.url);
       })
