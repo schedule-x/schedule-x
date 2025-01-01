@@ -8,8 +8,111 @@ import Image from 'next/image'
 import ModalIcon from '../partials/icons/modal-icon'
 import SidebarIcon from '../partials/icons/sidebar-icon'
 import DragIcon from '../partials/icons/drag-icon'
+import PricingCard, { ProductVariant } from '../partials/pricing-card/pricing-card'
+import { useEffect, useMemo, useState } from 'react'
 
 export default function PremiumPage() {
+  const yearlyVariants: ProductVariant[] = [
+    {
+      price: 299,
+      id: 614707,
+      label: '1 developer'
+    },
+    {
+      price: 479,
+      id: 421689,
+      label: '2-3 developers'
+    },
+    {
+      price: 649,
+      id: 614706,
+      label: '4-6 developers'
+    },
+    {
+      price: 849,
+      id: 614709,
+      label: '7-9 developers'
+    },
+    {
+      price: 1099,
+      id: 614710,
+      label: '10+ developers'
+    },
+  ]
+
+  const lifetimeVariants: ProductVariant[] = [
+    {
+      price: 599,
+      id: 517516,
+      label: '1 developer'
+    },
+    {
+      price: 999,
+      id: 614719,
+      label: '2-3 developers'
+    },
+    {
+      price: 1499,
+      id: 614720,
+      label: '4-6 developers'
+    },
+    {
+      price: 1999,
+      id: 614722,
+      label: '7-9 developers'
+    },
+    {
+      price: 2499,
+      id: 614723,
+      label: '10+ developers'
+    },
+  ]
+
+  function initLemonSqueezy() {
+    if ('createLemonSqueezy' in window) {
+      // @ts-ignore
+      window.createLemonSqueezy()
+    }
+  }
+
+  useEffect(() => {
+    initLemonSqueezy()
+  }, [])
+
+
+  const [selectedVariantYearly, setSelectedVariantYearly] = useState<number>(yearlyVariants[0].id)
+  const yearlyPricing = useMemo(() => {
+    return yearlyVariants.find((variant) => variant.id === selectedVariantYearly)?.price
+  }, [selectedVariantYearly])
+
+  const [selectedVariantLifetime, setSelectedVariantLifetime] = useState<number>(lifetimeVariants[0].id)
+  const lifetimePricing = useMemo(() => {
+    return lifetimeVariants.find((variant) => variant.id === selectedVariantLifetime)?.price
+  }, [selectedVariantLifetime])
+
+  const startCheckout = (licenseType: 'yearly' | 'lifetime') => {
+    initLemonSqueezy()
+    const variantId = licenseType === 'yearly' ? selectedVariantYearly : selectedVariantLifetime
+
+    console.log(variantId)
+
+    fetch('/api/start-checkout', {
+      method: 'POST',
+      body: JSON.stringify({ variantId: variantId }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data: { url: string }) => {
+        // @ts-ignore
+        LemonSqueezy.Url.Open(data.url);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
   return (
     <>
       <div className={'premiumPage page-wrapper'}>
@@ -23,7 +126,7 @@ export default function PremiumPage() {
           </h1>
 
           <h2 className={'heroSubHeading'}>
-            Don't waste time building stuff like forms, calendar toggles, or drag-to-create. Someone already built all
+            Don't waste time building stuff event forms, a resource view, or drag-to-create. Someone already built all
             that for you.
           </h2>
 
@@ -120,10 +223,34 @@ export default function PremiumPage() {
           <h2 className={'premiumSectionHeading heading-font'}>Pricing</h2>
 
           <div className={'premiumPageCards'}>
-            <SalesCard
+            <PricingCard
+              startCheckout={startCheckout}
+              price={yearlyPricing}
+              isPriceYearly
               data={{
-                title: 'Team',
-                description: 'All products, ready to use out of the box',
+                  title: 'Yearly plan',
+                  description: 'License for one year, with support and updates',
+                  variants: yearlyVariants,
+                  features: [
+                    'All products',
+                    'Email support',
+                    'Prioritized issue processing',
+                  ],
+                  buttonText: 'Start 14-day trial'
+                }}
+                buttonClass={'filled'}
+                onSelectVariant={(value) => setSelectedVariantYearly(value)}
+                licenseType={'yearly'}
+              />
+
+              <PricingCard
+                startCheckout={startCheckout}
+                price={lifetimePricing}
+                isPriceYearly={false}
+                data={{
+                  title: 'Lifetime license',
+                  description: 'Perpetual license, with 1 year of support and updates',
+                  variants: lifetimeVariants,
                   features: [
                     'All products',
                     'Email support',
@@ -132,7 +259,8 @@ export default function PremiumPage() {
                   buttonText: 'Buy now'
                 }}
                 buttonClass={'filled'}
-                buttonLink={'https://schedule-x.lemonsqueezy.com'}
+                onSelectVariant={(value) => setSelectedVariantLifetime(value)}
+                licenseType={'lifetime'}
               />
 
               <SalesCard
@@ -141,10 +269,10 @@ export default function PremiumPage() {
                   description: 'All products, plus service and custom plugins',
                   features: [
                     'All products',
-                    'Private chat support',
-                    'Prioritized issue processing',
                     'Service Level Agreement',
                     'Custom-made plugins',
+                    'Private chat support',
+                    'Prioritized issue processing',
                   ],
                   buttonText: 'Get in touch'
                 }}
@@ -163,17 +291,17 @@ export default function PremiumPage() {
                 believed in the project early on. You can continue using Schedule-X premium commercially without having
                 to upgrade licenses later on, if you buy it before OEM licensing is introduced.
               </Accordion.Panel>
+
               <Accordion.Panel header="How many issues and feature requests are included?">
                 There is no limit to how many issues and feature requests you can submit. However, you buy the
-                software <i>as is</i>, without any guarantee that I will build features that you request. If I believe
-                that a feature is useful to many customers, I am more likely to build it.
+                software <i>as is</i>, without any guarantee that I will build features that you request.
 
                 <br/>
                 <br/>
 
-                If you want certainty that a feature will be built, you need to select an enterprise license so we can
-                discuss the terms of the feature request.
+                If you want certainty that a feature will be built, you need to select "Enterprise". Thereafter we can discuss the features, so I can give you a quote.
               </Accordion.Panel>
+
               <Accordion.Panel header="Can I cache the software on my servers?">
                 Yes. This is even encouraged. For example, you can use software like <a href={"https://verdaccio.org/"}
                                                                                         target={'_blank'} style={{
@@ -182,7 +310,12 @@ export default function PremiumPage() {
               }}>Verdaccio</a> or JFrog artifactory. However,
                 <strong> this does not mean that you are allowed to use Schedule-X premium beyond the terms of the
                   license you purchased.</strong> You need to pay the yearly subscription, for as long as the software
-                is being used.
+                is being used, unless you have a lifetime license.
+              </Accordion.Panel>
+
+              <Accordion.Panel header="Is there a trial for the lifetime license?">
+                No, there is no trial for the lifetime license, due to limitations in my merchant of record, Lemonsqueezy. If you need a free trial
+                but want to purchase a lifetime license, you will need to purchase the yearly license first, cancel the trial, and then purchase the lifetime license.
               </Accordion.Panel>
             </Accordion>
           </section>

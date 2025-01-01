@@ -12,6 +12,8 @@ import '@sx-premium/sidebar/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
 import '@sx-premium/drag-to-create/index.css'
 import '@sx-premium/resource-scheduler/index.css'
+import '../components/partials/app-dropdown/app-dropdown.scss'
+import '../components/partials/pricing-card/pricing-card.scss'
 import 'rsuite/dist/rsuite-no-reset.min.css';
 import 'swiper/css';
 import '@fontsource-variable/podkova';
@@ -24,6 +26,7 @@ export default function MyApp({ Component, pageProps }) {
   if (typeof window === 'object') alxScript = true
 
   return <main className={'main'}><Component {...pageProps} />
+    <Script src="https://app.lemonsqueezy.com/js/lemon.js"/>
     {alxScript && window?.location.hostname !== 'localhost' &&
       <Script data-domain="schedule-x.dev" src="https://analytics.schedule-x.com/js/script.js" defer/>}
     <Script>
