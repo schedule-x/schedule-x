@@ -94,8 +94,6 @@ export default function PremiumPage() {
     initLemonSqueezy()
     const variantId = licenseType === 'yearly' ? selectedVariantYearly : selectedVariantLifetime
 
-    console.log(variantId)
-
     fetch('/api/start-checkout', {
       method: 'POST',
       body: JSON.stringify({ variantId: variantId }),
