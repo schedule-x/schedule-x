@@ -126,7 +126,7 @@ export default function PremiumPage() {
           </h1>
 
           <h2 className={'heroSubHeading'}>
-            Don't waste time building stuff event forms, a resource view, or drag-to-create. Someone already built all
+            Don't waste time building event forms, a resource view, or drag-to-create. Someone already built all
             that for you.
           </h2>
 
