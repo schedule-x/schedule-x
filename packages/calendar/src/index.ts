@@ -28,6 +28,7 @@ import {
   setRangeForDay,
 } from './utils/stateless/time/range/set-range'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
+import { PremiumOptionsExternal } from '@schedule-x/shared/src/types/premium/options'
 export type {
   CalendarConfig,
   CustomComponentFn,
@@ -39,6 +40,8 @@ export type {
   WeekOptions,
   MonthGridOptions,
   PluginBase,
+  PremiumOptionsExternal
+
 }
 
 export {

@@ -77,7 +77,7 @@ export default class CalendarConfigBuilder
       this.maxDate,
       this.monthGridOptions,
       this.theme,
-      this.translations
+      this.translations,
     )
   }
 

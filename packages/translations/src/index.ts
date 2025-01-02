@@ -57,7 +57,7 @@ import { ltLT } from './locales/lt-LT'
 import { datePickerLtLT } from './locales/lt-LT/date-picker'
 
 import { translate } from './translator/translate'
-
+//TODO:Change langauges Format form deDE to de-DE in V3
 const translations = {
   deDE,
   enUS,
