@@ -16,6 +16,11 @@ import { DEFAULT_DAY_BOUNDARIES } from '../../../constants'
 import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
 import { Signal, signal } from '@preact/signals'
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
+import {
+  PremiumOptionsExternal,
+  PremiumOptionsInternal,
+} from '@schedule-x/shared/src/types/premium/PremiumOptions'
+import { Default_PremiumOptions } from '@schedule-x/shared/src/values/premium-options'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   firstDayOfWeek: Signal<WeekDay>
@@ -30,6 +35,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   locale: Signal<string> = signal(DEFAULT_LOCALE)
   theme: string | undefined
   translations: Signal<Record<string, Language>>
+  premiumOptions: Signal<PremiumOptionsInternal>
 
   constructor(
     locale: string = DEFAULT_LOCALE,
@@ -50,7 +56,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
       nEventsPerDay: 4,
     },
     theme: string | undefined = undefined,
-    translations: Record<string, Language> = {}
+    translations: Record<string, Language> = {},
+    premium: PremiumOptionsExternal = Default_PremiumOptions
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
@@ -64,6 +71,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.monthGridOptions = signal(monthGridOptions)
     this.theme = theme
     this.translations = signal(translations)
+    this.premiumOptions = signal(premium)
   }
 
   get isHybridDay(): boolean {
