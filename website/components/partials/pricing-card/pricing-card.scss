@@ -1,24 +1,23 @@
 @use '../../../theme/mixins' as mixins;
 
 // create a sexy looking white bg card with a slight shadow
-.sales-card {
+.pricing-card {
   display: grid;
   grid-template-areas:
     "title"
     "description"
+    "developers"
+    "price"
     "features"
     "button";
-  grid-template-rows: 1fr 1fr 219px 1fr;
+  grid-template-rows: auto 60px 60px 75px 100px auto;
+  background-color: #fff;
   border-radius: 1rem;
   padding: 2rem;
   width: 300px;
   border: 1px solid rgb(0 0 0 / 10%);
   text-align: center;
   align-items: start;
-
-  @include mixins.mobile-screens {
-    grid-template-rows: auto;
-  }
 
   h3 {
     grid-area: title;
@@ -28,13 +27,42 @@
     margin-bottom: 0.5rem;
   }
 
-  .sales-card-description {
+  .pricing-card-description {
     grid-area: description;
     color: rgb(13 13 13 / 40%);
     margin-bottom: 1rem;
   }
 
-  .sales-card-features {
+  .pricing-card-price {
+    grid-area: price;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card-price-period {
+    margin-left: 0.25em;
+    font-size: 1.25rem;
+    color: #696363;
+  }
+
+  .app-dropdown {
+    grid-area: developers;
+  }
+
+  .pricing-card-developers {
+    grid-area: developers;
+    width: fit-content;
+    margin: 12px auto 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card-features {
     grid-area: features;
     list-style: none;
     padding: 0;
@@ -49,21 +77,24 @@
   }
 
   button.outlined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: transparent;
     color: #6750a4;
     box-shadow: inset 0 0 0 2px #6750a4;
   }
 
   button.black {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(to right, #000 50%, #333 100%);
     color: #fff;
   }
 
-  .btn-area {
-    grid-area: button;
-  }
-
   .btn {
+    grid-area: button;
     background: linear-gradient(to right, #6750a4 50%, #8c6fb7 100%);
     color: #fff;
     padding: 0.75rem 1.5rem;
@@ -73,9 +104,5 @@
     box-shadow: 0 0 10px rgb(0 0 0 / 10%);
     cursor: pointer;
     margin-top: 1rem;
-
-    &:hover {
-      transform: translateY(-2px);
-    }
   }
 }

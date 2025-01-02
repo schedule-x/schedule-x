@@ -9,9 +9,10 @@ type props = {
   };
   buttonClass?: string;
   buttonLink?: string;
+  buttonCallback?: () => void;
 }
 
-export default function SalesCard({ data, buttonClass, buttonLink }: props) {
+export default function SalesCard({ data, buttonClass, buttonLink, buttonCallback }: props) {
   return (
     <div className="sales-card">
       <h3 className="heading-font">
@@ -29,9 +30,15 @@ export default function SalesCard({ data, buttonClass, buttonLink }: props) {
         ))}
       </ul>
 
-      <a href={buttonLink} target={'_blank'} className="btn-area">
-        <button className={buttonClass + ' btn'}>{data.buttonText}</button>
-      </a>
+      {buttonLink && (
+        <a href={buttonLink} target={'_blank'} className="btn-area">
+          <button className={buttonClass + ' btn'}>{data.buttonText}</button>
+        </a>
+      )}
+
+      {buttonCallback && (
+        <button className={buttonClass + ' btn'} onClick={() => buttonCallback()}>{data.buttonText}</button>
+      )}
     </div>
   );
 }
