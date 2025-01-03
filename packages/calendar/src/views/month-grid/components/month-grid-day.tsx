@@ -114,6 +114,14 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     )
   })
 
+  const handleMouseDown = (e: MouseEvent) => {
+    const target = e.target as HTMLElement
+    if (!target.classList.contains('sx__month-grid-day')) return
+
+    const callback = $app.config.callbacks.onMouseDownMonthGridDate
+    if (callback) callback(day.date, e)
+  }
+
   return (
     <div
       className={wrapperClasses.join(' ')}
@@ -124,6 +132,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       }
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
       onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
+      onMouseDown={handleMouseDown}
     >
       {fullDayBackgroundEvent && (
         <>

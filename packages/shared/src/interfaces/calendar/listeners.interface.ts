@@ -14,6 +14,9 @@ export interface CalendarCallbacks {
   onClickAgendaDate?: (date: string) => void
   onDoubleClickAgendaDate?: (date: string) => void
   onClickPlusEvents?: (date: string) => void
+  onMouseDownDateTime?: (dateTime: string, mouseDownEvent: MouseEvent) => void
+  onMouseDownDateGridDate?: (date: string, mouseDownEvent: MouseEvent) => void
+  onMouseDownMonthGridDate?: (date: string, mouseDownEvent: MouseEvent) => void
 
   /**
    * Run a validator function before updating an event.

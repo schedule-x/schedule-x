@@ -67,6 +67,7 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
+// const drawPlugin = new DrawPluginImpl()
 
 const calendar = createCalendar({
   weekOptions: {
@@ -90,7 +91,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2025-03-31',
-  // defaultView: 'month-grid',
+  defaultView: 'month-grid',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   teleportTo: document.body,
@@ -127,6 +128,24 @@ const calendar = createCalendar({
   callbacks: {
     // onBeforeEventUpdate(oldEvent, newEvent, $app) {
     //   return false
+    // },
+
+    // onMouseDownDateTime(dateTime, e) {
+    //   drawPlugin.drawTimeGridEvent(dateTime, e, {
+    //     title: 'hello time grid',
+    //   })
+    // },
+    //
+    // onMouseDownDateGridDate(date, mouseDownEvent) {
+    //   drawPlugin.drawDateGridEvent(date, mouseDownEvent, {
+    //     title: 'hi date grid',
+    //   })
+    // },
+    //
+    // onMouseDownMonthGridDate(date, _e) {
+    //   drawPlugin.drawMonthGridEvent(date, {
+    //     title: 'hi month grid',
+    //   })
     // },
 
     onRangeUpdate(range) {

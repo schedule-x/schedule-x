@@ -74,6 +74,16 @@ export default function TimeGridDay({
     }
   }
 
+  const handleMouseDown = (e: MouseEvent) => {
+    const callback = $app.config.callbacks.onMouseDownDateTime
+    if (!callback || mouseDownOnChild) return
+
+    const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
+    if (clickDateTime) {
+      callback(clickDateTime, e)
+    }
+  }
+
   const handlePointerUp = () => {
     const msWaitToEnsureThatClickEventWasDispatched = 10
     setTimeout(() => {
@@ -106,6 +116,7 @@ export default function TimeGridDay({
       onMouseLeave={() => setMouseDownOnChild(false)}
       onMouseUp={handlePointerUp}
       onTouchEnd={handlePointerUp}
+      onMouseDown={handleMouseDown}
     >
       {backgroundEvents.map((event) => (
         <>
