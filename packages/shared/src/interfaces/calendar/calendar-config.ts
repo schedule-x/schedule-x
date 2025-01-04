@@ -18,6 +18,10 @@ import { Signal } from '@preact/signals'
 import { WeekDay } from '../../enums/time/week-day.enum'
 import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
+import {
+  PremiumOptionsExternal,
+  PremiumOptionsInternal,
+} from '../../types/premium/PremiumOptions'
 
 export type WeekOptions = {
   gridHeight: number
@@ -74,6 +78,7 @@ export default interface CalendarConfigInternal extends Config {
   _customComponentFns: CustomComponentFns
   translations: Signal<Record<string, Language>>
 
+  premiumOptions: Signal<PremiumOptionsInternal>
   // Getters
   isHybridDay: boolean
   timePointsPerDay: number
@@ -100,6 +105,7 @@ interface ReducedCalendarConfigInternal
     | 'locale'
     | 'firstDayOfWeek'
     | 'translations'
+    | 'Premium'
   > {}
 
 export interface CalendarConfigExternal
@@ -121,4 +127,5 @@ export interface CalendarConfigExternal
   firstDayOfWeek?: WeekDay
   skipValidation?: boolean
   translations?: Record<string, Language>
+  premium?: PremiumOptionsExternal
 }
