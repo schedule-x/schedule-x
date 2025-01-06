@@ -15,6 +15,7 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
 
   /* needed for the draw plugin */
   .sx__spacer {
+    display: var(--sx-draw-plugin-spacer-display, none);
     height: var(--sx-draw-plugin-spacer);
   }
 }
