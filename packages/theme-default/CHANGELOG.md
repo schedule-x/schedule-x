@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/schedule-x/schedule-x/compare/v2.12.1...v2.13.0) (2025-01-06)
+
+### Bug Fixes
+
+- **theme-default:** dragging multi-day events in date grid ([#843](https://github.com/schedule-x/schedule-x/issues/843)) ([9a88699](https://github.com/schedule-x/schedule-x/commit/9a886993b53c359d57441a251eebb99766795ba6))
+
+### Features
+
+- **calendar:** mouse down events ([#854](https://github.com/schedule-x/schedule-x/issues/854)) ([6fa74b3](https://github.com/schedule-x/schedule-x/commit/6fa74b32be5c4221b58bddd390672e484b6e45c4))
+
 ## [2.12.1](https://github.com/schedule-x/schedule-x/compare/v2.12.0...v2.12.1) (2024-12-20)
 
 **Note:** Version bump only for package @schedule-x/theme-default

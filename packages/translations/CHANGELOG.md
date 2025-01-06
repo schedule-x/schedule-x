@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/schedule-x/schedule-x/compare/v2.12.1...v2.13.0) (2025-01-06)
+
+### Features
+
+- add support for customizable translations in calendar config ([#835](https://github.com/schedule-x/schedule-x/issues/835)) ([942b5ad](https://github.com/schedule-x/schedule-x/commit/942b5ad3de1d8e05fa9944eba788030fc828be8a))
+
 ## [2.12.1](https://github.com/schedule-x/schedule-x/compare/v2.12.0...v2.12.1) (2024-12-20)
 
 **Note:** Version bump only for package @schedule-x/translations
