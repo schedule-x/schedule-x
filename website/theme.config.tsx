@@ -73,14 +73,14 @@ const config: DocsThemeConfig = {
     )
   },
 
-  // banner: {
-  //   key: 'newsletter-signup-1.0',
-  //   text: (
-  //     <a href="/newsletter" target="_blank">
-  //       Get the latest project news. Click here for the newsletter signup 📬
-  //     </a>
-  //   )
-  // }
+  banner: {
+    key: 'draw-plugin-1.0',
+    text: (
+      <a href="/docs/calendar/plugins/draw" target="_blank">
+        Just released: Draw Plugin 🎨
+      </a>
+    )
+  }
 }
 
 export default config
