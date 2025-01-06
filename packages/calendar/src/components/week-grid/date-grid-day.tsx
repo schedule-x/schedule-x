@@ -3,6 +3,8 @@ import DateGridEvent from './date-grid-event'
 import { DATE_GRID_BLOCKER } from '../../constants'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { dateStringRegex } from '@schedule-x/shared/src'
+import { useContext } from 'preact/hooks'
+import { AppContext } from '../../utils/stateful/app-context'
 
 type props = {
   calendarEvents: {
@@ -17,6 +19,7 @@ export default function DateGridDay({
   date,
   backgroundEvents,
 }: props) {
+  const $app = useContext(AppContext)
   const dateStart = date + ' 00:00'
   const dateEnd = date + ' 23:59'
 
@@ -29,6 +32,13 @@ export default function DateGridDay({
       : event.end
     return eventStartWithTime <= dateStart && eventEndWithTime >= dateEnd
   })
+
+  const handleMouseDown = (e: MouseEvent) => {
+    const callback = $app.config.callbacks.onMouseDownDateGridDate
+    if (!callback) return
+
+    callback(date, e)
+  }
 
   return (
     <div className="sx__date-grid-day" data-date-grid-date={date}>
@@ -48,11 +58,14 @@ export default function DateGridDay({
             <div
               className="sx__date-grid-cell"
               style={{ gridRow: index + 1 }}
+              onMouseDown={handleMouseDown}
             ></div>
           )
 
         return <DateGridEvent calendarEvent={event} gridRow={index + 1} />
       })}
+
+      <div className={'sx__spacer'} onMouseDown={handleMouseDown} />
     </div>
   )
 }
