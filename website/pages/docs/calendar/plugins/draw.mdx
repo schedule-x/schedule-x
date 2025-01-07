@@ -35,7 +35,7 @@ npm install @sx-premium/draw
 
 ### API
 
-#### `createDrawPlugin()`
+#### `createDrawPlugin(config: { onFinishDrawing: (event: CalendarEvent) => void })`
 
 Create the plugin instance.
 
@@ -61,7 +61,11 @@ import {
   viewDay,
 } from '@schedule-x/calendar'
 import { createDrawPlugin } from "@sx-premium/draw";
-const drawPlugin = createDrawPlugin()
+const drawPlugin = createDrawPlugin({
+  onFinishDrawing: (event) => {
+    // do something, like saving the event to the server
+  }
+})
 
 const calendar = createCalendar({
   callbacks: {
