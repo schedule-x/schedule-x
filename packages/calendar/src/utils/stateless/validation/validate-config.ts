@@ -1,4 +1,4 @@
-import { CalendarConfigExternal } from '@schedule-x/shared'
+import { CalendarConfigExternal } from '@schedule-x/shared/src'
 import { DateFormats } from '@schedule-x/shared/src/values/date-formats'
 
 export const validateConfig = (config: CalendarConfigExternal) => {
