@@ -168,4 +168,18 @@ describe('validating the config', () => {
       ).not.toThrowError()
     })
   })
+
+  describe('validating the month options', () => {
+    it('should not accept negative numbers for nEventsPerDay', () => {
+      expect(() =>
+        validateConfig({
+          monthGridOptions: {
+            nEventsPerDay: -2,
+          },
+        } as CalendarConfigExternal)
+      ).toThrowError(
+        '[Schedule-X error]: monthGridOptions.nEventsPerDay must be a positive number'
+      )
+    })
+  })
 })

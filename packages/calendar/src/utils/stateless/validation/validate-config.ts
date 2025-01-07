@@ -58,4 +58,13 @@ export const validateConfig = (config: CalendarConfigExternal) => {
       '[Schedule-X error]: weekOptions.eventWidth must be an integer between 1 and 100'
     )
   }
+
+  if (
+    typeof config.monthGridOptions?.nEventsPerDay !== 'undefined' &&
+    config.monthGridOptions.nEventsPerDay < 0
+  ) {
+    throw new Error(
+      '[Schedule-X error]: monthGridOptions.nEventsPerDay must be a positive number'
+    )
+  }
 }
