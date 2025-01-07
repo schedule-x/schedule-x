@@ -12,6 +12,7 @@ import { createDateSelectionCallback } from './utils/stateless/factories/create-
 import { PluginBase } from '@schedule-x/shared/src'
 import { validatePlugins } from './utils/stateless/validation/validate-plugins'
 import { validateEvents } from './utils/stateless/validation/validate-events'
+import { validateConfig } from './utils/stateless/validation/validate-config'
 
 export const createCalendarAppSingleton = (
   config: CalendarConfigExternal,
@@ -62,6 +63,7 @@ export const createCalendar = <Plugins extends PluginBase<string>[]>(
   validatePlugins(config.plugins, plugins)
   if (config.skipValidation !== true) {
     validateEvents(config.events)
+    validateConfig(config)
   }
 
   return new CalendarApp(
