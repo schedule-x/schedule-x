@@ -67,4 +67,19 @@ export const validateConfig = (config: CalendarConfigExternal) => {
       '[Schedule-X error]: monthGridOptions.nEventsPerDay must be a positive number'
     )
   }
+
+  const dayBoundaryPattern = /^\d{2}:\d{2}$/
+  if (typeof config.dayBoundaries !== 'undefined') {
+    const startFormatIsInvalid = !dayBoundaryPattern.test(
+      config.dayBoundaries.start
+    )
+    const endFormatIsInvalid = !dayBoundaryPattern.test(
+      config.dayBoundaries.end
+    )
+    if (startFormatIsInvalid || endFormatIsInvalid) {
+      throw new Error(
+        '[Schedule-X error]: dayBoundaries must be an object with "start"- and "end" properties, each with the format HH:mm'
+      )
+    }
+  }
 }

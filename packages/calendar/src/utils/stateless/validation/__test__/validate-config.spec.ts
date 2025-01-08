@@ -6,7 +6,8 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 
 import { validateConfig } from '../validate-config'
-import { CalendarConfigExternal } from '@schedule-x/shared'
+import { CalendarConfigExternal } from '@schedule-x/shared/src'
+import { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 
 describe('validating the config', () => {
   describe('validating the selected date', () => {
@@ -181,5 +182,41 @@ describe('validating the config', () => {
         '[Schedule-X error]: monthGridOptions.nEventsPerDay must be a positive number'
       )
     })
+  })
+
+  describe('validating the day boundaries', () => {
+    it.each([
+      [{ start: 0, end: 23 }],
+      [{ start: '00:00', end: '23:59:59' }],
+      [{ start: '00:00:00', end: '23:59:59' }],
+      [{ start: '00:00:00', end: '23:59:59:999' }],
+      [{ start: '0', end: '23' }],
+    ])(
+      'should throw an error if the format of the day boundaries is not valid',
+      // @ts-expect-error - This test is meant to test invalid types
+      (dayBoundaries: DayBoundariesExternal) => {
+        expect(() =>
+          validateConfig({
+            dayBoundaries,
+          } as CalendarConfigExternal)
+        ).toThrowError(
+          '[Schedule-X error]: dayBoundaries must be an object with "start"- and "end" properties, each with the format HH:mm'
+        )
+      }
+    )
+
+    it.each([
+      [{ start: '00:00', end: '23:59' }],
+      [{ start: '22:00', end: '06:00' }],
+    ])(
+      'should not throw an error if the format of the day boundaries is valid',
+      (dayBoundaries: DayBoundariesExternal) => {
+        expect(() =>
+          validateConfig({
+            dayBoundaries,
+          } as CalendarConfigExternal)
+        ).not.toThrowError()
+      }
+    )
   })
 })

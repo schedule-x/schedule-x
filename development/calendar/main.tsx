@@ -91,7 +91,7 @@ const calendar = createCalendar({
   // defaultView: viewWeek.name,
   // minDate: '2024-01-01',
   // maxDate: '2025-03-31',
-  defaultView: 'month-grid',
+  defaultView: 'week',
   // selectedDate: '2024-12-01',
   // datePicker: {
   //   teleportTo: document.body,
@@ -296,8 +296,8 @@ const calendar = createCalendar({
   events: [
     {
       id: 874574875,
-      start: '2024-09-09 07:45',
-      end: '2024-09-09 09:01',
+      start: '2024-09-09 07:45:00',
+      end: '2024-09-09 09:01:00',
       _customContent: {
         timeGrid: '<div class="custom-content">Custom Content</div>',
         monthGrid: '<div class="custom-content">Custom Content</div>',
