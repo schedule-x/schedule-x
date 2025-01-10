@@ -10,6 +10,8 @@ import SidebarIcon from '../partials/icons/sidebar-icon'
 import DragIcon from '../partials/icons/drag-icon'
 import PricingCard, { ProductVariant } from '../partials/pricing-card/pricing-card'
 import { useEffect, useMemo, useState } from 'react'
+import CoinsIcon from '../partials/icons/coins-icon'
+import DrawIcon from '../partials/icons/draw-icon'
 
 export default function PremiumPage() {
   const yearlyVariants: ProductVariant[] = [
@@ -126,7 +128,7 @@ export default function PremiumPage() {
           </h1>
 
           <h2 className={'heroSubHeading'}>
-            Don't waste time building event forms, a resource view, or drag-to-create. Someone already built all
+            Don't waste time building event forms, a resource view, drag-to-create, or event drawing. Someone already built all
             that for you.
           </h2>
 
@@ -172,27 +174,7 @@ export default function PremiumPage() {
             </div>
 
             <div className="premium-feature">
-              <SidebarIcon/>
-
-              <h3>
-                Sidebar
-              </h3>
-
-              <p className={'description'}>Add a sidebar with calendar toggles, "Add event"-button and placeholder
-                events for drag-to-create</p>
-
-              <div className={'links'}>
-                <Link href={'/docs/calendar/plugins/sidebar'}>
-                  DOCS
-                </Link>
-                <Link href={'/demos/modal-and-sidebar'}>
-                  DEMO
-                </Link>
-              </div>
-            </div>
-
-            <div className="premium-feature">
-              <DragIcon />
+              <DragIcon/>
 
               <h3>
                 Drag-to-create
@@ -207,6 +189,69 @@ export default function PremiumPage() {
                   DOCS
                 </Link>
                 <Link href={'/demos/drag-to-create'}>
+                  DEMO
+                </Link>
+              </div>
+            </div>
+
+            <div className="premium-feature">
+              <CoinsIcon/>
+
+              <h3>
+                Resource view
+              </h3>
+
+              <p className={'description'}>
+                A view that shows resources and their events.
+              </p>
+
+              <div className={'links'}>
+                <Link href={'/docs/calendar/resource-scheduler'}>
+                  DOCS
+                </Link>
+                <Link href={'/demos/resource-scheduler'}>
+                  DEMO
+                </Link>
+              </div>
+            </div>
+
+            <div className="premium-feature">
+              <DrawIcon/>
+
+              <h3>
+                Draw
+              </h3>
+
+              <p className={'description'}>
+                A plugin for drawing events by dragging on the calendar.
+              </p>
+
+              <div className={'links'}>
+                <Link href={'/docs/calendar/plugins/draw'}>
+                  DOCS
+                </Link>
+
+                <button disabled={true} style={{ color: 'gray' }}>
+                  DEMO (coming soon)
+                </button>
+              </div>
+            </div>
+
+            <div className="premium-feature">
+              <SidebarIcon/>
+
+              <h3>
+                Sidebar
+              </h3>
+
+              <p className={'description'}>Add a sidebar with calendar toggles, "Add event"-button and placeholder
+                events for drag-to-create</p>
+
+              <div className={'links'}>
+                <Link href={'/docs/calendar/plugins/sidebar'}>
+                  DOCS
+                </Link>
+                <Link href={'/demos/modal-and-sidebar'}>
                   DEMO
                 </Link>
               </div>
@@ -287,9 +332,8 @@ export default function PremiumPage() {
 
             <Accordion style={{ width: '100%', maxWidth: '950px' }}>
               <Accordion.Panel header="Can I use the license commercially?" defaultExpanded>
-                <i>Yes, you can.</i> Though I plan to introduce an OEM license later, I believe in honoring those who
-                believed in the project early on. You can continue using Schedule-X premium commercially without having
-                to upgrade licenses later on, if you buy it before OEM licensing is introduced.
+                <i>Yes, you can.</i> Use it whatever way you see fit, except reselling the Schedule-X premium source code
+                as if it was your own product.
               </Accordion.Panel>
 
               <Accordion.Panel header="How many issues and feature requests are included?">
