@@ -1,4 +1,6 @@
 ```jsx
+'use client'
+
 import { useNextCalendarApp, ScheduleXCalendar } from '@schedule-x/react'
 import {
   createViewDay,
@@ -9,7 +11,7 @@ import {
 import { createEventsServicePlugin } from '@schedule-x/events-service'
 
 import '@schedule-x/theme-default/dist/index.css'
-import {useEffect} from "react";
+import { useEffect } from "react";
 
 function CalendarApp() {
   const plugins = [createEventsServicePlugin()]
