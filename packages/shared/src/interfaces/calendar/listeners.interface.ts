@@ -3,8 +3,8 @@ import { DateRange } from '../../types/date-range'
 import CalendarAppSingleton from './calendar-app-singleton'
 
 export interface CalendarCallbacks {
-  onEventClick?: (event: CalendarEventExternal) => void
-  onDoubleClickEvent?: (event: CalendarEventExternal) => void
+  onEventClick?: (event: CalendarEventExternal, e: UIEvent) => void
+  onDoubleClickEvent?: (event: CalendarEventExternal, e: UIEvent) => void
   onRangeUpdate?: (range: DateRange) => void
   onSelectedDateUpdate?: (date: string) => void
   onClickDate?: (date: string) => void

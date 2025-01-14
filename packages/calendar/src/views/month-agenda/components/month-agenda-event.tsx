@@ -40,19 +40,19 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
 
   const onClick = (e: MouseEvent) => {
     setClickedEvent(e, calendarEvent)
-    invokeOnEventClickCallback($app, calendarEvent)
+    invokeOnEventClickCallback($app, calendarEvent, e)
   }
 
   const onDoubleClick = (e: MouseEvent) => {
     setClickedEvent(e, calendarEvent)
-    invokeOnEventDoubleClickCallback($app, calendarEvent)
+    invokeOnEventDoubleClickCallback($app, calendarEvent, e)
   }
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
-      invokeOnEventClickCallback($app, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent, e)
       nextTick(() => {
         focusModal($app)
       })

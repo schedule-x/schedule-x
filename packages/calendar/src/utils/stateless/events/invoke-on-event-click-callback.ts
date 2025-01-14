@@ -3,9 +3,10 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 
 export const invokeOnEventClickCallback = (
   $app: CalendarAppSingleton,
-  calendarEvent: CalendarEventInternal
+  calendarEvent: CalendarEventInternal,
+  e: UIEvent
 ) => {
   if ($app.config.callbacks.onEventClick) {
-    $app.config.callbacks.onEventClick(calendarEvent._getExternalEvent())
+    $app.config.callbacks.onEventClick(calendarEvent._getExternalEvent(), e)
   }
 }
