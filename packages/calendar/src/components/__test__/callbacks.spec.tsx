@@ -113,6 +113,10 @@ describe('Calendar callbacks', () => {
         end: '2023-12-01 23:59',
         title: 'Event 1',
       }
+      const uiEvent = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      })
       const $app = createCalendarAppSingleton({
         views: [viewMonthGrid, viewMonthAgenda, viewDay, viewWeek],
         callbacks: {
@@ -124,12 +128,12 @@ describe('Calendar callbacks', () => {
       })
       renderComponent($app)
 
-      await clickByText('Event 1')
+      await clickByText('Event 1', uiEvent)
 
       await waitFor(() => {
         expect(onEventClick).toHaveBeenCalledTimes(1)
 
-        expect(onEventClick).toHaveBeenCalledWith(calendarEvent)
+        expect(onEventClick).toHaveBeenCalledWith(calendarEvent, uiEvent)
       })
     })
 
@@ -147,6 +151,10 @@ describe('Calendar callbacks', () => {
           end: '2023-12-01 23:59',
           title: 'Event 1',
         }
+        const uiEvent = new MouseEvent('dblclick', {
+          bubbles: true,
+          cancelable: true,
+        })
         const $app = createCalendarAppSingleton({
           views: [viewMonthGrid, viewMonthAgenda, viewDay, viewWeek],
           callbacks: {
@@ -158,12 +166,15 @@ describe('Calendar callbacks', () => {
         })
         renderComponent($app)
 
-        await doubleClickByText('Event 1')
+        await doubleClickByText('Event 1', uiEvent)
 
         await waitFor(() => {
           expect(onDoubleClickEvent).toHaveBeenCalledTimes(1)
 
-          expect(onDoubleClickEvent).toHaveBeenCalledWith(calendarEvent)
+          expect(onDoubleClickEvent).toHaveBeenCalledWith(
+            calendarEvent,
+            uiEvent
+          )
         })
       })
     })

@@ -107,7 +107,7 @@ export default function DateGridEvent({
     if (e.key === 'Enter' || e.key === ' ') {
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
-      invokeOnEventClickCallback($app, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent, e)
       nextTick(() => {
         focusModal($app)
       })
@@ -154,8 +154,10 @@ export default function DateGridEvent({
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
         onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
         onTouchEnd={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
-        onClick={() => invokeOnEventClickCallback($app, calendarEvent)}
-        onDblClick={() => invokeOnEventDoubleClickCallback($app, calendarEvent)}
+        onClick={(e) => invokeOnEventClickCallback($app, calendarEvent, e)}
+        onDblClick={(e) =>
+          invokeOnEventDoubleClickCallback($app, calendarEvent, e)
+        }
         onKeyDown={handleKeyDown}
         className={eventClasses.join(' ')}
         style={{

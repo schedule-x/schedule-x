@@ -156,12 +156,12 @@ const calendar = createCalendar({
       console.log('onEventUpdate', event)
     },
 
-    onEventClick(event) {
-      console.log('onEventClick', event)
+    onEventClick(event, e) {
+      console.log('onEventClick', event, e)
     },
 
-    onDoubleClickEvent(event) {
-      console.log('onDoubleClickEvent', event)
+    onDoubleClickEvent(event, e) {
+      console.log('onDoubleClickEvent', event, e)
     },
 
     onClickDate(date) {

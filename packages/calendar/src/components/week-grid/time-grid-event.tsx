@@ -114,19 +114,19 @@ export default function TimeGridEvent({
 
   const handleOnClick = (e: MouseEvent) => {
     e.stopPropagation()
-    invokeOnEventClickCallback($app, calendarEvent)
+    invokeOnEventClickCallback($app, calendarEvent, e)
   }
 
   const handleOnDoubleClick = (e: MouseEvent) => {
     e.stopPropagation()
-    invokeOnEventDoubleClickCallback($app, calendarEvent)
+    invokeOnEventDoubleClickCallback($app, calendarEvent, e)
   }
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.stopPropagation()
       setClickedEvent(e, calendarEvent)
-      invokeOnEventClickCallback($app, calendarEvent)
+      invokeOnEventClickCallback($app, calendarEvent, e)
       nextTick(() => {
         focusModal($app)
       })
