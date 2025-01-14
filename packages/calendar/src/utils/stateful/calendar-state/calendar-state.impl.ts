@@ -36,15 +36,14 @@ export const createCalendarState = (
 
     const lastRange =
       lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE
+    if (!_range.value) return
+    if (
+      lastRange?.start === _range.value.start &&
+      lastRange?.end === _range.value.end
+    )
+      return
     Object.values(calendarConfig.plugins || {}).forEach((plugin) => {
-      if (!_range.value) return
-      if (
-        lastRange?.start === _range.value.start &&
-        lastRange?.end === _range.value.end
-      )
-        return
-
-      plugin?.onRangeUpdate?.(_range.value)
+      plugin?.onRangeUpdate?.(_range.value!)
       lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE =
         _range.value
     })
