@@ -1,4 +1,5 @@
 import CalendarAppSingleton from './calendar/calendar-app-singleton'
+import { DateRange } from '../types/date-range'
 
 export default interface PluginBase<Name extends string> {
   name: Name
@@ -24,6 +25,8 @@ export default interface PluginBase<Name extends string> {
    * */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onRender?($app: CalendarAppSingleton | any): void
+
+  onRangeUpdate?: (range: DateRange) => void
 
   destroy?(): void
 }

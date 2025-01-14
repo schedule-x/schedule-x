@@ -10,11 +10,14 @@ import { EventsFacadeImpl } from './util/stateful/events-facade'
 import { createRecurrencesForEvent } from './util/stateless/create-recurrences-for-event'
 import { ResizeUpdater } from './util/stateful/resize-updater'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
+import { parseSXToRFC5545 } from '@schedule-x/recurrence/src/parsers/rrule/parse-rrule'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
 
   private $app: CalendarAppSingleton | null = null
+  private range: DateRange | null = null
 
   /**
    * Must be before render, because if we run it onRender, we will create recurrences for the recurrences that were added
@@ -22,6 +25,13 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
    * */
   beforeRender($app: CalendarAppSingleton): void {
     this.$app = $app
+    this.range = $app.calendarState.range.value
+    this.createRecurrencesForEvents()
+  }
+
+  onRangeUpdate(range: DateRange): void {
+    this.range = range
+    this.removeAllEventRecurrences()
     this.createRecurrencesForEvents()
   }
 
@@ -94,11 +104,30 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     calendarEvent: CalendarEventInternal,
     rrule: string
   ) {
+    // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
+    if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
+      if (this.range) {
+        if (!rrule.endsWith(';')) rrule += ';'
+        rrule += `UNTIL=${parseSXToRFC5545(this.range.end)};`
+      } else {
+        console.warn(
+          'No date range found in event recurrence plugin. Aborting creation of recurrences to prevent infinite recursion.'
+        )
+        return []
+      }
+    }
+
     return createRecurrencesForEvent(
       this.$app as CalendarAppSingleton,
       calendarEvent,
       rrule
     )
+  }
+
+  private removeAllEventRecurrences() {
+    this.$app!.calendarEvents.list.value = [
+      ...this.$app!.calendarEvents.list.value.filter((event) => !event.isCopy),
+    ]
   }
 }
 
