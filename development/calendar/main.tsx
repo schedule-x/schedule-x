@@ -148,9 +148,9 @@ const calendar = createCalendar({
     //   })
     // },
 
-    onRangeUpdate(range) {
-      console.log('onRangeUpdate', range)
-    },
+    // onRangeUpdate(range) {
+    //   console.log('onRangeUpdate', range)
+    // },
 
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
