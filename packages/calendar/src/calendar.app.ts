@@ -36,10 +36,15 @@ export default class CalendarApp {
   }
 
   destroy(): void {
-    this.calendarContainerEl?.remove()
     Object.values(this.$app.config.plugins || {}).forEach((plugin) => {
-      plugin?.destroy?.()
+      if (!plugin || !plugin.destroy) return
+
+      plugin.destroy()
     })
+
+    if (this.calendarContainerEl) {
+      render(null, this.calendarContainerEl)
+    }
   }
 
   setTheme(theme: 'light' | 'dark'): void {
