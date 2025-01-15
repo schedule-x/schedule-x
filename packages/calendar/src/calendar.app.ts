@@ -10,6 +10,7 @@ import { PluginBase } from '@schedule-x/shared/src'
 
 export default class CalendarApp {
   public events: EventsFacade
+  private calendarContainerEl: HTMLElement | undefined
 
   constructor(private $app: CalendarAppSingleton) {
     this.events = new EventsFacadeImpl(this.$app)
@@ -30,7 +31,20 @@ export default class CalendarApp {
   }
 
   render(el: HTMLElement): void {
+    this.calendarContainerEl = el
     render(createElement(CalendarWrapper, { $app: this.$app }), el)
+  }
+
+  destroy(): void {
+    Object.values(this.$app.config.plugins || {}).forEach((plugin) => {
+      if (!plugin || !plugin.destroy) return
+
+      plugin.destroy()
+    })
+
+    if (this.calendarContainerEl) {
+      render(null, this.calendarContainerEl)
+    }
   }
 
   setTheme(theme: 'light' | 'dark'): void {
