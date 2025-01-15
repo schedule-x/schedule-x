@@ -31,6 +31,7 @@ export default class CalendarApp {
   }
 
   render(el: HTMLElement): void {
+    this.calendarContainerEl = el
     render(createElement(CalendarWrapper, { $app: this.$app }), el)
   }
 
