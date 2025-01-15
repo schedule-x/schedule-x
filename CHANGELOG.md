@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/schedule-x/schedule-x/compare/v2.14.0...v2.14.1) (2025-01-15)
+
+### Bug Fixes
+
+- add destroy method, to be consumed by framework adapters ([#875](https://github.com/schedule-x/schedule-x/issues/875)) ([40c471d](https://github.com/schedule-x/schedule-x/commit/40c471d47e418a1fc6547efca3d0b7d92c9d1e66))
+
 # [2.14.0](https://github.com/schedule-x/schedule-x/compare/v2.13.0...v2.14.0) (2025-01-15)
 
 ### Features
