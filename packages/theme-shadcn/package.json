@@ -12,6 +12,7 @@
     "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
   },
   "exports": {
+    ".": "./dist/index.css",
     "./dist/index.css": "./dist/index.css"
   },
   "files": [
