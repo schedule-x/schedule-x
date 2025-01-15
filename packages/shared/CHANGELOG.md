@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/schedule-x/schedule-x/compare/v2.13.0...v2.14.0) (2025-01-15)
+
+### Features
+
+- **calendar:** add uievent to onEventClick and onEventDoubleClick callback ([#870](https://github.com/schedule-x/schedule-x/issues/870)) ([f9fa6e7](https://github.com/schedule-x/schedule-x/commit/f9fa6e79faf705e98d357f3abf711a08bc52c26c))
+- **event-recurrence:** enable usage of infinite events ([#869](https://github.com/schedule-x/schedule-x/issues/869)) ([2c8ebaf](https://github.com/schedule-x/schedule-x/commit/2c8ebafda36aaa9dcb05272db08d6526bead02c1))
+
 # [2.13.0](https://github.com/schedule-x/schedule-x/compare/v2.12.1...v2.13.0) (2025-01-06)
 
 ### Features
