@@ -104,23 +104,18 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     calendarEvent: CalendarEventInternal,
     rrule: string
   ) {
-    // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
-    if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
-      if (this.range) {
-        if (!rrule.endsWith(';')) rrule += ';'
-        rrule += `UNTIL=${parseSXToRFC5545(this.range.end)};`
-      } else {
-        console.warn(
-          'No date range found in event recurrence plugin. Aborting creation of recurrences to prevent infinite recursion.'
-        )
-        return []
-      }
+    if (!this.range) {
+      console.warn(
+        'No date range found in event recurrence plugin. Aborting creation of recurrences to prevent infinite recursion.'
+      )
+      return []
     }
 
     return createRecurrencesForEvent(
       this.$app as CalendarAppSingleton,
       calendarEvent,
-      rrule
+      rrule,
+      this.range
     )
   }
 

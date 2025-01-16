@@ -4,12 +4,20 @@ import { parseSXToRFC5545 } from '../../../../recurrence/src/parsers/rrule/parse
 import { AugmentedEvent } from '../../types/augmented-event'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 export const createRecurrencesForEvent = (
   $app: CalendarAppSingleton,
   calendarEvent: CalendarEventInternal,
-  rrule: string
+  rrule: string,
+  range: DateRange
 ) => {
+  // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
+  if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
+    if (!rrule.endsWith(';')) rrule += ';'
+    rrule += `UNTIL=${parseSXToRFC5545(range.end)};`
+  }
+
   const recurrenceSet = new RecurrenceSet({
     dtstart: parseSXToRFC5545(calendarEvent.start),
     dtend: parseSXToRFC5545(calendarEvent.end),
