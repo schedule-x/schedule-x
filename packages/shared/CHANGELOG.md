@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.2](https://github.com/schedule-x/schedule-x/compare/v2.14.1...v2.14.2) (2025-01-16)
+
+**Note:** Version bump only for package @schedule-x/shared
+
 ## [2.14.1](https://github.com/schedule-x/schedule-x/compare/v2.14.0...v2.14.1) (2025-01-15)
 
 **Note:** Version bump only for package @schedule-x/shared

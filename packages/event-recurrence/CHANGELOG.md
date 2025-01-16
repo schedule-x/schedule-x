@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.2](https://github.com/schedule-x/schedule-x/compare/v2.14.1...v2.14.2) (2025-01-16)
+
+### Bug Fixes
+
+- **event-recurrence:** infinite events in events service ([#877](https://github.com/schedule-x/schedule-x/issues/877)) ([fe18d26](https://github.com/schedule-x/schedule-x/commit/fe18d267a88d8e884304bf66c4811c91e50abdf1))
+
 ## [2.14.1](https://github.com/schedule-x/schedule-x/compare/v2.14.0...v2.14.1) (2025-01-15)
 
 **Note:** Version bump only for package @schedule-x/event-recurrence
