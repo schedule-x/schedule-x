@@ -41,6 +41,26 @@ describe('Events facade for recurrence plugin', () => {
 
       expect($app.calendarEvents.list.value.length).toBe(3)
     })
+
+    it('should add an infinite event', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2025-01-01',
+        defaultView: 'month-grid',
+      })
+      const plugin = createEventsServicePlugin()
+      plugin.beforeRender!($app)
+      expect($app.calendarEvents.list.value.length).toBe(0)
+
+      const event = {
+        id: '1',
+        start: '2025-01-01',
+        end: '2025-01-01',
+        rrule: 'FREQ=DAILY',
+      }
+      plugin.add(event)
+
+      expect($app.calendarEvents.list.value.length).toBe(33)
+    })
   })
 
   describe('Getting a single event by id', () => {
@@ -197,7 +217,10 @@ describe('Events facade for recurrence plugin', () => {
 
   describe('Setting the whole list of events', () => {
     it('should set the whole list of events', () => {
-      const $app = __createAppWithViews__()
+      const $app = __createAppWithViews__({
+        selectedDate: '2021-01-01',
+        defaultView: 'week',
+      })
       const plugin = createEventsServicePlugin()
       plugin.beforeRender!($app)
       expect($app.calendarEvents.list.value.length).toBe(0)
@@ -224,11 +247,22 @@ describe('Events facade for recurrence plugin', () => {
         ])
       )
 
-      plugin.set([{ id: '3', start: '2021-01-01', end: '2021-01-01' }])
-      expect(plugin.getAll()).toHaveLength(1)
+      const infiniteEvent = {
+        id: '5',
+        start: '2021-01-01',
+        end: '2021-01-01',
+        rrule: 'FREQ=DAILY',
+      }
+      plugin.set([
+        { id: '3', start: '2021-01-01', end: '2021-01-01' },
+        infiniteEvent,
+      ])
+      expect(plugin.getAll()).toHaveLength(2)
+      expect($app.calendarEvents.list.value.length).toBe(4)
       expect(plugin.getAll()).toEqual(
         expect.arrayContaining([
           { id: '3', start: '2021-01-01', end: '2021-01-01' },
+          infiniteEvent,
         ])
       )
     })

@@ -15,9 +15,18 @@ export class EventsFacadeImpl implements EventsFacade {
       const newEvent = externalEventToInternal(event, this.$app.config)
       newEventsList.push(newEvent)
       const rrule = newEvent._getForeignProperties().rrule
-      if (rrule) {
+      if (
+        rrule &&
+        typeof rrule === 'string' &&
+        this.$app.calendarState.range.value
+      ) {
         newEventsList.push(
-          ...createRecurrencesForEvent(this.$app, newEvent, rrule as string)
+          ...createRecurrencesForEvent(
+            this.$app,
+            newEvent,
+            rrule,
+            this.$app.calendarState.range.value
+          )
         )
       }
     }
@@ -30,9 +39,18 @@ export class EventsFacadeImpl implements EventsFacade {
     const newEventsList = [...this.$app.calendarEvents.list.value, newEvent]
     const rrule = newEvent._getForeignProperties().rrule
 
-    if (rrule) {
+    if (
+      rrule &&
+      typeof rrule === 'string' &&
+      this.$app.calendarState.range.value
+    ) {
       newEventsList.push(
-        ...createRecurrencesForEvent(this.$app, newEvent, rrule as string)
+        ...createRecurrencesForEvent(
+          this.$app,
+          newEvent,
+          rrule,
+          this.$app.calendarState.range.value
+        )
       )
     }
     this.$app.calendarEvents.list.value = newEventsList
@@ -60,9 +78,18 @@ export class EventsFacadeImpl implements EventsFacade {
     const updatedEvent = externalEventToInternal(event, this.$app.config)
     const copiedEvents = [...this.$app.calendarEvents.list.value, updatedEvent]
     const rrule = (updatedEvent as AugmentedEvent)._getForeignProperties().rrule
-    if (rrule) {
+    if (
+      rrule &&
+      typeof rrule === 'string' &&
+      this.$app.calendarState.range.value
+    ) {
       copiedEvents.push(
-        ...createRecurrencesForEvent(this.$app, updatedEvent, rrule as string)
+        ...createRecurrencesForEvent(
+          this.$app,
+          updatedEvent,
+          rrule,
+          this.$app.calendarState.range.value
+        )
       )
     }
     this.$app.calendarEvents.list.value = copiedEvents
