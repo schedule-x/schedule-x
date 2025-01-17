@@ -10,6 +10,7 @@ import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invo
 import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import { randomStringId } from '@schedule-x/shared'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -27,7 +28,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
 
   const customComponent = $app.config._customComponentFns.monthAgendaEvent
   const customComponentId = customComponent
-    ? 'custom-month-agenda-event-' + calendarEvent.id
+    ? 'custom-month-agenda-event-' + randomStringId()
     : undefined
 
   useEffect(() => {
