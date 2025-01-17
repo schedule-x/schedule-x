@@ -3,12 +3,10 @@ name: Bug report
 about: Create a report to help us improve
 title: ""
 labels: ""
-assignees: ""
 ---
 
 Thank you for wanting to take the time to report a problem. In order to increase the chances of the issue being 
-resolved,
-please take a moment to give as much relevant information as possible.
+resolved, please take a moment to give as much relevant information as possible.
 
 **Context:**
 
@@ -21,6 +19,10 @@ please take a moment to give as much relevant information as possible.
 A clear and concise description of how the bug appears to you.
 
 **To Reproduce**
+
+Please consider setting up a reproduction example, for example on Stackblitz or CodeSandbox.
+This will **greatly** increase the chances of the bug being resolved quickly. Otherwise, please at least provide a
+step-by-step guide on how to reproduce the bug.
 
 Steps to reproduce the behavior:
 
