@@ -10,7 +10,7 @@ import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invo
 import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
-import { randomStringId } from '@schedule-x/shared'
+import { randomStringId } from '@schedule-x/shared/src'
 
 type props = {
   calendarEvent: CalendarEventInternal
