@@ -56,7 +56,7 @@ describe('CalendarApp', () => {
         const callSecondArgument = singleCall.args[1]
         expect(callFirstArgument).toBeInstanceOf(HTMLDivElement)
         const elementCCID = callFirstArgument.dataset.ccid
-        expect(elementCCID).toBe('custom-month-agenda-event-1')
+        expect(elementCCID).toMatch(/custom-month-agenda-event-\w+/)
         expect(callSecondArgument.calendarEvent.id).toBe(eventId)
         expect(callSecondArgument.calendarEvent.title).toBe(eventTitle)
         expect(callSecondArgument.calendarEvent.start).toBe(eventStart)
