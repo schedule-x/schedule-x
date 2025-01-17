@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/calendar",
   "umdName": "SXCalendar",
-  "version": "2.14.2",
+  "version": "2.14.3",
   "description": "Schedule-X calendar component",
   "author": {
     "name": "Tom Österlund",

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
+
+### Bug Fixes
+
+- **calendar:** custom components in month agenda ([#881](https://github.com/schedule-x/schedule-x/issues/881)) ([eff57f7](https://github.com/schedule-x/schedule-x/commit/eff57f7e95e0dd96c1d00e2d2454c4bc780dc2f4))
+
 ## [2.14.2](https://github.com/schedule-x/schedule-x/compare/v2.14.1...v2.14.2) (2025-01-16)
 
 **Note:** Version bump only for package @schedule-x/calendar
