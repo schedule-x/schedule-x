@@ -19,4 +19,3 @@ Add any other context or screenshots about the feature request here.
 **Things that could speed up the process**
 - [ ] I can picture implementing at least parts of this feature
 - [ ] I believe I know how to do this, and am willing to implement the whole thing.
-- [ ] I have a Schedule-X premium license
