@@ -79,15 +79,19 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
     })
     this.setCalendarEventPointerEventsTo('auto')
+
+    const updatedEvent = this.createUpdatedEvent()
+
     const shouldAbort = testIfShouldAbort(
       this.$app,
-      this.calendarEvent,
+      updatedEvent,
       this.originalStart,
       this.originalEnd
     )
+
     if (shouldAbort) return
 
-    this.updateCalendarEvent()
+    this.updateCalendarEvent(updatedEvent)
   }
 
   private setCalendarEventPointerEventsTo = (
@@ -104,7 +108,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     })
   }
 
-  private updateCalendarEvent = () => {
+  private createUpdatedEvent = (): CalendarEventInternal => {
     const eventCopy = deepCloneEvent(this.calendarEvent, this.$app)
     const diffOldDateAndNewDate = calculateDaysDifference(
       dateFromDateTime(this.calendarEvent.start),
@@ -112,6 +116,11 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     )
     eventCopy.start = addDays(eventCopy.start, diffOldDateAndNewDate)
     eventCopy.end = addDays(eventCopy.end, diffOldDateAndNewDate)
-    updateDraggedEvent(this.$app, eventCopy, this.originalStart)
+
+    return eventCopy
+  }
+
+  private updateCalendarEvent = (newEvent: CalendarEventInternal) => {
+    updateDraggedEvent(this.$app, newEvent, this.originalStart)
   }
 }
