@@ -23,7 +23,7 @@
     "@codemirror/lang-javascript": "^6.2.1",
     "@fontsource-variable/podkova": "^5.1.0",
     "@gitbeaker/rest": "^41.3.0",
-    "@lemonsqueezy/lemonsqueezy.js": "^3.3.1",
+    "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
     "@schedule-x/calendar": "^2.4.0",
     "@schedule-x/date-picker": "^2.4.0",
     "@schedule-x/drag-and-drop": "^2.4.0",
