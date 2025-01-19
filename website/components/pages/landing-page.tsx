@@ -19,7 +19,7 @@ export default function LandingPage() {
     <>
       <div className={'landingPage page-wrapper'}>
         <h1>
-          <span className={'headingGradient'}>The modern</span> JavaScript event calendar
+          <span className={'headingGradient'}>Modern tools</span> for building an event calendar
         </h1>
 
         <h2>
