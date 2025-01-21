@@ -3,7 +3,7 @@ title: 'Chat plugin'
 description: 'Plugin for generating events by an AI chat assistant'
 ---
 
-# Chat
+# AI assistant
 
 A plugin that allows you to generate events by interacting with an AI chat assistant.
 
@@ -21,10 +21,12 @@ import {Callout} from "nextra/components";
 
 ## 2. Installation
 
-### 2.1 Set up Schedule-X platform auth (only once)
+### 2.1 Set up Schedule-X platform auth in `.npmrc` (only once)
 
-Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
-
+```
+@sx-platform:registry=https://gitlab.schedule-x.com/api/v4/packages/npm/
+//gitlab.schedule-x.com/api/v4/packages/npm/:_authToken=${SX_PLATFORM_TOKEN}
+```
 
 ### 2.2 Install
 
