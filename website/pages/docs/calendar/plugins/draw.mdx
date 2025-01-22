@@ -64,7 +64,10 @@ import { createDrawPlugin } from "@sx-premium/draw";
 const drawPlugin = createDrawPlugin({
   onFinishDrawing: (event) => {
     // do something, like saving the event to the server
-  }
+  },
+
+  // (Optional) configure the intervals, in minutes, at which a time grid-event can be drawn. Valid values: 15, 30, 60
+  snapDuration: 30
 })
 
 const calendar = createCalendar({
