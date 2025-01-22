@@ -42,6 +42,7 @@ export default class CalendarConfigBuilder
     nDays: 7,
     eventWidth: 100,
     timeAxisFormatOptions: { hour: 'numeric' },
+    eventOverlap: true,
   }
   monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined
