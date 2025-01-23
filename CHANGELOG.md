@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/schedule-x/schedule-x/compare/v2.14.3...v2.15.0) (2025-01-23)
+
+### Bug Fixes
+
+- **drag-and-drop:** fix onBeforeEventUpdate in month grid ([#884](https://github.com/schedule-x/schedule-x/issues/884)) ([db84146](https://github.com/schedule-x/schedule-x/commit/db84146d29faab95c45d9c87037bef37f3fc752c))
+
+### Features
+
+- add croatian (hr-HR) translations ([#887](https://github.com/schedule-x/schedule-x/issues/887)) ([d6776bf](https://github.com/schedule-x/schedule-x/commit/d6776bfeb47d44d01d58d3092760872045460304))
+
 ## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
 
 ### Bug Fixes
