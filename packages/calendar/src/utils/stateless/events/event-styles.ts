@@ -62,12 +62,11 @@ export const getLeftRule = (
 export const getWidthRule = (
   leftRule: number,
   eventWidth: number,
-  calendarEvent: CalendarEventInternal,
+  maxConcurrentEvents: number | undefined,
   eventOverlap: boolean
 ) => {
-  if (eventOverlap || !calendarEvent._maxConcurrentEvents)
-    return eventWidth - leftRule
-  return eventWidth / calendarEvent._maxConcurrentEvents
+  if (eventOverlap || !maxConcurrentEvents) return eventWidth - leftRule
+  return eventWidth / maxConcurrentEvents
 }
 
 export const getBorderRule = (calendarEvent: CalendarEventInternal) => {

@@ -160,7 +160,7 @@ export default function TimeGridEvent({
     calendarEvent._maxConcurrentEvents &&
     calendarEvent._maxConcurrentEvents > 1
   )
-    classNames.push('is-overlap')
+    classNames.push('is-event-overlap')
   if (calendarEvent._options?.additionalClasses)
     classNames.push(...calendarEvent._options.additionalClasses)
 
@@ -209,7 +209,7 @@ export default function TimeGridEvent({
           width: `${getWidthRule(
             leftRule,
             isCopy ? 100 : $app.config.weekOptions.value.eventWidth,
-            calendarEvent,
+            calendarEvent._maxConcurrentEvents,
             $app.config.weekOptions.value.eventOverlap
           )}%`,
           backgroundColor: customComponent
