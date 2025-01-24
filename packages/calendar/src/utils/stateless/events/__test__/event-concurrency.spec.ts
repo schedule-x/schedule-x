@@ -268,17 +268,17 @@ describe('Event concurrency', () => {
     const timeEvent1 = {
       start: '2025-01-28 13:30',
       end: '2025-01-28 17:00',
-      id: '5',
+      id: '1',
     }
     const timeEvent2 = {
       start: '2025-01-28 14:00',
       end: '2025-01-28 15:00',
-      id: '6',
+      id: '2',
     }
     const timeEvent3 = {
       start: '2025-01-28 15:00',
       end: '2025-01-28 16:30',
-      id: '7',
+      id: '3',
     }
     const event1 = createEvent(timeEvent1)
     const event2 = createEvent(timeEvent2)
