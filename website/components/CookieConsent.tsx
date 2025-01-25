@@ -85,7 +85,7 @@ const CookieConsent = () => {
     <div style={styles.container}>
       <div className={'cookieConsentContent'}>
         <p style={styles.text}>
-          We use cookies for marketing purposes. By clicking "Accept", you consent to the use of all cookies. If you decline, we will only use functional cookies. You can read more about our cookie policy <a style={{textDecoration: 'underline'}} href="/cookie-policy">here</a>.
+          We use cookies for marketing purposes. By clicking "Accept", you consent to the use of all cookies. If you decline, we will only use functional cookies. You can read more about our cookie policy <a style={{textDecoration: 'underline'}} href="/privacy">here</a>.
         </p>
         <div style={styles.buttonContainer}>
           <button onClick={handleAccept} style={{ ...styles.button, ...styles.acceptButton }}>
