@@ -41,6 +41,18 @@ export default function CustomFooter() {
             style={{ textDecoration: 'underline' }}>
             <a href="/attributions">Attributions</a>
           </div>
+
+          <div
+            style={{ textDecoration: 'underline' }}>
+            <a href="/privacy">Privacy policy</a>
+          </div>
+
+          {/*<div*/}
+          {/*  style={{ textDecoration: 'underline' }}>*/}
+          {/*  <a href="javascript:document.dispatchEvent(new Event('cookie_consent_show'))">*/}
+          {/*    Show Cookie Settings*/}
+          {/*  </a>*/}
+          {/*</div>*/}
         </div>
       </div>
     </footer>

@@ -19,6 +19,7 @@ import 'swiper/css';
 import '@fontsource-variable/podkova';
 
 import Script from 'next/script'
+import CookieConsent from '../components/CookieConsent'
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
@@ -35,5 +36,6 @@ export default function MyApp({ Component, pageProps }) {
     <Script src="https://lmsqueezy.com/affiliate.js" defer/>
     <Script src="https://widget.senja.io/widget/68874853-36dd-407e-86f3-b6f17ba0fa99/platform.js"
             type="text/javascript" async></Script>
+    <CookieConsent />
   </main>
 }
