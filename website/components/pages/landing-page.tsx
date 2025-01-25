@@ -65,6 +65,11 @@ export default function LandingPage() {
             </SwiperSlide>
 
             <SwiperSlide>
+              <img height={40} width={125} style={{ position: 'relative', top: '-2px' }}
+                   src="/images/logos/iService.png" alt="iService"/>
+            </SwiperSlide>
+
+            <SwiperSlide>
               <img height={40} width={120} style={{ position: 'relative', top: '-4px' }}
                    src="/images/logos/elevent_horz_color.svg" alt="Book Elevent"/>
             </SwiperSlide>
@@ -72,11 +77,6 @@ export default function LandingPage() {
             <SwiperSlide>
               <img height={40} width={160} style={{ position: 'relative', top: '-10px' }}  src="/images/logos/statushub.svg" alt="Status Hub"/>
             </SwiperSlide>
-
-            {/*<SwiperSlide>*/}
-            {/*  <img height={40} width={125} style={{ position: 'relative', top: '-2px' }}*/}
-            {/*       src="/images/logos/iService.png" alt="iService"/>*/}
-            {/*</SwiperSlide>*/}
 
             <SwiperSlide>
               <img height={40} width={160} src="/images/logos/acteamo.png" alt="Acteamo"/>
