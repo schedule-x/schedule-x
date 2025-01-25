@@ -15,5 +15,6 @@ export const calendarSlSI: CalendarTranslations = {
   'Full day- and multiple day events': 'Celodnevni in večdnevni dogodki',
   'Link to {{n}} more events on {{date}}':
     'Povezava do {{n}} drugih dogodkov dne {{date}}',
-  'Link to 1 more event on {{date}}': 'Povezava do še enega dogodka dne {{date}}',
+  'Link to 1 more event on {{date}}':
+    'Povezava do še enega dogodka dne {{date}}',
 }
