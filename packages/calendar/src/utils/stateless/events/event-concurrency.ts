@@ -43,6 +43,7 @@ export const handleEventConcurrency = (
           NpreviousConcurrentEvents + NupcomingConcurrentEvents + 1
         currentEvent._previousConcurrentEvents = NpreviousConcurrentEvents
 
+        // TODO v3: try to use _maxConcurrentEvents for both overlap/no overlap mode, and remove _totalConcurrentEvents
         let maxOverlappingEvents = 0
         const timePoints: { time: string; type: 'start' | 'end' }[] = []
 
