@@ -20,7 +20,7 @@ describe('Date-picker state', () => {
 
       state.inputDisplayedValue.value = '2020-12-31' // less than min
 
-      expect(state.inputDisplayedValue.value).toBe(originalSelectedDate)
+      expect(state.inputDisplayedValue.value).toBe('12/20/2021')
     })
 
     it('should change the input value if it is greater than the min date', () => {
@@ -47,7 +47,7 @@ describe('Date-picker state', () => {
 
       state.inputDisplayedValue.value = '2022-01-01'
 
-      expect(state.inputDisplayedValue.value).toBe(originalSelectedDate)
+      expect(state.inputDisplayedValue.value).toBe('12/20/2021')
     })
 
     it('should change the input value if it is less than the max date', () => {

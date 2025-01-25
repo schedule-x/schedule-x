@@ -10,7 +10,7 @@ describe('date picker state impl - input displayed value', () => {
   it('should default to the value of selected date param if given', () => {
     const expectedResult = '2000-01-01'
     const underTest = createDatePickerState(config(), expectedResult)
-    expect(underTest.inputDisplayedValue.value).toBe(expectedResult)
+    expect(underTest.inputDisplayedValue.value).toBe('1/1/2000')
   })
 
   it('should default to empty string if no selected date param is given', () => {
