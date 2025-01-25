@@ -21,17 +21,8 @@ import {Callout} from "nextra/components";
 
 ## 2. Installation
 
-### 2.1 Set up Schedule-X platform auth in `.npmrc` (only once)
-
-```
-@sx-platform:registry=https://gitlab.schedule-x.com/api/v4/packages/npm/
-//gitlab.schedule-x.com/api/v4/packages/npm/:_authToken=${SX_PLATFORM_TOKEN}
-```
-
-### 2.2 Install
-
 ```bash copy
-npm install @sx-platorm/ai-assistant
+npm install @schedule-x/platform-ai-assistant
 ```
 
 ## Usage
@@ -57,6 +48,9 @@ import {
 } from '@schedule-x/calendar'
 import { createAIAssistant } from "@sx-platform/ai-assistant";
 import { createEventRecurrencePlugin, createEventsServicePlugin } from "@schedule-x/event-recurrence";
+
+import '@schedule-x/platform-ai-assistant/index.css'
+import '@schedule-x/theme-default/dist/calendar.css'
 
 const recurrencePlugin = createEventRecurrencePlugin();
 const eventsServicePlugin = createEventsServicePlugin();
@@ -92,13 +86,14 @@ Send a request to the Schedule-X Platform API to get a bearer token.
 curl -X POST https://platform.schedule-x.com/user/login \
   -H 'Content-Type: application/json' \
   -d '{
-    "api_key": "your-key"
+    "api_key": "your_key",
+    "group_id": your_group_number,
+    "id": "1"
   }'
 ```
 
 This will return a response with a token that you can use in the `createAIAssistant` config.
 
-## Changelog
+## Examples, including server side authentication
 
-See [changelog](/premium-changelog) page.
-
+* Next.js: https://github.com/schedule-x/react-examples/tree/main/ai-assistant
