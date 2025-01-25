@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.1](https://github.com/schedule-x/schedule-x/compare/v2.15.0...v2.15.1) (2025-01-25)
+
+**Note:** Version bump only for package @schedule-x/drag-and-drop
+
+# [2.15.0](https://github.com/schedule-x/schedule-x/compare/v2.14.3...v2.15.0) (2025-01-23)
+
+### Bug Fixes
+
+- **drag-and-drop:** fix onBeforeEventUpdate in month grid ([#884](https://github.com/schedule-x/schedule-x/issues/884)) ([db84146](https://github.com/schedule-x/schedule-x/commit/db84146d29faab95c45d9c87037bef37f3fc752c))
+
 ## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
 
 **Note:** Version bump only for package @schedule-x/drag-and-drop

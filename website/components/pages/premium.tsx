@@ -93,6 +93,14 @@ export default function PremiumPage() {
     return lifetimeVariants.find((variant) => variant.id === selectedVariantLifetime)?.price
   }, [selectedVariantLifetime])
 
+  const sendTrackingToGoogleAds = () => {
+    if ('gtag' in window) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      gtag('event', 'conversion', { 'send_to': 'AW-16716598695/fmXbCKu755QaEKebjKM-', 'transaction_id': '' })
+    }
+  }
+
   const startCheckout = (licenseType: 'yearly' | 'lifetime') => {
     initLemonSqueezy()
     const variantId = licenseType === 'yearly' ? selectedVariantYearly : selectedVariantLifetime
@@ -106,6 +114,7 @@ export default function PremiumPage() {
     })
       .then((response) => response.json())
       .then((data: { url: string }) => {
+        sendTrackingToGoogleAds()
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         LemonSqueezy.Url.Open(data.url);

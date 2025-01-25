@@ -55,10 +55,12 @@ import { srRS } from './locales/sr-RS'
 import { datePickerSrRS } from './locales/sr-RS/date-picker'
 import { ltLT } from './locales/lt-LT'
 import { datePickerLtLT } from './locales/lt-LT/date-picker'
-
-import { translate } from './translator/translate'
+import { hrHR } from './locales/hr-HR'
+import { datePickerHrHR } from './locales/hr-HR/date-picker'
 import { slSI } from './locales/sl-SI'
 import { datePickerSlSI } from './locales/sl-SI/date-picker'
+
+import { translate } from './translator/translate'
 
 const translations = {
   deDE,
@@ -89,6 +91,7 @@ const translations = {
   srLatnRS,
   srRS,
   ltLT,
+  hrHR,
   slSI,
 }
 
@@ -121,6 +124,7 @@ const datePickerTranslations = {
   srLatnRS: datePickerSrLatnRS,
   srRS: datePickerSrRS,
   ltLT: datePickerLtLT,
+  hrHr: datePickerHrHR,
   slSI: datePickerSlSI,
 }
 
@@ -155,5 +159,6 @@ export {
   caES,
   srLatnRS,
   ltLT,
+  hrHR,
   slSI,
 }
