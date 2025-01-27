@@ -24,6 +24,7 @@ export type WeekOptions = {
   nDays: number
   eventWidth: number
   timeAxisFormatOptions: Intl.DateTimeFormatOptions
+  eventOverlap: boolean
 }
 
 export type MonthGridOptions = {

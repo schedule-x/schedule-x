@@ -42,6 +42,39 @@ export const handleEventConcurrency = (
         currentEvent._totalConcurrentEvents =
           NpreviousConcurrentEvents + NupcomingConcurrentEvents + 1
         currentEvent._previousConcurrentEvents = NpreviousConcurrentEvents
+
+        // TODO v3: try to use _maxConcurrentEvents for both overlap/no overlap mode, and remove _totalConcurrentEvents
+        let maxOverlappingEvents = 0
+        const timePoints: { time: string; type: 'start' | 'end' }[] = []
+
+        concurrentEventsCache.forEach((cachedEvent) => {
+          if (
+            cachedEvent.end > currentEvent.start &&
+            cachedEvent.start < currentEvent.end
+          ) {
+            timePoints.push({ time: cachedEvent.start, type: 'start' })
+            timePoints.push({ time: cachedEvent.end, type: 'end' })
+          }
+        })
+
+        timePoints.sort(
+          (a, b) => a.time.localeCompare(b.time) || (a.type === 'end' ? -1 : 1)
+        )
+
+        let currentOverlap = 0
+        timePoints.forEach((point) => {
+          if (point.type === 'start') {
+            currentOverlap++
+            maxOverlappingEvents = Math.max(
+              maxOverlappingEvents,
+              currentOverlap
+            )
+          } else {
+            currentOverlap--
+          }
+        })
+
+        currentEvent._maxConcurrentEvents = maxOverlappingEvents
       }
       concurrentEventsCache = []
       return handleEventConcurrency(sortedEvents, concurrentEventsCache, i + 1)
@@ -57,6 +90,7 @@ export const handleEventConcurrency = (
 
     event._totalConcurrentEvents = 1
     event._previousConcurrentEvents = 0
+    event._maxConcurrentEvents = 1
   }
 
   return sortedEvents

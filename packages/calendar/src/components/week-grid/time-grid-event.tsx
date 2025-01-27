@@ -155,6 +155,12 @@ export default function TimeGridEvent({
   const borderRule = getBorderRule(calendarEvent)
   const classNames = ['sx__time-grid-event', 'sx__event']
   if (isCopy) classNames.push('is-event-copy')
+  if (
+    !$app.config.weekOptions.value.eventOverlap &&
+    calendarEvent._maxConcurrentEvents &&
+    calendarEvent._maxConcurrentEvents > 1
+  )
+    classNames.push('is-event-overlap')
   if (calendarEvent._options?.additionalClasses)
     classNames.push(...calendarEvent._options.additionalClasses)
 
@@ -200,7 +206,12 @@ export default function TimeGridEvent({
             $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
-          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.value.eventWidth)}%`,
+          width: `${getWidthRule(
+            leftRule,
+            isCopy ? 100 : $app.config.weekOptions.value.eventWidth,
+            calendarEvent._maxConcurrentEvents,
+            $app.config.weekOptions.value.eventOverlap
+          )}%`,
           backgroundColor: customComponent
             ? undefined
             : eventCSSVariables.backgroundColor,

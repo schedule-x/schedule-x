@@ -285,6 +285,7 @@ describe('createCalendarControlsPlugin', () => {
         eventWidth: 100,
         gridHeight: 200,
         timeAxisFormatOptions: { hour: 'numeric' },
+        eventOverlap: true,
       }
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
@@ -296,11 +297,12 @@ describe('createCalendarControlsPlugin', () => {
 
       expect(controlsPlugin.getWeekOptions()).toEqual(initialWeekOptions)
 
-      const newWeekOptions: WeekOptions = {
+      const newWeekOptions: Partial<WeekOptions> = {
         nDays: 3,
         eventWidth: 200,
         gridHeight: 300,
         timeAxisFormatOptions: { hour: '2-digit' },
+        eventOverlap: false,
       }
       controlsPlugin.setWeekOptions(newWeekOptions)
       expect(controlsPlugin.getWeekOptions()).toEqual(newWeekOptions)
@@ -314,6 +316,7 @@ describe('createCalendarControlsPlugin', () => {
         eventWidth: 100,
         gridHeight: 200,
         timeAxisFormatOptions: { hour: 'numeric' },
+        eventOverlap: true,
       }
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
@@ -335,6 +338,7 @@ describe('createCalendarControlsPlugin', () => {
         eventWidth: 200,
         gridHeight: 200,
         timeAxisFormatOptions: { hour: 'numeric' },
+        eventOverlap: true,
       })
     })
   })
