@@ -3,4 +3,14 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
 })
 
-module.exports = withNextra()
+module.exports = withNextra({
+  async redirects() {
+    return [
+      {
+        source: '/docs/calendar/supported-languages',
+        destination: '/docs/calendar/language',
+        permanent: true,
+      },
+    ]
+  },
+})
