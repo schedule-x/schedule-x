@@ -12,7 +12,7 @@ export const handleEventConcurrency = (
     if (
       concurrentEventsCache.length &&
       (!nextEvent ||
-        concurrentEventsCache.every((e) => e.end < nextEvent.start))
+        concurrentEventsCache.every((e) => e.end <= nextEvent.start))
     ) {
       concurrentEventsCache.push(event)
 
