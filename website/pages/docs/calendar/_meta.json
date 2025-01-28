@@ -27,8 +27,8 @@
     "title": "Demo",
     "href": "/demos/calendar"
   },
-  "supported-languages": {
-    "title": "Supported languages"
+  "language": {
+    "title": "Language"
   },
   "installing-premium": {
     "display": "hidden",

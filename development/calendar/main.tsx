@@ -27,6 +27,8 @@ import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
 import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
+import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
+import { translations } from '@schedule-x/translations/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -70,6 +72,14 @@ const eventsServicePlugin = createEventsServicePlugin()
 // const drawPlugin = new DrawPluginImpl()
 
 const calendar = createCalendar({
+  translations: mergeLocales(
+    translations,
+    {
+      enUS: {
+        'Week': '4 days'
+      }
+    }
+  ),
   weekOptions: {
     // gridHeight: 3000,
     // nDays: 3,
