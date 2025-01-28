@@ -1,9 +1,11 @@
 ---
-title: 'Supported languages'
-description: 'Learn which languages are supported by the Schedule-X calendar'
+title: 'Language'
+description: 'Learn which languages are supported by the Schedule-X calendar, and how to customize translations'
 ---
 
-# Supported languages for calendar
+# Language
+
+## Supported languages for calendar
 
 Schedule-X currently supports the following languages. For support of further languages, please open a PR, adding
 your translations under the folder: `packages/translations/src/locales/xx-XX`
@@ -40,3 +42,27 @@ your translations under the folder: `packages/translations/src/locales/xx-XX`
 | Turkish                  | tr-TR      |
 | Ukrainian                | uk-UA      |
 | Croatian                 | hr-HR      |
+
+## Customizing the translations
+
+To customize translations, you can use the `mergeLocales` helper to merge the original translations
+with your custom translations. This way, you can override the default translations with your own.
+
+Below is an example of how to customize the `Week` translation for the `en-US` locale, which could be useful if
+you configure the number of days shown in a week.
+
+```ts
+import { translations, mergeLocales } from '@schedule-x/translations'
+
+const calendar = createCalendar({
+  translations: mergeLocales(
+    translations,
+    {
+      enUS: {
+        'Week': '4 days'
+      }
+    }
+  ),
+  // ... other config options
+})
+```

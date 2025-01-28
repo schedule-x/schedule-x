@@ -61,6 +61,7 @@ import { slSI } from './locales/sl-SI'
 import { datePickerSlSI } from './locales/sl-SI/date-picker'
 
 import { translate } from './translator/translate'
+import { mergeLocales } from './utils/merge-locales'
 
 const translations = {
   deDE,
@@ -129,6 +130,7 @@ const datePickerTranslations = {
 }
 
 export {
+  mergeLocales,
   translate,
   translations,
   datePickerTranslations,
