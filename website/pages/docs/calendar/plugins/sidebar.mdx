@@ -49,10 +49,11 @@ npm install @sx-premium/sidebar
 
 ```js
 import { createCalendar } from '@schedule-x/calendar'
-import { createSidebarPlugin } from "@sx-premium/sidebar";
+import { createSidebarPlugin, translations as sidebarTranslations } from "@sx-premium/sidebar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createInteractiveEventModal, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
 import { createDragToCreatePlugin } from "@sx-premium/drag-to-create";
+import { translations, mergeLocales } from '@schedule-x/translations'
 
 import '@sx-premium/sidebar/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
@@ -102,7 +103,14 @@ const sidebar = createSidebarPlugin({
 })
 
 const calendar = createCalendar(
-  { /* config */ },
+  {
+    translations: mergeLocales(
+      translations,
+      sidebarTranslations,
+      modalTranslations
+    )
+    // ...config options
+  },
   [
     eventsService,
     sidebar,

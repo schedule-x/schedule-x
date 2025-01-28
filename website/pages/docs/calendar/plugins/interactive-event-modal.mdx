@@ -213,8 +213,11 @@ follow the same structure as the default fields, but additionally you need to ad
 
 ```ts
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal, createInputField } from "@sx-premium/interactive-event-modal";
+import { createInteractiveEventModal, createInputField, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
+import { translations, mergeLocales } from '@schedule-x/translations'
+import { createCalendar } from '@schedule-x/calendar'
 
+import '@schedule-x/theme-default/dist/calendar.css'
 import '@sx-premium/interactive-event-modal/index.css'
 
 const eventsService = createEventsServicePlugin()
@@ -249,6 +252,15 @@ const eventModal = createInteractiveEventModal({
       ]
     }),
   }
+})
+
+const calendar = createCalendar({
+  translations: mergeLocales(translations, modalTranslations),
+  plugins: [
+    eventModal,
+    eventsService,
+  ],
+  // ...other configuration
 })
 ```
 

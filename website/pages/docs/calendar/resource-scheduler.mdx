@@ -42,7 +42,7 @@ Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-p
 
 
 ```bash copy
-npm install @sx-premium/resource-scheduler
+npm install @sx-premium/resource-scheduler @schedule-x/calendar @schedule-x/translations @schedule-x/theme-default
 ```
 
 ## Usage
@@ -50,8 +50,9 @@ npm install @sx-premium/resource-scheduler
 ```js
 import { createCalendar } from '@schedule-x/calendar'
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
-import { createHourlyView, createDailyView, createConfig } from "@sx-premium/resource-scheduler";
+import { createInteractiveEventModal, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
+import { createHourlyView, createDailyView, createConfig, translations as resourceViewTranslations } from "@sx-premium/resource-scheduler";
+import { translations, mergeLocales } from '@schedule-x/translations'
 
 import '@sx-premium/resource-scheduler/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
@@ -104,6 +105,11 @@ const interactiveEventModal = createInteractiveEventModal({
 })
 
 const calendar = createCalendar({
+  translations: mergeLocales(
+    translations,
+    modalTranslations,
+    resourceViewTranslations
+  ),
   events: [
     {
       id: 1,
