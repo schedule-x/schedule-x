@@ -59,6 +59,8 @@ import { hrHR } from './locales/hr-HR'
 import { datePickerHrHR } from './locales/hr-HR/date-picker'
 import { slSI } from './locales/sl-SI'
 import { datePickerSlSI } from './locales/sl-SI/date-picker'
+import { fiFI } from './locales/fi-FI'
+import { datePickerfiFI } from './locales/fi-FI/date-picker
 
 import { translate } from './translator/translate'
 import { mergeLocales } from './utils/merge-locales'
@@ -94,6 +96,7 @@ const translations = {
   ltLT,
   hrHR,
   slSI,
+  fiFI,
 }
 
 const datePickerTranslations = {
@@ -127,6 +130,7 @@ const datePickerTranslations = {
   ltLT: datePickerLtLT,
   hrHr: datePickerHrHR,
   slSI: datePickerSlSI,
+  fiFI: datePickerFiFI,
 }
 
 export {
@@ -163,4 +167,5 @@ export {
   ltLT,
   hrHR,
   slSI,
+  fiFI,
 }
