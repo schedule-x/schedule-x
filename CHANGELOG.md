@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+### Bug Fixes
+
+- **calendar:** improve stacking in time grid ([#905](https://github.com/schedule-x/schedule-x/issues/905)) ([df9d949](https://github.com/schedule-x/schedule-x/commit/df9d949efba975ca6e61687cbe15383420a15751))
+
 # [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
 
 ### Features
