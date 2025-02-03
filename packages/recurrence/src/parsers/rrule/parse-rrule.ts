@@ -16,6 +16,7 @@ export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
     if (key === 'UNTIL') rruleOptions.until = parseRFC5545ToSX(value)
     if (key === 'COUNT') rruleOptions.count = Number(value)
     if (key === 'INTERVAL') rruleOptions.interval = Number(value)
+    if (key === 'WKST') rruleOptions.wkst = value
   })
 
   return rruleOptions
@@ -30,6 +31,7 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   if (rruleOptions.interval) rrule += `;INTERVAL=${rruleOptions.interval}`
   if (rruleOptions.byday) rrule += `;BYDAY=${rruleOptions.byday.join(',')}`
   if (rruleOptions.bymonthday) rrule += `;BYMONTHDAY=${rruleOptions.bymonthday}`
+  if (rruleOptions.wkst) rrule += `;WKST=${rruleOptions.wkst}`
 
   return rrule
 }

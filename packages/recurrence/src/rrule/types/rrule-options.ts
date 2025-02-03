@@ -7,6 +7,7 @@ export interface RRuleOptions {
   count?: number
   byday?: string[]
   bymonthday?: number
+  wkst?: string
 }
 
 export interface RRuleOptionsExternal extends Omit<RRuleOptions, 'interval'> {

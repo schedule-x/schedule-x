@@ -72,4 +72,45 @@ describe('getWeekForDate', () => {
       '2024-04-06',
     ])
   })
+
+  describe('setting different first days of the week', () => {
+    it('should set monday as the first day of the week', () => {
+      const result = getWeekForDate('2025-02-03', 1)
+      expect(result).toEqual([
+        '2025-02-03',
+        '2025-02-04',
+        '2025-02-05',
+        '2025-02-06',
+        '2025-02-07',
+        '2025-02-08',
+        '2025-02-09',
+      ])
+    })
+
+    it('should set saturday as the first day of the week', () => {
+      const result = getWeekForDate('2025-02-08', 6)
+      expect(result).toEqual([
+        '2025-02-08',
+        '2025-02-09',
+        '2025-02-10',
+        '2025-02-11',
+        '2025-02-12',
+        '2025-02-13',
+        '2025-02-14',
+      ])
+    })
+
+    it('should set saturday as first day of the week, with a date that is not a saturday', () => {
+      const result = getWeekForDate('2025-02-03', 6)
+      expect(result).toEqual([
+        '2025-02-01',
+        '2025-02-02',
+        '2025-02-03',
+        '2025-02-04',
+        '2025-02-05',
+        '2025-02-06',
+        '2025-02-07',
+      ])
+    })
+  })
 })
