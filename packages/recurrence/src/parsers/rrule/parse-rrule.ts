@@ -22,7 +22,7 @@ export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
     if (key === 'INTERVAL') rruleOptions.interval = Number(value)
     if (key === 'WKST') {
       if (!rfc5455Weekdays.includes(value as unknown as RFC5455Weekday)) {
-        throw new Error('Invalid WKST value')
+        throw new Error(`Invalid WKST value: ${value}`)
       }
       rruleOptions.wkst = value as RFC5455Weekday
     }
