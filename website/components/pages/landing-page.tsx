@@ -202,7 +202,7 @@ export default function LandingPage() {
 
 
             <ul>
-              <li>Build event modal with a form ~30 hours ❌</li>
+              <li>Build event modal- and form with recurrence options ~100 hours ❌</li>
               <li>Build Drag-to-create ~40 hours ❌</li>
               <li>Build Resource view ~100 hours ❌</li>
               <li>Install and configure Schedule-X premium ~1 hour ✅</li>
