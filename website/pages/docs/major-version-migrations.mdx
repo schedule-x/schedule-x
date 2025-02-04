@@ -1,0 +1,78 @@
+---
+title: 'Migrating between major versions'
+description: 'Learn how to migrate between major versions of the Schedule-X calendar'
+---
+
+# Migrating between major versions
+
+## Migration from @sx-premium v2 to v3
+
+v3 of the premium plugins brought some breaking changes to the interactive event modal plugin, and nothing else. If
+you do not use this, you should be able to update to v3 without changing anything.
+
+### Breaking changes in the interactive event modal
+
+The event recurrence section now has more options. Users can set an interval for the recurrence, decide on which
+weekdays the event should recur, and decide between `until`, `count` or infinite, for limiting the recurrence.
+
+Previously, you could configure the rrule fields like this:
+
+```ts
+const modal = createInteractiveEventModal({
+  fields: {
+    rruleFrequency: {},
+    rruleUntil: {}
+  }
+
+  // other config
+})
+```
+
+In v3, this will throw an error, since you need to either configure all rrule fields, or none. Now you can do this:
+
+```ts
+const modal = createInteractiveEventModal({
+  fields: {
+    // your other fields
+    ...rruleFields()
+  }
+
+  // other config
+})
+```
+
+
+## Migration guide for v2
+
+V2 brought a few breaking changes in the UI and internal APIs.
+
+If you haven't built your own custom plugins, you will probably be able to migrate effortlessly.
+
+### Migrating with custom plugins
+
+If you have built custom plugins that use the internal config in some way, you will need to change the
+way you access the config values. This is because the config values are now mostly reactive. So for example:
+
+v1.x.x: `$app.config.locale` ➡️ v2.x.x: `$app.config.locale.value`
+
+And this pattern repeats itself across the different config values.
+
+Also, the `init` function on plugins has been renamed into `onRender`, to better reflect when it is invoked. It is
+now accompanied by another method for plugins, `beforeRender`.
+
+### Breaking changes in the UI
+
+The UI had a few breaking changes:
+- The time grid event now displays a location by default, if one exists on the event. The `showLocation` option has
+now been removed.
+- Month grid- and date grid events now display a timestamp next to their title, for all timed events.
+- The view selection component is now hidden, if there is only one view available.
+
+### Premium plugins
+
+If you are using the premium plugins, you will also need to migrate them to at least v2, but preferably even to v3.
+
+## `@schedule-x/react`
+
+The `Calendar` alias for the `ScheduleXCalendar` component has been removed. If you were using this API, use `ScheduleXCalendar` instead.
+

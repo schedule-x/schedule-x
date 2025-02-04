@@ -11,6 +11,11 @@ module.exports = withNextra({
         destination: '/docs/calendar/language',
         permanent: true,
       },
+      {
+        source: '/docs/migration-v2',
+        destination: '/docs/major-version-migrations',
+        permanent: true,
+      }
     ]
   },
 })
