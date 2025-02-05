@@ -38,8 +38,13 @@ export default function CustomFooter() {
           </div>
 
           <div
-            style={{ textDecoration: 'underline' }}>
+            style={{ marginBottom: '1em', textDecoration: 'underline' }}>
             <a href="/attributions">Attributions</a>
+          </div>
+
+          <div
+            style={{ marginBottom: '1em', textDecoration: 'underline' }}>
+            <a href="/affiliate-program">Affiliate program</a>
           </div>
 
           <div
