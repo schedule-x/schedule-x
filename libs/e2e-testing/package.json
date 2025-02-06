@@ -4,7 +4,7 @@
     "access": "public"
   },
   "description": "Shared E2E testing utils for Schedule-X",
-  "version": "2.17.0",
+  "version": "2.18.0",
   "module": "./dist/core.js",
   "main": "./dist/core.cjs.js",
   "umd": "./dist/core.umd.js",

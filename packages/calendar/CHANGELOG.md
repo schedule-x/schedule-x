@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+### Features
+
+- improve sorting in month grid ([#918](https://github.com/schedule-x/schedule-x/issues/918)) ([523b207](https://github.com/schedule-x/schedule-x/commit/523b207f47070ad7faf16db070f49e31c84f7d6c))
+
 # [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
 
 **Note:** Version bump only for package @schedule-x/calendar

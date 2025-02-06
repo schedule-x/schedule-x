@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+### Features
+
+- extend custom component fns type ([#915](https://github.com/schedule-x/schedule-x/issues/915)) ([89b5954](https://github.com/schedule-x/schedule-x/commit/89b59544f76aeb5180726c49b45b1bf063fb1309))
+
 # [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
 
 **Note:** Version bump only for package @schedule-x/shared
