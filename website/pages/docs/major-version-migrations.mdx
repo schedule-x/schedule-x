@@ -12,6 +12,7 @@ you do not use this, you should be able to update to v3 without changing anythin
 
 ### Breaking changes in the interactive event modal
 
+#### 1. Event recurrence UI and API
 The event recurrence section now has more options. Users can set an interval for the recurrence, decide on which
 weekdays the event should recur, and decide between `until`, `count` or infinite, for limiting the recurrence.
 
@@ -40,6 +41,10 @@ const modal = createInteractiveEventModal({
   // other config
 })
 ```
+
+#### 2. `onAddEvent` callback
+
+The `onAddEvent` callback is now required in the modal configuration. If you do not provide it, the modal will throw an error.
 
 
 ## Migration guide for v2
