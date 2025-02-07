@@ -108,19 +108,19 @@ const calendar = createCalendar(
       translations,
       sidebarTranslations,
       modalTranslations
-    )
+    ),
+
+    plugins: [
+      eventsService,
+      sidebar,
+      interactiveEventModal,
+      createDragToCreatePlugin(/* drag-to-create options */)
+    ]
     // ...config options
   },
-  [
-    eventsService,
-    sidebar,
-    interactiveEventModal,
-    createDragToCreatePlugin(/* drag-to-create options */)
-  ]
 )
 
 calendar.render(document.getElementById('your-calendar-wrapper'))
-
 ```
 
 ## Changelog

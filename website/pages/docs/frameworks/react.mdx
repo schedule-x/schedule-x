@@ -70,13 +70,19 @@ like this might do the trick for you:
 The Schedule-X calendar is built with customization in mind. Currently, you can use the following custom
 components to take control over certain parts of the calendar. This is done by writing your own React components:
 
-| Component name     | Description                                                      | Props                           |
-|--------------------|------------------------------------------------------------------|---------------------------------|
-| `timeGridEvent`    | The component for timed events used in the week- and day views   | `calendarEvent`                 |
-| `dateGridEvent`    | The component for all-day events used in the week- and day views | `calendarEvent`                 |
-| `monthGridEvent`   | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
-| `monthAgendaEvent` | The component for events used in the month agenda view           | `calendarEvent`                 |
-| `eventModal`       | The component for the event modal                                | `calendarEvent`                 |
+| Component name              | Description                                                      | Props                           |
+|-----------------------------|------------------------------------------------------------------|---------------------------------|
+| `timeGridEvent`             | The component for timed events used in the week- and day views   | `calendarEvent`                 |
+| `dateGridEvent`             | The component for all-day events used in the week- and day views | `calendarEvent`                 |
+| `monthGridEvent`            | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
+| `monthAgendaEvent`          | The component for events used in the month agenda view           | `calendarEvent`                 |
+| `eventModal`                | The component for the modal that opens when clicking an event    | `calendarEvent`                 |
+| `headerContentLeftPrepend`  | Prepends content to the left part of the header                  |                                 |
+| `headerContentLeftAppend`   | Appends content to the left part of the header                   |                                 |
+| `headerContentRightPrepend` | Prepends content to the right part of the header                 |                                 |
+| `headerContentRightAppend`  | Appends content to the right part of the header                  |                                 |
+| `headerContent`             | Replaces the whole header content                                |                                 |
+| `sidebarAddEventButton`     | "Add event" button in the sidebar plugin                         | `onClick`                       |
 
 An example of how to use these components can be found here: https://github.com/schedule-x/react-example/blob/main/src/App.tsx
 
