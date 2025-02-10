@@ -22,7 +22,7 @@
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.1",
     "@fontsource-variable/podkova": "^5.1.0",
-    "@gitbeaker/rest": "^41.3.0",
+    "@gitbeaker/rest": "^42.0.0",
     "@lemonsqueezy/lemonsqueezy.js": "^3.3.1",
     "@schedule-x/calendar": "^2.17.0",
     "@schedule-x/date-picker": "^2.17.0",
