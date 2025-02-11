@@ -268,6 +268,17 @@ const calendar = createCalendar({
   backgroundEvents: [
     {
       title: 'Out of office',
+      start: '2025-02-11',
+      end: '2025-02-11',
+      style: {
+        // create tilted 5px thick gray lines
+        backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
+        opacity: 0.5,
+      },
+      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=TU,TH;',
+    },
+    {
+      title: 'Out of office',
       start: '2024-12-03',
       end: '2024-12-03',
       style: {

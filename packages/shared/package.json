@@ -19,6 +19,9 @@
   "files": [
     "dist"
   ],
+  "peerDependencies": {
+    "@preact/signals": "^1.1.5"
+  },
   "scripts": {
     "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
     "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
