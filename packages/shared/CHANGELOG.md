@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
+
+### Features
+
+- **event-recurrence:** enable rrule for background events ([#923](https://github.com/schedule-x/schedule-x/issues/923)) ([83433c1](https://github.com/schedule-x/schedule-x/commit/83433c14f402442c8e8e6d975dec90d6a5ddfa71))
+
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+### Features
+
+- extend custom component fns type ([#915](https://github.com/schedule-x/schedule-x/issues/915)) ([89b5954](https://github.com/schedule-x/schedule-x/commit/89b59544f76aeb5180726c49b45b1bf063fb1309))
+
+# [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+**Note:** Version bump only for package @schedule-x/shared
+
 # [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
 
 ### Features

@@ -1,5 +1,9 @@
-import { RRuleOptionsExternal } from '../../rrule/types/rrule-options'
+import {
+  RFC5455Weekday,
+  RRuleOptionsExternal,
+} from '../../rrule/types/rrule-options'
 import { RRuleFreq } from '../../rrule/enums/rrule-freq'
+import { rfc5455Weekdays } from '../../utils/weekdays'
 
 export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
   const rruleOptions: RRuleOptionsExternal = {
@@ -16,6 +20,12 @@ export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
     if (key === 'UNTIL') rruleOptions.until = parseRFC5545ToSX(value)
     if (key === 'COUNT') rruleOptions.count = Number(value)
     if (key === 'INTERVAL') rruleOptions.interval = Number(value)
+    if (key === 'WKST') {
+      if (!rfc5455Weekdays.includes(value as unknown as RFC5455Weekday)) {
+        throw new Error(`Invalid WKST value: ${value}`)
+      }
+      rruleOptions.wkst = value as RFC5455Weekday
+    }
   })
 
   return rruleOptions
@@ -30,6 +40,7 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   if (rruleOptions.interval) rrule += `;INTERVAL=${rruleOptions.interval}`
   if (rruleOptions.byday) rrule += `;BYDAY=${rruleOptions.byday.join(',')}`
   if (rruleOptions.bymonthday) rrule += `;BYMONTHDAY=${rruleOptions.bymonthday}`
+  if (rruleOptions.wkst) rrule += `;WKST=${rruleOptions.wkst}`
 
   return rrule
 }

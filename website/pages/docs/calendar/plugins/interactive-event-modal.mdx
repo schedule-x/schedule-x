@@ -167,18 +167,40 @@ fields: {
 
 ### Available fields
 
-| Field name     | Type                     |
-|----------------|--------------------------|
-| title          | InputFieldWithValidation |
-| description    | InputFieldWithValidation |
-| startDate      | InputField               |
-| startTime      | InputField               |
-| endDate        | InputField               |
-| endTime        | InputField               |
-| rruleFrequency | InputField               |
-| rruleUntil     | InputField               |
-| people         | InputFieldWithValidation |
-| calendarId     | InputFieldWithValidation |
+| Field name           | Type                     |
+|----------------------|--------------------------|
+| title                | InputFieldWithValidation |
+| description          | InputFieldWithValidation |
+| startDate            | InputField               |
+| startTime            | InputField               |
+| endDate              | InputField               |
+| endTime              | InputField               |
+| people               | InputFieldWithValidation |
+| calendarId           | InputFieldWithValidation |
+| resourceId           | InputFieldWithValidation |
+| rruleFrequency       | InputField               |
+| rruleUntil           | InputField               |
+| rruleCustomFrequency | InputField               |
+| rruleInterval        | InputField               |
+| rruleCount           | InputField               |
+| rruleByDay           | InputField               |
+
+### Using the RRule fields
+
+The rrule fields depend on one another. Therefore, you either need to configure all of them, or none.
+You can easily configure all of them at once like this, if you don't need any custom configuration of them.
+
+```ts
+export { rruleFields, createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
+
+const modal = createInteractiveEventModal({
+  fields: {
+    // your other fields
+    ...rruleFields()
+  }
+})
+
+```
 
 #### Input field types
 

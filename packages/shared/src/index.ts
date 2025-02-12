@@ -26,6 +26,7 @@ export type { CalendarEvent, EventModalPlugin, CalendarEventInternal }
 export type { View, ViewConfig } from './types/calendar/view'
 export type { CalendarAppSingleton, PluginBase }
 export type { CustomComponentFns as CustomComponents } from './interfaces/calendar/custom-component-fns'
+export type { CustomComponentName } from './interfaces/calendar/custom-component-fns'
 export {
   addDays,
   addMonths,

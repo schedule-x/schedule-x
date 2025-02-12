@@ -7,7 +7,7 @@ import { calendars } from './data/calendars'
 import { createScrollControllerPlugin } from "@schedule-x/scroll-controller";
 import { createSidebarPlugin } from "@sx-premium/sidebar";
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createInteractiveEventModal, rruleFields } from "@sx-premium/interactive-event-modal";
 import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
@@ -30,8 +30,7 @@ export default function ModalCalendar() {
       startDate: {},
       endDate: {},
       endTime: {},
-      rruleFrequency: {},
-      rruleUntil: {},
+      ...rruleFields(),
       people: {
         validator: (value) => {
           return {

@@ -79,7 +79,7 @@
     "stylelint-config-standard-scss": "^14.0.0",
     "ts-sinon": "^2.0.2",
     "tsx": "^4.7.0",
-    "typescript": "^5.3.3",
+    "typescript": "^5.7.3",
     "vite": "^5.0.12",
     "vitest": "^2.0.5"
   },

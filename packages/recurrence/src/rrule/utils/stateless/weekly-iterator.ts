@@ -13,10 +13,15 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   ]
   let currentDate = dtstart
   const allDateTimes: string[] = []
+  const firstDayOfWeek = (
+    rruleOptions.wkst
+      ? ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].indexOf(rruleOptions.wkst)
+      : 0
+  ) as 0 | 1 | 2 | 3 | 4 | 5 | 6
 
   return {
     next() {
-      const week = getWeekForDate(currentDate)
+      const week = getWeekForDate(currentDate, firstDayOfWeek)
       const candidatesDates = week
         .filter((date) => weekDaysJS.includes(toJSDate(date).getDay()))
         .map((date) => {

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
+
+**Note:** Version bump only for package @schedule-x/recurrence
+
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+**Note:** Version bump only for package @schedule-x/recurrence
+
+# [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
+
+### Features
+
+- **event-recurrence:** enable using wkst in rrule ([#911](https://github.com/schedule-x/schedule-x/issues/911)) ([a237414](https://github.com/schedule-x/schedule-x/commit/a237414eca95f2c8000620fa05fcac6032b4fe08))
+
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+**Note:** Version bump only for package @schedule-x/recurrence
+
 # [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
 
 **Note:** Version bump only for package @schedule-x/recurrence

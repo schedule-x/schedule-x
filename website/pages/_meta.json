@@ -86,5 +86,14 @@
       "sidebar": false,
       "toc": false
     }
+  },
+  "affiliate-program": {
+    "display": "hidden",
+    "title": "Affiliate program",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
   }
 }

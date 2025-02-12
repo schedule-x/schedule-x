@@ -7,7 +7,7 @@ import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/c
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
 import {
   sortEventsByStartAndEnd,
-  sortEventsByStartAndEndWithoutConsideringTime,
+  sortEventsForMonthGrid,
 } from '../sort-by-start-date'
 
 describe('sorting events', () => {
@@ -49,7 +49,7 @@ describe('sorting events', () => {
     })
   })
 
-  describe('sorting events only based on their date', () => {
+  describe('sorting events for the month grid', () => {
     it('should sort events according to date in ascending order', () => {
       const event1 = createEvent({
         start: '2020-01-01 01:00',
@@ -65,13 +65,36 @@ describe('sorting events', () => {
         end: '2020-01-10 01:00',
       })
 
-      const result = [event2, event3, event1].sort(
-        sortEventsByStartAndEndWithoutConsideringTime
-      )
+      const result = [event2, event3, event1].sort(sortEventsForMonthGrid)
 
       expect(result[0]).toStrictEqual(event1)
       expect(result[1]).toStrictEqual(event2)
       expect(result[2]).toStrictEqual(event3)
+    })
+
+    it('should sort events that start and end at the same day by their start time', () => {
+      const event1 = createEvent({
+        start: '2020-01-01 01:00',
+        end: '2020-01-01 02:00',
+      })
+
+      // should be the third event, because it starts later than event1, and ends earlier than event3
+      const event2 = createEvent({
+        start: '2020-01-01 02:00',
+        end: '2020-01-01 03:00',
+      })
+
+      // should be the first event, because it ends on a later day than other events
+      const event3 = createEvent({
+        start: '2020-01-01 03:00',
+        end: '2020-01-03 04:00',
+      })
+
+      const result = [event2, event3, event1].sort(sortEventsForMonthGrid)
+
+      expect(result[0]).toStrictEqual(event3)
+      expect(result[1]).toStrictEqual(event1)
+      expect(result[2]).toStrictEqual(event2)
     })
   })
 })
