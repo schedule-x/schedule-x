@@ -60,7 +60,7 @@ import { datePickerHrHR } from './locales/hr-HR/date-picker'
 import { slSI } from './locales/sl-SI'
 import { datePickerSlSI } from './locales/sl-SI/date-picker'
 import { fiFI } from './locales/fi-FI'
-import { datePickerfiFI } from './locales/fi-FI/date-picker'
+import { datePickerFiFI } from './locales/fi-FI/date-picker'
 
 import { translate } from './translator/translate'
 import { mergeLocales } from './utils/merge-locales'
