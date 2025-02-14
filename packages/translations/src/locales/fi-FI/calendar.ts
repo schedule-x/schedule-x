@@ -15,5 +15,6 @@ export const calendarFiFI: CalendarTranslations = {
   'Full day- and multiple day events': 'Koko ja usean päivän tapahtumat',
   'Link to {{n}} more events on {{date}}':
     'Linkki {{n}} lisätapahtumaan päivämäärällä {{date}}',
-  'Link to 1 more event on {{date}}': 'Linkki 1 lisätapahtumaan päivämäärällä {{date}}',
+  'Link to 1 more event on {{date}}':
+    'Linkki 1 lisätapahtumaan päivämäärällä {{date}}',
 }
