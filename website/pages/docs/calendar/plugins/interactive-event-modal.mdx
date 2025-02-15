@@ -209,6 +209,7 @@ type InputField<T extends undefined | string | string[]> = {
   label?: string
   name?: string
   onChange?: (value: T) => void
+  placeholder?: string
 }
 
 type InputFieldWithValidation<T extends undefined | string | string[]> =

@@ -137,6 +137,53 @@ calendar.render(document.getElementById('your-calendar-wrapper'))
 
 ```
 
+
+## API
+
+### ResourceSchedulerConfig
+
+`Signal` is a reactive variable which holds a `value` property. This enables you to reactively
+update the value of your config variables. So if you wish to override the default hourWidth of the hourly view,
+you can do so by setting `config.hourWidth.value = 100`.
+
+```ts
+export type ResourceViewConfig = {
+  hourWidth: Signal<number>
+  dayWidth: Signal<number>
+  resources: Signal<Resource[]>
+  resourceHeight: Signal<number>
+  eventHeight: Signal<number>
+  dragAndDrop: Signal<boolean>
+  resize: Signal<boolean>
+  onLazyLoadDate?: (dates: Date[]) => void
+  onLazyLoadMonth?: (dates: Date[]) => void
+}
+```
+
+### Resource
+
+```ts
+export type Resource = {
+  label?: string
+  labelHTML?: string
+  id: string
+  colorName?: string
+  lightColors?: ColorDefinition
+  darkColors?: ColorDefinition
+}
+```
+
+### ColorDefinition
+
+```ts
+export type ColorDefinition = {
+  main: string
+  container: string
+  onContainer: string
+}
+```
+
+
 ## Changelog
 
 See [changelog](/premium-changelog) page.
