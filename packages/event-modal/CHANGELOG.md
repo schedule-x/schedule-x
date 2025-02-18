@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
 # [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
 
 **Note:** Version bump only for package @schedule-x/event-modal

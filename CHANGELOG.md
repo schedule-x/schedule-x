@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
+
+### Features
+
+- **translations:** add finnish ([#924](https://github.com/schedule-x/schedule-x/issues/924)) ([499c7fb](https://github.com/schedule-x/schedule-x/commit/499c7fb50e06fce20877ee79860c2fbb67b52481))
+
 # [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
 
 ### Features
