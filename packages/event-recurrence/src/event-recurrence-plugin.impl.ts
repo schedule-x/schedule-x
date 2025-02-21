@@ -17,7 +17,7 @@ import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/de
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
-import { addDays } from '@schedule-x/shared'
+import { addDays } from '@schedule-x/shared/src'
 import {
   parseRFC5545ToSX,
   parseSXToRFC5545,
