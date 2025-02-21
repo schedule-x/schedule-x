@@ -22,11 +22,15 @@ type props = {
   date: string
 }
 
+// We need to include the event.start, to make updates of recurring events work properly
+const getEventKey = (event: CalendarEventInternal) => event.id + event.start
+
 export default function TimeGridDay({
   calendarEvents,
   date,
   backgroundEvents,
 }: props) {
+  console.log(date)
   /**
    * The time grid day needs to keep track of whether the mousedown event happened on a calendar event, in order to prevent
    * click events from firing when dragging an event.
@@ -126,7 +130,7 @@ export default function TimeGridDay({
 
       {eventsWithConcurrency.map((event) => (
         <TimeGridEvent
-          key={event.id}
+          key={getEventKey(event)}
           calendarEvent={event}
           dayBoundariesDateTime={dayBoundariesDateTime}
           setMouseDown={setMouseDownOnChild}

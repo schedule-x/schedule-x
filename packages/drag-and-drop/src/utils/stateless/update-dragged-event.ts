@@ -42,6 +42,10 @@ export const updateDraggedEvent = (
   }
 
   if ($app.config.callbacks.onEventUpdate) {
-    $app.config.callbacks.onEventUpdate(eventCopy._getExternalEvent())
+    // Find the newly updated event, because only then the rrule has been updated. It is not updated directly on the event copy
+    const newEvent = $app.calendarEvents.list.value.find(
+      (event) => event.id === eventCopy.id && !event.isCopy
+    )
+    $app.config.callbacks.onEventUpdate(newEvent!._getExternalEvent())
   }
 }
