@@ -15,7 +15,5 @@ export interface EventRecurrencePlugin extends PluginBase<string> {
     newEventEnd: string
   ): void
 
-  addDaysToRRuleForEvent(id: EventId, nDays: number): string
-
   eventsFacade: EventsFacade
 }

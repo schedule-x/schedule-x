@@ -17,11 +17,6 @@ import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/de
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
-import { addDays } from '@schedule-x/shared/src'
-import {
-  parseRFC5545ToSX,
-  parseSXToRFC5545,
-} from '@schedule-x/recurrence/src/parsers/rrule/parse-rrule'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -92,36 +87,6 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
         updatedEvent._getForeignProperties().rrule as string
       ),
     ]
-  }
-
-  addDaysToRRuleForEvent(id: EventId, nDays: number) {
-    const eventToUpdate = this.$app!.calendarEvents.list.value.find(
-      (event) => event.id === id && !event.isCopy
-    )
-    if (!eventToUpdate) {
-      throw new Error(
-        `Tried to update rrule for non-existing event with id: ${id}`
-      )
-    }
-
-    let rrule = eventToUpdate._getForeignProperties().rrule as
-      | string
-      | undefined
-    if (!rrule) {
-      throw new Error(
-        `Tried to update rrule for event with id: ${id}, but no rrule was found`
-      )
-    }
-
-    const untilMatch = rrule.match(/UNTIL=(\d{8})/)
-    if (untilMatch) {
-      const until = parseRFC5545ToSX(untilMatch[1])
-      const newUntil = addDays(until, nDays)
-      const updatedUntilRFC5545 = parseSXToRFC5545(newUntil)
-      rrule = rrule.replace(untilMatch[1], updatedUntilRFC5545)
-    }
-
-    return rrule
   }
 
   private createRecurrencesForEvents() {
