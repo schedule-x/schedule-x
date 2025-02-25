@@ -111,7 +111,7 @@ export default function ResourceCalendar() {
     selectedDate: '2024-05-06',
     events: [
       {
-        id: 1,
+        id: '1',
         title: 'Tom',
         start: '2024-05-06 02:00',
         end: '2024-05-06 07:55',
@@ -119,7 +119,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 2,
+        id: '2',
         title: 'Deepak',
         start: '2024-05-06 02:00',
         end: '2024-05-06 07:55',
@@ -127,7 +127,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 3,
+        id: '3',
         title: 'Tim',
         start: '2024-05-06 00:00',
         end: '2024-05-06 03:00',
@@ -135,7 +135,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 4,
+        id: '4',
         title: 'Zhao',
         start: '2024-05-06 01:30',
         end: '2024-05-06 03:30',
@@ -143,7 +143,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 5,
+        id: '5',
         title: 'Ted',
         start: '2024-05-06 00:00',
         end: '2024-05-06 08:00',
@@ -151,7 +151,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 6,
+        id: '6',
         title: 'Chen',
         start: '2024-05-06 06:00',
         end: '2024-05-06 09:00',
@@ -159,7 +159,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 7,
+        id: '7',
         title: 'Jane',
         start: '2024-05-06 07:30',
         end: '2024-05-06 09:30',
@@ -167,7 +167,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 8,
+        id: '8',
         title: 'Marsha',
         start: '2024-05-06 08:00',
         end: '2024-05-06 14:00',
@@ -175,7 +175,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 0,
+        id: '0',
         title: 'Jane',
         start: '2024-05-06 08:00',
         end: '2024-05-06 14:00',
@@ -183,7 +183,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 9,
+        id: '9',
         title: 'Huang',
         start: '2024-05-06 08:00',
         end: '2024-05-06 13:55',
@@ -191,7 +191,7 @@ export default function ResourceCalendar() {
         rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
       },
       {
-        id: 10,
+        id: '10',
         title: 'Freddy',
         start: '2024-05-06 08:00',
         end: '2024-05-06 13:55',
