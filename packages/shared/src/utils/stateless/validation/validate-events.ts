@@ -1,6 +1,5 @@
-import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
-import { dateStringRegex } from '@schedule-x/shared/src'
+import { dateStringRegex, dateTimeStringRegex } from '../time/validation/regex'
+import CalendarEventExternal from '../../../interfaces/calendar/calendar-event.interface'
 
 export const validateEvents = (events: CalendarEventExternal[] = []) => {
   events?.forEach((event: CalendarEventExternal) => {

@@ -9,6 +9,8 @@ import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/back
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { createRecurrencesForBackgroundEvent } from './util/stateless/create-recurrences-for-event'
 
+import { validateEvents } from '@schedule-x/shared/src/utils/stateless/validation/validate-events'
+
 class EventsServicePluginImpl implements EventsService {
   name: string = 'eventsService'
   $app!: CalendarAppSingleton
@@ -24,11 +26,15 @@ class EventsServicePluginImpl implements EventsService {
   add(event: CalendarEventExternal): void {
     if (!this.$app) this.throwNotInitializedError()
 
+    validateEvents([event])
+
     this.eventsFacade.add(event)
   }
 
   update(event: CalendarEventExternal): void {
     if (!this.$app) this.throwNotInitializedError()
+
+    validateEvents([event])
 
     this.eventsFacade.update(event)
   }
@@ -53,6 +59,8 @@ class EventsServicePluginImpl implements EventsService {
 
   set(events: CalendarEventExternal[]): void {
     if (!this.$app) this.throwNotInitializedError()
+
+    validateEvents(events)
 
     this.eventsFacade.set(events)
   }
