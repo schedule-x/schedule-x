@@ -43,6 +43,28 @@ export default function ResourceCalendar() {
     {
       id: 'conveyor-belt-a',
       label: 'Conveyor Belt A',
+      resources: [
+        {
+          id: 'conveyor-belt-a-1',
+          label: 'Conveyor Belt A 1',
+          colorName: 'belt-a-1',
+          lightColors: {
+            main: '#1cf9b0',
+            container: '#dafff0',
+            onContainer: '#004d3d',
+          },
+        },
+        {
+          id: 'conveyor-belt-a-2',
+          label: 'Conveyor Belt A 2',
+          colorName: 'belt-a-2',
+          lightColors: {
+            main: '#1c7df9',
+            container: '#d2e7ff',
+            onContainer: '#002859',
+          }
+        }
+      ],
     },
     {
       id: 'conveyor-belt-b',
@@ -116,7 +138,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 02:00',
         end: '2024-05-06 07:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '2',
@@ -124,7 +146,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 02:00',
         end: '2024-05-06 07:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '3',
@@ -132,7 +154,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 00:00',
         end: '2024-05-06 03:00',
         resourceId: 'welding',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '4',
@@ -140,7 +162,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 01:30',
         end: '2024-05-06 03:30',
         resourceId: 'cnc',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '5',
@@ -148,7 +170,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 00:00',
         end: '2024-05-06 08:00',
         resourceId: 'supervision-1',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '6',
@@ -156,7 +178,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 06:00',
         end: '2024-05-06 09:00',
         resourceId: 'welding',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '7',
@@ -164,23 +186,23 @@ export default function ResourceCalendar() {
         start: '2024-05-06 07:30',
         end: '2024-05-06 09:30',
         resourceId: 'cnc',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '8',
         title: 'Marsha',
         start: '2024-05-06 08:00',
         end: '2024-05-06 14:00',
-        resourceId: 'conveyor-belt-a',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        resourceId: 'conveyor-belt-a-1',
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '0',
         title: 'Jane',
         start: '2024-05-06 08:00',
         end: '2024-05-06 14:00',
-        resourceId: 'conveyor-belt-a',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        resourceId: 'conveyor-belt-a-2',
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '9',
@@ -188,7 +210,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 08:00',
         end: '2024-05-06 13:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '10',
@@ -196,7 +218,7 @@ export default function ResourceCalendar() {
         start: '2024-05-06 08:00',
         end: '2024-05-06 13:55',
         resourceId: 'conveyor-belt-b',
-        rrule: 'FREQ=DAILY;UNTIL=20240510T235959'
+        rrule: 'FREQ=DAILY;COUNT=5'
       },
     ],
     calendars: calendars,
