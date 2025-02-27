@@ -77,11 +77,11 @@ components to take control over certain parts of the calendar. This is done by w
 | `monthGridEvent`            | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
 | `monthAgendaEvent`          | The component for events used in the month agenda view           | `calendarEvent`                 |
 | `eventModal`                | The component for the modal that opens when clicking an event    | `calendarEvent`                 |
-| `headerContentLeftPrepend`  | Prepends content to the left part of the header                  |                                 |
-| `headerContentLeftAppend`   | Appends content to the left part of the header                   |                                 |
-| `headerContentRightPrepend` | Prepends content to the right part of the header                 |                                 |
-| `headerContentRightAppend`  | Appends content to the right part of the header                  |                                 |
-| `headerContent`             | Replaces the whole header content                                |                                 |
+| `headerContentLeftPrepend`  | Prepends content to the left part of the header                  | `$app`                          |
+| `headerContentLeftAppend`   | Appends content to the left part of the header                   | `$app`                          |
+| `headerContentRightPrepend` | Prepends content to the right part of the header                 | `$app`                          |
+| `headerContentRightAppend`  | Appends content to the right part of the header                  | `$app`                          |
+| `headerContent`             | Replaces the whole header content                                | `$app`                          |
 | `sidebarAddEventButton`     | "Add event" button in the sidebar plugin                         | `onClick`                       |
 
 An example of how to use these components can be found here: https://github.com/schedule-x/react-example/blob/main/src/App.tsx
