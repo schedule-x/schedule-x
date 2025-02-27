@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+### Features
+
+- **event-recurrence:** add method for updating the rrule with nDays ([#931](https://github.com/schedule-x/schedule-x/issues/931)) ([5d2f562](https://github.com/schedule-x/schedule-x/commit/5d2f562a63c7c517f1364a8ca6cb41abd84eed70))
+
 # [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
 
 **Note:** Version bump only for package @schedule-x/eslint-config

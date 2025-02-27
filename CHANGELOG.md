@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+### Features
+
+- add Romanian translations ([#935](https://github.com/schedule-x/schedule-x/issues/935)) ([d590597](https://github.com/schedule-x/schedule-x/commit/d590597e471a9c920cc695a32f9cce67f6ec7856))
+- **calendar:** pass $app to custom components in header ([#938](https://github.com/schedule-x/schedule-x/issues/938)) ([9d6c774](https://github.com/schedule-x/schedule-x/commit/9d6c7746cc2ba05eaacff6e0db07838bba392667))
+- **event-recurrence:** add method for updating the rrule with nDays ([#931](https://github.com/schedule-x/schedule-x/issues/931)) ([5d2f562](https://github.com/schedule-x/schedule-x/commit/5d2f562a63c7c517f1364a8ca6cb41abd84eed70))
+- validate events in event service plugins ([#937](https://github.com/schedule-x/schedule-x/issues/937)) ([6b45e09](https://github.com/schedule-x/schedule-x/commit/6b45e09db2a07d0159e7d9748c6601de7803cea9))
+
 # [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
 
 ### Features

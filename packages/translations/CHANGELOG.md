@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+### Features
+
+- add Romanian translations ([#935](https://github.com/schedule-x/schedule-x/issues/935)) ([d590597](https://github.com/schedule-x/schedule-x/commit/d590597e471a9c920cc695a32f9cce67f6ec7856))
+
 # [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
 
 ### Features
