@@ -53,6 +53,7 @@ import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createInteractiveEventModal, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
 import { createHourlyView, createDailyView, createConfig, translations as resourceViewTranslations } from "@sx-premium/resource-scheduler";
 import { translations, mergeLocales } from '@schedule-x/translations'
+import { signal } from "@preact/signals";
 
 import '@sx-premium/resource-scheduler/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
@@ -69,7 +70,53 @@ resourceConfig.dragAndDrop.value = true
 resourceConfig.resources.value = [
   {
     label: 'Room 100',
-    id: '1'
+    id: '1',
+    resources: [
+      {
+        label: 'Room 100A',
+        id: '1.1',
+        isOpen: signal(false),
+        resources: [
+          {
+            label: 'Room 100A1',
+            id: '1.1.1',
+            colorName: 'room-100A1',
+            lightColors: {
+              main: '#1c7df9',
+              container: '#d2e7ff',
+              onContainer: '#002859',
+            },
+          },
+          {
+            label: 'Room 100A2',
+            id: '1.1.2',
+          },
+          {
+            label: 'Room 100A3',
+            id: '1.1.3',
+          }
+        ],
+      },
+      {
+        label: 'Room 100B',
+        id: '1.2',
+        isOpen: signal(false),
+        resources: [
+          {
+            label: 'Room 100B1',
+            id: '1.2.1',
+          },
+          {
+            label: 'Room 100B2',
+            id: '1.2.2',
+          },
+          {
+            label: 'Room 100B3',
+            id: '1.2.3',
+          }
+        ]
+      }
+    ]
   },
   {
     labelHTML: '<span>Room <strong>101</strong></span>',
@@ -170,6 +217,8 @@ export type Resource = {
   colorName?: string
   lightColors?: ColorDefinition
   darkColors?: ColorDefinition
+  resources?: Resource[]
+  isOpen?: Signal<boolean>
 }
 ```
 

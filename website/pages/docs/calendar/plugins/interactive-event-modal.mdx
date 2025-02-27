@@ -219,7 +219,7 @@ type InputFieldWithValidation<T extends undefined | string | string[]> =
 
 type CustomInputField<T extends undefined | string | string[]> =
   InputFieldWithValidation<T> & {
-    type: 'text' | 'select' | 'textarea' | 'combobox'
+    type: 'text' | 'select' | 'textarea' | 'combobox' | 'combobox-multi'
     items?: SelectItem[]
   }
 
@@ -235,7 +235,7 @@ export type SelectItem = { label: string; value: string }
 
 Additional to the default fields, you can add custom fields to a `customFields` property. The fields of this property
 follow the same structure as the default fields, but additionally you need to add one of the supported types: `text`,
-`textarea`, `select` or `combobox`. For example:
+`textarea`, `select`, `combobox` or `combobox-multi`. For example:
 
 ```ts
 import { createEventsServicePlugin } from "@schedule-x/events-service";

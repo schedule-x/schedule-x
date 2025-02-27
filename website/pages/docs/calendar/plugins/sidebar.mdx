@@ -98,6 +98,13 @@ const sidebar = createSidebarPlugin({
     }
   ],
 
+  /**
+  * Optional: Should placeholder events be selectable
+  * If set to true, you can later grab the currently selected placeholder event via sidebar.selectedPlaceholderEvent.value
+  * This can, for example, help your users draw events belonging to different calendars
+  * */
+  isPlaceholderEventSelectable: true,
+
   // Optional: factory function for generating event ids when events are created
   idFactory: () => uuidv4() // or any other id generator
 })
