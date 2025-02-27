@@ -6,7 +6,8 @@ import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { EventsService } from '@schedule-x/shared/src/interfaces/events-service/events-service.interface'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
-import { validateEvents } from '@schedule-x/calendar/src/utils/stateless/validation/validate-events'
+
+import { validateEvents } from '@schedule-x/shared/src/utils/stateless/validation/validate-events'
 
 class EventsServicePluginImpl implements EventsService {
   name = 'EventsServicePlugin'

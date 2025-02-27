@@ -8,7 +8,8 @@ import { EventsService } from '@schedule-x/shared/src/interfaces/events-service/
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { createRecurrencesForBackgroundEvent } from './util/stateless/create-recurrences-for-event'
-import { validateEvents } from '@schedule-x/calendar/src/utils/stateless/validation/validate-events'
+
+import { validateEvents } from '@schedule-x/shared/src/utils/stateless/validation/validate-events'
 
 class EventsServicePluginImpl implements EventsService {
   name: string = 'eventsService'
