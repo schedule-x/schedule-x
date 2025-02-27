@@ -46,22 +46,27 @@ export default function CalendarHeader() {
 
   useEffect(() => {
     if (headerContent) {
-      headerContent(getElementByCCID(headerContentId), {})
+      headerContent(getElementByCCID(headerContentId), { $app })
     }
     if (headerContentLeftPrepend && headerContentLeftPrependId) {
-      headerContentLeftPrepend(getElementByCCID(headerContentLeftPrependId), {})
+      headerContentLeftPrepend(getElementByCCID(headerContentLeftPrependId), {
+        $app,
+      })
     }
     if (headerContentLeftAppend) {
-      headerContentLeftAppend(getElementByCCID(headerContentLeftAppendId), {})
+      headerContentLeftAppend(getElementByCCID(headerContentLeftAppendId), {
+        $app,
+      })
     }
     if (headerContentRightPrepend) {
-      headerContentRightPrepend(
-        getElementByCCID(headerContentRightPrependId),
-        {}
-      )
+      headerContentRightPrepend(getElementByCCID(headerContentRightPrependId), {
+        $app,
+      })
     }
     if (headerContentRightAppend) {
-      headerContentRightAppend(getElementByCCID(headerContentRightAppendId), {})
+      headerContentRightAppend(getElementByCCID(headerContentRightAppendId), {
+        $app,
+      })
     }
   }, [])
 
