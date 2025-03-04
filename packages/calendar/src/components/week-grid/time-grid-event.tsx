@@ -176,6 +176,11 @@ export default function TimeGridEvent({
 
   const hasCustomContent = calendarEvent._customContent?.timeGrid
 
+  const relativeStartWithinDayBoundary =
+    dayBoundariesDateTime && calendarEvent.start < dayBoundariesDateTime.start
+      ? dayBoundariesDateTime?.start
+      : calendarEvent.start
+
   return (
     <>
       <div
@@ -195,12 +200,12 @@ export default function TimeGridEvent({
         role="button"
         style={{
           top: `${getYCoordinateInTimeGrid(
-            calendarEvent.start,
+            relativeStartWithinDayBoundary,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
-            calendarEvent.start,
+            relativeStartWithinDayBoundary,
             calendarEvent.end,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
