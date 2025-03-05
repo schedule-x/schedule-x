@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.21.1](https://github.com/schedule-x/schedule-x/compare/v2.21.0...v2.21.1) (2025-03-05)
+
+### Bug Fixes
+
+- **calendar:** display events in hybrid days, even when event start i… ([#942](https://github.com/schedule-x/schedule-x/issues/942)) ([76a8b58](https://github.com/schedule-x/schedule-x/commit/76a8b589a6009905a946f71bcf96fda3f3d3a685))
+
 # [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
 
 ### Features
