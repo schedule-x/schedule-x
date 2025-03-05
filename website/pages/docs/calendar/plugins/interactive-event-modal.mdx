@@ -87,6 +87,11 @@ const eventModal = createInteractiveEventModal({
     return event.calendarId === 'calendar-1';
   },
 
+  // (Optional): callback for deciding whether to display edit- and delete buttons for an event
+  isEventEditable(event) {
+    return event.calendarId === 'internal'
+  },
+
   // (Optional): configure the time picker to use 12-hour format
   has12HourTimeFormat: true,
 
