@@ -30,7 +30,7 @@ import { focusModal } from '../../utils/stateless/events/focus-modal'
 
 type props = {
   calendarEvent: CalendarEventInternal
-  dayBoundariesDateTime?: DayBoundariesDateTime
+  dayBoundariesDateTime: DayBoundariesDateTime
   setMouseDown: StateUpdater<boolean>
   isCopy?: boolean
 }
@@ -82,10 +82,11 @@ export default function TimeGridEvent({
 
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
-    if (!dayBoundariesDateTime) return // this can only happen in eventCopy
+    if (isCopy) return
     if (!uiEvent.target) return
     if (!$app.config.plugins.dragAndDrop) return
     if (calendarEvent._options?.disableDND) return
+    if (realStartIsBeforeDayBoundaryStart) return // Don't allow dragging events that start before the day boundary; it would require a bunch of adjustments in drag & drop plugin in order to look nice
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(newEventCopy)
@@ -137,7 +138,7 @@ export default function TimeGridEvent({
     setMouseDown(true)
     e.stopPropagation()
 
-    if (!dayBoundariesDateTime) return // this can only happen in eventCopy
+    if (isCopy) return
 
     if ($app.config.plugins.resize) {
       const eventCopy = deepCloneEvent(calendarEvent, $app)
@@ -176,6 +177,15 @@ export default function TimeGridEvent({
 
   const hasCustomContent = calendarEvent._customContent?.timeGrid
 
+  const realStartIsBeforeDayBoundaryStart =
+    dayBoundariesDateTime &&
+    calendarEvent.start < dayBoundariesDateTime.start &&
+    calendarEvent.end >= dayBoundariesDateTime.start
+
+  const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
+    ? dayBoundariesDateTime?.start
+    : calendarEvent.start
+
   return (
     <>
       <div
@@ -195,12 +205,12 @@ export default function TimeGridEvent({
         role="button"
         style={{
           top: `${getYCoordinateInTimeGrid(
-            calendarEvent.start,
+            relativeStartWithinDayBoundary,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
-            calendarEvent.start,
+            relativeStartWithinDayBoundary,
             calendarEvent.end,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
@@ -281,6 +291,7 @@ export default function TimeGridEvent({
           calendarEvent={eventCopy}
           isCopy={true}
           setMouseDown={setMouseDown}
+          dayBoundariesDateTime={dayBoundariesDateTime}
         />
       )}
     </>

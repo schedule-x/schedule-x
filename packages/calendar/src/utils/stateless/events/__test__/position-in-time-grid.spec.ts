@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -8,6 +7,7 @@ import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/c
 import CalendarConfigBuilder from '../../../stateful/config/calendar-config.builder'
 import { positionInTimeGrid } from '../position-in-time-grid'
 import { __createAppWithViews__ } from '../../testing/__create-app-with-views__'
+import { createWeek } from '../../views/week/create-week'
 
 describe('Position in time grid', () => {
   const _config = new CalendarConfigBuilder().build()
@@ -37,5 +37,49 @@ describe('Position in time grid', () => {
     const result = positionInTimeGrid([event1], week, $app)
 
     expect(result).toEqual({})
+  })
+
+  it('should add time grid event to actual day even if start is before day boundary, but also after end of previous day', () => {
+    const $app = __createAppWithViews__({
+      dayBoundaries: {
+        start: '10:00',
+        end: '22:00',
+      },
+      selectedDate: '2020-01-01',
+    })
+    const timeEvent1 = {
+      start: '2020-01-01 08:00',
+      end: '2020-01-01 12:00',
+      id: '1',
+    }
+    const event1 = createEvent(timeEvent1)
+    const week = createWeek($app)
+
+    const result = positionInTimeGrid([event1], week, $app)
+
+    expect(result['2019-12-31'].timeGridEvents.length).toBe(0)
+    expect(result['2020-01-01'].timeGridEvents).toEqual([event1])
+  })
+
+  it('should add time grid event to previous day if days are hybrid, and event starts before previous day end', () => {
+    const $app = __createAppWithViews__({
+      dayBoundaries: {
+        start: '10:00',
+        end: '08:00',
+      },
+      selectedDate: '2020-01-01',
+    })
+    const timeEvent1 = {
+      start: '2020-01-01 07:00',
+      end: '2020-01-01 09:00',
+      id: '1',
+    }
+    const event1 = createEvent(timeEvent1)
+    const week = createWeek($app)
+
+    const result = positionInTimeGrid([event1], week, $app)
+
+    expect(result['2019-12-31'].timeGridEvents).toEqual([event1])
+    expect(result['2020-01-01'].timeGridEvents.length).toBe(0)
   })
 })

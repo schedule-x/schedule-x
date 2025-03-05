@@ -69,7 +69,6 @@ const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
 
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
-// const drawPlugin = new DrawPluginImpl()
 
 const calendar = createCalendar({
   translations: mergeLocales(
@@ -81,88 +80,12 @@ const calendar = createCalendar({
     }
   ),
   weekOptions: {
-    // gridHeight: 3000,
-    // nDays: 3,
     eventWidth: 95,
   },
-  // monthGridOptions: {
-  //   nEventsPerDay: 7
-  // },
   firstDayOfWeek: 1,
-  // locale: 'de-BL',
-  // locale: 'pt-BR',
-  // locale: 'en-US',
-  // locale: 'zh-CN',
-  // locale: 'id-ID',
-  //locale: 'zh-TW',
-  // locale: 'et-EE',
-  // locale: 'ca-ES',
-  // locale: 'hr-HR',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-  // defaultView: viewWeek.name,
-  // minDate: '2024-01-01',
-  // maxDate: '2025-03-31',
   defaultView: 'week',
-  // selectedDate: '2024-12-01',
-  // datePicker: {
-  //   teleportTo: document.body,
-  // },
-  // dayBoundaries: {
-  //   start: '06:00',
-  //   end: '20:00',
-  // },
-  // isDark: true,
-  // translations:{
-  //   "deBL":{
-  //     Today: 'Heute',
-  //     Month: 'Monat',
-  //     Week: 'Woche test',
-  //     Day: 'Tag',
-  //     'Select View': 'Select View',
-  //     events: 'Events',
-  //     event: 'event',
-  //     'No events': 'No events',
-  //     'Next period': 'Next period',
-  //     'Previous period': 'Previous period',
-  //     to: 'to', // as in 2/1/2020 to 2/2/2020
-  //     'Full day- and multiple day events': 'Full day- and multiple day events',
-  //     'Link to {{n}} more events on {{date}}':
-  //         'Link to {{n}} more events on {{date}}',
-  //     'Link to 1 more event on {{date}}': 'Link to 1 more event on {{date}}',
-  //     Date: 'Date',
-  //     'MM/DD/YYYY': 'DD/MM/YYYY',
-  //     'Next month': 'Next month',
-  //     'Previous month': 'Previous month',
-  //     'Choose Date': 'Choose Date',
-  //   }
-  // },
   callbacks: {
-    // onBeforeEventUpdate(oldEvent, newEvent, $app) {
-    //   return false
-    // },
-
-    // onMouseDownDateTime(dateTime, e) {
-    //   drawPlugin.drawTimeGridEvent(dateTime, e, {
-    //     title: 'hello time grid',
-    //   })
-    // },
-    //
-    // onMouseDownDateGridDate(date, mouseDownEvent) {
-    //   drawPlugin.drawDateGridEvent(date, mouseDownEvent, {
-    //     title: 'hi date grid',
-    //   })
-    // },
-    //
-    // onMouseDownMonthGridDate(date, _e) {
-    //   drawPlugin.drawMonthGridEvent(date, {
-    //     title: 'hi month grid',
-    //   })
-    // },
-
-    // onRangeUpdate(range) {
-    //   console.log('onRangeUpdate', range)
-    // },
-
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
     },
@@ -206,10 +129,6 @@ const calendar = createCalendar({
     onDoubleClickDate(date) {
       console.log('onDoubleClickDate', date)
     },
-    //
-    // isCalendarSmall($app) {
-    //   return $app.elements.calendarWrapper!.clientWidth! < 500
-    // }
   },
   calendars: {
     personal: {
@@ -315,78 +234,22 @@ const calendar = createCalendar({
       },
     }
   ],
+  dayBoundaries: {
+    start: '10:00',
+    end: '23:00'
+  },
   events: [
     {
-      id: 874574875,
-      start: '2024-09-09 07:45',
-      end: '2024-09-09 09:01',
-      _customContent: {
-        timeGrid: '<div class="custom-content">Custom Content</div>',
-        monthGrid: '<div class="custom-content">Custom Content</div>',
-      }
+      id: 1,
+      start: '2025-03-04 08:00',
+      end: '2025-03-04 12:00',
     },
     {
-      id: 874574875,
-      start: '2024-09-09',
-      end: '2024-09-09',
-      title: 'All Day Event',
-      _customContent: {
-        dateGrid: '<div class="custom-content">Custom Content</div>',
-        monthAgenda: '<div class="custom-content">Custom Content</div>',
-      }
+      id: 2,
+      start: '2025-03-04 11:00',
+      end: '2025-03-04 12:00',
     },
-    ...seededEvents,
-    {
-      id: 45678,
-      title: 'Bi-Weekly Event Monday and Wednesday',
-      start: '2024-03-19 14:00',
-      end: '2024-03-19 15:00',
-      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;UNTIL=20240229T235959',
-    },
-    {
-      id: 18547854,
-      title: 'Bi-Weekly Event Monday and Wednesday',
-      start: '2024-02-05 14:00',
-      end: '2024-02-05 15:00',
-      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;UNTIL=20240229T235959',
-    },
-    {
-      id: 18547855,
-      title: 'Weekly Event',
-      start: '2024-02-03',
-      end: '2024-02-03',
-      rrule: 'FREQ=WEEKLY;COUNT=4',
-    },
-    {
-      id: 789,
-      title: 'Daily event',
-      start: '2024-02-05 12:00',
-      end: '2024-02-05 13:55',
-      rrule: 'FREQ=DAILY;COUNT=5',
-      calendarId: 'personal',
-    },
-    {
-      id: 9834876578,
-      title: 'Daily event 2',
-      start: '2024-02-05 12:00',
-      end: '2024-02-05 13:55',
-      rrule: 'FREQ=DAILY;UNTIL=20240209T235900',
-      calendarId: 'work',
-    },
-    {
-      id: 7845684678465874,
-      title: 'Monthly event',
-      start: '2024-02-07 16:00',
-      end: '2024-02-07 17:55',
-      rrule: 'FREQ=MONTHLY;COUNT=5',
-    },
-    {
-      rrule: 'FREQ=YEARLY;COUNT=5',
-      title: 'Yearly event',
-      start: '2024-02-08 16:00',
-      end: '2024-02-08 17:55',
-      id: 874367853,
-    },
+    ...seededEvents
   ],
 }, [
   createDragAndDropPlugin(),
