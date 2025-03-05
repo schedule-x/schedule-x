@@ -178,7 +178,9 @@ export default function TimeGridEvent({
   const hasCustomContent = calendarEvent._customContent?.timeGrid
 
   const realStartIsBeforeDayBoundaryStart =
-    dayBoundariesDateTime && calendarEvent.start < dayBoundariesDateTime.start
+    dayBoundariesDateTime &&
+    calendarEvent.start < dayBoundariesDateTime.start &&
+    calendarEvent.end >= dayBoundariesDateTime.start
 
   const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
     ? dayBoundariesDateTime?.start

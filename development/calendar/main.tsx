@@ -236,7 +236,7 @@ const calendar = createCalendar({
   ],
   dayBoundaries: {
     start: '10:00',
-    end: '18:00'
+    end: '23:00'
   },
   events: [
     {
@@ -249,6 +249,7 @@ const calendar = createCalendar({
       start: '2025-03-04 11:00',
       end: '2025-03-04 12:00',
     },
+    ...seededEvents
   ],
 }, [
   createDragAndDropPlugin(),
