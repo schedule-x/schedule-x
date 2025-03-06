@@ -239,17 +239,17 @@ const calendar = createCalendar({
     end: '23:00'
   },
   events: [
-    {
-      id: 1,
-      start: '2025-03-04 08:00',
-      end: '2025-03-04 12:00',
-    },
+    // {
+    //   id: 1,
+    //   start: '2025-03-04 08:00',
+    //   end: '2025-03-04 12:00',
+    // },
     {
       id: 2,
       start: '2025-03-04 11:00',
       end: '2025-03-04 12:00',
     },
-    ...seededEvents
+    // ...seededEvents
   ],
 }, [
   createDragAndDropPlugin(),

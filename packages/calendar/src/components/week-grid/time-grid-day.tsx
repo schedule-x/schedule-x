@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
@@ -15,6 +16,7 @@ import { toJSDate } from '@schedule-x/shared/src'
 import { useSignalEffect } from '@preact/signals'
 import TimeGridBackgroundEvent from './background-event'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
+import { randomStringId } from '@schedule-x/shared/src'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -27,6 +29,7 @@ export default function TimeGridDay({
   date,
   backgroundEvents,
 }: props) {
+  const dayElementId = useState(randomStringId())[0]
   /**
    * The time grid day needs to keep track of whether the mousedown event happened on a calendar event, in order to prevent
    * click events from firing when dragging an event.
@@ -104,8 +107,65 @@ export default function TimeGridDay({
     setClassNames(newClassNames)
   })
 
+  const [eventsHiddenAtTop, setEventsHiddenAtTop] = useState<HTMLElement[]>([])
+  const [eventsHiddenAtBottom, setEventsHiddenAtBottom] = useState<
+    HTMLElement[]
+  >([])
+  const [viewContainer] = useState(() =>
+    $app.elements.calendarWrapper?.querySelector('.sx__view-container')
+  )
+  const [weekHeaderHeight] = useState(
+    () =>
+      $app.elements.calendarWrapper?.querySelector('.sx__week-header')
+        ?.clientHeight || 0
+  )
+  const [viewContainerScrollTop, setViewContainerScrollTop] = useState(0)
+
+  useEffect(() => {
+    if (!(viewContainer instanceof HTMLElement)) return
+
+    const listener = () => {
+      setViewContainerScrollTop(viewContainer.scrollTop)
+      const newEventsHiddenAtTop: HTMLElement[] = []
+      const newEventsHiddenAtBottom: HTMLElement[] = []
+
+      const dayElement = document.getElementById(dayElementId)
+      if (!(dayElement instanceof HTMLElement)) return
+
+      const viewContainerRect = viewContainer.getBoundingClientRect()
+
+      const allEventElements = dayElement.querySelectorAll(
+        '.sx__time-grid-event'
+      )
+      allEventElements.forEach((eventEl) => {
+        if (!(eventEl instanceof HTMLElement)) return
+
+        const eventRect = eventEl.getBoundingClientRect()
+        const weekGridTop = viewContainerRect.top + weekHeaderHeight
+
+        if (eventRect.bottom < weekGridTop) {
+          console.log('hidden at the top')
+          newEventsHiddenAtTop.push(eventEl)
+        } else if (eventRect.top > viewContainerRect.bottom) {
+          console.log('hidden at the bottom')
+          newEventsHiddenAtBottom.push(eventEl)
+        } else {
+          console.log('visible')
+        }
+      })
+      setEventsHiddenAtTop(newEventsHiddenAtTop)
+      setEventsHiddenAtBottom(newEventsHiddenAtBottom)
+    }
+    viewContainer.addEventListener('scroll', listener)
+
+    return () => {
+      viewContainer.removeEventListener('scroll', listener)
+    }
+  }, [])
+
   return (
     <div
+      id={dayElementId}
       className={classNames.join(' ')}
       data-time-grid-date={date}
       onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
@@ -118,6 +178,16 @@ export default function TimeGridDay({
       onTouchEnd={handlePointerUp}
       onMouseDown={handleMouseDown}
     >
+      {viewContainer && !!eventsHiddenAtTop.length && (
+        <div
+          className={'sx__time-grid-day__hidden-events-top-indicator'}
+          style={{
+            top: `${viewContainerScrollTop}px`,
+          }}
+        >
+          + {eventsHiddenAtTop.length} more
+        </div>
+      )}
       {backgroundEvents.map((event) => (
         <>
           <TimeGridBackgroundEvent backgroundEvent={event} date={date} />
@@ -132,6 +202,17 @@ export default function TimeGridDay({
           setMouseDown={setMouseDownOnChild}
         />
       ))}
+
+      {viewContainer && !!eventsHiddenAtBottom.length && (
+        <div
+          className={'sx__time-grid-day__hidden-events-bottom-indicator'}
+          style={{
+            top: `${viewContainer.clientHeight + viewContainerScrollTop}px`,
+          }}
+        >
+          + {eventsHiddenAtBottom.length} hidden at the bottom
+        </div>
+      )}
     </div>
   )
 }

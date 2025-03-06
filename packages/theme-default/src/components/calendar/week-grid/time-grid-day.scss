@@ -4,3 +4,17 @@
   height: 100%;
   border-left: var(--sx-border);
 }
+
+.sx__time-grid-day__hidden-events-top-indicator {
+  position: absolute;
+  left: auto;
+  right: auto;
+  font-size: 1rem;
+}
+
+.sx__time-grid-day__hidden-events-bottom-indicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-size: 1rem;
+}
