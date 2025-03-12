@@ -345,6 +345,24 @@ export default function PremiumPage() {
                 as if it was your own product.
               </Accordion.Panel>
 
+              <Accordion.Panel header="For how many projects can I use 1 license?">
+                You need 1 license per project you use Schedule-X premium in. If you for example have a dev agency with
+                multiple customers and projects,
+                you need 1 license per project.
+
+                <br></br>
+                <br></br>
+                A "project" here, however, is not defined by the number of users or the number of instances your
+                software will be deployed to.
+                Think of it more as a "product". If you have a SaaS platform with many customers that maybe even self-host
+                your platform, that still just counts as 1 project. After all,
+                for you it's just 1 product.
+
+                <br></br>
+                <br></br>
+                If you are uncertain about how many licenses you need, please reach out to tom(at)schedule-x.dev
+              </Accordion.Panel>
+
               <Accordion.Panel header="How many issues and feature requests are included?">
                 There is no limit to how many issues and feature requests you can submit. However, you buy the
                 software <i>as is</i>, without any guarantee that I will build features that you request.
