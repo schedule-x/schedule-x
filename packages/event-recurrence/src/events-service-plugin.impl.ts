@@ -28,6 +28,8 @@ class EventsServicePluginImpl implements EventsService {
 
     validateEvents([event])
 
+    console.log('hi')
+
     this.eventsFacade.add(event)
   }
 

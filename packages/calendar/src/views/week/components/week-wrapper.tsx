@@ -84,11 +84,12 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-grid">
             <TimeAxis />
 
-            {Object.values(week).map((day) => (
+            {Object.values(week).map((day, index) => (
               <TimeGridDay
                 calendarEvents={day.timeGridEvents}
                 backgroundEvents={day.backgroundEvents}
                 date={day.date}
+                dayIndex={index}
                 key={day.date}
               />
             ))}

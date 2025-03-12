@@ -5,16 +5,21 @@
   border-left: var(--sx-border);
 }
 
-.sx__time-grid-day__hidden-events-top-indicator {
+button.sx__time-grid-day__hidden-events-top-indicator,
+button.sx__time-grid-day__hidden-events-bottom-indicator {
+  z-index: 1;
   position: absolute;
-  left: auto;
-  right: auto;
-  font-size: 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--sx-color-neutral);
+  background-color: var(--sx-color-background);
 }
 
-.sx__time-grid-day__hidden-events-bottom-indicator {
-  position: absolute;
-  left: 0;
-  right: 0;
-  font-size: 1rem;
+button.sx__time-grid-day__hidden-events-top-indicator {
+  border-top: 3px solid var(--sx-color-primary);
+}
+
+button.sx__time-grid-day__hidden-events-bottom-indicator {
+  border-bottom: 3px solid var(--sx-color-primary);
 }

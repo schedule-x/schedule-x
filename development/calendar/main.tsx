@@ -81,6 +81,7 @@ const calendar = createCalendar({
   ),
   weekOptions: {
     eventWidth: 95,
+    hiddenEventIndicators: true,
   },
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
@@ -234,28 +235,14 @@ const calendar = createCalendar({
       },
     }
   ],
-  dayBoundaries: {
-    start: '10:00',
-    end: '23:00'
-  },
   events: [
-    // {
-    //   id: 1,
-    //   start: '2025-03-04 08:00',
-    //   end: '2025-03-04 12:00',
-    // },
-    {
-      id: 2,
-      start: '2025-03-04 11:00',
-      end: '2025-03-04 12:00',
-    },
-    // ...seededEvents
+    ...seededEvents
   ],
 }, [
   createDragAndDropPlugin(),
   createCalendarControlsPlugin(),
   createScrollControllerPlugin(),
-  createEventsServicePlugin(),
+  eventsServicePlugin,
   createCurrentTimePlugin(),
   createEventModalPlugin(),
   createEventRecurrencePlugin(),
@@ -283,8 +270,8 @@ addEventButton.addEventListener('click', () => {
   eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
-    start: '2024-06-06',
-    end: '2024-06-06',
+    start: '2025-03-06 12:00',
+    end: '2025-03-06 13:00',
   })
 })
 

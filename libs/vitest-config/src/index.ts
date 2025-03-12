@@ -5,5 +5,6 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     useAtomics: true,
+    setupFiles: ['../../libs/vitest-config/src/vitest-setup.ts'],
   },
 })

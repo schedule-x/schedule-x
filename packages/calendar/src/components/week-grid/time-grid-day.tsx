@@ -6,28 +6,32 @@ import TimeGridEvent from './time-grid-event'
 import { sortEventsByStartAndEnd } from '../../utils/stateless/events/sort-by-start-date'
 import { handleEventConcurrency } from '../../utils/stateless/events/event-concurrency'
 import { timeStringFromTimePoints } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
-import { setTimeInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
+import {
+  setTimeInDateTimeString
+} from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datetime/grid-click-to-datetime'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
-import { toJSDate } from '@schedule-x/shared/src'
+import { randomStringId, toJSDate } from '@schedule-x/shared/src'
 import { useSignalEffect } from '@preact/signals'
 import TimeGridBackgroundEvent from './background-event'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
-import { randomStringId } from '@schedule-x/shared/src'
+import { createPortal } from 'preact/compat'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
   backgroundEvents: BackgroundEvent[]
   date: string
+  dayIndex: number
 }
 
 export default function TimeGridDay({
   calendarEvents,
   date,
   backgroundEvents,
+  dayIndex
 }: props) {
   const dayElementId = useState(randomStringId())[0]
   /**
@@ -107,6 +111,7 @@ export default function TimeGridDay({
     setClassNames(newClassNames)
   })
 
+  const showHiddenEventIndicators = $app.config.weekOptions.value.hiddenEventIndicators
   const [eventsHiddenAtTop, setEventsHiddenAtTop] = useState<HTMLElement[]>([])
   const [eventsHiddenAtBottom, setEventsHiddenAtBottom] = useState<
     HTMLElement[]
@@ -120,12 +125,16 @@ export default function TimeGridDay({
         ?.clientHeight || 0
   )
   const [viewContainerScrollTop, setViewContainerScrollTop] = useState(0)
+  const [viewContainerHeight, setViewContainerHeight] = useState(0)
+  const [dayElement, setDayElement] = useState<HTMLElement | null>(null)
 
   useEffect(() => {
     if (!(viewContainer instanceof HTMLElement)) return
+    setDayElement(document.getElementById(dayElementId))
 
-    const listener = () => {
+    const calculateHiddenEvents = () => {
       setViewContainerScrollTop(viewContainer.scrollTop)
+      setViewContainerHeight(viewContainer.clientHeight)
       const newEventsHiddenAtTop: HTMLElement[] = []
       const newEventsHiddenAtBottom: HTMLElement[] = []
 
@@ -140,28 +149,57 @@ export default function TimeGridDay({
       allEventElements.forEach((eventEl) => {
         if (!(eventEl instanceof HTMLElement)) return
 
-        const eventRect = eventEl.getBoundingClientRect()
         const weekGridTop = viewContainerRect.top + weekHeaderHeight
 
-        if (eventRect.bottom < weekGridTop) {
-          console.log('hidden at the top')
+        if (eventEl.getBoundingClientRect().bottom < weekGridTop) {
           newEventsHiddenAtTop.push(eventEl)
-        } else if (eventRect.top > viewContainerRect.bottom) {
-          console.log('hidden at the bottom')
+        } else if (eventEl.getBoundingClientRect().top > viewContainerRect.bottom) {
           newEventsHiddenAtBottom.push(eventEl)
-        } else {
-          console.log('visible')
         }
       })
       setEventsHiddenAtTop(newEventsHiddenAtTop)
       setEventsHiddenAtBottom(newEventsHiddenAtBottom)
     }
-    viewContainer.addEventListener('scroll', listener)
+    const resizeObserver = new ResizeObserver(calculateHiddenEvents)
+    viewContainer.addEventListener('scroll', calculateHiddenEvents)
+    resizeObserver.observe(viewContainer)
 
     return () => {
-      viewContainer.removeEventListener('scroll', listener)
+      viewContainer.removeEventListener('scroll', calculateHiddenEvents)
+      resizeObserver.disconnect()
     }
   }, [])
+
+  const getScrollPositionWithinViewContainer = (
+    element: HTMLElement,
+  ) => {
+    const dayElement = document.getElementById(dayElementId)
+    if (!dayElement) return 0
+
+    return element.getBoundingClientRect().top - dayElement.getBoundingClientRect().top
+  }
+
+  const scrollToFirstHiddenEventAtTop = () => {
+    if (!eventsHiddenAtTop.length) return
+
+    const firstHiddenEvent = eventsHiddenAtTop[eventsHiddenAtTop.length - 1]
+    viewContainer?.scrollTo({
+      top: getScrollPositionWithinViewContainer(firstHiddenEvent),
+      behavior: 'smooth',
+    })
+  }
+
+  const scrollToFirstHiddenElementAtBottom = () => {
+    if (!eventsHiddenAtBottom.length) return
+
+    const firstHiddenEvent = eventsHiddenAtBottom[0]
+    viewContainer?.scrollTo({
+      top: getScrollPositionWithinViewContainer(firstHiddenEvent),
+      behavior: 'smooth',
+    })
+  }
+
+  console.log(!!eventsHiddenAtTop.length)
 
   return (
     <div
@@ -178,16 +216,19 @@ export default function TimeGridDay({
       onTouchEnd={handlePointerUp}
       onMouseDown={handleMouseDown}
     >
-      {viewContainer && !!eventsHiddenAtTop.length && (
-        <div
+      {showHiddenEventIndicators && viewContainer && !!eventsHiddenAtTop.length && createPortal((
+        <button
           className={'sx__time-grid-day__hidden-events-top-indicator'}
           style={{
-            top: `${viewContainerScrollTop}px`,
+            top: `${weekHeaderHeight + 20}px`,
+            width: (dayElement?.clientWidth || 0) + 'px',
+            left: (dayElement?.clientWidth || 0) * dayIndex + 'px',
           }}
+          onClick={scrollToFirstHiddenEventAtTop}
         >
           + {eventsHiddenAtTop.length} more
-        </div>
-      )}
+        </button>
+      ), viewContainer)}
       {backgroundEvents.map((event) => (
         <>
           <TimeGridBackgroundEvent backgroundEvent={event} date={date} />
@@ -203,16 +244,19 @@ export default function TimeGridDay({
         />
       ))}
 
-      {viewContainer && !!eventsHiddenAtBottom.length && (
-        <div
+      {showHiddenEventIndicators && viewContainer && !!eventsHiddenAtBottom.length && createPortal((
+        <button
           className={'sx__time-grid-day__hidden-events-bottom-indicator'}
           style={{
-            top: `${viewContainer.clientHeight + viewContainerScrollTop}px`,
+            left: (dayElement?.clientWidth || 0) * dayIndex + 'px',
+            bottom: `${0 - 24}px`,
+            width: (dayElement?.clientWidth || 0) + 'px',
           }}
+          onClick={scrollToFirstHiddenElementAtBottom}
         >
-          + {eventsHiddenAtBottom.length} hidden at the bottom
-        </div>
-      )}
+          + {eventsHiddenAtBottom.length} more
+        </button>
+      ), viewContainer)}
     </div>
   )
 }
