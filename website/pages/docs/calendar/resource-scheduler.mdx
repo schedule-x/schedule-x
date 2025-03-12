@@ -51,7 +51,8 @@ npm install @sx-premium/resource-scheduler @schedule-x/calendar @schedule-x/tran
 import { createCalendar } from '@schedule-x/calendar'
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { createInteractiveEventModal, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
-import { createHourlyView, createDailyView, createConfig, translations as resourceViewTranslations } from "@sx-premium/resource-scheduler";
+import { createHourlyView, createDailyView, createConfig, translations as resourceViewTranslations, TimeUnits } from
+"@sx-premium/resource-scheduler";
 import { translations, mergeLocales } from '@schedule-x/translations'
 import { signal } from "@preact/signals";
 
@@ -66,6 +67,18 @@ const dailyView = createDailyView(resourceConfig);
 // enable or disable drag and drop, resizing
 resourceConfig.resize.value = true
 resourceConfig.dragAndDrop.value = true
+
+// optionally set the initially displayed columns of the hourly view
+resourceConfig.initialHours.value = new TimeUnits().getDayHoursBetween(
+  '2025-03-07 08:00',
+  '2025-03-08 02:00'
+)
+
+// optionally set the initially displayed days of the daily view
+resourceConfig.initialDays.value = new TimeUnits().getDaysBetween(
+  '2025-03-05',
+  '2025-03-20'
+)
 
 resourceConfig.resources.value = [
   {
@@ -195,15 +208,50 @@ you can do so by setting `config.hourWidth.value = 100`.
 
 ```ts
 export type ResourceViewConfig = {
+  // width of a column in the hourly view
   hourWidth: Signal<number>
+
+  // width of a column in the daily view
   dayWidth: Signal<number>
+
+  // list of resources you want to display
   resources: Signal<Resource[]>
+
+  // height of a resource row
   resourceHeight: Signal<number>
+
+  // height of an event
   eventHeight: Signal<number>
+
+  // should drag and drop be enabled
   dragAndDrop: Signal<boolean>
+
+  // should resizing be enabled
   resize: Signal<boolean>
+
+  // should infinite scroll be enabled
+  infiniteScroll: Signal<boolean>
+
+  // callback that runs when the user scrolls the hourly view
   onLazyLoadDate?: (dates: Date[]) => void
+
+  // callback that runs when the user scrolls the daily view
   onLazyLoadMonth?: (dates: Date[]) => void
+
+  // callback for detecting clicks in the hourly view
+  onClickDateTime: Signal<(datetime: string, resourceId: string) => void>
+
+  // callback for detecting clicks in the daily view
+  onClickDate: Signal<(date: string, resourceId: string) => void>
+
+  // callback for detecting clicks on a resource
+  onClickResource: Signal<(resourceId: string) => void>
+
+  // Can be used to set the initially displayed hours of the hourly view
+  initialHours: Signal<Date[] | undefined>
+
+  // Can be used to set the initially displayed days of the daily view
+  initialDays: Signal<Date[] | undefined>
 }
 ```
 
