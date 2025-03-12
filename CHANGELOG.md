@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.21.2](https://github.com/schedule-x/schedule-x/compare/v2.21.1...v2.21.2) (2025-03-12)
+
+### Bug Fixes
+
+- **drag-and-drop:** remove event listener that remained after dnd ([#946](https://github.com/schedule-x/schedule-x/issues/946)) ([1df7042](https://github.com/schedule-x/schedule-x/commit/1df70420b0b381b6e97c191e39a767947b91bd04))
+
 ## [2.21.1](https://github.com/schedule-x/schedule-x/compare/v2.21.0...v2.21.1) (2025-03-05)
 
 ### Bug Fixes
