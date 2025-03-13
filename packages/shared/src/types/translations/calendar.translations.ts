@@ -13,4 +13,5 @@ export interface CalendarTranslations {
   'Full day- and multiple day events': string
   'Link to {{n}} more events on {{date}}': string
   'Link to 1 more event on {{date}}': string
+  CW: string
 }

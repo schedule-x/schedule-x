@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   afterEach,
   describe,
@@ -122,6 +123,34 @@ describe('MonthAgendaDayNames', () => {
       expect(getDayN(4).textContent).toBe('周五')
       expect(getDayN(5).textContent).toBe('周六')
       expect(getDayN(6).textContent).toBe('周日')
+    })
+  })
+
+  describe('adding a class for left padding, if week numbers are shown', () => {
+    it('should add the class if week numbers are shown', () => {
+      const timeUnits = new TimeUnitsBuilder()
+        .withConfig(createBaseConfig())
+        .build()
+      const agendaMonth = createAgendaMonth('2023-11-01', timeUnits)
+      const $app = __createAppWithViews__({ showWeekNumbers: true })
+      renderComponent(agendaMonth.weeks[0], $app)
+
+      expect(
+        document.querySelector('.sx__month-agenda-day-names')?.classList
+      ).toContain('sx__has-week-numbers')
+    })
+
+    it('should not add the class if week numbers are not shown', () => {
+      const timeUnits = new TimeUnitsBuilder()
+        .withConfig(createBaseConfig())
+        .build()
+      const agendaMonth = createAgendaMonth('2023-11-01', timeUnits)
+      const $app = __createAppWithViews__({ showWeekNumbers: false })
+      renderComponent(agendaMonth.weeks[0], $app)
+
+      expect(
+        document.querySelector('.sx__month-agenda-day-names')?.classList
+      ).not.toContain('sx__has-week-numbers')
     })
   })
 })

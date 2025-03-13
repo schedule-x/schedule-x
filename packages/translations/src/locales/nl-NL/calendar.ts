@@ -17,4 +17,5 @@ export const calendarNlNL: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Link naar {{n}} meer evenementen op {{date}}',
   'Link to 1 more event on {{date}}': 'Link naar 1 meer evenement op {{date}}',
+  CW: 'Week {{week}}',
 }

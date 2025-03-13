@@ -12,7 +12,7 @@ body {
 
 #app {
   width: 400px;
-  max-width: 100%;
+  max-width: 90%;
   margin: 300px auto 0;
   padding: 1rem;
   font-family: 'Open Sans', sans-serif;
@@ -32,7 +32,7 @@ body {
 @media (width <=699px) {
   #calendar {
     height: 100vh;
-    padding: 0;
+    padding: 1rem;
   }
 }
 

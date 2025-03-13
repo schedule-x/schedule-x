@@ -16,4 +16,5 @@ export const calendarSvSE: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Länk till {{n}} fler händelser den {{date}}',
   'Link to 1 more event on {{date}}': 'Länk till 1 händelse till den {{date}}',
+  CW: 'Vecka {{week}}',
 }

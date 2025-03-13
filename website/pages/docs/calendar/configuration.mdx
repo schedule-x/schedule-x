@@ -105,6 +105,12 @@ const config = {
   },
 
   /**
+  * Display week numbers. Not 100% according to ISO 8601, which considers a week to start on Monday and end on Sunday.
+  * Since Schedule-X enables you to configure the first day of the week, the week numbers are calculated based on that.
+  * */
+  showWeekNumbers: true,
+
+  /**
    * Toggle automatic view change when the calendar is resized below a certain width breakpoint.
    * Defaults to true
    * */

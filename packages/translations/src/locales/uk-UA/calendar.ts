@@ -18,4 +18,5 @@ export const calendarUkUA: CalendarTranslations = {
     'Посилання на {{n}} додаткові події на {{date}}',
   'Link to 1 more event on {{date}}':
     'Посилання на 1 додаткову подію на {{date}}',
+  CW: 'Тиждень {{week}}',
 }

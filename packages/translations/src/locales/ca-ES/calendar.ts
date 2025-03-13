@@ -17,4 +17,5 @@ export const calendarCaES: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Enllaç a {{n}} esdeveniments més el {{date}}',
   'Link to 1 more event on {{date}}': 'Enllaç a 1 esdeveniment més el {{date}}',
+  CW: 'Setmana {{week}}',
 }

@@ -28,3 +28,16 @@
     display: none;
   }
 }
+
+.sx__calendar-header__week-number {
+  border-radius: 4px;
+  background-color: #eceef1;
+  color: var(--sx-color-on-surface);
+  padding: var(--sx-spacing-padding1) var(--sx-spacing-padding2);
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  .is-dark & {
+    background-color: #4a4458;
+  }
+}

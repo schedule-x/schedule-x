@@ -16,4 +16,5 @@ export const calendarKoKR: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     '{{date}}에 {{n}}개 이상의 이벤트로 이동',
   'Link to 1 more event on {{date}}': '{{date}}에 1개 이상의 이벤트로 이동',
+  CW: '{{week}}주',
 }

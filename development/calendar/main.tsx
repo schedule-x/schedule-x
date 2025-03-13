@@ -74,17 +74,18 @@ const calendar = createCalendar({
   translations: mergeLocales(
     translations,
     {
-      enUS: {
-        'Week': '4 days'
-      }
+      enUS: {}
     }
   ),
   weekOptions: {
     eventWidth: 95,
   },
-  firstDayOfWeek: 1,
+  showWeekNumbers: true,
+  firstDayOfWeek: 0,
+  // selectedDate: '2025-01-01',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-  defaultView: 'week',
+  defaultView: 'month-agenda',
+  // locale: 'zh-CN',
   callbacks: {
     onEventUpdate(event) {
       console.log('onEventUpdate', event)

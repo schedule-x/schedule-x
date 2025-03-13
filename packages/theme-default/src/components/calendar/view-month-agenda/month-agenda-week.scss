@@ -5,3 +5,16 @@
     border-top: var(--sx-border);
   }
 }
+
+.sx__month-agenda-week__week-number {
+  text-align: center;
+  background-color: #eceef1;
+  color: var(--sx-color-on-surface);
+  width: 1.5rem;
+  font-size: 0.75rem;
+  padding-top: 9px;
+
+  .is-dark & {
+    background-color: #4a4458;
+  }
+}

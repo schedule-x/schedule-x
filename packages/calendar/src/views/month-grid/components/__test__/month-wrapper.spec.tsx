@@ -192,4 +192,49 @@ describe('MonthWrapper', () => {
       })
     })
   })
+
+  describe('display of weeks numbers', () => {
+    it('should display the week numbers if showWeekNumbers is configured', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2024-07-01',
+        showWeekNumbers: true,
+      })
+      renderComponent($app)
+
+      expect(
+        document.querySelectorAll('.sx__month-grid-week__week-number').length
+      ).toBe(5)
+    })
+
+    it('should not display the week numbers if showWeekNumbers is not configured', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2024-07-01',
+        showWeekNumbers: false,
+      })
+      renderComponent($app)
+
+      expect(
+        document.querySelectorAll('.sx__month-grid-week__week-number').length
+      ).toBe(0)
+    })
+
+    it('should show week numbers for a German calendar', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2025-03-13',
+        showWeekNumbers: true,
+        firstDayOfWeek: 1,
+      })
+      renderComponent($app)
+
+      const weekNumbers = document.querySelectorAll(
+        '.sx__month-grid-week__week-number'
+      )
+      expect(weekNumbers[0].textContent).toBe('9')
+      expect(weekNumbers[1].textContent).toBe('10')
+      expect(weekNumbers[2].textContent).toBe('11')
+      expect(weekNumbers[3].textContent).toBe('12')
+      expect(weekNumbers[4].textContent).toBe('13')
+      expect(weekNumbers[5].textContent).toBe('14')
+    })
+  })
 })

@@ -55,8 +55,10 @@ export default class CalendarConfigBuilder
   backgroundEvents: BackgroundEvent[] | undefined
 
   theme: string | undefined
-  //TODO:Change for V3
+  // TODO: Change for V3. Should only be configured from outside
   translations: Record<string, Language> | undefined
+
+  showWeekNumbers: boolean | undefined
 
   build(): CalendarConfigInternal {
     return new CalendarConfigImpl(
@@ -78,7 +80,8 @@ export default class CalendarConfigBuilder
       this.maxDate,
       this.monthGridOptions,
       this.theme,
-      this.translations
+      this.translations,
+      this.showWeekNumbers
     )
   }
 
@@ -193,6 +196,11 @@ export default class CalendarConfigBuilder
 
   withTheme(theme: string | undefined) {
     this.theme = theme
+    return this
+  }
+
+  withWeekNumbers(showWeekNumbers: boolean | undefined) {
+    this.showWeekNumbers = showWeekNumbers
     return this
   }
 }

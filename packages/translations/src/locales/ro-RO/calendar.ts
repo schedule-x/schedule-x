@@ -18,4 +18,5 @@ export const calendarRoRO: CalendarTranslations = {
     'Link către {{n}} evenimente suplimentare pe {{date}}',
   'Link to 1 more event on {{date}}':
     'Link către 1 eveniment suplimentar pe {{date}}',
+  CW: 'Săptămâna {{week}}',
 }

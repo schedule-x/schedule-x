@@ -15,4 +15,5 @@ export const calendarZhCN: CalendarTranslations = {
   'Full day- and multiple day events': '全天和多天活动',
   'Link to {{n}} more events on {{date}}': '链接到{{date}}上的{{n}}个更多活动',
   'Link to 1 more event on {{date}}': '链接到{{date}}上的1个更多活动',
+  CW: '第{{week}}周',
 }

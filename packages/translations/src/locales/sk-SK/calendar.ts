@@ -16,4 +16,5 @@ export const calendarSkSK: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Odkaz na {{n}} ďalších udalostí dňa {{date}}',
   'Link to 1 more event on {{date}}': 'Odkaz na 1 ďalšiu udalosť dňa {{date}}',
+  CW: '{{week}}. týždeň',
 }
