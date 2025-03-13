@@ -17,4 +17,5 @@ export const calendarEtEE: CalendarTranslations = {
     'Link {{n}} rohkematele sündmustele kuupäeval {{date}}',
   'Link to 1 more event on {{date}}':
     'Link ühele lisasündmusele kuupäeval {{date}}',
+  CW: 'Nädala number {{week}}',
 }

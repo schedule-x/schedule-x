@@ -17,4 +17,5 @@ export const calendarFiFI: CalendarTranslations = {
     'Linkki {{n}} lisätapahtumaan päivämäärällä {{date}}',
   'Link to 1 more event on {{date}}':
     'Linkki 1 lisätapahtumaan päivämäärällä {{date}}',
+  CW: 'Viikko {{week}}',
 }

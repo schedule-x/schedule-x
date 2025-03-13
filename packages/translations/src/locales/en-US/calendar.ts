@@ -16,4 +16,5 @@ export const calendarEnUS: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Link to {{n}} more events on {{date}}',
   'Link to 1 more event on {{date}}': 'Link to 1 more event on {{date}}',
+  CW: 'Week {{week}}',
 }

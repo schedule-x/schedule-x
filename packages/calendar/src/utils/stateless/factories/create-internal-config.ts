@@ -25,5 +25,6 @@ export const createInternalConfig = (
     .withBackgroundEvents(config.backgroundEvents)
     .withTheme(config.theme)
     .withTranslations(config.translations || translations)
+    .withWeekNumbers(config.showWeekNumbers)
     .build()
 }
