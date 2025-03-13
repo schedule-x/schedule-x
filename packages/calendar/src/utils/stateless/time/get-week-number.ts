@@ -11,7 +11,9 @@ export const getWeekNumber = (d: Date, firstDayOfWeek: number) => {
   yearStart.setUTCDate(yearStart.getUTCDate() - yearStartOffset)
 
   // Calculate full weeks from adjusted start of the year
-  const weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7)
+  const weekNo = Math.ceil(
+    ((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7
+  )
 
   // Handle edge case for the last days of the year falling into week 53
   const nextYearStart = new Date(Date.UTC(d.getUTCFullYear() + 1, 0, 1))
