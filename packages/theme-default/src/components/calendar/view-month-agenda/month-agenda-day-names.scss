@@ -3,6 +3,10 @@
   padding: var(--sx-spacing-padding2) 0;
   font-size: var(--sx-font-extra-small);
   color: var(--sx-color-neutral);
+
+  &.sx__has-week-numbers {
+    padding-left: 1.5rem;
+  }
 }
 
 .sx__month-agenda-day-name {

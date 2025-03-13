@@ -82,8 +82,9 @@ const calendar = createCalendar({
   },
   showWeekNumbers: true,
   firstDayOfWeek: 0,
+  // selectedDate: '2025-01-01',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-  defaultView: 'week',
+  defaultView: 'month-agenda',
   // locale: 'zh-CN',
   callbacks: {
     onEventUpdate(event) {

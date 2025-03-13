@@ -1,5 +1,9 @@
 import { MonthWeek as MonthWeekType } from '../types/month'
 import MonthGridDay from './month-grid-day'
+import { useContext } from 'preact/hooks'
+import { AppContext } from '../../../utils/stateful/app-context'
+import { getWeekNumber } from '../../../utils/stateless/time/get-week-number'
+import { toJSDate } from '@schedule-x/shared/src'
 
 type props = {
   week: MonthWeekType
@@ -12,8 +16,19 @@ export default function MonthGridWeek({
   isFirstWeek,
   isLastWeek,
 }: props) {
+  const $app = useContext(AppContext)
+
   return (
     <div className="sx__month-grid-week">
+      {$app.config.showWeekNumbers.value && (
+        <div className="sx__month-grid-week__week-number">
+          {getWeekNumber(
+            toJSDate(week[0].date),
+            $app.config.firstDayOfWeek.value
+          )}
+        </div>
+      )}
+
       {week.map((day) => {
         /**
          * The day component keeps internal state, and needs to be thrown away once the day changes.
