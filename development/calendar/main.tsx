@@ -81,7 +81,7 @@ const calendar = createCalendar({
     eventWidth: 95,
   },
   showWeekNumbers: true,
-  firstDayOfWeek: 1,
+  firstDayOfWeek: 0,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
   defaultView: 'week',
   // locale: 'zh-CN',
