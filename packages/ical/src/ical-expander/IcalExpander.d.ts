@@ -1,4 +1,3 @@
-/* eslint-disable */
 /*
 from https://github.com/fullcalendar/fullcalendar
 released under https://github.com/fullcalendar/fullcalendar/blob/main/LICENSE.md

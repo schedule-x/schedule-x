@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek } from '@schedule-x/calendar'
 import {useEffect, useState} from 'react'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'

@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { EventRecurrencePlugin } from '@schedule-x/shared/src/interfaces/event-recurrence/event-recurrence-plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { EventId } from '@schedule-x/shared/src/types/event-id'

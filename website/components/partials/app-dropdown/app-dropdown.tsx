@@ -36,7 +36,9 @@ export default function AppDropdown({ items, selectedItem, onSelect }: props) {
 
   const handleClickOnSelectionItem = (optionValue: number) => {
     setIsOpen(false)
-    onSelect && onSelect(optionValue)
+    if (onSelect) {
+      onSelect(optionValue)
+    }
     setSelectedOption(items.find((item) => item.id === optionValue))
   }
 

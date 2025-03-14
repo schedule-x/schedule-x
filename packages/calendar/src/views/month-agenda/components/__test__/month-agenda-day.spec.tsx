@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -18,7 +17,7 @@ const renderComponent = (
   $app: CalendarAppSingleton,
   day: MonthAgendaDayType,
   isActive = false,
-  setActiveDate: StateUpdater<string> = vi.fn
+  setActiveDate: StateUpdater<string> = vi.fn()
 ) => {
   render(
     <AppContext.Provider value={$app}>
