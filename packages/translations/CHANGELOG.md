@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
+
+### Features
+
+- **calendar:** add showWeekNumbers option ([#951](https://github.com/schedule-x/schedule-x/issues/951)) ([02621e4](https://github.com/schedule-x/schedule-x/commit/02621e4aea01601cff4f2d94739bae98dc0aaa4a))
+
 ## [2.21.2](https://github.com/schedule-x/schedule-x/compare/v2.21.1...v2.21.2) (2025-03-12)
 
 **Note:** Version bump only for package @schedule-x/translations
