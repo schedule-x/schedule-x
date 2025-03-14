@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import TimeInput from './time-input'
 import { AppContext } from '../utils/stateful/app-context'
 import { useContext, useRef } from 'preact/compat'

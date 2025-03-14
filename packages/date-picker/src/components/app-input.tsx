@@ -52,7 +52,7 @@ export default function AppInput() {
       ).value
       $app.datePickerState.close()
     } catch (e) {
-      // nothing to do
+      console.log('Error setting input value:' + e)
     }
   }
 

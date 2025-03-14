@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import CalendarAppSingletonImpl from './calendar-app-singleton.impl'

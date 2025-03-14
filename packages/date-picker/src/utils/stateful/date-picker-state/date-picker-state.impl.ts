@@ -45,7 +45,7 @@ export const createDatePickerState = (
       datePickerDate.value = newValue
       lastValidDisplayedValue.value = inputDisplayedValue.value
     } catch (e) {
-      // nothing to do
+      console.error('Error setting input value: ', e)
     }
   })
 

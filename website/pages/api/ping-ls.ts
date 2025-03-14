@@ -26,6 +26,7 @@ export default async (req, res) => {
       isTestMode: response.data.meta.test_mode,
     })
   } catch (e) {
+    console.log(e)
     res.json({
       message: 'error',
     })

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
 import { calendars } from './data/calendars';
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";

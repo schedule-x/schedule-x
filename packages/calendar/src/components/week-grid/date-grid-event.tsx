@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'

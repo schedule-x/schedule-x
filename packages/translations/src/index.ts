@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { deDE } from './locales/de-DE'
 import { datePickerDeDE } from './locales/de-DE/date-picker'
 import { enUS } from './locales/en-US'
