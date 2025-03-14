@@ -49,6 +49,10 @@ export default defineConfig([
           pattern: 'packages/events-service/*',
         },
         {
+          type: 'ical',
+          pattern: 'packages/ical/*',
+        },
+        {
           type: 'recurrence',
           pattern: 'packages/recurrence/*',
         },
@@ -120,6 +124,10 @@ export default defineConfig([
             },
             {
               from: 'events-service',
+              allow: ['shared'],
+            },
+            {
+              from: 'ical',
               allow: ['shared'],
             },
             {
