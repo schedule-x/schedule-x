@@ -7,11 +7,9 @@ import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import {
   createHourlyView,
   createConfig,
-  translations as resourceViewTranslations,
   TimeUnits
 } from "@sx-premium/resource-scheduler";
 import { createSchedulingAssistant } from '@sx-premium/scheduling-assistant'
-import { mergeLocales, translations } from '@schedule-x/translations'
 import { useState } from 'react'
 import { effect } from '@preact/signals'
 
@@ -101,7 +99,6 @@ export default function CalendarDemoPage() {
     plugins: [
       schedulingAssistant
     ],
-    translations: mergeLocales(translations, resourceViewTranslations),
   })
 
   const getTime = (start: string, end: string) => {
