@@ -12,6 +12,7 @@ import '@sx-premium/sidebar/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
 import '@sx-premium/drag-to-create/index.css'
 import '@sx-premium/resource-scheduler/index.css'
+import '@sx-premium/scheduling-assistant/index.css'
 import '../components/partials/app-dropdown/app-dropdown.scss'
 import '../components/partials/pricing-card/pricing-card.scss'
 import 'rsuite/dist/rsuite-no-reset.min.css';

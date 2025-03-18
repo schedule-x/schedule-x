@@ -159,6 +159,11 @@ $heading-width: 900px;
     width: 100%;
     text-align: center;
   }
+
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
 }
 
 @media (hover: hover) {

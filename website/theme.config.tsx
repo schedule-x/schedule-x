@@ -74,10 +74,13 @@ const config: DocsThemeConfig = {
   },
 
   banner: {
-    key: 'draw-plugin-1.0',
+    key: 'scheduling-assistant-plugin-1.0',
     text: (
-      <a href="/docs/calendar/plugins/draw" target="_blank">
-        Just released: Draw Plugin 🎨
+      <a href="/docs/calendar/plugins/scheduling-assistant" target="_blank">
+        <span style={{ backgroundColor: '#f6e05e', color: '#000', borderRadius: '4px', padding: '2px 6px', marginRight: '5px', fontSize: '0.75rem' }}>
+          NEW
+        </span>
+        Scheduling Assistant ✨
       </a>
     )
   }
