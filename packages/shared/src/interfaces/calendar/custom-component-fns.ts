@@ -12,6 +12,10 @@ export type CustomComponentName =
   | 'headerContentRightAppend'
   | 'headerContent'
   | 'interactiveModalAdditionalFields'
+  | 'weekGridDate'
+  | 'weekGridHour'
+  | 'monthGridDayName'
+  | 'monthGridDate'
   | string
 
 export type CustomComponentFns = {
