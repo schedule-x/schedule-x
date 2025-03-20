@@ -42,7 +42,9 @@ export default function DateAxis({ week }: props) {
           )
         }
 
-        weekGridDateCustomComponentFn(el, { date })
+        weekGridDateCustomComponentFn(el, {
+          date: toDateString(date),
+        })
       })
     }
   }, [week])
