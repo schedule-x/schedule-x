@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/schedule-x/schedule-x/compare/v2.22.0...v2.23.0) (2025-03-20)
+
+**Note:** Version bump only for package @schedule-x/current-time
+
 # [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
 
 **Note:** Version bump only for package @schedule-x/current-time

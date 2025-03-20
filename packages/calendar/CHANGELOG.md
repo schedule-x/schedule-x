@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/schedule-x/schedule-x/compare/v2.22.0...v2.23.0) (2025-03-20)
+
+### Features
+
+- **calendar:** add additional slots ([#972](https://github.com/schedule-x/schedule-x/issues/972)) ([5e1d2b6](https://github.com/schedule-x/schedule-x/commit/5e1d2b6acfc204d7b048d7a9a9a48bf08512456a))
+
 # [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
 
 ### Features
