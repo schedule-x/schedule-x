@@ -38,6 +38,10 @@
     "display": "hidden",
     "title": "Incident with private package registry"
   },
+  "custom-components": {
+    "display": "hidden",
+    "title": "A visual overview of the custom components available"
+  },
   "advanced": {
     "title": "Advanced usage"
   }

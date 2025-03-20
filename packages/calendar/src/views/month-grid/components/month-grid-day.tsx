@@ -13,6 +13,7 @@ import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 import { dateStringRegex } from '@schedule-x/shared/src'
+import { randomStringId } from '@schedule-x/shared/src'
 
 type props = {
   day: MonthDayType
@@ -121,6 +122,42 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     if (callback) callback(day.date, e)
   }
 
+  const monthGridDayNameCustomComponent =
+    $app.config._customComponentFns.monthGridDayName
+  const monthGridDayNameCCID = useState(
+    monthGridDayNameCustomComponent ? randomStringId() : ''
+  )[0]
+  useEffect(() => {
+    if (!monthGridDayNameCustomComponent) return
+
+    const dayNameEl = document.querySelector(
+      `[data-ccid="${monthGridDayNameCCID}"]`
+    )
+    if (!(dayNameEl instanceof HTMLElement)) {
+      return
+    }
+
+    monthGridDayNameCustomComponent(dayNameEl, {
+      day: toJSDate(day.date).getDay(),
+    })
+  }, [day])
+
+  const monthGridDateCustomComponent =
+    $app.config._customComponentFns.monthGridDate
+  const monthGridDateCCID = useState(
+    monthGridDateCustomComponent ? randomStringId() : ''
+  )[0]
+  useEffect(() => {
+    if (!monthGridDateCustomComponent) return
+
+    const dateEl = document.querySelector(`[data-ccid="${monthGridDateCCID}"]`)
+    if (!(dateEl instanceof HTMLElement)) return
+
+    monthGridDateCustomComponent(dateEl, {
+      date: toJSDate(day.date).getDate(),
+    })
+  }, [day])
+
   return (
     <div
       className={wrapperClasses.join(' ')}
@@ -147,12 +184,22 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
-          <div className="sx__month-grid-day__header-day-name">
-            {getDayNameShort(dayDate, $app.config.locale.value)}
-          </div>
+          <>
+            {monthGridDayNameCustomComponent ? (
+              <div data-ccid={monthGridDayNameCCID} />
+            ) : (
+              <div className="sx__month-grid-day__header-day-name">
+                {getDayNameShort(dayDate, $app.config.locale.value)}
+              </div>
+            )}
+          </>
         ) : null}
 
-        <div className={dateClassNames.join(' ')}>{dayDate.getDate()}</div>
+        {monthGridDateCCID ? (
+          <div data-ccid={monthGridDateCCID} />
+        ) : (
+          <div className={dateClassNames.join(' ')}>{dayDate.getDate()}</div>
+        )}
       </div>
 
       <div className="sx__month-grid-day__events">
