@@ -82,9 +82,8 @@ const calendar = createCalendar({
   },
   showWeekNumbers: true,
   firstDayOfWeek: 6,
-  selectedDate: '2025-01-01',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-  defaultView: 'month-agenda',
+  defaultView: 'week',
   // locale: 'zh-CN',
   callbacks: {
     onEventUpdate(event) {
@@ -253,10 +252,10 @@ const calendar = createCalendar({
     ...seededEvents
   ],
 }, [
+  eventsServicePlugin,
   createDragAndDropPlugin(),
   createCalendarControlsPlugin(),
   createScrollControllerPlugin(),
-  createEventsServicePlugin(),
   createCurrentTimePlugin(),
   createEventModalPlugin(),
   createEventRecurrencePlugin(),
@@ -284,8 +283,8 @@ addEventButton.addEventListener('click', () => {
   eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
-    start: '2024-06-06',
-    end: '2024-06-06',
+    start: '2025-03-26 11:00',
+    end: '2025-03-26 12:00',
   })
 })
 

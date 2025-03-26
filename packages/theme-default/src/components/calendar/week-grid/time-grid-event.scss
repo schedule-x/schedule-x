@@ -14,6 +14,24 @@
     z-index: 1;
     transition: transform 0.15s ease-in-out;
   }
+
+  &.is-event-new {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out forwards;
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+        // filter to change colors during animation
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+  }
 }
 
 [data-has-dnd='true'] {

@@ -154,6 +154,13 @@ export default function TimeGridEvent({
 
   const borderRule = getBorderRule(calendarEvent)
   const classNames = ['sx__time-grid-event', 'sx__event']
+
+  if (
+    calendarEvent._createdAt &&
+    Date.now() - calendarEvent._createdAt.getTime() < 1000
+  )
+    classNames.push('is-event-new')
+  console.log(calendarEvent._createdAt)
   if (isCopy) classNames.push('is-event-copy')
   if (
     !$app.config.weekOptions.value.eventOverlap &&
