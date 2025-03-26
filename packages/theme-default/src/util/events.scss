@@ -1,8 +1,8 @@
 @mixin is-event-new {
   &.is-event-new {
-    animation: sxGrowEvent 0.3s ease-in-out forwards;
+    animation: sx-grow-event 0.3s ease-in-out forwards;
 
-    @keyframes sxGrowEvent {
+    @keyframes sx-grow-event {
       0% {
         transform: scale(0);
         opacity: 0;

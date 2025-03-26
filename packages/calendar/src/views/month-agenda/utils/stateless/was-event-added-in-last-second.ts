@@ -1,4 +1,4 @@
-import { CalendarEventInternal } from '@schedule-x/shared'
+import { CalendarEventInternal } from '@schedule-x/shared/src'
 
 export const wasEventAddedInLastSecond = (
   calendarEvent: CalendarEventInternal
