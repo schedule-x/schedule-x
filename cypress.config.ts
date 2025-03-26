@@ -1,5 +1,5 @@
 import { defineConfig } from 'cypress'
-import getCompareSnapshotsPlugin from 'cypress-visual-regression/dist/plugin'
+import getCompareSnapshotsPlugin from 'cypress-visual-regression/dist/plugin.js'
 import { getPlatformForCypressSnapshots } from './cypress/utils/platform'
 
 const platformForCypressSnapshots = getPlatformForCypressSnapshots()
