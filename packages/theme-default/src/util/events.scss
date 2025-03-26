@@ -1,0 +1,19 @@
+@mixin is-event-new {
+  &.is-event-new {
+    animation: sxGrowEvent 0.3s ease-in-out forwards;
+
+    @keyframes sxGrowEvent {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+        box-shadow: none;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: none;
+      }
+    }
+  }
+}

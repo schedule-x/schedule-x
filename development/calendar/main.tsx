@@ -249,7 +249,7 @@ const calendar = createCalendar({
       start: '2025-03-04 11:00',
       end: '2025-03-04 12:00',
     },
-    ...seededEvents
+    // ...seededEvents
   ],
 }, [
   eventsServicePlugin,
@@ -262,13 +262,6 @@ const calendar = createCalendar({
   createResizePlugin(),
 ])
 calendar.render(calendarElement)
-
-// const calendar2Element = document.getElementById('calendar-2') as HTMLElement
-// const calendar2 = createCalendar({
-//   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-//   events: [],
-// })
-// calendar2.render(calendar2Element)
 
 let darkToggle = 0
 

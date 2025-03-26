@@ -25,6 +25,7 @@ import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/r
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
+import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -119,6 +120,8 @@ export default function DateGridEvent({
     'sx__date-grid-cell',
   ]
   if (isCopy) eventClasses.push('sx__date-grid-event--copy')
+  if (wasEventAddedInLastSecond(calendarEvent))
+    eventClasses.push('is-event-new')
   if (hasOverflowLeft) eventClasses.push('sx__date-grid-event--overflow-left')
   if (hasOverflowRight) eventClasses.push('sx__date-grid-event--overflow-right')
   if (calendarEvent._options?.additionalClasses)

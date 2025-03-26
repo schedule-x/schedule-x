@@ -1,3 +1,5 @@
+@use '../../../util/events' as events;
+
 .sx__month-agenda-events {
   padding: 0 var(--sx-spacing-padding2);
 }
@@ -9,6 +11,8 @@
   margin-bottom: $event-gap;
   border-radius: var(--sx-rounding-extra-small);
   font-size: var(--sx-font-small);
+
+  @include events.is-event-new;
 
   &:first-child {
     margin-top: $event-gap;

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import {
   getBorderRule,
@@ -26,6 +27,7 @@ import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
+import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -155,12 +157,7 @@ export default function TimeGridEvent({
   const borderRule = getBorderRule(calendarEvent)
   const classNames = ['sx__time-grid-event', 'sx__event']
 
-  if (
-    calendarEvent._createdAt &&
-    Date.now() - calendarEvent._createdAt.getTime() < 1000
-  )
-    classNames.push('is-event-new')
-  console.log(calendarEvent._createdAt)
+  if (wasEventAddedInLastSecond(calendarEvent)) classNames.push('is-event-new')
   if (isCopy) classNames.push('is-event-copy')
   if (
     !$app.config.weekOptions.value.eventOverlap &&

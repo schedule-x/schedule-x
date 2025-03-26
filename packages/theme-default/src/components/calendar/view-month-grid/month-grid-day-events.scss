@@ -1,3 +1,5 @@
+@use '../../../util/events' as events;
+
 .sx__month-grid-day__events {
   display: grid;
   grid-gap: 4px;
@@ -17,6 +19,8 @@
   overflow: hidden;
   white-space: nowrap;
   z-index: 1;
+
+  @include events.is-event-new
 }
 
 .sx__month-grid-event-time {

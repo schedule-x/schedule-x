@@ -140,4 +140,40 @@ describe('MonthGridEvent', () => {
       expect(document.querySelector('.sx__month-grid-event-title')).toBeFalsy()
     })
   })
+
+  describe('rendering a newly added event with an animation', () => {
+    it('should add the is-event-new class to the event', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1234',
+            start: '2020-01-01',
+            end: '2020-01-02',
+          },
+        ],
+      })
+      const calendarEventInternal = $app.calendarEvents.list.value[0]
+      calendarEventInternal._createdAt = new Date()
+      renderComponent($app, calendarEventInternal, false, false)
+
+      expect(document.querySelector('.is-event-new')).toBeTruthy()
+    })
+
+    it('should not add the is-event-new class to the event if the event was not added in the last second', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1234',
+            start: '2020-01-01',
+            end: '2020-01-02',
+          },
+        ],
+      })
+      const calendarEventInternal = $app.calendarEvents.list.value[0]
+      vi.advanceTimersByTime(2000)
+      renderComponent($app, calendarEventInternal, false, false)
+
+      expect(document.querySelector('.is-event-new')).toBeFalsy()
+    })
+  })
 })
