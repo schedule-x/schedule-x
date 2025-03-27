@@ -11,6 +11,7 @@ import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/event
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
 import { randomStringId } from '@schedule-x/shared/src'
+import { wasEventAddedInLastSecond } from '../utils/stateless/was-event-added-in-last-second'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -62,9 +63,13 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
 
   const hasCustomContent = calendarEvent._customContent?.monthAgenda
 
+  const classNames = ['sx__event', 'sx__month-agenda-event']
+
+  if (wasEventAddedInLastSecond(calendarEvent)) classNames.push('is-event-new')
+
   return (
     <div
-      className="sx__event sx__month-agenda-event"
+      className={classNames.join(' ')}
       data-ccid={customComponentId}
       data-event-id={calendarEvent.id}
       style={{

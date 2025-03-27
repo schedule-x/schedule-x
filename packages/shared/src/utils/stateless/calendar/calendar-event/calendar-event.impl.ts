@@ -23,6 +23,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   _totalConcurrentEvents: number | undefined
   _maxConcurrentEvents: number | undefined
   _nDaysInGrid: number | undefined
+  _createdAt: Date | undefined
 
   constructor(
     private _config: CalendarConfigInternal,

@@ -12,6 +12,7 @@ import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { wasEventAddedInLastSecond } from '../../month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {
   gridRow: number
@@ -114,6 +115,7 @@ export default function MonthGridEvent({
   if (calendarEvent._options?.additionalClasses) {
     classNames.push(...calendarEvent._options.additionalClasses)
   }
+  if (wasEventAddedInLastSecond(calendarEvent)) classNames.push('is-event-new')
   if (hasOverflowLeft) classNames.push('sx__month-grid-event--overflow-left')
   if (hasOverflowRight) classNames.push('sx__month-grid-event--overflow-right')
 

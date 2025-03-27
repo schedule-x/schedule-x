@@ -82,9 +82,8 @@ const calendar = createCalendar({
   },
   showWeekNumbers: true,
   firstDayOfWeek: 6,
-  selectedDate: '2025-01-01',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-  defaultView: 'month-agenda',
+  defaultView: 'week',
   // locale: 'zh-CN',
   callbacks: {
     onEventUpdate(event) {
@@ -250,26 +249,19 @@ const calendar = createCalendar({
       start: '2025-03-04 11:00',
       end: '2025-03-04 12:00',
     },
-    ...seededEvents
+    // ...seededEvents
   ],
 }, [
+  eventsServicePlugin,
   createDragAndDropPlugin(),
   createCalendarControlsPlugin(),
   createScrollControllerPlugin(),
-  createEventsServicePlugin(),
   createCurrentTimePlugin(),
   createEventModalPlugin(),
   createEventRecurrencePlugin(),
   createResizePlugin(),
 ])
 calendar.render(calendarElement)
-
-// const calendar2Element = document.getElementById('calendar-2') as HTMLElement
-// const calendar2 = createCalendar({
-//   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-//   events: [],
-// })
-// calendar2.render(calendar2Element)
 
 let darkToggle = 0
 
@@ -284,8 +276,8 @@ addEventButton.addEventListener('click', () => {
   eventsServicePlugin.add({
     id: 'new-event',
     title: 'New Event',
-    start: '2024-06-06',
-    end: '2024-06-06',
+    start: '2025-03-26 11:00',
+    end: '2025-03-26 12:00',
   })
 })
 

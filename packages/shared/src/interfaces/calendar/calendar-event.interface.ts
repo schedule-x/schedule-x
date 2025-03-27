@@ -48,6 +48,7 @@ export interface CalendarEventInternal extends CalendarEventExternal {
   _eventFragments: EventFragments
 
   _color: string
+  _createdAt: Date | undefined
 
   _getForeignProperties(): Record<string, unknown>
   _getExternalEvent(): CalendarEventExternal

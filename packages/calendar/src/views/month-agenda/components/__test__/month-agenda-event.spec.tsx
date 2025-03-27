@@ -66,4 +66,46 @@ describe('MonthAgendaEvent', () => {
       ).toBe('123')
     })
   })
+
+  describe('displaying a fade in animation', () => {
+    it('should render with a class of is-event-new', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            title: 'Test Event',
+            start: '1999-03-12 14:45',
+            end: '1999-03-12 15:45',
+          },
+        ],
+      })
+
+      const calendarEventInternal = $app.calendarEvents.list.value[0]
+      calendarEventInternal._createdAt = new Date()
+      renderComponent($app, calendarEventInternal)
+
+      expect(
+        document.querySelector('.sx__month-agenda-event')?.classList
+      ).toContain('is-event-new')
+    })
+
+    it('should render without a class of is-event-new', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            title: 'Test Event',
+            start: '1999-03-12 14:45',
+            end: '1999-03-12 15:45',
+          },
+        ],
+      })
+
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      expect(
+        document.querySelector('.sx__month-agenda-event')?.classList
+      ).not.toContain('is-event-new')
+    })
+  })
 })
