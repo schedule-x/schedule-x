@@ -38,13 +38,13 @@ const formatRules = {
 export const dateFormatLocalizedRules = new Map<string, DateFormatRule>([
   ['ca-ES', formatRules.slashDMY],
   ['cs-CZ', formatRules.periodDMY],
-  ['da-DK', formatRules.dashDMY],
+  ['da-DK', formatRules.periodDMY],
   ['de-DE', formatRules.periodDMY],
   ['en-GB', formatRules.slashDMY],
   ['en-US', formatRules.slashMDY],
   ['es-ES', formatRules.slashDMY],
   ['et-EE', formatRules.periodDMY],
-  ['fi-FI', formatRules.dashDMY],
+  ['fi-FI', formatRules.periodDMY],
   ['fr-FR', formatRules.slashDMY],
   ['hr-HR', formatRules.periodDMY],
   ['id-ID', formatRules.slashDMY],
@@ -52,7 +52,7 @@ export const dateFormatLocalizedRules = new Map<string, DateFormatRule>([
   ['ja-JP', formatRules.slashYMD],
   ['ko-KR', formatRules.slashYMD],
   ['ky-KG', formatRules.slashDMY],
-  ['lt-LT', formatRules.periodDMY],
+  ['lt-LT', formatRules.dashYMD],
   ['mk-MK', formatRules.periodDMY],
   ['nl-NL', formatRules.dashDMY],
   ['pl-PL', formatRules.periodDMY],
@@ -67,5 +67,5 @@ export const dateFormatLocalizedRules = new Map<string, DateFormatRule>([
   ['tr-TR', formatRules.periodDMY],
   ['uk-UA', formatRules.periodDMY],
   ['zh-CN', formatRules.slashYMD],
-  ['zh-TW', formatRules.slashYMD]
+  ['zh-TW', formatRules.slashYMD],
 ])
