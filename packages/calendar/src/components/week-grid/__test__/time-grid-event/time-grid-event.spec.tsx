@@ -20,6 +20,10 @@ const renderComponent = (
       <TimeGridEvent
         calendarEvent={calendarEvent}
         setMouseDown={() => undefined}
+        dayBoundariesDateTime={{
+          start: '2020-01-01 00:00',
+          end: '2020-01-01 23:59',
+        }}
       />
     </AppContext.Provider>
   )
@@ -130,6 +134,48 @@ describe('TimeGridEvent', () => {
       expect(titleContent).toBeNull()
       const customContent = document.querySelector('.custom-content')
       expect(customContent).not.toBeNull()
+    })
+  })
+
+  describe('rendering new event with an animation', () => {
+    it('should add the is-event-new class to the event', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            _customContent: {
+              timeGrid: '<div class="custom-content">Custom Content</div>',
+            },
+            start: '2020-01-01 00:00',
+            end: '2020-01-02 01:00',
+          },
+        ],
+      })
+      const calendarEventInternal = $app.calendarEvents.list.value[0]
+      calendarEventInternal._createdAt = new Date()
+      renderComponent($app, calendarEventInternal)
+
+      const timeGridEvent = document.querySelector('.sx__time-grid-event')
+      expect(timeGridEvent?.classList.contains('is-event-new')).toBe(true)
+    })
+
+    it('should not add the is-event-new class to the event if the event is not new', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            _customContent: {
+              timeGrid: '<div class="custom-content">Custom Content</div>',
+            },
+            start: '2020-01-01 00:00',
+            end: '2020-01-02 01:00',
+          },
+        ],
+      })
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      const timeGridEvent = document.querySelector('.sx__time-grid-event')
+      expect(timeGridEvent?.classList.contains('is-event-new')).toBe(false)
     })
   })
 })
