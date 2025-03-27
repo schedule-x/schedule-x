@@ -44,8 +44,9 @@ export const createDatePickerState = (
       selectedDate.value = newValue
       datePickerDate.value = newValue
       lastValidDisplayedValue.value = inputDisplayedValue.value
-    } catch (e) {
-      console.error('Error setting input value: ', e)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
+      // Nothing to do here. We don't want to log errors when users are typing invalid formats
     }
   })
 
