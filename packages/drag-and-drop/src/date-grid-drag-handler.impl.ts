@@ -59,7 +59,9 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private handleMouseOrTouchMove = (uiEvent: UIEvent) => {
     const { clientX } = getEventCoordinates(uiEvent)
     const pixelDiffX = clientX - this.startX
-    const currentDaysDiff = Math.round(pixelDiffX / this.dayWidth)
+    let currentDaysDiff = Math.round(pixelDiffX / this.dayWidth)
+    if (this.$app.config.direction === 'rtl') currentDaysDiff *= -1
+
     if (currentDaysDiff === this.lastDaysDiff) return
 
     const newStart = addDays(this.originalStart, currentDaysDiff)
@@ -99,7 +101,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
 
   private transformEventCopyPosition(newStartDate: string) {
     const dateFromOriginalStart = dateFromDateTime(this.originalStart)
-    const daysToShift = Math.round(
+    let daysToShift = Math.round(
       (new Date(newStartDate).getTime() -
         new Date(
           dateFromOriginalStart >= this.rangeStartDate
@@ -108,6 +110,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
         ).getTime()) /
         MS_PER_DAY
     )
+    if (this.$app.config.direction === 'rtl') daysToShift *= -1
     getDateGridEventCopy(this.$app, this.eventCopy).style.transform =
       `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
   }

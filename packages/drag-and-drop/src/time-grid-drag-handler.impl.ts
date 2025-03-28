@@ -97,7 +97,10 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
 
   private handleHorizontalMouseOrTouchMove(totalDaysDiff: number) {
     if (totalDaysDiff === this.lastDaysDiff) return
-    const diffToAdd = totalDaysDiff - this.lastDaysDiff
+
+    let diffToAdd = totalDaysDiff - this.lastDaysDiff
+    if (this.$app.config.direction === 'rtl') diffToAdd = -diffToAdd
+
     const newStartDate = addDays(
       dateFromDateTime(this.eventCopy.start),
       diffToAdd
