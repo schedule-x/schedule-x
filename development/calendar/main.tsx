@@ -81,10 +81,11 @@ const calendar = createCalendar({
     eventWidth: 95,
   },
   showWeekNumbers: true,
-  firstDayOfWeek: 6,
+  firstDayOfWeek: 1,
+  direction: 'rtl',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
   defaultView: 'week',
-  // locale: 'zh-CN',
+  locale: 'he-IL',
   callbacks: {
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
@@ -240,14 +241,17 @@ const calendar = createCalendar({
   },
   events: [
     {
+      title: 'שלום טום',
       id: 1,
-      start: '2025-03-04 08:00',
-      end: '2025-03-04 12:00',
+      start: '2025-03-28',
+      end: '2025-03-28',
     },
     {
+      title: 'שלום טום',
+      description: 'שלום טום',
       id: 2,
-      start: '2025-03-04 11:00',
-      end: '2025-03-04 12:00',
+      start: '2025-03-27 11:00',
+      end: '2025-03-27 12:00',
     },
     ...seededEvents
   ],

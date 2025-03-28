@@ -39,9 +39,19 @@
 .sx__chevron--previous {
   left: calc(50% + 0.125rem);
   transform: translate(-50%, -50%) rotate(225deg);
+
+  .is-rtl & {
+    left: calc(50% - 0.125rem);
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
 }
 
 .sx__chevron--next {
   left: calc(50% - 0.125rem);
   transform: translate(-50%, -50%) rotate(45deg);
+
+  .is-rtl & {
+    left: calc(50% + 0.125rem);
+    transform: translate(-50%, -50%) rotate(225deg);
+  }
 }
