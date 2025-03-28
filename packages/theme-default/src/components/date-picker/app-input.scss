@@ -26,6 +26,11 @@
   .sx__date-input--active & {
     transform: translateY(-50%) rotate(180deg);
   }
+
+  .is-rtl & {
+    left: 1rem;
+    right: auto;
+  }
 }
 
 .sx__date-input-chevron {
