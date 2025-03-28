@@ -6,7 +6,7 @@ import {
   getLeftRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
-import { StateUpdater, useContext, useEffect } from 'preact/hooks'
+import { useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
@@ -32,7 +32,7 @@ import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/statel
 type props = {
   calendarEvent: CalendarEventInternal
   dayBoundariesDateTime: DayBoundariesDateTime
-  setMouseDown: StateUpdater<boolean>
+  setMouseDown: (value: boolean) => void
   isCopy?: boolean
 }
 

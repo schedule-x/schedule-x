@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/calendar",
   "umdName": "SXCalendar",
-  "version": "2.24.0",
+  "version": "2.25.0-alpha.0",
   "description": "Schedule-X calendar component",
   "author": {
     "name": "Tom Österlund",
@@ -29,7 +29,7 @@
     "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
   },
   "peerDependencies": {
-    "@preact/signals": "^1.1.5",
+    "@preact/signals": "^2.0.2",
     "preact": "^10.19.2"
   },
   "repository": {
