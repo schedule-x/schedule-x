@@ -190,6 +190,7 @@ describe('validating the config', () => {
       [{ start: '00:00:00', end: '23:59:59' }],
       [{ start: '00:00:00', end: '23:59:59:999' }],
       [{ start: '0', end: '23' }],
+      [{ start: '12:30', end: '17:00' }],
     ])(
       'should throw an error if the format of the day boundaries is not valid',
       // @ts-expect-error - This test is meant to test invalid types
@@ -205,7 +206,7 @@ describe('validating the config', () => {
     )
 
     it.each([
-      [{ start: '00:00', end: '23:59' }],
+      [{ start: '00:00', end: '23:00' }],
       [{ start: '22:00', end: '06:00' }],
     ])(
       'should not throw an error if the format of the day boundaries is valid',

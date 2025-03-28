@@ -68,7 +68,7 @@ export const validateConfig = (config: CalendarConfigExternal) => {
     )
   }
 
-  const dayBoundaryPattern = /^\d{2}:\d{2}$/
+  const dayBoundaryPattern = /^\d{2}:00$/
   if (typeof config.dayBoundaries !== 'undefined') {
     const startFormatIsInvalid = !dayBoundaryPattern.test(
       config.dayBoundaries.start
