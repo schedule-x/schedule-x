@@ -87,11 +87,19 @@ const eventModal = createInteractiveEventModal({
     return event.calendarId === 'calendar-1';
   },
 
+  // (Optional): callback for deciding whether to display edit- and delete buttons for an event
+  isEventEditable(event) {
+    return event.calendarId === 'internal'
+  },
+
   // (Optional): configure the time picker to use 12-hour format
   has12HourTimeFormat: true,
 
   // (Optional): add a gray "move-bar" bar at the top of the modal, which can be used to move the modal
   movable: true,
+
+  // (Optional): configure whether the title field should be hidden (is currently shown by default)
+  hideTitle: false,
 
   // (Optional): configuration for the field "title"
   fields: {
@@ -164,18 +172,40 @@ fields: {
 
 ### Available fields
 
-| Field name     | Type                     |
-|----------------|--------------------------|
-| title          | InputFieldWithValidation |
-| description    | InputFieldWithValidation |
-| startDate      | InputField               |
-| startTime      | InputField               |
-| endDate        | InputField               |
-| endTime        | InputField               |
-| rruleFrequency | InputField               |
-| rruleUntil     | InputField               |
-| people         | InputFieldWithValidation |
-| calendarId     | InputFieldWithValidation |
+| Field name           | Type                     |
+|----------------------|--------------------------|
+| title                | InputFieldWithValidation |
+| description          | InputFieldWithValidation |
+| startDate            | InputField               |
+| startTime            | InputField               |
+| endDate              | InputField               |
+| endTime              | InputField               |
+| people               | InputFieldWithValidation |
+| calendarId           | InputFieldWithValidation |
+| resourceId           | InputFieldWithValidation |
+| rruleFrequency       | InputField               |
+| rruleUntil           | InputField               |
+| rruleCustomFrequency | InputField               |
+| rruleInterval        | InputField               |
+| rruleCount           | InputField               |
+| rruleByDay           | InputField               |
+
+### Using the RRule fields
+
+The rrule fields depend on one another. Therefore, you either need to configure all of them, or none.
+You can easily configure all of them at once like this, if you don't need any custom configuration of them.
+
+```ts
+export { rruleFields, createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
+
+const modal = createInteractiveEventModal({
+  fields: {
+    // your other fields
+    ...rruleFields()
+  }
+})
+
+```
 
 #### Input field types
 
@@ -184,6 +214,7 @@ type InputField<T extends undefined | string | string[]> = {
   label?: string
   name?: string
   onChange?: (value: T) => void
+  placeholder?: string
 }
 
 type InputFieldWithValidation<T extends undefined | string | string[]> =
@@ -193,7 +224,7 @@ type InputFieldWithValidation<T extends undefined | string | string[]> =
 
 type CustomInputField<T extends undefined | string | string[]> =
   InputFieldWithValidation<T> & {
-    type: 'text' | 'select' | 'textarea' | 'combobox'
+    type: 'text' | 'select' | 'textarea' | 'combobox' | 'combobox-multi'
     items?: SelectItem[]
   }
 
@@ -209,12 +240,15 @@ export type SelectItem = { label: string; value: string }
 
 Additional to the default fields, you can add custom fields to a `customFields` property. The fields of this property
 follow the same structure as the default fields, but additionally you need to add one of the supported types: `text`,
-`textarea`, `select` or `combobox`. For example:
+`textarea`, `select`, `combobox` or `combobox-multi`. For example:
 
 ```ts
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal, createInputField } from "@sx-premium/interactive-event-modal";
+import { createInteractiveEventModal, createInputField, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
+import { translations, mergeLocales } from '@schedule-x/translations'
+import { createCalendar } from '@schedule-x/calendar'
 
+import '@schedule-x/theme-default/dist/calendar.css'
 import '@sx-premium/interactive-event-modal/index.css'
 
 const eventsService = createEventsServicePlugin()
@@ -250,6 +284,15 @@ const eventModal = createInteractiveEventModal({
     }),
   }
 })
+
+const calendar = createCalendar({
+  translations: mergeLocales(translations, modalTranslations),
+  plugins: [
+    eventModal,
+    eventsService,
+  ],
+  // ...other configuration
+})
 ```
 
 If you need to display these custom fields in the view mode of the modal, you can write a custom component for
@@ -266,4 +309,5 @@ These can be added on request. Please let us know if you need an example for a s
 
 * React example: https://github.com/schedule-x/react-examples/tree/main/interactive-event-modal
 * Vue example: https://github.com/schedule-x/vue-examples/tree/main/interactive-event-modal
-
+* Angular example: https://github.com/schedule-x/angular-examples/tree/main/sidebar--modal--drag-to-create
+* Svelte example: https://github.com/schedule-x/svelte-examples

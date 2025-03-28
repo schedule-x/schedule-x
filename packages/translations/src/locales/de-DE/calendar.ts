@@ -16,4 +16,5 @@ export const calendarDeDE: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Link zu {{n}} weiteren Ereignissen am {{date}}',
   'Link to 1 more event on {{date}}': 'Link zu 1 weiteren Ereignis am {{date}}',
+  CW: 'KW {{week}}',
 }

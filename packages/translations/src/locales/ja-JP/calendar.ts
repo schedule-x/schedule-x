@@ -16,4 +16,5 @@ export const calendarJaJP: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     '{{date}} に{{n}}件のイベントへのリンク',
   'Link to 1 more event on {{date}}': '{{date}} に1件のイベントへのリンク',
+  CW: '週 {{week}}',
 }

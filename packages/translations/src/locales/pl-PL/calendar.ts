@@ -17,4 +17,5 @@ export const calendarPlPL: CalendarTranslations = {
     'Link do {{n}} kolejnych wydarzeń w dniu {{date}}',
   'Link to 1 more event on {{date}}':
     'Link do 1 kolejnego wydarzenia w dniu {{date}}',
+  CW: 'Tydzień {{week}}',
 }

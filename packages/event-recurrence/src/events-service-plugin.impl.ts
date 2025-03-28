@@ -6,6 +6,10 @@ import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { EventsService } from '@schedule-x/shared/src/interfaces/events-service/events-service.interface'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
+import { AugmentedBackgroundEvent } from './types/augmented-event'
+import { createRecurrencesForBackgroundEvent } from './util/stateless/create-recurrences-for-event'
+
+import { validateEvents } from '@schedule-x/shared/src/utils/stateless/validation/validate-events'
 
 class EventsServicePluginImpl implements EventsService {
   name: string = 'eventsService'
@@ -22,11 +26,15 @@ class EventsServicePluginImpl implements EventsService {
   add(event: CalendarEventExternal): void {
     if (!this.$app) this.throwNotInitializedError()
 
+    validateEvents([event])
+
     this.eventsFacade.add(event)
   }
 
   update(event: CalendarEventExternal): void {
     if (!this.$app) this.throwNotInitializedError()
+
+    validateEvents([event])
 
     this.eventsFacade.update(event)
   }
@@ -52,6 +60,8 @@ class EventsServicePluginImpl implements EventsService {
   set(events: CalendarEventExternal[]): void {
     if (!this.$app) this.throwNotInitializedError()
 
+    validateEvents(events)
+
     this.eventsFacade.set(events)
   }
 
@@ -62,7 +72,26 @@ class EventsServicePluginImpl implements EventsService {
   }
 
   setBackgroundEvents(backgroundEvents: BackgroundEvent[]): void {
-    this.$app.calendarEvents.backgroundEvents.value = backgroundEvents
+    if (!this.$app) this.throwNotInitializedError()
+
+    const newBackgroundEvents: AugmentedBackgroundEvent[] = []
+    for (const event of backgroundEvents) {
+      newBackgroundEvents.push({
+        ...event,
+      })
+      const rrule = event.rrule
+      if (rrule && this.$app.calendarState.range.value) {
+        newBackgroundEvents.push(
+          ...createRecurrencesForBackgroundEvent(
+            event,
+            rrule,
+            this.$app.calendarState.range.value
+          )
+        )
+      }
+    }
+
+    this.$app.calendarEvents.backgroundEvents.value = newBackgroundEvents
   }
 }
 

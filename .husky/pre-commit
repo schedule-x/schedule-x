@@ -1,4 +1,4 @@
 
 npm run format:changed
-npm run lint:changed:fix
+npm run lint:all
 git add .

@@ -41,4 +41,17 @@ describe('Parsing an rrule from js to string', () => {
       expect(result).toEqual('FREQ=WEEKLY;COUNT=5;BYDAY=MO,WE')
     })
   })
+
+  describe('With freq, byday, interval and wkst', () => {
+    it('should return the correct rrule', () => {
+      const result = rruleJSToString({
+        freq: RRuleFreq.WEEKLY,
+        byday: ['MO', 'WE'],
+        wkst: 'SU',
+        interval: 2,
+      })
+
+      expect(result).toEqual('FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;WKST=SU')
+    })
+  })
 })

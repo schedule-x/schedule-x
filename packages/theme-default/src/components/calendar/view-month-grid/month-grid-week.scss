@@ -1,7 +1,27 @@
+.sx__month-grid-week__week-number {
+  display: flex;
+  justify-content: center;
+  padding-top: 12px;
+  background-color: #eceef1;
+  color: var(--sx-color-on-surface);
+  width: 1.5rem;
+  font-size: 0.75rem;
+
+  .is-dark & {
+    background-color: #4a4458;
+  }
+}
+
 .sx__month-grid-week {
   border-top: var(--sx-border);
   flex: 1;
   display: flex;
+
+  &:first-child {
+    .sx__month-grid-week__week-number {
+      padding-top: 26px;
+    }
+  }
 }
 
 .sx__month-grid-day {

@@ -15,6 +15,6 @@ jobs:
       - name: Install dependencies 🛠️
         run: npm i
       - name: Lint TS 🧹
-        run: npx eslint -c eslintrc.cjs . --ext .ts . --ext .tsx
+        run: npm run lint:all
       - name: Lint SCSS
         run: npm run lint:scss

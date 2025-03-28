@@ -1,5 +1,5 @@
 import AppWrapper from '@schedule-x/date-picker/src/components/app-wrapper'
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useEffect, useMemo, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import DatePickerAppSingletonBuilder from '@schedule-x/shared/src/utils/stateful/date-picker/app-singleton/date-picker-app-singleton.builder'
 import RangeHeading from './range-heading'
@@ -8,6 +8,9 @@ import ViewSelection from './view-selection'
 import ForwardBackwardNavigation from './forward-backward-navigation'
 import { randomStringId } from '@schedule-x/shared/src'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
+import { viewWeek } from '../../views/week'
+import { viewDay } from '../../views/day'
+import WeekNumber from './week-number'
 
 export default function CalendarHeader() {
   const $app = useContext(AppContext)
@@ -46,26 +49,35 @@ export default function CalendarHeader() {
 
   useEffect(() => {
     if (headerContent) {
-      headerContent(getElementByCCID(headerContentId), {})
+      headerContent(getElementByCCID(headerContentId), { $app })
     }
     if (headerContentLeftPrepend && headerContentLeftPrependId) {
-      headerContentLeftPrepend(getElementByCCID(headerContentLeftPrependId), {})
+      headerContentLeftPrepend(getElementByCCID(headerContentLeftPrependId), {
+        $app,
+      })
     }
     if (headerContentLeftAppend) {
-      headerContentLeftAppend(getElementByCCID(headerContentLeftAppendId), {})
+      headerContentLeftAppend(getElementByCCID(headerContentLeftAppendId), {
+        $app,
+      })
     }
     if (headerContentRightPrepend) {
-      headerContentRightPrepend(
-        getElementByCCID(headerContentRightPrependId),
-        {}
-      )
+      headerContentRightPrepend(getElementByCCID(headerContentRightPrependId), {
+        $app,
+      })
     }
     if (headerContentRightAppend) {
-      headerContentRightAppend(getElementByCCID(headerContentRightAppendId), {})
+      headerContentRightAppend(getElementByCCID(headerContentRightAppendId), {
+        $app,
+      })
     }
   }, [])
 
   const keyForRerenderingOnLocaleChange = $app.config.locale.value
+
+  const isDayOrWeekView = useMemo(() => {
+    return [viewWeek.name, viewDay.name].includes($app.calendarState.view.value)
+  }, [$app.calendarState.view.value])
 
   return (
     <header className={'sx__calendar-header'} data-ccid={headerContentId}>
@@ -81,6 +93,10 @@ export default function CalendarHeader() {
             <ForwardBackwardNavigation />
 
             <RangeHeading key={$app.config.locale.value} />
+
+            {$app.config.showWeekNumbers.value && isDayOrWeekView && (
+              <WeekNumber />
+            )}
 
             {headerContentLeftAppendId && (
               <div data-ccid={headerContentLeftAppendId} />

@@ -21,7 +21,9 @@ import { DEFAULT_EVENT_COLOR_NAME } from '../../../../values'
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined
   _totalConcurrentEvents: number | undefined
+  _maxConcurrentEvents: number | undefined
   _nDaysInGrid: number | undefined
+  _createdAt: Date | undefined
 
   constructor(
     private _config: CalendarConfigInternal,

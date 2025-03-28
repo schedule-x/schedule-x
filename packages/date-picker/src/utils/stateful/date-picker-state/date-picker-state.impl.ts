@@ -4,6 +4,8 @@ import { effect, signal } from '@preact/signals'
 import { toDateString as formatToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-format/to-date-string'
 import { toDateString as dateToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
+import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
+import { toJSDate } from '@schedule-x/shared/src'
 
 export const createDatePickerState = (
   config: DatePickerConfigInternal,
@@ -22,8 +24,12 @@ export const createDatePickerState = (
   const datePickerDate = signal(initialSelectedDate || currentDayDateString)
   const isDark = signal(config.style?.dark || false)
 
-  const inputDisplayedValue = signal(selectedDateParam || '')
-  const lastValidDisplayedValue = signal(selectedDateParam || '')
+  const inputDisplayedValue = signal(
+    selectedDateParam
+      ? toLocalizedDateString(toJSDate(selectedDateParam), config.locale.value)
+      : ''
+  )
+  const lastValidDisplayedValue = signal(inputDisplayedValue.value)
   effect(() => {
     try {
       const newValue = formatToDateString(
@@ -38,8 +44,9 @@ export const createDatePickerState = (
       selectedDate.value = newValue
       datePickerDate.value = newValue
       lastValidDisplayedValue.value = inputDisplayedValue.value
-    } catch (e) {
-      // nothing to do
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_e) {
+      // Nothing to do here. We don't want to log errors when users are typing invalid formats
     }
   })
 

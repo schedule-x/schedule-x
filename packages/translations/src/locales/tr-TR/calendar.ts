@@ -16,4 +16,5 @@ export const calendarTrTR: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     '{{date}} tarihinde {{n}} etkinliğe bağlantı',
   'Link to 1 more event on {{date}}': '{{date}} tarihinde 1 etkinliğe bağlantı',
+  CW: '{{week}}. Hafta',
 }

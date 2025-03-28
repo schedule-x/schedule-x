@@ -10,14 +10,22 @@ import { CalendarEventInternal } from '@schedule-x/shared'
 describe('Event styles', () => {
   describe('getting the event width', () => {
     it.each([
-      [0, 100, 100],
-      [0, 90, 90],
-      [50, 100, 50],
-      [50, 90, 40],
+      [0, 100, 2, false, 50],
+      [0, 90, 2, true, 90],
+      [50, 100, 1, false, 100],
+      [50, 90, 2, true, 40],
     ])(
       'should return the correct width',
-      (leftRule, eventWidth, expectedWidth) => {
-        expect(getWidthRule(leftRule, eventWidth)).toBe(expectedWidth)
+      (
+        leftRule,
+        eventWidth,
+        maxConcurrentEvents,
+        eventOverlap,
+        expectedWidth
+      ) => {
+        expect(
+          getWidthRule(leftRule, eventWidth, maxConcurrentEvents, eventOverlap)
+        ).toBe(expectedWidth)
       }
     )
   })

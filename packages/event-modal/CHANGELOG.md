@@ -3,6 +3,62 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/schedule-x/schedule-x/compare/v2.23.0...v2.24.0) (2025-03-27)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.23.0](https://github.com/schedule-x/schedule-x/compare/v2.22.0...v2.23.0) (2025-03-20)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+## [2.21.2](https://github.com/schedule-x/schedule-x/compare/v2.21.1...v2.21.2) (2025-03-12)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+## [2.21.1](https://github.com/schedule-x/schedule-x/compare/v2.21.0...v2.21.1) (2025-03-05)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+## [2.15.1](https://github.com/schedule-x/schedule-x/compare/v2.15.0...v2.15.1) (2025-01-25)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
+# [2.15.0](https://github.com/schedule-x/schedule-x/compare/v2.14.3...v2.15.0) (2025-01-23)
+
+**Note:** Version bump only for package @schedule-x/event-modal
+
 ## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
 
 **Note:** Version bump only for package @schedule-x/event-modal

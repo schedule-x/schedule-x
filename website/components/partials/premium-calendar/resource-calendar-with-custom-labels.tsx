@@ -1,8 +1,7 @@
-/* eslint-disable max-lines */
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
 import { calendars } from './data/calendars';
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createInteractiveEventModal, rruleFields } from "@sx-premium/interactive-event-modal";
 import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
 import {createHourlyView, createConfig} from "@sx-premium/resource-scheduler";
 import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
@@ -25,8 +24,7 @@ export default function ResourceCalendarWithCustomLabels() {
       startDate: {},
       endDate: {},
       endTime: {},
-      rruleFrequency: {},
-      rruleUntil: {},
+      ...rruleFields()
     },
     onAddEvent: (event) => {
       console.log(event)

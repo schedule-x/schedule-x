@@ -39,6 +39,7 @@ export interface CalendarEventInternal extends CalendarEventExternal {
   // week time grid
   _previousConcurrentEvents: number | undefined
   _totalConcurrentEvents: number | undefined
+  _maxConcurrentEvents: number | undefined
 
   // week date grid
   _nDaysInGrid: number | undefined
@@ -47,6 +48,7 @@ export interface CalendarEventInternal extends CalendarEventExternal {
   _eventFragments: EventFragments
 
   _color: string
+  _createdAt: Date | undefined
 
   _getForeignProperties(): Record<string, unknown>
   _getExternalEvent(): CalendarEventExternal

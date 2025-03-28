@@ -14,7 +14,7 @@ import '@schedule-x/theme-default/dist/index.css'
 import { useEffect } from "react";
 
 function CalendarApp() {
-  const plugins = [createEventsServicePlugin()]
+  const eventsService = useState(() => createEventsServicePlugin())[0]
 
   const calendar = useNextCalendarApp({
     views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
@@ -26,12 +26,14 @@ function CalendarApp() {
         end: '2023-12-16',
       },
     ],
-  }, plugins)
-
-  useEffect(() => {
-    // get all events
-    calendar.eventsService.getAll()
-  }, [])
+    plugins: [eventsService],
+    callbacks: {
+      onRender: () => {
+        // get all events
+        eventsService.getAll()
+      }
+    }
+  })
 
   return (
     <div>

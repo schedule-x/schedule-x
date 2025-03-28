@@ -68,6 +68,58 @@ describe('RRule', () => {
         { start: '2024-01-31 17:30', end: '2024-01-31 19:00' },
       ])
     })
+
+    it('should return a timed event for every 2nd Saturday and Sunday, 10 times, with wkst MO', () => {
+      const options: RRuleOptionsExternal = {
+        freq: RRuleFreq.WEEKLY,
+        byday: ['SA', 'SU'],
+        interval: 2,
+        count: 10,
+        wkst: 'MO',
+      }
+
+      const result = new RRule(
+        options,
+        '2025-02-08 17:30',
+        '2025-02-08 19:00'
+      ).getRecurrences()
+
+      expect(result).toEqual([
+        { start: '2025-02-08 17:30', end: '2025-02-08 19:00' },
+        { start: '2025-02-09 17:30', end: '2025-02-09 19:00' },
+        { start: '2025-02-22 17:30', end: '2025-02-22 19:00' },
+        { start: '2025-02-23 17:30', end: '2025-02-23 19:00' },
+        { start: '2025-03-08 17:30', end: '2025-03-08 19:00' },
+        { start: '2025-03-09 17:30', end: '2025-03-09 19:00' },
+        { start: '2025-03-22 17:30', end: '2025-03-22 19:00' },
+        { start: '2025-03-23 17:30', end: '2025-03-23 19:00' },
+        { start: '2025-04-05 17:30', end: '2025-04-05 19:00' },
+        { start: '2025-04-06 17:30', end: '2025-04-06 19:00' },
+      ])
+    })
+
+    it('should return a timed event for every 2nd Saturday and Sunday, 4 times, with wkst SU', () => {
+      const options: RRuleOptionsExternal = {
+        freq: RRuleFreq.WEEKLY,
+        byday: ['SU', 'SA'],
+        interval: 2,
+        count: 4,
+        wkst: 'SU',
+      }
+
+      const result = new RRule(
+        options,
+        '2025-02-02 17:30',
+        '2025-02-02 19:00'
+      ).getRecurrences()
+
+      expect(result).toEqual([
+        { start: '2025-02-02 17:30', end: '2025-02-02 19:00' },
+        { start: '2025-02-08 17:30', end: '2025-02-08 19:00' },
+        { start: '2025-02-16 17:30', end: '2025-02-16 19:00' },
+        { start: '2025-02-22 17:30', end: '2025-02-22 19:00' },
+      ])
+    })
   })
 
   describe('weekly occurrences without byday option', () => {

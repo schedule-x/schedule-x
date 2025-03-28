@@ -5,7 +5,7 @@
   "frameworks": {
     "title": "Frameworks"
   },
-  "migration-v2": {
-    "title": "Migration guide: v2"
+  "major-version-migrations": {
+    "title": "Migrating major versions"
   }
 }

@@ -36,6 +36,7 @@ export class EventsFacadeImpl implements EventsFacade {
 
   add(event: CalendarEventExternal): void {
     const newEvent = externalEventToInternal(event, this.$app.config)
+    newEvent._createdAt = new Date()
     const newEventsList = [...this.$app.calendarEvents.list.value, newEvent]
     const rrule = newEvent._getForeignProperties().rrule
 

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
@@ -46,16 +45,12 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
 
   private init() {
     document.addEventListener('mousemove', this.handleMouseOrTouchMove)
-    document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
-      once: true,
-    })
+    document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd)
 
     document.addEventListener('touchmove', this.handleMouseOrTouchMove, {
       passive: false,
     })
-    document.addEventListener('touchend', this.handleMouseUpOrTouchEnd, {
-      once: true,
-    })
+    document.addEventListener('touchend', this.handleMouseUpOrTouchEnd)
   }
 
   private handleMouseOrTouchMove = (uiEvent: UIEvent) => {
@@ -140,6 +135,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private handleMouseUpOrTouchEnd = () => {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
+    document.removeEventListener('mouseup', this.handleMouseUpOrTouchEnd)
+    document.removeEventListener('touchend', this.handleMouseUpOrTouchEnd)
     this.updateCopy(undefined)
 
     const shouldAbort = testIfShouldAbort(

@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/schedule-x/schedule-x/compare/v2.23.0...v2.24.0) (2025-03-27)
+
+### Features
+
+- add animation for adding event via events service ([#983](https://github.com/schedule-x/schedule-x/issues/983)) ([95ed933](https://github.com/schedule-x/schedule-x/commit/95ed933c1cc19cba666dc940632df7e142e0726d))
+- add localized date format rules for multiple locales ([#984](https://github.com/schedule-x/schedule-x/issues/984)) ([e17f923](https://github.com/schedule-x/schedule-x/commit/e17f923014c836c42cda185e1489375f0ef837f4))
+
+# [2.23.0](https://github.com/schedule-x/schedule-x/compare/v2.22.0...v2.23.0) (2025-03-20)
+
+### Features
+
+- **calendar:** add additional slots ([#972](https://github.com/schedule-x/schedule-x/issues/972)) ([5e1d2b6](https://github.com/schedule-x/schedule-x/commit/5e1d2b6acfc204d7b048d7a9a9a48bf08512456a))
+
+# [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
+
+### Features
+
+- **calendar:** add showWeekNumbers option ([#951](https://github.com/schedule-x/schedule-x/issues/951)) ([02621e4](https://github.com/schedule-x/schedule-x/commit/02621e4aea01601cff4f2d94739bae98dc0aaa4a))
+
+## [2.21.2](https://github.com/schedule-x/schedule-x/compare/v2.21.1...v2.21.2) (2025-03-12)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+## [2.21.1](https://github.com/schedule-x/schedule-x/compare/v2.21.0...v2.21.1) (2025-03-05)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+### Features
+
+- **event-recurrence:** add method for updating the rrule with nDays ([#931](https://github.com/schedule-x/schedule-x/issues/931)) ([5d2f562](https://github.com/schedule-x/schedule-x/commit/5d2f562a63c7c517f1364a8ca6cb41abd84eed70))
+- validate events in event service plugins ([#937](https://github.com/schedule-x/schedule-x/issues/937)) ([6b45e09](https://github.com/schedule-x/schedule-x/commit/6b45e09db2a07d0159e7d9748c6601de7803cea9))
+
+# [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+# [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
+
+### Features
+
+- **event-recurrence:** enable rrule for background events ([#923](https://github.com/schedule-x/schedule-x/issues/923)) ([83433c1](https://github.com/schedule-x/schedule-x/commit/83433c14f402442c8e8e6d975dec90d6a5ddfa71))
+
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+### Features
+
+- extend custom component fns type ([#915](https://github.com/schedule-x/schedule-x/issues/915)) ([89b5954](https://github.com/schedule-x/schedule-x/commit/89b59544f76aeb5180726c49b45b1bf063fb1309))
+
+# [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+# [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
+
+### Features
+
+- add mergeLocales function ([#904](https://github.com/schedule-x/schedule-x/issues/904)) ([c75e8cf](https://github.com/schedule-x/schedule-x/commit/c75e8cfbb5c9f8bcecb31e649f835bdf947e9250))
+- add option to prevent event overlap in week/day views ([#897](https://github.com/schedule-x/schedule-x/issues/897)) ([b39690a](https://github.com/schedule-x/schedule-x/commit/b39690a4b79ce02f79484a72bd569d1b0d5c2f35))
+
+## [2.15.1](https://github.com/schedule-x/schedule-x/compare/v2.15.0...v2.15.1) (2025-01-25)
+
+**Note:** Version bump only for package @schedule-x/shared
+
+# [2.15.0](https://github.com/schedule-x/schedule-x/compare/v2.14.3...v2.15.0) (2025-01-23)
+
+**Note:** Version bump only for package @schedule-x/shared
+
 ## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
 
 **Note:** Version bump only for package @schedule-x/shared

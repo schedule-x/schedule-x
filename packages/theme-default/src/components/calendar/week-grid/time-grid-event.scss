@@ -1,3 +1,5 @@
+@use '../../../util/events' as events;
+
 .sx__time-grid-event {
   width: calc(100% - 10px);
   padding: var(--sx-spacing-padding1);
@@ -14,6 +16,8 @@
     z-index: 1;
     transition: transform 0.15s ease-in-out;
   }
+
+  @include events.is-event-new;
 }
 
 [data-has-dnd='true'] {

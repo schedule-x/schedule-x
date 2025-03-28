@@ -3,6 +3,101 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/schedule-x/schedule-x/compare/v2.23.0...v2.24.0) (2025-03-27)
+
+### Features
+
+- add animation for adding event via events service ([#983](https://github.com/schedule-x/schedule-x/issues/983)) ([95ed933](https://github.com/schedule-x/schedule-x/commit/95ed933c1cc19cba666dc940632df7e142e0726d))
+- add localized date format rules for multiple locales ([#984](https://github.com/schedule-x/schedule-x/issues/984)) ([e17f923](https://github.com/schedule-x/schedule-x/commit/e17f923014c836c42cda185e1489375f0ef837f4))
+
+# [2.23.0](https://github.com/schedule-x/schedule-x/compare/v2.22.0...v2.23.0) (2025-03-20)
+
+### Features
+
+- **calendar:** add additional slots ([#972](https://github.com/schedule-x/schedule-x/issues/972)) ([5e1d2b6](https://github.com/schedule-x/schedule-x/commit/5e1d2b6acfc204d7b048d7a9a9a48bf08512456a))
+
+# [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
+
+### Features
+
+- **calendar:** add showWeekNumbers option ([#951](https://github.com/schedule-x/schedule-x/issues/951)) ([02621e4](https://github.com/schedule-x/schedule-x/commit/02621e4aea01601cff4f2d94739bae98dc0aaa4a))
+
+## [2.21.2](https://github.com/schedule-x/schedule-x/compare/v2.21.1...v2.21.2) (2025-03-12)
+
+### Bug Fixes
+
+- **drag-and-drop:** remove event listener that remained after dnd ([#946](https://github.com/schedule-x/schedule-x/issues/946)) ([1df7042](https://github.com/schedule-x/schedule-x/commit/1df70420b0b381b6e97c191e39a767947b91bd04))
+
+## [2.21.1](https://github.com/schedule-x/schedule-x/compare/v2.21.0...v2.21.1) (2025-03-05)
+
+### Bug Fixes
+
+- **calendar:** display events in hybrid days, even when event start i… ([#942](https://github.com/schedule-x/schedule-x/issues/942)) ([76a8b58](https://github.com/schedule-x/schedule-x/commit/76a8b589a6009905a946f71bcf96fda3f3d3a685))
+
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+### Features
+
+- add Romanian translations ([#935](https://github.com/schedule-x/schedule-x/issues/935)) ([d590597](https://github.com/schedule-x/schedule-x/commit/d590597e471a9c920cc695a32f9cce67f6ec7856))
+- **calendar:** pass $app to custom components in header ([#938](https://github.com/schedule-x/schedule-x/issues/938)) ([9d6c774](https://github.com/schedule-x/schedule-x/commit/9d6c7746cc2ba05eaacff6e0db07838bba392667))
+- **event-recurrence:** add method for updating the rrule with nDays ([#931](https://github.com/schedule-x/schedule-x/issues/931)) ([5d2f562](https://github.com/schedule-x/schedule-x/commit/5d2f562a63c7c517f1364a8ca6cb41abd84eed70))
+- validate events in event service plugins ([#937](https://github.com/schedule-x/schedule-x/issues/937)) ([6b45e09](https://github.com/schedule-x/schedule-x/commit/6b45e09db2a07d0159e7d9748c6601de7803cea9))
+
+# [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
+
+### Features
+
+- **translations:** add finnish ([#924](https://github.com/schedule-x/schedule-x/issues/924)) ([499c7fb](https://github.com/schedule-x/schedule-x/commit/499c7fb50e06fce20877ee79860c2fbb67b52481))
+
+# [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
+
+### Features
+
+- **event-recurrence:** enable rrule for background events ([#923](https://github.com/schedule-x/schedule-x/issues/923)) ([83433c1](https://github.com/schedule-x/schedule-x/commit/83433c14f402442c8e8e6d975dec90d6a5ddfa71))
+
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+### Features
+
+- extend custom component fns type ([#915](https://github.com/schedule-x/schedule-x/issues/915)) ([89b5954](https://github.com/schedule-x/schedule-x/commit/89b59544f76aeb5180726c49b45b1bf063fb1309))
+- improve sorting in month grid ([#918](https://github.com/schedule-x/schedule-x/issues/918)) ([523b207](https://github.com/schedule-x/schedule-x/commit/523b207f47070ad7faf16db070f49e31c84f7d6c))
+
+# [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
+
+### Features
+
+- **event-recurrence:** enable using wkst in rrule ([#911](https://github.com/schedule-x/schedule-x/issues/911)) ([a237414](https://github.com/schedule-x/schedule-x/commit/a237414eca95f2c8000620fa05fcac6032b4fe08))
+
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+### Bug Fixes
+
+- **calendar:** improve stacking in time grid ([#905](https://github.com/schedule-x/schedule-x/issues/905)) ([df9d949](https://github.com/schedule-x/schedule-x/commit/df9d949efba975ca6e61687cbe15383420a15751))
+
+# [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
+
+### Features
+
+- add mergeLocales function ([#904](https://github.com/schedule-x/schedule-x/issues/904)) ([c75e8cf](https://github.com/schedule-x/schedule-x/commit/c75e8cfbb5c9f8bcecb31e649f835bdf947e9250))
+- add option to prevent event overlap in week/day views ([#897](https://github.com/schedule-x/schedule-x/issues/897)) ([b39690a](https://github.com/schedule-x/schedule-x/commit/b39690a4b79ce02f79484a72bd569d1b0d5c2f35))
+- **translations:** add slovenian ([#886](https://github.com/schedule-x/schedule-x/issues/886)) ([cec4435](https://github.com/schedule-x/schedule-x/commit/cec4435462d383c86a552497eb00fbced0cb575b))
+
+## [2.15.1](https://github.com/schedule-x/schedule-x/compare/v2.15.0...v2.15.1) (2025-01-25)
+
+### Bug Fixes
+
+- **date-picker:** format initial selected date ([#901](https://github.com/schedule-x/schedule-x/issues/901)) ([a934221](https://github.com/schedule-x/schedule-x/commit/a934221f418e7f58bbfeea5c23d355d4eb88f932))
+
+# [2.15.0](https://github.com/schedule-x/schedule-x/compare/v2.14.3...v2.15.0) (2025-01-23)
+
+### Bug Fixes
+
+- **drag-and-drop:** fix onBeforeEventUpdate in month grid ([#884](https://github.com/schedule-x/schedule-x/issues/884)) ([db84146](https://github.com/schedule-x/schedule-x/commit/db84146d29faab95c45d9c87037bef37f3fc752c))
+
+### Features
+
+- add croatian (hr-HR) translations ([#887](https://github.com/schedule-x/schedule-x/issues/887)) ([d6776bf](https://github.com/schedule-x/schedule-x/commit/d6776bfeb47d44d01d58d3092760872045460304))
+
 ## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
 
 ### Bug Fixes

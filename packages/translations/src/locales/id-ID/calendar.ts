@@ -17,4 +17,5 @@ export const calendarIdID: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Tautan ke {{n}} acara lainnya pada {{date}}',
   'Link to 1 more event on {{date}}': 'Tautan ke 1 acara lainnya pada {{date}}',
+  CW: 'Minggu {{week}}',
 }

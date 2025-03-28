@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Builder from '../../../../interfaces/builder.interface'
 import DatePickerAppSingleton from '../../../../interfaces/date-picker/date-picker-app.singleton'
 import DatePickerAppSingletonImpl from './date-picker-app-singleton.impl'

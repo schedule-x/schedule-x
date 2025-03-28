@@ -1,3 +1,5 @@
+@use '../../../util/events' as events;
+
 $overflow-indicator-inline-position: -10px;
 $overflow-indicator-width: 10px;
 $event-overflow-margin: 10px; // CORRELATION ID: 1
@@ -38,6 +40,8 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   &:has(.sx__date-grid-event--right-overflow) {
     margin-right: $event-overflow-margin;
   }
+
+  @include events.is-event-new;
 
   @mixin event-overflow-indicator {
     position: absolute;

@@ -23,6 +23,12 @@
   "draw": {
     "title": "⭐ Draw"
   },
+  "ai-assistant": {
+    "title": "⭐ AI Assistant"
+  },
+  "scheduling-assistant": {
+    "title": "⭐ Scheduling Assistant"
+  },
   "events-service": {
     "title": "Events Service"
   },
@@ -40,5 +46,11 @@
   },
   "custom-plugins": {
     "title": "Custom Plugins"
+  },
+  "ical": {
+    "title": "iCal"
+  },
+  "community-plugins": {
+    "title": "Community Plugins"
   }
 }

@@ -17,4 +17,5 @@ export const calendarEsES: CalendarTranslations = {
   'Link to {{n}} more events on {{date}}':
     'Enlace a {{n}} eventos más el {{date}}',
   'Link to 1 more event on {{date}}': 'Enlace a 1 evento más el {{date}}',
+  CW: 'Semana {{week}}',
 }

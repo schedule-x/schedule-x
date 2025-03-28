@@ -16,7 +16,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { MonthAgendaWrapper } from '../month-agenda-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
-import { CalendarEventInternal } from '@schedule-x/shared'
+import { CalendarEventInternal } from '@schedule-x/shared/src'
 import { vi } from 'vitest'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
@@ -335,6 +335,34 @@ describe('MonthAgendaWrapper', () => {
       expect(allDays[25].classList).toContain('sx__friday')
       expect(allDays[26].classList).toContain('sx__saturday')
       expect(allDays[27].classList).toContain('sx__sunday')
+    })
+  })
+
+  describe('displaying week numbers if configured', () => {
+    it('should not display week numbers by default', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-02-27',
+        events: [],
+      })
+      renderComponent($app)
+
+      expect(
+        document.querySelectorAll('.sx__month-agenda-week__week-number')
+      ).toHaveLength(0)
+    })
+
+    it('should display week numbers if configured', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2027-02-27',
+        events: [],
+        showWeekNumbers: true,
+      })
+      $app.config.showWeekNumbers.value = true
+      renderComponent($app)
+
+      expect(
+        document.querySelectorAll('.sx__month-agenda-week__week-number')
+      ).toHaveLength(4)
     })
   })
 })

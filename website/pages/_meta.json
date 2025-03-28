@@ -56,6 +56,15 @@
       "toc": false
     }
   },
+  "privacy": {
+    "display": "hidden",
+    "title": "Privacy policys",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
+  },
   "404": {
     "display": "hidden",
     "title": "Page not found",
@@ -72,6 +81,15 @@
   "validate-license-key": {
     "display": "hidden",
     "title": "Imprint",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
+  },
+  "affiliate-program": {
+    "display": "hidden",
+    "title": "Affiliate program",
     "type": "page",
     "theme": {
       "sidebar": false,

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { EventRecurrencePlugin } from '@schedule-x/shared/src/interfaces/event-recurrence/event-recurrence-plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
@@ -7,11 +6,15 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { DndUpdater } from './util/stateful/dnd-updater'
 import EventsFacade from '@schedule-x/shared/src/utils/stateful/events-facade/events-facade.interface'
 import { EventsFacadeImpl } from './util/stateful/events-facade'
-import { createRecurrencesForEvent } from './util/stateless/create-recurrences-for-event'
+import {
+  createRecurrencesForBackgroundEvent,
+  createRecurrencesForEvent,
+} from './util/stateless/create-recurrences-for-event'
 import { ResizeUpdater } from './util/stateful/resize-updater'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
-import { parseSXToRFC5545 } from '@schedule-x/recurrence/src/parsers/rrule/parse-rrule'
+import { AugmentedBackgroundEvent } from './types/augmented-event'
+import { batch } from '@preact/signals'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -27,12 +30,16 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     this.$app = $app
     this.range = $app.calendarState.range.value
     this.createRecurrencesForEvents()
+    this.createRecurrencesForBackgroundEvents()
   }
 
   onRangeUpdate(range: DateRange): void {
     this.range = range
     this.removeAllEventRecurrences()
-    this.createRecurrencesForEvents()
+    batch(() => {
+      this.createRecurrencesForEvents()
+      this.createRecurrencesForBackgroundEvents()
+    })
   }
 
   get eventsFacade(): EventsFacade {
@@ -100,6 +107,26 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     ]
   }
 
+  private createRecurrencesForBackgroundEvents() {
+    const recurrencesToCreate: AugmentedBackgroundEvent[] = []
+    const $app = this.$app as CalendarAppSingleton
+
+    $app.calendarEvents.backgroundEvents.value.forEach((event) => {
+      const rrule = event.rrule
+
+      if (rrule && this.range) {
+        recurrencesToCreate.push(
+          ...createRecurrencesForBackgroundEvent(event, rrule, this.range)
+        )
+      }
+    })
+
+    $app.calendarEvents.backgroundEvents.value = [
+      ...$app.calendarEvents.backgroundEvents.value,
+      ...recurrencesToCreate,
+    ]
+  }
+
   private createRecurrencesForEvent(
     calendarEvent: CalendarEventInternal,
     rrule: string
@@ -122,6 +149,11 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   private removeAllEventRecurrences() {
     this.$app!.calendarEvents.list.value = [
       ...this.$app!.calendarEvents.list.value.filter((event) => !event.isCopy),
+    ]
+    this.$app!.calendarEvents.backgroundEvents.value = [
+      ...this.$app!.calendarEvents.backgroundEvents.value.filter(
+        (event) => !(event as AugmentedBackgroundEvent).isCopy
+      ),
     ]
   }
 }

@@ -58,6 +58,20 @@ const calendar = createCalendar({
 })
 ```
 
+## BackgroundEvent API
+
+```ts
+export type BackgroundEvent = {
+  start: string
+  end: string
+  style: CSSProperties
+  title?: string
+  rrule?: string
+}
+```
+
+For docs on how to use `rrule`, please see the event [recurrence documentation](/docs/calendar/plugins/recurrence).
+
 ## Update background events
 
 See the [events service plugin](/docs/calendar/plugins/events-service) for how to update background events.

@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import Link from 'next/link'
 
 export default function Logo() {

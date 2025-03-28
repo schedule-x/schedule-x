@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/ical",
   "umdName": "SXICalendar",
-  "version": "2.14.3",
+  "version": "2.24.0",
   "description": "Plugin for Schedule-X to handle iCalendar sources",
   "author": {
     "name": "Tom Österlund",
@@ -20,8 +20,6 @@
     "ical.js": "^2.0.1"
   },
   "scripts": {
-    "lint": "eslint -c eslintrc.cjs . --ext .ts . --ext .tsx",
-    "lint:fix": "eslint -c eslintrc.cjs . --ext .ts --fix . --ext .tsx --fix",
     "format": "prettier . --write",
     "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
   },

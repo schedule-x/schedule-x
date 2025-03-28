@@ -33,8 +33,14 @@ describe('CustomHeaderContent', () => {
 
     it('should call the custom component function', async () => {
       await waitFor(() => {
-        expect(prependFn).toHaveBeenCalledWith(expect.any(HTMLElement), {})
-        expect(appendFn).toHaveBeenCalledWith(expect.any(HTMLElement), {})
+        expect(prependFn).toHaveBeenCalledWith(
+          expect.any(HTMLElement),
+          expect.any(Object)
+        )
+        expect(appendFn).toHaveBeenCalledWith(
+          expect.any(HTMLElement),
+          expect.any(Object)
+        )
       })
     })
   })
@@ -61,8 +67,14 @@ describe('CustomHeaderContent', () => {
 
     it('should call the custom component function', async () => {
       await waitFor(() => {
-        expect(prependFn).toHaveBeenCalledWith(expect.any(HTMLElement), {})
-        expect(appendFn).toHaveBeenCalledWith(expect.any(HTMLElement), {})
+        expect(prependFn).toHaveBeenCalledWith(
+          expect.any(HTMLElement),
+          expect.any(Object)
+        )
+        expect(appendFn).toHaveBeenCalledWith(
+          expect.any(HTMLElement),
+          expect.any(Object)
+        )
       })
     })
   })

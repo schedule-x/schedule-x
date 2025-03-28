@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/schedule-x/schedule-x/compare/v2.23.0...v2.24.0) (2025-03-27)
+
+### Features
+
+- add animation for adding event via events service ([#983](https://github.com/schedule-x/schedule-x/issues/983)) ([95ed933](https://github.com/schedule-x/schedule-x/commit/95ed933c1cc19cba666dc940632df7e142e0726d))
+
+# [2.23.0](https://github.com/schedule-x/schedule-x/compare/v2.22.0...v2.23.0) (2025-03-20)
+
+### Features
+
+- **calendar:** add additional slots ([#972](https://github.com/schedule-x/schedule-x/issues/972)) ([5e1d2b6](https://github.com/schedule-x/schedule-x/commit/5e1d2b6acfc204d7b048d7a9a9a48bf08512456a))
+
+# [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
+
+### Features
+
+- **calendar:** add showWeekNumbers option ([#951](https://github.com/schedule-x/schedule-x/issues/951)) ([02621e4](https://github.com/schedule-x/schedule-x/commit/02621e4aea01601cff4f2d94739bae98dc0aaa4a))
+
+## [2.21.2](https://github.com/schedule-x/schedule-x/compare/v2.21.1...v2.21.2) (2025-03-12)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [2.21.1](https://github.com/schedule-x/schedule-x/compare/v2.21.0...v2.21.1) (2025-03-05)
+
+### Bug Fixes
+
+- **calendar:** display events in hybrid days, even when event start i… ([#942](https://github.com/schedule-x/schedule-x/issues/942)) ([76a8b58](https://github.com/schedule-x/schedule-x/commit/76a8b589a6009905a946f71bcf96fda3f3d3a685))
+
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+### Features
+
+- **calendar:** pass $app to custom components in header ([#938](https://github.com/schedule-x/schedule-x/issues/938)) ([9d6c774](https://github.com/schedule-x/schedule-x/commit/9d6c7746cc2ba05eaacff6e0db07838bba392667))
+- validate events in event service plugins ([#937](https://github.com/schedule-x/schedule-x/issues/937)) ([6b45e09](https://github.com/schedule-x/schedule-x/commit/6b45e09db2a07d0159e7d9748c6601de7803cea9))
+
+# [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+### Features
+
+- improve sorting in month grid ([#918](https://github.com/schedule-x/schedule-x/issues/918)) ([523b207](https://github.com/schedule-x/schedule-x/commit/523b207f47070ad7faf16db070f49e31c84f7d6c))
+
+# [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+### Bug Fixes
+
+- **calendar:** improve stacking in time grid ([#905](https://github.com/schedule-x/schedule-x/issues/905)) ([df9d949](https://github.com/schedule-x/schedule-x/commit/df9d949efba975ca6e61687cbe15383420a15751))
+
+# [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
+
+### Features
+
+- add option to prevent event overlap in week/day views ([#897](https://github.com/schedule-x/schedule-x/issues/897)) ([b39690a](https://github.com/schedule-x/schedule-x/commit/b39690a4b79ce02f79484a72bd569d1b0d5c2f35))
+
+## [2.15.1](https://github.com/schedule-x/schedule-x/compare/v2.15.0...v2.15.1) (2025-01-25)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
+# [2.15.0](https://github.com/schedule-x/schedule-x/compare/v2.14.3...v2.15.0) (2025-01-23)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
 ## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
 
 ### Bug Fixes

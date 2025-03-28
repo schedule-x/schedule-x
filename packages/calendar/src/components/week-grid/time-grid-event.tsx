@@ -27,10 +27,11 @@ import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
+import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {
   calendarEvent: CalendarEventInternal
-  dayBoundariesDateTime?: DayBoundariesDateTime
+  dayBoundariesDateTime: DayBoundariesDateTime
   setMouseDown: StateUpdater<boolean>
   isCopy?: boolean
 }
@@ -82,10 +83,11 @@ export default function TimeGridEvent({
 
   const handleStartDrag = (uiEvent: UIEvent) => {
     if (isUIEventTouchEvent(uiEvent)) uiEvent.preventDefault()
-    if (!dayBoundariesDateTime) return // this can only happen in eventCopy
+    if (isCopy) return
     if (!uiEvent.target) return
     if (!$app.config.plugins.dragAndDrop) return
     if (calendarEvent._options?.disableDND) return
+    if (realStartIsBeforeDayBoundaryStart) return // Don't allow dragging events that start before the day boundary; it would require a bunch of adjustments in drag & drop plugin in order to look nice
 
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(newEventCopy)
@@ -137,7 +139,7 @@ export default function TimeGridEvent({
     setMouseDown(true)
     e.stopPropagation()
 
-    if (!dayBoundariesDateTime) return // this can only happen in eventCopy
+    if (isCopy) return
 
     if ($app.config.plugins.resize) {
       const eventCopy = deepCloneEvent(calendarEvent, $app)
@@ -154,7 +156,15 @@ export default function TimeGridEvent({
 
   const borderRule = getBorderRule(calendarEvent)
   const classNames = ['sx__time-grid-event', 'sx__event']
+
+  if (wasEventAddedInLastSecond(calendarEvent)) classNames.push('is-event-new')
   if (isCopy) classNames.push('is-event-copy')
+  if (
+    !$app.config.weekOptions.value.eventOverlap &&
+    calendarEvent._maxConcurrentEvents &&
+    calendarEvent._maxConcurrentEvents > 1
+  )
+    classNames.push('is-event-overlap')
   if (calendarEvent._options?.additionalClasses)
     classNames.push(...calendarEvent._options.additionalClasses)
 
@@ -169,6 +179,15 @@ export default function TimeGridEvent({
   }
 
   const hasCustomContent = calendarEvent._customContent?.timeGrid
+
+  const realStartIsBeforeDayBoundaryStart =
+    dayBoundariesDateTime &&
+    calendarEvent.start < dayBoundariesDateTime.start &&
+    calendarEvent.end >= dayBoundariesDateTime.start
+
+  const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
+    ? dayBoundariesDateTime?.start
+    : calendarEvent.start
 
   return (
     <>
@@ -189,18 +208,23 @@ export default function TimeGridEvent({
         role="button"
         style={{
           top: `${getYCoordinateInTimeGrid(
-            calendarEvent.start,
+            relativeStartWithinDayBoundary,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           height: `${getEventHeight(
-            calendarEvent.start,
+            relativeStartWithinDayBoundary,
             calendarEvent.end,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
           left: `${leftRule}%`,
-          width: `${getWidthRule(leftRule, isCopy ? 100 : $app.config.weekOptions.value.eventWidth)}%`,
+          width: `${getWidthRule(
+            leftRule,
+            isCopy ? 100 : $app.config.weekOptions.value.eventWidth,
+            calendarEvent._maxConcurrentEvents,
+            $app.config.weekOptions.value.eventOverlap
+          )}%`,
           backgroundColor: customComponent
             ? undefined
             : eventCSSVariables.backgroundColor,
@@ -270,6 +294,7 @@ export default function TimeGridEvent({
           calendarEvent={eventCopy}
           isCopy={true}
           setMouseDown={setMouseDown}
+          dayBoundariesDateTime={dayBoundariesDateTime}
         />
       )}
     </>

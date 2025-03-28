@@ -15,6 +15,7 @@ export default class EventsFacadeImpl implements EventsFacade {
 
   add(event: CalendarEventExternal): void {
     const newEvent = externalEventToInternal(event, this.$app.config)
+    newEvent._createdAt = new Date()
     const copiedEvents = [...this.$app.calendarEvents.list.value]
     copiedEvents.push(newEvent)
     this.$app.calendarEvents.list.value = copiedEvents

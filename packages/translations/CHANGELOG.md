@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.24.0](https://github.com/schedule-x/schedule-x/compare/v2.23.0...v2.24.0) (2025-03-27)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+# [2.23.0](https://github.com/schedule-x/schedule-x/compare/v2.22.0...v2.23.0) (2025-03-20)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+# [2.22.0](https://github.com/schedule-x/schedule-x/compare/v2.21.2...v2.22.0) (2025-03-14)
+
+### Features
+
+- **calendar:** add showWeekNumbers option ([#951](https://github.com/schedule-x/schedule-x/issues/951)) ([02621e4](https://github.com/schedule-x/schedule-x/commit/02621e4aea01601cff4f2d94739bae98dc0aaa4a))
+
+## [2.21.2](https://github.com/schedule-x/schedule-x/compare/v2.21.1...v2.21.2) (2025-03-12)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+## [2.21.1](https://github.com/schedule-x/schedule-x/compare/v2.21.0...v2.21.1) (2025-03-05)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+# [2.21.0](https://github.com/schedule-x/schedule-x/compare/v2.20.0...v2.21.0) (2025-02-27)
+
+### Features
+
+- add Romanian translations ([#935](https://github.com/schedule-x/schedule-x/issues/935)) ([d590597](https://github.com/schedule-x/schedule-x/commit/d590597e471a9c920cc695a32f9cce67f6ec7856))
+
+# [2.20.0](https://github.com/schedule-x/schedule-x/compare/v2.19.0...v2.20.0) (2025-02-18)
+
+### Features
+
+- **translations:** add finnish ([#924](https://github.com/schedule-x/schedule-x/issues/924)) ([499c7fb](https://github.com/schedule-x/schedule-x/commit/499c7fb50e06fce20877ee79860c2fbb67b52481))
+
+# [2.19.0](https://github.com/schedule-x/schedule-x/compare/v2.18.0...v2.19.0) (2025-02-12)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+# [2.18.0](https://github.com/schedule-x/schedule-x/compare/v2.17.0...v2.18.0) (2025-02-06)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+# [2.17.0](https://github.com/schedule-x/schedule-x/compare/v2.16.1...v2.17.0) (2025-02-03)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+## [2.16.1](https://github.com/schedule-x/schedule-x/compare/v2.16.0...v2.16.1) (2025-01-31)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+# [2.16.0](https://github.com/schedule-x/schedule-x/compare/v2.15.1...v2.16.0) (2025-01-28)
+
+### Features
+
+- add mergeLocales function ([#904](https://github.com/schedule-x/schedule-x/issues/904)) ([c75e8cf](https://github.com/schedule-x/schedule-x/commit/c75e8cfbb5c9f8bcecb31e649f835bdf947e9250))
+- **translations:** add slovenian ([#886](https://github.com/schedule-x/schedule-x/issues/886)) ([cec4435](https://github.com/schedule-x/schedule-x/commit/cec4435462d383c86a552497eb00fbced0cb575b))
+
+## [2.15.1](https://github.com/schedule-x/schedule-x/compare/v2.15.0...v2.15.1) (2025-01-25)
+
+**Note:** Version bump only for package @schedule-x/translations
+
+# [2.15.0](https://github.com/schedule-x/schedule-x/compare/v2.14.3...v2.15.0) (2025-01-23)
+
+### Features
+
+- add croatian (hr-HR) translations ([#887](https://github.com/schedule-x/schedule-x/issues/887)) ([d6776bf](https://github.com/schedule-x/schedule-x/commit/d6776bfeb47d44d01d58d3092760872045460304))
+
 ## [2.14.3](https://github.com/schedule-x/schedule-x/compare/v2.14.2...v2.14.3) (2025-01-17)
 
 **Note:** Version bump only for package @schedule-x/translations

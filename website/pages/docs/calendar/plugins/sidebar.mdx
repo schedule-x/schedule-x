@@ -49,10 +49,11 @@ npm install @sx-premium/sidebar
 
 ```js
 import { createCalendar } from '@schedule-x/calendar'
-import { createSidebarPlugin } from "@sx-premium/sidebar";
+import { createSidebarPlugin, translations as sidebarTranslations } from "@sx-premium/sidebar";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
-import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+import { createInteractiveEventModal, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
 import { createDragToCreatePlugin } from "@sx-premium/drag-to-create";
+import { translations, mergeLocales } from '@schedule-x/translations'
 
 import '@sx-premium/sidebar/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
@@ -97,22 +98,36 @@ const sidebar = createSidebarPlugin({
     }
   ],
 
+  /**
+  * Optional: Should placeholder events be selectable
+  * If set to true, you can later grab the currently selected placeholder event via sidebar.selectedPlaceholderEvent.value
+  * This can, for example, help your users draw events belonging to different calendars
+  * */
+  isPlaceholderEventSelectable: true,
+
   // Optional: factory function for generating event ids when events are created
   idFactory: () => uuidv4() // or any other id generator
 })
 
 const calendar = createCalendar(
-  { /* config */ },
-  [
-    eventsService,
-    sidebar,
-    interactiveEventModal,
-    createDragToCreatePlugin(/* drag-to-create options */)
-  ]
+  {
+    translations: mergeLocales(
+      translations,
+      sidebarTranslations,
+      modalTranslations
+    ),
+
+    plugins: [
+      eventsService,
+      sidebar,
+      interactiveEventModal,
+      createDragToCreatePlugin(/* drag-to-create options */)
+    ]
+    // ...config options
+  },
 )
 
 calendar.render(document.getElementById('your-calendar-wrapper'))
-
 ```
 
 ## Changelog
@@ -124,6 +139,5 @@ See [changelog](/premium-changelog) page.
 These can be added on request. Please let us know if you need an example for a specific framework.
 
 * React example: https://github.com/schedule-x/react-examples/blob/main/sidebar/src/App.tsx
-* Vue example:
-* Angular example:
-* Svelte example:
+* Angular example: https://github.com/schedule-x/angular-examples/tree/main/sidebar--modal--drag-to-create
+* Svelte example: https://github.com/schedule-x/svelte-examples

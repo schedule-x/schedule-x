@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { deDE } from './locales/de-DE'
 import { datePickerDeDE } from './locales/de-DE/date-picker'
 import { enUS } from './locales/en-US'
@@ -55,8 +54,17 @@ import { srRS } from './locales/sr-RS'
 import { datePickerSrRS } from './locales/sr-RS/date-picker'
 import { ltLT } from './locales/lt-LT'
 import { datePickerLtLT } from './locales/lt-LT/date-picker'
+import { hrHR } from './locales/hr-HR'
+import { datePickerHrHR } from './locales/hr-HR/date-picker'
+import { slSI } from './locales/sl-SI'
+import { datePickerSlSI } from './locales/sl-SI/date-picker'
+import { fiFI } from './locales/fi-FI'
+import { datePickerFiFI } from './locales/fi-FI/date-picker'
+import { roRO } from './locales/ro-RO'
+import { datePickerRoRO } from './locales/ro-RO/date-picker'
 
 import { translate } from './translator/translate'
+import { mergeLocales } from './utils/merge-locales'
 
 const translations = {
   deDE,
@@ -87,6 +95,10 @@ const translations = {
   srLatnRS,
   srRS,
   ltLT,
+  hrHR,
+  slSI,
+  fiFI,
+  roRO,
 }
 
 const datePickerTranslations = {
@@ -118,9 +130,14 @@ const datePickerTranslations = {
   srLatnRS: datePickerSrLatnRS,
   srRS: datePickerSrRS,
   ltLT: datePickerLtLT,
+  hrHr: datePickerHrHR,
+  slSI: datePickerSlSI,
+  fiFI: datePickerFiFI,
+  roRO: datePickerRoRO,
 }
 
 export {
+  mergeLocales,
   translate,
   translations,
   datePickerTranslations,
@@ -151,4 +168,8 @@ export {
   caES,
   srLatnRS,
   ltLT,
+  hrHR,
+  slSI,
+  fiFI,
+  roRO,
 }

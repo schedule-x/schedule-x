@@ -27,8 +27,8 @@
     "title": "Demo",
     "href": "/demos/calendar"
   },
-  "supported-languages": {
-    "title": "Supported languages"
+  "language": {
+    "title": "Language"
   },
   "installing-premium": {
     "display": "hidden",
@@ -37,6 +37,10 @@
   "incident-registry": {
     "display": "hidden",
     "title": "Incident with private package registry"
+  },
+  "custom-components": {
+    "display": "hidden",
+    "title": "A visual overview of the custom components available"
   },
   "advanced": {
     "title": "Advanced usage"

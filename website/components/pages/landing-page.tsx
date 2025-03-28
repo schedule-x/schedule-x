@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import '@schedule-x/theme-default/dist/index.css'
 import Card from '../partials/card/card'
 import dragAndDropIconWhite from '../../assets/icons/drag-and-drop-white.svg'
@@ -65,6 +64,11 @@ export default function LandingPage() {
             </SwiperSlide>
 
             <SwiperSlide>
+              <img height={40} width={125} style={{ position: 'relative', top: '-2px' }}
+                   src="/images/logos/iService.png" alt="iService"/>
+            </SwiperSlide>
+
+            <SwiperSlide>
               <img height={40} width={120} style={{ position: 'relative', top: '-4px' }}
                    src="/images/logos/elevent_horz_color.svg" alt="Book Elevent"/>
             </SwiperSlide>
@@ -72,11 +76,6 @@ export default function LandingPage() {
             <SwiperSlide>
               <img height={40} width={160} style={{ position: 'relative', top: '-10px' }}  src="/images/logos/statushub.svg" alt="Status Hub"/>
             </SwiperSlide>
-
-            {/*<SwiperSlide>*/}
-            {/*  <img height={40} width={125} style={{ position: 'relative', top: '-2px' }}*/}
-            {/*       src="/images/logos/iService.png" alt="iService"/>*/}
-            {/*</SwiperSlide>*/}
 
             <SwiperSlide>
               <img height={40} width={160} src="/images/logos/acteamo.png" alt="Acteamo"/>
@@ -202,7 +201,7 @@ export default function LandingPage() {
 
 
             <ul>
-              <li>Build event modal with a form ~30 hours ❌</li>
+              <li>Build event modal- and form with recurrence options ~100 hours ❌</li>
               <li>Build Drag-to-create ~40 hours ❌</li>
               <li>Build Resource view ~100 hours ❌</li>
               <li>Install and configure Schedule-X premium ~1 hour ✅</li>

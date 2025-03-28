@@ -24,6 +24,7 @@ export type WeekOptions = {
   nDays: number
   eventWidth: number
   timeAxisFormatOptions: Intl.DateTimeFormatOptions
+  eventOverlap: boolean
 }
 
 export type MonthGridOptions = {
@@ -70,6 +71,7 @@ export default interface CalendarConfigInternal extends Config {
   monthGridOptions: Signal<MonthGridOptions>
   plugins: Plugins
   isResponsive: boolean
+  showWeekNumbers: Signal<boolean>
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
   translations: Signal<Record<string, Language>>
@@ -100,6 +102,7 @@ interface ReducedCalendarConfigInternal
     | 'locale'
     | 'firstDayOfWeek'
     | 'translations'
+    | 'showWeekNumbers'
   > {}
 
 export interface CalendarConfigExternal
@@ -121,4 +124,5 @@ export interface CalendarConfigExternal
   firstDayOfWeek?: WeekDay
   skipValidation?: boolean
   translations?: Record<string, Language>
+  showWeekNumbers?: boolean
 }

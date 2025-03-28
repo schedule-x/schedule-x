@@ -18,7 +18,7 @@ const config = {
   // ... views, events and other options
 
   /**
-   * Set the language. List of supported languages: https://schedule-x.dev/docs/calendar/supported-languages
+   * Set the language. List of supported languages: https://schedule-x.dev/docs/calendar/language
    * For support of further languages, please open a PR, adding your translations under the folder:
    * packages/translations/src/locales/xx-XX
    *
@@ -52,7 +52,8 @@ const config = {
   isDark: true,
 
   /**
-   * Decides which hours should be displayed in the week and day grids. Defaults to midnight - midnight (a full day)
+   * Decides which hours should be displayed in the week and day grids. Only full hours are allowed; 01:30, for example, is not allowed.
+   * Defaults to midnight - midnight (a full day)
    * Can also be set to a "hybrid" day, such as { start: '06:00', end: '03:00' }, meaning each day starts at 6am but
    * extends into the next day until 3am.
    * */
@@ -89,6 +90,12 @@ const config = {
      * Default: { hour: 'numeric' }
      */
     timeAxisFormatOptions: { hour: '2-digit', minute: '2-digit' },
+
+    /**
+     * Determines whether concurrent events can overlap.
+     * Defaults to true. Set to false to disable overlapping.
+     */
+    eventOverlap: true,
   },
 
   monthGridOptions: {
@@ -97,6 +104,12 @@ const config = {
      * */
     nEventsPerDay: 8,
   },
+
+  /**
+  * Display week numbers. Not 100% according to ISO 8601, which considers a week to start on Monday and end on Sunday.
+  * Since Schedule-X enables you to configure the first day of the week, the week numbers are calculated based on that.
+  * */
+  showWeekNumbers: true,
 
   /**
    * Toggle automatic view change when the calendar is resized below a certain width breakpoint.
