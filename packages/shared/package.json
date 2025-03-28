@@ -20,7 +20,7 @@
     "dist"
   ],
   "peerDependencies": {
-    "@preact/signals": "^1.1.5"
+    "@preact/signals": "^2.0.2"
   },
   "scripts": {
     "format": "prettier . --write",
