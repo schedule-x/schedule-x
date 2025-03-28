@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.25.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v2.24.0...v2.25.0-alpha.0) (2025-03-28)
+
+### Features
+
+- validate dayboundaries config to only allow full hours ([#991](https://github.com/schedule-x/schedule-x/issues/991)) ([22ca674](https://github.com/schedule-x/schedule-x/commit/22ca6748c60622cbdae3c9791b66b215a11d3cd8))
+
 # [2.24.0](https://github.com/schedule-x/schedule-x/compare/v2.23.0...v2.24.0) (2025-03-27)
 
 ### Features

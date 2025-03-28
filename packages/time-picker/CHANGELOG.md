@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.25.0-alpha.0](https://github.com/schedule-x/schedule-x/compare/v2.24.0...v2.25.0-alpha.0) (2025-03-28)
+
+**Note:** Version bump only for package @schedule-x/time-picker
+
 # [2.24.0](https://github.com/schedule-x/schedule-x/compare/v2.23.0...v2.24.0) (2025-03-27)
 
 **Note:** Version bump only for package @schedule-x/time-picker
