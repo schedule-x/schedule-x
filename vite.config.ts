@@ -11,7 +11,7 @@ export default defineConfig({
       provider: 'istanbul',
       extension: ['.ts', '.tsx'],
       reporter: ['text', 'html', 'lcov', 'text-summary'],
-      exclude: ['website/**', 'development/**', 'libs/**', '**/__test__/**'],
+      exclude: ['website/**', 'development/**', 'libs/**', '**/__test__/**', 'cypress/**'],
     },
     useAtomics: true,
   },
