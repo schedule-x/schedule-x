@@ -5,14 +5,28 @@ import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placeme
 export const createDatePickerConfig = (
   config: CalendarConfigExternal,
   dateSelectionCallback: (date: string) => void
-) =>
-  new DatePickerConfigBuilder()
+) => {
+  const isRtl = config.direction === 'rtl'
+  let teleportTo: HTMLElement | undefined
+  if (config.datePicker?.teleportTo) {
+    teleportTo = config.datePicker.teleportTo
+  } else if (isRtl) {
+    teleportTo = document.body
+  }
+
+  let placement = Placement.BOTTOM_END
+  if (isRtl) {
+    placement = Placement.BOTTOM_START
+  }
+
+  return new DatePickerConfigBuilder()
     .withLocale(config.locale)
     .withFirstDayOfWeek(config.firstDayOfWeek)
     .withMin(config.minDate)
     .withMax(config.maxDate)
-    .withTeleportTo(config.datePicker?.teleportTo)
+    .withTeleportTo(teleportTo)
     .withStyle(config.datePicker?.style)
-    .withPlacement(Placement.BOTTOM_END)
+    .withPlacement(placement)
     .withListeners({ onChange: dateSelectionCallback })
     .build()
+}
