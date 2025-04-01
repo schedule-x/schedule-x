@@ -62,7 +62,13 @@ export default function DateGridDay({
             ></div>
           )
 
-        return <DateGridEvent calendarEvent={event} gridRow={index + 1} />
+        return (
+          <DateGridEvent
+            calendarEvent={event}
+            gridRow={index + 1}
+            key={event.start + event.end}
+          />
+        )
       })}
 
       <div className={'sx__spacer'} onMouseDown={handleMouseDown} />
