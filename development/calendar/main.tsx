@@ -249,7 +249,7 @@ const calendar = createCalendar({
       start: '2025-03-04 11:00',
       end: '2025-03-04 12:00',
     },
-    // ...seededEvents
+    ...seededEvents
   ],
 }, [
   eventsServicePlugin,
