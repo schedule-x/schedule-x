@@ -42,7 +42,7 @@ export const getEventHeight = (
   )
 }
 
-export const getLeftRule = (
+export const getInlineStartRule = (
   calendarEvent: CalendarEventInternal,
   eventWidth: number
 ) => {

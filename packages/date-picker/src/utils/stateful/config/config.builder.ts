@@ -60,7 +60,6 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   }
 
   withPlacement(placement: Placement | undefined): ConfigBuilder {
-    console.log(placement)
     this.placement = placement
 
     return this

@@ -4,7 +4,7 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup } from '@testing-library/preact'
-import { afterEach } from 'vitest'
+import { afterEach, beforeEach } from 'vitest'
 import { getEventByText, renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 
@@ -63,7 +63,7 @@ describe('styles of DateGridEvent', () => {
     })
   })
 
-  describe('events with overflow', () => {
+  describe('events with overflow in ltr direction', () => {
     const selectedDate = '2024-10-01'
 
     const eventWithOverflowLeftId = 'my-event-id'
@@ -134,6 +134,64 @@ describe('styles of DateGridEvent', () => {
       expect(event.style.borderBottomLeftRadius).toBe('0px')
       expect(event.style.borderTopRightRadius).toBe('0px')
       expect(event.style.borderBottomRightRadius).toBe('0px')
+    })
+  })
+
+  describe('events with overflow in rtl direction', () => {
+    document.documentElement.setAttribute('dir', 'rtl')
+    beforeEach(() => {
+      document.documentElement.setAttribute('dir', 'rtl')
+    })
+
+    const selectedDate = '2025-04-03'
+
+    const eventWithOverflowLeftId = 'my-event-id'
+    const eventWithOverflowLeftTitle = 'My event'
+    const eventWithOverflowBothId = 'my-event-id-2'
+    const eventWithOverflowBothTitle = 'My event 2'
+
+    const $app = __createAppWithViews__({
+      selectedDate: selectedDate,
+      events: [
+        {
+          id: eventWithOverflowLeftId,
+          title: eventWithOverflowLeftTitle,
+          start: '2025-04-06',
+          end: '2025-04-07',
+        },
+        {
+          id: eventWithOverflowBothId,
+          title: eventWithOverflowBothTitle,
+          start: '2025-03-20',
+          end: '2025-04-08',
+        },
+      ],
+    })
+
+    it('should subtract 10px extra from width to make room for overflow indicator, and add class for event that goes beyond week', () => {
+      renderComponent($app, eventWithOverflowLeftId, 2)
+      const event = getEventByText(eventWithOverflowLeftTitle)
+
+      expect(event.style.width).toBe('calc(200% - 12px)')
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-left')
+      ).toBe(true)
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-right')
+      ).toBe(false)
+    })
+
+    it('should subtract 20px extra from width to make room for overflow indicators', () => {
+      renderComponent($app, eventWithOverflowBothId, 7)
+      const event = getEventByText(eventWithOverflowBothTitle)
+
+      expect(event.style.width).toBe('calc(700% - 22px)')
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-left')
+      ).toBe(true)
+      expect(
+        event.classList.contains('sx__date-grid-event--overflow-right')
+      ).toBe(true)
     })
   })
 

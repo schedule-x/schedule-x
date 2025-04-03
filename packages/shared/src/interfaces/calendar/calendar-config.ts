@@ -104,6 +104,7 @@ interface ReducedCalendarConfigInternal
     | 'firstDayOfWeek'
     | 'translations'
     | 'showWeekNumbers'
+    | 'direction'
   > {}
 
 export interface CalendarConfigExternal

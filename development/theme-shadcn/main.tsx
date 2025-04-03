@@ -24,6 +24,8 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 const calendar = createCalendar({
   selectedDate: '2024-05-06',
   theme: 'shadcn',
+  direction: 'rtl',
+  locale: 'he-IL',
   events: [
     {
       id: 1,

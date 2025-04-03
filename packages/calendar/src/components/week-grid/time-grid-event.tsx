@@ -3,7 +3,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import {
   getBorderRule,
   getEventHeight,
-  getLeftRule,
+  getInlineStartRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
 import { useContext, useEffect } from 'preact/hooks'
@@ -70,13 +70,13 @@ export default function TimeGridEvent({
   }
 
   const eventCSSVariables = {
-    borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
+    borderInlineStart: `4px solid var(--sx-color-${calendarEvent._color})`,
     textColor: `var(--sx-color-on-${calendarEvent._color}-container)`,
     backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
     iconStroke: `var(--sx-color-on-${calendarEvent._color}-container)`,
   } as const
 
-  const leftRule = getLeftRule(
+  const insetInlineStart = getInlineStartRule(
     calendarEvent,
     $app.config.weekOptions.value.eventWidth
   )
@@ -218,9 +218,9 @@ export default function TimeGridEvent({
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
-          left: `${leftRule}%`,
+          insetInlineStart: `${insetInlineStart}%`,
           width: `${getWidthRule(
-            leftRule,
+            insetInlineStart,
             isCopy ? 100 : $app.config.weekOptions.value.eventWidth,
             calendarEvent._maxConcurrentEvents,
             $app.config.weekOptions.value.eventOverlap
@@ -230,11 +230,11 @@ export default function TimeGridEvent({
             : eventCSSVariables.backgroundColor,
           color: customComponent ? undefined : eventCSSVariables.textColor,
           borderTop: borderRule,
-          borderRight: borderRule,
+          borderInlineEnd: borderRule,
           borderBottom: borderRule,
-          borderLeft: customComponent
+          borderInlineStart: customComponent
             ? undefined
-            : eventCSSVariables.borderLeft,
+            : eventCSSVariables.borderInlineStart,
           padding: customComponent ? '0' : undefined,
         }}
       >

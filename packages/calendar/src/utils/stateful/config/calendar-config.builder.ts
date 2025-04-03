@@ -52,7 +52,6 @@ export default class CalendarConfigBuilder
   minDate: string | undefined
   maxDate: string | undefined
   backgroundEvents: BackgroundEvent[] | undefined
-  direction: 'ltr' | 'rtl' | undefined
 
   theme: string | undefined
   // TODO: Change for V3. Should only be configured from outside
@@ -82,7 +81,6 @@ export default class CalendarConfigBuilder
       this.theme,
       this.translations,
       this.showWeekNumbers,
-      this.direction
     )
   }
 
@@ -202,11 +200,6 @@ export default class CalendarConfigBuilder
 
   withWeekNumbers(showWeekNumbers: boolean | undefined) {
     this.showWeekNumbers = showWeekNumbers
-    return this
-  }
-
-  withDirection(direction: 'ltr' | 'rtl' | undefined) {
-    this.direction = direction
     return this
   }
 }

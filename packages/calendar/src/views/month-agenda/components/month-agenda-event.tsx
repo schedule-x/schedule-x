@@ -24,7 +24,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
   const eventCSSVariables = {
     backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
     color: `var(--sx-color-on-${calendarEvent._color}-container)`,
-    borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
+    borderInlineStart: `4px solid var(--sx-color-${calendarEvent._color})`,
   }
 
   const customComponent = $app.config._customComponentFns.monthAgendaEvent
@@ -77,7 +77,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
           ? undefined
           : eventCSSVariables.backgroundColor,
         color: customComponent ? undefined : eventCSSVariables.color,
-        borderLeft: customComponent ? undefined : eventCSSVariables.borderLeft,
+        borderInlineStart: customComponent ? undefined : eventCSSVariables.borderInlineStart,
         padding: customComponent ? '0px' : undefined,
       }}
       onClick={(e) => onClick(e)}

@@ -27,7 +27,7 @@
     transform: translateY(-50%) rotate(180deg);
   }
 
-  .is-rtl & {
+  [dir="rtl"] & {
     left: 1rem;
     right: auto;
   }

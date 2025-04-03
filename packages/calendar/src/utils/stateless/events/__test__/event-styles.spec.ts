@@ -3,7 +3,7 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { getLeftRule, getWidthRule } from '../event-styles'
+import { getInlineStartRule, getWidthRule } from '../event-styles'
 import { stubInterface } from 'ts-sinon'
 import { CalendarEventInternal } from '@schedule-x/shared'
 
@@ -36,7 +36,7 @@ describe('Event styles', () => {
       calendarEvent._totalConcurrentEvents = undefined
       calendarEvent._previousConcurrentEvents = undefined
 
-      const result = getLeftRule(calendarEvent, 100)
+      const result = getInlineStartRule(calendarEvent, 100)
 
       expect(result).toBe(0)
     })
@@ -46,7 +46,7 @@ describe('Event styles', () => {
       calendarEvent._totalConcurrentEvents = 2
       calendarEvent._previousConcurrentEvents = 0
 
-      const result = getLeftRule(calendarEvent, 100)
+      const result = getInlineStartRule(calendarEvent, 100)
 
       expect(result).toBe(0)
     })
@@ -56,7 +56,7 @@ describe('Event styles', () => {
       calendarEvent._totalConcurrentEvents = 2
       calendarEvent._previousConcurrentEvents = 1
 
-      const result = getLeftRule(calendarEvent, 100)
+      const result = getInlineStartRule(calendarEvent, 100)
 
       expect(result).toBe(50)
     })
@@ -66,7 +66,7 @@ describe('Event styles', () => {
       calendarEvent._totalConcurrentEvents = 4
       calendarEvent._previousConcurrentEvents = 2
 
-      const result = getLeftRule(calendarEvent, 100)
+      const result = getInlineStartRule(calendarEvent, 100)
 
       expect(result).toBe(50)
     })
@@ -76,7 +76,7 @@ describe('Event styles', () => {
       calendarEvent._totalConcurrentEvents = 2
       calendarEvent._previousConcurrentEvents = 1
 
-      const result = getLeftRule(calendarEvent, 90)
+      const result = getInlineStartRule(calendarEvent, 90)
 
       expect(result).toBe(45)
     })

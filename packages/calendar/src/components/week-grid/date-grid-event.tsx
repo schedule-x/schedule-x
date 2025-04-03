@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { useContext, useEffect } from 'preact/hooks'
+import { useContext, useEffect, useMemo } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -49,7 +49,7 @@ export default function DateGridEvent({
   } = useEventInteractions($app)
 
   const eventCSSVariables = {
-    borderLeft: `4px solid var(--sx-color-${calendarEvent._color})`,
+    borderInlineStart: `4px solid var(--sx-color-${calendarEvent._color})`,
     color: `var(--sx-color-on-${calendarEvent._color}-container)`,
     backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
   } as const
@@ -70,12 +70,24 @@ export default function DateGridEvent({
     })
   }
 
-  const hasOverflowLeft =
-    dateFromDateTime(calendarEvent.start) <
+  const startsBeforeWeek = dateFromDateTime(calendarEvent.start) <
     dateFromDateTime(($app.calendarState.range.value as DateRange).start)
-  const hasOverflowRight =
-    dateFromDateTime(calendarEvent.end) >
+  const endsAfterWeek = dateFromDateTime(calendarEvent.end) >
     dateFromDateTime(($app.calendarState.range.value as DateRange).end)
+  const hasOverflowLeft = useMemo(() => {
+    if ($app.config.direction === 'ltr') {
+      return startsBeforeWeek
+    }
+
+    return endsAfterWeek
+  }, [startsBeforeWeek, endsAfterWeek])
+  const hasOverflowRight = useMemo(() => {
+    if ($app.config.direction === 'ltr') {
+      return endsAfterWeek
+    }
+
+    return startsBeforeWeek
+  }, [startsBeforeWeek, endsAfterWeek])
   const overflowStyles = { backgroundColor: eventCSSVariables.backgroundColor }
 
   const customComponent = $app.config._customComponentFns.dateGridEvent
@@ -127,9 +139,9 @@ export default function DateGridEvent({
   if (calendarEvent._options?.additionalClasses)
     eventClasses.push(...calendarEvent._options.additionalClasses)
 
-  const borderLeftNonCustom = hasOverflowLeft
+  const borderInlineStartNonCustom = startsBeforeWeek
     ? 'none'
-    : eventCSSVariables.borderLeft
+    : eventCSSVariables.borderInlineStart
 
   const hasCustomContent = calendarEvent._customContent?.dateGrid
 
@@ -173,7 +185,7 @@ export default function DateGridEvent({
           gridRow,
           display: eventCopy ? 'none' : 'flex',
           padding: customComponent ? '0px' : undefined,
-          borderLeft: customComponent ? undefined : borderLeftNonCustom,
+          borderInlineStart: customComponent ? undefined : borderInlineStartNonCustom,
           color: customComponent ? undefined : eventCSSVariables.color,
           backgroundColor: customComponent
             ? undefined
@@ -222,7 +234,7 @@ export default function DateGridEvent({
 
         {$app.config.plugins.resize &&
           !calendarEvent._options?.disableResize &&
-          !hasOverflowRight && (
+          !endsAfterWeek && (
             <div
               className="sx__date-grid-event-resize-handle"
               onMouseDown={startResize}

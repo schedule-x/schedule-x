@@ -40,7 +40,10 @@ export class DateGridEventResizer {
 
   private handleMouseMove = (event: MouseEvent) => {
     const xDifference = event.clientX - this.initialX
-    this.lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
+    let lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
+    if (this.$app.config.direction === 'rtl') lastNDaysDiff *= -1
+
+    this.lastNDaysDiff = lastNDaysDiff
     this.setNewTimeForEventEnd()
   }
 

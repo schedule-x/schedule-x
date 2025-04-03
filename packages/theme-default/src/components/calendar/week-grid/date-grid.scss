@@ -97,6 +97,11 @@ $event-overflow-margin: 10px; // CORRELATION ID: 1
   width: clamp(10px, 15px, 50%);
   cursor: ew-resize;
   z-index: 1;
+
+  [dir="rtl"] & {
+    left: 0;
+    right: auto;
+  }
 }
 
 .sx__date-grid-background-event {

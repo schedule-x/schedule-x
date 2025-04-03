@@ -50,7 +50,7 @@ export default function MonthGridEvent({
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {
-    borderLeft: hasStartDate
+    borderInlineStart: hasStartDate
       ? `4px solid var(--sx-color-${calendarEvent._color})`
       : undefined,
     color: `var(--sx-color-on-${calendarEvent._color}-container)`,
@@ -138,7 +138,7 @@ export default function MonthGridEvent({
         gridRow,
         width: eventCSSVariables.width,
         padding: customComponent ? '0px' : undefined,
-        borderLeft: customComponent ? undefined : eventCSSVariables.borderLeft,
+        borderInlineStart: customComponent ? undefined : eventCSSVariables.borderInlineStart,
         color: customComponent ? undefined : eventCSSVariables.color,
         backgroundColor: customComponent
           ? undefined
