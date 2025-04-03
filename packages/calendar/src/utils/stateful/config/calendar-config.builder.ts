@@ -80,7 +80,7 @@ export default class CalendarConfigBuilder
       this.monthGridOptions,
       this.theme,
       this.translations,
-      this.showWeekNumbers,
+      this.showWeekNumbers
     )
   }
 

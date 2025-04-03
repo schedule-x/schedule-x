@@ -54,7 +54,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     },
     theme: string | undefined = undefined,
     translations: Record<string, Language> = {},
-    showWeekNumbers: boolean = false,
+    showWeekNumbers: boolean = false
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)

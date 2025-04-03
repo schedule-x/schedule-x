@@ -138,7 +138,9 @@ export default function MonthGridEvent({
         gridRow,
         width: eventCSSVariables.width,
         padding: customComponent ? '0px' : undefined,
-        borderInlineStart: customComponent ? undefined : eventCSSVariables.borderInlineStart,
+        borderInlineStart: customComponent
+          ? undefined
+          : eventCSSVariables.borderInlineStart,
         color: customComponent ? undefined : eventCSSVariables.color,
         backgroundColor: customComponent
           ? undefined

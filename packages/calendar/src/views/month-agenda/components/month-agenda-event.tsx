@@ -77,7 +77,9 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
           ? undefined
           : eventCSSVariables.backgroundColor,
         color: customComponent ? undefined : eventCSSVariables.color,
-        borderInlineStart: customComponent ? undefined : eventCSSVariables.borderInlineStart,
+        borderInlineStart: customComponent
+          ? undefined
+          : eventCSSVariables.borderInlineStart,
         padding: customComponent ? '0px' : undefined,
       }}
       onClick={(e) => onClick(e)}

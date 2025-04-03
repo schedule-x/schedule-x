@@ -53,4 +53,20 @@ describe('CalendarConfigImpl', () => {
       }
     )
   })
+
+  describe('setting the direction of the html document', () => {
+    it('should set the direction to ltr', () => {
+      const config = new CalendarConfigBuilder().build()
+
+      expect(config.direction).toBe('ltr')
+    })
+
+    it('should set the direction to rtl', () => {
+      document.documentElement.setAttribute('dir', 'rtl')
+
+      const config = new CalendarConfigBuilder().build()
+
+      expect(config.direction).toBe('rtl')
+    })
+  })
 })

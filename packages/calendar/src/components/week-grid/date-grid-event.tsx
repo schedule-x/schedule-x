@@ -70,9 +70,11 @@ export default function DateGridEvent({
     })
   }
 
-  const startsBeforeWeek = dateFromDateTime(calendarEvent.start) <
+  const startsBeforeWeek =
+    dateFromDateTime(calendarEvent.start) <
     dateFromDateTime(($app.calendarState.range.value as DateRange).start)
-  const endsAfterWeek = dateFromDateTime(calendarEvent.end) >
+  const endsAfterWeek =
+    dateFromDateTime(calendarEvent.end) >
     dateFromDateTime(($app.calendarState.range.value as DateRange).end)
   const hasOverflowLeft = useMemo(() => {
     if ($app.config.direction === 'ltr') {
@@ -185,7 +187,9 @@ export default function DateGridEvent({
           gridRow,
           display: eventCopy ? 'none' : 'flex',
           padding: customComponent ? '0px' : undefined,
-          borderInlineStart: customComponent ? undefined : borderInlineStartNonCustom,
+          borderInlineStart: customComponent
+            ? undefined
+            : borderInlineStartNonCustom,
           color: customComponent ? undefined : eventCSSVariables.color,
           backgroundColor: customComponent
             ? undefined

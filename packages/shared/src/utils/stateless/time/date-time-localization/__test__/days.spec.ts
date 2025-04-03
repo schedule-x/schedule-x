@@ -6,8 +6,8 @@ import {
 import TimeUnitsBuilder from '../../../../stateful/time-units/time-units.builder'
 import { WeekDay } from '../../../../../enums/time/week-day.enum'
 import {
-  getDayNamesShort,
   getOneLetterDayNames,
+  getOneLetterOrShortDayNames,
 } from '../date-time-localization'
 import { Month } from '../../../../../enums/time/month.enum'
 import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
@@ -69,7 +69,7 @@ describe('get localized day names', () => {
   })
 
   it('should get short day names in Chinese', () => {
-    const underTest = getDayNamesShort
+    const underTest = getOneLetterOrShortDayNames
     const date = new Date(2023, Month.JANUARY, 1)
     const week = timeUnitsImpl.getWeekFor(date)
 
@@ -82,5 +82,21 @@ describe('get localized day names', () => {
     expect(result[4]).toBe('周五')
     expect(result[5]).toBe('周六')
     expect(result[6]).toBe('周日')
+  })
+
+  it('should get narrow day names in hebrew', () => {
+    const underTest = getOneLetterOrShortDayNames
+    const date = new Date(2023, Month.JANUARY, 1)
+    const week = timeUnitsImpl.getWeekFor(date)
+
+    const result = underTest(week, 'he-il')
+
+    expect(result[0]).toBe('ב׳')
+    expect(result[1]).toBe('ג׳')
+    expect(result[2]).toBe('ד׳')
+    expect(result[3]).toBe('ה׳')
+    expect(result[4]).toBe('ו׳')
+    expect(result[5]).toBe('ש׳')
+    expect(result[6]).toBe('א׳')
   })
 })
