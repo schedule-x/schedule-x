@@ -8,7 +8,6 @@ describe('Updating calendar events', {
   const weekView = createWeekViewPageObject()
 
   beforeEach(() => {
-    cy.viewport(1440, 900)
     cy.visit(cypressPageUrls.calendar.updateEvents)
   })
 

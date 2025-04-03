@@ -9,7 +9,6 @@ describe('Updating the calendar config', {
   const datePicker = createDatePickerPageObject()
 
   beforeEach(() => {
-    cy.viewport(1440, 900)
     cy.visit(cypressPageUrls.calendar.updateConfig)
   })
 

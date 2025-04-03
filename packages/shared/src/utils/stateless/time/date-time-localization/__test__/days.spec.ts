@@ -89,7 +89,7 @@ describe('get localized day names', () => {
     const date = new Date(2023, Month.JANUARY, 1)
     const week = timeUnitsImpl.getWeekFor(date)
 
-    const result = underTest(week, 'he-il')
+    const result = underTest(week, 'he-IL')
 
     expect(result[0]).toBe('ב׳')
     expect(result[1]).toBe('ג׳')

@@ -28,7 +28,7 @@ export const getOneLetterDayNames = (
 }
 
 export const getDayNameShort = (date: Date, locale: string) => {
-  if (locale === 'he-il') {
+  if (locale === 'he-IL') {
     return date.toLocaleString(locale, { weekday: 'narrow' })
   }
 
