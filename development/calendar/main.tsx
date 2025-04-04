@@ -82,10 +82,8 @@ const calendar = createCalendar({
   },
   showWeekNumbers: true,
   firstDayOfWeek: 1,
-  direction: 'rtl',
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
   defaultView: 'week',
-  locale: 'he-IL',
   callbacks: {
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
