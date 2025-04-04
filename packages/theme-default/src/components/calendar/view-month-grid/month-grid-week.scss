@@ -30,7 +30,7 @@
   flex: 1;
 
   &:not(:last-child) {
-    border-right: var(--sx-border);
+    border-inline-end: var(--sx-border);
   }
 }
 
