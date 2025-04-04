@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.27.0](https://github.com/schedule-x/schedule-x/compare/v2.26.0...v2.27.0) (2025-04-04)
+
+**Note:** Version bump only for package @schedule-x/theme-shadcn
+
 # [2.26.0](https://github.com/schedule-x/schedule-x/compare/v2.24.0...v2.26.0) (2025-04-01)
 
 **Note:** Version bump only for package @schedule-x/theme-shadcn

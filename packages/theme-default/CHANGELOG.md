@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.27.0](https://github.com/schedule-x/schedule-x/compare/v2.26.0...v2.27.0) (2025-04-04)
+
+### Features
+
+- add rtl support and hebrew translations ([#992](https://github.com/schedule-x/schedule-x/issues/992)) ([b77520c](https://github.com/schedule-x/schedule-x/commit/b77520cdf15d5f087eae014d939c803a64d68aaa))
+
 # [2.26.0](https://github.com/schedule-x/schedule-x/compare/v2.24.0...v2.26.0) (2025-04-01)
 
 **Note:** Version bump only for package @schedule-x/theme-default
