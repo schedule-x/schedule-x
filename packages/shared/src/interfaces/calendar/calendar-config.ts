@@ -75,6 +75,7 @@ export default interface CalendarConfigInternal extends Config {
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
   translations: Signal<Record<string, Language>>
+  direction: 'ltr' | 'rtl'
 
   // Getters
   isHybridDay: boolean
@@ -103,6 +104,7 @@ interface ReducedCalendarConfigInternal
     | 'firstDayOfWeek'
     | 'translations'
     | 'showWeekNumbers'
+    | 'direction'
   > {}
 
 export interface CalendarConfigExternal

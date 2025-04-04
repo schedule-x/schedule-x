@@ -65,6 +65,8 @@ import { datePickerRoRO } from './locales/ro-RO/date-picker'
 
 import { translate } from './translator/translate'
 import { mergeLocales } from './utils/merge-locales'
+import { heIL } from './locales/he-IL'
+import { datePickerHeIL } from './locales/he-IL/date-picker'
 
 const translations = {
   deDE,
@@ -81,6 +83,7 @@ const translations = {
   daDK,
   mkMK,
   plPL,
+  heIL,
   esES,
   nlNL,
   ptBR,
@@ -134,6 +137,7 @@ const datePickerTranslations = {
   slSI: datePickerSlSI,
   fiFI: datePickerFiFI,
   roRO: datePickerRoRO,
+  heIL: datePickerHeIL,
 }
 
 export {
@@ -172,4 +176,5 @@ export {
   slSI,
   fiFI,
   roRO,
+  heIL,
 }

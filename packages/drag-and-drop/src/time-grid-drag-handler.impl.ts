@@ -85,10 +85,15 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private setTimeForEventCopy(pointsToAdd: number) {
     const newStart = addTimePointsToDateTime(this.eventCopy.start, pointsToAdd)
     const newEnd = addTimePointsToDateTime(this.eventCopy.end, pointsToAdd)
-    if (newStart < addDays(this.dayBoundariesDateTime.start, this.lastDaysDiff))
+    let currentDiff = this.lastDaysDiff
+
+    if (this.$app.config.direction === 'rtl') {
+      currentDiff = -currentDiff
+    }
+
+    if (newStart < addDays(this.dayBoundariesDateTime.start, currentDiff))
       return
-    if (newEnd > addDays(this.dayBoundariesDateTime.end, this.lastDaysDiff))
-      return
+    if (newEnd > addDays(this.dayBoundariesDateTime.end, currentDiff)) return
 
     this.eventCopy.start = newStart
     this.eventCopy.end = newEnd
@@ -97,7 +102,10 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
 
   private handleHorizontalMouseOrTouchMove(totalDaysDiff: number) {
     if (totalDaysDiff === this.lastDaysDiff) return
-    const diffToAdd = totalDaysDiff - this.lastDaysDiff
+
+    let diffToAdd = totalDaysDiff - this.lastDaysDiff
+    if (this.$app.config.direction === 'rtl') diffToAdd = -diffToAdd
+
     const newStartDate = addDays(
       dateFromDateTime(this.eventCopy.start),
       diffToAdd

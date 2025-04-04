@@ -16,6 +16,7 @@ import { DEFAULT_DAY_BOUNDARIES } from '../../../constants'
 import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/time-points/time-points-per-day'
 import { Signal, signal } from '@preact/signals'
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
+import { getDirection } from '../../stateless/get-direction'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   firstDayOfWeek: Signal<WeekDay>
@@ -31,6 +32,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   theme: string | undefined
   translations: Signal<Record<string, Language>>
   showWeekNumbers: Signal<boolean> = signal(false)
+  direction: 'ltr' | 'rtl' = 'ltr'
 
   constructor(
     locale: string = DEFAULT_LOCALE,
@@ -67,6 +69,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.theme = theme
     this.translations = signal(translations)
     this.showWeekNumbers = signal(showWeekNumbers)
+    this.direction = getDirection()
   }
 
   get isHybridDay(): boolean {

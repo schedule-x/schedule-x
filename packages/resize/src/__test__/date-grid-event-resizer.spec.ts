@@ -239,6 +239,29 @@ describe('Resizing events in the date grid', () => {
         eventStartingInPreviousWeek._getExternalEvent()
       )
     })
+
+    it('should make the event one day longer if document has rtl direction', () => {
+      $app.config.direction = 'rtl'
+      expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
+      expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
+      const resizePlugin = createResizePlugin() as ResizePlugin
+      resizePlugin.onRender!($app)
+      resizePlugin.createDateGridEventResizer(
+        eventStartingInPreviousWeek,
+        eventUpdater,
+        new MouseEvent('mousedown', { clientX: 1000 })
+      )
+
+      calendarWrapper.dispatchEvent(
+        new MouseEvent('mousemove', {
+          clientX: 900,
+        })
+      )
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
+      expect(eventStartingInPreviousWeek.end).toBe('2024-01-24')
+    })
   })
 
   describe('aborting an update', () => {

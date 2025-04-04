@@ -11,7 +11,6 @@ import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__cr
 import { stubInterface } from 'ts-sinon'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 
-// TODO: move to package-neutral location
 describe('style attribute "display" of date grid event element', () => {
   afterEach(() => {
     cleanup()

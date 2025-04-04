@@ -289,6 +289,41 @@ describe('A calendar with normal day boundaries', () => {
     })
   })
 
+  describe('dragging an event horizontally when document has rtl direction', () => {
+    it('should drag an event to the next day', () => {
+      $app.config.direction = 'rtl'
+      new TimeGridDragHandlerImpl(
+        $app,
+        clickEvent,
+        eventCopy,
+        updateCopyFn,
+        dayBoundariesDateTime,
+        25
+      )
+
+      const daysToDrag = 1
+      const pixelPerDay = 100
+      const pixelDiffX = daysToDrag * pixelPerDay
+      const mouseMoveEvent = {
+        clientX: clickEvent.clientX - pixelDiffX,
+        clientY: clickEvent.clientY,
+      } as MouseEvent
+      document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
+      expect(eventCopyElement.style.transform).toEqual(
+        'translateX(calc(-100% + -1px))'
+      )
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      expect(updateCopyFn).toHaveBeenCalled()
+      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
+        '2024-02-03 12:00'
+      )
+      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
+        '2024-02-03 13:00'
+      )
+    })
+  })
+
   describe('aborting an update via onBeforeEventUpdate', () => {
     it('should abort the update if onBeforeEventUpdate returns false', () => {
       $app.config.callbacks.onBeforeEventUpdate = (

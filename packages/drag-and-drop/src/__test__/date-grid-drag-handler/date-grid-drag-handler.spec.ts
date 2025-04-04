@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   describe,
@@ -253,6 +254,73 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(originalEvent?.end).toBe('2024-02-25 04:00')
       expect(updateCopyFn).toHaveBeenCalled()
       expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+    })
+  })
+
+  describe('dragging an event to the left when document direction is rtl', () => {
+    it('should update the event to one day later', () => {
+      $app.config.direction = 'rtl'
+
+      new DateGridDragHandlerImpl(
+        $app,
+        eventCoordinates,
+        eventCopy,
+        updateCopyFn
+      )
+
+      expect(eventCopy.start).toBe('2024-02-23 03:30')
+      expect(eventCopy.end).toBe('2024-02-24 04:00')
+
+      const mouseMoveEvent = {
+        clientX: eventCoordinates.clientX - 100,
+        clientY: 1000,
+      } as MouseEvent
+      document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
+
+      expect(eventCopy.start).toBe('2024-02-24 03:30')
+      expect(eventCopy.end).toBe('2024-02-25 04:00')
+      expect(updateCopyFn).toHaveBeenCalled()
+
+      document.dispatchEvent(new MouseEvent('mouseup'))
+      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-24 03:30')
+      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-25 04:00')
+
+      vi.runAllTimers()
+      expect(updateCopyFn).toHaveBeenCalledTimes(2)
+      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+    })
+  })
+
+  describe('dragging an event to the right when document direction is rtl', () => {
+    it('should update the event to one day earlier', () => {
+      $app.config.direction = 'rtl'
+      new DateGridDragHandlerImpl(
+        $app,
+        eventCoordinates,
+        eventCopy,
+        updateCopyFn
+      )
+
+      expect(eventCopy.start).toBe('2024-02-23 03:30')
+      expect(eventCopy.end).toBe('2024-02-24 04:00')
+
+      const mouseMoveEvent = {
+        clientX: eventCoordinates.clientX + 100,
+        clientY: 1000,
+      } as MouseEvent
+      document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
+
+      expect(eventCopy.start).toBe('2024-02-22 03:30')
+      expect(eventCopy.end).toBe('2024-02-23 04:00')
+      expect(updateCopyFn).toHaveBeenCalled()
+
+      document.dispatchEvent(new MouseEvent('mouseup'))
+      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-22 03:30')
+      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-23 04:00')
+
+      vi.runAllTimers()
+      expect(updateCopyFn).toHaveBeenCalledTimes(2)
+      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
     })
   })
 })
