@@ -50,7 +50,7 @@
     display: flex;
     gap: var(--sx-spacing-padding2);
 
-    [dir=rtl] & {
+    [dir="rtl"] & {
       flex-direction: row-reverse;
       justify-content: flex-end;
     }
