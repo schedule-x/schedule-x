@@ -335,7 +335,7 @@ export default function PremiumPage() {
             />
           </div>
 
-          <p style={{ color: 'gray' }}>The following&nbsp;
+          <p style={{ color: 'gray', margin: '0 2rem', textAlign: 'center' }}>The following&nbsp;
             <Link href={'/terms-and-conditions'} style={{ textDecoration: 'underline' }}>
               terms and conditions
             </Link> apply to all license models.
