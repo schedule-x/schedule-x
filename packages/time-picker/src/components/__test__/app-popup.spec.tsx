@@ -9,15 +9,19 @@ import { AppContext } from '../../utils/stateful/app-context'
 import AppPopup from '../app-popup'
 import { assertElementType } from '../../../../../libs/assertions/src'
 import { afterEach, vi } from 'vitest'
+import { translate, translations } from '@schedule-x/translations/src'
+import { signal } from '@preact/signals'
 
 describe('Time picker popup', () => {
+  const translateFn = translate(signal('en-US'), signal(translations))
+
   afterEach(() => {
     cleanup()
   })
 
   describe('rendering it with default settings', () => {
     it('should have 00 in both hours and minutes', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       render(
         <AppContext.Provider value={$app}>
           <AppPopup />
@@ -37,7 +41,7 @@ describe('Time picker popup', () => {
     })
 
     it('should focus the hours input', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       render(
         <AppContext.Provider value={$app}>
           <AppPopup />
@@ -55,7 +59,7 @@ describe('Time picker popup', () => {
     ])(
       'should render in 12-hour mode',
       ({ initialValue, expectedInitialHours }) => {
-        const $app = createTimePickerAppContext()
+        const $app = createTimePickerAppContext({}, translateFn)
         $app.config.is12Hour.value = true
         $app.timePickerState.currentTime.value = initialValue
         render(
@@ -72,7 +76,7 @@ describe('Time picker popup', () => {
 
   describe('Interacting with the input and buttons', () => {
     it('should change the hours and minutes value and save', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       render(
         <AppContext.Provider value={$app}>
           <AppPopup />
@@ -94,7 +98,7 @@ describe('Time picker popup', () => {
     })
 
     it('should close the popup when clicking the cancel button', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       $app.timePickerState.isOpen.value = true
       render(
         <AppContext.Provider value={$app}>
@@ -111,7 +115,7 @@ describe('Time picker popup', () => {
 
   describe('clicking outside', () => {
     it('should close the popup when clicking outside', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       $app.timePickerState.isOpen.value = true
       render(
         <AppContext.Provider value={$app}>
@@ -130,7 +134,7 @@ describe('Time picker popup', () => {
 
   describe('pressing escape', () => {
     it('should close the popup', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       $app.timePickerState.isOpen.value = true
       render(
         <AppContext.Provider value={$app}>
@@ -148,7 +152,7 @@ describe('Time picker popup', () => {
 
     it('should call the onEscapeKeyDown callback if provided', () => {
       const onEscapeKeyDown = vi.fn()
-      const $app = createTimePickerAppContext({ onEscapeKeyDown })
+      const $app = createTimePickerAppContext({ onEscapeKeyDown }, translateFn)
       $app.timePickerState.isOpen.value = true
       render(
         <AppContext.Provider value={$app}>

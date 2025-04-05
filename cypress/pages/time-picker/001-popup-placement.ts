@@ -1,6 +1,8 @@
 import { createTimePicker } from '../../../packages/time-picker'
 // import '../../../packages/theme-default/src/time-picker.scss'
 import '@schedule-x/theme-default/dist/time-picker.css'
+import { translate, translations } from '@schedule-x/translations'
+import { signal } from '@preact/signals'
 
 
 const timePickerTopLeft = document.querySelector('.time-picker-top-left')
@@ -13,21 +15,21 @@ const timePickerInModal = document.querySelector(
 
 createTimePicker({
   placement: 'bottom-start',
-}).render(timePickerTopLeft as HTMLElement)
+}, translate(signal('en-US'), signal(translations))).render(timePickerTopLeft as HTMLElement)
 
 createTimePicker({
   placement: 'bottom-end',
-}).render(timePickerTopRight as HTMLElement)
+}, translate(signal('en-US'), signal(translations))).render(timePickerTopRight as HTMLElement)
 
 createTimePicker({
   placement: 'top-start',
-}).render(timePickerBottomLeft as HTMLElement)
+}, translate(signal('en-US'), signal(translations))).render(timePickerBottomLeft as HTMLElement)
 
 createTimePicker({
   placement: 'top-end',
-}).render(timePickerBottomRight as HTMLElement)
+}, translate(signal('en-US'), signal(translations))).render(timePickerBottomRight as HTMLElement)
 
 createTimePicker({
   placement: 'bottom-start',
   teleportTo: document.body,
-}).render(timePickerInModal as HTMLElement)
+}, translate(signal('en-US'), signal(translations))).render(timePickerInModal as HTMLElement)

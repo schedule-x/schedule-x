@@ -137,7 +137,9 @@ export default function AppPopup() {
       className={classList.join(' ')}
       style={$app.config.teleportTo.value ? fixedPositionStyle : undefined}
     >
-      <div className="sx__time-picker-popup-label">Select time</div>
+      <div className="sx__time-picker-popup-label">
+        {$app.translate('Select time')}
+      </div>
 
       <div className="sx__time-picker-time-inputs">
         <TimeInput
@@ -165,7 +167,7 @@ export default function AppPopup() {
               className={`sx__time-picker-12-hour-switch${$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
               onClick={() => ($app.timePickerState.isAM.value = true)}
             >
-              AM
+              {$app.translate('AM')}
             </button>
 
             <button
@@ -173,7 +175,7 @@ export default function AppPopup() {
               className={`sx__time-picker-12-hour-switch${!$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
               onClick={() => ($app.timePickerState.isAM.value = false)}
             >
-              PM
+              {$app.translate('PM')}
             </button>
           </div>
         )}
@@ -185,7 +187,7 @@ export default function AppPopup() {
           class="sx__time-picker-action sx__ripple sx__button-cancel"
           onClick={() => ($app.timePickerState.isOpen.value = false)}
         >
-          Cancel
+          {$app.translate('Cancel')}
         </button>
 
         <button
@@ -194,7 +196,7 @@ export default function AppPopup() {
           class="sx__time-picker-action sx__ripple sx__button-accept"
           onClick={handleAccept}
         >
-          OK
+          {$app.translate('OK')}
         </button>
       </div>
     </div>

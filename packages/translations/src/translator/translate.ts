@@ -14,6 +14,7 @@ export const translate =
     }
     const deHyphenatedLocale = locale.value.replaceAll('-', '')
     const language = languages.value[deHyphenatedLocale]
+
     if (!language) return key
 
     let translation: string = language[key as keyof typeof language] || key
