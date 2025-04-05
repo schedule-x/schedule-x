@@ -6,6 +6,8 @@ import { Language } from '@schedule-x/shared/src/types/translations/language.tra
 export const translate =
   (locale: Signal<string>, languages: Signal<Record<string, Language>>) =>
   (key: string, translationVariables?: TranslationVariables): string => {
+    console.log(locale.value)
+
     if (
       !/^[a-z]{2}-[A-Z]{2}$/.test(locale.value) &&
       'sr-Latn-RS' !== locale.value
@@ -14,9 +16,13 @@ export const translate =
     }
     const deHyphenatedLocale = locale.value.replaceAll('-', '')
     const language = languages.value[deHyphenatedLocale]
+    console.log(language)
+
     if (!language) return key
 
     let translation: string = language[key as keyof typeof language] || key
+
+    console.log(translation)
 
     Object.keys(translationVariables || {}).forEach((variable) => {
       const value = String(translationVariables?.[variable])
