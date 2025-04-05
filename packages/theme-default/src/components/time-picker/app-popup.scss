@@ -49,6 +49,11 @@
   .sx__time-picker-time-inputs {
     display: flex;
     gap: var(--sx-spacing-padding2);
+
+    [dir=rtl] & {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
   }
 
   .sx__time-picker-colon {
