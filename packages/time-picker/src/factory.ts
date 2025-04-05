@@ -2,6 +2,8 @@ import { TimePickerConfigExternal } from './types/time-picker-config'
 import TimePickerApp from './time-picker.app'
 import { computed, effect, signal } from '@preact/signals'
 import { TimePickerState } from './types/time-picker-state'
+import { TranslateFn } from '@schedule-x/shared/src/types/translations'
+import { TimePickerAppContext } from './types/time-picker-app.context'
 
 const getTimePickerState = (
   config: TimePickerConfigExternal,
@@ -50,8 +52,9 @@ const getTimePickerState = (
 }
 
 export const createTimePickerAppContext = (
-  config: TimePickerConfigExternal = {}
-) => ({
+  config: TimePickerConfigExternal = {},
+  translateFn: TranslateFn
+): TimePickerAppContext => ({
   config: {
     onEscapeKeyDown: signal(config.onEscapeKeyDown ?? undefined),
     dark: signal(config.dark ?? false),
@@ -62,8 +65,12 @@ export const createTimePickerAppContext = (
     name: signal(config.name ?? ''),
   },
   timePickerState: getTimePickerState(config, config.is12Hour ?? false),
+  translate: translateFn,
 })
 
-export const createTimePicker = (config: TimePickerConfigExternal = {}) => {
-  return new TimePickerApp(createTimePickerAppContext(config))
+export const createTimePicker = (
+  config: TimePickerConfigExternal = {},
+  translateFn: TranslateFn
+) => {
+  return new TimePickerApp(createTimePickerAppContext(config, translateFn))
 }

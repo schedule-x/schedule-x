@@ -1,13 +1,13 @@
 @mixin input-label {
   position: absolute;
   top: 0;
-  left: 21px; // align with input padding
+  inset-inline-start: 12px; // align with input padding
   padding: 0 var(--sx-spacing-padding1);
   background-color: var(--sx-color-background);
   font-size: 0.75rem;
   color: var(--sx-color-neutral);
   line-height: 1rem;
-  transform: translateY(-50%) translateX(-0.5rem);
+  transform: translateY(-50%);
   transition: transform 0.2s ease-in-out;
   pointer-events: none;
 }
