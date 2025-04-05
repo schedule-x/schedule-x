@@ -50,7 +50,7 @@
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-image": "^3.0.2",
     "@rollup/plugin-node-resolve": "^16.0.0",
-    "@schedule-x/eslint-config": "^1.12.2",
+    "@schedule-x/eslint-config": "^2.0.0",
     "@schedule-x/prettier-config": "^1.12.2",
     "@testing-library/preact": "^3.2.3",
     "@types/jsdom": "^21.1.1",
