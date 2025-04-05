@@ -95,5 +95,14 @@
       "sidebar": false,
       "toc": false
     }
+  },
+  "terms-and-conditions": {
+    "display": "hidden",
+    "title": "Terms and conditions",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
   }
 }
