@@ -9,7 +9,7 @@ import { AppContext } from '../../utils/stateful/app-context'
 import AppPopup from '../app-popup'
 import { assertElementType } from '../../../../../libs/assertions/src'
 import { afterEach, vi } from 'vitest'
-import { translate, translations } from '@schedule-x/translations'
+import { translate, translations } from '@schedule-x/translations/src'
 import { signal } from '@preact/signals'
 
 describe('Time picker popup', () => {
