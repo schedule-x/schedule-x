@@ -60,7 +60,7 @@
     "cypress": "12.17.4",
     "cypress-visual-regression": "3.0.0",
     "eslint": "^9.22.0",
-    "eslint-import-resolver-typescript": "^3.8.7",
+    "eslint-import-resolver-typescript": "^4.0.0",
     "eslint-plugin-boundaries": "^5.0.1",
     "globals": "^16.0.0",
     "husky": "^9.0.0",
