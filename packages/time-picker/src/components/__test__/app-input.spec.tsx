@@ -9,15 +9,19 @@ import AppInput from '../app-input'
 import { createTimePickerAppContext } from '../../factory'
 import { AppContext } from '../../utils/stateful/app-context'
 import { assertElementType } from '../../../../../libs/assertions/src'
+import { translate, translations } from '@schedule-x/translations'
+import { signal } from '@preact/signals'
 
 describe('The time picker input (readonly, value display field)', () => {
+  const translateFn = translate(signal('en-US'), signal(translations))
+
   afterEach(() => {
     cleanup()
   })
 
   describe('rendering with default config', () => {
     it('should render the input field with the correct label', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       render(
         <AppContext.Provider value={$app}>
           <AppInput />
@@ -32,7 +36,10 @@ describe('The time picker input (readonly, value display field)', () => {
 
   describe('rendering with a custom label', () => {
     it('should render the input field with the correct label', () => {
-      const $app = createTimePickerAppContext({ label: 'Custom Label' })
+      const $app = createTimePickerAppContext(
+        { label: 'Custom Label' },
+        translateFn
+      )
       render(
         <AppContext.Provider value={$app}>
           <AppInput />
@@ -47,7 +54,7 @@ describe('The time picker input (readonly, value display field)', () => {
 
   describe('rendering the input name', () => {
     it('should render with the default name', () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       render(
         <AppContext.Provider value={$app}>
           <AppInput />
@@ -60,7 +67,10 @@ describe('The time picker input (readonly, value display field)', () => {
     })
 
     it('should render the input field with the correct name', () => {
-      const $app = createTimePickerAppContext({ name: 'custom-name' })
+      const $app = createTimePickerAppContext(
+        { name: 'custom-name' },
+        translateFn
+      )
       render(
         <AppContext.Provider value={$app}>
           <AppInput />
@@ -75,7 +85,7 @@ describe('The time picker input (readonly, value display field)', () => {
 
   describe('when the popup is opened', () => {
     it('should add the active class to the wrapper', async () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       render(
         <AppContext.Provider value={$app}>
           <AppInput />
@@ -94,7 +104,7 @@ describe('The time picker input (readonly, value display field)', () => {
 
   describe('opening the popup', () => {
     it('should open the popup but not set wrapperElement when the input is focused, if no teleport is defined', async () => {
-      const $app = createTimePickerAppContext()
+      const $app = createTimePickerAppContext({}, translateFn)
       render(
         <AppContext.Provider value={$app}>
           <AppInput />
@@ -112,7 +122,10 @@ describe('The time picker input (readonly, value display field)', () => {
     })
 
     it('should open the popup and set wrapperElement when the input is focused, if teleport is defined', async () => {
-      const $app = createTimePickerAppContext({ teleportTo: document.body })
+      const $app = createTimePickerAppContext(
+        { teleportTo: document.body },
+        translateFn
+      )
       $app.config.teleportTo.value = document.body
       render(
         <AppContext.Provider value={$app}>
