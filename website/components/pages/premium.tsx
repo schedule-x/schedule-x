@@ -282,65 +282,71 @@ export default function PremiumPage() {
               price={yearlyPricing}
               isPriceYearly
               data={{
-                  title: 'Yearly plan',
-                  description: 'License for one year, with support and updates',
-                  variants: yearlyVariants,
-                  features: [
-                    'All products',
-                    'Email support',
-                    'Prioritized issue processing',
-                  ],
-                  buttonText: 'Start 14-day trial'
-                }}
-                buttonClass={'filled'}
-                onSelectVariant={(value) => setSelectedVariantYearly(value)}
-                licenseType={'yearly'}
-              />
+                title: 'Yearly plan',
+                description: 'License for one year, with support and updates',
+                variants: yearlyVariants,
+                features: [
+                  'All products',
+                  'Email support',
+                  'Prioritized issue processing',
+                ],
+                buttonText: 'Start 14-day trial'
+              }}
+              buttonClass={'filled'}
+              onSelectVariant={(value) => setSelectedVariantYearly(value)}
+              licenseType={'yearly'}
+            />
 
-              <PricingCard
-                startCheckout={startCheckout}
-                price={lifetimePricing}
-                isPriceYearly={false}
-                data={{
-                  title: 'Lifetime license',
-                  description: 'Perpetual license, with 1 year of support and updates',
-                  variants: lifetimeVariants,
-                  features: [
-                    'All products',
-                    'Email support',
-                    'Prioritized issue processing',
-                  ],
-                  buttonText: 'Buy now'
-                }}
-                buttonClass={'filled'}
-                onSelectVariant={(value) => setSelectedVariantLifetime(value)}
-                licenseType={'lifetime'}
-              />
+            <PricingCard
+              startCheckout={startCheckout}
+              price={lifetimePricing}
+              isPriceYearly={false}
+              data={{
+                title: 'Lifetime license',
+                description: 'Perpetual license, with 1 year of support and updates',
+                variants: lifetimeVariants,
+                features: [
+                  'All products',
+                  'Email support',
+                  'Prioritized issue processing',
+                ],
+                buttonText: 'Buy now'
+              }}
+              buttonClass={'filled'}
+              onSelectVariant={(value) => setSelectedVariantLifetime(value)}
+              licenseType={'lifetime'}
+            />
 
-              <SalesCard
-                data={{
-                  title: 'Enterprise',
-                  description: 'All products, plus service and custom plugins',
-                  features: [
-                    'All products',
-                    'Service Level Agreement',
-                    'Custom-made plugins',
-                    'Private chat support',
-                    'Prioritized issue processing',
-                  ],
-                  buttonText: 'Get in touch'
-                }}
-                buttonLink={'https://docs.google.com/forms/d/e/1FAIpQLSfE0G6RCUbnzbEUCMGEKcfUGx6XprAPU_IGRxNZ2UajizU7SA/viewform?usp=sf_link'}
-                buttonClass={'black'}
-              />
-            </div>
-          </section>
+            <SalesCard
+              data={{
+                title: 'Enterprise',
+                description: 'All products, plus service and custom plugins',
+                features: [
+                  'All products',
+                  'Service Level Agreement',
+                  'Custom-made plugins',
+                  'Private chat support',
+                  'Prioritized issue processing',
+                ],
+                buttonText: 'Get in touch'
+              }}
+              buttonLink={'https://docs.google.com/forms/d/e/1FAIpQLSfE0G6RCUbnzbEUCMGEKcfUGx6XprAPU_IGRxNZ2UajizU7SA/viewform?usp=sf_link'}
+              buttonClass={'black'}
+            />
+          </div>
 
-          <section className={'faq'}>
-            <h2 className={'premiumSectionHeading heading-font'}>FAQ</h2>
+          <p style={{ color: 'gray', margin: '0 2rem', textAlign: 'center' }}>The following&nbsp;
+            <Link href={'/terms-and-conditions'} style={{ textDecoration: 'underline' }}>
+              terms and conditions
+            </Link> apply to all license models.
+          </p>
+        </section>
 
-            <Accordion style={{ width: '100%', maxWidth: '950px' }}>
-              <Accordion.Panel header="Can I use the license commercially?" defaultExpanded>
+        <section className={'faq'}>
+          <h2 className={'premiumSectionHeading heading-font'}>FAQ</h2>
+
+          <Accordion style={{ width: '100%', maxWidth: '950px' }}>
+            <Accordion.Panel header="Can I use the license commercially?" defaultExpanded>
                 <i>Yes, you can.</i> Use it whatever way you see fit, except reselling the Schedule-X premium source code
                 as if it was your own product.
               </Accordion.Panel>
