@@ -41,7 +41,7 @@
     "@sx-premium/sidebar": "^3.8.0",
     "@uiw/codemirror-theme-github": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
-    "framer-motion": "^11.3.30",
+    "framer-motion": "^12.0.0",
     "mongodb": "^6.8.0",
     "next": "^15.0.0",
     "nextra": "2.13.4",
