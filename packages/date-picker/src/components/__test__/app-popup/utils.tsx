@@ -6,10 +6,12 @@ import { createAppSingleton } from '../../../factory'
 
 export const renderComponent = (
   placement?: Placement,
-  onEscapeKeyDown?: () => void
+  onEscapeKeyDown?: () => void,
+  teleportTo?: HTMLElement
 ) => {
   const app = createAppSingleton({
     placement,
+    teleportTo,
     locale: 'en-US',
     listeners: {
       onEscapeKeyDown,

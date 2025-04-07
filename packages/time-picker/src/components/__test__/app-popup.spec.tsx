@@ -167,4 +167,51 @@ describe('Time picker popup', () => {
       expect(onEscapeKeyDown).toHaveBeenCalled()
     })
   })
+
+  describe('placement of the popup', () => {
+    it('should by default have bottom-start placement', () => {
+      const $app = createTimePickerAppContext({}, translateFn)
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+      const popup = document.querySelector('.sx__time-picker-popup')
+      assertElementType<HTMLElement>(popup, HTMLElement)
+      expect(popup.classList.contains('bottom-start')).toBe(true)
+    })
+
+    it('should not have any placement class if teleportTo is set', () => {
+      const $app = createTimePickerAppContext(
+        { teleportTo: document.body },
+        translateFn
+      )
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+      const popup = document.querySelector('.sx__time-picker-popup')
+      assertElementType<HTMLElement>(popup, HTMLElement)
+      expect(popup.classList.contains('bottom-start')).toBe(false)
+      expect(popup.classList.contains('top-start')).toBe(false)
+      expect(popup.classList.contains('bottom-end')).toBe(false)
+      expect(popup.classList.contains('top-end')).toBe(false)
+    })
+
+    it('should configure placement to bottom-end', () => {
+      const $app = createTimePickerAppContext(
+        { placement: 'bottom-end' },
+        translateFn
+      )
+      render(
+        <AppContext.Provider value={$app}>
+          <AppPopup />
+        </AppContext.Provider>
+      )
+      const popup = document.querySelector('.sx__time-picker-popup')
+      assertElementType<HTMLElement>(popup, HTMLElement)
+      expect(popup.classList.contains('bottom-end')).toBe(true)
+    })
+  })
 })
