@@ -71,6 +71,12 @@ describe('AppPopup', () => {
     }
   )
 
+  it('should not add a placement class if teleportTo is set', () => {
+    renderComponent(Placement.BOTTOM_START, undefined, document.body)
+    const popup = screen.getByTestId('date-picker-popup')
+    expect(popup.classList.contains(Placement.BOTTOM_START)).toBe(false)
+  })
+
   it('should close when pressing escape', () => {
     const { app } = renderComponent()
     app.datePickerState.isOpen.value = true

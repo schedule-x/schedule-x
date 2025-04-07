@@ -1,6 +1,6 @@
 import TimeInput from './time-input'
 import { AppContext } from '../utils/stateful/app-context'
-import { useContext, useRef } from 'preact/compat'
+import { useContext, useMemo, useRef } from 'preact/compat'
 import { useEffect, useState } from 'preact/hooks'
 import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
 import { convert12HourTo24HourTimeString } from '../utils/stateless/convert-time-strings'
@@ -13,17 +13,17 @@ export default function AppPopup() {
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
   const OKButtonRef = useRef<HTMLButtonElement>(null)
-  const [classList, setClassList] = useState([
-    POPUP_CLASS_NAME,
-    $app.config.placement,
-  ])
 
-  useEffect(() => {
-    setClassList([
+  const classList = useMemo(() => {
+    const returnValue = [
       POPUP_CLASS_NAME,
-      $app.config.placement,
       $app.config.dark.value ? 'is-dark' : '',
-    ])
+    ]
+    if (!$app.config.teleportTo.value && $app.config.placement.value) {
+      returnValue.push($app.config.placement.value)
+    }
+
+    return returnValue
   }, [$app.config.dark.value, $app.config.placement.value])
 
   const getInitialStart12Hour = (hours: string) => {

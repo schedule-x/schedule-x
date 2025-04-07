@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useEffect, useMemo, useState } from 'preact/hooks'
 import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/date-picker-view.enum'
 import MonthView from './month-view'
 import YearsView from './years-view'
@@ -14,16 +14,22 @@ export default function AppPopup() {
     DatePickerView.MONTH_DAYS
   )
 
-  const basePopupClasses = [POPUP_CLASS_NAME, $app.config.placement]
-  const [classList, setClassList] = useState(basePopupClasses)
-
-  useEffect(() => {
-    setClassList([
-      ...basePopupClasses,
+  const classList = useMemo(() => {
+    const returnValue = [
+      POPUP_CLASS_NAME,
       $app.datePickerState.isDark.value ? 'is-dark' : '',
       $app.config.teleportTo ? 'is-teleported' : '',
-    ])
-  }, [$app.datePickerState.isDark.value])
+    ]
+    if ($app.config.placement && !$app.config.teleportTo) {
+      returnValue.push($app.config.placement)
+    }
+
+    return returnValue
+  }, [
+    $app.datePickerState.isDark.value,
+    $app.config.placement,
+    $app.config.teleportTo,
+  ])
 
   const clickOutsideListener = (event: Event) => {
     const target = event.target as HTMLElement
