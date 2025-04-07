@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.2](https://github.com/schedule-x/schedule-x/compare/v2.27.1...v2.27.2) (2025-04-07)
+
+**Note:** Version bump only for package @schedule-x/ical
+
 ## [2.27.1](https://github.com/schedule-x/schedule-x/compare/v2.27.0...v2.27.1) (2025-04-07)
 
 **Note:** Version bump only for package @schedule-x/ical

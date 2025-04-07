@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.2](https://github.com/schedule-x/schedule-x/compare/v2.27.1...v2.27.2) (2025-04-07)
+
+### Bug Fixes
+
+- popup positions when teleported ([#1015](https://github.com/schedule-x/schedule-x/issues/1015)) ([9b27843](https://github.com/schedule-x/schedule-x/commit/9b27843a6cb6b03ff4ee860cc4f387db2f9da545))
+
 ## [2.27.1](https://github.com/schedule-x/schedule-x/compare/v2.27.0...v2.27.1) (2025-04-07)
 
 ### Bug Fixes
