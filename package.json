@@ -64,7 +64,7 @@
     "eslint-plugin-boundaries": "^5.0.1",
     "globals": "^16.0.0",
     "husky": "^9.0.0",
-    "jsdom": "^25.0.0",
+    "jsdom": "^26.0.0",
     "lerna": "8.2.1",
     "minimist": "^1.2.8",
     "prettier": "^3.0.0",
