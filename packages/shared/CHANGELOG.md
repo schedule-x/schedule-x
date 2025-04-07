@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.1](https://github.com/schedule-x/schedule-x/compare/v2.27.0...v2.27.1) (2025-04-07)
+
+### Bug Fixes
+
+- **time-picker:** add missing translations ([#1009](https://github.com/schedule-x/schedule-x/issues/1009)) ([f7c2b52](https://github.com/schedule-x/schedule-x/commit/f7c2b52bdf1d3c0deed7d826ad40d8730c2ec147))
+
 # [2.27.0](https://github.com/schedule-x/schedule-x/compare/v2.26.0...v2.27.0) (2025-04-04)
 
 ### Features

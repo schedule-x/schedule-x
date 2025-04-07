@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.1](https://github.com/schedule-x/schedule-x/compare/v2.27.0...v2.27.1) (2025-04-07)
+
+### Bug Fixes
+
+- month grid and time picker in rtl ([#1008](https://github.com/schedule-x/schedule-x/issues/1008)) ([2c82386](https://github.com/schedule-x/schedule-x/commit/2c823860c4adb3fd62b0e43bd9d5101166e57f9d))
+
 # [2.27.0](https://github.com/schedule-x/schedule-x/compare/v2.26.0...v2.27.0) (2025-04-04)
 
 ### Features
