@@ -6,58 +6,55 @@ export default function CustomFooter() {
 
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', maxWidth: '1440px', margin: '0 auto' }}>
         <div>
-          {/*{path === '/' && (*/}
-          {/*  <div style={{ marginBottom: '1em' }}*/}
-          {/*       className="footer-theme-switch nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">*/}
-          {/*    <ThemeSwitch/>*/}
-          {/*  </div>*/}
-          {/*)}*/}
-
           <div
             style={{ marginBottom: '1em' }}
-            className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">©
+            className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">©
             2023-present
           </div>
 
           <div
             style={{ marginBottom: '1em' }}
-            className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-justify-center nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
+            className="nx-mx-auto nx-flex nx-max-w-[90rem] nx-text-gray-600 dark:nx-text-gray-400 md:nx-justify-start nx-pl-[max(env(safe-area-inset-left),1.5rem)] nx-pr-[max(env(safe-area-inset-right),1.5rem)]">
             Tom Österlund, Schedule-X
           </div>
         </div>
 
-        <div className={'footer-links'}>
+        <div className={'footer-links'} style={{ marginInlineEnd: '2em' }}>
+          <h3 style={{ fontWeight: 600, marginBottom: '0.75em' }}>Company</h3>
+
           <div
-            style={{ marginBottom: '1em', textDecoration: 'underline' }}>
+            style={{ marginBottom: '0.75em', textDecoration: 'underline' }}>
             <a href="/newsletter">Newsletter</a>
           </div>
 
           <div
-            style={{ marginBottom: '1em', textDecoration: 'underline' }}>
+            style={{ marginBottom: '0.75em', textDecoration: 'underline' }}>
             <a href="/imprint">Imprint</a>
           </div>
 
           <div
-            style={{ marginBottom: '1em', textDecoration: 'underline' }}>
-            <a href="/attributions">Attributions</a>
+            style={{ marginBottom: '0.75em', textDecoration: 'underline' }}>
+            <a href="/procurement">Procurement</a>
+          </div>
+        </div>
+
+        <div className={'footer-links'}>
+          <h3 style={{ fontWeight: 600, marginBottom: '0.75em' }}>Resources</h3>
+
+          <div
+            style={{ marginBottom: '0.75em', textDecoration: 'underline' }}>
+            <a href="/affiliate-program">Affiliate program</a>
           </div>
 
           <div
-            style={{ marginBottom: '1em', textDecoration: 'underline' }}>
-            <a href="/affiliate-program">Affiliate program</a>
+            style={{ marginBottom: '0.75em', textDecoration: 'underline' }}>
+            <a href="/attributions">Attributions</a>
           </div>
 
           <div
             style={{ textDecoration: 'underline' }}>
             <a href="/privacy">Privacy policy</a>
           </div>
-
-          {/*<div*/}
-          {/*  style={{ textDecoration: 'underline' }}>*/}
-          {/*  <a href="javascript:document.dispatchEvent(new Event('cookie_consent_show'))">*/}
-          {/*    Show Cookie Settings*/}
-          {/*  </a>*/}
-          {/*</div>*/}
         </div>
       </div>
     </footer>

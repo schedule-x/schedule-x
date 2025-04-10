@@ -104,5 +104,14 @@
       "sidebar": false,
       "toc": false
     }
+  },
+  "procurement": {
+    "display": "hidden",
+    "title": "Procurement",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "toc": false
+    }
   }
 }
