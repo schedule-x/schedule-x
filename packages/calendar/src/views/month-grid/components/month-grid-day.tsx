@@ -155,6 +155,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
     monthGridDateCustomComponent(dateEl, {
       date: toJSDate(day.date).getDate(),
+      jsDate: toJSDate(day.date),
     })
   }, [day])
 

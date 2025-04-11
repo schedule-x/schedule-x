@@ -44,9 +44,11 @@ describe('custom month grid day name', () => {
         const callFirstArgument = customComponentFn.mock.calls[index][0]
         const callSecondArgument = customComponentFn.mock.calls[index][1] as {
           date: number
+          jsDate: Date
         }
         expect(callFirstArgument instanceof HTMLElement).toBe(true)
         expect(callSecondArgument.date).toBe(date)
+        expect(callSecondArgument.jsDate).toBeInstanceOf(Date)
       })
     })
   })
