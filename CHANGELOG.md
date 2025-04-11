@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.28.0](https://github.com/schedule-x/schedule-x/compare/v2.27.2...v2.28.0) (2025-04-11)
+
+### Features
+
+- **calendar:** add jsDate prop to monthGridDate custom component ([#1021](https://github.com/schedule-x/schedule-x/issues/1021)) ([03ad860](https://github.com/schedule-x/schedule-x/commit/03ad860f3a33966a439a82f67a710c957b14ca5f))
+
 ## [2.27.2](https://github.com/schedule-x/schedule-x/compare/v2.27.1...v2.27.2) (2025-04-07)
 
 ### Bug Fixes
