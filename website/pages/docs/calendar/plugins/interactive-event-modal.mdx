@@ -224,8 +224,16 @@ type InputFieldWithValidation<T extends undefined | string | string[]> =
 
 type CustomInputField<T extends undefined | string | string[]> =
   InputFieldWithValidation<T> & {
-    type: 'text' | 'select' | 'textarea' | 'combobox' | 'combobox-multi'
+    type: 'text' | 'select' | 'textarea' | 'combobox' | 'combobox-multi' | 'any'
     items?: SelectItem[]
+
+    // paired together with 'any' type, allows you to use any Preact-component as input.
+    // this is useful for anyone who needs to use a custom input component, like a rich text editor or a media upload.
+    InputComponent?: (
+      props: InputField<T> & {
+        initialValue: T
+      }
+    ) => JSX.Element
   }
 
 type ValidationResult = {
