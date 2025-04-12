@@ -66,6 +66,12 @@ const drawPlugin = createDrawPlugin({
     // do something, like saving the event to the server
   },
 
+  // (Optional) callback that runs on mouseup after drawing an event, before calling onFinishDrawing
+  onBeforeFinishDrawing: (event) => {
+    // do something, like validating the event
+    // return false to remove the event, and true to keep it
+  },
+
   // (Optional) configure the intervals, in minutes, at which a time grid-event can be drawn. Valid values: 15, 30, 60
   snapDuration: 30
 })
