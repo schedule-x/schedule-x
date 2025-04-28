@@ -46,6 +46,7 @@ export const dateFormatLocalizedRules = new Map<string, DateFormatRule>([
   ['et-EE', formatRules.periodDMY],
   ['fi-FI', formatRules.periodDMY],
   ['fr-FR', formatRules.slashDMY],
+  ['fr-CH', formatRules.periodDMY],
   ['hr-HR', formatRules.periodDMY],
   ['id-ID', formatRules.slashDMY],
   ['it-IT', formatRules.slashDMY],
