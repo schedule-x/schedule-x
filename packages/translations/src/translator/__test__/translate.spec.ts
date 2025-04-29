@@ -53,6 +53,16 @@ describe('translate', () => {
     expect(underTest(key)).toEqual(french[key])
   })
 
+  it('should return the key if the locale is fr-CH', () => {
+    const locale = signal('fr-CH')
+    const key = 'Today'
+    const frenchSwiss = stubInterface<Language>()
+    const languages = { frCH: frenchSwiss }
+    const underTest = translate(locale, signal(languages))
+
+    expect(underTest(key)).toEqual(frenchSwiss[key])
+  })
+
   it('should return key if locale is supported, but key does not exist', () => {
     const locale = signal('en-US')
     const key = 'Month'
