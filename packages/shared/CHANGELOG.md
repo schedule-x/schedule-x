@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.29.0](https://github.com/schedule-x/schedule-x/compare/v2.28.0...v2.29.0) (2025-04-29)
+
+### Features
+
+- add fr-CH translation ([#1032](https://github.com/schedule-x/schedule-x/issues/1032)) ([42e9a6e](https://github.com/schedule-x/schedule-x/commit/42e9a6e9c754246f260a26b24a49241e04c487c0))
+
 # [2.28.0](https://github.com/schedule-x/schedule-x/compare/v2.27.2...v2.28.0) (2025-04-11)
 
 **Note:** Version bump only for package @schedule-x/shared
