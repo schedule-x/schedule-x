@@ -18,10 +18,24 @@ npm i @schedule-x/drag-and-drop
 ```js
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 
-const calendar = createCalendar(
-  { /* other configuration */ },
-  [createDragAndDropPlugin()]
-)
+const calendar = createCalendar({
+  /* other configuration */
+  plugins: [
+    createDragAndDropPlugin()
+  ],
+
+  callbacks: {
+    onEventUpdate(updatedEvent) {
+      console.log('onEventUpdate', updatedEvent)
+    },
+
+    // (Optionally) run your validation or side effects
+    // return false to stop the update, and true to allow it
+    onBeforeEventUpdate(oldEvent, newEvent, $app) {
+      return false
+    }
+  }
+})
 ```
 
 ## Configuration
