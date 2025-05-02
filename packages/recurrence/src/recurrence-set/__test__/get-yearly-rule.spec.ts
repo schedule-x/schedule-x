@@ -43,6 +43,48 @@ describe('Getting yearly recurrences', () => {
         },
       ])
     })
+    it('should generate yearly recurrences from 2025 excluding 2026', () => {
+      const rset = new RecurrenceSet({
+        rrule: 'FREQ=YEARLY;COUNT=6',
+        dtstart: '20250202',
+        dtend: '20250202',
+        exdate: ['20260202'],
+      })
+
+      const expectedRecurrences = [
+        {
+          start: '2025-02-02',
+          end: '2025-02-02',
+        },
+        {
+          start: '2027-02-02',
+          end: '2027-02-02',
+        },
+        {
+          start: '2028-02-02',
+          end: '2028-02-02',
+        },
+        {
+          start: '2029-02-02',
+          end: '2029-02-02',
+        },
+        {
+          start: '2030-02-02',
+          end: '2030-02-02',
+        },
+      ]
+
+      const excluded = {
+        start: '2026-02-02',
+        end: '2026-02-02',
+      }
+
+      const recurrences = rset.getRecurrences()
+
+      expect(recurrences).toEqual(expectedRecurrences)
+      expect(recurrences).toHaveLength(5)
+      expect(recurrences).not.toContainEqual(excluded)
+    })
   })
 
   describe('Using FREQ, UNTIL and INTERVAL', () => {
@@ -74,6 +116,34 @@ describe('Getting yearly recurrences', () => {
         },
       ]
       expect(recurrences).toEqual(expectedRecurrences)
+    })
+    it('should get every third year for 6 years, excluding 2028-05-02', () => {
+      const rset = new RecurrenceSet({
+        rrule: 'FREQ=YEARLY;UNTIL=20310502T150000;INTERVAL=3',
+        dtstart: '20250502T150000',
+        dtend: '20250502T150500',
+        exdate: ['20280502T150000'],
+      })
+
+      const recurrences = rset.getRecurrences()
+
+      const expectedRecurrences = [
+        {
+          start: '2025-05-02 15:00',
+          end: '2025-05-02 15:05',
+        },
+        {
+          start: '2031-05-02 15:00',
+          end: '2031-05-02 15:05',
+        },
+      ]
+
+      expect(recurrences).toEqual(expectedRecurrences)
+      expect(recurrences).toHaveLength(2)
+      expect(recurrences).not.toContainEqual({
+        start: '2028-05-02 15:00',
+        end: '2028-05-02 15:05',
+      })
     })
   })
 })

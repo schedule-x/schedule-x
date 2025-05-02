@@ -79,6 +79,8 @@ export class EventsFacadeImpl implements EventsFacade {
     const updatedEvent = externalEventToInternal(event, this.$app.config)
     const copiedEvents = [...this.$app.calendarEvents.list.value, updatedEvent]
     const rrule = (updatedEvent as AugmentedEvent)._getForeignProperties().rrule
+    const exdate = (updatedEvent as AugmentedEvent)._getForeignProperties()
+      .exdate as string[] | undefined
     if (
       rrule &&
       typeof rrule === 'string' &&
@@ -89,7 +91,8 @@ export class EventsFacadeImpl implements EventsFacade {
           this.$app,
           updatedEvent,
           rrule,
-          this.$app.calendarState.range.value
+          this.$app.calendarState.range.value,
+          exdate
         )
       )
     }

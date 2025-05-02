@@ -6,29 +6,35 @@ import { addDays } from '@schedule-x/shared/src'
 
 const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   let currentDate = dtstart
+  let currentCount: number = 0
   const allDateTimes: string[] = []
   const bydayNumbers: number[] | undefined =
     rruleOptions.byday?.map(getJSDayFromByday) || undefined
+  const mappedExdate = rruleOptions.exdate
 
   return {
     next() {
       if (
-        !isCountReached(allDateTimes.length, rruleOptions.count) &&
+        !isCountReached(currentCount, rruleOptions.count) &&
         !isDatePastUntil(currentDate, rruleOptions.until)
       ) {
-        if (bydayNumbers) {
-          const dayOfWeek = toJSDate(currentDate).getDay()
-          if (bydayNumbers.includes(dayOfWeek)) {
+        if (!mappedExdate?.has(currentDate)) {
+          if (bydayNumbers) {
+            const dayOfWeek = toJSDate(currentDate).getDay()
+            if (bydayNumbers.includes(dayOfWeek)) {
+              allDateTimes.push(currentDate)
+            }
+          } else {
             allDateTimes.push(currentDate)
           }
-        } else {
-          allDateTimes.push(currentDate)
         }
+
+        currentCount++
       }
 
       if (
         isDatePastUntil(currentDate, rruleOptions.until) ||
-        isCountReached(allDateTimes.length, rruleOptions.count)
+        isCountReached(currentCount, rruleOptions.count)
       ) {
         return { done: true, value: allDateTimes }
       }

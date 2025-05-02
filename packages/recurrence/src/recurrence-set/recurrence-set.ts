@@ -17,23 +17,31 @@ type RecurrenceSetOptions = {
   dtstart: string
   dtend?: string
   rrule: string
+  exdate?: string[] | undefined
 }
 
 export class RecurrenceSet {
   private dtstart: string
   private dtend: string
   private rrule: RRuleOptionsExternal
+  private exdate?: Map<string, boolean> | undefined
 
   constructor(options: RecurrenceSetOptions) {
     this.dtstart = parseRFC5545ToSX(options.dtstart)
     this.dtend = parseRFC5545ToSX(options.dtend || options.dtstart)
     this.rrule = rruleStringToJS(options.rrule)
+    this.exdate = this.mapExdate(options.exdate)
   }
 
   getRecurrences(): Recurrence[] {
     const recurrences: Recurrence[] = []
     recurrences.push(
-      ...new RRule(this.rrule, this.dtstart, this.dtend).getRecurrences()
+      ...new RRule(
+        this.rrule,
+        this.dtstart,
+        this.dtend,
+        this.exdate
+      ).getRecurrences()
     )
 
     return recurrences
@@ -51,6 +59,18 @@ export class RecurrenceSet {
       : addDays(this.dtend!, calculateDaysDifference(oldDtstart, newDtstart))
   }
 
+  private mapExdate(exdate?: string[]): Map<string, boolean> | undefined {
+    if (!exdate?.length) return undefined
+
+    const exdateMap = new Map<string, boolean>()
+
+    exdate.forEach((date) => {
+      exdateMap.set(parseRFC5545ToSX(date), true)
+    })
+
+    return exdateMap
+  }
+
   getRrule() {
     return rruleJSToString(this.rrule)
   }
@@ -61,5 +81,9 @@ export class RecurrenceSet {
 
   getDtend() {
     return parseSXToRFC5545(this.dtend)
+  }
+
+  getExdate() {
+    return this.exdate
   }
 }

@@ -18,11 +18,13 @@ export class RRule {
   constructor(
     options: RRuleOptionsExternal,
     private dtstart: string,
-    dtend?: string
+    dtend?: string,
+    exdate?: Map<string, boolean> | undefined
   ) {
     this.options = {
       ...options,
       interval: options.interval ?? 1,
+      exdate,
     }
 
     const actualDTEND = dtend || dtstart /* RFC5545: #1 */
