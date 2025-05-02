@@ -79,7 +79,7 @@ const sidebar = createSidebarPlugin({
   // Optional: Should there be calendar toggles
   hasCalendarToggles: true,
 
-  // Optional: placeholder events for drag-to-create
+  // Optional: placeholder events for drag-to-create. These can later be updated by calling updatePlaceholderEvents
   placeholderEvents: [
     {
       title: 'Morning brief',
@@ -108,6 +108,14 @@ const sidebar = createSidebarPlugin({
   // Optional: factory function for generating event ids when events are created
   idFactory: () => uuidv4() // or any other id generator
 })
+
+// Update placeholder events
+sidebar.updatePlaceholderEvents([
+  {
+    title: 'event 1',
+    calendarId: 'internal',
+  }
+])
 
 const calendar = createCalendar(
   {

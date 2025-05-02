@@ -70,12 +70,14 @@ resourceConfig.resize.value = true
 resourceConfig.dragAndDrop.value = true
 
 // optionally set the initially displayed columns of the hourly view
+// can be combined with `infiniteScroll.value = false` to achieve a scheduler with fixed columns
 resourceConfig.initialHours.value = new TimeUnits().getDayHoursBetween(
   '2025-03-07 08:00',
   '2025-03-08 02:00'
 )
 
 // optionally set the initially displayed days of the daily view
+// can be combined with `infiniteScroll.value = false` to achieve a scheduler with fixed columns
 resourceConfig.initialDays.value = new TimeUnits().getDaysBetween(
   '2025-03-05',
   '2025-03-20'
