@@ -12,14 +12,12 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
     toJSDate(dtstart).getDay(),
   ]
   let currentDate = dtstart
-  let currentCount: number = 0
   const allDateTimes: string[] = []
   const firstDayOfWeek = (
     rruleOptions.wkst
       ? ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].indexOf(rruleOptions.wkst)
       : 0
   ) as 0 | 1 | 2 | 3 | 4 | 5 | 6
-  const mappedExdate = rruleOptions.exdate
 
   return {
     next() {
@@ -39,16 +37,13 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
           !isCountReached(allDateTimes.length, rruleOptions.count) &&
           !isDatePastUntil(candidate, rruleOptions.until)
         ) {
-          if (!mappedExdate?.has(candidate)) {
-            allDateTimes.push(candidate)
-          }
-          currentCount++
+          allDateTimes.push(candidate)
         }
       })
 
       if (
         isDatePastUntil(currentDate, rruleOptions.until) ||
-        isCountReached(currentCount, rruleOptions.count)
+        isCountReached(allDateTimes.length, rruleOptions.count)
       ) {
         return { done: true, value: allDateTimes }
       }

@@ -9,7 +9,6 @@ export interface RRuleOptions {
   count?: number
   byday?: string[]
   bymonthday?: number
-  exdate?: Map<string, boolean> | undefined
   wkst?: RFC5455Weekday
 }
 

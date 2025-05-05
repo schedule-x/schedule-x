@@ -5,24 +5,19 @@ import { addYears } from '@schedule-x/shared/src/utils/stateless/time/date-time-
 const yearlyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   const allDateTimes: string[] = []
   let currentDate = dtstart
-  let currentCount: number = 0
-  const mappedExdate = rruleOptions.exdate
 
   return {
     next() {
       if (
-        !isCountReached(currentCount, rruleOptions.count) &&
+        !isCountReached(allDateTimes.length, rruleOptions.count) &&
         !isDatePastUntil(currentDate, rruleOptions.until)
       ) {
-        if (!mappedExdate?.has(currentDate)) {
-          allDateTimes.push(currentDate)
-        }
-        currentCount++
+        allDateTimes.push(currentDate)
       }
 
       if (
         isDatePastUntil(currentDate, rruleOptions.until) ||
-        isCountReached(currentCount, rruleOptions.count)
+        isCountReached(allDateTimes.length, rruleOptions.count)
       ) {
         return { done: true, value: allDateTimes }
       }

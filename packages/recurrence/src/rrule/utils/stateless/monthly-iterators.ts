@@ -5,25 +5,20 @@ import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-c
 
 const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
   let currentDate = dtstart
-  let currentCount: number = 0
   const allDateTimes: string[] = []
-  const mappedExdate = options.exdate
 
   return {
     next() {
       if (
-        !isCountReached(currentCount, options.count) &&
+        !isCountReached(allDateTimes.length, options.count) &&
         !isDatePastUntil(currentDate, options.until)
       ) {
-        if (!mappedExdate?.has(currentDate)) {
-          allDateTimes.push(currentDate)
-        }
-        currentCount++
+        allDateTimes.push(currentDate)
       }
 
       if (
         isDatePastUntil(currentDate, options.until) ||
-        isCountReached(currentCount, options.count)
+        isCountReached(allDateTimes.length, options.count)
       ) {
         return { done: true, value: allDateTimes }
       }
