@@ -245,7 +245,7 @@ describe('Getting daily recurrences', () => {
         ])
       })
       it('should return all mondays but one in May 2025', () => {
-        const exdate = ['20250507']
+        const exdate = ['20250512']
         const rset = new RecurrenceSet({
           rrule: 'FREQ=WEEKLY;BYDAY=MO;UNTIL=20250531',
           dtstart: '20250501',
@@ -261,10 +261,6 @@ describe('Getting daily recurrences', () => {
             end: '2025-05-05',
           },
           {
-            start: '2025-05-12',
-            end: '2025-05-12',
-          },
-          {
             start: '2025-05-19',
             end: '2025-05-19',
           },
@@ -278,12 +274,12 @@ describe('Getting daily recurrences', () => {
         expect(recurrences).not.toEqual(
           expect.arrayContaining([
             {
-              start: '2025-05-07',
-              end: '2025-05-07',
+              start: '2025-05-12',
+              end: '2025-05-12',
             },
           ])
         )
-        expect(recurrences.length).toBe(4)
+        expect(recurrences.length).toBe(3)
       })
     })
   })
