@@ -34,17 +34,13 @@ export class RecurrenceSet {
   }
 
   getRecurrences(): Recurrence[] {
-    const recurrences: Recurrence[] = []
-    recurrences.push(
-      ...new RRule(
-        this.rrule,
-        this.dtstart,
-        this.dtend,
-        this.exdate
-      ).getRecurrences()
-    )
+    const recurrences = new RRule(
+      this.rrule,
+      this.dtstart,
+      this.dtend
+    ).getRecurrences()
 
-    return recurrences
+    return this.filterExdate(recurrences)
   }
 
   updateDtstart(newDtstart: string) {
@@ -65,10 +61,28 @@ export class RecurrenceSet {
     const exdateMap = new Map<string, boolean>()
 
     exdate.forEach((date) => {
+      const parsedDate = parseRFC5545ToSX(date)
+
+      /**
+       * If the exdate is the same as the dtstart,
+       * we can't remove it anyways.
+       */
+      if (parsedDate === this.dtstart) {
+        return
+      }
+
       exdateMap.set(parseRFC5545ToSX(date), true)
     })
 
     return exdateMap
+  }
+
+  private filterExdate(recurrences: Recurrence[]): Recurrence[] {
+    if (!this.exdate) return recurrences
+
+    return recurrences.filter(
+      (recurrence) => !this.exdate?.has(recurrence.start)
+    )
   }
 
   getRrule() {
