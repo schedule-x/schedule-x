@@ -71,7 +71,7 @@ export class RecurrenceSet {
         return
       }
 
-      exdateMap.set(parseRFC5545ToSX(date), true)
+      exdateMap.set(parsedDate, true)
     })
 
     return exdateMap
