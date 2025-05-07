@@ -100,5 +100,73 @@ describe('Getting weekly recurrences', () => {
         },
       ])
     })
+    it('should return 4 fridays in May, excluding 2025-05-30', () => {
+      const rset = new RecurrenceSet({
+        rrule: 'FREQ=WEEKLY;BYDAY=FR;UNTIL=20250531',
+        dtstart: '20250501',
+        dtend: '20250501',
+        exdate: ['20250530'],
+      })
+
+      const recurrences = rset.getRecurrences()
+
+      expect(recurrences).toEqual([
+        {
+          start: '2025-05-02',
+          end: '2025-05-02',
+        },
+        {
+          start: '2025-05-09',
+          end: '2025-05-09',
+        },
+        {
+          start: '2025-05-16',
+          end: '2025-05-16',
+        },
+        {
+          start: '2025-05-23',
+          end: '2025-05-23',
+        },
+      ])
+      expect(recurrences).not.toContainEqual({
+        start: '2025-05-30',
+        end: '2025-05-30',
+      })
+      expect(recurrences).toHaveLength(4)
+    })
+  })
+  describe('Using freq, byday and count', () => {
+    it('should return 3 Mondays in May 2025, excluding 2025-05-12', () => {
+      const rset = new RecurrenceSet({
+        rrule: 'FREQ=WEEKLY;BYDAY=MO;COUNT=4',
+        dtstart: '20250501T010000',
+        dtend: '20250501T020000',
+        exdate: ['20250512T010000'],
+      })
+
+      const recurrences = rset.getRecurrences()
+
+      const expectedRecurrences = [
+        {
+          start: '2025-05-05 01:00',
+          end: '2025-05-05 02:00',
+        },
+        {
+          start: '2025-05-19 01:00',
+          end: '2025-05-19 02:00',
+        },
+        {
+          start: '2025-05-26 01:00',
+          end: '2025-05-26 02:00',
+        },
+      ]
+
+      expect(recurrences).toEqual(expectedRecurrences)
+      expect(recurrences).not.toContainEqual({
+        start: '2025-05-12 01:00',
+        end: '2025-05-12 02:00',
+      })
+      expect(recurrences).toHaveLength(3)
+    })
   })
 })

@@ -14,7 +14,8 @@ export const createRecurrencesForEvent = (
   $app: CalendarAppSingleton,
   calendarEvent: CalendarEventInternal,
   rrule: string,
-  range: DateRange
+  range: DateRange,
+  exdate?: string[] | undefined
 ) => {
   // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
   if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
@@ -26,6 +27,7 @@ export const createRecurrencesForEvent = (
     dtstart: parseSXToRFC5545(calendarEvent.start),
     dtend: parseSXToRFC5545(calendarEvent.end),
     rrule,
+    exdate,
   })
 
   return recurrenceSet

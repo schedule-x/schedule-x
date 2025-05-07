@@ -93,10 +93,13 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
     $app.calendarEvents.list.value.forEach((event) => {
       const rrule = event._getForeignProperties().rrule as string | undefined
+      const exdate = event._getForeignProperties().exdate as
+        | string[]
+        | undefined
 
       if (rrule) {
         recurrencesToCreate.push(
-          ...this.createRecurrencesForEvent(event, rrule)
+          ...this.createRecurrencesForEvent(event, rrule, exdate)
         )
       }
     })
@@ -129,7 +132,8 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   private createRecurrencesForEvent(
     calendarEvent: CalendarEventInternal,
-    rrule: string
+    rrule: string,
+    exdate?: string[] | undefined
   ) {
     if (!this.range) {
       console.warn(
@@ -142,7 +146,8 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       this.$app as CalendarAppSingleton,
       calendarEvent,
       rrule,
-      this.range
+      this.range,
+      exdate
     )
   }
 
