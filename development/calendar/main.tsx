@@ -84,7 +84,6 @@ const calendar = createCalendar({
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
   defaultView: 'week',
-  locale: 'he-IL',
   callbacks: {
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
@@ -240,10 +239,17 @@ const calendar = createCalendar({
   },
   events: [
     {
-      title: 'שלום טום',
-      id: 1,
-      start: '2025-03-28',
-      end: '2025-03-28',
+      id: 123,
+      title: 'Weekly event',
+      start: '2024-02-05 14:00',
+      end: '2024-02-05 15:00',
+
+      // will create a recurrence set of 3 events: 2024-02-05 14:00, 2024-02-26 14:00, 2024-03-04 14:00
+      rrule: 'FREQ=WEEKLY;COUNT=5',
+      exdate: [
+        '2024-02-12 14:00',
+        '2024-02-19 14:00'
+      ]
     },
     {
       title: 'שלום טום',
