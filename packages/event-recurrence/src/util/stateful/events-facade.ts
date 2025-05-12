@@ -15,6 +15,9 @@ export class EventsFacadeImpl implements EventsFacade {
       const newEvent = externalEventToInternal(event, this.$app.config)
       newEventsList.push(newEvent)
       const rrule = newEvent._getForeignProperties().rrule
+      const exdate = newEvent._getForeignProperties().exdate as
+        | string[]
+        | undefined
       if (
         rrule &&
         typeof rrule === 'string' &&
@@ -25,7 +28,8 @@ export class EventsFacadeImpl implements EventsFacade {
             this.$app,
             newEvent,
             rrule,
-            this.$app.calendarState.range.value
+            this.$app.calendarState.range.value,
+            exdate
           )
         )
       }
@@ -39,7 +43,9 @@ export class EventsFacadeImpl implements EventsFacade {
     newEvent._createdAt = new Date()
     const newEventsList = [...this.$app.calendarEvents.list.value, newEvent]
     const rrule = newEvent._getForeignProperties().rrule
-
+    const exdate = newEvent._getForeignProperties().exdate as
+      | string[]
+      | undefined
     if (
       rrule &&
       typeof rrule === 'string' &&
@@ -50,7 +56,8 @@ export class EventsFacadeImpl implements EventsFacade {
           this.$app,
           newEvent,
           rrule,
-          this.$app.calendarState.range.value
+          this.$app.calendarState.range.value,
+          exdate
         )
       )
     }
