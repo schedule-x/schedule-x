@@ -155,6 +155,12 @@ const config = {
       return false
     },
 
+    // See docs for "onBeforeEventUpdate"
+    async onBeforeEventUpdateAsync(oldEvent, newEvent, $app) {
+      // run some async validation, like fetching data from an API and then validating
+      return false
+    },
+
     /**
      * Is called when an event is clicked
      * */

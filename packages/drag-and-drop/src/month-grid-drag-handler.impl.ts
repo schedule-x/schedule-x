@@ -73,7 +73,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     })
   }
 
-  private handleDragEnd = () => {
+  private handleDragEnd = async () => {
     this.allDayElements.forEach((el) => {
       el.removeEventListener('dragover', this.handleDragOver)
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
@@ -82,7 +82,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
 
     const updatedEvent = this.createUpdatedEvent()
 
-    const shouldAbort = testIfShouldAbort(
+    const shouldAbort = await testIfShouldAbort(
       this.$app,
       updatedEvent,
       this.originalStart,

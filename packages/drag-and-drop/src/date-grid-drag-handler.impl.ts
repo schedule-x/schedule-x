@@ -115,11 +115,11 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
       `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
   }
 
-  private handleMouseUpOrTouchEnd = () => {
+  private handleMouseUpOrTouchEnd = async () => {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
 
-    const shouldAbort = testIfShouldAbort(
+    const shouldAbort = await testIfShouldAbort(
       this.$app,
       this.eventCopy,
       this.originalStart,

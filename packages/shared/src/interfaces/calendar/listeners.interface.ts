@@ -33,6 +33,13 @@ export interface CalendarCallbacks {
     $app: CalendarAppSingleton
   ) => boolean
 
+  // see docs for onBeforeEventUpdate
+  onBeforeEventUpdateAsync?: (
+    oldEvent: CalendarEventExternal,
+    newEvent: CalendarEventExternal,
+    $app: CalendarAppSingleton
+  ) => Promise<boolean>
+
   /**
    * Receive the updated event after it has been updated by for example drag & drop, resize or the interactive event modal.
    *

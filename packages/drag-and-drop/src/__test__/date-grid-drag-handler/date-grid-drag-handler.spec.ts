@@ -14,6 +14,7 @@ import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calenda
 import DateGridDragHandlerImpl from '../../date-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
 import { deepCloneEvent } from '@schedule-x/shared/src'
+import { waitFor } from '@testing-library/preact'
 
 describe('A calendar with custom, non-hybrid day boundaries', () => {
   let $app: CalendarAppSingleton
@@ -254,6 +255,67 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(originalEvent?.end).toBe('2024-02-25 04:00')
       expect(updateCopyFn).toHaveBeenCalled()
       expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+    })
+  })
+
+  describe('aborting an update via onBeforeEventUpdateAsync', () => {
+    it('should not update the event if the callback returns false', async () => {
+      $app.config.callbacks.onBeforeEventUpdateAsync = async (
+        _oldEvent,
+        _newEvent,
+        $app
+      ) => {
+        return Promise.resolve(false)
+      }
+      $app.config.callbacks.onEventUpdate = vi.fn()
+
+      new DateGridDragHandlerImpl(
+        $app,
+        eventCoordinates,
+        eventCopy,
+        updateCopyFn
+      )
+
+      const mouseMoveEvent = {
+        clientX: eventCoordinates.clientX + 100,
+        clientY: 1000,
+      } as MouseEvent
+      document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      const originalEvent = getEventWithId(eventId, $app)
+      expect(originalEvent?.start).toBe('2024-02-23 03:30')
+      expect(originalEvent?.end).toBe('2024-02-24 04:00')
+      expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
+    })
+
+    it('should update the event if the callback returns true', async () => {
+      $app.config.callbacks.onBeforeEventUpdateAsync = async (
+        _oldEvent,
+        _newEvent,
+        $app
+      ) => {
+        return Promise.resolve(true)
+      }
+      $app.config.callbacks.onEventUpdate = vi.fn()
+
+      new DateGridDragHandlerImpl(
+        $app,
+        eventCoordinates,
+        eventCopy,
+        updateCopyFn
+      )
+
+      const mouseMoveEvent = {
+        clientX: eventCoordinates.clientX + 100,
+        clientY: 1000,
+      } as MouseEvent
+      document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
+      document.dispatchEvent(new MouseEvent('mouseup'))
+
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+      })
     })
   })
 
