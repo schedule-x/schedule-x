@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   it,
@@ -59,6 +60,24 @@ describe('Events facade for recurrence plugin', () => {
       plugin.add(event)
 
       expect($app.calendarEvents.list.value.length).toBe(33)
+    })
+
+    it('should add an event with an exdate', () => {
+      const $app = __createAppWithViews__()
+      const plugin = createEventsServicePlugin()
+      plugin.beforeRender!($app)
+      expect($app.calendarEvents.list.value.length).toBe(0)
+
+      const event = {
+        id: '1',
+        start: '2025-05-01',
+        end: '2025-05-01',
+        rrule: 'FREQ=DAILY;COUNT=10',
+        exdate: ['20250503', '20250508'],
+      }
+      plugin.add(event)
+
+      expect($app.calendarEvents.list.value.length).toBe(8)
     })
   })
 
@@ -212,6 +231,46 @@ describe('Events facade for recurrence plugin', () => {
       })
       expect($app.calendarEvents.list.value.length).toBe(4)
     })
+
+    it('should update an event with an exdate', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '1',
+            title: 'Test Event 1',
+            start: '2025-05-12 14:00',
+            end: '2025-05-12 15:00',
+          },
+        ],
+      })
+      const plugin = createEventsServicePlugin()
+      plugin.beforeRender!($app)
+      expect($app.calendarEvents.list.value.length).toBe(1)
+
+      const event = {
+        id: '2',
+        start: '2025-05-12',
+        end: '2025-05-12',
+        rrule: 'FREQ=DAILY;COUNT=3',
+        exdate: ['20250513', '20250514'],
+      }
+      plugin.add(event)
+      expect($app.calendarEvents.list.value.length).toBe(2)
+
+      plugin.update({
+        id: '1',
+        start: '2025-05-15 19:00',
+        end: '2025-05-15 20:00',
+        rrule: 'FREQ=DAILY;COUNT=10',
+        exdate: [
+          '20250519T190000',
+          '20250523T190000',
+          '20250524T190000',
+          '20250517T190000',
+        ],
+      })
+      expect($app.calendarEvents.list.value.length).toBe(7)
+    })
   })
 
   describe('Setting the whole list of events', () => {
@@ -264,6 +323,41 @@ describe('Events facade for recurrence plugin', () => {
           infiniteEvent,
         ])
       )
+    })
+
+    it('should set the whole list of events with exdate', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2025-05-01',
+      })
+      const plugin = createEventsServicePlugin()
+      plugin.beforeRender!($app)
+      expect($app.calendarEvents.list.value.length).toBe(0)
+
+      const events = [
+        {
+          id: '1',
+          start: '2025-05-01',
+          end: '2025-05-01',
+          rrule: 'FREQ=DAILY;COUNT=5',
+          exdate: ['20250502', '20250503'],
+        },
+        {
+          id: '2',
+          start: '2025-05-02 22:00',
+          end: '2025-05-02 23:00',
+          rrule: 'FREQ=DAILY;COUNT=10',
+          exdate: [
+            '20250509T220000',
+            '20250508T220000',
+            '20250510T220000',
+            '20250511T220000',
+          ],
+        },
+      ]
+
+      plugin.set(events)
+      expect(plugin.getAll()).toHaveLength(2)
+      expect($app.calendarEvents.list.value.length).toBe(9)
     })
   })
 })
