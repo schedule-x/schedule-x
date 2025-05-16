@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.31.0](https://github.com/schedule-x/schedule-x/compare/v2.30.0...v2.31.0) (2025-05-16)
+
+### Bug Fixes
+
+- **event-recurrence:** support add and set exdate in event facade ([#1045](https://github.com/schedule-x/schedule-x/issues/1045)) ([c4ef2b5](https://github.com/schedule-x/schedule-x/commit/c4ef2b56f71569ef7bf3e66189745ac546e63391))
+
 # [2.30.0](https://github.com/schedule-x/schedule-x/compare/v2.29.0...v2.30.0) (2025-05-07)
 
 ### Features
