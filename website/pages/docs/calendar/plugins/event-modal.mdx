@@ -37,29 +37,45 @@ Close the modal programmatically.
 
 ## Customization
 
-If you're using a framework like React, you can customize modal content via passing `customComponents` prop like so:
+If you're using one of the framework adapter components, like for React, you can customize modal content via passing
+`customComponents` prop like so:
 
-```tsx
-<ScheduleXCalendar
-    customComponents={{
-      eventModal: ({ calendarEvent }: { calendarEvent: CalendarEvent }) => {
-        return (
-          <div
-            style={{
-              padding: "40px",
-              background: "yellow",
-              color: "black",
-              borderRadius: "24px",
-              border: "1px solid black",
-              fontSize: "24px",
-              fontWeight: "bold",
-            }}
-          >
-            {calendarEvent.title}
-          </div>
-        );
-      },
-    }}
-    calendarApp={calendar}
-/>
+```tsx copy
+import { useCalendarApp } from '@schedule-x/react'
+import { createEventModalPlugin } from '@schedule-x/event-modal'
+
+const customComponents = {
+  eventModal: ({ calendarEvent }) => {
+    return (
+      <div
+        style={{
+          padding: "40px",
+          background: "yellow",
+          color: "black",
+          borderRadius: "24px",
+          border: "1px solid black",
+          fontSize: "24px",
+          fontWeight: "bold",
+        }}
+      >
+        {calendarEvent.title}
+      </div>
+    );
+  },
+}
+
+function CalendarComponent() {
+  const calendar = useCalendarApp({
+    // ...other configuration
+
+    plugins: [createEventModalPlugin()],
+  })
+
+  return <>
+    <ScheduleXCalendar
+      customComponents={customComponents}
+      calendarApp={calendar}
+    />
+  </>
+}
 ```
