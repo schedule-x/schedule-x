@@ -87,6 +87,13 @@ const dragToCreatePlugin = createDragToCreatePlugin({
   onBeforeAddEvent: (event, $app) => {
     // Your validation logic
     return true
+  },
+
+  // Optional: async version of onBeforeAddEvent
+  onBeforeAddEventAsync: async (event, $app) => {
+    // Your async validation logic
+    // Return false to prevent the event from being added.
+    return true
   }
 })
 

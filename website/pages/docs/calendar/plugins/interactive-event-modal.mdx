@@ -147,10 +147,6 @@ calendar.render(document.getElementById('your-calendar-wrapper'))
 
 ## Public methods
 
-### `openEventCreationModal(id: string | number, start?: string, otherEventProperties?: Partial<CalendarEvent>)`
-
-Method for programmatically opening the event creation modal. The id parameter is used for setting an id of the event that will be created, if the user chooses to click save.
-
 #### Parameters
 - `id` - id of the event that will be created
 - `start` - start date or datetime of the event that will be created
@@ -159,6 +155,16 @@ Method for programmatically opening the event creation modal. The id parameter i
 ### `clickToCreate: (start: string, otherEventProperties?: Partial<CalendarEvent>) => void`
 
 Method for adding an event and opening the event editing modal. Preferably used with the `onDoubleClickDateTime` and `onDoubleClickDate` callbacks, to add events by clicking.
+
+### `openForExistingEvent(id: EventId): void`
+
+Method for opening the modal for an existing event.
+
+### `openEventCreationModal(id: string | number, start?: string, otherEventProperties?: Partial<CalendarEvent>)`
+
+Method for programmatically opening the event creation modal. The id parameter is used for setting an id of the
+event that will be created, if the user chooses to click save. Can for example be used if you implement your own
+"Add event" button.
 
 ## `fields` configuration option
 
