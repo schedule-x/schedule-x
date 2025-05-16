@@ -34,3 +34,32 @@ eventModal.close(); // close the modal
 ### `close`
 
 Close the modal programmatically.
+
+## Customization
+
+If you're using a framework like React, you can customize modal content via passing `customComponents` prop like so:
+
+```tsx
+<ScheduleXCalendar
+    customComponents={{
+      eventModal: ({ calendarEvent }: { calendarEvent: CalendarEvent }) => {
+        return (
+          <div
+            style={{
+              padding: "40px",
+              background: "yellow",
+              color: "black",
+              borderRadius: "24px",
+              border: "1px solid black",
+              fontSize: "24px",
+              fontWeight: "bold",
+            }}
+          >
+            {calendarEvent.title}
+          </div>
+        );
+      },
+    }}
+    calendarApp={calendar}
+/>
+```
