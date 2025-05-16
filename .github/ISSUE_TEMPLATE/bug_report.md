@@ -8,28 +8,28 @@ labels: ""
 Thank you for wanting to take the time to report a problem. In order to increase the chances of the issue being 
 resolved, please take a moment to give as much relevant information as possible.
 
-**Context:**
+**Minimal reproduction environment**
 
-- Browser [e.g. chrome, safari]
-- Browser-version
-- Schedule-X version [e.g. v1.1.0] Please make sure that you've tried the latest version before reporting the bug.
+Please take a moment to set up a reproduction example. Bug reports without a reproduction example will be closed. 
+Many times people find solutions to their problems while setting such examples up. And when there is an actual bug, 
+these examples help a lot for whoever ends up fixing it. For open sourced features, you can use 
+these templates:
+
+- [Vue](https://codesandbox.io/p/sandbox/schedule-x-repro-starter---vue-zct3p6)
+- [React](https://codesandbox.io/p/sandbox/schedule-x-repro-starter---react-zvy4y3)
+
+For premium features, please fork one of the following repositories, add your credentials in `.npmrc` locally, and then 
+push the changes to your own repository. Here it is VERY important that you don't push your credentials, since this 
+will force us to invalidate your token if discovered. Repos to fork:
+
+- [Vue](https://github.com/schedule-x/vue-examples)
+- [React](https://github.com/schedule-x/react-examples)
+- [Angular](https://github.com/schedule-x/angular-examples)
+- [Svelte](https://github.com/schedule-x/svelte-examples)
 
 **Describe the bug**
 
 A clear and concise description of how the bug appears to you.
-
-**To Reproduce**
-
-Please consider setting up a reproduction example, for example on Stackblitz or CodeSandbox.
-This will **greatly** increase the chances of the bug being resolved quickly. Otherwise, please at least provide a
-step-by-step guide on how to reproduce the bug.
-
-Steps to reproduce the behavior:
-
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
 
 **Expected behavior**
 
