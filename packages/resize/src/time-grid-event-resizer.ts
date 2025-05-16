@@ -64,13 +64,15 @@ export class TimeGridEventResizer {
     this.updateCopy(this.eventCopy)
   }
 
-  private handleMouseUp = () => {
-    const onBeforeEventUpdate = this.$app.config.callbacks.onBeforeEventUpdate
+  private handleMouseUp = async () => {
+    const onBeforeEventUpdate =
+      this.$app.config.callbacks.onBeforeEventUpdateAsync ||
+      this.$app.config.callbacks.onBeforeEventUpdate
     if (onBeforeEventUpdate) {
       const oldEvent = this.eventCopy._getExternalEvent()
       oldEvent.end = this.originalEventEnd
       const newEvent = this.eventCopy._getExternalEvent()
-      const validationResult = onBeforeEventUpdate(
+      const validationResult = await onBeforeEventUpdate(
         oldEvent,
         newEvent,
         this.$app

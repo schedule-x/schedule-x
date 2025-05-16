@@ -4,12 +4,13 @@ import {
   expect,
   beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import MonthGridDragHandlerImpl from '../../month-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
 import { vi } from 'vitest'
+import { waitFor } from '@testing-library/preact'
 
 describe('MonthGridDragHandler', () => {
   describe('Dragging an event forwards', () => {
@@ -37,7 +38,7 @@ describe('MonthGridDragHandler', () => {
       calendarEvent = $app.calendarEvents.list.value[0]
     })
 
-    it('should move the event to the next day', () => {
+    it('should move the event to the next day', async () => {
       const fourthOfJanuaryElement = document.createElement('div')
       fourthOfJanuaryElement.classList.add('sx__month-grid-day')
       fourthOfJanuaryElement.dataset.date = '2021-01-04'
@@ -47,8 +48,10 @@ describe('MonthGridDragHandler', () => {
       fourthOfJanuaryElement.dispatchEvent(new MouseEvent('dragover'))
       document.dispatchEvent(new MouseEvent('dragend'))
 
-      expect(calendarEvent.start).toBe('2021-01-04')
-      expect(calendarEvent.end).toBe('2021-01-06')
+      await waitFor(() => {
+        expect(calendarEvent.start).toBe('2021-01-04')
+        expect(calendarEvent.end).toBe('2021-01-06')
+      })
     })
 
     it('should set pointer events to none for other events while dragging, and then back to auto', () => {
@@ -132,7 +135,7 @@ describe('MonthGridDragHandler', () => {
       expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
     })
 
-    it('should update the event if onBeforeEventUpdate returns true', () => {
+    it('should update the event if onBeforeEventUpdate returns true', async () => {
       const $app = __createAppWithViews__({
         events: [
           {
@@ -157,9 +160,11 @@ describe('MonthGridDragHandler', () => {
       fourthOfJanuaryElement.dispatchEvent(new MouseEvent('dragover'))
       document.dispatchEvent(new MouseEvent('dragend'))
 
-      expect(calendarEvent.start).toBe('2021-01-04')
-      expect(calendarEvent.end).toBe('2021-01-06')
-      expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+      await waitFor(() => {
+        expect(calendarEvent.start).toBe('2021-01-04')
+        expect(calendarEvent.end).toBe('2021-01-06')
+        expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+      })
     })
   })
 })

@@ -140,14 +140,14 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     }% + ${totalDaysDiff}px))`
   }
 
-  private handleMouseUpOrTouchEnd = () => {
+  private handleMouseUpOrTouchEnd = async () => {
     document.removeEventListener('mousemove', this.handleMouseOrTouchMove)
     document.removeEventListener('touchmove', this.handleMouseOrTouchMove)
     document.removeEventListener('mouseup', this.handleMouseUpOrTouchEnd)
     document.removeEventListener('touchend', this.handleMouseUpOrTouchEnd)
     this.updateCopy(undefined)
 
-    const shouldAbort = testIfShouldAbort(
+    const shouldAbort = await testIfShouldAbort(
       this.$app,
       this.eventCopy,
       this.originalStart,

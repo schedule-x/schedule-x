@@ -89,6 +89,14 @@ const calendar = createCalendar({
       console.log('onEventUpdate', event)
     },
 
+    async onBeforeEventUpdateAsync(oldEvent, newEvent, $app) {
+        return Promise.resolve(true)
+    },
+
+    // onBeforeEventUpdate(oldEvent, newEvent, $app) {
+    //   return false
+    // },
+
     onEventClick(event, e) {
       console.log('onEventClick', event, e)
     },
@@ -241,8 +249,8 @@ const calendar = createCalendar({
     {
       id: 123,
       title: 'Weekly event',
-      start: '2024-02-05 14:00',
-      end: '2024-02-05 15:00',
+      start: '2025-05-14 14:00',
+      end: '2025-05-14 15:00',
 
       // will create a recurrence set of 3 events: 2024-02-05 14:00, 2024-02-26 14:00, 2024-03-04 14:00
       rrule: 'FREQ=WEEKLY;COUNT=5',
