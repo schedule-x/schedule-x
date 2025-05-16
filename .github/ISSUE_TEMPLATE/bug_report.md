@@ -27,6 +27,8 @@ will force us to invalidate your token if discovered. Repos to fork:
 - [Angular](https://github.com/schedule-x/angular-examples)
 - [Svelte](https://github.com/schedule-x/svelte-examples)
 
+Before posting your report, you can remove all the instructions above and just leave a link to your reproduction example.
+
 **Describe the bug**
 
 A clear and concise description of how the bug appears to you.
