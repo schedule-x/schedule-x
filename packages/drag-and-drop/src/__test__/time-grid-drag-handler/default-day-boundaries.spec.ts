@@ -14,6 +14,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dragEventNQuarters, getEventWithId } from './utils'
 import { deepCloneEvent } from '@schedule-x/shared/src'
+import { waitFor } from '@testing-library/preact'
 
 describe('A calendar with normal day boundaries', () => {
   let $app: CalendarAppSingleton
@@ -67,7 +68,7 @@ describe('A calendar with normal day boundaries', () => {
   })
 
   describe('Dragging an event vertically in the time grid', () => {
-    it('should drag an event to 2 hours later', () => {
+    it('should drag an event to 2 hours later', async () => {
       new TimeGridDragHandlerImpl(
         $app,
         clickEvent,
@@ -81,12 +82,14 @@ describe('A calendar with normal day boundaries', () => {
       dragEventNQuarters(clickEvent, quartersToDrag, 'down')
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 14:00')
-      expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 15:00')
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 14:00')
+        expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 15:00')
+      })
     })
 
-    it('should drag an event to 2 hours and 30 minutes earlier', () => {
+    it('should drag an event to 2 hours and 30 minutes earlier', async () => {
       new TimeGridDragHandlerImpl(
         $app,
         clickEvent,
@@ -100,12 +103,14 @@ describe('A calendar with normal day boundaries', () => {
       dragEventNQuarters(clickEvent, quartersToDrag, 'up')
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 09:30')
-      expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 10:30')
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 09:30')
+        expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 10:30')
+      })
     })
 
-    it('should not be able to drag an event beyond the start of a day', () => {
+    it('should not be able to drag an event beyond the start of a day', async () => {
       eventCopy.start = '2024-02-02 00:30'
       eventCopy.end = '2024-02-02 01:30'
 
@@ -143,18 +148,20 @@ describe('A calendar with normal day boundaries', () => {
       expect(eventCopy.end).toBe('2024-02-02 01:00')
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-02 00:00'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-02 01:00'
-      )
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
+          '2024-02-02 00:00'
+        )
+        expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
+          '2024-02-02 01:00'
+        )
+      })
     })
   })
 
   describe('Dragging an event horizontally in the time grid', () => {
-    it('should drag an event to the next day', () => {
+    it('should drag an event to the next day', async () => {
       new TimeGridDragHandlerImpl(
         $app,
         clickEvent,
@@ -177,16 +184,18 @@ describe('A calendar with normal day boundaries', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-03 12:00'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-03 13:00'
-      )
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
+          '2024-02-03 12:00'
+        )
+        expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
+          '2024-02-03 13:00'
+        )
+      })
     })
 
-    it('should drag an event to the previous day', () => {
+    it('should drag an event to the previous day', async () => {
       new TimeGridDragHandlerImpl(
         $app,
         clickEvent,
@@ -210,16 +219,18 @@ describe('A calendar with normal day boundaries', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-01 12:00'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-01 13:00'
-      )
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
+          '2024-02-01 12:00'
+        )
+        expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
+          '2024-02-01 13:00'
+        )
+      })
     })
 
-    it('should not be able to drag an event beyond the end of the week', () => {
+    it('should not be able to drag an event beyond the end of the week', async () => {
       new TimeGridDragHandlerImpl(
         $app,
         clickEvent,
@@ -279,18 +290,20 @@ describe('A calendar with normal day boundaries', () => {
       )
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-04 12:00'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-04 13:00'
-      )
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
+          '2024-02-04 12:00'
+        )
+        expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
+          '2024-02-04 13:00'
+        )
+      })
     })
   })
 
   describe('dragging an event horizontally when document has rtl direction', () => {
-    it('should drag an event to the next day', () => {
+    it('should drag an event to the next day', async () => {
       $app.config.direction = 'rtl'
       new TimeGridDragHandlerImpl(
         $app,
@@ -314,18 +327,20 @@ describe('A calendar with normal day boundaries', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-        '2024-02-03 12:00'
-      )
-      expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-        '2024-02-03 13:00'
-      )
+      await waitFor(() => {
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
+          '2024-02-03 12:00'
+        )
+        expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
+          '2024-02-03 13:00'
+        )
+      })
     })
   })
 
   describe('aborting an update via onBeforeEventUpdate', () => {
-    it('should abort the update if onBeforeEventUpdate returns false', () => {
+    it('should abort the update if onBeforeEventUpdate returns false', async () => {
       $app.config.callbacks.onBeforeEventUpdate = (
         _oldEvent,
         _newEvent,
@@ -348,13 +363,15 @@ describe('A calendar with normal day boundaries', () => {
       dragEventNQuarters(clickEvent, quartersToDrag, 'down')
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      const originalEvent = getEventWithId(eventId, $app)
-      expect(originalEvent?.start).toBe('2024-02-02 12:00')
-      expect(originalEvent?.end).toBe('2024-02-02 13:00')
-      expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
+      await waitFor(() => {
+        const originalEvent = getEventWithId(eventId, $app)
+        expect(originalEvent?.start).toBe('2024-02-02 12:00')
+        expect(originalEvent?.end).toBe('2024-02-02 13:00')
+        expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
+      })
     })
 
-    it('should update the event if onBeforeEventUpdate returns true', () => {
+    it('should update the event if onBeforeEventUpdate returns true', async () => {
       $app.config.callbacks.onBeforeEventUpdate = (
         _oldEvent,
         _newEvent,
@@ -378,10 +395,12 @@ describe('A calendar with normal day boundaries', () => {
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       const originalEvent = getEventWithId(eventId, $app)
-      expect(originalEvent?.start).toBe('2024-02-02 14:00')
-      expect(originalEvent?.end).toBe('2024-02-02 15:00')
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+      await waitFor(() => {
+        expect(originalEvent?.start).toBe('2024-02-02 14:00')
+        expect(originalEvent?.end).toBe('2024-02-02 15:00')
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+      })
     })
   })
 })

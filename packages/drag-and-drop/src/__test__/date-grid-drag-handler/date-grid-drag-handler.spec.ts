@@ -60,7 +60,7 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
   })
 
   describe('Dragging an event one day to the right, when possible', () => {
-    it('should update the event to one day later', () => {
+    it('should update the event to one day later', async () => {
       new DateGridDragHandlerImpl(
         $app,
         eventCoordinates,
@@ -79,17 +79,19 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-24 03:30')
-      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-25 04:00')
+      await vi.runAllTimersAsync()
 
-      vi.runAllTimers()
-      expect(updateCopyFn).toHaveBeenCalledTimes(2)
-      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      await waitFor(() => {
+        expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-24 03:30')
+        expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-25 04:00')
+        expect(updateCopyFn).toHaveBeenCalledTimes(2)
+        expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      })
     })
   })
 
   describe('Dragging an event one day to the left, when possible', () => {
-    it('should update the event to one day earlier', () => {
+    it('should update the event to one day earlier', async () => {
       new DateGridDragHandlerImpl(
         $app,
         eventCoordinates,
@@ -108,17 +110,19 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-22 03:30')
-      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-23 04:00')
+      await vi.runAllTimersAsync()
 
-      vi.runAllTimers()
-      expect(updateCopyFn).toHaveBeenCalledTimes(2)
-      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      await waitFor(() => {
+        expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-22 03:30')
+        expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-23 04:00')
+        expect(updateCopyFn).toHaveBeenCalledTimes(2)
+        expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      })
     })
   })
 
   describe('Dragging two days to the right, when possible', () => {
-    it('should update the event to two days later', () => {
+    it('should update the event to two days later', async () => {
       new DateGridDragHandlerImpl(
         $app,
         eventCoordinates,
@@ -143,17 +147,20 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(eventCopy.end).toBe('2024-02-26 04:00')
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-25 03:30')
-      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-26 04:00')
 
-      vi.runAllTimers()
-      expect(updateCopyFn).toHaveBeenCalledTimes(3)
-      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      await vi.runAllTimersAsync()
+
+      await waitFor(() => {
+        expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-25 03:30')
+        expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-26 04:00')
+        expect(updateCopyFn).toHaveBeenCalledTimes(3)
+        expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      })
     })
   })
 
   describe('Trying to drag 3 days to the right, but only 2 days are possible', () => {
-    it('should update the event to two days later', () => {
+    it('should update the event to two days later', async () => {
       new DateGridDragHandlerImpl(
         $app,
         eventCoordinates,
@@ -186,12 +193,15 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(eventCopy.end).toBe('2024-02-26 04:00')
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-25 03:30')
-      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-26 04:00')
 
-      vi.runAllTimers()
-      expect(updateCopyFn).toHaveBeenCalledTimes(3)
-      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      await vi.runAllTimersAsync()
+
+      await waitFor(() => {
+        expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-25 03:30')
+        expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-26 04:00')
+        expect(updateCopyFn).toHaveBeenCalledTimes(3)
+        expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      })
     })
   })
 
@@ -226,7 +236,7 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
     })
 
-    it('should update the event if the callback returns true', () => {
+    it('should update the event if the callback returns true', async () => {
       $app.config.callbacks.onBeforeEventUpdate = (
         _oldEvent,
         _newEvent,
@@ -249,12 +259,15 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
       document.dispatchEvent(new MouseEvent('mouseup'))
+      await vi.runAllTimersAsync()
 
-      const originalEvent = getEventWithId(eventId, $app)
-      expect(originalEvent?.start).toBe('2024-02-24 03:30')
-      expect(originalEvent?.end).toBe('2024-02-25 04:00')
-      expect(updateCopyFn).toHaveBeenCalled()
-      expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+      await waitFor(() => {
+        const originalEvent = getEventWithId(eventId, $app)
+        expect(originalEvent?.start).toBe('2024-02-24 03:30')
+        expect(originalEvent?.end).toBe('2024-02-25 04:00')
+        expect(updateCopyFn).toHaveBeenCalled()
+        expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
+      })
     })
   })
 
@@ -320,7 +333,7 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
   })
 
   describe('dragging an event to the left when document direction is rtl', () => {
-    it('should update the event to one day later', () => {
+    it('should update the event to one day later', async () => {
       $app.config.direction = 'rtl'
 
       new DateGridDragHandlerImpl(
@@ -344,17 +357,20 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-24 03:30')
-      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-25 04:00')
 
-      vi.runAllTimers()
-      expect(updateCopyFn).toHaveBeenCalledTimes(2)
-      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      await vi.runAllTimersAsync()
+
+      await waitFor(() => {
+        expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-24 03:30')
+        expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-25 04:00')
+        expect(updateCopyFn).toHaveBeenCalledTimes(2)
+        expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      })
     })
   })
 
   describe('dragging an event to the right when document direction is rtl', () => {
-    it('should update the event to one day earlier', () => {
+    it('should update the event to one day earlier', async () => {
       $app.config.direction = 'rtl'
       new DateGridDragHandlerImpl(
         $app,
@@ -377,12 +393,15 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-22 03:30')
-      expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-23 04:00')
 
-      vi.runAllTimers()
-      expect(updateCopyFn).toHaveBeenCalledTimes(2)
-      expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      await vi.runAllTimersAsync()
+
+      await waitFor(() => {
+        expect(getEventWithId(eventId, $app)?.start).toBe('2024-02-22 03:30')
+        expect(getEventWithId(eventId, $app)?.end).toBe('2024-02-23 04:00')
+        expect(updateCopyFn).toHaveBeenCalledTimes(2)
+        expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
+      })
     })
   })
 })

@@ -266,7 +266,7 @@ describe('Resizing events in the date grid', () => {
   })
 
   describe('aborting an update with onBeforeEventUpdate', () => {
-    it('should not update the event when the onBeforeEventUpdate callback returns false', () => {
+    it('should not update the event when the onBeforeEventUpdate callback returns false', async () => {
       $app.config.callbacks.onEventUpdate = vi.fn()
       $app.config.callbacks.onBeforeEventUpdate = (
         _oldEvent,
@@ -292,9 +292,11 @@ describe('Resizing events in the date grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
-      expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
-      expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
+      await waitFor(() => {
+        expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
+        expect(eventStartingInPreviousWeek.end).toBe('2024-01-23')
+        expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
+      })
     })
 
     it('should update the event when the onBeforeEventUpdate callback returns true', () => {

@@ -19,6 +19,7 @@ import { Mock, vi } from 'vitest'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { createResizePlugin } from '../resize.plugin'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
+import { waitFor } from '@testing-library/preact'
 
 describe('Resizing events in the time grid', () => {
   describe('When the calendar wrapper cannot be found', () => {
@@ -63,6 +64,7 @@ describe('Resizing events in the time grid', () => {
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
         weekOptions: signal({
+          ...stubInterface(),
           gridHeight: 2400,
           nDays: 1,
           eventWidth: 100,
@@ -254,6 +256,7 @@ describe('Resizing events in the time grid', () => {
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
         weekOptions: signal({
+          ...stubInterface(),
           gridHeight: 2400,
           nDays: 1,
           dayBoundaries: { start: '00:00', end: '24:00' },
@@ -303,7 +306,7 @@ describe('Resizing events in the time grid', () => {
       expect(eventInternal.end).toBe('2024-01-05 07:00')
     })
 
-    it('should update the event if the callback returns true', () => {
+    it('should update the event if the callback returns true', async () => {
       $app.config.callbacks = {
         ...$app.config.callbacks,
         onBeforeEventUpdate(_oldEvent, _newEvent, _$app) {
@@ -322,10 +325,12 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(updateEventSpy).toHaveBeenCalled()
-      const eventInternal = $app.calendarEvents.list.value[0]
-      expect(eventInternal.start).toBe('2024-01-05 06:00')
-      expect(eventInternal.end).toBe('2024-01-05 07:30')
+      await waitFor(() => {
+        expect(updateEventSpy).toHaveBeenCalled()
+        const eventInternal = $app.calendarEvents.list.value[0]
+        expect(eventInternal.start).toBe('2024-01-05 06:00')
+        expect(eventInternal.end).toBe('2024-01-05 07:30')
+      })
     })
   })
 })
