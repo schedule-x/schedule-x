@@ -53,7 +53,7 @@
     "swiper": "^11.1.15"
   },
   "devDependencies": {
-    "@types/node": "22.15.14",
+    "@types/node": "22.15.18",
     "sass": "^1.72.0",
     "typescript": "^5.3.3"
   }
