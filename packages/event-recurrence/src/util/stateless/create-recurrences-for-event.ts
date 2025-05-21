@@ -28,18 +28,19 @@ export const createRecurrencesForEvent = (
     dtend: parseSXToRFC5545(calendarEvent.end),
     rrule,
     exdate,
-  })
+  }).getRecurrences()
 
-  return recurrenceSet
-    .getRecurrences()
-    .slice(1) // skip the first occurrence because this is the original event
-    .map((recurrence) => {
-      const eventCopy: AugmentedEvent = deepCloneEvent(calendarEvent, $app)
-      eventCopy.start = recurrence.start
-      eventCopy.end = recurrence.end
-      eventCopy.isCopy = true
-      return eventCopy
-    })
+  if (recurrenceSet[0].start == calendarEvent.start) {
+    recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
+  }
+
+  return recurrenceSet.map((recurrence) => {
+    const eventCopy: AugmentedEvent = deepCloneEvent(calendarEvent, $app)
+    eventCopy.start = recurrence.start
+    eventCopy.end = recurrence.end
+    eventCopy.isCopy = true
+    return eventCopy
+  })
 }
 
 export const createRecurrencesForBackgroundEvent = (
