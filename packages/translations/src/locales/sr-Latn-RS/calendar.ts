@@ -5,6 +5,7 @@ export const calendarSrLatnRS: CalendarTranslations = {
   Month: 'Mesec',
   Week: 'Nedelja',
   Day: 'Dan',
+  List: 'Lista',
   'Select View': 'Odaberite pregled',
   events: 'Događaji',
   event: 'Događaj',

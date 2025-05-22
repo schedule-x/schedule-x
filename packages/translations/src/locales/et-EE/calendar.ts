@@ -5,6 +5,7 @@ export const calendarEtEE: CalendarTranslations = {
   Month: 'Kuu',
   Week: 'Nädal',
   Day: 'Päev',
+  List: 'Nimekiri',
   'Select View': 'Vali vaade',
   events: 'sündmused',
   event: 'sündmus',

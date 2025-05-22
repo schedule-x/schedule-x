@@ -5,6 +5,7 @@ export const calendarHrHR: CalendarTranslations = {
   Month: 'Mjesec',
   Week: 'Nedjelja',
   Day: 'Dan',
+  List: 'Lista',
   'Select View': 'Odaberite pregled',
   events: 'Događaji',
   event: 'Događaj',

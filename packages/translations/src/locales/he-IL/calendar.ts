@@ -5,6 +5,7 @@ export const calendarHeIL: CalendarTranslations = {
   Month: 'חוֹדֶשׁ',
   Week: 'שָׁבוּעַ',
   Day: 'יוֹם',
+  List: 'רשימה',
   'Select View': 'בחר תצוגה',
   events: 'אירועים',
   event: 'אירוע',
