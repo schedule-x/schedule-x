@@ -89,7 +89,9 @@ export default function MonthAgendaDay({
           <div
             style={{
               backgroundColor: `var(--sx-color-${event._color})`,
-              filter: `brightness(1.6)`,
+              filter: $app.calendarState.isDark.value
+                ? undefined
+                : `brightness(1.6)`,
             }}
             className="sx__month-agenda-day__event-icon"
           />
