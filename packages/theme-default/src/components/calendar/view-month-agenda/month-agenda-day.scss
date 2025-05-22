@@ -25,4 +25,9 @@
   height: $icon-size;
   width: $icon-size;
   border-radius: 50%;
+  filter: brightness(1.6);
+
+  .is-dark & {
+    filter: initial;
+  }
 }
