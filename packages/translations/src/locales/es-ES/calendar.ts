@@ -5,10 +5,11 @@ export const calendarEsES: CalendarTranslations = {
   Month: 'Mes',
   Week: 'Semana',
   Day: 'Día',
-  'Select View': 'Seleccione una vista',
+  List: 'Lista',
+  'Select View': 'Seleccionar vista',
   '+ {{n}} events': '+ {{n}} eventos',
   '+ 1 event': '+ 1 evento',
-  'No events': 'Sin eventos',
+  'No events': 'No hay eventos',
   'Next period': 'Siguiente período',
   'Previous period': 'Período anterior',
   to: 'a', // as in 2/1/2020 to 2/2/2020

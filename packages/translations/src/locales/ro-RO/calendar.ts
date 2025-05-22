@@ -5,6 +5,7 @@ export const calendarRoRO: CalendarTranslations = {
   Month: 'Lună',
   Week: 'Săptămână',
   Day: 'Zi',
+  List: 'Listă',
   'Select View': 'Selectează vizualizarea',
   '+ {{n}} events': '+ {{n}} evenimente',
   '+ 1 event': '+ 1 eveniment',

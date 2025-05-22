@@ -5,6 +5,7 @@ export const calendarMkMK: CalendarTranslations = {
   Month: 'Месец',
   Week: 'Недела',
   Day: 'Ден',
+  List: 'Листа',
   'Select View': 'Избери Преглед',
   '+ {{n}} events': '+ {{n}} настани',
   '+ 1 event': '+ 1 настан',

@@ -5,6 +5,7 @@ export const calendarSlSI: CalendarTranslations = {
   Month: 'Mesec',
   Week: 'Teden',
   Day: 'Dan',
+  List: 'Seznam',
   'Select View': 'Izberi pogled',
   '+ {{n}} events': '+ {{n}} dogodki',
   '+ 1 event': '+ 1 dogodek',

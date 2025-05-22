@@ -5,6 +5,7 @@ export const calendarUkUA: CalendarTranslations = {
   Month: 'Місяць',
   Week: 'Тиждень',
   Day: 'День',
+  List: 'Список',
   'Select View': 'Виберіть вигляд',
   '+ {{n}} events': '+ {{n}} події',
   '+ 1 event': '+ 1 подія',

@@ -5,6 +5,7 @@ export const calendarTrTR: CalendarTranslations = {
   Month: 'Aylık',
   Week: 'Haftalık',
   Day: 'Günlük',
+  List: 'Liste',
   'Select View': 'Görünüm Seç',
   '+ {{n}} events': '+ {{n}} etkinlikler',
   '+ 1 event': '+ 1 etkinlik',

@@ -83,7 +83,7 @@ const calendar = createCalendar({
   },
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'week',
+  defaultView: 'list',
   callbacks: {
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
@@ -245,6 +245,7 @@ const calendar = createCalendar({
     start: '10:00',
     end: '23:00'
   },
+  locale: 'de-DE',
   events: [
     {
       id: 123,

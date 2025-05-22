@@ -5,6 +5,7 @@ export const calendarLtLT: CalendarTranslations = {
   Month: 'Mėnuo',
   Week: 'Savaitė',
   Day: 'Diena',
+  List: 'Sąrašas',
   'Select View': 'Pasirinkite vaizdą',
   '+ {{n}} events': '+ {{n}} įvykiai',
   '+ 1 event': '+ 1 įvykis',
