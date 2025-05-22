@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.31.1](https://github.com/schedule-x/schedule-x/compare/v2.31.0...v2.31.1) (2025-05-22)
+
+### Bug Fixes
+
+- **calendar:** agenda event icon color in dark mode ([#1065](https://github.com/schedule-x/schedule-x/issues/1065)) ([91c31e5](https://github.com/schedule-x/schedule-x/commit/91c31e51829ee133643209fcaed2db7f32b48e68))
+
 # [2.31.0](https://github.com/schedule-x/schedule-x/compare/v2.30.0...v2.31.0) (2025-05-16)
 
 **Note:** Version bump only for package @schedule-x/calendar

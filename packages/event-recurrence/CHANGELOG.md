@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.31.1](https://github.com/schedule-x/schedule-x/compare/v2.31.0...v2.31.1) (2025-05-22)
+
+### Bug Fixes
+
+- **event-recurrence:** skipping first not aligned date when BYDAY is set ([#1063](https://github.com/schedule-x/schedule-x/issues/1063)) ([c2e5045](https://github.com/schedule-x/schedule-x/commit/c2e5045520785e25fe747599935f856e1bf9d400))
+
 # [2.31.0](https://github.com/schedule-x/schedule-x/compare/v2.30.0...v2.31.0) (2025-05-16)
 
 ### Bug Fixes
