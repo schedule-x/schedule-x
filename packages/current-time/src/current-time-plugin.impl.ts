@@ -79,7 +79,11 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
       currentTimeIndicator.style.top = top
       todayElement.appendChild(currentTimeIndicator)
 
-      if (this.config.fullWeekWidth) {
+      const isResourceView = todayElement.querySelector(
+        '.sx__custom-view'
+      )
+
+      if (this.config.fullWeekWidth || isResourceView) {
         this.createFullWidthIndicator(top)
       }
 
