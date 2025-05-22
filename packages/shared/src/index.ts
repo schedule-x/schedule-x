@@ -32,3 +32,4 @@ export {
   addMonths,
   addMinutes,
 } from './utils/stateless/time/date-time-mutation/adding'
+export type { DateRange } from './types/date-range'
