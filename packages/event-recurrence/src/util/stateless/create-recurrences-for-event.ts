@@ -30,7 +30,7 @@ export const createRecurrencesForEvent = (
     exdate,
   }).getRecurrences()
 
-  if (recurrenceSet[0].start == calendarEvent.start) {
+  if (recurrenceSet[0].start === calendarEvent.start) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
