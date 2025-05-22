@@ -26,6 +26,7 @@ import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
+import { createViewList } from '@schedule-x/calendar/src/views/list'
 import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
@@ -33,7 +34,7 @@ import { translations } from '@schedule-x/translations/src'
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const scrollControllerPlugin = createScrollControllerPlugin({
-  initialScroll: '01:00',
+  initialScroll: '07:50',
 })
 
 class CalendarsUpdaterPlugin {
@@ -80,9 +81,8 @@ const calendar = createCalendar({
   weekOptions: {
     eventWidth: 95,
   },
-  showWeekNumbers: true,
   firstDayOfWeek: 1,
-  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
+  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
   defaultView: 'week',
   callbacks: {
     onEventUpdate(event) {
@@ -241,43 +241,38 @@ const calendar = createCalendar({
       },
     }
   ],
-  // dayBoundaries: {
-  //   start: '10:00',
-  //   end: '23:00'
-  // },
+  dayBoundaries: {
+    start: '10:00',
+    end: '23:00'
+  },
   events: [
-      {
-        "id": 1,
-        "title": "e0",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      },
-      {
-        "id": 2,
-        "title": "e1",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      },
-      {
-        "id": 3,
-        "title": "e2",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      },
-      {
-        "id": 4,
-        "title": "e3",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      }
+    {
+      id: 123,
+      title: 'Weekly event',
+      start: '2025-05-14 14:00',
+      end: '2025-05-14 15:00',
+
+      // will create a recurrence set of 3 events: 2024-02-05 14:00, 2024-02-26 14:00, 2024-03-04 14:00
+      rrule: 'FREQ=WEEKLY;COUNT=5',
+      exdate: [
+        '2024-02-12 14:00',
+        '2024-02-19 14:00'
+      ]
+    },
+    {
+      title: 'שלום טום',
+      description: 'שלום טום',
+      id: 2,
+      start: '2025-03-27 11:00',
+      end: '2025-03-27 12:00',
+    },
+    ...seededEvents
   ],
 }, [
   eventsServicePlugin,
   createDragAndDropPlugin(),
   createCalendarControlsPlugin(),
-  createScrollControllerPlugin({
-    initialScroll: '00:30',
-  }),
+  createScrollControllerPlugin(),
   createCurrentTimePlugin(),
   createEventModalPlugin(),
   createEventRecurrencePlugin(),
