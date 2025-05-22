@@ -28,7 +28,6 @@ import {
   setRangeForDay,
 } from './utils/stateless/time/range/set-range'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
-import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
 import TimeGridDay from './components/week-grid/time-grid-day'
 import TimeAxis from './components/week-grid/time-axis'
 import DateGridDay from './components/week-grid/date-grid-day'
