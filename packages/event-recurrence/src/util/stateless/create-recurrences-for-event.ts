@@ -58,17 +58,17 @@ export const createRecurrencesForBackgroundEvent = (
     dtstart: parseSXToRFC5545(backgroundEvent.start),
     dtend: parseSXToRFC5545(backgroundEvent.end),
     rrule,
-  })
+  }).getRecurrences()
 
-  return recurrenceSet
-    .getRecurrences()
-    .slice(1) // skip the first occurrence because this is the original event
-    .map((recurrence) => {
-      const eventCopy: AugmentedBackgroundEvent =
-        structuredClone(backgroundEvent)
-      eventCopy.start = recurrence.start
-      eventCopy.end = recurrence.end
-      eventCopy.isCopy = true
-      return eventCopy
-    })
+  if (recurrenceSet[0].start === backgroundEvent.start) {
+    recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
+  }
+
+  return recurrenceSet.map((recurrence) => {
+    const eventCopy: AugmentedBackgroundEvent = structuredClone(backgroundEvent)
+    eventCopy.start = recurrence.start
+    eventCopy.end = recurrence.end
+    eventCopy.isCopy = true
+    return eventCopy
+  })
 }
