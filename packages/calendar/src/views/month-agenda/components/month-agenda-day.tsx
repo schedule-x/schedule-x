@@ -87,10 +87,7 @@ export default function MonthAgendaDay({
       <div className="sx__month-agenda-day__event-icons">
         {day.events.slice(0, 3).map((event) => (
           <div
-            style={{
-              backgroundColor: `var(--sx-color-${event._color})`,
-              filter: `brightness(1.6)`,
-            }}
+            style={{ backgroundColor: `var(--sx-color-${event._color})` }}
             className="sx__month-agenda-day__event-icon"
           />
         ))}
