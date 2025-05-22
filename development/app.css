@@ -31,7 +31,7 @@ body {
 
 @media (width <=699px) {
   #calendar {
-    height: 100vh;
+    height: 90vh;
     padding: 1rem;
   }
 }

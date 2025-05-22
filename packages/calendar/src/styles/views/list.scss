@@ -1,0 +1,59 @@
+.sx__list-wrapper {
+  padding: 0;
+  overflow-y: auto;
+  height: 100%;
+  background-color: #f2f2f7;
+}
+
+.sx__list-day {
+  margin-bottom: 0;
+}
+
+.sx__list-day-header {
+  padding: 8px 16px;
+  background-color: #f2f2f7;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.sx__list-day-date {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #8e8e93;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sx__list-day-events {
+  background: white;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sx__list-event {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  position: relative;
+}
+
+.sx__list-event-time {
+  font-size: 0.9em;
+  color: #8e8e93;
+  min-width: 80px;
+}
+
+.sx__list-event-title {
+  font-size: 1em;
+  color: #000;
+  flex: 1;
+}
+
+.sx__list-day-margin {
+  display: none;
+}

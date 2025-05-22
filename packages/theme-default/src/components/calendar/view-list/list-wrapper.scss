@@ -1,0 +1,96 @@
+.sx__list-wrapper {
+  padding: 0;
+  background-color: var(--sx-color-background);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.sx__list-day {
+  padding: 0;
+  background-color: var(--sx-color-background);
+}
+
+.sx__list-day-header {
+  padding: var(--sx-spacing-padding2) var(--sx-spacing-padding4);
+  background-color: var(--sx-color-surface-container-low);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.sx__list-day-date {
+  font-size: var(--sx-font-extra-small);
+  font-weight: 600;
+  color: var(--sx-color-neutral);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sx__list-day-events {
+  padding: 0 16px;
+  background: var(--sx-color-background);
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: var(--sx-border);
+}
+
+.sx__list-event {
+  padding: 12px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sx__list-event-color-line {
+  width: 4px;
+  height: 24px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.sx__list-event-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.sx__list-event-title {
+  font-size: 1em;
+  color: var(--sx-color-on-background);
+  flex: 1;
+  margin-right: 16px;
+}
+
+.sx__list-event-times {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 80px;
+  gap: 2px;
+}
+
+.sx__list-event-start-time {
+  font-size: 0.85em;
+  color: var(--sx-color-on-background);
+}
+
+.sx__list-event-end-time {
+  font-size: 0.85em;
+  color: var(--sx-color-neutral);
+}
+
+.sx__list-event-arrow {
+  font-size: 0.85em;
+  color: var(--sx-color-neutral);
+  line-height: 1;
+}
+
+.sx__list-event-all-day {
+  font-size: 0.85em;
+  color: var(--sx-color-neutral);
+}
+
+.sx__list-day-margin {
+  height: 16px;
+} 
