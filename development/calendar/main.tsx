@@ -136,7 +136,12 @@ const calendar = createCalendar({
     onDoubleClickDate(date) {
       console.log('onDoubleClickDate', date)
     },
+
+    onRangeUpdate(range) {
+      console.log('onRangeUpdate', range)
+    }
   },
+  selectedDate: '2025-04-10',
   calendars: {
     personal: {
       colorName: 'personal',

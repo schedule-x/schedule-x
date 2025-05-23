@@ -1,16 +1,18 @@
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useEffect, useState, useRef } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { format, isSameDay, parseISO } from 'date-fns'
+import { format, isSameDay, parseISO, addDays as dateFnsAddDays } from 'date-fns'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 interface DayWithEvents {
   date: string
   events: CalendarEventInternal[]
+  opacity: number
 }
 
 interface ListWrapperProps {
@@ -23,8 +25,27 @@ export const ListWrapper: PreactViewComponent = ({
   id,
 }: ListWrapperProps) => {
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const scrollObserverRef = useRef<IntersectionObserver | null>(null)
+  const opacityObserversRef = useRef<Map<Element, IntersectionObserver>>(new Map())
+  const isLoadingMoreRef = useRef(false)
+  const previousDaysRef = useRef<Map<string, number>>(new Map())
 
+  // Initialize range with selected date + 2 weeks
   useEffect(() => {
+    const selectedDate = $app.datePickerState.selectedDate.value
+    const endDate = dateFnsAddDays(parseISO(selectedDate), 14).toISOString().split('T')[0]
+    $app.calendarState.range.value = {
+      start: selectedDate,
+      end: endDate
+    }
+  }, [$app.datePickerState.selectedDate.value])
+
+  // Update days with events when range or events change
+  useEffect(() => {
+    const range = $app.calendarState.range.value
+    if (!range) return
+
     const events = $app.calendarEvents.list.value
     const daysWithEventsMap = events.reduce(
       (
@@ -58,16 +79,129 @@ export const ListWrapper: PreactViewComponent = ({
             return aStart.localeCompare(bStart)
           }
         ),
+        opacity: previousDaysRef.current.get(date) ?? 0, // Use previous opacity or 0
       }))
       .sort((a, b) => a.date.localeCompare(b.date))
 
-    // Filter days to only show those after or equal to the selected date
+    // Filter days to only show those within the current range
     const filteredDays = sortedDays.filter(
-      (day) => day.date >= $app.datePickerState.selectedDate.value
+      (day) => 
+        day.date >= range.start && 
+        day.date <= range.end
     )
 
     setDaysWithEvents(filteredDays)
-  }, [$app.calendarEvents.list.value, $app.datePickerState.selectedDate.value])
+  }, [$app.calendarEvents.list.value, $app.calendarState.range.value])
+
+  // Set up intersection observer for infinite scroll
+  useEffect(() => {
+    if (!wrapperRef.current) return
+
+    // Cleanup previous scroll observer
+    if (scrollObserverRef.current) {
+      scrollObserverRef.current.disconnect()
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const lastEntry = entries[0]
+        if (lastEntry.isIntersecting && !isLoadingMoreRef.current) {
+          const wrapper = wrapperRef.current
+          if (!wrapper) return
+
+          const range = $app.calendarState.range.value
+          if (!range) return
+
+          // Check if we're actually near the bottom of the scroll
+          const isNearBottom = 
+            wrapper.scrollHeight - wrapper.scrollTop - wrapper.clientHeight < 100
+
+          if (isNearBottom) {
+            isLoadingMoreRef.current = true
+            // Extend range by 2 weeks
+            const newEndDate = dateFnsAddDays(parseISO(range.end), 14).toISOString().split('T')[0]
+            $app.calendarState.range.value = {
+              start: range.start,
+              end: newEndDate
+            }
+            // Reset loading flag after a short delay
+            setTimeout(() => {
+              isLoadingMoreRef.current = false
+            }, 1000)
+          }
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1,
+      }
+    )
+
+    // Observe the last day element
+    const lastDay = wrapperRef.current.querySelector('.sx__list-day:last-child')
+    if (lastDay) {
+      observer.observe(lastDay)
+    }
+
+    scrollObserverRef.current = observer
+
+    return () => {
+      if (scrollObserverRef.current) {
+        scrollObserverRef.current.disconnect()
+      }
+    }
+  }, [daysWithEvents, $app.calendarState.range.value])
+
+  // Update opacity based on visibility
+  useEffect(() => {
+    if (!wrapperRef.current) return
+
+    // Cleanup previous opacity observers
+    opacityObserversRef.current.forEach((observer, element) => {
+      observer.disconnect()
+      opacityObserversRef.current.delete(element)
+    })
+
+    const days = wrapperRef.current.querySelectorAll('.sx__list-day')
+    days.forEach((day, index) => {
+      // Skip if already observed
+      if (opacityObserversRef.current.has(day)) return
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0]
+          if (entry.isIntersecting) {
+            setDaysWithEvents(prev => {
+              const newDays = [...prev]
+              newDays[index] = { ...newDays[index], opacity: 1 }
+              // Store the opacity in our ref
+              previousDaysRef.current.set(newDays[index].date, 1)
+              return newDays
+            })
+            // Cleanup observer after opacity is set
+            observer.disconnect()
+            opacityObserversRef.current.delete(day)
+          }
+        },
+        {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      )
+      observer.observe(day)
+      opacityObserversRef.current.set(day, observer)
+    })
+
+    return () => {
+      // Cleanup all opacity observers
+      opacityObserversRef.current.forEach((observer) => {
+        observer.disconnect()
+      })
+      opacityObserversRef.current.clear()
+    }
+  }, [daysWithEvents])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
     const eventStartDate = dateFromDateTime(event.start)
@@ -141,14 +275,21 @@ export const ListWrapper: PreactViewComponent = ({
 
   return (
     <AppContext.Provider value={$app}>
-      <div id={id} className="sx__list-wrapper">
+      <div id={id} className="sx__list-wrapper" ref={wrapperRef}>
         {daysWithEvents.length === 0 ? (
           <div className="sx__list-no-events">
             {$app.translate('No events')}
           </div>
         ) : (
-          daysWithEvents.map((day) => (
-            <div key={day.date} className="sx__list-day">
+          daysWithEvents.map((day, index) => (
+            <div 
+              key={day.date} 
+              className="sx__list-day"
+              style={{
+                opacity: day.opacity,
+                transition: 'opacity 0.3s ease-in-out'
+              }}
+            >
               <div className="sx__list-day-header">
                 <div className="sx__list-day-date">
                   {toJSDate(day.date).toLocaleDateString(

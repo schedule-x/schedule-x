@@ -12,6 +12,7 @@ import {
   initPlugins,
 } from '../utils/stateless/plugins-lifecycle'
 import { useSignalEffect } from '@preact/signals'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 
 type props = {
   $app: CalendarAppSingleton
@@ -65,6 +66,8 @@ export default function CalendarWrapper({ $app }: props) {
   const [transitionClass, setTransitionClass] = useState('')
 
   useSignalEffect(() => {
+    if ($app.calendarState.view.value === InternalViewName.List) return
+
     const newRangeStartIsLaterThanPrevious =
       ($app.calendarState.range.value?.start || '') > previousRangeStart
     setTransitionClass(

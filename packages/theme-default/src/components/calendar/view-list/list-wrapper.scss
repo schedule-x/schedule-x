@@ -4,11 +4,14 @@
   height: 100%;
   overflow-y: auto;
   position: relative;
+  scroll-behavior: smooth;
 }
 
 .sx__list-day {
   padding: 0;
   background-color: var(--sx-color-background);
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 .sx__list-day-header {
@@ -17,6 +20,8 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .sx__list-day-date {
