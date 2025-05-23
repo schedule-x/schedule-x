@@ -51,7 +51,7 @@ export const ListWrapper: PreactViewComponent = ({ $app, id }: ListWrapperProps)
       .sort((a, b) => a.date.localeCompare(b.date))
 
     setDaysWithEvents(sortedDays)
-  }, [$app.calendarEvents.list.value])
+  }, [$app.calendarEvents.list.value, $app.datePickerState.selectedDate.value])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
     const eventStartDate = dateFromDateTime(event.start)
