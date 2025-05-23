@@ -3,6 +3,7 @@
   background-color: var(--sx-color-background);
   height: 100%;
   overflow-y: auto;
+  position: relative;
 }
 
 .sx__list-day {
@@ -93,4 +94,14 @@
 
 .sx__list-day-margin {
   height: 16px;
+}
+
+.sx__list-no-events {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--sx-color-neutral);
+  font-size: var(--sx-font-extra-small);
+  text-align: center;
 } 

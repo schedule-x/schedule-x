@@ -61,7 +61,12 @@ export const ListWrapper: PreactViewComponent = ({
       }))
       .sort((a, b) => a.date.localeCompare(b.date))
 
-    setDaysWithEvents(sortedDays)
+    // Filter days to only show those after or equal to the selected date
+    const filteredDays = sortedDays.filter(
+      (day) => day.date >= $app.datePickerState.selectedDate.value
+    )
+
+    setDaysWithEvents(filteredDays)
   }, [$app.calendarEvents.list.value, $app.datePickerState.selectedDate.value])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
@@ -137,48 +142,54 @@ export const ListWrapper: PreactViewComponent = ({
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__list-wrapper">
-        {daysWithEvents.map((day) => (
-          <div key={day.date} className="sx__list-day">
-            <div className="sx__list-day-header">
-              <div className="sx__list-day-date">
-                {toJSDate(day.date).toLocaleDateString(
-                  $app.config.locale.value,
-                  {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  }
-                )}
+        {daysWithEvents.length === 0 ? (
+          <div className="sx__list-no-events">
+            {$app.translate('No events')}
+          </div>
+        ) : (
+          daysWithEvents.map((day) => (
+            <div key={day.date} className="sx__list-day">
+              <div className="sx__list-day-header">
+                <div className="sx__list-day-date">
+                  {toJSDate(day.date).toLocaleDateString(
+                    $app.config.locale.value,
+                    {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                    }
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="sx__list-day-events">
-              {day.events.map((event, index) => (
-                <div
-                  key={event.id}
-                  className="sx__list-event"
-                  style={{
-                    borderTop: index === 0 ? 'none' : '1px solid #e0e0e0',
-                  }}
-                >
+              <div className="sx__list-day-events">
+                {day.events.map((event, index) => (
                   <div
-                    className="sx__list-event-color-line"
+                    key={event.id}
+                    className="sx__list-event"
                     style={{
-                      backgroundColor: `var(--sx-color-${event._color})`,
+                      borderTop: index === 0 ? 'none' : '1px solid #e0e0e0',
                     }}
-                  />
-                  <div className="sx__list-event-content">
-                    <div className="sx__list-event-title">{event.title}</div>
-                    <div className="sx__list-event-times">
-                      {renderEventTimes(event, day.date)}
+                  >
+                    <div
+                      className="sx__list-event-color-line"
+                      style={{
+                        backgroundColor: `var(--sx-color-${event._color})`,
+                      }}
+                    />
+                    <div className="sx__list-event-content">
+                      <div className="sx__list-event-title">{event.title}</div>
+                      <div className="sx__list-event-times">
+                        {renderEventTimes(event, day.date)}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <div className="sx__list-day-margin" />
             </div>
-            <div className="sx__list-day-margin" />
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </AppContext.Provider>
   )
