@@ -18,35 +18,46 @@ interface ListWrapperProps {
   id: string
 }
 
-export const ListWrapper: PreactViewComponent = ({ $app, id }: ListWrapperProps) => {
+export const ListWrapper: PreactViewComponent = ({
+  $app,
+  id,
+}: ListWrapperProps) => {
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
 
   useEffect(() => {
     const events = $app.calendarEvents.list.value
-    const daysWithEventsMap = events.reduce((acc: Record<string, CalendarEventInternal[]>, event: CalendarEventInternal) => {
-      const startDate = dateFromDateTime(event.start)
-      const endDate = event.end ? dateFromDateTime(event.end) : startDate
-      let currentDate = startDate
+    const daysWithEventsMap = events.reduce(
+      (
+        acc: Record<string, CalendarEventInternal[]>,
+        event: CalendarEventInternal
+      ) => {
+        const startDate = dateFromDateTime(event.start)
+        const endDate = event.end ? dateFromDateTime(event.end) : startDate
+        let currentDate = startDate
 
-      while (currentDate <= endDate) {
-        if (!acc[currentDate]) {
-          acc[currentDate] = []
+        while (currentDate <= endDate) {
+          if (!acc[currentDate]) {
+            acc[currentDate] = []
+          }
+          acc[currentDate].push(event)
+          currentDate = addDays(currentDate, 1)
         }
-        acc[currentDate].push(event)
-        currentDate = addDays(currentDate, 1)
-      }
 
-      return acc
-    }, {})
+        return acc
+      },
+      {}
+    )
 
     const sortedDays = Object.entries(daysWithEventsMap)
       .map(([date, events]) => ({
         date,
-        events: events.sort((a: CalendarEventInternal, b: CalendarEventInternal) => {
-          const aStart = a.start
-          const bStart = b.start
-          return aStart.localeCompare(bStart)
-        }),
+        events: events.sort(
+          (a: CalendarEventInternal, b: CalendarEventInternal) => {
+            const aStart = a.start
+            const bStart = b.start
+            return aStart.localeCompare(bStart)
+          }
+        ),
       }))
       .sort((a, b) => a.date.localeCompare(b.date))
 
@@ -75,11 +86,17 @@ export const ListWrapper: PreactViewComponent = ({ $app, id }: ListWrapperProps)
       return (
         <>
           <div className="sx__list-event-start-time">
-            {toJSDate(event.start).toLocaleTimeString($app.config.locale.value, timeOptions)}
+            {toJSDate(event.start).toLocaleTimeString(
+              $app.config.locale.value,
+              timeOptions
+            )}
           </div>
           {event.end && (
             <div className="sx__list-event-end-time">
-              {toJSDate(event.end).toLocaleTimeString($app.config.locale.value, timeOptions)}
+              {toJSDate(event.end).toLocaleTimeString(
+                $app.config.locale.value,
+                timeOptions
+              )}
             </div>
           )}
         </>
@@ -90,7 +107,10 @@ export const ListWrapper: PreactViewComponent = ({ $app, id }: ListWrapperProps)
       return (
         <>
           <div className="sx__list-event-start-time">
-            {toJSDate(event.start).toLocaleTimeString($app.config.locale.value, timeOptions)}
+            {toJSDate(event.start).toLocaleTimeString(
+              $app.config.locale.value,
+              timeOptions
+            )}
           </div>
           <div className="sx__list-event-arrow">→</div>
         </>
@@ -102,7 +122,10 @@ export const ListWrapper: PreactViewComponent = ({ $app, id }: ListWrapperProps)
         <>
           <div className="sx__list-event-arrow">←</div>
           <div className="sx__list-event-end-time">
-            {toJSDate(event.end).toLocaleTimeString($app.config.locale.value, timeOptions)}
+            {toJSDate(event.end).toLocaleTimeString(
+              $app.config.locale.value,
+              timeOptions
+            )}
           </div>
         </>
       )
@@ -118,12 +141,15 @@ export const ListWrapper: PreactViewComponent = ({ $app, id }: ListWrapperProps)
           <div key={day.date} className="sx__list-day">
             <div className="sx__list-day-header">
               <div className="sx__list-day-date">
-                {toJSDate(day.date).toLocaleDateString($app.config.locale.value, {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
+                {toJSDate(day.date).toLocaleDateString(
+                  $app.config.locale.value,
+                  {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  }
+                )}
               </div>
             </div>
             <div className="sx__list-day-events">

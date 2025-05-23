@@ -13,9 +13,11 @@ export const calendarFrFR: CalendarTranslations = {
   'Next period': 'Période suivante',
   'Previous period': 'Période précédente',
   to: 'au', // as in 2/1/2020 to 2/2/2020
-  'Full day- and multiple day events': 'Événements sur une journée ou plusieurs jours',
+  'Full day- and multiple day events':
+    'Événements sur une journée ou plusieurs jours',
   'Link to {{n}} more events on {{date}}':
     'Lien vers {{n}} événements supplémentaires le {{date}}',
-  'Link to 1 more event on {{date}}': 'Lien vers 1 événement supplémentaire le {{date}}',
+  'Link to 1 more event on {{date}}':
+    'Lien vers 1 événement supplémentaire le {{date}}',
   CW: 'S{{week}}',
 }
