@@ -29,24 +29,43 @@ export const ListWrapper: PreactViewComponent = ({
   const scrollObserverRef = useRef<IntersectionObserver | null>(null)
   const opacityObserversRef = useRef<Map<Element, IntersectionObserver>>(new Map())
   const isLoadingMoreRef = useRef(false)
+  const isLoadingEarlierRef = useRef(false)
   const previousDaysRef = useRef<Map<string, number>>(new Map())
+  const hasInitialScrollRef = useRef(false)
+  const hasInitialRangeRef = useRef(false)
 
-  // Initialize range with selected date + 2 weeks
+  // Initialize range with earliest and latest event dates only once
   useEffect(() => {
-    const selectedDate = $app.datePickerState.selectedDate.value
-    const endDate = dateFnsAddDays(parseISO(selectedDate), 14).toISOString().split('T')[0]
+    const events = $app.calendarEvents.list.value
+    if (events.length === 0 || hasInitialRangeRef.current) return
+
+    // Find earliest and latest dates from events
+    const dates = events.flatMap(event => {
+      const startDate = dateFromDateTime(event.start)
+      const endDate = event.end ? dateFromDateTime(event.end) : startDate
+      return [startDate, endDate]
+    })
+
+    const earliestDate = dates.reduce((earliest, current) => 
+      current < earliest ? current : earliest
+    )
+    const latestDate = dates.reduce((latest, current) => 
+      current > latest ? current : latest
+    )
+
     $app.calendarState.range.value = {
-      start: selectedDate,
-      end: endDate
+      start: earliestDate,
+      end: latestDate
     }
-  }, [$app.datePickerState.selectedDate.value])
+    hasInitialRangeRef.current = true
+  }, [$app.calendarEvents.list.value])
 
-  // Update days with events when range or events change
+  // Update days with events when events change
   useEffect(() => {
+    const events = $app.calendarEvents.list.value
     const range = $app.calendarState.range.value
     if (!range) return
 
-    const events = $app.calendarEvents.list.value
     const daysWithEventsMap = events.reduce(
       (
         acc: Record<string, CalendarEventInternal[]>,
@@ -79,7 +98,7 @@ export const ListWrapper: PreactViewComponent = ({
             return aStart.localeCompare(bStart)
           }
         ),
-        opacity: previousDaysRef.current.get(date) ?? 0, // Use previous opacity or 0
+        opacity: previousDaysRef.current.get(date) ?? 0,
       }))
       .sort((a, b) => a.date.localeCompare(b.date))
 
@@ -93,67 +112,27 @@ export const ListWrapper: PreactViewComponent = ({
     setDaysWithEvents(filteredDays)
   }, [$app.calendarEvents.list.value, $app.calendarState.range.value])
 
-  // Set up intersection observer for infinite scroll
+  // Scroll to selected date only on initial render
   useEffect(() => {
-    if (!wrapperRef.current) return
+    if (!wrapperRef.current || hasInitialScrollRef.current) return
 
-    // Cleanup previous scroll observer
-    if (scrollObserverRef.current) {
-      scrollObserverRef.current.disconnect()
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const lastEntry = entries[0]
-        if (lastEntry.isIntersecting && !isLoadingMoreRef.current) {
-          const wrapper = wrapperRef.current
-          if (!wrapper) return
-
-          const range = $app.calendarState.range.value
-          if (!range) return
-
-          // Check if we're actually near the bottom of the scroll
-          const isNearBottom = 
-            wrapper.scrollHeight - wrapper.scrollTop - wrapper.clientHeight < 100
-
-          if (isNearBottom) {
-            isLoadingMoreRef.current = true
-            // Extend range by 2 weeks
-            const newEndDate = dateFnsAddDays(parseISO(range.end), 14).toISOString().split('T')[0]
-            $app.calendarState.range.value = {
-              start: range.start,
-              end: newEndDate
-            }
-            // Reset loading flag after a short delay
-            setTimeout(() => {
-              isLoadingMoreRef.current = false
-            }, 1000)
-          }
-        }
-      },
-      {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1,
-      }
+    const selectedDate = $app.datePickerState.selectedDate.value
+    const selectedDayElement = wrapperRef.current.querySelector(
+      `.sx__list-day[data-date="${selectedDate}"]`
     )
 
-    // Observe the last day element
-    const lastDay = wrapperRef.current.querySelector('.sx__list-day:last-child')
-    if (lastDay) {
-      observer.observe(lastDay)
+    if (selectedDayElement) {
+      requestAnimationFrame(() => {
+        selectedDayElement.scrollIntoView({ 
+          behavior: 'instant',
+          block: 'start' 
+        })
+        hasInitialScrollRef.current = true
+      })
     }
+  }, [daysWithEvents])
 
-    scrollObserverRef.current = observer
-
-    return () => {
-      if (scrollObserverRef.current) {
-        scrollObserverRef.current.disconnect()
-      }
-    }
-  }, [daysWithEvents, $app.calendarState.range.value])
-
-  // Update opacity based on visibility
+  // Set up intersection observer for opacity updates
   useEffect(() => {
     if (!wrapperRef.current) return
 
@@ -202,6 +181,116 @@ export const ListWrapper: PreactViewComponent = ({
       opacityObserversRef.current.clear()
     }
   }, [daysWithEvents])
+
+  // Set up scroll listener for infinite scroll in both directions
+  useEffect(() => {
+    if (!wrapperRef.current) return
+
+    const checkForMoreDays = () => {
+      const wrapper = wrapperRef.current
+      if (!wrapper || (isLoadingEarlierRef.current && isLoadingMoreRef.current)) return
+
+      const range = $app.calendarState.range.value
+      if (!range) return
+
+      const allDays = wrapper.querySelectorAll('.sx__list-day')
+      
+      // Check for upward scroll
+      if (!isLoadingEarlierRef.current) {
+        // Count days that are above the viewport
+        const daysAboveViewport = Array.from(allDays).filter(day => {
+          const rect = day.getBoundingClientRect()
+          return rect.bottom < 0
+        }).length
+
+        // Find the first visible day
+        const firstVisibleDay = Array.from(allDays).find(day => {
+          const rect = day.getBoundingClientRect()
+          return rect.top >= 0
+        })
+
+        if (firstVisibleDay) {
+          const firstVisibleDate = firstVisibleDay.getAttribute('data-date')
+          if (!firstVisibleDate) return
+
+          // Calculate if we need more dates
+          const twoWeeksBeforeFirstVisible = dateFnsAddDays(parseISO(firstVisibleDate), -14).toISOString().split('T')[0]
+          const needsMoreDates = range.start > twoWeeksBeforeFirstVisible
+
+          // Check if we're at the top and scrolling up, or if we have 3 or fewer days above
+          const isAtTop = wrapper.scrollTop === 0
+          const hasFewDaysAbove = daysAboveViewport <= 3
+
+          if ((isAtTop || hasFewDaysAbove) && needsMoreDates) {
+            isLoadingEarlierRef.current = true
+            // Extend range backwards by 2 weeks
+            const newStartDate = dateFnsAddDays(parseISO(range.start), -14).toISOString().split('T')[0]
+            $app.calendarState.range.value = {
+              start: newStartDate,
+              end: range.end
+            }
+            // Reset loading flag after a short delay
+            setTimeout(() => {
+              isLoadingEarlierRef.current = false
+            }, 1000)
+          }
+        }
+      }
+
+      // Check for downward scroll
+      if (!isLoadingMoreRef.current) {
+        // Count days that are below the viewport
+        const daysBelowViewport = Array.from(allDays).filter(day => {
+          const rect = day.getBoundingClientRect()
+          return rect.top > wrapper.clientHeight && rect.bottom > wrapper.clientHeight
+        }).length
+
+        // Find the last visible day
+        const lastVisibleDay = Array.from(allDays).findLast(day => {
+          const rect = day.getBoundingClientRect()
+          return rect.bottom <= wrapper.clientHeight
+        })
+
+        if (lastVisibleDay) {
+          const lastVisibleDate = lastVisibleDay.getAttribute('data-date')
+          if (!lastVisibleDate) return
+
+          // Calculate if we need more dates
+          const twoWeeksAfterLastVisible = dateFnsAddDays(parseISO(lastVisibleDate), 14).toISOString().split('T')[0]
+          console.log('twoWeeksAfterLastVisible', twoWeeksAfterLastVisible)
+          const needsMoreDates = range.end < twoWeeksAfterLastVisible
+
+          // Check if we have 3 or fewer days below
+          const hasFewDaysBelow = daysBelowViewport <= 3
+
+          console.log('daysBelowViewport', daysBelowViewport)
+
+          if (hasFewDaysBelow && needsMoreDates) {
+            isLoadingMoreRef.current = true
+            // Extend range forwards by 2 weeks
+            const newEndDate = dateFnsAddDays(parseISO(range.end), 14).toISOString().split('T')[0]
+            $app.calendarState.range.value = {
+              start: range.start,
+              end: newEndDate
+            }
+            // Reset loading flag after a short delay
+            setTimeout(() => {
+              isLoadingMoreRef.current = false
+            }, 1000)
+          }
+        }
+      }
+    }
+
+    // Add scroll listener
+    wrapperRef.current.addEventListener('scroll', checkForMoreDays)
+
+    return () => {
+      if (wrapperRef.current) {
+        wrapperRef.current.removeEventListener('scroll', checkForMoreDays)
+      }
+    }
+  }, [daysWithEvents, $app.calendarState.range.value])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
     const eventStartDate = dateFromDateTime(event.start)
@@ -285,6 +374,7 @@ export const ListWrapper: PreactViewComponent = ({
             <div 
               key={day.date} 
               className="sx__list-day"
+              data-date={day.date}
               style={{
                 opacity: day.opacity,
                 transition: 'opacity 0.3s ease-in-out'
