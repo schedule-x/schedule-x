@@ -342,4 +342,43 @@ describe('Event concurrency', () => {
     expect(result[3]._previousConcurrentEvents).toBe(1)
     expect(result[3]._maxConcurrentEvents).toBe(2)
   })
+
+  it('should have 4 events that are all 0 minutes long at the same time', () => {
+    const timeEvent1 = {
+      start: '2025-01-28 14:00',
+      end: '2025-01-28 14:00',
+      id: '1',
+    }
+    const timeEvent2 = {
+      start: '2025-01-28 14:00',
+      end: '2025-01-28 14:00',
+      id: '2',
+    }
+    const timeEvent3 = {
+      start: '2025-01-28 14:00',
+      end: '2025-01-28 14:00',
+      id: '3',
+    }
+    const timeEvent4 = {
+      start: '2025-01-28 14:00',
+      end: '2025-01-28 14:00',
+      id: '4',
+    }
+    const event1 = createEvent(timeEvent1)
+    const event2 = createEvent(timeEvent2)
+    const event3 = createEvent(timeEvent3)
+    const event4 = createEvent(timeEvent4)
+
+    const result = handleEventConcurrency([event1, event2, event3, event4])
+
+    // they should be concurrent
+    expect(result[0]._totalConcurrentEvents).toBe(4)
+    expect(result[0]._previousConcurrentEvents).toBe(0)
+    expect(result[1]._totalConcurrentEvents).toBe(4)
+    expect(result[1]._previousConcurrentEvents).toBe(1)
+    expect(result[2]._totalConcurrentEvents).toBe(4)
+    expect(result[2]._previousConcurrentEvents).toBe(2)
+    expect(result[3]._totalConcurrentEvents).toBe(4)
+    expect(result[3]._previousConcurrentEvents).toBe(3)
+  })
 })

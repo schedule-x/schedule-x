@@ -46,7 +46,7 @@ export type {
   WeekOptions,
   MonthGridOptions,
   PluginBase,
-  Week
+  Week,
 }
 
 export {
@@ -73,5 +73,5 @@ export {
   TimeAxis,
   DateGridDay,
   sortEventsForWeekView,
-  AppContext
+  AppContext,
 }
