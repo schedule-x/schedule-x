@@ -64,6 +64,8 @@ import { fiFI } from './locales/fi-FI'
 import { datePickerFiFI } from './locales/fi-FI/date-picker'
 import { roRO } from './locales/ro-RO'
 import { datePickerRoRO } from './locales/ro-RO/date-picker'
+import { faIR } from './locales/fa-IR'
+import { datePickerFaIR } from './locales/fa-IR/date-picker'
 
 import { translate } from './translator/translate'
 import { mergeLocales } from './utils/merge-locales'
@@ -104,6 +106,7 @@ const translations = {
   slSI,
   fiFI,
   roRO,
+  faIR,
 }
 
 const datePickerTranslations = {
@@ -141,6 +144,7 @@ const datePickerTranslations = {
   fiFI: datePickerFiFI,
   roRO: datePickerRoRO,
   heIL: datePickerHeIL,
+  faIR: datePickerFaIR,
 }
 
 export {
@@ -181,4 +185,5 @@ export {
   fiFI,
   roRO,
   heIL,
+  faIR,
 }

@@ -3,7 +3,7 @@ import { Language } from '@schedule-x/shared/src/types/translations/language.tra
 import { calendarFaIR } from './calendar'
 import { timePickerFaIR } from './time-picker'
 
-export const enUS: Language = {
+export const faIR: Language = {
   ...datePickerFaIR,
   ...calendarFaIR,
   ...timePickerFaIR,
