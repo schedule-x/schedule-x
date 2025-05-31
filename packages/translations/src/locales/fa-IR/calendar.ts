@@ -1,7 +1,7 @@
 import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/calendar.translations'
 
 export const calendarFaIR: CalendarTranslations = {
-  today: 'امروز',
+  Today: 'امروز',
   Month: 'ماه',
   Week: 'هفته',
   Day: 'روز',
