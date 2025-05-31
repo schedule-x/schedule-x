@@ -3,7 +3,7 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { CalendarEventInternal } from '@schedule-x/shared'
+import { CalendarEventInternal } from '@schedule-x/shared/src'
 import { stubInterface } from 'ts-sinon'
 import {
   areEvents0MinutesAndConcurrent,

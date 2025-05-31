@@ -1,4 +1,4 @@
-import { CalendarEventInternal } from '@schedule-x/shared'
+import { CalendarEventInternal } from '@schedule-x/shared/src'
 import { DateFormats } from '@schedule-x/shared/src/values/date-formats'
 
 export const isEvent0Minutes = (e: CalendarEventInternal | undefined) => {
