@@ -1,4 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { areEvents0MinutesAndConcurrent } from './is-event-0-minutes'
 
 export const handleEventConcurrency = (
   sortedEvents: CalendarEventInternal[],
@@ -8,8 +9,10 @@ export const handleEventConcurrency = (
   for (let i = currentIndex; i < sortedEvents.length; i++) {
     const event = sortedEvents[i]
     const nextEvent: CalendarEventInternal | undefined = sortedEvents[i + 1]
-    const areBothEventsZeroMinutes =
-      event.start && nextEvent?.start && event.start === nextEvent?.end
+    const areBothEventsZeroMinutes = areEvents0MinutesAndConcurrent(
+      event,
+      nextEvent
+    )
 
     if (
       concurrentEventsCache.length &&
@@ -24,10 +27,7 @@ export const handleEventConcurrency = (
         const NpreviousConcurrentEvents = concurrentEventsCache.filter(
           (cachedEvent, index) => {
             if (cachedEvent === currentEvent || index > ii) return false
-            if (
-              cachedEvent.start === currentEvent.start &&
-              cachedEvent.start === currentEvent.end
-            )
+            if (areEvents0MinutesAndConcurrent(cachedEvent, currentEvent))
               return true
 
             return (
@@ -39,10 +39,7 @@ export const handleEventConcurrency = (
         const NupcomingConcurrentEvents = concurrentEventsCache.filter(
           (cachedEvent, index) => {
             if (cachedEvent === currentEvent || index < ii) return false
-            if (
-              cachedEvent.start === currentEvent.start &&
-              cachedEvent.start === currentEvent.end
-            )
+            if (areEvents0MinutesAndConcurrent(cachedEvent, currentEvent))
               return true
 
             return (
@@ -64,8 +61,7 @@ export const handleEventConcurrency = (
           if (
             (cachedEvent.end > currentEvent.start &&
               cachedEvent.start < currentEvent.end) ||
-            (cachedEvent.start === currentEvent.start &&
-              cachedEvent.start === currentEvent.end)
+            areEvents0MinutesAndConcurrent(cachedEvent, currentEvent)
           ) {
             timePoints.push({ time: cachedEvent.start, type: 'start' })
             timePoints.push({ time: cachedEvent.end, type: 'end' })
