@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.32.0](https://github.com/schedule-x/schedule-x/compare/v2.31.1...v2.32.0) (2025-05-31)
+
+### Features
+
+- **translations:** add Persian (fa-IR) locale support ([#1069](https://github.com/schedule-x/schedule-x/issues/1069)) ([e07404e](https://github.com/schedule-x/schedule-x/commit/e07404e137bc152aac8535a157ca6c2ced9e11f6))
+
 ## [2.31.1](https://github.com/schedule-x/schedule-x/compare/v2.31.0...v2.31.1) (2025-05-22)
 
 **Note:** Version bump only for package @schedule-x/translations

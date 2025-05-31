@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.32.0](https://github.com/schedule-x/schedule-x/compare/v2.31.1...v2.32.0) (2025-05-31)
+
+### Bug Fixes
+
+- **calendar:** concurrency for 0 minute events ([#1071](https://github.com/schedule-x/schedule-x/issues/1071)) ([857085b](https://github.com/schedule-x/schedule-x/commit/857085b45ac126bf9eefdde0472ab1407ae8a1c7))
+
 ## [2.31.1](https://github.com/schedule-x/schedule-x/compare/v2.31.0...v2.31.1) (2025-05-22)
 
 ### Bug Fixes
