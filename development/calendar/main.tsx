@@ -266,11 +266,16 @@ const calendar = createCalendar({
       ]
     },
     {
-      title: 'שלום טום',
-      description: 'שלום טום',
-      id: 2,
-      start: '2025-03-27 11:00',
-      end: '2025-03-27 12:00',
+      id: 124,
+      title: 'Weekly event',
+      start: '2025-06-09 14:00',
+      end: '2025-06-09 15:00',
+    },
+    {
+      id: 124,
+      title: 'Weekly event',
+      start: '2025-06-10 14:00',
+      end: '2025-06-10 15:00',
     },
     ...seededEvents
   ],

@@ -1,13 +1,11 @@
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useContext, useEffect, useState, useRef } from 'preact/hooks'
+import { useEffect, useState, useRef } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { format, isSameDay, parseISO, addDays as dateFnsAddDays } from 'date-fns'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 interface DayWithEvents {
   date: string
@@ -214,7 +212,7 @@ export const ListWrapper: PreactViewComponent = ({
           if (!firstVisibleDate) return
 
           // Calculate if we need more dates
-          const twoWeeksBeforeFirstVisible = dateFnsAddDays(parseISO(firstVisibleDate), -14).toISOString().split('T')[0]
+          const twoWeeksBeforeFirstVisible = addDays(firstVisibleDate, -14)
           const needsMoreDates = range.start > twoWeeksBeforeFirstVisible
 
           // Check if we're at the top and scrolling up, or if we have 3 or fewer days above
@@ -224,7 +222,7 @@ export const ListWrapper: PreactViewComponent = ({
           if ((isAtTop || hasFewDaysAbove) && needsMoreDates) {
             isLoadingEarlierRef.current = true
             // Extend range backwards by 2 weeks
-            const newStartDate = dateFnsAddDays(parseISO(range.start), -14).toISOString().split('T')[0]
+            const newStartDate = addDays(range.start, -14)
             $app.calendarState.range.value = {
               start: newStartDate,
               end: range.end
@@ -255,20 +253,13 @@ export const ListWrapper: PreactViewComponent = ({
           const lastVisibleDate = lastVisibleDay.getAttribute('data-date')
           if (!lastVisibleDate) return
 
-          // Calculate if we need more dates
-          const twoWeeksAfterLastVisible = dateFnsAddDays(parseISO(lastVisibleDate), 14).toISOString().split('T')[0]
-          console.log('twoWeeksAfterLastVisible', twoWeeksAfterLastVisible)
+          const twoWeeksAfterLastVisible = addDays(lastVisibleDate, 14)
           const needsMoreDates = range.end < twoWeeksAfterLastVisible
-
-          // Check if we have 3 or fewer days below
           const hasFewDaysBelow = daysBelowViewport <= 3
-
-          console.log('daysBelowViewport', daysBelowViewport)
 
           if (hasFewDaysBelow && needsMoreDates) {
             isLoadingMoreRef.current = true
-            // Extend range forwards by 2 weeks
-            const newEndDate = dateFnsAddDays(parseISO(range.end), 14).toISOString().split('T')[0]
+            const newEndDate = addDays(range.end, 14)
             $app.calendarState.range.value = {
               start: range.start,
               end: newEndDate
@@ -297,12 +288,9 @@ export const ListWrapper: PreactViewComponent = ({
     const eventEndDate = event.end
       ? dateFromDateTime(event.end)
       : eventStartDate
-    const isFirstDay = isSameDay(parseISO(eventStartDate), parseISO(dayDate))
-    const isLastDay = isSameDay(parseISO(eventEndDate), parseISO(dayDate))
-    const isMultiDay = !isSameDay(
-      parseISO(eventStartDate),
-      parseISO(eventEndDate)
-    )
+    const isFirstDay = eventStartDate === dayDate
+    const isLastDay = eventEndDate === dayDate
+    const isMultiDay = eventStartDate !== eventEndDate
 
     const timeOptions = {
       hour: 'numeric',
