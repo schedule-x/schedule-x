@@ -222,7 +222,6 @@ export const ListWrapper: PreactViewComponent = ({
     }
   }, [$app.calendarState.range.value])
 
-  // Set up scroll listener with debounce
   useEffect(() => {
     if (!wrapperRef.current) return
 

@@ -141,7 +141,7 @@ const calendar = createCalendar({
       console.log('onRangeUpdate', range)
     }
   },
-  selectedDate: '2025-04-20',
+  selectedDate: '2024-04-10',
   calendars: {
     personal: {
       colorName: 'personal',
@@ -206,7 +206,7 @@ const calendar = createCalendar({
         backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
         opacity: 0.5,
       },
-      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=TU,TH;',
+      // rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=TU,TH;',
     },
     {
       title: 'Out of office',
@@ -259,11 +259,11 @@ const calendar = createCalendar({
       end: '2025-05-14 15:00',
 
       // will create a recurrence set of 3 events: 2024-02-05 14:00, 2024-02-26 14:00, 2024-03-04 14:00
-      rrule: 'FREQ=WEEKLY;COUNT=5',
-      exdate: [
-        '2024-02-12 14:00',
-        '2024-02-19 14:00'
-      ]
+      // rrule: 'FREQ=WEEKLY;COUNT=5',
+      // exdate: [
+      //   '2024-02-12 14:00',
+      //   '2024-02-19 14:00'
+      // ]
     },
     {
       id: 124,
