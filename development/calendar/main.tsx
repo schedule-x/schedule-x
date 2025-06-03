@@ -141,7 +141,7 @@ const calendar = createCalendar({
       console.log('onRangeUpdate', range)
     }
   },
-  selectedDate: '2025-04-10',
+  selectedDate: '2025-04-20',
   calendars: {
     personal: {
       colorName: 'personal',

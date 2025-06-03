@@ -23,13 +23,14 @@ export const ListWrapper: PreactViewComponent = ({
 }: ListWrapperProps) => {
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const isLoadingMoreRef = useRef(false)
   const isLoadingEarlierRef = useRef(false)
+  const isLoadingLaterRef = useRef(false)
   const hasInitialScrollRef = useRef(false)
   const hasInitialRangeRef = useRef(false)
   const isMountedRef = useRef(true)
+  const earlierTimeoutRef = useRef<number | null>(null)
+  const laterTimeoutRef = useRef<number | null>(null)
 
-  // Memoized function to update days with events
   const updateDaysWithEvents = useCallback((events: CalendarEventInternal[], range: { start: string; end: string }) => {
     if (!isMountedRef.current) return
 
@@ -77,10 +78,10 @@ export const ListWrapper: PreactViewComponent = ({
       return [startDate, endDate]
     })
 
-    const earliestDate = dates.reduce((earliest, current) => 
+    const earliestDate = dates.reduce((earliest, current) =>
       current < earliest ? current : earliest
     )
-    const latestDate = dates.reduce((latest, current) => 
+    const latestDate = dates.reduce((latest, current) =>
       current > latest ? current : latest
     )
 
@@ -112,9 +113,9 @@ export const ListWrapper: PreactViewComponent = ({
     if (selectedDayElement) {
       requestAnimationFrame(() => {
         if (isMountedRef.current) {
-          selectedDayElement.scrollIntoView({ 
+          selectedDayElement.scrollIntoView({
             behavior: 'instant',
-            block: 'start' 
+            block: 'start'
           })
           hasInitialScrollRef.current = true
         }
@@ -122,19 +123,27 @@ export const ListWrapper: PreactViewComponent = ({
     }
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
 
-  // Memoized scroll handler
+  /**
+   * Memoized scroll handler, the goal of which is:
+   *
+   * 1) to handle downwards scrolling, and when 2 days or fewer are visible below the visible
+   * area of the view, the range is extended by 2 weeks.
+   *
+   * 2) Similarly, when scrolling upwards,
+   * if 2 days or fewer are visible above the visible area of the view, range.start is
+   * set to 2 weeks earlier than its current value
+   * */
   const handleScroll = useCallback(() => {
     if (!wrapperRef.current || !isMountedRef.current) return
 
     const wrapper = wrapperRef.current
-    if (isLoadingEarlierRef.current && isLoadingMoreRef.current) return
+    if (isLoadingEarlierRef.current && isLoadingLaterRef.current) return
 
     const range = $app.calendarState.range.value
     if (!range) return
 
     const allDays = wrapper.querySelectorAll('.sx__list-day')
-    
-    // Check for upward scroll
+
     if (!isLoadingEarlierRef.current) {
       const daysAboveViewport = Array.from(allDays).filter(day => {
         const rect = day.getBoundingClientRect()
@@ -162,7 +171,10 @@ export const ListWrapper: PreactViewComponent = ({
             start: newStartDate,
             end: range.end
           }
-          setTimeout(() => {
+          if (earlierTimeoutRef.current) {
+            window.clearTimeout(earlierTimeoutRef.current)
+          }
+          earlierTimeoutRef.current = window.setTimeout(() => {
             if (isMountedRef.current) {
               isLoadingEarlierRef.current = false
             }
@@ -171,8 +183,7 @@ export const ListWrapper: PreactViewComponent = ({
       }
     }
 
-    // Check for downward scroll
-    if (!isLoadingMoreRef.current) {
+    if (!isLoadingLaterRef.current) {
       const daysBelowViewport = Array.from(allDays).filter(day => {
         const rect = day.getBoundingClientRect()
         return rect.top > wrapper.clientHeight && rect.bottom > wrapper.clientHeight
@@ -192,15 +203,18 @@ export const ListWrapper: PreactViewComponent = ({
         const hasFewDaysBelow = daysBelowViewport <= 3
 
         if (hasFewDaysBelow && needsMoreDates) {
-          isLoadingMoreRef.current = true
+          isLoadingLaterRef.current = true
           const newEndDate = addDays(range.end, 14)
           $app.calendarState.range.value = {
             start: range.start,
             end: newEndDate
           }
-          setTimeout(() => {
+          if (laterTimeoutRef.current) {
+            window.clearTimeout(laterTimeoutRef.current)
+          }
+          laterTimeoutRef.current = window.setTimeout(() => {
             if (isMountedRef.current) {
-              isLoadingMoreRef.current = false
+              isLoadingLaterRef.current = false
             }
           }, 1000)
         }
@@ -225,6 +239,12 @@ export const ListWrapper: PreactViewComponent = ({
     return () => {
       if (scrollTimeout) {
         window.clearTimeout(scrollTimeout)
+      }
+      if (earlierTimeoutRef.current) {
+        window.clearTimeout(earlierTimeoutRef.current)
+      }
+      if (laterTimeoutRef.current) {
+        window.clearTimeout(laterTimeoutRef.current)
       }
       if (wrapperRef.current) {
         wrapperRef.current.removeEventListener('scroll', debouncedScroll)
@@ -308,8 +328,8 @@ export const ListWrapper: PreactViewComponent = ({
           </div>
         ) : (
           daysWithEvents.map((day) => (
-            <div 
-              key={day.date} 
+            <div
+              key={day.date}
               className="sx__list-day"
               data-date={day.date}
             >
