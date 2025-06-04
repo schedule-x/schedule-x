@@ -1,3 +1,5 @@
+import { arEG } from './locales/ar-EG'
+import { datePickerArEG } from './locales/ar-EG/date-picker'
 import { deDE } from './locales/de-DE'
 import { datePickerDeDE } from './locales/de-DE/date-picker'
 import { enUS } from './locales/en-US'
@@ -107,6 +109,7 @@ const translations = {
   fiFI,
   roRO,
   faIR,
+  arEG,
 }
 
 const datePickerTranslations = {
@@ -145,6 +148,7 @@ const datePickerTranslations = {
   roRO: datePickerRoRO,
   heIL: datePickerHeIL,
   faIR: datePickerFaIR,
+  arEG: datePickerArEG,
 }
 
 export {
@@ -186,4 +190,5 @@ export {
   roRO,
   heIL,
   faIR,
+  arEG,
 }
