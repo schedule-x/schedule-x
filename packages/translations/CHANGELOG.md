@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.33.0](https://github.com/schedule-x/schedule-x/compare/v2.32.0...v2.33.0) (2025-06-16)
+
+### Features
+
+- **translations:** add translations for Arabic (ar-EG) ([#1072](https://github.com/schedule-x/schedule-x/issues/1072)) ([e7ea644](https://github.com/schedule-x/schedule-x/commit/e7ea64434de2e75087e685a19b58f40cfdd7f66f))
+
 # [2.32.0](https://github.com/schedule-x/schedule-x/compare/v2.31.1...v2.32.0) (2025-05-31)
 
 ### Features
