@@ -104,7 +104,10 @@ describe('MonthAgendaDay', () => {
         })
       )
 
-      expect(onDoubleClickAgendaDate).toHaveBeenCalledWith(date)
+      expect(onDoubleClickAgendaDate).toHaveBeenCalledWith(
+        date,
+        expect.any(UIEvent)
+      )
     })
   })
 

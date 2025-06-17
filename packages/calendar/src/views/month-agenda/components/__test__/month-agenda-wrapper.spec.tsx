@@ -94,7 +94,10 @@ describe('MonthAgendaWrapper', () => {
 
       fireEvent.click(screen.getAllByText('28')[1]) // first 28 is in December 2026, second is in January 2027
 
-      expect(onClickDateSpy).toHaveBeenCalledWith('2027-01-28')
+      expect(onClickDateSpy).toHaveBeenCalledWith(
+        '2027-01-28',
+        expect.any(Object)
+      )
     })
 
     it('should display 5 weeks and 35 days', () => {

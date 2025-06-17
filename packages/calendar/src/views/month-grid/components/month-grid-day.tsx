@@ -50,7 +50,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     e.stopPropagation()
 
     if ($app.config.callbacks.onClickPlusEvents)
-      $app.config.callbacks.onClickPlusEvents(day.date)
+      $app.config.callbacks.onClickPlusEvents(day.date, e)
     if (
       !$app.config.views.value.find(
         (view) => view.name === InternalViewName.Day
@@ -163,12 +163,12 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     <div
       className={wrapperClasses.join(' ')}
       data-date={day.date}
-      onClick={() =>
+      onClick={(e) =>
         $app.config.callbacks.onClickDate &&
-        $app.config.callbacks.onClickDate(day.date)
+        $app.config.callbacks.onClickDate(day.date, e)
       }
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
-      onDblClick={() => $app.config.callbacks.onDoubleClickDate?.(day.date)}
+      onDblClick={(e) => $app.config.callbacks.onDoubleClickDate?.(day.date, e)}
       onMouseDown={handleMouseDown}
     >
       {fullDayBackgroundEvent && (

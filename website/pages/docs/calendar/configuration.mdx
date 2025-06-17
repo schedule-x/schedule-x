@@ -164,63 +164,63 @@ const config = {
     /**
      * Is called when an event is clicked
      * */
-    onEventClick(calendarEvent) {
+    onEventClick(calendarEvent, e: UIEvent) {
       console.log('onEventClick', calendarEvent)
     },
 
     /**
      * Is called when an event is double clicked
      * */
-    onDoubleClickEvent(calendarEvent) {
+    onDoubleClickEvent(calendarEvent, e: UIEvent) {
       console.log('onDoubleClickEvent', calendarEvent)
     },
 
     /**
      * Is called when clicking a date in the month grid
      * */
-    onClickDate(date) {
+    onClickDate(date, e?: UIEvent) {
       console.log('onClickDate', date) // e.g. 2024-01-01
     },
 
     /**
      * Is called when clicking somewhere in the time grid of a week or day view
      * */
-    onClickDateTime(dateTime) {
+    onClickDateTime(dateTime, e?: UIEvent) {
       console.log('onClickDateTime', dateTime) // e.g. 2024-01-01 12:37
     },
 
     /**
      * Is called when selecting a day in the month agenda
      * */
-    onClickAgendaDate(date) {
+    onClickAgendaDate(date, e?: UIEvent) {
       console.log('onClickAgendaDate', date) // e.g. 2024-01-01
     },
 
     /**
-     * Is called when double clicking a day in the month agenda
+     * Is called when double-clicking a day in the month agenda
      * */
-    onDoubleClickAgendaDate(date) {
+    onDoubleClickAgendaDate(date, e?: UIEvent) {
       console.log('onDoubleClickAgendaDate', date) // e.g. 2024-01-01
     },
 
     /**
-     * Is called when double clicking a date in the month grid
+     * Is called when double-clicking a date in the month grid
      * */
-    onDoubleClickDate(date) {
+    onDoubleClickDate(date, e?: UIEvent) {
       console.log('onClickDate', date) // e.g. 2024-01-01
     },
 
     /**
-     * Is called when double clicking somewhere in the time grid of a week or day view
+     * Is called when double-clicking somewhere in the time grid of a week or day view
      * */
-    onDoubleClickDateTime(dateTime) {
+    onDoubleClickDateTime(dateTime, e?: UIEvent) {
       console.log('onDoubleClickDateTime', dateTime) // e.g. 2024-01-01 12:37
     },
 
     /**
      * Is called when clicking the "+ N events" button of a month grid-day
      * */
-    onClickPlusEvents(date) {
+    onClickPlusEvents(date, e?: UIEvent) {
       console.log('onClickPlusEvents', date) // e.g. 2024-01-01
     },
 

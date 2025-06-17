@@ -250,7 +250,10 @@ describe('Calendar callbacks', () => {
         fireEvent(gridDayElement, new MouseEvent('click'))
 
         expect(onClickDate).toHaveBeenCalledTimes(1)
-        expect(onClickDate).toHaveBeenCalledWith('2027-11-01')
+        expect(onClickDate).toHaveBeenCalledWith(
+          '2027-11-01',
+          expect.any(UIEvent)
+        )
       })
     })
   })
@@ -274,7 +277,10 @@ describe('Calendar callbacks', () => {
         fireEvent(gridDayElement, new MouseEvent('dblclick'))
 
         expect(onDoubleClickDate).toHaveBeenCalledTimes(1)
-        expect(onDoubleClickDate).toHaveBeenCalledWith('2027-11-01')
+        expect(onDoubleClickDate).toHaveBeenCalledWith(
+          '2027-11-01',
+          expect.any(UIEvent)
+        )
       })
     })
   })
@@ -310,7 +316,10 @@ describe('Calendar callbacks', () => {
           fireEvent(gridDayElement, new MouseEvent('click'))
 
           expect(onClickDateTime).toHaveBeenCalledTimes(1)
-          expect(onClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
+          expect(onClickDateTime).toHaveBeenCalledWith(
+            '2023-12-11 00:00',
+            expect.any(Object)
+          )
         })
       }
     )
@@ -347,7 +356,10 @@ describe('Calendar callbacks', () => {
           fireEvent(gridDayElement, new MouseEvent('dblclick'))
 
           expect(onDoubleClickDateTime).toHaveBeenCalledTimes(1)
-          expect(onDoubleClickDateTime).toHaveBeenCalledWith('2023-12-11 00:00')
+          expect(onDoubleClickDateTime).toHaveBeenCalledWith(
+            '2023-12-11 00:00',
+            expect.any(UIEvent)
+          )
         })
       }
     )
