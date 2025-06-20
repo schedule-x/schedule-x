@@ -64,13 +64,13 @@ export default function TimeGridDay({
 
   const handleOnClick = (
     e: MouseEvent,
-    callback: ((dateTime: string) => void) | undefined
+    callback: ((dateTime: string, e?: UIEvent) => void) | undefined
   ) => {
     if (!callback || mouseDownOnChild) return
 
     const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
     if (clickDateTime) {
-      callback(clickDateTime)
+      callback(clickDateTime, e)
     }
   }
 

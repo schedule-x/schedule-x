@@ -142,7 +142,8 @@ describe('MonthDay component', () => {
       )
 
       expect(onClickPlusEvents).toHaveBeenCalledWith(
-        dayWithEventLimitPlus2.date
+        dayWithEventLimitPlus2.date,
+        expect.any(UIEvent)
       )
     })
 

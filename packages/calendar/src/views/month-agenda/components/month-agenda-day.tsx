@@ -37,13 +37,13 @@ export default function MonthAgendaDay({
 
   const handleClick = (
     e: MouseEvent,
-    callback: ((dateTime: string) => void) | undefined
+    callback: ((dateTime: string, e?: UIEvent) => void) | undefined
   ) => {
     setActiveDate(day.date)
 
     if (!callback) return
 
-    callback(day.date)
+    callback(day.date, e)
   }
 
   const hasFocus = (weekDay: MonthAgendaDayType) =>
