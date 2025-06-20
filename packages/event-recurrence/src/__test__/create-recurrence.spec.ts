@@ -62,4 +62,49 @@ describe('Creating recurrences for events', () => {
       expect(events[4].end).toEqual('2024-03-30 17:00')
     })
   })
+
+  describe('for one monthly event', () => {
+    it('should not add recurrence if event start is the only recurrence within the range', () => {
+      const eventWithRRule: CalendarEventExternal = {
+        id: '1',
+        title: 'Monthly event',
+        start: '2024-02-05 16:00',
+        end: '2024-02-05 17:00',
+        rrule: 'FREQ=MONTHLY;',
+      }
+      const $app = __createAppWithViews__({
+        events: [eventWithRRule],
+        selectedDate: '2024-02-01',
+      })
+      createEventRecurrencePlugin().beforeRender!($app)
+
+      const events = $app.calendarEvents.list.value
+      expect(events).toHaveLength(1)
+      expect(events[0].start).toEqual('2024-02-05 16:00')
+      expect(events[0].end).toEqual('2024-02-05 17:00')
+    })
+
+    it('should create recurrence in the month following the event start', () => {
+      const eventWithRRule: CalendarEventExternal = {
+        id: '1',
+        title: 'Monthly event',
+        start: '2024-02-05 16:00',
+        end: '2024-02-05 17:00',
+        rrule: 'FREQ=MONTHLY;',
+      }
+      const $app = __createAppWithViews__({
+        events: [eventWithRRule],
+        selectedDate: '2024-03-01',
+        defaultView: 'month-grid',
+      })
+      createEventRecurrencePlugin().beforeRender!($app)
+
+      const events = $app.calendarEvents.list.value
+      expect(events).toHaveLength(2)
+      expect(events[0].start).toEqual('2024-02-05 16:00')
+      expect(events[0].end).toEqual('2024-02-05 17:00')
+      expect(events[1].start).toEqual('2024-03-05 16:00')
+      expect(events[1].end).toEqual('2024-03-05 17:00')
+    })
+  })
 })
