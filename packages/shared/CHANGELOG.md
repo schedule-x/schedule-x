@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.34.0](https://github.com/schedule-x/schedule-x/compare/v2.33.0...v2.34.0) (2025-06-20)
+
+### Features
+
+- add optional UIEvent-param for callbacks ([#1083](https://github.com/schedule-x/schedule-x/issues/1083)) ([4ab30cc](https://github.com/schedule-x/schedule-x/commit/4ab30cc0e4ca9158de2226484360b665b5e2296e))
+
 # [2.33.0](https://github.com/schedule-x/schedule-x/compare/v2.32.0...v2.33.0) (2025-06-16)
 
 **Note:** Version bump only for package @schedule-x/shared
