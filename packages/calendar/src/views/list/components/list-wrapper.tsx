@@ -1,5 +1,5 @@
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useEffect, useState, useRef, useCallback } from 'preact/hooks'
+import { useEffect, useState, useCallback, useRef } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -23,17 +23,8 @@ export const ListWrapper: PreactViewComponent = ({
 }: ListWrapperProps) => {
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const isLoadingEarlierRef = useRef(false)
-  const isLoadingLaterRef = useRef(false)
-  const hasInitialScrollRef = useRef(false)
-  const hasInitialRangeRef = useRef(false)
-  const isMountedRef = useRef(true)
-  const earlierTimeoutRef = useRef<number | null>(null)
-  const laterTimeoutRef = useRef<number | null>(null)
 
   const updateDaysWithEvents = useCallback((events: CalendarEventInternal[], range: { start: string; end: string }) => {
-    if (!isMountedRef.current) return
-
     const daysWithEventsMap = events.reduce(
       (acc: Record<string, CalendarEventInternal[]>, event: CalendarEventInternal) => {
         const startDate = dateFromDateTime(event.start)
@@ -70,7 +61,7 @@ export const ListWrapper: PreactViewComponent = ({
   // Initialize range with earliest and latest event dates only once
   useEffect(() => {
     const events = $app.calendarEvents.list.value
-    if (events.length === 0 || hasInitialRangeRef.current) return
+    if (events.length === 0) return
 
     const dates = events.flatMap(event => {
       const startDate = dateFromDateTime(event.start)
@@ -89,7 +80,6 @@ export const ListWrapper: PreactViewComponent = ({
       start: earliestDate,
       end: latestDate
     }
-    hasInitialRangeRef.current = true
   }, [$app.calendarEvents.list.value])
 
   // Update days with events when events change
@@ -103,7 +93,7 @@ export const ListWrapper: PreactViewComponent = ({
 
   // Scroll to selected date only on initial render
   useEffect(() => {
-    if (!wrapperRef.current || hasInitialScrollRef.current || !isMountedRef.current) return
+    if (!wrapperRef.current) return
 
     const selectedDate = $app.datePickerState.selectedDate.value
     const selectedDayElement = wrapperRef.current.querySelector(
@@ -112,144 +102,13 @@ export const ListWrapper: PreactViewComponent = ({
 
     if (selectedDayElement) {
       requestAnimationFrame(() => {
-        if (isMountedRef.current) {
           selectedDayElement.scrollIntoView({
             behavior: 'instant',
             block: 'start'
           })
-          hasInitialScrollRef.current = true
-        }
       })
     }
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
-
-  /**
-   * Memoized scroll handler, the goal of which is:
-   *
-   * 1) to handle downwards scrolling, and when 2 days or fewer are visible below the visible
-   * area of the view, the range is extended by 2 weeks.
-   *
-   * 2) Similarly, when scrolling upwards,
-   * if 2 days or fewer are visible above the visible area of the view, range.start is
-   * set to 2 weeks earlier than its current value
-   * */
-  const handleScroll = useCallback(() => {
-    if (!wrapperRef.current || !isMountedRef.current) return
-
-    const wrapper = wrapperRef.current
-    if (isLoadingEarlierRef.current && isLoadingLaterRef.current) return
-
-    const range = $app.calendarState.range.value
-    if (!range) return
-
-    const allDays = wrapper.querySelectorAll('.sx__list-day')
-
-    if (!isLoadingEarlierRef.current) {
-      const daysAboveViewport = Array.from(allDays).filter(day => {
-        const rect = day.getBoundingClientRect()
-        return rect.bottom < 0
-      }).length
-
-      const firstVisibleDay = Array.from(allDays).find(day => {
-        const rect = day.getBoundingClientRect()
-        return rect.top >= 0
-      })
-
-      if (firstVisibleDay) {
-        const firstVisibleDate = firstVisibleDay.getAttribute('data-date')
-        if (!firstVisibleDate) return
-
-        const twoWeeksBeforeFirstVisible = addDays(firstVisibleDate, -14)
-        const needsMoreDates = range.start > twoWeeksBeforeFirstVisible
-        const isAtTop = wrapper.scrollTop === 0
-        const hasFewDaysAbove = daysAboveViewport <= 3
-
-        if ((isAtTop || hasFewDaysAbove) && needsMoreDates) {
-          isLoadingEarlierRef.current = true
-          const newStartDate = addDays(range.start, -14)
-          $app.calendarState.range.value = {
-            start: newStartDate,
-            end: range.end
-          }
-          if (earlierTimeoutRef.current) {
-            window.clearTimeout(earlierTimeoutRef.current)
-          }
-          earlierTimeoutRef.current = window.setTimeout(() => {
-            if (isMountedRef.current) {
-              isLoadingEarlierRef.current = false
-            }
-          }, 1000)
-        }
-      }
-    }
-
-    if (!isLoadingLaterRef.current) {
-      const daysBelowViewport = Array.from(allDays).filter(day => {
-        const rect = day.getBoundingClientRect()
-        return rect.top > wrapper.clientHeight && rect.bottom > wrapper.clientHeight
-      }).length
-
-      const lastVisibleDay = Array.from(allDays).findLast(day => {
-        const rect = day.getBoundingClientRect()
-        return rect.bottom <= wrapper.clientHeight
-      })
-
-      if (lastVisibleDay) {
-        const lastVisibleDate = lastVisibleDay.getAttribute('data-date')
-        if (!lastVisibleDate) return
-
-        const twoWeeksAfterLastVisible = addDays(lastVisibleDate, 14)
-        const needsMoreDates = range.end < twoWeeksAfterLastVisible
-        const hasFewDaysBelow = daysBelowViewport <= 3
-
-        if (hasFewDaysBelow && needsMoreDates) {
-          isLoadingLaterRef.current = true
-          const newEndDate = addDays(range.end, 14)
-          $app.calendarState.range.value = {
-            start: range.start,
-            end: newEndDate
-          }
-          if (laterTimeoutRef.current) {
-            window.clearTimeout(laterTimeoutRef.current)
-          }
-          laterTimeoutRef.current = window.setTimeout(() => {
-            if (isMountedRef.current) {
-              isLoadingLaterRef.current = false
-            }
-          }, 1000)
-        }
-      }
-    }
-  }, [$app.calendarState.range.value])
-
-  useEffect(() => {
-    if (!wrapperRef.current) return
-
-    let scrollTimeout: number | null = null
-    const debouncedScroll = () => {
-      if (scrollTimeout) {
-        window.clearTimeout(scrollTimeout)
-      }
-      scrollTimeout = window.setTimeout(handleScroll, 100)
-    }
-
-    wrapperRef.current.addEventListener('scroll', debouncedScroll)
-
-    return () => {
-      if (scrollTimeout) {
-        window.clearTimeout(scrollTimeout)
-      }
-      if (earlierTimeoutRef.current) {
-        window.clearTimeout(earlierTimeoutRef.current)
-      }
-      if (laterTimeoutRef.current) {
-        window.clearTimeout(laterTimeoutRef.current)
-      }
-      if (wrapperRef.current) {
-        wrapperRef.current.removeEventListener('scroll', debouncedScroll)
-      }
-    }
-  }, [handleScroll])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
     const eventStartDate = dateFromDateTime(event.start)
