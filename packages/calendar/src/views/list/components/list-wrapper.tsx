@@ -1,11 +1,12 @@
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useEffect, useState, useCallback, useRef } from 'preact/hooks'
+import { useEffect, useState, useCallback, useRef, MutableRef } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
+import { RefObject } from 'preact'
 
 interface DayWithEvents {
   date: string
@@ -18,6 +19,44 @@ interface ListWrapperProps {
   onScrollDayIntoView?: (date: string) => void
 }
 
+const setRange = (events: CalendarEventInternal[], $app: CalendarAppSingleton) => {
+  const dates = events.flatMap((event) => {
+    const startDate = dateFromDateTime(event.start)
+    const endDate = event.end ? dateFromDateTime(event.end) : startDate
+    return [startDate, endDate]
+  })
+
+  const earliestDate = dates.reduce((earliest, current) =>
+    current < earliest ? current : earliest
+  )
+  const latestDate = dates.reduce((latest, current) =>
+    current > latest ? current : latest
+  )
+
+  $app.calendarState.range.value = {
+    start: earliestDate,
+    end: latestDate,
+  }
+}
+
+const scrollOnDateSelection = ($app: CalendarAppSingleton, wrapperRef: RefObject<HTMLDivElement>) => {
+  if (!wrapperRef.current) return
+
+  const selectedDate = $app.datePickerState.selectedDate.value
+  const selectedDayElement = wrapperRef.current.querySelector(
+    `.sx__list-day[data-date="${selectedDate}"]`
+  )
+
+  if (selectedDayElement instanceof HTMLElement) {
+    requestAnimationFrame(() => {
+      selectedDayElement.scrollIntoView({
+        behavior: 'instant',
+        block: 'start',
+      })
+    })
+  }
+}
+
 export const ListWrapper: PreactViewComponent = ({
   $app,
   id,
@@ -26,17 +65,14 @@ export const ListWrapper: PreactViewComponent = ({
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   const updateDaysWithEvents = useCallback(
-    (
-      events: CalendarEventInternal[],
-      range: { start: string; end: string }
-    ) => {
+    (events: CalendarEventInternal[]) => {
       const daysWithEventsMap = events.reduce(
         (
           acc: Record<string, CalendarEventInternal[]>,
           event: CalendarEventInternal
         ) => {
           const startDate = dateFromDateTime(event.start)
-          const endDate = event.end ? dateFromDateTime(event.end) : startDate
+          const endDate = dateFromDateTime(event.end)
           let currentDate = startDate
 
           while (currentDate <= endDate) {
@@ -68,23 +104,7 @@ export const ListWrapper: PreactViewComponent = ({
     const events = $app.calendarEvents.list.value
     if (events.length === 0) return
 
-    const dates = events.flatMap((event) => {
-      const startDate = dateFromDateTime(event.start)
-      const endDate = event.end ? dateFromDateTime(event.end) : startDate
-      return [startDate, endDate]
-    })
-
-    const earliestDate = dates.reduce((earliest, current) =>
-      current < earliest ? current : earliest
-    )
-    const latestDate = dates.reduce((latest, current) =>
-      current > latest ? current : latest
-    )
-
-    $app.calendarState.range.value = {
-      start: earliestDate,
-      end: latestDate,
-    }
+    setRange(events, $app)
   }, [$app.calendarEvents.list.value])
 
   useEffect(() => {
@@ -92,7 +112,7 @@ export const ListWrapper: PreactViewComponent = ({
     const range = $app.calendarState.range.value
     if (!range) return
 
-    updateDaysWithEvents(events, range)
+    updateDaysWithEvents(events)
   }, [
     $app.calendarEvents.list.value,
     $app.calendarState.range.value,
@@ -132,28 +152,12 @@ export const ListWrapper: PreactViewComponent = ({
   }, [daysWithEvents, $app.config.callbacks.onScrollDayIntoView])
 
   useEffect(() => {
-    if (!wrapperRef.current) return
-
-    const selectedDate = $app.datePickerState.selectedDate.value
-    const selectedDayElement = wrapperRef.current.querySelector(
-      `.sx__list-day[data-date="${selectedDate}"]`
-    )
-
-    if (selectedDayElement instanceof HTMLElement) {
-      requestAnimationFrame(() => {
-        selectedDayElement.scrollIntoView({
-          behavior: 'instant',
-          block: 'start',
-        })
-      })
-    }
+    scrollOnDateSelection($app, wrapperRef)
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
     const eventStartDate = dateFromDateTime(event.start)
-    const eventEndDate = event.end
-      ? dateFromDateTime(event.end)
-      : eventStartDate
+    const eventEndDate = dateFromDateTime(event.end)
     const isFirstDay = eventStartDate === dayDate
     const isLastDay = eventEndDate === dayDate
     const isMultiDay = eventStartDate !== eventEndDate
@@ -246,7 +250,10 @@ export const ListWrapper: PreactViewComponent = ({
                     className="sx__list-event"
                   >
                     <div
-                      className={`sx__list-event-color-line sx__list-event-color-line--${event._color}`}
+                      className={`sx__list-event-color-line`}
+                      style={{
+                        backgroundColor: `var(--sx-color-${event._color})`,
+                      }}
                     />
                     <div className="sx__list-event-content">
                       <div className="sx__list-event-title">{event.title}</div>
