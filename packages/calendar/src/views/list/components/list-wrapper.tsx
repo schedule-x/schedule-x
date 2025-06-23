@@ -19,26 +19,6 @@ interface ListWrapperProps {
   onScrollDayIntoView?: (date: string) => void
 }
 
-const setRange = (events: CalendarEventInternal[], $app: CalendarAppSingleton) => {
-  const dates = events.flatMap((event) => {
-    const startDate = dateFromDateTime(event.start)
-    const endDate = event.end ? dateFromDateTime(event.end) : startDate
-    return [startDate, endDate]
-  })
-
-  const earliestDate = dates.reduce((earliest, current) =>
-    current < earliest ? current : earliest
-  )
-  const latestDate = dates.reduce((latest, current) =>
-    current > latest ? current : latest
-  )
-
-  $app.calendarState.range.value = {
-    start: earliestDate,
-    end: latestDate,
-  }
-}
-
 const scrollOnDateSelection = ($app: CalendarAppSingleton, wrapperRef: RefObject<HTMLDivElement>) => {
   if (!wrapperRef.current) return
 
@@ -101,29 +81,18 @@ export const ListWrapper: PreactViewComponent = ({
   )
 
   useEffect(() => {
-    const events = $app.calendarEvents.list.value
-    if (events.length === 0) return
-
-    setRange(events, $app)
-  }, [$app.calendarEvents.list.value])
-
-  useEffect(() => {
-    const events = $app.calendarEvents.list.value
-    const range = $app.calendarState.range.value
-    if (!range) return
-
-    updateDaysWithEvents(events)
+    updateDaysWithEvents($app.calendarEvents.list.value)
   }, [
     $app.calendarEvents.list.value,
-    $app.calendarState.range.value,
-    updateDaysWithEvents,
   ])
+
+  const [interSectionObserver, setIntersectionObserver] = useState<IntersectionObserver | null>(null)
 
   useEffect(() => {
     if (!wrapperRef.current || !$app.config.callbacks.onScrollDayIntoView)
       return
 
-    const observer = new IntersectionObserver(
+    const _observer = interSectionObserver ||  new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -143,13 +112,15 @@ export const ListWrapper: PreactViewComponent = ({
 
     const dayElements = wrapperRef.current.querySelectorAll('.sx__list-day')
     dayElements.forEach((dayElement) => {
-      observer.observe(dayElement)
+      _observer.observe(dayElement)
     })
 
+    setIntersectionObserver(_observer)
+
     return () => {
-      observer.disconnect()
+      _observer.disconnect()
     }
-  }, [daysWithEvents, $app.config.callbacks.onScrollDayIntoView])
+  }, [daysWithEvents])
 
   useEffect(() => {
     scrollOnDateSelection($app, wrapperRef)

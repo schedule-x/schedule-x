@@ -5,6 +5,7 @@ export const calendarFaIR: CalendarTranslations = {
   Month: 'ماه',
   Week: 'هفته',
   Day: 'روز',
+  List: 'لیست',
   'Select View': 'انتخاب نما',
   '+ {{n}} events': '+ {{n}} رویدادها',
   '+ 1 event': '+ 1 رویداد',
