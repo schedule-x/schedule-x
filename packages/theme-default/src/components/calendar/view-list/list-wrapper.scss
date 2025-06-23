@@ -47,11 +47,35 @@
   gap: 12px;
 }
 
+.sx__list-event:not(:first-child) {
+  border-top: var(--sx-border);
+}
+
 .sx__list-event-color-line {
   width: 4px;
   height: 24px;
   border-radius: 2px;
   flex-shrink: 0;
+}
+
+.sx__list-event-color-line--primary {
+  background-color: var(--sx-color-primary);
+}
+
+.sx__list-event-color-line--secondary {
+  background-color: var(--sx-color-secondary);
+}
+
+.sx__list-event-color-line--tertiary {
+  background-color: var(--sx-color-tertiary);
+}
+
+.sx__list-event-color-line--quaternary {
+  background-color: var(--sx-color-quaternary);
+}
+
+.sx__list-event-color-line--quinary {
+  background-color: var(--sx-color-quinary);
 }
 
 .sx__list-event-content {

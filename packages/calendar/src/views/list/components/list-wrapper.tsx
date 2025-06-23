@@ -59,11 +59,7 @@ export const ListWrapper: PreactViewComponent = ({
         }))
         .sort((a, b) => a.date.localeCompare(b.date))
 
-      const filteredDays = sortedDays.filter(
-        (day) => day.date >= range.start && day.date <= range.end
-      )
-
-      setDaysWithEvents(filteredDays)
+      setDaysWithEvents(sortedDays)
     },
     []
   )
@@ -143,7 +139,7 @@ export const ListWrapper: PreactViewComponent = ({
       `.sx__list-day[data-date="${selectedDate}"]`
     )
 
-    if (selectedDayElement) {
+    if (selectedDayElement instanceof HTMLElement) {
       requestAnimationFrame(() => {
         selectedDayElement.scrollIntoView({
           behavior: 'instant',
@@ -248,15 +244,9 @@ export const ListWrapper: PreactViewComponent = ({
                   <div
                     key={event.id}
                     className="sx__list-event"
-                    style={{
-                      borderTop: index === 0 ? 'none' : '1px solid #e0e0e0',
-                    }}
                   >
                     <div
-                      className="sx__list-event-color-line"
-                      style={{
-                        backgroundColor: `var(--sx-color-${event._color})`,
-                      }}
+                      className={`sx__list-event-color-line sx__list-event-color-line--${event._color}`}
                     />
                     <div className="sx__list-event-content">
                       <div className="sx__list-event-title">{event.title}</div>
