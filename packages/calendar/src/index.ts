@@ -76,6 +76,5 @@ export {
   TimeAxis,
   DateGridDay,
   sortEventsForWeekView,
-  AppContext
+  AppContext,
 }
-

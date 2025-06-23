@@ -24,7 +24,11 @@ export default class TimeUnitsImpl implements TimeUnits {
     const lastDateOfMonth = new Date(year, month + 1, 0)
     const dates: Date[] = []
 
-    for (let date = new Date(firstDateOfMonth); date <= lastDateOfMonth; date.setDate(date.getDate() + 1)) {
+    for (
+      let date = new Date(firstDateOfMonth);
+      date <= lastDateOfMonth;
+      date.setDate(date.getDate() + 1)
+    ) {
       dates.push(new Date(date))
     }
 

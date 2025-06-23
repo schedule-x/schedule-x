@@ -85,6 +85,10 @@ const calendar = createCalendar({
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
   defaultView: 'list',
   callbacks: {
+    onScrollDayIntoView(date) {
+      console.log('onScrollDayIntoView: ', date)
+    },
+
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
     },

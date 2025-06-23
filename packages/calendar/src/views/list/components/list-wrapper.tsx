@@ -15,6 +15,7 @@ interface DayWithEvents {
 interface ListWrapperProps {
   $app: CalendarAppSingleton
   id: string
+  onScrollDayIntoView?: (date: string) => void
 }
 
 export const ListWrapper: PreactViewComponent = ({
@@ -24,46 +25,54 @@ export const ListWrapper: PreactViewComponent = ({
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const updateDaysWithEvents = useCallback((events: CalendarEventInternal[], range: { start: string; end: string }) => {
-    const daysWithEventsMap = events.reduce(
-      (acc: Record<string, CalendarEventInternal[]>, event: CalendarEventInternal) => {
-        const startDate = dateFromDateTime(event.start)
-        const endDate = event.end ? dateFromDateTime(event.end) : startDate
-        let currentDate = startDate
+  const updateDaysWithEvents = useCallback(
+    (
+      events: CalendarEventInternal[],
+      range: { start: string; end: string }
+    ) => {
+      const daysWithEventsMap = events.reduce(
+        (
+          acc: Record<string, CalendarEventInternal[]>,
+          event: CalendarEventInternal
+        ) => {
+          const startDate = dateFromDateTime(event.start)
+          const endDate = event.end ? dateFromDateTime(event.end) : startDate
+          let currentDate = startDate
 
-        while (currentDate <= endDate) {
-          if (!acc[currentDate]) {
-            acc[currentDate] = []
+          while (currentDate <= endDate) {
+            if (!acc[currentDate]) {
+              acc[currentDate] = []
+            }
+            acc[currentDate].push(event)
+            currentDate = addDays(currentDate, 1)
           }
-          acc[currentDate].push(event)
-          currentDate = addDays(currentDate, 1)
-        }
 
-        return acc
-      },
-      {}
-    )
+          return acc
+        },
+        {}
+      )
 
-    const sortedDays = Object.entries(daysWithEventsMap)
-      .map(([date, events]) => ({
-        date,
-        events: events.sort((a, b) => a.start.localeCompare(b.start)),
-      }))
-      .sort((a, b) => a.date.localeCompare(b.date))
+      const sortedDays = Object.entries(daysWithEventsMap)
+        .map(([date, events]) => ({
+          date,
+          events: events.sort((a, b) => a.start.localeCompare(b.start)),
+        }))
+        .sort((a, b) => a.date.localeCompare(b.date))
 
-    const filteredDays = sortedDays.filter(
-      (day) => day.date >= range.start && day.date <= range.end
-    )
+      const filteredDays = sortedDays.filter(
+        (day) => day.date >= range.start && day.date <= range.end
+      )
 
-    setDaysWithEvents(filteredDays)
-  }, [])
+      setDaysWithEvents(filteredDays)
+    },
+    []
+  )
 
-  // Initialize range with earliest and latest event dates only once
   useEffect(() => {
     const events = $app.calendarEvents.list.value
     if (events.length === 0) return
 
-    const dates = events.flatMap(event => {
+    const dates = events.flatMap((event) => {
       const startDate = dateFromDateTime(event.start)
       const endDate = event.end ? dateFromDateTime(event.end) : startDate
       return [startDate, endDate]
@@ -78,20 +87,54 @@ export const ListWrapper: PreactViewComponent = ({
 
     $app.calendarState.range.value = {
       start: earliestDate,
-      end: latestDate
+      end: latestDate,
     }
   }, [$app.calendarEvents.list.value])
 
-  // Update days with events when events change
   useEffect(() => {
     const events = $app.calendarEvents.list.value
     const range = $app.calendarState.range.value
     if (!range) return
 
     updateDaysWithEvents(events, range)
-  }, [$app.calendarEvents.list.value, $app.calendarState.range.value, updateDaysWithEvents])
+  }, [
+    $app.calendarEvents.list.value,
+    $app.calendarState.range.value,
+    updateDaysWithEvents,
+  ])
 
-  // Scroll to selected date only on initial render
+  useEffect(() => {
+    if (!wrapperRef.current || !$app.config.callbacks.onScrollDayIntoView)
+      return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const date = entry.target.getAttribute('data-date')
+            if (date && $app.config.callbacks.onScrollDayIntoView) {
+              $app.config.callbacks.onScrollDayIntoView(date)
+            }
+          }
+        })
+      },
+      {
+        root: wrapperRef.current,
+        rootMargin: '0px',
+        threshold: 0.1,
+      }
+    )
+
+    const dayElements = wrapperRef.current.querySelectorAll('.sx__list-day')
+    dayElements.forEach((dayElement) => {
+      observer.observe(dayElement)
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [daysWithEvents, $app.config.callbacks.onScrollDayIntoView])
+
   useEffect(() => {
     if (!wrapperRef.current) return
 
@@ -102,10 +145,10 @@ export const ListWrapper: PreactViewComponent = ({
 
     if (selectedDayElement) {
       requestAnimationFrame(() => {
-          selectedDayElement.scrollIntoView({
-            behavior: 'instant',
-            block: 'start'
-          })
+        selectedDayElement.scrollIntoView({
+          behavior: 'instant',
+          block: 'start',
+        })
       })
     }
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
@@ -186,11 +229,7 @@ export const ListWrapper: PreactViewComponent = ({
           </div>
         ) : (
           daysWithEvents.map((day) => (
-            <div
-              key={day.date}
-              className="sx__list-day"
-              data-date={day.date}
-            >
+            <div key={day.date} className="sx__list-day" data-date={day.date}>
               <div className="sx__list-day-header">
                 <div className="sx__list-day-date">
                   {toJSDate(day.date).toLocaleDateString(
