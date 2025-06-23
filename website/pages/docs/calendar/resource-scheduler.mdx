@@ -244,8 +244,14 @@ export type ResourceViewConfig = {
   // callback for detecting clicks in the hourly view
   onClickDateTime: Signal<(datetime: string, resourceId: string) => void>
 
+  // callback for detecting double clicks in the hourly view
+  onDoubleClickDateTime: Signal<(datetime: string, resourceId: string) => void>
+
   // callback for detecting clicks in the daily view
   onClickDate: Signal<(date: string, resourceId: string) => void>
+
+  // callback for detecting double clicks in the daily view
+  onDoubleClickDate: Signal<(date: string, resourceId: string) => void>
 
   // callback for detecting clicks on a resource
   onClickResource: Signal<(resourceId: string) => void>
