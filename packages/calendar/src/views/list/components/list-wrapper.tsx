@@ -1,5 +1,11 @@
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useEffect, useState, useCallback, useRef, MutableRef } from 'preact/hooks'
+import {
+  useEffect,
+  useState,
+  useCallback,
+  useRef,
+  MutableRef,
+} from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -19,7 +25,10 @@ interface ListWrapperProps {
   onScrollDayIntoView?: (date: string) => void
 }
 
-const scrollOnDateSelection = ($app: CalendarAppSingleton, wrapperRef: RefObject<HTMLDivElement>) => {
+const scrollOnDateSelection = (
+  $app: CalendarAppSingleton,
+  wrapperRef: RefObject<HTMLDivElement>
+) => {
   if (!wrapperRef.current) return
 
   const selectedDate = $app.datePickerState.selectedDate.value
@@ -43,6 +52,12 @@ export const ListWrapper: PreactViewComponent = ({
 }: ListWrapperProps) => {
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
+
+  /**
+   * "hack" for preventing the onScrollDayIntoView callback from being called just after events have changed
+   * */
+  const blockOnScrollDayIntoViewCallback = useRef(false)
+  const blockTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const updateDaysWithEvents = useCallback(
     (events: CalendarEventInternal[]) => {
@@ -76,39 +91,76 @@ export const ListWrapper: PreactViewComponent = ({
         .sort((a, b) => a.date.localeCompare(b.date))
 
       setDaysWithEvents(sortedDays)
+      console.log('events were added')
+
+      // Clear any existing timeout
+      if (blockTimeoutRef.current) {
+        clearTimeout(blockTimeoutRef.current)
+      }
+
+      blockTimeoutRef.current = setTimeout(() => {
+        blockOnScrollDayIntoViewCallback.current = false
+        blockTimeoutRef.current = null
+      }, 100)
     },
     []
   )
 
   useEffect(() => {
+    blockOnScrollDayIntoViewCallback.current = true
     updateDaysWithEvents($app.calendarEvents.list.value)
-  }, [
-    $app.calendarEvents.list.value,
-  ])
+  }, [$app.calendarEvents.list.value])
 
-  const [interSectionObserver, setIntersectionObserver] = useState<IntersectionObserver | null>(null)
+  // Add scroll event listener to clear the block timeout
+  useEffect(() => {
+    const handleScroll = () => {
+      if (blockTimeoutRef.current) {
+        clearTimeout(blockTimeoutRef.current)
+        blockTimeoutRef.current = null
+        blockOnScrollDayIntoViewCallback.current = false
+      }
+    }
+
+    const wrapper = wrapperRef.current
+    if (wrapper) {
+      wrapper.addEventListener('scroll', handleScroll)
+      return () => {
+        wrapper.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
+
+  const [interSectionObserver, setIntersectionObserver] =
+    useState<IntersectionObserver | null>(null)
 
   useEffect(() => {
     if (!wrapperRef.current || !$app.config.callbacks.onScrollDayIntoView)
       return
 
-    const _observer = interSectionObserver ||  new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const date = entry.target.getAttribute('data-date')
-            if (date && $app.config.callbacks.onScrollDayIntoView) {
-              $app.config.callbacks.onScrollDayIntoView(date)
+    const _observer =
+      interSectionObserver ||
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const date = entry.target.getAttribute('data-date')
+              if (
+                date &&
+                $app.config.callbacks.onScrollDayIntoView &&
+                !blockOnScrollDayIntoViewCallback.current
+              ) {
+                console.log('callback runs')
+                $app.config.callbacks.onScrollDayIntoView(date)
+              }
             }
-          }
-        })
-      },
-      {
-        root: wrapperRef.current,
-        rootMargin: '0px',
-        threshold: 0.1,
-      }
-    )
+          })
+        },
+        {
+          root: wrapperRef.current,
+          rootMargin: '0px',
+          threshold: 0.1,
+        }
+      )
 
     const dayElements = wrapperRef.current.querySelectorAll('.sx__list-day')
     dayElements.forEach((dayElement) => {
@@ -216,10 +268,7 @@ export const ListWrapper: PreactViewComponent = ({
               </div>
               <div className="sx__list-day-events">
                 {day.events.map((event, index) => (
-                  <div
-                    key={event.id}
-                    className="sx__list-event"
-                  >
+                  <div key={event.id} className="sx__list-event">
                     <div
                       className={`sx__list-event-color-line`}
                       style={{

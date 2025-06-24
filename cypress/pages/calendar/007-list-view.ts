@@ -7,7 +7,7 @@ import '@fontsource/roboto-condensed'
 import {
   createCalendar,
   viewList
-} from '@schedule-x/calendar'
+} from '../../../packages/calendar/src'
 import '@schedule-x/theme-default/dist/index.css'
 import '../index.css'
 import { addDays, CalendarEvent } from '@schedule-x/shared'
@@ -33,12 +33,16 @@ const getEventsBetween = (start: string, end: string): CalendarEvent[] => {
 
 let currentStart = '2026-06-23'
 let currentEnd = '2026-06-25'
+let currentNOfEvents = 0
+
+const initialEvents = getEventsBetween(currentStart, currentEnd)
+console.log('Initial events count:', initialEvents.length)
 
 const calendar = createCalendar({
   views: [viewList],
   plugins: [eventsService],
   defaultView: 'week',
-  events: getEventsBetween(currentStart, currentEnd),
+  events: initialEvents,
   callbacks: {
     onScrollDayIntoView: (date) => {
       const dateMinus30 = addDays(date, -30)
@@ -51,7 +55,8 @@ const calendar = createCalendar({
       }
 
       const newEvents = getEventsBetween(currentStart, currentEnd)
-      console.log(newEvents.length)
+      if (newEvents.length === currentNOfEvents) return
+
       eventsService.set(newEvents)
     }
   }
