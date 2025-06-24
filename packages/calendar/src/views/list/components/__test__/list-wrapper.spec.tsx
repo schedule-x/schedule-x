@@ -137,14 +137,20 @@ describe('ListWrapper', () => {
     })
 
     it('should display event color line', () => {
-      const event = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00', { _color: 'primary' })
+      const event = createCalendarEvent(
+        '2023-10-07 10:00',
+        '2023-10-07 11:00',
+        { _color: 'primary' }
+      )
       const { $app } = setup([event])
 
       render(<ListWrapper $app={$app} id="test-list" />)
 
       const colorLine = document.querySelector('.sx__list-event-color-line')
       expect(colorLine).toBeTruthy()
-      expect(colorLine?.className).toContain('sx__list-event-color-line--primary')
+      expect(colorLine?.className).toContain(
+        'sx__list-event-color-line--primary'
+      )
     })
   })
 
@@ -203,8 +209,16 @@ describe('ListWrapper', () => {
 
   describe('event sorting and grouping', () => {
     it('should group events by date', () => {
-      const event1 = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00', { id: '1' })
-      const event2 = createCalendarEvent('2023-10-08 11:00', '2023-10-08 12:00', { id: '2' })
+      const event1 = createCalendarEvent(
+        '2023-10-07 10:00',
+        '2023-10-07 11:00',
+        { id: '1' }
+      )
+      const event2 = createCalendarEvent(
+        '2023-10-08 11:00',
+        '2023-10-08 12:00',
+        { id: '2' }
+      )
       const { $app } = setup([event1, event2])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -214,8 +228,16 @@ describe('ListWrapper', () => {
     })
 
     it('should sort events within a day by start time', () => {
-      const event1 = createCalendarEvent('2023-10-07 11:00', '2023-10-07 12:00', { id: '1' })
-      const event2 = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00', { id: '2' })
+      const event1 = createCalendarEvent(
+        '2023-10-07 11:00',
+        '2023-10-07 12:00',
+        { id: '1' }
+      )
+      const event2 = createCalendarEvent(
+        '2023-10-07 10:00',
+        '2023-10-07 11:00',
+        { id: '2' }
+      )
       const { $app } = setup([event1, event2])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -229,8 +251,16 @@ describe('ListWrapper', () => {
     })
 
     it('should sort days chronologically', () => {
-      const event1 = createCalendarEvent('2023-10-08 10:00', '2023-10-08 11:00', { id: '1' })
-      const event2 = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00', { id: '2' })
+      const event1 = createCalendarEvent(
+        '2023-10-08 10:00',
+        '2023-10-08 11:00',
+        { id: '1' }
+      )
+      const event2 = createCalendarEvent(
+        '2023-10-07 10:00',
+        '2023-10-07 11:00',
+        { id: '2' }
+      )
       const { $app } = setup([event1, event2])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -243,8 +273,16 @@ describe('ListWrapper', () => {
 
   describe('updating range according to first and last events', () => {
     it('should only show events within the specified range', () => {
-      const event1 = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00', { id: '1' })
-      const event2 = createCalendarEvent('2023-10-15 10:00', '2023-10-15 11:00', { id: '2' }) // Outside range
+      const event1 = createCalendarEvent(
+        '2023-10-07 10:00',
+        '2023-10-07 11:00',
+        { id: '1' }
+      )
+      const event2 = createCalendarEvent(
+        '2023-10-15 10:00',
+        '2023-10-15 11:00',
+        { id: '2' }
+      ) // Outside range
       const { $app } = setup([event1, event2])
 
       // Set range to only include first event
