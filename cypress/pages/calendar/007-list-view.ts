@@ -4,10 +4,7 @@ import '@fontsource/open-sans/500-italic.css'
 import '@fontsource/open-sans/700.css'
 import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
-import {
-  createCalendar,
-  viewList
-} from '../../../packages/calendar/src'
+import { createCalendar, viewList } from '../../../packages/calendar/src'
 import '@schedule-x/theme-default/dist/index.css'
 import '../index.css'
 import { addDays, CalendarEvent } from '@schedule-x/shared'
@@ -26,8 +23,8 @@ const getEventsBetween = (start: string, end: string): CalendarEvent[] => {
     const rangeEnd = new Date(end)
 
     return (eventStart >= rangeStart && eventStart <= rangeEnd) ||
-           (eventEnd >= rangeStart && eventEnd <= rangeEnd) ||
-           (eventStart <= rangeStart && eventEnd >= rangeEnd)
+      (eventEnd >= rangeStart && eventEnd <= rangeEnd) ||
+      (eventStart <= rangeStart && eventEnd >= rangeEnd)
   }))
 }
 

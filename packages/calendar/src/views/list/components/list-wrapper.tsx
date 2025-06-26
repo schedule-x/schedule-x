@@ -268,7 +268,7 @@ export const ListWrapper: PreactViewComponent = ({
               </div>
               <div className="sx__list-day-events">
                 {day.events.map((event, index) => (
-                  <div key={event.id} className="sx__list-event">
+                  <div key={event.id} className="sx__event sx__list-event">
                     <div
                       className={`sx__list-event-color-line`}
                       style={{
