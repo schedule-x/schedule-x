@@ -7,7 +7,7 @@ export const calendarHrHR: CalendarTranslations = {
   Day: 'Dan',
   'Select View': 'Odaberite pregled',
   '+ {{n}} events': '+ {{n}} Događaji',
-  '+ {{n}} event': '+ 1 Događaj',
+  '+ 1 event': '+ 1 Događaj',
   'No events': 'Nema događaja',
   'Next period': 'Sljedeći period',
   'Previous period': 'Prethodni period',
