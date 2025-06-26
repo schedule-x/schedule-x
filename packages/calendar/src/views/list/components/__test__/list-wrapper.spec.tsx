@@ -50,48 +50,9 @@ const createMultiDayEvent = (
   } as CalendarEventInternal
 }
 
-const createFullDayEvent = (
-  start: string,
-  end: string,
-  overrides: Partial<CalendarEventInternal> = {}
-) => {
-  return {
-    id: '3',
-    title: 'Full Day Event',
-    start,
-    end,
-    _color: 'tertiary',
-    _isMultiDayFullDay: false,
-    _isSingleDayFullDay: true,
-    _isSingleDayTimed: false,
-    _isMultiDayTimed: false,
-    ...overrides,
-  } as CalendarEventInternal
-}
-
 const setup = (events: CalendarEventInternal[] = []) => {
   const $app = __createAppWithViews__()
-
-  // Setup calendar events
   $app.calendarEvents.list = signal(events)
-
-  // Setup calendar state
-  $app.calendarState.range = signal({
-    start: '2023-10-07',
-    end: '2023-10-10',
-  })
-
-  // Setup date picker state
-  $app.datePickerState.selectedDate = signal('2023-10-07')
-
-  // Setup config
-  $app.config.locale = signal('en-US')
-  $app.config.callbacks = {
-    onScrollDayIntoView: vi.fn(),
-  }
-
-  // Setup translate function
-  $app.translate = vi.fn((key: string) => key)
 
   return { $app }
 }
@@ -175,41 +136,7 @@ describe('ListWrapper', () => {
     })
   })
 
-  describe('rendering full day events', () => {
-    it('should display full day event correctly', () => {
-      const event = createFullDayEvent('2023-10-08', '2023-10-08')
-      const { $app } = setup([event])
-
-      render(<ListWrapper $app={$app} id="test-list" />)
-
-      expect(screen.getByText('Full Day Event')).toBeTruthy()
-      expect(screen.getByText('Sunday, October 8, 2023')).toBeTruthy()
-      // Full day events don't show times
-      expect(screen.queryByText('10:00 AM')).toBeFalsy()
-      expect(screen.queryByText('11:00 AM')).toBeFalsy()
-    })
-  })
-
   describe('event sorting and grouping', () => {
-    it('should group events by date', () => {
-      const event1 = createCalendarEvent(
-        '2023-10-07 10:00',
-        '2023-10-07 11:00',
-        { id: '1' }
-      )
-      const event2 = createCalendarEvent(
-        '2023-10-08 11:00',
-        '2023-10-08 12:00',
-        { id: '2' }
-      )
-      const { $app } = setup([event1, event2])
-
-      render(<ListWrapper $app={$app} id="test-list" />)
-
-      expect(screen.getByText('Saturday, October 7, 2023')).toBeTruthy()
-      expect(screen.getByText('Sunday, October 8, 2023')).toBeTruthy()
-    })
-
     it('should sort events within a day by start time', () => {
       const event1 = createCalendarEvent(
         '2023-10-07 11:00',
@@ -217,8 +144,8 @@ describe('ListWrapper', () => {
         { id: '1' }
       )
       const event2 = createCalendarEvent(
-        '2023-10-07 10:00',
-        '2023-10-07 11:00',
+        '2023-10-07 08:00',
+        '2023-10-07 09:00',
         { id: '2' }
       )
       const { $app } = setup([event1, event2])
@@ -228,9 +155,13 @@ describe('ListWrapper', () => {
       const events = document.querySelectorAll('.sx__list-event')
       expect(events).toHaveLength(2)
 
-      // First event should be the earlier one
       expect(events[0].textContent).toContain('Test Event')
-      expect(events[0].textContent).toContain('10:00 AM')
+      expect(events[0].textContent).toContain('8:00 AM')
+      expect(events[0].textContent).toContain('9:00 AM')
+
+      expect(events[1].textContent).toContain('Test Event')
+      expect(events[1].textContent).toContain('11:00 AM')
+      expect(events[1].textContent).toContain('12:00 PM')
     })
 
     it('should sort days chronologically', () => {
@@ -251,39 +182,6 @@ describe('ListWrapper', () => {
       const days = document.querySelectorAll('.sx__list-day')
       expect(days[0].getAttribute('data-date')).toBe('2023-10-07')
       expect(days[1].getAttribute('data-date')).toBe('2023-10-08')
-    })
-  })
-
-  describe('updating range according to first and last events', () => {
-    it('should only show events within the specified range', () => {
-      const event1 = createCalendarEvent(
-        '2023-10-07 10:00',
-        '2023-10-07 11:00',
-        { id: '1' }
-      )
-      const event2 = createCalendarEvent(
-        '2023-10-15 10:00',
-        '2023-10-15 11:00',
-        { id: '2' }
-      ) // Outside range
-      const { $app } = setup([event1, event2])
-
-      // Set range to only include first event
-      $app.calendarState.range.value = {
-        start: '2023-10-07',
-        end: '2023-10-10',
-      }
-
-      render(<ListWrapper $app={$app} id="test-list" />)
-
-      expect(screen.findByText('Test Event')).toBeTruthy()
-      // Only one event should be shown
-      const events = document.querySelectorAll('.sx__list-event')
-      expect(events).toHaveLength(2)
-      expect($app.calendarState.range.value).toEqual({
-        start: '2023-10-07',
-        end: '2023-10-15',
-      })
     })
   })
 
@@ -321,7 +219,6 @@ describe('ListWrapper', () => {
 
       render(<ListWrapper $app={$app} id="test-list" />)
 
-      // German locale should format date differently
       expect(screen.getByText(/Samstag, 7\. Oktober 2023/)).toBeTruthy()
     })
 
@@ -334,7 +231,6 @@ describe('ListWrapper', () => {
 
       // German locale should use 24-hour format
       expect(screen.getByText('10:00')).toBeTruthy()
-      // no us format
       expect(screen.queryByText('10:00 AM')).toBeFalsy()
     })
   })

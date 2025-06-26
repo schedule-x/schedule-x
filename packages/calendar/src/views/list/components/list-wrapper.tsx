@@ -1,5 +1,5 @@
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useCallback, useEffect, useRef, useState, } from 'preact/hooks'
+import { useEffect, useRef, useState } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -240,7 +240,7 @@ export const ListWrapper: PreactViewComponent = ({
                 </div>
               </div>
               <div className="sx__list-day-events">
-                {day.events.map((event, index) => (
+                {day.events.map((event) => (
                   <div key={event.id} className="sx__event sx__list-event">
                     <div
                       className={`sx__list-event-color-line`}
