@@ -135,23 +135,6 @@ describe('ListWrapper', () => {
       expect(screen.getByText('10:00 AM')).toBeTruthy()
       expect(screen.getByText('11:00 AM')).toBeTruthy()
     })
-
-    it('should display event color line', () => {
-      const event = createCalendarEvent(
-        '2023-10-07 10:00',
-        '2023-10-07 11:00',
-        { _color: 'primary' }
-      )
-      const { $app } = setup([event])
-
-      render(<ListWrapper $app={$app} id="test-list" />)
-
-      const colorLine = document.querySelector('.sx__list-event-color-line')
-      expect(colorLine).toBeTruthy()
-      expect(colorLine?.className).toContain(
-        'sx__list-event-color-line--primary'
-      )
-    })
   })
 
   describe('rendering multi-day events', () => {

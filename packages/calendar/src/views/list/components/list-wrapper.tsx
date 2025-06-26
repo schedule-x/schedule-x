@@ -1,18 +1,12 @@
 import { AppContext } from '../../../utils/stateful/app-context'
-import {
-  useEffect,
-  useState,
-  useCallback,
-  useRef,
-  MutableRef,
-} from 'preact/hooks'
+import { useCallback, useEffect, useRef, useState, } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { RefObject } from 'preact'
+import { scrollOnDateSelection } from '../utils/stateless/scroll-on-date-selection'
 
 interface DayWithEvents {
   date: string
@@ -25,27 +19,6 @@ interface ListWrapperProps {
   onScrollDayIntoView?: (date: string) => void
 }
 
-const scrollOnDateSelection = (
-  $app: CalendarAppSingleton,
-  wrapperRef: RefObject<HTMLDivElement>
-) => {
-  if (!wrapperRef.current) return
-
-  const selectedDate = $app.datePickerState.selectedDate.value
-  const selectedDayElement = wrapperRef.current.querySelector(
-    `.sx__list-day[data-date="${selectedDate}"]`
-  )
-
-  if (selectedDayElement instanceof HTMLElement) {
-    requestAnimationFrame(() => {
-      selectedDayElement.scrollIntoView({
-        behavior: 'instant',
-        block: 'start',
-      })
-    })
-  }
-}
-
 export const ListWrapper: PreactViewComponent = ({
   $app,
   id,
@@ -55,63 +28,64 @@ export const ListWrapper: PreactViewComponent = ({
 
   /**
    * "hack" for preventing the onScrollDayIntoView callback from being called just after events have changed
+   * any ideas for how to improve this are welcome
    * */
   const blockOnScrollDayIntoViewCallback = useRef(false)
   const blockTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const updateDaysWithEvents = useCallback(
-    (events: CalendarEventInternal[]) => {
-      const daysWithEventsMap = events.reduce(
-        (
-          acc: Record<string, CalendarEventInternal[]>,
-          event: CalendarEventInternal
-        ) => {
-          const startDate = dateFromDateTime(event.start)
-          const endDate = dateFromDateTime(event.end)
-          let currentDate = startDate
+  const updateDaysWithEvents = (events: CalendarEventInternal[]) => {
+    const daysWithEventsMap = events.reduce(
+      (
+        acc: Record<string, CalendarEventInternal[]>,
+        event: CalendarEventInternal
+      ) => {
+        const startDate = dateFromDateTime(event.start)
+        const endDate = dateFromDateTime(event.end)
+        let currentDate = startDate
 
-          while (currentDate <= endDate) {
-            if (!acc[currentDate]) {
-              acc[currentDate] = []
-            }
-            acc[currentDate].push(event)
-            currentDate = addDays(currentDate, 1)
+        while (currentDate <= endDate) {
+          if (!acc[currentDate]) {
+            acc[currentDate] = []
           }
+          acc[currentDate].push(event)
+          currentDate = addDays(currentDate, 1)
+        }
 
-          return acc
-        },
-        {}
-      )
+        return acc
+      },
+      {}
+    )
 
-      const sortedDays = Object.entries(daysWithEventsMap)
-        .map(([date, events]) => ({
-          date,
-          events: events.sort((a, b) => a.start.localeCompare(b.start)),
-        }))
-        .sort((a, b) => a.date.localeCompare(b.date))
+    const sortedDays = Object.entries(daysWithEventsMap)
+      .map(([date, events]) => ({
+        date,
+        events: events.sort((a, b) => a.start.localeCompare(b.start)),
+      }))
+      .sort((a, b) => a.date.localeCompare(b.date))
 
-      setDaysWithEvents(sortedDays)
-      console.log('events were added')
+    setDaysWithEvents(sortedDays)
 
-      // Clear any existing timeout
-      if (blockTimeoutRef.current) {
-        clearTimeout(blockTimeoutRef.current)
-      }
+    if (blockTimeoutRef.current) {
+      clearTimeout(blockTimeoutRef.current)
+    }
 
-      blockTimeoutRef.current = setTimeout(() => {
-        blockOnScrollDayIntoViewCallback.current = false
-        blockTimeoutRef.current = null
-      }, 100)
-    },
-    []
-  )
+    blockTimeoutRef.current = setTimeout(() => {
+      blockOnScrollDayIntoViewCallback.current = false
+      blockTimeoutRef.current = null
+    }, 100)
+  }
 
   useEffect(() => {
+    /**
+     * onScrollDayIntoView can never be allowed to be called as a side effect of events changing.
+     * Otherwise, implementers will have to write custom logic to prevent infinite recursion.
+     *
+     * Open to any ideas for how to improve this and make do without a timeout.
+     * */
     blockOnScrollDayIntoViewCallback.current = true
     updateDaysWithEvents($app.calendarEvents.list.value)
   }, [$app.calendarEvents.list.value])
 
-  // Add scroll event listener to clear the block timeout
   useEffect(() => {
     const handleScroll = () => {
       if (blockTimeoutRef.current) {
@@ -149,7 +123,6 @@ export const ListWrapper: PreactViewComponent = ({
                 $app.config.callbacks.onScrollDayIntoView &&
                 !blockOnScrollDayIntoViewCallback.current
               ) {
-                console.log('callback runs')
                 $app.config.callbacks.onScrollDayIntoView(date)
               }
             }

@@ -53,18 +53,6 @@
   flex-shrink: 0;
 }
 
-.sx__list-event-color-line--primary {
-  background-color: var(--sx-color-primary);
-}
-
-.sx__list-event-color-line--secondary {
-  background-color: var(--sx-color-secondary);
-}
-
-.sx__list-event-color-line--tertiary {
-  background-color: var(--sx-color-tertiary);
-}
-
 .sx__list-event-content {
   display: flex;
   justify-content: space-between;
