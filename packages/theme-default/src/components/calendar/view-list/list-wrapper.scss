@@ -20,8 +20,6 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 .sx__list-day-date {
@@ -35,15 +33,13 @@
 .sx__list-day-events {
   padding: 0 16px;
   background: var(--sx-color-background);
-  border-radius: 0;
-  box-shadow: none;
 }
 
 .sx__list-event {
-  padding: 12px 0;
+  padding: 0.75rem 0;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 0.75rem;
 }
 
 .sx__list-event:not(:first-child) {
@@ -51,9 +47,9 @@
 }
 
 .sx__list-event-color-line {
-  width: 4px;
+  width: 5px;
   height: 24px;
-  border-radius: 2px;
+  border-radius:2px;
   flex-shrink: 0;
 }
 
@@ -69,14 +65,6 @@
   background-color: var(--sx-color-tertiary);
 }
 
-.sx__list-event-color-line--quaternary {
-  background-color: var(--sx-color-quaternary);
-}
-
-.sx__list-event-color-line--quinary {
-  background-color: var(--sx-color-quinary);
-}
-
 .sx__list-event-content {
   display: flex;
   justify-content: space-between;
@@ -88,7 +76,6 @@
   font-size: 1em;
   color: var(--sx-color-on-background);
   flex: 1;
-  margin-right: 16px;
 }
 
 .sx__list-event-times {
