@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.35.0](https://github.com/schedule-x/schedule-x/compare/v2.34.0...v2.35.0) (2025-06-27)
+
+### Features
+
+- **resize:** add compatibility for touch devices ([#1098](https://github.com/schedule-x/schedule-x/issues/1098)) ([927d9ae](https://github.com/schedule-x/schedule-x/commit/927d9ae801de7d521e2a801f3e1864f1758ccb62))
+
 # [2.34.0](https://github.com/schedule-x/schedule-x/compare/v2.33.0...v2.34.0) (2025-06-20)
 
 **Note:** Version bump only for package @schedule-x/resize

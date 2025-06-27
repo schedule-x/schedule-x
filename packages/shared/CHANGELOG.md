@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.35.0](https://github.com/schedule-x/schedule-x/compare/v2.34.0...v2.35.0) (2025-06-27)
+
+### Features
+
+- add list view ([#1097](https://github.com/schedule-x/schedule-x/issues/1097)) ([53aabde](https://github.com/schedule-x/schedule-x/commit/53aabde89b7349a55f4d8002e33a47d97f66b90a))
+- improve flexibility for translation key "+ x events" ([#1095](https://github.com/schedule-x/schedule-x/issues/1095)) ([fa25d7a](https://github.com/schedule-x/schedule-x/commit/fa25d7a4b9bc4339f00b821ac6aac132d1df9bbb))
+- **resize:** add compatibility for touch devices ([#1098](https://github.com/schedule-x/schedule-x/issues/1098)) ([927d9ae](https://github.com/schedule-x/schedule-x/commit/927d9ae801de7d521e2a801f3e1864f1758ccb62))
+
 # [2.34.0](https://github.com/schedule-x/schedule-x/compare/v2.33.0...v2.34.0) (2025-06-20)
 
 ### Features
