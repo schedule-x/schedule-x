@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   describe,
   expect,
@@ -5,12 +6,20 @@ import {
   beforeEach,
   afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { cleanup, render, screen, waitFor } from '@testing-library/preact'
+import {
+  cleanup,
+  render,
+  screen,
+  waitFor,
+  fireEvent,
+} from '@testing-library/preact'
 import { ListWrapper } from '../list-wrapper'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { signal } from '@preact/signals'
 import { vi } from 'vitest'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { stubInterface } from 'ts-sinon'
+import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/event-modal.plugin'
 
 const createCalendarEvent = (
   start: string,
@@ -244,6 +253,116 @@ describe('ListWrapper', () => {
       const wrapper = document.getElementById('custom-list-id')
       expect(wrapper).toBeTruthy()
       expect(wrapper?.className).toContain('sx__list-wrapper')
+    })
+  })
+
+  describe('event modal interactions', () => {
+    it('should open modal through click', async () => {
+      const event = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00')
+      const { $app } = setup([event])
+
+      // Mock the event modal plugin
+      const mockEventModal = stubInterface<EventModalPlugin>()
+      mockEventModal.setCalendarEvent =
+        vi.fn() as unknown as typeof mockEventModal.setCalendarEvent
+      mockEventModal.calendarEventElement = signal(null)
+      $app.config.plugins.eventModal = mockEventModal
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      const eventElement = document.querySelector('.sx__list-event')
+      expect(eventElement).toBeTruthy()
+
+      fireEvent.click(eventElement as Element)
+
+      expect(mockEventModal.setCalendarEvent).toHaveBeenCalledWith(
+        event,
+        expect.any(Object)
+      )
+      expect(mockEventModal.calendarEventElement.value).toBe(eventElement)
+    })
+
+    it('should open modal through double click', async () => {
+      const event = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00')
+      const { $app } = setup([event])
+
+      // Mock the event modal plugin
+      const mockEventModal = stubInterface<EventModalPlugin>()
+      mockEventModal.setCalendarEvent =
+        vi.fn() as unknown as typeof mockEventModal.setCalendarEvent
+      mockEventModal.calendarEventElement = signal(null)
+      $app.config.plugins.eventModal = mockEventModal
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      const eventElement = document.querySelector('.sx__list-event')
+      expect(eventElement).toBeTruthy()
+
+      fireEvent.dblClick(eventElement as Element)
+
+      expect(mockEventModal.setCalendarEvent).toHaveBeenCalledWith(
+        event,
+        expect.any(Object)
+      )
+      expect(mockEventModal.calendarEventElement.value).toBe(eventElement)
+    })
+
+    it('should open modal through focus and press Enter', async () => {
+      const event = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00')
+      const { $app } = setup([event])
+
+      // Mock the event modal plugin
+      const mockEventModal = stubInterface<EventModalPlugin>()
+      mockEventModal.setCalendarEvent =
+        vi.fn() as unknown as typeof mockEventModal.setCalendarEvent
+      mockEventModal.calendarEventElement = signal(null)
+      $app.config.plugins.eventModal = mockEventModal
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      const eventElement = document.querySelector(
+        '.sx__list-event'
+      ) as HTMLElement
+      expect(eventElement).toBeTruthy()
+
+      // Focus the element and press Enter
+      eventElement.focus()
+      fireEvent.keyDown(eventElement, { key: 'Enter' })
+
+      expect(mockEventModal.setCalendarEvent).toHaveBeenCalledWith(
+        event,
+        expect.any(Object)
+      )
+      expect(mockEventModal.calendarEventElement.value).toBe(eventElement)
+    })
+
+    it('should open modal through focus and press Space', async () => {
+      const event = createCalendarEvent('2023-10-07 10:00', '2023-10-07 11:00')
+      const { $app } = setup([event])
+
+      // Mock the event modal plugin
+      const mockEventModal = stubInterface<EventModalPlugin>()
+      mockEventModal.setCalendarEvent =
+        vi.fn() as unknown as typeof mockEventModal.setCalendarEvent
+      mockEventModal.calendarEventElement = signal(null)
+      $app.config.plugins.eventModal = mockEventModal
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      const eventElement = document.querySelector(
+        '.sx__list-event'
+      ) as HTMLElement
+      expect(eventElement).toBeTruthy()
+
+      // Focus the element and press Space
+      eventElement.focus()
+      fireEvent.keyDown(eventElement, { key: ' ' })
+
+      expect(mockEventModal.setCalendarEvent).toHaveBeenCalledWith(
+        event,
+        expect.any(Object)
+      )
+      expect(mockEventModal.calendarEventElement.value).toBe(eventElement)
     })
   })
 })

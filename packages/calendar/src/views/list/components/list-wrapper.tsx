@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { AppContext } from '../../../utils/stateful/app-context'
 import { useEffect, useRef, useState } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
@@ -7,6 +8,11 @@ import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preac
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { scrollOnDateSelection } from '../utils/stateless/scroll-on-date-selection'
+import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
+import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
+import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
+import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
+import { focusModal } from '../../../utils/stateless/events/focus-modal'
 
 interface DayWithEvents {
   date: string
@@ -25,6 +31,7 @@ export const ListWrapper: PreactViewComponent = ({
 }: ListWrapperProps) => {
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const { setClickedEvent } = useEventInteractions($app)
 
   /**
    * "hack" for preventing the onScrollDayIntoView callback from being called just after events have changed
@@ -216,6 +223,33 @@ export const ListWrapper: PreactViewComponent = ({
     return <div className="sx__list-event-arrow">↔</div>
   }
 
+  const handleEventClick = (e: MouseEvent, event: CalendarEventInternal) => {
+    setClickedEvent(e, event)
+    invokeOnEventClickCallback($app, event, e)
+  }
+
+  const handleEventDoubleClick = (
+    e: MouseEvent,
+    event: CalendarEventInternal
+  ) => {
+    setClickedEvent(e, event)
+    invokeOnEventDoubleClickCallback($app, event, e)
+  }
+
+  const handleEventKeyDown = (
+    e: KeyboardEvent,
+    event: CalendarEventInternal
+  ) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.stopPropagation()
+      setClickedEvent(e, event)
+      invokeOnEventClickCallback($app, event, e)
+      nextTick(() => {
+        focusModal($app)
+      })
+    }
+  }
+
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__list-wrapper" ref={wrapperRef}>
@@ -241,7 +275,15 @@ export const ListWrapper: PreactViewComponent = ({
               </div>
               <div className="sx__list-day-events">
                 {day.events.map((event) => (
-                  <div key={event.id} className="sx__event sx__list-event">
+                  <div
+                    key={event.id}
+                    className="sx__event sx__list-event"
+                    onClick={(e) => handleEventClick(e, event)}
+                    onDblClick={(e) => handleEventDoubleClick(e, event)}
+                    onKeyDown={(e) => handleEventKeyDown(e, event)}
+                    tabIndex={0}
+                    role="button"
+                  >
                     <div
                       className={`sx__list-event-color-line`}
                       style={{

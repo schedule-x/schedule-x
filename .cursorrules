@@ -1,0 +1,16 @@
+# Cursor Rules
+
+## Test Running
+When the user asks to "run a test", "run tests", "test this file", or similar test-related requests, automatically execute the following command:
+
+```bash
+npx vitest {relative_file_path}
+```
+
+Where `{relative_file_path}` should be replaced with the actual relative path to the current file being tested.
+
+For example:
+- If the user is in a file at `packages/my-package/src/component.test.ts`, run: `npx vitest packages/my-package/src/component.test.ts`
+- If the user is in a file at `libs/utils/helpers.spec.ts`, run: `npx vitest libs/utils/helpers.spec.ts`
+
+This rule applies to any file with test-related extensions like `.test.ts`, `.test.js`, `.spec.ts`, `.spec.js`, etc. 
