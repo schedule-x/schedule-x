@@ -5,6 +5,7 @@ export const calendarIdID: CalendarTranslations = {
   Month: 'Bulan',
   Week: 'Minggu',
   Day: 'Hari',
+  List: 'Daftar',
   'Select View': 'Pilih tampilan',
   '+ {{n}} events': '+ {{n}} Acara',
   '+ 1 event': '+ 1 Acara',

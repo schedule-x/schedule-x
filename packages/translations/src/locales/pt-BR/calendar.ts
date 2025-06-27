@@ -5,6 +5,7 @@ export const calendarPtBR: CalendarTranslations = {
   Month: 'Mês',
   Week: 'Semana',
   Day: 'Dia',
+  List: 'Lista',
   'Select View': 'Selecione uma visualização',
   '+ {{n}} events': '+ {{n}} eventos',
   '+ 1 event': '+ 1 evento',

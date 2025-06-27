@@ -5,6 +5,7 @@ export const calendarArEG: CalendarTranslations = {
   Month: 'الشهر',
   Week: 'الأسبوع',
   Day: 'اليوم',
+  List: 'القائمة',
   'Select View': 'اختر العرض',
   '+ {{n}} events': '+ {{n}} الأحداث',
   '+ 1 event': '+ 1 حدث',

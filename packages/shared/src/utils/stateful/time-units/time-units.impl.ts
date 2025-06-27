@@ -17,6 +17,24 @@ export default class TimeUnitsImpl implements TimeUnits {
     this.config.firstDayOfWeek.value = firstDayOfWeek
   }
 
+  getMonth(year: number, month: Month): Date[] {
+    if (year === 0) throw new NoYearZeroError()
+
+    const firstDateOfMonth = new Date(year, month, 1)
+    const lastDateOfMonth = new Date(year, month + 1, 0)
+    const dates: Date[] = []
+
+    for (
+      let date = new Date(firstDateOfMonth);
+      date <= lastDateOfMonth;
+      date.setDate(date.getDate() + 1)
+    ) {
+      dates.push(new Date(date))
+    }
+
+    return dates
+  }
+
   getMonthWithTrailingAndLeadingDays(year: number, month: Month) {
     if (year === 0) throw new NoYearZeroError()
 

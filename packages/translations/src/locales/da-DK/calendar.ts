@@ -5,6 +5,7 @@ export const calendarDaDK: CalendarTranslations = {
   Month: 'Måned',
   Week: 'Uge',
   Day: 'Dag',
+  List: 'Liste',
   'Select View': 'Vælg visning',
   '+ {{n}} events': '+ {{n}} begivenheder',
   '+ 1 event': '+ 1 begivenhed',

@@ -5,6 +5,7 @@ export const calendarFiFI: CalendarTranslations = {
   Month: 'Kuukausi',
   Week: 'Viikko',
   Day: 'Päivä',
+  List: 'Lista',
   'Select View': 'Valitse näkymä',
   '+ {{n}} events': '+ {{n}} tapahtumaa',
   '+ 1 event': '+ 1 tapahtuma',

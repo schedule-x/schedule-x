@@ -5,6 +5,7 @@ export const calendarItIT: CalendarTranslations = {
   Month: 'Mese',
   Week: 'Settimana',
   Day: 'Giorno',
+  List: 'Lista',
   'Select View': 'Seleziona la vista',
   '+ {{n}} events': '+ {{n}} eventi',
   '+ 1 event': '+ 1 evento',

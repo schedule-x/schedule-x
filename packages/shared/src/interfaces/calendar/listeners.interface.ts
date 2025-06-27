@@ -17,6 +17,7 @@ export interface CalendarCallbacks {
   onMouseDownDateTime?: (dateTime: string, mouseDownEvent: MouseEvent) => void
   onMouseDownDateGridDate?: (date: string, mouseDownEvent: MouseEvent) => void
   onMouseDownMonthGridDate?: (date: string, mouseDownEvent: MouseEvent) => void
+  onScrollDayIntoView?: (date: string) => void
 
   /**
    * Run a validator function before updating an event.

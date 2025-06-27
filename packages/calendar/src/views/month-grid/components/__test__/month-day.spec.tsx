@@ -251,17 +251,13 @@ describe('MonthDay component', () => {
 
   describe('getting the aria label for the more events button', () => {
     it.each([
-      [
-        'de-DE',
-        '+ 1 Ereignis',
-        'Link zu 1 weiteren Ereignis am 1. Januar 2020',
-      ],
+      ['de-DE', '+ 1 Ereignis', 'Link zu 1 weiterem Termin am 1. Januar 2020'],
       ['en-US', '+ 1 event', 'Link to 1 more event on January 1, 2020'],
       ['es-ES', '+ 1 evento', 'Enlace a 1 evento más el 1 de enero de 2020'],
       [
         'fr-FR',
         '+ 1 événement',
-        'Lien vers 1 autre événement le 1 janvier 2020',
+        'Lien vers 1 événement supplémentaire le 1 janvier 2020',
       ],
     ])(
       'should return the singular translation',

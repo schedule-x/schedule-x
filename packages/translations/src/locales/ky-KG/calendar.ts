@@ -5,6 +5,7 @@ export const calendarKyKG: CalendarTranslations = {
   Month: 'Ай',
   Week: 'Апта',
   Day: 'Күн',
+  List: 'Тизме',
   'Select View': 'Көрүнүштү тандаңыз',
   '+ {{n}} events': '+ {{n}} Окуялар',
   '+ 1 event': '+ 1 Окуя',

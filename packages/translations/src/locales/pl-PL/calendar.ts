@@ -5,6 +5,7 @@ export const calendarPlPL: CalendarTranslations = {
   Month: 'Miesiąc',
   Week: 'Tydzień',
   Day: 'Dzień',
+  List: 'Lista',
   'Select View': 'Wybierz widok',
   '+ {{n}} events': '+ {{n}} wydarzenia',
   '+ 1 event': '+ 1 wydarzenie',

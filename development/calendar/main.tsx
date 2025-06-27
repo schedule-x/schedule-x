@@ -20,54 +20,17 @@ import {
   createEventsServicePlugin,
 } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
-import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
 import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
-import {WeekDay} from "@schedule-x/shared/src/enums/time/week-day.enum.ts";
+import { createViewList } from '@schedule-x/calendar/src/views/list'
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
-const scrollControllerPlugin = createScrollControllerPlugin({
-  initialScroll: '01:00',
-})
-
-class CalendarsUpdaterPlugin {
-  name: string = 'calendars-updater'
-  $app!: CalendarAppSingleton
-
-  destroy(): void {}
-
-  init($app: CalendarAppSingleton): void {
-    this.$app = $app
-  }
-
-  updateCalendars(): void {
-    this.$app.config.calendars.value = {
-      ...this.$app.config.calendars.value,
-      personal: {
-        colorName: 'personal',
-        lightColors: {
-          main: 'yellow',
-          container: '#000',
-          onContainer: 'yellow',
-        },
-        darkColors: {
-          main: '#fff5c0',
-          onContainer: '#fff5de',
-          container: '#a29742',
-        },
-      },
-    }
-  }
-}
-const calendarsUpdaterPlugin = new CalendarsUpdaterPlugin()
-
-const calendarControlsPlugin = createCalendarControlsPlugin()
 const eventsServicePlugin = createEventsServicePlugin()
 
 const calendar = createCalendar({
@@ -80,11 +43,14 @@ const calendar = createCalendar({
   weekOptions: {
     eventWidth: 95,
   },
-  showWeekNumbers: true,
   firstDayOfWeek: 1,
-  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda()],
-  defaultView: 'week',
+  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
+  defaultView: 'list',
   callbacks: {
+    onScrollDayIntoView(date) {
+      console.log('onScrollDayIntoView: ', date)
+    },
+
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
     },
@@ -92,10 +58,6 @@ const calendar = createCalendar({
     async onBeforeEventUpdateAsync(oldEvent, newEvent, $app) {
         return Promise.resolve(true)
     },
-
-    // onBeforeEventUpdate(oldEvent, newEvent, $app) {
-    //   return false
-    // },
 
     onEventClick(event, e) {
       console.log('onEventClick', event, e)
@@ -136,7 +98,12 @@ const calendar = createCalendar({
     onDoubleClickDate(date) {
       console.log('onDoubleClickDate', date)
     },
+
+    onRangeUpdate(range) {
+      console.log('onRangeUpdate', range)
+    }
   },
+  selectedDate: '2025-06-10',
   calendars: {
     personal: {
       colorName: 'personal',
@@ -201,7 +168,6 @@ const calendar = createCalendar({
         backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
         opacity: 0.5,
       },
-      rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=TU,TH;',
     },
     {
       title: 'Out of office',
@@ -241,184 +207,22 @@ const calendar = createCalendar({
       },
     }
   ],
-  // dayBoundaries: {
-  //   start: '10:00',
-  //   end: '23:00'
-  // },
+  dayBoundaries: {
+    start: '10:00',
+    end: '23:00'
+  },
+  locale: 'de-DE',
   events: [
-      {
-        "id": 1,
-        "title": "e0",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      },
-      {
-        "id": 2,
-        "title": "e1",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      },
-      {
-        "id": 3,
-        "title": "e2",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      },
-      {
-        "id": 4,
-        "title": "e3",
-        "start": "2025-05-28 01:00",
-        "end": "2025-05-28 01:00"
-      }
+    ...seededEvents
   ],
 }, [
   eventsServicePlugin,
   createDragAndDropPlugin(),
   createCalendarControlsPlugin(),
-  createScrollControllerPlugin({
-    initialScroll: '00:30',
-  }),
+  createScrollControllerPlugin(),
   createCurrentTimePlugin(),
   createEventModalPlugin(),
   createEventRecurrencePlugin(),
   createResizePlugin(),
 ])
 calendar.render(calendarElement)
-
-let darkToggle = 0
-
-const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement
-themeToggle.addEventListener('click', () => {
-  calendar.setTheme(darkToggle % 2 === 0 ? 'dark' : 'light')
-  darkToggle++
-})
-
-const addEventButton = document.getElementById('add-event') as HTMLButtonElement
-addEventButton.addEventListener('click', () => {
-  eventsServicePlugin.add({
-    id: 'new-event',
-    title: 'New Event',
-    start: '2025-03-26 11:00',
-    end: '2025-03-26 12:00',
-  })
-})
-
-const scrollButton = document.getElementById('scroll') as HTMLButtonElement
-scrollButton.addEventListener('click', () => {
-  scrollControllerPlugin.scrollTo(
-    (document.getElementById('scroll-to') as HTMLInputElement).value
-  )
-})
-
-const logAllEventsButton = document.getElementById(
-  'log-all-events'
-) as HTMLButtonElement
-logAllEventsButton.addEventListener('click', () => {
-  console.log(calendar.events.getAll())
-})
-
-const setDateButton = document.getElementById(
-  'set-date-button'
-) as HTMLButtonElement
-setDateButton.addEventListener('click', () => {
-  const newDate = (document.getElementById('set-date') as HTMLInputElement)
-    .value
-  calendarControlsPlugin.setDate(newDate)
-})
-
-const setViewButton = document.getElementById(
-  'set-view-button'
-) as HTMLButtonElement
-setViewButton.addEventListener('click', () => {
-  const newView = (document.getElementById('set-view') as HTMLInputElement)
-    .value
-  calendarControlsPlugin.setView(newView)
-})
-
-const setFirstDayOfWeekButton = document.getElementById(
-    'set-first-day-of-week-button'
-) as HTMLButtonElement
-setFirstDayOfWeekButton.addEventListener('click', () => {
-  const newFirstDayOfWeek = (document.getElementById('set-first-day-of-week') as HTMLInputElement)
-      .value
-  calendarControlsPlugin.setFirstDayOfWeek(parseInt(newFirstDayOfWeek, 10) as WeekDay)
-})
-
-const setNDaysButton = document.getElementById(
-    'set-n-days-button'
-) as HTMLButtonElement
-setNDaysButton.addEventListener('click', () => {
-  const newNDays = (document.getElementById('set-n-days') as HTMLInputElement)
-      .value as unknown as number
-  calendarControlsPlugin.setWeekOptions({...calendarControlsPlugin.getWeekOptions(), nDays: newNDays})
-})
-
-const setLocaleSelect = document.getElementById(
-    'set-locale'
-) as HTMLSelectElement
-setLocaleSelect.addEventListener('change', () => {
-  const newLocale = (document.getElementById('set-locale') as HTMLSelectElement).value
-  calendarControlsPlugin.setLocale(newLocale)
-})
-
-const setDayBoundariesButton = document.getElementById(
-    'set-day-boundaries-button'
-) as HTMLButtonElement
-
-setDayBoundariesButton.addEventListener('click', () => {
-  const newDayBoundariesStart = (document.getElementById('set-day-boundaries-start') as HTMLInputElement).value
-  const newDayBoundariesEnd = (document.getElementById('set-day-boundaries-end') as HTMLInputElement).value
-
-  calendarControlsPlugin.setDayBoundaries({start: `${newDayBoundariesStart.padStart(2, '0')}:00`, end: `${newDayBoundariesEnd.padStart(2, '0')}:00`})
-})
-
-const updateCalendarsButton = document.getElementById(
-  'update-calendars'
-) as HTMLButtonElement
-updateCalendarsButton.addEventListener('click', () => {
-  calendarsUpdaterPlugin.updateCalendars()
-})
-
-const updateBackgroundEventsButton = document.getElementById(
-  'update-background-events'
-) as HTMLButtonElement
-updateBackgroundEventsButton.addEventListener('click', () => {
-  eventsServicePlugin.setBackgroundEvents([
-    {
-      title: 'Out of office',
-      start: '2024-09-03',
-      end: '2024-09-03',
-      style: {
-        backgroundColor: '#1c39f9',
-        opacity: 0.5,
-      },
-    },
-    {
-      title: 'Out of office',
-      start: '2024-09-02 00:00',
-      end: '2024-09-02 02:00',
-      style: {
-        background: 'linear-gradient(45deg, #f91c45, #1c7df9)',
-        opacity: 0.5,
-      },
-    },
-    {
-      title: 'Out of office',
-      start: '2024-09-02 04:00',
-      end: '2024-09-02 07:00',
-      style: {
-        backgroundColor: '#f9ba1c',
-        opacity: 0.5,
-      },
-    },
-    {
-      title: 'Holiday',
-      start: '2024-09-05',
-      end: '2024-09-07',
-      style: {
-        backgroundColor: '#f9501c',
-        opacity: 0.5,
-      },
-    }
-  ])
-})

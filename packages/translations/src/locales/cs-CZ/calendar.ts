@@ -5,6 +5,7 @@ export const calendarCsCZ: CalendarTranslations = {
   Month: 'Měsíc',
   Week: 'Týden',
   Day: 'Den',
+  List: 'Seznam',
   'Select View': 'Vyberte zobrazení',
   '+ {{n}} events': '+ {{n}} události',
   '+ 1 event': '+ 1 událost',

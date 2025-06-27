@@ -8,4 +8,5 @@ export default interface TimeUnits {
   getMonthWithTrailingAndLeadingDays(year: number, month: Month): MonthWithDates
   getWeekFor(date: Date): WeekWithDates
   getMonthsFor(year: number): Date[]
+  getMonth(year: number, month: Month): Date[]
 }

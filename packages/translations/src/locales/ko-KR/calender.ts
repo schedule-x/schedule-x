@@ -5,6 +5,7 @@ export const calendarKoKR: CalendarTranslations = {
   Month: '월',
   Week: '주',
   Day: '일',
+  List: '목록',
   'Select View': '보기 선택',
   '+ {{n}} events': '+ {{n}} 일정들',
   '+ 1 event': '+ 1 일정',

@@ -5,6 +5,7 @@ export const calendarRuRU: CalendarTranslations = {
   Month: 'Месяц',
   Week: 'Неделя',
   Day: 'День',
+  List: 'Список',
   'Select View': 'Выберите вид',
   '+ {{n}} events': '+ {{n}} события',
   '+ 1 event': '+ 1 событие',
