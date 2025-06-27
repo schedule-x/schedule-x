@@ -106,7 +106,7 @@ export default function DateGridEvent({
     })
   }, [calendarEvent, eventCopy])
 
-  const startResize = (mouseEvent: MouseEvent) => {
+  const startResize = (mouseEvent: MouseEvent | TouchEvent) => {
     mouseEvent.stopPropagation()
     const eventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(eventCopy)
@@ -242,6 +242,7 @@ export default function DateGridEvent({
             <div
               className="sx__date-grid-event-resize-handle"
               onMouseDown={startResize}
+              onTouchStart={startResize}
             />
           )}
       </div>

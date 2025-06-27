@@ -135,7 +135,7 @@ export default function TimeGridEvent({
     }
   }
 
-  const startResize = (e: MouseEvent) => {
+  const startResize = (e: MouseEvent | TouchEvent) => {
     setMouseDown(true)
     e.stopPropagation()
 
@@ -284,6 +284,7 @@ export default function TimeGridEvent({
               <div
                 className={'sx__time-grid-event-resize-handle'}
                 onMouseDown={startResize}
+                onTouchStart={startResize}
               />
             )}
         </div>
