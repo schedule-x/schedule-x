@@ -4,4 +4,8 @@
   .sx__is-calendar-small & {
     font-size: 16px;
   }
+
+  .is-list-view & {
+    display: none;
+  }
 }

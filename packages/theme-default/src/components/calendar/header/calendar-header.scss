@@ -19,12 +19,6 @@
   display: flex;
   align-items: center;
   gap: var(--sx-spacing-padding4);
-
-  &.is-inline-start {
-    .is-list-view.sx__is-calendar-small & {
-      display: none;
-    }
-  }
 }
 
 .sx__forward-backward-navigation {
