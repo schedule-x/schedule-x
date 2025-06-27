@@ -241,6 +241,134 @@ describe('Resizing events in the time grid', () => {
     })
   })
 
+  describe('Touch interactions', () => {
+    let $app: CalendarAppSingleton
+    let calendarEvent: CalendarEventInternal
+    let eventCopy: CalendarEventInternal
+    let calendarWrapper: HTMLDivElement
+    const initialY = 500
+    let eventUpdater: Mock
+
+    beforeEach(() => {
+      calendarWrapper = document.createElement('div')
+      $app = stubInterface<CalendarAppSingleton>()
+      $app.elements = { calendarWrapper }
+      $app.config = {
+        ...stubInterface<CalendarConfigInternal>(),
+        weekOptions: signal({
+          ...stubInterface(),
+          gridHeight: 2400,
+          nDays: 1,
+          dayBoundaries: { start: '00:00', end: '24:00' },
+          eventWidth: 100,
+          timeAxisFormatOptions: { hour: 'numeric', minute: '2-digit' },
+        }),
+        timePointsPerDay: 2400,
+      }
+      calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        1,
+        '2024-01-05 06:00',
+        '2024-01-05 07:00'
+      ).build()
+      eventCopy = deepCloneEvent(calendarEvent, $app)
+
+      $app.calendarEvents = stubInterface<CalendarEvents>()
+      $app.calendarEvents.list = signal([calendarEvent])
+      $app.config.callbacks = {
+        onEventUpdate: vi.fn(),
+      }
+      eventUpdater = vi.fn()
+    })
+
+    it('should extend an event by 30 minutes using touch events', () => {
+      const resizePlugin = createResizePlugin() as ResizePlugin
+      resizePlugin.onRender!($app)
+      resizePlugin.createTimeGridEventResizer(
+        calendarEvent,
+        eventUpdater,
+        new TouchEvent('touchstart', {
+          touches: [{ clientY: initialY } as Touch],
+        }),
+        {
+          start: '2024-01-05 00:00',
+          end: '2024-01-05 23:59',
+        }
+      )
+
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      // Touch move 50 pixels down (half hour, because day = 2400px)
+      calendarWrapper.dispatchEvent(
+        new TouchEvent('touchmove', {
+          touches: [{ clientX: 0, clientY: initialY + 50 } as Touch],
+        })
+      )
+      document.dispatchEvent(new TouchEvent('touchend'))
+
+      expect(calendarEvent.start).toBe('2024-01-05 06:00')
+      expect(calendarEvent.end).toBe('2024-01-05 07:30')
+      expect(updateEventSpy).toHaveBeenCalledWith({
+        id: 1,
+        start: '2024-01-05 06:00',
+        end: '2024-01-05 07:30',
+      })
+    })
+
+    it('should shorten an event by 30 minutes using touch events', () => {
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      // Touch move 50 pixels up (half hour, because day = 2400px)
+      calendarWrapper.dispatchEvent(
+        new TouchEvent('touchmove', {
+          touches: [{ clientX: 0, clientY: initialY - 50 } as Touch],
+        })
+      )
+      document.dispatchEvent(new TouchEvent('touchend'))
+
+      expect(calendarEvent.start).toBe('2024-01-05 06:00')
+      expect(calendarEvent.end).toBe('2024-01-05 06:30')
+      expect(updateEventSpy).toHaveBeenCalledWith({
+        id: 1,
+        start: '2024-01-05 06:00',
+        end: '2024-01-05 06:30',
+      })
+    })
+
+    it('should call onEventUpdate once on touchend', () => {
+      new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
+        start: '2024-01-05 00:00',
+        end: '2024-01-05 23:59',
+      })
+      const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
+
+      // first do 3 touchmoves
+      let currentY = initialY
+      for (let i = 0; i < 3; i++) {
+        currentY += 25
+        calendarWrapper.dispatchEvent(
+          new TouchEvent('touchmove', {
+            touches: [{ clientX: 0, clientY: currentY } as Touch],
+          })
+        )
+      }
+
+      // then do a touchend
+      document.dispatchEvent(new TouchEvent('touchend'))
+
+      expect(updateEventSpy).toHaveBeenCalledTimes(1)
+      expect(updateEventSpy).toHaveBeenCalledWith({
+        id: 1,
+        start: '2024-01-05 06:00',
+        end: '2024-01-05 07:45',
+      })
+    })
+  })
+
   describe('aborting an update via onBeforeEventUpdate', () => {
     let $app: CalendarAppSingleton
     let calendarEvent: CalendarEventInternal

@@ -6,6 +6,7 @@ import { addDays } from '@schedule-x/shared/src'
 import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { updateEventsList } from './utils/stateless/update-events-list'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
 export class DateGridEventResizer {
   private readonly dayWidth: number = 0
@@ -33,13 +34,24 @@ export class DateGridEventResizer {
   setupEventListeners() {
     ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
       'mousemove',
-      this.handleMouseMove
+      this.handleMouseOrTouchMove
     )
-    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
+    document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
+    ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
+      'touchmove',
+      this.handleMouseOrTouchMove,
+      { passive: false }
+    )
+    document.addEventListener('touchend', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
   }
 
-  private handleMouseMove = (event: MouseEvent) => {
-    const xDifference = event.clientX - this.initialX
+  private handleMouseOrTouchMove = (event: UIEvent) => {
+    const { clientX } = getEventCoordinates(event)
+    const xDifference = clientX - this.initialX
     let lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
     if (this.$app.config.direction === 'rtl') lastNDaysDiff *= -1
 
@@ -64,7 +76,7 @@ export class DateGridEventResizer {
     this.updateCopy(this.eventCopy)
   }
 
-  private handleMouseUp = async () => {
+  private handleMouseUpOrTouchEnd = async () => {
     const onBeforeEventUpdate =
       this.$app.config.callbacks.onBeforeEventUpdateAsync ||
       this.$app.config.callbacks.onBeforeEventUpdate
@@ -107,7 +119,11 @@ export class DateGridEventResizer {
     )
     ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
       'mousemove',
-      this.handleMouseMove
+      this.handleMouseOrTouchMove
+    )
+    ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
+      'touchmove',
+      this.handleMouseOrTouchMove
     )
   }
 }

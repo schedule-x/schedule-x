@@ -5,6 +5,7 @@ import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-pl
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { DateGridEventResizer } from './date-grid-event-resizer'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
 class ResizePluginImpl implements ResizePlugin {
   name = PluginName.Resize
@@ -19,16 +20,17 @@ class ResizePluginImpl implements ResizePlugin {
   createTimeGridEventResizer(
     calendarEvent: CalendarEventInternal,
     updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
-    mouseDownEvent: MouseEvent,
+    uiEvent: MouseEvent | TouchEvent,
     dayBoundariesDateTime: { start: string; end: string }
   ) {
     if (!this.$app) return this.logError()
 
+    const { clientY } = getEventCoordinates(uiEvent)
     new TimeGridEventResizer(
       this.$app,
       calendarEvent,
       updateCopy,
-      mouseDownEvent.clientY,
+      clientY,
       this.getTimePointsForIntervalConfig(),
       dayBoundariesDateTime
     )
@@ -37,16 +39,12 @@ class ResizePluginImpl implements ResizePlugin {
   createDateGridEventResizer(
     calendarEvent: CalendarEventInternal,
     updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
-    mouseDownEvent: MouseEvent
+    uiEvent: MouseEvent | TouchEvent
   ) {
     if (!this.$app) return this.logError()
 
-    new DateGridEventResizer(
-      this.$app,
-      calendarEvent,
-      updateCopy,
-      mouseDownEvent.clientX
-    )
+    const { clientX } = getEventCoordinates(uiEvent)
+    new DateGridEventResizer(this.$app, calendarEvent, updateCopy, clientX)
   }
 
   private getTimePointsForIntervalConfig(): number {
