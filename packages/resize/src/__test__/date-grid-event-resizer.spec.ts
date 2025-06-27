@@ -16,6 +16,12 @@ import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/
 import { createResizePlugin } from '../resize.plugin'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { waitFor } from '@testing-library/preact'
+import { stubInterface } from 'ts-sinon'
+import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
+import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
+import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-events.interface'
+import { signal } from '@preact/signals'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 describe('Resizing events in the date grid', () => {
   let $app: CalendarAppSingleton
@@ -71,6 +77,12 @@ describe('Resizing events in the date grid', () => {
       return
     }
     calendarWrapper = $app.elements.calendarWrapper
+
+    // Add the missing .sx__time-grid-day element for all tests
+    const timeGridDay = document.createElement('div')
+    timeGridDay.classList.add('sx__time-grid-day')
+    timeGridDay.style.width = '100px'
+    calendarWrapper.appendChild(timeGridDay)
   })
 
   describe('When the calendar wrapper is not found in', () => {
@@ -390,6 +402,123 @@ describe('Resizing events in the date grid', () => {
 
       expect(eventStartingInPreviousWeek.start).toBe('2024-01-21')
       expect(eventStartingInPreviousWeek.end).toBe('2024-01-24')
+    })
+  })
+
+  describe('Touch interactions', () => {
+    let $app: CalendarAppSingleton
+    let calendarEvent: CalendarEventInternal
+    let eventUpdater: Mock
+    let calendarWrapper: HTMLDivElement
+
+    beforeEach(() => {
+      calendarWrapper = document.createElement('div')
+      $app = stubInterface<CalendarAppSingleton>()
+      $app.elements = { calendarWrapper }
+      $app.config = {
+        ...stubInterface<CalendarConfigInternal>(),
+        weekOptions: signal({
+          ...stubInterface(),
+          nDays: 7,
+        }),
+        direction: 'ltr',
+      }
+      calendarEvent = new CalendarEventBuilder(
+        $app.config,
+        1,
+        '2024-01-26',
+        '2024-01-26'
+      ).build()
+
+      $app.calendarState = stubInterface<CalendarState>()
+      $app.calendarState.range = signal({
+        start: '2024-01-22',
+        end: '2024-01-28',
+      } as DateRange)
+      $app.calendarEvents = stubInterface<CalendarEvents>()
+      $app.calendarEvents.list = signal([calendarEvent])
+      $app.config.callbacks = {
+        onEventUpdate: vi.fn(),
+      }
+      eventUpdater = vi.fn()
+
+      // Add the missing .sx__time-grid-day element
+      const timeGridDay = document.createElement('div')
+      timeGridDay.classList.add('sx__time-grid-day')
+      timeGridDay.style.width = '100px'
+      calendarWrapper.appendChild(timeGridDay)
+
+      // Add the missing daywidth setup
+      calendarWrapper.querySelector = (selector: string) => {
+        if (selector === '.sx__time-grid-day') {
+          return {
+            clientWidth: 100,
+          }
+        }
+        return null
+      }
+    })
+
+    it('should resize the event to be one day longer using touch events', async () => {
+      expect(calendarEvent.start).toBe('2024-01-26')
+      expect(calendarEvent.end).toBe('2024-01-26')
+
+      const resizePlugin = createResizePlugin() as ResizePlugin
+      resizePlugin.onRender!($app)
+      // Start at 1000, move to 1100 (100px apart, matches day width)
+      resizePlugin.createDateGridEventResizer(
+        calendarEvent,
+        eventUpdater,
+        new TouchEvent('touchstart', { touches: [{ clientX: 1000 } as Touch] })
+      )
+
+      calendarWrapper.dispatchEvent(
+        new TouchEvent('touchmove', {
+          touches: [{ clientX: 1100 } as Touch],
+        })
+      )
+      document.dispatchEvent(new TouchEvent('touchend'))
+
+      await waitFor(() => {
+        expect(calendarEvent.start).toBe('2024-01-26')
+        expect(calendarEvent.end).toBe('2024-01-27')
+      })
+    })
+
+    it('should call the onEventUpdate callback when the touch resizing is finished', () => {
+      const mockCallback = vi.fn()
+      $app.config.callbacks.onEventUpdate = mockCallback
+      expect(calendarEvent.start).toBe('2024-01-26')
+      expect(calendarEvent.end).toBe('2024-01-26')
+      const resizePlugin = createResizePlugin() as ResizePlugin
+      resizePlugin.onRender!($app)
+      resizePlugin.createDateGridEventResizer(
+        calendarEvent,
+        eventUpdater,
+        new TouchEvent('touchstart', { touches: [{ clientX: 1000 } as Touch] })
+      )
+
+      // Dispatch 2 touchmove events to prove that the callback is still only called once on touchend
+      calendarWrapper.dispatchEvent(
+        new TouchEvent('touchmove', {
+          touches: [{ clientX: 1100 } as Touch],
+        })
+      )
+      calendarWrapper.dispatchEvent(
+        new TouchEvent('touchmove', {
+          touches: [{ clientX: 1200 } as Touch],
+        })
+      )
+      document.dispatchEvent(
+        new TouchEvent('touchend', {
+          touches: [{ clientX: 1200 } as Touch],
+        })
+      )
+
+      expect(mockCallback).toHaveBeenCalledTimes(1)
+      expect(mockCallback).toHaveBeenCalledWith(
+        calendarEvent._getExternalEvent()
+      )
     })
   })
 })
