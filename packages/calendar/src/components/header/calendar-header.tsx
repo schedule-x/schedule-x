@@ -88,7 +88,7 @@ export default function CalendarHeader() {
     <header className={'sx__calendar-header'} data-ccid={headerContentId}>
       {!headerContent && (
         <>
-          <div className={'sx__calendar-header-content is-inline-start'}>
+          <div className={'sx__calendar-header-content'}>
             {headerContentLeftPrependId && (
               <div data-ccid={headerContentLeftPrependId} />
             )}
@@ -108,7 +108,7 @@ export default function CalendarHeader() {
             )}
           </div>
 
-          <div className={'sx__calendar-header-content is-inline-end'}>
+          <div className={'sx__calendar-header-content'}>
             {headerContentRightPrependId && (
               <div data-ccid={headerContentRightPrependId} />
             )}

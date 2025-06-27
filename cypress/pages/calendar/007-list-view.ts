@@ -4,7 +4,7 @@ import '@fontsource/open-sans/500-italic.css'
 import '@fontsource/open-sans/700.css'
 import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
-import { createCalendar, viewList } from '../../../packages/calendar/src'
+import { createCalendar, createViewList } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 import '../index.css'
 import { addDays, CalendarEvent } from '@schedule-x/shared'
@@ -36,7 +36,7 @@ const initialEvents = getEventsBetween(currentStart, currentEnd)
 console.log('Initial events count:', initialEvents.length)
 
 const calendar = createCalendar({
-  views: [viewList],
+  views: [createViewList()],
   plugins: [eventsService],
   defaultView: 'week',
   events: initialEvents,

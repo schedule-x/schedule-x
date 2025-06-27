@@ -66,6 +66,7 @@ export default function CalendarWrapper({ $app }: props) {
   const [transitionClass, setTransitionClass] = useState('')
 
   useSignalEffect(() => {
+    // There is no reason to transition sideways, because the list view is expanded vertically, unlike the other views
     if ($app.calendarState.view.value === InternalViewName.List) return
 
     const newRangeStartIsLaterThanPrevious =
