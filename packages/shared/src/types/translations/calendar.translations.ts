@@ -4,8 +4,8 @@ export interface CalendarTranslations {
   Week: string
   Day: string
   'Select View': string
-  events: string
-  event: string
+  '+ {{n}} events': string
+  '+ 1 event': string
   'No events': string
   'Next period': string
   'Previous period': string

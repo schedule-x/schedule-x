@@ -28,9 +28,9 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   ).length
 
   const getEventTranslationSingularOrPlural = (nOfAdditionalEvents: number) => {
-    if (nOfAdditionalEvents === 1) return $app.translate('event')
+    if (nOfAdditionalEvents === 1) return $app.translate('+ 1 event')
 
-    return $app.translate('events')
+    return $app.translate('+ {{n}} events', { n: nOfAdditionalEvents })
   }
 
   const getAriaLabelSingularOrPlural = (nOfAdditionalEvents: number) => {
@@ -234,9 +234,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
           aria-label={getAriaLabelSingularOrPlural(numberOfNonDisplayedEvents)}
           onClick={handleClickAdditionalEvents}
         >
-          {`+ ${
-            numberOfNonDisplayedEvents
-          } ${getEventTranslationSingularOrPlural(numberOfNonDisplayedEvents)}`}
+          {getEventTranslationSingularOrPlural(numberOfNonDisplayedEvents)}
         </button>
       ) : null}
     </div>
