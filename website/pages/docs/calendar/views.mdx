@@ -52,3 +52,50 @@ const calendar = createCalendar({
 
 calendar.render(document.getElementById('calendar'))
 ```
+
+## Loading events
+
+The strategy for loading events will differ slightly depending on the view.
+
+### Day, Week and Month views
+
+When a user navigates to new days, weeks or months, the calendar will invoke `onRangeUpdate`, which
+you can use to load the events for the new range.
+
+```ts 
+const calendar = createCalendar({
+  views: [createViewDay(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek()],
+ 
+  events: [],
+
+  callbacks: {
+    onRangeUpdate: ({ start, end }) => {
+      // Load events for the new range
+    }
+  }
+})
+ 
+calendar.render(document.getElementById('calendar'))
+```
+
+### List view
+
+The list view is a bit different. When a user scrolls through the list, the calendar will invoke `onScrollDayIntoView`.
+You can then use this callback as a hint for when to load more events. For example, if you start by loading all events for January 2026,
+you can then use this callback to load events for February 2026, when the user reaches one of the last days of January.
+
+```ts 
+const calendar = createCalendar({
+  views: [createViewList()],
+ 
+  events: [],
+
+  callbacks: {
+    onScrollDayIntoView: (date) => {
+      // Load events for the new range
+    }
+  }
+})
+ 
+calendar.render(document.getElementById('calendar'))
+```

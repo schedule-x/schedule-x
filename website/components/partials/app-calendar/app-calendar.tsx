@@ -1,4 +1,4 @@
-import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek } from '@schedule-x/calendar'
+import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek, viewList } from '@schedule-x/calendar'
 import { seededEvents } from './data/seeded-events'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
@@ -7,7 +7,7 @@ import { createResizePlugin } from '@schedule-x/resize'
 
 export default function AppCalendar() {
   const calendarApp = useNextCalendarApp({
-    views: [viewWeek, viewMonthAgenda, viewDay, viewMonthGrid],
+    views: [viewWeek, viewMonthAgenda, viewDay, viewMonthGrid, viewList],
     defaultView: viewWeek.name,
     events: seededEvents,
     plugins: [createDragAndDropPlugin(), createEventModalPlugin(), createResizePlugin()],
