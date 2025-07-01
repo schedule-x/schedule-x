@@ -13,7 +13,16 @@ const meta: MetaRecord = {
     type: 'page',
     href: 'docs',
     title: 'Docs'
-  }
+  },
+  demos: {
+    display: 'hidden',
+    title: 'Demos',
+    type: 'page',
+    theme: {
+      sidebar: false,
+      toc: false
+    }
+  },
 }
 
 export default meta
