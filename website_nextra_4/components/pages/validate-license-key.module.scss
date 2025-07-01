@@ -1,0 +1,30 @@
+.licenseKeyPage {
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+  }
+
+  input {
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  button {
+    background-color: var(--sx-color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--sx-rounding-small);
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}

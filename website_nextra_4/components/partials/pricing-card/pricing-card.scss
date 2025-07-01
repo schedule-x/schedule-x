@@ -1,0 +1,108 @@
+@use '../../../theme/mixins' as mixins;
+
+// create a sexy looking white bg card with a slight shadow
+.pricing-card {
+  display: grid;
+  grid-template-areas:
+    "title"
+    "description"
+    "developers"
+    "price"
+    "features"
+    "button";
+  grid-template-rows: auto 60px 60px 75px 100px auto;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 300px;
+  border: 1px solid rgb(0 0 0 / 10%);
+  text-align: center;
+  align-items: start;
+
+  h3 {
+    grid-area: title;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .pricing-card-description {
+    grid-area: description;
+    color: rgb(13 13 13 / 40%);
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card-price {
+    grid-area: price;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card-price-period {
+    margin-left: 0.25em;
+    font-size: 1.25rem;
+    color: #696363;
+  }
+
+  .app-dropdown {
+    grid-area: developers;
+  }
+
+  .pricing-card-developers {
+    grid-area: developers;
+    width: fit-content;
+    margin: 12px auto 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card-features {
+    grid-area: features;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1rem;
+
+    li {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  button.outlined {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #6750a4;
+    box-shadow: inset 0 0 0 2px #6750a4;
+  }
+
+  button.black {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #000 50%, #333 100%);
+    color: #fff;
+  }
+
+  .btn {
+    grid-area: button;
+    background: linear-gradient(to right, #6750a4 50%, #8c6fb7 100%);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    cursor: pointer;
+    margin-top: 1rem;
+  }
+}

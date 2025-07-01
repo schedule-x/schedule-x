@@ -1,0 +1,333 @@
+@use '../../theme/mixins' as mixins;
+
+$heading-width: 900px;
+
+.landingPage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mixins.smaller-screens {
+    padding: 0 1.5rem;
+  }
+}
+
+.landingPageBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+  background-repeat: repeat;
+  opacity: 0.05;
+}
+
+.marquee-wrapper {
+  width: 100%;
+  margin: 3rem 0;
+
+  /**
+   * The carousel looks kinda weird on smaller screens
+   */
+  @include mixins.smaller-screens {
+    display: none;
+  }
+
+  img {
+    filter: grayscale(100%);
+    transition: all 0.2s ease;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
+  }
+}
+
+.marquee {
+  width: 100%;
+  overflow: visible;
+}
+
+.swiper-wrapper {
+  -webkit-transition-timing-function: linear !important;
+  -o-transition-timing-function: linear !important;
+  transition-timing-function: linear !important;
+}
+
+.marquee-wrapper .swiper {
+  overflow: visible;
+}
+
+
+.landingPage h1 {
+  max-width: $heading-width;
+  font-size: 4.25rem;
+  font-weight: 700;
+  margin: 3rem auto 1rem;
+  text-align: center;
+  text-wrap: balance;
+  color: #002c61;
+
+  .dark & {
+    color: #d0bcff;
+  }
+
+  @include mixins.smaller-screens {
+    font-size: 3rem;
+    text-wrap: initial;
+  }
+}
+
+.headingGradient {
+  background: linear-gradient(to right, #deccfa 0%, #6750a4 100%);
+  text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  .dark & {
+    background: linear-gradient(to left, #deccfa 0%, #6750a4 100%);
+    text-shadow: 0 0 90px rgb(0 0 0 / 30%);
+    background-clip: text;
+  }
+}
+
+.landingPage h2 {
+  max-width: calc(#{$heading-width} - 150px);
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin: 0 auto 2rem;
+  text-align: center;
+  color: #8290ac;
+
+  .dark & {
+    color: #e1daf1;
+  }
+
+  @include mixins.smaller-screens {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 3rem;
+  }
+}
+
+.sx-react-calendar-wrapper {
+  width: 100%;
+  max-width: 950px;
+  height: 600px;
+  margin-bottom: 4rem;
+
+  // lower on mobile
+  @include mixins.mobile-screens {
+    height: 500px;
+  }
+}
+
+.landingPageActions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 4rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+  }
+
+  @include mixins.mobile-screens {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.landingPageAction {
+  font-size: 1.125rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+
+  @include mixins.smaller-screens {
+    font-size: 1rem;
+  }
+
+  @include mixins.mobile-screens {
+    width: 100%;
+    text-align: center;
+  }
+
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+}
+
+@media (hover: hover) {
+  .landingPageAction:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.buttonPrimary {
+  background: linear-gradient(to right, #6750a4 50%, #8c6fb7 100%);
+  color: #fff;
+
+  &.hasMarginBottom {
+    margin-bottom: 2rem;
+  }
+}
+
+.buttonOutlined {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: #6750a4;
+  box-shadow: inset 0 0 0 2px #6750a4;
+
+  .dark & {
+    color: #d0bcff;
+    border-color: #d0bcff;
+    box-shadow: inset 0 0 0 2px #d0bcff;
+  }
+
+  .github-icon {
+    margin-left: 0.5rem;
+  }
+}
+
+.landingPageImage {
+  margin-bottom: 4rem;
+}
+
+.light {
+  .landingPageImage--light {
+    display: block;
+  }
+
+  .landingPageImage--dark {
+    display: none;
+  }
+}
+
+.dark {
+  .landingPageImage--light {
+    display: none;
+  }
+
+  .landingPageImage--dark {
+    display: block;
+  }
+}
+
+.landingPageCards {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 4rem;
+
+  @include mixins.smaller-screens {
+    margin-bottom: 3rem;
+  }
+}
+
+.footer-links {
+  text-align: left;
+  padding-left: 1.5rem;
+
+  a {
+    color: rgb(75, 85, 99);
+
+    .dark & {
+      color:rgb(156, 163, 175)
+    }
+  }
+}
+
+.landingPageSection {
+  position: relative;
+  margin: 250px auto 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &.hasMarginBottom {
+    margin-bottom: 4rem;
+  }
+
+  @include mixins.smaller-screens {
+    margin: 100px auto 0;
+  }
+}
+
+.sectionImage {
+  position: absolute;
+  top: -200px;
+  z-index: 0;
+  pointer-events: none;
+
+  @include mixins.smaller-screens {
+    max-width: initial;
+  }
+}
+
+.features-heading {
+  margin-bottom: 2rem;
+  text-align: center;
+  max-width: $heading-width;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  .featuresText {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--sx-color-primary);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #002c61;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: #8290ac;
+    margin-bottom: 2rem;
+    max-width: 650px;
+
+    .dark & {
+      color: #e1daf1;
+    }
+  }
+
+  ul {
+    margin-bottom: 2rem;
+    text-align: left;
+    list-style: initial;
+
+    @include mixins.smaller-screens {
+      padding-left: 1rem;
+    }
+
+    li {
+      font-size: 1.125rem;
+      color: #8290ac;
+      margin-bottom: 0.75rem;
+    }
+  }
+}
+
+.landingPageDemoVideo {
+  border-radius: 10px;
+}
