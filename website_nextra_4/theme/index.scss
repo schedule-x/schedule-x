@@ -39,6 +39,14 @@ html {
   }
 }
 
+body {
+  background-color: #fff;
+}
+
+.nextra-navbar {
+  background-color: #fff;
+}
+
 .page-wrapper {
   max-width: 90rem;
   min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
