@@ -24,10 +24,11 @@ import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import React from "react";
-import Image from "next/image";
 
 import Script from 'next/script'
 import CookieConsent from '../components/CookieConsent'
+import Logo from '../components/theme/logo'
+import CustomFooter from '../components/theme/custom-footer'
 
 // This default export is required in a new `pages/_app.js` file.
 /* export default function MyApp({ Component, pageProps }) {
@@ -49,13 +50,15 @@ import CookieConsent from '../components/CookieConsent'
 } */
   const navbar = (
     <Navbar
-      logo={<><Image src={'/tarvis_logo.png'} width={120} height={80} alt={'Tarvis logo'} /></>}
+      logo={<Logo />}
       // ... Your additional navbar options
     />
   )
-  const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>
 
   export default async function RootLayout({ children }: { children: React.ReactNode }) {
+    let alxScript = false
+    if (typeof window === 'object') alxScript = true
+
     return (
       <html
         // Not required, but good for SEO
@@ -71,15 +74,29 @@ import CookieConsent from '../components/CookieConsent'
         {/* Your additional tags should be passed as `children` of `<Head>` element */}
       </Head>
       <body>
-      <Layout
-        navbar={navbar}
-        pageMap={await getPageMap()}
-        docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
-        footer={footer}
-      >
-        {children}
-      </Layout>
-      <Script data-domain={'tarvis.dev'} src={'https://analytics.schedule-x.com/js/script.js'} defer/>
+        <Layout
+          navbar={navbar}
+          pageMap={await getPageMap()}
+          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          footer={<CustomFooter />}
+        >
+          {children}
+        </Layout>
+
+        <Script src="https://app.lemonsqueezy.com/js/lemon.js"/>
+
+        {alxScript && window?.location.hostname !== 'localhost' &&
+          <Script data-domain="schedule-x.dev" src="https://analytics.schedule-x.com/js/script.js" defer/>}
+        <Script>
+          {`window.lemonSqueezyAffiliateConfig = { store: "schedule-x" };`}
+        </Script>
+
+        <Script src="https://lmsqueezy.com/affiliate.js" defer/>
+
+        <Script src="https://widget.senja.io/widget/68874853-36dd-407e-86f3-b6f17ba0fa99/platform.js"
+                type="text/javascript" async></Script>
+
+        <CookieConsent />
       </body>
       </html>
     )
