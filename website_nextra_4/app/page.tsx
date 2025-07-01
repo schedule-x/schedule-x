@@ -1,5 +1,3 @@
-'use client' // fix this later
-
 import '@schedule-x/theme-default/dist/index.css'
 import Card from '../components/partials/card/card'
 import dragAndDropIconWhite from '../assets/icons/drag-and-drop-white.svg'
@@ -11,9 +9,16 @@ import responsiveWhite from '../assets/icons/responsive-white.svg'
 import Link from 'next/link'
 import AppCalendar from '../components/partials/app-calendar/app-calendar'
 import Image from 'next/image'
-import { AppReveal } from '../components/partials/reveal/AppReveal'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+
+import { Metadata } from 'next';
+import TextValuePropDevs from '../components/partials/landing-page/text-value-prop-devs'
+import TextValuePropPremium from '../components/partials/landing-page/text-value-prop-premium'
+import LogoSlide from '../components/partials/landing-page/logo-slide'
+
+export const metadata: Metadata = {
+  title: 'Modern JavaScript Event Calendar',
+  description: 'Modern JavaScript Event calendar for React, Angular, Vue and plain JS. Modern alternative to Fullcalendar. Drag & drop, dark mode, event resizing and more.',
+}
 
 export default function LandingPage() {
   return (
@@ -48,61 +53,7 @@ export default function LandingPage() {
 
         <AppCalendar/>
 
-        <div className="marquee-wrapper">
-          <Swiper
-            modules={[Autoplay]}
-            loop={true}
-            slidesPerView={6}
-            spaceBetween={'90px'}
-            speed={8000}
-            allowTouchMove={false}
-            autoplay={{
-              delay: 1
-            }}
-            style={{ alignItems: 'center' }}
-          >
-            <SwiperSlide>
-              <img height={40} width={160} src="/images/logos/AkzoNobel_logo.png" alt="AkzoNobel"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={125} style={{ position: 'relative', top: '-2px' }}
-                   src="/images/logos/iService.png" alt="iService"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={120} style={{ position: 'relative', top: '-4px' }}
-                   src="/images/logos/elevent_horz_color.svg" alt="Book Elevent"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={160} style={{ position: 'relative', top: '-10px' }}  src="/images/logos/statushub.svg" alt="Status Hub"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={160} src="/images/logos/acteamo.png" alt="Acteamo"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={130} style={{ position: 'relative', top: '-7px' }}
-                   src="/images/logos/overflow-logo_full.png" alt="Overflow Marketing"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={160} style={{ position: 'relative', top: '3px' }} src="/images/logos/hipokratija.svg" alt="Hipokratija"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={110} style={{ position: 'relative', top: '-16px' }} src="/images/logos/heaps-7-1024x576.png" alt="Heaps.dk"/>
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img height={40} width={80} style={{ position: 'relative', top: '-13px' }} src="/images/logos/zinya.png"
-                   alt="Zinya Global"/>
-            </SwiperSlide>
-          </Swiper>
-        </div>
-
+        <LogoSlide />
 
         <div className="senja-embed" data-id="68874853-36dd-407e-86f3-b6f17ba0fa99" data-mode="shadow"
              data-lazyload="false"
@@ -115,22 +66,7 @@ export default function LandingPage() {
 
 
           <div className={'features-heading'}>
-            <AppReveal width={'fit-content'}>
-              <div className="featuresText">
-                For web devs
-              </div>
-
-
-              <h3>
-                Ship a calendar in no time
-              </h3>
-
-              <p>
-                Getting it right when building a calendar takes time. Schedule-X already has a lot of things figured out
-                for
-                you, so you can save yourself the months it would take to build a calendar from scratch.
-              </p>
-            </AppReveal>
+            <TextValuePropDevs />
           </div>
 
           <div className={'landingPageCards'}>
@@ -188,19 +124,7 @@ export default function LandingPage() {
                  height={479}/>
 
           <div className={'features-heading'}>
-            <AppReveal width={'fit-content'}>
-              <div className="featuresText">
-                The all-inclusive way
-              </div>
-
-              <h3>
-                Schedule-X Premium
-              </h3>
-
-              <p>Someone already took care of the complex details you need for an all-inclusive calendar experience. No
-                need to build it yourself.</p>
-            </AppReveal>
-
+            <TextValuePropPremium />
 
             <ul>
               <li>Build event modal- and form with recurrence options ~100 hours ❌</li>
