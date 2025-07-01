@@ -28,9 +28,12 @@ const meta: MetaRecord = {
   language: {
     title: "Language"
   },
-  'advanced-usage': {
+  'advanced': {
     title: "Advanced usage"
   },
+  'major-version-migrations': {
+    title: 'Migrating major versions'
+  }
 }
 
 export default meta

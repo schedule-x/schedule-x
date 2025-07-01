@@ -1,0 +1,136 @@
+---
+title: 'Angular component'
+description: 'Learn how to use the Schedule-X calendar in an Angular application'
+---
+
+# Angular component
+
+This page offers documentation for using the Schedule-X calendar in Angular. For general documentation on
+configuring the calendar, refer to the rest of the documentation. If you are using
+Schedule-X in an app with SSR, you need to make sure the component only renders in the browser.
+
+## Installing
+
+import { Tabs } from 'nextra/components'
+
+<Tabs items={['npm', 'pnpm/yarn']}>
+  <Tabs.Tab>
+    ```bash copy
+      npm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      pnpm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+## Basic usage
+
+### Example
+
+```ts
+// app.component.ts
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { CalendarComponent } from "@schedule-x/angular";
+import { createCalendar, createViewWeek } from "@schedule-x/calendar";
+import '@schedule-x/theme-default/dist/index.css' // can alternatively be added in your angular.json
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, CalendarComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'angular-example';
+  calendarApp = createCalendar({
+    events: [
+      {
+        id: '1',
+        title: 'Event 1',
+        start: '2024-06-11 03:00',
+        end: '2024-06-11 05:00',
+      },
+    ],
+    views: [createViewWeek()],
+  })
+}
+
+```
+
+```html
+<!-- app.component.html -->
+
+<main class="main">
+  <div class="content">
+    <sx-calendar [calendarApp]="calendarApp"></sx-calendar>
+  </div>
+</main>
+
+<router-outlet />
+
+```
+
+### Explanation
+
+#### The calendar instance
+
+The `createCalendar` function takes a [configuration object](/docs/calendar/configuration) as its single argument,
+and returns an instance of the calendar app. The calendar instance contains some methods that you can use to
+interact with the calendar events and toggle between light and dark mode. For more on this, refer to the rest of the
+calendar docs.
+
+## Styles
+
+The Schedule-X calendar is a responsive component. To achieve this,
+it cannot be delivered with a fixed height or width of its own. You need to define the height and width of the
+wrapping element `.ng-calendar-wrapper` according to your needs. For a regular desktop application, something
+like this might do the trick for you:
+
+```css
+.ng-calendar-wrapper {
+  width: 1200px;
+  max-width: 100vw;
+  height: 800px;
+  max-height: 90vh;
+}
+```
+
+## Custom markup
+
+You can also use `ng-template` to take control over some of the markup rendered in the calendar. For example, you
+can create a custom event for the time grid, in the week- and day views, like this:
+
+```html
+<ng-template #timeGridEvent let-arg>
+  <div style="background-color: #d6c5ea; border: 2px solid #856dc0; height: 100%; width: 100%; border-radius: 5px;
+padding: 5px">
+    <div>Time grid event: {{ arg.calendarEvent.title }}</div>
+  </div>
+</ng-template>
+```
+
+All available templates are:
+
+| Template name               | Description                                                      | Args                            |
+|-----------------------------|------------------------------------------------------------------|---------------------------------|
+| `timeGridEvent`             | The component for timed events used in the week- and day views   | `calendarEvent`                 |
+| `dateGridEvent`             | The component for all-day events used in the week- and day views | `calendarEvent`                 |
+| `monthGridEvent`            | The component for events used in the month grid view             | `calendarEvent`, `hasStartDate` |
+| `monthAgendaEvent`          | The component for events used in the month agenda view           | `calendarEvent`                 |
+| `eventModal`                | The component for the modal that opens when clicking an event    | `calendarEvent`                 |
+| `headerContentLeftPrepend`  | Prepends content to the left part of the header                  | `$app`                          |
+| `headerContentLeftAppend`   | Appends content to the left part of the header                   | `$app`                          |
+| `headerContentRightPrepend` | Prepends content to the right part of the header                 | `$app`                          |
+| `headerContentRightAppend`  | Appends content to the right part of the header                  | `$app`                          |
+
+[Visual overview of all components](/docs/calendar/custom-components)
+
+## Example
+
+An example repo with a working Angular setup can be found [here](https://github.com/schedule-x/angular-example).
