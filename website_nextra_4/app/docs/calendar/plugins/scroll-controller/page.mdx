@@ -1,0 +1,32 @@
+---
+title: 'Scroll controller plugin'
+description: 'Take control over the scrolling in the week- and day view grids.'
+---
+
+# Scroll controller
+
+Take control over the scrolling in the week- and day view grids.
+
+## Install
+
+```bash copy
+npm i @schedule-x/scroll-controller
+```
+
+## Usage
+
+```js
+import { createScrollControllerPlugin } from '@schedule-x/scroll-controller'
+
+const scrollController = createScrollControllerPlugin({
+  initialScroll: '07:50'
+})
+
+const calendar = createCalendar(
+  { /* calendar options */ },
+  [scrollController]
+)
+calendar.render(document.getElementById('calendar'))
+
+scrollController.scrollTo('04:00')
+```
