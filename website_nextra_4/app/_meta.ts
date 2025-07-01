@@ -23,6 +23,15 @@ const meta: MetaRecord = {
       toc: false
     }
   },
+  premium: {
+    title: 'Premium',
+    type: 'page',
+    theme: {
+      layout: 'full',
+      sidebar: false,
+      toc: false
+    }
+  },
 }
 
 export default meta
