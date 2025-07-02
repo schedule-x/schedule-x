@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import {
   getAuthenticatedUser,
   lemonSqueezySetup,
@@ -11,7 +11,7 @@ lemonSqueezySetup({
   onError: (error) => console.error("Error!", error),
 });
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const response = await getAuthenticatedUser()
 

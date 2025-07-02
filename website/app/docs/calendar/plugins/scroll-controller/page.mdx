@@ -22,10 +22,11 @@ const scrollController = createScrollControllerPlugin({
   initialScroll: '07:50'
 })
 
-const calendar = createCalendar(
-  { /* calendar options */ },
-  [scrollController]
-)
+const calendar = createCalendar({
+  /* other configuration */
+
+  plugins: [scrollController]
+})
 calendar.render(document.getElementById('calendar'))
 
 scrollController.scrollTo('04:00')

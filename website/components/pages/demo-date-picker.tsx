@@ -1,3 +1,5 @@
+'use client'
+
 import { createDatePicker } from '@schedule-x/date-picker'
 import '@schedule-x/theme-default/dist/index.css'
 import { useEffect, useState } from 'react'

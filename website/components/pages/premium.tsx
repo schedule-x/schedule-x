@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import '@schedule-x/theme-default/dist/index.css'
 import AppUnderline from "../partials/svg/underline";
 import Link from "next/link";

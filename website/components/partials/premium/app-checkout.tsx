@@ -80,7 +80,7 @@ export default function AppCheckout() {
     
       const [selectedVariantYearly, setSelectedVariantYearly] = useState<number>(yearlyVariants[0].id)
       const yearlyPricing = useMemo(() => {
-        return yearlyVariants.find((variant) => variant.id === selectedVariantYearly)?.price
+        return yearlyVariants.find((variant) => variant.id === selectedVariantYearly)?.price || 299
       }, [selectedVariantYearly])
     
       const [selectedVariantLifetime, setSelectedVariantLifetime] = useState<number>(lifetimeVariants[0].id)
@@ -152,7 +152,7 @@ export default function AppCheckout() {
 
             <PricingCard
               startCheckout={startCheckout}
-              price={lifetimePricing}
+              price={lifetimePricing || 599}
               isPriceYearly={false}
               data={{
                 title: 'Lifetime license',

@@ -51,8 +51,10 @@ const calendar = createCalendar({
       console.log('rendering events for new range', range)
       icalendarPlugin.between(range.start, range.end)
     },
-  }
-}, [icalendarPlugin])
+  },
+
+  plugins: [icalendarPlugin]
+})
 
 calendar.render(document.getElementById('your-calendar'))
 ```

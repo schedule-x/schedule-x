@@ -33,6 +33,24 @@ const meta: MetaRecord = {
   },
   'major-version-migrations': {
     title: 'Migrating major versions'
+  },
+  'installing-premium': {
+    display: 'hidden',
+    title: 'Installing premium plugins',
+    theme: {
+      navbar: true,
+      sidebar: true,
+      toc: true
+    }
+  },
+  'custom-components': {
+    display: 'hidden',
+    title: 'Custom components',
+    theme: {
+      navbar: true,
+      sidebar: true,
+      toc: true
+    }
   }
 }
 
