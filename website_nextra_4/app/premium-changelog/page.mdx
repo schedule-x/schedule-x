@@ -1,0 +1,481 @@
+# Change Log
+
+# 3.18.0 (2025-06-23)
+
+### Features
+
+* **resource-scheduler:** add double click callbacks for time and datetime
+
+## 3.17.0 (2025-05-16)
+
+### Features
+
+* **drag-to-create:** add onBeforeAddEventAsync method
+* **draw:** add onBeforeFinishDrawingAsync method
+* **interactive-event-modal:** add openForExistingEvent method
+* **interactive-event-modal:** prevent closing on click outside
+* **resource-scheduler:** add _options API compatibility
+
+## 3.16.1 (2025-05-02)
+
+### Bug Fixes
+
+* **resource-view:** make sure initialDays and initialHours doesn't break date selection
+
+## 3.16.0 (2025-05-02)
+
+### Features
+
+* **sidebar:** updatePlaceholderEvents
+
+## 3.15.0 (2025-04-12)
+
+### Features
+
+* **interactive-event-modal:** add custom field type "any"
+
+## 3.14.0 (2025-04-12)
+
+### Features
+
+* **draw:** add onBeforeFinishDrawing callback
+
+## 3.13.0 (2025-04-08)
+
+### Features
+
+* rtl support
+
+## 3.12.0 (2025-04-01)
+
+### Features
+
+* **resource-scheduler:** use onDoubleClickEvent callback
+
+## 3.11.1 (2025-03-31)
+
+### Bug Fixes
+
+* **resource-scheduler:** lazy loading in daily view when selected date is last day of month
+
+## 3.11.0 (2025-03-29)
+
+### Features
+
+* **resource-scheduler:** add data-event-id attribute to event element
+
+## 3.10.0 (2025-03-29)
+
+### Features
+
+* **resource-scheduler:** onEventClick
+
+## 3.8.1 (2025-03-19)
+
+### Bug Fixes
+
+* **sidebar:** prevent day view header to overlap sidebar
+
+## 3.8.0 (2025-03-18)
+
+### Features
+
+* scheduling assistant
+
+## 3.7.0 (2025-03-12)
+
+### Features
+
+* **resource-scheduler:** add onClickDateTime and onClickDate APIs
+* **resource-scheduler:** add onClickResource API
+
+## 3.6.0 (2025-03-11)
+
+### Bug Fixes
+
+* **resource-scheduler:** globals for umd bundle
+* **resource-scheduler:** rendering of sticky month- and date labels
+
+### Features
+
+* **resource-scheduler:** enable specifying the initially displayed columns
+* **resource-scheduler:** add infiniteScroll signal to config, for optionally disabling infinite scroll
+
+## 3.5.1 (2025-03-06)
+
+### Bug Fixes
+
+* **resource-scheduler:** update rrule UNTIL correctly after dragging in daily grid
+
+## 3.5.0 (2025-03-05)
+
+### Features
+
+* **interactive-event-modal:** add isEventEditable callback
+
+## 3.4.0 (2025-02-27)
+
+### Features
+
+* **interactive-event-modal:** add combobox-multi custom field
+* **sidebar:** enable selection of placeholder events
+
+## 3.3.1 (2025-02-21)
+
+### Bug Fixes
+
+* **resource-scheduler:** dragging recurrent events
+* **resource-scheduler:** sticky month name when selected date is not first of month
+
+## 3.3.0 (2025-02-19)
+
+### Features
+
+* resource grouping
+
+## 3.2.0 (2025-02-15)
+
+### Features
+
+* add onLazyLoadDate and onLazyLoadMonth callbacks to resource scheduler
+* **interactive-event-modal:** enable configuring placeholders
+
+## 3.1.1 (2025-02-15)
+
+### Bug Fixes
+
+* **resource-view:** dragging between daily grid resources resets event time
+
+## 3.1.0 (2025-02-07)
+
+### Bug Fixes
+
+* **interactive-event-modal:** throw error if onAddEvent is missing
+
+### Features
+
+* **sidebar:** add slot for "Add event" button
+
+## 3.0.1 (2025-02-04)
+
+### Bug Fixes
+
+* modal position on consecutive clicks on events
+
+## 3.0.0 (2025-02-04)
+
+### Features
+
+* **interactive-event-modal:** more rrule options
+
+### BREAKING CHANGES
+
+* **interactive-event-modal:** new UI and way to configure recurrence fields in modal
+
+## 2.9.0 (2025-01-28)
+
+### Features
+
+* **interactive-event-modal:** hideTitle flag
+
+## 2.8.0 (2025-01-28)
+
+### Features
+
+* add translations
+
+## 2.7.0 (2025-01-24)
+
+### Features
+
+* **ai-assistant:** add styles export
+
+## 2.6.0 (2025-01-22)
+
+### Features
+
+* **draw:** enable configuring snap duration
+
+## 2.5.0 (2025-01-21)
+
+### Features
+
+* **resource-scheduler:** allow disabling drag-and-drop and resize
+
+## 2.4.0 (2025-01-20)
+
+### Features
+
+* **ai-assistant:** add new plugin for Schedule-X platform
+
+## 2.3.3 (2025-01-11)
+
+### Bug Fixes
+
+* **interactive-event-modal:** reactivity bug
+
+## 2.3.2 (2025-01-10)
+
+### Bug Fixes
+
+* **interactive-event-modal:** reactivity bug
+
+
+## 2.3.1 (2025-01-07)
+
+### Bug Fixes
+
+* **draw:** pass external event through callback
+
+## 2.3.0 (2025-01-07)
+
+### Features
+
+* **draw:** add onFinishDrawing callback
+
+## 2.2.0 (2025-01-06)
+
+### Features
+
+* **draw:** add plugin
+
+## 2.1.0 (2024-12-20)
+
+### Features
+
+* enable changing date format of date picker
+
+## 2.0.0 (2024-12-03)
+
+### Bug Fixes
+
+* **interactive-event-modal:** enable validating event in add-view
+
+### Features
+
+* **interactive-event-modal:** make custom fields reactive and add `createInputField` API
+
+## 1.7.0 (2024-11-30)
+
+### Features
+
+* **drag-to-create:** onBeforeAddEvent for validating event creation
+
+## 1.6.0 (2024-11-28)
+
+### Features
+
+* **interactive-event-modal:** min and max for date picker
+* throw error on invalid config
+
+## 1.5.1 (2024-11-19)
+
+### Bug Fixes
+
+* **drag-to-create:** plugin name
+
+## 1.5.0 (2024-10-18)
+
+
+### Features
+
+* **modal:** add on change callback for fields
+
+
+## 1.4.0 (2024-10-11)
+
+### Features
+
+* **modal:** enable programmatic update of fields
+
+## 1.3.0 (2024-10-05)
+
+
+### Bug Fixes
+
+* build issue
+
+### Features
+
+* resource view daily first stable version
+
+## 1.2.0 (2024-10-01)
+
+
+### Features
+
+* custom fields in interactive event modal
+
+
+
+## 1.1.0 (2024-09-26)
+
+
+### Features
+
+* use new plugin api
+
+
+
+## 1.0.1 (2024-09-23)
+
+Migrate to @schedule-x monorepo dependencies v2.0.0
+
+
+## 0.20.0 (2024-09-13)
+
+### Features
+
+* enable moving modal
+
+
+## 0.19.0 (2024-08-31)
+
+### Features
+
+* call onEventUpdate callback
+* rename resource view into resource scheduler
+
+
+## 0.18.0 (2024-08-22)
+
+### Features
+
+* **resource-view:** enable event resizing
+
+## 0.17.1, 0.17.2, 0.17.3 (2024-08-15)
+
+### Bug Fixes
+
+* **modal:** fix problem when updating recurring events
+* **resource-view:** reactivity problem
+* **resource-view:** reset scroll when selecting new date
+
+
+## 0.17.0 (2024-08-14)
+
+
+### Bug Fixes
+
+* prevent horizontal drag-and-drop for full-day events
+
+
+### Features
+
+* **resource-view:** add resource icon
+* **resource-view:** position events more effectively
+* **resource-view:** drag and drop
+* **resource-view:** enable using event modal
+
+
+## 0.16.1 (2024-08-09)
+
+
+### Bug Fixes
+
+* **drag-to-create:** remove event listeners in month-grid when adding new event
+
+## 0.16.0 (2024-08-08)
+
+### Bug Fixes
+
+* **modal:** remove disturbing animation
+* **modal:** set higher zindex for popups
+* prevent display of recurrence warning on empty rrule
+
+
+### Features
+
+* add resource view beta
+* **resource-view:** add resource color icons
+
+## 0.15.0(2024-07-31)
+
+### Features
+
+* sidebar drag to create
+
+## 0.14.1 (2024-07-29)
+
+### Bug Fixes
+
+* **sidebar:** unset calendarId in clickToCreate if it is in a hidden calendar
+
+## 0.14.0 (2024-07-27)
+
+### Features
+
+* enable closing modal with escape
+
+## 0.13.0(2024-07-26)
+
+### Features
+
+* add drag-to-create plugin
+
+## 0.12.0(2024-07-22)
+
+### Features
+
+* enable editing recurring events in modal
+
+## 0.11.1(2024-07-18)
+
+### Bug Fixes
+
+* make modal css work with webpack
+
+## 0.11.0(2024-07-12)
+
+### Features
+
+* add `canOpenModal` callback
+
+## 0.10.1(2024-07-11)
+
+### Bug Fixes
+
+* include time picker styles in modal
+
+## 0.10.0(2024-07-11)
+
+### Bug Fixes
+
+* prevent events from being stuck in edit added mode
+
+### Features
+
+* display alert when event in form is in hidden calendar
+* update time picker
+
+
+## 0.9.1(2024-07-02)
+
+### Bug Fixes
+
+* enable using validator without field name
+
+## 0.9.0(2024-07-02)
+
+### Bug Fixes
+
+* enable adding id in addNewEventAndOpenModal
+
+### Features
+
+* add field validation callbacks
+* add onStartUpdate and onEndUpdate callbacks
+* add otherEventProperties param to openEventCreationModal
+* click to create
+* dark theme
+* invoke onAddEvent when saving event after using clickToCreate
+
+
+## 0.8.0 (2024-06-28)
+
+### Features
+
+* make modal responsive
+* change max-height of combobox-list
+* make sidebar collapsible
+* add openOnRender option for sidebar
