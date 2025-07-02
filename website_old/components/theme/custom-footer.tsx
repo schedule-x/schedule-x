@@ -1,10 +1,10 @@
 export default function CustomFooter() {
   return (
     <footer
-      style={{ paddingTop: '1.5em', paddingBottom: '1.5em', borderTop: '1px solid rgba(0, 0, 0, 0.06)', backgroundColor: 'rgba(243,244,246)' }}
-      className="nx-pb-[env(safe-area-inset-bottom)] print:nx-bg-transparent">
+      style={{ paddingTop: '1.5em', paddingBottom: '1.5em', borderTop: '1px solid rgba(0, 0, 0, 0.06)' }}
+      className="nx-bg-gray-100 nx-pb-[env(safe-area-inset-bottom)] dark:nx-bg-neutral-900 print:nx-bg-transparent">
 
-      <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', maxWidth: '1440px', margin: '0 auto', color: 'rgb(75, 85, 99)' }}>
+      <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', maxWidth: '1440px', margin: '0 auto' }}>
         <div>
           <div
             style={{ marginBottom: '1em' }}

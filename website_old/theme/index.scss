@@ -9,10 +9,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.nextra-navbar-blur {
-  background-color: #fff;
-}
-
 .heading-font {
   font-family: 'Podkova Variable', serif;
   font-weight: 700;
@@ -43,23 +39,10 @@ html {
   }
 }
 
-body {
-  background-color: #fff;
-}
-
-.nextra-navbar {
-  background-color: #fff;
-}
-
-.nextra-sidebar-footer {
-  display: none;
-}
-
 .page-wrapper {
   max-width: 90rem;
   min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
   margin: 0 auto;
-  background-color: #fff;
 
   input {
     outline-offset: unset;

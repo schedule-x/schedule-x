@@ -1,5 +1,3 @@
-'use client'
-
 import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek, viewList } from '@schedule-x/calendar'
 import { seededEvents } from './data/seeded-events'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
