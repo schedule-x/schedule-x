@@ -9,6 +9,10 @@ html {
   scroll-behavior: smooth;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .nextra-navbar-blur {
   background-color: #fff;
 }

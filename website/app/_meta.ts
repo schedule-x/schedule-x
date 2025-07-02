@@ -7,6 +7,7 @@ const meta: MetaRecord = {
       layout: 'full',
       sidebar: false,
       toc: true,
+      timestamp: false,
     }
   },
   docs: {
@@ -29,7 +30,8 @@ const meta: MetaRecord = {
     theme: {
       layout: 'full',
       sidebar: false,
-      toc: false
+      toc: false,
+      timestamp: false
     }
   },
   imprint: {
