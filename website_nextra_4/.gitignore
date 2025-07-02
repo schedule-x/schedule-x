@@ -3,3 +3,4 @@ dist
 .next
 .idea
 .env.local
+.env
