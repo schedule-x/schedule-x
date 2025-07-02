@@ -51,6 +51,7 @@
     "devDependencies": {
         "@types/node": "^24.0.1",
         "@types/react": "^19.1.8",
+        "sass": "^1.72.0",
         "typescript": "^5.8.3"
     }
 }
