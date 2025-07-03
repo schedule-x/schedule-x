@@ -9,6 +9,7 @@ on:
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
 jobs:
   build_website:
