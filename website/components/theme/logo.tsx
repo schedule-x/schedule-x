@@ -1,8 +1,6 @@
-import Link from 'next/link'
-
 export default function Logo() {
   return (
-    <Link href={'/'} title={'Go to home page'} className="header-logo">
+    <>
       <div className={'logo-lg'}>
         <svg
           className={'logo-light'}
@@ -254,6 +252,6 @@ export default function Logo() {
           />
         </svg>
       </div>
-    </Link>
+    </>
   )
 }

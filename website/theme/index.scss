@@ -1,12 +1,15 @@
 @use 'mixins' as mixins;
 
 html {
-  .main {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    overflow: hidden;
-  }
-
   scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.nextra-navbar-blur {
+  background-color: #fff;
 }
 
 .heading-font {
@@ -39,10 +42,23 @@ html {
   }
 }
 
+body {
+  background-color: #fff;
+}
+
+.nextra-navbar {
+  background-color: #fff;
+}
+
+.nextra-sidebar-footer {
+  display: none;
+}
+
 .page-wrapper {
   max-width: 90rem;
   min-height: calc(100vh - var(--nextra-navbar-height) - 165px);
   margin: 0 auto;
+  background-color: #fff;
 
   input {
     outline-offset: unset;
@@ -62,6 +78,11 @@ html {
 
   &.premiumPage {
     max-width: 100vw;
+  }
+
+  html & {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    overflow: hidden;
   }
 }
 

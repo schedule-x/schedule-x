@@ -1,7 +1,7 @@
 import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek } from '@schedule-x/calendar'
 import {useEffect, useState} from 'react'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import { calendars } from './data/calendars'
 import { createScrollControllerPlugin } from "@schedule-x/scroll-controller";
 import { createSidebarPlugin } from "@sx-premium/sidebar";
@@ -190,7 +190,9 @@ export default function ModalCalendar() {
       observer.observe(document.body, { childList: true, subtree: true });
     }
 
-    createTipWhenHoveringCalendar(calendarEl);
+    if (calendarEl) {
+      createTipWhenHoveringCalendar(calendarEl);
+    }
   }, []);
 
   return <>

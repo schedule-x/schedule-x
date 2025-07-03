@@ -1,0 +1,108 @@
+---
+title: 'Plugins'
+description: 'Extend the calendar with additional features through plugins.'
+---
+
+# Plugins
+
+The calendar can be extended with additional features through plugins. The library offers a range of plugins that can be downloaded separately.
+You can also write your own custom plugins.
+
+## Basic example
+
+You can add plugins to the calendar, by adding them to the config object.
+
+```ts
+import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import '@schedule-x/theme-default/dist/index.css'
+
+const calendar = createCalendar({
+  views: [createViewMonthGrid()],
+  events: [
+    {
+      id: 1,
+      title: 'Coffee with John',
+      start: '2023-12-04 10:05',
+      end: '2023-12-04 10:35',
+    },
+  ],
+  plugins: [
+    createDragAndDropPlugin()
+  ],
+})
+
+calendar.render(document.getElementById('calendar'))
+```
+
+## Available plugins
+
+import {Cards} from 'nextra/components'
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Drag and drop"
+    href="/docs/calendar/plugins/drag-and-drop"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Resize"
+    href="/docs/calendar/plugins/resize"
+  ></Cards.Card>
+</Cards>
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Event modal"
+    href="/docs/calendar/plugins/event-modal"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Event recurrence"
+    href="/docs/calendar/plugins/recurrence"
+  ></Cards.Card>
+</Cards>
+
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Scroll controller"
+    href="/docs/calendar/plugins/scroll-controller"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Calendar controls"
+    href="/docs/calendar/plugins/calendar-controls"
+  ></Cards.Card>
+</Cards>
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Current time indicator"
+    href="/docs/calendar/plugins/current-time"
+  ></Cards.Card>
+  <Cards.Card
+    arrow
+    title="Events Service"
+    href="/docs/calendar/plugins/events-service"
+  ></Cards.Card>
+</Cards>
+
+<Cards num={2}>
+  <Cards.Card
+    arrow
+    title="Custom plugins"
+    href="/docs/calendar/plugins/custom-plugins"
+  ></Cards.Card>
+</Cards>
+
+
+
+
+
+
+

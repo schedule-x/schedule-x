@@ -150,6 +150,7 @@ $heading-width: 900px;
   font-weight: 600;
   transition: all 0.2s ease;
   box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+  cursor: pointer;
 
   @include mixins.smaller-screens {
     font-size: 1rem;

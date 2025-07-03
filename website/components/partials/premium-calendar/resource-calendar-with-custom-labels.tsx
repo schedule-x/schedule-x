@@ -1,4 +1,4 @@
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import { calendars } from './data/calendars';
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
 import { createInteractiveEventModal, rruleFields } from "@sx-premium/interactive-event-modal";

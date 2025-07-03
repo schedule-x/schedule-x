@@ -1,8 +1,10 @@
+'use client'
+
 import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek, viewList } from '@schedule-x/calendar'
 import { seededEvents } from './data/seeded-events'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import { createResizePlugin } from '@schedule-x/resize'
 
 export default function AppCalendar() {

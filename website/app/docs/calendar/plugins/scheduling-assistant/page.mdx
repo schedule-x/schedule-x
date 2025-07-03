@@ -1,0 +1,157 @@
+---
+title: 'Resource scheduler component'
+description: 'Learn how to use the Schedule-X resource scheduler.'
+---
+
+# Scheduling assistant
+
+An Outlook-inspired scheduling assistant that helps you find the best time for a meeting or event.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+## Features & demo
+import FeaturesList from "../../../../../components/partials/features-list/features-list";
+
+<FeaturesList features={[
+  'Outlook-inspired Scheduling assistant',
+  'Drag & drop or resize the assistant, to find the best time given the people/resources',
+]} />
+
+[Go to Demo](/demos/scheduling-assistant)
+
+<br />
+
+<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
+  <source src={'https://d19hgxvhjb2new.cloudfront.net/website/scheduling-assistant.mp4'} type={'video/mp4'} />
+</video>
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
+
+
+```bash copy
+npm install @sx-premium/scheduling-assistant @sx-premium/resource-scheduler @schedule-x/calendar
+@schedule-x/theme-default
+```
+
+## Usage
+
+```js
+import { createCalendar } from '@schedule-x/calendar'
+import { createHourlyView, createConfig, TimeUnits } from "@sx-premium/resource-scheduler";
+import { createSchedulingAssistant } from '@sx-premium/scheduling-assistant'
+
+import '@sx-premium/resource-scheduler/index.css'
+import '@sx-premium/scheduling-assistant/index.css'
+import '@schedule-x/theme-default/dist/index.css'
+
+const rConfig = createConfig()
+rConfig.initialHours.value = new TimeUnits().getDayHoursBetween(
+  '2025-03-07 08:00',
+  '2025-03-07 19:00'
+)
+rConfig.infiniteScroll.value = false
+const hourlyView = createHourlyView(rConfig)
+
+rConfig.resources.value = [
+  {
+    id: 'janedoe',
+    label: 'Jane Doe'
+  },
+  {
+    id: 'johnsmith',
+    label: 'John Smith'
+  },
+  {
+    id: 'tedmosby',
+    label: 'Ted Mosby'
+  }
+]
+
+const schedulingAssistant = createSchedulingAssistant({
+  initialStart: '2025-03-07 10:00',
+  initialEnd: '2025-03-07 12:00'
+})
+
+const calendar = createCalendar({
+  selectedDate: '2025-03-07',
+  events: [
+    {
+      id: 'event1',
+      resourceId: 'janedoe',
+      start: '2025-03-07 09:00',
+      end: '2025-03-07 10:00',
+      title: 'Event 1'
+    },
+    {
+      id: 'event2',
+      resourceId: 'johnsmith',
+      start: '2025-03-07 10:00',
+      end: '2025-03-07 11:00',
+      title: 'Event 2'
+    },
+    {
+      id: 'event3',
+      resourceId: 'tedmosby',
+      start: '2025-03-07 11:00',
+      end: '2025-03-07 12:00',
+      title: 'Event 3'
+    },
+    {
+      id: 'event4',
+      resourceId: 'janedoe',
+      start: '2025-03-07 17:00',
+      end: '2025-03-07 18:00',
+      title: 'Event 4'
+    }
+  ],
+  views: [hourlyView],
+  plugins: [
+    schedulingAssistant
+  ]
+})
+
+calendar.render(document.getElementById('your-calendar-wrapper'))
+```
+
+
+## API
+
+### SchedulingAssistant
+
+```ts
+export interface SchedulingAssistant extends PluginBase<string> {
+  currentStart: Signal<string>
+  currentEnd: Signal<string>
+  hasCollision: Signal<boolean>
+}
+```
+
+`Signal` is a reactive variable which holds a `value` property. You can access the value anywhere in your code like
+`schedulingAssistant.currentStart.value`, or reactively listen to updates:
+
+```ts
+import { effect } from '@preact/signals'
+
+effect(() => {
+  console.log(schedulingAssistant.currentStart.value)
+})
+```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.
+
+## Examples
+
+These can be added on request. Please let us know if you need an example for a specific framework.

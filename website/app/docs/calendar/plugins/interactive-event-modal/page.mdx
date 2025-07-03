@@ -1,0 +1,330 @@
+---
+title: 'Interactive event modal'
+description: 'A plugin for displaying an interactive modal for adding, editing, viewing and removing events.'
+---
+
+# Interactive event modal
+
+A plugin for displaying an interactive modal for adding, editing and removing events.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+## Features & demo
+
+import FeaturesList from "../../../../../components/partials/features-list/features-list";
+
+<FeaturesList features={[
+  'Adding, updating and deleting events',
+  'Click to create',
+  'Recurring events',
+  'Validation'
+]} />
+
+[Go to Demo](/demos/modal-and-sidebar)
+
+<br />
+
+<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo" width={800} height={250}>
+    <source src={'https://d19hgxvhjb2new.cloudfront.net/website/interactive-modal-demo.mp4'} type={'video/mp4'} />
+</video>
+
+## 2. Install the packages
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
+
+```bash copy
+npm i @sx-premium/interactive-event-modal
+```
+## Usage
+
+```js
+import { createCalendar } from '@schedule-x/calendar'
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
+
+import '@sx-premium/interactive-event-modal/index.css'
+
+const eventsService = createEventsServicePlugin()
+
+const eventModal = createInteractiveEventModal({
+  // dependency needed to add events
+  eventsService,
+
+  // (Optional): Available people for the event form
+  availablePeople: ['John Doe', 'Jane Doe'],
+
+  // (Optional): callback for when an event is added
+  onAddEvent: (event) => {
+    console.log(event)
+  },
+
+  // (Optional): callback for when an event is updated
+  onDeleteEvent: (eventId) => {
+    console.log(eventId)
+  },
+
+  // (Optional): callback for when an event start property is updated
+  onStartUpdate(start) {
+    console.log(start)
+  },
+
+  // (Optional): callback for when an event end property is updated
+  onEndUpdate(end) {
+    console.log(end)
+  },
+
+  // (Optional): callback which is invoked before opening the modal. Return false to prevent the modal from opening
+  canOpenModal: (event) => {
+    return event.calendarId === 'calendar-1';
+  },
+
+  // (Optional): callback for deciding whether to display edit- and delete buttons for an event
+  isEventEditable(event) {
+    return event.calendarId === 'internal'
+  },
+
+  // (Optional): configure the time picker to use 12-hour format
+  has12HourTimeFormat: true,
+
+  // (Optional): prevent the modal from closing on click outside. "false" by default
+  preventClosingOnClickOutside: true,
+
+  // (Optional): add a gray "move-bar" bar at the top of the modal, which can be used to move the modal
+  movable: true,
+
+  // (Optional): configure whether the title field should be hidden (is currently shown by default)
+  hideTitle: false,
+
+  // (Optional): configuration for the field "title"
+  fields: {
+    title: {
+      label: 'Event Title',
+      name: 'event-title',
+      validator: (value) => {
+        return {
+          isValid: !!value && value.length >= 3,
+          message: 'Title must be at least 3 characters long'
+        }
+      }
+    },
+    description: {},
+  },
+
+  // (Optional): date picker config
+  datePicker: {
+    min: '2025-01-01',
+    max: '2025-12-31',
+  }
+})
+
+const calendar = createCalendar({
+  // ...other configuration
+  plugins: [
+    eventModal,
+    eventsService,
+  ],
+
+  callbacks: {
+    onDoubleClickDateTime(dateTime) {
+      eventModal.clickToCreate(dateTime, {
+        id: 'some-event-id',
+      })
+    }
+  }
+})
+
+calendar.render(document.getElementById('your-calendar-wrapper'))
+```
+
+## Public methods
+
+#### Parameters
+- `id` - id of the event that will be created
+- `start` - start date or datetime of the event that will be created
+- `otherEventProperties` - additional properties that will be added to the event that will be created
+
+### `clickToCreate: (start: string, otherEventProperties?: Partial<CalendarEvent>) => void`
+
+Method for adding an event and opening the event editing modal. Preferably used with the `onDoubleClickDateTime` and `onDoubleClickDate` callbacks, to add events by clicking.
+
+### `openForExistingEvent(id: EventId): void`
+
+Method for opening the modal for an existing event.
+
+### `openEventCreationModal(id: string | number, start?: string, otherEventProperties?: Partial<CalendarEvent>)`
+
+Method for programmatically opening the event creation modal. The id parameter is used for setting an id of the
+event that will be created, if the user chooses to click save. Can for example be used if you implement your own
+"Add event" button.
+
+## `fields` configuration option
+
+Please note, that by default, all fields are displayed.
+
+If you, however, configure one of them, the rest will be hidden by default. Date and time pickers are an exception here, since these are required at least when adding an event. For adding a field but without custom configuration, simply add it with an empty object like so:
+
+```ts
+fields: {
+  description: {}
+  // other fields
+}
+```
+
+### Available fields
+
+| Field name           | Type                     |
+|----------------------|--------------------------|
+| title                | InputFieldWithValidation |
+| description          | InputFieldWithValidation |
+| startDate            | InputField               |
+| startTime            | InputField               |
+| endDate              | InputField               |
+| endTime              | InputField               |
+| people               | InputFieldWithValidation |
+| calendarId           | InputFieldWithValidation |
+| resourceId           | InputFieldWithValidation |
+| rruleFrequency       | InputField               |
+| rruleUntil           | InputField               |
+| rruleCustomFrequency | InputField               |
+| rruleInterval        | InputField               |
+| rruleCount           | InputField               |
+| rruleByDay           | InputField               |
+
+### Using the RRule fields
+
+The rrule fields depend on one another. Therefore, you either need to configure all of them, or none.
+You can easily configure all of them at once like this, if you don't need any custom configuration of them.
+
+```ts
+export { rruleFields, createInteractiveEventModal } from '@sx-premium/interactive-event-modal'
+
+const modal = createInteractiveEventModal({
+  fields: {
+    // your other fields
+    ...rruleFields()
+  }
+})
+
+```
+
+#### Input field types
+
+```ts
+type InputField<T extends undefined | string | string[]> = {
+  label?: string
+  name?: string
+  onChange?: (value: T) => void
+  placeholder?: string
+}
+
+type InputFieldWithValidation<T extends undefined | string | string[]> =
+  InputField<T> & {
+    validator?: (fieldValue: T) => ValidationResult
+  }
+
+type CustomInputField<T extends undefined | string | string[]> =
+  InputFieldWithValidation<T> & {
+    type: 'text' | 'select' | 'textarea' | 'combobox' | 'combobox-multi' | 'any'
+    items?: SelectItem[]
+
+    // paired together with 'any' type, allows you to use any Preact-component as input.
+    // this is useful for anyone who needs to use a custom input component, like a rich text editor or a media upload.
+    InputComponent?: (
+      props: InputField<T> & {
+        initialValue: T
+      }
+    ) => JSX.Element
+  }
+
+type ValidationResult = {
+  isValid: boolean
+  message?: string
+}
+
+export type SelectItem = { label: string; value: string }
+```
+
+### Custom fields
+
+Additional to the default fields, you can add custom fields to a `customFields` property. The fields of this property
+follow the same structure as the default fields, but additionally you need to add one of the supported types: `text`,
+`textarea`, `select`, `combobox` or `combobox-multi`. For example:
+
+```ts
+import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createInteractiveEventModal, createInputField, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
+import { translations, mergeLocales } from '@schedule-x/translations'
+import { createCalendar } from '@schedule-x/calendar'
+
+import '@schedule-x/theme-default/dist/calendar.css'
+import '@sx-premium/interactive-event-modal/index.css'
+
+const eventsService = createEventsServicePlugin()
+
+const eventModal = createInteractiveEventModal({
+  eventsService,
+
+  fields: {
+    title: {},
+  },
+
+  customFields: {
+    additionalNotes: createInputField({ // will correspond to an event property "additionalNotes"
+      label: 'Additional notes',
+      name: 'additional-notes',
+      type: 'textarea',
+      validator: (value) => {
+        return {
+          isValid: !!value && value.length >= 3,
+          message: 'Custom field must be at least 3 characters long'
+        }
+      }
+    }),
+
+    locationSelect: createInputField({ // will correspond to an event property "locationSelect"
+      label: 'Location',
+      type: 'select',
+      items: [
+        { label: 'Lake view office', value: 'lake-view' },
+        { label: 'City center office', value: 'city-center' },
+        { label: 'Home office', value: 'home' },
+      ]
+    }),
+  }
+})
+
+const calendar = createCalendar({
+  translations: mergeLocales(translations, modalTranslations),
+  plugins: [
+    eventModal,
+    eventsService,
+  ],
+  // ...other configuration
+})
+```
+
+If you need to display these custom fields in the view mode of the modal, you can write a custom component for
+`interactiveModalAdditionalFields`, which then receives `calendarEvent` as a prop. View the docs for your framework
+(Vue, React etc.) to learn how custom components work in Schedule-X.
+
+## Changelog
+
+See [changelog](/premium-changelog) page.
+
+## Examples
+
+These can be added on request. Please let us know if you need an example for a specific framework.
+
+* React example: https://github.com/schedule-x/react-examples/tree/main/interactive-event-modal
+* Vue example: https://github.com/schedule-x/vue-examples/tree/main/interactive-event-modal
+* Angular example: https://github.com/schedule-x/angular-examples/tree/main/sidebar--modal--drag-to-create
+* Svelte example: https://github.com/schedule-x/svelte-examples

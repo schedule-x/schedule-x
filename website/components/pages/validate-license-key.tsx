@@ -1,3 +1,5 @@
+'use client'
+
 import {Fragment, useState} from "react";
 import styles from './validate-license-key.module.scss'
 

@@ -39,7 +39,7 @@ export default function AppDropdown({ items, selectedItem, onSelect }: props) {
     if (onSelect) {
       onSelect(optionValue)
     }
-    setSelectedOption(items.find((item) => item.id === optionValue))
+    setSelectedOption(items.find((item) => item.id === optionValue) || selectedItem)
   }
 
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(0)

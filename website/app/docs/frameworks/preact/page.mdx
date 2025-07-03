@@ -1,0 +1,106 @@
+---
+title: 'Preact component'
+description: 'Learn how to use the Schedule-X calendar in a Preact application'
+---
+import PreactIcon from "../../../../components/partials/logos/preact-icon";
+
+# <PreactIcon /> Preact component
+
+This page offers documentation for using the Schedule-X calendar in Preact. For general documentation on
+configuring and interacting with the calendar, refer to the rest of the calendar documentation.
+
+## Installing
+
+```bash copy
+npm install @schedule-x/preact @schedule-x/theme-default
+```
+
+If you're using a package manager that does not automatically
+download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
+`preact`. This is for example the case for **yarn** and **npm < v7**.
+
+## Basic usage
+
+### Example
+
+```tsx
+import { useCalendarApp, ScheduleXCalendar } from '@schedule-x/preact'
+import {
+  createViewDay,
+  createViewMonthAgenda,
+  createViewMonthGrid,
+  createViewWeek,
+} from '@schedule-x/calendar'
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+
+const dragAndDrop = createDragAndDropPlugin()
+
+import '@schedule-x/theme-default/dist/index.css'
+
+function CalendarApp() {
+  const calendar = useCalendarApp({
+    views: [
+      createViewDay(),
+      createViewWeek(),
+      createViewMonthGrid(),
+      createViewMonthAgenda(),
+    ],
+    events: [
+      {
+        id: '1',
+        title: 'Event 1',
+        start: '2023-12-16',
+        end: '2023-12-16',
+      },
+    ],
+    plugins: [dragAndDrop],
+  })
+
+  return (
+    <div>
+      <ScheduleXCalendar calendarApp={calendar} />
+    </div>
+  )
+}
+
+export default CalendarApp;
+```
+
+## Styles
+
+The Schedule-X calendar is a responsive component. To achieve this,
+it cannot be delivered with a fixed height or width of its own. You need to define the height and width of the
+wrapping element `.sx-preact-calendar-wrapper` according to your needs. For a regular desktop application, something
+like this might do the trick for you:
+
+```css
+.sx-preact-calendar-wrapper {
+  width: 1200px;
+  max-width: 100vw;
+  height: 800px;
+  max-height: 90vh;
+}
+```
+
+## Custom components
+
+The Schedule-X calendar is built with customization in mind. Currently, you can use the following custom
+components to take control over certain parts of the calendar. This is done by writing your own Preact components:
+
+| Slot / Component name       | Description                                                         | Props                           |
+|-----------------------------|---------------------------------------------------------------------|---------------------------------|
+| `timeGridEvent`             | The component for timed events used in the week- and day views      | `calendarEvent`                 |
+| `dateGridEvent`             | The component for all-day events used in the week- and day views    | `calendarEvent`                 |
+| `weekGridDate`              | Replaces the day name and date in the header of day- and week views | `date`                          |
+| `weekGridHour`              | Replaces the hour in the time axis of day- and week views           | `hour`                          |
+| `monthGridEvent`            | The component for events used in the month grid view                | `calendarEvent`, `hasStartDate` |
+| `monthGridDayName`          | Replaces day names like "Mon", "Tue" in month grid                  | `day` (0-6, like in JS-dates)   |
+| `monthGridDate`             | Replaces date of month in month grid                                | `date`, `jsDate`                |
+| `monthAgendaEvent`          | The component for events used in the month agenda view              | `calendarEvent`                 |
+| `eventModal`                | The component for the modal that opens when clicking an event       | `calendarEvent`                 |
+| `headerContentLeftPrepend`  | Prepends content to the left part of the header                     | `$app`                          |
+| `headerContentLeftAppend`   | Appends content to the left part of the header                      | `$app`                          |
+| `headerContentRightPrepend` | Prepends content to the right part of the header                    | `$app`                          |
+| `headerContentRightAppend`  | Appends content to the right part of the header                     | `$app`                          |
+| `headerContent`             | Replaces the whole header content                                   | `$app`                          |
+| `sidebarAddEventButton`     | "Add event" button in the sidebar plugin                            | `onClick`                       |

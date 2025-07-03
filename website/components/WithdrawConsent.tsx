@@ -1,3 +1,5 @@
+'use client';
+
 export default function WithdrawConsent() {
   const withdraw = () => {
     // remove consent from local storage

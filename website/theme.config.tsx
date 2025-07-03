@@ -1,11 +1,8 @@
 import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
-import Logo from './components/theme/logo'
 import { useRouter } from 'next/router'
 import CustomFooter from './components/theme/custom-footer'
 
-const config: DocsThemeConfig = {
-  logo: Logo,
+const config = {
   logoLink: false,
   project: {
     link: 'https://github.com/schedule-x/schedule-x',
