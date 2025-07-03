@@ -24,12 +24,9 @@ const config = {
     }
   },
   darkMode: false,
+
   feedback: {
     useLink: () => 'https://github.com/schedule-x/schedule-x/issues/new/choose'
-  },
-
-  nextThemes: {
-    forcedTheme: 'light',
   },
 
   head: () => {
