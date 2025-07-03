@@ -69,15 +69,6 @@ const meta: MetaRecord = {
       toc: false
     }
   },
-  '404': {
-    display: 'hidden',
-    title: 'Page not found',
-    type: 'page',
-    theme: {
-      "sidebar": false,
-      "toc": false
-    }
-  },
   'premium-changelog': {
     display: 'hidden',
     title: 'Changelog for Schedule-X premium'
