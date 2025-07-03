@@ -259,7 +259,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 60%;
+    opacity: 0.6;
     z-index: 1;
     pointer-events: none;
 
@@ -295,7 +295,7 @@ body {
     background: linear-gradient(45deg, #8b5cf6, #a855f7);
     border-radius: 50%;
     z-index: -1;
-    opacity: 30%;
+    opacity: 0.3;
   }
   
   .avatar-image {
@@ -316,14 +316,14 @@ body {
   font-size: 1.25rem;
   font-weight: 700;
   color: #0f172a;
-  margin: 0 0 0.375rem 0;
+  margin: 0 0 0.375rem;
   letter-spacing: -0.01em;
 }
 
 .testimonial-role {
   font-size: 0.9375rem;
   color: #64748b;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.25rem;
   font-weight: 500;
 }
 
@@ -419,7 +419,7 @@ body {
 }
 
 // Responsive design
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .testimonials-section {
     padding: 4rem 0;
     margin: 2rem 0;
