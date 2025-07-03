@@ -2,6 +2,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import { Link } from 'nextra-theme-docs';
 
 export default function LogoSlide() {
     return <div className="marquee-wrapper">
@@ -18,25 +19,47 @@ export default function LogoSlide() {
       style={{ alignItems: 'center' }}
     >
       <SwiperSlide>
-        <img height={40} width={160} src="/images/logos/AkzoNobel_logo.png" alt="AkzoNobel"/>
+        <Link href="https://www.akzonobel.com/" target="_blank">
+          <img height={40} width={160} src="/images/logos/AkzoNobel_logo.png" alt="AkzoNobel"/>
+        </Link>
       </SwiperSlide>
 
       <SwiperSlide>
-        <img height={40} width={125} style={{ position: 'relative', top: '-2px' }}
-             src="/images/logos/iService.png" alt="iService"/>
+        <Link href="https://www.dovercorporation.com/" target="_blank">
+          <img height={40} width={100} style={{ position: 'relative', top: '-2px', marginLeft: '25px' }} src="/images/logos/logo-dover.png" alt="Dover corp"/>
+        </Link>
       </SwiperSlide>
 
       <SwiperSlide>
-        <img height={40} width={120} style={{ position: 'relative', top: '-4px' }}
-             src="/images/logos/elevent_horz_color.svg" alt="Book Elevent"/>
+        <Link href="https://www.osu.edu/" target="_blank">
+          <img height={60} width={160} style={{ position: 'relative', top: '-24px' }} src="/images/logos/osu.png" alt="Ohio State University"/>
+        </Link>
       </SwiperSlide>
 
       <SwiperSlide>
-        <img height={40} width={160} style={{ position: 'relative', top: '-10px' }}  src="/images/logos/statushub.svg" alt="Status Hub"/>
+        <Link href="https://iservice.us/" target="_blank">
+          <img height={40} width={125} style={{ position: 'relative', top: '-2px' }}
+               src="/images/logos/iService.png" alt="iService"/>
+        </Link>
       </SwiperSlide>
 
       <SwiperSlide>
-        <img height={40} width={160} src="/images/logos/acteamo.png" alt="Acteamo"/>
+        <Link href="https://www.bookelevent.com/" target="_blank">
+          <img height={40} width={120} style={{ position: 'relative', top: '-4px' }}
+               src="/images/logos/elevent_horz_color.svg" alt="Book Elevent"/>
+        </Link>
+      </SwiperSlide>
+
+      <SwiperSlide>
+        <Link href="https://statushub.com/" target="_blank">
+          <img height={40} width={160} style={{ position: 'relative', top: '-10px' }}  src="/images/logos/statushub.svg" alt="Status Hub"/>
+        </Link>
+      </SwiperSlide>
+
+      <SwiperSlide>
+        <Link href="https://www.acteamo.com/" target="_blank">
+          <img height={40} width={160} src="/images/logos/acteamo.png" alt="Acteamo"/>
+        </Link>
       </SwiperSlide>
 
       <SwiperSlide>
@@ -45,11 +68,15 @@ export default function LogoSlide() {
       </SwiperSlide>
 
       <SwiperSlide>
-        <img height={40} width={160} style={{ position: 'relative', top: '3px' }} src="/images/logos/hipokratija.svg" alt="Hipokratija"/>
+        <Link href="https://hipokratija.rs/" target="_blank">
+          <img height={40} width={160} style={{ position: 'relative', top: '3px' }} src="/images/logos/hipokratija.svg" alt="Hipokratija"/>
+        </Link>
       </SwiperSlide>
 
       <SwiperSlide>
-        <img height={40} width={110} style={{ position: 'relative', top: '-16px' }} src="/images/logos/heaps-7-1024x576.png" alt="Heaps.dk"/>
+        <Link href="https://heaps.dk/" target="_blank">
+          <img height={40} width={110} style={{ position: 'relative', top: '-16px' }} src="/images/logos/heaps-7-1024x576.png" alt="Heaps.dk"/>
+        </Link>
       </SwiperSlide>
 
       <SwiperSlide>
