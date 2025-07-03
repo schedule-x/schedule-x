@@ -57,6 +57,9 @@ import CustomFooter from '../components/theme/custom-footer'
       </Head>
       <body>
         <Layout
+          nextThemes={{
+            forcedTheme: 'light',
+          }}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"

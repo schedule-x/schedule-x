@@ -14,6 +14,7 @@ import { Metadata } from 'next';
 import TextValuePropDevs from '../components/partials/landing-page/text-value-prop-devs'
 import TextValuePropPremium from '../components/partials/landing-page/text-value-prop-premium'
 import LogoSlide from '../components/partials/landing-page/logo-slide'
+import Testimonials from '../components/partials/testimonials/testimonials'
 
 export const metadata: Metadata = {
   title: 'Modern JavaScript Event Calendar',
@@ -55,10 +56,7 @@ export default function LandingPage() {
 
         <LogoSlide />
 
-        <div className="senja-embed" data-id="68874853-36dd-407e-86f3-b6f17ba0fa99" data-mode="shadow"
-             data-lazyload="false"
-             style={{ display: 'block', width: '90%', maxWidth: '950px', marginBottom: '40px' }}>
-        </div>
+        <Testimonials />
 
         <section className={'landingPageSection'}>
           <Image className={'sectionImage'} src={'/images/website_section_fade_inclined.svg'} alt={'hello'} width={1400}
