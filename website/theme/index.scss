@@ -225,15 +225,15 @@ body {
 }
 
 .testimonial-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 95%);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2.5rem;
   box-shadow: 
-    0 20px 25px -5px rgba(0, 0, 0, 0.05),
-    0 10px 10px -5px rgba(0, 0, 0, 0.02),
-    0 0 0 1px rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+    0 20px 25px -5px rgba(0, 0, 0, 5%),
+    0 10px 10px -5px rgba(0, 0, 0, 2%),
+    0 0 0 1px rgba(255, 255, 255, 80%);
+  border: 1px solid rgba(255, 255, 255, 20%);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   
@@ -272,8 +272,8 @@ body {
   &:hover {
     transform: translateY(-4px);
     box-shadow: 
-      0 25px 50px -12px rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(255, 255, 255, 0.9);
+      0 25px 50px -12px rgba(0, 0, 0, 10%),
+      0 0 0 1px rgba(255, 255, 255, 90%);
   }
 }
 
@@ -304,7 +304,7 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid white;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 10%);
   }
 }
 
@@ -345,7 +345,7 @@ body {
 .star {
   width: 18px;
   height: 18px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 10%));
 }
 
 .testimonial-content {
@@ -377,17 +377,17 @@ body {
   }
   
   .testimonial-card {
-    background: rgba(30, 41, 59, 0.95);
-    border-color: rgba(71, 85, 105, 0.3);
+    background: rgba(30, 41, 59, 95%);
+    border-color: rgba(71, 85, 105, 30%);
     box-shadow: 
-      0 20px 25px -5px rgba(0, 0, 0, 0.2),
-      0 10px 10px -5px rgba(0, 0, 0, 0.1),
-      0 0 0 1px rgba(71, 85, 105, 0.2);
+      0 20px 25px -5px rgba(0, 0, 0, 20%),
+      0 10px 10px -5px rgba(0, 0, 0, 10%),
+      0 0 0 1px rgba(71, 85, 105, 20%);
     
     &:hover {
       box-shadow: 
-        0 25px 50px -12px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(71, 85, 105, 0.4);
+        0 25px 50px -12px rgba(0, 0, 0, 30%),
+        0 0 0 1px rgba(71, 85, 105, 40%);
     }
   }
   
