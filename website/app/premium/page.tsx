@@ -1,14 +1,20 @@
 import '@schedule-x/theme-default/dist/index.css'
-import AppUnderline from "../partials/svg/underline";
+import AppUnderline from "../../components/partials/svg/underline";
 import Link from "next/link";
 import Image from 'next/image'
-import ModalIcon from '../partials/icons/modal-icon'
-import SidebarIcon from '../partials/icons/sidebar-icon'
-import DragIcon from '../partials/icons/drag-icon'
-import CoinsIcon from '../partials/icons/coins-icon'
-import DrawIcon from '../partials/icons/draw-icon'
-import AppCheckout from '../partials/premium/app-checkout'
-import FAQ from '../partials/premium/faq'
+import ModalIcon from '../../components/partials/icons/modal-icon'
+import SidebarIcon from '../../components/partials/icons/sidebar-icon'
+import DragIcon from '../../components/partials/icons/drag-icon'
+import CoinsIcon from '../../components/partials/icons/coins-icon'
+import DrawIcon from '../../components/partials/icons/draw-icon'
+import AppCheckout from '../../components/partials/premium/app-checkout'
+import FAQ from '../../components/partials/premium/faq'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Schedule-X | Material Design Event Calendar',
+  description: 'Premium components for Schedule-X. Resource scheduler, event modal with form, drag-and-drop event creation and more.',
+}
 
 export default function PremiumPage() {
   return (
