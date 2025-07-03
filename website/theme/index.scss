@@ -1,11 +1,6 @@
 @use 'mixins' as mixins;
 
 html {
-  .page-wrapper {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    overflow: hidden;
-  }
-
   scroll-behavior: smooth;
 }
 
@@ -83,6 +78,11 @@ body {
 
   &.premiumPage {
     max-width: 100vw;
+  }
+
+  html & {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    overflow: hidden;
   }
 }
 
