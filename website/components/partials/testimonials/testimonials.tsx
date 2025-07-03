@@ -4,7 +4,7 @@ interface Testimonial {
   id: string
   name: string
   role: string
-  company: string
+  company?: string
   content: string
   avatar: string
   rating: number
@@ -13,19 +13,17 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: '1',
-    name: 'Sarah Johnson',
-    role: 'Senior Frontend Developer',
-    company: 'TechFlow Solutions',
-    content: 'Schedule-X has completely transformed how we handle event management in our applications. The drag-and-drop functionality is incredibly smooth, and the dark mode support was exactly what our users were asking for. It\'s been a game-changer for our development workflow.',
+    name: 'Vukadin Nedeljkovic',
+    role: 'Team Lead',
+    content: 'Schedule-X is great. Its flexibility and constant improvement distinguish it from similar community tools. Cudos to Tom who put in such effort and time to consider and discuss possible solutions.',
     avatar: 'https://d19hgxvhjb2new.cloudfront.net/website/vukadin-nedeljkovic.webp ',
     rating: 5
   },
   {
     id: '2',
-    name: 'Michael Chen',
-    role: 'Product Manager',
-    company: 'EventMaster Pro',
-    content: 'We evaluated several calendar solutions before choosing Schedule-X. The customization options are outstanding, and the i18n support made our global rollout seamless. The premium features saved us months of development time.',
+    name: 'Mike',
+    role: 'Co-Founder & CTO @ Zinya Global',
+    content: 'We\'re using the premium version of Schedule-X and have nothing but good things to say. It meets all our needs for a resource scheduling component being both easy to work with, configurable, and extremely easy to integrate with the rest of our application. On top of this, customer support has been stellar.',
     avatar: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMjQiIGZpbGw9IiM4QjVBQjAiLz4KPHN2ZyB4PSIxMiIgeT0iMTIiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Ik0xMiAxMmMyLjIxIDAgNC0xLjc5IDQtNHMtMS43OS00LTQtNC00IDEuNzktNCA0IDEuNzkgNCA0IDR6bTAgMmMtMi42NyAwLTggMS4zNC04IDR2MmgxNnYtMmMwLTIuNjYtNS4zMy00LTgtNHoiLz4KPC9zdmc+Cjwvc3ZnPgo=',
     rating: 5
   }
@@ -58,8 +56,9 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
           <img
             src={testimonial.avatar}
             alt={`${testimonial.name} avatar`}
-            width={48}
-            height={48}
+            width={100}
+            height={100}
+            style={{ objectFit: 'cover', borderRadius: '50%' }}
             className="avatar-image"
           />
         </div>
@@ -84,7 +83,7 @@ const Testimonials: React.FC = () => {
       <div className="testimonials-container">
         <h3 className="testimonials-heading">What developers are saying</h3>
         <p className="testimonials-subtitle">
-          Join thousands of developers who trust Schedule-X for their event management needs
+          Join thousands of developers who trust Schedule-X for their scheduling needs
         </p>
         <div className="testimonials-grid">
           {testimonials.map((testimonial) => (
