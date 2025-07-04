@@ -62,6 +62,8 @@ export const createRecurrencesForBackgroundEvent = (
     rrule,
   }).getRecurrences()
 
+  if (!recurrenceSet || recurrenceSet.length === 0) return []
+
   if (recurrenceSet[0].start === backgroundEvent.start) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
