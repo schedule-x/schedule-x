@@ -229,5 +229,29 @@ describe('TimeGridDay', () => {
         document.querySelector('.sx__time-grid-background-event')
       ).toBeNull()
     })
+
+    it('should render a timed background event that starts on the previous day', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: '2023-09-11',
+      })
+      renderComponent($app, [], '2023-09-11', [
+        {
+          start: '2023-09-10 00:00',
+          end: '2023-09-11 12:00',
+          style: {},
+        },
+      ])
+
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('top: 0%')
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('height: 50%')
+    })
   })
 })

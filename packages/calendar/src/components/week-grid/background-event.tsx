@@ -22,13 +22,20 @@ export default function TimeGridBackgroundEvent({
   const $app = useContext(AppContext)
   let start = backgroundEvent.start
   let end = backgroundEvent.end
-  if (dateStringRegex.test(start)) start += ' 00:00'
-  if (dateStringRegex.test(end)) end += ' 23:59'
+  const startIsAnotherDate = dateFromDateTime(start) !== date
+  const endIsAnotherDate = dateFromDateTime(end) !== date
+
+  // get YYYY-MM-DD from start and end and add 00:00 or 23:59, if the date is not the same as the date of the background event
+  // or if it's a full-day event
+  if (dateStringRegex.test(start) || startIsAnotherDate)
+    start = start.substring(0, 10) + ' 00:00'
+  if (dateStringRegex.test(end) || endIsAnotherDate)
+    end = end.substring(0, 10) + ' 23:59'
 
   // The date in event.start and event.end does not necessarily have to be during this date, since it might start before
   // this date or end after. Nonetheless, it should appear as an event from 00:00 to 23:59 on this date in that case, and thus the start- and end-dates might have to be adjusted.
-  if (dateFromDateTime(start) !== date) start = date + ' ' + start.split(' ')[1]
-  if (dateFromDateTime(end) !== date) end = date + ' ' + end.split(' ')[1]
+  if (startIsAnotherDate) start = date + ' ' + start.split(' ')[1]
+  if (endIsAnotherDate) end = date + ' ' + end.split(' ')[1]
 
   // adjust the start time according to the day boundaries
   // otherwise the background event `top` is calculated incorrectly
