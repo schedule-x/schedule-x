@@ -34,6 +34,16 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 const eventsServicePlugin = createEventsServicePlugin()
 
 const calendar = createCalendar({
+plugins: [
+  eventsServicePlugin,
+  createDragAndDropPlugin(),
+  createEventModalPlugin(),
+  createScrollControllerPlugin({
+    initialScroll: '07:50'
+  }),
+  createResizePlugin(),
+],
+
   translations: mergeLocales(
     translations,
     {
