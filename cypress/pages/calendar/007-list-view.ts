@@ -38,6 +38,7 @@ console.log('Initial events count:', initialEvents.length)
 const calendar = createCalendar({
   views: [createViewList()],
   plugins: [eventsService],
+  selectedDate: '2026-06-23',
   defaultView: 'week',
   events: initialEvents,
   callbacks: {
