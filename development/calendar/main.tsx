@@ -178,14 +178,5 @@ const calendar = createCalendar({
   events: [
     ...seededEvents
   ],
-}, [
-  eventsServicePlugin,
-  createDragAndDropPlugin(),
-  createCalendarControlsPlugin(),
-  createScrollControllerPlugin(),
-  createCurrentTimePlugin(),
-  createEventModalPlugin(),
-  createEventRecurrencePlugin(),
-  createResizePlugin(),
-])
+})
 calendar.render(calendarElement)
