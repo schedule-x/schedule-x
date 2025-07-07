@@ -86,10 +86,11 @@ class ScrollControllerPlugin implements PluginBase<string> {
   private waitUntilGridDayExistsThenScroll() {
     this.observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        const gridDayExists = Array.from(mutation.addedNodes).find((node) => {
-          if (!(node instanceof HTMLElement)) return false
-          return node.classList.contains('sx__time-grid-day')
-        })
+        const gridDayExists =
+          this.$app?.elements.calendarWrapper?.querySelector(
+            '.sx__time-grid-day'
+          )
+
         if (
           mutation.type === 'childList' &&
           gridDayExists &&
