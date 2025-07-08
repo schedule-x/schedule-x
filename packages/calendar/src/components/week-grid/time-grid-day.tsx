@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useState, useMemo } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import TimeGridEvent from './time-grid-event'
 import { sortEventsByStartAndEnd } from '../../utils/stateless/events/sort-by-start-date'
@@ -12,9 +12,9 @@ import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datet
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
 import { toJSDate } from '@schedule-x/shared/src'
-import { useSignalEffect } from '@preact/signals'
 import TimeGridBackgroundEvent from './background-event'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
+import { useComputed } from '@preact/signals'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -53,13 +53,9 @@ export default function TimeGridDay({
     end: dayEndDateTime,
   }
 
-  const sortedEvents = calendarEvents.sort(sortEventsByStartAndEnd)
-  const [eventsWithConcurrency, setEventsWithConcurrency] = useState<
-    CalendarEventInternal[]
-  >([])
-
-  useEffect(() => {
-    setEventsWithConcurrency(handleEventConcurrency(sortedEvents))
+  const eventsWithConcurrency = useMemo(() => {
+    const sortedEvents = calendarEvents.sort(sortEventsByStartAndEnd)
+    return handleEventConcurrency(sortedEvents)
   }, [calendarEvents])
 
   const handleOnClick = (
@@ -95,18 +91,17 @@ export default function TimeGridDay({
     'sx__time-grid-day',
     getClassNameForWeekday(toJSDate(date).getDay()),
   ]
-  const [classNames, setClassNames] = useState<string[]>(baseClasses)
 
-  useSignalEffect(() => {
+  const classNames = useComputed(() => {
     const newClassNames = [...baseClasses]
     if ($app.datePickerState.selectedDate.value === date)
       newClassNames.push('is-selected')
-    setClassNames(newClassNames)
+    return newClassNames
   })
 
   return (
     <div
-      className={classNames.join(' ')}
+      className={classNames.value.join(' ')}
       data-time-grid-date={date}
       onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
       onDblClick={(e) =>
