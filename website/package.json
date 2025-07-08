@@ -8,7 +8,7 @@
         "dev": "next",
         "build": "next build",
         "start": "next start",
-        "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
+        "postbuild": "pagefind --site .next/server/app --output-path out/_pagefind"
     },
     "keywords": [],
     "author": "Schedule-X",

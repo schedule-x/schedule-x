@@ -4,3 +4,4 @@ dist
 .idea
 .env.local
 .env
+_pagefind/
