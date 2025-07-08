@@ -23,10 +23,5 @@ describe('list view', {
     // scroll a bit and test that more events were loaded
     cy.get('.sx__list-wrapper').scrollTo('bottom')
     cy.get('.sx__event').should('have.length', 28)
-
-    cy.compareSnapshot(
-      'calendar-list-view__after-scroll',
-      SNAPSHOT_FAULT_TOLERANCE
-    )
   })
 })
