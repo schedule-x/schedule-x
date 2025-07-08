@@ -80,12 +80,14 @@ class EventsServicePluginImpl implements EventsService {
         ...event,
       })
       const rrule = event.rrule
+      const exdate = event.exdate
       if (rrule && this.$app.calendarState.range.value) {
         newBackgroundEvents.push(
           ...createRecurrencesForBackgroundEvent(
             event,
             rrule,
-            this.$app.calendarState.range.value
+            this.$app.calendarState.range.value,
+            exdate
           )
         )
       }

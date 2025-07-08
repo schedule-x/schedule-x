@@ -6,4 +6,5 @@ export type BackgroundEvent = {
   style: CSSProperties
   title?: string
   rrule?: string
+  exdate?: string[]
 }

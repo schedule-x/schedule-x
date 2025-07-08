@@ -116,18 +116,26 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
     $app.calendarEvents.backgroundEvents.value.forEach((event) => {
       const rrule = event.rrule
+      const exdate = event.exdate
 
       if (rrule && this.range) {
         recurrencesToCreate.push(
-          ...createRecurrencesForBackgroundEvent(event, rrule, this.range)
+          ...createRecurrencesForBackgroundEvent(
+            event,
+            rrule,
+            this.range,
+            exdate
+          )
         )
       }
     })
 
-    $app.calendarEvents.backgroundEvents.value = [
+    const newLocal = [
       ...$app.calendarEvents.backgroundEvents.value,
       ...recurrencesToCreate,
     ]
+    console.log(newLocal)
+    $app.calendarEvents.backgroundEvents.value = newLocal
   }
 
   private createRecurrencesForEvent(
