@@ -51,9 +51,13 @@ Create the plugin instance.
 
 Configuration object for the plugin. Added as the first parameter to the `createDragToCreatePlugin` function.
 
-| Property   | type                           |
-|------------|--------------------------------|
-| onAddEvent | (event: CalendarEvent) => void |
+| Property                | Type                                    | Default |
+|------------------------|-----------------------------------------|---------|
+| `onAddEvent`           | `(event: CalendarEvent) => void`        | -       |
+| `onBeforeAddEvent`     | `(event: CalendarEvent) => boolean`     | -       |
+| `onBeforeAddEventAsync`| `(event: CalendarEvent) => Promise<boolean>` | -       |
+| `snapDuration`         | `15 \| 30 \| 60`                        | 30      |
+
 
 #### `dragToCreate(eventId: string, otherEventProperties: Partial<CalendarEvent>)`
 
