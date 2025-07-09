@@ -66,7 +66,7 @@ export default function DateGridDay({
           <DateGridEvent
             calendarEvent={event}
             gridRow={index + 1}
-            key={event.start + event.end}
+            key={event.start + event.end + index}
           />
         )
       })}

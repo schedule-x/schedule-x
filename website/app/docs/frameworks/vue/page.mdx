@@ -14,9 +14,27 @@ Schedule-X with Nuxt, all code examples below should work, but everything needs 
 
 ## Installing
 
-```bash copy
-npm install @schedule-x/vue @schedule-x/theme-default
-```
+import { Tabs } from 'nextra/components'
+
+<Tabs items={['npm', 'pnpm', 'yarn']}>
+  <Tabs.Tab>
+    ```bash copy
+      npm install @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      pnpm install @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      yarn add @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 If you're using a package manager that does not automatically
 download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and

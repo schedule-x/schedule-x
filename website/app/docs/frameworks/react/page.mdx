@@ -14,19 +14,33 @@ configuring and interacting with the calendar, refer to the rest of the calendar
 
 In this example we will set up a calendar with the default theme, and a plugin for retrieving and updating events.
 
-```bash copy
-npm install @schedule-x/react @schedule-x/theme-default @schedule-x/events-service
-```
+import { Tabs } from 'nextra/components'
 
-If you're using a package manager that does not automatically
-download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
-`preact`. This is for example the case for **yarn** and **npm < v7**.
+<Tabs items={['npm', 'pnpm', 'yarn']}>
+  <Tabs.Tab>
+    ```bash copy
+      npm install @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      pnpm install @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service @preact/signals preact
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      yarn add @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service @preact/signals preact
+    ```
+  </Tabs.Tab>
+</Tabs>
+
 
 ## Basic usage
 
 ### Example
 
-import { Tabs } from 'nextra/components'
 import ReactExample from '../../../../components/code-examples/react-calendar.mdx'
 import NextjsExample from '../../../../components/code-examples/nextjs-calendar.mdx'
 import {Callout} from "nextra/components";
