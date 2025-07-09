@@ -130,12 +130,10 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       }
     })
 
-    const newLocal = [
+    $app.calendarEvents.backgroundEvents.value = [
       ...$app.calendarEvents.backgroundEvents.value,
       ...recurrencesToCreate,
     ]
-    console.log(newLocal)
-    $app.calendarEvents.backgroundEvents.value = newLocal
   }
 
   private createRecurrencesForEvent(
