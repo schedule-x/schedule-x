@@ -35,12 +35,10 @@ const eventsServicePlugin = createEventsServicePlugin()
 
 const calendar = createCalendar({
 plugins: [
+  createEventRecurrencePlugin(),
   eventsServicePlugin,
   createDragAndDropPlugin(),
   createEventModalPlugin(),
-  createScrollControllerPlugin({
-    initialScroll: '07:50'
-  }),
   createResizePlugin(),
 ],
 
@@ -172,12 +170,14 @@ plugins: [
     {
       title: 'Out of office',
       start: '2025-07-07 00:00',
-      end: '2025-07-08 02:00',
+      end: '2025-07-07 02:00',
       style: {
         // create tilted 5px thick gray lines
         backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
         opacity: 0.5,
       },
+      rrule: 'FREQ=WEEKLY',
+      exdate: ['20250714T000000', '20250728T000000']
     },
   ],
   /* dayBoundaries: {

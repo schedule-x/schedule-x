@@ -48,7 +48,8 @@ export const createRecurrencesForEvent = (
 export const createRecurrencesForBackgroundEvent = (
   backgroundEvent: BackgroundEvent,
   rrule: string,
-  range: DateRange
+  range: DateRange,
+  exdate?: string[] | undefined
 ) => {
   // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
   if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
@@ -60,6 +61,7 @@ export const createRecurrencesForBackgroundEvent = (
     dtstart: parseSXToRFC5545(backgroundEvent.start),
     dtend: parseSXToRFC5545(backgroundEvent.end),
     rrule,
+    exdate,
   }).getRecurrences()
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
