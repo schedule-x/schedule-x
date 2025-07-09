@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
+
+### Bug Fixes
+
+- memory leak week view ([#1121](https://github.com/schedule-x/schedule-x/issues/1121)) ([fcfb7aa](https://github.com/schedule-x/schedule-x/commit/fcfb7aa423cd6b6e0aa1b7a4ecca32de82ab87f8))
+
+### Features
+
+- enable background events to be timed and multiple days long ([#1111](https://github.com/schedule-x/schedule-x/issues/1111)) ([fe658b2](https://github.com/schedule-x/schedule-x/commit/fe658b2deffdf07dc3f6ce0379f0c12bda9d0c7f))
+
 # [2.35.0](https://github.com/schedule-x/schedule-x/compare/v2.34.0...v2.35.0) (2025-06-27)
 
 ### Bug Fixes
