@@ -38,9 +38,6 @@ import CustomFooter from '../components/theme/custom-footer'
   )
 
   export default async function RootLayout({ children }: { children: React.ReactNode }) {
-    let alxScript = false
-    if (typeof window === 'object') alxScript = true
-
     return (
       <html
         // Not required, but good for SEO
@@ -70,7 +67,7 @@ import CustomFooter from '../components/theme/custom-footer'
 
         <Script src="https://app.lemonsqueezy.com/js/lemon.js"/>
 
-        {alxScript && window?.location.hostname !== 'localhost' &&
+        {typeof window !== 'undefined' && window.location.hostname !== 'localhost' &&
           <Script data-domain="schedule-x.dev" src="https://analytics.schedule-x.com/js/script.js" defer/>}
         <Script>
           {`window.lemonSqueezyAffiliateConfig = { store: "schedule-x" };`}

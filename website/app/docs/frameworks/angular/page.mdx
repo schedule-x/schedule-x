@@ -13,7 +13,7 @@ Schedule-X in an app with SSR, you need to make sure the component only renders 
 
 import { Tabs } from 'nextra/components'
 
-<Tabs items={['npm', 'pnpm/yarn']}>
+<Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tabs.Tab>
     ```bash copy
       npm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default
@@ -23,6 +23,12 @@ import { Tabs } from 'nextra/components'
   <Tabs.Tab>
     ```bash copy
       pnpm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      yarn add @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
     ```
   </Tabs.Tab>
 </Tabs>

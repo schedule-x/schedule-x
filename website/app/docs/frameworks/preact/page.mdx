@@ -11,13 +11,27 @@ configuring and interacting with the calendar, refer to the rest of the calendar
 
 ## Installing
 
-```bash copy
-npm install @schedule-x/preact @schedule-x/theme-default
-```
+import { Tabs } from 'nextra/components'
 
-If you're using a package manager that does not automatically
-download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
-`preact`. This is for example the case for **yarn** and **npm < v7**.
+<Tabs items={['npm', 'pnpm', 'yarn']}>
+  <Tabs.Tab>
+    ```bash copy
+      npm install @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      pnpm install @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+    ```
+  </Tabs.Tab>
+
+  <Tabs.Tab>
+    ```bash copy
+      yarn add @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ## Basic usage
 

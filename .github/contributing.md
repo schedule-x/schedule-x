@@ -10,12 +10,7 @@ less information and clarity.
 
 ## Developing
 
-This setup guide has yet to be battle tested, so please send a message in the Discord channel if you run into any 
-issues.
-
-### Getting up and running
-
-#### Git stuff
+### Git stuff
 
 1. Click the fork button in GitHub
 2. Clone your fork to your local machine
@@ -28,7 +23,7 @@ issues.
 * `chore: update dependencies`
 5. Push your changes to your fork and open a pull request to the main-branch of the Schedule-X repository
 
-#### Code stuff
+### Code stuff
 
 - `npm i`
 - `husky install` - configuring the gitHooks. Might not work on windows. In this case just need to make sure to lint and format on your own.
