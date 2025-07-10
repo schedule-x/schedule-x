@@ -7,6 +7,9 @@ const meta: MetaRecord = {
   frameworks: {
     title: 'Frameworks',
   },
+  api: {
+    title: 'API',
+  }
 }
 
 export default meta
