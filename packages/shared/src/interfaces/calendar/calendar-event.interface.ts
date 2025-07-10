@@ -1,12 +1,17 @@
 import { EventId } from '../../types/event-id'
 import { EventFragments } from './event-fragments'
 
+/*
+ * AUTO-DOCS
+ * Configuration options for calendar events, including drag-and-drop and resize settings
+ */
 export type CalendarEventOptions = {
   disableDND?: boolean
   disableResize?: boolean
   additionalClasses?: string[]
 }
 
+// AUTO-DOCS
 export default interface CalendarEventExternal {
   id: EventId
   start: string
@@ -28,6 +33,7 @@ export default interface CalendarEventExternal {
   [key: string]: any
 }
 
+// AUTO-DOCS
 export interface CalendarEventInternal extends CalendarEventExternal {
   // event duration
   _isSingleDayTimed: boolean

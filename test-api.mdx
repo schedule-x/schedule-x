@@ -1,12 +1,12 @@
 # API Reference
 
-This page contains automatically generated API docs based on selected types and interfaces from the Schedule-X packages.
+This page contains automatically generated TypeScript types and interfaces from the Schedule-X packages.
 
 ## CalendarEventExternal
 
 ### Properties
 
-- **id:** [EventId](#eventid)
+- **id:** [EventId](#event-id)
 
 - **start:** string
 
@@ -24,13 +24,13 @@ This page contains automatically generated API docs based on selected types and 
 
 - **_customContent (optional):** ` { timeGrid?: string dateGrid?: string monthGrid?: string monthAgenda?: string } `
 
-- **_options (optional):** [CalendarEventOptions](#calendareventoptions)
+- **_options (optional):** CalendarEventOptions
 
 
 
 ## CalendarEventInternal
 
-**Extends:** [CalendarEventExternal](#calendareventexternal)
+**Extends:** [CalendarEventExternal](#calendar-event-external)
 
 ### Properties
 
@@ -52,7 +52,7 @@ This page contains automatically generated API docs based on selected types and 
 
 - **_nDaysInGrid:** `number | undefined`
 
-- **_eventFragments:** [EventFragments](#eventfragments)
+- **_eventFragments:** [EventFragments](#event-fragments)
 
 - **_color:** string
 
@@ -60,23 +60,7 @@ This page contains automatically generated API docs based on selected types and 
 
 
 
-## CalendarEventOptions
-
-Configuration options for calendar events, including drag-and-drop and resize settings
-
-### Properties
-
-- **disableDND (optional):** boolean
-
-- **disableResize (optional):** boolean
-
-- **additionalClasses (optional):** string[]
-
-
-
 ## EventFragments
-
-Internal representation of events in the month grid
 
 **Type:** `Record<startDate, nDays>`
 
