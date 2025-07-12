@@ -46,7 +46,7 @@ export default function MonthGridEvent({
     setClickedEvent,
   } = useEventInteractions($app)
 
-  const hasStartDate = dateFromDateTime(calendarEvent.start) === date
+  const hasStartDate = dateFromDateTime(calendarEvent._startLocal) === date
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {
@@ -153,7 +153,7 @@ export default function MonthGridEvent({
         <>
           {dateTimeStringRegex.test(calendarEvent.start) && (
             <div className="sx__month-grid-event-time">
-              {timeFn(calendarEvent.start, $app.config.locale.value)}
+              {timeFn(calendarEvent._startLocal, $app.config.locale.value)}
             </div>
           )}
 

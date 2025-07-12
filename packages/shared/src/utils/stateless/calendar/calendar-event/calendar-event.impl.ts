@@ -17,6 +17,7 @@ import {
 } from '../../time/format-conversion/string-to-string'
 import { EventFragments } from '../../../../interfaces/calendar/event-fragments'
 import { DEFAULT_EVENT_COLOR_NAME } from '../../../../values'
+import { Temporal } from 'temporal-polyfill'
 
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined
@@ -40,28 +41,54 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     private _foreignProperties: Record<string, unknown> = {}
   ) {}
 
+  get _startLocal(): string {
+    if (dateStringRegex.test(this.start)) return this.start
+
+    return Temporal.ZonedDateTime
+      .from(this.start)
+      .withTimeZone(this._config.timezone.value)
+      .toPlainDateTime()
+      .toString()
+  }
+
+  get _endLocal(): string {
+    if (dateStringRegex.test(this.end)) return this.end
+
+    return Temporal.ZonedDateTime
+      .from(this.end)
+      .withTimeZone(this._config.timezone.value)
+      .toPlainDateTime()
+      .toString()
+  }
+
   get _isSingleDayTimed(): boolean {
-    return (
-      dateTimeStringRegex.test(this.start) &&
-      dateTimeStringRegex.test(this.end) &&
-      dateFromDateTime(this.start) === dateFromDateTime(this.end)
-    )
+    if (!dateTimeStringRegex.test(this.start) || !dateTimeStringRegex.test(this.end)) return false
+
+    const localStart = Temporal.ZonedDateTime.from(this.start)
+    const localEnd = Temporal.ZonedDateTime.from(this.end)
+    const localStartDate = dateFromDateTime(localStart.toPlainDateTime().toString())
+    const localEndDate = dateFromDateTime(localEnd.toPlainDateTime().toString())
+
+    return localStartDate === localEndDate
   }
 
   get _isSingleDayFullDay(): boolean {
     return (
+      this.start === this.end &&
       dateStringRegex.test(this.start) &&
-      dateStringRegex.test(this.end) &&
-      this.start === this.end
+      dateStringRegex.test(this.end)
     )
   }
 
   get _isMultiDayTimed(): boolean {
-    return (
-      dateTimeStringRegex.test(this.start) &&
-      dateTimeStringRegex.test(this.end) &&
-      dateFromDateTime(this.start) !== dateFromDateTime(this.end)
-    )
+    if (!dateTimeStringRegex.test(this.start) || !dateTimeStringRegex.test(this.end)) return false
+
+    const localStart = Temporal.ZonedDateTime.from(this.start)
+    const localEnd = Temporal.ZonedDateTime.from(this.end)
+    const localStartDate = dateFromDateTime(localStart.toPlainDateTime().toString())
+    const localEndDate = dateFromDateTime(localEnd.toPlainDateTime().toString())
+
+    return localStartDate !== localEndDate
   }
 
   get _isMultiDayFullDay(): boolean {
@@ -80,8 +107,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     )
       return false
 
-    const startDate = dateFromDateTime(this.start)
-    const endDate = dateFromDateTime(this.end)
+    const startDate = dateFromDateTime(this._startLocal)
+    const endDate = dateFromDateTime(this._endLocal)
     const endDateMinusOneDay = toDateString(
       new Date(toJSDate(endDate).getTime() - 86400000)
     )

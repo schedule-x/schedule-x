@@ -29,6 +29,9 @@ export default interface CalendarEventExternal {
 }
 
 export interface CalendarEventInternal extends CalendarEventExternal {
+  _startLocal: string
+  _endLocal: string
+
   // event duration
   _isSingleDayTimed: boolean
   _isSingleDayFullDay: boolean

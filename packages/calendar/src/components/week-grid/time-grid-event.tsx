@@ -28,6 +28,7 @@ import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -57,15 +58,21 @@ export default function TimeGridEvent({
     { hour: 'numeric', minute: 'numeric' },
   ] as const
   const getEventTime = (start: string, end: string) => {
-    const localizedStartTime = toJSDate(start).toLocaleTimeString(
-      ...localizeArgs
-    )
+    const localizedStartTime = Temporal.ZonedDateTime
+      .from(start)
+      .withTimeZone($app.config.timezone.value)
+      .toLocaleString(
+        ...localizeArgs
+      )
 
     if (start === end) {
       return localizedStartTime
     }
 
-    const localizedEndTime = toJSDate(end).toLocaleTimeString(...localizeArgs)
+    const localizedEndTime = Temporal.ZonedDateTime
+      .from(end)
+      .withTimeZone($app.config.timezone.value)
+      .toLocaleString(...localizeArgs)
     return `${localizedStartTime} – ${localizedEndTime}`
   }
 
@@ -187,7 +194,7 @@ export default function TimeGridEvent({
 
   const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
     ? dayBoundariesDateTime?.start
-    : calendarEvent.start
+    : calendarEvent._startLocal
 
   return (
     <>
@@ -214,7 +221,7 @@ export default function TimeGridEvent({
           )}%`,
           height: `${getEventHeight(
             relativeStartWithinDayBoundary,
-            calendarEvent.end,
+            calendarEvent._endLocal,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,

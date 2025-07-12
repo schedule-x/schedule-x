@@ -214,7 +214,7 @@ export default function DateGridEvent({
               {calendarEvent.title} &nbsp;
               {dateTimeStringRegex.test(calendarEvent.start) && (
                 <span className="sx__date-grid-event-time">
-                  {timeFn(calendarEvent.start, $app.config.locale.value)}
+                  {timeFn(calendarEvent._startLocal, $app.config.locale.value)}
                 </span>
               )}
             </span>

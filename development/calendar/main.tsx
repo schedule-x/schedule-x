@@ -53,7 +53,7 @@ plugins: [
   },
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'week',
+  defaultView: 'month-grid',
   callbacks: {
     onScrollDayIntoView(date) {
       console.log('onScrollDayIntoView: ', date)
@@ -185,8 +185,27 @@ plugins: [
     end: '23:00'
   }, */
   locale: 'de-DE',
+  // tz new york
+  timezone: 'America/New_York',
   events: [
-    ...seededEvents
+    {
+      id: 1,
+      start: '2025-07-11T04:00:00.000+02:00[Europe/Berlin]',
+      end: '2025-07-11T05:00:00.000+02:00[Europe/Berlin]',
+      title: 'Event 1',
+      people: ['John Doe'],
+      location: 'Office',
+      description: 'Event 1 description',
+    },
+    {
+      id: 2,
+      start: '2025-07-11T04:00:00.000+02:00[Europe/Berlin]',
+      end: '2025-07-13T05:00:00.000+02:00[Europe/Berlin]',
+      title: 'Event 2',
+      people: ['John Doe'],
+      location: 'Office',
+      description: 'Event 2 description',
+    }
   ],
 })
 calendar.render(calendarElement)

@@ -14,8 +14,8 @@ export const positionInTimeGrid = (
   for (const event of timeGridEvents) {
     const range = $app.calendarState.range.value as DateRange
 
-    if (event.start >= range.start && event.end <= range.end) {
-      let date = dateFromDateTime(event.start)
+    if (event._startLocal >= range.start && event._endLocal <= range.end) {
+      let date = dateFromDateTime(event._startLocal)
 
       if ($app.config.isHybridDay) {
         const previousDayStart = `${addDays(date, -1)} ${timeStringFromTimePoints($app.config.dayBoundaries.value.start)}`
@@ -23,9 +23,9 @@ export const positionInTimeGrid = (
         const actualDayStart = `${date} ${timeStringFromTimePoints($app.config.dayBoundaries.value.start)}`
 
         if (
-          event.start > previousDayStart &&
-          event.start < previousDayEnd &&
-          event.start < actualDayStart
+          event._startLocal > previousDayStart &&
+          event._startLocal < previousDayEnd &&
+          event._startLocal < actualDayStart
         ) {
           date = addDays(date, -1)
         }

@@ -18,6 +18,7 @@ import { Signal } from '@preact/signals'
 import { WeekDay } from '../../enums/time/week-day.enum'
 import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
+import { IANATimezone } from '../../utils/stateless/time/tzdb'
 
 export type WeekOptions = {
   gridHeight: number
@@ -76,6 +77,7 @@ export default interface CalendarConfigInternal extends Config {
   _customComponentFns: CustomComponentFns
   translations: Signal<Record<string, Language>>
   direction: 'ltr' | 'rtl'
+  timezone: Signal<IANATimezone>
 
   // Getters
   isHybridDay: boolean
@@ -105,6 +107,7 @@ interface ReducedCalendarConfigInternal
     | 'translations'
     | 'showWeekNumbers'
     | 'direction'
+    | 'timezone'
   > {}
 
 export interface CalendarConfigExternal
@@ -127,4 +130,5 @@ export interface CalendarConfigExternal
   skipValidation?: boolean
   translations?: Record<string, Language>
   showWeekNumbers?: boolean
+  timezone?: string
 }
