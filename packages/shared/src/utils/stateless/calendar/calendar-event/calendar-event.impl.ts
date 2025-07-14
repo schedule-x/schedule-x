@@ -110,15 +110,15 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   get _isSingleHybridDayTimed(): boolean {
     if (!this._config.isHybridDay) return false
     if (
-      !dateTimeStringRegex.test(this.start) ||
-      !dateTimeStringRegex.test(this.end)
+      this.start instanceof Temporal.PlainDate ||
+      this.end instanceof Temporal.PlainDate
     )
       return false
 
-    const startDate = dateFromDateTime(this._startLocal)
-    const endDate = dateFromDateTime(this._endLocal)
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
     const endDateMinusOneDay = toDateString(
-      new Date(toJSDate(endDate).getTime() - 86400000)
+      Temporal.PlainDate.from(endDate).subtract({ days: 1 }).toString()
     )
     if (startDate !== endDate && startDate !== endDateMinusOneDay) return false
 
