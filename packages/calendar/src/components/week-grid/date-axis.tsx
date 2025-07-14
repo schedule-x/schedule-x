@@ -15,7 +15,6 @@ export default function DateAxis({ week }: props) {
   const $app = useContext(AppContext)
 
   const getClassNames = (date: Temporal.ZonedDateTime) => {
-    console.log(date)
     const classNames = [
       'sx__week-grid__date',
       getClassNameForWeekday(date.dayOfWeek),
