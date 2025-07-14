@@ -1,5 +1,6 @@
 import { Temporal } from 'temporal-polyfill'
+const now = Temporal.Now.instant();
+const zdt = now.toZonedDateTimeISO('America/New_York');
+const offset = zdt.offset;
 
-const zdt = Temporal.ZonedDateTime.from('2025-07-11T10:00:00.000+02:00[Europe/Berlin]')
-
-console.log(zdt.toPlainDateTime().toString())
+console.log(offset); // e.g., "-04:00"

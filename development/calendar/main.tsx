@@ -28,10 +28,12 @@ import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agen
 import { createViewList } from '@schedule-x/calendar/src/views/list'
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
+import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const eventsServicePlugin = createEventsServicePlugin()
+const calendarControlsPlugin = createCalendarControlsPlugin()
 
 const calendar = createCalendar({
 plugins: [
@@ -40,6 +42,7 @@ plugins: [
   createDragAndDropPlugin(),
   createEventModalPlugin(),
   createResizePlugin(),
+  calendarControlsPlugin,
 ],
 
   translations: mergeLocales(
@@ -53,7 +56,7 @@ plugins: [
   },
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'month-grid',
+  defaultView: 'week',
   callbacks: {
     onScrollDayIntoView(date) {
       console.log('onScrollDayIntoView: ', date)
@@ -167,7 +170,7 @@ plugins: [
     },
   },
   backgroundEvents: [
-    {
+    /* {
       title: 'Out of office',
       start: '2025-07-07 00:00',
       end: '2025-07-07 02:00',
@@ -178,7 +181,7 @@ plugins: [
       },
       rrule: 'FREQ=WEEKLY',
       exdate: ['20250714T000000', '20250728T000000']
-    },
+    }, */
   ],
   /* dayBoundaries: {
     start: '10:00',
@@ -186,7 +189,7 @@ plugins: [
   }, */
   locale: 'de-DE',
   // tz new york
-  timezone: 'America/New_York',
+  timezone: 'Europe/Berlin',
   events: [
     {
       id: 1,
@@ -209,3 +212,12 @@ plugins: [
   ],
 })
 calendar.render(calendarElement)
+
+// change timezone via calendarControlsPlugin
+const timezoneSelect = document.getElementById('timezone-select') as HTMLSelectElement
+timezoneSelect.addEventListener('change', (e) => {
+  const newTimezone = (e.target as HTMLSelectElement).value
+  if (newTimezone) {
+    calendarControlsPlugin.setTimezone(newTimezone as IANATimezone)
+  }
+})

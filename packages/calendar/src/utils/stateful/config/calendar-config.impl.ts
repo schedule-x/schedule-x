@@ -17,6 +17,7 @@ import { timePointsPerDay } from '@schedule-x/shared/src/utils/stateless/time/ti
 import { Signal, signal } from '@preact/signals'
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 import { getDirection } from '../../stateless/get-direction'
+import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   firstDayOfWeek: Signal<WeekDay>
@@ -33,7 +34,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   translations: Signal<Record<string, Language>>
   showWeekNumbers: Signal<boolean> = signal(false)
   direction: 'ltr' | 'rtl' = 'ltr'
-  timezone: Signal<string>
+  timezone: Signal<IANATimezone>
 
   constructor(
     locale: string = DEFAULT_LOCALE,

@@ -596,5 +596,4 @@ export type IANATimezone =
   | 'Universal'
   | 'W-SU'
   | 'WET'
-  | 'Zulu'
-  | null;
+  | 'Zulu';
