@@ -6,6 +6,7 @@ import Builder from '../../../../interfaces/builder.interface'
 import CalendarEventImpl from './calendar-event.impl'
 import { EventId } from '../../../../types/event-id'
 import CalendarConfigInternal from '../../../../interfaces/calendar/calendar-config'
+import { Temporal } from 'temporal-polyfill'
 
 export default class CalendarEventBuilder
   implements Builder<CalendarEventInternal>
@@ -22,8 +23,8 @@ export default class CalendarEventBuilder
   constructor(
     private _config: CalendarConfigInternal,
     private id: EventId,
-    private start: string,
-    private end: string
+    private start: Temporal.ZonedDateTime | Temporal.PlainDate,
+    private end: Temporal.ZonedDateTime | Temporal.PlainDate
   ) {}
 
   build(): CalendarEventInternal {

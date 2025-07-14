@@ -20,10 +20,10 @@ export const sortEventsForMonthGrid = (
   a: CalendarEventInternal,
   b: CalendarEventInternal
 ) => {
-  const aStartDate = dateFromDateTime(a._startLocal)
-  const bStartDate = dateFromDateTime(b._startLocal)
-  const aEndDate = dateFromDateTime(a._endLocal)
-  const bEndDate = dateFromDateTime(b._endLocal)
+  const aStartDate = dateFromDateTime(a.start.toString())
+  const bStartDate = dateFromDateTime(b.start.toString())
+  const aEndDate = dateFromDateTime(a.end.toString())
+  const bEndDate = dateFromDateTime(b.end.toString())
 
   /**
    * For events that start and end at the same day, sort them by their start time.
@@ -32,7 +32,7 @@ export const sortEventsForMonthGrid = (
    * today at 1am and ends later today. That way we avoid empty gaps in the grid.
    * */
   if (aStartDate === bStartDate && aEndDate === bEndDate) {
-    if (a._startLocal < b._startLocal) return -1
+    if (a.start.toString() < b.start.toString()) return -1
   }
 
   if (aStartDate === bStartDate) {

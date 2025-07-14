@@ -189,12 +189,12 @@ export default function TimeGridEvent({
 
   const realStartIsBeforeDayBoundaryStart =
     dayBoundariesDateTime &&
-    calendarEvent.start < dayBoundariesDateTime.start.toString() &&
-    calendarEvent.end >= dayBoundariesDateTime.start.toString()
+    calendarEvent.start.toString() < dayBoundariesDateTime.start.toString() &&
+    calendarEvent.end.toString() >= dayBoundariesDateTime.start.toString()
 
   const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
-    ? dayBoundariesDateTime?.start
-    : calendarEvent._startLocal
+    ? dayBoundariesDateTime?.start.toString()
+    : calendarEvent.start.toString()
 
   return (
     <>
@@ -221,7 +221,7 @@ export default function TimeGridEvent({
           )}%`,
           height: `${getEventHeight(
             relativeStartWithinDayBoundary,
-            calendarEvent._endLocal,
+            calendarEvent.end.toString(),
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,

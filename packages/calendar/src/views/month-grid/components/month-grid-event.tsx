@@ -10,7 +10,6 @@ import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/event
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { wasEventAddedInLastSecond } from '../../month-agenda/utils/stateless/was-event-added-in-last-second'
 import { Temporal } from 'temporal-polyfill'
@@ -48,7 +47,7 @@ export default function MonthGridEvent({
   } = useEventInteractions($app)
 
   const plainDate = Temporal.PlainDate.from(date).toString()
-  const hasStartDate = dateFromDateTime(calendarEvent._startLocal) === plainDate
+  const hasStartDate = dateFromDateTime(calendarEvent.start.toString()) === plainDate
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {
@@ -153,9 +152,9 @@ export default function MonthGridEvent({
     >
       {!customComponent && !hasCustomContent && (
         <>
-          {dateTimeStringRegex.test(calendarEvent.start) && (
+          {calendarEvent.start instanceof Temporal.ZonedDateTime && (
             <div className="sx__month-grid-event-time">
-              {timeFn(calendarEvent._startLocal, $app.config.locale.value)}
+              {timeFn(calendarEvent.start, $app.config.locale.value)}
             </div>
           )}
 

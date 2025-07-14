@@ -1,5 +1,6 @@
 import { EventId } from '../../types/event-id'
 import { EventFragments } from './event-fragments'
+import { Temporal } from 'temporal-polyfill'
 
 export type CalendarEventOptions = {
   disableDND?: boolean
@@ -9,8 +10,8 @@ export type CalendarEventOptions = {
 
 export default interface CalendarEventExternal {
   id: EventId
-  start: string
-  end: string
+  start: Temporal.ZonedDateTime | Temporal.PlainDate
+  end: Temporal.ZonedDateTime | Temporal.PlainDate
   title?: string
   people?: string[]
   location?: string
@@ -29,9 +30,6 @@ export default interface CalendarEventExternal {
 }
 
 export interface CalendarEventInternal extends CalendarEventExternal {
-  _startLocal: string
-  _endLocal: string
-
   // event duration
   _isSingleDayTimed: boolean
   _isSingleDayFullDay: boolean

@@ -2,7 +2,7 @@ import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-
 import { Temporal } from 'temporal-polyfill'
 import { toIntegers } from '../format-conversion/format-conversion'
 
-const dateFn = (dateTime: Temporal.ZonedDateTime, locale: string) => {
+const dateFn = (dateTime: Temporal.ZonedDateTime | Temporal.PlainDate, locale: string) => {
   return dateTime.toLocaleString(locale, {
     day: 'numeric',
     month: 'long',
@@ -12,7 +12,8 @@ const dateFn = (dateTime: Temporal.ZonedDateTime, locale: string) => {
 
 export const getLocalizedDate = dateFn
 
-export const timeFn = (dateTimeString: string, locale: string) => {
+export const timeFn = (dateTime: Temporal.ZonedDateTime, locale: string) => {
+  const dateTimeString = dateTime.toString()
   const { year, month, date, hours, minutes } = toIntegers(dateTimeString)
 
   return new Date(year, month, date, hours, minutes).toLocaleTimeString(
@@ -30,8 +31,8 @@ export const getTimeStamp = (
   delimiter = '\u2013'
 ) => {
   const eventTime = { start: calendarEvent.start, end: calendarEvent.end } as {
-    start: string
-    end: string
+    start: Temporal.ZonedDateTime | Temporal.PlainDate
+    end: Temporal.ZonedDateTime | Temporal.PlainDate
   }
 
   if (calendarEvent._isSingleDayFullDay) {
@@ -47,9 +48,9 @@ export const getTimeStamp = (
 
   if (calendarEvent._isSingleDayTimed && eventTime.start !== eventTime.end) {
     return `${dateFn(eventTime.start, locale)} <span aria-hidden="true">⋅</span> ${timeFn(
-      eventTime.start,
+      eventTime.start as Temporal.ZonedDateTime,
       locale
-    )} ${delimiter} ${timeFn(eventTime.end, locale)}`
+    )} ${delimiter} ${timeFn(eventTime.end as Temporal.ZonedDateTime, locale)}`
   }
 
   if (
@@ -57,16 +58,16 @@ export const getTimeStamp = (
     calendarEvent.start === calendarEvent.end
   ) {
     return `${dateFn(eventTime.start, locale)}, ${timeFn(
-      eventTime.start,
+      eventTime.start as Temporal.ZonedDateTime,
       locale
     )}`
   }
 
   return `${dateFn(eventTime.start, locale)}, ${timeFn(
-    eventTime.start,
+    eventTime.start as Temporal.ZonedDateTime,
     locale
   )} ${delimiter} ${dateFn(eventTime.end, locale)}, ${timeFn(
-    eventTime.end,
+    eventTime.end as Temporal.ZonedDateTime,
     locale
   )}`
 }

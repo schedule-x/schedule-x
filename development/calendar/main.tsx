@@ -194,8 +194,8 @@ plugins: [
   events: [
     {
       id: 1,
-      start: '2025-07-11T04:00:00.000+02:00[Europe/Berlin]',
-      end: '2025-07-11T05:00:00.000+02:00[Europe/Berlin]',
+      start: Temporal.ZonedDateTime.from('2025-07-11T04:00:00.000+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-07-11T05:00:00.000+02:00[Europe/Berlin]'),
       title: 'Event 1',
       people: ['John Doe'],
       location: 'Office',
@@ -203,8 +203,8 @@ plugins: [
     },
     {
       id: 2,
-      start: '2025-07-11T04:00:00.000+02:00[Europe/Berlin]',
-      end: '2025-07-13T05:00:00.000+02:00[Europe/Berlin]',
+      start: Temporal.ZonedDateTime.from('2025-07-11T04:00:00.000+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-07-13T05:00:00.000+02:00[Europe/Berlin]'),
       title: 'Event 2',
       people: ['John Doe'],
       location: 'Office',

@@ -26,6 +26,7 @@ import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -71,10 +72,10 @@ export default function DateGridEvent({
   }
 
   const startsBeforeWeek =
-    calendarEvent.start <
+    calendarEvent.start.toString() <
     ($app.calendarState.range.value as DateRange).start.toString()
   const endsAfterWeek =
-    calendarEvent.end >
+    calendarEvent.end.toString() >
     ($app.calendarState.range.value as DateRange).end.toString()
   const hasOverflowLeft = useMemo(() => {
     if ($app.config.direction === 'ltr') {
@@ -212,9 +213,9 @@ export default function DateGridEvent({
 
             <span className="sx__date-grid-event-text">
               {calendarEvent.title} &nbsp;
-              {dateTimeStringRegex.test(calendarEvent.start) && (
+              {calendarEvent.start instanceof Temporal.ZonedDateTime && (
                 <span className="sx__date-grid-event-time">
-                  {timeFn(calendarEvent._startLocal, $app.config.locale.value)}
+                  {timeFn(calendarEvent.start, $app.config.locale.value)}
                 </span>
               )}
             </span>

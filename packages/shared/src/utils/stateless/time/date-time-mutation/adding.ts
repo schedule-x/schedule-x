@@ -9,7 +9,7 @@ export const addMonths = (to: Temporal.ZonedDateTime, nMonths: number): Temporal
   return to.add({ months: nMonths })
 }
 
-export const addDays = (to: Temporal.ZonedDateTime, nDays: number): Temporal.ZonedDateTime => {
+export const addDays = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nDays: number): Temporal.ZonedDateTime | Temporal.PlainDate => {
   return to.add({ days: nDays })
 }
 

@@ -14,8 +14,8 @@ const positionInMonthWeek = (
   const occupiedLevels = new Set<number>()
 
   for (const event of sortedEvents) {
-    const eventOriginalStartDate = dateFromDateTime(event._startLocal)
-    const eventOriginalEndDate = dateFromDateTime(event._endLocal)
+    const eventOriginalStartDate = dateFromDateTime(event.start.toString())
+    const eventOriginalEndDate = dateFromDateTime(event.end.toString())
 
     const isEventStartInWeek = !!week[eventOriginalStartDate]
     let isEventInWeek = isEventStartInWeek

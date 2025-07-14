@@ -29,8 +29,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   constructor(
     private _config: CalendarConfigInternal,
     public id: EventId,
-    public start: string,
-    public end: string,
+    private _start: Temporal.ZonedDateTime | Temporal.PlainDate,
+    private _end: Temporal.ZonedDateTime | Temporal.PlainDate,
     public title?: string,
     public people?: string[],
     public location?: string,
@@ -41,61 +41,69 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     private _foreignProperties: Record<string, unknown> = {}
   ) {}
 
-  get _startLocal(): string {
-    if (dateStringRegex.test(this.start)) return this.start
+  get start(): Temporal.ZonedDateTime | Temporal.PlainDate {
+    if (this._start instanceof Temporal.PlainDate) {
+      return this._start
+    }
 
-    return Temporal.ZonedDateTime
-      .from(this.start)
+    return this._start
       .withTimeZone(this._config.timezone.value)
-      .toPlainDateTime()
-      .toString()
   }
 
-  get _endLocal(): string {
-    if (dateStringRegex.test(this.end)) return this.end
+  set start(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
+    this._start = value
+  }
 
-    return Temporal.ZonedDateTime
-      .from(this.end)
+  get end(): Temporal.ZonedDateTime | Temporal.PlainDate {
+    if (this._end instanceof Temporal.PlainDate) {
+      return this._end
+    }
+
+    return this._end
       .withTimeZone(this._config.timezone.value)
-      .toPlainDateTime()
-      .toString()
+  }
+
+  set end(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
+    this._end = value
   }
 
   get _isSingleDayTimed(): boolean {
-    if (!dateTimeStringRegex.test(this.start) || !dateTimeStringRegex.test(this.end)) return false
+    if (this.start instanceof Temporal.PlainDate || this.end instanceof Temporal.PlainDate) return false
 
-    const localStart = Temporal.ZonedDateTime.from(this.start)
-    const localEnd = Temporal.ZonedDateTime.from(this.end)
-    const localStartDate = dateFromDateTime(localStart.toPlainDateTime().toString())
-    const localEndDate = dateFromDateTime(localEnd.toPlainDateTime().toString())
+    const localStartDate = dateFromDateTime(this.start.toString())
+    const localEndDate = dateFromDateTime(this.end.toString())
 
     return localStartDate === localEndDate
   }
 
   get _isSingleDayFullDay(): boolean {
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
+
     return (
-      this.start === this.end &&
-      dateStringRegex.test(this.start) &&
-      dateStringRegex.test(this.end)
+      startDate === endDate &&
+      this.start instanceof Temporal.PlainDate &&
+      this.end instanceof Temporal.PlainDate
     )
   }
 
   get _isMultiDayTimed(): boolean {
-    if (!dateTimeStringRegex.test(this.start) || !dateTimeStringRegex.test(this.end)) return false
+    if (this.start instanceof Temporal.PlainDate || this.end instanceof Temporal.PlainDate) return false
 
-    const localStart = Temporal.ZonedDateTime.from(this.start)
-    const localEnd = Temporal.ZonedDateTime.from(this.end)
-    const localStartDate = dateFromDateTime(localStart.toPlainDateTime().toString())
-    const localEndDate = dateFromDateTime(localEnd.toPlainDateTime().toString())
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
 
-    return localStartDate !== localEndDate
+    return startDate !== endDate
   }
 
   get _isMultiDayFullDay(): boolean {
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
+
     return (
-      dateStringRegex.test(this.start) &&
-      dateStringRegex.test(this.end) &&
-      this.start !== this.end
+      this.start instanceof Temporal.PlainDate &&
+      this.end instanceof Temporal.PlainDate &&
+      startDate === endDate
     )
   }
 
