@@ -1,9 +1,11 @@
-export const isToday = (date: Date) => {
-  const today = new Date()
+import { Temporal } from 'temporal-polyfill'
+
+export const isToday = (date: Temporal.ZonedDateTime) => {
+  const today = Temporal.Now.zonedDateTimeISO()
   return (
-    date.getDate() === today.getDate() &&
-    date.getMonth() === today.getMonth() &&
-    date.getFullYear() === today.getFullYear()
+    date.day === today.day &&
+    date.month === today.month &&
+    date.year === today.year
   )
 }
 

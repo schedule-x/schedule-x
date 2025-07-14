@@ -38,12 +38,12 @@ export const getMonthAndYearForDateRange = (
 }
 
 export const getMonthAndYearForSelectedDate = ($app: CalendarAppSingleton) => {
-  const dateMonth = toJSDate(
-    $app.datePickerState.selectedDate.value
-  ).toLocaleString(...getLocaleStringMonthArgs($app))
-  const dateYear = toJSDate(
-    $app.datePickerState.selectedDate.value
-  ).toLocaleString(...getLocaleStringYearArgs($app))
+  const dateMonth = $app.datePickerState.selectedDate.value.toLocaleString(
+    ...getLocaleStringMonthArgs($app)
+  )
+  const dateYear = $app.datePickerState.selectedDate.value.toLocaleString(
+    ...getLocaleStringYearArgs($app)
+  )
 
   return `${dateMonth} ${dateYear}`
 }

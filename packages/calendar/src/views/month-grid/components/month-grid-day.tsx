@@ -12,7 +12,6 @@ import { DATE_GRID_BLOCKER } from '../../../constants'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
-import { dateStringRegex } from '@schedule-x/shared/src'
 import { randomStringId } from '@schedule-x/shared/src'
 
 type props = {
@@ -66,17 +65,14 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   }
 
   const dateClassNames = ['sx__month-grid-day__header-date']
-  const jsDate = toJSDate(day.date)
-  const dayDate = jsDate
+  const dayDate = day.date
   if (isToday(dayDate)) dateClassNames.push('sx__is-today')
 
-  const { month: selectedDateMonth } = toIntegers(
-    $app.datePickerState.selectedDate.value
-  )
-  const { month: dayMonth } = toIntegers(day.date)
+  const selectedDateMonth = $app.datePickerState.selectedDate.value.month
+  const dayMonth = day.date.month
   const baseClasses = [
     'sx__month-grid-day',
-    getClassNameForWeekday(jsDate.getDay()),
+    getClassNameForWeekday(dayDate.dayOfWeek),
   ]
   const [wrapperClasses, setWrapperClasses] = useState(baseClasses)
 
@@ -99,9 +95,9 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const numberOfNonDisplayedEvents = getNumberOfNonDisplayedEvents()
 
-  const dayStartDateTime = day.date + ' 00:00'
-  const dayEndDateTime = day.date + ' 23:59'
-  const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
+  const dayStartDateTime = day.date.with({ hour: 0, minute: 0 })
+  const dayEndDateTime = day.date.with({ hour: 23, minute: 59 })
+  /* const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
     const eventStartWithTime = dateStringRegex.test(event.start)
       ? event.start + ' 00:00'
       : event.start
@@ -112,7 +108,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       eventStartWithTime <= dayStartDateTime &&
       eventEndWithTime >= dayEndDateTime
     )
-  })
+  }) */
 
   const handleMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLElement
@@ -171,7 +167,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       onDblClick={(e) => $app.config.callbacks.onDoubleClickDate?.(day.date, e)}
       onMouseDown={handleMouseDown}
     >
-      {fullDayBackgroundEvent && (
+      {/* {fullDayBackgroundEvent && (
         <>
           <div
             className="sx__month-grid-background-event"
@@ -181,7 +177,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
             }}
           />
         </>
-      )}
+      )} */}
 
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
@@ -199,7 +195,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
         {monthGridDateCCID ? (
           <div data-ccid={monthGridDateCCID} />
         ) : (
-          <div className={dateClassNames.join(' ')}>{dayDate.getDate()}</div>
+          <div className={dateClassNames.join(' ')}>{dayDate.day}</div>
         )}
       </div>
 

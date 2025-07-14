@@ -29,7 +29,7 @@ export const getOneLetterDayNames = (
   })
 }
 
-export const getDayNameShort = (date: Date, locale: string) => {
+export const getDayNameShort = (date: Temporal.ZonedDateTime, locale: string) => {
   if (locale === 'he-IL') {
     return date.toLocaleString(locale, { weekday: 'narrow' })
   }

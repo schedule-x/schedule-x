@@ -13,6 +13,7 @@ import { focusModal } from '../../../utils/stateless/events/focus-modal'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { wasEventAddedInLastSecond } from '../../month-agenda/utils/stateless/was-event-added-in-last-second'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   gridRow: number
@@ -33,20 +34,21 @@ export default function MonthGridEvent({
   const hasOverflowLeft =
     isFirstWeek &&
     $app.calendarState.range.value?.start &&
-    dateFromDateTime(calendarEvent.start) <
-      dateFromDateTime($app.calendarState.range.value.start)
+    Temporal.ZonedDateTime.from(calendarEvent.start).toString() <
+      Temporal.ZonedDateTime.from($app.calendarState.range.value.start).toString()
   const hasOverflowRight =
     isLastWeek &&
     $app.calendarState.range.value?.end &&
-    dateFromDateTime(calendarEvent.end) >
-      dateFromDateTime($app.calendarState.range.value.end)
+    Temporal.ZonedDateTime.from(calendarEvent.end).toString() >
+      Temporal.ZonedDateTime.from($app.calendarState.range.value.end).toString()
   const {
     createDragStartTimeout,
     setClickedEventIfNotDragging,
     setClickedEvent,
   } = useEventInteractions($app)
 
-  const hasStartDate = dateFromDateTime(calendarEvent._startLocal) === date
+  const plainDate = Temporal.PlainDate.from(date).toString()
+  const hasStartDate = dateFromDateTime(calendarEvent._startLocal) === plainDate
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {

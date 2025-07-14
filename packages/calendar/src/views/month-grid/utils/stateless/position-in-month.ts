@@ -2,6 +2,7 @@ import { Month as MonthType, MonthDay } from '../../types/month'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DATE_GRID_BLOCKER } from '../../../../constants'
+import { Temporal } from 'temporal-polyfill'
 
 const positionInMonthWeek = (
   sortedEvents: CalendarEventInternal[],
@@ -36,7 +37,9 @@ const positionInMonthWeek = (
         : lastDateOfWeek
 
     const eventDays = Object.values(week).filter((day) => {
-      return day.date >= firstDateOfEvent && day.date <= lastDateOfEvent
+      const plainDate = Temporal.PlainDate.from(day.date).toString()
+
+      return plainDate >= firstDateOfEvent && plainDate <= lastDateOfEvent
     })
 
     let levelInWeekForEvent
@@ -80,7 +83,10 @@ export const positionInMonth = (
   const weeks: Record<string, MonthDay>[] = []
   month.forEach((week) => {
     const weekMap: Record<string, MonthDay> = {}
-    week.forEach((day) => (weekMap[day.date] = day))
+    week.forEach((day) => {
+      const plainDate = Temporal.PlainDate.from(day.date)
+      weekMap[plainDate.toString()] = day
+    })
     weeks.push(weekMap)
   })
   weeks.forEach((week) => positionInMonthWeek(sortedEvents, week))

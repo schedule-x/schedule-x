@@ -38,7 +38,7 @@ const getRangeEndGivenDayBoundaries = (
   let dayEndTimeString = timeStringFromTimePoints(
     calendarConfig.dayBoundaries.value.end
   )
-  let newRangeEndDate = toDateString(date)
+  let newRangeEndDate = date
   if (calendarConfig.isHybridDay) {
     newRangeEndDate = addDays(newRangeEndDate, 1)
   }
@@ -46,12 +46,10 @@ const getRangeEndGivenDayBoundaries = (
     dayEndTimeString = '23:59'
   }
 
-  const { year, month, date: day } = toIntegers(newRangeEndDate)
-
   return Temporal.ZonedDateTime.from({
-    year,
-    month: month + 1,
-    day,
+    year: newRangeEndDate.year,
+    month: newRangeEndDate.month,
+    day: newRangeEndDate.day,
     hour: +dayEndTimeString.split(':')[0],
     minute: +dayEndTimeString.split(':')[1],
     timeZone: calendarConfig.timezone.value,
@@ -76,10 +74,9 @@ export const setRangeForWeek = (config: RangeSetterConfig): DateRange => {
 }
 
 export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
-  const { year, month } = toIntegers(config.date)
   const monthForDate = config.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
-    year,
-    month
+    config.date.year,
+    config.date.month
   )
   const newRangeEndDate = toDateString(
     monthForDate[monthForDate.length - 1][
@@ -87,8 +84,10 @@ export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
     ]
   )
   return {
-    start: toDateTimeString(monthForDate[0][0]),
-    end: `${newRangeEndDate} 23:59`,
+    start: monthForDate[0][0],
+    end: monthForDate[monthForDate.length - 1][
+      monthForDate[monthForDate.length - 1].length - 1
+    ],
   }
 }
 
@@ -96,11 +95,11 @@ export const setRangeForDay = (config: RangeSetterConfig): DateRange => {
   return {
     start: getRangeStartGivenDayBoundaries(
       config.calendarConfig,
-      toJSDate(config.date)
+      config.date
     ),
     end: getRangeEndGivenDayBoundaries(
       config.calendarConfig,
-      toJSDate(config.date)
+      config.date
     ),
   }
 }

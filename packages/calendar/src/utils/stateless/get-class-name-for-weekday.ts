@@ -1,7 +1,5 @@
 export const getClassNameForWeekday = (weekday: number): string => {
   switch (weekday) {
-    case 0:
-      return 'sx__sunday'
     case 1:
       return 'sx__monday'
     case 2:
@@ -14,7 +12,9 @@ export const getClassNameForWeekday = (weekday: number): string => {
       return 'sx__friday'
     case 6:
       return 'sx__saturday'
+    case 7:
+      return 'sx__sunday'
     default:
-      throw new Error('Invalid weekday')
+      throw new Error(`Invalid weekday ${weekday}`)
   }
 }
