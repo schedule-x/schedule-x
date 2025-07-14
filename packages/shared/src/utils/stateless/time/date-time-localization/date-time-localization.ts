@@ -21,7 +21,7 @@ export const toLocalizedDateString = (date: Temporal.ZonedDateTime, locale: stri
 }
 
 export const getOneLetterDayNames = (
-  week: Date[],
+  week: Temporal.ZonedDateTime[],
   locale: string
 ): string[] => {
   return week.map((date) => {
@@ -37,12 +37,12 @@ export const getDayNameShort = (date: Temporal.ZonedDateTime, locale: string) =>
   return date.toLocaleString(locale, { weekday: 'short' })
 }
 
-export const getDayNamesShort = (week: Date[], locale: string): string[] => {
+export const getDayNamesShort = (week: Temporal.ZonedDateTime[], locale: string): string[] => {
   return week.map((date) => getDayNameShort(date, locale))
 }
 
 export const getOneLetterOrShortDayNames = (
-  week: Date[],
+  week: Temporal.ZonedDateTime[],
   locale: string
 ): string[] => {
   if (['zh-cn', 'zh-tw', 'ca-es', 'he-il'].includes(locale.toLowerCase())) {

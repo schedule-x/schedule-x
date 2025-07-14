@@ -5,6 +5,7 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
 import { randomStringId, toDateString } from '@schedule-x/shared/src'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   week: WeekWithDates
@@ -13,10 +14,11 @@ type props = {
 export default function DateAxis({ week }: props) {
   const $app = useContext(AppContext)
 
-  const getClassNames = (date: Date) => {
+  const getClassNames = (date: Temporal.ZonedDateTime) => {
+    console.log(date)
     const classNames = [
       'sx__week-grid__date',
-      getClassNameForWeekday(date.getDay()),
+      getClassNameForWeekday(date.dayOfWeek),
     ]
     if (isToday(date)) {
       classNames.push('sx__week-grid__date--is-today')
@@ -53,7 +55,7 @@ export default function DateAxis({ week }: props) {
     <>
       <div className="sx__week-grid__date-axis">
         {week.map((date, idx) => (
-          <div className={getClassNames(date)} data-date={toDateString(date)}>
+          <div className={getClassNames(date)} data-date={date.toString()}>
             {weekGridDateCustomComponentFn && (
               <div data-ccid={weekGridDateCCIDs[0][idx]} />
             )}
@@ -65,7 +67,7 @@ export default function DateAxis({ week }: props) {
                 </div>
 
                 <div className="sx__week-grid__date-number">
-                  {date.getDate()}
+                  {date.day}
                 </div>
               </>
             )}

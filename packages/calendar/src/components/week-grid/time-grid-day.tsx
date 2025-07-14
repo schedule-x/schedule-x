@@ -15,11 +15,12 @@ import { toJSDate } from '@schedule-x/shared/src'
 import TimeGridBackgroundEvent from './background-event'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { useComputed } from '@preact/signals'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
   backgroundEvents: BackgroundEvent[]
-  date: string
+  date: Temporal.ZonedDateTime
 }
 
 export default function TimeGridDay({
@@ -40,13 +41,11 @@ export default function TimeGridDay({
   const timeStringFromDayBoundaryEnd = timeStringFromTimePoints(
     $app.config.dayBoundaries.value.end
   )
-  const dayStartDateTime = setTimeInDateTimeString(
-    date,
-    timeStringFromDayBoundary
-  )
+  const dayStartDateTime = date.with({ hour: 0, minute: 0 })
+  const endWithAdjustedTime = date.with({ hour: +timeStringFromDayBoundaryEnd.split(':')[0], minute: +timeStringFromDayBoundaryEnd.split(':')[1] })
   const dayEndDateTime = $app.config.isHybridDay
-    ? addDays(setTimeInDateTimeString(date, timeStringFromDayBoundaryEnd), 1)
-    : setTimeInDateTimeString(date, timeStringFromDayBoundaryEnd)
+    ? addDays(endWithAdjustedTime, 1)
+    : endWithAdjustedTime
 
   const dayBoundariesDateTime: DayBoundariesDateTime = {
     start: dayStartDateTime,
@@ -89,7 +88,7 @@ export default function TimeGridDay({
 
   const baseClasses = [
     'sx__time-grid-day',
-    getClassNameForWeekday(toJSDate(date).getDay()),
+    getClassNameForWeekday(date.dayOfWeek),
   ]
 
   const classNames = useComputed(() => {

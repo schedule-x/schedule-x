@@ -3,7 +3,7 @@ import TimeGridDay from '../../../components/week-grid/time-grid-day'
 import TimeAxis from '../../../components/week-grid/time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import DateAxis from '../../../components/week-grid/date-axis'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { toIntegers, toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../../utils/stateless/events/sort-events-for-week'
 import { createWeek } from '../../../utils/stateless/views/week/create-week'
 import { positionInTimeGrid } from '../../../utils/stateless/events/position-in-time-grid'
@@ -12,6 +12,7 @@ import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by
 import DateGridDay from '../../../components/week-grid/date-grid-day'
 import { useComputed } from '@preact/signals'
 import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
+import { Temporal } from 'temporal-polyfill'
 
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
@@ -57,9 +58,15 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-header">
             <div className="sx__week-header-content">
               <DateAxis
-                week={Object.values(week.value).map((day) =>
-                  toJSDate(day.date)
-                )}
+                week={Object.values(week.value).map((day) => {
+                  const plainDate = Temporal.PlainDate.from(day.date)
+                  return Temporal.ZonedDateTime.from({
+                    year: plainDate.year,
+                    month: plainDate.month,
+                    day: plainDate.day,
+                    timeZone: $app.config.timezone.value,
+                  })
+                })}
               />
 
               <div
@@ -83,14 +90,25 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-grid">
             <TimeAxis />
 
-            {Object.values(week.value).map((day) => (
-              <TimeGridDay
-                calendarEvents={day.timeGridEvents}
-                backgroundEvents={day.backgroundEvents}
-                date={day.date}
-                key={day.date}
-              />
-            ))}
+            {Object.values(week.value).map((day) => {
+              const { year, month, date } = toIntegers(day.date)
+
+              const zonedDateTime = Temporal.ZonedDateTime.from({
+                year,
+                month,
+                day: date,
+                timeZone: $app.config.timezone.value,
+              })
+
+              return (
+                <TimeGridDay
+                  calendarEvents={day.timeGridEvents}
+                  backgroundEvents={day.backgroundEvents}
+                  date={zonedDateTime}
+                  key={day.date}
+                />
+              )
+            })}
           </div>
         </div>
       </AppContext.Provider>
