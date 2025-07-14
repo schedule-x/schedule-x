@@ -1,4 +1,6 @@
-export const toLocalizedMonth = (date: Date, locale: string): string => {
+import { Temporal } from 'temporal-polyfill'
+
+export const toLocalizedMonth = (date: Temporal.ZonedDateTime, locale: string): string => {
   return date.toLocaleString(locale, { month: 'long' })
 }
 
@@ -10,7 +12,7 @@ export const toLocalizedDate = (date: Date, locale: string): string => {
   })
 }
 
-export const toLocalizedDateString = (date: Date, locale: string): string => {
+export const toLocalizedDateString = (date: Temporal.ZonedDateTime, locale: string): string => {
   return date.toLocaleString(locale, {
     month: 'numeric',
     day: 'numeric',

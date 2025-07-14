@@ -1,9 +1,10 @@
 import { doubleDigit } from '../date-time-mutation/double-digit'
+import { Temporal } from 'temporal-polyfill'
 
-export const toDateString = (date: Date): string => {
-  return `${date.getFullYear()}-${doubleDigit(
-    date.getMonth() + 1
-  )}-${doubleDigit(date.getDate())}`
+export const toDateString = (date: Temporal.ZonedDateTime): string => {
+  return `${date.year}-${doubleDigit(
+    date.month
+  )}-${doubleDigit(date.day)}`
 }
 
 export const toTimeString = (date: Date): string => {

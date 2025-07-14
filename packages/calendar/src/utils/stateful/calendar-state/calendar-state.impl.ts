@@ -7,11 +7,12 @@ import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-uni
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import EventColors from '../event-colors/event-colors'
 import { toDateString } from '@schedule-x/shared/src'
+import { Temporal } from 'temporal-polyfill'
 
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
   timeUnitsImpl: TimeUnits,
-  selectedDate?: string
+  selectedDate?: Temporal.ZonedDateTime
 ): CalendarState => {
   const _view = signal<ViewName>(
     calendarConfig.views.value.find(
@@ -55,7 +56,7 @@ export const createCalendarState = (
     }
   })
 
-  const setRange = (date: string) => {
+  const setRange = (date: Temporal.ZonedDateTime) => {
     const selectedView = calendarConfig.views.value.find(
       (availableView) => availableView.name === _view.value
     )
@@ -66,8 +67,8 @@ export const createCalendarState = (
       timeUnitsImpl,
     })
     if (
-      newRange.start === range.value?.start &&
-      newRange.end === range.value?.end
+      newRange.start.toString() === range.value?.start.toString() &&
+      newRange.end.toString() === range.value?.end.toString()
     )
       return
 
@@ -75,7 +76,7 @@ export const createCalendarState = (
   }
 
   // one initial call for setting the range
-  setRange(selectedDate || toDateString(new Date()))
+  setRange(selectedDate || Temporal.Now.zonedDateTimeISO())
 
   const isCalendarSmall = signal<boolean | undefined>(undefined)
   const isDark = signal<boolean>(calendarConfig.isDark.value || false)

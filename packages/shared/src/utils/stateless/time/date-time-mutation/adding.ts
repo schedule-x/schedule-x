@@ -3,42 +3,14 @@ import {
   toDateString,
   toDateTimeString,
 } from '../format-conversion/date-to-strings'
+import { Temporal } from 'temporal-polyfill'
 
-export const addMonths = (to: string, nMonths: number): string => {
-  const { year, month, date, hours, minutes } = toIntegers(to)
-  const isDateTimeString = hours !== undefined && minutes !== undefined
-  const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)
-
-  let expectedMonth = (jsDate.getMonth() + nMonths) % 12
-  if (expectedMonth < 0) expectedMonth += 12
-  jsDate.setMonth(jsDate.getMonth() + nMonths)
-
-  // handle date overflow and underflow
-  if (jsDate.getMonth() > expectedMonth) {
-    jsDate.setDate(0)
-  } else if (jsDate.getMonth() < expectedMonth) {
-    jsDate.setMonth(jsDate.getMonth() + 1)
-    jsDate.setDate(0)
-  }
-
-  if (isDateTimeString) {
-    return toDateTimeString(jsDate)
-  }
-
-  return toDateString(jsDate)
+export const addMonths = (to: Temporal.ZonedDateTime, nMonths: number): Temporal.ZonedDateTime => {
+  return to.add({ months: nMonths })
 }
 
-export const addDays = (to: string, nDays: number): string => {
-  const { year, month, date, hours, minutes } = toIntegers(to)
-  const isDateTimeString = hours !== undefined && minutes !== undefined
-  const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)
-  jsDate.setDate(jsDate.getDate() + nDays)
-
-  if (isDateTimeString) {
-    return toDateTimeString(jsDate)
-  }
-
-  return toDateString(jsDate)
+export const addDays = (to: Temporal.ZonedDateTime, nDays: number): Temporal.ZonedDateTime => {
+  return to.add({ days: nDays })
 }
 
 export const addMinutes = (to: string, nMinutes: number): string => {

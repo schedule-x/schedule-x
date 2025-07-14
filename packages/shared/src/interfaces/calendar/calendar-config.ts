@@ -19,6 +19,7 @@ import { WeekDay } from '../../enums/time/week-day.enum'
 import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
+import { Temporal } from 'temporal-polyfill'
 
 export type WeekOptions = {
   gridHeight: number
@@ -77,7 +78,6 @@ export default interface CalendarConfigInternal extends Config {
   _customComponentFns: CustomComponentFns
   translations: Signal<Record<string, Language>>
   direction: 'ltr' | 'rtl'
-  timezone: Signal<IANATimezone>
 
   // Getters
   isHybridDay: boolean
@@ -117,7 +117,7 @@ export interface CalendarConfigExternal
   backgroundEvents?: BackgroundEvent[]
   dayBoundaries?: DayBoundariesExternal
   views: [View, ...View[]]
-  selectedDate?: string
+  selectedDate?: Temporal.ZonedDateTime
   plugins?: PluginBase<string>[]
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
@@ -130,5 +130,5 @@ export interface CalendarConfigExternal
   skipValidation?: boolean
   translations?: Record<string, Language>
   showWeekNumbers?: boolean
-  timezone?: string
+  timezone?: IANATimezone
 }

@@ -15,16 +15,16 @@ import { Temporal } from 'temporal-polyfill'
 
 const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
-  date: Date
+  date: Temporal.ZonedDateTime
 ): Temporal.ZonedDateTime => {
   const timeString = timeStringFromTimePoints(
     calendarConfig.dayBoundaries.value.start
   )
 
   return Temporal.ZonedDateTime.from({
-    year: date.getFullYear(),
-    month: date.getMonth() + 1,
-    day: date.getDate(),
+    year: date.year,
+    month: date.month,
+    day: date.day,
     hour: +timeString.split(':')[0],
     minute: +timeString.split(':')[1],
     timeZone: calendarConfig.timezone.value,
@@ -33,7 +33,7 @@ const getRangeStartGivenDayBoundaries = (
 
 const getRangeEndGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
-  date: Date
+  date: Temporal.ZonedDateTime
 ): Temporal.ZonedDateTime => {
   let dayEndTimeString = timeStringFromTimePoints(
     calendarConfig.dayBoundaries.value.end
@@ -60,7 +60,7 @@ const getRangeEndGivenDayBoundaries = (
 
 export const setRangeForWeek = (config: RangeSetterConfig): DateRange => {
   const weekForDate = config.timeUnitsImpl
-    .getWeekFor(toJSDate(config.date))
+    .getWeekFor(config.date)
     .slice(0, config.calendarConfig.weekOptions.value.nDays)
 
   return {

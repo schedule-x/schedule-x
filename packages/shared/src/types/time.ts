@@ -1,2 +1,4 @@
-export type WeekWithDates = Date[]
-export type MonthWithDates = Date[][]
+import { Temporal } from 'temporal-polyfill'
+
+export type WeekWithDates = Temporal.ZonedDateTime[]
+export type MonthWithDates = Temporal.ZonedDateTime[][]

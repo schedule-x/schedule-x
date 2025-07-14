@@ -17,13 +17,13 @@ describe('get month', () => {
         .withConfig(createBaseConfig())
         .build()
 
-      const result = underTest.getMonth(2023, Month.JULY)
+      const result = underTest.getMonth(2023, Month.AUGUST)
 
       expect(result.length).toBe(31)
-      expect(result[0].getDate()).toBe(1)
-      expect(result[30].getDate()).toBe(31)
-      expect(result.every((date) => date.getMonth() === Month.JULY)).toBe(true)
-      expect(result.every((date) => date.getFullYear() === 2023)).toBe(true)
+      expect(result[0].day).toBe(1)
+      expect(result[30].day).toBe(31)
+      expect(result.every((date) => date.month === Month.AUGUST)).toBe(true)
+      expect(result.every((date) => date.year === 2023)).toBe(true)
     })
 
     it('should get all dates in a month with 30 days', () => {
@@ -34,10 +34,10 @@ describe('get month', () => {
       const result = underTest.getMonth(2023, Month.APRIL)
 
       expect(result.length).toBe(30)
-      expect(result[0].getDate()).toBe(1)
-      expect(result[29].getDate()).toBe(30)
-      expect(result.every((date) => date.getMonth() === Month.APRIL)).toBe(true)
-      expect(result.every((date) => date.getFullYear() === 2023)).toBe(true)
+      expect(result[0].day).toBe(1)
+      expect(result[29].day).toBe(30)
+      expect(result.every((date) => date.month === Month.APRIL)).toBe(true)
+      expect(result.every((date) => date.year === 2023)).toBe(true)
     })
 
     it('should get all dates in February of a leap year', () => {
@@ -48,12 +48,10 @@ describe('get month', () => {
       const result = underTest.getMonth(2024, Month.FEBRUARY)
 
       expect(result.length).toBe(29)
-      expect(result[0].getDate()).toBe(1)
-      expect(result[28].getDate()).toBe(29)
-      expect(result.every((date) => date.getMonth() === Month.FEBRUARY)).toBe(
-        true
-      )
-      expect(result.every((date) => date.getFullYear() === 2024)).toBe(true)
+      expect(result[0].day).toBe(1)
+      expect(result[28].day).toBe(29)
+      expect(result.every((date) => date.month === Month.FEBRUARY)).toBe(true)
+      expect(result.every((date) => date.year === 2024)).toBe(true)
     })
 
     it('should get all dates in February of a non-leap year', () => {
@@ -64,12 +62,10 @@ describe('get month', () => {
       const result = underTest.getMonth(2023, Month.FEBRUARY)
 
       expect(result.length).toBe(28)
-      expect(result[0].getDate()).toBe(1)
-      expect(result[27].getDate()).toBe(28)
-      expect(result.every((date) => date.getMonth() === Month.FEBRUARY)).toBe(
-        true
-      )
-      expect(result.every((date) => date.getFullYear() === 2023)).toBe(true)
+      expect(result[0].day).toBe(1)
+      expect(result[27].day).toBe(28)
+      expect(result.every((date) => date.month === Month.FEBRUARY)).toBe(true)
+      expect(result.every((date) => date.year === 2023)).toBe(true)
     })
 
     it('should throw an error for year 0', () => {

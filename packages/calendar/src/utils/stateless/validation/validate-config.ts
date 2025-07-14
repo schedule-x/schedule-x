@@ -2,14 +2,14 @@ import { CalendarConfigExternal } from '@schedule-x/shared/src'
 import { DateFormats } from '@schedule-x/shared/src/values/date-formats'
 
 export const validateConfig = (config: CalendarConfigExternal) => {
-  if (
+  /* if (
     config.selectedDate &&
     !DateFormats.DATE_STRING.test(config.selectedDate)
   ) {
     throw new Error(
       '[Schedule-X error]: selectedDate must have the format YYYY-MM-DD'
     )
-  }
+  } */
 
   if (config.minDate && !DateFormats.DATE_STRING.test(config.minDate)) {
     throw new Error(

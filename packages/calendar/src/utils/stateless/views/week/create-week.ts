@@ -4,8 +4,9 @@ import { Week } from '../../../../types/week'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { Temporal } from 'temporal-polyfill'
 
-const createOneDay = (week: Week, date: Date) => {
+const createOneDay = (week: Week, date: Temporal.ZonedDateTime) => {
   const dateString = toDateString(date)
   week[dateString] = {
     date: dateString,
@@ -21,12 +22,12 @@ export const createWeek = ($app: CalendarAppSingleton) => {
   if ($app.calendarState.view.value === InternalViewName.Day)
     return createOneDay(
       {},
-      toJSDate(($app.calendarState.range.value as DateRange).start)
+      ($app.calendarState.range.value as DateRange).start
     )
 
   // Week mode
   return $app.timeUnitsImpl
-    .getWeekFor(toJSDate($app.datePickerState.selectedDate.value))
+    .getWeekFor($app.datePickerState.selectedDate.value)
     .slice(0, $app.config.weekOptions.value.nDays)
     .reduce(createOneDay, {} as Week)
 }

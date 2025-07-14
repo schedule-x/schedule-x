@@ -6,27 +6,29 @@ import { toDateString as dateToDateString } from '@schedule-x/shared/src/utils/s
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import { toJSDate } from '@schedule-x/shared/src'
+import { Temporal } from 'temporal-polyfill'
+import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+
 
 export const createDatePickerState = (
   config: DatePickerConfigInternal,
-  selectedDateParam?: string
+  selectedDateParam?: Temporal.ZonedDateTime
 ): DatePickerState => {
-  const currentDayDateString = dateToDateString(new Date())
   const initialSelectedDate =
-    typeof selectedDateParam === 'string'
+    selectedDateParam instanceof Temporal.ZonedDateTime
       ? selectedDateParam
-      : currentDayDateString
+      : Temporal.Now.zonedDateTimeISO()
 
   const isOpen = signal(false)
   const isDisabled = signal(config.disabled || false)
   const datePickerView = signal(DatePickerView.MONTH_DAYS)
-  const selectedDate = signal(initialSelectedDate)
-  const datePickerDate = signal(initialSelectedDate || currentDayDateString)
+  const selectedDate = signal<Temporal.ZonedDateTime>(initialSelectedDate)
+  const datePickerDate = signal<Temporal.ZonedDateTime>(initialSelectedDate)
   const isDark = signal(config.style?.dark || false)
 
   const inputDisplayedValue = signal(
     selectedDateParam
-      ? toLocalizedDateString(toJSDate(selectedDateParam), config.locale.value)
+      ? toLocalizedDateString(selectedDateParam, config.locale.value)
       : ''
   )
   const lastValidDisplayedValue = signal(inputDisplayedValue.value)
@@ -40,9 +42,11 @@ export const createDatePickerState = (
         inputDisplayedValue.value = lastValidDisplayedValue.value
         return
       }
+      const { year, month, date: day } = toIntegers(newValue)
+      const newZonedDateTime = Temporal.ZonedDateTime.from({ year, month, day, timeZone: config.timezone.value })
 
-      selectedDate.value = newValue
-      datePickerDate.value = newValue
+      selectedDate.value = newZonedDateTime
+      datePickerDate.value = newZonedDateTime
       lastValidDisplayedValue.value = inputDisplayedValue.value
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {

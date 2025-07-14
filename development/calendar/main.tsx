@@ -29,6 +29,7 @@ import { createViewList } from '@schedule-x/calendar/src/views/list'
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
+import { Temporal } from 'temporal-polyfill'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -114,7 +115,7 @@ plugins: [
       console.log('onRangeUpdate', range)
     }
   },
-  selectedDate: '2025-07-10',
+  selectedDate: Temporal.ZonedDateTime.from({ year: 2025, month: 7, day: 10, timeZone: 'Europe/Berlin' }),
   calendars: {
     personal: {
       colorName: 'personal',

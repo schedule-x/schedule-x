@@ -5,15 +5,15 @@ import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/ti
 import chevronIcon from '../assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
+import { Temporal } from 'temporal-polyfill'
 
 export default function AppInput() {
   const datePickerInputId = randomStringId()
   const datePickerLabelId = randomStringId()
   const inputWrapperId = randomStringId()
   const $app = useContext(AppContext)
-  const getLocalizedDate = (dateString: string) => {
-    if (dateString === '') return $app.translate('MM/DD/YYYY')
-    return toLocalizedDateString(toJSDate(dateString), $app.config.locale.value)
+  const getLocalizedDate = (date: Temporal.ZonedDateTime) => {
+    return toLocalizedDateString(date, $app.config.locale.value)
   }
 
   useEffect(() => {

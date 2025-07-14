@@ -1,12 +1,13 @@
 import { WeekDay } from '../../../enums/time/week-day.enum'
 import { MonthWithDates, WeekWithDates } from '../../../types/time'
 import { Month } from '../../../enums/time/month.enum'
+import { Temporal } from 'temporal-polyfill'
 
 export default interface TimeUnits {
   firstDayOfWeek: WeekDay
 
   getMonthWithTrailingAndLeadingDays(year: number, month: Month): MonthWithDates
-  getWeekFor(date: Date): WeekWithDates
+  getWeekFor(date: Temporal.ZonedDateTime): WeekWithDates
   getMonthsFor(year: number): Date[]
-  getMonth(year: number, month: Month): Date[]
+  getMonth(year: number, month: Month): Temporal.ZonedDateTime[]
 }

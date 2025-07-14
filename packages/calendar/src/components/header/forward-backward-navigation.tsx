@@ -45,6 +45,8 @@ export default function ForwardBackwardNavigation() {
     )
     if (!selectedView) return
 
+    console.log('datepicker state', $app.datePickerState.selectedDate.value)
+
     setRangeEndMinusOneRange(
       selectedView.setDateRange({
         range: $app.calendarState.range,
