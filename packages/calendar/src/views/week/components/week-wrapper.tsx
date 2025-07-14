@@ -40,12 +40,13 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
       day.backgroundEvents = filterByRange(
         $app.calendarEvents.backgroundEvents.value,
         {
-          start: date,
-          end: date,
+          start: rangeStart,
+          end: rangeEnd,
         }
       )
     })
     newWeek = positionInTimeGrid(timeGridEvents, newWeek, $app)
+
     return newWeek
   })
 

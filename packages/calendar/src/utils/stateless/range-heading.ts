@@ -1,5 +1,6 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { Temporal } from 'temporal-polyfill'
 
 const getLocaleStringMonthArgs = ($app: CalendarAppSingleton) => {
   return [$app.config.locale.value, { month: 'long' }] as const
@@ -11,19 +12,19 @@ const getLocaleStringYearArgs = ($app: CalendarAppSingleton) => {
 
 export const getMonthAndYearForDateRange = (
   $app: CalendarAppSingleton,
-  rangeStart: string,
-  rangeEnd: string
+  rangeStart: Temporal.ZonedDateTime,
+  rangeEnd: Temporal.ZonedDateTime
 ): string => {
-  const startDateMonth = toJSDate(rangeStart).toLocaleString(
+  const startDateMonth = rangeStart.toLocaleString(
     ...getLocaleStringMonthArgs($app)
   )
-  const startDateYear = toJSDate(rangeStart).toLocaleString(
+  const startDateYear = rangeStart.toLocaleString(
     ...getLocaleStringYearArgs($app)
   )
-  const endDateMonth = toJSDate(rangeEnd).toLocaleString(
+  const endDateMonth = rangeEnd.toLocaleString(
     ...getLocaleStringMonthArgs($app)
   )
-  const endDateYear = toJSDate(rangeEnd).toLocaleString(
+  const endDateYear = rangeEnd.toLocaleString(
     ...getLocaleStringYearArgs($app)
   )
 

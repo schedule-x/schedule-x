@@ -11,20 +11,30 @@ import {
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { RangeSetterConfig } from '@schedule-x/shared/src/interfaces/calendar/range-setter-config.interface'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
+import { Temporal } from 'temporal-polyfill'
 
 const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
   date: Date
-) => {
-  return `${toDateString(date)} ${timeStringFromTimePoints(
+): Temporal.ZonedDateTime => {
+  const timeString = timeStringFromTimePoints(
     calendarConfig.dayBoundaries.value.start
-  )}`
+  )
+
+  return Temporal.ZonedDateTime.from({
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    hour: +timeString.split(':')[0],
+    minute: +timeString.split(':')[1],
+    timeZone: calendarConfig.timezone.value,
+  })
 }
 
 const getRangeEndGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
   date: Date
-) => {
+): Temporal.ZonedDateTime => {
   let dayEndTimeString = timeStringFromTimePoints(
     calendarConfig.dayBoundaries.value.end
   )
@@ -35,7 +45,17 @@ const getRangeEndGivenDayBoundaries = (
   if (calendarConfig.dayBoundaries.value.end === 2400) {
     dayEndTimeString = '23:59'
   }
-  return `${newRangeEndDate} ${dayEndTimeString}`
+
+  const { year, month, date: day } = toIntegers(newRangeEndDate)
+
+  return Temporal.ZonedDateTime.from({
+    year,
+    month: month + 1,
+    day,
+    hour: +dayEndTimeString.split(':')[0],
+    minute: +dayEndTimeString.split(':')[1],
+    timeZone: calendarConfig.timezone.value,
+  })
 }
 
 export const setRangeForWeek = (config: RangeSetterConfig): DateRange => {

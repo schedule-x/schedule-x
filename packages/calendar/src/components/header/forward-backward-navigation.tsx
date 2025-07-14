@@ -4,6 +4,7 @@ import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { useSignalEffect } from '@preact/signals'
+import { Temporal } from 'temporal-polyfill'
 
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
@@ -35,8 +36,8 @@ export default function ForwardBackwardNavigation() {
     )
   })
 
-  const [rangeEndMinusOneRange, setRangeEndMinusOneRange] = useState('')
-  const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState('')
+  const [rangeEndMinusOneRange, setRangeEndMinusOneRange] = useState<Temporal.ZonedDateTime | null>(null)
+  const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState<Temporal.ZonedDateTime | null>(null)
 
   useEffect(() => {
     const selectedView = $app.config.views.value.find(

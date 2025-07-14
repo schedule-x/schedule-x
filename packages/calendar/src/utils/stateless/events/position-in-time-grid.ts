@@ -14,7 +14,7 @@ export const positionInTimeGrid = (
   for (const event of timeGridEvents) {
     const range = $app.calendarState.range.value as DateRange
 
-    if (event._startLocal >= range.start && event._endLocal <= range.end) {
+    if (event._startLocal >= range.start.toString() && event._endLocal <= range.end.toString()) {
       let date = dateFromDateTime(event._startLocal)
 
       if ($app.config.isHybridDay) {

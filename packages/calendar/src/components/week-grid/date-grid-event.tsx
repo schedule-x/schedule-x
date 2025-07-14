@@ -71,11 +71,11 @@ export default function DateGridEvent({
   }
 
   const startsBeforeWeek =
-    dateFromDateTime(calendarEvent.start) <
-    dateFromDateTime(($app.calendarState.range.value as DateRange).start)
+    calendarEvent.start <
+    ($app.calendarState.range.value as DateRange).start.toString()
   const endsAfterWeek =
-    dateFromDateTime(calendarEvent.end) >
-    dateFromDateTime(($app.calendarState.range.value as DateRange).end)
+    calendarEvent.end >
+    ($app.calendarState.range.value as DateRange).end.toString()
   const hasOverflowLeft = useMemo(() => {
     if ($app.config.direction === 'ltr') {
       return startsBeforeWeek

@@ -70,7 +70,7 @@ export default function CalendarWrapper({ $app }: props) {
     if ($app.calendarState.view.value === InternalViewName.List) return
 
     const newRangeStartIsLaterThanPrevious =
-      ($app.calendarState.range.value?.start || '') > previousRangeStart
+      ($app.calendarState.range.value?.start.toString() || '') > previousRangeStart
     setTransitionClass(
       newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
     )
@@ -78,7 +78,7 @@ export default function CalendarWrapper({ $app }: props) {
     setTimeout(() => {
       setTransitionClass('')
     }, 300) // CORRELATION ID: 3
-    setPreviousRangeStart($app.calendarState.range.value?.start || '')
+    setPreviousRangeStart($app.calendarState.range.value?.start.toString() || '')
   })
 
   useSignalEffect(() => {

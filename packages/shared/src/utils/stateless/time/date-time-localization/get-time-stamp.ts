@@ -1,10 +1,9 @@
-import { toIntegers } from '../format-conversion/format-conversion'
 import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-event.interface'
+import { Temporal } from 'temporal-polyfill'
+import { toIntegers } from '../format-conversion/format-conversion'
 
-const dateFn = (dateTimeString: string, locale: string) => {
-  const { year, month, date } = toIntegers(dateTimeString)
-
-  return new Date(year, month, date).toLocaleDateString(locale, {
+const dateFn = (dateTime: Temporal.ZonedDateTime, locale: string) => {
+  return dateTime.toLocaleString(locale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
