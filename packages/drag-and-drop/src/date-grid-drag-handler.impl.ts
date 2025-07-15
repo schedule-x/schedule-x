@@ -10,16 +10,16 @@ import { getDateGridEventCopy } from './utils/stateless/get-date-grid-event-copy
 import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
-
-const MS_PER_DAY = 1000 * 60 * 60 * 24
+import { Temporal } from 'temporal-polyfill'
+import { CLIENT_RENEG_LIMIT } from 'tls'
 
 export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private readonly startX: number
   private readonly dayWidth: number
-  private readonly originalStart: string
-  private readonly originalEnd: string
-  private readonly rangeStartDate: string
-  private readonly rangeEndDate: string
+  private readonly originalStart: Temporal.ZonedDateTime | Temporal.PlainDate
+  private readonly originalEnd: Temporal.ZonedDateTime | Temporal.PlainDate
+  private readonly rangeStartDate: Temporal.PlainDate
+  private readonly rangeEndDate: Temporal.PlainDate
   private lastDaysDiff = 0
 
   constructor(
@@ -30,14 +30,16 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   ) {
     this.startX = eventCoordinates.clientX
     this.dayWidth = getTimeGridDayWidth(this.$app)
-    this.originalStart = this.eventCopy.start
-    this.originalEnd = this.eventCopy.end
-    this.rangeStartDate = dateFromDateTime(
+    this.originalStart = Temporal.ZonedDateTime.from(this.eventCopy.start)
+    this.originalEnd = Temporal.ZonedDateTime.from(this.eventCopy.end)
+    this.rangeStartDate = Temporal.PlainDate.from(
       (this.$app.calendarState.range.value as DateRange).start
     )
-    this.rangeEndDate = addDays(
-      this.rangeStartDate,
-      $app.config.weekOptions.value.nDays - 1
+    this.rangeEndDate = Temporal.PlainDate.from(
+      addDays(
+        this.rangeStartDate,
+        $app.config.weekOptions.value.nDays - 1
+      )
     )
     this.init()
   }
@@ -65,27 +67,26 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     if (currentDaysDiff === this.lastDaysDiff) return
 
     const newStart = addDays(this.originalStart, currentDaysDiff)
+    const newStartDate = Temporal.PlainDate.from(newStart).toString()
     const newEnd = addDays(this.originalEnd, currentDaysDiff)
-    const newStartDate = dateFromDateTime(newStart)
-    const newEndDate = dateFromDateTime(newEnd)
-    if (newStartDate > this.rangeEndDate) return
-    if (newEndDate < this.rangeStartDate) return
+    const newEndDate = Temporal.PlainDate.from(newEnd).toString()
+
+    if (newStartDate > this.rangeEndDate.toString()) return
+    if (newEndDate < this.rangeStartDate.toString()) return
 
     this.eventCopy.start = newStart
     this.eventCopy.end = newEnd
     const newStartIsInWeek =
-      newStartDate >= this.rangeStartDate && newStartDate <= this.rangeEndDate
+      newStart.toString() >= this.rangeStartDate.toString() && newStart.toString() <= this.rangeEndDate.toString()
     const firstDateInGrid = newStartIsInWeek
-      ? newStartDate
+      ? newStart.toString()
       : this.rangeStartDate
     const lastDateIsInGrid =
-      newEndDate >= this.rangeStartDate && newEndDate <= this.rangeEndDate
-    const lastDateInGrid = lastDateIsInGrid ? newEndDate : this.rangeEndDate
+      newEnd.toString() >= this.rangeStartDate.toString() && newEnd.toString() <= this.rangeEndDate.toString()
+    const lastDateInGrid = lastDateIsInGrid ? newEnd.toString() : this.rangeEndDate.toString()
     this.eventCopy._nDaysInGrid =
       Math.round(
-        (new Date(lastDateInGrid).getTime() -
-          new Date(firstDateInGrid).getTime()) /
-          MS_PER_DAY
+        (Temporal.PlainDate.from(firstDateInGrid).until(Temporal.PlainDate.from(lastDateInGrid)).total('days'))
       ) + 1
 
     /**
@@ -93,23 +94,22 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
      * While moving an event during a state as such, it will optically look as if its position is transitioned, since the event width is increased and decreased
      * as the event is moved.
      * */
-    if (newStartDate >= this.rangeStartDate)
-      this.transformEventCopyPosition(newStartDate)
+    if (newStart.toString() >= this.rangeStartDate.toString())
+      this.transformEventCopyPosition(newStart.toString())
     this.updateCopy(this.eventCopy)
     this.lastDaysDiff = currentDaysDiff
   }
 
   private transformEventCopyPosition(newStartDate: string) {
-    const dateFromOriginalStart = dateFromDateTime(this.originalStart)
+    const originalStartDate = this.originalStart.toString()
+    const originalStartInGrid = originalStartDate >= this.rangeStartDate.toString()
+      ? originalStartDate
+      : this.rangeStartDate.toString()
+    
     let daysToShift = Math.round(
-      (new Date(newStartDate).getTime() -
-        new Date(
-          dateFromOriginalStart >= this.rangeStartDate
-            ? dateFromOriginalStart
-            : this.rangeStartDate
-        ).getTime()) /
-        MS_PER_DAY
+      Temporal.PlainDate.from(originalStartInGrid).until(Temporal.PlainDate.from(newStartDate)).total('days')
     )
+    console.log(daysToShift)
     if (this.$app.config.direction === 'rtl') daysToShift *= -1
     getDateGridEventCopy(this.$app, this.eventCopy).style.transform =
       `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
@@ -138,6 +138,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private updateOriginalEvent() {
     if (this.lastDaysDiff === 0) return
 
-    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
+    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart.toString())
   }
 }
