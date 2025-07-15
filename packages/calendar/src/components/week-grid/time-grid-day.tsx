@@ -16,6 +16,7 @@ import TimeGridBackgroundEvent from './background-event'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { useComputed } from '@preact/signals'
 import { Temporal } from 'temporal-polyfill'
+import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -93,7 +94,7 @@ export default function TimeGridDay({
 
   const classNames = useComputed(() => {
     const newClassNames = [...baseClasses]
-    if ($app.datePickerState.selectedDate.value === date)
+    if (isSameDay($app.datePickerState.selectedDate.value, date))
       newClassNames.push('is-selected')
     return newClassNames
   })

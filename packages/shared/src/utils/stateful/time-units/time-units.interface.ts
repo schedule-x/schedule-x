@@ -7,7 +7,7 @@ export default interface TimeUnits {
   firstDayOfWeek: WeekDay
 
   getMonthWithTrailingAndLeadingDays(year: number, month: Month): MonthWithDates
-  getWeekFor(date: Temporal.ZonedDateTime): WeekWithDates
+  getWeekFor(date: Temporal.ZonedDateTime | Temporal.PlainDate): WeekWithDates
   getMonthsFor(year: number): Date[]
   getMonth(year: number, month: Month): Temporal.ZonedDateTime[]
 }

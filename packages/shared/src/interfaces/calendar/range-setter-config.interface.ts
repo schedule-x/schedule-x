@@ -5,7 +5,7 @@ import { Signal } from '@preact/signals'
 import { Temporal } from 'temporal-polyfill'
 
 export interface RangeSetterConfig {
-  date: Temporal.ZonedDateTime
+  date: Temporal.PlainDate
   timeUnitsImpl: TimeUnits
   calendarConfig: CalendarConfigInternal
   range: Signal<DateRange | null>

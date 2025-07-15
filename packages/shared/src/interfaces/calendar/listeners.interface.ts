@@ -1,12 +1,13 @@
 import CalendarEventExternal from './calendar-event.interface'
 import { DateRange } from '../../types/date-range'
 import CalendarAppSingleton from './calendar-app-singleton'
+import { Temporal } from 'temporal-polyfill'
 
 export interface CalendarCallbacks {
   onEventClick?: (event: CalendarEventExternal, e: UIEvent) => void
   onDoubleClickEvent?: (event: CalendarEventExternal, e: UIEvent) => void
   onRangeUpdate?: (range: DateRange) => void
-  onSelectedDateUpdate?: (date: string) => void
+  onSelectedDateUpdate?: (date: Temporal.PlainDate) => void
   onClickDate?: (date: string, e?: UIEvent) => void
   onDoubleClickDate?: (date: string, e?: UIEvent) => void
   onClickDateTime?: (dateTime: string, e?: UIEvent) => void

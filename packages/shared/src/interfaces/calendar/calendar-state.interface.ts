@@ -10,5 +10,5 @@ export default interface CalendarState {
   range: Signal<DateRange | null>
   isDark: Signal<boolean>
 
-  setRange: (date: string) => void
+  setRange: (date: Temporal.PlainDate) => void
 }

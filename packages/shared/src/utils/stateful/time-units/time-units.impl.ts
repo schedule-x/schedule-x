@@ -67,7 +67,6 @@ export default class TimeUnitsImpl implements TimeUnits {
   }
 
   getWeekFor(date: Temporal.ZonedDateTime | Temporal.PlainDate): WeekWithDates {
-    console.log('date', date)
     const plainDate = date instanceof Temporal.PlainDate ? date : date.toPlainDate()
     const week: WeekWithDates = [this.getFirstDateOfWeekTemporal(plainDate).toZonedDateTime(this.config.timezone.value)]
 

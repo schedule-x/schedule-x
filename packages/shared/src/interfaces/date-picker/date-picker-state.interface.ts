@@ -15,6 +15,7 @@ export default interface DatePickerState {
   open(): void
   close(): void
   toggle(): void
+  handleInput(newInputValue: string): void
 
   setView(view: DatePickerView): void
 }

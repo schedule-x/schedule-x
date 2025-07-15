@@ -11,14 +11,13 @@ export const setDateOfMonth = (dateString: string, date: number): string => {
   return dateString
 }
 
-export const getFirstDayOPreviousMonth = (dateString: string): string => {
-  dateString = addMonths(dateString, -1)
-  return setDateOfMonth(dateString, 1)
+export const getFirstDayOPreviousMonth = (date: Temporal.PlainDate): Temporal.PlainDate => {
+  return addMonths(date, -1) as Temporal.PlainDate
 }
 
-export const getFirstDayOfNextMonth = (dateString: string): string => {
-  dateString = addMonths(dateString, 1)
-  return setDateOfMonth(dateString, 1)
+export const getFirstDayOfNextMonth = (date: Temporal.PlainDate): Temporal.PlainDate => {
+  const nextMonth = addMonths(date, 1)
+  return nextMonth.with({ day: 1 }) as Temporal.PlainDate
 }
 
 export const setTimeInDateTimeString = (

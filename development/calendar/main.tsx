@@ -115,7 +115,9 @@ plugins: [
     },
 
     onRangeUpdate(range) {
-      console.log('onRangeUpdate', range)
+      console.log('onRangeUpdate')
+      console.log(range.start.toString())
+      console.log(range.end.toString())
     }
   },
   selectedDate: Temporal.PlainDate.from({ year: 2025, month: 7, day: 10 }),

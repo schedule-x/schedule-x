@@ -1,26 +1,18 @@
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import chevronIcon from '../assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 import { Temporal } from 'temporal-polyfill'
+import { useSignalEffect } from '@preact/signals'
 
 export default function AppInput() {
   const datePickerInputId = randomStringId()
   const datePickerLabelId = randomStringId()
   const inputWrapperId = randomStringId()
   const $app = useContext(AppContext)
-  const getLocalizedDate = (date: Temporal.ZonedDateTime) => {
-    return toLocalizedDateString(date, $app.config.locale.value)
-  }
 
-  useEffect(() => {
-    $app.datePickerState.inputDisplayedValue.value = getLocalizedDate(
-      $app.datePickerState.selectedDate.value
-    )
-  }, [$app.datePickerState.selectedDate.value, $app.config.locale.value])
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
@@ -47,9 +39,7 @@ export default function AppInput() {
     event.stopPropagation() // prevent date picker from closing
 
     try {
-      $app.datePickerState.inputDisplayedValue.value = (
-        event.target as HTMLInputElement
-      ).value
+      $app.datePickerState.handleInput((event.target as HTMLInputElement).value)
       $app.datePickerState.close()
     } catch (e) {
       console.log('Error setting input value:' + e)
@@ -64,8 +54,7 @@ export default function AppInput() {
     return () => inputElement.removeEventListener('change', handleInputValue)
   })
 
-  const handleClick = (event: Event) => {
-    handleInputValue(event)
+  const handleClick = () => {
     $app.datePickerState.open()
   }
 

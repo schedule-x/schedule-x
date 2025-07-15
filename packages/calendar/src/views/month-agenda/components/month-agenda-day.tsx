@@ -48,7 +48,7 @@ export default function MonthAgendaDay({
       ['ArrowLeft', -1],
       ['ArrowRight', 1],
     ])
-    $app.datePickerState.selectedDate.value = Temporal.ZonedDateTime.from(
+    $app.datePickerState.selectedDate.value = Temporal.PlainDate.from(
       addDays(
         $app.datePickerState.selectedDate.value,
         keyMapDaysToAdd.get(event.key) || 0

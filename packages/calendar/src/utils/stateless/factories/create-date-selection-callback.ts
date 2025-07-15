@@ -1,15 +1,16 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
 import { CalendarConfigExternal } from '@schedule-x/shared/src'
+import { Temporal } from 'temporal-polyfill'
 
 export const createDateSelectionCallback = (
   calendarState: CalendarState,
   config: CalendarConfigExternal
 ) => {
-  let lastEmittedDate: string | null = null
+  let lastEmittedDate: Temporal.PlainDate | null = null
 
-  return (date: string) => {
+  return (date: Temporal.PlainDate) => {
     calendarState.setRange(date)
-    if (config.callbacks?.onSelectedDateUpdate && date !== lastEmittedDate) {
+    if (config.callbacks?.onSelectedDateUpdate && date.toString() !== lastEmittedDate?.toString()) {
       lastEmittedDate = date
       config.callbacks.onSelectedDateUpdate(date)
     }

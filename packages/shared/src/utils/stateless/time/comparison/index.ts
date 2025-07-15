@@ -9,10 +9,10 @@ export const isToday = (date: Temporal.ZonedDateTime) => {
   )
 }
 
-export const isSameMonth = (date1: Date, date2: Date): boolean => {
+export const isSameMonth = (date1: Temporal.ZonedDateTime | Temporal.PlainDate, date2: Temporal.ZonedDateTime | Temporal.PlainDate): boolean => {
   return (
-    date1.getMonth() === date2.getMonth() &&
-    date1.getFullYear() === date2.getFullYear()
+    date1.month === date2.month &&
+    date1.year === date2.year
   )
 }
 export const isSameDay = (date1: Temporal.ZonedDateTime | Temporal.PlainDate, date2: Temporal.ZonedDateTime | Temporal.PlainDate): boolean => {

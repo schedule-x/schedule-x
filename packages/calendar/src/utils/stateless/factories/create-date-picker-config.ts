@@ -23,6 +23,7 @@ export const createDatePickerConfig = (
   return new DatePickerConfigBuilder()
     .withLocale(config.locale)
     .withFirstDayOfWeek(config.firstDayOfWeek)
+    .withTimezone(config.timezone)
     .withMin(config.minDate)
     .withMax(config.maxDate)
     .withTeleportTo(teleportTo)

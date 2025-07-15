@@ -10,6 +10,7 @@ import {
   getFirstDayOPreviousMonth,
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   setYearsView: () => void
@@ -17,14 +18,12 @@ type props = {
 
 export default function MonthViewHeader({ setYearsView }: props) {
   const $app = useContext(AppContext)
-  const dateStringToLocalizedMonthName = (selectedDate: string) => {
-    const selectedDateJS = toJSDate(selectedDate)
-
-    return toLocalizedMonth(selectedDateJS, $app.config.locale.value)
+  const dateStringToLocalizedMonthName = (selectedDate: Temporal.PlainDate) => {
+    return toLocalizedMonth(selectedDate, $app.config.locale.value)
   }
 
-  const getYearFrom = (datePickerDate: string) => {
-    return toIntegers(datePickerDate).year
+  const getYearFrom = (datePickerDate: Temporal.PlainDate) => {
+    return datePickerDate.year
   }
 
   const [selectedDateMonthName, setSelectedDateMonthName] = useState(

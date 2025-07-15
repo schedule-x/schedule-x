@@ -11,7 +11,7 @@ import { Temporal } from 'temporal-polyfill'
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
   timeUnitsImpl: TimeUnits,
-  selectedDate?: Temporal.ZonedDateTime
+  selectedDate?: Temporal.PlainDate
 ): CalendarState => {
   const _view = signal<ViewName>(
     calendarConfig.views.value.find(
@@ -55,7 +55,7 @@ export const createCalendarState = (
     }
   })
 
-  const setRange = (date: Temporal.ZonedDateTime) => {
+  const setRange = (date: Temporal.PlainDate) => {
     const selectedView = calendarConfig.views.value.find(
       (availableView) => availableView.name === _view.value
     )
@@ -75,7 +75,7 @@ export const createCalendarState = (
   }
 
   // one initial call for setting the range
-  setRange(selectedDate || Temporal.Now.zonedDateTimeISO())
+  setRange(selectedDate || Temporal.PlainDate.from(Temporal.Now.plainDateISO()))
 
   const isCalendarSmall = signal<boolean | undefined>(undefined)
   const isDark = signal<boolean>(calendarConfig.isDark.value || false)
@@ -95,7 +95,7 @@ export const createCalendarState = (
     setRange,
     range,
     isCalendarSmall,
-    setView: (newView: ViewName, selectedDate: string) => {
+    setView: (newView: ViewName, selectedDate: Temporal.PlainDate) => {
       batch(() => {
         _view.value = newView
         setRange(selectedDate)

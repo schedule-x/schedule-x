@@ -5,7 +5,7 @@ import {
 } from '../format-conversion/date-to-strings'
 import { Temporal } from 'temporal-polyfill'
 
-export const addMonths = (to: Temporal.ZonedDateTime, nMonths: number): Temporal.ZonedDateTime => {
+export const addMonths = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nMonths: number): Temporal.ZonedDateTime | Temporal.PlainDate => {
   return to.add({ months: nMonths })
 }
 

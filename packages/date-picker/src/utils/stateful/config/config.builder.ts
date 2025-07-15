@@ -5,12 +5,15 @@ import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
+import { Temporal } from 'temporal-polyfill'
+import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   locale: string | undefined
   firstDayOfWeek: WeekDay | undefined
-  min: string | undefined
-  max: string | undefined
+  timezone: IANATimezone | undefined
+  min: Temporal.PlainDate | undefined
+  max: Temporal.PlainDate | undefined
   placement: Placement | undefined
   listeners: DatePickerListeners | undefined
   style: DatePickerStyle | undefined
@@ -23,6 +26,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
     return new ConfigImpl(
       this.locale,
       this.firstDayOfWeek,
+      this.timezone,
       this.min,
       this.max,
       this.placement,
@@ -47,13 +51,19 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
     return this
   }
 
-  withMin(min: string | undefined): ConfigBuilder {
+  withTimezone(timezone: IANATimezone | undefined): ConfigBuilder {
+    this.timezone = timezone
+
+    return this
+  }
+
+  withMin(min: Temporal.PlainDate | undefined): ConfigBuilder {
     this.min = min
 
     return this
   }
 
-  withMax(max: string | undefined): ConfigBuilder {
+  withMax(max: Temporal.PlainDate | undefined): ConfigBuilder {
     this.max = max
 
     return this

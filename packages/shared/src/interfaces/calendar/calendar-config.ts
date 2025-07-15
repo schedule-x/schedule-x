@@ -68,8 +68,8 @@ export default interface CalendarConfigInternal extends Config {
   weekOptions: Signal<WeekOptions>
   calendars: Signal<Record<string, CalendarType>>
   isDark: Signal<boolean>
-  minDate: Signal<string | undefined>
-  maxDate: Signal<string | undefined>
+  minDate: Signal<Temporal.PlainDate | undefined>
+  maxDate: Signal<Temporal.PlainDate | undefined>
   monthGridOptions: Signal<MonthGridOptions>
   plugins: Plugins
   isResponsive: boolean
@@ -122,8 +122,8 @@ export interface CalendarConfigExternal
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
   isDark?: boolean
-  minDate?: string | undefined
-  maxDate?: string | undefined
+  minDate?: Temporal.PlainDate | undefined
+  maxDate?: Temporal.PlainDate | undefined
   monthGridOptions?: MonthGridOptions
   locale?: string
   firstDayOfWeek?: WeekDay

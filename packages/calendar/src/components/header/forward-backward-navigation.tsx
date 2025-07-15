@@ -20,7 +20,7 @@ export default function ForwardBackwardNavigation() {
       direction === 'forwards'
         ? currentView.backwardForwardUnits
         : -currentView.backwardForwardUnits
-    )
+    ) as Temporal.PlainDate
   }
 
   const [localizedRange, setLocalizedRange] = useState('')
@@ -39,13 +39,11 @@ export default function ForwardBackwardNavigation() {
   const [rangeEndMinusOneRange, setRangeEndMinusOneRange] = useState<Temporal.ZonedDateTime | null>(null)
   const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState<Temporal.ZonedDateTime | null>(null)
 
-  useEffect(() => {
+  useSignalEffect(() => {
     const selectedView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
     if (!selectedView) return
-
-    console.log('datepicker state', $app.datePickerState.selectedDate.value)
 
     setRangeEndMinusOneRange(
       selectedView.setDateRange({
@@ -69,7 +67,7 @@ export default function ForwardBackwardNavigation() {
         ),
       }).start
     )
-  }, [$app.datePickerState.selectedDate.value, $app.calendarState.view.value])
+  })
 
   return (
     <>
@@ -82,8 +80,8 @@ export default function ForwardBackwardNavigation() {
           disabled={
             !!(
               $app.config.minDate.value &&
-              dateFromDateTime(rangeEndMinusOneRange) <
-                $app.config.minDate.value
+              dateFromDateTime(rangeEndMinusOneRange?.toString() ?? '') <
+                $app.config.minDate.value.toString()
             )
           }
           onClick={() => navigate('backwards')}
@@ -94,9 +92,9 @@ export default function ForwardBackwardNavigation() {
         <Chevron
           disabled={
             !!(
-              $app.config.maxDate.value &&
-              dateFromDateTime(rangeStartPlusOneRange) >
-                $app.config.maxDate.value
+              $app.config.maxDate.value && rangeStartPlusOneRange &&
+              dateFromDateTime(rangeStartPlusOneRange.toString()) >
+                $app.config.maxDate.value.toString()
             )
           }
           onClick={() => navigate('forwards')}

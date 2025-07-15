@@ -34,7 +34,6 @@ export const createCalendarAppSingleton = (
     datePickerConfig,
     config.selectedDate || config.datePicker?.selectedDate
   )
-  console.log('config.selectedDate', config.selectedDate)
   const calendarEvents = createCalendarEventsImpl(
     config.events || [],
     config.backgroundEvents || [],

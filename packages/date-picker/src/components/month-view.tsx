@@ -18,13 +18,11 @@ export default function MonthView({ seatYearsView }: props) {
   const [month, setMonth] = useState<MonthWithDates>([])
 
   const renderMonth = () => {
-    const newDatePickerDate = toJSDate(
-      $app.datePickerState.datePickerDate.value
-    )
+    const newDatePickerDate = $app.datePickerState.datePickerDate.value
     setMonth(
       $app.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
-        newDatePickerDate.getFullYear(),
-        newDatePickerDate.getMonth()
+        newDatePickerDate.year,
+        newDatePickerDate.month
       )
     )
   }

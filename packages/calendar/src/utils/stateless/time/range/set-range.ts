@@ -40,7 +40,7 @@ const getRangeEndGivenDayBoundaries = (
   )
   let newRangeEndDate = date
   if (calendarConfig.isHybridDay) {
-    newRangeEndDate = addDays(newRangeEndDate, 1)
+    newRangeEndDate = addDays(newRangeEndDate, 1) as Temporal.ZonedDateTime
   }
   if (calendarConfig.dayBoundaries.value.end === 2400) {
     dayEndTimeString = '23:59'
