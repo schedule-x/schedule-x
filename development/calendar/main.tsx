@@ -214,6 +214,16 @@ plugins: [
       people: ['John Doe'],
       location: 'Office',
       description: 'Event 2 description',
+    },
+    // now plain date for 2 day event
+    {
+      id: 3,
+      start: Temporal.PlainDate.from('2025-07-11'),
+      end: Temporal.PlainDate.from('2025-07-13'),
+      title: 'Event 3',
+      people: ['John Doe'],
+      location: 'Office',
+      description: 'Event 3 description',
     }
   ],
 })

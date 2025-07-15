@@ -4,13 +4,14 @@ import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/even
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { signal } from '@preact/signals'
 import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
+import { Temporal } from 'temporal-polyfill'
 
 const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()
   calendarEvent.id = '1'
   calendarEvent.title = 'test'
-  calendarEvent.start = '2023-10-07'
-  calendarEvent.end = '2023-10-08'
+  calendarEvent.start = Temporal.PlainDate.from('2023-10-07')
+  calendarEvent.end = Temporal.PlainDate.from('2023-10-08')
   calendarEvent._isMultiDayFullDay = true
   calendarEvent._isSingleDayFullDay = false
   calendarEvent._isSingleDayTimed = false

@@ -98,7 +98,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     return (
       this.start instanceof Temporal.PlainDate &&
       this.end instanceof Temporal.PlainDate &&
-      startDate === endDate
+      startDate !== endDate
     )
   }
 
