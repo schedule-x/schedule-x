@@ -5,6 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { createIcalendarPlugin } from '../icalendar-plugin.impl'
+import { Temporal } from 'temporal-polyfill'
 
 describe('IcalendarPluginImpl', () => {
   describe('parsing events on init', () => {
@@ -37,7 +38,7 @@ describe('IcalendarPluginImpl', () => {
       })
       const $app = __createAppWithViews__({
         plugins: [plugin],
-        selectedDate: '2013-08-02',
+        selectedDate: Temporal.PlainDate.from('2013-08-02'),
       })
       plugin.beforeRender($app)
 
@@ -75,17 +76,17 @@ describe('IcalendarPluginImpl', () => {
       })
       const $app = __createAppWithViews__({
         plugins: [plugin],
-        selectedDate: '2024-08-01',
+        selectedDate: Temporal.PlainDate.from('2024-08-01'),
       })
       plugin.beforeRender($app)
 
       expect($app.calendarEvents.list.value.length).toBe(1)
 
       $app.calendarState.range.value = {
-        start: '2024-09-01',
-        end: '2024-09-05',
+        start: Temporal.ZonedDateTime.from('2024-09-01T00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-09-05T23:59:59+00:00[UTC]'),
       }
-      plugin.between('2024-09-01 00:00', '2024-09-05 23:59')
+      plugin.between(Temporal.ZonedDateTime.from('2024-09-01T00:00:00+00:00[UTC]'), Temporal.ZonedDateTime.from('2024-09-05T23:59:59+00:00[UTC]'))
 
       expect($app.calendarEvents.list.value.length).toBe(3)
     })
@@ -111,13 +112,13 @@ describe('IcalendarPluginImpl', () => {
       })
       const $app = __createAppWithViews__({
         plugins: [plugin],
-        selectedDate: '2023-08-01',
+        selectedDate: Temporal.PlainDate.from('2023-08-01'),
       })
       plugin.beforeRender($app)
 
       expect($app.calendarEvents.list.value.length).toBe(1)
-      expect($app.calendarEvents.list.value[0].start).toBe('2023-08-01')
-      expect($app.calendarEvents.list.value[0].end).toBe('2023-08-01')
+      expect($app.calendarEvents.list.value[0].start).toEqual(Temporal.PlainDate.from('2023-08-01'))
+      expect($app.calendarEvents.list.value[0].end).toEqual(Temporal.PlainDate.from('2023-08-01'))
     })
 
     it('should parse a full day event with date-time type', () => {
@@ -139,13 +140,13 @@ describe('IcalendarPluginImpl', () => {
       })
       const $app = __createAppWithViews__({
         plugins: [plugin],
-        selectedDate: '2023-08-01',
+        selectedDate: Temporal.PlainDate.from('2023-08-01'),
       })
       plugin.beforeRender($app)
 
       expect($app.calendarEvents.list.value.length).toBe(1)
-      expect($app.calendarEvents.list.value[0].start).toBe('2023-08-01')
-      expect($app.calendarEvents.list.value[0].end).toBe('2023-08-01')
+      expect($app.calendarEvents.list.value[0].start).toEqual(Temporal.PlainDate.from('2023-08-01'))
+      expect($app.calendarEvents.list.value[0].end).toEqual(Temporal.PlainDate.from('2023-08-01'))
     })
   })
 })
