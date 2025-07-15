@@ -13,6 +13,7 @@ import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invo
 import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import { Temporal } from 'temporal-polyfill'
 
 interface DayWithEvents {
   date: string
@@ -46,8 +47,8 @@ export const ListWrapper: PreactViewComponent = ({
         acc: Record<string, CalendarEventInternal[]>,
         event: CalendarEventInternal
       ) => {
-        const startDate = dateFromDateTime(event.start)
-        const endDate = dateFromDateTime(event.end)
+        const startDate = dateFromDateTime(event.start.toString())
+        const endDate = dateFromDateTime(event.end.toString())
         let currentDate = startDate
 
         while (currentDate <= endDate) {
@@ -55,7 +56,7 @@ export const ListWrapper: PreactViewComponent = ({
             acc[currentDate] = []
           }
           acc[currentDate].push(event)
-          currentDate = addDays(currentDate, 1)
+          currentDate = addDays(Temporal.PlainDate.from(currentDate), 1).toString()
         }
 
         return acc
@@ -66,7 +67,7 @@ export const ListWrapper: PreactViewComponent = ({
     const sortedDays = Object.entries(daysWithEventsMap)
       .map(([date, events]) => ({
         date,
-        events: events.sort((a, b) => a.start.localeCompare(b.start)),
+        events: events.sort((a, b) => a.start.toString().localeCompare(b.start.toString())),
       }))
       .sort((a, b) => a.date.localeCompare(b.date))
 
@@ -159,8 +160,8 @@ export const ListWrapper: PreactViewComponent = ({
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
-    const eventStartDate = dateFromDateTime(event.start)
-    const eventEndDate = dateFromDateTime(event.end)
+    const eventStartDate = dateFromDateTime(event.start.toString())
+    const eventEndDate = dateFromDateTime(event.end.toString())
     const isFirstDay = eventStartDate === dayDate
     const isLastDay = eventEndDate === dayDate
     const isMultiDay = eventStartDate !== eventEndDate
@@ -175,14 +176,14 @@ export const ListWrapper: PreactViewComponent = ({
       return (
         <>
           <div className="sx__list-event-start-time">
-            {toJSDate(event.start).toLocaleTimeString(
+            {event.start.toLocaleString(
               $app.config.locale.value,
               timeOptions
             )}
           </div>
           {event.end && (
             <div className="sx__list-event-end-time">
-              {toJSDate(event.end).toLocaleTimeString(
+              {event.end.toLocaleString(
                 $app.config.locale.value,
                 timeOptions
               )}
@@ -196,7 +197,7 @@ export const ListWrapper: PreactViewComponent = ({
       return (
         <>
           <div className="sx__list-event-start-time">
-            {toJSDate(event.start).toLocaleTimeString(
+            {event.start.toLocaleString(
               $app.config.locale.value,
               timeOptions
             )}
@@ -211,7 +212,7 @@ export const ListWrapper: PreactViewComponent = ({
         <>
           <div className="sx__list-event-arrow">←</div>
           <div className="sx__list-event-end-time">
-            {toJSDate(event.end).toLocaleTimeString(
+            {event.end.toLocaleString(
               $app.config.locale.value,
               timeOptions
             )}
