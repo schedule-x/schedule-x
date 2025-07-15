@@ -4,11 +4,6 @@ import CalendarEventExternal, {
 } from '../../../../interfaces/calendar/calendar-event.interface'
 import { EventId } from '../../../../types/event-id'
 import CalendarConfigInternal from '../../../../interfaces/calendar/calendar-config'
-import {
-  dateStringRegex,
-  dateTimeStringRegex,
-} from '../../time/validation/regex'
-import { toJSDate } from '../../time/format-conversion/format-conversion'
 import { toDateString } from '../../time/format-conversion/date-to-strings'
 import { timePointsFromString } from '../../time/time-points/string-conversion'
 import {
@@ -118,15 +113,15 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     const startDate = dateFromDateTime(this.start.toString())
     const endDate = dateFromDateTime(this.end.toString())
     const endDateMinusOneDay = toDateString(
-      Temporal.PlainDate.from(endDate).subtract({ days: 1 }).toString()
+      Temporal.PlainDate.from(endDate).subtract({ days: 1 })
     )
     if (startDate !== endDate && startDate !== endDateMinusOneDay) return false
 
     const dayBoundaries = this._config.dayBoundaries.value
     const eventStartTimePoints = timePointsFromString(
-      timeFromDateTime(this.start)
+      timeFromDateTime(this.start.toString())
     )
-    const eventEndTimePoints = timePointsFromString(timeFromDateTime(this.end))
+    const eventEndTimePoints = timePointsFromString(timeFromDateTime(this.end.toString()))
 
     return (
       (eventStartTimePoints >= dayBoundaries.start &&
