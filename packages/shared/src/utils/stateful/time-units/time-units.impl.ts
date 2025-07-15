@@ -79,10 +79,10 @@ export default class TimeUnitsImpl implements TimeUnits {
     return week
   }
 
-  getMonthsFor(year: number): Date[] {
+  getMonthsFor(year: number): Temporal.PlainDate[] {
     return Object.values(Month)
       .filter((month) => !isNaN(Number(month)))
-      .map((month) => new ExtendedDateImpl(year, Number(month), 1))
+      .map((month) => Temporal.PlainDate.from({ year, month: Number(month), day: 1 }))
   }
 
   private getWeekForTemporal(date: Temporal.PlainDate): Temporal.PlainDate[] {

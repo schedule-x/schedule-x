@@ -1,6 +1,7 @@
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
 import { toLocalizedMonth } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   year: number
@@ -19,9 +20,9 @@ export default function YearsViewAccordion({
 
   const yearWithDates = $app.timeUnitsImpl.getMonthsFor(year)
 
-  const handleClickOnMonth = (event: MouseEvent, month: Date) => {
+  const handleClickOnMonth = (event: MouseEvent, month: Temporal.PlainDate) => {
     event.stopPropagation()
-    setYearAndMonth(year, month.getMonth())
+    setYearAndMonth(year, month.month)
   }
 
   return (

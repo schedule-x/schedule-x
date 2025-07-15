@@ -8,6 +8,6 @@ export default interface TimeUnits {
 
   getMonthWithTrailingAndLeadingDays(year: number, month: Month): MonthWithDates
   getWeekFor(date: Temporal.ZonedDateTime | Temporal.PlainDate): WeekWithDates
-  getMonthsFor(year: number): Date[]
+  getMonthsFor(year: number): Temporal.PlainDate[]
   getMonth(year: number, month: Month): Temporal.ZonedDateTime[]
 }
