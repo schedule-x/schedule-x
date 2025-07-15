@@ -1,5 +1,6 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src'
+import { Temporal } from 'temporal-polyfill'
 
 export const testIfShouldAbort = async (
   $app: CalendarAppSingleton,
@@ -10,8 +11,8 @@ export const testIfShouldAbort = async (
    * */
   eventCopyOrOriginalEvent: CalendarEventInternal,
 
-  originalStart: string,
-  originalEnd: string,
+  originalStart: Temporal.ZonedDateTime | Temporal.PlainDate,
+  originalEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
   updateCopy?: (newCopy: CalendarEventInternal | undefined) => void
 ): Promise<boolean> => {
   const onBeforeEventUpdate =

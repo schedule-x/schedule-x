@@ -95,7 +95,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
 
               const zonedDateTime = Temporal.ZonedDateTime.from({
                 year,
-                month,
+                month: month + 1,
                 day: date,
                 timeZone: $app.config.timezone.value,
               })

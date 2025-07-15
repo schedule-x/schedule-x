@@ -4,8 +4,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
-import { setDateInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
-import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
+import { setDateInDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import TimeGridDragHandler from '@schedule-x/shared/src/interfaces/drag-and-drop/time-grid-drag-handler.interface'
 import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
@@ -13,6 +12,7 @@ import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
+import { Temporal } from 'temporal-polyfill'
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number
@@ -20,8 +20,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly startX
   private lastIntervalDiff = 0
   private lastDaysDiff = 0
-  private readonly originalStart: string
-  private readonly originalEnd: string
+  private readonly originalStart: Temporal.ZonedDateTime
+  private readonly originalEnd: Temporal.ZonedDateTime
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -38,8 +38,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     ).clientWidth
     this.startY = this.eventCoordinates.clientY
     this.startX = this.eventCoordinates.clientX
-    this.originalStart = this.eventCopy.start
-    this.originalEnd = this.eventCopy.end
+    this.originalStart = Temporal.ZonedDateTime.from(this.eventCopy.start)  
+    this.originalEnd = Temporal.ZonedDateTime.from(this.eventCopy.end)
     this.init()
   }
 
@@ -83,17 +83,16 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private setTimeForEventCopy(pointsToAdd: number) {
-    const newStart = addTimePointsToDateTime(this.eventCopy.start, pointsToAdd)
-    const newEnd = addTimePointsToDateTime(this.eventCopy.end, pointsToAdd)
+    const newStart = addTimePointsToDateTime(this.eventCopy.start as Temporal.ZonedDateTime, pointsToAdd)
+    const newEnd = addTimePointsToDateTime(this.eventCopy.end as Temporal.ZonedDateTime, pointsToAdd)
     let currentDiff = this.lastDaysDiff
 
     if (this.$app.config.direction === 'rtl') {
       currentDiff = -currentDiff
     }
 
-    if (newStart < addDays(this.dayBoundariesDateTime.start, currentDiff))
-      return
-    if (newEnd > addDays(this.dayBoundariesDateTime.end, currentDiff)) return
+    if (newStart.toString() < addDays(this.dayBoundariesDateTime.start, currentDiff).toString()) return
+    if (newEnd.toString() > addDays(this.dayBoundariesDateTime.end, currentDiff).toString()) return
 
     this.eventCopy.start = newStart
     this.eventCopy.end = newEnd
@@ -107,23 +106,23 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     if (this.$app.config.direction === 'rtl') diffToAdd = -diffToAdd
 
     const newStartDate = addDays(
-      dateFromDateTime(this.eventCopy.start),
+      this.eventCopy.start,
       diffToAdd
-    )
-    const newEndDate = addDays(dateFromDateTime(this.eventCopy.end), diffToAdd)
-    const newStart = setDateInDateTimeString(this.eventCopy.start, newStartDate)
-    const newEnd = setDateInDateTimeString(this.eventCopy.end, newEndDate)
+    ) as Temporal.ZonedDateTime
+    const newEndDate = addDays(this.eventCopy.end, diffToAdd) as Temporal.ZonedDateTime
+    const newStart = setDateInDateTime(this.eventCopy.start as Temporal.ZonedDateTime, newStartDate)
+    const newEnd = setDateInDateTime(this.eventCopy.end as Temporal.ZonedDateTime, newEndDate)
 
-    if (newStart < (this.$app.calendarState.range.value as DateRange).start)
+    if (newStart.toString() < (this.$app.calendarState.range.value as DateRange).start.toString())
       return
-    if (newEnd > (this.$app.calendarState.range.value as DateRange).end) return
+    if (newEnd.toString() > (this.$app.calendarState.range.value as DateRange).end.toString()) return
 
     this.setDateForEventCopy(newStart, newEnd)
     this.transformEventCopyPosition(totalDaysDiff)
     this.lastDaysDiff = totalDaysDiff
   }
 
-  private setDateForEventCopy(newStart: string, newEnd: string) {
+  private setDateForEventCopy(newStart: Temporal.ZonedDateTime, newEnd: Temporal.ZonedDateTime) {
     this.eventCopy.start = newStart
     this.eventCopy.end = newEnd
     this.updateCopy(this.eventCopy)

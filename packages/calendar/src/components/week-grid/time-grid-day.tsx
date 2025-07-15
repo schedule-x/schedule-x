@@ -41,10 +41,10 @@ export default function TimeGridDay({
   const timeStringFromDayBoundaryEnd = timeStringFromTimePoints(
     $app.config.dayBoundaries.value.end
   )
-  const dayStartDateTime = date.with({ hour: 0, minute: 0 })
+  const dayStartDateTime = date.with({ hour: +timeStringFromDayBoundary.split(':')[0], minute: +timeStringFromDayBoundary.split(':')[1] })
   const endWithAdjustedTime = date.with({ hour: +timeStringFromDayBoundaryEnd.split(':')[0], minute: +timeStringFromDayBoundaryEnd.split(':')[1] })
   const dayEndDateTime = $app.config.isHybridDay
-    ? addDays(endWithAdjustedTime, 1)
+    ? addDays(endWithAdjustedTime, 1) as Temporal.ZonedDateTime
     : endWithAdjustedTime
 
   const dayBoundariesDateTime: DayBoundariesDateTime = {

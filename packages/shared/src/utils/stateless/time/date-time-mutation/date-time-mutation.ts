@@ -3,6 +3,7 @@ import { toDateString } from '../format-conversion/date-to-strings'
 import { toJSDate } from '../format-conversion/format-conversion'
 import { timeFromDateTime } from '../format-conversion/string-to-string'
 import { doubleDigit } from './double-digit'
+import { Temporal } from 'temporal-polyfill'
 
 export const setDateOfMonth = (dateString: string, date: number): string => {
   dateString = dateString.slice(0, 8) + doubleDigit(date) + dateString.slice(10)
@@ -29,11 +30,15 @@ export const setTimeInDateTimeString = (
   return `${dateCache} ${newTime}`
 }
 
-export const setDateInDateTimeString = (
-  dateTimeString: string,
-  newDate: string
-): string => {
-  const timeCache = timeFromDateTime(dateTimeString)
+export const setDateInDateTime = (
+  dateTime: Temporal.ZonedDateTime,
+  newDate: Temporal.ZonedDateTime
+): Temporal.ZonedDateTime => {
+  const updatedDateTime = dateTime.with({
+    year: newDate.year, 
+    month: newDate.month,
+    day: newDate.day,
+  })
 
-  return `${newDate} ${timeCache}`
+  return updatedDateTime
 }
