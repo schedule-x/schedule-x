@@ -95,8 +95,8 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const numberOfNonDisplayedEvents = getNumberOfNonDisplayedEvents()
 
-  const dayStartDateTime = day.date.with({ hour: 0, minute: 0 })
-  const dayEndDateTime = day.date.with({ hour: 23, minute: 59 })
+ /*  const dayStartDateTime = day.date.with({ hour: 0, minute: 0 })
+  const dayEndDateTime = day.date.with({ hour: 23, minute: 59 }) */
   /* const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
     const eventStartWithTime = dateStringRegex.test(event.start)
       ? event.start + ' 00:00'

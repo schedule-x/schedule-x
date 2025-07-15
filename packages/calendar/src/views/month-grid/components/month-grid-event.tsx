@@ -17,7 +17,6 @@ import { Temporal } from 'temporal-polyfill'
 type props = {
   gridRow: number
   calendarEvent: CalendarEventInternal
-  date: string
   isFirstWeek: boolean
   isLastWeek: boolean
 }

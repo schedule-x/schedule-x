@@ -73,6 +73,8 @@ const positionInMonthWeek = (
     }
   }
 
+  console.log(week)
+
   return week
 }
 

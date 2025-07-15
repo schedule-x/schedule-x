@@ -3,7 +3,7 @@ import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/back
 import { Temporal } from 'temporal-polyfill'
 
 export type MonthDay = {
-  date: Temporal.ZonedDateTime
+  date: Temporal.PlainDate
   events: Record<string, CalendarEventInternal | 'blocker' | undefined>
   backgroundEvents: BackgroundEvent[]
 }

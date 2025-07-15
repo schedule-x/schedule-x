@@ -8,6 +8,7 @@ import { positionInMonth } from '../utils/stateless/position-in-month'
 import { sortEventsForMonthGrid } from '../../../utils/stateless/events/sort-by-start-date'
 import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
 import { useSignalEffect } from '@preact/signals'
+import { Temporal } from 'temporal-polyfill'
 
 export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])
@@ -17,19 +18,19 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
       event._eventFragments = {}
     })
     const newMonth = createMonth(
-      $app.datePickerState.selectedDate.value,
+      Temporal.ZonedDateTime.from($app.datePickerState.selectedDate.value).toPlainDate(),
       $app.timeUnitsImpl
     )
     newMonth.forEach((week) => {
       week.forEach((day) => {
-        day.backgroundEvents = filterByRange(
+        /* day.backgroundEvents = filterByRange(
           $app.calendarEvents.backgroundEvents.value,
           {
-            start: day.date,
-            end: day.date,
+            start: Temporal.ZonedDateTime.from(day.date).withTimeZone($app.config.timezone.value),
+            end: Temporal.ZonedDateTime.from(day.date).withTimeZone($app.config.timezone.value),
           }
         )
-      })
+ */      })
     })
     const filteredEvents = $app.calendarEvents.filterPredicate.value
       ? $app.calendarEvents.list.value.filter(
