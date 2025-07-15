@@ -5,7 +5,7 @@ import { Temporal } from 'temporal-polyfill'
 export default interface DatePickerState {
   isOpen: Signal<boolean>
   isDisabled: Signal<boolean>
-  selectedDate: Signal<Temporal.ZonedDateTime>
+  selectedDate: Signal<Temporal.PlainDate>
   inputDisplayedValue: Signal<string>
   datePickerDate: Signal<string>
   datePickerView: Signal<DatePickerView>

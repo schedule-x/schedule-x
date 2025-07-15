@@ -2,13 +2,14 @@ import { MonthAgenda, MonthAgendaDay } from '../../types/month-agenda'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { Temporal } from 'temporal-polyfill'
 
 const getAllEventDates = (startDate: string, endDate: string): string[] => {
   let currentDate = startDate
   const dates = [currentDate]
 
   while (currentDate < endDate) {
-    currentDate = addDays(currentDate, 1)
+    currentDate = addDays(Temporal.PlainDate.from(currentDate), 1).toString()
     dates.push(currentDate)
   }
 
@@ -19,8 +20,8 @@ const placeEventInDay =
   (allDaysMap: Record<string, MonthAgendaDay>) =>
   (event: CalendarEventInternal) => {
     getAllEventDates(
-      dateFromDateTime(event.start),
-      dateFromDateTime(event.end)
+      dateFromDateTime(event.start.toString()),
+      dateFromDateTime(event.end.toString())
     ).forEach((date) => {
       if (allDaysMap[date]) {
         allDaysMap[date].events.push(event)

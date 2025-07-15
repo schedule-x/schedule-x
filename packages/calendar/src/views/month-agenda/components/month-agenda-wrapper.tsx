@@ -8,6 +8,8 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import { positionEventsInAgenda } from '../utils/stateless/position-events-in-agenda'
 import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
 import MonthAgendaEvents from './month-agenda-events'
+import { Temporal } from 'temporal-polyfill'
+import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
   const getMonth = () => {
@@ -64,8 +66,8 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
             <MonthAgendaWeek
               key={index}
               week={week}
-              setActiveDate={(dateString: string) =>
-                ($app.datePickerState.selectedDate.value = dateString)
+              setActiveDate={(date: Temporal.PlainDate) =>
+                ($app.datePickerState.selectedDate.value = date)
               }
               activeDate={$app.datePickerState.selectedDate.value}
             />
@@ -78,7 +80,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
             agendaMonth.weeks
               .flat()
               .find(
-                (day) => day.date === $app.datePickerState.selectedDate.value
+                (day) => isSameDay(day.date, $app.datePickerState.selectedDate.value)
               )?.events || []
           }
         />

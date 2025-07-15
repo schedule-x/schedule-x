@@ -1,14 +1,15 @@
 import { MonthAgendaWeek as MonthAgendaWeekType } from '../types/month-agenda'
 import MonthAgendaDay from './month-agenda-day'
 import { getWeekNumber } from '../../../utils/stateless/time/get-week-number'
-import { toJSDate } from '@schedule-x/shared/src'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
+import { Temporal } from 'temporal-polyfill'
+import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 type props = {
   week: MonthAgendaWeekType
-  setActiveDate: (dateString: string) => void
-  activeDate: string
+  setActiveDate: (date: Temporal.PlainDate) => void
+  activeDate: Temporal.PlainDate
 }
 
 export default function MonthAgendaWeek({
@@ -23,7 +24,7 @@ export default function MonthAgendaWeek({
       {$app.config.showWeekNumbers.value && (
         <div className="sx__month-agenda-week__week-number">
           {getWeekNumber(
-            toJSDate(week[0].date),
+            Temporal.PlainDate.from(week[0].date),
             $app.config.firstDayOfWeek.value
           )}
         </div>
@@ -33,8 +34,8 @@ export default function MonthAgendaWeek({
         <MonthAgendaDay
           setActiveDate={setActiveDate}
           day={day}
-          isActive={activeDate === day.date}
-          key={index + day.date}
+          isActive={isSameDay(activeDate, day.date)}
+          key={index + day.date.toString()}
         />
       ))}
     </div>
