@@ -7,7 +7,7 @@ export default interface DatePickerState {
   isDisabled: Signal<boolean>
   selectedDate: Signal<Temporal.PlainDate>
   inputDisplayedValue: Signal<string>
-  datePickerDate: Signal<string>
+  datePickerDate: Signal<Temporal.PlainDate>
   datePickerView: Signal<DatePickerView>
   inputWrapperElement: Signal<HTMLDivElement | undefined>
   isDark: Signal<boolean>

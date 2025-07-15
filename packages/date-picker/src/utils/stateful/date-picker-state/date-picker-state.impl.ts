@@ -12,18 +12,18 @@ import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-c
 
 export const createDatePickerState = (
   config: DatePickerConfigInternal,
-  selectedDateParam?: Temporal.ZonedDateTime
+  selectedDateParam?: Temporal.PlainDate
 ): DatePickerState => {
   const initialSelectedDate =
-    selectedDateParam instanceof Temporal.ZonedDateTime
+    selectedDateParam instanceof Temporal.PlainDate
       ? selectedDateParam
-      : Temporal.Now.zonedDateTimeISO()
+      : Temporal.Now.plainDateISO()
 
   const isOpen = signal(false)
   const isDisabled = signal(config.disabled || false)
   const datePickerView = signal(DatePickerView.MONTH_DAYS)
-  const selectedDate = signal<Temporal.ZonedDateTime>(initialSelectedDate)
-  const datePickerDate = signal<Temporal.ZonedDateTime>(initialSelectedDate)
+  const selectedDate = signal<Temporal.PlainDate>(initialSelectedDate)
+  const datePickerDate = signal<Temporal.PlainDate>(initialSelectedDate)
   const isDark = signal(config.style?.dark || false)
 
   const inputDisplayedValue = signal(

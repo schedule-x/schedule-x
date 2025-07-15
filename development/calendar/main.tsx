@@ -118,7 +118,7 @@ plugins: [
       console.log('onRangeUpdate', range)
     }
   },
-  selectedDate: Temporal.ZonedDateTime.from({ year: 2025, month: 7, day: 10, timeZone: 'Europe/Berlin' }),
+  selectedDate: Temporal.PlainDate.from({ year: 2025, month: 7, day: 10 }),
   calendars: {
     personal: {
       colorName: 'personal',

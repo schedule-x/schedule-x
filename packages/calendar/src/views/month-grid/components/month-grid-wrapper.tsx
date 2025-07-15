@@ -18,7 +18,7 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
       event._eventFragments = {}
     })
     const newMonth = createMonth(
-      Temporal.ZonedDateTime.from($app.datePickerState.selectedDate.value).toPlainDate(),
+      Temporal.PlainDate.from($app.datePickerState.selectedDate.value),
       $app.timeUnitsImpl
     )
     newMonth.forEach((week) => {

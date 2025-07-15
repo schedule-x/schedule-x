@@ -12,7 +12,7 @@ export const toLocalizedDate = (date: Date, locale: string): string => {
   })
 }
 
-export const toLocalizedDateString = (date: Temporal.ZonedDateTime, locale: string): string => {
+export const toLocalizedDateString = (date: Temporal.ZonedDateTime | Temporal.PlainDate, locale: string): string => {
   return date.toLocaleString(locale, {
     month: 'numeric',
     day: 'numeric',

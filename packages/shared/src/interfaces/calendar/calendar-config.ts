@@ -117,7 +117,7 @@ export interface CalendarConfigExternal
   backgroundEvents?: BackgroundEvent[]
   dayBoundaries?: DayBoundariesExternal
   views: [View, ...View[]]
-  selectedDate?: Temporal.ZonedDateTime
+  selectedDate?: Temporal.PlainDate
   plugins?: PluginBase<string>[]
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
