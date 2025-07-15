@@ -5,11 +5,12 @@ import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundari
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { updateEventsList } from './utils/stateless/update-events-list'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
+import { Temporal } from 'temporal-polyfill'
 
 export class TimeGridEventResizer {
-  private readonly originalEventEnd: string
+  private readonly originalEventEnd: Temporal.ZonedDateTime
   private lastIntervalDiff = 0
-  private lastValidEnd = ''
+  private lastValidEnd: Temporal.ZonedDateTime
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -19,8 +20,8 @@ export class TimeGridEventResizer {
     private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number,
     private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
-    this.originalEventEnd = this.eventCopy.end
-    this.lastValidEnd = this.eventCopy.end
+    this.originalEventEnd = this.eventCopy.end as Temporal.ZonedDateTime
+    this.lastValidEnd = this.eventCopy.end as Temporal.ZonedDateTime
     const calendarWrapper = this.$app.elements.calendarWrapper
     if (!calendarWrapper) return
 
@@ -66,8 +67,8 @@ export class TimeGridEventResizer {
     const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
 
     if (
-      newEnd > this.dayBoundariesDateTime.end ||
-      newEnd <= this.eventCopy.start
+      newEnd.toString() > this.dayBoundariesDateTime.end.toString() ||
+      newEnd.toString() <= this.eventCopy.start.toString()
     )
       return
 

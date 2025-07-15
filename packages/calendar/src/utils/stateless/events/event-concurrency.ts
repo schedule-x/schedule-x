@@ -31,8 +31,8 @@ export const handleEventConcurrency = (
               return true
 
             return (
-              cachedEvent.start <= currentEvent.start &&
-              cachedEvent.end > currentEvent.start
+              cachedEvent.start.toString() <= currentEvent.start.toString() &&
+              cachedEvent.end.toString() > currentEvent.start.toString()
             )
           }
         ).length
@@ -43,8 +43,8 @@ export const handleEventConcurrency = (
               return true
 
             return (
-              cachedEvent.start < currentEvent.end &&
-              cachedEvent.end >= currentEvent.start
+              cachedEvent.start.toString() < currentEvent.end.toString() &&
+              cachedEvent.end.toString() >= currentEvent.start.toString()
             )
           }
         ).length
@@ -59,12 +59,12 @@ export const handleEventConcurrency = (
 
         concurrentEventsCache.forEach((cachedEvent) => {
           if (
-            (cachedEvent.end > currentEvent.start &&
-              cachedEvent.start < currentEvent.end) ||
+            (cachedEvent.end.toString() > currentEvent.start.toString() &&
+              cachedEvent.start.toString() < currentEvent.end.toString()) ||
             areEvents0MinutesAndConcurrent(cachedEvent, currentEvent)
           ) {
-            timePoints.push({ time: cachedEvent.start, type: 'start' })
-            timePoints.push({ time: cachedEvent.end, type: 'end' })
+            timePoints.push({ time: cachedEvent.start.toString(), type: 'start' })
+            timePoints.push({ time: cachedEvent.end.toString(), type: 'end' })
           }
         })
 
@@ -92,8 +92,8 @@ export const handleEventConcurrency = (
     }
 
     if (
-      (nextEvent && event.end > nextEvent.start) ||
-      concurrentEventsCache.some((e) => e.end > event.start) ||
+      (nextEvent && event.end.toString() > nextEvent.start.toString()) ||
+      concurrentEventsCache.some((e) => e.end.toString() > event.start.toString()) ||
       areBothEventsZeroMinutes
     ) {
       concurrentEventsCache.push(event)

@@ -1,9 +1,11 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src'
-import { DateFormats } from '@schedule-x/shared/src/values/date-formats'
+import { Temporal } from 'temporal-polyfill'
 
 export const isEvent0Minutes = (e: CalendarEventInternal | undefined) => {
   return (
-    e?.start === e?.end && DateFormats.DATE_TIME_STRING.test(e?.start || '')
+    e?.start instanceof Temporal.ZonedDateTime &&
+    e?.end instanceof Temporal.ZonedDateTime &&
+    e?.start.toString() === e?.end.toString()
   )
 }
 
