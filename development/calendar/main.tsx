@@ -60,7 +60,7 @@ plugins: [
   },
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'month-grid',
+  defaultView: 'week',
   callbacks: {
     onScrollDayIntoView(date) {
       console.log('onScrollDayIntoView: ', date)
@@ -120,7 +120,7 @@ plugins: [
       console.log(range.end.toString())
     }
   },
-  selectedDate: Temporal.PlainDate.from({ year: 2025, month: 7, day: 10 }),
+  selectedDate: Temporal.PlainDate.from({ year: 2024, month: 1, day: 23 }),
   calendars: {
     personal: {
       colorName: 'personal',
@@ -231,6 +231,15 @@ plugins: [
       id: 3,
       start: Temporal.PlainDate.from('2025-07-11'),
       end: Temporal.PlainDate.from('2025-07-13'),
+      title: 'Event 3',
+      people: ['John Doe'],
+      location: 'Office',
+      description: 'Event 3 description',
+    },
+    {
+      id: 4,
+      start: Temporal.PlainDate.from('2024-01-21'),
+      end: Temporal.PlainDate.from('2024-01-23'),
       title: 'Event 3',
       people: ['John Doe'],
       location: 'Office',

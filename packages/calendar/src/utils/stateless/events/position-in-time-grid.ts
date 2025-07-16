@@ -15,7 +15,6 @@ export const positionInTimeGrid = (
   $app: CalendarAppSingleton
 ) => {
   for (const event of timeGridEvents) {
-    console.log(event)
     const range = $app.calendarState.range.value as DateRange
 
     if (event.start.toString() >= range.start.toString() && event.end.toString() <= range.end.toString()) {

@@ -56,17 +56,24 @@ export class DateGridEventResizer {
     let lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
     if (this.$app.config.direction === 'rtl') lastNDaysDiff *= -1
 
+    if (lastNDaysDiff === this.lastNDaysDiff) return
+
     this.lastNDaysDiff = lastNDaysDiff
     this.setNewTimeForEventEnd()
   }
 
   private setNewTimeForEventEnd() {
     const newEnd = addDays(this.originalEventEnd, this.lastNDaysDiff)
+    let rangeStart: Temporal.ZonedDateTime | Temporal.PlainDate = (this.$app.calendarState.range.value as DateRange).start
+    if (newEnd instanceof Temporal.PlainDate) {
+      rangeStart = Temporal.PlainDate.from(rangeStart)
+    }
+
     if (
       newEnd.toString() > (this.$app.calendarState.range.value as DateRange).end.toString() ||
       newEnd.toString() < this.eventCopy.start.toString() ||
       newEnd.toString() <
-        (this.$app.calendarState.range.value as DateRange).start.toString()
+        rangeStart.toString()
     )
       return
 

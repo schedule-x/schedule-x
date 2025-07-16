@@ -30,8 +30,8 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   ) {
     this.startX = eventCoordinates.clientX
     this.dayWidth = getTimeGridDayWidth(this.$app)
-    this.originalStart = Temporal.ZonedDateTime.from(this.eventCopy.start)
-    this.originalEnd = Temporal.ZonedDateTime.from(this.eventCopy.end)
+    this.originalStart = this.eventCopy.start instanceof Temporal.PlainDate ? Temporal.PlainDate.from(this.eventCopy.start) : Temporal.ZonedDateTime.from(this.eventCopy.start)
+    this.originalEnd = this.eventCopy.end instanceof Temporal.PlainDate ? Temporal.PlainDate.from(this.eventCopy.end) : Temporal.ZonedDateTime.from(this.eventCopy.end)
     this.rangeStartDate = Temporal.PlainDate.from(
       (this.$app.calendarState.range.value as DateRange).start
     )
@@ -109,7 +109,7 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     let daysToShift = Math.round(
       Temporal.PlainDate.from(originalStartInGrid).until(Temporal.PlainDate.from(newStartDate)).total('days')
     )
-    console.log(daysToShift)
+
     if (this.$app.config.direction === 'rtl') daysToShift *= -1
     getDateGridEventCopy(this.$app, this.eventCopy).style.transform =
       `translateX(calc(${daysToShift * this.dayWidth}px + ${daysToShift}px))`
