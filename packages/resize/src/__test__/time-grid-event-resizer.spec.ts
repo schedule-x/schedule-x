@@ -20,16 +20,21 @@ import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/
 import { createResizePlugin } from '../resize.plugin'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { waitFor } from '@testing-library/preact'
+import { Temporal } from 'temporal-polyfill'
 
 describe('Resizing events in the time grid', () => {
   describe('When the calendar wrapper cannot be found', () => {
     it('should not throw an error', () => {
       const $app = stubInterface<CalendarAppSingleton>()
+      $app.config = {
+        ...stubInterface<CalendarConfigInternal>(),
+        timezone: signal('UTC'),
+      }
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         1,
-        '2024-01-05 06:00',
-        '2024-01-05 07:00'
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2024-01-05 07:00:00+00:00[UTC]')
       ).build()
       const eventUpdater = vi.fn()
       const initialY = 500
@@ -41,8 +46,8 @@ describe('Resizing events in the time grid', () => {
         eventUpdater,
         { clientY: initialY } as MouseEvent,
         {
-          start: '2024-01-05 00:00',
-          end: '2024-01-05 23:59',
+          start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
         }
       )
     })
@@ -63,6 +68,7 @@ describe('Resizing events in the time grid', () => {
       $app.elements = { calendarWrapper }
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
+        timezone: signal('UTC'),
         weekOptions: signal({
           ...stubInterface(),
           gridHeight: 2400,
@@ -75,15 +81,15 @@ describe('Resizing events in the time grid', () => {
       calendarEvent = new CalendarEventBuilder(
         $app.config,
         1,
-        '2024-01-05 06:00',
-        '2024-01-05 07:00'
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2024-01-05 07:00:00+00:00[UTC]')
       ).build()
       eventCopy = deepCloneEvent(calendarEvent, $app)
       calendarEventNearEndOfDay = new CalendarEventBuilder(
         $app.config,
         2,
-        '2024-01-05 23:00',
-        '2024-01-05 23:30'
+        Temporal.ZonedDateTime.from('2024-01-05 23:00:00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2024-01-05 23:30:00+00:00[UTC]')
       ).build()
       $app.calendarEvents = stubInterface<CalendarEvents>()
       $app.calendarEvents.list = signal([
@@ -104,8 +110,8 @@ describe('Resizing events in the time grid', () => {
         eventUpdater,
         { clientY: initialY } as MouseEvent,
         {
-          start: '2024-01-05 00:00',
-          end: '2024-01-05 23:59',
+          start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
         }
       )
 
@@ -117,19 +123,19 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEvent.start).toBe('2024-01-05 06:00')
-      expect(calendarEvent.end).toBe('2024-01-05 07:30')
+      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
+      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'))
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:00',
-        end: '2024-01-05 07:30',
+        start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'),
       })
     })
 
     it('should shorten an event by 30 minutes', () => {
       new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
+        start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
       })
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
@@ -139,19 +145,19 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEvent.start).toBe('2024-01-05 06:00')
-      expect(calendarEvent.end).toBe('2024-01-05 06:30')
+      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
+      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]'))
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:00',
-        end: '2024-01-05 06:30',
+        start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]'),
       })
     })
 
     it('should not resize above the event start', () => {
       new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
+        start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
       })
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
@@ -165,12 +171,12 @@ describe('Resizing events in the time grid', () => {
       }
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEvent.start).toBe('2024-01-05 06:00')
-      expect(calendarEvent.end).toBe('2024-01-05 06:15')
+      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
+      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:15:00+00:00[UTC]'))
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:00',
-        end: '2024-01-05 06:15',
+        start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 06:15:00+00:00[UTC]'),
       })
     })
 
@@ -186,8 +192,8 @@ describe('Resizing events in the time grid', () => {
         initialY,
         25,
         {
-          start: '2024-01-05 00:00',
-          end: '2024-01-05 23:59',
+          start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
         }
       )
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
@@ -204,19 +210,19 @@ describe('Resizing events in the time grid', () => {
       // mouseup
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEventNearEndOfDay.start).toBe('2024-01-05 23:00')
-      expect(calendarEventNearEndOfDay.end).toBe('2024-01-05 23:45')
+      expect(calendarEventNearEndOfDay.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 23:00:00+00:00[UTC]'))
+      expect(calendarEventNearEndOfDay.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 23:45:00+00:00[UTC]'))
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 2,
-        start: '2024-01-05 23:00',
-        end: '2024-01-05 23:45',
+        start: Temporal.ZonedDateTime.from('2024-01-05 23:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:45:00+00:00[UTC]'),
       })
     })
 
     it('should call onEventUpdate once on mouseup', () => {
       new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
+        start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
       })
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
@@ -235,8 +241,8 @@ describe('Resizing events in the time grid', () => {
       expect(updateEventSpy).toHaveBeenCalledTimes(1)
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:00',
-        end: '2024-01-05 07:45',
+        start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 07:45:00+00:00[UTC]'),
       })
     })
   })
@@ -255,6 +261,7 @@ describe('Resizing events in the time grid', () => {
       $app.elements = { calendarWrapper }
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
+        timezone: signal('UTC'),
         weekOptions: signal({
           ...stubInterface(),
           gridHeight: 2400,
@@ -268,8 +275,8 @@ describe('Resizing events in the time grid', () => {
       calendarEvent = new CalendarEventBuilder(
         $app.config,
         1,
-        '2024-01-05 06:00',
-        '2024-01-05 07:00'
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2024-01-05 07:00:00+00:00[UTC]')
       ).build()
       eventCopy = deepCloneEvent(calendarEvent, $app)
 
@@ -291,8 +298,8 @@ describe('Resizing events in the time grid', () => {
           touches: [{ clientY: initialY } as Touch],
         }),
         {
-          start: '2024-01-05 00:00',
-          end: '2024-01-05 23:59',
+          start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
         }
       )
 
@@ -306,19 +313,19 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new TouchEvent('touchend'))
 
-      expect(calendarEvent.start).toBe('2024-01-05 06:00')
-      expect(calendarEvent.end).toBe('2024-01-05 07:30')
+      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
+      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'))
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:00',
-        end: '2024-01-05 07:30',
+        start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'),
       })
     })
 
     it('should shorten an event by 30 minutes using touch events', () => {
       new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
+        start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
       })
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
@@ -330,19 +337,19 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new TouchEvent('touchend'))
 
-      expect(calendarEvent.start).toBe('2024-01-05 06:00')
-      expect(calendarEvent.end).toBe('2024-01-05 06:30')
+      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
+      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]'))
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:00',
-        end: '2024-01-05 06:30',
+        start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]'),
       })
     })
 
     it('should call onEventUpdate once on touchend', () => {
       new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
+        start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
       })
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
@@ -363,8 +370,8 @@ describe('Resizing events in the time grid', () => {
       expect(updateEventSpy).toHaveBeenCalledTimes(1)
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
-        start: '2024-01-05 06:00',
-        end: '2024-01-05 07:45',
+        start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 07:45:00+00:00[UTC]'),
       })
     })
   })
@@ -383,6 +390,7 @@ describe('Resizing events in the time grid', () => {
       $app.elements = { calendarWrapper }
       $app.config = {
         ...stubInterface<CalendarConfigInternal>(),
+        timezone: signal('UTC'),
         weekOptions: signal({
           ...stubInterface(),
           gridHeight: 2400,
@@ -396,8 +404,8 @@ describe('Resizing events in the time grid', () => {
       calendarEvent = new CalendarEventBuilder(
         $app.config,
         1,
-        '2024-01-05 06:00',
-        '2024-01-05 07:00'
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2024-01-05 07:00:00+00:00[UTC]')
       ).build()
       eventCopy = deepCloneEvent(calendarEvent, $app)
 
@@ -417,8 +425,8 @@ describe('Resizing events in the time grid', () => {
         },
       }
       new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
+        start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
       })
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
@@ -430,8 +438,8 @@ describe('Resizing events in the time grid', () => {
 
       expect(updateEventSpy).not.toHaveBeenCalled()
       const eventInternal = $app.calendarEvents.list.value[0]
-      expect(eventInternal.start).toBe('2024-01-05 06:00')
-      expect(eventInternal.end).toBe('2024-01-05 07:00')
+      expect(eventInternal.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
+      expect(eventInternal.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:00:00+00:00[UTC]'))
     })
 
     it('should update the event if the callback returns true', async () => {
@@ -442,8 +450,8 @@ describe('Resizing events in the time grid', () => {
         },
       }
       new TimeGridEventResizer($app, eventCopy, eventUpdater, initialY, 25, {
-        start: '2024-01-05 00:00',
-        end: '2024-01-05 23:59',
+        start: Temporal.ZonedDateTime.from('2024-01-05 00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-05 23:59:00+00:00[UTC]'),
       })
       const updateEventSpy = spyOn($app.config.callbacks, 'onEventUpdate')
 
@@ -456,8 +464,8 @@ describe('Resizing events in the time grid', () => {
       await waitFor(() => {
         expect(updateEventSpy).toHaveBeenCalled()
         const eventInternal = $app.calendarEvents.list.value[0]
-        expect(eventInternal.start).toBe('2024-01-05 06:00')
-        expect(eventInternal.end).toBe('2024-01-05 07:30')
+        expect(eventInternal.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
+        expect(eventInternal.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'))
       })
     })
   })
