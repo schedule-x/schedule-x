@@ -5,13 +5,11 @@ import TimeGridEvent from './time-grid-event'
 import { sortEventsByStartAndEnd } from '../../utils/stateless/events/sort-by-start-date'
 import { handleEventConcurrency } from '../../utils/stateless/events/event-concurrency'
 import { timeStringFromTimePoints } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
-import { setTimeInDateTimeString } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getClickDateTime } from '../../utils/stateless/time/grid-click-to-datetime/grid-click-to-datetime'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
-import { toJSDate } from '@schedule-x/shared/src'
 import TimeGridBackgroundEvent from './background-event'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { useComputed } from '@preact/signals'
@@ -43,7 +41,12 @@ export default function TimeGridDay({
     $app.config.dayBoundaries.value.end
   )
   const dayStartDateTime = date.with({ hour: +timeStringFromDayBoundary.split(':')[0], minute: +timeStringFromDayBoundary.split(':')[1] })
-  const endWithAdjustedTime = date.with({ hour: +timeStringFromDayBoundaryEnd.split(':')[0], minute: +timeStringFromDayBoundaryEnd.split(':')[1] })
+  const endHour = +timeStringFromDayBoundaryEnd.split(':')[0]
+  const endWithAdjustedTime = date.with({
+    hour: endHour === 24 ? 23 : endHour,
+    minute: endHour === 24 ? 59 : +timeStringFromDayBoundaryEnd.split(':')[1],
+    second: endHour === 24 ? 59 : 0,
+  })
   const dayEndDateTime = $app.config.isHybridDay
     ? addDays(endWithAdjustedTime, 1) as Temporal.ZonedDateTime
     : endWithAdjustedTime
