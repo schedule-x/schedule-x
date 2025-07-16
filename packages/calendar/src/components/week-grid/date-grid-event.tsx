@@ -71,12 +71,22 @@ export default function DateGridEvent({
     })
   }
 
+  const rangeStartForComparison = calendarEvent.start instanceof Temporal.ZonedDateTime ? ($app.calendarState.range.value as DateRange).start.toString() : Temporal.PlainDate.from({
+    year: ($app.calendarState.range.value as DateRange).start.year,
+    month: ($app.calendarState.range.value as DateRange).start.month,
+    day: ($app.calendarState.range.value as DateRange).start.day,
+  }).toString()
+  const rangeEndForComparison = calendarEvent.end instanceof Temporal.ZonedDateTime ? ($app.calendarState.range.value as DateRange).end.toString() : Temporal.PlainDate.from({
+    year: ($app.calendarState.range.value as DateRange).end.year,
+    month: ($app.calendarState.range.value as DateRange).end.month,
+    day: ($app.calendarState.range.value as DateRange).end.day,
+  }).toString()
   const startsBeforeWeek =
     calendarEvent.start.toString() <
-    ($app.calendarState.range.value as DateRange).start.toString()
+    rangeStartForComparison
   const endsAfterWeek =
     calendarEvent.end.toString() >
-    ($app.calendarState.range.value as DateRange).end.toString()
+    rangeEndForComparison
   const hasOverflowLeft = useMemo(() => {
     if ($app.config.direction === 'ltr') {
       return startsBeforeWeek
