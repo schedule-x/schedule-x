@@ -15,6 +15,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dragEventNQuarters, getEventWithId } from './utils'
 import { deepCloneEvent } from '@schedule-x/shared/src'
 import { waitFor } from '@testing-library/preact'
+import { Temporal } from 'temporal-polyfill'
 
 describe('A calendar with normal day boundaries', () => {
   let $app: CalendarAppSingleton
@@ -22,8 +23,8 @@ describe('A calendar with normal day boundaries', () => {
   let eventCopy: CalendarEventInternal
   let updateCopyFn: Mock
   let dayBoundariesDateTime: {
-    start: string
-    end: string
+    start: Temporal.ZonedDateTime
+    end: Temporal.ZonedDateTime
   }
   let eventCopyElement: HTMLDivElement
 
@@ -31,13 +32,13 @@ describe('A calendar with normal day boundaries', () => {
 
   beforeEach(() => {
     $app = __createAppWithViews__({
-      selectedDate: '2024-02-02',
+      selectedDate: Temporal.PlainDate.from('2024-02-02'),
     })
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       eventId,
-      '2024-02-02 12:00',
-      '2024-02-02 13:00'
+      Temporal.ZonedDateTime.from('2024-02-02 12:00+00:00[UTC]'),
+      Temporal.ZonedDateTime.from('2024-02-02 13:00+00:00[UTC]')
     ).build()
     $app.calendarEvents.list.value = [calendarEvent]
     eventCopy = deepCloneEvent(calendarEvent, $app)
@@ -62,8 +63,8 @@ describe('A calendar with normal day boundaries', () => {
     } as MouseEvent
     updateCopyFn = vi.fn()
     dayBoundariesDateTime = {
-      start: '2024-02-02 00:00',
-      end: '2024-02-02 24:00',
+      start: Temporal.ZonedDateTime.from('2024-02-02 00:00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2024-02-02 23:59+00:00[UTC]'),
     }
   })
 
@@ -84,8 +85,8 @@ describe('A calendar with normal day boundaries', () => {
 
       await waitFor(() => {
         expect(updateCopyFn).toHaveBeenCalled()
-        expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 14:00')
-        expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 15:00')
+        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 14:00+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 15:00+00:00[UTC]'))
       })
     })
 
@@ -105,14 +106,14 @@ describe('A calendar with normal day boundaries', () => {
 
       await waitFor(() => {
         expect(updateCopyFn).toHaveBeenCalled()
-        expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 09:30')
-        expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 10:30')
+        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 09:30+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 10:30+00:00[UTC]'))
       })
     })
 
     it('should not be able to drag an event beyond the start of a day', async () => {
-      eventCopy.start = '2024-02-02 00:30'
-      eventCopy.end = '2024-02-02 01:30'
+      eventCopy.start = Temporal.ZonedDateTime.from('2024-02-02 00:30+00:00[UTC]')
+      eventCopy.end = Temporal.ZonedDateTime.from('2024-02-02 01:30+00:00[UTC]')
 
       new TimeGridDragHandlerImpl(
         $app,
@@ -128,33 +129,33 @@ describe('A calendar with normal day boundaries', () => {
        * */
       dragEventNQuarters(clickEvent, eventId, 'up')
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(eventCopy.start).toBe('2024-02-02 00:15')
-      expect(eventCopy.end).toBe('2024-02-02 01:15')
+      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 00:15+00:00[UTC]'))
+      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 01:15+00:00[UTC]'))
 
       /**
        * Drag event to 00:00
        * */
       dragEventNQuarters(clickEvent, 2, 'up')
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(eventCopy.start).toBe('2024-02-02 00:00')
-      expect(eventCopy.end).toBe('2024-02-02 01:00')
+      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 00:00+00:00[UTC]'))
+      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 01:00+00:00[UTC]'))
 
       /**
        * Try dragging event to 23:45 (which should do nothing)
        * */
       dragEventNQuarters(clickEvent, 3, 'up')
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(eventCopy.start).toBe('2024-02-02 00:00')
-      expect(eventCopy.end).toBe('2024-02-02 01:00')
+      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 00:00+00:00[UTC]'))
+      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 01:00+00:00[UTC]'))
 
       document.dispatchEvent(new MouseEvent('mouseup'))
       await waitFor(() => {
         expect(updateCopyFn).toHaveBeenCalled()
         expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-          '2024-02-02 00:00'
+          Temporal.ZonedDateTime.from('2024-02-02 00:00+00:00[UTC]')
         )
         expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-          '2024-02-02 01:00'
+          Temporal.ZonedDateTime.from('2024-02-02 01:00+00:00[UTC]')
         )
       })
     })
@@ -187,10 +188,10 @@ describe('A calendar with normal day boundaries', () => {
       await waitFor(() => {
         expect(updateCopyFn).toHaveBeenCalled()
         expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-          '2024-02-03 12:00'
+          Temporal.ZonedDateTime.from('2024-02-03 12:00+00:00[UTC]')
         )
         expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-          '2024-02-03 13:00'
+          Temporal.ZonedDateTime.from('2024-02-03 13:00+00:00[UTC]')
         )
       })
     })
@@ -222,10 +223,10 @@ describe('A calendar with normal day boundaries', () => {
       await waitFor(() => {
         expect(updateCopyFn).toHaveBeenCalled()
         expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-          '2024-02-01 12:00'
+          Temporal.ZonedDateTime.from('2024-02-01 12:00+00:00[UTC]')
         )
         expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-          '2024-02-01 13:00'
+          Temporal.ZonedDateTime.from('2024-02-01 13:00+00:00[UTC]')
         )
       })
     })
@@ -251,8 +252,8 @@ describe('A calendar with normal day boundaries', () => {
           clientY: clickEvent.clientY,
         } as MouseEvent)
       )
-      expect(eventCopy.start).toBe('2024-02-03 12:00')
-      expect(eventCopy.end).toBe('2024-02-03 13:00')
+      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-03 12:00+00:00[UTC]'))
+      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-03 13:00+00:00[UTC]'))
       expect(eventCopyElement.style.transform).toEqual(
         'translateX(calc(100% + 1px))'
       )
@@ -267,8 +268,8 @@ describe('A calendar with normal day boundaries', () => {
           clientY: clickEvent.clientY,
         } as MouseEvent)
       )
-      expect(eventCopy.start).toBe('2024-02-04 12:00')
-      expect(eventCopy.end).toBe('2024-02-04 13:00')
+      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-04 12:00+00:00[UTC]'))
+      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-04 13:00+00:00[UTC]'))
       expect(eventCopyElement.style.transform).toEqual(
         'translateX(calc(200% + 2px))'
       )
@@ -283,8 +284,8 @@ describe('A calendar with normal day boundaries', () => {
           clientY: clickEvent.clientY,
         } as MouseEvent)
       )
-      expect(eventCopy.start).toBe('2024-02-04 12:00')
-      expect(eventCopy.end).toBe('2024-02-04 13:00')
+      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-04 12:00+00:00[UTC]'))
+      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-04 13:00+00:00[UTC]'))
       expect(eventCopyElement.style.transform).toEqual(
         'translateX(calc(200% + 2px))'
       )
@@ -293,10 +294,10 @@ describe('A calendar with normal day boundaries', () => {
       await waitFor(() => {
         expect(updateCopyFn).toHaveBeenCalled()
         expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-          '2024-02-04 12:00'
+          Temporal.ZonedDateTime.from('2024-02-04 12:00+00:00[UTC]')
         )
         expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-          '2024-02-04 13:00'
+          Temporal.ZonedDateTime.from('2024-02-04 13:00+00:00[UTC]')
         )
       })
     })
@@ -330,10 +331,10 @@ describe('A calendar with normal day boundaries', () => {
       await waitFor(() => {
         expect(updateCopyFn).toHaveBeenCalled()
         expect(getEventWithId(eventCopy.id, $app)?.start).toEqual(
-          '2024-02-03 12:00'
+          Temporal.ZonedDateTime.from('2024-02-03 12:00+00:00[UTC]')
         )
         expect(getEventWithId(eventCopy.id, $app)?.end).toEqual(
-          '2024-02-03 13:00'
+          Temporal.ZonedDateTime.from('2024-02-03 13:00+00:00[UTC]')
         )
       })
     })
@@ -365,8 +366,8 @@ describe('A calendar with normal day boundaries', () => {
 
       await waitFor(() => {
         const originalEvent = getEventWithId(eventId, $app)
-        expect(originalEvent?.start).toBe('2024-02-02 12:00')
-        expect(originalEvent?.end).toBe('2024-02-02 13:00')
+        expect(originalEvent?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 12:00+00:00[UTC]'))
+        expect(originalEvent?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 13:00+00:00[UTC]'))
         expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
       })
     })
@@ -396,8 +397,8 @@ describe('A calendar with normal day boundaries', () => {
 
       const originalEvent = getEventWithId(eventId, $app)
       await waitFor(() => {
-        expect(originalEvent?.start).toBe('2024-02-02 14:00')
-        expect(originalEvent?.end).toBe('2024-02-02 15:00')
+        expect(originalEvent?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 14:00+00:00[UTC]'))
+        expect(originalEvent?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 15:00+00:00[UTC]'))
         expect(updateCopyFn).toHaveBeenCalled()
         expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
       })

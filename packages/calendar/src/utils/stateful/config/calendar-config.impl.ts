@@ -18,6 +18,7 @@ import { Signal, signal } from '@preact/signals'
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 import { getDirection } from '../../stateless/get-direction'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
+import { Temporal } from 'temporal-polyfill'
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   firstDayOfWeek: Signal<WeekDay>
@@ -26,8 +27,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   weekOptions: Signal<WeekOptions>
   calendars: Signal<Record<string, CalendarType>>
   isDark: Signal<boolean>
-  minDate: Signal<string | undefined>
-  maxDate: Signal<string | undefined>
+  minDate: Signal<Temporal.PlainDate | undefined>
+  maxDate: Signal<Temporal.PlainDate | undefined>
   monthGridOptions: Signal<MonthGridOptions>
   locale: Signal<string> = signal(DEFAULT_LOCALE)
   theme: string | undefined
@@ -49,15 +50,15 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     public isResponsive: boolean = true,
     public callbacks = {},
     public _customComponentFns = {},
-    minDate: string | undefined = undefined,
-    maxDate: string | undefined = undefined,
+    minDate: Temporal.PlainDate | undefined = undefined,
+    maxDate: Temporal.PlainDate | undefined = undefined,
     monthGridOptions: MonthGridOptions = {
       nEventsPerDay: 4,
     },
     theme: string | undefined = undefined,
     translations: Record<string, Language> = {},
     showWeekNumbers: boolean = false,
-    timezone: string = 'Europe/Berlin'
+    timezone: IANATimezone = 'UTC'
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
