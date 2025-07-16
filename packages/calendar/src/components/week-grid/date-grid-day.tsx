@@ -2,9 +2,9 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import DateGridEvent from './date-grid-event'
 import { DATE_GRID_BLOCKER } from '../../constants'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
-import { dateStringRegex } from '@schedule-x/shared/src'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   calendarEvents: {
@@ -20,17 +20,37 @@ export default function DateGridDay({
   backgroundEvents,
 }: props) {
   const $app = useContext(AppContext)
-  const dateStart = date + ' 00:00'
-  const dateEnd = date + ' 23:59'
+  const dateStart = Temporal.ZonedDateTime.from({
+    year: Temporal.PlainDate.from(date).year,
+    month: Temporal.PlainDate.from(date).month,
+    day: Temporal.PlainDate.from(date).day,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    timeZone: $app.config.timezone.value,
+  })
+  const dateEnd = Temporal.ZonedDateTime.from({
+    year: Temporal.PlainDate.from(date).year,
+    month: Temporal.PlainDate.from(date).month,
+    day: Temporal.PlainDate.from(date).day,
+    hour: 23,
+    minute: 59,
+    second: 59,
+    timeZone: $app.config.timezone.value,
+  })
 
   const fullDayBackgroundEvent = backgroundEvents.find((event) => {
-    const eventStartWithTime = dateStringRegex.test(event.start)
-      ? event.start + ' 00:00'
+    const eventStartWithTime = event  .start instanceof Temporal.PlainDate
+      ? event.start.toZonedDateTime($app.config.timezone.value)
       : event.start
-    const eventEndWithTime = dateStringRegex.test(event.end)
-      ? event.end + ' 23:59'
+    const eventEndWithTime = event.end instanceof Temporal.PlainDate
+      ? event.end.toZonedDateTime($app.config.timezone.value).with({
+        hour: 23,
+        minute: 59,
+        second: 59,
+      })
       : event.end
-    return eventStartWithTime <= dateStart && eventEndWithTime >= dateEnd
+    return eventStartWithTime.toString() <= dateStart.toString() && eventEndWithTime.toString() >= dateEnd.toString()
   })
 
   const handleMouseDown = (e: MouseEvent) => {

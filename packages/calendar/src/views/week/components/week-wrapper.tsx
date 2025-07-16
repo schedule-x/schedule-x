@@ -38,12 +38,33 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
       newWeek
     )
     Object.entries(newWeek).forEach(([date, day]) => {
+      const plainDate = Temporal.PlainDate.from(date)
+      const rangeStartDateTime = Temporal.ZonedDateTime.from({
+        year: plainDate.year,
+        month: plainDate.month,
+        day: plainDate.day,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        timeZone: $app.config.timezone.value,
+      })
+      const rangeEndDateTime = Temporal.ZonedDateTime.from({
+        year: plainDate.year,
+        month: plainDate.month,
+        day: plainDate.day,
+        hour: 23,
+        minute: 59,
+        second: 59,
+        timeZone: $app.config.timezone.value,
+      })
+      
       day.backgroundEvents = filterByRange(
         $app.calendarEvents.backgroundEvents.value,
         {
-          start: rangeStart,
-          end: rangeEnd,
-        }
+          start: rangeStartDateTime,
+          end: rangeEndDateTime,
+        },
+        $app.config.timezone.value
       )
     })
     newWeek = positionInTimeGrid(timeGridEvents, newWeek, $app)

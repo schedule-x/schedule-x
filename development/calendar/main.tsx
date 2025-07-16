@@ -60,7 +60,7 @@ plugins: [
   },
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'month-agenda',
+  defaultView: 'week',
   callbacks: {
     onScrollDayIntoView(date) {
       console.log('onScrollDayIntoView: ', date)
@@ -176,18 +176,29 @@ plugins: [
     },
   },
   backgroundEvents: [
-    /* {
+    {
       title: 'Out of office',
-      start: '2025-07-07 00:00',
-      end: '2025-07-07 02:00',
+      start: Temporal.ZonedDateTime.from('2025-07-07T00:00:00.000+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-07-07T12:00:00.000+02:00[Europe/Berlin]'),
       style: {
         // create tilted 5px thick gray lines
         backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
         opacity: 0.5,
       },
-      rrule: 'FREQ=WEEKLY',
-      exdate: ['20250714T000000', '20250728T000000']
-    }, */
+      // rrule: 'FREQ=WEEKLY',
+      // exdate: ['20250714T000000', '20250728T000000']
+    },
+
+    // PlainDate
+    {
+      title: 'Out of office 2',
+      start: Temporal.PlainDate.from('2025-07-09'),
+      end: Temporal.PlainDate.from('2025-07-10'),
+      style: {
+        backgroundImage: 'repeating-linear-gradient(45deg, #e3a, #e3a 5px, transparent 5px, transparent 10px)',
+        opacity: 0.5,
+      },
+    },
   ],
   /* dayBoundaries: {
     start: '10:00',
