@@ -1,6 +1,5 @@
 import { MonthDay as MonthDayType } from '../types/month'
 import {
-  toIntegers,
   toJSDate,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
@@ -13,6 +12,7 @@ import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 import { randomStringId } from '@schedule-x/shared/src'
+import { Temporal } from 'temporal-polyfill'
 
 type props = {
   day: MonthDayType
@@ -95,20 +95,40 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const numberOfNonDisplayedEvents = getNumberOfNonDisplayedEvents()
 
- /*  const dayStartDateTime = day.date.with({ hour: 0, minute: 0 })
-  const dayEndDateTime = day.date.with({ hour: 23, minute: 59 }) */
-  /* const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
-    const eventStartWithTime = dateStringRegex.test(event.start)
-      ? event.start + ' 00:00'
+  const dayStartDateTime = Temporal.ZonedDateTime.from({
+    year: day.date.year,
+    month: day.date.month,
+    day: day.date.day,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    timeZone: $app.config.timezone.value,
+  })
+  const dayEndDateTime = Temporal.ZonedDateTime.from({
+    year: day.date.year,
+    month: day.date.month,
+    day: day.date.day,
+    hour: 23,
+    minute: 59,
+    second: 59,
+    timeZone: $app.config.timezone.value,
+  })
+  const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
+    const eventStartWithTime = event.start instanceof Temporal.PlainDate
+      ? event.start.toZonedDateTime($app.config.timezone.value)
       : event.start
-    const eventEndWithTime = dateStringRegex.test(event.end)
-      ? event.end + ' 23:59'
+    const eventEndWithTime = event.end instanceof Temporal.PlainDate
+      ? event.end.toZonedDateTime($app.config.timezone.value).with({
+        hour: 23,
+        minute: 59,
+        second: 59,
+      })
       : event.end
     return (
-      eventStartWithTime <= dayStartDateTime &&
-      eventEndWithTime >= dayEndDateTime
+      eventStartWithTime.toString() <= dayStartDateTime.toString() &&
+      eventEndWithTime.toString() >= dayEndDateTime.toString()
     )
-  }) */
+  })
 
   const handleMouseDown = (e: MouseEvent) => {
     const target = e.target as HTMLElement
@@ -167,7 +187,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       onDblClick={(e) => $app.config.callbacks.onDoubleClickDate?.(day.date, e)}
       onMouseDown={handleMouseDown}
     >
-      {/* {fullDayBackgroundEvent && (
+      {fullDayBackgroundEvent && (
         <>
           <div
             className="sx__month-grid-background-event"
@@ -177,7 +197,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
             }}
           />
         </>
-      )} */}
+      )}
 
       <div className="sx__month-grid-day__header">
         {isFirstWeek ? (
