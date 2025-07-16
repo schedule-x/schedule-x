@@ -8,7 +8,6 @@ import {
 } from '../../utils/stateless/events/event-styles'
 import { useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pin-icon'
@@ -193,8 +192,8 @@ export default function TimeGridEvent({
     calendarEvent.end.toString() >= dayBoundariesDateTime.start.toString()
 
   const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
-    ? dayBoundariesDateTime?.start.toString()
-    : calendarEvent.start.toString()
+    ? dayBoundariesDateTime?.start
+    : calendarEvent.start as Temporal.ZonedDateTime
 
   return (
     <>
@@ -221,7 +220,7 @@ export default function TimeGridEvent({
           )}%`,
           height: `${getEventHeight(
             relativeStartWithinDayBoundary,
-            calendarEvent.end.toString(),
+            calendarEvent.end as Temporal.ZonedDateTime,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,

@@ -6,10 +6,11 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 import { timePointToPercentage } from '@schedule-x/shared/src/utils/stateless/time/interpolation/time-point-to-grid-percentage'
+import { Temporal } from 'temporal-polyfill'
 
 export const getEventHeight = (
-  start: string,
-  end: string,
+  start: Temporal.ZonedDateTime,
+  end: Temporal.ZonedDateTime,
   dayBoundaries: DayBoundariesInternal,
   pointsPerDay: number
 ) => {
@@ -18,12 +19,12 @@ export const getEventHeight = (
       timePointToPercentage(
         pointsPerDay,
         dayBoundaries,
-        timePointsFromString(timeFromDateTime(addTimePointsToDateTime(end, 50)))
+        timePointsFromString(timeFromDateTime(addTimePointsToDateTime(end, 50).toString()))
       ) -
       timePointToPercentage(
         pointsPerDay,
         dayBoundaries,
-        timePointsFromString(timeFromDateTime(start))
+        timePointsFromString(timeFromDateTime(start.toString()))
       )
     )
   }
@@ -32,12 +33,12 @@ export const getEventHeight = (
     timePointToPercentage(
       pointsPerDay,
       dayBoundaries,
-      timePointsFromString(timeFromDateTime(end))
+      timePointsFromString(timeFromDateTime(end.toString()))
     ) -
     timePointToPercentage(
       pointsPerDay,
       dayBoundaries,
-      timePointsFromString(timeFromDateTime(start))
+      timePointsFromString(timeFromDateTime(start.toString()))
     )
   )
 }

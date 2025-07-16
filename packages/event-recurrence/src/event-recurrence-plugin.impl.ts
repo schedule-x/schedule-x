@@ -121,6 +121,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       if (rrule && this.range) {
         recurrencesToCreate.push(
           ...createRecurrencesForBackgroundEvent(
+            $app,
             event,
             rrule,
             this.range,

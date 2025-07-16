@@ -2,6 +2,7 @@ import { RRuleOptions } from '../../types/rrule-options'
 import { addMonths } from '@schedule-x/shared/src'
 import { isCountReached, isDatePastUntil } from './iterator-utils'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { addMonthsToDateOrDatetime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
   let currentDate = dtstart
@@ -23,7 +24,7 @@ const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      const nextCurrentDateCandidate = addMonths(currentDate, options.interval)
+      const nextCurrentDateCandidate = addMonthsToDateOrDatetime(currentDate, options.interval)
       let currentIntervalCandidate = options.interval
       let { date: nextMonthDateCandidate } = toIntegers(
         nextCurrentDateCandidate
@@ -32,11 +33,11 @@ const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
       while (nextMonthDateCandidate !== options.bymonthday) {
         currentIntervalCandidate += options.interval
         nextMonthDateCandidate = toIntegers(
-          addMonths(currentDate, currentIntervalCandidate)
+          addMonthsToDateOrDatetime(currentDate, currentIntervalCandidate)
         ).date
       }
 
-      currentDate = addMonths(currentDate, currentIntervalCandidate)
+      currentDate = addMonthsToDateOrDatetime(currentDate, currentIntervalCandidate)
 
       return { done: false, value: allDateTimes }
     },

@@ -3,12 +3,14 @@ import { getDurationInMinutes } from './utils/stateless/duration-in-minutes'
 import { weeklyIteratorResult } from './utils/stateless/weekly-iterator'
 import { RRuleFreq } from './enums/rrule-freq'
 import { Recurrence } from '../types/recurrence'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
+import { sxDateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import { addDays, addMinutes } from '@schedule-x/shared/src'
+import { addMinutes } from '@schedule-x/shared/src'
 import { dailyIteratorResult } from './utils/stateless/daily-iterator'
 import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
 import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
+import { addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { Temporal } from 'temporal-polyfill'
 
 export class RRule {
   private options: RRuleOptions
@@ -30,7 +32,7 @@ export class RRule {
     if (this.isDateTime) {
       this.durationInMinutes = getDurationInMinutes(this.dtstart, actualDTEND)
     } else {
-      this.durationInDays = calculateDaysDifference(this.dtstart, actualDTEND)
+      this.durationInDays = calculateDaysDifference(Temporal.PlainDate.from(this.dtstart), Temporal.PlainDate.from(actualDTEND))
     }
   }
 
@@ -78,11 +80,11 @@ export class RRule {
       start: date,
       end: this.isDateTime
         ? addMinutes(date, this.durationInMinutes!)
-        : addDays(date, this.durationInDays!),
+        : addDaysToDateOrDateTime(date, this.durationInDays!),
     }
   }
 
   private get isDateTime() {
-    return dateTimeStringRegex.test(this.dtstart)
+    return sxDateTimeStringRegex.test(this.dtstart)
   }
 }

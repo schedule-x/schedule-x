@@ -4,6 +4,8 @@ import {
 } from '../../rrule/types/rrule-options'
 import { RRuleFreq } from '../../rrule/enums/rrule-freq'
 import { rfc5455Weekdays } from '../../utils/weekdays'
+import { Temporal } from 'temporal-polyfill'
+import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
   const rruleOptions: RRuleOptionsExternal = {
@@ -52,6 +54,63 @@ export const parseSXToRFC5545 = (datetime: string): string => {
   if (/T\d{4}$/.test(datetime)) datetime += '00' // add seconds if not present
 
   return datetime
+}
+
+export const parseTemporalToRFC5545 = (dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate): string => {
+  const year = dateOrDatetime.year.toString().padStart(4, '0')
+  const month = dateOrDatetime.month.toString().padStart(2, '0')
+  const day = dateOrDatetime.day.toString().padStart(2, '0')
+
+  if (dateOrDatetime instanceof Temporal.ZonedDateTime) {
+    const hour = dateOrDatetime.hour.toString().padStart(2, '0')
+    const minute = dateOrDatetime.minute.toString().padStart(2, '0')
+    const second = dateOrDatetime.second.toString().padStart(2, '0')
+
+    return `${year}${month}${day}T${hour}${minute}${second}`
+  }
+
+  if (dateOrDatetime instanceof Temporal.PlainDate) {
+    return `${year}${month}${day}`
+  }
+
+  throw new Error(`Invalid datetime format: ${dateOrDatetime}`)
+}
+
+export const parseRFC5545ToTemporal = (dateOrDatetime: string, timezone: IANATimezone): Temporal.ZonedDateTime | Temporal.PlainDate => {
+  if (dateOrDatetime.length === 15) {
+    // given YYYYMMDDThhmmss format
+    const year = dateOrDatetime.substring(0, 4)
+    const month = dateOrDatetime.substring(4, 6)
+    const day = dateOrDatetime.substring(6, 8)
+    const hour = dateOrDatetime.substring(9, 11)
+    const minute = dateOrDatetime.substring(11, 13)
+    const second = dateOrDatetime.substring(13, 15)
+
+    return Temporal.ZonedDateTime.from({
+      year: parseInt(year),
+      month: parseInt(month),
+      day: parseInt(day),
+      hour: parseInt(hour),
+      minute: parseInt(minute),
+      second: parseInt(second),
+      timeZone: timezone
+    })
+  }
+  
+  if (dateOrDatetime.length === 8) {
+    // given YYYYMMDD format
+    const year = dateOrDatetime.substring(0, 4)
+    const month = dateOrDatetime.substring(4, 6)
+    const day = dateOrDatetime.substring(6, 8)
+    
+    return Temporal.PlainDate.from({
+      year: parseInt(year),
+      month: parseInt(month),
+      day: parseInt(day)
+    })
+  }
+
+  throw new Error(`Invalid RFC5545 format: ${dateOrDatetime}`)
 }
 
 export const parseRFC5545ToSX = (datetime: string): string => {

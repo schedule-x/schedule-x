@@ -1,6 +1,6 @@
 import { getWeekForDate } from './get-week-for-date'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import { jsDateToDateString, toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { RRuleOptions } from '../../types/rrule-options'
 import { getJSDayFromByday } from './byday-jsday-map'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -50,7 +50,7 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
 
       const nextDateJS = toJSDate(currentDate)
       nextDateJS.setDate(nextDateJS.getDate() + 7 * rruleOptions.interval)
-      currentDate = toDateString(nextDateJS)
+      currentDate = jsDateToDateString(nextDateJS)
 
       return { done: false, value: allDateTimes }
     },

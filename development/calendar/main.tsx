@@ -46,7 +46,7 @@ plugins: [
   createEventModalPlugin(),
   createResizePlugin(),
   calendarControlsPlugin,
-  scrollController,
+  // scrollController,
 ],
 
   translations: mergeLocales(
@@ -116,11 +116,11 @@ plugins: [
 
     onRangeUpdate(range) {
       console.log('onRangeUpdate')
-      console.log(range.start.toString())
-      console.log(range.end.toString())
+      /* console.log(range.start.toString())
+      console.log(range.end.toString()) */
     }
   },
-  selectedDate: Temporal.PlainDate.from({ year: 2024, month: 1, day: 23 }),
+  //selectedDate: Temporal.PlainDate.from({ year: 2024, month: 1, day: 23 }),
   calendars: {
     personal: {
       colorName: 'personal',
@@ -216,6 +216,7 @@ plugins: [
       people: ['John Doe'],
       location: 'Office',
       description: 'Event 1 description',
+      rrule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR',
     },
     {
       id: 2,
@@ -229,22 +230,24 @@ plugins: [
     // now plain date for 2 day event
     {
       id: 3,
-      start: Temporal.PlainDate.from('2025-07-11'),
-      end: Temporal.PlainDate.from('2025-07-13'),
+      start: Temporal.PlainDate.from('2025-07-10'),
+      end: Temporal.PlainDate.from('2025-07-10'),
       title: 'Event 3',
       people: ['John Doe'],
       location: 'Office',
       description: 'Event 3 description',
+      rrule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR',
     },
+    // ADD YEARLY RECURRENCE
     {
       id: 4,
-      start: Temporal.PlainDate.from('2024-01-21'),
-      end: Temporal.PlainDate.from('2024-01-23'),
-      title: 'Event 3',
+      start: Temporal.PlainDate.from('2025-07-10'),
+      end: Temporal.PlainDate.from('2025-07-10'),
+      calendarId: 'personal',
+      title: 'Event 4',
       people: ['John Doe'],
-      location: 'Office',
-      description: 'Event 3 description',
-    }
+      rrule: 'FREQ=YEARLY;INTERVAL=1',
+    },
   ],
 })
 calendar.render(calendarElement)
