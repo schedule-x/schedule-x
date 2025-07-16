@@ -26,6 +26,10 @@ export const addMinutes = (to: string, nMinutes: number): string => {
   return jsDateToDateString(jsDate)
 }
 
+export const addMinutesToTemporal = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nMinutes: number): Temporal.ZonedDateTime | Temporal.PlainDate => {
+  return to.add({ minutes: nMinutes })
+}
+
 export const addYears = (to: string, nYears: number): string => {
   const { year, month, date, hours, minutes } = toIntegers(to)
   const isDateTimeString = hours !== undefined && minutes !== undefined

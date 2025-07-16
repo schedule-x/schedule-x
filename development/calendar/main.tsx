@@ -68,6 +68,8 @@ plugins: [
 
     onEventUpdate(event) {
       console.log('onEventUpdate', event)
+      console.log('event.start', event.start.toString())
+      console.log('event.end', event.end.toString())
     },
 
     async onBeforeEventUpdateAsync(oldEvent, newEvent, $app) {
@@ -247,6 +249,24 @@ plugins: [
       title: 'Event 4',
       people: ['John Doe'],
       rrule: 'FREQ=YEARLY;INTERVAL=1',
+    },
+    // monthly recurrence
+    {
+      id: 5,
+      title: 'Monthly Event',
+      start: Temporal.PlainDate.from('2025-07-10'),
+      end: Temporal.PlainDate.from('2025-07-10'),
+      calendarId: 'personal',
+      rrule: 'FREQ=MONTHLY;INTERVAL=1',
+    },
+    // monthly recurrence
+    {
+      id: 6 ,
+      title: 'Monthly time event',
+      start: Temporal.ZonedDateTime.from('2025-07-10T00:00:00.000+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-07-10T01:00:00.000+02:00[Europe/Berlin]'),
+      calendarId: 'personal',
+      rrule: 'FREQ=MONTHLY;INTERVAL=1',
     },
   ],
 })

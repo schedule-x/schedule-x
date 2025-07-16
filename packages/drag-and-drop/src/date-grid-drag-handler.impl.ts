@@ -138,6 +138,6 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private updateOriginalEvent() {
     if (this.lastDaysDiff === 0) return
 
-    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart.toString())
+    updateDraggedEvent(this.$app, this.eventCopy, this.originalStart)
   }
 }

@@ -15,6 +15,7 @@ import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/de
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
+import { Temporal } from 'temporal-polyfill'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -56,8 +57,8 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   updateRecurrenceDND(
     eventId: EventId,
-    oldEventStart: string,
-    newEventStart: string
+    oldEventStart: Temporal.ZonedDateTime | Temporal.PlainDate,
+    newEventStart: Temporal.ZonedDateTime | Temporal.PlainDate
   ): void {
     const { updatedEvent, recurrenceSet } = new DndUpdater(
       this.$app as CalendarAppSingleton
@@ -71,8 +72,8 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   updateRecurrenceOnResize(
     eventId: EventId,
-    oldEventEnd: string,
-    newEventEnd: string
+    oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
+    newEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   ): void {
     const updatedEvent = new ResizeUpdater(
       this.$app as CalendarAppSingleton

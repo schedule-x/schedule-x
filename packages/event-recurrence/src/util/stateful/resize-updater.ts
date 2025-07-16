@@ -1,21 +1,21 @@
 import {
   addDays,
-  addMinutes,
   CalendarAppSingleton,
 } from '@schedule-x/shared/src'
 import { AugmentedEvent } from '../../types/augmented-event'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
-import { getDurationInMinutes } from '@schedule-x/recurrence/src/rrule/utils/stateless/duration-in-minutes'
+import { getDurationInMinutesTemporal } from '@schedule-x/recurrence/src/rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
+import { Temporal } from 'temporal-polyfill'
+import { addMinutesToTemporal } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 export class ResizeUpdater {
   constructor(private $app: CalendarAppSingleton) {}
 
   update(
     eventId: EventId,
-    oldEventEnd: string,
-    newEventEnd: string
+    oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
+    newEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   ): AugmentedEvent {
     this.deleteAllCopiesForEvent(eventId)
     const eventToUpdate = this.$app!.calendarEvents.list.value.find(
@@ -33,14 +33,14 @@ export class ResizeUpdater {
   }
 
   private getNewEventEnd(
-    newEventEnd: string,
+    newEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
     eventToUpdate: AugmentedEvent,
-    oldEventEnd: string
+    oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   ) {
-    return dateTimeStringRegex.test(newEventEnd)
-      ? addMinutes(
+    return newEventEnd instanceof Temporal.ZonedDateTime
+      ? addMinutesToTemporal(
           eventToUpdate.end,
-          getDurationInMinutes(oldEventEnd, newEventEnd)
+          getDurationInMinutesTemporal(oldEventEnd as Temporal.ZonedDateTime, newEventEnd as Temporal.ZonedDateTime)
         )
       : addDays(
           eventToUpdate.end,

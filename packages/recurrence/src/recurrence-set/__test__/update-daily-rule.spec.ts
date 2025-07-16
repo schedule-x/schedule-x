@@ -19,7 +19,7 @@ describe('Updating a recurrence set with a daily rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstart('20240213')
+      rset.updateDtstartAndDtend('20240213')
 
       expect(rset.getRrule()).toEqual('FREQ=DAILY;UNTIL=20240223;BYDAY=TU')
       expect(rset.getDtstart()).toEqual('20240213')
@@ -40,7 +40,7 @@ describe('Updating a recurrence set with a daily rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstart('20240210T020000')
+      rset.updateDtstartAndDtend('20240210T020000')
 
       expect(rset.getRrule()).toEqual(
         'FREQ=DAILY;UNTIL=20240220T030000;BYDAY=SA'
@@ -61,7 +61,7 @@ describe('Updating a recurrence set with a daily rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstart('20240209T213000')
+      rset.updateDtstartAndDtend('20240209T213000')
 
       expect(rset.getRrule()).toEqual(
         'FREQ=DAILY;UNTIL=20240220T020000;BYDAY=FR'

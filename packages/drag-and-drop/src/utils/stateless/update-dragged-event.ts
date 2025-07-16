@@ -1,10 +1,11 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { Temporal } from 'temporal-polyfill'
 
 const updateRecurringEvent = (
   $app: CalendarAppSingleton,
   eventCopy: CalendarEventInternal,
-  startPreDrag: string
+  startPreDrag: Temporal.ZonedDateTime | Temporal.PlainDate
 ) => {
   $app.config.plugins.eventRecurrence?.updateRecurrenceDND(
     eventCopy.id,
@@ -30,7 +31,7 @@ const updateNonRecurringEvent = (
 export const updateDraggedEvent = (
   $app: CalendarAppSingleton,
   eventCopy: CalendarEventInternal,
-  startPreDrag: string
+  startPreDrag: Temporal.ZonedDateTime | Temporal.PlainDate
 ) => {
   if (
     'rrule' in eventCopy._getForeignProperties() &&
