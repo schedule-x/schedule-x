@@ -1,10 +1,11 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
+import { Temporal } from 'temporal-polyfill'
 
 export const getClickDateTime = (
   e: MouseEvent,
   $app: CalendarAppSingleton,
-  dayStartDateTime: string
+  dayStartDateTime: Temporal.ZonedDateTime
 ) => {
   if (!(e.target instanceof HTMLElement)) return
 

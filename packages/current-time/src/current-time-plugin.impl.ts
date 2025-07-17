@@ -9,6 +9,7 @@ import {
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { addMinutes } from '@schedule-x/shared/src'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import { Temporal } from 'temporal-polyfill'
 
 class CurrentTimePluginImpl implements CurrentTimePlugin {
   name = 'currentTime'
@@ -46,14 +47,11 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   }
 
   private setIndicator(isRecursion = false) {
-    const todayDateString = toDateString(new Date())
-    let nowDateTimeString = toDateTimeString(new Date())
+    const todayDateString = toDateString(Temporal.Now.plainDateISO())
+    let nowDateTime = Temporal.Now.zonedDateTimeISO()
 
     if (this.config.timeZoneOffset) {
-      nowDateTimeString = addMinutes(
-        nowDateTimeString,
-        this.config.timeZoneOffset
-      )
+      nowDateTime = nowDateTime.add({ minutes: this.config.timeZoneOffset })
     }
 
     const todayElement = this.$app.elements.calendarWrapper!.querySelector(
@@ -72,7 +70,7 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
       currentTimeIndicator.classList.add('sx__current-time-indicator')
       const top =
         getYCoordinateInTimeGrid(
-          nowDateTimeString,
+          nowDateTime,
           this.$app.config.dayBoundaries.value,
           this.$app.config.timePointsPerDay
         ) + '%'

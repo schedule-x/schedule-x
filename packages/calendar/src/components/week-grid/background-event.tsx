@@ -87,10 +87,10 @@ export default function TimeGridBackgroundEvent({
           ...backgroundEvent.style,
           position: 'absolute',
           zIndex: 0,
-          top: `${getYCoordinateInTimeGrid(start.toString(), $app.config.dayBoundaries.value, $app.config.timePointsPerDay)}%`,
+          top: `${getYCoordinateInTimeGrid(start, $app.config.dayBoundaries.value, $app.config.timePointsPerDay)}%`,
           height: `${getEventHeight(
-            start.toString(),
-            end.toString(),
+            start,
+            end,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,

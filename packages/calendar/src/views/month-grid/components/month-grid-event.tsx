@@ -19,6 +19,7 @@ type props = {
   calendarEvent: CalendarEventInternal
   isFirstWeek: boolean
   isLastWeek: boolean
+  date: string
 }
 
 export default function MonthGridEvent({

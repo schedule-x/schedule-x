@@ -13,6 +13,7 @@ import { PluginBase } from '@schedule-x/shared/src'
 import { validatePlugins } from './utils/stateless/validation/validate-plugins'
 import { validateConfig } from './utils/stateless/validation/validate-config'
 import { validateEvents } from '@schedule-x/shared/src/utils/stateless/validation/validate-events'
+import { Temporal } from 'temporal-polyfill'
 
 export const createCalendarAppSingleton = (
   config: CalendarConfigExternal,
@@ -29,7 +30,7 @@ export const createCalendarAppSingleton = (
     calendarState,
     config
   )
-  const datePickerConfig = createDatePickerConfig(config, dateSelectionCallback)
+  const datePickerConfig = createDatePickerConfig(config, (date: string) => dateSelectionCallback(Temporal.PlainDate.from(date)))
   const datePickerState = createDatePickerState(
     datePickerConfig,
     config.selectedDate || config.datePicker?.selectedDate

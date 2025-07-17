@@ -1,5 +1,6 @@
 import { addMonths } from './adding'
 import { toDateString } from '../format-conversion/date-to-strings'
+import { jsDateToDateString } from '../format-conversion/date-to-strings'
 import { toJSDate } from '../format-conversion/format-conversion'
 import { timeFromDateTime } from '../format-conversion/string-to-string'
 import { doubleDigit } from './double-digit'
@@ -24,7 +25,7 @@ export const setTimeInDateTimeString = (
   dateTimeString: string,
   newTime: string
 ): string => {
-  const dateCache = toDateString(toJSDate(dateTimeString))
+  const dateCache = jsDateToDateString(toJSDate(dateTimeString))
 
   return `${dateCache} ${newTime}`
 }

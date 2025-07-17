@@ -21,7 +21,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
 
     return positionEventsInAgenda(
       createAgendaMonth(
-        $app.datePickerState.selectedDate.value,
+        $app.datePickerState.selectedDate.value.toZonedDateTime($app.config.timezone.value),
         $app.timeUnitsImpl
       ),
       filteredEvents.sort(sortEventsByStartAndEnd)

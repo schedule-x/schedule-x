@@ -49,7 +49,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     e.stopPropagation()
 
     if ($app.config.callbacks.onClickPlusEvents)
-      $app.config.callbacks.onClickPlusEvents(day.date, e)
+      $app.config.callbacks.onClickPlusEvents(day.date.toString(), e)
     if (
       !$app.config.views.value.find(
         (view) => view.name === InternalViewName.Day
@@ -66,7 +66,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const dateClassNames = ['sx__month-grid-day__header-date']
   const dayDate = day.date
-  if (isToday(dayDate)) dateClassNames.push('sx__is-today')
+  if (isToday(dayDate.toZonedDateTime($app.config.timezone.value))) dateClassNames.push('sx__is-today')
 
   const selectedDateMonth = $app.datePickerState.selectedDate.value.month
   const dayMonth = day.date.month
@@ -135,7 +135,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     if (!target.classList.contains('sx__month-grid-day')) return
 
     const callback = $app.config.callbacks.onMouseDownMonthGridDate
-    if (callback) callback(day.date, e)
+    if (callback) callback(day.date.toString(), e)
   }
 
   const monthGridDayNameCustomComponent =
@@ -154,7 +154,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     }
 
     monthGridDayNameCustomComponent(dayNameEl, {
-      day: toJSDate(day.date).getDay(),
+      day: toJSDate(day.date.toString()).getDay(),
     })
   }, [day])
 
@@ -170,21 +170,21 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     if (!(dateEl instanceof HTMLElement)) return
 
     monthGridDateCustomComponent(dateEl, {
-      date: toJSDate(day.date).getDate(),
-      jsDate: toJSDate(day.date),
+      date: toJSDate(day.date.toString()).getDate(),
+      jsDate: toJSDate(day.date.toString()),
     })
   }, [day])
 
   return (
     <div
       className={wrapperClasses.join(' ')}
-      data-date={day.date}
+      data-date={day.date.toString()}
       onClick={(e) =>
         $app.config.callbacks.onClickDate &&
-        $app.config.callbacks.onClickDate(day.date, e)
+        $app.config.callbacks.onClickDate(day.date.toString(), e)
       }
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
-      onDblClick={(e) => $app.config.callbacks.onDoubleClickDate?.(day.date, e)}
+      onDblClick={(e) => $app.config.callbacks.onDoubleClickDate?.(day.date.toString(), e)}
       onMouseDown={handleMouseDown}
     >
       {fullDayBackgroundEvent && (
@@ -235,7 +235,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
               <MonthGridEvent
                 gridRow={index + 1}
                 calendarEvent={event}
-                date={day.date}
+                date={day.date.toString()}
                 isFirstWeek={isFirstWeek}
                 isLastWeek={isLastWeek}
               />

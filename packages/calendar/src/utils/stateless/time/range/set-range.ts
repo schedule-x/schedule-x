@@ -92,14 +92,18 @@ export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
 }
 
 export const setRangeForDay = (config: RangeSetterConfig): DateRange => {
+  let date = config.date as Temporal.ZonedDateTime | Temporal.PlainDate
+  if (date instanceof Temporal.PlainDate) {
+    date = date.toZonedDateTime({ timeZone: config.calendarConfig.timezone.value })
+  }
   return {
     start: getRangeStartGivenDayBoundaries(
       config.calendarConfig,
-      config.date
+      date
     ),
     end: getRangeEndGivenDayBoundaries(
       config.calendarConfig,
-      config.date
+      date
     ),
   }
 }

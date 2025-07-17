@@ -106,8 +106,8 @@ export class DateGridEventResizer {
     updateEventsList(
       this.$app,
       this.eventCopy,
-      this.originalEventEnd,
-      this.eventCopy.end
+      this.originalEventEnd.toString(),
+      this.eventCopy.end.toString()
     )
     this.finish()
 

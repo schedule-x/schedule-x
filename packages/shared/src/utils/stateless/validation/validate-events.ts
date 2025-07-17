@@ -3,21 +3,23 @@ import CalendarEventExternal from '../../../interfaces/calendar/calendar-event.i
 
 export const validateEvents = (events: CalendarEventExternal[] = []) => {
   events?.forEach((event: CalendarEventExternal) => {
+    const startStr = typeof event.start === 'string' ? event.start : event.start.toString();
+    const endStr = typeof event.end === 'string' ? event.end : event.end.toString();
     if (
-      !dateTimeStringRegex.test(event.start) &&
-      !dateStringRegex.test(event.start)
+      !dateTimeStringRegex.test(startStr) &&
+      !dateStringRegex.test(startStr)
     ) {
       throw new Error(
-        `[Schedule-X error]: Event start time ${event.start} is not a valid time format. Please refer to the docs for more information.`
+        `[Schedule-X error]: Event start time ${startStr} is not a valid time format. Please refer to the docs for more information.`
       )
     }
 
     if (
-      !dateTimeStringRegex.test(event.end) &&
-      !dateStringRegex.test(event.end)
+      !dateTimeStringRegex.test(endStr) &&
+      !dateStringRegex.test(endStr)
     ) {
       throw new Error(
-        `[Schedule-X error]: Event end time ${event.end} is not a valid time format. Please refer to the docs for more information.`
+        `[Schedule-X error]: Event end time ${endStr} is not a valid time format. Please refer to the docs for more information.`
       )
     }
 

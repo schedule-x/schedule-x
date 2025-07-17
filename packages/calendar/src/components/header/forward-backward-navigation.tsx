@@ -50,10 +50,13 @@ export default function ForwardBackwardNavigation() {
         range: $app.calendarState.range,
         calendarConfig: $app.config,
         timeUnitsImpl: $app.timeUnitsImpl,
-        date: selectedView.backwardForwardFn(
-          $app.datePickerState.selectedDate.value,
-          -selectedView.backwardForwardUnits
-        ),
+        date: (() => {
+          const result = selectedView.backwardForwardFn(
+            $app.datePickerState.selectedDate.value,
+            -selectedView.backwardForwardUnits
+          );
+          return result instanceof Temporal.ZonedDateTime ? result.toPlainDate() : result;
+        })(),
       }).end
     )
     setRangeStartPlusOneRange(
@@ -61,10 +64,13 @@ export default function ForwardBackwardNavigation() {
         range: $app.calendarState.range,
         calendarConfig: $app.config,
         timeUnitsImpl: $app.timeUnitsImpl,
-        date: selectedView.backwardForwardFn(
-          $app.datePickerState.selectedDate.value,
-          selectedView.backwardForwardUnits
-        ),
+        date: (() => {
+          const result = selectedView.backwardForwardFn(
+            $app.datePickerState.selectedDate.value,
+            selectedView.backwardForwardUnits
+          );
+          return result instanceof Temporal.ZonedDateTime ? result.toPlainDate() : result;
+        })(),
       }).start
     )
   })

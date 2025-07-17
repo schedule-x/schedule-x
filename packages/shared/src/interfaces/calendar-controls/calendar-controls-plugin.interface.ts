@@ -10,10 +10,11 @@ import {
   WeekOptions,
 } from '../calendar/calendar-config'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
+import { Temporal } from 'temporal-polyfill'
 
 export default interface CalendarControlsPlugin extends PluginBase<string> {
   onRender($app: CalendarAppSingleton): void
-  setDate(date: string): void
+  setDate(date: Temporal.PlainDate): void
   setView(view: string): void
   setFirstDayOfWeek(firstDayOfWeek: WeekDay): void
   setLocale(locale: string): void
@@ -21,11 +22,11 @@ export default interface CalendarControlsPlugin extends PluginBase<string> {
   setDayBoundaries(dayBoundaries: DayBoundariesExternal): void
   setWeekOptions(weekOptions: WeekOptions): void
   setCalendars(calendars: Record<string, CalendarType>): void
-  setMinDate(minDate: string | undefined): void
-  setMaxDate(maxDate: string | undefined): void
+  setMinDate(minDate: Temporal.PlainDate | undefined): void
+  setMaxDate(maxDate: Temporal.PlainDate | undefined): void
   setMonthGridOptions(monthGridOptions: MonthGridOptions): void
   setTimezone(timezone: IANATimezone): void
-  getDate(): string
+  getDate(): Temporal.PlainDate
   getView(): string
   getFirstDayOfWeek(): WeekDay
   getLocale(): string
@@ -33,8 +34,8 @@ export default interface CalendarControlsPlugin extends PluginBase<string> {
   getDayBoundaries(): DayBoundariesExternal
   getWeekOptions(): WeekOptions
   getCalendars(): Record<string, CalendarType>
-  getMinDate(): string | undefined
-  getMaxDate(): string | undefined
+  getMinDate(): Temporal.PlainDate | undefined
+  getMaxDate(): Temporal.PlainDate | undefined
   getMonthGridOptions(): MonthGridOptions
   getRange(): DateRange | null
 }

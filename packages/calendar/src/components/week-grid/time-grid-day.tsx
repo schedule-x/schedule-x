@@ -69,7 +69,7 @@ export default function TimeGridDay({
 
     const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
     if (clickDateTime) {
-      callback(clickDateTime, e)
+      callback(clickDateTime.toString(), e)
     }
   }
 
@@ -79,7 +79,7 @@ export default function TimeGridDay({
 
     const clickDateTime = getClickDateTime(e, $app, dayStartDateTime)
     if (clickDateTime) {
-      callback(clickDateTime, e)
+      callback(clickDateTime.toString(), e)
     }
   }
 
@@ -105,7 +105,7 @@ export default function TimeGridDay({
   return (
     <div
       className={classNames.value.join(' ')}
-      data-time-grid-date={date}
+      data-time-grid-date={date.toString()}
       onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
       onDblClick={(e) =>
         handleOnClick(e, $app.config.callbacks.onDoubleClickDateTime)
@@ -118,7 +118,7 @@ export default function TimeGridDay({
     >
       {backgroundEvents.map((event) => (
         <>
-          <TimeGridBackgroundEvent backgroundEvent={event} date={date} />
+          <TimeGridBackgroundEvent backgroundEvent={event} date={date.toString()} />
         </>
       ))}
 

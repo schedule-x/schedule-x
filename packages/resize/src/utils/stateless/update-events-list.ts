@@ -1,11 +1,12 @@
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { Temporal } from 'temporal-polyfill'
 
 export const updateEventsList = (
   $app: CalendarAppSingleton,
   eventCopy: CalendarEventInternal,
-  oldEventEnd: string,
-  newEventEnd: string
+  oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
+  newEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
 ) => {
   const rrule = eventCopy._getForeignProperties().rrule
 

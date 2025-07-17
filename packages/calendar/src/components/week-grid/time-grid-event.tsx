@@ -56,7 +56,7 @@ export default function TimeGridEvent({
     $app.config.locale.value,
     { hour: 'numeric', minute: 'numeric' },
   ] as const
-  const getEventTime = (start: string, end: string) => {
+  const getEventTime = (start: Temporal.ZonedDateTime, end: Temporal.ZonedDateTime) => {
     const localizedStartTime = Temporal.ZonedDateTime
       .from(start)
       .withTimeZone($app.config.timezone.value)
@@ -258,7 +258,7 @@ export default function TimeGridEvent({
 
               <div className="sx__time-grid-event-time">
                 <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
-                {getEventTime(calendarEvent.start, calendarEvent.end)}
+                {getEventTime(calendarEvent.start as Temporal.ZonedDateTime, calendarEvent.end as Temporal.ZonedDateTime)}
               </div>
 
               {calendarEvent.people && calendarEvent.people.length > 0 && (

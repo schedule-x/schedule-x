@@ -16,6 +16,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
+import { Temporal } from 'temporal-polyfill'
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name = PluginName.CalendarControls
@@ -29,10 +30,7 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app = $app
   }
 
-  setDate(date: string): void {
-    if (!dateStringRegex.test(date))
-      throw new Error('Invalid date. Expected format YYYY-MM-DD')
-
+  setDate(date: Temporal.PlainDate): void {
     this.$app.datePickerState.selectedDate.value = date
   }
 
@@ -88,11 +86,11 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app.config.calendars.value = calendars
   }
 
-  setMinDate(minDate: string | undefined) {
+  setMinDate(minDate: Temporal.PlainDate | undefined) {
     this.$app.config.minDate.value = minDate
   }
 
-  setMaxDate(maxDate: string | undefined) {
+  setMaxDate(maxDate: Temporal.PlainDate | undefined) {
     this.$app.config.maxDate.value = maxDate
   }
 
@@ -104,7 +102,7 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app.config.timezone.value = timezone
   }
 
-  getDate = (): string => this.$app.datePickerState.selectedDate.value
+  getDate = (): Temporal.PlainDate => this.$app.datePickerState.selectedDate.value
 
   getView = (): string => this.$app.calendarState.view.value
 
@@ -124,9 +122,9 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   getCalendars = (): Record<string, CalendarType> =>
     this.$app.config.calendars.value
 
-  getMinDate = (): string | undefined => this.$app.config.minDate.value
+  getMinDate = (): Temporal.PlainDate | undefined => this.$app.config.minDate.value
 
-  getMaxDate = (): string | undefined => this.$app.config.maxDate.value
+  getMaxDate = (): Temporal.PlainDate | undefined => this.$app.config.maxDate.value
 
   getMonthGridOptions = (): MonthGridOptions =>
     this.$app.config.monthGridOptions.value

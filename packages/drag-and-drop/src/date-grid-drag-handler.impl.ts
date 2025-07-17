@@ -11,7 +11,6 @@ import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 import { Temporal } from 'temporal-polyfill'
-import { CLIENT_RENEG_LIMIT } from 'tls'
 
 export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private readonly startX: number

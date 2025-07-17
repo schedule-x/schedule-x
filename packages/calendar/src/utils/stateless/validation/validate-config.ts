@@ -11,13 +11,13 @@ export const validateConfig = (config: CalendarConfigExternal) => {
     )
   } */
 
-  if (config.minDate && !DateFormats.DATE_STRING.test(config.minDate)) {
+  if (config.minDate && !DateFormats.DATE_STRING.test(typeof config.minDate === 'string' ? config.minDate : config.minDate.toString())) {
     throw new Error(
       '[Schedule-X error]: minDate must have the format YYYY-MM-DD'
     )
   }
 
-  if (config.maxDate && !DateFormats.DATE_STRING.test(config.maxDate)) {
+  if (config.maxDate && !DateFormats.DATE_STRING.test(typeof config.maxDate === 'string' ? config.maxDate : config.maxDate.toString())) {
     throw new Error(
       '[Schedule-X error]: maxDate must have the format YYYY-MM-DD'
     )

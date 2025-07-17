@@ -7,7 +7,6 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { Temporal } from 'temporal-polyfill'
-import { CLIENT_RENEG_LIMIT } from 'tls'
 
 export const positionInTimeGrid = (
   timeGridEvents: CalendarEventInternal[],

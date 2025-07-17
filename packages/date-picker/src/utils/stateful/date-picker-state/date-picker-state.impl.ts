@@ -75,7 +75,7 @@ export const createDatePickerState = (
   }
 
   effect(() => {
-    if (config.listeners?.onChange) handleOnChange(selectedDate.value)
+    if (config.listeners?.onChange) handleOnChange(selectedDate.value.toString())
   })
 
   return {

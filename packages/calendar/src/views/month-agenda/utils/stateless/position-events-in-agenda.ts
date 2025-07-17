@@ -36,7 +36,7 @@ export const positionEventsInAgenda = (
   const allDaysMap = agendaMonth.weeks.reduce(
     (acc, week) => {
       week.forEach((day) => {
-        acc[day.date] = day
+        acc[day.date.toString()] = day
       })
       return acc
     },
