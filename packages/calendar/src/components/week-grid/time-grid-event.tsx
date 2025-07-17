@@ -57,9 +57,7 @@ export default function TimeGridEvent({
     { hour: 'numeric', minute: 'numeric' },
   ] as const
   const getEventTime = (start: Temporal.ZonedDateTime, end: Temporal.ZonedDateTime) => {
-    const localizedStartTime = Temporal.ZonedDateTime
-      .from(start)
-      .withTimeZone($app.config.timezone.value)
+    const localizedStartTime = start
       .toLocaleString(
         ...localizeArgs
       )
@@ -68,9 +66,7 @@ export default function TimeGridEvent({
       return localizedStartTime
     }
 
-    const localizedEndTime = Temporal.ZonedDateTime
-      .from(end)
-      .withTimeZone($app.config.timezone.value)
+    const localizedEndTime = end
       .toLocaleString(...localizeArgs)
     return `${localizedStartTime} – ${localizedEndTime}`
   }
