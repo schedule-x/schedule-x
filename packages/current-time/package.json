@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/current-time",
   "umdName": "SXCurrentTime",
-  "version": "3.0.0-beta.1",
+  "version": "3.0.0-beta.2",
   "description": "Schedule-X plugin for displaying an indicator for the current time",
   "author": {
     "name": "Tom Österlund",
