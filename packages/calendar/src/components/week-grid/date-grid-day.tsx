@@ -57,7 +57,7 @@ export default function DateGridDay({
     const callback = $app.config.callbacks.onMouseDownDateGridDate
     if (!callback) return
 
-    callback(date, e)
+    callback(Temporal.PlainDate.from(date), e)
   }
 
   return (

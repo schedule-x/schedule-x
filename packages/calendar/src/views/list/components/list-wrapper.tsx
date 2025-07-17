@@ -131,7 +131,7 @@ export const ListWrapper: PreactViewComponent = ({
                 $app.config.callbacks.onScrollDayIntoView &&
                 !blockOnScrollDayIntoViewCallback.current
               ) {
-                $app.config.callbacks.onScrollDayIntoView(date)
+                $app.config.callbacks.onScrollDayIntoView(Temporal.PlainDate.from(date))
               }
             }
           })

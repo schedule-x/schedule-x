@@ -251,7 +251,7 @@ describe('Calendar callbacks', () => {
 
         expect(onClickDate).toHaveBeenCalledTimes(1)
         expect(onClickDate).toHaveBeenCalledWith(
-          '2027-11-01',
+          Temporal.PlainDate.from('2027-11-01'),
           expect.any(UIEvent)
         )
       })
@@ -278,7 +278,7 @@ describe('Calendar callbacks', () => {
 
         expect(onDoubleClickDate).toHaveBeenCalledTimes(1)
         expect(onDoubleClickDate).toHaveBeenCalledWith(
-          '2027-11-01',
+          Temporal.PlainDate.from('2027-11-01'),
           expect.any(UIEvent)
         )
       })
@@ -317,7 +317,7 @@ describe('Calendar callbacks', () => {
 
           expect(onClickDateTime).toHaveBeenCalledTimes(1)
           expect(onClickDateTime).toHaveBeenCalledWith(
-            '2023-12-11 00:00',
+            Temporal.ZonedDateTime.from('2023-12-11T00:00:00.000Z[UTC]'),
             expect.any(Object)
           )
         })
@@ -357,7 +357,7 @@ describe('Calendar callbacks', () => {
 
           expect(onDoubleClickDateTime).toHaveBeenCalledTimes(1)
           expect(onDoubleClickDateTime).toHaveBeenCalledWith(
-            '2023-12-11 00:00',
+            Temporal.ZonedDateTime.from('2023-12-11T00:00:00.000Z[UTC]'),
             expect.any(UIEvent)
           )
         })

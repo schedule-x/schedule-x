@@ -105,7 +105,7 @@ describe('MonthAgendaDay', () => {
       )
 
       expect(onDoubleClickAgendaDate).toHaveBeenCalledWith(
-        date,
+        Temporal.PlainDate.from('2020-01-01'),
         expect.any(UIEvent)
       )
     })

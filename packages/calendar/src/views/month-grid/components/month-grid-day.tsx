@@ -49,7 +49,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     e.stopPropagation()
 
     if ($app.config.callbacks.onClickPlusEvents)
-      $app.config.callbacks.onClickPlusEvents(day.date.toString(), e)
+      $app.config.callbacks.onClickPlusEvents(day.date, e)
     if (
       !$app.config.views.value.find(
         (view) => view.name === InternalViewName.Day
@@ -135,7 +135,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     if (!target.classList.contains('sx__month-grid-day')) return
 
     const callback = $app.config.callbacks.onMouseDownMonthGridDate
-    if (callback) callback(day.date.toString(), e)
+    if (callback) callback(day.date, e)
   }
 
   const monthGridDayNameCustomComponent =
@@ -181,10 +181,10 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
       data-date={day.date.toString()}
       onClick={(e) =>
         $app.config.callbacks.onClickDate &&
-        $app.config.callbacks.onClickDate(day.date.toString(), e)
+        $app.config.callbacks.onClickDate(day.date, e)
       }
       aria-label={getLocalizedDate(day.date, $app.config.locale.value)}
-      onDblClick={(e) => $app.config.callbacks.onDoubleClickDate?.(day.date.toString(), e)}
+      onDblClick={(e) => $app.config.callbacks.onDoubleClickDate?.(day.date, e)}
       onMouseDown={handleMouseDown}
     >
       {fullDayBackgroundEvent && (
