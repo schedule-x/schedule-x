@@ -1,0 +1,53 @@
+# v3 of Schedule-X is coming!
+
+v3 of Schedule-X is around the corner! 🥳
+
+A bunch of [new features](https://github.com/schedule-x/schedule-x/issues?q=is%3Aissue%20state%3Aopen%20label%3Av3) are coming to the calendar. Most significantly,
+Schedule-X is moving away from its own custom date/datetime format, and adopting [Temporal API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal).
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Not on a tight schedule? Consider hopping on to v3 right away! It's not production-ready yet, but is planned to be so during Q3 of 2025.
+</Callout>
+
+## Reasoning
+
+Many have correctly pointed out, that the current date/datetime format is not very intuitive for people that are used to working with standard formats like ISO 8601, or RFC 5545. Sticking to standards would also make it easier to integrate with other tools.
+
+Additionally, the current date/datetime format only supports floating time, that is timestamps without awareness of timezones. With moving to Temporal API, implementing timezones will come almost out of the box.
+
+Lastly, a nice bonus is that displaying dates according to non-gregorian calendars will be much easier, which is another feature some members of the community have been asking for.
+
+## Can I already try it?
+
+Yes!
+
+You can try the new version of Schedule-X by installing it like this:
+
+```bash
+npm install @schedule-x/calendar@3.0.0-beta.2 @schedule-x/theme-default@3.0.0-beta.2
+```
+
+There is a minimal but working example of how to use the new version here: https://github.com/schedule-x/v3-beta-example
+
+## When can I use it in production?
+
+A stable release of v3 is planned during Q3 of 2025. If you're on a tight schedule, you might want to stick with v2 for now, but for anyone who's not, you might want to consider hopping on to v3 right away. That way you won't have to migrate to v3 later.
+
+## What's next?
+
+The current focus is to:
+
+1) Release a beta for the premium plugins
+2) Release a beta for the React and Vue integrations
+3) Fix all the [broken unit tests](https://github.com/schedule-x/schedule-x/issues/1133) in the open source repo (anyone is welcome to help with this!)
+4) Gather feedback from the community. Please [open an issue](https://github.com/schedule-x/schedule-x/issues) if you run into any problems while using the beta. This would help a lot!
+
+## Continued support for v2
+
+There will be continued support for v2 for any bugs that are discovered. This general support will last for 6 months after the release of v3.
+
+**However**, for premium users, this support will be extended to at least 1 year, and possibly longer if needed.
+
+General EOL for v2 is then planned for 12 months after the release of v3, with said exception for premium users.

@@ -20,7 +20,7 @@ import 'swiper/css';
 import '@fontsource-variable/podkova';
 
 import { Layout, Navbar } from 'nextra-theme-docs'
-import { Head } from 'nextra/components'
+import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import React from "react";
@@ -61,6 +61,14 @@ import CustomFooter from '../components/theme/custom-footer'
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           footer={<CustomFooter />}
+          banner={<Banner key="v3-beta-1" storageKey="v3-beta-1" dismissible={false}>
+            <a href="/v3" target="_blank">
+              <span style={{ backgroundColor: '#f6e05e', color: '#000', borderRadius: '4px', padding: '2px 6px', marginRight: '5px', fontSize: '0.75rem' }}>
+              v3
+              </span>
+              is coming! Temporal API, timezones, and more  🥳
+            </a>
+          </Banner>}
         >
           {children}
         </Layout>
