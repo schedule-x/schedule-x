@@ -13,7 +13,7 @@ import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for
 import TimeGridBackgroundEvent from './background-event'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { useComputed } from '@preact/signals'
-import { Temporal } from 'temporal-polyfill'
+
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 type props = {

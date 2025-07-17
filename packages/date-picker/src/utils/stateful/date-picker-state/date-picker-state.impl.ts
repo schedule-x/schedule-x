@@ -6,7 +6,7 @@ import { toDateString as dateToDateString } from '@schedule-x/shared/src/utils/s
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import { toJSDate } from '@schedule-x/shared/src'
-import { Temporal } from 'temporal-polyfill'
+
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'

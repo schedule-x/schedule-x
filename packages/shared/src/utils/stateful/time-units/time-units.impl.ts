@@ -5,7 +5,7 @@ import { WeekWithDates } from '../../../types/time'
 import { NoYearZeroError } from '../../stateless/errors/no-year-zero.error'
 import ExtendedDateImpl from '../time/extended-date/extended-date.impl'
 import Config from '../../../interfaces/config.interface'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default class TimeUnitsImpl implements TimeUnits {
   constructor(private config: Config) {}

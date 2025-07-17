@@ -6,7 +6,7 @@ import {
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { createEventRecurrencePlugin } from '../event-recurrence-plugin.impl'
-import { Temporal } from 'temporal-polyfill'
+
 
 describe('Creating recurrences for events', () => {
   describe('For a weekly event', () => {

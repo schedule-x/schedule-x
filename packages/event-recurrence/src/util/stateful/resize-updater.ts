@@ -6,7 +6,7 @@ import { AugmentedEvent } from '../../types/augmented-event'
 import { getDurationInMinutesTemporal } from '@schedule-x/recurrence/src/rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
-import { Temporal } from 'temporal-polyfill'
+
 import { addMinutesToTemporal } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 export class ResizeUpdater {

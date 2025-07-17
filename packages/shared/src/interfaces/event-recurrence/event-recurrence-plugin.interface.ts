@@ -1,7 +1,7 @@
 import PluginBase from '../plugin.interface'
 import { EventId } from '../../types/event-id'
 import EventsFacade from '../../utils/stateful/events-facade/events-facade.interface'
-import { Temporal } from 'temporal-polyfill'
+
 
 export interface EventRecurrencePlugin extends PluginBase<string> {
   updateRecurrenceDND(

@@ -8,7 +8,7 @@ import { positionInMonth } from '../utils/stateless/position-in-month'
 import { sortEventsForMonthGrid } from '../../../utils/stateless/events/sort-by-start-date'
 import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
 import { useSignalEffect } from '@preact/signals'
-import { Temporal } from 'temporal-polyfill'
+
 
 export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
   const [month, setMonth] = useState<Month>([])

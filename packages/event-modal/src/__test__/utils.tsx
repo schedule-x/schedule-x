@@ -4,7 +4,7 @@ import EventModalPlugin from '@schedule-x/shared/src/interfaces/event-modal/even
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { signal } from '@preact/signals'
 import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
-import { Temporal } from 'temporal-polyfill'
+
 
 const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()

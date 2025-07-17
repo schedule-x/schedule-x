@@ -1,6 +1,6 @@
 import { AppContext } from '../../utils/stateful/app-context'
 import { useContext } from 'preact/hooks'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default function TodayButton() {
   const $app = useContext(AppContext)

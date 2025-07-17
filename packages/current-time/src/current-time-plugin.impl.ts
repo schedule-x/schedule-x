@@ -9,7 +9,7 @@ import {
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { addMinutes } from '@schedule-x/shared/src'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
-import { Temporal } from 'temporal-polyfill'
+
 
 class CurrentTimePluginImpl implements CurrentTimePlugin {
   name = 'currentTime'

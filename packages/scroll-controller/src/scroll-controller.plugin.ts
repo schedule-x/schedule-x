@@ -5,7 +5,7 @@ import ScrollControllerConfig from './interfaces/config'
 import { effect } from '@preact/signals'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
-import { Temporal } from 'temporal-polyfill'
+
 
 class ScrollControllerPlugin implements PluginBase<string> {
   name = PluginName.ScrollController

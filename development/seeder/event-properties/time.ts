@@ -1,6 +1,6 @@
 import { getRandomElementOfArray } from '../helpers/get-random-element-in-array.ts'
 import { NUMBER_OF_EVENTS, CLI_MONTH_ARG_PATTERN } from '../faker-config.ts'
-import { Temporal } from 'temporal-polyfill'
+
 
 const createDateTimeString = (dateObject: Date) => {
   const d = new Date(dateObject)

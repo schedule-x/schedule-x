@@ -27,7 +27,7 @@ import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   calendarEvent: CalendarEventInternal

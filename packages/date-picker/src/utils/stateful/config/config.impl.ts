@@ -8,7 +8,7 @@ import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placeme
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
 import { signal, Signal } from '@preact/signals'
-import { Temporal } from 'temporal-polyfill'
+
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export class ConfigImpl implements DatePickerConfigInternal {

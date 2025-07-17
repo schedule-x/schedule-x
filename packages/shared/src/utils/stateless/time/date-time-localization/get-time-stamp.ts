@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-event.interface'
-import { Temporal } from 'temporal-polyfill'
+
 import { toIntegers } from '../format-conversion/format-conversion'
 
 const dateFn = (dateTime: Temporal.ZonedDateTime | Temporal.PlainDate, locale: string) => {

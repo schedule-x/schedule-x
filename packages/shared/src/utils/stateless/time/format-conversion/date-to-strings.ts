@@ -1,5 +1,5 @@
 import { doubleDigit } from '../date-time-mutation/double-digit'
-import { Temporal } from 'temporal-polyfill'
+
 
 export const toDateString = (date: Temporal.ZonedDateTime | Temporal.PlainDate): string => {
   return `${date.year}-${doubleDigit(

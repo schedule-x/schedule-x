@@ -1,7 +1,7 @@
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
 import { toLocalizedMonth } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   year: number

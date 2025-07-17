@@ -8,7 +8,7 @@ import {
   timeStringFromTimePoints,
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   backgroundEvent: BackgroundEvent

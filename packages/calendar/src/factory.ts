@@ -13,7 +13,7 @@ import { PluginBase } from '@schedule-x/shared/src'
 import { validatePlugins } from './utils/stateless/validation/validate-plugins'
 import { validateConfig } from './utils/stateless/validation/validate-config'
 import { validateEvents } from '@schedule-x/shared/src/utils/stateless/validation/validate-events'
-import { Temporal } from 'temporal-polyfill'
+
 
 export const createCalendarAppSingleton = (
   config: CalendarConfigExternal,

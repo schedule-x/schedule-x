@@ -10,7 +10,7 @@ import { dailyIteratorResult } from './utils/stateless/daily-iterator'
 import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
 import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
 import { addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { Temporal } from 'temporal-polyfill'
+
 
 export class RRule {
   private options: RRuleOptions

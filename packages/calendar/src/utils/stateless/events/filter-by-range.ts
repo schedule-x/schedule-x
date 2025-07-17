@@ -1,6 +1,6 @@
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
-import { Temporal } from 'temporal-polyfill'
+
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export const filterByRange = (

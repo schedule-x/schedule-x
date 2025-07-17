@@ -1,6 +1,6 @@
 import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-state.interface'
 import { CalendarConfigExternal } from '@schedule-x/shared/src'
-import { Temporal } from 'temporal-polyfill'
+
 
 export const createDateSelectionCallback = (
   calendarState: CalendarState,

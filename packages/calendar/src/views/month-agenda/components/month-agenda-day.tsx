@@ -4,7 +4,7 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { addDays } from '@schedule-x/shared/src'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   day: MonthAgendaDayType

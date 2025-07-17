@@ -1,5 +1,5 @@
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { Temporal } from 'temporal-polyfill'
+
 
 export const getDurationInMinutes = (
   dtstart: string,

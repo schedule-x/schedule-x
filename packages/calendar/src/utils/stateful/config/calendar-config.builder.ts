@@ -27,7 +27,7 @@ import {
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
-import { Temporal } from 'temporal-polyfill'
+
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export default class CalendarConfigBuilder

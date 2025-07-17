@@ -11,7 +11,7 @@ import MonthGridDragHandlerImpl from '../../month-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
 import { vi } from 'vitest'
 import { waitFor } from '@testing-library/preact'
-import { Temporal } from 'temporal-polyfill'
+
 
 describe('MonthGridDragHandler', () => {
   describe('Dragging an event forwards', () => {

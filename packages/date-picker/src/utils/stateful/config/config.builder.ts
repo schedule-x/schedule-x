@@ -5,7 +5,7 @@ import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
-import { Temporal } from 'temporal-polyfill'
+
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export class ConfigBuilder implements Builder<DatePickerConfigInternal> {

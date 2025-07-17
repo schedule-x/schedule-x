@@ -4,7 +4,7 @@ import { DATE_GRID_BLOCKER } from '../../constants'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   calendarEvents: {

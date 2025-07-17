@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src'
-import { Temporal } from 'temporal-polyfill'
+
 
 export const isEvent0Minutes = (e: CalendarEventInternal | undefined) => {
   return (

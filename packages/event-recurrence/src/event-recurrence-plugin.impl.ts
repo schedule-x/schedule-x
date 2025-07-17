@@ -15,7 +15,7 @@ import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/de
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
-import { Temporal } from 'temporal-polyfill'
+
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence

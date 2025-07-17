@@ -1,4 +1,4 @@
-import { Temporal } from 'temporal-polyfill'
+
 
 export const toLocalizedMonth = (date: Temporal.ZonedDateTime | Temporal.PlainDate, locale: string): string => {
   return date.toLocaleString(locale, { month: 'long' })

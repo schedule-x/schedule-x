@@ -12,7 +12,7 @@ import {
 } from '../../time/format-conversion/string-to-string'
 import { EventFragments } from '../../../../interfaces/calendar/event-fragments'
 import { DEFAULT_EVENT_COLOR_NAME } from '../../../../values'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined

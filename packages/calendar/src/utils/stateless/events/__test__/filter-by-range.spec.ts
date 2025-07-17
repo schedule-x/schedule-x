@@ -5,7 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { filterByRange } from '../filter-by-range'
-import { Temporal } from 'temporal-polyfill'
+
 
 describe('filterByRange', () => {
   describe('excluding events that are out of range', () => {

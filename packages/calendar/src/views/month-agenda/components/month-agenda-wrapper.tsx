@@ -8,7 +8,7 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import { positionEventsInAgenda } from '../utils/stateless/position-events-in-agenda'
 import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
 import MonthAgendaEvents from './month-agenda-events'
-import { Temporal } from 'temporal-polyfill'
+
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {

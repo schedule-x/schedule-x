@@ -5,7 +5,7 @@ import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundari
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { updateEventsList } from './utils/stateless/update-events-list'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
-import { Temporal } from 'temporal-polyfill'
+
 
 export class TimeGridEventResizer {
   private readonly originalEventEnd: Temporal.ZonedDateTime

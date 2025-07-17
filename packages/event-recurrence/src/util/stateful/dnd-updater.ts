@@ -8,7 +8,7 @@ import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/
 import { parseRFC5545ToTemporal, parseTemporalToRFC5545 } from '../../../../recurrence/src/parsers/rrule/parse-rrule'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { addMinutesToTemporal } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { Temporal } from 'temporal-polyfill'
+
 
 export class DndUpdater {
   constructor(private $app: CalendarAppSingleton) {}

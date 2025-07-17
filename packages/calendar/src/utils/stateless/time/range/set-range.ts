@@ -11,7 +11,7 @@ import {
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { RangeSetterConfig } from '@schedule-x/shared/src/interfaces/calendar/range-setter-config.interface'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
-import { Temporal } from 'temporal-polyfill'
+
 
 const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,

@@ -18,7 +18,7 @@ import { Signal, signal } from '@preact/signals'
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 import { getDirection } from '../../stateless/get-direction'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   firstDayOfWeek: Signal<WeekDay>

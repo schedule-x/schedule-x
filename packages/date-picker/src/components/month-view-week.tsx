@@ -9,7 +9,7 @@ import {
 import { addDays } from '@schedule-x/shared/src'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   week: WeekWithDates

@@ -4,7 +4,7 @@ import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time
 import { addDays, addMinutes } from '@schedule-x/shared/src'
 import { getDurationInMinutes } from './utils/stateless/duration-in-minutes'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { Temporal } from 'temporal-polyfill'
+
 
 export class RRuleUpdater {
   private rruleOptionsNew: RRuleOptionsExternal

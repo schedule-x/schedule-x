@@ -4,7 +4,7 @@ import { Week } from '../../../../types/week'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
-import { Temporal } from 'temporal-polyfill'
+
 
 const createOneDay = (week: Week, date: Temporal.ZonedDateTime) => {
   const dateString = toDateString(date)

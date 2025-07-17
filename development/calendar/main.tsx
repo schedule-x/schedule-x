@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import 'temporal-polyfill/global'
 import '@fontsource/open-sans'
 import '@fontsource/open-sans/300.css'
 import '@fontsource/open-sans/500-italic.css'
@@ -20,7 +21,6 @@ import {
   createEventsServicePlugin,
 } from '@schedule-x/event-recurrence/src'
 import { createCalendarControlsPlugin } from '../../packages/calendar-controls/src'
-import { createCurrentTimePlugin } from '../../packages/current-time/src/current-time-plugin.impl.ts'
 import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
@@ -29,7 +29,7 @@ import { createViewList } from '@schedule-x/calendar/src/views/list'
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
-import { Temporal } from 'temporal-polyfill'
+
 import { dateStringRegex } from '@schedule-x/shared'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement

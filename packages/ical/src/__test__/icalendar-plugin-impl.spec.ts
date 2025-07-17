@@ -5,7 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { createIcalendarPlugin } from '../icalendar-plugin.impl'
-import { Temporal } from 'temporal-polyfill'
+
 
 describe('IcalendarPluginImpl', () => {
   describe('parsing events on init', () => {

@@ -7,7 +7,7 @@ import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private allDayElements: NodeListOf<HTMLDivElement>

@@ -12,7 +12,7 @@ import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number

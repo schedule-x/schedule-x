@@ -7,7 +7,7 @@ import {
   toIntegers,
   toJSDate,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   setMonthView: () => void

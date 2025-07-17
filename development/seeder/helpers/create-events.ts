@@ -1,5 +1,5 @@
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface.ts'
-import { Temporal } from 'temporal-polyfill'
+
 
 import { getListOfTimePropertiesForEvents } from '../event-properties/time.ts'
 import { NUMBER_OF_EVENTS } from '../faker-config.ts'

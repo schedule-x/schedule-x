@@ -3,7 +3,7 @@ import MonthAgendaDay from './month-agenda-day'
 import { getWeekNumber } from '../../../utils/stateless/time/get-week-number'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { Temporal } from 'temporal-polyfill'
+
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 type props = {

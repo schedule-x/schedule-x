@@ -2,7 +2,7 @@ import { Month as MonthType, MonthDay } from '../../types/month'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DATE_GRID_BLOCKER } from '../../../../constants'
-import { Temporal } from 'temporal-polyfill'
+
 
 const positionInMonthWeek = (
   sortedEvents: CalendarEventInternal[],

@@ -10,7 +10,7 @@ import {
   getFirstDayOPreviousMonth,
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   setYearsView: () => void

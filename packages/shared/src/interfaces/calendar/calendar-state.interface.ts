@@ -1,7 +1,7 @@
 import { ViewName } from '../../types/calendar/view-name'
 import { ReadonlySignal, Signal } from '@preact/signals'
 import { DateRange } from '../../types/date-range'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default interface CalendarState {
   isCalendarSmall: Signal<boolean | undefined>

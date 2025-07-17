@@ -16,7 +16,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
-import { Temporal } from 'temporal-polyfill'
+
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name = PluginName.CalendarControls

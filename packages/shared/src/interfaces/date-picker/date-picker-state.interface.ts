@@ -1,6 +1,6 @@
 import { DatePickerView } from './date-picker-view.enum'
 import { Signal } from '@preact/signals'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default interface DatePickerState {
   isOpen: Signal<boolean>

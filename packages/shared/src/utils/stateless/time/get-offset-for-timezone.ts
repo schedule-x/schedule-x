@@ -1,4 +1,4 @@
-import { Temporal } from 'temporal-polyfill'
+
 import { IANATimezone } from './tzdb';
 
 export const getOffsetForTimezone = (timezone: IANATimezone): string => {

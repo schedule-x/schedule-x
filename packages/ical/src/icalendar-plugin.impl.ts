@@ -7,7 +7,7 @@ import {
 import { IcalExpander } from './ical-expander/IcalExpander'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
-import { Temporal } from 'temporal-polyfill'
+
 
 type ICalendarPluginOptions = {
   data: string

@@ -10,7 +10,7 @@ import {
   WeekOptions,
 } from '../calendar/calendar-config'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default interface CalendarControlsPlugin extends PluginBase<string> {
   onRender($app: CalendarAppSingleton): void

@@ -1,6 +1,6 @@
 import PluginBase from '../plugin.interface'
 import { CalendarEventInternal } from '../calendar/calendar-event.interface'
-import { Temporal } from 'temporal-polyfill'
+
 import { DateRange } from '../../types/date-range'
 
 export interface ResizePlugin extends PluginBase<string> {

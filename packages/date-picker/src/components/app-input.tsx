@@ -4,7 +4,7 @@ import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/ti
 import chevronIcon from '../assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
-import { Temporal } from 'temporal-polyfill'
+
 import { useSignalEffect } from '@preact/signals'
 
 export default function AppInput() {

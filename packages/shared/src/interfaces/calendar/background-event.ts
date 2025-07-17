@@ -1,5 +1,5 @@
 import { CSSProperties } from 'preact/compat'
-import { Temporal } from 'temporal-polyfill'
+
 
 export type BackgroundEvent = {
   start: Temporal.PlainDate | Temporal.ZonedDateTime

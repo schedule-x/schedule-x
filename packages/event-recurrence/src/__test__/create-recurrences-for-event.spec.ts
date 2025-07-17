@@ -15,7 +15,7 @@ import {
 } from '../util/stateless/create-recurrences-for-event'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
-import { Temporal } from 'temporal-polyfill'
+
 
 describe('createRecurrencesForEvent', () => {
   let $app: CalendarAppSingleton

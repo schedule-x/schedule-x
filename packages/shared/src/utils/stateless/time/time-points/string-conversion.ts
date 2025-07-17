@@ -3,7 +3,7 @@ import { timeStringRegex } from '../validation/regex'
 import { toJSDate } from '../format-conversion/format-conversion'
 import { toDateTimeString } from '../format-conversion/date-to-strings'
 import { doubleDigit } from '../date-time-mutation/double-digit'
-import { Temporal } from 'temporal-polyfill'
+
 
 const minuteTimePointMultiplier = 1.6666666666666667 // 100 / 60
 

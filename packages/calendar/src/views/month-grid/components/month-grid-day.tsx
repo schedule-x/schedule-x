@@ -12,7 +12,7 @@ import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 import { randomStringId } from '@schedule-x/shared/src'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   day: MonthDayType

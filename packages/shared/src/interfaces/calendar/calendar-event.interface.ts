@@ -1,6 +1,6 @@
 import { EventId } from '../../types/event-id'
 import { EventFragments } from './event-fragments'
-import { Temporal } from 'temporal-polyfill'
+
 
 export type CalendarEventOptions = {
   disableDND?: boolean

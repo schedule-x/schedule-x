@@ -10,7 +10,7 @@ import { getDateGridEventCopy } from './utils/stateless/get-date-grid-event-copy
 import { EventCoordinates } from '@schedule-x/shared/src/interfaces/shared/event-coordinates'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
-import { Temporal } from 'temporal-polyfill'
+
 
 export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   private readonly startX: number

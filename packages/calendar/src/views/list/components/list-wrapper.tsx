@@ -13,7 +13,7 @@ import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invo
 import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
-import { Temporal } from 'temporal-polyfill'
+
 
 interface DayWithEvents {
   date: string

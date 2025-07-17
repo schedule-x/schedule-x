@@ -26,6 +26,8 @@
     "packages",
     "development",
     "shared",
+    "packages/types.d.ts"
   ],
+  "files": ["packages/types.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
 }

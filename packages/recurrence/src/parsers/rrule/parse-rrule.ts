@@ -4,7 +4,7 @@ import {
 } from '../../rrule/types/rrule-options'
 import { RRuleFreq } from '../../rrule/enums/rrule-freq'
 import { rfc5455Weekdays } from '../../utils/weekdays'
-import { Temporal } from 'temporal-polyfill'
+
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {

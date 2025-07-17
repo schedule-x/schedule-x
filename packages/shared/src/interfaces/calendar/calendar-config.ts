@@ -19,7 +19,7 @@ import { WeekDay } from '../../enums/time/week-day.enum'
 import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
-import { Temporal } from 'temporal-polyfill'
+
 
 export type WeekOptions = {
   gridHeight: number

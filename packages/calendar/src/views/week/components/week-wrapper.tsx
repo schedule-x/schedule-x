@@ -12,7 +12,7 @@ import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by
 import DateGridDay from '../../../components/week-grid/date-grid-day'
 import { useComputed } from '@preact/signals'
 import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
-import { Temporal } from 'temporal-polyfill'
+
 
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(

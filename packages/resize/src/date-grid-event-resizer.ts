@@ -7,7 +7,7 @@ import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { updateEventsList } from './utils/stateless/update-events-list'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
-import { Temporal } from 'temporal-polyfill'
+
 
 export class DateGridEventResizer {
   private readonly dayWidth: number = 0

@@ -3,7 +3,7 @@ import { getOneLetterOrShortDayNames } from '@schedule-x/shared/src/utils/statel
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { useContext, useMemo } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   week: MonthAgendaWeek

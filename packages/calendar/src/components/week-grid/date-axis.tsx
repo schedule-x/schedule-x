@@ -5,7 +5,7 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
 import { randomStringId, toDateString } from '@schedule-x/shared/src'
-import { Temporal } from 'temporal-polyfill'
+
 
 type props = {
   week: WeekWithDates
