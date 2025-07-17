@@ -29,8 +29,8 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
   ) {
     this.startX = eventCoordinates.clientX
     this.dayWidth = getTimeGridDayWidth(this.$app)
-    this.originalStart = this.eventCopy.start instanceof Temporal.PlainDate ? Temporal.PlainDate.from(this.eventCopy.start) : Temporal.ZonedDateTime.from(this.eventCopy.start)
-    this.originalEnd = this.eventCopy.end instanceof Temporal.PlainDate ? Temporal.PlainDate.from(this.eventCopy.end) : Temporal.ZonedDateTime.from(this.eventCopy.end)
+    this.originalStart = this.eventCopy.start instanceof Temporal.PlainDate ? Temporal.PlainDate.from(this.eventCopy.start.toString()) : Temporal.ZonedDateTime.from(this.eventCopy.start.toString())
+    this.originalEnd = this.eventCopy.end instanceof Temporal.PlainDate ? Temporal.PlainDate.from(this.eventCopy.end.toString()) : Temporal.ZonedDateTime.from(this.eventCopy.end.toString())
     this.rangeStartDate = Temporal.PlainDate.from(
       (this.$app.calendarState.range.value as DateRange).start
     )

@@ -6,7 +6,7 @@ import { Temporal } from 'temporal-polyfill'
 
 const createWeekForMonth = (week: MonthWeek, day: Temporal.ZonedDateTime) => {
   week.push({
-    date: Temporal.ZonedDateTime.from(day).toPlainDate(),
+    date: Temporal.ZonedDateTime.from(day.toString()).toPlainDate(),
     events: {},
     backgroundEvents: [],
   })

@@ -34,12 +34,12 @@ export default function MonthGridEvent({
     isFirstWeek &&
     $app.calendarState.range.value?.start &&
     calendarEvent.start.toString() <
-      Temporal.ZonedDateTime.from($app.calendarState.range.value.start).toString()
+      $app.calendarState.range.value.start.toString()
   const hasOverflowRight =
     isLastWeek &&
     $app.calendarState.range.value?.end &&
     calendarEvent.end.toString() >
-      Temporal.ZonedDateTime.from($app.calendarState.range.value.end).toString()
+      $app.calendarState.range.value.end.toString()
   const {
     createDragStartTimeout,
     setClickedEventIfNotDragging,

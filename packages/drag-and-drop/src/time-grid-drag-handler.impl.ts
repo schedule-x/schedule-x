@@ -38,8 +38,8 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     ).clientWidth
     this.startY = this.eventCoordinates.clientY
     this.startX = this.eventCoordinates.clientX
-    this.originalStart = Temporal.ZonedDateTime.from(this.eventCopy.start)  
-    this.originalEnd = Temporal.ZonedDateTime.from(this.eventCopy.end)
+    this.originalStart = Temporal.ZonedDateTime.from(this.eventCopy.start.toString())  
+    this.originalEnd = Temporal.ZonedDateTime.from(this.eventCopy.end.toString())
     this.init()
   }
 
