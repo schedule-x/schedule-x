@@ -17,7 +17,7 @@ export const handleEventConcurrency = (
     if (
       concurrentEventsCache.length &&
       (!nextEvent ||
-        (concurrentEventsCache.every((e) => e.end <= nextEvent.start) &&
+        (concurrentEventsCache.every((e) => e.end.toString() <= nextEvent.start.toString()) &&
           !areBothEventsZeroMinutes))
     ) {
       concurrentEventsCache.push(event)

@@ -1,5 +1,6 @@
 import { getRandomElementOfArray } from '../helpers/get-random-element-in-array.ts'
 import { NUMBER_OF_EVENTS, CLI_MONTH_ARG_PATTERN } from '../faker-config.ts'
+import { Temporal } from 'temporal-polyfill'
 
 const createDateTimeString = (dateObject: Date) => {
   const d = new Date(dateObject)
@@ -75,8 +76,8 @@ export const getListOfTimePropertiesForEvents = (
       const endDate = new Date(startDate.getTime() + daysToAdd * 86400000)
 
       timesArray.push({
-        start: createDateString(startDate),
-        end: createDateString(endDate),
+        start: Temporal.PlainDate.from(createDateString(startDate)),
+        end: Temporal.PlainDate.from(createDateString(endDate)),
       })
       // But normally, create a timed event
     } else {
@@ -86,8 +87,8 @@ export const getListOfTimePropertiesForEvents = (
       const endDate = new Date(startDate.getTime() + minutesToAdd * 60000)
 
       timesArray.push({
-        start: createDateTimeString(startDate),
-        end: createDateTimeString(endDate),
+        start: Temporal.ZonedDateTime.from(createDateTimeString(startDate) + '[UTC]'),
+        end: Temporal.ZonedDateTime.from(createDateTimeString(endDate) + '[UTC]'),
       })
     }
   }

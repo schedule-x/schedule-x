@@ -30,6 +30,7 @@ import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.t
 import { translations } from '@schedule-x/translations/src'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
 import { Temporal } from 'temporal-polyfill'
+import { dateStringRegex } from '@schedule-x/shared'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -210,7 +211,12 @@ plugins: [
   // tz new york
   timezone: 'Europe/Berlin',
   events: [
-    {
+    ...seededEvents.map(event => ({
+      ...event,
+      start: dateStringRegex.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
+      end: dateStringRegex.test(event.end) ? Temporal.PlainDate.from(event.end) : Temporal.ZonedDateTime.from(event.end),
+    })),
+    /* {
       id: 1,
       start: Temporal.ZonedDateTime.from('2025-07-11T04:00:00.000+02:00[Europe/Berlin]'),
       end: Temporal.ZonedDateTime.from('2025-07-11T05:00:00.000+02:00[Europe/Berlin]'),
@@ -267,7 +273,7 @@ plugins: [
       end: Temporal.ZonedDateTime.from('2025-07-10T01:00:00.000+02:00[Europe/Berlin]'),
       calendarId: 'personal',
       rrule: 'FREQ=MONTHLY;INTERVAL=1',
-    },
+    }, */
   ],
 })
 calendar.render(calendarElement)
