@@ -22,9 +22,9 @@ packages.forEach((pkg) => {
     // Run npm publish --tag beta
     const cmd = 'npm publish --tag beta';
     console.log(`dry Running: ${cmd} in ${pkgPath}`);
-    // execSync(cmd, { stdio: 'inherit' });
+    execSync(cmd, { stdio: 'inherit' });
     
-    //console.log(`✅ Successfully published ${pkgName}\n`);
+    console.log(`✅ Successfully published ${pkgName}\n`);
   } catch(e) {
     console.error(`❌ Failed to publish ${pkgName}:`, e.message);
   } finally {
