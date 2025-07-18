@@ -191,5 +191,105 @@ describe('RRule', () => {
       expect(recurrences).toHaveLength(12)
       expect(recurrences).toEqual(expectedRecurrences)
     })
+
+    it('should return the first Monday of each month starting August 2025 for 12 months', () => {
+      const rrule = new RRule(
+        {
+          freq: RRuleFreq.MONTHLY,
+          byday: ['1MO'],
+          count: 12,
+        },
+        '2025-08-04 09:00',
+        '2025-08-04 10:00'
+      )
+
+      const recurrences = rrule.getRecurrences()
+
+      const expectedRecurrences = [
+        {
+          start: '2025-08-04 09:00',
+          end: '2025-08-04 10:00',
+        },
+        {
+          start: '2025-09-01 09:00',
+          end: '2025-09-01 10:00',
+        },
+        {
+          start: '2025-10-06 09:00',
+          end: '2025-10-06 10:00',
+        },
+        {
+          start: '2025-11-03 09:00',
+          end: '2025-11-03 10:00',
+        },
+        {
+          start: '2025-12-01 09:00',
+          end: '2025-12-01 10:00',
+        },
+        {
+          start: '2026-01-05 09:00',
+          end: '2026-01-05 10:00',
+        },
+        {
+          start: '2026-02-02 09:00',
+          end: '2026-02-02 10:00',
+        },
+        {
+          start: '2026-03-02 09:00',
+          end: '2026-03-02 10:00',
+        },
+        {
+          start: '2026-04-06 09:00',
+          end: '2026-04-06 10:00',
+        },
+        {
+          start: '2026-05-04 09:00',
+          end: '2026-05-04 10:00',
+        },
+        {
+          start: '2026-06-01 09:00',
+          end: '2026-06-01 10:00',
+        },
+        {
+          start: '2026-07-06 09:00',
+          end: '2026-07-06 10:00',
+        },
+      ]
+
+      expect(recurrences).toHaveLength(12)
+      expect(recurrences).toEqual(expectedRecurrences)
+    })
+
+    it('should return the last Friday of each month in Q1 2026', () => {
+      const rrule = new RRule(
+        {
+          freq: 'MONTHLY',
+          byday: ['-1FR'],
+          count: 3,
+        },
+        '2026-01-01 15:00',
+        '2026-01-01 16:00'
+      )
+
+      const recurrences = rrule.getRecurrences()
+
+      const expectedRecurrences = [
+        {
+          start: '2026-01-30 15:00',
+          end: '2026-01-30 16:00',
+        },
+        {
+          start: '2026-02-27 15:00',
+          end: '2026-02-27 16:00',
+        },
+        {
+          start: '2026-03-27 15:00',
+          end: '2026-03-27 16:00',
+        },
+      ]
+
+      expect(recurrences).toHaveLength(3)
+      expect(recurrences).toEqual(expectedRecurrences)
+    })
   })
 })

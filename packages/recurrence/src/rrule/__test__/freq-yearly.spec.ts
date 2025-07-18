@@ -52,5 +52,52 @@ describe('RRule', () => {
         { start: '2033-12-31 23:30', end: '2033-12-31 23:45' },
       ])
     })
+
+    it('should return US Thanksgiving (4th Thursday of November) from 2025 to 2030', () => {
+      const options: RRuleOptionsExternal = {
+        freq: RRuleFreq.YEARLY,
+        bymonth: 11,
+        byday: ['4TH'],
+        until: '2030-11-28 15:00',
+      }
+
+      const result = new RRule(
+        options,
+        '2025-11-27 12:00',
+        '2025-11-27 15:00'
+      ).getRecurrences()
+
+      expect(result).toEqual([
+        { start: '2025-11-27 12:00', end: '2025-11-27 15:00' },
+        { start: '2026-11-26 12:00', end: '2026-11-26 15:00' },
+        { start: '2027-11-25 12:00', end: '2027-11-25 15:00' },
+        { start: '2028-11-23 12:00', end: '2028-11-23 15:00' },
+        { start: '2029-11-22 12:00', end: '2029-11-22 15:00' },
+        { start: '2030-11-28 12:00', end: '2030-11-28 15:00' },
+      ])
+    })
+
+    it('should return Memorial Day (last Monday of May) for multiple years', () => {
+      const rrule = new RRule(
+        {
+          freq: 'YEARLY',
+          byday: ['-1MO'],
+          bymonth: 5,
+          count: 5,
+        },
+        '2024-05-27 09:00',
+        '2024-05-27 17:00'
+      )
+
+      const recurrences = rrule.getRecurrences()
+
+      expect(recurrences).toEqual([
+        { start: '2024-05-27 09:00', end: '2024-05-27 17:00' },
+        { start: '2025-05-26 09:00', end: '2025-05-26 17:00' },
+        { start: '2026-05-25 09:00', end: '2026-05-25 17:00' },
+        { start: '2027-05-31 09:00', end: '2027-05-31 17:00' },
+        { start: '2028-05-29 09:00', end: '2028-05-29 17:00' },
+      ])
+    })
   })
 })
