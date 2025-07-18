@@ -30,7 +30,7 @@ import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.t
 import { translations } from '@schedule-x/translations/src'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
 
-import { dateStringRegex } from '@schedule-x/shared'
+import { dateStringRegex } from '@schedule-x/shared/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 

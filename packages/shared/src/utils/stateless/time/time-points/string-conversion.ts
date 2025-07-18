@@ -29,7 +29,7 @@ export const addTimePointsToDateTime = (
   dateTime: Temporal.ZonedDateTime,
   pointsToAdd: number
 ): Temporal.ZonedDateTime => {
-  const minutesToAdd = pointsToAdd / minuteTimePointMultiplier
+  const minutesToAdd = Math.round(pointsToAdd / minuteTimePointMultiplier)
   const newDateTime = dateTime.add({ minutes: minutesToAdd })
 
   return newDateTime
