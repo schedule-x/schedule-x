@@ -3,7 +3,7 @@ import MonthGridDay from './month-grid-day'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { getWeekNumber } from '../../../utils/stateless/time/get-week-number'
-import { toJSDate } from '@schedule-x/shared/src'
+import { toDateString, toJSDate } from '@schedule-x/shared/src'
 
 type props = {
   week: MonthWeekType
@@ -33,10 +33,9 @@ export default function MonthGridWeek({
         /**
          * The day component keeps internal state, and needs to be thrown away once the day changes.
          * */
-        const dateKey = day.date
         return (
           <MonthGridDay
-            key={dateKey}
+            key={toDateString(day.date)}
             day={day}
             isFirstWeek={isFirstWeek}
             isLastWeek={isLastWeek}
