@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/calendar-controls",
   "umdName": "SXCalendarControls",
-  "version": "3.0.0-beta.2",
+  "version": "3.0.0-beta.3",
   "description": "Plugin for extra controls for the Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",
