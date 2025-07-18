@@ -6,7 +6,6 @@ import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getClassNameForWeekday } from '../../utils/stateless/get-class-name-for-weekday'
 import { randomStringId, toDateString } from '@schedule-x/shared/src'
 
-
 type props = {
   week: WeekWithDates
 }
@@ -54,7 +53,7 @@ export default function DateAxis({ week }: props) {
     <>
       <div className="sx__week-grid__date-axis">
         {week.map((date, idx) => (
-          <div className={getClassNames(date)} data-date={date.toString()}>
+          <div className={getClassNames(date)} data-date={toDateString(date)}>
             {weekGridDateCustomComponentFn && (
               <div data-ccid={weekGridDateCCIDs[0][idx]} />
             )}

@@ -15,6 +15,7 @@ import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/back
 import { useComputed } from '@preact/signals'
 
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 
 type props = {
   calendarEvents: CalendarEventInternal[]
@@ -105,7 +106,7 @@ export default function TimeGridDay({
   return (
     <div
       className={classNames.value.join(' ')}
-      data-time-grid-date={date.toString()}
+      data-time-grid-date={toDateString(date)}
       onClick={(e) => handleOnClick(e, $app.config.callbacks.onClickDateTime)}
       onDblClick={(e) =>
         handleOnClick(e, $app.config.callbacks.onDoubleClickDateTime)

@@ -11,7 +11,7 @@ import { DATE_GRID_BLOCKER } from '../../../constants'
 import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
-import { randomStringId } from '@schedule-x/shared/src'
+import { randomStringId, toDateString } from '@schedule-x/shared/src'
 
 
 type props = {
@@ -178,7 +178,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   return (
     <div
       className={wrapperClasses.join(' ')}
-      data-date={day.date.toString()}
+      data-date={toDateString(day.date)}
       onClick={(e) =>
         $app.config.callbacks.onClickDate &&
         $app.config.callbacks.onClickDate(day.date, e)
