@@ -20,6 +20,7 @@ import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/
 import { createResizePlugin } from '../resize.plugin'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { waitFor } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 
 describe('Resizing events in the time grid', () => {

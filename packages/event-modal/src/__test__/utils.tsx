@@ -36,6 +36,7 @@ export const setup = (customComponentFn?: CustomComponentFn) => {
     eventModal: customComponentFn,
   }
   $app.config.locale = signal('en-US')
+  $app.config.timezone = signal('Europe/Stockholm')
   $app.calendarState.isDark = signal(false)
   return { $app, calendarEvent }
 }

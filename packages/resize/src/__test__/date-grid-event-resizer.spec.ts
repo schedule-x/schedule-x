@@ -22,6 +22,7 @@ import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-s
 import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-events.interface'
 import { signal } from '@preact/signals'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
+import 'temporal-polyfill/global'
 
 
 describe('Resizing events in the date grid', () => {
