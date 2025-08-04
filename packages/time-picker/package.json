@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/time-picker",
   "umdName": "SXTimePicker",
-  "version": "3.0.0-beta.4",
+  "version": "3.0.0-beta.5",
   "description": "Schedule-X time picker component",
   "author": {
     "name": "Tom Österlund",

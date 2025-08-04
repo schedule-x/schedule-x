@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/ical",
   "umdName": "SXICalendar",
-  "version": "3.0.0-beta.4",
+  "version": "3.0.0-beta.5",
   "description": "Plugin for Schedule-X to handle iCalendar sources",
   "author": {
     "name": "Tom Österlund",
