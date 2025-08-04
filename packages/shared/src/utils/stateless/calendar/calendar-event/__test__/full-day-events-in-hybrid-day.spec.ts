@@ -5,6 +5,7 @@ import {
 } from '../../../testing/unit/unit-testing-library.impl'
 import CalendarConfigBuilder from '@schedule-x/calendar/src/utils/stateful/config/calendar-config.builder'
 import CalendarEventBuilder from '../calendar-event.builder'
+import 'temporal-polyfill/global'
 
 describe('CalendarEventImpl', () => {
   describe('the event time type in a hybrid day', () => {

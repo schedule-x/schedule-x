@@ -1,6 +1,4 @@
-
-
-export const isToday = (date: Temporal.ZonedDateTime) => {
+export const isToday = (date: Temporal.ZonedDateTime | Temporal.PlainDate) => {
   const today = Temporal.Now.zonedDateTimeISO()
   return (
     date.day === today.day &&

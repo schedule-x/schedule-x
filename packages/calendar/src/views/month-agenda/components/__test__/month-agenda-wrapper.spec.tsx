@@ -18,6 +18,7 @@ import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__cr
 import CalendarEventBuilder from '@schedule-x/shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { CalendarEventInternal } from '@schedule-x/shared/src'
 import { vi } from 'vitest'
+import 'temporal-polyfill/global'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<MonthAgendaWrapper $app={$app} id={'1'} />)

@@ -5,10 +5,11 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createDatePickerState } from '../date-picker-state.impl'
 import { __createInternalConfig__ as config } from '../../../stateless/testing/factories/create-internal-config'
+import 'temporal-polyfill/global'
 
 describe('date picker state impl - input displayed value', () => {
   it('should default to the value of selected date param if given', () => {
-    const expectedResult = '2000-01-01'
+    const expectedResult = Temporal.PlainDate.from('2000-01-01')
     const underTest = createDatePickerState(config(), expectedResult)
     expect(underTest.inputDisplayedValue.value).toBe('1/1/2000')
   })
@@ -33,15 +34,15 @@ describe('date picker state impl - input displayed value', () => {
       inputDisplayedValue: string,
       expectedNewSelectedDate: string | boolean
     ) => {
-      const selectedDateParam = ''
-      const underTest = createDatePickerState(config(locale), selectedDateParam)
+      const selectedDateParam = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
+      const underTest = createDatePickerState(config(locale))
       underTest.inputDisplayedValue.value = inputDisplayedValue
 
       if (expectedNewSelectedDate) {
-        expect(underTest.selectedDate.value).toBe(expectedNewSelectedDate)
-        expect(underTest.datePickerDate.value).toBe(expectedNewSelectedDate)
+        expect(underTest.selectedDate.value).toEqual(expectedNewSelectedDate)
+        expect(underTest.datePickerDate.value).toEqual(expectedNewSelectedDate)
       } else {
-        expect(underTest.selectedDate.value).toBe(selectedDateParam)
+        expect(underTest.selectedDate.value).toEqual(selectedDateParam)
       }
     }
   )

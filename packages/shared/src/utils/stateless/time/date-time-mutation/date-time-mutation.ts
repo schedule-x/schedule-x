@@ -1,19 +1,9 @@
 import { addMonths } from './adding'
-import { toDateString } from '../format-conversion/date-to-strings'
 import { jsDateToDateString } from '../format-conversion/date-to-strings'
 import { toJSDate } from '../format-conversion/format-conversion'
-import { timeFromDateTime } from '../format-conversion/string-to-string'
-import { doubleDigit } from './double-digit'
-
-
-export const setDateOfMonth = (dateString: string, date: number): string => {
-  dateString = dateString.slice(0, 8) + doubleDigit(date) + dateString.slice(10)
-
-  return dateString
-}
 
 export const getFirstDayOPreviousMonth = (date: Temporal.PlainDate): Temporal.PlainDate => {
-  return addMonths(date, -1) as Temporal.PlainDate
+  return addMonths(date, -1).with({ day: 1 }) as Temporal.PlainDate
 }
 
 export const getFirstDayOfNextMonth = (date: Temporal.PlainDate): Temporal.PlainDate => {

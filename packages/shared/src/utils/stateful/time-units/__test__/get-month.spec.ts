@@ -9,6 +9,7 @@ import { Month } from '../../../../enums/time/month.enum'
 import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils'
 import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
 import { NoYearZeroError } from '../../../stateless/errors/no-year-zero.error'
+import 'temporal-polyfill/global'
 
 describe('get month', () => {
   describe('getMonth', () => {

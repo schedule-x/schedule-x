@@ -15,6 +15,7 @@ import DateGridDragHandlerImpl from '../../date-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
 import { deepCloneEvent } from '@schedule-x/shared/src'
 import { waitFor } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 
 describe('A calendar with custom, non-hybrid day boundaries', () => {

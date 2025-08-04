@@ -3,7 +3,6 @@ import { WeekDay } from '../../../enums/time/week-day.enum'
 import { Month } from '../../../enums/time/month.enum'
 import { WeekWithDates } from '../../../types/time'
 import { NoYearZeroError } from '../../stateless/errors/no-year-zero.error'
-import ExtendedDateImpl from '../time/extended-date/extended-date.impl'
 import Config from '../../../interfaces/config.interface'
 
 

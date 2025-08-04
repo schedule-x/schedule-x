@@ -7,6 +7,7 @@ import {
 import { createDatePickerState } from '../date-picker-state.impl'
 import { __createInternalConfig__ as config } from '../../../stateless/testing/factories/create-internal-config'
 import { getCurrentDayDateString } from './utils'
+import 'temporal-polyfill/global'
 
 describe('selected date in date picker state impl', () => {
   const defaultSelectedDate = '2023-01-01'

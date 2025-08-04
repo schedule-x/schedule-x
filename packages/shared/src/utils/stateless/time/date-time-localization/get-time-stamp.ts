@@ -46,7 +46,7 @@ export const getTimeStamp = (
     )}`
   }
 
-  if (calendarEvent._isSingleDayTimed && eventTime.start !== eventTime.end) {
+  if (calendarEvent._isSingleDayTimed && eventTime.start?.toString() !== eventTime.end?.toString()) {
     return `${dateFn(eventTime.start, locale)} <span aria-hidden="true">⋅</span> ${timeFn(
       eventTime.start as Temporal.ZonedDateTime,
       locale
@@ -55,7 +55,7 @@ export const getTimeStamp = (
 
   if (
     calendarEvent._isSingleDayTimed &&
-    calendarEvent.start === calendarEvent.end
+    calendarEvent.start?.toString() === calendarEvent.end?.toString()
   ) {
     return `${dateFn(eventTime.start, locale)}, ${timeFn(
       eventTime.start as Temporal.ZonedDateTime,

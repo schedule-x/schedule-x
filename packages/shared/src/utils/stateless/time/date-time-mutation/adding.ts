@@ -6,6 +6,10 @@ import {
 
 
 export const addMonths = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nMonths: number): Temporal.ZonedDateTime | Temporal.PlainDate => {
+  if (nMonths < 0) {
+    return to.subtract({ months: -nMonths })
+  }
+
   return to.add({ months: nMonths })
 }
 

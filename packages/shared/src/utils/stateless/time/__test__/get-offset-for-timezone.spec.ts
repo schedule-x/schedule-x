@@ -1,5 +1,6 @@
 import { describe, it, expect } from "../../testing/unit/unit-testing-library.impl";
 import { getOffsetForTimezone } from "../get-offset-for-timezone";
+import 'temporal-polyfill/global'
 
 function getTimezoneName(timezone: string): string {
     const formatter = new Intl.DateTimeFormat("en-US", {

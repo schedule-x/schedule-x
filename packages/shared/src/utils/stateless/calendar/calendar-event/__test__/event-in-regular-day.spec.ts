@@ -5,11 +5,12 @@ import {
 } from '../../../testing/unit/unit-testing-library.impl'
 import CalendarEventBuilder from '../calendar-event.builder'
 import CalendarConfigBuilder from '@schedule-x/calendar/src/utils/stateful/config/calendar-config.builder'
+import 'temporal-polyfill/global'
 
 describe('CalendarEventImpl', () => {
   describe('the event time type in a day with default day boundaries', () => {
     const _config = new CalendarConfigBuilder().build()
-    const createEvent = (eventTime: { start: string; end: string }) =>
+    const createEvent = (eventTime: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate }) =>
       new CalendarEventBuilder(
         _config,
         '1',
@@ -19,8 +20,8 @@ describe('CalendarEventImpl', () => {
 
     it('should create a single-day timed event', () => {
       const eventTime = {
-        start: '2020-01-01 01:00',
-        end: '2020-01-01 02:00',
+        start: Temporal.ZonedDateTime.from('2020-01-01T01:00:00+01:00[Europe/Berlin]'),
+        end: Temporal.ZonedDateTime.from('2020-01-01T02:00:00+01:00[Europe/Berlin]'),
       }
       const calendarEvent = new CalendarEventBuilder(
         _config,
@@ -38,8 +39,8 @@ describe('CalendarEventImpl', () => {
 
     it('should create a single-day full-day event', () => {
       const eventTime = {
-        start: '2020-01-01',
-        end: '2020-01-01',
+        start: Temporal.PlainDate.from('2020-01-01'),
+        end: Temporal.PlainDate.from('2020-01-01'),
       }
       const calendarEvent = createEvent(eventTime)
 
@@ -52,8 +53,8 @@ describe('CalendarEventImpl', () => {
 
     it('should create a multi-day timed event', () => {
       const eventTime = {
-        start: '2020-01-01 01:00',
-        end: '2020-01-02 02:00',
+        start: Temporal.ZonedDateTime.from('2020-01-01T01:00:00+01:00[Europe/Berlin]'),
+        end: Temporal.ZonedDateTime.from('2020-01-02T02:00:00+01:00[Europe/Berlin]'),
       }
       const calendarEvent = createEvent(eventTime)
 
@@ -66,8 +67,8 @@ describe('CalendarEventImpl', () => {
 
     it('should create a multi-day full-day event', () => {
       const eventTime = {
-        start: '2020-01-01',
-        end: '2020-01-02',
+        start: Temporal.PlainDate.from('2020-01-01'),
+        end: Temporal.PlainDate.from('2020-01-02'),
       }
       const calendarEvent = createEvent(eventTime)
 

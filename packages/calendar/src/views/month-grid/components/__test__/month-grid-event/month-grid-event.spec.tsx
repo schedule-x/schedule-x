@@ -7,6 +7,7 @@ import { __createAppWithViews__ } from '../../../../../utils/stateless/testing/_
 import { beforeEach, vi } from 'vitest'
 import { renderComponent } from './utils'
 import { cleanup } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 describe('MonthGridEvent', () => {
   beforeEach(() => {

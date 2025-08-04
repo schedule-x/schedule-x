@@ -5,6 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { getTimeGridDayWidth } from '../get-time-grid-day-width'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
+import 'temporal-polyfill/global'
 
 describe('getTimeGridDayWidth', () => {
   describe('Getting the width in px of a day in the time grid', () => {

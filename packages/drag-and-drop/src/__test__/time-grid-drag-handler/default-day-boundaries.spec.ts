@@ -15,6 +15,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dragEventNQuarters, getEventWithId } from './utils'
 import { deepCloneEvent } from '@schedule-x/shared/src'
 import { waitFor } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 
 describe('A calendar with normal day boundaries', () => {

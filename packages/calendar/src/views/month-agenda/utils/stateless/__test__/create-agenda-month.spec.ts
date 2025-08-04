@@ -7,6 +7,7 @@ import { createAgendaMonth } from '../create-agenda-month'
 import TimeUnitsBuilder from '@schedule-x/shared/src/utils/stateful/time-units/time-units.builder'
 import { MonthAgendaDay } from '../../../types/month-agenda'
 import { createBaseConfig } from '../../../../../__test__/utils'
+import 'temporal-polyfill/global'
 
 const assertDate = (agendaMonthDate: MonthAgendaDay, expectedDate: string) => {
   expect(agendaMonthDate.date).toBe(expectedDate)

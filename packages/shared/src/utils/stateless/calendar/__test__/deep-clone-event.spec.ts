@@ -8,20 +8,27 @@ import { deepCloneEvent } from '../deep-clone-event'
 import CalendarEventBuilder from '../calendar-event/calendar-event.builder'
 import CalendarAppSingleton from '../../../../interfaces/calendar/calendar-app-singleton'
 import { stubInterface } from 'ts-sinon'
+import 'temporal-polyfill/global'
+import { signal } from '@preact/signals'
+import { IANATimezone } from '../../time/tzdb'
 
 describe('deep cloning an event', () => {
   let $app: CalendarAppSingleton
 
   beforeEach(() => {
     $app = stubInterface<CalendarAppSingleton>()
+    $app.config = {
+      ...$app.config,
+      timezone: signal('Europe/Berlin' as IANATimezone),
+    }
   })
 
   it('should copy title', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withTitle('title')
       .build()
@@ -35,24 +42,28 @@ describe('deep cloning an event', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withTitle('title')
       .build()
 
     const clonedEvent = deepCloneEvent(calendarEvent, $app)
 
-    expect(clonedEvent.start).toEqual('2020-02-17 10:34')
-    expect(clonedEvent.end).toEqual('2020-02-17 11:34')
+    expect(clonedEvent.start).toEqual(
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]')
+    )
+    expect(clonedEvent.end).toEqual(
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
+    )
   })
 
   it('should copy description', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withDescription('description')
       .build()
@@ -66,8 +77,8 @@ describe('deep cloning an event', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withLocation('location')
       .build()
@@ -81,8 +92,8 @@ describe('deep cloning an event', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withCalendarId('calendarId')
       .build()
@@ -96,8 +107,8 @@ describe('deep cloning an event', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withOptions({ disableDND: true })
       .build()
@@ -111,8 +122,8 @@ describe('deep cloning an event', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withCustomContent({ dateGrid: 'content' })
       .build()
@@ -126,8 +137,8 @@ describe('deep cloning an event', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       'id',
-      '2020-02-17 10:34',
-      '2020-02-17 11:34'
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+01:00[Europe/Berlin]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+01:00[Europe/Berlin]')
     )
       .withForeignProperties({ key: 'value' })
       .build()

@@ -7,6 +7,7 @@ import { createDatePickerState } from '../date-picker-state.impl'
 import { stubInterface } from 'ts-sinon'
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import { signal } from '@preact/signals'
+import 'temporal-polyfill/global'
 
 describe('Date-picker state', () => {
   describe('Validating the input according to min config option', () => {

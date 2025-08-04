@@ -5,12 +5,13 @@ import {
 } from '../../../testing/unit/unit-testing-library.impl'
 import { CalendarEventInternal } from '../../../../../interfaces/calendar/calendar-event.interface'
 import { getTimeStamp } from '../get-time-stamp'
+import 'temporal-polyfill/global'
 
 describe('Getting the time stamp for the event modal', () => {
   describe('Time stamps for full single day events', () => {
     const singleFullDayEvent: Partial<CalendarEventInternal> = {
-      start: '2023-10-06',
-      end: '2023-10-06',
+      start: Temporal.PlainDate.from('2023-10-06'),
+      end: Temporal.PlainDate.from('2023-10-06'),
       _isSingleDayFullDay: true,
     }
     it('should return a German time stamp for a single day timed event', () => {
@@ -32,8 +33,8 @@ describe('Getting the time stamp for the event modal', () => {
 
   describe('Time stamps for full multi day events', () => {
     const multiFullDayEvent: Partial<CalendarEventInternal> = {
-      start: '2023-10-06',
-      end: '2023-10-08',
+      start: Temporal.PlainDate.from('2023-10-06'),
+      end: Temporal.PlainDate.from('2023-10-08'),
       _isMultiDayFullDay: true,
     }
     it('should return a German time stamp for a multi day timed event', () => {
@@ -55,8 +56,8 @@ describe('Getting the time stamp for the event modal', () => {
 
   describe('Time stamps for single day timed events', () => {
     const singleDayTimedEvent: Partial<CalendarEventInternal> = {
-      start: '2023-10-06 20:07',
-      end: '2023-10-06 21:07',
+      start: Temporal.ZonedDateTime.from('2023-10-06T20:07:00+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-10-06T21:07:00+02:00[Europe/Berlin]'),
       _isSingleDayTimed: true,
     }
 
@@ -81,8 +82,8 @@ describe('Getting the time stamp for the event modal', () => {
 
   describe('Time stamps for multi day timed events', () => {
     const multiDayTimedEvent: Partial<CalendarEventInternal> = {
-      start: '2023-10-06 20:07',
-      end: '2023-10-08 21:07',
+      start: Temporal.ZonedDateTime.from('2023-10-06T20:07:00+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-10-08T21:07:00+02:00[Europe/Berlin]'),
       _isMultiDayTimed: true,
     }
 
@@ -105,8 +106,8 @@ describe('Getting the time stamp for the event modal', () => {
 
   describe('Time stamps for 1-minute events', () => {
     const singleTimeEvent: Partial<CalendarEventInternal> = {
-      start: '2023-10-06 20:07',
-      end: '2023-10-06 20:07',
+      start: Temporal.ZonedDateTime.from('2023-10-06T20:07:00+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-10-06T20:07:00+02:00[Europe/Berlin]'),
       _isSingleDayTimed: true,
     }
 
