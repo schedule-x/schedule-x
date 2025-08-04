@@ -32,12 +32,12 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
           },
         ],
         plugins: [dragAndDropPlugin],
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
       })
 
       renderComponent($app, $app.calendarEvents.list.value[0])
@@ -62,12 +62,12 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
           },
         ],
         plugins: [dragAndDropPlugin],
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
       })
 
       renderComponent($app, $app.calendarEvents.list.value[0])
@@ -94,15 +94,15 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
             _options: {
               disableDND: true,
             },
           },
         ],
         plugins: [dragAndDropPlugin],
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01') ,
       })
 
       renderComponent($app, $app.calendarEvents.list.value[0])

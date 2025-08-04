@@ -21,8 +21,8 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
           },
         ],
       })
@@ -40,8 +40,8 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
             _options: {
               additionalClasses: ['test-class', 'test-class-2'],
             },
@@ -58,12 +58,12 @@ describe('MonthGridEvent', () => {
   describe('describing event overflow in class names', () => {
     it('should not add any overflow classes to event', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-31',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-31'),
           },
         ],
       })
@@ -79,12 +79,12 @@ describe('MonthGridEvent', () => {
 
     it('should add overflow-left class to event', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
         events: [
           {
             id: '1234',
-            start: '2019-12-29',
-            end: '2020-01-31',
+            start: Temporal.PlainDate.from('2019-12-29'),
+            end: Temporal.PlainDate.from('2020-01-31'),
           },
         ],
       })
@@ -100,12 +100,12 @@ describe('MonthGridEvent', () => {
 
     it('should add overflow-right class to event', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-02-10',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-02-10'),
           },
         ],
       })
@@ -126,8 +126,8 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
             _customContent: {
               monthGrid: '<div class="custom-content">My custom content</div>',
             },
@@ -148,8 +148,8 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
           },
         ],
       })
@@ -165,8 +165,8 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
           },
         ],
       })

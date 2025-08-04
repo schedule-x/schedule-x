@@ -15,7 +15,7 @@ describe('CalendarEventImpl', () => {
         end: '03:00',
       })
       .build()
-    const createEvent = (eventTime: { start: string; end: string }) =>
+    const createEvent = (eventTime: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate }) =>
       new CalendarEventBuilder(
         _config,
         '1',
@@ -25,8 +25,8 @@ describe('CalendarEventImpl', () => {
 
     it('should be classified as a single full day event', () => {
       const eventTime = {
-        start: '2020-01-01',
-        end: '2020-01-01',
+        start: Temporal.PlainDate.from('2020-01-01'),
+        end: Temporal.PlainDate.from('2020-01-01'),
       }
       const calendarEvent = createEvent(eventTime)
 
