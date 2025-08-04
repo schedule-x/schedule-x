@@ -47,7 +47,7 @@ plugins: [
   createEventModalPlugin(),
   createResizePlugin(),
   calendarControlsPlugin,
-  // scrollController,
+  scrollController,
 ],
 
   translations: mergeLocales(

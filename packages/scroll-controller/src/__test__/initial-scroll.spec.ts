@@ -8,6 +8,7 @@ import { createScrollControllerPlugin } from '../scroll-controller.plugin'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { Mock, vi } from 'vitest'
 import { cleanup, waitFor } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 const addGridDayToDOM = (viewContainer: HTMLDivElement) => {
   const gridDay = document.createElement('div')
@@ -107,7 +108,6 @@ describe('Scroll controller plugin', () => {
     ])(
       'should scroll when the day grid element comes into the DOM',
       (initialScrollConfig, expectedScroll) => {
-        const underTest = createScrollControllerPlugin({
           initialScroll: initialScrollConfig,
         })
         const viewContainerScrollSpy = vi.spyOn(viewContainer, 'scroll')
