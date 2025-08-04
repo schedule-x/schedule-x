@@ -48,12 +48,14 @@ npm i @sx-premium/interactive-event-modal
 
 ```js
 import { createCalendar } from '@schedule-x/calendar'
-import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createEventsServicePlugin, createEventRecurrencePlugin } from "@schedule-x/event-recurrence";
 import { createInteractiveEventModal } from "@sx-premium/interactive-event-modal";
 
 import '@sx-premium/interactive-event-modal/index.css'
 
+
 const eventsService = createEventsServicePlugin()
+const eventRecurrence = createEventRecurrencePlugin()
 
 const eventModal = createInteractiveEventModal({
   // dependency needed to add events
@@ -131,6 +133,7 @@ const calendar = createCalendar({
   plugins: [
     eventModal,
     eventsService,
+    eventRecurrence,
   ],
 
   callbacks: {
@@ -260,7 +263,7 @@ follow the same structure as the default fields, but additionally you need to ad
 `textarea`, `select`, `combobox` or `combobox-multi`. For example:
 
 ```ts
-import { createEventsServicePlugin } from "@schedule-x/events-service";
+import { createEventsServicePlugin, createEventRecurrencePlugin } from "@schedule-x/event-recurrence";
 import { createInteractiveEventModal, createInputField, translations as modalTranslations } from "@sx-premium/interactive-event-modal";
 import { translations, mergeLocales } from '@schedule-x/translations'
 import { createCalendar } from '@schedule-x/calendar'
@@ -269,7 +272,7 @@ import '@schedule-x/theme-default/dist/calendar.css'
 import '@sx-premium/interactive-event-modal/index.css'
 
 const eventsService = createEventsServicePlugin()
-
+const eventRecurrence = createEventRecurrencePlugin()
 const eventModal = createInteractiveEventModal({
   eventsService,
 
@@ -307,6 +310,7 @@ const calendar = createCalendar({
   plugins: [
     eventModal,
     eventsService,
+    eventRecurrence,
   ],
   // ...other configuration
 })

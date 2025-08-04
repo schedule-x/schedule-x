@@ -8,7 +8,7 @@ Schedule-X is moving away from its own custom date/datetime format, and adopting
 import {Callout} from "nextra/components";
 
 <Callout type="info">
-  Not on a tight schedule? Consider hopping on to v3 right away! It's not production-ready yet, but is planned to be so during Q3 of 2025.
+  Not on a tight schedule? Consider hopping on v3 right away! It's not production-ready yet, but is planned to be so during Q3 of 2025.
 </Callout>
 
 ## Reasoning
@@ -23,26 +23,31 @@ Lastly, a nice bonus is that displaying dates according to non-gregorian calenda
 
 Yes!
 
-You can try the new version of Schedule-X by installing it like this:
+You can try the new version of Schedule-X by installing any package with the beta tag, like:
 
 ```bash
-npm install @schedule-x/calendar@3.0.0-beta.2 @schedule-x/theme-default@3.0.0-beta.2
+npm install @schedule-x/calendar@beta @schedule-x/theme-default@beta
+```
+
+Or the premium plugins (with auth token like always):
+
+```bash
+npm install @sx-premium/interactive-event-modal@beta
 ```
 
 There is a minimal but working example of how to use the new version here: https://github.com/schedule-x/v3-beta-example
 
 ## When can I use it in production?
 
-A stable release of v3 is planned during Q3 of 2025. If you're on a tight schedule, you might want to stick with v2 for now, but for anyone who's not, you might want to consider hopping on to v3 right away. That way you won't have to migrate to v3 later.
+A stable release of v3 is planned during Q3 of 2025. If you're on a tight schedule, you might want to stick with v2 for now, but for anyone who's not, you might want to consider hopping on v3 right away. That way you won't have to migrate to v3 later.
 
 ## What's next?
 
 The current focus is to:
 
-1) Release a beta for the premium plugins
+1) Find testers for the beta. Please [open an issue](https://github.com/schedule-x/schedule-x/issues) if you run into any problems while using the beta versions. This would help a lot!
 2) Release a beta for the React and Vue integrations
 3) Fix all the [broken unit tests](https://github.com/schedule-x/schedule-x/issues/1133) in the open source repo (anyone is welcome to help with this!)
-4) Gather feedback from the community. Please [open an issue](https://github.com/schedule-x/schedule-x/issues) if you run into any problems while using the beta. This would help a lot!
 
 ## Continued support for v2
 
