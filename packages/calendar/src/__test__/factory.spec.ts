@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -34,7 +35,7 @@ describe('The calendar factory', () => {
   })
 
   describe('validating event start time', () => {
-    it('should throw an error if start time includes seconds', () => {
+    it('should not throw an error if start time includes seconds', () => {
       const underTest = createCalendar
 
       expect(() => {
@@ -48,12 +49,10 @@ describe('The calendar factory', () => {
             },
           ],
         })
-      }).toThrow(
-        `[Schedule-X error]: Event start time 2022-01-01T00:00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
+      }).not.toThrow()
     })
 
-    it('should throw an error if start time includes T as a separator', () => {
+    it('should not throw an error if start time includes T as a separator', () => {
       const underTest = createCalendar
 
       expect(() => {
@@ -67,9 +66,7 @@ describe('The calendar factory', () => {
             },
           ],
         })
-      }).toThrow(
-        `[Schedule-X error]: Event start time 2022-01-01T00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
+      }).not.toThrow()
     })
 
     it('should not throw an error if start time is a date string', () => {
@@ -81,8 +78,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -98,8 +95,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01 00:00',
-              end: '2022-01-01 00:00',
+              start: Temporal.ZonedDateTime.from('2022-01-01T12:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T13:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -108,7 +105,7 @@ describe('The calendar factory', () => {
   })
 
   describe('validating event end time', () => {
-    it('should throw an error if end time includes seconds', () => {
+    it('should not throw an error if end time includes seconds', () => {
       const underTest = createCalendar
 
       expect(() => {
@@ -117,17 +114,15 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
               end: '2022-01-01T00:00:00',
             },
           ],
         })
-      }).toThrow(
-        `[Schedule-X error]: Event end time 2022-01-01T00:00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
+      }).not.toThrow()
     })
 
-    it('should throw an error if end time includes T as a separator', () => {
+    it('should not throw an error if end time includes T as a separator', () => {
       const underTest = createCalendar
 
       expect(() => {
@@ -136,14 +131,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
               end: '2022-01-01T00:00',
             },
           ],
         })
-      }).toThrow(
-        `[Schedule-X error]: Event end time 2022-01-01T00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
+      }).not.toThrow()
     })
 
     it('should not throw an error if end time is a date string', () => {
@@ -155,8 +148,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -172,8 +165,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01 00:00',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -191,8 +184,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1.1,
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -210,8 +203,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: '1.1',
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -229,8 +222,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4c4d',
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -246,8 +239,8 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })
@@ -265,8 +258,8 @@ describe('The calendar factory', () => {
             events: [
               {
                 id: id as any,
-                start: '2022-01-01',
-                end: '2022-01-01',
+                start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+                end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
               },
             ],
           })

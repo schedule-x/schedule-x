@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -46,13 +47,13 @@ describe('MonthAgendaEvents', () => {
         events: [
           {
             id: '1',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
+            end: Temporal.ZonedDateTime.from('2020-01-02T00:00:00[Europe/Stockholm]'),
           },
           {
             id: '2',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
+            end: Temporal.ZonedDateTime.from('2020-01-02T00:00:00[Europe/Stockholm]'),
           },
         ],
       })

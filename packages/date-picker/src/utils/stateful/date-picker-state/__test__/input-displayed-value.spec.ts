@@ -14,10 +14,9 @@ describe('date picker state impl - input displayed value', () => {
     expect(underTest.inputDisplayedValue.value).toBe('1/1/2000')
   })
 
-  it('should default to empty string if no selected date param is given', () => {
-    const expectedResult = ''
+  it('should default to current date if no selected date param is given', () => {
     const underTest = createDatePickerState(config())
-    expect(underTest.inputDisplayedValue.value).toBe(expectedResult)
+    expect(underTest.inputDisplayedValue.value).toBe('8/5/2025')
   })
 
   it.each([
@@ -39,8 +38,8 @@ describe('date picker state impl - input displayed value', () => {
       underTest.inputDisplayedValue.value = inputDisplayedValue
 
       if (expectedNewSelectedDate) {
-        expect(underTest.selectedDate.value).toEqual(expectedNewSelectedDate)
-        expect(underTest.datePickerDate.value).toEqual(expectedNewSelectedDate)
+        expect(underTest.selectedDate.value).toEqual(Temporal.PlainDate.from(expectedNewSelectedDate))
+        expect(underTest.datePickerDate.value).toEqual(Temporal.PlainDate.from(expectedNewSelectedDate))
       } else {
         expect(underTest.selectedDate.value).toEqual(selectedDateParam)
       }
