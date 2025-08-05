@@ -12,6 +12,7 @@ import 'temporal-polyfill/global'
 describe('CalendarEventImpl', () => {
   describe('the event time type in a hybrid day', () => {
     const _config = new CalendarConfigBuilder()
+      .withTimezone('Europe/Berlin')
       .withDayBoundaries({
         start: '12:00',
         end: '06:00',
