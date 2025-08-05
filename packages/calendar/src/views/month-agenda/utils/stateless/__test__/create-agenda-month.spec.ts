@@ -10,7 +10,7 @@ import { createBaseConfig } from '../../../../../__test__/utils'
 import 'temporal-polyfill/global'
 
 const assertDate = (agendaMonthDate: MonthAgendaDay, expectedDate: string) => {
-  expect(agendaMonthDate.date).toEqual(expectedDate)
+  expect(agendaMonthDate.date).toEqual(Temporal.PlainDate.from(expectedDate))
   expect(agendaMonthDate.events.length).toBe(0)
 }
 

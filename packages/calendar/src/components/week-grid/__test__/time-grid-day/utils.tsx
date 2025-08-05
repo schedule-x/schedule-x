@@ -4,11 +4,12 @@ import { render } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import TimeGridDay from '../../time-grid-day'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
+import 'temporal-polyfill/global'
 
 export const renderComponent = (
   $app: CalendarAppSingleton,
   calendarEvents: CalendarEventInternal[],
-  date: string,
+  date: Temporal.ZonedDateTime,
   backgroundEvents: BackgroundEvent[] = []
 ) => {
   render(

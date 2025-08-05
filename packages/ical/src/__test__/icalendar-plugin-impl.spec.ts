@@ -83,10 +83,10 @@ describe('IcalendarPluginImpl', () => {
       expect($app.calendarEvents.list.value.length).toBe(1)
 
       $app.calendarState.range.value = {
-        start: Temporal.ZonedDateTime.from('2024-09-01T00:00:00+00:00[UTC]'),
-        end: Temporal.ZonedDateTime.from('2024-09-05T23:59:59+00:00[UTC]'),
+        start: '2024-09-01 00:00',
+        end: '2024-09-05 23:59',
       }
-      plugin.between(Temporal.ZonedDateTime.from('2024-09-01T00:00:00+00:00[UTC]'), Temporal.ZonedDateTime.from('2024-09-05T23:59:59+00:00[UTC]'))
+      plugin.between('2024-09-01 00:00', '2024-09-05 23:59')
 
       expect($app.calendarEvents.list.value.length).toBe(3)
     })

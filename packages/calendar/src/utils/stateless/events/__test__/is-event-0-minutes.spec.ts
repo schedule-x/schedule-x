@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -13,13 +14,13 @@ import {
 describe('isEvent0Minutes', () => {
   const e1: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
-    start: '2023-02-17 10:05',
-    end: '2023-02-17 10:05',
+    start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
+    end: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
   }
   const e2: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
-    start: '2030-12-31 20:10',
-    end: '2030-12-31 20:10',
+    start: Temporal.ZonedDateTime.from('2030-12-31T20:10:00.00+00:00[UTC]'),
+    end: Temporal.ZonedDateTime.from('2030-12-31T20:10:00.00+00:00[UTC]'),
   }
 
   it.each([e1, e2])(
@@ -31,8 +32,8 @@ describe('isEvent0Minutes', () => {
 
   const e3: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
-    start: '2023-02-17 10:05',
-    end: '2023-02-17 10:06',
+    start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
+    end: Temporal.ZonedDateTime.from('2023-02-17T10:06:00.00+00:00[UTC]'),
   }
 
   it('should return false for timed events with different start and end time', () => {
@@ -42,8 +43,8 @@ describe('isEvent0Minutes', () => {
   it('should return false for untimed events', () => {
     const e4: CalendarEventInternal = {
       ...stubInterface<CalendarEventInternal>(),
-      start: '2023-02-17',
-      end: '2023-02-17',
+      start: Temporal.ZonedDateTime.from('2023-02-17T00:00:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2023-02-17T00:00:00.00+00:00[UTC]'),
     }
     expect(isEvent0Minutes(e4)).toBe(false)
   })
@@ -52,13 +53,13 @@ describe('isEvent0Minutes', () => {
 describe('areTwoEvents0MinutesAndConcurrent', () => {
   const e1: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
-    start: '2023-02-17 10:05',
-    end: '2023-02-17 10:05',
+    start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
+    end: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
   }
   const e2: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
-    start: '2023-02-17 10:05',
-    end: '2023-02-17 10:05',
+    start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
+    end: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
   }
 
   it('should return true for two events with the same start and end time', () => {
@@ -67,13 +68,13 @@ describe('areTwoEvents0MinutesAndConcurrent', () => {
 
   const e3: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
-    start: '2023-02-17 10:05',
-    end: '2023-02-17 10:06',
+    start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
+    end: Temporal.ZonedDateTime.from('2023-02-17T10:06:00.00+00:00[UTC]'),
   }
   const e4: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
-    start: '2023-02-17 10:05',
-    end: '2023-02-17 10:06',
+    start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
+    end: Temporal.ZonedDateTime.from('2023-02-17T10:06:00.00+00:00[UTC]'),
   }
   it('should return false for two events with different start and end time', () => {
     expect(areEvents0MinutesAndConcurrent(e1, e3)).toBe(false)

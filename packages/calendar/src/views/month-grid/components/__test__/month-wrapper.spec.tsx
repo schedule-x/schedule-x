@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -8,6 +9,7 @@ import { cleanup, render, waitFor } from '@testing-library/preact'
 import { MonthGridWrapper } from '../month-grid-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { afterEach } from 'vitest'
+import 'temporal-polyfill/global'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<MonthGridWrapper $app={$app} id={'1'} />)
@@ -21,7 +23,7 @@ describe('MonthWrapper', () => {
   describe('rendering weeks for a certain month', () => {
     it('should render 6 weeks for October 2023', () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = '2023-10-01'
+      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2023-10-01')
       renderComponent($app)
 
       expect(document.querySelectorAll('.sx__month-grid-week').length).toBe(6)
@@ -42,17 +44,17 @@ describe('MonthWrapper', () => {
   describe('using the events filter predicate', () => {
     it('should not filter any events if the predicate is undefined', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2023-10-01',
+        selectedDate: Temporal.PlainDate.from('2023-10-01'),
         events: [
           {
             id: '1',
-            start: '2023-10-01',
-            end: '2023-10-01',
+            start: Temporal.PlainDate.from('2023-10-01'),
+            end: Temporal.PlainDate.from('2023-10-01'),
           },
           {
             id: '2',
-            start: '2023-10-01',
-            end: '2023-10-01',
+            start: Temporal.PlainDate.from('2023-10-01'),
+            end: Temporal.PlainDate.from('2023-10-01'),
           },
         ],
       })
@@ -63,18 +65,18 @@ describe('MonthWrapper', () => {
 
     it('should filter events based on title', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2023-10-01',
+        selectedDate: Temporal.PlainDate.from('2023-10-01'),
         events: [
           {
             id: '1',
-            start: '2023-10-01',
-            end: '2023-10-01',
+            start: Temporal.PlainDate.from('2023-10-01'),
+            end: Temporal.PlainDate.from('2023-10-01'),
             title: 'event 1',
           },
           {
             id: '2',
-            start: '2023-10-01',
-            end: '2023-10-01',
+            start: Temporal.PlainDate.from('2023-10-01'),
+            end: Temporal.PlainDate.from('2023-10-01'),
             title: 'event 2',
           },
         ],
@@ -88,18 +90,18 @@ describe('MonthWrapper', () => {
 
     it('should re-render the month grid when the filter predicate changes', async () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2023-10-01',
+        selectedDate: Temporal.PlainDate.from('2023-10-01'),
         events: [
           {
             id: '1',
-            start: '2023-10-01',
-            end: '2023-10-01',
+            start: Temporal.PlainDate.from('2023-10-01'),
+            end: Temporal.PlainDate.from('2023-10-01'),
             title: 'event 1',
           },
           {
             id: '2',
-            start: '2023-10-01',
-            end: '2023-10-01',
+            start: Temporal.PlainDate.from('2023-10-01'),
+            end: Temporal.PlainDate.from('2023-10-01'),
             title: 'event 2',
           },
         ],
@@ -120,7 +122,7 @@ describe('MonthWrapper', () => {
 
   describe('setting weekday classes', () => {
     const $app = __createAppWithViews__({
-      selectedDate: '2020-01-01',
+      selectedDate: Temporal.PlainDate.from('2020-01-01'),
     })
 
     it('should set weekday classes for all days of the month', () => {
@@ -172,7 +174,7 @@ describe('MonthWrapper', () => {
   describe('the selected class', () => {
     it('should add the selected class to the selected date', async () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2024-07-01',
+        selectedDate: Temporal.PlainDate.from('2024-07-01'),
       })
       renderComponent($app)
 
@@ -181,7 +183,7 @@ describe('MonthWrapper', () => {
       )
       expect(selectedDay?.getAttribute('data-date')).toBe('2024-07-01')
 
-      $app.datePickerState.selectedDate.value = '2024-07-02'
+      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2024-07-02')
 
       await waitFor(() => {
         const selectedDay = document.querySelector(
@@ -195,7 +197,7 @@ describe('MonthWrapper', () => {
   describe('display of weeks numbers', () => {
     it('should display the week numbers if showWeekNumbers is configured', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2024-07-01',
+        selectedDate: Temporal.PlainDate.from('2024-07-01'),
         showWeekNumbers: true,
       })
       renderComponent($app)
@@ -207,7 +209,7 @@ describe('MonthWrapper', () => {
 
     it('should not display the week numbers if showWeekNumbers is not configured', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2024-07-01',
+        selectedDate: Temporal.PlainDate.from('2024-07-01'),
         showWeekNumbers: false,
       })
       renderComponent($app)
@@ -219,7 +221,7 @@ describe('MonthWrapper', () => {
 
     it('should show week numbers for a German calendar', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2025-03-13',
+        selectedDate: Temporal.PlainDate.from('2025-03-13'),
         showWeekNumbers: true,
         firstDayOfWeek: 1,
       })

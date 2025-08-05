@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -11,7 +12,7 @@ import { createWeek } from '../../views/week/create-week'
 
 describe('Position in time grid', () => {
   const _config = new CalendarConfigBuilder().build()
-  const createEvent = (event: { start: string; end: string; id: string }) => {
+  const createEvent = (event: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate; id: string }) => {
     return new CalendarEventBuilder(
       _config,
       event.id,
@@ -20,15 +21,15 @@ describe('Position in time grid', () => {
     ).build()
   }
 
-  const selectedDate = '2020-01-01'
+  const selectedDate = Temporal.PlainDate.from('2020-01-01')
   const $app = __createAppWithViews__({
     selectedDate,
   })
 
   it('should not add time grid events if date event date does not exist in given week', () => {
     const timeEvent1 = {
-      start: '2020-01-01 00:00',
-      end: '2020-01-01 01:00',
+      start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2020-01-01T01:00:00.00+00:00[UTC]'),
       id: '1',
     }
     const event1 = createEvent(timeEvent1)
@@ -45,11 +46,11 @@ describe('Position in time grid', () => {
         start: '10:00',
         end: '22:00',
       },
-      selectedDate: '2020-01-01',
+      selectedDate: Temporal.PlainDate.from('2020-01-01'),
     })
     const timeEvent1 = {
-      start: '2020-01-01 08:00',
-      end: '2020-01-01 12:00',
+      start: Temporal.ZonedDateTime.from('2020-01-01T08:00:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2020-01-01T12:00:00.00+00:00[UTC]'),
       id: '1',
     }
     const event1 = createEvent(timeEvent1)
@@ -67,11 +68,11 @@ describe('Position in time grid', () => {
         start: '10:00',
         end: '08:00',
       },
-      selectedDate: '2020-01-01',
+      selectedDate: Temporal.PlainDate.from('2020-01-01'),
     })
     const timeEvent1 = {
-      start: '2020-01-01 07:00',
-      end: '2020-01-01 09:00',
+      start: Temporal.ZonedDateTime.from('2020-01-01T07:00:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2020-01-01T09:00:00.00+00:00[UTC]'),
       id: '1',
     }
     const event1 = createEvent(timeEvent1)

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -12,8 +13,8 @@ describe('Resize Recurrence', () => {
     it('should update an event by setting the end to 2 hours later', () => {
       const event: CalendarEventExternal = {
         id: 1,
-        start: '2024-02-05 21:00',
-        end: '2024-02-05 22:00',
+        start: Temporal.ZonedDateTime.from('2024-02-05T21:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-02-05T22:00:00.00+00:00[UTC]'),
         rrule: 'FREQ=WEEKLY;COUNT=10',
       }
       const $app = __createAppWithViews__({
@@ -24,8 +25,8 @@ describe('Resize Recurrence', () => {
 
       recurrencePlugin.updateRecurrenceOnResize(
         1,
-        '2024-02-05 22:00',
-        '2024-02-05 23:00'
+        Temporal.ZonedDateTime.from('2024-02-05T22:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2024-02-05T23:00:00.00+00:00[UTC]')
       )
 
       const updatedEvent = $app.calendarEvents.list.value.find(
@@ -33,8 +34,8 @@ describe('Resize Recurrence', () => {
       )
       expect(updatedEvent?._getExternalEvent()).toEqual({
         id: 1,
-        start: '2024-02-05 21:00',
-        end: '2024-02-05 23:00',
+        start: Temporal.ZonedDateTime.from('2024-02-05T21:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-02-05T23:00:00.00+00:00[UTC]'),
         rrule: 'FREQ=WEEKLY;COUNT=10',
       })
     })
@@ -44,8 +45,8 @@ describe('Resize Recurrence', () => {
     it('should update an event by setting the end to 1 day later', () => {
       const event: CalendarEventExternal = {
         id: 1,
-        start: '2024-02-05',
-        end: '2024-02-06',
+        start: Temporal.ZonedDateTime.from('2024-02-05T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-02-06T00:00:00.00+00:00[UTC]'),
         rrule: 'FREQ=WEEKLY;COUNT=10',
       }
       const $app = __createAppWithViews__({
@@ -54,15 +55,15 @@ describe('Resize Recurrence', () => {
       const recurrencePlugin = createEventRecurrencePlugin()
       recurrencePlugin.beforeRender!($app)
 
-      recurrencePlugin.updateRecurrenceOnResize(1, '2024-02-06', '2024-02-07')
+      recurrencePlugin.updateRecurrenceOnResize(1, Temporal.ZonedDateTime.from('2024-02-06T00:00:00.00+00:00[UTC]'), Temporal.ZonedDateTime.from('2024-02-07T00:00:00.00+00:00[UTC]'))
 
       const updatedEvent = $app.calendarEvents.list.value.find(
         (e) => e.id === 1
       )
       expect(updatedEvent?._getExternalEvent()).toEqual({
         id: 1,
-        start: '2024-02-05',
-        end: '2024-02-07',
+        start: Temporal.PlainDate.from('2024-02-05'),
+        end: Temporal.PlainDate.from('2024-02-07'),
         rrule: 'FREQ=WEEKLY;COUNT=10',
       })
     })
@@ -75,7 +76,7 @@ describe('Resize Recurrence', () => {
       recurrencePlugin.beforeRender!($app)
 
       expect(() => {
-        recurrencePlugin.updateRecurrenceOnResize(1, '2024-02-06', '2024-02-07')
+        recurrencePlugin.updateRecurrenceOnResize(1, Temporal.PlainDate.from('2024-02-06'), Temporal.PlainDate.from('2024-02-07'))
       }).toThrowError('Tried to update a non-existing event')
     })
   })

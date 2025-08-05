@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -17,7 +18,7 @@ describe('MonthViewWeek', () => {
 
   it('should render week', () => {
     const $app = createAppSingleton()
-    const date = new Date(2023, Month.JULY, 23)
+    const date = Temporal.ZonedDateTime.from('2023-07-23T00:00:00.00+00:00[UTC]')
     const { container } = renderComponent(
       $app,
       $app.timeUnitsImpl.getWeekFor(date)
@@ -29,7 +30,7 @@ describe('MonthViewWeek', () => {
   })
 
   it('should display selected date', () => {
-    const date = new Date(2023, Month.AUGUST, 8)
+    const date = Temporal.ZonedDateTime.from('2023-08-08T00:00:00.00+00:00[UTC]')
     const $app = createAppSingleton({ selectedDate: toDateString(date) })
     const { container } = renderComponent(
       $app,
@@ -42,8 +43,8 @@ describe('MonthViewWeek', () => {
   })
 
   it('should not display any selected date', () => {
-    const date = new Date(2023, Month.AUGUST, 8)
-    const $app = createAppSingleton({ selectedDate: '2020-01-01' })
+    const date = Temporal.ZonedDateTime.from('2023-08-08T00:00:00.00+00:00[UTC]')
+    const $app = createAppSingleton({ selectedDate: Temporal.PlainDate.from('2020-01-01') })
     const { container } = renderComponent(
       $app,
       $app.timeUnitsImpl.getWeekFor(date)
@@ -54,9 +55,9 @@ describe('MonthViewWeek', () => {
   })
 
   it("should display today's date", () => {
-    const today = new Date()
-    const expectedTodaysDate = today.getDate()
-    const $app = createAppSingleton({ selectedDate: toDateString(today) })
+    const today = Temporal.ZonedDateTime.from('2023-08-08T00:00:00.00+00:00[UTC]')
+    const expectedTodaysDate = today.toPlainDate().day
+    const $app = createAppSingleton({ selectedDate: today.toPlainDate() })
     const { container } = renderComponent(
       $app,
       $app.timeUnitsImpl.getWeekFor(today)

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -25,13 +26,13 @@ describe('CalendarApp', () => {
 
     const eventId = '1'
     const eventTitle = 'test title 123'
-    const eventStart = '2020-01-01 04:00'
-    const eventEnd = '2020-01-01 06:00'
+    const eventStart = Temporal.ZonedDateTime.from('2020-01-01T04:00:00.00+00:00[UTC]')
+    const eventEnd = Temporal.ZonedDateTime.from('2020-01-01T06:00:00.00+00:00[UTC]')
     const foreignPropertyValue = 'foreign property value'
 
     beforeEach(() => {
       calendarApp = createCalendar({
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
         views: [viewWeek],
         events: [
           {

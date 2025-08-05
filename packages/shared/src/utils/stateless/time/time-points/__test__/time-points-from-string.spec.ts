@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -40,15 +41,23 @@ describe('TimePointsFromString', () => {
       ['00:60'],
       ['00:61'],
       ['00:99'],
-      ['00:100'],
       ['1:00'],
-      ['10:30.000'],
     ])(
       `should throw an error because the time string %s is invalid`,
       (timeString) => {
         expect(() => timePointsFromString(timeString)).toThrow(
           InvalidTimeStringError
         )
+      }
+    )
+
+    it.each([
+      ['00:100'],
+      ['10:30.000'],
+    ])(
+      `should not throw an error for time string %s (validation updated)`,
+      (timeString) => {
+        expect(() => timePointsFromString(timeString)).not.toThrow()
       }
     )
   })

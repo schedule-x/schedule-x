@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 /* eslint-disable max-lines */
 import {
   describe,

@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -36,7 +37,7 @@ describe('Calendar callbacks', () => {
         callbacks: {
           onRangeUpdate,
         },
-        selectedDate: '2023-12-01',
+        selectedDate: Temporal.PlainDate.from('2023-12-01'),
         defaultView: InternalViewName.MonthGrid,
       })
       renderComponent($app)
@@ -47,8 +48,8 @@ describe('Calendar callbacks', () => {
         expect(onRangeUpdate).toHaveBeenCalledTimes(1)
 
         expect(onRangeUpdate).toHaveBeenCalledWith({
-          start: '2024-01-01 00:00',
-          end: '2024-02-04 23:59',
+          start: Temporal.ZonedDateTime.from('2024-01-01T00:00:00.000Z[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-02-04T23:59:00.000Z[UTC]'),
         })
       })
     })
@@ -59,7 +60,7 @@ describe('Calendar callbacks', () => {
         callbacks: {
           onSelectedDateUpdate,
         },
-        selectedDate: '2023-12-01',
+        selectedDate: Temporal.PlainDate.from('2023-12-01'),
         defaultView: InternalViewName.MonthGrid,
       })
       renderComponent($app)
@@ -68,7 +69,7 @@ describe('Calendar callbacks', () => {
 
       await waitFor(() => {
         expect(onSelectedDateUpdate).toHaveBeenCalledTimes(1)
-        expect(onSelectedDateUpdate).toHaveBeenCalledWith('2024-01-01')
+        expect(onSelectedDateUpdate).toHaveBeenCalledWith(Temporal.PlainDate.from('2024-01-01'))
       })
     })
   })
@@ -80,7 +81,7 @@ describe('Calendar callbacks', () => {
         callbacks: {
           onRangeUpdate,
         },
-        selectedDate: '2023-12-01',
+        selectedDate: Temporal.PlainDate.from('2023-12-01'),
         defaultView: InternalViewName.Week,
       })
       renderComponent($app)
@@ -92,8 +93,8 @@ describe('Calendar callbacks', () => {
         expect(onRangeUpdate).toHaveBeenCalledTimes(1)
 
         expect(onRangeUpdate).toHaveBeenCalledWith({
-          start: '2023-11-27 00:00',
-          end: '2023-12-31 23:59',
+          start: Temporal.ZonedDateTime.from('2023-11-27T00:00:00.000Z[UTC]'),
+          end: Temporal.ZonedDateTime.from('2023-12-31T23:59:00.000Z[UTC]'),
         })
       })
     })
@@ -109,8 +110,8 @@ describe('Calendar callbacks', () => {
       const onEventClick = vi.fn()
       const calendarEvent = {
         id: '1',
-        start: '2023-12-01 00:00',
-        end: '2023-12-01 23:59',
+        start: Temporal.ZonedDateTime.from('2023-12-01T00:00:00.000Z[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-12-01T23:59:00.000Z[UTC]'),
         title: 'Event 1',
       }
       const uiEvent = new MouseEvent('click', {
@@ -122,7 +123,7 @@ describe('Calendar callbacks', () => {
         callbacks: {
           onEventClick,
         },
-        selectedDate: '2023-12-01',
+        selectedDate: Temporal.PlainDate.from('2023-12-01'),
         defaultView: viewName,
         events: [calendarEvent],
       })
@@ -147,8 +148,8 @@ describe('Calendar callbacks', () => {
         const onDoubleClickEvent = vi.fn()
         const calendarEvent = {
           id: '1',
-          start: '2023-12-01 00:00',
-          end: '2023-12-01 23:59',
+          start: Temporal.ZonedDateTime.from('2023-12-01T00:00:00.000Z[UTC]'),
+          end: Temporal.ZonedDateTime.from('2023-12-01T23:59:00.000Z[UTC]'),
           title: 'Event 1',
         }
         const uiEvent = new MouseEvent('dblclick', {
@@ -160,7 +161,7 @@ describe('Calendar callbacks', () => {
           callbacks: {
             onDoubleClickEvent,
           },
-          selectedDate: '2023-12-01',
+          selectedDate: Temporal.PlainDate.from('2023-12-01'),
           defaultView: viewName,
           events: [calendarEvent],
         })
@@ -183,8 +184,8 @@ describe('Calendar callbacks', () => {
       const onClickDate = vi.fn()
       const calendarEvent = {
         id: '1',
-        start: '2027-11-01 00:00',
-        end: '2027-11-01 23:59',
+        start: Temporal.ZonedDateTime.from('2027-11-01T00:00:00.000Z[UTC]'),
+        end: Temporal.ZonedDateTime.from('2027-11-01T23:59:00.000Z[UTC]'),
         title: 'Event 1',
       }
       const $app = createCalendarAppSingleton({
@@ -193,7 +194,7 @@ describe('Calendar callbacks', () => {
           onClickDate,
         },
         events: [calendarEvent],
-        selectedDate: '2027-11-12',
+        selectedDate: Temporal.PlainDate.from('2027-11-12'),
         defaultView: InternalViewName.MonthGrid,
       })
       renderComponent($app)
@@ -209,8 +210,8 @@ describe('Calendar callbacks', () => {
         const onClickDateTime = vi.fn()
         const calendarEvent = {
           id: '1',
-          start: '2023-12-01 00:00',
-          end: '2023-12-01 06:00',
+          start: Temporal.ZonedDateTime.from('2023-12-01T00:00:00.000Z[UTC]'),
+          end: Temporal.ZonedDateTime.from('2023-12-01T06:00:00.000Z[UTC]'),
           title: 'Event 1',
         }
         const $app = createCalendarAppSingleton({
@@ -219,7 +220,7 @@ describe('Calendar callbacks', () => {
             onClickDateTime,
           },
           events: [calendarEvent],
-          selectedDate: '2023-12-01',
+          selectedDate: Temporal.PlainDate.from('2023-12-01'),
           defaultView: viewName,
         })
         renderComponent($app)
@@ -239,7 +240,7 @@ describe('Calendar callbacks', () => {
         callbacks: {
           onClickDate,
         },
-        selectedDate: '2027-11-12',
+        selectedDate: Temporal.PlainDate.from('2027-11-12'),
         defaultView: InternalViewName.MonthGrid,
       })
       renderComponent($app)
@@ -266,7 +267,7 @@ describe('Calendar callbacks', () => {
         callbacks: {
           onDoubleClickDate,
         },
-        selectedDate: '2027-11-12',
+        selectedDate: Temporal.PlainDate.from('2027-11-12'),
         defaultView: InternalViewName.MonthGrid,
       })
       renderComponent($app)
@@ -304,7 +305,7 @@ describe('Calendar callbacks', () => {
           callbacks: {
             onClickDateTime,
           },
-          selectedDate: '2023-12-11',
+          selectedDate: Temporal.PlainDate.from('2023-12-11'),
           defaultView: view,
         })
         renderComponent($app)
@@ -344,7 +345,7 @@ describe('Calendar callbacks', () => {
           callbacks: {
             onDoubleClickDateTime,
           },
-          selectedDate: '2023-12-11',
+          selectedDate: Temporal.PlainDate.from('2023-12-11'),
           defaultView: view,
         })
         renderComponent($app)

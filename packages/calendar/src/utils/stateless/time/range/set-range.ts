@@ -87,7 +87,7 @@ export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
     start: monthForDate[0][0],
     end: monthForDate[monthForDate.length - 1][
       monthForDate[monthForDate.length - 1].length - 1
-    ],
+    ].with({ hour: 23, minute: 59 }),
   }
 }
 

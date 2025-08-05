@@ -13,6 +13,5 @@ export default defineConfig({
       reporter: ['text', 'html', 'lcov', 'text-summary'],
       exclude: ['website/**', 'development/**', 'libs/**', '**/__test__/**', 'cypress/**'],
     },
-    useAtomics: true,
   },
-})
+}) 

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   beforeEach,
@@ -28,7 +29,7 @@ describe('Navigating date picker with keyboard', () => {
 
     beforeEach(() => {
       $app = createAppSingleton({
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
       })
     })
 
@@ -53,30 +54,30 @@ describe('Navigating date picker with keyboard', () => {
 
       await waitFor(() => {
         navigateWithKey('ArrowRight')
-        expect($app.datePickerState.datePickerDate.value).toBe('2021-01-02')
+        expect($app.datePickerState.datePickerDate.value).toEqual(Temporal.PlainDate.from('2021-01-02'))
       })
 
       await waitFor(() => {
         navigateWithKey('ArrowLeft')
-        expect($app.datePickerState.datePickerDate.value).toBe('2021-01-01')
+        expect($app.datePickerState.datePickerDate.value).toEqual(Temporal.PlainDate.from('2021-01-01'))
       })
 
       await waitFor(() => {
         navigateWithKey('ArrowUp')
         navigateWithKey('ArrowUp')
-        expect($app.datePickerState.datePickerDate.value).toBe('2020-12-18')
+        expect($app.datePickerState.datePickerDate.value).toEqual(Temporal.PlainDate.from('2020-12-18'))
       })
 
       await waitFor(() => {
         navigateWithKey('ArrowDown')
-        expect($app.datePickerState.datePickerDate.value).toBe('2020-12-25')
+        expect($app.datePickerState.datePickerDate.value).toEqual(Temporal.PlainDate.from('2020-12-25'))
       })
 
       const focusedElement = getFocusedElement()
       focusedElement?.dispatchEvent(
         new KeyboardEvent('keydown', { key: 'Enter' })
       )
-      expect($app.datePickerState.selectedDate.value).toBe('2020-12-25')
+      expect($app.datePickerState.selectedDate.value).toEqual(Temporal.PlainDate.from('2020-12-25'))
     })
   })
 })

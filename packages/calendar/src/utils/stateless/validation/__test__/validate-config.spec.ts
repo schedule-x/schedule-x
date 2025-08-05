@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -11,55 +12,53 @@ import { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day
 describe('validating the config', () => {
   describe('validating the selected date', () => {
     it.each([['2022-01-01T00:00:00.000Z'], ['2022-01-01 00:00:00']])(
-      'should throw an error if the selected date is not a valid date string',
+      'should throw an error if the selected date is not a temporal plain date',
       (selectedDate: string) => {
         expect(() =>
           validateConfig({ selectedDate } as CalendarConfigExternal)
-        ).toThrowError(
-          '[Schedule-X error]: selectedDate must have the format YYYY-MM-DD'
-        )
+        ).toThrowError()
       }
     )
 
     it('should not throw an error if the selected date is a valid date string', () => {
       expect(() =>
-        validateConfig({ selectedDate: '2022-01-01' } as CalendarConfigExternal)
+        validateConfig({ selectedDate: Temporal.PlainDate.from('2022-01-01') } as CalendarConfigExternal)
       ).not.toThrowError()
     })
   })
 
   describe('validating minDate and maxDate', () => {
     it.each([['2022-01-01T00:00:00.000Z'], ['2022-01-01 00:00:00']])(
-      'should throw an error if the minDate is not a valid date string',
+      'should throw an error if the minDate is not a temporal plain date',
       (minDate: string) => {
         expect(() =>
           validateConfig({ minDate } as CalendarConfigExternal)
         ).toThrowError(
-          '[Schedule-X error]: minDate must have the format YYYY-MM-DD'
+          '[Schedule-X error]: minDate must be a temporal plain date'
         )
       }
     )
 
     it.each([['2022-01-01T00:00:00.000Z'], ['2022-01-01 00:00:00']])(
-      'should throw an error if the maxDate is not a valid date string',
+      'should throw an error if the maxDate is not a temporal plain date',
       (maxDate: string) => {
         expect(() =>
           validateConfig({ maxDate } as CalendarConfigExternal)
         ).toThrowError(
-          '[Schedule-X error]: maxDate must have the format YYYY-MM-DD'
+          '[Schedule-X error]: maxDate must be a temporal plain date'
         )
       }
     )
 
-    it('should not throw an error if the minDate is a valid date string', () => {
+    it('should not throw an error if the minDate is a temporal plain date', () => {
       expect(() =>
-        validateConfig({ minDate: '2022-01-01' } as CalendarConfigExternal)
+        validateConfig({ minDate: Temporal.PlainDate.from('2022-01-01') } as CalendarConfigExternal)
       ).not.toThrowError()
     })
 
-    it('should not throw an error if the maxDate is a valid date string', () => {
+    it('should not throw an error if the maxDate is a temporal plain date', () => {
       expect(() =>
-        validateConfig({ maxDate: '2022-01-01' } as CalendarConfigExternal)
+        validateConfig({ maxDate: Temporal.PlainDate.from('2022-01-01') } as CalendarConfigExternal)
       ).not.toThrowError()
     })
   })

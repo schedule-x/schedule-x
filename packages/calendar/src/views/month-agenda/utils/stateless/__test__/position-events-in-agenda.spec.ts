@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -14,12 +15,12 @@ describe('Positioning events in a month agenda', () => {
       events: [
         {
           id: eventId,
-          start: '2023-11-01',
-          end: '2023-11-10',
+          start: Temporal.PlainDate.from('2023-11-01'),
+          end: Temporal.PlainDate.from('2023-11-10'),
         },
       ],
     })
-    const agendaMonth = createAgendaMonth('2023-11-01', $app.timeUnitsImpl)
+    const agendaMonth = createAgendaMonth(Temporal.PlainDate.from('2023-11-01'), $app.timeUnitsImpl)
 
     it('should position event in all 10 days', () => {
       const result = positionEventsInAgenda(
@@ -53,22 +54,22 @@ describe('Positioning events in a month agenda', () => {
       events: [
         {
           id: eventId1,
-          start: '2023-11-01',
-          end: '2023-11-10',
+          start: Temporal.PlainDate.from('2023-11-01'),
+          end: Temporal.PlainDate.from('2023-11-10'),
         },
         {
           id: eventId2,
-          start: '2023-11-01',
-          end: '2023-11-05',
+          start: Temporal.PlainDate.from('2023-11-01'),
+          end: Temporal.PlainDate.from('2023-11-05'),
         },
         {
           id: eventId3,
-          start: '2023-11-05',
-          end: '2023-11-10',
+          start: Temporal.PlainDate.from('2023-11-05'),
+          end: Temporal.PlainDate.from('2023-11-10'),
         },
       ],
     })
-    const agendaMonth = createAgendaMonth('2023-11-01', $app.timeUnitsImpl)
+    const agendaMonth = createAgendaMonth(Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'), $app.timeUnitsImpl)
 
     it('should position events in all days', () => {
       const result = positionEventsInAgenda(

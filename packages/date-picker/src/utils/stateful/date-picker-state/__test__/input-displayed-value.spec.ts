@@ -35,7 +35,7 @@ describe('date picker state impl - input displayed value', () => {
     ) => {
       const selectedDateParam = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
       const underTest = createDatePickerState(config(locale))
-      underTest.inputDisplayedValue.value = inputDisplayedValue
+      underTest.handleInput(inputDisplayedValue)
 
       if (expectedNewSelectedDate) {
         expect(underTest.selectedDate.value).toEqual(Temporal.PlainDate.from(expectedNewSelectedDate))

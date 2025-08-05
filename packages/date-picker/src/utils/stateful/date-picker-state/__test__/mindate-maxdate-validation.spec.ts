@@ -16,10 +16,10 @@ describe('Date-picker state', () => {
       config.locale = signal('en-US')
       config.min = '2021-01-01'
       config.max = '2100-12-31'
-      const originalSelectedDate = '2021-12-20'
+      const originalSelectedDate = Temporal.PlainDate.from('2021-12-20')
       const state = createDatePickerState(config, originalSelectedDate)
 
-      state.inputDisplayedValue.value = '2020-12-31' // less than min
+      state.handleInput('2020-12-31') // less than min
 
       expect(state.inputDisplayedValue.value).toBe('12/20/2021')
     })
@@ -29,11 +29,11 @@ describe('Date-picker state', () => {
       config.locale = signal('en-US')
       config.min = '2021-01-01'
       config.max = '2100-12-31'
-      const state = createDatePickerState(config, '2021-12-31')
+      const state = createDatePickerState(config, Temporal.PlainDate.from('2021-12-31'))
 
-      state.inputDisplayedValue.value = '2022-01-01' // greater than min
+      state.handleInput('2022-01-01') // greater than min
 
-      expect(state.inputDisplayedValue.value).toBe('2022-01-01')
+      expect(state.inputDisplayedValue.value).toBe('1/1/2022')
     })
   })
 
@@ -43,10 +43,10 @@ describe('Date-picker state', () => {
       config.locale = signal('en-US')
       config.min = '2000-01-01'
       config.max = '2021-12-31'
-      const originalSelectedDate = '2021-12-20'
+      const originalSelectedDate = Temporal.PlainDate.from('2021-12-20')
       const state = createDatePickerState(config, originalSelectedDate)
 
-      state.inputDisplayedValue.value = '2022-01-01'
+      state.handleInput('2022-01-01')
 
       expect(state.inputDisplayedValue.value).toBe('12/20/2021')
     })
@@ -56,11 +56,11 @@ describe('Date-picker state', () => {
       config.locale = signal('en-US')
       config.min = '2000-01-01'
       config.max = '2021-12-31'
-      const state = createDatePickerState(config, '2021-12-31')
+      const state = createDatePickerState(config, Temporal.PlainDate.from('2021-12-31'))
 
-      state.inputDisplayedValue.value = '2021-01-01'
+      state.handleInput('2021-01-01')
 
-      expect(state.inputDisplayedValue.value).toBe('2021-01-01')
+      expect(state.inputDisplayedValue.value).toBe('1/1/2021')
     })
   })
 })

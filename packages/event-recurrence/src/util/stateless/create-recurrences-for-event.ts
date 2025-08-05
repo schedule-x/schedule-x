@@ -68,14 +68,14 @@ export const createRecurrencesForBackgroundEvent = (
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
 
-  if (recurrenceSet[0].start === parseTemporalToRFC5545(backgroundEvent.start)) {
+  if (parseSXToRFC5545(recurrenceSet[0].start) === parseTemporalToRFC5545(backgroundEvent.start)) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
   return recurrenceSet.map((recurrence) => {
     const eventCopy: AugmentedBackgroundEvent = structuredClone(backgroundEvent)
-    eventCopy.start = parseRFC5545ToTemporal(recurrence.start, $app.config.timezone.value)
-    eventCopy.end = parseRFC5545ToTemporal(recurrence.end, $app.config.timezone.value)
+    eventCopy.start = parseRFC5545ToTemporal(parseSXToRFC5545(recurrence.start), $app.config.timezone.value)
+    eventCopy.end = parseRFC5545ToTemporal(parseSXToRFC5545(recurrence.end), $app.config.timezone.value)
     eventCopy.isCopy = true
     return eventCopy
   })

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import {
   describe,
