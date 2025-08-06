@@ -72,8 +72,8 @@ describe('CalendarApp', () => {
         expect(event2Week1Arg0.dataset.ccid).toMatch(ccidPattern)
         expect(event2Week1Arg1.calendarEvent.id).toBe(eventId2)
         expect(event2Week1Arg1.calendarEvent.title).toBe(eventTitle2)
-        expect(event2Week1Arg1.calendarEvent.start).toBe(eventStart2)
-        expect(event2Week1Arg1.calendarEvent.end).toBe(eventEnd2)
+        expect(event2Week1Arg1.calendarEvent.start).toEqual(eventStart2)
+        expect(event2Week1Arg1.calendarEvent.end).toEqual(eventEnd2)
         expect(event2Week1Arg1.hasStartDate).toBe(false)
 
         const event2Week2 = customComponentFn.getCalls()[2]
@@ -83,8 +83,8 @@ describe('CalendarApp', () => {
         expect(event2Week2Arg0.dataset.ccid).toMatch(ccidPattern)
         expect(event2Week2Arg1.calendarEvent.id).toBe(eventId2)
         expect(event2Week2Arg1.calendarEvent.title).toBe(eventTitle2)
-        expect(event2Week2Arg1.calendarEvent.start).toBe(eventStart2)
-        expect(event2Week2Arg1.calendarEvent.end).toBe(eventEnd2)
+        expect(event2Week2Arg1.calendarEvent.start).toEqual(eventStart2)
+        expect(event2Week2Arg1.calendarEvent.end).toEqual(eventEnd2)
         expect(event2Week2Arg1.hasStartDate).toBe(false)
 
         const event1 = customComponentFn.getCalls()[1]
@@ -94,8 +94,8 @@ describe('CalendarApp', () => {
         expect(event1Arg0.dataset.ccid).toMatch(ccidPattern)
         expect(event1Arg1.calendarEvent.id).toBe(eventId1)
         expect(event1Arg1.calendarEvent.title).toBe(eventTitle1)
-        expect(event1Arg1.calendarEvent.start).toBe(eventStart1)
-        expect(event1Arg1.calendarEvent.end).toBe(eventEnd1)
+        expect(event1Arg1.calendarEvent.start).toEqual(eventStart1)
+        expect(event1Arg1.calendarEvent.end).toEqual(eventEnd1)
         expect(event1Arg1.calendarEvent.randomForeignProperty).toBe(
           randomForeignPropertyValue
         )

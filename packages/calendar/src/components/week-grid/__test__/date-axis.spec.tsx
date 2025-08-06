@@ -6,7 +6,6 @@ import {
   it,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import TimeUnitsBuilder from '@schedule-x/shared/src/utils/stateful/time-units/time-units.builder'
-import { Month } from '@schedule-x/shared/src/enums/time/month.enum'
 import { cleanup, render, screen } from '@testing-library/preact'
 import DateAxis from '../date-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
@@ -16,7 +15,7 @@ import { beforeEach } from 'vitest'
 import { createBaseConfig } from '../../../__test__/utils'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 
-const renderComponent = ($app: CalendarAppSingleton, week: Date[]) => {
+const renderComponent = ($app: CalendarAppSingleton, week: Temporal.ZonedDateTime[]) => {
   render(
     <AppContext.Provider value={$app}>
       <DateAxis week={week} />
@@ -41,7 +40,7 @@ describe('DateAxis', () => {
 
   describe('displaying dates for a week', () => {
     it('should display dates for the week of 2023-09-09', () => {
-      const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 9))
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-09'))
       renderComponent(__createAppWithViews__(), week)
       ;[4, 5, 6, 7, 8, 9, 10].forEach((date) => {
         expect(screen.getByText(date.toString())).not.toBeNull()
@@ -49,7 +48,7 @@ describe('DateAxis', () => {
     })
 
     it('should display the day names', () => {
-      const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 9))
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-09'))
       renderComponent(__createAppWithViews__(), week)
       ;['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].forEach((day) => {
         expect(screen.getByText(day)).not.toBeNull()
@@ -57,7 +56,7 @@ describe('DateAxis', () => {
     })
 
     it('should not highlight any date that is not today', () => {
-      const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 1))
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-01'))
       renderComponent(__createAppWithViews__(), week)
 
       expect(
@@ -66,7 +65,7 @@ describe('DateAxis', () => {
     })
 
     it('should highlight today', () => {
-      const week = timeUnitsImpl.getWeekFor(new Date())
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-01'))
       renderComponent(__createAppWithViews__(), week)
 
       expect(
@@ -75,7 +74,7 @@ describe('DateAxis', () => {
     })
 
     it('should have data-date attributes for every day', () => {
-      const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 1))
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-01'))
       renderComponent(__createAppWithViews__(), week)
 
       const allDayElements = document.querySelectorAll('.sx__week-grid__date')
@@ -91,7 +90,7 @@ describe('DateAxis', () => {
 
   describe('a week starting on Monday', () => {
     it('should display the day names in the correct order', () => {
-      const week = timeUnitsImpl.getWeekFor(new Date())
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-01'))
       renderComponent(__createAppWithViews__(), week)
 
       const allDayElements = document.querySelectorAll('.sx__week-grid__date')
@@ -110,10 +109,10 @@ describe('DateAxis', () => {
       timeUnitsImpl = new TimeUnitsBuilder()
         .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SUNDAY }))
         .build()
-      const week = timeUnitsImpl.getWeekFor(new Date(2023, Month.SEPTEMBER, 3))
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-03'))
       renderComponent(
         __createAppWithViews__({
-          firstDayOfWeek: 0,
+          firstDayOfWeek: WeekDay.SUNDAY,
         }),
         week
       )

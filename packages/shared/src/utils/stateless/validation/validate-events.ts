@@ -1,25 +1,22 @@
-import { dateStringRegex, dateTimeStringRegex } from '../time/validation/regex'
 import CalendarEventExternal from '../../../interfaces/calendar/calendar-event.interface'
 
 export const validateEvents = (events: CalendarEventExternal[] = []) => {
   events?.forEach((event: CalendarEventExternal) => {
-    const startStr = typeof event.start === 'string' ? event.start : event.start.toString();
-    const endStr = typeof event.end === 'string' ? event.end : event.end.toString();
     if (
-      !dateTimeStringRegex.test(startStr) &&
-      !dateStringRegex.test(startStr)
+      !(event.start instanceof Temporal.ZonedDateTime) &&
+      !(event.start instanceof Temporal.PlainDate)
     ) {
       throw new Error(
-        `[Schedule-X error]: Event start time ${startStr} is not a valid time format. Please refer to the docs for more information.`
+        `[Schedule-X error]: Event start time needs to be a Temporal.ZonedDateTime or Temporal.PlainDate.`
       )
     }
 
     if (
-      !dateTimeStringRegex.test(endStr) &&
-      !dateStringRegex.test(endStr)
+      !(event.end instanceof Temporal.ZonedDateTime) &&
+      !(event.end instanceof Temporal.PlainDate)
     ) {
       throw new Error(
-        `[Schedule-X error]: Event end time ${endStr} is not a valid time format. Please refer to the docs for more information.`
+        `[Schedule-X error]: Event end time needs to be a Temporal.ZonedDateTime or Temporal.PlainDate.`
       )
     }
 

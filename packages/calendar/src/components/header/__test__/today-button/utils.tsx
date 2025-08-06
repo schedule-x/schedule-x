@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/preact'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import TodayButton from '../../today-button'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import 'temporal-polyfill/global'
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(
@@ -13,7 +13,7 @@ const renderComponent = ($app: CalendarAppSingleton) => {
   )
 }
 
-const createAppSingletonWithSelectedDate = (initialSelectedDate: string) => {
+const createAppSingletonWithSelectedDate = (initialSelectedDate: Temporal.PlainDate) => {
   return __createAppWithViews__({
     datePicker: {
       selectedDate: initialSelectedDate,
@@ -22,7 +22,7 @@ const createAppSingletonWithSelectedDate = (initialSelectedDate: string) => {
 }
 
 export const renderWithSelectedDateInThePast = (
-  initialSelectedDate: string
+  initialSelectedDate: Temporal.PlainDate
 ) => {
   const $app = createAppSingletonWithSelectedDate(initialSelectedDate)
   renderComponent($app)
@@ -31,7 +31,8 @@ export const renderWithSelectedDateInThePast = (
 }
 
 export const renderWithSelectedDateToday = () => {
-  const $app = createAppSingletonWithSelectedDate(toDateString(new Date()))
+  const now = Temporal.Now.plainDateISO()
+  const $app = createAppSingletonWithSelectedDate(Temporal.PlainDate.from(now))
   renderComponent($app)
 
   return $app

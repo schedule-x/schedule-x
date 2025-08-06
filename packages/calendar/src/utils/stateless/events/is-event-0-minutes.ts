@@ -13,5 +13,5 @@ export const areEvents0MinutesAndConcurrent = (
   e1: CalendarEventInternal | undefined,
   e2: CalendarEventInternal | undefined
 ) => {
-  return isEvent0Minutes(e1) && isEvent0Minutes(e2) && e1?.start === e2?.start
+  return isEvent0Minutes(e1) && isEvent0Minutes(e2) && e1?.start.toString() === e2?.start.toString()
 }

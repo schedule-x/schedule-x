@@ -75,8 +75,8 @@ describe('YearsView', () => {
 
   it('should display years based on min- & max dates in config', () => {
     const $app = createAppSingleton({
-      min: '2020-01-01',
-      max: '2021-01-01',
+      min: Temporal.PlainDate.from('2020-01-01'),
+      max: Temporal.PlainDate.from('2021-01-01'),
     })
 
     render(

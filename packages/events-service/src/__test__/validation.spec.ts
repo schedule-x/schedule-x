@@ -12,13 +12,13 @@ describe('validating events when adding them', () => {
     it.each([
       {
         id: '1',
-        start: '2021-01-01',
-        end: '2021-01-02',
+        start: Temporal.PlainDate.from('2021-01-01'),
+        end: Temporal.PlainDate.from('2021-01-02'),
       },
       {
         id: '2',
-        start: '2021-01-01 00:00',
-        end: '2021-01-02 00:00',
+        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2021-01-02T00:00:00+00:00[UTC]'),
       },
     ])(`should not throw an error`, (event) => {
       const eventsService = createEventsServicePlugin()
@@ -46,6 +46,7 @@ describe('validating events when adding them', () => {
       const $app = __createAppWithViews__()
       eventsService.beforeRender($app)
 
+      // @ts-expect-error - we want to test the validation
       expect(() => eventsService.set([event])).toThrow()
     })
   })
@@ -54,13 +55,13 @@ describe('validating events when adding them', () => {
     it.each([
       {
         id: '1',
-        start: '2021-01-01',
-        end: '2021-01-02',
+        start: Temporal.PlainDate.from('2021-01-01'),
+        end: Temporal.PlainDate.from('2021-01-02'),
       },
       {
         id: '2',
-        start: '2021-01-01 00:00',
-        end: '2021-01-02 00:00',
+        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2021-01-02T00:00:00+00:00[UTC]'),
       },
     ])(`should not throw an error`, (event) => {
       const eventsService = createEventsServicePlugin()
@@ -88,6 +89,7 @@ describe('validating events when adding them', () => {
       const $app = __createAppWithViews__()
       eventsService.beforeRender($app)
 
+      // @ts-expect-error - we want to test the validation
       expect(() => eventsService.add(event)).toThrow()
     })
   })
@@ -96,13 +98,13 @@ describe('validating events when adding them', () => {
     it.each([
       {
         id: '1',
-        start: '2021-01-01',
-        end: '2021-01-02',
+        start: Temporal.PlainDate.from('2021-01-01'),
+        end: Temporal.PlainDate.from('2021-01-02'),
       },
       {
         id: '2',
-        start: '2021-01-01 00:00',
-        end: '2021-01-02 00:00',
+        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2021-01-02T00:00:00+00:00[UTC]'),
       },
     ])(`should not throw an error`, (event) => {
       const eventsService = createEventsServicePlugin()
@@ -130,6 +132,7 @@ describe('validating events when adding them', () => {
       const $app = __createAppWithViews__()
       eventsService.beforeRender($app)
 
+      // @ts-expect-error - we want to test the validation
       expect(() => eventsService.update(event)).toThrow()
     })
   })

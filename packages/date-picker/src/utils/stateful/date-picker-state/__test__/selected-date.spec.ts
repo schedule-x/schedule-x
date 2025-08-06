@@ -25,7 +25,7 @@ describe('selected date in date picker state impl', () => {
   })
 
   it('should set selected date to current date when empty string is provided', () => {
-    const underTest = createDatePickerState(config(), '')
+    const underTest = createDatePickerState(config(), undefined)
     expect(underTest.selectedDate.value).toEqual(Temporal.PlainDate.from(Temporal.Now.plainDateISO()))
   })
 
@@ -40,6 +40,6 @@ describe('selected date in date picker state impl', () => {
     const newSelectedDate = Temporal.PlainDate.from('2023-01-10')
     underTest.selectedDate.value = newSelectedDate
 
-    expect(onChangeSpy).toHaveBeenCalledWith(newSelectedDate.toString())
+    expect(onChangeSpy).toHaveBeenCalledWith(newSelectedDate)
   })
 })

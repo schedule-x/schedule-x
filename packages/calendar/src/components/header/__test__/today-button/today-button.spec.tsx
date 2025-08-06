@@ -20,26 +20,28 @@ describe('TodayButton', () => {
 
   describe('Clicking the button', () => {
     it('should set the selected date to today', () => {
-      const initialSelectedDate = '1991-07-01'
-      const expectedSelectedDate = toDateString(new Date())
+      const initialSelectedDate = Temporal.PlainDate.from('1991-07-01')
+      const now = Temporal.Now.plainDateISO()
+      const expectedSelectedDate = Temporal.PlainDate.from(now)
       const $app = renderWithSelectedDateInThePast(initialSelectedDate)
-      expect($app.datePickerState.selectedDate.value).toBe(initialSelectedDate)
+      expect($app.datePickerState.selectedDate.value).toEqual(initialSelectedDate)
 
       clickTodayButton()
 
-      expect($app.datePickerState.selectedDate.value).toBe(expectedSelectedDate)
+      expect($app.datePickerState.selectedDate.value).toEqual(expectedSelectedDate)
     })
 
     it('should not change the selected date if it is already today', () => {
       const $app = renderWithSelectedDateToday()
-      expect($app.datePickerState.selectedDate.value).toBe(
-        toDateString(new Date())
+      const now = Temporal.Now.plainDateISO()
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from(now)
       )
 
       clickTodayButton()
 
-      expect($app.datePickerState.selectedDate.value).toBe(
-        toDateString(new Date())
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from(now)
       )
     })
   })

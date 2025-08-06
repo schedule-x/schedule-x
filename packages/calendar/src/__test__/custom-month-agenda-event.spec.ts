@@ -60,8 +60,8 @@ describe('CalendarApp', () => {
         expect(elementCCID).toMatch(/custom-month-agenda-event-\w+/)
         expect(callSecondArgument.calendarEvent.id).toBe(eventId)
         expect(callSecondArgument.calendarEvent.title).toBe(eventTitle)
-        expect(callSecondArgument.calendarEvent.start).toBe(eventStart)
-        expect(callSecondArgument.calendarEvent.end).toBe(eventEnd)
+        expect(callSecondArgument.calendarEvent.start).toEqual(eventStart)
+        expect(callSecondArgument.calendarEvent.end).toEqual(eventEnd)
         expect(callSecondArgument.calendarEvent.foreignProperty).toBe(
           foreignPropertyValue
         )

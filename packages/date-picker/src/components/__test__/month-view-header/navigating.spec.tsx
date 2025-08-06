@@ -11,7 +11,7 @@ import { renderComponent } from './utils'
 describe('month view header', () => {
   describe('navigating through the months', () => {
     it('should go to next month', async () => {
-      const selectedDate = '2021-01-01'
+      const selectedDate = Temporal.PlainDate.from('2021-01-01')
       const expectedMonthName = 'February 2021'
       const $app = createAppSingleton({ selectedDate })
 
@@ -29,7 +29,7 @@ describe('month view header', () => {
     })
 
     it('should go to previous month', async () => {
-      const selectedDate = '2021-01-01'
+      const selectedDate = Temporal.PlainDate.from('2021-01-01')
       const expectedMonthName = 'December 2020'
       const $app = createAppSingleton({ selectedDate })
 

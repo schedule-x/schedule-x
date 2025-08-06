@@ -43,8 +43,8 @@ describe('isEvent0Minutes', () => {
   it('should return false for untimed events', () => {
     const e4: CalendarEventInternal = {
       ...stubInterface<CalendarEventInternal>(),
-      start: Temporal.ZonedDateTime.from('2023-02-17T00:00:00.00+00:00[UTC]'),
-      end: Temporal.ZonedDateTime.from('2023-02-17T00:00:00.00+00:00[UTC]'),
+      start: Temporal.PlainDate.from('2023-02-17'),
+      end: Temporal.PlainDate.from('2023-02-17'),
     }
     expect(isEvent0Minutes(e4)).toBe(false)
   })

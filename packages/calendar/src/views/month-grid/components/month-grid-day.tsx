@@ -8,7 +8,7 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { DATE_GRID_BLOCKER } from '../../../constants'
-import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import { isSameDay, isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 import { randomStringId, toDateString } from '@schedule-x/shared/src'
@@ -80,7 +80,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     const classes = [...baseClasses]
 
     if (dayMonth !== selectedDateMonth) classes.push('is-leading-or-trailing')
-    if ($app.datePickerState.selectedDate.value === day.date)
+    if (isSameDay($app.datePickerState.selectedDate.value, day.date))
       classes.push('is-selected')
     setWrapperClasses(classes)
   }, [$app.datePickerState.selectedDate.value])

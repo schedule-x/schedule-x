@@ -10,7 +10,7 @@ import { createAppSingleton } from '../factory'
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 
 const createApp = (
-  initialSelectedDate?: string,
+  initialSelectedDate?: Temporal.PlainDate,
   listeners?: DatePickerListeners
 ) => {
   const underTest = DatePickerApp
@@ -26,27 +26,27 @@ const createApp = (
 
 describe('date picker app', () => {
   it('should be able to retrieve date picker value', () => {
-    const expectedInitialValue = '2020-01-01'
+    const expectedInitialValue = Temporal.PlainDate.from('2020-01-01')
     const app = createApp(expectedInitialValue)
 
-    expect(app.value).toBe(expectedInitialValue)
+    expect(app.value).toEqual(expectedInitialValue)
   })
 
   it('should be able to set date picker value', () => {
-    const expectedInitialValue = '2020-01-01'
+    const expectedInitialValue = Temporal.PlainDate.from('2020-01-01')
     const app = createApp(expectedInitialValue)
 
-    const expectedNewValue = '2020-01-02'
+    const expectedNewValue = Temporal.PlainDate.from('2020-01-02')
     app.value = expectedNewValue
 
-    expect(app.value).toBe(expectedNewValue)
+    expect(app.value).toEqual(expectedNewValue)
   })
 
   it('should call on change callback when value changes', () => {
     const onChangeSpy = mockFn()
     const app = createApp(undefined, { onChange: onChangeSpy })
 
-    const expectedNewValue = '1999-12-31'
+    const expectedNewValue = Temporal.PlainDate.from('1999-12-31')
     expect(onChangeSpy).not.toHaveBeenCalledWith(expectedNewValue)
     app.value = expectedNewValue
 

@@ -55,14 +55,14 @@ export const createDatePickerState = (
   })
 
   let wasInitialized = false
-  const handleOnChange = (selectedDate: string) => {
+  const handleOnChange = (selectedDate: Temporal.PlainDate) => {
     if (!wasInitialized) return (wasInitialized = true)
 
     config.listeners.onChange!(selectedDate)
   }
 
   effect(() => {
-    if (config.listeners?.onChange) handleOnChange(selectedDate.value.toString())
+    if (config.listeners?.onChange) handleOnChange(selectedDate.value)
   })
 
   return {

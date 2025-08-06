@@ -108,6 +108,7 @@ describe('Scroll controller plugin', () => {
     ])(
       'should scroll when the day grid element comes into the DOM',
       (initialScrollConfig, expectedScroll) => {
+        const underTest = createScrollControllerPlugin({
           initialScroll: initialScrollConfig,
         })
         const viewContainerScrollSpy = vi.spyOn(viewContainer, 'scroll')

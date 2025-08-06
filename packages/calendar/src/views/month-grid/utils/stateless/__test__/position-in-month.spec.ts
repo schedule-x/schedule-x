@@ -17,20 +17,20 @@ describe('Positioning events for in month view', () => {
 
   describe('Positioning single day events in first week', () => {
     const month = createMonth(
-      '2020-01-01',
+      Temporal.PlainDate.from('2020-01-01'),
       new TimeUnitsBuilder().withConfig(createBaseConfig()).build()
     )
     const event1 = new CalendarEventBuilder(
       $app.config,
       1,
-      '2020-01-01',
-      '2020-01-01'
+      Temporal.PlainDate.from('2020-01-01'),
+      Temporal.PlainDate.from('2020-01-01')
     ).build()
     const event2 = new CalendarEventBuilder(
       $app.config,
       1,
-      '2020-01-01',
-      '2020-01-01'
+      Temporal.PlainDate.from('2020-01-01'),
+      Temporal.PlainDate.from('2020-01-01')
     ).build()
     const sortedEvents = [event1, event2]
 
@@ -44,20 +44,20 @@ describe('Positioning events for in month view', () => {
 
   describe('Positioning multi day events in first week', () => {
     const month = createMonth(
-      '2020-01-01',
+      Temporal.PlainDate.from('2020-01-01'),
       new TimeUnitsBuilder().withConfig(createBaseConfig()).build()
     )
     const event1 = new CalendarEventBuilder(
       $app.config,
       1,
-      '2019-12-30',
-      '2020-01-01'
+      Temporal.PlainDate.from('2019-12-30'),
+      Temporal.PlainDate.from('2020-01-01')
     ).build()
     const event2 = new CalendarEventBuilder(
       $app.config,
       1,
-      '2020-01-01',
-      '2020-01-03'
+      Temporal.PlainDate.from('2020-01-01'),
+      Temporal.PlainDate.from('2020-01-03')
     ).build()
     const sortedEvents = [event1, event2]
 
@@ -82,20 +82,20 @@ describe('Positioning events for in month view', () => {
 
   describe('Positioning a multi day event in every week of month, alongside other events', () => {
     const month = createMonth(
-      '2020-01-01',
+      Temporal.PlainDate.from('2020-01-01'),
       new TimeUnitsBuilder().withConfig(createBaseConfig()).build()
     )
     const event1 = new CalendarEventBuilder(
       $app.config,
       1,
-      '2019-12-30',
-      '2020-01-28'
+      Temporal.PlainDate.from('2019-12-30'),
+      Temporal.PlainDate.from('2020-01-28')
     ).build()
     const event2 = new CalendarEventBuilder(
       $app.config,
       1,
-      '2020-01-28',
-      '2020-01-29'
+      Temporal.PlainDate.from('2020-01-28'),
+      Temporal.PlainDate.from('2020-01-29')
     ).build()
     const sortedEvents = [event1, event2]
 

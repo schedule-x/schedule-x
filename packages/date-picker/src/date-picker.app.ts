@@ -16,10 +16,10 @@ export default class DatePickerApp {
   }
 
   get value() {
-    return this.$app.datePickerState.selectedDate.value.toString()
+    return this.$app.datePickerState.selectedDate.value
   }
 
-  set value(value: string) {
+  set value(value: Temporal.PlainDate) {
     this.$app.datePickerState.selectedDate.value = Temporal.PlainDate.from(value)
   }
 
