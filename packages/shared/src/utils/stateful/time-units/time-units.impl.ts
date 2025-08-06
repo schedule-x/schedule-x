@@ -79,6 +79,8 @@ export default class TimeUnitsImpl implements TimeUnits {
   }
 
   getMonthsFor(year: number): Temporal.PlainDate[] {
+    if (year === 0) throw new NoYearZeroError()
+
     return Object.values(Month)
       .filter((month) => !isNaN(Number(month)))
       .map((month) => Temporal.PlainDate.from({ year, month: Number(month), day: 1 }))

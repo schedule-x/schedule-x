@@ -16,30 +16,31 @@ describe('date picker state impl - input displayed value', () => {
 
   it('should default to current date if no selected date param is given', () => {
     const underTest = createDatePickerState(config())
-    expect(underTest.inputDisplayedValue.value).toBe('8/5/2025')
+    const now = Temporal.Now.plainDateISO()
+    expect(underTest.inputDisplayedValue.value).toBe(`${now.month}/${now.day}/${now.year}`)
   })
 
   it.each([
-    ['en-US', '2021-01-01', '2021-01-01'],
-    ['en-US', '03/20/2025', '2025-03-20'],
+    ['en-US', '2021-01-01', Temporal.PlainDate.from('2021-01-01')],
+    ['en-US', '03/20/2025', Temporal.PlainDate.from('2025-03-20')],
     ['en-US', '03/20/202', false],
-    ['de-DE', '01.01.2021', '2021-01-01'],
-    ['de-DE', '20.03.2025', '2025-03-20'],
+    ['de-DE', '01.01.2021', Temporal.PlainDate.from('2021-01-01')],
+    ['de-DE', '20.03.2025', Temporal.PlainDate.from('2025-03-20')],
     ['de-DE', '20.03.', false],
   ])(
     'should update selected date and date picker date when input displayed value changes',
     (
       locale: string,
       inputDisplayedValue: string,
-      expectedNewSelectedDate: string | boolean
+      expectedNewSelectedDate: Temporal.PlainDate | boolean
     ) => {
       const selectedDateParam = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
       const underTest = createDatePickerState(config(locale))
       underTest.handleInput(inputDisplayedValue)
 
       if (expectedNewSelectedDate) {
-        expect(underTest.selectedDate.value).toEqual(Temporal.PlainDate.from(expectedNewSelectedDate))
-        expect(underTest.datePickerDate.value).toEqual(Temporal.PlainDate.from(expectedNewSelectedDate))
+        expect(underTest.selectedDate.value).toEqual(expectedNewSelectedDate)
+        expect(underTest.datePickerDate.value).toEqual(expectedNewSelectedDate)
       } else {
         expect(underTest.selectedDate.value).toEqual(selectedDateParam)
       }

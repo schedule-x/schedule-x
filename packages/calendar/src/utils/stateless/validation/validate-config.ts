@@ -1,25 +1,24 @@
 import { CalendarConfigExternal } from '@schedule-x/shared/src'
-import { DateFormats } from '@schedule-x/shared/src/values/date-formats'
 
 export const validateConfig = (config: CalendarConfigExternal) => {
-  /* if (
+  if (
     config.selectedDate &&
-    !DateFormats.DATE_STRING.test(config.selectedDate)
+    !(config.selectedDate instanceof Temporal.PlainDate)
   ) {
     throw new Error(
       '[Schedule-X error]: selectedDate must have the format YYYY-MM-DD'
     )
-  } */
+  }
 
-  if (config.minDate && !DateFormats.DATE_STRING.test(typeof config.minDate === 'string' ? config.minDate : config.minDate.toString())) {
+  if (config.minDate && !(config.minDate instanceof Temporal.PlainDate)) {
     throw new Error(
-      '[Schedule-X error]: minDate must have the format YYYY-MM-DD'
+      '[Schedule-X error]: minDate must be a temporal plain date'
     )
   }
 
-  if (config.maxDate && !DateFormats.DATE_STRING.test(typeof config.maxDate === 'string' ? config.maxDate : config.maxDate.toString())) {
+  if (config.maxDate && !(config.maxDate instanceof Temporal.PlainDate)) {
     throw new Error(
-      '[Schedule-X error]: maxDate must have the format YYYY-MM-DD'
+      '[Schedule-X error]: maxDate must be a temporal plain date'
     )
   }
 

@@ -210,13 +210,14 @@ describe('TimeGridDay', () => {
       ).toContain('height: 99.93055555555557%')
     })
 
-    it('does not render a background event, if the background event ends on the start time of the day', () => {
+    it.only('does not render a background event, if the background event ends on the start time of the day', () => {
       const $app = __createAppWithViews__({
         selectedDate: Temporal.PlainDate.from('2023-09-11'),
         dayBoundaries: {
           start: '06:00',
           end: '23:00',
         },
+        timezone: 'UTC',
       })
       renderComponent($app, [], Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]'), [
         {

@@ -50,10 +50,7 @@ export const createDatePickerState = (
         return
       }
       const { year, month, date: day } = toIntegers(newValue)
-      const newPlainDate = Temporal.PlainDate.from({ year, month, day })
-    
-      if (inputDisplayedValue.value === lastValidDisplayedValue.value) return
-
+      const newPlainDate = Temporal.PlainDate.from({ year, month: month + 1, day })
       selectedDate.value = newPlainDate
       datePickerDate.value = newPlainDate
       lastValidDisplayedValue.value = inputDisplayedValue.value

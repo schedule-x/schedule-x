@@ -11,11 +11,11 @@ import { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day
 
 describe('validating the config', () => {
   describe('validating the selected date', () => {
-    it.each([['2022-01-01T00:00:00.000Z'], ['2022-01-01 00:00:00']])(
+    it.each([[Temporal.ZonedDateTime.from('2022-01-01T00:00:00.000+00:00[UTC]'), '2022-01-01']])(
       'should throw an error if the selected date is not a temporal plain date',
-      (selectedDate: string) => {
+      (selectedDate: string | Temporal.ZonedDateTime) => {
         expect(() =>
-          validateConfig({ selectedDate } as CalendarConfigExternal)
+          validateConfig({ selectedDate: selectedDate as unknown } as CalendarConfigExternal)
         ).toThrowError()
       }
     )

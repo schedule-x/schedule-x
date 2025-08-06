@@ -7,7 +7,6 @@ import {
   beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
-import { Month } from '@schedule-x/shared/src/enums/time/month.enum'
 import { clickByDate, renderComponent } from './utils'
 import { createAppSingleton } from '../../../factory'
 
@@ -22,7 +21,7 @@ describe('MonthViewWeek', () => {
     const closeSpy = spyOn($app.datePickerState, 'close')
     renderComponent(
       $app,
-      $app.timeUnitsImpl.getWeekFor(new Date(2023, Month.JULY, 23))
+      $app.timeUnitsImpl.getWeekFor(Temporal.ZonedDateTime.from('2023-07-23T00:00:00.00+00:00[UTC]'))
     )
     expect($app.datePickerState.isOpen.value).toBe(true)
 
@@ -42,12 +41,12 @@ describe('MonthViewWeek', () => {
     ['23', '2023-07-23'],
   ])('should set new selected date', (dateOfMonth, expectedResult) => {
     const $app = createAppSingleton()
-    const date = new Date(2023, Month.JULY, 23)
+    const date = Temporal.ZonedDateTime.from('2023-07-23T00:00:00.00+00:00[UTC]')
     const week = $app.timeUnitsImpl.getWeekFor(date)
     renderComponent($app, week)
 
     clickByDate(dateOfMonth)
 
-    expect($app.datePickerState.selectedDate.value).toBe(expectedResult)
+    expect($app.datePickerState.selectedDate.value).toEqual(Temporal.PlainDate.from(expectedResult))
   })
 })

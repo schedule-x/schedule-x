@@ -33,8 +33,8 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [dragAndDropPlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
+            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
             id: 1,
             _options: {
               disableDND: true,
@@ -65,8 +65,8 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [resizePlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
+            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
             id: 1,
             _options: {
               disableResize: true,
@@ -94,8 +94,8 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [dragAndDropPlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
+            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
             id: 1,
           },
         ],
@@ -123,8 +123,8 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [resizePlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
+            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
             id: 1,
           },
         ],
