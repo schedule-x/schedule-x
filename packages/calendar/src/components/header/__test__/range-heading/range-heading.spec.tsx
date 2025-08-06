@@ -25,9 +25,9 @@ describe('RangeHeading', () => {
       (locale, selectedDate, expectedRangeHeading) => {
         const $app = createCalendarAppSingleton({
           locale,
-          selectedDate,
+          selectedDate: Temporal.PlainDate.from(selectedDate),
           views: [viewMonthGrid, viewWeek, viewDay],
-        })
+        }, [])
         renderComponent($app)
 
         expect(screen.queryByText(expectedRangeHeading)).toBeTruthy()

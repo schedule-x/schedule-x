@@ -15,6 +15,7 @@ const datePicker = createDatePicker({
   locale: 'de-DE',
   // disabled: true,
   // locale: 'fr-FR',
+  hasPlaceholder: true,
   style: {
     fullWidth: true,
     // dark: true,

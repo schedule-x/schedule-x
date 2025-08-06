@@ -26,12 +26,7 @@ export const createDatePickerState = (
   const selectedDate = signal<Temporal.PlainDate>(initialSelectedDate)
   const datePickerDate = signal<Temporal.PlainDate>(initialSelectedDate)
   const isDark = signal(config.style?.dark || false)
-
-  const inputDisplayedValue = signal(
-    selectedDateParam
-      ? toLocalizedDateString(selectedDateParam, config.locale.value)
-      : ''
-  )
+  const inputDisplayedValue = signal(toLocalizedDateString(initialSelectedDate, config.locale.value))
   const lastValidDisplayedValue = signal(inputDisplayedValue.value)
   
   const handleInput = (newInputValue: string) => {

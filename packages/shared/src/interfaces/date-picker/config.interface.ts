@@ -15,6 +15,7 @@ export default interface DatePickerConfigInternal extends Config {
   label?: string
   name?: string
   disabled?: boolean
+  hasPlaceholder?: boolean
 }
 
 export interface DatePickerConfigExternal

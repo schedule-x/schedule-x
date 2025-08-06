@@ -54,6 +54,12 @@ export default function AppInput() {
     return () => inputElement.removeEventListener('change', handleInputValue)
   })
 
+  useEffect(() => {
+    if ($app.config.hasPlaceholder) {
+      $app.datePickerState.inputDisplayedValue.value = $app.translate('MM/DD/YYYY')
+    }
+  }, [])
+
   const handleClick = () => {
     $app.datePickerState.open()
   }

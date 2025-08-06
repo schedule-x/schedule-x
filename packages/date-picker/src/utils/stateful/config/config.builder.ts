@@ -21,6 +21,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   label?: string
   name?: string
   disabled?: boolean
+  hasPlaceholder?: boolean
 
   build(): DatePickerConfigInternal {
     return new ConfigImpl(
@@ -35,7 +36,8 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
       this.teleportTo,
       this.label,
       this.name,
-      this.disabled
+      this.disabled,
+      this.hasPlaceholder
     )
   }
 
@@ -107,6 +109,12 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
 
   withDisabled(disabled: boolean | undefined): ConfigBuilder {
     this.disabled = disabled
+
+    return this
+  }
+
+  withHasPlaceholder(hasPlaceholder: boolean | undefined): ConfigBuilder {
+    this.hasPlaceholder = hasPlaceholder
 
     return this
   }

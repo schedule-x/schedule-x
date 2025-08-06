@@ -28,7 +28,8 @@ export class ConfigImpl implements DatePickerConfigInternal {
     public teleportTo?: HTMLElement,
     public label?: string,
     public name?: string,
-    public disabled?: boolean
+    public disabled?: boolean,
+    public hasPlaceholder?: boolean
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)

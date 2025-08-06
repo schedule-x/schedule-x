@@ -30,13 +30,13 @@ describe('date picker input', () => {
     }
   )
 
-  it.only.each([
+  it.each([
     ['MM/DD/YYYY', 'en-US'],
     ['TT.MM.JJJJ', 'de-DE'],
   ])(
-    'should display placeholder %s for locale %s when selected date is undefined',
+    'should display placeholder %s for locale %s when hasPlaceholder is true',
     (placeholder: string, locale: string) => {
-      renderComponent(createAppSingleton({ selectedDate: undefined, locale }))
+      renderComponent(createAppSingleton({ locale, hasPlaceholder: true }))
       const inputElement = getInputElement()
 
       expect(screen.getByDisplayValue(placeholder) === inputElement).toBe(true)
