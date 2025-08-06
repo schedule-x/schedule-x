@@ -6,6 +6,7 @@ import { timeStringFromTimePoints } from '@schedule-x/shared/src/utils/stateless
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { doubleDigit } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/double-digit'
 
 
 export const positionInTimeGrid = (
@@ -21,17 +22,19 @@ export const positionInTimeGrid = (
 
       if ($app.config.isHybridDay) {
         const { year, month, date: day } = toIntegers(date)
-        const previousDayStart = `${addDays(Temporal.PlainDate.from({ year, month, day }), -1)} ${timeStringFromTimePoints($app.config.dayBoundaries.value.start)}`
+        const previousDayStart = `${addDays(Temporal.PlainDate.from({ year, month: month + 1, day }), -1)} ${timeStringFromTimePoints($app.config.dayBoundaries.value.start)}`
         const previousDayEnd = `${date} ${timeStringFromTimePoints($app.config.dayBoundaries.value.end)}`
         const actualDayStart = `${date} ${timeStringFromTimePoints($app.config.dayBoundaries.value.start)}`
+        const eventStartZDT = event.start as Temporal.ZonedDateTime
+        const eventStartFloating = `${eventStartZDT.year}-${doubleDigit(eventStartZDT.month)}-${doubleDigit(eventStartZDT.day)} ${doubleDigit(eventStartZDT.hour)}:${doubleDigit(eventStartZDT.minute)}`
 
         if (
-          event.start.toString() > previousDayStart &&
-          event.start.toString() < previousDayEnd &&
-          event.start.toString() < actualDayStart
+          eventStartFloating > previousDayStart &&
+          eventStartFloating < previousDayEnd &&
+          eventStartFloating < actualDayStart
         ) {
           const { year, month, date: day } = toIntegers(date)
-          date = dateFromDateTime(addDays(Temporal.PlainDate.from({ year, month, day }), -1).toString())
+          date = dateFromDateTime(addDays(Temporal.PlainDate.from({ year, month: month + 1, day }), -1).toString())
         }
       }
       week[date]?.timeGridEvents.push(event)

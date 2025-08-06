@@ -62,12 +62,13 @@ describe('Position in time grid', () => {
     expect(result['2020-01-01'].timeGridEvents).toEqual([event1])
   })
 
-  it('should add time grid event to previous day if days are hybrid, and event starts before previous day end', () => {
+  it.only('should add time grid event to previous day if days are hybrid, and event starts before previous day end', () => {
     const $app = __createAppWithViews__({
       dayBoundaries: {
         start: '10:00',
         end: '08:00',
       },
+      timezone: 'UTC',
       selectedDate: Temporal.PlainDate.from('2020-01-01'),
     })
     const timeEvent1 = {

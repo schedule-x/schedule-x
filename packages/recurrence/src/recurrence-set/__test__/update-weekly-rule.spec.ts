@@ -20,7 +20,7 @@ describe('Updating a recurrence set', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240102')
+      rset.updateDtstartAndDtend('20240102', '20240102')
 
       expect(rset.getRrule()).toEqual('FREQ=WEEKLY;BYDAY=TU')
       expect(rset.getDtstart()).toEqual('20240102')
@@ -39,7 +39,7 @@ describe('Updating a recurrence set', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240107')
+      rset.updateDtstartAndDtend('20240107', '20240107')
 
       expect(rset.getRrule()).toEqual('FREQ=WEEKLY;UNTIL=20240501;BYDAY=SU')
       expect(rset.getDtstart()).toEqual('20240107')
@@ -60,7 +60,7 @@ describe('Updating a recurrence set', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240101T030000')
+      rset.updateDtstartAndDtend('20240101T030000', '20240101T040000')
 
       expect(rset.getRrule()).toEqual('FREQ=WEEKLY;BYDAY=MO')
       expect(rset.getDtstart()).toEqual('20240101T030000')
@@ -79,7 +79,7 @@ describe('Updating a recurrence set', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240131T230000')
+      rset.updateDtstartAndDtend('20240131T230000', '20240201T010000')
 
       expect(rset.getRrule()).toEqual('FREQ=WEEKLY;BYDAY=WE')
       expect(rset.getDtstart()).toEqual('20240131T230000')
