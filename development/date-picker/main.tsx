@@ -7,6 +7,8 @@ import '@fontsource/roboto-condensed'
 import '../app.css'
 import '../../packages/theme-default/src/date-picker.scss'
 import { createDatePicker } from '@schedule-x/date-picker/src'
+import 'temporal-polyfill/global'
+import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 
 const datePicker = createDatePicker({
   teleportTo: document.body,
@@ -18,8 +20,8 @@ const datePicker = createDatePicker({
     // dark: true,
   },
   // locale: 'sv-SE',
-  firstDayOfWeek: 0,
-  selectedDate: '1991-07-13',
+  firstDayOfWeek: WeekDay.MONDAY,
+  // selectedDate: Temporal.PlainDate.from('1991-07-13'),
   // placement: 'top-end',
   // min: '2021-03-01',
   // max: '2021-03-31',

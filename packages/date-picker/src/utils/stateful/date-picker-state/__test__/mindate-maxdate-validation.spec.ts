@@ -14,8 +14,8 @@ describe('Date-picker state', () => {
     it('should not change the input value if it is less than the min date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
       config.locale = signal('en-US')
-      config.min = '2021-01-01'
-      config.max = '2100-12-31'
+      config.min = Temporal.PlainDate.from('2021-01-01')
+      config.max = Temporal.PlainDate.from('2100-12-31')
       const originalSelectedDate = Temporal.PlainDate.from('2021-12-20')
       const state = createDatePickerState(config, originalSelectedDate)
 
@@ -27,8 +27,8 @@ describe('Date-picker state', () => {
     it('should change the input value if it is greater than the min date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
       config.locale = signal('en-US')
-      config.min = '2021-01-01'
-      config.max = '2100-12-31'
+      config.min = Temporal.PlainDate.from('2021-01-01')
+      config.max = Temporal.PlainDate.from('2100-12-31')
       const state = createDatePickerState(config, Temporal.PlainDate.from('2021-12-31'))
 
       state.handleInput('2022-01-01') // greater than min
@@ -41,8 +41,8 @@ describe('Date-picker state', () => {
     it('should not change the input value if it is greater than the max date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
       config.locale = signal('en-US')
-      config.min = '2000-01-01'
-      config.max = '2021-12-31'
+      config.min = Temporal.PlainDate.from('2000-01-01')
+      config.max = Temporal.PlainDate.from('2021-12-31')
       const originalSelectedDate = Temporal.PlainDate.from('2021-12-20')
       const state = createDatePickerState(config, originalSelectedDate)
 
@@ -54,8 +54,8 @@ describe('Date-picker state', () => {
     it('should change the input value if it is less than the max date', () => {
       const config = stubInterface<DatePickerConfigInternal>()
       config.locale = signal('en-US')
-      config.min = '2000-01-01'
-      config.max = '2021-12-31'
+      config.min = Temporal.PlainDate.from('2000-01-01')
+      config.max = Temporal.PlainDate.from('2021-12-31')
       const state = createDatePickerState(config, Temporal.PlainDate.from('2021-12-31'))
 
       state.handleInput('2021-01-01')
