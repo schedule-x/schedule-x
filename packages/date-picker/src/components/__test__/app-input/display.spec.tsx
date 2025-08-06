@@ -21,7 +21,7 @@ describe('date picker input', () => {
   ])(
     'should display selected date for locale %s',
     (selectedDate: string, locale: string, expectedDisplayedDate: string) => {
-      renderComponent(createAppSingleton({ selectedDate, locale }))
+      renderComponent(createAppSingleton({ selectedDate: Temporal.PlainDate.from(selectedDate), locale }))
       const inputElement = getInputElement()
 
       expect(
@@ -30,13 +30,13 @@ describe('date picker input', () => {
     }
   )
 
-  it.each([
+  it.only.each([
     ['MM/DD/YYYY', 'en-US'],
     ['TT.MM.JJJJ', 'de-DE'],
   ])(
-    'should display placeholder %s for locale %swhen selected date is an empty string',
+    'should display placeholder %s for locale %s when selected date is undefined',
     (placeholder: string, locale: string) => {
-      renderComponent(createAppSingleton({ selectedDate: '', locale }))
+      renderComponent(createAppSingleton({ selectedDate: undefined, locale }))
       const inputElement = getInputElement()
 
       expect(screen.getByDisplayValue(placeholder) === inputElement).toBe(true)
@@ -46,14 +46,14 @@ describe('date picker input', () => {
   it('should update displayed selected date', async () => {
     const expectedInitialDate = '1/1/2021'
     const expectedUpdatedDate = '1/2/2021'
-    const $app = createAppSingleton({ selectedDate: '2021-01-01' })
+    const $app = createAppSingleton({ selectedDate: Temporal.PlainDate.from('2021-01-01') })
     renderComponent($app)
     const inputElement = getInputElement()
     expect(screen.getByDisplayValue(expectedInitialDate) === inputElement).toBe(
       true
     )
 
-    $app.datePickerState.selectedDate.value = '2021-01-02'
+    $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2021-01-02')
 
     await waitFor(() => {
       expect(

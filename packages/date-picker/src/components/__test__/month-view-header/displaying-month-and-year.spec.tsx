@@ -22,7 +22,7 @@ describe('month view header', () => {
     ])(
       'should display the month name in %s when rendering',
       (_languageName, locale, januaryName) => {
-        const selectedDate = '2021-01-01'
+        const selectedDate = Temporal.PlainDate.from('2021-01-01')
         const expectedMonthName = januaryName
         const $app = createAppSingleton({
           selectedDate,
@@ -36,7 +36,7 @@ describe('month view header', () => {
     )
 
     it('should display the year when rendering', () => {
-      const selectedDate = '2021-01-01'
+      const selectedDate = Temporal.PlainDate.from('2021-01-01')
       const expectedYear = '2021'
       const $app = createAppSingleton({ selectedDate })
 
@@ -46,13 +46,13 @@ describe('month view header', () => {
     })
 
     it('should update month name when selected date changes', async () => {
-      const selectedDate = '2021-01-01'
+      const selectedDate = Temporal.PlainDate.from('2021-01-01')
       const expectedMonthName = 'February'
       const $app = createAppSingleton({ selectedDate })
 
       const { container } = renderComponent($app)
 
-      $app.datePickerState.datePickerDate.value = '2021-02-01'
+      $app.datePickerState.datePickerDate.value = Temporal.PlainDate.from('2021-02-01')
 
       await waitFor(() => {
         expect(container.textContent).toContain(expectedMonthName)

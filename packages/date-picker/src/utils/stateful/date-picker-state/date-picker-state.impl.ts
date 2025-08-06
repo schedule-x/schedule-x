@@ -2,19 +2,14 @@ import DatePickerState from '@schedule-x/shared/src/interfaces/date-picker/date-
 import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/date-picker-view.enum'
 import { effect, signal } from '@preact/signals'
 import { toDateString as formatToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-format/to-date-string'
-import { toDateString as dateToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
-import { toJSDate } from '@schedule-x/shared/src'
 
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
-import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 const getLocalizedDate = (date: Temporal.ZonedDateTime | Temporal.PlainDate, locale: string) => {
   return toLocalizedDateString(date, locale)
 }
-
 
 export const createDatePickerState = (
   config: DatePickerConfigInternal,
