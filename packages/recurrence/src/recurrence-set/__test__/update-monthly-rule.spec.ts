@@ -20,7 +20,7 @@ describe('Updating a recurrence set with a monthly rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240222')
+      rset.updateDtstartAndDtend('20240222', '20240222')
 
       expect(rset.getRrule()).toEqual('FREQ=MONTHLY;COUNT=5;BYMONTHDAY=22')
       expect(rset.getDtstart()).toEqual('20240222')
@@ -41,7 +41,7 @@ describe('Updating a recurrence set with a monthly rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240209T030000')
+      rset.updateDtstartAndDtend('20240209T030000', '20240209T040000')
 
       expect(rset.getRrule()).toEqual('FREQ=MONTHLY;COUNT=5;BYMONTHDAY=9')
       expect(rset.getDtstart()).toEqual('20240209T030000')

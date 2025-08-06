@@ -20,7 +20,7 @@ describe('Updating a recurrence set with a yearly rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240215')
+      rset.updateDtstartAndDtend('20240215', '20240215')
 
       expect(rset.getRrule()).toEqual('FREQ=YEARLY;COUNT=3')
       expect(rset.getDtstart()).toEqual('20240215')
@@ -39,7 +39,7 @@ describe('Updating a recurrence set with a yearly rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240215')
+      rset.updateDtstartAndDtend('20240215', '20240215')
 
       expect(rset.getRrule()).toEqual('FREQ=YEARLY;UNTIL=20290215')
       expect(rset.getDtstart()).toEqual('20240215')
@@ -60,7 +60,7 @@ describe('Updating a recurrence set with a yearly rule', () => {
         dtstart: initialValues.dtstart,
         dtend: initialValues.dtend,
       })
-      rset.updateDtstartAndDtend('20240210T020000')
+      rset.updateDtstartAndDtend('20240210T020000', '20240210T030000')
 
       expect(rset.getRrule()).toEqual('FREQ=YEARLY;UNTIL=20290210T030000')
       expect(rset.getDtstart()).toEqual('20240210T020000')
