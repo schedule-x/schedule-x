@@ -38,6 +38,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
 
   private init() {
     document.addEventListener('dragend', this.handleDragEnd, { once: true })
+    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
     this.allDayElements.forEach((el) => {
       el.addEventListener('dragover', this.handleDragOver)
     })
@@ -74,6 +75,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   }
 
   private handleDragEnd = async () => {
+    document.removeEventListener('mouseup', this.handleMouseUp)
     this.allDayElements.forEach((el) => {
       el.removeEventListener('dragover', this.handleDragOver)
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
@@ -92,6 +94,11 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     if (shouldAbort) return
 
     this.updateCalendarEvent(updatedEvent)
+  }
+
+  private handleMouseUp = async () => {
+    document.removeEventListener('dragend', this.handleDragEnd)
+    this.setCalendarEventPointerEventsTo('auto')
   }
 
   private setCalendarEventPointerEventsTo = (

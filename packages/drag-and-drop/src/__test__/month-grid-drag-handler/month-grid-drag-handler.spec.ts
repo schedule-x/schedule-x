@@ -71,6 +71,22 @@ describe('MonthGridDragHandler', () => {
       expect(otherEvent.style.pointerEvents).toBe('auto')
     })
 
+    it('should set pointer events to none for other events, and then back to auto on mouse up', () => {
+      const fourthOfJanuaryElement = document.createElement('div')
+      fourthOfJanuaryElement.classList.add('sx__month-grid-day')
+      fourthOfJanuaryElement.dataset.date = '2021-01-04'
+      const otherEvent = document.createElement('div')
+      otherEvent.classList.add('sx__event')
+      $app.elements.calendarWrapper!.appendChild(fourthOfJanuaryElement)
+      $app.elements.calendarWrapper!.appendChild(otherEvent)
+      new MonthGridDragHandlerImpl(calendarEvent, $app)
+
+      expect(otherEvent.style.pointerEvents).toBe('none')
+
+      document.dispatchEvent(new MouseEvent('mouseup'))
+      expect(otherEvent.style.pointerEvents).toBe('auto')
+    })
+
     it('should add a class for the dragover day to signal it is active', () => {
       const fourthOfJanuaryElement = document.createElement('div')
       fourthOfJanuaryElement.classList.add('sx__month-grid-day')
