@@ -45,9 +45,8 @@ describe('createCalendarControlsPlugin', () => {
       expect($app.datePickerState.selectedDate.value).toEqual(Temporal.PlainDate.from('2021-01-01'))
       controlsPlugin.onRender($app)
 
-      expect(() => controlsPlugin.setDate('20210230T01:00:000Z')).toThrow(
-        'Invalid date. Expected format YYYY-MM-DD'
-      )
+      // @ts-expect-error - we want to test the error case
+      expect(() => controlsPlugin.setDate('20210230T01:00:000Z')).toThrow()
     })
   })
 

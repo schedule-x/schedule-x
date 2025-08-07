@@ -37,7 +37,7 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 const eventsServicePlugin = createEventsServicePlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const scrollController = createScrollControllerPlugin({
-  initialScroll: '07:50'
+  initialScroll: '05:00'
 })
 const calendar = createCalendar({
 plugins: [
@@ -203,10 +203,10 @@ plugins: [
       },
     },
   ],
-  /* dayBoundaries: {
-    start: '10:00',
-    end: '23:00'
-  }, */
+  dayBoundaries: {
+    start: '21:00',
+    end: '09:00'
+  },
   locale: 'de-DE',
   // tz new york
   timezone: 'Europe/Berlin',

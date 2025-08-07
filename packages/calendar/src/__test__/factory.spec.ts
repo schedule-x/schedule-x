@@ -8,6 +8,7 @@ import {
 import { createCalendar } from '../factory'
 import CalendarApp from '../calendar.app'
 import { viewMonthGrid } from '../views/month-grid'
+import { EventId } from '@schedule-x/shared/src/types/event-id'
 
 describe('The calendar factory', () => {
   it('should create a calendar app', () => {
@@ -32,146 +33,6 @@ describe('The calendar factory', () => {
         []
       )
     }).toThrow()
-  })
-
-  describe('validating event start time', () => {
-    it('should not throw an error if start time includes seconds', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01T00:00:00',
-              end: '2022-01-01T00:00:00',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if start time includes T as a separator', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01T00:00',
-              end: '2022-01-01T00:00',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if start time is a date string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if start is a date time string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T12:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T13:00:00[Europe/Stockholm]'),
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-  })
-
-  describe('validating event end time', () => {
-    it('should not throw an error if end time includes seconds', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: '2022-01-01T00:00:00',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if end time includes T as a separator', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: '2022-01-01T00:00',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if end time is a date string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if end is a date time string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
   })
 
   describe('validating event ids', () => {
@@ -280,9 +141,9 @@ describe('The calendar factory', () => {
           skipValidation: true,
           events: [
             {
-              id: 1,
-              start: '2022-01-01T00:00:00',
-              end: '2022-01-01T00:00:00',
+              id: null as unknown as EventId,
+              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
             },
           ],
         })

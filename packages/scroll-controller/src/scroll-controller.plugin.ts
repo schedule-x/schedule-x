@@ -78,7 +78,6 @@ class ScrollControllerPlugin implements PluginBase<string> {
 
     let diffMinutes: number;
     if ($app.config.isHybridDay && scrollToTime.toString() < dayStart.toString()) {
-      // Tagesüberlauf (z.B. über Mitternacht hinaus)
       const dayEnd = Temporal.PlainTime.from(endTimeStr);
       diffMinutes =
         dayEnd.since(dayStart).total('minutes') +

@@ -51,7 +51,7 @@ describe('CurrentTimePlugin', () => {
       const timeGridDayElement = document.createElement('div')
       timeGridDayElement.setAttribute(
         'data-time-grid-date',
-        toDateString(new Date())
+        toDateString(Temporal.ZonedDateTime.from(Temporal.Now.instant().toZonedDateTimeISO('Europe/Stockholm')))
       )
       app.elements.calendarWrapper.appendChild(timeGridDayElement)
 

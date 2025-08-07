@@ -12,9 +12,10 @@ import { __createAppWithViews__ } from '../../../testing/__create-app-with-views
 
 describe('positioning events in the date grid of a week or day', () => {
   describe('positioning timed events', () => {
-    const selectedDate = '2023-09-17'
+    const selectedDate = Temporal.PlainDate.from('2023-09-17')
     const $app = __createAppWithViews__({
       selectedDate,
+      timezone: 'Europe/Moscow',
     })
 
     it('should position an event that spans from before the first day until after the last', () => {
@@ -22,8 +23,8 @@ describe('positioning events in the date grid of a week or day', () => {
         new CalendarEventBuilder(
           $app.config,
           1,
-          '2023-09-10 04:00',
-          '2023-09-20 20:00'
+          Temporal.ZonedDateTime.from('2023-09-10T04:00:00+03:00[Europe/Moscow]'),
+          Temporal.ZonedDateTime.from('2023-09-20T20:00:00+03:00[Europe/Moscow]')
         ).build(),
       ]
       const week = createWeek($app)

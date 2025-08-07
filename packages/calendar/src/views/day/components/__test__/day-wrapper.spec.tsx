@@ -54,6 +54,7 @@ describe('DayWrapper', () => {
         events: [calendarEvent],
         defaultView: InternalViewName.Day,
         selectedDate: Temporal.PlainDate.from('2023-10-12'),
+        timezone: 'Europe/Stockholm',
       })
 
       renderComponent($app)
