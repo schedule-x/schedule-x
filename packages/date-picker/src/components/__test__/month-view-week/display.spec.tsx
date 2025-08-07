@@ -34,7 +34,7 @@ describe('MonthViewWeek', () => {
     const date = Temporal.ZonedDateTime.from(
       '2023-08-08T00:00:00.00+00:00[UTC]'
     )
-    const $app = createAppSingleton({ selectedDate: toDateString(date) })
+    const $app = createAppSingleton({ selectedDate: Temporal.PlainDate.from('2023-08-08') })
     const { container } = renderComponent(
       $app,
       $app.timeUnitsImpl.getWeekFor(date)
@@ -61,7 +61,7 @@ describe('MonthViewWeek', () => {
     expect(selectedDay).toBeNull()
   })
 
-  it.only("should display today's date", () => {
+  it("should display today's date", () => {
     const today = Temporal.Now.plainDateISO()
     const expectedTodaysDate = today.day
     const $app = createAppSingleton({ selectedDate: today })
