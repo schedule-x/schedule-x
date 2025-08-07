@@ -15,16 +15,18 @@ import '@schedule-x/theme-default/dist/index.css'
 import '../index.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
+import 'temporal-polyfill/global'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar({
-  selectedDate: '2023-09-21',
+  selectedDate: Temporal.PlainDate.from('2023-09-21'),
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
   plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
   events: [],
+  timezone: 'America/New_York',
 })
 
 calendar.render(calendarElement)
@@ -35,8 +37,8 @@ addEventButton.addEventListener('click', () => {
   calendar.events.add({
     id: 1,
     title: 'New event',
-    start: '2023-09-21',
-    end: '2023-09-21',
+    start: Temporal.ZonedDateTime.from('2023-09-21T00:00-05:00[America/New_York]'),
+    end: Temporal.ZonedDateTime.from('2023-09-21T00:00-05:00[America/New_York]'),
   })
 })
 

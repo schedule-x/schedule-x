@@ -10,6 +10,7 @@ import '../index.css'
 import { addDays, CalendarEvent } from '@schedule-x/shared'
 import { eventsDB } from './007-list-view-db.ts'
 import { createEventsServicePlugin } from '@schedule-x/events-service'
+import 'temporal-polyfill/global'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -17,10 +18,10 @@ const eventsService = createEventsServicePlugin()
 
 const getEventsBetween = (start: string, end: string): CalendarEvent[] => {
   return eventsDB.filter((event => {
-    const eventStart = new Date(event.start)
-    const eventEnd = new Date(event.end)
-    const rangeStart = new Date(start)
-    const rangeEnd = new Date(end)
+    const eventStart = event.start.toString()
+    const eventEnd = event.end.toString()
+    const rangeStart = start
+    const rangeEnd = end
 
     return (eventStart >= rangeStart && eventStart <= rangeEnd) ||
       (eventEnd >= rangeStart && eventEnd <= rangeEnd) ||
@@ -38,7 +39,7 @@ console.log('Initial events count:', initialEvents.length)
 const calendar = createCalendar({
   views: [createViewList()],
   plugins: [eventsService],
-  selectedDate: '2026-06-23',
+  selectedDate: Temporal.PlainDate.from('2026-06-23'),
   defaultView: 'week',
   events: initialEvents,
   callbacks: {
@@ -46,10 +47,10 @@ const calendar = createCalendar({
       const dateMinus30 = addDays(date, -30)
       const datePlus30 = addDays(date, 30)
 
-      if (datePlus30 > currentEnd) {
-        currentEnd = datePlus30
-      } else if (dateMinus30 < currentStart) {
-        currentStart = dateMinus30
+      if (datePlus30.toString() > currentEnd) {
+        currentEnd = datePlus30.toString()
+      } else if (dateMinus30.toString() < currentStart) {
+        currentStart = dateMinus30.toString()
       }
 
       const newEvents = getEventsBetween(currentStart, currentEnd)

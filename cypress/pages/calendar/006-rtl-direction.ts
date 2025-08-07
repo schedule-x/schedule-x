@@ -14,55 +14,57 @@ import {
 import '@schedule-x/theme-default/dist/index.css'
 import '../index.css'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
+import 'temporal-polyfill/global'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar({
-  selectedDate: '2023-09-21',
+  selectedDate: Temporal.PlainDate.from('2023-09-21'),
   locale: 'he-IL',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
   showWeekNumbers: true,
   plugins: [createEventModalPlugin()],
+  timezone: 'America/New_York',
   events: [
     {
       id: 1,
       title: 'פגישה עם הצוות',
       description: 'פגישה עם הצוות',
-      start: '2023-09-18 03:10',
-      end: '2023-09-18 04:30',
+      start: Temporal.ZonedDateTime.from('2023-09-18T03:10-05:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2023-09-18T04:30-05:00[America/New_York]'),
     },
     {
       id: 2,
       title: 'פגישה עם הלקוח',
-      start: '2023-09-21 00:00',
-      end: '2023-09-21 01:00',
+      start: Temporal.ZonedDateTime.from('2023-09-21T00:00-05:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2023-09-21T01:00-05:00[America/New_York]'),
     },
     {
       id: 3,
       title: 'פגישה עם המועמד',
-      start: '2023-09-19 07:00',
-      end: '2023-09-19 09:00',
+      start: Temporal.ZonedDateTime.from('2023-09-19T07:00-05:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2023-09-19T09:00-05:00[America/New_York]'),
     },
     {
       id: 4,
-      start: '2023-09-21 04:00',
-      end: '2023-09-21 04:30',
+      start: Temporal.ZonedDateTime.from('2023-09-21T04:00-05:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2023-09-21T04:30-05:00[America/New_York]'),
     },
     {
       id: 5,
-      start: '2023-09-21 16:00',
-      end: '2023-09-21 18:00',
+      start: Temporal.ZonedDateTime.from('2023-09-21T16:00-05:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2023-09-21T18:00-05:00[America/New_York]'),
     },
     {
       id: 6,
-      start: '2023-09-21 18:00',
-      end: '2023-09-21 20:00',
+      start: Temporal.ZonedDateTime.from('2023-09-21T18:00-05:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2023-09-21T20:00-05:00[America/New_York]'),
     },
     {
       id: 7,
-      start: '2023-09-21 20:00',
-      end: '2023-09-21 22:00',
+      start: Temporal.ZonedDateTime.from('2023-09-21T20:00-05:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2023-09-21T22:00-05:00[America/New_York]'),
     }
   ],
 })
