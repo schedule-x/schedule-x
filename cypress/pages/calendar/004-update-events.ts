@@ -37,8 +37,8 @@ addEventButton.addEventListener('click', () => {
   calendar.events.add({
     id: 1,
     title: 'New event',
-    start: Temporal.ZonedDateTime.from('2023-09-21T00:00-05:00[America/New_York]'),
-    end: Temporal.ZonedDateTime.from('2023-09-21T00:00-05:00[America/New_York]'),
+    start: Temporal.PlainDate.from('2023-09-21'),
+    end: Temporal.PlainDate.from('2023-09-21'),
   })
 })
 
