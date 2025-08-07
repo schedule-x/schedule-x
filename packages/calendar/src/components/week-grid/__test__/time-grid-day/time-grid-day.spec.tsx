@@ -87,6 +87,12 @@ describe('TimeGridDay', () => {
       )
 
       const dayElement = document.querySelector('.sx__time-grid-day') as HTMLElement
+      Object.defineProperty(dayElement, 'getBoundingClientRect', {
+        value: () => ({
+          height: 100,
+          top: 10,
+        }),
+      })
       fireEvent.click(dayElement as Element)
 
       expect(onClickDateTime).toHaveBeenCalled()
