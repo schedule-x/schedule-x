@@ -28,7 +28,6 @@ import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
-
 type props = {
   calendarEvent: CalendarEventInternal
   dayBoundariesDateTime: DayBoundariesDateTime
@@ -56,18 +55,17 @@ export default function TimeGridEvent({
     $app.config.locale.value,
     { hour: 'numeric', minute: 'numeric' },
   ] as const
-  const getEventTime = (start: Temporal.ZonedDateTime, end: Temporal.ZonedDateTime) => {
-    const localizedStartTime = start
-      .toLocaleString(
-        ...localizeArgs
-      )
+  const getEventTime = (
+    start: Temporal.ZonedDateTime,
+    end: Temporal.ZonedDateTime
+  ) => {
+    const localizedStartTime = start.toLocaleString(...localizeArgs)
 
     if (start === end) {
       return localizedStartTime
     }
 
-    const localizedEndTime = end
-      .toLocaleString(...localizeArgs)
+    const localizedEndTime = end.toLocaleString(...localizeArgs)
     return `${localizedStartTime} – ${localizedEndTime}`
   }
 
@@ -189,7 +187,7 @@ export default function TimeGridEvent({
 
   const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
     ? dayBoundariesDateTime?.start
-    : calendarEvent.start as Temporal.ZonedDateTime
+    : (calendarEvent.start as Temporal.ZonedDateTime)
 
   return (
     <>
@@ -254,7 +252,10 @@ export default function TimeGridEvent({
 
               <div className="sx__time-grid-event-time">
                 <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
-                {getEventTime(calendarEvent.start as Temporal.ZonedDateTime, calendarEvent.end as Temporal.ZonedDateTime)}
+                {getEventTime(
+                  calendarEvent.start as Temporal.ZonedDateTime,
+                  calendarEvent.end as Temporal.ZonedDateTime
+                )}
               </div>
 
               {calendarEvent.people && calendarEvent.people.length > 0 && (

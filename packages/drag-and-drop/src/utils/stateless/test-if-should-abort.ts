@@ -1,7 +1,6 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src'
 
-
 export const testIfShouldAbort = async (
   $app: CalendarAppSingleton,
 

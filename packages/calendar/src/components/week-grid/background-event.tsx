@@ -9,7 +9,6 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
-
 type props = {
   backgroundEvent: BackgroundEvent
   date: string
@@ -57,7 +56,9 @@ export default function TimeGridBackgroundEvent({
   const formattedStart = `${startHour.toString().padStart(2, '0')}:${startMinute.toString().padStart(2, '0')}`
   const startTimePoints = timePointsFromString(formattedStart)
   if (startTimePoints < $app.config.dayBoundaries.value.start) {
-    const updatedStart = timeStringFromTimePoints($app.config.dayBoundaries.value.start)
+    const updatedStart = timeStringFromTimePoints(
+      $app.config.dayBoundaries.value.start
+    )
     const updatedStartHour = updatedStart.split(':')[0]
     const updatedStartMinute = updatedStart.split(':')[1]
     start = Temporal.ZonedDateTime.from({

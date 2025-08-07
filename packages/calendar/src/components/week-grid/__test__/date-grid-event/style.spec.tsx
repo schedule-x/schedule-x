@@ -203,8 +203,12 @@ describe('styles of DateGridEvent', () => {
           {
             id: '123',
             title: 'Test Event',
-            start: Temporal.ZonedDateTime.from('1999-03-12T14:45:00+03:00[Europe/Moscow]'),
-            end: Temporal.ZonedDateTime.from('1999-03-12T15:45:00+03:00[Europe/Moscow]'),
+            start: Temporal.ZonedDateTime.from(
+              '1999-03-12T14:45:00+03:00[Europe/Moscow]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '1999-03-12T15:45:00+03:00[Europe/Moscow]'
+            ),
           },
         ],
       })
@@ -224,8 +228,12 @@ describe('styles of DateGridEvent', () => {
           {
             id: '123',
             title: 'Test Event',
-            start: Temporal.ZonedDateTime.from('1999-03-12T14:45:00+03:00[Europe/Moscow]'),
-            end: Temporal.ZonedDateTime.from('1999-03-12T15:45:00+03:00[Europe/Moscow]'),
+            start: Temporal.ZonedDateTime.from(
+              '1999-03-12T14:45:00+03:00[Europe/Moscow]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '1999-03-12T15:45:00+03:00[Europe/Moscow]'
+            ),
           },
         ],
       })

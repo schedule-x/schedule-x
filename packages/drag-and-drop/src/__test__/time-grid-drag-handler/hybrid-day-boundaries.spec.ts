@@ -13,7 +13,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dragEventNQuartersIn20HourGridOf2000px } from './utils'
 import 'temporal-polyfill/global'
 
-
 describe('A calendar with custom hybrid day boundaries', () => {
   let $app: CalendarAppSingleton
   let clickEvent: MouseEvent
@@ -83,8 +82,12 @@ describe('A calendar with custom hybrid day boundaries', () => {
        * Drag event to end at 23:45
        * */
       dragEventNQuartersIn20HourGridOf2000px(clickEvent, 3, 'down')
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 23:45+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-03 00:15+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 23:45+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-03 00:15+00:00[UTC]')
+      )
     })
 
     it('should drag an event past midnight into next day, then backwards a day horizontally, and then backward vertically', () => {
@@ -105,8 +108,12 @@ describe('A calendar with custom hybrid day boundaries', () => {
         5,
         'down'
       )
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-03 00:15+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-03 00:45+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-03 00:15+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-03 00:45+00:00[UTC]')
+      )
 
       /**
        * Drag event 1 day to the left
@@ -116,8 +123,12 @@ describe('A calendar with custom hybrid day boundaries', () => {
         clientX: eventDraggedOnce.clientX - 100,
       }
       document.dispatchEvent(new MouseEvent('mousemove', eventDraggedTwice))
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 00:15+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 00:45+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 00:15+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 00:45+00:00[UTC]')
+      )
 
       /**
        * Drag event 1 hour up
@@ -127,8 +138,12 @@ describe('A calendar with custom hybrid day boundaries', () => {
         4,
         'up'
       )
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-01 23:15+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-01 23:45+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-01 23:15+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-01 23:45+00:00[UTC]')
+      )
     })
   })
 })

@@ -13,7 +13,6 @@ import { vi } from 'vitest'
 import { waitFor } from '@testing-library/preact'
 import 'temporal-polyfill/global'
 
-
 describe('MonthGridDragHandler', () => {
   describe('Dragging an event forwards', () => {
     let $app: CalendarAppSingleton
@@ -51,7 +50,9 @@ describe('MonthGridDragHandler', () => {
       document.dispatchEvent(new MouseEvent('dragend'))
 
       await waitFor(() => {
-        expect(calendarEvent.start).toEqual(Temporal.PlainDate.from('2021-01-04'))
+        expect(calendarEvent.start).toEqual(
+          Temporal.PlainDate.from('2021-01-04')
+        )
         expect(calendarEvent.end).toEqual(Temporal.PlainDate.from('2021-01-06'))
       })
     })
@@ -163,7 +164,9 @@ describe('MonthGridDragHandler', () => {
       document.dispatchEvent(new MouseEvent('dragend'))
 
       await waitFor(() => {
-        expect(calendarEvent.start).toEqual(Temporal.PlainDate.from('2021-01-04'))
+        expect(calendarEvent.start).toEqual(
+          Temporal.PlainDate.from('2021-01-04')
+        )
         expect(calendarEvent.end).toEqual(Temporal.PlainDate.from('2021-01-06'))
         expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
       })

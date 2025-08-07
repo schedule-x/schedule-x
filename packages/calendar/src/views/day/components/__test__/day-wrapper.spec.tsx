@@ -27,8 +27,12 @@ describe('DayWrapper', () => {
     it('should render a date grid event but no time grid event', () => {
       const calendarEvent = {
         id: 1,
-        start: Temporal.ZonedDateTime.from('2023-10-12T00:00:00[Europe/Stockholm]'),
-        end: Temporal.ZonedDateTime.from('2023-10-13T00:00:00[Europe/Stockholm]'),
+        start: Temporal.ZonedDateTime.from(
+          '2023-10-12T00:00:00[Europe/Stockholm]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2023-10-13T00:00:00[Europe/Stockholm]'
+        ),
       }
       const $app = __createAppWithViews__({
         events: [calendarEvent],
@@ -47,8 +51,12 @@ describe('DayWrapper', () => {
     it('should render a time grid event but no date grid event', () => {
       const calendarEvent = {
         id: 1,
-        start: Temporal.ZonedDateTime.from('2023-10-12T00:00:00[Europe/Stockholm]'),
-        end: Temporal.ZonedDateTime.from('2023-10-12T23:59:00[Europe/Stockholm]'),
+        start: Temporal.ZonedDateTime.from(
+          '2023-10-12T00:00:00[Europe/Stockholm]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2023-10-12T23:59:00[Europe/Stockholm]'
+        ),
       }
       const $app = __createAppWithViews__({
         events: [calendarEvent],

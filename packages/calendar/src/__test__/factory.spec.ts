@@ -45,8 +45,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1.1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -64,8 +68,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: '1.1',
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -83,8 +91,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4c4d',
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -100,8 +112,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -119,8 +135,12 @@ describe('The calendar factory', () => {
             events: [
               {
                 id: id as any,
-                start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-                end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+                start: Temporal.ZonedDateTime.from(
+                  '2022-01-01T00:00:00[Europe/Stockholm]'
+                ),
+                end: Temporal.ZonedDateTime.from(
+                  '2022-01-01T00:00:00[Europe/Stockholm]'
+                ),
               },
             ],
           })
@@ -142,8 +162,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: null as unknown as EventId,
-              start: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
-              end: Temporal.ZonedDateTime.from('2022-01-01T00:00:00[Europe/Stockholm]'),
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })

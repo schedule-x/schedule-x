@@ -69,7 +69,9 @@ describe('Calendar callbacks', () => {
 
       await waitFor(() => {
         expect(onSelectedDateUpdate).toHaveBeenCalledTimes(1)
-        expect(onSelectedDateUpdate).toHaveBeenCalledWith(Temporal.PlainDate.from('2024-01-01'))
+        expect(onSelectedDateUpdate).toHaveBeenCalledWith(
+          Temporal.PlainDate.from('2024-01-01')
+        )
       })
     })
   })

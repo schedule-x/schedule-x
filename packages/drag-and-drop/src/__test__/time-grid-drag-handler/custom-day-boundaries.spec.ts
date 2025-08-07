@@ -76,27 +76,43 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
        * Drag event to 15:15
        * */
       dragEventNQuarters12HourGrid(clickEvent, 1, 'up')
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:15+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:45+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:15+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:45+00:00[UTC]')
+      )
 
       /**
        * Drag event to 15:00
        * */
       dragEventNQuarters12HourGrid(clickEvent, 2, 'up')
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]')
+      )
 
       /**
        * Try dragging event to 14:45 (which should do nothing)
        * */
       dragEventNQuarters12HourGrid(clickEvent, 3, 'up')
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]')
+      )
 
       document.dispatchEvent(new MouseEvent('mouseup'))
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]'))
-      expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]'))
+      expect(getEventWithId(eventId, $app)?.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]')
+      )
+      expect(getEventWithId(eventId, $app)?.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]')
+      )
     })
   })
 })

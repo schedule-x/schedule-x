@@ -14,12 +14,12 @@ export const filterByRange = (
 
     let eventStart = event.start
     let eventEnd = event.end
-    
+
     // Convert PlainDate to ZonedDateTime with start time 00:00:00
     if (eventStart instanceof Temporal.PlainDate) {
       eventStart = eventStart.toZonedDateTime(timezone)
     }
-    
+
     // Convert PlainDate to ZonedDateTime with end time 23:59:59
     if (eventEnd instanceof Temporal.PlainDate) {
       eventEnd = eventEnd.toZonedDateTime(timezone).with({
@@ -28,15 +28,19 @@ export const filterByRange = (
         second: 59,
         millisecond: 999,
         microsecond: 999,
-        nanosecond: 999
+        nanosecond: 999,
       })
     }
 
     const eventStartsInRange =
-      eventStart.toString() >= rangeStart.toString() && eventStart.toString() <= rangeEnd.toString()
-    const eventEndInRange = eventEnd.toString() >= rangeStart.toString() && eventEnd.toString() <= rangeEnd.toString()
+      eventStart.toString() >= rangeStart.toString() &&
+      eventStart.toString() <= rangeEnd.toString()
+    const eventEndInRange =
+      eventEnd.toString() >= rangeStart.toString() &&
+      eventEnd.toString() <= rangeEnd.toString()
     const eventStartBeforeAndEventEndAfterRange =
-      eventStart.toString() < rangeStart.toString() && eventEnd.toString() > rangeEnd.toString()
+      eventStart.toString() < rangeStart.toString() &&
+      eventEnd.toString() > rangeEnd.toString()
 
     return (
       eventStartsInRange ||

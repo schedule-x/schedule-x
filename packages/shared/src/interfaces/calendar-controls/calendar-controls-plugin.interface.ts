@@ -11,7 +11,6 @@ import {
 } from '../calendar/calendar-config'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
 
-
 export default interface CalendarControlsPlugin extends PluginBase<string> {
   onRender($app: CalendarAppSingleton): void
   setDate(date: Temporal.PlainDate): void

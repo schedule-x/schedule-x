@@ -1,7 +1,6 @@
 import { EventId } from '../../types/event-id'
 import { EventFragments } from './event-fragments'
 
-
 export type CalendarEventOptions = {
   disableDND?: boolean
   disableResize?: boolean

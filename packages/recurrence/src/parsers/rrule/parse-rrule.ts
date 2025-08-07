@@ -56,7 +56,9 @@ export const parseSXToRFC5545 = (datetime: string): string => {
   return datetime
 }
 
-export const parseTemporalToRFC5545 = (dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate): string => {
+export const parseTemporalToRFC5545 = (
+  dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate
+): string => {
   const year = dateOrDatetime.year.toString().padStart(4, '0')
   const month = dateOrDatetime.month.toString().padStart(2, '0')
   const day = dateOrDatetime.day.toString().padStart(2, '0')
@@ -76,7 +78,10 @@ export const parseTemporalToRFC5545 = (dateOrDatetime: Temporal.ZonedDateTime | 
   throw new Error(`Invalid datetime format: ${dateOrDatetime}`)
 }
 
-export const parseRFC5545ToTemporal = (dateOrDatetime: string, timezone: IANATimezone): Temporal.ZonedDateTime | Temporal.PlainDate => {
+export const parseRFC5545ToTemporal = (
+  dateOrDatetime: string,
+  timezone: IANATimezone
+): Temporal.ZonedDateTime | Temporal.PlainDate => {
   if (dateOrDatetime.length === 15) {
     // given YYYYMMDDThhmmss format
     const year = dateOrDatetime.substring(0, 4)
@@ -93,20 +98,20 @@ export const parseRFC5545ToTemporal = (dateOrDatetime: string, timezone: IANATim
       hour: parseInt(hour),
       minute: parseInt(minute),
       second: parseInt(second),
-      timeZone: timezone
+      timeZone: timezone,
     })
   }
-  
+
   if (dateOrDatetime.length === 8) {
     // given YYYYMMDD format
     const year = dateOrDatetime.substring(0, 4)
     const month = dateOrDatetime.substring(4, 6)
     const day = dateOrDatetime.substring(6, 8)
-    
+
     return Temporal.PlainDate.from({
       year: parseInt(year),
       month: parseInt(month),
-      day: parseInt(day)
+      day: parseInt(day),
     })
   }
 

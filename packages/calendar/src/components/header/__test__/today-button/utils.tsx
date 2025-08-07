@@ -13,7 +13,9 @@ const renderComponent = ($app: CalendarAppSingleton) => {
   )
 }
 
-const createAppSingletonWithSelectedDate = (initialSelectedDate: Temporal.PlainDate) => {
+const createAppSingletonWithSelectedDate = (
+  initialSelectedDate: Temporal.PlainDate
+) => {
   return __createAppWithViews__({
     datePicker: {
       selectedDate: initialSelectedDate,

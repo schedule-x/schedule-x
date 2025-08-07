@@ -6,7 +6,6 @@ import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/
 import { updateEventsList } from './utils/stateless/update-events-list'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
-
 export class TimeGridEventResizer {
   private readonly originalEventEnd: Temporal.ZonedDateTime
   private lastIntervalDiff = 0

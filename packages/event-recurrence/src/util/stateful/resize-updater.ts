@@ -1,7 +1,4 @@
-import {
-  addDays,
-  CalendarAppSingleton,
-} from '@schedule-x/shared/src'
+import { addDays, CalendarAppSingleton } from '@schedule-x/shared/src'
 import { AugmentedEvent } from '../../types/augmented-event'
 import { getDurationInMinutesTemporal } from '@schedule-x/recurrence/src/rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
@@ -40,7 +37,10 @@ export class ResizeUpdater {
     return newEventEnd instanceof Temporal.ZonedDateTime
       ? addMinutesToTemporal(
           eventToUpdate.end,
-          getDurationInMinutesTemporal(oldEventEnd as Temporal.ZonedDateTime, newEventEnd as Temporal.ZonedDateTime)
+          getDurationInMinutesTemporal(
+            oldEventEnd as Temporal.ZonedDateTime,
+            newEventEnd as Temporal.ZonedDateTime
+          )
         )
       : addDays(
           eventToUpdate.end,

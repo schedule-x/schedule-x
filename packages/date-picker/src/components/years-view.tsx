@@ -8,7 +8,6 @@ import {
   toJSDate,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
-
 type props = {
   setMonthView: () => void
 }
@@ -25,7 +24,11 @@ export default function YearsView({ setMonthView }: props) {
   const [expandedYear, setExpandedYear] = useState<number>(selectedYear)
 
   const setNewDatePickerDate = (year: number, month: number) => {
-    $app.datePickerState.datePickerDate.value = Temporal.PlainDate.from({ year, month, day: 1 })
+    $app.datePickerState.datePickerDate.value = Temporal.PlainDate.from({
+      year,
+      month,
+      day: 1,
+    })
     setMonthView()
   }
 

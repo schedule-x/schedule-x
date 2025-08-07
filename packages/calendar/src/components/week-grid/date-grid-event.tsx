@@ -27,7 +27,6 @@ import { focusModal } from '../../utils/stateless/events/focus-modal'
 import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
-
 type props = {
   calendarEvent: CalendarEventInternal
   gridRow: number
@@ -71,22 +70,25 @@ export default function DateGridEvent({
     })
   }
 
-  const rangeStartForComparison = calendarEvent.start instanceof Temporal.ZonedDateTime ? ($app.calendarState.range.value as DateRange).start.toString() : Temporal.PlainDate.from({
-    year: ($app.calendarState.range.value as DateRange).start.year,
-    month: ($app.calendarState.range.value as DateRange).start.month,
-    day: ($app.calendarState.range.value as DateRange).start.day,
-  }).toString()
-  const rangeEndForComparison = calendarEvent.end instanceof Temporal.ZonedDateTime ? ($app.calendarState.range.value as DateRange).end.toString() : Temporal.PlainDate.from({
-    year: ($app.calendarState.range.value as DateRange).end.year,
-    month: ($app.calendarState.range.value as DateRange).end.month,
-    day: ($app.calendarState.range.value as DateRange).end.day,
-  }).toString()
+  const rangeStartForComparison =
+    calendarEvent.start instanceof Temporal.ZonedDateTime
+      ? ($app.calendarState.range.value as DateRange).start.toString()
+      : Temporal.PlainDate.from({
+          year: ($app.calendarState.range.value as DateRange).start.year,
+          month: ($app.calendarState.range.value as DateRange).start.month,
+          day: ($app.calendarState.range.value as DateRange).start.day,
+        }).toString()
+  const rangeEndForComparison =
+    calendarEvent.end instanceof Temporal.ZonedDateTime
+      ? ($app.calendarState.range.value as DateRange).end.toString()
+      : Temporal.PlainDate.from({
+          year: ($app.calendarState.range.value as DateRange).end.year,
+          month: ($app.calendarState.range.value as DateRange).end.month,
+          day: ($app.calendarState.range.value as DateRange).end.day,
+        }).toString()
   const startsBeforeWeek =
-    calendarEvent.start.toString() <
-    rangeStartForComparison
-  const endsAfterWeek =
-    calendarEvent.end.toString() >
-    rangeEndForComparison
+    calendarEvent.start.toString() < rangeStartForComparison
+  const endsAfterWeek = calendarEvent.end.toString() > rangeEndForComparison
   const hasOverflowLeft = useMemo(() => {
     if ($app.config.direction === 'ltr') {
       return startsBeforeWeek

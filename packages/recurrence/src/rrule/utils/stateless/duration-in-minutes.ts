@@ -1,6 +1,5 @@
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
-
 export const getDurationInMinutes = (
   dtstart: string,
   dtend: string

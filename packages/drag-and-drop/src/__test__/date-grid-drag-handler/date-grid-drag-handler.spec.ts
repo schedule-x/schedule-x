@@ -17,7 +17,6 @@ import { deepCloneEvent } from '@schedule-x/shared/src'
 import { waitFor } from '@testing-library/preact'
 import 'temporal-polyfill/global'
 
-
 describe('A calendar with custom, non-hybrid day boundaries', () => {
   let $app: CalendarAppSingleton
   let eventCopy: CalendarEventInternal
@@ -77,16 +76,24 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
 
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]')
+      )
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
       await vi.runAllTimersAsync()
 
       await waitFor(() => {
-        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]'))
-        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]')
+        )
+        expect(getEventWithId(eventId, $app)?.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]')
+        )
         expect(updateCopyFn).toHaveBeenCalledTimes(2)
         expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
       })
@@ -108,16 +115,24 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
 
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]')
+      )
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
       await vi.runAllTimersAsync()
 
       await waitFor(() => {
-        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]'))
-        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]')
+        )
+        expect(getEventWithId(eventId, $app)?.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]')
+        )
         expect(updateCopyFn).toHaveBeenCalledTimes(2)
         expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
       })
@@ -138,24 +153,36 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
         clientY: 1000,
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent1))
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]')
+      )
 
       const mouseMoveEvent2 = {
         clientX: eventCoordinates.clientX + 200,
         clientY: 1000,
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent2))
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]')
+      )
 
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       await vi.runAllTimersAsync()
 
       await waitFor(() => {
-        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]'))
-        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]')
+        )
+        expect(getEventWithId(eventId, $app)?.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]')
+        )
         expect(updateCopyFn).toHaveBeenCalledTimes(3)
         expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
       })
@@ -176,32 +203,48 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
         clientY: 1000,
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent1))
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]')
+      )
 
       const mouseMoveEvent2 = {
         clientX: eventCoordinates.clientX + 200,
         clientY: 1000,
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent2))
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]')
+      )
 
       const mouseMoveEvent3 = {
         clientX: eventCoordinates.clientX + 300,
         clientY: 1000,
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent3))
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]')
+      )
 
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       await vi.runAllTimersAsync()
 
       await waitFor(() => {
-        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]'))
-        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-25 03:30:00+00:00[UTC]')
+        )
+        expect(getEventWithId(eventId, $app)?.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-26 04:00:00+00:00[UTC]')
+        )
         expect(updateCopyFn).toHaveBeenCalledTimes(3)
         expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
       })
@@ -234,8 +277,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       const originalEvent = getEventWithId(eventId, $app)
-      expect(originalEvent?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]'))
-      expect(originalEvent?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]'))
+      expect(originalEvent?.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]')
+      )
+      expect(originalEvent?.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]')
+      )
       expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
     })
 
@@ -266,8 +313,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
 
       await waitFor(() => {
         const originalEvent = getEventWithId(eventId, $app)
-        expect(originalEvent?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]'))
-        expect(originalEvent?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]'))
+        expect(originalEvent?.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]')
+        )
+        expect(originalEvent?.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]')
+        )
         expect(updateCopyFn).toHaveBeenCalled()
         expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
       })
@@ -300,8 +351,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       const originalEvent = getEventWithId(eventId, $app)
-      expect(originalEvent?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]'))
-      expect(originalEvent?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]'))
+      expect(originalEvent?.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]')
+      )
+      expect(originalEvent?.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]')
+      )
       expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
     })
 
@@ -346,8 +401,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
         updateCopyFn
       )
 
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]')
+      )
 
       const mouseMoveEvent = {
         clientX: eventCoordinates.clientX - 100,
@@ -355,8 +414,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
 
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]')
+      )
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
@@ -364,8 +427,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       await vi.runAllTimersAsync()
 
       await waitFor(() => {
-        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]'))
-        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-24 03:30:00+00:00[UTC]')
+        )
+        expect(getEventWithId(eventId, $app)?.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-25 04:00:00+00:00[UTC]')
+        )
         expect(updateCopyFn).toHaveBeenCalledTimes(2)
         expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
       })
@@ -382,8 +449,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
         updateCopyFn
       )
 
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-23 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-24 04:00:00+00:00[UTC]')
+      )
 
       const mouseMoveEvent = {
         clientX: eventCoordinates.clientX + 100,
@@ -391,8 +462,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       } as MouseEvent
       document.dispatchEvent(new MouseEvent('mousemove', mouseMoveEvent))
 
-      expect(eventCopy.start).toEqual(Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]'))
-      expect(eventCopy.end).toEqual(Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]'))
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]')
+      )
       expect(updateCopyFn).toHaveBeenCalled()
 
       document.dispatchEvent(new MouseEvent('mouseup'))
@@ -400,8 +475,12 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
       await vi.runAllTimersAsync()
 
       await waitFor(() => {
-        expect(getEventWithId(eventId, $app)?.start).toEqual(Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]'))
-        expect(getEventWithId(eventId, $app)?.end).toEqual(Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]'))
+        expect(getEventWithId(eventId, $app)?.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-22 03:30:00+00:00[UTC]')
+        )
+        expect(getEventWithId(eventId, $app)?.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-02-23 04:00:00+00:00[UTC]')
+        )
         expect(updateCopyFn).toHaveBeenCalledTimes(2)
         expect(updateCopyFn).toHaveBeenCalledWith(undefined) // Test removing the event copy once the drag is done
       })

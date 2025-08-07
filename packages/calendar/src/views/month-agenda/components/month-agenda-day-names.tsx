@@ -4,7 +4,6 @@ import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-con
 import { useContext, useMemo } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 
-
 type props = {
   week: MonthAgendaWeek
 }

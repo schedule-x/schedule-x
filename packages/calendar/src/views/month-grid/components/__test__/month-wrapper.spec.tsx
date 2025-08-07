@@ -23,7 +23,8 @@ describe('MonthWrapper', () => {
   describe('rendering weeks for a certain month', () => {
     it('should render 6 weeks for October 2023', () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2023-10-01')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2023-10-01')
       renderComponent($app)
 
       expect(document.querySelectorAll('.sx__month-grid-week').length).toBe(6)
@@ -183,7 +184,8 @@ describe('MonthWrapper', () => {
       )
       expect(selectedDay?.getAttribute('data-date')).toBe('2024-07-01')
 
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2024-07-02')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2024-07-02')
 
       await waitFor(() => {
         const selectedDay = document.querySelector(

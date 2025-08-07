@@ -5,7 +5,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { signal } from '@preact/signals'
 import { CustomComponentFn } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 
-
 const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()
   calendarEvent.id = '1'

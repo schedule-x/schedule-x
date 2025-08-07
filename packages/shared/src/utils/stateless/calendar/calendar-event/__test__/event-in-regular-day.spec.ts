@@ -10,7 +10,10 @@ import 'temporal-polyfill/global'
 describe('CalendarEventImpl', () => {
   describe('the event time type in a day with default day boundaries', () => {
     const _config = new CalendarConfigBuilder().build()
-    const createEvent = (eventTime: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate }) =>
+    const createEvent = (eventTime: {
+      start: Temporal.ZonedDateTime | Temporal.PlainDate
+      end: Temporal.ZonedDateTime | Temporal.PlainDate
+    }) =>
       new CalendarEventBuilder(
         _config,
         '1',
@@ -20,8 +23,12 @@ describe('CalendarEventImpl', () => {
 
     it('should create a single-day timed event', () => {
       const eventTime = {
-        start: Temporal.ZonedDateTime.from('2020-01-01T01:00:00+01:00[Europe/Berlin]'),
-        end: Temporal.ZonedDateTime.from('2020-01-01T02:00:00+01:00[Europe/Berlin]'),
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T01:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-01T02:00:00+01:00[Europe/Berlin]'
+        ),
       }
       const calendarEvent = new CalendarEventBuilder(
         _config,
@@ -53,8 +60,12 @@ describe('CalendarEventImpl', () => {
 
     it('should create a multi-day timed event', () => {
       const eventTime = {
-        start: Temporal.ZonedDateTime.from('2020-01-01T01:00:00+01:00[Europe/Berlin]'),
-        end: Temporal.ZonedDateTime.from('2020-01-02T02:00:00+01:00[Europe/Berlin]'),
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T01:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-02T02:00:00+01:00[Europe/Berlin]'
+        ),
       }
       const calendarEvent = createEvent(eventTime)
 

@@ -62,8 +62,14 @@ describe('date time mutation', () => {
     const underTest = getFirstDayOPreviousMonth
 
     it.each([
-      [Temporal.PlainDate.from('2020-01-01'), Temporal.PlainDate.from('2019-12-01')],
-      [Temporal.PlainDate.from('2023-07-23'), Temporal.PlainDate.from('2023-06-01')],
+      [
+        Temporal.PlainDate.from('2020-01-01'),
+        Temporal.PlainDate.from('2019-12-01'),
+      ],
+      [
+        Temporal.PlainDate.from('2023-07-23'),
+        Temporal.PlainDate.from('2023-06-01'),
+      ],
     ])('should get first day of previous month', (date, expectedResult) => {
       expect(underTest(date)).toEqual(expectedResult)
     })
@@ -73,9 +79,18 @@ describe('date time mutation', () => {
     const underTest = getFirstDayOfNextMonth
 
     it.each([
-      [Temporal.PlainDate.from('2020-01-01'), Temporal.PlainDate.from('2020-02-01')],
-      [Temporal.PlainDate.from('2023-07-23'), Temporal.PlainDate.from('2023-08-01')],
-      [Temporal.PlainDate.from('2024-01-31'), Temporal.PlainDate.from('2024-02-01')],
+      [
+        Temporal.PlainDate.from('2020-01-01'),
+        Temporal.PlainDate.from('2020-02-01'),
+      ],
+      [
+        Temporal.PlainDate.from('2023-07-23'),
+        Temporal.PlainDate.from('2023-08-01'),
+      ],
+      [
+        Temporal.PlainDate.from('2024-01-31'),
+        Temporal.PlainDate.from('2024-02-01'),
+      ],
     ])('should get first day of next month', (date, expectedResult) => {
       expect(underTest(date)).toEqual(expectedResult)
     })

@@ -35,14 +35,7 @@ describe('TimePointsFromString', () => {
       }
     )
 
-    it.each([
-      ['24:01'],
-      ['25:00'],
-      ['00:60'],
-      ['00:61'],
-      ['00:99'],
-      ['1:00'],
-    ])(
+    it.each([['24:01'], ['25:00'], ['00:60'], ['00:61'], ['00:99'], ['1:00']])(
       `should throw an error because the time string %s is invalid`,
       (timeString) => {
         expect(() => timePointsFromString(timeString)).toThrow(
@@ -51,10 +44,7 @@ describe('TimePointsFromString', () => {
       }
     )
 
-    it.each([
-      ['00:100'],
-      ['10:30.000'],
-    ])(
+    it.each([['00:100'], ['10:30.000']])(
       `should not throw an error for time string %s (validation updated)`,
       (timeString) => {
         expect(() => timePointsFromString(timeString)).not.toThrow()

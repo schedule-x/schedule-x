@@ -11,15 +11,11 @@ export const validateConfig = (config: CalendarConfigExternal) => {
   }
 
   if (config.minDate && !(config.minDate instanceof Temporal.PlainDate)) {
-    throw new Error(
-      '[Schedule-X error]: minDate must be a temporal plain date'
-    )
+    throw new Error('[Schedule-X error]: minDate must be a temporal plain date')
   }
 
   if (config.maxDate && !(config.maxDate instanceof Temporal.PlainDate)) {
-    throw new Error(
-      '[Schedule-X error]: maxDate must be a temporal plain date'
-    )
+    throw new Error('[Schedule-X error]: maxDate must be a temporal plain date')
   }
 
   if (

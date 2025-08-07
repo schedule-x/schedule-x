@@ -2,7 +2,6 @@ import { WeekDay } from '../../../enums/time/week-day.enum'
 import { MonthWithDates, WeekWithDates } from '../../../types/time'
 import { Month } from '../../../enums/time/month.enum'
 
-
 export default interface TimeUnits {
   firstDayOfWeek: WeekDay
 

@@ -21,7 +21,9 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
 
     return positionEventsInAgenda(
       createAgendaMonth(
-        $app.datePickerState.selectedDate.value.toZonedDateTime($app.config.timezone.value),
+        $app.datePickerState.selectedDate.value.toZonedDateTime(
+          $app.config.timezone.value
+        ),
         $app.timeUnitsImpl
       ),
       filteredEvents.sort(sortEventsByStartAndEnd)
@@ -79,8 +81,8 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
           events={
             agendaMonth.weeks
               .flat()
-              .find(
-                (day) => isSameDay(day.date, $app.datePickerState.selectedDate.value)
+              .find((day) =>
+                isSameDay(day.date, $app.datePickerState.selectedDate.value)
               )?.events || []
           }
         />

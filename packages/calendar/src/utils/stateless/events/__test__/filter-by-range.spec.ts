@@ -7,7 +7,6 @@ import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/back
 import { filterByRange } from '../filter-by-range'
 import 'temporal-polyfill/global'
 
-
 describe('filterByRange', () => {
   describe('excluding events that are out of range', () => {
     it('should filter out an event that starts and ends before range starts', () => {

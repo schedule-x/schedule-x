@@ -7,7 +7,10 @@ import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/ti
 
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
-const getLocalizedDate = (date: Temporal.ZonedDateTime | Temporal.PlainDate, locale: string) => {
+const getLocalizedDate = (
+  date: Temporal.ZonedDateTime | Temporal.PlainDate,
+  locale: string
+) => {
   return toLocalizedDateString(date, locale)
 }
 
@@ -26,21 +29,27 @@ export const createDatePickerState = (
   const selectedDate = signal<Temporal.PlainDate>(initialSelectedDate)
   const datePickerDate = signal<Temporal.PlainDate>(initialSelectedDate)
   const isDark = signal(config.style?.dark || false)
-  const inputDisplayedValue = signal(toLocalizedDateString(initialSelectedDate, config.locale.value))
+  const inputDisplayedValue = signal(
+    toLocalizedDateString(initialSelectedDate, config.locale.value)
+  )
   const lastValidDisplayedValue = signal(inputDisplayedValue.value)
-  
+
   const handleInput = (newInputValue: string) => {
     try {
-      const newValue = formatToDateString(
-        newInputValue,
-        config.locale.value
-      )
-      if (newValue < config.min.toString() || newValue > config.max.toString()) {
+      const newValue = formatToDateString(newInputValue, config.locale.value)
+      if (
+        newValue < config.min.toString() ||
+        newValue > config.max.toString()
+      ) {
         inputDisplayedValue.value = lastValidDisplayedValue.value
         return
       }
       const { year, month, date: day } = toIntegers(newValue)
-      const newPlainDate = Temporal.PlainDate.from({ year, month: month + 1, day })
+      const newPlainDate = Temporal.PlainDate.from({
+        year,
+        month: month + 1,
+        day,
+      })
       selectedDate.value = newPlainDate
       datePickerDate.value = newPlainDate
       lastValidDisplayedValue.value = inputDisplayedValue.value
@@ -51,7 +60,10 @@ export const createDatePickerState = (
   }
 
   effect(() => {
-    inputDisplayedValue.value = getLocalizedDate(selectedDate.value, config.locale.value)
+    inputDisplayedValue.value = getLocalizedDate(
+      selectedDate.value,
+      config.locale.value
+    )
   })
 
   let wasInitialized = false

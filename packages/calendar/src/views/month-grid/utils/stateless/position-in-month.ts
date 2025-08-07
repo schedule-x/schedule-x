@@ -3,7 +3,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DATE_GRID_BLOCKER } from '../../../../constants'
 
-
 const positionInMonthWeek = (
   sortedEvents: CalendarEventInternal[],
   week: Record<string, MonthDay>

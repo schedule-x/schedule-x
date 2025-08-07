@@ -135,7 +135,11 @@ describe('Events facade for recurrence plugin', () => {
       expect(plugin.getAll()).toEqual(
         expect.arrayContaining([
           event1,
-          { id: '2', start: Temporal.PlainDate.from('2021-01-01'), end: Temporal.PlainDate.from('2021-01-01') },
+          {
+            id: '2',
+            start: Temporal.PlainDate.from('2021-01-01'),
+            end: Temporal.PlainDate.from('2021-01-01'),
+          },
         ])
       )
     })
@@ -196,7 +200,11 @@ describe('Events facade for recurrence plugin', () => {
       plugin.add(event)
       expect($app.calendarEvents.list.value.length).toBe(3)
 
-      plugin.update({ id: '1', start: Temporal.PlainDate.from('2021-01-01'), end: Temporal.PlainDate.from('2021-01-01') })
+      plugin.update({
+        id: '1',
+        start: Temporal.PlainDate.from('2021-01-01'),
+        end: Temporal.PlainDate.from('2021-01-01'),
+      })
       expect($app.calendarEvents.list.value.length).toBe(1)
     })
 
@@ -239,8 +247,12 @@ describe('Events facade for recurrence plugin', () => {
           {
             id: '1',
             title: 'Test Event 1',
-            start: Temporal.ZonedDateTime.from('2025-05-12T14:00:00.00+00:00[UTC]'),
-            end: Temporal.ZonedDateTime.from('2025-05-12T15:00:00.00+00:00[UTC]'),
+            start: Temporal.ZonedDateTime.from(
+              '2025-05-12T14:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2025-05-12T15:00:00.00+00:00[UTC]'
+            ),
           },
         ],
       })
@@ -302,7 +314,11 @@ describe('Events facade for recurrence plugin', () => {
       expect(plugin.getAll()).toEqual(
         expect.arrayContaining([
           event1,
-          { id: '2', start: Temporal.PlainDate.from('2021-01-01'), end: Temporal.PlainDate.from('2021-01-01') },
+          {
+            id: '2',
+            start: Temporal.PlainDate.from('2021-01-01'),
+            end: Temporal.PlainDate.from('2021-01-01'),
+          },
         ])
       )
 
@@ -313,14 +329,22 @@ describe('Events facade for recurrence plugin', () => {
         rrule: 'FREQ=DAILY',
       }
       plugin.set([
-        { id: '3', start: Temporal.PlainDate.from('2021-01-01'), end: Temporal.PlainDate.from('2021-01-01') },
+        {
+          id: '3',
+          start: Temporal.PlainDate.from('2021-01-01'),
+          end: Temporal.PlainDate.from('2021-01-01'),
+        },
         infiniteEvent,
       ])
       expect(plugin.getAll()).toHaveLength(2)
       expect($app.calendarEvents.list.value.length).toBe(4)
       expect(plugin.getAll()).toEqual(
         expect.arrayContaining([
-          { id: '3', start: Temporal.PlainDate.from('2021-01-01'), end: Temporal.PlainDate.from('2021-01-01') },
+          {
+            id: '3',
+            start: Temporal.PlainDate.from('2021-01-01'),
+            end: Temporal.PlainDate.from('2021-01-01'),
+          },
           infiniteEvent,
         ])
       )
@@ -344,7 +368,9 @@ describe('Events facade for recurrence plugin', () => {
         },
         {
           id: '2',
-          start: Temporal.ZonedDateTime.from('2025-05-02T22:00:00.00+00:00[UTC]'),
+          start: Temporal.ZonedDateTime.from(
+            '2025-05-02T22:00:00.00+00:00[UTC]'
+          ),
           end: Temporal.ZonedDateTime.from('2025-05-02T23:00:00.00+00:00[UTC]'),
           rrule: 'FREQ=DAILY;COUNT=10',
           exdate: [

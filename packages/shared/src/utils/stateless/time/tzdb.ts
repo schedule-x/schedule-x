@@ -1,4 +1,4 @@
-export type IANATimezone = 
+export type IANATimezone =
   | 'Africa/Abidjan'
   | 'Africa/Accra'
   | 'Africa/Addis_Ababa'
@@ -596,4 +596,4 @@ export type IANATimezone =
   | 'Universal'
   | 'W-SU'
   | 'WET'
-  | 'Zulu';
+  | 'Zulu'

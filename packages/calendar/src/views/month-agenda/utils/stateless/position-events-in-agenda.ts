@@ -3,7 +3,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
-
 const getAllEventDates = (startDate: string, endDate: string): string[] => {
   let currentDate = startDate
   const dates = [currentDate]

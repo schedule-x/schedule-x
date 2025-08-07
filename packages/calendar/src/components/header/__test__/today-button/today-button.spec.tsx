@@ -24,11 +24,15 @@ describe('TodayButton', () => {
       const now = Temporal.Now.plainDateISO()
       const expectedSelectedDate = Temporal.PlainDate.from(now)
       const $app = renderWithSelectedDateInThePast(initialSelectedDate)
-      expect($app.datePickerState.selectedDate.value).toEqual(initialSelectedDate)
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        initialSelectedDate
+      )
 
       clickTodayButton()
 
-      expect($app.datePickerState.selectedDate.value).toEqual(expectedSelectedDate)
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        expectedSelectedDate
+      )
     })
 
     it('should not change the selected date if it is already today', () => {

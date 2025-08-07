@@ -127,11 +127,17 @@ describe('MonthAgendaDay', () => {
 
     it('should display 1 event icons', () => {
       const $app = __createAppWithViews__({
-        events: [{ 
-          id: 1, 
-          start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-          end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
-        }],
+        events: [
+          {
+            id: 1,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+        ],
       })
       renderComponent($app, {
         date: Temporal.PlainDate.from('2020-01-01'),
@@ -144,20 +150,32 @@ describe('MonthAgendaDay', () => {
     it('should display 3 event icons', () => {
       const $app = __createAppWithViews__({
         events: [
-          { 
-            id: 1, 
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
+          {
+            id: 1,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
-          { 
-            id: 2, 
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
+          {
+            id: 2,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
-          { 
-            id: 3, 
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
+          {
+            id: 3,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -172,25 +190,41 @@ describe('MonthAgendaDay', () => {
     it('should display 3 event icons even when there are more events', () => {
       const $app = __createAppWithViews__({
         events: [
-          { 
-            id: 1, 
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
+          {
+            id: 1,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
-          { 
-            id: 2, 
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
+          {
+            id: 2,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
-          { 
-            id: 3, 
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
+          {
+            id: 3,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
-          { 
-            id: 4, 
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'), 
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]') 
+          {
+            id: 4,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -208,7 +242,10 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         selectedDate: Temporal.PlainDate.from('2021-02-01'),
       })
-      renderComponent($app, { date: Temporal.PlainDate.from('2021-02-01'), events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-02-01'),
+        events: [],
+      })
 
       expect(document.querySelector('.is-leading-or-trailing')).toBeNull()
     })
@@ -217,7 +254,10 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         selectedDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: Temporal.PlainDate.from('2021-03-31'), events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-03-31'),
+        events: [],
+      })
 
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
@@ -226,7 +266,10 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         selectedDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: Temporal.PlainDate.from('2021-05-01'), events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-05-01'),
+        events: [],
+      })
 
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
@@ -237,7 +280,10 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         minDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: Temporal.PlainDate.from('2021-03-31'), events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-03-31'),
+        events: [],
+      })
 
       expect(document.querySelector(DAY_SELECTOR)?.attributes).toHaveProperty(
         'disabled'
@@ -248,7 +294,10 @@ describe('MonthAgendaDay', () => {
       const $app = __createAppWithViews__({
         maxDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: Temporal.PlainDate.from('2021-05-01'), events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-05-01'),
+        events: [],
+      })
 
       expect(document.querySelector(DAY_SELECTOR)?.attributes).toHaveProperty(
         'disabled'
@@ -260,7 +309,10 @@ describe('MonthAgendaDay', () => {
         minDate: Temporal.PlainDate.from('2021-04-01'),
         maxDate: Temporal.PlainDate.from('2021-04-30'),
       })
-      renderComponent($app, { date: Temporal.PlainDate.from('2021-04-15'), events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-04-15'),
+        events: [],
+      })
 
       expect(
         document.querySelector(DAY_SELECTOR)?.attributes

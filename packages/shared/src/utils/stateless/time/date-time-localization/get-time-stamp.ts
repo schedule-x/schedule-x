@@ -2,7 +2,10 @@ import { CalendarEventInternal } from '../../../../interfaces/calendar/calendar-
 
 import { toIntegers } from '../format-conversion/format-conversion'
 
-const dateFn = (dateTime: Temporal.ZonedDateTime | Temporal.PlainDate, locale: string) => {
+const dateFn = (
+  dateTime: Temporal.ZonedDateTime | Temporal.PlainDate,
+  locale: string
+) => {
   return dateTime.toLocaleString(locale, {
     day: 'numeric',
     month: 'long',
@@ -46,7 +49,10 @@ export const getTimeStamp = (
     )}`
   }
 
-  if (calendarEvent._isSingleDayTimed && eventTime.start?.toString() !== eventTime.end?.toString()) {
+  if (
+    calendarEvent._isSingleDayTimed &&
+    eventTime.start?.toString() !== eventTime.end?.toString()
+  ) {
     return `${dateFn(eventTime.start, locale)} <span aria-hidden="true">⋅</span> ${timeFn(
       eventTime.start as Temporal.ZonedDateTime,
       locale

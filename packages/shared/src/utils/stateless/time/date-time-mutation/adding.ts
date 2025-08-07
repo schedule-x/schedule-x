@@ -4,8 +4,10 @@ import {
   jsDatetToDateTimeString,
 } from '../format-conversion/date-to-strings'
 
-
-export const addMonths = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nMonths: number): Temporal.ZonedDateTime | Temporal.PlainDate => {
+export const addMonths = (
+  to: Temporal.ZonedDateTime | Temporal.PlainDate,
+  nMonths: number
+): Temporal.ZonedDateTime | Temporal.PlainDate => {
   if (nMonths < 0) {
     return to.subtract({ months: -nMonths })
   }
@@ -13,7 +15,10 @@ export const addMonths = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nMont
   return to.add({ months: nMonths })
 }
 
-export const addDays = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nDays: number): Temporal.ZonedDateTime | Temporal.PlainDate => {
+export const addDays = (
+  to: Temporal.ZonedDateTime | Temporal.PlainDate,
+  nDays: number
+): Temporal.ZonedDateTime | Temporal.PlainDate => {
   if (nDays < 0) {
     return to.subtract({ days: -nDays })
   }
@@ -34,7 +39,10 @@ export const addMinutes = (to: string, nMinutes: number): string => {
   return jsDateToDateString(jsDate)
 }
 
-export const addMinutesToTemporal = (to: Temporal.ZonedDateTime | Temporal.PlainDate, nMinutes: number): Temporal.ZonedDateTime | Temporal.PlainDate => {
+export const addMinutesToTemporal = (
+  to: Temporal.ZonedDateTime | Temporal.PlainDate,
+  nMinutes: number
+): Temporal.ZonedDateTime | Temporal.PlainDate => {
   if (nMinutes < 0) {
     return to.subtract({ minutes: -nMinutes })
   }
@@ -68,7 +76,10 @@ export const addDaysToDateOrDateTime = (to: string, nDays: number): string => {
   return jsDateToDateString(jsDate)
 }
 
-export const addMonthsToDateOrDatetime = (to: string, nMonths: number): string => {
+export const addMonthsToDateOrDatetime = (
+  to: string,
+  nMonths: number
+): string => {
   const { year, month, date, hours, minutes } = toIntegers(to)
   const isDateTimeString = hours !== undefined && minutes !== undefined
   const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)

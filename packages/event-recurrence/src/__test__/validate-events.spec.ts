@@ -17,8 +17,12 @@ describe('validating events when adding them', () => {
       },
       {
         id: '2',
-        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00+03:00[Europe/Moscow]'),
-        end: Temporal.ZonedDateTime.from('2021-01-02T00:00:00+03:00[Europe/Moscow]'),
+        start: Temporal.ZonedDateTime.from(
+          '2021-01-01T00:00:00+03:00[Europe/Moscow]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2021-01-02T00:00:00+03:00[Europe/Moscow]'
+        ),
       },
     ])(`should not throw an error`, (event) => {
       const eventsService = createEventsServicePlugin()
@@ -59,8 +63,12 @@ describe('validating events when adding them', () => {
       },
       {
         id: '2',
-        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00+03:00[Europe/Moscow]'),
-        end: Temporal.ZonedDateTime.from('2021-01-02T00:00:00+03:00[Europe/Moscow]'),
+        start: Temporal.ZonedDateTime.from(
+          '2021-01-01T00:00:00+03:00[Europe/Moscow]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2021-01-02T00:00:00+03:00[Europe/Moscow]'
+        ),
       },
     ])(`should not throw an error`, (event) => {
       const eventsService = createEventsServicePlugin()
@@ -101,8 +109,12 @@ describe('validating events when adding them', () => {
       },
       {
         id: '2',
-        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00+03:00[Europe/Moscow]'),
-        end: Temporal.ZonedDateTime.from('2021-01-02T00:00:00+03:00[Europe/Moscow]'),
+        start: Temporal.ZonedDateTime.from(
+          '2021-01-01T00:00:00+03:00[Europe/Moscow]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2021-01-02T00:00:00+03:00[Europe/Moscow]'
+        ),
       },
     ])(`should not throw an error`, (event) => {
       const eventsService = createEventsServicePlugin()

@@ -11,7 +11,6 @@ import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
 import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
 import { addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
-
 export class RRule {
   private options: RRuleOptions
   private durationInMinutes: number | undefined
@@ -32,7 +31,10 @@ export class RRule {
     if (this.isDateTime) {
       this.durationInMinutes = getDurationInMinutes(this.dtstart, actualDTEND)
     } else {
-      this.durationInDays = calculateDaysDifference(Temporal.PlainDate.from(this.dtstart), Temporal.PlainDate.from(actualDTEND))
+      this.durationInDays = calculateDaysDifference(
+        Temporal.PlainDate.from(this.dtstart),
+        Temporal.PlainDate.from(actualDTEND)
+      )
     }
   }
 

@@ -11,7 +11,11 @@ import { handleEventConcurrency } from '../event-concurrency'
 
 describe('Event concurrency', () => {
   const _config = new CalendarConfigBuilder().build()
-  const createEvent = (event: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate; id: string }) => {
+  const createEvent = (event: {
+    start: Temporal.ZonedDateTime | Temporal.PlainDate
+    end: Temporal.ZonedDateTime | Temporal.PlainDate
+    id: string
+  }) => {
     return new CalendarEventBuilder(
       _config,
       event.id,

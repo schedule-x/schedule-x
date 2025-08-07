@@ -16,7 +16,6 @@ import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
 
-
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
 

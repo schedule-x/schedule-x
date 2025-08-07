@@ -2,7 +2,6 @@ import CalendarEventExternal from './calendar-event.interface'
 import { DateRange } from '../../types/date-range'
 import CalendarAppSingleton from './calendar-app-singleton'
 
-
 export interface CalendarCallbacks {
   onEventClick?: (event: CalendarEventExternal, e: UIEvent) => void
   onDoubleClickEvent?: (event: CalendarEventExternal, e: UIEvent) => void
@@ -11,13 +10,25 @@ export interface CalendarCallbacks {
   onClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
   onDoubleClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
   onClickDateTime?: (dateTime: Temporal.ZonedDateTime, e?: UIEvent) => void
-  onDoubleClickDateTime?: (dateTime: Temporal.ZonedDateTime, e?: UIEvent) => void
+  onDoubleClickDateTime?: (
+    dateTime: Temporal.ZonedDateTime,
+    e?: UIEvent
+  ) => void
   onClickAgendaDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
   onDoubleClickAgendaDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
   onClickPlusEvents?: (date: Temporal.PlainDate, e?: UIEvent) => void
-  onMouseDownDateTime?: (dateTime: Temporal.ZonedDateTime, mouseDownEvent: MouseEvent) => void
-  onMouseDownDateGridDate?: (date: Temporal.PlainDate, mouseDownEvent: MouseEvent) => void
-  onMouseDownMonthGridDate?: (date: Temporal.PlainDate, mouseDownEvent: MouseEvent) => void
+  onMouseDownDateTime?: (
+    dateTime: Temporal.ZonedDateTime,
+    mouseDownEvent: MouseEvent
+  ) => void
+  onMouseDownDateGridDate?: (
+    date: Temporal.PlainDate,
+    mouseDownEvent: MouseEvent
+  ) => void
+  onMouseDownMonthGridDate?: (
+    date: Temporal.PlainDate,
+    mouseDownEvent: MouseEvent
+  ) => void
   onScrollDayIntoView?: (date: Temporal.PlainDate) => void
 
   /**

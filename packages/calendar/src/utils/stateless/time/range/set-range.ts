@@ -12,7 +12,6 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import { RangeSetterConfig } from '@schedule-x/shared/src/interfaces/calendar/range-setter-config.interface'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
-
 const getRangeStartGivenDayBoundaries = (
   calendarConfig: CalendarConfigInternal,
   date: Temporal.ZonedDateTime
@@ -94,16 +93,12 @@ export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
 export const setRangeForDay = (config: RangeSetterConfig): DateRange => {
   let date = config.date as Temporal.ZonedDateTime | Temporal.PlainDate
   if (date instanceof Temporal.PlainDate) {
-    date = date.toZonedDateTime({ timeZone: config.calendarConfig.timezone.value })
+    date = date.toZonedDateTime({
+      timeZone: config.calendarConfig.timezone.value,
+    })
   }
   return {
-    start: getRangeStartGivenDayBoundaries(
-      config.calendarConfig,
-      date
-    ),
-    end: getRangeEndGivenDayBoundaries(
-      config.calendarConfig,
-      date
-    ),
+    start: getRangeStartGivenDayBoundaries(config.calendarConfig, date),
+    end: getRangeEndGivenDayBoundaries(config.calendarConfig, date),
   }
 }

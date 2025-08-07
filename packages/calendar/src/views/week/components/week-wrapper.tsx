@@ -3,7 +3,10 @@ import TimeGridDay from '../../../components/week-grid/time-grid-day'
 import TimeAxis from '../../../components/week-grid/time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import DateAxis from '../../../components/week-grid/date-axis'
-import { toIntegers, toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import {
+  toIntegers,
+  toJSDate,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../../utils/stateless/events/sort-events-for-week'
 import { createWeek } from '../../../utils/stateless/views/week/create-week'
 import { positionInTimeGrid } from '../../../utils/stateless/events/position-in-time-grid'
@@ -12,7 +15,6 @@ import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by
 import DateGridDay from '../../../components/week-grid/date-grid-day'
 import { useComputed } from '@preact/signals'
 import { filterByRange } from '../../../utils/stateless/events/filter-by-range'
-
 
 export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
   document.documentElement.style.setProperty(
@@ -57,7 +59,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
         second: 59,
         timeZone: $app.config.timezone.value,
       })
-      
+
       day.backgroundEvents = filterByRange(
         $app.calendarEvents.backgroundEvents.value,
         {

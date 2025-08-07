@@ -19,7 +19,6 @@ import { Language } from '@schedule-x/shared/src/types/translations/language.tra
 import { getDirection } from '../../stateless/get-direction'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
-
 export default class CalendarConfigImpl implements CalendarConfigInternal {
   firstDayOfWeek: Signal<WeekDay>
   views: Signal<View[]>

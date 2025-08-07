@@ -63,8 +63,12 @@ export default class CalendarConfigBuilder
   showWeekNumbers: boolean | undefined
 
   build(): CalendarConfigInternal {
-    const minDate = this.minDate ? Temporal.PlainDate.from(this.minDate) : undefined;
-    const maxDate = this.maxDate ? Temporal.PlainDate.from(this.maxDate) : undefined;
+    const minDate = this.minDate
+      ? Temporal.PlainDate.from(this.minDate)
+      : undefined
+    const maxDate = this.maxDate
+      ? Temporal.PlainDate.from(this.maxDate)
+      : undefined
     return new CalendarConfigImpl(
       this.locale || DEFAULT_LOCALE,
       typeof this.firstDayOfWeek === 'number'

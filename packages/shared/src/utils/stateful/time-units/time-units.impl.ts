@@ -5,7 +5,6 @@ import { WeekWithDates } from '../../../types/time'
 import { NoYearZeroError } from '../../stateless/errors/no-year-zero.error'
 import Config from '../../../interfaces/config.interface'
 
-
 export default class TimeUnitsImpl implements TimeUnits {
   constructor(private config: Config) {}
 
@@ -20,8 +19,14 @@ export default class TimeUnitsImpl implements TimeUnits {
   getMonth(year: number, month: Month): Temporal.ZonedDateTime[] {
     if (year === 0) throw new NoYearZeroError()
 
-    const firstDateOfMonth = Temporal.PlainDate.from({ year, month: month, day: 1 })
-    const lastDateOfMonth = firstDateOfMonth.toPlainYearMonth().toPlainDate({ day: firstDateOfMonth.toPlainYearMonth().daysInMonth })
+    const firstDateOfMonth = Temporal.PlainDate.from({
+      year,
+      month: month,
+      day: 1,
+    })
+    const lastDateOfMonth = firstDateOfMonth
+      .toPlainYearMonth()
+      .toPlainDate({ day: firstDateOfMonth.toPlainYearMonth().daysInMonth })
     const dates: Temporal.ZonedDateTime[] = []
 
     let currentDate = firstDateOfMonth
@@ -36,7 +41,11 @@ export default class TimeUnitsImpl implements TimeUnits {
   getMonthWithTrailingAndLeadingDays(year: number, month: Month) {
     if (year === 0) throw new NoYearZeroError()
 
-    const firstDateOfMonth = Temporal.PlainDate.from({ year, month: month, day: 1 })
+    const firstDateOfMonth = Temporal.PlainDate.from({
+      year,
+      month: month,
+      day: 1,
+    })
     const monthWithDates = [this.getWeekForTemporal(firstDateOfMonth)]
 
     let isInMonth = true
@@ -47,7 +56,9 @@ export default class TimeUnitsImpl implements TimeUnits {
 
       // Check if the next week contains any dates from the target month
       const nextWeekDates = this.getWeekForTemporal(nextWeekStart)
-      const hasDatesInTargetMonth = nextWeekDates.some(date => date.month === month)
+      const hasDatesInTargetMonth = nextWeekDates.some(
+        (date) => date.month === month
+      )
 
       if (hasDatesInTargetMonth) {
         monthWithDates.push(nextWeekDates)
@@ -58,16 +69,21 @@ export default class TimeUnitsImpl implements TimeUnits {
     }
 
     // Convert Temporal.PlainDate arrays to Temporal.ZonedDateTime arrays
-    return monthWithDates.map(week => 
-      week.map(plainDate => 
+    return monthWithDates.map((week) =>
+      week.map((plainDate) =>
         plainDate.toZonedDateTime(this.config.timezone.value)
       )
     )
   }
 
   getWeekFor(date: Temporal.ZonedDateTime | Temporal.PlainDate): WeekWithDates {
-    const plainDate = date instanceof Temporal.PlainDate ? date : date.toPlainDate()
-    const week: WeekWithDates = [this.getFirstDateOfWeekTemporal(plainDate).toZonedDateTime(this.config.timezone.value)]
+    const plainDate =
+      date instanceof Temporal.PlainDate ? date : date.toPlainDate()
+    const week: WeekWithDates = [
+      this.getFirstDateOfWeekTemporal(plainDate).toZonedDateTime(
+        this.config.timezone.value
+      ),
+    ]
 
     while (week.length < 7) {
       const lastDateOfWeek = week[week.length - 1]
@@ -83,7 +99,9 @@ export default class TimeUnitsImpl implements TimeUnits {
 
     return Object.values(Month)
       .filter((month) => !isNaN(Number(month)))
-      .map((month) => Temporal.PlainDate.from({ year, month: Number(month), day: 1 }))
+      .map((month) =>
+        Temporal.PlainDate.from({ year, month: Number(month), day: 1 })
+      )
   }
 
   private getWeekForTemporal(date: Temporal.PlainDate): Temporal.PlainDate[] {
@@ -98,7 +116,9 @@ export default class TimeUnitsImpl implements TimeUnits {
     return week
   }
 
-  private getFirstDateOfWeekTemporal(date: Temporal.PlainDate): Temporal.PlainDate {
+  private getFirstDateOfWeekTemporal(
+    date: Temporal.PlainDate
+  ): Temporal.PlainDate {
     const dateIsNthDayOfWeek = date.dayOfWeek - this.firstDayOfWeek
 
     if (dateIsNthDayOfWeek === 0) {

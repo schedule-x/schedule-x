@@ -15,7 +15,10 @@ describe('CalendarEventImpl', () => {
         end: '03:00',
       })
       .build()
-    const createEvent = (eventTime: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate }) =>
+    const createEvent = (eventTime: {
+      start: Temporal.ZonedDateTime | Temporal.PlainDate
+      end: Temporal.ZonedDateTime | Temporal.PlainDate
+    }) =>
       new CalendarEventBuilder(
         _config,
         '1',

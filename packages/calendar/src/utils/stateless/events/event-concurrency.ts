@@ -17,7 +17,9 @@ export const handleEventConcurrency = (
     if (
       concurrentEventsCache.length &&
       (!nextEvent ||
-        (concurrentEventsCache.every((e) => e.end.toString() <= nextEvent.start.toString()) &&
+        (concurrentEventsCache.every(
+          (e) => e.end.toString() <= nextEvent.start.toString()
+        ) &&
           !areBothEventsZeroMinutes))
     ) {
       concurrentEventsCache.push(event)
@@ -63,7 +65,10 @@ export const handleEventConcurrency = (
               cachedEvent.start.toString() < currentEvent.end.toString()) ||
             areEvents0MinutesAndConcurrent(cachedEvent, currentEvent)
           ) {
-            timePoints.push({ time: cachedEvent.start.toString(), type: 'start' })
+            timePoints.push({
+              time: cachedEvent.start.toString(),
+              type: 'start',
+            })
             timePoints.push({ time: cachedEvent.end.toString(), type: 'end' })
           }
         })
@@ -93,7 +98,9 @@ export const handleEventConcurrency = (
 
     if (
       (nextEvent && event.end.toString() > nextEvent.start.toString()) ||
-      concurrentEventsCache.some((e) => e.end.toString() > event.start.toString()) ||
+      concurrentEventsCache.some(
+        (e) => e.end.toString() > event.start.toString()
+      ) ||
       areBothEventsZeroMinutes
     ) {
       concurrentEventsCache.push(event)

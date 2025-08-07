@@ -10,7 +10,6 @@ import { addDays } from '@schedule-x/shared/src'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
-
 type props = {
   week: WeekWithDates
 }
@@ -38,7 +37,10 @@ export default function MonthViewWeek({ week }: props) {
   })
 
   const isDateSelectable = (date: Temporal.PlainDate) => {
-    return date.toString() >= $app.config.min.toString() && date.toString() <= $app.config.max.toString()
+    return (
+      date.toString() >= $app.config.min.toString() &&
+      date.toString() <= $app.config.max.toString()
+    )
   }
 
   const selectDate = (date: Temporal.PlainDate) => {

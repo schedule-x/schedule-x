@@ -33,8 +33,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [dragAndDropPlugin],
         events: [
           {
-            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
-            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
             _options: {
               disableDND: true,
@@ -65,8 +69,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [resizePlugin],
         events: [
           {
-            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
-            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
             _options: {
               disableResize: true,
@@ -94,8 +102,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [dragAndDropPlugin],
         events: [
           {
-            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
-            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
           },
         ],
@@ -123,8 +135,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [resizePlugin],
         events: [
           {
-            start: Temporal.ZonedDateTime.from('2021-10-10T00:00:00.00+00:00[UTC]'),
-            end: Temporal.ZonedDateTime.from('2021-10-10T01:00:00.00+00:00[UTC]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
           },
         ],

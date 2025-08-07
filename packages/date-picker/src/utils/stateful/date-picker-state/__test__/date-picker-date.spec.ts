@@ -19,6 +19,8 @@ describe('date picker date in date picker state impl', () => {
     const todayDateString = getCurrentDayDateString()
     const underTest = createDatePickerState(config())
 
-    expect(underTest.datePickerDate.value).toEqual(Temporal.PlainDate.from(todayDateString))
+    expect(underTest.datePickerDate.value).toEqual(
+      Temporal.PlainDate.from(todayDateString)
+    )
   })
 })

@@ -1,6 +1,11 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { RecurrenceSet } from '../../../../recurrence/src'
-import { parseRFC5545ToSX, parseRFC5545ToTemporal, parseSXToRFC5545, parseTemporalToRFC5545 } from '../../../../recurrence/src/parsers/rrule/parse-rrule'
+import {
+  parseRFC5545ToSX,
+  parseRFC5545ToTemporal,
+  parseSXToRFC5545,
+  parseTemporalToRFC5545,
+} from '../../../../recurrence/src/parsers/rrule/parse-rrule'
 import {
   AugmentedBackgroundEvent,
   AugmentedEvent,
@@ -32,16 +37,25 @@ export const createRecurrencesForEvent = (
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
 
-  if (recurrenceSet[0].start === parseRFC5545ToSX(parseTemporalToRFC5545(calendarEvent.start))) {
+  if (
+    recurrenceSet[0].start ===
+    parseRFC5545ToSX(parseTemporalToRFC5545(calendarEvent.start))
+  ) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
   return recurrenceSet.map((recurrence) => {
     const eventCopy: AugmentedEvent = deepCloneEvent(calendarEvent, $app)
-    eventCopy.start = parseRFC5545ToTemporal(parseSXToRFC5545(recurrence.start), $app.config.timezone.value)
-    eventCopy.end = parseRFC5545ToTemporal(parseSXToRFC5545(recurrence.end), $app.config.timezone.value)
+    eventCopy.start = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.start),
+      $app.config.timezone.value
+    )
+    eventCopy.end = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.end),
+      $app.config.timezone.value
+    )
     eventCopy.isCopy = true
-  
+
     return eventCopy
   })
 }
@@ -68,14 +82,23 @@ export const createRecurrencesForBackgroundEvent = (
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
 
-  if (parseSXToRFC5545(recurrenceSet[0].start) === parseTemporalToRFC5545(backgroundEvent.start)) {
+  if (
+    parseSXToRFC5545(recurrenceSet[0].start) ===
+    parseTemporalToRFC5545(backgroundEvent.start)
+  ) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
   return recurrenceSet.map((recurrence) => {
     const eventCopy: AugmentedBackgroundEvent = structuredClone(backgroundEvent)
-    eventCopy.start = parseRFC5545ToTemporal(parseSXToRFC5545(recurrence.start), $app.config.timezone.value)
-    eventCopy.end = parseRFC5545ToTemporal(parseSXToRFC5545(recurrence.end), $app.config.timezone.value)
+    eventCopy.start = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.start),
+      $app.config.timezone.value
+    )
+    eventCopy.end = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.end),
+      $app.config.timezone.value
+    )
     eventCopy.isCopy = true
     return eventCopy
   })

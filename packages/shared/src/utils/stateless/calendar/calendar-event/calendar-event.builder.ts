@@ -7,7 +7,6 @@ import CalendarEventImpl from './calendar-event.impl'
 import { EventId } from '../../../../types/event-id'
 import CalendarConfigInternal from '../../../../interfaces/calendar/calendar-config'
 
-
 export default class CalendarEventBuilder
   implements Builder<CalendarEventInternal>
 {

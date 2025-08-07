@@ -8,7 +8,6 @@ import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-con
 import { updateEventsList } from './utils/stateless/update-events-list'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
-
 export class DateGridEventResizer {
   private readonly dayWidth: number = 0
   private readonly originalEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
@@ -64,16 +63,18 @@ export class DateGridEventResizer {
 
   private setNewTimeForEventEnd() {
     const newEnd = addDays(this.originalEventEnd, this.lastNDaysDiff)
-    let rangeStart: Temporal.ZonedDateTime | Temporal.PlainDate = (this.$app.calendarState.range.value as DateRange).start
+    let rangeStart: Temporal.ZonedDateTime | Temporal.PlainDate = (
+      this.$app.calendarState.range.value as DateRange
+    ).start
     if (newEnd instanceof Temporal.PlainDate) {
       rangeStart = Temporal.PlainDate.from(rangeStart)
     }
 
     if (
-      newEnd.toString() > (this.$app.calendarState.range.value as DateRange).end.toString() ||
+      newEnd.toString() >
+        (this.$app.calendarState.range.value as DateRange).end.toString() ||
       newEnd.toString() < this.eventCopy.start.toString() ||
-      newEnd.toString() <
-        rangeStart.toString()
+      newEnd.toString() < rangeStart.toString()
     )
       return
 

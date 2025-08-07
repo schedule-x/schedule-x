@@ -21,8 +21,12 @@ describe('Week view', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2021-01-01T12:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T18:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -45,13 +49,21 @@ describe('Week view', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2021-01-01T12:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T18:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
           },
           {
             id: 2,
-            start: Temporal.ZonedDateTime.from('2021-01-01T14:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T16:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -67,20 +79,32 @@ describe('Week view', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2021-01-01T12:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T18:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
           {
             id: 2,
-            start: Temporal.ZonedDateTime.from('2021-01-01T14:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T16:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event 2',
           },
           {
             id: 3,
-            start: Temporal.ZonedDateTime.from('2021-01-01T14:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T16:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
         ],
@@ -101,20 +125,32 @@ describe('Week view', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2021-01-01T12:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T18:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
           {
             id: 2,
-            start: Temporal.ZonedDateTime.from('2021-01-01T14:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T16:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event 2',
           },
           {
             id: 3,
-            start: Temporal.ZonedDateTime.from('2021-01-01T14:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T16:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
         ],
@@ -174,7 +210,8 @@ describe('Week view', () => {
         '2024-07-20'
       )
 
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2024-07-19')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2024-07-19')
 
       await waitFor(() => {
         const selectedDayAfterChange = document.querySelector(

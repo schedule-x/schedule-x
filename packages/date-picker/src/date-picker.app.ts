@@ -2,7 +2,6 @@ import { createElement, render } from 'preact'
 import AppWrapper from './components/app-wrapper'
 import DatePickerAppSingleton from '@schedule-x/shared/src/interfaces/date-picker/date-picker-app.singleton'
 
-
 export default class DatePickerApp {
   constructor(private $app: DatePickerAppSingleton) {}
 
@@ -20,7 +19,8 @@ export default class DatePickerApp {
   }
 
   set value(value: Temporal.PlainDate) {
-    this.$app.datePickerState.selectedDate.value = Temporal.PlainDate.from(value)
+    this.$app.datePickerState.selectedDate.value =
+      Temporal.PlainDate.from(value)
   }
 
   get disabled() {

@@ -1,6 +1,9 @@
 import { getWeekForDate } from './get-week-for-date'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { jsDateToDateString, toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import {
+  jsDateToDateString,
+  toDateString,
+} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { RRuleOptions } from '../../types/rrule-options'
 import { getJSDayFromByday } from './byday-jsday-map'
 import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'

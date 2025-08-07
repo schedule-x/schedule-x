@@ -14,7 +14,6 @@ import { validatePlugins } from './utils/stateless/validation/validate-plugins'
 import { validateConfig } from './utils/stateless/validation/validate-config'
 import { validateEvents } from '@schedule-x/shared/src/utils/stateless/validation/validate-events'
 
-
 export const createCalendarAppSingleton = (
   config: CalendarConfigExternal,
   plugins: PluginBase<string>[]
@@ -30,7 +29,10 @@ export const createCalendarAppSingleton = (
     calendarState,
     config
   )
-  const datePickerConfig = createDatePickerConfig(config, (date: Temporal.PlainDate) => dateSelectionCallback(date))
+  const datePickerConfig = createDatePickerConfig(
+    config,
+    (date: Temporal.PlainDate) => dateSelectionCallback(date)
+  )
   const datePickerState = createDatePickerState(
     datePickerConfig,
     config.selectedDate || config.datePicker?.selectedDate

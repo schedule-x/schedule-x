@@ -24,7 +24,6 @@ import { signal } from '@preact/signals'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import 'temporal-polyfill/global'
 
-
 describe('Resizing events in the date grid', () => {
   let $app: CalendarAppSingleton
   let calendarEvent: CalendarEventInternal
@@ -192,8 +191,12 @@ describe('Resizing events in the date grid', () => {
     })
 
     it('should not be able to resize beyond the start of the week, if the event starts in the previous week', () => {
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-23')
+      )
       const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       // should first be able to resize one day to the left
@@ -215,15 +218,23 @@ describe('Resizing events in the date grid', () => {
         })
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-22'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-22')
+      )
     })
 
     it('should call the onEventUpdate callback when the resizing is finished', () => {
       const mockCallback = vi.fn()
       $app.config.callbacks.onEventUpdate = mockCallback
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-23')
+      )
       const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
@@ -257,8 +268,12 @@ describe('Resizing events in the date grid', () => {
 
     it('should make the event one day longer if document has rtl direction', () => {
       $app.config.direction = 'rtl'
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-23')
+      )
       const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
@@ -274,8 +289,12 @@ describe('Resizing events in the date grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-24'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-24')
+      )
     })
   })
 
@@ -289,8 +308,12 @@ describe('Resizing events in the date grid', () => {
       ) => {
         return false
       }
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-23')
+      )
       const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
@@ -307,8 +330,12 @@ describe('Resizing events in the date grid', () => {
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       await waitFor(() => {
-        expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-        expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+        expect(eventStartingInPreviousWeek.start).toEqual(
+          Temporal.PlainDate.from('2024-01-21')
+        )
+        expect(eventStartingInPreviousWeek.end).toEqual(
+          Temporal.PlainDate.from('2024-01-23')
+        )
         expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
       })
     })
@@ -321,8 +348,12 @@ describe('Resizing events in the date grid', () => {
       ) => {
         return true
       }
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-23')
+      )
       const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
@@ -338,8 +369,12 @@ describe('Resizing events in the date grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-24'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-24')
+      )
     })
   })
 
@@ -353,8 +388,12 @@ describe('Resizing events in the date grid', () => {
       ) => {
         return Promise.resolve(false)
       }
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-23')
+      )
       const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
@@ -371,8 +410,12 @@ describe('Resizing events in the date grid', () => {
       document.dispatchEvent(new MouseEvent('mouseup'))
 
       await waitFor(() => {
-        expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-        expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+        expect(eventStartingInPreviousWeek.start).toEqual(
+          Temporal.PlainDate.from('2024-01-21')
+        )
+        expect(eventStartingInPreviousWeek.end).toEqual(
+          Temporal.PlainDate.from('2024-01-23')
+        )
         expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
       })
     })
@@ -385,8 +428,12 @@ describe('Resizing events in the date grid', () => {
       ) => {
         return true
       }
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-23'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-23')
+      )
       const resizePlugin = createResizePlugin() as ResizePlugin
       resizePlugin.onRender!($app)
       resizePlugin.createDateGridEventResizer(
@@ -402,8 +449,12 @@ describe('Resizing events in the date grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(eventStartingInPreviousWeek.start).toEqual(Temporal.PlainDate.from('2024-01-21'))
-      expect(eventStartingInPreviousWeek.end).toEqual(Temporal.PlainDate.from('2024-01-24'))
+      expect(eventStartingInPreviousWeek.start).toEqual(
+        Temporal.PlainDate.from('2024-01-21')
+      )
+      expect(eventStartingInPreviousWeek.end).toEqual(
+        Temporal.PlainDate.from('2024-01-24')
+      )
     })
   })
 
@@ -492,7 +543,9 @@ describe('Resizing events in the date grid', () => {
       document.dispatchEvent(new TouchEvent('touchend'))
 
       await waitFor(() => {
-        expect(calendarEvent.start).toEqual(Temporal.PlainDate.from('2024-01-26'))
+        expect(calendarEvent.start).toEqual(
+          Temporal.PlainDate.from('2024-01-26')
+        )
         expect(calendarEvent.end).toEqual(Temporal.PlainDate.from('2024-01-27'))
       })
     })

@@ -21,7 +21,9 @@ describe('MonthViewWeek', () => {
     const closeSpy = spyOn($app.datePickerState, 'close')
     renderComponent(
       $app,
-      $app.timeUnitsImpl.getWeekFor(Temporal.ZonedDateTime.from('2023-07-23T00:00:00.00+00:00[UTC]'))
+      $app.timeUnitsImpl.getWeekFor(
+        Temporal.ZonedDateTime.from('2023-07-23T00:00:00.00+00:00[UTC]')
+      )
     )
     expect($app.datePickerState.isOpen.value).toBe(true)
 
@@ -41,12 +43,16 @@ describe('MonthViewWeek', () => {
     ['23', '2023-07-23'],
   ])('should set new selected date', (dateOfMonth, expectedResult) => {
     const $app = createAppSingleton()
-    const date = Temporal.ZonedDateTime.from('2023-07-23T00:00:00.00+00:00[UTC]')
+    const date = Temporal.ZonedDateTime.from(
+      '2023-07-23T00:00:00.00+00:00[UTC]'
+    )
     const week = $app.timeUnitsImpl.getWeekFor(date)
     renderComponent($app, week)
 
     clickByDate(dateOfMonth)
 
-    expect($app.datePickerState.selectedDate.value).toEqual(Temporal.PlainDate.from(expectedResult))
+    expect($app.datePickerState.selectedDate.value).toEqual(
+      Temporal.PlainDate.from(expectedResult)
+    )
   })
 })

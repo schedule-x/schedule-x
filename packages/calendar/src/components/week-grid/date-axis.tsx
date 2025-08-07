@@ -64,9 +64,7 @@ export default function DateAxis({ week }: props) {
                   {getDayNameShort(date, $app.config.locale.value)}
                 </div>
 
-                <div className="sx__week-grid__date-number">
-                  {date.day}
-                </div>
+                <div className="sx__week-grid__date-number">{date.day}</div>
               </>
             )}
           </div>

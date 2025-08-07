@@ -8,7 +8,6 @@ import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/fo
 import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 
-
 export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private allDayElements: NodeListOf<HTMLDivElement>
   private currentDragoverDate: string | undefined
@@ -59,7 +58,10 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     if (this.currentDragoverDate === dayElement.dataset.date) return
 
     this.currentDragoverDate = dayElement.dataset.date as string
-    const newEndDate = addDays(Temporal.PlainDate.from(this.currentDragoverDate), this.eventNDays - 1)
+    const newEndDate = addDays(
+      Temporal.PlainDate.from(this.currentDragoverDate),
+      this.eventNDays - 1
+    )
 
     this.allDayElements.forEach((el) => {
       const dayElementDate = el.dataset.date as string

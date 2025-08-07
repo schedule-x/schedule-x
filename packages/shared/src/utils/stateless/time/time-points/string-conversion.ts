@@ -2,7 +2,6 @@ import { InvalidTimeStringError } from '../../errors/invalid-time-string.error'
 import { timeStringRegex } from '../validation/regex'
 import { doubleDigit } from '../date-time-mutation/double-digit'
 
-
 const minuteTimePointMultiplier = 1.6666666666666667 // 100 / 60
 
 export const timePointsFromString = (timeString: string): number => {

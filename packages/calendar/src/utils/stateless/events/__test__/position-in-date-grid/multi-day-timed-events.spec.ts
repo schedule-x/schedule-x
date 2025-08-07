@@ -23,8 +23,12 @@ describe('positioning events in the date grid of a week or day', () => {
         new CalendarEventBuilder(
           $app.config,
           1,
-          Temporal.ZonedDateTime.from('2023-09-10T04:00:00+03:00[Europe/Moscow]'),
-          Temporal.ZonedDateTime.from('2023-09-20T20:00:00+03:00[Europe/Moscow]')
+          Temporal.ZonedDateTime.from(
+            '2023-09-10T04:00:00+03:00[Europe/Moscow]'
+          ),
+          Temporal.ZonedDateTime.from(
+            '2023-09-20T20:00:00+03:00[Europe/Moscow]'
+          )
         ).build(),
       ]
       const week = createWeek($app)

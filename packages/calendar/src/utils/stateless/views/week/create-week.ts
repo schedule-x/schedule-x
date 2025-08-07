@@ -5,7 +5,6 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 
-
 const createOneDay = (week: Week, date: Temporal.ZonedDateTime) => {
   const dateString = toDateString(date)
   week[dateString] = {
@@ -20,10 +19,7 @@ const createOneDay = (week: Week, date: Temporal.ZonedDateTime) => {
 
 export const createWeek = ($app: CalendarAppSingleton) => {
   if ($app.calendarState.view.value === InternalViewName.Day)
-    return createOneDay(
-      {},
-      ($app.calendarState.range.value as DateRange).start
-    )
+    return createOneDay({}, ($app.calendarState.range.value as DateRange).start)
 
   // Week mode
   return $app.timeUnitsImpl

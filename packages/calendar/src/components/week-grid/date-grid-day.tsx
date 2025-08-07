@@ -5,7 +5,6 @@ import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/back
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 
-
 type props = {
   calendarEvents: {
     [key: string]: CalendarEventInternal | typeof DATE_GRID_BLOCKER | undefined
@@ -40,17 +39,22 @@ export default function DateGridDay({
   })
 
   const fullDayBackgroundEvent = backgroundEvents.find((event) => {
-    const eventStartWithTime = event  .start instanceof Temporal.PlainDate
-      ? event.start.toZonedDateTime($app.config.timezone.value)
-      : event.start
-    const eventEndWithTime = event.end instanceof Temporal.PlainDate
-      ? event.end.toZonedDateTime($app.config.timezone.value).with({
-        hour: 23,
-        minute: 59,
-        second: 59,
-      })
-      : event.end
-    return eventStartWithTime.toString() <= dateStart.toString() && eventEndWithTime.toString() >= dateEnd.toString()
+    const eventStartWithTime =
+      event.start instanceof Temporal.PlainDate
+        ? event.start.toZonedDateTime($app.config.timezone.value)
+        : event.start
+    const eventEndWithTime =
+      event.end instanceof Temporal.PlainDate
+        ? event.end.toZonedDateTime($app.config.timezone.value).with({
+            hour: 23,
+            minute: 59,
+            second: 59,
+          })
+        : event.end
+    return (
+      eventStartWithTime.toString() <= dateStart.toString() &&
+      eventEndWithTime.toString() >= dateEnd.toString()
+    )
   })
 
   const handleMouseDown = (e: MouseEvent) => {

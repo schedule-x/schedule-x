@@ -23,8 +23,12 @@ const renderComponent = (
         calendarEvent={calendarEvent}
         setMouseDown={() => undefined}
         dayBoundariesDateTime={{
-          start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-          end: Temporal.ZonedDateTime.from('2020-01-01T23:59:00[Europe/Stockholm]'),
+          start: Temporal.ZonedDateTime.from(
+            '2020-01-01T00:00:00[Europe/Stockholm]'
+          ),
+          end: Temporal.ZonedDateTime.from(
+            '2020-01-01T23:59:00[Europe/Stockholm]'
+          ),
         }}
       />
     </AppContext.Provider>
@@ -43,8 +47,12 @@ describe('TimeGridEvent', () => {
           {
             id: '123',
             title: 'Event 1',
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-02T01:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-02T01:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -60,8 +68,12 @@ describe('TimeGridEvent', () => {
           {
             id: '123',
             title: 'Event 1',
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-01T01:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T01:00:00[Europe/Stockholm]'
+            ),
             _options: {
               additionalClasses: ['event-class', 'another-class'],
             },
@@ -83,8 +95,12 @@ describe('TimeGridEvent', () => {
           {
             id: '123',
             title: 'Event 1',
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-01T01:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T01:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -103,8 +119,12 @@ describe('TimeGridEvent', () => {
           {
             id: '123',
             title: '1-minute event',
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -112,7 +132,9 @@ describe('TimeGridEvent', () => {
       renderComponent($app, $app.calendarEvents.list.value[0])
 
       const eventTime = document.querySelector('.sx__time-grid-event-time')
-      expect(eventTime?.lastChild?.textContent).toStrictEqual('11:00 PM – 11:00 PM')
+      expect(eventTime?.lastChild?.textContent).toStrictEqual(
+        '11:00 PM – 11:00 PM'
+      )
     })
   })
 
@@ -125,8 +147,12 @@ describe('TimeGridEvent', () => {
             _customContent: {
               timeGrid: '<div class="custom-content">Custom Content</div>',
             },
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-02T01:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-02T01:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -148,8 +174,12 @@ describe('TimeGridEvent', () => {
             _customContent: {
               timeGrid: '<div class="custom-content">Custom Content</div>',
             },
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-02T01:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-02T01:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -169,8 +199,12 @@ describe('TimeGridEvent', () => {
             _customContent: {
               timeGrid: '<div class="custom-content">Custom Content</div>',
             },
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-02T01:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-02T01:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })

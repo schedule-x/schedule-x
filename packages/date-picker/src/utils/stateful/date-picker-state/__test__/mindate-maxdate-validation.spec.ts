@@ -29,7 +29,10 @@ describe('Date-picker state', () => {
       config.locale = signal('en-US')
       config.min = Temporal.PlainDate.from('2021-01-01')
       config.max = Temporal.PlainDate.from('2100-12-31')
-      const state = createDatePickerState(config, Temporal.PlainDate.from('2021-12-31'))
+      const state = createDatePickerState(
+        config,
+        Temporal.PlainDate.from('2021-12-31')
+      )
 
       state.handleInput('2022-01-01') // greater than min
 
@@ -56,7 +59,10 @@ describe('Date-picker state', () => {
       config.locale = signal('en-US')
       config.min = Temporal.PlainDate.from('2000-01-01')
       config.max = Temporal.PlainDate.from('2021-12-31')
-      const state = createDatePickerState(config, Temporal.PlainDate.from('2021-12-31'))
+      const state = createDatePickerState(
+        config,
+        Temporal.PlainDate.from('2021-12-31')
+      )
 
       state.handleInput('2021-01-01')
 

@@ -18,7 +18,9 @@ export const getEventHeight = (
       timePointToPercentage(
         pointsPerDay,
         dayBoundaries,
-        timePointsFromString(timeFromDateTime(addTimePointsToDateTime(end, 50).toString()))
+        timePointsFromString(
+          timeFromDateTime(addTimePointsToDateTime(end, 50).toString())
+        )
       ) -
       timePointToPercentage(
         pointsPerDay,

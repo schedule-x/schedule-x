@@ -20,9 +20,7 @@ describe('calendar state', () => {
     config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
     const cfg = createBaseConfig()
     cfg.timezone.value = 'UTC'
-    const timeUnitsImpl = new TimeUnitsBuilder()
-      .withConfig(cfg)
-      .build()
+    const timeUnitsImpl = new TimeUnitsBuilder().withConfig(cfg).build()
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)
@@ -90,9 +88,7 @@ describe('calendar state', () => {
     config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
     const cfg = createBaseConfig()
     cfg.timezone.value = 'UTC'
-    const timeUnitsImpl = new TimeUnitsBuilder()
-      .withConfig(cfg)
-      .build()
+    const timeUnitsImpl = new TimeUnitsBuilder().withConfig(cfg).build()
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)

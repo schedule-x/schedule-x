@@ -71,7 +71,10 @@ describe('ViewSelection', () => {
 
   it('should only display views compatible with a small calendar', async () => {
     const { $app } = renderComponent()
-    $app.calendarState.setView(InternalViewName.MonthAgenda, Temporal.PlainDate.from('2023-09-13'))
+    $app.calendarState.setView(
+      InternalViewName.MonthAgenda,
+      Temporal.PlainDate.from('2023-09-13')
+    )
     $app.calendarState.isCalendarSmall.value = true
 
     openViewSelection()
@@ -88,7 +91,10 @@ describe('ViewSelection', () => {
 
   it('should only display views compatible with a large calendar', async () => {
     const { $app } = renderComponent()
-    $app.calendarState.setView(InternalViewName.MonthAgenda, Temporal.PlainDate.from('2023-09-13'))
+    $app.calendarState.setView(
+      InternalViewName.MonthAgenda,
+      Temporal.PlainDate.from('2023-09-13')
+    )
     $app.calendarState.isCalendarSmall.value = false
 
     openViewSelection()

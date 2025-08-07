@@ -28,12 +28,16 @@ describe('createCalendarControlsPlugin', () => {
         plugins: [controlsPlugin],
         selectedDate: Temporal.PlainDate.from('2021-01-01'),
       })
-      expect($app.datePickerState.selectedDate.value).toEqual(Temporal.PlainDate.from('2021-01-01'))
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from('2021-01-01')
+      )
       controlsPlugin.onRender($app)
 
       controlsPlugin.setDate(Temporal.PlainDate.from('2021-02-02'))
 
-      expect($app.datePickerState.selectedDate.value).toEqual(Temporal.PlainDate.from('2021-02-02'))
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from('2021-02-02')
+      )
     })
 
     it('should throw if the date is invalid', () => {
@@ -42,7 +46,9 @@ describe('createCalendarControlsPlugin', () => {
         plugins: [controlsPlugin],
         selectedDate: Temporal.PlainDate.from('2021-01-01'),
       })
-      expect($app.datePickerState.selectedDate.value).toEqual(Temporal.PlainDate.from('2021-01-01'))
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from('2021-01-01')
+      )
       controlsPlugin.onRender($app)
 
       // @ts-expect-error - we want to test the error case
@@ -113,9 +119,12 @@ describe('createCalendarControlsPlugin', () => {
         selectedDate: Temporal.PlainDate.from('2021-01-01'),
       })
       controlsPlugin.onRender($app)
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2023-01-01')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2023-01-01')
 
-      expect(controlsPlugin.getDate()).toEqual(Temporal.PlainDate.from('2023-01-01'))
+      expect(controlsPlugin.getDate()).toEqual(
+        Temporal.PlainDate.from('2023-01-01')
+      )
     })
   })
 
@@ -128,7 +137,10 @@ describe('createCalendarControlsPlugin', () => {
         defaultView: InternalViewName.MonthGrid,
       })
       controlsPlugin.onRender($app)
-      $app.calendarState.setView(InternalViewName.Day, Temporal.PlainDate.from('2021-01-01'))
+      $app.calendarState.setView(
+        InternalViewName.Day,
+        Temporal.PlainDate.from('2021-01-01')
+      )
 
       expect(controlsPlugin.getView()).toBe(InternalViewName.Day)
     })

@@ -2,11 +2,15 @@ import { addMonths } from './adding'
 import { jsDateToDateString } from '../format-conversion/date-to-strings'
 import { toJSDate } from '../format-conversion/format-conversion'
 
-export const getFirstDayOPreviousMonth = (date: Temporal.PlainDate): Temporal.PlainDate => {
+export const getFirstDayOPreviousMonth = (
+  date: Temporal.PlainDate
+): Temporal.PlainDate => {
   return addMonths(date, -1).with({ day: 1 }) as Temporal.PlainDate
 }
 
-export const getFirstDayOfNextMonth = (date: Temporal.PlainDate): Temporal.PlainDate => {
+export const getFirstDayOfNextMonth = (
+  date: Temporal.PlainDate
+): Temporal.PlainDate => {
   const nextMonth = addMonths(date, 1)
   return nextMonth.with({ day: 1 }) as Temporal.PlainDate
 }
@@ -25,7 +29,7 @@ export const setDateInDateTime = (
   newDate: Temporal.ZonedDateTime
 ): Temporal.ZonedDateTime => {
   const updatedDateTime = dateTime.with({
-    year: newDate.year, 
+    year: newDate.year,
     month: newDate.month,
     day: newDate.day,
   })

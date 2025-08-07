@@ -27,8 +27,12 @@ describe('Week view', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T23:59:59[Europe/Stockholm]'
+            ),
             title: eventTitle,
           },
         ],
@@ -51,12 +55,12 @@ describe('Week view', () => {
       renderComponent($app)
 
       const eventElement = document.querySelector('.sx__date-grid-event')
-      expect(eventElement?.attributes.getNamedItem('aria-label')?.value).toContain(
-        eventTitle
-      )
-      expect(eventElement?.attributes.getNamedItem('aria-label')?.value).toContain(
-        'January 1, 2021'
-      )
+      expect(
+        eventElement?.attributes.getNamedItem('aria-label')?.value
+      ).toContain(eventTitle)
+      expect(
+        eventElement?.attributes.getNamedItem('aria-label')?.value
+      ).toContain('January 1, 2021')
     })
   })
 
@@ -68,8 +72,12 @@ describe('Week view', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2021-01-01T12:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2021-01-01T18:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
             title: eventTitle,
           },
         ],

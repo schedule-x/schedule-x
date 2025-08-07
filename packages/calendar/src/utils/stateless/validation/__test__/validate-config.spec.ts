@@ -11,18 +11,27 @@ import { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day
 
 describe('validating the config', () => {
   describe('validating the selected date', () => {
-    it.each([[Temporal.ZonedDateTime.from('2022-01-01T00:00:00.000+00:00[UTC]'), '2022-01-01']])(
+    it.each([
+      [
+        Temporal.ZonedDateTime.from('2022-01-01T00:00:00.000+00:00[UTC]'),
+        '2022-01-01',
+      ],
+    ])(
       'should throw an error if the selected date is not a temporal plain date',
       (selectedDate: string | Temporal.ZonedDateTime) => {
         expect(() =>
-          validateConfig({ selectedDate: selectedDate as unknown } as CalendarConfigExternal)
+          validateConfig({
+            selectedDate: selectedDate as unknown,
+          } as CalendarConfigExternal)
         ).toThrowError()
       }
     )
 
     it('should not throw an error if the selected date is a valid date string', () => {
       expect(() =>
-        validateConfig({ selectedDate: Temporal.PlainDate.from('2022-01-01') } as CalendarConfigExternal)
+        validateConfig({
+          selectedDate: Temporal.PlainDate.from('2022-01-01'),
+        } as CalendarConfigExternal)
       ).not.toThrowError()
     })
   })
@@ -52,13 +61,17 @@ describe('validating the config', () => {
 
     it('should not throw an error if the minDate is a temporal plain date', () => {
       expect(() =>
-        validateConfig({ minDate: Temporal.PlainDate.from('2022-01-01') } as CalendarConfigExternal)
+        validateConfig({
+          minDate: Temporal.PlainDate.from('2022-01-01'),
+        } as CalendarConfigExternal)
       ).not.toThrowError()
     })
 
     it('should not throw an error if the maxDate is a temporal plain date', () => {
       expect(() =>
-        validateConfig({ maxDate: Temporal.PlainDate.from('2022-01-01') } as CalendarConfigExternal)
+        validateConfig({
+          maxDate: Temporal.PlainDate.from('2022-01-01'),
+        } as CalendarConfigExternal)
       ).not.toThrowError()
     })
   })

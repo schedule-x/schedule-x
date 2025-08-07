@@ -23,11 +23,14 @@ describe('RangeHeading', () => {
     ])(
       'should display the localized range heading when in the week view',
       (locale, selectedDate, expectedRangeHeading) => {
-        const $app = createCalendarAppSingleton({
-          locale,
-          selectedDate: Temporal.PlainDate.from(selectedDate),
-          views: [viewMonthGrid, viewWeek, viewDay],
-        }, [])
+        const $app = createCalendarAppSingleton(
+          {
+            locale,
+            selectedDate: Temporal.PlainDate.from(selectedDate),
+            views: [viewMonthGrid, viewWeek, viewDay],
+          },
+          []
+        )
         renderComponent($app)
 
         expect(screen.queryByText(expectedRangeHeading)).toBeTruthy()

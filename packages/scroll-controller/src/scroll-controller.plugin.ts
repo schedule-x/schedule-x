@@ -7,7 +7,6 @@ import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
-
 class ScrollControllerPlugin implements PluginBase<string> {
   name = PluginName.ScrollController
   private $app: CalendarAppSingleton | null = null
@@ -80,9 +79,8 @@ class ScrollControllerPlugin implements PluginBase<string> {
 
     const viewContainer = (
       $app.elements.calendarWrapper as HTMLElement
-    ).querySelector('.sx__view-container') as HTMLElement;
-    viewContainer.scroll(0, pixelsToScroll);
-
+    ).querySelector('.sx__view-container') as HTMLElement
+    viewContainer.scroll(0, pixelsToScroll)
   }
 
   private waitUntilGridDayExistsThenScroll() {
@@ -125,4 +123,3 @@ export const createScrollControllerPlugin = (
     name: PluginName.ScrollController
   }
 }
-

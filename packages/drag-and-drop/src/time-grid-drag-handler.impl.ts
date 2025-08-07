@@ -13,7 +13,6 @@ import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/
 import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/calendar/time-points-per-pixel'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 
-
 export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   private readonly dayWidth: number
   private readonly startY: number
@@ -38,8 +37,12 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
     ).clientWidth
     this.startY = this.eventCoordinates.clientY
     this.startX = this.eventCoordinates.clientX
-    this.originalStart = Temporal.ZonedDateTime.from(this.eventCopy.start.toString())  
-    this.originalEnd = Temporal.ZonedDateTime.from(this.eventCopy.end.toString())
+    this.originalStart = Temporal.ZonedDateTime.from(
+      this.eventCopy.start.toString()
+    )
+    this.originalEnd = Temporal.ZonedDateTime.from(
+      this.eventCopy.end.toString()
+    )
     this.init()
   }
 
@@ -83,16 +86,30 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
   }
 
   private setTimeForEventCopy(pointsToAdd: number) {
-    const newStart = addTimePointsToDateTime(this.eventCopy.start as Temporal.ZonedDateTime, pointsToAdd)
-    const newEnd = addTimePointsToDateTime(this.eventCopy.end as Temporal.ZonedDateTime, pointsToAdd)
+    const newStart = addTimePointsToDateTime(
+      this.eventCopy.start as Temporal.ZonedDateTime,
+      pointsToAdd
+    )
+    const newEnd = addTimePointsToDateTime(
+      this.eventCopy.end as Temporal.ZonedDateTime,
+      pointsToAdd
+    )
     let currentDiff = this.lastDaysDiff
 
     if (this.$app.config.direction === 'rtl') {
       currentDiff = -currentDiff
     }
 
-    if (newStart.toString() < addDays(this.dayBoundariesDateTime.start, currentDiff).toString()) return
-    if (newEnd.toString() > addDays(this.dayBoundariesDateTime.end, currentDiff).toString()) return
+    if (
+      newStart.toString() <
+      addDays(this.dayBoundariesDateTime.start, currentDiff).toString()
+    )
+      return
+    if (
+      newEnd.toString() >
+      addDays(this.dayBoundariesDateTime.end, currentDiff).toString()
+    )
+      return
 
     this.eventCopy.start = newStart
     this.eventCopy.end = newEnd
@@ -109,20 +126,39 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
       this.eventCopy.start,
       diffToAdd
     ) as Temporal.ZonedDateTime
-    const newEndDate = addDays(this.eventCopy.end, diffToAdd) as Temporal.ZonedDateTime
-    const newStart = setDateInDateTime(this.eventCopy.start as Temporal.ZonedDateTime, newStartDate)
-    const newEnd = setDateInDateTime(this.eventCopy.end as Temporal.ZonedDateTime, newEndDate)
+    const newEndDate = addDays(
+      this.eventCopy.end,
+      diffToAdd
+    ) as Temporal.ZonedDateTime
+    const newStart = setDateInDateTime(
+      this.eventCopy.start as Temporal.ZonedDateTime,
+      newStartDate
+    )
+    const newEnd = setDateInDateTime(
+      this.eventCopy.end as Temporal.ZonedDateTime,
+      newEndDate
+    )
 
-    if (newStart.toString() < (this.$app.calendarState.range.value as DateRange).start.toString())
+    if (
+      newStart.toString() <
+      (this.$app.calendarState.range.value as DateRange).start.toString()
+    )
       return
-    if (newEnd.toString() > (this.$app.calendarState.range.value as DateRange).end.toString()) return
+    if (
+      newEnd.toString() >
+      (this.$app.calendarState.range.value as DateRange).end.toString()
+    )
+      return
 
     this.setDateForEventCopy(newStart, newEnd)
     this.transformEventCopyPosition(totalDaysDiff)
     this.lastDaysDiff = totalDaysDiff
   }
 
-  private setDateForEventCopy(newStart: Temporal.ZonedDateTime, newEnd: Temporal.ZonedDateTime) {
+  private setDateForEventCopy(
+    newStart: Temporal.ZonedDateTime,
+    newEnd: Temporal.ZonedDateTime
+  ) {
     this.eventCopy.start = newStart
     this.eventCopy.end = newEnd
     this.updateCopy(this.eventCopy)

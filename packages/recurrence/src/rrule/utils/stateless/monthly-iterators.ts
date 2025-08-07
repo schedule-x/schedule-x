@@ -24,7 +24,10 @@ const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      const nextCurrentDateCandidate = addMonthsToDateOrDatetime(currentDate, options.interval)
+      const nextCurrentDateCandidate = addMonthsToDateOrDatetime(
+        currentDate,
+        options.interval
+      )
       let currentIntervalCandidate = options.interval
       let { date: nextMonthDateCandidate } = toIntegers(
         nextCurrentDateCandidate
@@ -37,7 +40,10 @@ const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
         ).date
       }
 
-      currentDate = addMonthsToDateOrDatetime(currentDate, currentIntervalCandidate)
+      currentDate = addMonthsToDateOrDatetime(
+        currentDate,
+        currentIntervalCandidate
+      )
 
       return { done: false, value: allDateTimes }
     },

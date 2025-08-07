@@ -41,7 +41,10 @@ export default function TimeGridDay({
   const timeStringFromDayBoundaryEnd = timeStringFromTimePoints(
     $app.config.dayBoundaries.value.end
   )
-  const dayStartDateTime = date.with({ hour: +timeStringFromDayBoundary.split(':')[0], minute: +timeStringFromDayBoundary.split(':')[1] })
+  const dayStartDateTime = date.with({
+    hour: +timeStringFromDayBoundary.split(':')[0],
+    minute: +timeStringFromDayBoundary.split(':')[1],
+  })
   const endHour = +timeStringFromDayBoundaryEnd.split(':')[0]
   const endWithAdjustedTime = date.with({
     hour: endHour === 24 ? 23 : endHour,
@@ -49,7 +52,7 @@ export default function TimeGridDay({
     second: endHour === 24 ? 59 : 0,
   })
   const dayEndDateTime = $app.config.isHybridDay
-    ? addDays(endWithAdjustedTime, 1) as Temporal.ZonedDateTime
+    ? (addDays(endWithAdjustedTime, 1) as Temporal.ZonedDateTime)
     : endWithAdjustedTime
 
   const dayBoundariesDateTime: DayBoundariesDateTime = {
@@ -64,7 +67,9 @@ export default function TimeGridDay({
 
   const handleOnClick = (
     e: MouseEvent,
-    callback: ((dateTime: Temporal.ZonedDateTime, e?: UIEvent) => void) | undefined
+    callback:
+      | ((dateTime: Temporal.ZonedDateTime, e?: UIEvent) => void)
+      | undefined
   ) => {
     if (!callback || mouseDownOnChild) return
 
@@ -119,7 +124,10 @@ export default function TimeGridDay({
     >
       {backgroundEvents.map((event) => (
         <>
-          <TimeGridBackgroundEvent backgroundEvent={event} date={date.toString()} />
+          <TimeGridBackgroundEvent
+            backgroundEvent={event}
+            date={date.toString()}
+          />
         </>
       ))}
 

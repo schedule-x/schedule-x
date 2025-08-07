@@ -5,7 +5,6 @@ import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/da
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { useSignalEffect } from '@preact/signals'
 
-
 export default function ForwardBackwardNavigation() {
   const $app = useContext(AppContext)
 
@@ -36,8 +35,10 @@ export default function ForwardBackwardNavigation() {
     )
   })
 
-  const [rangeEndMinusOneRange, setRangeEndMinusOneRange] = useState<Temporal.ZonedDateTime | null>(null)
-  const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState<Temporal.ZonedDateTime | null>(null)
+  const [rangeEndMinusOneRange, setRangeEndMinusOneRange] =
+    useState<Temporal.ZonedDateTime | null>(null)
+  const [rangeStartPlusOneRange, setRangeStartPlusOneRange] =
+    useState<Temporal.ZonedDateTime | null>(null)
 
   useSignalEffect(() => {
     const selectedView = $app.config.views.value.find(
@@ -54,8 +55,10 @@ export default function ForwardBackwardNavigation() {
           const result = selectedView.backwardForwardFn(
             $app.datePickerState.selectedDate.value,
             -selectedView.backwardForwardUnits
-          );
-          return result instanceof Temporal.ZonedDateTime ? result.toPlainDate() : result;
+          )
+          return result instanceof Temporal.ZonedDateTime
+            ? result.toPlainDate()
+            : result
         })(),
       }).end
     )
@@ -68,8 +71,10 @@ export default function ForwardBackwardNavigation() {
           const result = selectedView.backwardForwardFn(
             $app.datePickerState.selectedDate.value,
             selectedView.backwardForwardUnits
-          );
-          return result instanceof Temporal.ZonedDateTime ? result.toPlainDate() : result;
+          )
+          return result instanceof Temporal.ZonedDateTime
+            ? result.toPlainDate()
+            : result
         })(),
       }).start
     )
@@ -98,7 +103,8 @@ export default function ForwardBackwardNavigation() {
         <Chevron
           disabled={
             !!(
-              $app.config.maxDate.value && rangeStartPlusOneRange &&
+              $app.config.maxDate.value &&
+              rangeStartPlusOneRange &&
               dateFromDateTime(rangeStartPlusOneRange.toString()) >
                 $app.config.maxDate.value.toString()
             )

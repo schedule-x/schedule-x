@@ -9,10 +9,16 @@ import 'temporal-polyfill/global'
 
 describe('an internal calendar event', () => {
   describe('an event with only time and an id', () => {
-    const _config = new CalendarConfigBuilder().withTimezone('Europe/Berlin').build()
+    const _config = new CalendarConfigBuilder()
+      .withTimezone('Europe/Berlin')
+      .build()
 
-    const EVENT_START = Temporal.ZonedDateTime.from('2009-09-07T04:00:00+02:00[Europe/Berlin]')
-    const EVENT_END = Temporal.ZonedDateTime.from('2009-09-07T05:45:00+02:00[Europe/Berlin]')
+    const EVENT_START = Temporal.ZonedDateTime.from(
+      '2009-09-07T04:00:00+02:00[Europe/Berlin]'
+    )
+    const EVENT_END = Temporal.ZonedDateTime.from(
+      '2009-09-07T05:45:00+02:00[Europe/Berlin]'
+    )
     const EVENT_TITLE = 'Meeting about stuff'
     const EVENT_LOCATION = 'Starbucks'
     const EVENT_PEOPLE = ['John', 'Jane']

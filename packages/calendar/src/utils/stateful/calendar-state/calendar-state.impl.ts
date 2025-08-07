@@ -7,7 +7,6 @@ import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-uni
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import EventColors from '../event-colors/event-colors'
 
-
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
   timeUnitsImpl: TimeUnits,

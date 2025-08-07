@@ -26,14 +26,22 @@ describe('CalendarApp', () => {
 
     const eventId1 = '1'
     const eventTitle1 = 'test title 123'
-    const eventStart1 = Temporal.ZonedDateTime.from('2018-07-01T04:00:00.00+00:00[UTC]')
-    const eventEnd1 = Temporal.ZonedDateTime.from('2018-07-01T06:00:00.00+00:00[UTC]')
+    const eventStart1 = Temporal.ZonedDateTime.from(
+      '2018-07-01T04:00:00.00+00:00[UTC]'
+    )
+    const eventEnd1 = Temporal.ZonedDateTime.from(
+      '2018-07-01T06:00:00.00+00:00[UTC]'
+    )
     const randomForeignPropertyValue = 'test'
 
     const eventId2 = '2'
     const eventTitle2 = 'test title 456'
-    const eventStart2 = Temporal.ZonedDateTime.from('2018-06-18T00:00:00.00+00:00[UTC]')
-    const eventEnd2 = Temporal.ZonedDateTime.from('2018-07-02T00:00:00.00+00:00[UTC]')
+    const eventStart2 = Temporal.ZonedDateTime.from(
+      '2018-06-18T00:00:00.00+00:00[UTC]'
+    )
+    const eventEnd2 = Temporal.ZonedDateTime.from(
+      '2018-07-02T00:00:00.00+00:00[UTC]'
+    )
 
     beforeEach(() => {
       calendarApp = createCalendar({

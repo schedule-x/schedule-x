@@ -35,7 +35,9 @@ describe('MonthAgendaEvent', () => {
         {
           id: '123',
           title: expectedTitle,
-          start: Temporal.ZonedDateTime.from('1999-03-12T14:45:00.00+00:00[UTC]'),
+          start: Temporal.ZonedDateTime.from(
+            '1999-03-12T14:45:00.00+00:00[UTC]'
+          ),
           end: Temporal.ZonedDateTime.from('1999-03-12T15:45:00.00+00:00[UTC]'),
         },
       ],
@@ -75,8 +77,12 @@ describe('MonthAgendaEvent', () => {
           {
             id: '123',
             title: 'Test Event',
-            start: Temporal.ZonedDateTime.from('1999-03-12T14:45:00.00+00:00[UTC]'),
-            end: Temporal.ZonedDateTime.from('1999-03-12T15:45:00.00+00:00[UTC]'),
+            start: Temporal.ZonedDateTime.from(
+              '1999-03-12T14:45:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '1999-03-12T15:45:00.00+00:00[UTC]'
+            ),
           },
         ],
       })
@@ -96,8 +102,12 @@ describe('MonthAgendaEvent', () => {
           {
             id: '123',
             title: 'Test Event',
-            start: Temporal.ZonedDateTime.from('1999-03-12T14:45:00.00+00:00[UTC]'),
-            end: Temporal.ZonedDateTime.from('1999-03-12T15:45:00.00+00:00[UTC]'),
+            start: Temporal.ZonedDateTime.from(
+              '1999-03-12T14:45:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '1999-03-12T15:45:00.00+00:00[UTC]'
+            ),
           },
         ],
       })

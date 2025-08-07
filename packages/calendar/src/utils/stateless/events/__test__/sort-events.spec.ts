@@ -13,7 +13,10 @@ import {
 
 describe('sorting events', () => {
   const config = new CalendarConfigBuilder().build()
-  const createEvent = (time: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate }) => {
+  const createEvent = (time: {
+    start: Temporal.ZonedDateTime | Temporal.PlainDate
+    end: Temporal.ZonedDateTime | Temporal.PlainDate
+  }) => {
     return new CalendarEventBuilder(config, '1', time.start, time.end).build()
   }
 

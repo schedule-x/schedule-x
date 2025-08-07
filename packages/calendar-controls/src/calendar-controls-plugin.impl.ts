@@ -17,7 +17,6 @@ import {
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
-
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name = PluginName.CalendarControls
   $app!: CalendarAppSingleton
@@ -102,7 +101,8 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app.config.timezone.value = timezone
   }
 
-  getDate = (): Temporal.PlainDate => this.$app.datePickerState.selectedDate.value
+  getDate = (): Temporal.PlainDate =>
+    this.$app.datePickerState.selectedDate.value
 
   getView = (): string => this.$app.calendarState.view.value
 
@@ -122,9 +122,11 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   getCalendars = (): Record<string, CalendarType> =>
     this.$app.config.calendars.value
 
-  getMinDate = (): Temporal.PlainDate | undefined => this.$app.config.minDate.value
+  getMinDate = (): Temporal.PlainDate | undefined =>
+    this.$app.config.minDate.value
 
-  getMaxDate = (): Temporal.PlainDate | undefined => this.$app.config.maxDate.value
+  getMaxDate = (): Temporal.PlainDate | undefined =>
+    this.$app.config.maxDate.value
 
   getMonthGridOptions = (): MonthGridOptions =>
     this.$app.config.monthGridOptions.value

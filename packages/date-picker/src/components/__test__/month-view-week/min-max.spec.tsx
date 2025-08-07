@@ -27,7 +27,9 @@ describe('MonthViewWeek', () => {
       expectedDisabledDatesCount: number,
       expectedEnabledDatesCount: number
     ) => {
-      const $app = createAppSingleton({ min: Temporal.PlainDate.from('2023-01-01') })
+      const $app = createAppSingleton({
+        min: Temporal.PlainDate.from('2023-01-01'),
+      })
       renderComponent(
         $app,
         new TimeUnitsBuilder()
@@ -54,7 +56,9 @@ describe('MonthViewWeek', () => {
       expectedDisabledDatesCount: number,
       expectedEnabledDatesCount: number
     ) => {
-      const $app = createAppSingleton({ max: Temporal.PlainDate.from('2022-12-31') })
+      const $app = createAppSingleton({
+        max: Temporal.PlainDate.from('2022-12-31'),
+      })
       renderComponent(
         $app,
         new TimeUnitsBuilder()

@@ -3,7 +3,6 @@ import { timePointToPercentage } from '../time/interpolation/time-point-to-grid-
 import { timePointsFromString } from '../time/time-points/string-conversion'
 import { timeFromDateTime } from '../time/format-conversion/string-to-string'
 
-
 export const getYCoordinateInTimeGrid = (
   dateTime: Temporal.ZonedDateTime,
   dayBoundaries: DayBoundariesInternal,

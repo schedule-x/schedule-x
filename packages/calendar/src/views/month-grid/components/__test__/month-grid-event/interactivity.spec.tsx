@@ -102,7 +102,7 @@ describe('MonthGridEvent', () => {
           },
         ],
         plugins: [dragAndDropPlugin],
-        selectedDate: Temporal.PlainDate.from('2020-01-01') ,
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
       })
 
       renderComponent($app, $app.calendarEvents.list.value[0])

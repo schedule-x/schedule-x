@@ -1,6 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
-
 export type MonthAgendaDay = {
   date: Temporal.PlainDate
   events: CalendarEventInternal[]

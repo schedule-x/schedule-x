@@ -22,7 +22,6 @@ import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-pl
 import { waitFor } from '@testing-library/preact'
 import 'temporal-polyfill/global'
 
-
 describe('Resizing events in the time grid', () => {
   describe('When the calendar wrapper cannot be found', () => {
     it('should not throw an error', () => {
@@ -124,8 +123,12 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
-      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'))
+      expect(calendarEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]')
+      )
+      expect(calendarEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]')
+      )
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
         start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
@@ -146,8 +149,12 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
-      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]'))
+      expect(calendarEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]')
+      )
+      expect(calendarEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]')
+      )
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
         start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
@@ -172,8 +179,12 @@ describe('Resizing events in the time grid', () => {
       }
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
-      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:15:00+00:00[UTC]'))
+      expect(calendarEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]')
+      )
+      expect(calendarEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:15:00+00:00[UTC]')
+      )
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
         start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
@@ -211,8 +222,12 @@ describe('Resizing events in the time grid', () => {
       // mouseup
       document.dispatchEvent(new MouseEvent('mouseup'))
 
-      expect(calendarEventNearEndOfDay.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 23:00:00+00:00[UTC]'))
-      expect(calendarEventNearEndOfDay.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 23:45:00+00:00[UTC]'))
+      expect(calendarEventNearEndOfDay.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 23:00:00+00:00[UTC]')
+      )
+      expect(calendarEventNearEndOfDay.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 23:45:00+00:00[UTC]')
+      )
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 2,
         start: Temporal.ZonedDateTime.from('2024-01-05 23:00:00+00:00[UTC]'),
@@ -314,8 +329,12 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new TouchEvent('touchend'))
 
-      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
-      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'))
+      expect(calendarEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]')
+      )
+      expect(calendarEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]')
+      )
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
         start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
@@ -338,8 +357,12 @@ describe('Resizing events in the time grid', () => {
       )
       document.dispatchEvent(new TouchEvent('touchend'))
 
-      expect(calendarEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
-      expect(calendarEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]'))
+      expect(calendarEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]')
+      )
+      expect(calendarEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:30:00+00:00[UTC]')
+      )
       expect(updateEventSpy).toHaveBeenCalledWith({
         id: 1,
         start: Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'),
@@ -439,8 +462,12 @@ describe('Resizing events in the time grid', () => {
 
       expect(updateEventSpy).not.toHaveBeenCalled()
       const eventInternal = $app.calendarEvents.list.value[0]
-      expect(eventInternal.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
-      expect(eventInternal.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:00:00+00:00[UTC]'))
+      expect(eventInternal.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]')
+      )
+      expect(eventInternal.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-05 07:00:00+00:00[UTC]')
+      )
     })
 
     it('should update the event if the callback returns true', async () => {
@@ -465,8 +492,12 @@ describe('Resizing events in the time grid', () => {
       await waitFor(() => {
         expect(updateEventSpy).toHaveBeenCalled()
         const eventInternal = $app.calendarEvents.list.value[0]
-        expect(eventInternal.start).toEqual(Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]'))
-        expect(eventInternal.end).toEqual(Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]'))
+        expect(eventInternal.start).toEqual(
+          Temporal.ZonedDateTime.from('2024-01-05 06:00:00+00:00[UTC]')
+        )
+        expect(eventInternal.end).toEqual(
+          Temporal.ZonedDateTime.from('2024-01-05 07:30:00+00:00[UTC]')
+        )
       })
     })
   })

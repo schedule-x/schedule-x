@@ -61,7 +61,8 @@ describe('MonthAgendaWrapper', () => {
   describe('a month for a date in the future', () => {
     it('should have one day with an active class', () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2027-01-27')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2027-01-27')
       renderComponent($app)
 
       const activeDay = document.querySelector('.sx__month-agenda-day--active')
@@ -70,7 +71,8 @@ describe('MonthAgendaWrapper', () => {
 
     it('should select a new day', async () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2027-01-27')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2027-01-27')
       renderComponent($app)
 
       fireEvent.click(screen.getAllByText('28')[1]) // first 28 is in December 2026, second is in January 2027
@@ -90,7 +92,8 @@ describe('MonthAgendaWrapper', () => {
           onClickAgendaDate: onClickDateSpy,
         },
       })
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2027-01-27')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2027-01-27')
       renderComponent($app)
 
       fireEvent.click(screen.getAllByText('28')[1]) // first 28 is in December 2026, second is in January 2027
@@ -103,7 +106,8 @@ describe('MonthAgendaWrapper', () => {
 
     it('should display 5 weeks and 35 days', () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2027-01-27')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2027-01-27')
       renderComponent($app)
 
       expect(document.querySelectorAll('.sx__month-agenda-week')).toHaveLength(
@@ -116,13 +120,15 @@ describe('MonthAgendaWrapper', () => {
 
     it('should display a new month when selecting a date in another month', async () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2027-01-27')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2027-01-27')
       renderComponent($app)
       expect(document.querySelectorAll('.sx__month-agenda-week')).toHaveLength(
         5
       )
 
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2027-02-27')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2027-02-27')
 
       await waitFor(() => {
         expect(
@@ -162,8 +168,12 @@ describe('MonthAgendaWrapper', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -185,13 +195,21 @@ describe('MonthAgendaWrapper', () => {
         events: [
           {
             id: 1,
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
           {
             id: 2,
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -210,20 +228,32 @@ describe('MonthAgendaWrapper', () => {
           {
             id: 1,
             title: 'display me',
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
           {
             id: 2,
             title: 'do not display me',
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
           {
             id: 3,
             title: 'display me',
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -244,20 +274,32 @@ describe('MonthAgendaWrapper', () => {
           {
             id: 1,
             title: 'display me',
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
           {
             id: 2,
             title: 'do not display me',
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
           {
             id: 3,
             title: 'display me',
-            start: Temporal.ZonedDateTime.from('2027-01-27T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2027-01-27T23:59:59[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2027-01-27T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2027-01-27T23:59:59[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -288,7 +330,8 @@ describe('MonthAgendaWrapper', () => {
       const activeDay = document.querySelector('.sx__month-agenda-day--active')
       expect(activeDay?.textContent).toContain('27')
 
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2027-01-20')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2027-01-20')
 
       await waitFor(() => {
         const newActiveDay = document.querySelector(

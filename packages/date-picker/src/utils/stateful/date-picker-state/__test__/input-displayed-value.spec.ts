@@ -17,7 +17,9 @@ describe('date picker state impl - input displayed value', () => {
   it('should default to current date if no selected date param is given', () => {
     const underTest = createDatePickerState(config())
     const now = Temporal.Now.plainDateISO()
-    expect(underTest.inputDisplayedValue.value).toBe(`${now.month}/${now.day}/${now.year}`)
+    expect(underTest.inputDisplayedValue.value).toBe(
+      `${now.month}/${now.day}/${now.year}`
+    )
   })
 
   it.each([
@@ -34,7 +36,9 @@ describe('date picker state impl - input displayed value', () => {
       inputDisplayedValue: string,
       expectedNewSelectedDate: Temporal.PlainDate | boolean
     ) => {
-      const selectedDateParam = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
+      const selectedDateParam = Temporal.PlainDate.from(
+        Temporal.Now.plainDateISO()
+      )
       const underTest = createDatePickerState(config(locale))
       underTest.handleInput(inputDisplayedValue)
 

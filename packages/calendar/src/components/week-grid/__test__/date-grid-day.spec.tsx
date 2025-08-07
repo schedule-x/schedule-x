@@ -48,8 +48,12 @@ describe('DateGridDay', () => {
       const date = '2021-01-01'
       const backgroundEvents: BackgroundEvent[] = [
         {
-          start: Temporal.ZonedDateTime.from('2021-01-01T00:01:00+03:00[Europe/Moscow]'),
-          end: Temporal.ZonedDateTime.from('2021-01-01T23:59:00+03:00[Europe/Moscow]'),
+          start: Temporal.ZonedDateTime.from(
+            '2021-01-01T00:01:00+03:00[Europe/Moscow]'
+          ),
+          end: Temporal.ZonedDateTime.from(
+            '2021-01-01T23:59:00+03:00[Europe/Moscow]'
+          ),
           style: {},
         },
       ]

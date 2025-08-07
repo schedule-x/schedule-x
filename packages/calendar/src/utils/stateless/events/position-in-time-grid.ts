@@ -8,7 +8,6 @@ import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { doubleDigit } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/double-digit'
 
-
 export const positionInTimeGrid = (
   timeGridEvents: CalendarEventInternal[],
   week: Week,
@@ -17,7 +16,10 @@ export const positionInTimeGrid = (
   for (const event of timeGridEvents) {
     const range = $app.calendarState.range.value as DateRange
 
-    if (event.start.toString() >= range.start.toString() && event.end.toString() <= range.end.toString()) {
+    if (
+      event.start.toString() >= range.start.toString() &&
+      event.end.toString() <= range.end.toString()
+    ) {
       let date = dateFromDateTime(event.start.toString())
 
       if ($app.config.isHybridDay) {
@@ -34,7 +36,12 @@ export const positionInTimeGrid = (
           eventStartFloating < actualDayStart
         ) {
           const { year, month, date: day } = toIntegers(date)
-          date = dateFromDateTime(addDays(Temporal.PlainDate.from({ year, month: month + 1, day }), -1).toString())
+          date = dateFromDateTime(
+            addDays(
+              Temporal.PlainDate.from({ year, month: month + 1, day }),
+              -1
+            ).toString()
+          )
         }
       }
       week[date]?.timeGridEvents.push(event)

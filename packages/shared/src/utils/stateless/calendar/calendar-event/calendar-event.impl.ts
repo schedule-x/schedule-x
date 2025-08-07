@@ -40,8 +40,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
       return this._start
     }
 
-    return this._start
-      .withTimeZone(this._config.timezone.value)
+    return this._start.withTimeZone(this._config.timezone.value)
   }
 
   set start(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
@@ -53,8 +52,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
       return this._end
     }
 
-    return this._end
-      .withTimeZone(this._config.timezone.value)
+    return this._end.withTimeZone(this._config.timezone.value)
   }
 
   set end(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
@@ -62,7 +60,11 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   }
 
   get _isSingleDayTimed(): boolean {
-    if (this.start instanceof Temporal.PlainDate || this.end instanceof Temporal.PlainDate) return false
+    if (
+      this.start instanceof Temporal.PlainDate ||
+      this.end instanceof Temporal.PlainDate
+    )
+      return false
 
     const localStartDate = dateFromDateTime(this.start.toString())
     const localEndDate = dateFromDateTime(this.end.toString())
@@ -82,7 +84,11 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   }
 
   get _isMultiDayTimed(): boolean {
-    if (this.start instanceof Temporal.PlainDate || this.end instanceof Temporal.PlainDate) return false
+    if (
+      this.start instanceof Temporal.PlainDate ||
+      this.end instanceof Temporal.PlainDate
+    )
+      return false
 
     const startDate = dateFromDateTime(this.start.toString())
     const endDate = dateFromDateTime(this.end.toString())
@@ -120,7 +126,9 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     const eventStartTimePoints = timePointsFromString(
       timeFromDateTime(this.start.toString())
     )
-    const eventEndTimePoints = timePointsFromString(timeFromDateTime(this.end.toString()))
+    const eventEndTimePoints = timePointsFromString(
+      timeFromDateTime(this.end.toString())
+    )
 
     return (
       (eventStartTimePoints >= dayBoundaries.start &&

@@ -34,7 +34,9 @@ describe('ForwardBackwardNavigation', () => {
       leftChevron.focus()
       leftChevron.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
 
-      expect($app.calendarState.range.value?.start).toEqual(Temporal.ZonedDateTime.from('2023-12-25T00:00:00.000Z[UTC]'))
+      expect($app.calendarState.range.value?.start).toEqual(
+        Temporal.ZonedDateTime.from('2023-12-25T00:00:00.000Z[UTC]')
+      )
       const navigation = document.querySelector(
         '.sx__forward-backward-navigation'
       )
@@ -54,7 +56,9 @@ describe('ForwardBackwardNavigation', () => {
       rightChevron.focus()
       rightChevron.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
 
-      expect($app.calendarState.range.value?.start).toEqual(Temporal.ZonedDateTime.from('2024-01-08T00:00:00.000Z[UTC]'))
+      expect($app.calendarState.range.value?.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-08T00:00:00.000Z[UTC]')
+      )
       const navigation = document.querySelector(
         '.sx__forward-backward-navigation'
       )

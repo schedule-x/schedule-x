@@ -5,7 +5,6 @@ import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/da
 import { addDays } from '@schedule-x/shared/src'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 
-
 type props = {
   day: MonthAgendaDayType
   isActive: boolean
@@ -39,7 +38,8 @@ export default function MonthAgendaDay({
   }
 
   const hasFocus = (weekDay: MonthAgendaDayType) =>
-    weekDay.date.toString() === $app.datePickerState.selectedDate.value.toString()
+    weekDay.date.toString() ===
+    $app.datePickerState.selectedDate.value.toString()
 
   const handleKeyDown = (event: KeyboardEvent) => {
     const keyMapDaysToAdd = new Map([
@@ -57,10 +57,12 @@ export default function MonthAgendaDay({
   }
 
   const isBeforeMinDate = !!(
-    $app.config.minDate.value && day.date.toString() < $app.config.minDate.value.toString()
+    $app.config.minDate.value &&
+    day.date.toString() < $app.config.minDate.value.toString()
   )
   const isPastMaxDate = !!(
-    $app.config.maxDate.value && day.date.toString() > $app.config.maxDate.value.toString()
+    $app.config.maxDate.value &&
+    day.date.toString() > $app.config.maxDate.value.toString()
   )
   return (
     <button

@@ -1,18 +1,18 @@
 import { MonthDay as MonthDayType } from '../types/month'
-import {
-  toJSDate,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { DATE_GRID_BLOCKER } from '../../../constants'
-import { isSameDay, isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import {
+  isSameDay,
+  isToday,
+} from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
 import { randomStringId, toDateString } from '@schedule-x/shared/src'
-
 
 type props = {
   day: MonthDayType
@@ -66,7 +66,8 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const dateClassNames = ['sx__month-grid-day__header-date']
   const dayDate = day.date
-  if (isToday(dayDate.toZonedDateTime($app.config.timezone.value))) dateClassNames.push('sx__is-today')
+  if (isToday(dayDate.toZonedDateTime($app.config.timezone.value)))
+    dateClassNames.push('sx__is-today')
 
   const selectedDateMonth = $app.datePickerState.selectedDate.value.month
   const dayMonth = day.date.month
@@ -114,16 +115,18 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     timeZone: $app.config.timezone.value,
   })
   const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
-    const eventStartWithTime = event.start instanceof Temporal.PlainDate
-      ? event.start.toZonedDateTime($app.config.timezone.value)
-      : event.start
-    const eventEndWithTime = event.end instanceof Temporal.PlainDate
-      ? event.end.toZonedDateTime($app.config.timezone.value).with({
-        hour: 23,
-        minute: 59,
-        second: 59,
-      })
-      : event.end
+    const eventStartWithTime =
+      event.start instanceof Temporal.PlainDate
+        ? event.start.toZonedDateTime($app.config.timezone.value)
+        : event.start
+    const eventEndWithTime =
+      event.end instanceof Temporal.PlainDate
+        ? event.end.toZonedDateTime($app.config.timezone.value).with({
+            hour: 23,
+            minute: 59,
+            second: 59,
+          })
+        : event.end
     return (
       eventStartWithTime.toString() <= dayStartDateTime.toString() &&
       eventEndWithTime.toString() >= dayEndDateTime.toString()

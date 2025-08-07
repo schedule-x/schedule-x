@@ -19,7 +19,10 @@ describe('createAgendaMonth', () => {
     const timeUnitsImpl = new TimeUnitsBuilder()
       .withConfig(createBaseConfig())
       .build()
-    const result = createAgendaMonth(Temporal.ZonedDateTime.from('2023-12-15T00:00:00+01:00[Europe/Berlin]'), timeUnitsImpl)
+    const result = createAgendaMonth(
+      Temporal.ZonedDateTime.from('2023-12-15T00:00:00+01:00[Europe/Berlin]'),
+      timeUnitsImpl
+    )
 
     expect(result.weeks.length).toBe(5)
     assertDate(result.weeks[0][0], '2023-11-27')

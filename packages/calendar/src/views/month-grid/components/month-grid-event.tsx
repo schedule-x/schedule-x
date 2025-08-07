@@ -13,7 +13,6 @@ import { focusModal } from '../../../utils/stateless/events/focus-modal'
 import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { wasEventAddedInLastSecond } from '../../month-agenda/utils/stateless/was-event-added-in-last-second'
 
-
 type props = {
   gridRow: number
   calendarEvent: CalendarEventInternal
@@ -38,8 +37,7 @@ export default function MonthGridEvent({
   const hasOverflowRight =
     isLastWeek &&
     $app.calendarState.range.value?.end &&
-    calendarEvent.end.toString() >
-      $app.calendarState.range.value.end.toString()
+    calendarEvent.end.toString() > $app.calendarState.range.value.end.toString()
   const {
     createDragStartTimeout,
     setClickedEventIfNotDragging,
@@ -47,7 +45,8 @@ export default function MonthGridEvent({
   } = useEventInteractions($app)
 
   const plainDate = Temporal.PlainDate.from(date).toString()
-  const hasStartDate = dateFromDateTime(calendarEvent.start.toString()) === plainDate
+  const hasStartDate =
+    dateFromDateTime(calendarEvent.start.toString()) === plainDate
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {

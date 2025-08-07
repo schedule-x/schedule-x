@@ -4,7 +4,6 @@ import { DatePickerListeners } from './listeners.interface'
 import { DatePickerStyle } from './style.interface'
 import { WeekDay } from '../../enums/time/week-day.enum'
 
-
 export default interface DatePickerConfigInternal extends Config {
   min: Temporal.PlainDate
   max: Temporal.PlainDate

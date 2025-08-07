@@ -13,7 +13,6 @@ export default function AppInput() {
   const inputWrapperId = randomStringId()
   const $app = useContext(AppContext)
 
-
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
   const setInputElement = () => {
@@ -56,7 +55,8 @@ export default function AppInput() {
 
   useEffect(() => {
     if ($app.config.hasPlaceholder) {
-      $app.datePickerState.inputDisplayedValue.value = $app.translate('MM/DD/YYYY')
+      $app.datePickerState.inputDisplayedValue.value =
+        $app.translate('MM/DD/YYYY')
     }
   }, [])
 

@@ -10,7 +10,6 @@ import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless
 import { addMinutes } from '@schedule-x/shared/src'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
-
 class CurrentTimePluginImpl implements CurrentTimePlugin {
   name = 'currentTime'
   $app!: CalendarAppSingleton

@@ -52,7 +52,8 @@ describe('month view header', () => {
 
       const { container } = renderComponent($app)
 
-      $app.datePickerState.datePickerDate.value = Temporal.PlainDate.from('2021-02-01')
+      $app.datePickerState.datePickerDate.value =
+        Temporal.PlainDate.from('2021-02-01')
 
       await waitFor(() => {
         expect(container.textContent).toContain(expectedMonthName)

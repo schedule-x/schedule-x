@@ -12,7 +12,11 @@ import { createWeek } from '../../views/week/create-week'
 
 describe('Position in time grid', () => {
   const _config = new CalendarConfigBuilder().build()
-  const createEvent = (event: { start: Temporal.ZonedDateTime | Temporal.PlainDate; end: Temporal.ZonedDateTime | Temporal.PlainDate; id: string }) => {
+  const createEvent = (event: {
+    start: Temporal.ZonedDateTime | Temporal.PlainDate
+    end: Temporal.ZonedDateTime | Temporal.PlainDate
+    id: string
+  }) => {
     return new CalendarEventBuilder(
       _config,
       event.id,

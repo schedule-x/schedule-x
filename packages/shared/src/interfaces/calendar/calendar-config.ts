@@ -20,7 +20,6 @@ import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
 
-
 export type WeekOptions = {
   gridHeight: number
   nDays: number

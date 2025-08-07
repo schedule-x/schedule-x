@@ -22,10 +22,7 @@ export default function MonthGridWeek({
     <div className="sx__month-grid-week">
       {$app.config.showWeekNumbers.value && (
         <div className="sx__month-grid-week__week-number">
-          {getWeekNumber(
-            week[0].date,
-            $app.config.firstDayOfWeek.value
-          )}
+          {getWeekNumber(week[0].date, $app.config.firstDayOfWeek.value)}
         </div>
       )}
 

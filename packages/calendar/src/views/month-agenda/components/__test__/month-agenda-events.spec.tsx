@@ -47,13 +47,21 @@ describe('MonthAgendaEvents', () => {
         events: [
           {
             id: '1',
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-02T00:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-02T00:00:00[Europe/Stockholm]'
+            ),
           },
           {
             id: '2',
-            start: Temporal.ZonedDateTime.from('2020-01-01T00:00:00[Europe/Stockholm]'),
-            end: Temporal.ZonedDateTime.from('2020-01-02T00:00:00[Europe/Stockholm]'),
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-02T00:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })

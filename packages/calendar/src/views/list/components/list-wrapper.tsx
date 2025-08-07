@@ -14,7 +14,6 @@ import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/event
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
 
-
 interface DayWithEvents {
   date: string
   events: CalendarEventInternal[]
@@ -56,7 +55,10 @@ export const ListWrapper: PreactViewComponent = ({
             acc[currentDate] = []
           }
           acc[currentDate].push(event)
-          currentDate = addDays(Temporal.PlainDate.from(currentDate), 1).toString()
+          currentDate = addDays(
+            Temporal.PlainDate.from(currentDate),
+            1
+          ).toString()
         }
 
         return acc
@@ -67,7 +69,9 @@ export const ListWrapper: PreactViewComponent = ({
     const sortedDays = Object.entries(daysWithEventsMap)
       .map(([date, events]) => ({
         date,
-        events: events.sort((a, b) => a.start.toString().localeCompare(b.start.toString())),
+        events: events.sort((a, b) =>
+          a.start.toString().localeCompare(b.start.toString())
+        ),
       }))
       .sort((a, b) => a.date.localeCompare(b.date))
 
@@ -131,7 +135,9 @@ export const ListWrapper: PreactViewComponent = ({
                 $app.config.callbacks.onScrollDayIntoView &&
                 !blockOnScrollDayIntoViewCallback.current
               ) {
-                $app.config.callbacks.onScrollDayIntoView(Temporal.PlainDate.from(date))
+                $app.config.callbacks.onScrollDayIntoView(
+                  Temporal.PlainDate.from(date)
+                )
               }
             }
           })
@@ -176,17 +182,11 @@ export const ListWrapper: PreactViewComponent = ({
       return (
         <>
           <div className="sx__list-event-start-time">
-            {event.start.toLocaleString(
-              $app.config.locale.value,
-              timeOptions
-            )}
+            {event.start.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
           {event.end && (
             <div className="sx__list-event-end-time">
-              {event.end.toLocaleString(
-                $app.config.locale.value,
-                timeOptions
-              )}
+              {event.end.toLocaleString($app.config.locale.value, timeOptions)}
             </div>
           )}
         </>
@@ -197,10 +197,7 @@ export const ListWrapper: PreactViewComponent = ({
       return (
         <>
           <div className="sx__list-event-start-time">
-            {event.start.toLocaleString(
-              $app.config.locale.value,
-              timeOptions
-            )}
+            {event.start.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
           <div className="sx__list-event-arrow">→</div>
         </>
@@ -212,10 +209,7 @@ export const ListWrapper: PreactViewComponent = ({
         <>
           <div className="sx__list-event-arrow">←</div>
           <div className="sx__list-event-end-time">
-            {event.end.toLocaleString(
-              $app.config.locale.value,
-              timeOptions
-            )}
+            {event.end.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
         </>
       )

@@ -96,7 +96,10 @@ describe('ListWrapper', () => {
 
   describe('rendering with single day events', () => {
     it('should display single day event correctly', () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -110,7 +113,10 @@ describe('ListWrapper', () => {
 
   describe('rendering multi-day events', () => {
     it('should display multi-day event start correctly', () => {
-      const event = createMultiDayEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-09T11:00:00+02:00[Europe/Paris]'))
+      const event = createMultiDayEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-09T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -123,7 +129,10 @@ describe('ListWrapper', () => {
     })
 
     it('should display multi-day event middle days correctly', () => {
-      const event = createMultiDayEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-09T11:00:00+02:00[Europe/Paris]'))
+      const event = createMultiDayEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-09T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -134,7 +143,10 @@ describe('ListWrapper', () => {
     })
 
     it('should display multi-day event end correctly', () => {
-      const event = createMultiDayEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-09T11:00:00+02:00[Europe/Paris]'))
+      const event = createMultiDayEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-09T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -197,7 +209,10 @@ describe('ListWrapper', () => {
 
   describe('selected date scrolling', () => {
     it('should scroll to selected date when it changes', async () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       render(<ListWrapper $app={$app} id="test-list" />)
@@ -210,7 +225,8 @@ describe('ListWrapper', () => {
       }
 
       // Change selected date
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2023-10-07')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2023-10-07')
 
       await waitFor(() => {
         expect(mockScrollIntoView).toHaveBeenCalledWith({
@@ -223,7 +239,10 @@ describe('ListWrapper', () => {
 
   describe('locale support', () => {
     it('should use correct locale for date formatting', () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
       $app.config.locale.value = 'de-DE'
 
@@ -233,7 +252,10 @@ describe('ListWrapper', () => {
     })
 
     it('should use correct locale for time formatting', () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
       $app.config.locale.value = 'de-DE'
 
@@ -259,7 +281,10 @@ describe('ListWrapper', () => {
 
   describe('event modal interactions', () => {
     it('should open modal through click', async () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       // Mock the event modal plugin
@@ -284,7 +309,10 @@ describe('ListWrapper', () => {
     })
 
     it('should open modal through double click', async () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       // Mock the event modal plugin
@@ -309,7 +337,10 @@ describe('ListWrapper', () => {
     })
 
     it('should open modal through focus and press Enter', async () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       // Mock the event modal plugin
@@ -338,7 +369,10 @@ describe('ListWrapper', () => {
     })
 
     it('should open modal through focus and press Space', async () => {
-      const event = createCalendarEvent(Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'), Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'))
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
       const { $app } = setup([event])
 
       // Mock the event modal plugin

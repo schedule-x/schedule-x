@@ -26,8 +26,12 @@ describe('CalendarApp', () => {
 
     const eventId = '1'
     const eventTitle = 'test title 123'
-    const eventStart = Temporal.ZonedDateTime.from('2022-08-27T21:57:00.00+00:00[UTC]')
-    const eventEnd = Temporal.ZonedDateTime.from('2020-08-27T22:42:00.00+00:00[UTC]')
+    const eventStart = Temporal.ZonedDateTime.from(
+      '2022-08-27T21:57:00.00+00:00[UTC]'
+    )
+    const eventEnd = Temporal.ZonedDateTime.from(
+      '2020-08-27T22:42:00.00+00:00[UTC]'
+    )
     const foreignPropertyValue = 'some value'
 
     beforeEach(() => {

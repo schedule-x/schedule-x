@@ -13,8 +13,12 @@ describe('Drag and drop recurring events', () => {
     it('should update the event start, end and rrule', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
-        start: Temporal.ZonedDateTime.from('2024-02-04T16:00:00+03:00[Europe/Moscow]'),
-        end: Temporal.ZonedDateTime.from('2024-02-04T17:00:00+03:00[Europe/Moscow]'),
+        start: Temporal.ZonedDateTime.from(
+          '2024-02-04T16:00:00+03:00[Europe/Moscow]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2024-02-04T17:00:00+03:00[Europe/Moscow]'
+        ),
         rrule: 'FREQ=WEEKLY;BYDAY=SU;UNTIL=20240229T235959',
       }
       const $app = __createAppWithViews__({
@@ -35,8 +39,12 @@ describe('Drag and drop recurring events', () => {
       )
       if (!updatedEvent) throw new Error('Event not found')
 
-      expect(updatedEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-02-05T18:00:00+03:00[Europe/Moscow]'))
-      expect(updatedEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-02-05T19:00:00+03:00[Europe/Moscow]'))
+      expect(updatedEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-05T18:00:00+03:00[Europe/Moscow]')
+      )
+      expect(updatedEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-05T19:00:00+03:00[Europe/Moscow]')
+      )
       expect(updatedEvent._getForeignProperties().rrule).toEqual(
         'FREQ=WEEKLY;UNTIL=20240302T015900;BYDAY=MO'
       )
@@ -47,8 +55,12 @@ describe('Drag and drop recurring events', () => {
     it('should update the event start, end and rrule', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
-        start: Temporal.ZonedDateTime.from('2024-02-04T16:00:00+03:00[Europe/Moscow]'),
-        end: Temporal.ZonedDateTime.from('2024-02-04T17:00:00+03:00[Europe/Moscow]'),
+        start: Temporal.ZonedDateTime.from(
+          '2024-02-04T16:00:00+03:00[Europe/Moscow]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2024-02-04T17:00:00+03:00[Europe/Moscow]'
+        ),
         rrule: 'FREQ=WEEKLY;BYDAY=SU,MO;UNTIL=20240229T235959',
       }
       const $app = __createAppWithViews__({
@@ -70,8 +82,12 @@ describe('Drag and drop recurring events', () => {
       )
       if (!updatedEvent) throw new Error('Event not found')
 
-      expect(updatedEvent.start).toEqual(Temporal.ZonedDateTime.from('2024-02-01T16:00:00+03:00[Europe/Moscow]'))
-      expect(updatedEvent.end).toEqual(Temporal.ZonedDateTime.from('2024-02-01T17:00:00+03:00[Europe/Moscow]'))
+      expect(updatedEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-01T16:00:00+03:00[Europe/Moscow]')
+      )
+      expect(updatedEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-01T17:00:00+03:00[Europe/Moscow]')
+      )
       expect(updatedEvent._getForeignProperties().rrule).toEqual(
         'FREQ=WEEKLY;UNTIL=20240226T235900;BYDAY=TH,FR'
       )
@@ -89,8 +105,12 @@ describe('Drag and drop recurring events', () => {
       expect(() =>
         eventRecurrencePlugin.updateRecurrenceDND(
           '16567',
-          Temporal.ZonedDateTime.from('2024-02-04T16:00:00+03:00[Europe/Moscow]'),
-          Temporal.ZonedDateTime.from('2024-02-05T18:00:00+03:00[Europe/Moscow]')
+          Temporal.ZonedDateTime.from(
+            '2024-02-04T16:00:00+03:00[Europe/Moscow]'
+          ),
+          Temporal.ZonedDateTime.from(
+            '2024-02-05T18:00:00+03:00[Europe/Moscow]'
+          )
         )
       ).toThrowError('Tried to update a non-existing event')
     })

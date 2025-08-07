@@ -20,8 +20,16 @@ export class ConfigImpl implements DatePickerConfigInternal {
     locale: string = DEFAULT_LOCALE,
     firstDayOfWeek: WeekDay = DEFAULT_FIRST_DAY_OF_WEEK,
     timezone: IANATimezone = 'UTC',
-    public min: Temporal.PlainDate = Temporal.PlainDate.from({ year: 1970, month: 1, day: 1 }),
-    public max: Temporal.PlainDate = Temporal.PlainDate.from({ year: new Date().getFullYear() + 50, month: 11, day: 31 }),
+    public min: Temporal.PlainDate = Temporal.PlainDate.from({
+      year: 1970,
+      month: 1,
+      day: 1,
+    }),
+    public max: Temporal.PlainDate = Temporal.PlainDate.from({
+      year: new Date().getFullYear() + 50,
+      month: 11,
+      day: 31,
+    }),
     public placement: Placement = Placement.BOTTOM_START,
     public listeners: DatePickerListeners = {},
     public style: DatePickerStyle = {},

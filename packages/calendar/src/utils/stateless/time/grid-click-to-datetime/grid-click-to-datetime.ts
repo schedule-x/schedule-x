@@ -1,7 +1,6 @@
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
-
 export const getClickDateTime = (
   e: MouseEvent,
   $app: CalendarAppSingleton,

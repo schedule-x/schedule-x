@@ -55,7 +55,11 @@ describe('Resize Recurrence', () => {
       const recurrencePlugin = createEventRecurrencePlugin()
       recurrencePlugin.beforeRender!($app)
 
-      recurrencePlugin.updateRecurrenceOnResize(1, Temporal.ZonedDateTime.from('2024-02-06T00:00:00.00+00:00[UTC]'), Temporal.ZonedDateTime.from('2024-02-07T00:00:00.00+00:00[UTC]'))
+      recurrencePlugin.updateRecurrenceOnResize(
+        1,
+        Temporal.ZonedDateTime.from('2024-02-06T00:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2024-02-07T00:00:00.00+00:00[UTC]')
+      )
 
       const updatedEvent = $app.calendarEvents.list.value.find(
         (e) => e.id === 1
@@ -76,7 +80,11 @@ describe('Resize Recurrence', () => {
       recurrencePlugin.beforeRender!($app)
 
       expect(() => {
-        recurrencePlugin.updateRecurrenceOnResize(1, Temporal.PlainDate.from('2024-02-06'), Temporal.PlainDate.from('2024-02-07'))
+        recurrencePlugin.updateRecurrenceOnResize(
+          1,
+          Temporal.PlainDate.from('2024-02-06'),
+          Temporal.PlainDate.from('2024-02-07')
+        )
       }).toThrowError('Tried to update a non-existing event')
     })
   })

@@ -11,7 +11,6 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 
-
 type props = {
   setYearsView: () => void
 }

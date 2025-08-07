@@ -16,7 +16,13 @@ describe('Updating a dragged event', () => {
       callbacks: {
         onEventUpdate: onEventUpdateSpy,
       },
-      events: [{ id: 1, start: Temporal.PlainDate.from('2010-10-10'), end: Temporal.PlainDate.from('2010-10-10') }],
+      events: [
+        {
+          id: 1,
+          start: Temporal.PlainDate.from('2010-10-10'),
+          end: Temporal.PlainDate.from('2010-10-10'),
+        },
+      ],
     })
     const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
 
