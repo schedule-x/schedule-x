@@ -65,7 +65,7 @@ describe('DateAxis', () => {
     })
 
     it('should highlight today', () => {
-      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from('2023-09-01'))
+      const week = timeUnitsImpl.getWeekFor(Temporal.PlainDate.from(Temporal.Now.plainDateISO()))
       renderComponent(__createAppWithViews__(), week)
 
       expect(

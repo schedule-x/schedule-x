@@ -4,6 +4,7 @@ import {
   it,
   expect,
   beforeEach,
+  afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
@@ -19,7 +20,7 @@ import 'temporal-polyfill/global'
 
 
 describe('createRecurrencesForEvent', () => {
-  let $app: CalendarAppSingleton
+  let $app: CalendarAppSingleton | undefined
 
   beforeEach(() => {
     $app = __createAppWithViews__()
@@ -239,7 +240,7 @@ describe('createRecurrencesForBackgroundEvent', () => {
         end: Temporal.ZonedDateTime.from('2024-02-29T23:59:00+01:00[Europe/Berlin]'),
       }
 
-      const exdate = ['20240219']
+      const exdate = ['20240219T000000']
 
       const recurrences = createRecurrencesForBackgroundEvent(
         $app,
@@ -276,7 +277,7 @@ describe('createRecurrencesForBackgroundEvent', () => {
         end: Temporal.ZonedDateTime.from('2024-02-29T23:59:00+01:00[Europe/Berlin]'),
       }
 
-      const exdate = ['20240212', '20240226']
+      const exdate = ['20240212T000000', '20240226T000000']
 
       const recurrences = createRecurrencesForBackgroundEvent(
         $app,

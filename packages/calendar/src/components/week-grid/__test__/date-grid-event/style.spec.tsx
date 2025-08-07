@@ -15,7 +15,7 @@ describe('styles of DateGridEvent', () => {
   })
 
   describe('events with no overflow', () => {
-    const selectedDate = '2024-10-01'
+    const selectedDate = Temporal.PlainDate.from('2024-10-01')
     const oneDayEventId = 'my-event-id'
     const oneDayEventTitle = 'My event'
     const threeDayEventId = 'my-event-id-2'
@@ -27,14 +27,14 @@ describe('styles of DateGridEvent', () => {
         {
           id: oneDayEventId,
           title: oneDayEventTitle,
-          start: selectedDate,
-          end: selectedDate,
+          start: Temporal.PlainDate.from('2024-10-01'),
+          end: Temporal.PlainDate.from('2024-10-01'),
         },
         {
           id: threeDayEventId,
           title: threeDayEventTitle,
-          start: selectedDate,
-          end: '2024-10-03',
+          start: Temporal.PlainDate.from('2024-10-01'),
+          end: Temporal.PlainDate.from('2024-10-03'),
         },
       ],
     })
@@ -65,7 +65,7 @@ describe('styles of DateGridEvent', () => {
   })
 
   describe('events with overflow in ltr direction', () => {
-    const selectedDate = '2024-10-01'
+    const selectedDate = Temporal.PlainDate.from('2024-10-01')
 
     const eventWithOverflowLeftId = 'my-event-id'
     const eventWithOverflowLeftTitle = 'My event'
@@ -78,14 +78,14 @@ describe('styles of DateGridEvent', () => {
         {
           id: eventWithOverflowLeftId,
           title: eventWithOverflowLeftTitle,
-          start: '2024-09-28',
-          end: selectedDate,
+          start: Temporal.PlainDate.from('2024-09-28'),
+          end: Temporal.PlainDate.from('2024-10-01'),
         },
         {
           id: eventWithOverflowBothId,
           title: eventWithOverflowBothTitle,
-          start: '2024-09-28',
-          end: '2024-10-07',
+          start: Temporal.PlainDate.from('2024-09-28'),
+          end: Temporal.PlainDate.from('2024-10-07'),
         },
       ],
     })
@@ -144,7 +144,7 @@ describe('styles of DateGridEvent', () => {
       document.documentElement.setAttribute('dir', 'rtl')
     })
 
-    const selectedDate = '2025-04-03'
+    const selectedDate = Temporal.PlainDate.from('2025-04-03')
 
     const eventWithOverflowLeftId = 'my-event-id'
     const eventWithOverflowLeftTitle = 'My event'
@@ -157,14 +157,14 @@ describe('styles of DateGridEvent', () => {
         {
           id: eventWithOverflowLeftId,
           title: eventWithOverflowLeftTitle,
-          start: '2025-04-06',
-          end: '2025-04-07',
+          start: Temporal.PlainDate.from('2025-04-06'),
+          end: Temporal.PlainDate.from('2025-04-07'),
         },
         {
           id: eventWithOverflowBothId,
           title: eventWithOverflowBothTitle,
-          start: '2025-03-20',
-          end: '2025-04-08',
+          start: Temporal.PlainDate.from('2025-03-20'),
+          end: Temporal.PlainDate.from('2025-04-08'),
         },
       ],
     })
@@ -203,8 +203,8 @@ describe('styles of DateGridEvent', () => {
           {
             id: '123',
             title: 'Test Event',
-            start: '1999-03-12 14:45',
-            end: '1999-03-12 15:45',
+            start: Temporal.ZonedDateTime.from('1999-03-12T14:45:00+03:00[Europe/Moscow]'),
+            end: Temporal.ZonedDateTime.from('1999-03-12T15:45:00+03:00[Europe/Moscow]'),
           },
         ],
       })
@@ -224,8 +224,8 @@ describe('styles of DateGridEvent', () => {
           {
             id: '123',
             title: 'Test Event',
-            start: '1999-03-12 14:45',
-            end: '1999-03-12 15:45',
+            start: Temporal.ZonedDateTime.from('1999-03-12T14:45:00+03:00[Europe/Moscow]'),
+            end: Temporal.ZonedDateTime.from('1999-03-12T15:45:00+03:00[Europe/Moscow]'),
           },
         ],
       })

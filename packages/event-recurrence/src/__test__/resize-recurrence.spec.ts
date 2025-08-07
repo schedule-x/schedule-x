@@ -45,8 +45,8 @@ describe('Resize Recurrence', () => {
     it('should update an event by setting the end to 1 day later', () => {
       const event: CalendarEventExternal = {
         id: 1,
-        start: Temporal.ZonedDateTime.from('2024-02-05T00:00:00.00+00:00[UTC]'),
-        end: Temporal.ZonedDateTime.from('2024-02-06T00:00:00.00+00:00[UTC]'),
+        start: Temporal.PlainDate.from('2024-02-05'),
+        end: Temporal.PlainDate.from('2024-02-06'),
         rrule: 'FREQ=WEEKLY;COUNT=10',
       }
       const $app = __createAppWithViews__({

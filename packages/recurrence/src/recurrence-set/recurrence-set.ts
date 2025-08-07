@@ -6,15 +6,9 @@ import {
   rruleStringToJS,
   parseRFC5545ToTemporal,
 } from '../parsers/rrule/parse-rrule'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
-import { getDurationInMinutes } from '../rrule/utils/stateless/duration-in-minutes'
-import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import { addDays, addMinutes } from '@schedule-x/shared/src'
 import { RRule } from '../rrule/rrule'
 import { Recurrence } from '../types/recurrence'
 import { RRuleOptionsExternal } from '../rrule/types/rrule-options'
-import { addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 type RecurrenceSetOptions = {
   dtstart: string
