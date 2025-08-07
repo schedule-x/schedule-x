@@ -4,7 +4,6 @@ import {
   it,
 } from '../../../stateless/testing/unit/unit-testing-library.impl'
 import TimeUnitsBuilder from '../time-units.builder'
-import { Month } from '../../../../enums/time/month.enum'
 import { expectWeekDatesToBe } from './utils/time-units-impl.spec-utils'
 import { WeekDay } from '../../../../enums/time/week-day.enum'
 import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'

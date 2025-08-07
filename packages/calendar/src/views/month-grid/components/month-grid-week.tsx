@@ -3,7 +3,7 @@ import MonthGridDay from './month-grid-day'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { getWeekNumber } from '../../../utils/stateless/time/get-week-number'
-import { toDateString, toJSDate } from '@schedule-x/shared/src'
+import { toDateString } from '@schedule-x/shared/src'
 
 type props = {
   week: MonthWeekType

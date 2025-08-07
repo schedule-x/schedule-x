@@ -4,7 +4,6 @@ import {
   parseRFC5545ToSX,
   rruleJSToString,
   rruleStringToJS,
-  parseRFC5545ToTemporal,
 } from '../parsers/rrule/parse-rrule'
 import { RRule } from '../rrule/rrule'
 import { Recurrence } from '../types/recurrence'

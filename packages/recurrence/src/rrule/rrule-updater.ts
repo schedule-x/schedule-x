@@ -1,7 +1,6 @@
 import { RRuleOptionsExternal } from './types/rrule-options'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import {
-  dateTimeStringRegex,
   sxDateTimeStringRegex,
 } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { addDays, addMinutes } from '@schedule-x/shared/src'

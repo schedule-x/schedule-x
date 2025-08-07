@@ -4,7 +4,6 @@ import {
   it,
   expect,
   beforeEach,
-  afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'

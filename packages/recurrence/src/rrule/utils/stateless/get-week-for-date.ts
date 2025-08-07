@@ -1,7 +1,6 @@
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import {
   jsDateToDateString,
-  toDateString,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 
 function getFirstDateOfWeek(

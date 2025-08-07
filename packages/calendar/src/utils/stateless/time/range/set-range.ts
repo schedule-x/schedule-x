@@ -1,13 +1,5 @@
 import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
-import {
-  toIntegers,
-  toJSDate,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { timeStringFromTimePoints } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
-import {
-  toDateString,
-  toDateTimeString,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { RangeSetterConfig } from '@schedule-x/shared/src/interfaces/calendar/range-setter-config.interface'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
@@ -76,11 +68,6 @@ export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
   const monthForDate = config.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
     config.date.year,
     config.date.month
-  )
-  const newRangeEndDate = toDateString(
-    monthForDate[monthForDate.length - 1][
-      monthForDate[monthForDate.length - 1].length - 1
-    ]
   )
   return {
     start: monthForDate[0][0],

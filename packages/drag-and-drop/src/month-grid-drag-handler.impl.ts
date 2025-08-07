@@ -4,7 +4,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 

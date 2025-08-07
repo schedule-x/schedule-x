@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import 'temporal-polyfill/global'
 import {
   afterEach,

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 export type IANATimezone =
   | 'Africa/Abidjan'
   | 'Africa/Accra'

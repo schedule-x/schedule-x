@@ -9,8 +9,8 @@ export const filterByRange = (
   timezone: IANATimezone
 ): BackgroundEvent[] => {
   return events.filter((event) => {
-    let rangeStart = range.start
-    let rangeEnd = range.end
+    const rangeStart = range.start
+    const rangeEnd = range.end
 
     let eventStart = event.start
     let eventEnd = event.end

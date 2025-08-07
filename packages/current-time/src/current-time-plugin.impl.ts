@@ -4,10 +4,8 @@ import CurrentTimePlugin, {
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import {
   toDateString,
-  toDateTimeString,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
-import { addMinutes } from '@schedule-x/shared/src'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class CurrentTimePluginImpl implements CurrentTimePlugin {

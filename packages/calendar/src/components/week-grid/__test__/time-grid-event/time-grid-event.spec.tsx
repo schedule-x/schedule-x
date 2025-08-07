@@ -3,7 +3,6 @@ import {
   describe,
   it,
   expect,
-  beforeEach,
   afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { CalendarAppSingleton } from '@schedule-x/shared'

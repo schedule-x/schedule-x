@@ -2,10 +2,6 @@ import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
 import { toLocalizedMonth } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import {
-  toIntegers,
-  toJSDate,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import {
   getFirstDayOfNextMonth,
   getFirstDayOPreviousMonth,
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'

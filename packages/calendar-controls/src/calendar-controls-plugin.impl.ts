@@ -1,7 +1,6 @@
 import CalendarControlsPlugin from '@schedule-x/shared/src/interfaces/calendar-controls/calendar-controls-plugin.interface'
 import { CalendarAppSingleton, View } from '@schedule-x/shared/src'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
-import { dateStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'

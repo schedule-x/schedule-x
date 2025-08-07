@@ -2,7 +2,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { useContext, useEffect, useMemo } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import {
@@ -24,7 +23,6 @@ import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-pl
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {

@@ -5,7 +5,6 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import DateAxis from '../../../components/week-grid/date-axis'
 import {
   toIntegers,
-  toJSDate,
 } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../../utils/stateless/events/sort-events-for-week'
 import { createWeek } from '../../../utils/stateless/views/week/create-week'
