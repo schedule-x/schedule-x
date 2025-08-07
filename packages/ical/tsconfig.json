@@ -1,9 +1,0 @@
-{
-  "extends": "@schedule-x/shared/src/config/package.tsconfig.json",
-  "compilerOptions": {
-    "outDir": "../../dist/types",
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
-  },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx", "../types.d.ts"]
-}
