@@ -6,7 +6,6 @@ import {
   beforeEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup } from '@testing-library/preact'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { renderComponent, getSelectedDay, getToday } from './utils'
 import { createAppSingleton } from '../../../factory'
 
