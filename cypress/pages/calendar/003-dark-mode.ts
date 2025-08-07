@@ -28,6 +28,7 @@ const calendar = createCalendar({
   defaultView: 'week',
   plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
   events: smokeTestEvents,
+  timezone: 'America/New_York',
 })
 
 calendar.render(calendarElement)

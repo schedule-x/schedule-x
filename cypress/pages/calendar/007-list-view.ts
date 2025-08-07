@@ -58,7 +58,8 @@ const calendar = createCalendar({
 
       eventsService.set(newEvents)
     }
-  }
+  },
+  timezone: 'America/New_York',
 })
 
 calendar.render(calendarElement)
