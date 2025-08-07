@@ -178,15 +178,33 @@ export const ListWrapper: PreactViewComponent = ({
       hour12: $app.config.locale.value === 'en-US',
     } as const
 
+    const startZDT = Temporal.ZonedDateTime.from({
+      year: event.start.year,
+      month: event.start.month,
+      day: event.start.day,
+      hour: event.start instanceof Temporal.ZonedDateTime ? event.start.hour : 0,
+      minute: event.start instanceof Temporal.ZonedDateTime ? event.start.minute : 0,
+      timeZone: $app.config.timezone.value,
+    })
+
+    const endZDT = Temporal.ZonedDateTime.from({
+      year: event.end.year,
+      month: event.end.month,
+      day: event.end.day,
+      hour: event.end instanceof Temporal.ZonedDateTime ? event.end.hour : 0,
+      minute: event.end instanceof Temporal.ZonedDateTime ? event.end.minute : 0,
+      timeZone: $app.config.timezone.value,
+    })
+
     if (!isMultiDay) {
       return (
         <>
           <div className="sx__list-event-start-time">
-            {event.start.toLocaleString($app.config.locale.value, timeOptions)}
+            {startZDT.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
           {event.end && (
             <div className="sx__list-event-end-time">
-              {event.end.toLocaleString($app.config.locale.value, timeOptions)}
+              {endZDT.toLocaleString($app.config.locale.value, timeOptions)}
             </div>
           )}
         </>
@@ -197,7 +215,7 @@ export const ListWrapper: PreactViewComponent = ({
       return (
         <>
           <div className="sx__list-event-start-time">
-            {event.start.toLocaleString($app.config.locale.value, timeOptions)}
+            {startZDT.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
           <div className="sx__list-event-arrow">→</div>
         </>
@@ -209,7 +227,7 @@ export const ListWrapper: PreactViewComponent = ({
         <>
           <div className="sx__list-event-arrow">←</div>
           <div className="sx__list-event-end-time">
-            {event.end.toLocaleString($app.config.locale.value, timeOptions)}
+            {endZDT.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
         </>
       )

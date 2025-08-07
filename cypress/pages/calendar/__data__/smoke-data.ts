@@ -623,8 +623,8 @@ export const smokeTestEvents = [
   {
     title: 'DEADLINE - english essay',
     with: 'Elisabeth Gruber',
-    start: Temporal.ZonedDateTime.from('2023-09-20T00:00-04:00[America/New_York]'),
-    end: Temporal.ZonedDateTime.from('2023-09-27T00:00-04:00[America/New_York]'),
+    start: Temporal.PlainDate.from('2023-09-20'),
+    end: Temporal.PlainDate.from('2023-09-27'),
     color: 'purple',
     isEditable: true,
     id: '86a3b9bee1d7',
@@ -854,8 +854,8 @@ export const smokeTestEvents = [
   {
     title: 'Call with Karo',
     with: 'Monica Geller',
-    start: Temporal.ZonedDateTime.from('2023-09-26T00:00-04:00[America/New_York]'),
-    end: Temporal.ZonedDateTime.from('2023-09-26T00:00-04:00[America/New_York]'),
+    start: Temporal.PlainDate.from('2023-09-26'),
+    end: Temporal.PlainDate.from('2023-09-26'),
     color: 'blue',
     isEditable: true,
     id: '26d523fe6627',
