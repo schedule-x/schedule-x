@@ -48,8 +48,8 @@ describe('DateGridDay', () => {
       const date = '2021-01-01'
       const backgroundEvents: BackgroundEvent[] = [
         {
-          start: '2021-01-01 00:01',
-          end: '2021-01-01 23:59',
+          start: Temporal.ZonedDateTime.from('2021-01-01T00:01:00+03:00[Europe/Moscow]'),
+          end: Temporal.ZonedDateTime.from('2021-01-01T23:59:00+03:00[Europe/Moscow]'),
           style: {},
         },
       ]
@@ -67,8 +67,8 @@ describe('DateGridDay', () => {
       const date = '2021-01-01'
       const backgroundEvents: BackgroundEvent[] = [
         {
-          start: '2021-01-01',
-          end: '2021-01-01',
+          start: Temporal.PlainDate.from('2021-01-01'),
+          end: Temporal.PlainDate.from('2021-01-01'),
           style: {},
         },
       ]
@@ -86,8 +86,8 @@ describe('DateGridDay', () => {
       const date = '2021-01-01'
       const backgroundEvents: BackgroundEvent[] = [
         {
-          start: '2020-12-31',
-          end: '2021-01-02',
+          start: Temporal.PlainDate.from('2020-12-31'),
+          end: Temporal.PlainDate.from('2021-01-02'),
           style: {},
         },
       ]
