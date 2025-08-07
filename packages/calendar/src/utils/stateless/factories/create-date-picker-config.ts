@@ -5,7 +5,7 @@ import { getDirection } from '../get-direction'
 
 export const createDatePickerConfig = (
   config: CalendarConfigExternal,
-  dateSelectionCallback: (date: string) => void
+  dateSelectionCallback: (date: Temporal.PlainDate) => void
 ) => {
   const isRtl = getDirection() === 'rtl'
   let teleportTo: HTMLElement | undefined

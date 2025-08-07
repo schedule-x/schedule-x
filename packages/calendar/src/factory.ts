@@ -30,7 +30,7 @@ export const createCalendarAppSingleton = (
     calendarState,
     config
   )
-  const datePickerConfig = createDatePickerConfig(config, (date: string) => dateSelectionCallback(Temporal.PlainDate.from(date)))
+  const datePickerConfig = createDatePickerConfig(config, (date: Temporal.PlainDate) => dateSelectionCallback(date))
   const datePickerState = createDatePickerState(
     datePickerConfig,
     config.selectedDate || config.datePicker?.selectedDate
