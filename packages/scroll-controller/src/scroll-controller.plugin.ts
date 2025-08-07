@@ -5,6 +5,7 @@ import ScrollControllerConfig from './interfaces/config'
 import { effect } from '@preact/signals'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
 
 class ScrollControllerPlugin implements PluginBase<string> {
@@ -67,27 +68,15 @@ class ScrollControllerPlugin implements PluginBase<string> {
     const pixelsPerHour =
       $app.config.weekOptions.value.gridHeight /
       ($app.config.timePointsPerDay / 100)
-    // const scrollToTimePoint = timePointsFromString(time)
+    const scrollToTimePoint = timePointsFromString(time)
 
-    // Konvertiere Start und Zielzeit mit Temporal
-    const startTimeStr = this.formatTimePoints($app.config.dayBoundaries.value.start);
-    const endTimeStr = this.formatTimePoints($app.config.dayBoundaries.value.end);
-
-    const scrollToTime = Temporal.PlainTime.from(time);
-    const dayStart = Temporal.PlainTime.from(startTimeStr);
-
-    let diffMinutes: number;
-    if ($app.config.isHybridDay && scrollToTime.toString() < dayStart.toString()) {
-      const dayEnd = Temporal.PlainTime.from(endTimeStr);
-      diffMinutes =
-        dayEnd.since(dayStart).total('minutes') +
-        scrollToTime.since(Temporal.PlainTime.from('00:00')).total('minutes');
-    } else {
-      diffMinutes = scrollToTime.since(dayStart).total('minutes');
-    }
-
-    const hoursPointsToScroll = diffMinutes / 60;
-    const pixelsToScroll = hoursPointsToScroll * pixelsPerHour;
+    const hoursFromDayStart =
+      $app.config.isHybridDay &&
+      scrollToTimePoint < $app.config.dayBoundaries.value.start
+        ? 2400 - $app.config.dayBoundaries.value.start + scrollToTimePoint
+        : scrollToTimePoint - $app.config.dayBoundaries.value.start
+    const hoursPointsToScroll = hoursFromDayStart / 100
+    const pixelsToScroll = hoursPointsToScroll * pixelsPerHour
 
     const viewContainer = (
       $app.elements.calendarWrapper as HTMLElement
@@ -95,12 +84,6 @@ class ScrollControllerPlugin implements PluginBase<string> {
     viewContainer.scroll(0, pixelsToScroll);
 
   }
-  private formatTimePoints(timePoint: number): string {
-    const hours = String(Math.floor(timePoint / 100)).padStart(2, '0');
-    const minutes = String(timePoint % 100).padStart(2, '0');
-    return `${hours}:${minutes}`;
-  }
-
 
   private waitUntilGridDayExistsThenScroll() {
     this.observer = new MutationObserver((mutations) => {

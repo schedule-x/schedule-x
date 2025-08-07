@@ -103,9 +103,9 @@ describe('Scroll controller plugin', () => {
 
     it.each([
       ['01:00', 400],
-      //['21:00', 0],
-      //['23:00', 200],
-      //['23:30', 250],
+      ['21:00', 0],
+      ['23:00', 200],
+      ['23:30', 250],
     ])(
       'should scroll when the day grid element comes into the DOM',
       (initialScrollConfig, expectedScroll) => {

@@ -37,7 +37,7 @@ const calendarElement = document.getElementById('calendar') as HTMLElement
 const eventsServicePlugin = createEventsServicePlugin()
 const calendarControlsPlugin = createCalendarControlsPlugin()
 const scrollController = createScrollControllerPlugin({
-  initialScroll: '05:00'
+  initialScroll: '01:00'
 })
 const calendar = createCalendar({
 plugins: [
