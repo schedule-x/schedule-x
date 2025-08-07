@@ -86,7 +86,7 @@ describe('TimeGridDay', () => {
         Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]')
       )
 
-      const dayElement = document.querySelector('.sx__time-grid-day')
+      const dayElement = document.querySelector('.sx__time-grid-day') as HTMLElement
       fireEvent.click(dayElement as Element)
 
       expect(onClickDateTime).toHaveBeenCalled()
@@ -245,7 +245,7 @@ describe('TimeGridDay', () => {
       ).toContain('height: 99.93055555555557%')
     })
 
-    it.only('does not render a background event, if the background event ends on the start time of the day', () => {
+    it('does not render a background event, if the background event ends on the start time of the day', () => {
       const $app = __createAppWithViews__({
         selectedDate: Temporal.PlainDate.from('2023-09-11'),
         dayBoundaries: {
