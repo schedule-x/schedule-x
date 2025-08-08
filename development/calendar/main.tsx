@@ -31,6 +31,7 @@ import { translations } from '@schedule-x/translations/src'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
 
 import { dateStringRegex } from '@schedule-x/shared/src'
+import { createCurrentTimePlugin } from '../../packages/current-time/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -48,6 +49,7 @@ plugins: [
   createResizePlugin(),
   calendarControlsPlugin,
   scrollController,
+  createCurrentTimePlugin(),
 ],
 
   translations: mergeLocales(
@@ -64,7 +66,7 @@ plugins: [
   }, */
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'month-grid',
+  defaultView: 'week',
   callbacks: {
     onScrollDayIntoView(date) {
       console.log('onScrollDayIntoView: ', date)
@@ -122,7 +124,7 @@ plugins: [
       console.log(range.end.toString()) */
     },
   },
-  selectedDate: Temporal.PlainDate.from({ year: 2024, month: 2, day: 5 }),
+  // selectedDate: Temporal.PlainDate.from({ year: 2024, month: 2, day: 5 }),
   calendars: {
     personal: {
       colorName: 'personal',

@@ -104,6 +104,12 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 
   setTimezone(timezone: IANATimezone) {
     this.$app.config.timezone.value = timezone
+
+    Object.values(this.$app.config.plugins).forEach((plugin) => {
+      if (plugin?.onTimezoneChange) {
+        plugin.onTimezoneChange(timezone)
+      }
+    })
   }
 
   getDate = (): Temporal.PlainDate =>
