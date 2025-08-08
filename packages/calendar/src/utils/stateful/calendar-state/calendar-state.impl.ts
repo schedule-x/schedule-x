@@ -27,20 +27,21 @@ export const createCalendarState = (
     null
 
   const callOnRangeUpdate = (_range: Signal<DateRange | null>) => {
+    const lastRange =
+      lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE
+    if (!_range.value) return
+    if (
+      lastRange?.start.toString() === _range.value.start.toString() &&
+      lastRange?.end.toString() === _range.value.end.toString()
+    )
+      return
+
     if (!wasInitialized) return (wasInitialized = true)
 
     if (calendarConfig.callbacks.onRangeUpdate && _range.value) {
       calendarConfig.callbacks.onRangeUpdate(_range.value)
     }
-
-    const lastRange =
-      lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE
-    if (!_range.value) return
-    if (
-      lastRange?.start === _range.value.start &&
-      lastRange?.end === _range.value.end
-    )
-      return
+    
     Object.values(calendarConfig.plugins || {}).forEach((plugin) => {
       plugin?.onRangeUpdate?.(_range.value!)
       lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE =

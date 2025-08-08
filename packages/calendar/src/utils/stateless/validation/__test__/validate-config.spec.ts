@@ -77,19 +77,19 @@ describe('validating the config', () => {
   })
 
   describe('validating the first day of the week', () => {
-    it.each([[-1], [7]])(
-      `should throw an error if the first day of the week is not between 0 and 6`,
+    it.each([[0], [8]])(
+      `should throw an error if the first day of the week is not between 1 and 7`,
       (firstDayOfWeek: number) => {
         expect(() =>
           validateConfig({ firstDayOfWeek } as CalendarConfigExternal)
         ).toThrowError(
-          '[Schedule-X error]: firstDayOfWeek must be a number between 0 and 6'
+          '[Schedule-X error]: firstDayOfWeek must be a number between 1 and 7'
         )
       }
     )
 
-    it.each([[0], [1], [2], [3], [4], [5], [6]])(
-      `should not throw an error if the first day of the week is between 0 and 6`,
+    it.each([[1], [2], [3], [4], [5], [6], [7]])(
+      `should not throw an error if the first day of the week is between 1 and 7`,
       (firstDayOfWeek: number) => {
         expect(() =>
           validateConfig({ firstDayOfWeek } as CalendarConfigExternal)

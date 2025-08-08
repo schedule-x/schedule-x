@@ -424,6 +424,7 @@ describe('createCalendarControlsPlugin', () => {
       controlsPlugin.setMinDate(newMinDate)
       expect(controlsPlugin.getMinDate()).toEqual(newMinDate)
       expect($app.config.minDate.value).toEqual(newMinDate)
+      expect($app.datePickerConfig.min).toEqual(newMinDate)
     })
   })
 
@@ -445,6 +446,7 @@ describe('createCalendarControlsPlugin', () => {
       controlsPlugin.setMaxDate(newMaxDate)
       expect(controlsPlugin.getMaxDate()).toEqual(newMaxDate)
       expect($app.config.maxDate.value).toEqual(newMaxDate)
+      expect($app.datePickerConfig.max).toEqual(newMaxDate)
     })
   })
 

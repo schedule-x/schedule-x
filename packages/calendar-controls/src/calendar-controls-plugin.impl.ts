@@ -86,10 +86,12 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 
   setMinDate(minDate: Temporal.PlainDate | undefined) {
     this.$app.config.minDate.value = minDate
+    minDate && (this.$app.datePickerConfig.min = minDate)
   }
 
   setMaxDate(maxDate: Temporal.PlainDate | undefined) {
     this.$app.config.maxDate.value = maxDate
+    maxDate && (this.$app.datePickerConfig.max = maxDate)
   }
 
   setMonthGridOptions(monthGridOptions: MonthGridOptions) {

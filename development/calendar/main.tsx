@@ -56,12 +56,15 @@ plugins: [
       enUS: {}
     }
   ),
-  weekOptions: {
-    eventWidth: 95,
-  },
+
+  showWeekNumbers: true,
+  /* dayBoundaries: {
+    start: '20:00',
+    end: '06:00'
+  }, */
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'week',
+  defaultView: 'month-grid',
   callbacks: {
     onScrollDayIntoView(date) {
       console.log('onScrollDayIntoView: ', date)
@@ -71,10 +74,6 @@ plugins: [
       console.log('onEventUpdate', event)
       console.log('event.start', event.start.toString())
       console.log('event.end', event.end.toString())
-    },
-
-    async onBeforeEventUpdateAsync(oldEvent, newEvent, $app) {
-        return Promise.resolve(true)
     },
 
     onEventClick(event, e) {
@@ -90,40 +89,40 @@ plugins: [
     },
 
     onClickDateTime(dateTime) {
-      console.log('onClickDateTime', dateTime)
+      console.log('onClickDateTime', dateTime.toString())
     },
 
     onClickAgendaDate(date) {
-      console.log('onClickAgendaDate', date)
+      console.log('onClickAgendaDate', date.toString())
     },
 
     onDoubleClickAgendaDate(date) {
-      console.log('onDoubleClickAgendaDate', date)
+      console.log('onDoubleClickAgendaDate', date.toString())
     },
 
     onClickPlusEvents(date) {
-      console.log('onClickPlusEvents', date)
+      console.log('onClickPlusEvents', date.toString())
     },
 
     onSelectedDateUpdate(date) {
-      console.log('onSelectedDateUpdate', date)
+      console.log('onSelectedDateUpdate', date.toString())
     },
 
     onDoubleClickDateTime(dateTime) {
-      console.log('onDoubleClickDateTime', dateTime)
+      console.log('onDoubleClickDateTime', dateTime.toString())
     },
 
     onDoubleClickDate(date) {
-      console.log('onDoubleClickDate', date)
+      console.log('onDoubleClickDate', date.toString())
     },
 
     onRangeUpdate(range) {
-      console.log('onRangeUpdate')
+      console.log('onRangeUpdate', range.start.toString(), range.end.toString())
       /* console.log(range.start.toString())
       console.log(range.end.toString()) */
-    }
+    },
   },
-  //selectedDate: Temporal.PlainDate.from({ year: 2024, month: 1, day: 23 }),
+  // selectedDate: Temporal.PlainDate.from({ year: 2054, month: 1, day: 23 }),
   calendars: {
     personal: {
       colorName: 'personal',
@@ -203,77 +202,29 @@ plugins: [
       },
     },
   ],
-  dayBoundaries: {
-    start: '21:00',
-    end: '09:00'
-  },
-  locale: 'de-DE',
+  locale: 'sv-SE',
+
   // tz new york
   timezone: 'Europe/Berlin',
   events: [
-    ...seededEvents.map(event => ({
+    /* ...seededEvents.map(event => ({
       ...event,
       start: dateStringRegex.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
       end: dateStringRegex.test(event.end) ? Temporal.PlainDate.from(event.end) : Temporal.ZonedDateTime.from(event.end),
-    })),
-    /* {
+    })), */
+/*     {
       id: 1,
-      start: Temporal.ZonedDateTime.from('2025-07-11T04:00:00.000+02:00[Europe/Berlin]'),
-      end: Temporal.ZonedDateTime.from('2025-07-11T05:00:00.000+02:00[Europe/Berlin]'),
-      title: 'Event 1',
-      people: ['John Doe'],
-      location: 'Office',
-      description: 'Event 1 description',
-      rrule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR',
-    },
-    {
-      id: 2,
-      start: Temporal.ZonedDateTime.from('2025-07-11T04:00:00.000+02:00[Europe/Berlin]'),
-      end: Temporal.ZonedDateTime.from('2025-07-13T05:00:00.000+02:00[Europe/Berlin]'),
-      title: 'Event 2',
-      people: ['John Doe'],
-      location: 'Office',
-      description: 'Event 2 description',
-    },
-    // now plain date for 2 day event
-    {
-      id: 3,
-      start: Temporal.PlainDate.from('2025-07-10'),
-      end: Temporal.PlainDate.from('2025-07-10'),
-      title: 'Event 3',
-      people: ['John Doe'],
-      location: 'Office',
-      description: 'Event 3 description',
-      rrule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR',
-    },
-    // ADD YEARLY RECURRENCE
-    {
-      id: 4,
-      start: Temporal.PlainDate.from('2025-07-10'),
-      end: Temporal.PlainDate.from('2025-07-10'),
-      calendarId: 'personal',
-      title: 'Event 4',
-      people: ['John Doe'],
-      rrule: 'FREQ=YEARLY;INTERVAL=1',
-    },
-    // monthly recurrence
-    {
-      id: 5,
-      title: 'Monthly Event',
-      start: Temporal.PlainDate.from('2025-07-10'),
-      end: Temporal.PlainDate.from('2025-07-10'),
-      calendarId: 'personal',
-      rrule: 'FREQ=MONTHLY;INTERVAL=1',
-    },
-    // monthly recurrence
-    {
-      id: 6 ,
-      title: 'Monthly time event',
-      start: Temporal.ZonedDateTime.from('2025-07-10T00:00:00.000+02:00[Europe/Berlin]'),
-      end: Temporal.ZonedDateTime.from('2025-07-10T01:00:00.000+02:00[Europe/Berlin]'),
-      calendarId: 'personal',
-      rrule: 'FREQ=MONTHLY;INTERVAL=1',
-    }, */
+      title: 'weekly',
+      start: Temporal.PlainDate.from('2025-08-08'),
+      end: Temporal.PlainDate.from('2025-08-08'),
+      rrule: 'FREQ=WEEKLY;COUNT=10;BYDAY=MO,TU,WE,TH,FR',
+    } */
+   {
+    id: 2,
+    title: 'monthly',
+    start: Temporal.PlainDate.from('2025-08-08'),
+    end: Temporal.PlainDate.from('2025-08-08'),
+   }
   ],
 })
 calendar.render(calendarElement)
@@ -285,4 +236,11 @@ timezoneSelect.addEventListener('change', (e) => {
   if (newTimezone) {
     calendarControlsPlugin.setTimezone(newTimezone as IANATimezone)
   }
+})
+
+const doStuffButton = document.getElementById('do-stuff') as HTMLButtonElement
+doStuffButton.addEventListener('click', (e) => {
+  calendarControlsPlugin.setMonthGridOptions({
+    nEventsPerDay: 1,
+  })
 })

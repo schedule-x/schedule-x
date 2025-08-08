@@ -20,10 +20,10 @@ export const validateConfig = (config: CalendarConfigExternal) => {
 
   if (
     typeof config.firstDayOfWeek !== 'undefined' &&
-    (config.firstDayOfWeek < 0 || config.firstDayOfWeek > 6)
+    (config.firstDayOfWeek < 1 || config.firstDayOfWeek > 7)
   ) {
     throw new Error(
-      '[Schedule-X error]: firstDayOfWeek must be a number between 0 and 6'
+      '[Schedule-X error]: firstDayOfWeek must be a number between 1 and 7'
     )
   }
 
