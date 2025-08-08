@@ -122,7 +122,7 @@ plugins: [
       console.log(range.end.toString()) */
     },
   },
-  // selectedDate: Temporal.PlainDate.from({ year: 2054, month: 1, day: 23 }),
+  selectedDate: Temporal.PlainDate.from({ year: 2024, month: 2, day: 5 }),
   calendars: {
     personal: {
       colorName: 'personal',
@@ -219,12 +219,13 @@ plugins: [
       end: Temporal.PlainDate.from('2025-08-08'),
       rrule: 'FREQ=WEEKLY;COUNT=10;BYDAY=MO,TU,WE,TH,FR',
     } */
-   {
-    id: 2,
-    title: 'monthly',
-    start: Temporal.PlainDate.from('2025-08-08'),
-    end: Temporal.PlainDate.from('2025-08-08'),
-   }
+      {
+        id: 123,
+        title: 'monthly',
+        start: Temporal.ZonedDateTime.from('2024-02-05T14:00+01:00[Europe/Berlin]'),
+        end: Temporal.ZonedDateTime.from('2024-02-05T15:00+01:00[Europe/Berlin]'),
+        rrule: 'FREQ=MONTHLY;BYMONTHDAY=5',
+      }
   ],
 })
 calendar.render(calendarElement)
@@ -240,7 +241,5 @@ timezoneSelect.addEventListener('change', (e) => {
 
 const doStuffButton = document.getElementById('do-stuff') as HTMLButtonElement
 doStuffButton.addEventListener('click', (e) => {
-  calendarControlsPlugin.setMonthGridOptions({
-    nEventsPerDay: 1,
-  })
+  scrollController.scrollTo('05:00')
 })
