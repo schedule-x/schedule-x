@@ -8,7 +8,6 @@ import {
 } from '../../utils/stateless/events/event-styles'
 import { useContext, useEffect } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pin-icon'
@@ -56,16 +55,17 @@ export default function TimeGridEvent({
     $app.config.locale.value,
     { hour: 'numeric', minute: 'numeric' },
   ] as const
-  const getEventTime = (start: string, end: string) => {
-    const localizedStartTime = toJSDate(start).toLocaleTimeString(
-      ...localizeArgs
-    )
+  const getEventTime = (
+    start: Temporal.ZonedDateTime,
+    end: Temporal.ZonedDateTime
+  ) => {
+    const localizedStartTime = start.toLocaleString(...localizeArgs)
 
     if (start === end) {
       return localizedStartTime
     }
 
-    const localizedEndTime = toJSDate(end).toLocaleTimeString(...localizeArgs)
+    const localizedEndTime = end.toLocaleString(...localizeArgs)
     return `${localizedStartTime} – ${localizedEndTime}`
   }
 
@@ -182,12 +182,12 @@ export default function TimeGridEvent({
 
   const realStartIsBeforeDayBoundaryStart =
     dayBoundariesDateTime &&
-    calendarEvent.start < dayBoundariesDateTime.start &&
-    calendarEvent.end >= dayBoundariesDateTime.start
+    calendarEvent.start.toString() < dayBoundariesDateTime.start.toString() &&
+    calendarEvent.end.toString() >= dayBoundariesDateTime.start.toString()
 
   const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
     ? dayBoundariesDateTime?.start
-    : calendarEvent.start
+    : (calendarEvent.start as Temporal.ZonedDateTime)
 
   return (
     <>
@@ -214,7 +214,7 @@ export default function TimeGridEvent({
           )}%`,
           height: `${getEventHeight(
             relativeStartWithinDayBoundary,
-            calendarEvent.end,
+            calendarEvent.end as Temporal.ZonedDateTime,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
@@ -252,7 +252,10 @@ export default function TimeGridEvent({
 
               <div className="sx__time-grid-event-time">
                 <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
-                {getEventTime(calendarEvent.start, calendarEvent.end)}
+                {getEventTime(
+                  calendarEvent.start as Temporal.ZonedDateTime,
+                  calendarEvent.end as Temporal.ZonedDateTime
+                )}
               </div>
 
               {calendarEvent.people && calendarEvent.people.length > 0 && (

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   beforeEach,
   describe,
@@ -22,7 +23,7 @@ describe('CalendarHeader', () => {
     it('should set the view to month and update range heading, when selecting month view', async () => {
       const $app = __createAppWithViews__({
         defaultView: 'week',
-        selectedDate: '2010-01-01',
+        selectedDate: Temporal.PlainDate.from('2010-01-01'),
         views: [viewMonthGrid, viewWeek, viewDay],
       })
       renderComponent($app)
@@ -42,7 +43,7 @@ describe('CalendarHeader', () => {
     it('should set the view to week and update range heading, when selecting week view', async () => {
       const $app = __createAppWithViews__({
         defaultView: 'day',
-        selectedDate: '2010-01-01',
+        selectedDate: Temporal.PlainDate.from('2010-01-01'),
         views: [viewMonthGrid, viewWeek, viewDay],
       })
       renderComponent($app)
@@ -62,7 +63,7 @@ describe('CalendarHeader', () => {
     it('should show the week number if the week view is displayed and showWeekNumbers is configured', async () => {
       const $app = __createAppWithViews__({
         defaultView: 'week',
-        selectedDate: '2010-01-01',
+        selectedDate: Temporal.PlainDate.from('2010-01-01'),
         views: [viewMonthGrid, viewWeek, viewDay],
         showWeekNumbers: true,
       })
@@ -87,7 +88,7 @@ describe('CalendarHeader', () => {
     it('should show the week number if the day view is displayed and showWeekNumbers is configured', async () => {
       const $app = __createAppWithViews__({
         defaultView: 'day',
-        selectedDate: '2010-01-01',
+        selectedDate: Temporal.PlainDate.from('2010-01-01'),
         views: [viewMonthGrid, viewWeek, viewDay],
         showWeekNumbers: true,
       })
@@ -112,7 +113,7 @@ describe('CalendarHeader', () => {
     it('should not show the week number if the week view is displayed and showWeekNumbers is not configured', async () => {
       const $app = __createAppWithViews__({
         defaultView: 'week',
-        selectedDate: '2010-01-01',
+        selectedDate: Temporal.PlainDate.from('2010-01-01'),
         views: [viewMonthGrid, viewWeek, viewDay],
         showWeekNumbers: false,
       })

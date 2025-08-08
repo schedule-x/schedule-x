@@ -18,8 +18,9 @@ export default class DatePickerApp {
     return this.$app.datePickerState.selectedDate.value
   }
 
-  set value(value: string) {
-    this.$app.datePickerState.selectedDate.value = value
+  set value(value: Temporal.PlainDate) {
+    this.$app.datePickerState.selectedDate.value =
+      Temporal.PlainDate.from(value)
   }
 
   get disabled() {

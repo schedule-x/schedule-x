@@ -1,2 +1,2 @@
-export type WeekWithDates = Date[]
-export type MonthWithDates = Date[][]
+export type WeekWithDates = Temporal.ZonedDateTime[]
+export type MonthWithDates = Temporal.ZonedDateTime[][]

@@ -4,8 +4,8 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 export const updateEventsList = (
   $app: CalendarAppSingleton,
   eventCopy: CalendarEventInternal,
-  oldEventEnd: string,
-  newEventEnd: string
+  oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
+  newEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
 ) => {
   const rrule = eventCopy._getForeignProperties().rrule
 

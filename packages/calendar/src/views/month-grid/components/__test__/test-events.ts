@@ -6,7 +6,7 @@ export const getTestEvent = ($app: CalendarAppSingleton) => {
   return new CalendarEventBuilder(
     $app.config,
     randomStringId(),
-    '2020-01-01 00:00',
-    '2020-01-01 23:59'
+    Temporal.ZonedDateTime.from('2020-01-01T00:00:00.00+00:00[UTC]'),
+    Temporal.ZonedDateTime.from('2020-01-01T23:59:00.00+00:00[UTC]')
   ).build()
 }

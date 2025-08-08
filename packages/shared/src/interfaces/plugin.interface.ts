@@ -1,5 +1,6 @@
 import CalendarAppSingleton from './calendar/calendar-app-singleton'
 import { DateRange } from '../types/date-range'
+import { IANATimezone } from '../utils/stateless/time/tzdb'
 
 export default interface PluginBase<Name extends string> {
   name: Name
@@ -27,6 +28,8 @@ export default interface PluginBase<Name extends string> {
   onRender?($app: CalendarAppSingleton | any): void
 
   onRangeUpdate?: (range: DateRange) => void
+
+  onTimezoneChange?: (timezone: IANATimezone) => void
 
   destroy?(): void
 }

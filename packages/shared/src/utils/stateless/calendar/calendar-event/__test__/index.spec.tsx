@@ -5,13 +5,20 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import CalendarConfigBuilder from '@schedule-x/calendar/src/utils/stateful/config/calendar-config.builder'
 import CalendarEventBuilder from '../calendar-event.builder'
+import 'temporal-polyfill/global'
 
 describe('an internal calendar event', () => {
   describe('an event with only time and an id', () => {
-    const _config = new CalendarConfigBuilder().build()
+    const _config = new CalendarConfigBuilder()
+      .withTimezone('Europe/Berlin')
+      .build()
 
-    const EVENT_START = '2009-09-07 04:00'
-    const EVENT_END = '2009-09-07 05:45'
+    const EVENT_START = Temporal.ZonedDateTime.from(
+      '2009-09-07T04:00:00+02:00[Europe/Berlin]'
+    )
+    const EVENT_END = Temporal.ZonedDateTime.from(
+      '2009-09-07T05:45:00+02:00[Europe/Berlin]'
+    )
     const EVENT_TITLE = 'Meeting about stuff'
     const EVENT_LOCATION = 'Starbucks'
     const EVENT_PEOPLE = ['John', 'Jane']
@@ -37,8 +44,8 @@ describe('an internal calendar event', () => {
       const eventExternal = event._getExternalEvent()
 
       expect(eventExternal.id).toBe('1')
-      expect(eventExternal.start).toBe(EVENT_START)
-      expect(eventExternal.end).toBe(EVENT_END)
+      expect(eventExternal.start).toEqual(EVENT_START)
+      expect(eventExternal.end).toEqual(EVENT_END)
       expect(eventExternal.title).toBe(EVENT_TITLE)
       expect(eventExternal.location).toBe(EVENT_LOCATION)
       expect(eventExternal.people).toBe(EVENT_PEOPLE)

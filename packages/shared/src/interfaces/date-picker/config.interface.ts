@@ -5,8 +5,8 @@ import { DatePickerStyle } from './style.interface'
 import { WeekDay } from '../../enums/time/week-day.enum'
 
 export default interface DatePickerConfigInternal extends Config {
-  min: string
-  max: string
+  min: Temporal.PlainDate
+  max: Temporal.PlainDate
   placement: Placement
   listeners: DatePickerListeners
   style: DatePickerStyle
@@ -14,13 +14,14 @@ export default interface DatePickerConfigInternal extends Config {
   label?: string
   name?: string
   disabled?: boolean
+  hasPlaceholder?: boolean
 }
 
 export interface DatePickerConfigExternal
   extends Partial<
     Omit<DatePickerConfigInternal, 'placement' | 'firstDayOfWeek' | 'locale'>
   > {
-  selectedDate?: string
+  selectedDate?: Temporal.PlainDate
   placement?: Placement | string
   firstDayOfWeek?: WeekDay
   locale?: string

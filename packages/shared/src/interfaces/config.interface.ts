@@ -1,5 +1,6 @@
 import { WeekDay } from '../enums/time/week-day.enum'
 import { Signal } from '@preact/signals'
+import { IANATimezone } from '../utils/stateless/time/tzdb'
 
 /**
  * This interface serves as a bridge between the config interface for the date picker amd the calendar.
@@ -7,4 +8,5 @@ import { Signal } from '@preact/signals'
 export default interface Config {
   locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
+  timezone: Signal<IANATimezone>
 }

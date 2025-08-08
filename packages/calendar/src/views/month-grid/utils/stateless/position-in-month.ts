@@ -13,8 +13,8 @@ const positionInMonthWeek = (
   const occupiedLevels = new Set<number>()
 
   for (const event of sortedEvents) {
-    const eventOriginalStartDate = dateFromDateTime(event.start)
-    const eventOriginalEndDate = dateFromDateTime(event.end)
+    const eventOriginalStartDate = dateFromDateTime(event.start.toString())
+    const eventOriginalEndDate = dateFromDateTime(event.end.toString())
 
     const isEventStartInWeek = !!week[eventOriginalStartDate]
     let isEventInWeek = isEventStartInWeek
@@ -36,7 +36,9 @@ const positionInMonthWeek = (
         : lastDateOfWeek
 
     const eventDays = Object.values(week).filter((day) => {
-      return day.date >= firstDateOfEvent && day.date <= lastDateOfEvent
+      const plainDate = Temporal.PlainDate.from(day.date).toString()
+
+      return plainDate >= firstDateOfEvent && plainDate <= lastDateOfEvent
     })
 
     let levelInWeekForEvent
@@ -80,7 +82,10 @@ export const positionInMonth = (
   const weeks: Record<string, MonthDay>[] = []
   month.forEach((week) => {
     const weekMap: Record<string, MonthDay> = {}
-    week.forEach((day) => (weekMap[day.date] = day))
+    week.forEach((day) => {
+      const plainDate = Temporal.PlainDate.from(day.date)
+      weekMap[plainDate.toString()] = day
+    })
     weeks.push(weekMap)
   })
   weeks.forEach((week) => positionInMonthWeek(sortedEvents, week))

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   beforeEach,
@@ -25,13 +26,17 @@ describe('CalendarApp', () => {
 
     const eventId = '1'
     const eventTitle = 'test title 123'
-    const eventStart = '2022-08-27 21:57'
-    const eventEnd = '2020-08-27 22:42'
+    const eventStart = Temporal.ZonedDateTime.from(
+      '2022-08-27T21:57:00.00+00:00[UTC]'
+    )
+    const eventEnd = Temporal.ZonedDateTime.from(
+      '2020-08-27T22:42:00.00+00:00[UTC]'
+    )
     const foreignPropertyValue = 'some value'
 
     beforeEach(() => {
       calendarApp = createCalendar({
-        selectedDate: '2022-08-27',
+        selectedDate: Temporal.PlainDate.from('2022-08-27'),
         views: [viewMonthAgenda],
         events: [
           {
@@ -59,8 +64,8 @@ describe('CalendarApp', () => {
         expect(elementCCID).toMatch(/custom-month-agenda-event-\w+/)
         expect(callSecondArgument.calendarEvent.id).toBe(eventId)
         expect(callSecondArgument.calendarEvent.title).toBe(eventTitle)
-        expect(callSecondArgument.calendarEvent.start).toBe(eventStart)
-        expect(callSecondArgument.calendarEvent.end).toBe(eventEnd)
+        expect(callSecondArgument.calendarEvent.start).toEqual(eventStart)
+        expect(callSecondArgument.calendarEvent.end).toEqual(eventEnd)
         expect(callSecondArgument.calendarEvent.foreignProperty).toBe(
           foreignPropertyValue
         )

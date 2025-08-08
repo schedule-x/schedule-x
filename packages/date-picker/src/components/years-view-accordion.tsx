@@ -19,9 +19,9 @@ export default function YearsViewAccordion({
 
   const yearWithDates = $app.timeUnitsImpl.getMonthsFor(year)
 
-  const handleClickOnMonth = (event: MouseEvent, month: Date) => {
+  const handleClickOnMonth = (event: MouseEvent, month: Temporal.PlainDate) => {
     event.stopPropagation()
-    setYearAndMonth(year, month.getMonth())
+    setYearAndMonth(year, month.month)
   }
 
   return (

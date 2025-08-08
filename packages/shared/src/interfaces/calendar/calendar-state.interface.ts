@@ -5,9 +5,9 @@ import { DateRange } from '../../types/date-range'
 export default interface CalendarState {
   isCalendarSmall: Signal<boolean | undefined>
   view: ReadonlySignal<ViewName>
-  setView: (view: ViewName, selectedDate: string) => void
+  setView: (view: ViewName, selectedDate: Temporal.PlainDate) => void
   range: Signal<DateRange | null>
   isDark: Signal<boolean>
 
-  setRange: (date: string) => void
+  setRange: (date: Temporal.PlainDate) => void
 }

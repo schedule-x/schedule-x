@@ -4,16 +4,16 @@ import {
   expect,
 } from '../../../testing/unit/unit-testing-library.impl'
 import { toLocalizedMonth } from '../date-time-localization'
-import { Month } from '../../../../../enums/time/month.enum'
+import 'temporal-polyfill/global'
 
 describe('get localized month', () => {
   it.each([
-    ['en-US', new Date(2023, Month.JANUARY, 1), 'January'],
-    ['de-DE', new Date(2023, Month.JANUARY, 1), 'Januar'],
-    ['sv-SE', new Date(2023, Month.JANUARY, 1), 'januari'],
+    ['en-US', Temporal.PlainDate.from('2023-01-01'), 'January'],
+    ['de-DE', Temporal.PlainDate.from('2023-01-01'), 'Januar'],
+    ['sv-SE', Temporal.PlainDate.from('2023-01-01'), 'januari'],
   ])(
     'should get the localized month given a date',
-    function (locale: string, date: Date, expected: string) {
+    function (locale: string, date: Temporal.PlainDate, expected: string) {
       const result = toLocalizedMonth(date, locale)
       expect(result).toEqual(expected)
     }

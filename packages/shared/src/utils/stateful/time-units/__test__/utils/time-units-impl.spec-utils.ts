@@ -5,6 +5,6 @@ export const expectWeekDatesToBe = (
   week: WeekWithDates,
   expectedDates: number[]
 ) => {
-  const weekDates = week.map((date) => date.getDate())
+  const weekDates = week.map((date) => date.day)
   expect(weekDates).toEqual(expectedDates)
 }

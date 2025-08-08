@@ -4,9 +4,9 @@ import { Signal } from '@preact/signals'
 export default interface DatePickerState {
   isOpen: Signal<boolean>
   isDisabled: Signal<boolean>
-  selectedDate: Signal<string>
+  selectedDate: Signal<Temporal.PlainDate>
   inputDisplayedValue: Signal<string>
-  datePickerDate: Signal<string>
+  datePickerDate: Signal<Temporal.PlainDate>
   datePickerView: Signal<DatePickerView>
   inputWrapperElement: Signal<HTMLDivElement | undefined>
   isDark: Signal<boolean>
@@ -14,6 +14,7 @@ export default interface DatePickerState {
   open(): void
   close(): void
   toggle(): void
+  handleInput(newInputValue: string): void
 
   setView(view: DatePickerView): void
 }

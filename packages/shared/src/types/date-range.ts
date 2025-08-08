@@ -1,4 +1,4 @@
 export type DateRange = {
-  start: string
-  end: string
+  start: Temporal.ZonedDateTime
+  end: Temporal.ZonedDateTime
 }

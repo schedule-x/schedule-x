@@ -9,8 +9,8 @@ export type CalendarEventOptions = {
 
 export default interface CalendarEventExternal {
   id: EventId
-  start: string
-  end: string
+  start: Temporal.ZonedDateTime | Temporal.PlainDate
+  end: Temporal.ZonedDateTime | Temporal.PlainDate
   title?: string
   people?: string[]
   location?: string

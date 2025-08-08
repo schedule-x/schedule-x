@@ -2,7 +2,7 @@ import { RRuleOptions } from '../../types/rrule-options'
 import { getJSDayFromByday } from './byday-jsday-map'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { isCountReached, isDatePastUntil } from './iterator-utils'
-import { addDays } from '@schedule-x/shared/src'
+import { addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   let currentDate = dtstart
@@ -33,7 +33,7 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      currentDate = addDays(currentDate, rruleOptions.interval)
+      currentDate = addDaysToDateOrDateTime(currentDate, rruleOptions.interval)
 
       return { done: false, value: allDateTimes }
     },

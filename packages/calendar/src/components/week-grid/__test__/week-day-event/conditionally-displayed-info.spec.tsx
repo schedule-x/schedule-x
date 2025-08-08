@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   describe,
@@ -18,15 +19,15 @@ describe('WeekDayEvent', () => {
 
   describe('conditionally displaying info', () => {
     const $app = __createAppWithViews__({
-      selectedDate: '2020-12-01',
+      selectedDate: Temporal.PlainDate.from('2020-12-01'),
     })
 
     it('should not contain a title element if the event has no title', () => {
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         '1',
-        '2020-12-01 10:00',
-        '2020-12-01 11:00'
+        Temporal.ZonedDateTime.from('2020-12-01T10:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2020-12-01T11:00:00.00+00:00[UTC]')
       ).build()
       renderComponent($app, calendarEvent)
 
@@ -38,8 +39,8 @@ describe('WeekDayEvent', () => {
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         '1',
-        '2020-12-01 10:00',
-        '2020-12-01 11:00'
+        Temporal.ZonedDateTime.from('2020-12-01T10:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2020-12-01T11:00:00.00+00:00[UTC]')
       )
         .withTitle(expectedTitle)
         .build()
@@ -55,8 +56,8 @@ describe('WeekDayEvent', () => {
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         '1',
-        '2020-12-01 10:00',
-        '2020-12-01 11:00'
+        Temporal.ZonedDateTime.from('2020-12-01T10:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2020-12-01T11:00:00.00+00:00[UTC]')
       ).build()
       renderComponent($app, calendarEvent)
 
@@ -67,8 +68,8 @@ describe('WeekDayEvent', () => {
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         '1',
-        '2020-12-01 10:00',
-        '2020-12-01 11:00'
+        Temporal.ZonedDateTime.from('2020-12-01T10:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2020-12-01T11:00:00.00+00:00[UTC]')
       )
         .withPeople([])
         .build()
@@ -81,8 +82,8 @@ describe('WeekDayEvent', () => {
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         '1',
-        '2020-12-01 10:00',
-        '2020-12-01 11:00'
+        Temporal.ZonedDateTime.from('2020-12-01T10:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2020-12-01T11:00:00.00+00:00[UTC]')
       )
         .withPeople(['Paul', 'John'])
         .build()
@@ -98,13 +99,13 @@ describe('WeekDayEvent', () => {
   describe('Usage of resize plugin', () => {
     it('should not display a resize handle', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2020-12-01',
+        selectedDate: Temporal.PlainDate.from('2020-12-01'),
       })
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         '1',
-        '2020-12-01 10:00',
-        '2020-12-01 11:00'
+        Temporal.ZonedDateTime.from('2020-12-01T10:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2020-12-01T11:00:00.00+00:00[UTC]')
       ).build()
       renderComponent($app, calendarEvent)
 
@@ -117,14 +118,14 @@ describe('WeekDayEvent', () => {
       const resizePlugin = stubInterface<ResizePlugin>()
       resizePlugin.name = 'resize'
       const $app = __createAppWithViews__({
-        selectedDate: '2020-12-01',
+        selectedDate: Temporal.PlainDate.from('2020-12-01'),
         plugins: [resizePlugin],
       })
       const calendarEvent = new CalendarEventBuilder(
         $app.config,
         '1',
-        '2020-12-01 10:00',
-        '2020-12-01 11:00'
+        Temporal.ZonedDateTime.from('2020-12-01T10:00:00.00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2020-12-01T11:00:00.00+00:00[UTC]')
       ).build()
       renderComponent($app, calendarEvent)
 

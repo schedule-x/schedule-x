@@ -2,7 +2,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import DateGridEvent from './date-grid-event'
 import { DATE_GRID_BLOCKER } from '../../constants'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
-import { dateStringRegex } from '@schedule-x/shared/src'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 
@@ -20,24 +19,49 @@ export default function DateGridDay({
   backgroundEvents,
 }: props) {
   const $app = useContext(AppContext)
-  const dateStart = date + ' 00:00'
-  const dateEnd = date + ' 23:59'
+  const dateStart = Temporal.ZonedDateTime.from({
+    year: Temporal.PlainDate.from(date).year,
+    month: Temporal.PlainDate.from(date).month,
+    day: Temporal.PlainDate.from(date).day,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    timeZone: $app.config.timezone.value,
+  })
+  const dateEnd = Temporal.ZonedDateTime.from({
+    year: Temporal.PlainDate.from(date).year,
+    month: Temporal.PlainDate.from(date).month,
+    day: Temporal.PlainDate.from(date).day,
+    hour: 23,
+    minute: 59,
+    second: 59,
+    timeZone: $app.config.timezone.value,
+  })
 
   const fullDayBackgroundEvent = backgroundEvents.find((event) => {
-    const eventStartWithTime = dateStringRegex.test(event.start)
-      ? event.start + ' 00:00'
-      : event.start
-    const eventEndWithTime = dateStringRegex.test(event.end)
-      ? event.end + ' 23:59'
-      : event.end
-    return eventStartWithTime <= dateStart && eventEndWithTime >= dateEnd
+    const eventStartWithTime =
+      event.start instanceof Temporal.PlainDate
+        ? event.start.toZonedDateTime($app.config.timezone.value)
+        : event.start
+    const eventEndWithTime =
+      event.end instanceof Temporal.PlainDate
+        ? event.end.toZonedDateTime($app.config.timezone.value).with({
+            hour: 23,
+            minute: 59,
+            second: 59,
+          })
+        : event.end
+    return (
+      eventStartWithTime.toString() <= dateStart.toString() &&
+      eventEndWithTime.toString() >= dateEnd.toString()
+    )
   })
 
   const handleMouseDown = (e: MouseEvent) => {
     const callback = $app.config.callbacks.onMouseDownDateGridDate
     if (!callback) return
 
-    callback(date, e)
+    callback(Temporal.PlainDate.from(date), e)
   }
 
   return (
@@ -66,7 +90,7 @@ export default function DateGridDay({
           <DateGridEvent
             calendarEvent={event}
             gridRow={index + 1}
-            key={event.start + event.end + index}
+            key={event.start.toString() + event.end.toString() + index}
           />
         )
       })}

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   beforeEach,
