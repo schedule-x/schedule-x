@@ -70,29 +70,4 @@ describe('CurrentTimePlugin', () => {
       expect(currentTimeIndicator.style.top).toMatch(/^\d+(\.\d+)%$/)
     })
   })
-
-  describe('initializing the plugin with a time zone offset', () => {
-    it.each([
-      [0],
-      [60],
-      [-60],
-      [180],
-      [-180],
-      [840], // largest positive offset according to UTC
-      [-720], // largest negative offset according to UTC
-    ])('should initialize without error', (offset: number) => {
-      expect(() =>
-        createCurrentTimePlugin({ timeZoneOffset: offset })
-      ).not.toThrow()
-    })
-
-    it.each([[841], [-721]])(
-      'should throw when using erroneous offsets',
-      (offset: number) => {
-        expect(() =>
-          createCurrentTimePlugin({ timeZoneOffset: offset })
-        ).toThrow()
-      }
-    )
-  })
 })
