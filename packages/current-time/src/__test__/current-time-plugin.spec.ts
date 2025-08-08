@@ -53,7 +53,7 @@ describe('CurrentTimePlugin', () => {
         'data-time-grid-date',
         toDateString(
           Temporal.ZonedDateTime.from(
-            Temporal.Now.instant().toZonedDateTimeISO('Europe/Stockholm')
+            Temporal.Now.instant().toZonedDateTimeISO(app.config.timezone.value)
           )
         )
       )
