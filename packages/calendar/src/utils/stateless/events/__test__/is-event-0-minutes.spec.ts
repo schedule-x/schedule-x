@@ -30,6 +30,24 @@ describe('isEvent0Minutes', () => {
     }
   )
 
+  it('should return true for events with same minute but different seconds', () => {
+    const eWithDifferentSeconds: CalendarEventInternal = {
+      ...stubInterface<CalendarEventInternal>(),
+      start: Temporal.ZonedDateTime.from('2023-02-17T10:05:30.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2023-02-17T10:05:45.00+00:00[UTC]'),
+    }
+    expect(isEvent0Minutes(eWithDifferentSeconds)).toBe(true)
+  })
+
+  it('should return true for events with same minute but different milliseconds', () => {
+    const eWithDifferentMilliseconds: CalendarEventInternal = {
+      ...stubInterface<CalendarEventInternal>(),
+      start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.123+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.456+00:00[UTC]'),
+    }
+    expect(isEvent0Minutes(eWithDifferentMilliseconds)).toBe(true)
+  })
+
   const e3: CalendarEventInternal = {
     ...stubInterface<CalendarEventInternal>(),
     start: Temporal.ZonedDateTime.from('2023-02-17T10:05:00.00+00:00[UTC]'),
@@ -64,6 +82,20 @@ describe('areTwoEvents0MinutesAndConcurrent', () => {
 
   it('should return true for two events with the same start and end time', () => {
     expect(areEvents0MinutesAndConcurrent(e1, e2)).toBe(true)
+  })
+
+  it('should return true for two events with same minute but different seconds', () => {
+    const e3: CalendarEventInternal = {
+      ...stubInterface<CalendarEventInternal>(),
+      start: Temporal.ZonedDateTime.from('2023-02-17T10:05:30.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2023-02-17T10:05:30.00+00:00[UTC]'),
+    }
+    const e4: CalendarEventInternal = {
+      ...stubInterface<CalendarEventInternal>(),
+      start: Temporal.ZonedDateTime.from('2023-02-17T10:05:45.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2023-02-17T10:05:45.00+00:00[UTC]'),
+    }
+    expect(areEvents0MinutesAndConcurrent(e3, e4)).toBe(true)
   })
 
   const e3: CalendarEventInternal = {
