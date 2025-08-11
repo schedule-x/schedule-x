@@ -75,7 +75,12 @@ export const createCalendarState = (
   }
 
   // one initial call for setting the range
-  setRange(selectedDate || Temporal.PlainDate.from(Temporal.Now.plainDateISO()))
+  setRange(
+    selectedDate ||
+      Temporal.PlainDate.from(
+        Temporal.Now.plainDateISO(calendarConfig.timezone.value)
+      )
+  )
 
   const isCalendarSmall = signal<boolean | undefined>(undefined)
   const isDark = signal<boolean>(calendarConfig.isDark.value || false)
