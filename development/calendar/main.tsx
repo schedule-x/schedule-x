@@ -179,10 +179,10 @@ plugins: [
       },
     },
   },
-  /* dayBoundaries: {
-    start: '01:00',
-    end: '18:00',
-  }, */
+  dayBoundaries: {
+    start: '06:00',
+    end: '03:00',
+  },
   backgroundEvents: [
     {
       title: 'Out of office',
@@ -211,7 +211,7 @@ plugins: [
   locale: 'sv-SE',
 
   // tz new york
-  timezone: 'Asia/Tokyo',
+  timezone: 'Europe/Berlin',
   events: [
     /* ...seededEvents.map(event => ({
       ...event,
@@ -229,8 +229,7 @@ plugins: [
         id: 123,
         title: 'monthly',
         start: Temporal.ZonedDateTime.from('2024-02-05T14:00+01:00[Europe/Berlin]'),
-        end: Temporal.ZonedDateTime.from('2024-02-05T15:00+01:00[Europe/Berlin]'),
-        rrule: 'FREQ=MONTHLY;BYMONTHDAY=5',
+        end: Temporal.ZonedDateTime.from('2025-09-05T15:00+02:00[Europe/Berlin]'),
       }
   ],
 })

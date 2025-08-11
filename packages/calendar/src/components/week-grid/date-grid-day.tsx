@@ -23,20 +23,29 @@ export default function DateGridDay({
     year: Temporal.PlainDate.from(date).year,
     month: Temporal.PlainDate.from(date).month,
     day: Temporal.PlainDate.from(date).day,
-    hour: 0,
+    hour:
+      $app.config.dayBoundaries.value.start === 0
+        ? 0
+        : $app.config.dayBoundaries.value.start / 100,
     minute: 0,
     second: 0,
     timeZone: $app.config.timezone.value,
   })
-  const dateEnd = Temporal.ZonedDateTime.from({
+  let dateEnd = Temporal.ZonedDateTime.from({
     year: Temporal.PlainDate.from(date).year,
     month: Temporal.PlainDate.from(date).month,
     day: Temporal.PlainDate.from(date).day,
-    hour: 23,
-    minute: 59,
-    second: 59,
+    hour:
+      $app.config.dayBoundaries.value.end === 2400
+        ? 23
+        : $app.config.dayBoundaries.value.end / 100,
+    minute: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
+    second: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
     timeZone: $app.config.timezone.value,
   })
+  if ($app.config.isHybridDay) {
+    dateEnd = dateEnd.add({ days: 1 })
+  }
 
   const fullDayBackgroundEvent = backgroundEvents.find((event) => {
     const eventStartWithTime =
@@ -51,6 +60,7 @@ export default function DateGridDay({
             second: 59,
           })
         : event.end
+
     return (
       eventStartWithTime.toString() <= dateStart.toString() &&
       eventEndWithTime.toString() >= dateEnd.toString()
