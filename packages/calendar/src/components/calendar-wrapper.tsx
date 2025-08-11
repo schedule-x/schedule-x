@@ -72,13 +72,18 @@ export default function CalendarWrapper({ $app }: props) {
     const newRangeStartIsLaterThanPrevious =
       ($app.calendarState.range.value?.start.toString() || '') >
       previousRangeStart
-    setTransitionClass(
-      newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
-    )
 
-    setTimeout(() => {
-      setTransitionClass('')
-    }, 300) // CORRELATION ID: 3
+    // Use requestAnimationFrame to ensure smooth animation timing
+    requestAnimationFrame(() => {
+      setTransitionClass(
+        newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
+      )
+
+      setTimeout(() => {
+        setTransitionClass('')
+      }, 300) // CORRELATION ID: 3
+    })
+
     setPreviousRangeStart(
       $app.calendarState.range.value?.start.toString() || ''
     )

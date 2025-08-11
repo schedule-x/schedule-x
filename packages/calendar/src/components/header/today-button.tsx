@@ -6,7 +6,7 @@ export default function TodayButton() {
 
   const setToday = () => {
     $app.datePickerState.selectedDate.value = Temporal.PlainDate.from(
-      Temporal.Now.plainDateISO()
+      Temporal.Now.plainDateISO($app.config.timezone.value)
     )
   }
 

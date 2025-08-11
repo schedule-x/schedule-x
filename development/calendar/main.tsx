@@ -179,11 +179,15 @@ plugins: [
       },
     },
   },
+  /* dayBoundaries: {
+    start: '01:00',
+    end: '18:00',
+  }, */
   backgroundEvents: [
     {
       title: 'Out of office',
-      start: Temporal.ZonedDateTime.from('2025-07-07T00:00:00.000+02:00[Europe/Berlin]'),
-      end: Temporal.ZonedDateTime.from('2025-07-07T12:00:00.000+02:00[Europe/Berlin]'),
+      start: Temporal.ZonedDateTime.from('2025-08-08T00:00:00.000+02:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-08-09T12:00:00.000+02:00[Europe/Berlin]'),
       style: {
         // create tilted 5px thick gray lines
         backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
@@ -207,7 +211,7 @@ plugins: [
   locale: 'sv-SE',
 
   // tz new york
-  timezone: 'Europe/Berlin',
+  timezone: 'Asia/Tokyo',
   events: [
     /* ...seededEvents.map(event => ({
       ...event,
