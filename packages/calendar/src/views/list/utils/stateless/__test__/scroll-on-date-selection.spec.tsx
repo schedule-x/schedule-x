@@ -17,7 +17,8 @@ describe('scrolling the list view on date selection', () => {
 
     it('should scroll the day element into view', () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = Temporal.PlainDate.from('2023-10-01')
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2023-10-01')
       const wrapperRef = {
         current: document.createElement('div'),
       }

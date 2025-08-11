@@ -86,7 +86,9 @@ describe('TimeGridDay', () => {
         Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]')
       )
 
-      const dayElement = document.querySelector('.sx__time-grid-day') as HTMLElement
+      const dayElement = document.querySelector(
+        '.sx__time-grid-day'
+      ) as HTMLElement
       Object.defineProperty(dayElement, 'getBoundingClientRect', {
         value: () => ({
           height: 100,

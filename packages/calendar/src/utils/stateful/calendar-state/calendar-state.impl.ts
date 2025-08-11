@@ -41,7 +41,7 @@ export const createCalendarState = (
     if (calendarConfig.callbacks.onRangeUpdate && _range.value) {
       calendarConfig.callbacks.onRangeUpdate(_range.value)
     }
-    
+
     Object.values(calendarConfig.plugins || {}).forEach((plugin) => {
       plugin?.onRangeUpdate?.(_range.value!)
       lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE =

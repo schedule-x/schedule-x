@@ -182,8 +182,10 @@ export const ListWrapper: PreactViewComponent = ({
       year: event.start.year,
       month: event.start.month,
       day: event.start.day,
-      hour: event.start instanceof Temporal.ZonedDateTime ? event.start.hour : 0,
-      minute: event.start instanceof Temporal.ZonedDateTime ? event.start.minute : 0,
+      hour:
+        event.start instanceof Temporal.ZonedDateTime ? event.start.hour : 0,
+      minute:
+        event.start instanceof Temporal.ZonedDateTime ? event.start.minute : 0,
       timeZone: $app.config.timezone.value,
     })
 
@@ -192,7 +194,8 @@ export const ListWrapper: PreactViewComponent = ({
       month: event.end.month,
       day: event.end.day,
       hour: event.end instanceof Temporal.ZonedDateTime ? event.end.hour : 0,
-      minute: event.end instanceof Temporal.ZonedDateTime ? event.end.minute : 0,
+      minute:
+        event.end instanceof Temporal.ZonedDateTime ? event.end.minute : 0,
       timeZone: $app.config.timezone.value,
     })
 

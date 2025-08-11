@@ -2,9 +2,7 @@ import CurrentTimePlugin, {
   CurrentTimePluginConfig,
 } from '@schedule-x/shared/src/interfaces/current-time/current-time-plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
-import {
-  toDateString,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
@@ -15,8 +13,7 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   timeout: ReturnType<typeof setTimeout> | null = null
   currentTimeIndicator: HTMLElement | null = null
 
-  constructor(private config: CurrentTimePluginConfig = {}) {
-  }
+  constructor(private config: CurrentTimePluginConfig = {}) {}
 
   onRender($app: CalendarAppSingleton): void {
     this.$app = $app
@@ -41,8 +38,12 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   }
 
   private setIndicator(isRecursion = false) {
-    const todayDateString = toDateString(Temporal.Now.plainDateISO())
-    const nowDateTime = Temporal.Now.zonedDateTimeISO(this.$app.config.timezone.value)
+    const todayDateString = toDateString(
+      Temporal.Now.plainDateISO(this.$app.config.timezone.value)
+    )
+    const nowDateTime = Temporal.Now.zonedDateTimeISO(
+      this.$app.config.timezone.value
+    )
     const todayElement = this.$app.elements.calendarWrapper!.querySelector(
       `[data-time-grid-date="${todayDateString}"]`
     )
