@@ -4,7 +4,10 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { getDurationInMinutes } from '../duration-in-minutes'
+import {
+  getDurationInMinutes,
+  getDurationInMinutesTemporal,
+} from '../duration-in-minutes'
 
 describe('getDurationInMinutes', () => {
   describe('when the start and end dates are the same', () => {
@@ -28,6 +31,36 @@ describe('getDurationInMinutes', () => {
       'should return the correct duration in minutes',
       (dtstart, dtend, expected) => {
         const result = getDurationInMinutes(dtstart, dtend)
+
+        expect(result).toEqual(expected)
+      }
+    )
+  })
+})
+
+describe('getDurationInMinutesTemporal', () => {
+  describe('when the start and end dates are the same', () => {
+    it('should return 0', () => {
+      const result = getDurationInMinutesTemporal(
+        Temporal.ZonedDateTime.from('2021-01-01T00:00+00:00[UTC]'),
+        Temporal.ZonedDateTime.from('2021-01-01T00:00+00:00[UTC]')
+      )
+
+      expect(result).toEqual(0)
+    })
+
+    it.each([
+      ['2021-01-01T00:00+00:00[UTC]', '2021-01-01T00:01+00:00[UTC]', 1],
+      ['2021-01-01T00:00+00:00[UTC]', '2021-01-01T02:15+00:00[UTC]', 135],
+      ['2021-01-01T00:00+00:00[UTC]', '2021-01-03T00:00+00:00[UTC]', 2880],
+      ['2021-01-01T01:00+00:00[UTC]', '2021-01-03T02:00+00:00[UTC]', 2940],
+    ])(
+      'should return the correct duration in minutes',
+      (dtstart, dtend, expected) => {
+        const result = getDurationInMinutesTemporal(
+          Temporal.ZonedDateTime.from(dtstart),
+          Temporal.ZonedDateTime.from(dtend)
+        )
 
         expect(result).toEqual(expected)
       }
