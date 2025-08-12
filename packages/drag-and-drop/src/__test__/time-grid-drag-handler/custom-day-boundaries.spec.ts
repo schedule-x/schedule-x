@@ -11,6 +11,7 @@ import TimeGridDragHandlerImpl from '../../time-grid-drag-handler.impl'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dragEventNQuarters12HourGrid, getEventWithId } from './utils'
+import 'temporal-polyfill/global'
 
 describe('A calendar with custom, non-hybrid day boundaries', () => {
   let $app: CalendarAppSingleton
@@ -18,14 +19,14 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
   let eventCopy: CalendarEventInternal
   let updateCopyFn: Mock
   let dayBoundariesDateTime: {
-    start: string
-    end: string
+    start: Temporal.ZonedDateTime
+    end: Temporal.ZonedDateTime
   }
   let eventId: string | number
 
   beforeEach(() => {
     $app = __createAppWithViews__({
-      selectedDate: '2024-02-02',
+      selectedDate: Temporal.PlainDate.from('2024-02-02'),
       dayBoundaries: {
         start: '03:00',
         end: '15:00',
@@ -34,8 +35,8 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
     const calendarEvent = new CalendarEventBuilder(
       $app.config,
       1,
-      '2024-02-02 03:30',
-      '2024-02-02 04:00'
+      Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]'),
+      Temporal.ZonedDateTime.from('2024-02-02 04:00+00:00[UTC]')
     ).build()
     eventId = calendarEvent.id
     $app.calendarEvents.list.value = [calendarEvent]
@@ -55,8 +56,8 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
     } as MouseEvent
     updateCopyFn = vi.fn()
     dayBoundariesDateTime = {
-      start: '2024-02-02 03:00',
-      end: '2024-02-02 15:00',
+      start: Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2024-02-02 15:00+00:00[UTC]'),
     }
   })
 
@@ -75,27 +76,43 @@ describe('A calendar with custom, non-hybrid day boundaries', () => {
        * Drag event to 15:15
        * */
       dragEventNQuarters12HourGrid(clickEvent, 1, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:15')
-      expect(eventCopy.end).toBe('2024-02-02 03:45')
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:15+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:45+00:00[UTC]')
+      )
 
       /**
        * Drag event to 15:00
        * */
       dragEventNQuarters12HourGrid(clickEvent, 2, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:00')
-      expect(eventCopy.end).toBe('2024-02-02 03:30')
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]')
+      )
 
       /**
        * Try dragging event to 14:45 (which should do nothing)
        * */
       dragEventNQuarters12HourGrid(clickEvent, 3, 'up')
-      expect(eventCopy.start).toBe('2024-02-02 03:00')
-      expect(eventCopy.end).toBe('2024-02-02 03:30')
+      expect(eventCopy.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]')
+      )
+      expect(eventCopy.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]')
+      )
 
       document.dispatchEvent(new MouseEvent('mouseup'))
       expect(updateCopyFn).toHaveBeenCalled()
-      expect(getEventWithId(eventId, $app)?.start).toEqual('2024-02-02 03:00')
-      expect(getEventWithId(eventId, $app)?.end).toEqual('2024-02-02 03:30')
+      expect(getEventWithId(eventId, $app)?.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:00+00:00[UTC]')
+      )
+      expect(getEventWithId(eventId, $app)?.end).toEqual(
+        Temporal.ZonedDateTime.from('2024-02-02 03:30+00:00[UTC]')
+      )
     })
   })
 })

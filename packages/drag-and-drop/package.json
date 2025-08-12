@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/drag-and-drop",
   "umdName": "SXDragAndDrop",
-  "version": "2.36.0",
+  "version": "3.0.0-rc.1",
   "description": "Drag & drop plugin for Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",

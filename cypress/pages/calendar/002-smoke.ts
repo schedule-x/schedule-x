@@ -18,16 +18,18 @@ import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { createResizePlugin } from '../../../packages/resize'
 import { smokeTestEvents } from './__data__/smoke-data.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller'
+import 'temporal-polyfill/global'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar({
-  selectedDate: '2023-09-21',
+  selectedDate: Temporal.PlainDate.from('2023-09-21'),
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
   plugins: [createDragAndDropPlugin(), createEventModalPlugin(), createScrollControllerPlugin(), createResizePlugin()],
   events: smokeTestEvents,
+  timezone: 'America/New_York',
 })
 
 calendar.render(calendarElement)

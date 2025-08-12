@@ -3,14 +3,12 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { getTimeGridDayWidth } from '@schedule-x/shared/src/utils/stateless/calendar/get-time-grid-day-width'
 import { addDays } from '@schedule-x/shared/src'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { updateEventsList } from './utils/stateless/update-events-list'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
 export class DateGridEventResizer {
   private readonly dayWidth: number = 0
-  private readonly originalEventEnd: string
+  private readonly originalEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   private readonly ORIGINAL_NDAYS: number
   private lastNDaysDiff = 0
 
@@ -55,19 +53,26 @@ export class DateGridEventResizer {
     let lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
     if (this.$app.config.direction === 'rtl') lastNDaysDiff *= -1
 
+    if (lastNDaysDiff === this.lastNDaysDiff) return
+
     this.lastNDaysDiff = lastNDaysDiff
     this.setNewTimeForEventEnd()
   }
 
   private setNewTimeForEventEnd() {
     const newEnd = addDays(this.originalEventEnd, this.lastNDaysDiff)
+    let rangeStart: Temporal.ZonedDateTime | Temporal.PlainDate = (
+      this.$app.calendarState.range.value as DateRange
+    ).start
+    if (newEnd instanceof Temporal.PlainDate) {
+      rangeStart = Temporal.PlainDate.from(rangeStart)
+    }
+
     if (
-      newEnd > (this.$app.calendarState.range.value as DateRange).end ||
-      newEnd < this.eventCopy.start ||
-      newEnd <
-        toDateString(
-          toJSDate((this.$app.calendarState.range.value as DateRange).start)
-        )
+      newEnd.toString() >
+        (this.$app.calendarState.range.value as DateRange).end.toString() ||
+      newEnd.toString() < this.eventCopy.start.toString() ||
+      newEnd.toString() < rangeStart.toString()
     )
       return
 

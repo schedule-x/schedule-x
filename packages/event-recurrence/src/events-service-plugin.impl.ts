@@ -84,6 +84,7 @@ class EventsServicePluginImpl implements EventsService {
       if (rrule && this.$app.calendarState.range.value) {
         newBackgroundEvents.push(
           ...createRecurrencesForBackgroundEvent(
+            this.$app,
             event,
             rrule,
             this.$app.calendarState.range.value,

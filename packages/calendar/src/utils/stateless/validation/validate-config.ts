@@ -1,34 +1,29 @@
 import { CalendarConfigExternal } from '@schedule-x/shared/src'
-import { DateFormats } from '@schedule-x/shared/src/values/date-formats'
 
 export const validateConfig = (config: CalendarConfigExternal) => {
   if (
     config.selectedDate &&
-    !DateFormats.DATE_STRING.test(config.selectedDate)
+    !(config.selectedDate instanceof Temporal.PlainDate)
   ) {
     throw new Error(
       '[Schedule-X error]: selectedDate must have the format YYYY-MM-DD'
     )
   }
 
-  if (config.minDate && !DateFormats.DATE_STRING.test(config.minDate)) {
-    throw new Error(
-      '[Schedule-X error]: minDate must have the format YYYY-MM-DD'
-    )
+  if (config.minDate && !(config.minDate instanceof Temporal.PlainDate)) {
+    throw new Error('[Schedule-X error]: minDate must be a temporal plain date')
   }
 
-  if (config.maxDate && !DateFormats.DATE_STRING.test(config.maxDate)) {
-    throw new Error(
-      '[Schedule-X error]: maxDate must have the format YYYY-MM-DD'
-    )
+  if (config.maxDate && !(config.maxDate instanceof Temporal.PlainDate)) {
+    throw new Error('[Schedule-X error]: maxDate must be a temporal plain date')
   }
 
   if (
     typeof config.firstDayOfWeek !== 'undefined' &&
-    (config.firstDayOfWeek < 0 || config.firstDayOfWeek > 6)
+    (config.firstDayOfWeek < 1 || config.firstDayOfWeek > 7)
   ) {
     throw new Error(
-      '[Schedule-X error]: firstDayOfWeek must be a number between 0 and 6'
+      '[Schedule-X error]: firstDayOfWeek must be a number between 1 and 7'
     )
   }
 

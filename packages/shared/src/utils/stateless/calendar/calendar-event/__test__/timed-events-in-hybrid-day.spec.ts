@@ -7,16 +7,21 @@ import {
   assertIsSingleDayTimedAndHybridDayTimed,
   assertIsSingleHybridTimedAndMultipleDayTimed,
 } from './utils'
+import 'temporal-polyfill/global'
 
 describe('CalendarEventImpl', () => {
   describe('the event time type in a hybrid day', () => {
     const _config = new CalendarConfigBuilder()
+      .withTimezone('Europe/Berlin')
       .withDayBoundaries({
         start: '12:00',
         end: '06:00',
       })
       .build()
-    const createEvent = (eventTime: { start: string; end: string }) =>
+    const createEvent = (eventTime: {
+      start: Temporal.ZonedDateTime | Temporal.PlainDate
+      end: Temporal.ZonedDateTime | Temporal.PlainDate
+    }) =>
       new CalendarEventBuilder(
         _config,
         '1',
@@ -26,16 +31,28 @@ describe('CalendarEventImpl', () => {
 
     it.each([
       {
-        start: '2020-01-01 01:00',
-        end: '2020-01-01 02:00',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T01:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-01T02:00:00+01:00[Europe/Berlin]'
+        ),
       },
       {
-        start: '2020-01-01 05:00',
-        end: '2020-01-01 06:00',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T05:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-01T06:00:00+01:00[Europe/Berlin]'
+        ),
       },
       {
-        start: '2020-01-01 12:00',
-        end: '2020-01-01 13:00',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T12:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-01T13:00:00+01:00[Europe/Berlin]'
+        ),
       },
     ])(
       'should be classified as a single hybrid day timed event and a single day timed event',
@@ -46,12 +63,20 @@ describe('CalendarEventImpl', () => {
 
     it.each([
       {
-        start: '2020-01-01 23:00',
-        end: '2020-01-02 01:00',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T23:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-02T01:00:00+01:00[Europe/Berlin]'
+        ),
       },
       {
-        start: '2020-01-01 23:59',
-        end: '2020-01-02 00:00',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T23:59:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-02T00:00:00+01:00[Europe/Berlin]'
+        ),
       },
     ])(
       'should be classified as a single hybrid day event and a multi day timed event',
@@ -62,16 +87,28 @@ describe('CalendarEventImpl', () => {
 
     it.each([
       {
-        start: '2020-01-01 00:00',
-        end: '2020-01-01 23:59',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T00:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-01T23:59:00+01:00[Europe/Berlin]'
+        ),
       },
       {
-        start: '2020-01-01 05:59',
-        end: '2020-01-01 06:01',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T05:59:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-01T06:01:00+01:00[Europe/Berlin]'
+        ),
       },
       {
-        start: '2020-01-01 11:59',
-        end: '2020-01-01 12:00',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T11:59:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-01T12:00:00+01:00[Europe/Berlin]'
+        ),
       },
     ])(
       'should not be classified as a single hybrid day event, only as single day timed',
@@ -82,8 +119,12 @@ describe('CalendarEventImpl', () => {
 
     it.each([
       {
-        start: '2020-01-01 23:00',
-        end: '2020-01-03 01:00',
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T23:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-03T01:00:00+01:00[Europe/Berlin]'
+        ),
       },
     ])(
       'should not be classified as a single hybrid day event, only as multi day timed',

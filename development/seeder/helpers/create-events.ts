@@ -1,5 +1,6 @@
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface.ts'
 
+
 import { getListOfTimePropertiesForEvents } from '../event-properties/time.ts'
 import { NUMBER_OF_EVENTS } from '../faker-config.ts'
 import { getRandomElementOfArray } from './get-random-element-in-array.ts'
@@ -17,8 +18,8 @@ export const createEvents = (monthArg: string | null = null) => {
 
   while (events.length < NUMBER_OF_EVENTS) {
     const time = getRandomElementOfArray(times) as {
-      start: string
-      end: string
+      start: Temporal.ZonedDateTime | Temporal.PlainDate
+      end: Temporal.ZonedDateTime | Temporal.PlainDate
     }
 
     const event = {
@@ -46,8 +47,10 @@ export const createEvents = (monthArg: string | null = null) => {
 
   // Sort events according to start, for easier debugging, if something breaks
   return events.sort((a, b) => {
-    if (a.start > b.start) return 1
-    if (a.start < b.start) return -1
+    const aStart = a.start.toString()
+    const bStart = b.start.toString()
+    if (aStart > bStart) return 1
+    if (aStart < bStart) return -1
 
     return 0
   })

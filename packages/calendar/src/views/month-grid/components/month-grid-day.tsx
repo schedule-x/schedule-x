@@ -1,19 +1,18 @@
 import { MonthDay as MonthDayType } from '../types/month'
-import {
-  toIntegers,
-  toJSDate,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { getDayNameShort } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import MonthGridEvent from './month-grid-event'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { DATE_GRID_BLOCKER } from '../../../constants'
-import { isToday } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+import {
+  isSameDay,
+  isToday,
+} from '@schedule-x/shared/src/utils/stateless/time/comparison'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
-import { dateStringRegex } from '@schedule-x/shared/src'
-import { randomStringId } from '@schedule-x/shared/src'
+import { randomStringId, toDateString } from '@schedule-x/shared/src'
 
 type props = {
   day: MonthDayType
@@ -66,17 +65,15 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
   }
 
   const dateClassNames = ['sx__month-grid-day__header-date']
-  const jsDate = toJSDate(day.date)
-  const dayDate = jsDate
-  if (isToday(dayDate)) dateClassNames.push('sx__is-today')
+  const dayDate = day.date
+  if (isToday(dayDate.toZonedDateTime($app.config.timezone.value)))
+    dateClassNames.push('sx__is-today')
 
-  const { month: selectedDateMonth } = toIntegers(
-    $app.datePickerState.selectedDate.value
-  )
-  const { month: dayMonth } = toIntegers(day.date)
+  const selectedDateMonth = $app.datePickerState.selectedDate.value.month
+  const dayMonth = day.date.month
   const baseClasses = [
     'sx__month-grid-day',
-    getClassNameForWeekday(jsDate.getDay()),
+    getClassNameForWeekday(dayDate.dayOfWeek),
   ]
   const [wrapperClasses, setWrapperClasses] = useState(baseClasses)
 
@@ -84,7 +81,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     const classes = [...baseClasses]
 
     if (dayMonth !== selectedDateMonth) classes.push('is-leading-or-trailing')
-    if ($app.datePickerState.selectedDate.value === day.date)
+    if (isSameDay($app.datePickerState.selectedDate.value, day.date))
       classes.push('is-selected')
     setWrapperClasses(classes)
   }, [$app.datePickerState.selectedDate.value])
@@ -99,18 +96,40 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const numberOfNonDisplayedEvents = getNumberOfNonDisplayedEvents()
 
-  const dayStartDateTime = day.date + ' 00:00'
-  const dayEndDateTime = day.date + ' 23:59'
+  const dayStartDateTime = Temporal.ZonedDateTime.from({
+    year: day.date.year,
+    month: day.date.month,
+    day: day.date.day,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    timeZone: $app.config.timezone.value,
+  })
+  const dayEndDateTime = Temporal.ZonedDateTime.from({
+    year: day.date.year,
+    month: day.date.month,
+    day: day.date.day,
+    hour: 23,
+    minute: 59,
+    second: 59,
+    timeZone: $app.config.timezone.value,
+  })
   const fullDayBackgroundEvent = day.backgroundEvents.find((event) => {
-    const eventStartWithTime = dateStringRegex.test(event.start)
-      ? event.start + ' 00:00'
-      : event.start
-    const eventEndWithTime = dateStringRegex.test(event.end)
-      ? event.end + ' 23:59'
-      : event.end
+    const eventStartWithTime =
+      event.start instanceof Temporal.PlainDate
+        ? event.start.toZonedDateTime($app.config.timezone.value)
+        : event.start
+    const eventEndWithTime =
+      event.end instanceof Temporal.PlainDate
+        ? event.end.toZonedDateTime($app.config.timezone.value).with({
+            hour: 23,
+            minute: 59,
+            second: 59,
+          })
+        : event.end
     return (
-      eventStartWithTime <= dayStartDateTime &&
-      eventEndWithTime >= dayEndDateTime
+      eventStartWithTime.toString() <= dayStartDateTime.toString() &&
+      eventEndWithTime.toString() >= dayEndDateTime.toString()
     )
   })
 
@@ -138,7 +157,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     }
 
     monthGridDayNameCustomComponent(dayNameEl, {
-      day: toJSDate(day.date).getDay(),
+      day: toJSDate(day.date.toString()).getDay(),
     })
   }, [day])
 
@@ -154,15 +173,15 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
     if (!(dateEl instanceof HTMLElement)) return
 
     monthGridDateCustomComponent(dateEl, {
-      date: toJSDate(day.date).getDate(),
-      jsDate: toJSDate(day.date),
+      date: toJSDate(day.date.toString()).getDate(),
+      jsDate: toJSDate(day.date.toString()),
     })
   }, [day])
 
   return (
     <div
       className={wrapperClasses.join(' ')}
-      data-date={day.date}
+      data-date={toDateString(day.date)}
       onClick={(e) =>
         $app.config.callbacks.onClickDate &&
         $app.config.callbacks.onClickDate(day.date, e)
@@ -199,7 +218,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
         {monthGridDateCCID ? (
           <div data-ccid={monthGridDateCCID} />
         ) : (
-          <div className={dateClassNames.join(' ')}>{dayDate.getDate()}</div>
+          <div className={dateClassNames.join(' ')}>{dayDate.day}</div>
         )}
       </div>
 
@@ -219,7 +238,7 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
               <MonthGridEvent
                 gridRow={index + 1}
                 calendarEvent={event}
-                date={day.date}
+                date={day.date.toString()}
                 isFirstWeek={isFirstWeek}
                 isLastWeek={isLastWeek}
               />

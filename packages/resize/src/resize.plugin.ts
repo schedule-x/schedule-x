@@ -6,6 +6,7 @@ import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { DateGridEventResizer } from './date-grid-event-resizer'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
+import { DateRange } from '@schedule-x/shared/src/types/date-range'
 
 class ResizePluginImpl implements ResizePlugin {
   name = PluginName.Resize
@@ -21,7 +22,7 @@ class ResizePluginImpl implements ResizePlugin {
     calendarEvent: CalendarEventInternal,
     updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     uiEvent: MouseEvent | TouchEvent,
-    dayBoundariesDateTime: { start: string; end: string }
+    dayBoundariesDateTime: DateRange
   ) {
     if (!this.$app) return this.logError()
 

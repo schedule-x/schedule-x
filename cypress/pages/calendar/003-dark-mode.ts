@@ -16,17 +16,19 @@ import '../index.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { smokeTestEvents } from './__data__/smoke-data.ts'
+import 'temporal-polyfill/global'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar({
-  selectedDate: '2023-09-21',
+  selectedDate: Temporal.PlainDate.from('2023-09-21'),
   isDark: true,
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
   plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
   events: smokeTestEvents,
+  timezone: 'America/New_York',
 })
 
 calendar.render(calendarElement)

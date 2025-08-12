@@ -8,6 +8,7 @@ import { createScrollControllerPlugin } from '../scroll-controller.plugin'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
 import { Mock, vi } from 'vitest'
 import { cleanup, waitFor } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 const addGridDayToDOM = (viewContainer: HTMLDivElement) => {
   const gridDay = document.createElement('div')
@@ -95,6 +96,7 @@ describe('Scroll controller plugin', () => {
         start: '21:00',
         end: '09:00',
       },
+      timezone: 'Europe/Stockholm',
     })
     $app.elements.calendarWrapper = calendarWrapper
     calendarWrapper.append(viewContainer)

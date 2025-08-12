@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -44,7 +46,7 @@ describe('MonthAgendaDay', () => {
     it('should have an active class', () => {
       renderComponent(
         __createAppWithViews__(),
-        { date: '2020-01-01', events: [] },
+        { date: Temporal.PlainDate.from('2020-01-01'), events: [] },
         true
       )
 
@@ -54,7 +56,7 @@ describe('MonthAgendaDay', () => {
     it('should not have an active class', () => {
       renderComponent(
         __createAppWithViews__(),
-        { date: '2020-01-01', events: [] },
+        { date: Temporal.PlainDate.from('2020-01-01'), events: [] },
         false
       )
 
@@ -65,7 +67,7 @@ describe('MonthAgendaDay', () => {
   describe('selecting a day', () => {
     it('should call setActiveDate with the date', () => {
       const setActiveDate = vi.fn()
-      const date = '2020-01-01'
+      const date = Temporal.PlainDate.from('2020-01-01')
       renderComponent(
         __createAppWithViews__(),
         { date, events: [] },
@@ -83,7 +85,7 @@ describe('MonthAgendaDay', () => {
     it('should call onDoubleClickAgendaDate with the date', () => {
       const onDoubleClickAgendaDate = vi.fn()
       const setActiveDate = vi.fn()
-      const date = '2020-01-01'
+      const date = Temporal.PlainDate.from('2020-01-01')
 
       renderComponent(
         __createAppWithViews__({
@@ -105,7 +107,7 @@ describe('MonthAgendaDay', () => {
       )
 
       expect(onDoubleClickAgendaDate).toHaveBeenCalledWith(
-        date,
+        Temporal.PlainDate.from('2020-01-01'),
         expect.any(UIEvent)
       )
     })
@@ -117,7 +119,7 @@ describe('MonthAgendaDay', () => {
         events: [],
       })
       renderComponent($app, {
-        date: '2020-01-01',
+        date: Temporal.PlainDate.from('2020-01-01'),
         events: $app.calendarEvents.list.value,
       })
 
@@ -126,10 +128,20 @@ describe('MonthAgendaDay', () => {
 
     it('should display 1 event icons', () => {
       const $app = __createAppWithViews__({
-        events: [{ id: 1, start: '2020-01-01', end: '2020-01-01' }],
+        events: [
+          {
+            id: 1,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+        ],
       })
       renderComponent($app, {
-        date: '2020-01-01',
+        date: Temporal.PlainDate.from('2020-01-01'),
         events: $app.calendarEvents.list.value,
       })
 
@@ -139,13 +151,37 @@ describe('MonthAgendaDay', () => {
     it('should display 3 event icons', () => {
       const $app = __createAppWithViews__({
         events: [
-          { id: 1, start: '2020-01-01', end: '2020-01-01' },
-          { id: 2, start: '2020-01-01', end: '2020-01-01' },
-          { id: 3, start: '2020-01-01', end: '2020-01-01' },
+          {
+            id: 1,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 2,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 3,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
         ],
       })
       renderComponent($app, {
-        date: '2020-01-01',
+        date: Temporal.PlainDate.from('2020-01-01'),
         events: $app.calendarEvents.list.value,
       })
 
@@ -155,14 +191,46 @@ describe('MonthAgendaDay', () => {
     it('should display 3 event icons even when there are more events', () => {
       const $app = __createAppWithViews__({
         events: [
-          { id: 1, start: '2020-01-01', end: '2020-01-01' },
-          { id: 2, start: '2020-01-01', end: '2020-01-01' },
-          { id: 3, start: '2020-01-01', end: '2020-01-01' },
-          { id: 4, start: '2020-01-01', end: '2020-01-01' },
+          {
+            id: 1,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 2,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 3,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 4,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
         ],
       })
       renderComponent($app, {
-        date: '2020-01-01',
+        date: Temporal.PlainDate.from('2020-01-01'),
         events: $app.calendarEvents.list.value,
       })
 
@@ -173,27 +241,36 @@ describe('MonthAgendaDay', () => {
   describe('setting classes for leading and trailing dates', () => {
     it('should not show any leading and trailing classes', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2021-02-01',
+        selectedDate: Temporal.PlainDate.from('2021-02-01'),
       })
-      renderComponent($app, { date: '2021-02-01', events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-02-01'),
+        events: [],
+      })
 
       expect(document.querySelector('.is-leading-or-trailing')).toBeNull()
     })
 
     it('should set a class for being a leading date', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2021-04-01',
+        selectedDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: '2021-03-31', events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-03-31'),
+        events: [],
+      })
 
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
 
     it('should set a class for being a trailing date', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2021-04-01',
+        selectedDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: '2021-05-01', events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-05-01'),
+        events: [],
+      })
 
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
@@ -202,9 +279,12 @@ describe('MonthAgendaDay', () => {
   describe('disabling the day', () => {
     it('should disable the day if it is before the min date', () => {
       const $app = __createAppWithViews__({
-        minDate: '2021-04-01',
+        minDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: '2021-03-31', events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-03-31'),
+        events: [],
+      })
 
       expect(document.querySelector(DAY_SELECTOR)?.attributes).toHaveProperty(
         'disabled'
@@ -213,9 +293,12 @@ describe('MonthAgendaDay', () => {
 
     it('should disable the day if it is after the max date', () => {
       const $app = __createAppWithViews__({
-        maxDate: '2021-04-01',
+        maxDate: Temporal.PlainDate.from('2021-04-01'),
       })
-      renderComponent($app, { date: '2021-05-01', events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-05-01'),
+        events: [],
+      })
 
       expect(document.querySelector(DAY_SELECTOR)?.attributes).toHaveProperty(
         'disabled'
@@ -224,10 +307,13 @@ describe('MonthAgendaDay', () => {
 
     it('should not disable the day if it is between the min and max date', () => {
       const $app = __createAppWithViews__({
-        minDate: '2021-04-01',
-        maxDate: '2021-04-30',
+        minDate: Temporal.PlainDate.from('2021-04-01'),
+        maxDate: Temporal.PlainDate.from('2021-04-30'),
       })
-      renderComponent($app, { date: '2021-04-15', events: [] })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2021-04-15'),
+        events: [],
+      })
 
       expect(
         document.querySelector(DAY_SELECTOR)?.attributes

@@ -8,30 +8,40 @@ import { updateEventsList } from '../update-events-list'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src'
 import { vi } from 'vitest'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
+import 'temporal-polyfill/global'
 
 describe('Updating the events list after resizing an event', () => {
   describe('When the event is not recurring', () => {
     it('should update the events list', () => {
-      const originalEventEnd = '2021-01-01 01:00'
+      const originalEventEnd = Temporal.ZonedDateTime.from(
+        '2021-01-01T01:00:00[Europe/Stockholm]'
+      )
       const $app = __createAppWithViews__({
         events: [
           {
             id: '1',
-            start: '2021-01-01 00:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T00:00:00[Europe/Stockholm]'
+            ),
             end: originalEventEnd,
           },
         ],
+        timezone: 'Europe/Stockholm',
       })
       const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
-      const newEventEnd = '2021-01-01 02:00'
+      const newEventEnd = Temporal.ZonedDateTime.from(
+        '2021-01-01T02:00:00[Europe/Stockholm]'
+      )
       eventCopy.end = newEventEnd
 
       updateEventsList($app, eventCopy, originalEventEnd, newEventEnd)
 
       const externalEvent =
         $app.calendarEvents.list.value[0]._getExternalEvent()
-      expect(externalEvent.start).toBe('2021-01-01 00:00')
-      expect(externalEvent.end).toBe(newEventEnd)
+      expect(externalEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2021-01-01T00:00:00[Europe/Stockholm]')
+      )
+      expect(externalEvent.end).toEqual(newEventEnd)
     })
   })
 
@@ -46,23 +56,33 @@ describe('Updating the events list after resizing an event', () => {
         events: [
           {
             id: '1',
-            start: '2021-01-01 00:00',
-            end: '2021-01-01 01:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T01:00:00[Europe/Stockholm]'
+            ),
             rrule:
               'FREQ=DAILY;COUNT=3;INTERVAL=1;BYDAY=MO,TU,WE,TH,FR;UNTIL=20210104T000000Z',
           },
         ],
         plugins: [eventRecurrencePlugin],
+        timezone: 'Europe/Stockholm',
       })
       eventRecurrencePlugin.beforeRender!($app)
       const eventCopy = deepCloneEvent($app.calendarEvents.list.value[0], $app)
 
-      updateEventsList($app, eventCopy, '2021-01-01 01:00', '2021-01-01 02:00')
+      updateEventsList(
+        $app,
+        eventCopy,
+        Temporal.ZonedDateTime.from('2021-01-01T01:00:00[Europe/Stockholm]'),
+        Temporal.ZonedDateTime.from('2021-01-01T02:00:00[Europe/Stockholm]')
+      )
 
       expect(updateOnResizeSpy).toHaveBeenCalledWith(
         '1',
-        '2021-01-01 01:00',
-        '2021-01-01 02:00'
+        Temporal.ZonedDateTime.from('2021-01-01T01:00:00[Europe/Stockholm]'),
+        Temporal.ZonedDateTime.from('2021-01-01T02:00:00[Europe/Stockholm]')
       )
     })
   })

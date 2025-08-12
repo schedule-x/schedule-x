@@ -1,6 +1,6 @@
 import { RRuleOptions } from '../../types/rrule-options'
 import { isCountReached, isDatePastUntil } from './iterator-utils'
-import { addYears } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { __deprecated__addYears } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 const yearlyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   const allDateTimes: string[] = []
@@ -22,7 +22,7 @@ const yearlyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      currentDate = addYears(currentDate, rruleOptions.interval)
+      currentDate = __deprecated__addYears(currentDate, rruleOptions.interval)
 
       return { done: false, value: allDateTimes }
     },

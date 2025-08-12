@@ -1,4 +1,4 @@
 export type DayBoundariesDateTime = {
-  start: string
-  end: string
+  start: Temporal.ZonedDateTime
+  end: Temporal.ZonedDateTime
 }

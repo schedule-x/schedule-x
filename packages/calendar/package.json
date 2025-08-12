@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/calendar",
   "umdName": "SXCalendar",
-  "version": "2.36.0",
+  "version": "3.0.0-rc.1",
   "description": "Schedule-X calendar component",
   "author": {
     "name": "Tom Österlund",
@@ -30,7 +30,8 @@
   },
   "peerDependencies": {
     "@preact/signals": "^2.0.2",
-    "preact": "^10.19.2"
+    "preact": "^10.19.2",
+    "temporal-polyfill": "0.3.0"
   },
   "repository": {
     "type": "git",

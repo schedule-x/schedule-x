@@ -4,6 +4,7 @@ import {
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { calculateDaysDifference } from '../days-difference'
+import 'temporal-polyfill/global'
 
 describe('calculating difference between 2 days', () => {
   describe('when the difference is 0', () => {

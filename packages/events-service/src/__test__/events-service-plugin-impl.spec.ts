@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -15,16 +16,20 @@ describe('Events-service plugin', () => {
     const event = {
       id: '1',
       title: 'event 1',
-      start: '2110-10-10 10:10',
-      end: '2110-10-10 11:10',
+      start: Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
     }
     underTest.add(event)
 
     expect($app.calendarEvents.list.value.length).toBe(1)
     expect($app.calendarEvents.list.value[0].id).toBe('1')
     expect($app.calendarEvents.list.value[0].title).toBe('event 1')
-    expect($app.calendarEvents.list.value[0].start).toBe('2110-10-10 10:10')
-    expect($app.calendarEvents.list.value[0].end).toBe('2110-10-10 11:10')
+    expect($app.calendarEvents.list.value[0].start).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]')
+    )
+    expect($app.calendarEvents.list.value[0].end).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]')
+    )
   })
 
   it('should update an event', () => {
@@ -34,24 +39,28 @@ describe('Events-service plugin', () => {
     const event = {
       id: '1',
       title: 'event 1',
-      start: '2110-10-10 10:10',
-      end: '2110-10-10 11:10',
+      start: Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
     }
     underTest.add(event)
 
     const updatedEvent = {
       id: '1',
       title: 'updated event 1',
-      start: '2110-10-10 10:10',
-      end: '2110-10-10 11:10',
+      start: Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
     }
     underTest.update(updatedEvent)
 
     expect($app.calendarEvents.list.value.length).toBe(1)
     expect($app.calendarEvents.list.value[0].id).toBe('1')
     expect($app.calendarEvents.list.value[0].title).toBe('updated event 1')
-    expect($app.calendarEvents.list.value[0].start).toBe('2110-10-10 10:10')
-    expect($app.calendarEvents.list.value[0].end).toBe('2110-10-10 11:10')
+    expect($app.calendarEvents.list.value[0].start).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]')
+    )
+    expect($app.calendarEvents.list.value[0].end).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]')
+    )
   })
 
   it('should get an event', () => {
@@ -61,8 +70,8 @@ describe('Events-service plugin', () => {
     const event = {
       id: '1',
       title: 'event 1',
-      start: '2110-10-10 10:10',
-      end: '2110-10-10 11:10',
+      start: Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
       _options: {
         additionalClasses: ['class1', 'class2'],
       },
@@ -73,8 +82,12 @@ describe('Events-service plugin', () => {
 
     expect(result?.id).toBe('1')
     expect(result?.title).toBe('event 1')
-    expect(result?.start).toBe('2110-10-10 10:10')
-    expect(result?.end).toBe('2110-10-10 11:10')
+    expect(result?.start).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]')
+    )
+    expect(result?.end).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]')
+    )
     expect(result?._options?.additionalClasses).toEqual(['class1', 'class2'])
   })
 
@@ -87,8 +100,8 @@ describe('Events-service plugin', () => {
       const event = {
         id: id,
         title: 'event 1',
-        start: '2110-10-10 10:10',
-        end: '2110-10-10 11:10',
+        start: Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
       }
       underTest.add(event)
 
@@ -105,14 +118,14 @@ describe('Events-service plugin', () => {
     const event1 = {
       id: '1',
       title: 'event 1',
-      start: '2110-10-10 10:10',
-      end: '2110-10-10 11:10',
+      start: Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
     }
     const event2 = {
       id: '2',
       title: 'event 2',
-      start: '2110-10-10 10:10',
-      end: '2110-10-10 11:10',
+      start: Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]'),
+      end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
     }
     underTest.add(event1)
     underTest.add(event2)
@@ -122,12 +135,20 @@ describe('Events-service plugin', () => {
     expect(result.length).toBe(2)
     expect(result[0].id).toBe('1')
     expect(result[0].title).toBe('event 1')
-    expect(result[0].start).toBe('2110-10-10 10:10')
-    expect(result[0].end).toBe('2110-10-10 11:10')
+    expect(result[0].start).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]')
+    )
+    expect(result[0].end).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]')
+    )
     expect(result[1].id).toBe('2')
     expect(result[1].title).toBe('event 2')
-    expect(result[1].start).toBe('2110-10-10 10:10')
-    expect(result[1].end).toBe('2110-10-10 11:10')
+    expect(result[1].start).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T10:10:00.00+00:00[UTC]')
+    )
+    expect(result[1].end).toEqual(
+      Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]')
+    )
   })
 
   it('should set the complete list of events', () => {
@@ -136,14 +157,18 @@ describe('Events-service plugin', () => {
         {
           id: '1',
           title: 'event 1',
-          start: '2110-10-10 10:10',
-          end: '2110-10-10 11:10',
+          start: Temporal.ZonedDateTime.from(
+            '2110-10-10T10:10:00.00+00:00[UTC]'
+          ),
+          end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
         },
         {
           id: '2',
           title: 'event 2',
-          start: '2110-10-10 10:10',
-          end: '2110-10-10 11:10',
+          start: Temporal.ZonedDateTime.from(
+            '2110-10-10T10:10:00.00+00:00[UTC]'
+          ),
+          end: Temporal.ZonedDateTime.from('2110-10-10T11:10:00.00+00:00[UTC]'),
         },
       ],
     })
@@ -155,8 +180,8 @@ describe('Events-service plugin', () => {
       {
         id: '3',
         title: 'event 3',
-        start: '2000-10-10 10:10',
-        end: '2000-10-10 11:10',
+        start: Temporal.ZonedDateTime.from('2000-10-10T10:10:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2000-10-10T11:10:00.00+00:00[UTC]'),
       },
     ]
     underTest.set(newEvents)
@@ -164,7 +189,11 @@ describe('Events-service plugin', () => {
     expect($app.calendarEvents.list.value.length).toBe(1)
     expect($app.calendarEvents.list.value[0].id).toBe('3')
     expect($app.calendarEvents.list.value[0].title).toBe('event 3')
-    expect($app.calendarEvents.list.value[0].start).toBe('2000-10-10 10:10')
-    expect($app.calendarEvents.list.value[0].end).toBe('2000-10-10 11:10')
+    expect($app.calendarEvents.list.value[0].start).toEqual(
+      Temporal.ZonedDateTime.from('2000-10-10T10:10:00.00+00:00[UTC]')
+    )
+    expect($app.calendarEvents.list.value[0].end).toEqual(
+      Temporal.ZonedDateTime.from('2000-10-10T11:10:00.00+00:00[UTC]')
+    )
   })
 })

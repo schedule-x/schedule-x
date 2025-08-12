@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -11,9 +12,10 @@ import { __createAppWithViews__ } from '../../../testing/__create-app-with-views
 
 describe('positioning events in the date grid of a week or day', () => {
   describe('positioning full day events', () => {
-    const selectedDate = '2023-09-17'
+    const selectedDate = Temporal.PlainDate.from('2023-09-17')
     const $app = __createAppWithViews__({
       selectedDate,
+      timezone: 'Europe/Moscow',
     })
 
     it('should position an event, stretching from the first until last day of the week', () => {
@@ -21,8 +23,8 @@ describe('positioning events in the date grid of a week or day', () => {
         new CalendarEventBuilder(
           $app.config,
           1,
-          '2023-09-11',
-          '2023-09-17'
+          Temporal.PlainDate.from('2023-09-11'),
+          Temporal.PlainDate.from('2023-09-17')
         ).build(),
       ]
       const week = createWeek($app)
@@ -57,8 +59,8 @@ describe('positioning events in the date grid of a week or day', () => {
         new CalendarEventBuilder(
           $app.config,
           1,
-          '2023-09-16',
-          '2023-09-16'
+          Temporal.PlainDate.from('2023-09-16'),
+          Temporal.PlainDate.from('2023-09-16')
         ).build(),
       ]
       const week = createWeek($app)
@@ -81,20 +83,20 @@ describe('positioning events in the date grid of a week or day', () => {
         new CalendarEventBuilder(
           $app.config,
           1,
-          '2023-09-12',
-          '2023-09-13'
+          Temporal.PlainDate.from('2023-09-12'),
+          Temporal.PlainDate.from('2023-09-13')
         ).build(),
         new CalendarEventBuilder(
           $app.config,
           2,
-          '2023-09-13',
-          '2023-09-14'
+          Temporal.PlainDate.from('2023-09-13'),
+          Temporal.PlainDate.from('2023-09-14')
         ).build(),
         new CalendarEventBuilder(
           $app.config,
           3,
-          '2023-09-14',
-          '2023-09-15'
+          Temporal.PlainDate.from('2023-09-14'),
+          Temporal.PlainDate.from('2023-09-15')
         ).build(),
       ]
       const week = createWeek($app)
@@ -147,26 +149,26 @@ describe('positioning events in the date grid of a week or day', () => {
         new CalendarEventBuilder(
           $app.config,
           1,
-          '2023-09-09',
-          '2023-09-19'
+          Temporal.PlainDate.from('2023-09-09'),
+          Temporal.PlainDate.from('2023-09-19')
         ).build(),
         new CalendarEventBuilder(
           $app.config,
           2,
-          '2023-09-10',
-          '2023-09-11'
+          Temporal.PlainDate.from('2023-09-10'),
+          Temporal.PlainDate.from('2023-09-11')
         ).build(),
         new CalendarEventBuilder(
           $app.config,
           3,
-          '2023-09-16',
-          '2023-09-17'
+          Temporal.PlainDate.from('2023-09-16'),
+          Temporal.PlainDate.from('2023-09-17')
         ).build(),
         new CalendarEventBuilder(
           $app.config,
           4,
-          '2023-09-17',
-          '2023-09-18'
+          Temporal.PlainDate.from('2023-09-17'),
+          Temporal.PlainDate.from('2023-09-18')
         ).build(),
       ]
       const week = createWeek($app)

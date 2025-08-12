@@ -1,7 +1,5 @@
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import chevronIcon from '../assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
@@ -11,16 +9,6 @@ export default function AppInput() {
   const datePickerLabelId = randomStringId()
   const inputWrapperId = randomStringId()
   const $app = useContext(AppContext)
-  const getLocalizedDate = (dateString: string) => {
-    if (dateString === '') return $app.translate('MM/DD/YYYY')
-    return toLocalizedDateString(toJSDate(dateString), $app.config.locale.value)
-  }
-
-  useEffect(() => {
-    $app.datePickerState.inputDisplayedValue.value = getLocalizedDate(
-      $app.datePickerState.selectedDate.value
-    )
-  }, [$app.datePickerState.selectedDate.value, $app.config.locale.value])
 
   const [wrapperClasses, setWrapperClasses] = useState<string[]>([])
 
@@ -47,9 +35,7 @@ export default function AppInput() {
     event.stopPropagation() // prevent date picker from closing
 
     try {
-      $app.datePickerState.inputDisplayedValue.value = (
-        event.target as HTMLInputElement
-      ).value
+      $app.datePickerState.handleInput((event.target as HTMLInputElement).value)
       $app.datePickerState.close()
     } catch (e) {
       console.log('Error setting input value:' + e)
@@ -57,15 +43,27 @@ export default function AppInput() {
   }
 
   useEffect(() => {
-    const inputElement = document.getElementById(datePickerInputId)
-    if (inputElement === null) return
+    const inputElement =
+      typeof document !== 'undefined' &&
+      document.getElementById(datePickerInputId)
+    if (
+      typeof HTMLElement === 'undefined' ||
+      !(inputElement instanceof HTMLElement)
+    )
+      return
 
     inputElement.addEventListener('change', handleInputValue) // Preact onChange triggers on every input
     return () => inputElement.removeEventListener('change', handleInputValue)
   })
 
-  const handleClick = (event: Event) => {
-    handleInputValue(event)
+  useEffect(() => {
+    if ($app.config.hasPlaceholder) {
+      $app.datePickerState.inputDisplayedValue.value =
+        $app.translate('MM/DD/YYYY')
+    }
+  }, [])
+
+  const handleClick = () => {
     $app.datePickerState.open()
   }
 

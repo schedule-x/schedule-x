@@ -4,7 +4,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 const updateRecurringEvent = (
   $app: CalendarAppSingleton,
   eventCopy: CalendarEventInternal,
-  startPreDrag: string
+  startPreDrag: Temporal.ZonedDateTime | Temporal.PlainDate
 ) => {
   $app.config.plugins.eventRecurrence?.updateRecurrenceDND(
     eventCopy.id,
@@ -30,7 +30,7 @@ const updateNonRecurringEvent = (
 export const updateDraggedEvent = (
   $app: CalendarAppSingleton,
   eventCopy: CalendarEventInternal,
-  startPreDrag: string
+  startPreDrag: Temporal.ZonedDateTime | Temporal.PlainDate
 ) => {
   if (
     'rrule' in eventCopy._getForeignProperties() &&

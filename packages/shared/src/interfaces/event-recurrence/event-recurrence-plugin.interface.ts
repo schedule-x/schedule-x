@@ -5,14 +5,14 @@ import EventsFacade from '../../utils/stateful/events-facade/events-facade.inter
 export interface EventRecurrencePlugin extends PluginBase<string> {
   updateRecurrenceDND(
     eventId: EventId,
-    oldEventStart: string,
-    newEventStart: string
+    oldEventStart: Temporal.ZonedDateTime | Temporal.PlainDate,
+    newEventStart: Temporal.ZonedDateTime | Temporal.PlainDate
   ): void
 
   updateRecurrenceOnResize(
     eventId: EventId,
-    oldEventEnd: string,
-    newEventEnd: string
+    oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
+    newEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   ): void
 
   eventsFacade: EventsFacade

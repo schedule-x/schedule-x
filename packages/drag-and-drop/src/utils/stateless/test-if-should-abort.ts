@@ -10,8 +10,8 @@ export const testIfShouldAbort = async (
    * */
   eventCopyOrOriginalEvent: CalendarEventInternal,
 
-  originalStart: string,
-  originalEnd: string,
+  originalStart: Temporal.ZonedDateTime | Temporal.PlainDate,
+  originalEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
   updateCopy?: (newCopy: CalendarEventInternal | undefined) => void
 ): Promise<boolean> => {
   const onBeforeEventUpdate =
