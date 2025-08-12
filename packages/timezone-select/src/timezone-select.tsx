@@ -1,80 +1,16 @@
 import { useContext, useEffect, useState, useRef } from 'preact/hooks'
 import { AppContext } from '@schedule-x/calendar/src/utils/stateful/app-context'
-import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
+import {
+  IANA_TIMEZONES,
+  IANATimezone,
+} from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/time/get-offset-for-timezone'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 import { useSignalEffect } from '@preact/signals'
 
 // Get all IANA timezones - this is a comprehensive list of common timezones
 const getAllTimezones = (): IANATimezone[] => {
-  return [
-    'UTC',
-    'America/New_York',
-    'America/Chicago',
-    'America/Denver',
-    'America/Los_Angeles',
-    'America/Anchorage',
-    'America/Honolulu',
-    'America/Toronto',
-    'America/Vancouver',
-    'America/Mexico_City',
-    'America/Sao_Paulo',
-    'America/Buenos_Aires',
-    'America/Santiago',
-    'Europe/London',
-    'Europe/Paris',
-    'Europe/Berlin',
-    'Europe/Rome',
-    'Europe/Madrid',
-    'Europe/Amsterdam',
-    'Europe/Brussels',
-    'Europe/Vienna',
-    'Europe/Zurich',
-    'Europe/Stockholm',
-    'Europe/Oslo',
-    'Europe/Copenhagen',
-    'Europe/Helsinki',
-    'Europe/Warsaw',
-    'Europe/Prague',
-    'Europe/Budapest',
-    'Europe/Bucharest',
-    'Europe/Sofia',
-    'Europe/Athens',
-    'Europe/Istanbul',
-    'Europe/Moscow',
-    'Europe/Kiev',
-    'Asia/Tokyo',
-    'Asia/Shanghai',
-    'Asia/Seoul',
-    'Asia/Singapore',
-    'Asia/Hong_Kong',
-    'Asia/Bangkok',
-    'Asia/Jakarta',
-    'Asia/Manila',
-    'Asia/Kolkata',
-    'Asia/Dubai',
-    'Asia/Tehran',
-    'Asia/Jerusalem',
-    'Asia/Riyadh',
-    'Asia/Kuwait',
-    'Asia/Qatar',
-    'Australia/Sydney',
-    'Australia/Melbourne',
-    'Australia/Perth',
-    'Australia/Brisbane',
-    'Australia/Adelaide',
-    'Pacific/Auckland',
-    'Pacific/Fiji',
-    'Pacific/Guam',
-    'Pacific/Honolulu',
-    'Africa/Cairo',
-    'Africa/Johannesburg',
-    'Africa/Lagos',
-    'Africa/Nairobi',
-    'Africa/Casablanca',
-    'Africa/Algiers',
-    'Africa/Tunis',
-  ] as IANATimezone[]
+  return IANA_TIMEZONES
 }
 
 export default function TimezoneSelect() {
