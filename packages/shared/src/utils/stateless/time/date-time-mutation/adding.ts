@@ -1,7 +1,7 @@
 import { toIntegers } from '../format-conversion/format-conversion'
 import {
-  jsDateToDateString,
-  jsDatetToDateTimeString,
+  __deprecated__jsDateToDateString,
+  __deprecated__jsDatetToDateTimeString,
 } from '../format-conversion/date-to-strings'
 
 export const addMonths = (
@@ -41,10 +41,10 @@ export const __deprecated__addMinutes = (
   jsDate.setMinutes(jsDate.getMinutes() + nMinutes)
 
   if (isDateTimeString) {
-    return jsDatetToDateTimeString(jsDate)
+    return __deprecated__jsDatetToDateTimeString(jsDate)
   }
 
-  return jsDateToDateString(jsDate)
+  return __deprecated__jsDateToDateString(jsDate)
 }
 
 export const addMinutesToTemporal = (
@@ -70,10 +70,10 @@ export const __deprecated__addYears = (to: string, nYears: number): string => {
   jsDate.setFullYear(jsDate.getFullYear() + nYears)
 
   if (isDateTimeString) {
-    return jsDatetToDateTimeString(jsDate)
+    return __deprecated__jsDatetToDateTimeString(jsDate)
   }
 
-  return jsDateToDateString(jsDate)
+  return __deprecated__jsDateToDateString(jsDate)
 }
 
 /**
@@ -91,10 +91,10 @@ export const __deprecated__addDaysToDateOrDateTime = (
   jsDate.setDate(jsDate.getDate() + nDays)
 
   if (isDateTimeString) {
-    return jsDatetToDateTimeString(jsDate)
+    return __deprecated__jsDatetToDateTimeString(jsDate)
   }
 
-  return jsDateToDateString(jsDate)
+  return __deprecated__jsDateToDateString(jsDate)
 }
 
 /**
@@ -123,8 +123,8 @@ export const __deprecated__addMonthsToDateOrDatetime = (
   }
 
   if (isDateTimeString) {
-    return jsDatetToDateTimeString(jsDate)
+    return __deprecated__jsDatetToDateTimeString(jsDate)
   }
 
-  return jsDateToDateString(jsDate)
+  return __deprecated__jsDateToDateString(jsDate)
 }

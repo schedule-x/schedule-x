@@ -1,5 +1,5 @@
 import { addMonths } from './adding'
-import { jsDateToDateString } from '../format-conversion/date-to-strings'
+import { __deprecated__jsDateToDateString } from '../format-conversion/date-to-strings'
 import { toJSDate } from '../format-conversion/format-conversion'
 
 export const getFirstDayOPreviousMonth = (
@@ -19,7 +19,7 @@ export const setTimeInDateTimeString = (
   dateTimeString: string,
   newTime: string
 ): string => {
-  const dateCache = jsDateToDateString(toJSDate(dateTimeString))
+  const dateCache = __deprecated__jsDateToDateString(toJSDate(dateTimeString))
 
   return `${dateCache} ${newTime}`
 }
