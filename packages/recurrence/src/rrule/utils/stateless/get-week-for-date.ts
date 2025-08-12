@@ -1,5 +1,5 @@
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { jsDateToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import { __deprecated__jsDateToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 
 function getFirstDateOfWeek(
   date: Date,
@@ -30,6 +30,6 @@ export const getWeekForDate = (
   return Array.from({ length: 7 }).map((_, index) => {
     const day = new Date(startOfWeek)
     day.setDate(startOfWeek.getDate() + index)
-    return jsDateToDateString(day)
+    return __deprecated__jsDateToDateString(day)
   })
 }
