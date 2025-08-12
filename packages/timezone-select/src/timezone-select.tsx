@@ -82,6 +82,8 @@ export default function TimezoneSelect() {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedTimezone, setSelectedTimezone] = useState<IANATimezone>('UTC')
   const [timezones] = useState<IANATimezone[]>(getAllTimezones())
+  const [searchQuery, setSearchQuery] = useState('')
+  const [focusedIndex, setFocusedIndex] = useState(-1)
 
   useSignalEffect(() => {
     setSelectedTimezone($app.config.timezone.value)
@@ -104,13 +106,65 @@ export default function TimezoneSelect() {
 
   const handleTimezoneSelect = (timezone: IANATimezone) => {
     setIsOpen(false)
+    setSearchQuery('')
+    setFocusedIndex(-1)
     $app.config.timezone.value = timezone
   }
 
   const handleSelectedTimezoneKeyDown = (keyboardEvent: KeyboardEvent) => {
     if (isKeyEnterOrSpace(keyboardEvent)) {
       setIsOpen(!isOpen)
+      if (!isOpen) {
+        setSearchQuery('')
+        setFocusedIndex(-1)
+      }
     }
+  }
+
+  const handleSearchInputKeyDown = (keyboardEvent: KeyboardEvent) => {
+    const filteredTimezones = getFilteredTimezones()
+
+    switch (keyboardEvent.key) {
+      case 'ArrowDown':
+        keyboardEvent.preventDefault()
+        setFocusedIndex((prev) =>
+          prev < filteredTimezones.length - 1 ? prev + 1 : 0
+        )
+        break
+      case 'ArrowUp':
+        keyboardEvent.preventDefault()
+        setFocusedIndex((prev) =>
+          prev > 0 ? prev - 1 : filteredTimezones.length - 1
+        )
+        break
+      case 'Enter':
+        keyboardEvent.preventDefault()
+        if (focusedIndex >= 0 && focusedIndex < filteredTimezones.length) {
+          handleTimezoneSelect(filteredTimezones[focusedIndex])
+        }
+        break
+      case 'Escape':
+        keyboardEvent.preventDefault()
+        setIsOpen(false)
+        setSearchQuery('')
+        setFocusedIndex(-1)
+        break
+    }
+  }
+
+  const getFilteredTimezones = (): IANATimezone[] => {
+    if (!searchQuery.trim()) {
+      return timezones
+    }
+
+    const query = searchQuery.toLowerCase()
+    return timezones.filter((timezone) => {
+      const { name } = getTimezoneDisplayParts(timezone)
+      return (
+        name.toLowerCase().includes(query) ||
+        timezone.toLowerCase().includes(query)
+      )
+    })
   }
 
   const getTimezoneDisplayParts = (
@@ -164,33 +218,51 @@ export default function TimezoneSelect() {
         {renderTimezoneDisplay(selectedTimezone)}
       </div>
       {isOpen && (
-        <ul
-          data-testid="timezone-select-items"
-          className="sx__timezone-select-items"
-        >
-          {timezones.map((timezone) => (
-            <li
-              key={timezone}
-              aria-label={
-                $app.translate('Select Timezone') +
-                ' ' +
-                (() => {
-                  const { offset, name } = getTimezoneDisplayParts(timezone)
-                  return `${offset} ${name}`
-                })()
-              }
-              tabIndex={-1}
-              role="button"
-              onClick={() => handleTimezoneSelect(timezone)}
-              className={
-                'sx__timezone-select-item' +
-                (timezone === selectedTimezone ? ' is-selected' : '')
-              }
-            >
-              {renderTimezoneDisplay(timezone)}
-            </li>
-          ))}
-        </ul>
+        <div className="sx__timezone-select-dropdown">
+          <div className="sx__timezone-select-search">
+            <input
+              type="text"
+              placeholder={$app.translate('Search timezones...')}
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.currentTarget.value)
+                setFocusedIndex(-1)
+              }}
+              onKeyDown={handleSearchInputKeyDown}
+              className="sx__timezone-select-search-input"
+              autoFocus
+            />
+          </div>
+          <ul
+            data-testid="timezone-select-items"
+            className="sx__timezone-select-items"
+          >
+            {getFilteredTimezones().map((timezone, index) => (
+              <li
+                key={timezone}
+                aria-label={
+                  $app.translate('Select Timezone') +
+                  ' ' +
+                  (() => {
+                    const { offset, name } = getTimezoneDisplayParts(timezone)
+                    return `${offset} ${name}`
+                  })()
+                }
+                tabIndex={-1}
+                role="button"
+                onClick={() => handleTimezoneSelect(timezone)}
+                onMouseEnter={() => setFocusedIndex(index)}
+                className={
+                  'sx__timezone-select-item' +
+                  (timezone === selectedTimezone ? ' is-selected' : '') +
+                  (index === focusedIndex ? ' is-focused' : '')
+                }
+              >
+                {renderTimezoneDisplay(timezone)}
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </div>
   )
