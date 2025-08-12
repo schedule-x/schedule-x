@@ -113,11 +113,12 @@ export default function TimezoneSelect() {
     }
   }
 
-  const getTimezoneDisplayName = (timezone: IANATimezone): string => {
+  const getTimezoneDisplayParts = (
+    timezone: IANATimezone
+  ): { offset: string; name: string } => {
     try {
       const offset = getOffsetForTimezone(timezone)
 
-      // Format offset as GMT+XX:XX or GMT-XX:XX
       let gmtOffset = 'GMT'
       if (offset === 'UTC') {
         gmtOffset = 'GMT'
@@ -127,29 +128,27 @@ export default function TimezoneSelect() {
         gmtOffset = `GMT${offset}`
       }
 
-      return `${gmtOffset} ${$app.translate(timezone)}`
+      return {
+        offset: gmtOffset,
+        name: $app.translate(timezone),
+      }
     } catch {
-      return timezone
+      return {
+        offset: '',
+        name: timezone,
+      }
     }
   }
 
   const renderTimezoneDisplay = (timezone: IANATimezone) => {
-    const displayText = getTimezoneDisplayName(timezone)
-    const parts = displayText.split(' ')
+    const { offset, name } = getTimezoneDisplayParts(timezone)
 
-    if (parts.length >= 2) {
-      const offsetPart = parts[0]
-      const timezoneName = parts.slice(1).join(' ')
-
-      return (
-        <>
-          <span className="gmt-part">{offsetPart}</span>
-          <span className="timezone-name">{timezoneName}</span>
-        </>
-      )
-    }
-
-    return displayText
+    return (
+      <>
+        <span className="gmt-part">{offset}</span>
+        <span className="timezone-name">{name}</span>
+      </>
+    )
   }
 
   return (
@@ -175,7 +174,10 @@ export default function TimezoneSelect() {
               aria-label={
                 $app.translate('Select Timezone') +
                 ' ' +
-                getTimezoneDisplayName(timezone)
+                (() => {
+                  const { offset, name } = getTimezoneDisplayParts(timezone)
+                  return `${offset} ${name}`
+                })()
               }
               tabIndex={-1}
               role="button"
