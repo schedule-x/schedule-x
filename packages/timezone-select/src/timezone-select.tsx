@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useEffect, useState, useRef } from 'preact/hooks'
 import { AppContext } from '@schedule-x/calendar/src/utils/stateful/app-context'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/time/get-offset-for-timezone'
@@ -84,6 +84,7 @@ export default function TimezoneSelect() {
   const [timezones] = useState<IANATimezone[]>(getAllTimezones())
   const [searchQuery, setSearchQuery] = useState('')
   const [focusedIndex, setFocusedIndex] = useState(-1)
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   useSignalEffect(() => {
     setSelectedTimezone($app.config.timezone.value)
@@ -103,6 +104,17 @@ export default function TimezoneSelect() {
     document.addEventListener('click', clickOutsideListener)
     return () => document.removeEventListener('click', clickOutsideListener)
   }, [])
+
+  useEffect(() => {
+    if (isOpen && searchInputRef.current) {
+      // Small delay to ensure the dropdown is fully rendered
+      const timer = setTimeout(() => {
+        searchInputRef.current?.focus()
+      }, 10)
+
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen])
 
   const handleTimezoneSelect = (timezone: IANATimezone) => {
     setIsOpen(false)
@@ -221,6 +233,7 @@ export default function TimezoneSelect() {
         <div className="sx__timezone-select-dropdown">
           <div className="sx__timezone-select-search">
             <input
+              ref={searchInputRef}
               type="text"
               placeholder={$app.translate('Search timezones...')}
               value={searchQuery}
@@ -230,7 +243,6 @@ export default function TimezoneSelect() {
               }}
               onKeyDown={handleSearchInputKeyDown}
               className="sx__timezone-select-search-input"
-              autoFocus
             />
           </div>
           <ul
