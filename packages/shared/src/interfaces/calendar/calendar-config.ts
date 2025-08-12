@@ -19,6 +19,7 @@ import { WeekDay } from '../../enums/time/week-day.enum'
 import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
+import TimezoneSelectPlugin from '../timezone-select/timezone-select-plugin'
 
 export type WeekOptions = {
   gridHeight: number
@@ -51,6 +52,7 @@ export type Plugins = {
   scrollController?: PluginBase<string>
   eventRecurrence?: EventRecurrencePlugin
   resize?: ResizePlugin
+  timezoneSelect?: TimezoneSelectPlugin
   [key: string]: PluginBase<string> | undefined
 }
 

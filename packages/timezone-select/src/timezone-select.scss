@@ -1,0 +1,96 @@
+.sx__timezone-select {
+  position: relative;
+  font-size: var(--sx-calendar-header-input-font-size);
+}
+
+.sx__timezone-select-selected-item {
+  height: 100%;
+  width: fit-content;
+  padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
+  cursor: pointer;
+  border-radius: var(--sx-rounding-extra-small);
+  border: var(--sx-border);
+
+  &:hover {
+    background-color: var(--sx-internal-color-light-gray);
+
+    .is-dark & {
+      background-color: var(--sx-color-surface-container-low);
+    }
+  }
+
+  // Style for the GMT part
+  .gmt-part {
+    font-weight: 500;
+    margin-right: var(--sx-spacing-padding2);
+    color: var(--sx-color-neutral);
+  }
+
+  // Style for the timezone name part
+  .timezone-name {
+    color: var(--sx-color-on-surface-variant);
+    font-weight: 400;
+  }
+}
+
+.sx__timezone-select-items {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: var(--sx-box-shadow-level3);
+  margin: 0;
+  background-color: var(--sx-color-background);
+  z-index: var(--sx-calendar-header-popup-z-index);
+  border-radius: var(--sx-rounding-extra-small);
+  border: var(--sx-border);
+
+  .is-dark & {
+    background-color: var(--sx-color-surface-container-high);
+  }
+}
+
+.sx__timezone-select-item {
+  padding: var(--sx-spacing-padding4) var(--sx-spacing-padding6);
+  cursor: pointer;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background-color: var(--sx-color-primary);
+    color: var(--sx-color-on-primary);
+
+    .gmt-part {
+      color: var(--sx-color-on-primary);
+    }
+
+    .timezone-name {
+      color: var(--sx-color-on-primary);
+    }
+  }
+
+  &.is-selected {
+    background-color: var(--sx-color-surface-dim);
+
+    &:hover,
+    &:focus {
+      background-color: var(--sx-color-primary);
+      color: var(--sx-color-on-primary);
+    }
+  }
+
+  // Style for the GMT part in dropdown items
+  .gmt-part {
+    font-weight: 500;
+    margin-right: var(--sx-spacing-padding2);
+    color: var(--sx-color-neutral);
+  }
+
+  // Style for the timezone name part in dropdown items
+  .timezone-name {
+    color: var(--sx-color-on-surface-variant);
+    font-weight: 400;
+  }
+}

@@ -29,9 +29,11 @@ import { createViewList } from '@schedule-x/calendar/src/views/list'
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
+import '../../packages/timezone-select/src/timezone-select.scss'
 
 import { dateStringRegex } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src'
+import { createTimezoneSelectPlugin } from '../../packages/timezone-select/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -50,6 +52,7 @@ plugins: [
   calendarControlsPlugin,
   scrollController,
   createCurrentTimePlugin(),
+  createTimezoneSelectPlugin(),
 ],
 
   translations: mergeLocales(
@@ -215,11 +218,11 @@ plugins: [
   // tz new york
   timezone: 'Europe/Berlin',
   events: [
-   /*  ...seededEvents.map(event => ({
+    ...seededEvents.map(event => ({
       ...event,
       start: dateStringRegex.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
       end: dateStringRegex.test(event.end) ? Temporal.PlainDate.from(event.end) : Temporal.ZonedDateTime.from(event.end),
-    })), */
+    })),
 /*     {
       id: 1,
       title: 'weekly',
