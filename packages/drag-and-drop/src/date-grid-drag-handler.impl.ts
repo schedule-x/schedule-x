@@ -30,11 +30,15 @@ export default class DateGridDragHandlerImpl implements DateGridDragHandler {
     this.originalStart =
       this.eventCopy.start instanceof Temporal.PlainDate
         ? Temporal.PlainDate.from(this.eventCopy.start.toString())
-        : Temporal.ZonedDateTime.from(this.eventCopy.start.toString())
+        : Temporal.ZonedDateTime.from(
+            this.eventCopy.start.toString()
+          ).withTimeZone(this.$app.config.timezone.value)
     this.originalEnd =
       this.eventCopy.end instanceof Temporal.PlainDate
         ? Temporal.PlainDate.from(this.eventCopy.end.toString())
-        : Temporal.ZonedDateTime.from(this.eventCopy.end.toString())
+        : Temporal.ZonedDateTime.from(
+            this.eventCopy.end.toString()
+          ).withTimeZone(this.$app.config.timezone.value)
     this.rangeStartDate = Temporal.PlainDate.from(
       (this.$app.calendarState.range.value as DateRange).start
     )

@@ -215,7 +215,7 @@ plugins: [
   // tz new york
   timezone: 'Europe/Berlin',
   events: [
-    /* ...seededEvents.map(event => ({
+   /*  ...seededEvents.map(event => ({
       ...event,
       start: dateStringRegex.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
       end: dateStringRegex.test(event.end) ? Temporal.PlainDate.from(event.end) : Temporal.ZonedDateTime.from(event.end),
@@ -230,8 +230,8 @@ plugins: [
       {
         id: 123,
         title: 'monthly',
-        start: Temporal.ZonedDateTime.from('2024-02-05T14:00+01:00[Europe/Berlin]'),
-        end: Temporal.ZonedDateTime.from('2025-09-05T15:00+02:00[Europe/Berlin]'),
+        start: Temporal.ZonedDateTime.from('2025-08-11T14:00+02:00[Europe/Berlin]'),
+        end: Temporal.ZonedDateTime.from('2025-08-12T15:00+02:00[Europe/Berlin]'),
       }
   ],
 })
