@@ -6,25 +6,14 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/time/get-offset-for-timezone'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
-import { useSignalEffect } from '@preact/signals'
-
-// Get all IANA timezones - this is a comprehensive list of common timezones
-const getAllTimezones = (): IANATimezone[] => {
-  return IANA_TIMEZONES
-}
 
 export default function TimezoneSelect() {
   const $app = useContext(AppContext)
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedTimezone, setSelectedTimezone] = useState<IANATimezone>('UTC')
-  const [timezones] = useState<IANATimezone[]>(getAllTimezones())
+  const [timezones] = useState<IANATimezone[]>([...IANA_TIMEZONES])
   const [searchQuery, setSearchQuery] = useState('')
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const searchInputRef = useRef<HTMLInputElement>(null)
-
-  useSignalEffect(() => {
-    setSelectedTimezone($app.config.timezone.value)
-  })
 
   const clickOutsideListener = (event: MouseEvent) => {
     const target = event.target
@@ -163,7 +152,7 @@ export default function TimezoneSelect() {
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleSelectedTimezoneKeyDown}
       >
-        {renderTimezoneDisplay(selectedTimezone)}
+        {renderTimezoneDisplay($app.config.timezone.value)}
       </div>
       {isOpen && (
         <div className="sx__timezone-select-dropdown">
@@ -202,7 +191,9 @@ export default function TimezoneSelect() {
                 onMouseEnter={() => setFocusedIndex(index)}
                 className={
                   'sx__timezone-select-item' +
-                  (timezone === selectedTimezone ? ' is-selected' : '') +
+                  (timezone === $app.config.timezone.value
+                    ? ' is-selected'
+                    : '') +
                   (index === focusedIndex ? ' is-focused' : '')
                 }
               >
