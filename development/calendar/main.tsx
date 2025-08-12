@@ -211,7 +211,7 @@ plugins: [
       },
     },
   ],
-  locale: 'de-DE',
+  locale: 'zh-CN',
 
   // tz new york
   timezone: 'Europe/Berlin',

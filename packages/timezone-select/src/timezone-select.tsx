@@ -46,6 +46,11 @@ export default function TimezoneSelect() {
     setSearchQuery('')
     setFocusedIndex(-1)
     $app.config.timezone.value = timezone
+    Object.values($app.config.plugins).forEach((plugin) => {
+      if (typeof plugin?.onTimezoneChange === 'function') {
+        plugin.onTimezoneChange(timezone)
+      }
+    })
   }
 
   const handleSelectedTimezoneKeyDown = (keyboardEvent: KeyboardEvent) => {
