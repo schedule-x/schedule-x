@@ -179,6 +179,8 @@ plugins: [
       },
     },
   },
+  minDate: Temporal.PlainDate.from('2023-08-01'),
+  maxDate: Temporal.PlainDate.from('2028-08-01'),
   dayBoundaries: {
     start: '06:00',
     end: '03:00',
