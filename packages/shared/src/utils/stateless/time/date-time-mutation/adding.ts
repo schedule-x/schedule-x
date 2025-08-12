@@ -26,7 +26,15 @@ export const addDays = (
   return to.add({ days: nDays })
 }
 
-export const addMinutes = (to: string, nMinutes: number): string => {
+/**
+ * @deprecated
+ *
+ * was kept during Temporal migration, to reduce risk in recurrence package, which internally still uses non-Temporal formats
+ */
+export const __deprecated__addMinutes = (
+  to: string,
+  nMinutes: number
+): string => {
   const { year, month, date, hours, minutes } = toIntegers(to)
   const isDateTimeString = hours !== undefined && minutes !== undefined
   const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)
@@ -50,7 +58,12 @@ export const addMinutesToTemporal = (
   return to.add({ minutes: nMinutes })
 }
 
-export const addYears = (to: string, nYears: number): string => {
+/**
+ * @deprecated
+ *
+ * was kept during Temporal migration, to reduce risk in recurrence package, which internally still uses non-Temporal formats
+ */
+export const __deprecated__addYears = (to: string, nYears: number): string => {
   const { year, month, date, hours, minutes } = toIntegers(to)
   const isDateTimeString = hours !== undefined && minutes !== undefined
   const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)
@@ -63,7 +76,15 @@ export const addYears = (to: string, nYears: number): string => {
   return jsDateToDateString(jsDate)
 }
 
-export const addDaysToDateOrDateTime = (to: string, nDays: number): string => {
+/**
+ * @deprecated
+ *
+ * was kept during Temporal migration, to reduce risk in recurrence package, which internally still uses non-Temporal formats
+ */
+export const __deprecated__addDaysToDateOrDateTime = (
+  to: string,
+  nDays: number
+): string => {
   const { year, month, date, hours, minutes } = toIntegers(to)
   const isDateTimeString = hours !== undefined && minutes !== undefined
   const jsDate = new Date(year, month, date, hours ?? 0, minutes ?? 0)
@@ -76,7 +97,12 @@ export const addDaysToDateOrDateTime = (to: string, nDays: number): string => {
   return jsDateToDateString(jsDate)
 }
 
-export const addMonthsToDateOrDatetime = (
+/**
+ * @deprecated
+ *
+ * was kept during Temporal migration, to reduce risk in recurrence package, which internally still uses non-Temporal formats
+ */
+export const __deprecated__addMonthsToDateOrDatetime = (
   to: string,
   nMonths: number
 ): string => {

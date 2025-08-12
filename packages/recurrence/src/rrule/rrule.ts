@@ -9,7 +9,7 @@ import { addMinutes } from '@schedule-x/shared/src'
 import { dailyIteratorResult } from './utils/stateless/daily-iterator'
 import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
 import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
-import { addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { __deprecated__addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 export class RRule {
   private options: RRuleOptions
@@ -82,7 +82,7 @@ export class RRule {
       start: date,
       end: this.isDateTime
         ? addMinutes(date, this.durationInMinutes!)
-        : addDaysToDateOrDateTime(date, this.durationInDays!),
+        : __deprecated__addDaysToDateOrDateTime(date, this.durationInDays!),
     }
   }
 

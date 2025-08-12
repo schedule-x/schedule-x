@@ -3,7 +3,12 @@ import {
   it,
   expect,
 } from '../../../testing/unit/unit-testing-library.impl'
-import { addDays, addMinutes, addMonths, addYears } from '../adding'
+import {
+  addDays,
+  __deprecated__addMinutes,
+  addMonths,
+  __deprecated__addYears,
+} from '../adding'
 import 'temporal-polyfill/global'
 
 describe('adding time', () => {
@@ -183,7 +188,7 @@ describe('adding time', () => {
   ])(
     'should add years to date strings & date time strings',
     (oldDate, yearsPlus, newDate) => {
-      expect(addYears(oldDate, yearsPlus)).toBe(newDate)
+      expect(__deprecated__addYears(oldDate, yearsPlus)).toBe(newDate)
     }
   )
 
@@ -196,7 +201,7 @@ describe('adding time', () => {
   ])(
     'should add minutes to date strings & date time strings',
     (oldDate, minutesPlus, newDate) => {
-      expect(addMinutes(oldDate, minutesPlus)).toEqual(newDate)
+      expect(__deprecated__addMinutes(oldDate, minutesPlus)).toEqual(newDate)
     }
   )
 })
