@@ -6,6 +6,7 @@
 .sx__view-selection-selected-item {
   height: 100%;
   width: fit-content;
+  min-width: 60px; /* Prevent layout shift by ensuring minimum width */
   padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
   cursor: pointer;
   border-radius: var(--sx-rounding-extra-small);

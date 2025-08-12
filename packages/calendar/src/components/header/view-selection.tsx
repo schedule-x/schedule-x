@@ -22,7 +22,16 @@ export default function ViewSelection() {
     }
   })
 
-  const [selectedViewLabel, setSelectedViewLabel] = useState('')
+  // Get initial selected view label to prevent layout shift
+  const getInitialSelectedViewLabel = () => {
+    const selectedView = $app.config.views.value.find(
+      (view) => view.name === $app.calendarState.view.value
+    )
+    return selectedView ? $app.translate(selectedView.label) : ''
+  }
+  const [selectedViewLabel, setSelectedViewLabel] = useState(
+    getInitialSelectedViewLabel()
+  )
   useSignalEffect(() => {
     const selectedView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
@@ -109,6 +118,7 @@ export default function ViewSelection() {
         className="sx__view-selection-selected-item sx__ripple"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleSelectedViewKeyDown}
+        style={{ minWidth: '60px' }} // Add minimum width to prevent layout shift
       >
         {selectedViewLabel}
       </div>
