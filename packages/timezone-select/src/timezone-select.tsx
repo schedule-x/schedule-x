@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '@schedule-x/calendar/src/utils/stateful/app-context'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
+import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/time/get-offset-for-timezone'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 import { useSignalEffect } from '@preact/signals'
 
@@ -114,57 +115,19 @@ export default function TimezoneSelect() {
 
   const getTimezoneDisplayName = (timezone: IANATimezone): string => {
     try {
-      const now = new Date()
-      const formatter = new Intl.DateTimeFormat('en-US', {
-        timeZone: timezone,
-        timeZoneName: 'short',
-      })
-      const timeZonePart =
-        formatter
-          .formatToParts(now)
-          .find((part) => part.type === 'timeZoneName')?.value || 'GMT'
+      const offset = getOffsetForTimezone(timezone)
 
-      // Extract GMT offset (e.g., "GMT-5" from "EST" or "GMT+1" from "CET")
+      // Format offset as GMT+XX:XX or GMT-XX:XX
       let gmtOffset = 'GMT'
-      if (timeZonePart.startsWith('GMT')) {
-        gmtOffset = timeZonePart
-      } else {
-        // For non-GMT timezone names, we need to calculate the offset
-        const utcFormatter = new Intl.DateTimeFormat('en-US', {
-          timeZone: 'UTC',
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        })
-
-        const localFormatter = new Intl.DateTimeFormat('en-US', {
-          timeZone: timezone,
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        })
-
-        const utcDate = new Date(utcFormatter.format(now))
-        const localDate = new Date(localFormatter.format(now))
-        const offsetMs = localDate.getTime() - utcDate.getTime()
-        const offsetHours = Math.round(offsetMs / (1000 * 60 * 60))
-
-        if (offsetHours >= 0) {
-          gmtOffset = `GMT+${offsetHours}`
-        } else {
-          gmtOffset = `GMT${offsetHours}`
-        }
+      if (offset === 'UTC') {
+        gmtOffset = 'GMT'
+      } else if (offset.startsWith('+')) {
+        gmtOffset = `GMT${offset}`
+      } else if (offset.startsWith('-')) {
+        gmtOffset = `GMT${offset}`
       }
 
-      return `${gmtOffset} ${timezone}`
+      return `${gmtOffset} ${$app.translate(timezone)}`
     } catch {
       return timezone
     }
@@ -175,12 +138,12 @@ export default function TimezoneSelect() {
     const parts = displayText.split(' ')
 
     if (parts.length >= 2) {
-      const gmtPart = parts[0]
+      const offsetPart = parts[0]
       const timezoneName = parts.slice(1).join(' ')
 
       return (
         <>
-          <span className="gmt-part">{gmtPart}</span>
+          <span className="gmt-part">{offsetPart}</span>
           <span className="timezone-name">{timezoneName}</span>
         </>
       )

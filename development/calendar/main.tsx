@@ -33,7 +33,7 @@ import '../../packages/timezone-select/src/timezone-select.scss'
 
 import { dateStringRegex } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src'
-import { createTimezoneSelectPlugin } from '../../packages/timezone-select/src'
+import { createTimezoneSelectPlugin, translations as timezoneSelectTranslations } from '../../packages/timezone-select/src'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
@@ -57,9 +57,7 @@ plugins: [
 
   translations: mergeLocales(
     translations,
-    {
-      enUS: {}
-    }
+    timezoneSelectTranslations
   ),
 
   showWeekNumbers: true,
@@ -213,7 +211,7 @@ plugins: [
       },
     },
   ],
-  locale: 'sv-SE',
+  locale: 'en-US',
 
   // tz new york
   timezone: 'Europe/Berlin',

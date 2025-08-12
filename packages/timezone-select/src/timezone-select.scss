@@ -22,6 +22,7 @@
   // Style for the GMT part
   .gmt-part {
     font-weight: 500;
+    font-size: var(--sx-font-extra-small);
     margin-right: var(--sx-spacing-padding2);
     color: var(--sx-color-neutral);
   }
@@ -86,6 +87,7 @@
     font-weight: 500;
     margin-right: var(--sx-spacing-padding2);
     color: var(--sx-color-neutral);
+    font-size: var(--sx-font-extra-small);
   }
 
   // Style for the timezone name part in dropdown items

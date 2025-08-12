@@ -3,3 +3,5 @@ import TimezoneSelectPlugin from '@schedule-x/shared/src/interfaces/timezone-sel
 
 export { createTimezoneSelectPlugin }
 export type { TimezoneSelectPlugin }
+
+export { translations } from './translations'
