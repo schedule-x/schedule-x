@@ -42,20 +42,29 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
         year: plainDate.year,
         month: plainDate.month,
         day: plainDate.day,
-        hour: 0,
+        hour:
+          $app.config.dayBoundaries.value.start === 0
+            ? 0
+            : $app.config.dayBoundaries.value.start / 100,
         minute: 0,
         second: 0,
         timeZone: $app.config.timezone.value,
       })
-      const rangeEndDateTime = Temporal.ZonedDateTime.from({
+      let rangeEndDateTime = Temporal.ZonedDateTime.from({
         year: plainDate.year,
         month: plainDate.month,
         day: plainDate.day,
-        hour: 23,
-        minute: 59,
-        second: 59,
+        hour:
+          $app.config.dayBoundaries.value.end === 2400
+            ? 23
+            : $app.config.dayBoundaries.value.end / 100,
+        minute: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
+        second: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
         timeZone: $app.config.timezone.value,
       })
+      if ($app.config.isHybridDay) {
+        rangeEndDateTime = rangeEndDateTime.add({ days: 1 })
+      }
 
       day.backgroundEvents = filterByRange(
         $app.calendarEvents.backgroundEvents.value,
