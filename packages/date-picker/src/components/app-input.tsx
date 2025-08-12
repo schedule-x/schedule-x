@@ -46,7 +46,7 @@ export default function AppInput() {
     const inputElement =
       typeof document !== 'undefined' &&
       document.getElementById(datePickerInputId)
-    if (!(inputElement instanceof HTMLElement)) return
+    if (!inputElement || !(inputElement instanceof HTMLElement)) return
 
     inputElement.addEventListener('change', handleInputValue) // Preact onChange triggers on every input
     return () => inputElement.removeEventListener('change', handleInputValue)
