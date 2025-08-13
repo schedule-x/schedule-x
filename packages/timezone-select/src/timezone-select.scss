@@ -19,7 +19,6 @@
     }
   }
 
-  // Style for the GMT part
   .gmt-part {
     font-weight: 500;
     font-size: var(--sx-font-extra-small);
@@ -27,7 +26,6 @@
     color: var(--sx-color-neutral);
   }
 
-  // Style for the timezone name part
   .timezone-name {
     color: var(--sx-color-on-surface-variant);
     font-weight: 400;
@@ -104,6 +102,18 @@
   cursor: pointer;
   white-space: nowrap;
 
+  .gmt-part {
+    font-weight: 500;
+    margin-right: var(--sx-spacing-padding2);
+    color: var(--sx-color-neutral);
+    font-size: var(--sx-font-extra-small);
+  }
+
+  .timezone-name {
+    color: var(--sx-color-on-surface-variant);
+    font-weight: 400;
+  }
+
   &:hover,
   &:focus {
     background-color: var(--sx-color-primary);
@@ -139,19 +149,5 @@
     .timezone-name {
       color: var(--sx-color-on-primary);
     }
-  }
-
-  // Style for the GMT part in dropdown items
-  .gmt-part {
-    font-weight: 500;
-    margin-right: var(--sx-spacing-padding2);
-    color: var(--sx-color-neutral);
-    font-size: var(--sx-font-extra-small);
-  }
-
-  // Style for the timezone name part in dropdown items
-  .timezone-name {
-    color: var(--sx-color-on-surface-variant);
-    font-weight: 400;
   }
 }
