@@ -633,5 +633,4 @@ export const timezoneDeDE = {
   'W-SU': 'Westliche Sowjetunion',
   WET: 'Westeuropaische Zeit',
   Zulu: 'Zulu',
-  'Search timezones...': 'Zeitzonen suchen...',
 } as const

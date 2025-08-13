@@ -16,9 +16,21 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/core.d.ts",
+      "browser": "./dist/core.umd.js",
+      "import": "./dist/core.js",
+      "require": "./dist/core.cjs.js"
+    },
+    "./index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    }
+  },
   "scripts": {
-    "format": "prettier . --write",
-    "test": "npx vitest run --config ../../libs/vitest-config/src/index.ts"
+    "build": "sass --no-source-map src/timezone-select.scss dist/index.css",
+    "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
   },
   "peerDependencies": {
     "@preact/signals": "^2.0.2",
