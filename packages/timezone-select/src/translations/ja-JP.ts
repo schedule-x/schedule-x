@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneJaJP = {
+  'Search timezones...': 'タイムゾーンを検索...',
+  'Select Timezone': 'タイムゾーンを選択',
+
   // アフリカ
   'Africa/Abidjan': 'コートジボワール – アビジャン',
   'Africa/Accra': 'ガーナ – アクラ',

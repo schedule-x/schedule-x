@@ -630,4 +630,5 @@ export const timezoneEnUS = {
   WET: 'Western European Time',
   Zulu: 'Zulu',
   'Search timezones...': 'Search timezones...',
+  'Select Timezone': 'Select Timezone',
 } as const

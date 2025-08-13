@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneTrTR = {
+  'Search timezones...': 'Saat dilimlerini arayın...',
+  'Select Timezone': 'Saat dilimini seçin',
+
   // Afrika
   'Africa/Abidjan': 'Fildişi Sahili – Abidjan',
   'Africa/Accra': 'Gana – Akra',

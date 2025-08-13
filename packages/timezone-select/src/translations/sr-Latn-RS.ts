@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneSrLatnRS = {
+  'Search timezones...': 'Traži vremenske zone...',
+  'Select Timezone': 'Odaberi vremensku zonu',
+
   // Afrika
   'Africa/Abidjan': 'Obala Slonovače – Abidžan',
   'Africa/Accra': 'Gana – Akra',

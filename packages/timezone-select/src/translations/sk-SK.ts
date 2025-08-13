@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneSkSK = {
+  'Search timezones...': 'Hľadať časové pásma...',
+  'Select Timezone': 'Vybrať časové pásmo',
+
   // Afrika
   'Africa/Abidjan': 'Pobrežie Slonoviny – Abidžan',
   'Africa/Accra': 'Ghana – Akra',

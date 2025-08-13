@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneMkMK = {
+  'Search timezones...': 'Пребарај временски зони...',
+  'Select Timezone': 'Избери временска зона',
+
   // Африка
   'Africa/Abidjan': 'Брег на Слоновата Коска – Абиџан',
   'Africa/Accra': 'Гана – Акра',

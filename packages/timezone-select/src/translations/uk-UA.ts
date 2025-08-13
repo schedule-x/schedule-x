@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneUkUA = {
+  'Search timezones...': 'Пошук часових поясів...',
+  'Select Timezone': 'Виберіть часовий пояс',
+
   // Африка
   'Africa/Abidjan': "Кот-д'Івуар – Абіджан",
   'Africa/Accra': 'Гана – Аккра',

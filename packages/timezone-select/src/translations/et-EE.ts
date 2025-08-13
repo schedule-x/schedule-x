@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneEtEE = {
+  'Search timezones...': 'Otsi aeguridadeid...',
+  'Select Timezone': 'Vali aeguriduse',
+
   // Aafrika
   'Africa/Abidjan': 'Elevandiluurannik – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

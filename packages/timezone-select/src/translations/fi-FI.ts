@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneFiFI = {
+  'Search timezones...': 'Etsi aikavyöhykkeitä...',
+  'Select Timezone': 'Valitse aikavyöhyke',
+
   // Afrikka
   'Africa/Abidjan': 'Norsunluurannikko – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

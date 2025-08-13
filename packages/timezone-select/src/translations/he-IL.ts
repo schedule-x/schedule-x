@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneHeIL = {
+  'Search timezones...': 'חפש אזורי זמן...',
+  'Select Timezone': 'בחר אזור זמן',
+
   // אפריקה
   'Africa/Abidjan': "חוף השנהב – אביג'אן",
   'Africa/Accra': 'גאנה – אקרה',

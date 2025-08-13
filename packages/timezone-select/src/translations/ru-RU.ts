@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneRuRU = {
+  'Search timezones...': 'Поиск часовых поясов...',
+  'Select Timezone': 'Выберите часовой пояс',
+
   // Африка
   'Africa/Abidjan': "Кот-д'Ивуар – Абиджан",
   'Africa/Accra': 'Гана – Аккра',

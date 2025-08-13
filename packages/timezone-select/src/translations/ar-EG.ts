@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneArEG = {
   // أفريقيا
+  'Search timezones...': 'البحث عن المناطق الزمنية...',
+  'Select Timezone': 'اختر المنطقة الزمنية',
   'Africa/Abidjan': 'ساحل العاج – أبيدجان',
   'Africa/Accra': 'غانا – أكرا',
   'Africa/Addis_Ababa': 'إثيوبيا – أديس أبابا',

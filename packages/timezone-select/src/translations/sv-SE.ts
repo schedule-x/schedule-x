@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneSvSE = {
+  'Search timezones...': 'Sök tidszoner...',
+  'Select Timezone': 'Välj tidszon',
+
   // Afrika
   'Africa/Abidjan': 'Elfenbenskusten – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

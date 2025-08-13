@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneItIT = {
+  'Search timezones...': 'Cerca di zone orarie...',
+  'Select Timezone': 'Seleziona la zona oraria',
+
   // Africa
   'Africa/Abidjan': "Costa d'Avorio – Abidjan",
   'Africa/Accra': 'Ghana – Accra',

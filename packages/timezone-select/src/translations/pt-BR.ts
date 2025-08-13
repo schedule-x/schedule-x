@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezonePtBR = {
+  'Search timezones...': 'Pesquisar fusos horários...',
+  'Select Timezone': 'Selecionar fuso horário',
+
   // África
   'Africa/Abidjan': 'Costa do Marfim – Abidjan',
   'Africa/Accra': 'Gana – Accra',

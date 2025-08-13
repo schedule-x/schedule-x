@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneHrHR = {
+  'Search timezones...': 'Traži vremenske zone...',
+  'Select Timezone': 'Odaberi vremensku zonu',
+
   // Afrika
   'Africa/Abidjan': 'Obala Bjelokosti – Abidjan',
   'Africa/Accra': 'Gana – Accra',

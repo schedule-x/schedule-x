@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneCaES = {
   // Àfrica
+  'Search timezones...': 'Cerca de zones horàries...',
+  'Select Timezone': 'Selecciona la zona horària',
   'Africa/Abidjan': "Costa d'Ivori – Abidjan",
   'Africa/Accra': 'Ghana – Accra',
   'Africa/Addis_Ababa': 'Etiòpia – Addis Abeba',

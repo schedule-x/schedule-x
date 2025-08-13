@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneDeDE = {
+  'Search timezones...': 'Zeitzonen suchen...',
+  'Select Timezone': 'Zeitzone auswählen',
+
   // Afrika
   'Africa/Abidjan': 'Elfenbeinküste – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

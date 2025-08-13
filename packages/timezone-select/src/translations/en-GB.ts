@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneEnGB = {
+  'Search timezones...': 'Search timezones...',
+  'Select Timezone': 'Select Timezone',
+
   // Africa
   'Africa/Abidjan': 'Ivory Coast – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneEsES = {
+  'Search timezones...': 'Buscar zonas horarias...',
+  'Select Timezone': 'Seleccionar zona horaria',
+
   // África
   'Africa/Abidjan': 'Costa de Marfil – Abiyán',
   'Africa/Accra': 'Ghana – Acra',

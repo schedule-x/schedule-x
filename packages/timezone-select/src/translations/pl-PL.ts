@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezonePlPL = {
+  'Search timezones...': 'Wyszukaj strefy czasowe...',
+  'Select Timezone': 'Wybierz strefę czasową',
+
   // Afryka
   'Africa/Abidjan': 'Wybrzeże Kości Słoniowej – Abidżan',
   'Africa/Accra': 'Ghana – Akra',

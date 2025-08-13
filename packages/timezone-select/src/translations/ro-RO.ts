@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneRoRO = {
+  'Search timezones...': 'Caută fusuri orare...',
+  'Select Timezone': 'Selectează fus orar',
+
   // Africa
   'Africa/Abidjan': 'Coasta de Fildeș – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

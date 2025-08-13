@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneZhCN = {
+  'Search timezones...': '搜索时区...',
+  'Select Timezone': '选择时区',
+
   // 非洲
   'Africa/Abidjan': '科特迪瓦 – 阿比让',
   'Africa/Accra': '加纳 – 阿克拉',

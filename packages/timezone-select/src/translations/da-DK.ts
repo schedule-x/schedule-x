@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneDaDK = {
+  'Search timezones...': 'Søg efter tidszoner...',
+  'Select Timezone': 'Vælg tidszone',
+
   // Afrika
   'Africa/Abidjan': 'Elfenbenskysten – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

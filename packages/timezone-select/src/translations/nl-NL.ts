@@ -1,5 +1,8 @@
 /* eslint-disable max-lines */
 export const timezoneNlNL = {
+  'Search timezones...': 'Zoek naar tijdzones...',
+  'Select Timezone': 'Selecteer tijdzone',
+
   // Afrika
   'Africa/Abidjan': 'Ivoorkust – Abidjan',
   'Africa/Accra': 'Ghana – Accra',
