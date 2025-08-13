@@ -87,7 +87,6 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-header">
             <div className="sx__week-header-content">
               <DateAxis
-                key={$app.config.timezone.value}
                 week={Object.values(week.value).map((day) => {
                   const plainDate = Temporal.PlainDate.from(day.date)
                   return Temporal.ZonedDateTime.from({

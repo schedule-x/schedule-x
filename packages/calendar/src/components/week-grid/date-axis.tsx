@@ -19,7 +19,6 @@ export default function DateAxis({ week }: props) {
       getClassNameForWeekday(date.dayOfWeek),
     ]
     if (isToday(date, $app.config.timezone.value)) {
-      console.log('isToday', date.toString(), $app.config.timezone.value)
       classNames.push('sx__week-grid__date--is-today')
     }
 
