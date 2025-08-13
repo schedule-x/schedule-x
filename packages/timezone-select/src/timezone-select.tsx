@@ -13,7 +13,37 @@ export default function TimezoneSelect({
   $app: CalendarAppSingleton
 }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [timezones] = useState<IANATimezone[]>([...IANA_TIMEZONES])
+  const [timezones] = useState<IANATimezone[]>(() => {
+    // Create a temporary map of timezone names to offset minutes for efficient sorting
+    const timezoneOffsetMap = new Map<IANATimezone, number>()
+    
+    const parseOffsetToMinutes = (offset: string): number => {
+      if (offset === 'UTC') return 0
+      
+      const sign = offset.startsWith('+') ? 1 : -1
+      const timePart = offset.replace(/^[+-]/, '')
+      const [hours, minutes] = timePart.split(':').map(Number)
+      
+      return sign * (hours * 60 + (minutes || 0))
+    }
+    
+    IANA_TIMEZONES.forEach(timezone => {
+      try {
+        const offset = getOffsetForTimezone(timezone)
+        const minutes = parseOffsetToMinutes(offset)
+        timezoneOffsetMap.set(timezone, minutes)
+      } catch {
+        // If there's an error getting offset, use 0 as fallback
+        timezoneOffsetMap.set(timezone, 0)
+      }
+    })
+    
+    return [...IANA_TIMEZONES].sort((a, b) => {
+      const offsetA = timezoneOffsetMap.get(a) ?? 0
+      const offsetB = timezoneOffsetMap.get(b) ?? 0
+      return offsetA - offsetB
+    })
+  })
   const [searchQuery, setSearchQuery] = useState('')
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const searchInputRef = useRef<HTMLInputElement>(null)
