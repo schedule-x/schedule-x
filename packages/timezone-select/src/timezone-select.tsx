@@ -1,14 +1,17 @@
-import { useContext, useEffect, useState, useRef } from 'preact/hooks'
-import { AppContext } from '@schedule-x/calendar/src/utils/stateful/app-context'
+import { useEffect, useState, useRef } from 'preact/hooks'
 import {
   IANA_TIMEZONES,
   IANATimezone,
 } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/time/get-offset-for-timezone'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 
-export default function TimezoneSelect() {
-  const $app = useContext(AppContext)
+export default function TimezoneSelect({
+  $app,
+}: {
+  $app: CalendarAppSingleton
+}) {
   const [isOpen, setIsOpen] = useState(false)
   const [timezones] = useState<IANATimezone[]>([...IANA_TIMEZONES])
   const [searchQuery, setSearchQuery] = useState('')

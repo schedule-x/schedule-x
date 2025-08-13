@@ -118,7 +118,6 @@ export default function ViewSelection() {
         className="sx__view-selection-selected-item sx__ripple"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleSelectedViewKeyDown}
-        style={{ minWidth: '60px' }} // Add minimum width to prevent layout shift
       >
         {selectedViewLabel}
       </div>

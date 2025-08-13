@@ -1,6 +1,10 @@
 .sx__timezone-select {
   position: relative;
   font-size: var(--sx-calendar-header-input-font-size);
+
+  .sx__is-calendar-small & {
+    display: none;
+  }
 }
 
 .sx__timezone-select-selected-item {

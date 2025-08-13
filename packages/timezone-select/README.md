@@ -29,7 +29,7 @@ const calendar = createCalendar({
 
 ## Features
 
-- **Comprehensive timezone list**: Includes all major IANA timezones
+- **Comprehensive timezone list**: Is based on the IANA db of timezones.
 - **Automatic timezone display**: Shows the current timezone abbreviation (e.g., "EST", "PST", "GMT")
 - **Real-time updates**: When a new timezone is selected, it updates `$app.config.timezone.value`
 - **Conditional rendering**: Only renders when the plugin is enabled
@@ -58,21 +58,13 @@ timezoneSelectPlugin.setEnabled(false)
 timezoneSelectPlugin.setEnabled(true)
 ```
 
-## Styling
-
-The timezone select component uses CSS custom properties that match the Schedule-X theme system. You can customize the appearance by overriding the following CSS classes:
-
-- `.sx__timezone-select` - Main container
-- `.sx__timezone-select-selected-item` - The selected timezone display
-- `.sx__timezone-select-items` - Dropdown container
-- `.sx__timezone-select-item` - Individual timezone options
-
 ## Example
 
 ```typescript
 import { createCalendar } from '@schedule-x/calendar'
 import { createViewWeek } from '@schedule-x/calendar'
 import { createTimezoneSelectPlugin } from '@schedule-x/timezone-select'
+import '@schedule-x/timezone-select/dist/index.css'
 
 const viewWeek = createViewWeek()
 const timezoneSelectPlugin = createTimezoneSelectPlugin()
