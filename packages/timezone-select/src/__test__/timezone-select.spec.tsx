@@ -133,7 +133,7 @@ describe('TimezoneSelectPlugin', () => {
         const timezoneSelectSelectedItem = document.querySelector(
           '.sx__timezone-select-selected-item'
         )
-        expect(timezoneSelectSelectedItem?.textContent).toBe('GMT+00:00Ivory Coast – Abidjan')
+        expect(timezoneSelectSelectedItem?.textContent).toBe('GMT-11:00Midway')
       })
     })
   })
