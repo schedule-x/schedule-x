@@ -1,0 +1,46 @@
+{
+  "name": "@schedule-x/timezone-select",
+  "umdName": "SXTimezoneSelect",
+  "version": "3.0.0-rc.1",
+  "description": "Schedule-X timezone select plugin",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@schedule-x.dev",
+    "url": "https://github.com/tomosterlund"
+  },
+  "license": "MIT",
+  "module": "./dist/core.js",
+  "main": "./dist/core.cjs.js",
+  "umd": "./dist/core.umd.js",
+  "types": "./dist/core.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/core.d.ts",
+      "browser": "./dist/core.umd.js",
+      "import": "./dist/core.js",
+      "require": "./dist/core.cjs.js"
+    },
+    "./index.css": {
+      "import": "./dist/index.css",
+      "require": "./dist/index.css"
+    }
+  },
+  "scripts": {
+    "build": "sass --no-source-map src/timezone-select.scss dist/index.css",
+    "lint:fix": "npx stylelint \"**/*.scss\" --fix --formatter compact"
+  },
+  "peerDependencies": {
+    "@preact/signals": "^2.0.2",
+    "preact": "^10.19.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/timezone-select"
+  },
+  "homepage": "https://schedule-x.dev",
+  "gitHead": "bdf911a3eea2a92d010520456a696cd31666009b"
+}

@@ -22,7 +22,16 @@ export default function ViewSelection() {
     }
   })
 
-  const [selectedViewLabel, setSelectedViewLabel] = useState('')
+  // Get initial selected view label to prevent layout shift
+  const getInitialSelectedViewLabel = () => {
+    const selectedView = $app.config.views.value.find(
+      (view) => view.name === $app.calendarState.view.value
+    )
+    return selectedView ? $app.translate(selectedView.label) : ''
+  }
+  const [selectedViewLabel, setSelectedViewLabel] = useState(
+    getInitialSelectedViewLabel()
+  )
   useSignalEffect(() => {
     const selectedView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value

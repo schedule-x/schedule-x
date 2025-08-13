@@ -2,6 +2,7 @@ import CalendarAppSingleton from './interfaces/calendar/calendar-app-singleton'
 import type CalendarEvent from './interfaces/calendar/calendar-event.interface'
 import type { CalendarEventInternal } from './interfaces/calendar/calendar-event.interface'
 import type EventModalPlugin from './interfaces/event-modal/event-modal.plugin'
+import type TimezoneSelectPlugin from './interfaces/timezone-select/timezone-select-plugin'
 import TimeIcon from './components/icons/time-icon'
 import UserIcon from './components/icons/user-icon'
 import DescriptionIcon from './components/icons/description-icon'
@@ -22,7 +23,12 @@ export { dateStringRegex } from './utils/stateless/time/validation/regex'
 export { toDateString } from './utils/stateless/time/format-conversion/date-to-strings'
 export { toJSDate } from './utils/stateless/time/format-conversion/format-conversion'
 export type { CalendarConfigExternal } from './interfaces/calendar/calendar-config'
-export type { CalendarEvent, EventModalPlugin, CalendarEventInternal }
+export type {
+  CalendarEvent,
+  EventModalPlugin,
+  CalendarEventInternal,
+  TimezoneSelectPlugin,
+}
 export type { View, ViewConfig } from './types/calendar/view'
 export type { CalendarAppSingleton, PluginBase }
 export type { CustomComponentFns as CustomComponents } from './interfaces/calendar/custom-component-fns'
