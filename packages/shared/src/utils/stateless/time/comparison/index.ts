@@ -1,5 +1,10 @@
-export const isToday = (date: Temporal.ZonedDateTime | Temporal.PlainDate) => {
-  const today = Temporal.Now.zonedDateTimeISO()
+import { IANATimezone } from '../tzdb'
+
+export const isToday = (
+  date: Temporal.ZonedDateTime | Temporal.PlainDate,
+  timezone: IANATimezone
+) => {
+  const today = Temporal.Now.zonedDateTimeISO(timezone)
   return (
     date.day === today.day &&
     date.month === today.month &&

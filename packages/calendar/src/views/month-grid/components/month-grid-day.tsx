@@ -66,7 +66,12 @@ export default function MonthGridDay({ day, isFirstWeek, isLastWeek }: props) {
 
   const dateClassNames = ['sx__month-grid-day__header-date']
   const dayDate = day.date
-  if (isToday(dayDate.toZonedDateTime($app.config.timezone.value)))
+  if (
+    isToday(
+      dayDate.toZonedDateTime($app.config.timezone.value),
+      $app.config.timezone.value
+    )
+  )
     dateClassNames.push('sx__is-today')
 
   const selectedDateMonth = $app.datePickerState.selectedDate.value.month

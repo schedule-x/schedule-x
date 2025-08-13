@@ -8,22 +8,24 @@ import 'temporal-polyfill/global'
 
 describe('comparison of time', () => {
   it('should return true if date is today', () => {
-    const today = Temporal.PlainDate.from(Temporal.Now.plainDateISO())
-    expect(isToday(today)).toBe(true)
+    const today = Temporal.PlainDate.from(
+      Temporal.Now.plainDateISO('Europe/Berlin')
+    )
+    expect(isToday(today, 'Europe/Berlin')).toBe(true)
   })
 
   it('should return false if date is not today', () => {
     const yesterday = Temporal.PlainDate.from(
-      Temporal.Now.plainDateISO().subtract({ days: 1 })
+      Temporal.Now.plainDateISO('Europe/Berlin').subtract({ days: 1 })
     )
-    expect(isToday(yesterday)).toBe(false)
+    expect(isToday(yesterday, 'Europe/Berlin')).toBe(false)
   })
 
   it('should return false if date is not today', () => {
     const tomorrow = Temporal.PlainDate.from(
-      Temporal.Now.plainDateISO().add({ days: 1 })
+      Temporal.Now.plainDateISO('Europe/Berlin').add({ days: 1 })
     )
-    expect(isToday(tomorrow)).toBe(false)
+    expect(isToday(tomorrow, 'Europe/Berlin')).toBe(false)
   })
 
   it.each([
