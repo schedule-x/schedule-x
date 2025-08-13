@@ -24,7 +24,8 @@ export default function MonthViewWeek({ week }: props) {
 
   const weekDays: WeekDay[] = week.map((day) => {
     const classes = ['sx__date-picker__day']
-    if (isToday(day)) classes.push('sx__date-picker__day--today')
+    if (isToday(day, $app.config.timezone.value))
+      classes.push('sx__date-picker__day--today')
     if (isSameDay(day, $app.datePickerState.selectedDate.value))
       classes.push('sx__date-picker__day--selected')
     if (!isSameMonth(day, $app.datePickerState.datePickerDate.value))
