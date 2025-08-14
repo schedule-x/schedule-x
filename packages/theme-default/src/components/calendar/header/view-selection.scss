@@ -10,6 +10,9 @@
   cursor: pointer;
   border-radius: var(--sx-rounding-extra-small);
   border: var(--sx-border);
+  display: flex;
+  align-items: center;
+  gap: var(--sx-spacing-padding2);
 
   &:hover {
     background-color: var(--sx-internal-color-light-gray);
@@ -18,6 +21,18 @@
       background-color: var(--sx-color-surface-container-low);
     }
   }
+}
+
+.sx__view-selection-chevron {
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  filter: brightness(0.7);
+  transition: transform 0.2s ease-in-out;
+}
+
+.sx__view-selection.is-open .sx__view-selection-chevron {
+  transform: rotate(180deg);
 }
 
 .sx__view-selection-items {

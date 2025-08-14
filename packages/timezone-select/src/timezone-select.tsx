@@ -6,6 +6,7 @@ import {
 import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/time/get-offset-for-timezone'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
+import chevronIcon from '@schedule-x/shared/src/assets/chevron-input.svg'
 
 export default function TimezoneSelect({
   $app,
@@ -181,7 +182,7 @@ export default function TimezoneSelect({
   }
 
   return (
-    <div className="sx__timezone-select">
+    <div className={`sx__timezone-select ${isOpen ? 'is-open' : ''}`}>
       <div
         tabIndex={0}
         role="button"
@@ -191,6 +192,7 @@ export default function TimezoneSelect({
         onKeyDown={handleSelectedTimezoneKeyDown}
       >
         {renderTimezoneDisplay($app.config.timezone.value)}
+        <img className="sx__timezone-select-chevron" src={chevronIcon} alt="" />
       </div>
       {isOpen && (
         <div className="sx__timezone-select-dropdown">
