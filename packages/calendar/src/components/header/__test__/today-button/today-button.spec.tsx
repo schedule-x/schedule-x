@@ -11,6 +11,7 @@ import {
   renderWithSelectedDateInThePast,
   renderWithSelectedDateToday,
 } from './utils'
+import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 describe('TodayButton', () => {
   afterEach(() => {
@@ -22,7 +23,11 @@ describe('TodayButton', () => {
       const initialSelectedDate = Temporal.PlainDate.from('1991-07-01')
       const now = Temporal.Now.plainDateISO()
       const expectedSelectedDate = Temporal.PlainDate.from(now)
-      const $app = renderWithSelectedDateInThePast(initialSelectedDate)
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      const $app = renderWithSelectedDateInThePast(
+        initialSelectedDate,
+        timezone as IANATimezone
+      )
       expect($app.datePickerState.selectedDate.value).toEqual(
         initialSelectedDate
       )
