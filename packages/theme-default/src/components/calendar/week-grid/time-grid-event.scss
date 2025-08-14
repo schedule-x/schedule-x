@@ -63,6 +63,24 @@
   white-space: nowrap;
 }
 
+.sx__title-and-time-compact {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-spacing-padding2);
+  
+  .sx__time-grid-event-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .sx__time-grid-event-time {
+    flex-shrink: 0;
+  }
+}
+
 .sx__event-icon {
   min-width: 15px;
   min-height: 15px;

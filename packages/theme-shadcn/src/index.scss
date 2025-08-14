@@ -32,6 +32,33 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     border-radius: var(--sx-event-border-radius);
   }
 
+  // Compact layout styles
+  .sx__title-and-time-compact {
+    display: flex;
+    align-items: center;
+    gap: var(--sx-spacing-padding2);
+    
+    .sx__time-grid-event-title {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .sx__time-grid-event-time {
+      flex-shrink: 0;
+    }
+  }
+
+  // Hide regular title and time when compact layout is active
+  .sx__is-compact {
+    .sx__time-grid-event-title:not(.sx__title-and-time-compact .sx__time-grid-event-title),
+    .sx__time-grid-event-time:not(.sx__title-and-time-compact .sx__time-grid-event-time) {
+      display: none;
+    }
+  }
+
   .sx__range-heading {
     font-weight: 600;
   }
