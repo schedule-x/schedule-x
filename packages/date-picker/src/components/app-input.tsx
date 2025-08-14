@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
-import chevronIcon from '../assets/chevron-input.svg'
+import chevronIcon from '@schedule-x/shared/src/assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 

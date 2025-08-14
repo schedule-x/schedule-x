@@ -4,6 +4,7 @@ import { ViewName } from '@schedule-x/shared/src/types/calendar/view-name'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 import { useSignalEffect } from '@preact/signals'
+import chevronIcon from '@schedule-x/shared/src/assets/chevron-input.svg'
 
 export default function ViewSelection() {
   const $app = useContext(AppContext)
@@ -110,7 +111,7 @@ export default function ViewSelection() {
   }
 
   return (
-    <div className="sx__view-selection">
+    <div className={`sx__view-selection ${isOpen ? 'is-open' : ''}`}>
       <div
         tabIndex={0}
         role="button"
@@ -120,6 +121,7 @@ export default function ViewSelection() {
         onKeyDown={handleSelectedViewKeyDown}
       >
         {selectedViewLabel}
+        <img className="sx__view-selection-chevron" src={chevronIcon} alt="" />
       </div>
       {isOpen && (
         <ul
