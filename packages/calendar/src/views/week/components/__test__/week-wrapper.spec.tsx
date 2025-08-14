@@ -8,6 +8,15 @@ import {
 import { cleanup, waitFor } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { renderComponent } from './utils'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('Week view', () => {
   afterEach(() => {

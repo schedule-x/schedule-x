@@ -33,11 +33,15 @@ describe('MonthWrapper', () => {
 
   describe('rendering the current month', () => {
     it('should highlight the current date', () => {
-      renderComponent(__createAppWithViews__())
-      const todaysDate = new Date().getDate()
+      renderComponent(
+        __createAppWithViews__({
+          timezone: 'Asia/Tokyo',
+        })
+      )
+      const todaysDate = Temporal.Now.plainDateISO('Asia/Tokyo')
 
       expect(document.querySelector('.sx__is-today')?.textContent).toBe(
-        todaysDate.toString()
+        todaysDate.day.toString()
       )
     })
   })

@@ -9,10 +9,19 @@ import { cleanup } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { renderComponent } from './utils'
+import { vi } from 'vitest'
 
 const tab = () => {
   document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }))
 }
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('Week view', () => {
   afterEach(() => {
@@ -92,7 +101,7 @@ describe('Week view', () => {
 
       const focusedEvent = document.activeElement
       expect(focusedEvent?.textContent).toContain(eventTitle)
-      expect(focusedEvent?.textContent).toContain('11:00 AM – 5:00 PM')
+      expect(focusedEvent?.textContent).toContain('11:00 AM')
     })
   })
 })

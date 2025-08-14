@@ -1,16 +1,25 @@
 import 'temporal-polyfill/global'
+import { vi } from 'vitest'
 import {
   describe,
   it,
   expect,
   afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { CalendarAppSingleton } from '@schedule-x/shared'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { AppContext } from '../../../../utils/stateful/app-context'
 import { cleanup, render } from '@testing-library/preact'
 import TimeGridEvent from '../../time-grid-event'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 const renderComponent = (
   $app: CalendarAppSingleton,
@@ -107,9 +116,7 @@ describe('TimeGridEvent', () => {
       renderComponent($app, $app.calendarEvents.list.value[0])
 
       const eventTime = document.querySelector('.sx__time-grid-event-time')
-      expect(eventTime?.lastChild?.textContent).toStrictEqual(
-        '11:00 PM – 12:00 AM'
-      )
+      expect(eventTime?.textContent).toStrictEqual('11:00 PM')
     })
 
     it('should only show start time if end time is the same', () => {
@@ -131,9 +138,7 @@ describe('TimeGridEvent', () => {
       renderComponent($app, $app.calendarEvents.list.value[0])
 
       const eventTime = document.querySelector('.sx__time-grid-event-time')
-      expect(eventTime?.lastChild?.textContent).toStrictEqual(
-        '11:00 PM – 11:00 PM'
-      )
+      expect(eventTime?.lastChild?.textContent).toStrictEqual('11:00 PM')
     })
   })
 

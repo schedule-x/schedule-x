@@ -9,6 +9,15 @@ import { cleanup, screen } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('WeekDayEvent', () => {
   afterEach(() => {

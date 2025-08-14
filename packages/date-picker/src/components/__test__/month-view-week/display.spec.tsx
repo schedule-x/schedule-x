@@ -63,9 +63,10 @@ describe('MonthViewWeek', () => {
   })
 
   it("should display today's date", () => {
-    const today = Temporal.Now.plainDateISO()
+    const timezone = 'Europe/Berlin'
+    const today = Temporal.Now.plainDateISO(timezone)
     const expectedTodaysDate = today.day
-    const $app = createAppSingleton({ selectedDate: today })
+    const $app = createAppSingleton({ selectedDate: today, timezone })
     const { container } = renderComponent(
       $app,
       $app.timeUnitsImpl.getWeekFor(today)

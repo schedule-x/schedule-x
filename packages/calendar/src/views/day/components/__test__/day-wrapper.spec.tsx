@@ -10,6 +10,15 @@ import { cleanup, render } from '@testing-library/preact'
 import { DayWrapper } from '../day-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<DayWrapper $app={$app} id={'randomstring'} />)
