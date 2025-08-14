@@ -51,14 +51,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     }
   }
 
-  // Hide regular title and time when compact layout is active
-  .sx__is-compact {
-    .sx__time-grid-event-title:not(.sx__title-and-time-compact .sx__time-grid-event-title),
-    .sx__time-grid-event-time:not(.sx__title-and-time-compact .sx__time-grid-event-time) {
-      display: none;
-    }
-  }
-
   .sx__range-heading {
     font-weight: 600;
   }

@@ -185,7 +185,6 @@ export default function TimeGridEvent({
 
   if (wasEventAddedInLastSecond(calendarEvent)) classNames.push('is-event-new')
   if (isCopy) classNames.push('is-event-copy')
-  if (isCompact) classNames.push('sx__is-compact')
   if (
     !$app.config.weekOptions.value.eventOverlap &&
     calendarEvent._maxConcurrentEvents &&
