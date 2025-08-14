@@ -40,8 +40,9 @@ describe('TodayButton', () => {
     })
 
     it('should not change the selected date if it is already today', () => {
-      const $app = renderWithSelectedDateToday()
-      const now = Temporal.Now.plainDateISO()
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+      const $app = renderWithSelectedDateToday(timezone as IANATimezone)
+      const now = Temporal.Now.plainDateISO(timezone as IANATimezone)
       expect($app.datePickerState.selectedDate.value).toEqual(
         Temporal.PlainDate.from(now)
       )

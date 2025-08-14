@@ -36,9 +36,12 @@ export const renderWithSelectedDateInThePast = (
   return $app
 }
 
-export const renderWithSelectedDateToday = () => {
-  const now = Temporal.Now.plainDateISO()
-  const $app = createAppSingletonWithSelectedDate(Temporal.PlainDate.from(now))
+export const renderWithSelectedDateToday = (timezone?: IANATimezone) => {
+  const now = Temporal.Now.plainDateISO(timezone as IANATimezone)
+  const $app = createAppSingletonWithSelectedDate(
+    Temporal.PlainDate.from(now),
+    timezone
+  )
   renderComponent($app)
 
   return $app
