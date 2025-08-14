@@ -25,6 +25,14 @@ import {
 } from '../../utils/stateless/testing/click-by-text'
 import { assertIsDIV } from '../../../../../libs/assertions/src'
 
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
+
 describe('Calendar callbacks', () => {
   afterEach(() => {
     cleanup()

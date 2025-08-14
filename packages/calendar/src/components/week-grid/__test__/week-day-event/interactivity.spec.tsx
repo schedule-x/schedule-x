@@ -14,6 +14,14 @@ import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { cleanup } from '@testing-library/preact'
 
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
+
 describe('TimeGridEvent interactivity', () => {
   beforeEach(() => {
     vi.useFakeTimers()

@@ -12,6 +12,15 @@ import CalendarApp from '../calendar.app'
 import { viewWeek } from '../views/week'
 import { spy } from 'sinon'
 import { getFirstEventElement } from './utils'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('CalendarApp', () => {
   afterEach(() => {
