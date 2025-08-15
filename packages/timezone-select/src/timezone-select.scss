@@ -7,6 +7,25 @@
   }
 }
 
+.sx__timezone-select-label {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 12px;
+  padding: 0 var(--sx-spacing-padding1);
+  background-color: var(--sx-color-background);
+  font-size: 0.75rem;
+  color: var(--sx-color-neutral);
+  line-height: 1rem;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+
+  .is-dark & {
+    display: none;
+  }
+}
+
 .sx__timezone-select-selected-item {
   height: 100%;
   width: fit-content;

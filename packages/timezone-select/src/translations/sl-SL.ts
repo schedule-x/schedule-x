@@ -2,6 +2,7 @@
 export const timezoneSlSL = {
   'Search timezones...': 'Iskanje časovnih pasov...',
   'Select Timezone': 'Izberi časovni pas',
+  Timezone: 'Časovni pas',
 
   // Afrika
   'Africa/Abidjan': 'Slonokoščena obala – Abidžan',

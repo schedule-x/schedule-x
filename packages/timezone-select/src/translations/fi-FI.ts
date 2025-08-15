@@ -2,7 +2,7 @@
 export const timezoneFiFI = {
   'Search timezones...': 'Etsi aikavyöhykkeitä...',
   'Select Timezone': 'Valitse aikavyöhyke',
-
+  Timezone: 'Aikavyöhyke',
   // Afrikka
   'Africa/Abidjan': 'Norsunluurannikko – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

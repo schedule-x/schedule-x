@@ -7,12 +7,15 @@ import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/tim
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import chevronIcon from '@schedule-x/shared/src/assets/chevron-input.svg'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 
 export default function TimezoneSelect({
   $app,
 }: {
   $app: CalendarAppSingleton
 }) {
+  const timezoneSelectId = randomStringId()
+  const timezoneLabelId = randomStringId()
   const [isOpen, setIsOpen] = useState(false)
   const [timezones] = useState<IANATimezone[]>(() => {
     // Create a temporary map of timezone names to offset minutes for efficient sorting
@@ -183,9 +186,18 @@ export default function TimezoneSelect({
 
   return (
     <div className={`sx__timezone-select ${isOpen ? 'is-open' : ''}`}>
+      <label
+        for={timezoneSelectId}
+        id={timezoneLabelId}
+        className="sx__timezone-select-label"
+      >
+        {$app.translate('Timezone')}
+      </label>
       <div
+        id={timezoneSelectId}
         tabIndex={0}
         role="button"
+        aria-describedby={timezoneLabelId}
         aria-label={$app.translate('Select Timezone')}
         className="sx__timezone-select-selected-item sx__ripple"
         onClick={() => setIsOpen(!isOpen)}

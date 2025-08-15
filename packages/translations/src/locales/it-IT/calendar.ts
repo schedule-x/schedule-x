@@ -7,6 +7,8 @@ export const calendarItIT: CalendarTranslations = {
   Day: 'Giorno',
   List: 'Lista',
   'Select View': 'Seleziona la vista',
+  View: 'Vista',
+
   '+ {{n}} events': '+ {{n}} eventi',
   '+ 1 event': '+ 1 evento',
   'No events': 'Nessun evento',

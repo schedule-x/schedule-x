@@ -2,6 +2,7 @@
 export const timezoneSrLatnRS = {
   'Search timezones...': 'Traži vremenske zone...',
   'Select Timezone': 'Odaberi vremensku zonu',
+  Timezone: 'Vremenska zona',
 
   // Afrika
   'Africa/Abidjan': 'Obala Slonovače – Abidžan',

@@ -2,6 +2,7 @@
 export const timezoneEnGB = {
   'Search timezones...': 'Search timezones...',
   'Select Timezone': 'Select Timezone',
+  Timezone: 'Timezone',
 
   // Africa
   'Africa/Abidjan': 'Ivory Coast – Abidjan',

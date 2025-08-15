@@ -47,6 +47,16 @@ describe('TimezoneSelectPlugin', () => {
     }
   })
 
+  it('should display the timezone label', async () => {
+    renderComponent('Europe/Berlin')
+
+    await waitFor(() => {
+      const timezoneLabel = document.querySelector('.sx__timezone-select-label')
+      expect(timezoneLabel).toBeTruthy()
+      expect(timezoneLabel?.textContent).toBe('Timezone')
+    })
+  })
+
   it('should not render timezone select if plugin is not enabled', async () => {
     const timezoneSelectPlugin = createTimezoneSelectPlugin()
     timezoneSelectPlugin.setEnabled(false)

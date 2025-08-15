@@ -2,6 +2,7 @@
 export const timezoneSrRS = {
   'Search timezones...': 'Traži vremenske zone...',
   'Select Timezone': 'Odaberi vremensku zonu',
+  Timezone: 'Vremenska zona',
 
   // Африка
   'Africa/Abidjan': 'Обала Слоноваче – Абиџан',

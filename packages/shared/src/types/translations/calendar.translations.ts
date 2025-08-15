@@ -5,6 +5,7 @@ export interface CalendarTranslations {
   Day: string
   List: string
   'Select View': string
+  View: string
   '+ {{n}} events': string
   '+ 1 event': string
   'No events': string

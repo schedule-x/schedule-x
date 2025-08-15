@@ -2,7 +2,7 @@
 export const timezoneKoKR = {
   'Search timezones...': '시간대 검색...',
   'Select Timezone': '시간대 선택',
-
+  Timezone: '시간대',
   // 아프리카
   'Africa/Abidjan': '코트디부아르 – 아비장',
   'Africa/Accra': '가나 – 아크라',

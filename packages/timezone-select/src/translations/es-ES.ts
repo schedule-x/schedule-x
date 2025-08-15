@@ -2,6 +2,7 @@
 export const timezoneEsES = {
   'Search timezones...': 'Buscar zonas horarias...',
   'Select Timezone': 'Seleccionar zona horaria',
+  Timezone: 'Zona horaria',
 
   // África
   'Africa/Abidjan': 'Costa de Marfil – Abiyán',

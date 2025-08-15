@@ -2,6 +2,7 @@
 export const timezoneNlNL = {
   'Search timezones...': 'Zoek naar tijdzones...',
   'Select Timezone': 'Selecteer tijdzone',
+  Timezone: 'Tijdzone',
 
   // Afrika
   'Africa/Abidjan': 'Ivoorkust – Abidjan',

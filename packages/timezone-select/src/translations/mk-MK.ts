@@ -2,7 +2,7 @@
 export const timezoneMkMK = {
   'Search timezones...': 'Пребарај временски зони...',
   'Select Timezone': 'Избери временска зона',
-
+  Timezone: 'Временска зона',
   // Африка
   'Africa/Abidjan': 'Брег на Слоновата Коска – Абиџан',
   'Africa/Accra': 'Гана – Акра',

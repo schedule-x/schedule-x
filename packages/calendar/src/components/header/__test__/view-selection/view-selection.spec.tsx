@@ -18,6 +18,16 @@ describe('ViewSelection', () => {
     cleanup()
   })
 
+  it('should display the view label', async () => {
+    renderComponent()
+
+    await waitFor(() => {
+      const viewLabel = document.querySelector('.sx__view-selection-label')
+      expect(viewLabel).toBeTruthy()
+      expect(viewLabel?.textContent).toBe('View')
+    })
+  })
+
   it('should close on click outside', async () => {
     renderComponent()
     expect(isDropdownOpen()).toBe(false)

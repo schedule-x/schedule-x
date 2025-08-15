@@ -5,9 +5,12 @@ import { View } from '@schedule-x/shared/src/types/calendar/view'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
 import { useSignalEffect } from '@preact/signals'
 import chevronIcon from '@schedule-x/shared/src/assets/chevron-input.svg'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 
 export default function ViewSelection() {
   const $app = useContext(AppContext)
+  const viewSelectId = randomStringId()
+  const viewLabelId = randomStringId()
 
   const [availableViews, setAvailableViews] = useState<View[]>([])
 
@@ -112,9 +115,18 @@ export default function ViewSelection() {
 
   return (
     <div className={`sx__view-selection ${isOpen ? 'is-open' : ''}`}>
+      <label
+        for={viewSelectId}
+        id={viewLabelId}
+        className="sx__view-selection-label"
+      >
+        {$app.translate('View')}
+      </label>
       <div
+        id={viewSelectId}
         tabIndex={0}
         role="button"
+        aria-describedby={viewLabelId}
         aria-label={$app.translate('Select View')}
         className="sx__view-selection-selected-item sx__ripple"
         onClick={() => setIsOpen(!isOpen)}

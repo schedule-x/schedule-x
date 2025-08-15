@@ -2,6 +2,7 @@
 export const timezonePlPL = {
   'Search timezones...': 'Wyszukaj strefy czasowe...',
   'Select Timezone': 'Wybierz strefę czasową',
+  Timezone: 'Strefa czasowa',
 
   // Afryka
   'Africa/Abidjan': 'Wybrzeże Kości Słoniowej – Abidżan',
