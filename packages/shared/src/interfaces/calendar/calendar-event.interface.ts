@@ -1,4 +1,5 @@
 import { EventId } from '../../types/event-id'
+import { IANATimezone } from '../../utils/stateless/time/tzdb'
 import { EventFragments } from './event-fragments'
 
 export type CalendarEventOptions = {
@@ -49,7 +50,7 @@ export interface CalendarEventInternal extends CalendarEventExternal {
 
   _color: string
   _createdAt: Date | undefined
-
+  _originalTimezone: IANATimezone | undefined
   _getForeignProperties(): Record<string, unknown>
   _getExternalEvent(): CalendarEventExternal
 }

@@ -12,6 +12,7 @@ import {
 } from '../../time/format-conversion/string-to-string'
 import { EventFragments } from '../../../../interfaces/calendar/event-fragments'
 import { DEFAULT_EVENT_COLOR_NAME } from '../../../../values'
+import { IANATimezone } from '../../time/tzdb'
 
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined
@@ -19,6 +20,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   _maxConcurrentEvents: number | undefined
   _nDaysInGrid: number | undefined
   _createdAt: Date | undefined
+  _originalTimezone: IANATimezone | undefined
 
   constructor(
     private _config: CalendarConfigInternal,
@@ -33,7 +35,12 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     public _options: CalendarEventOptions | undefined = undefined,
     public _customContent: CalendarEventInternal['_customContent'] = {},
     private _foreignProperties: Record<string, unknown> = {}
-  ) {}
+  ) {
+    this._originalTimezone =
+      this._start instanceof Temporal.ZonedDateTime
+        ? (this._start.timeZoneId as IANATimezone)
+        : undefined
+  }
 
   get start(): Temporal.ZonedDateTime | Temporal.PlainDate {
     if (this._start instanceof Temporal.PlainDate) {
@@ -44,7 +51,10 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   }
 
   set start(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
-    this._start = value
+    this._start =
+      value instanceof Temporal.ZonedDateTime
+        ? value.withTimeZone(this._originalTimezone as IANATimezone)
+        : value
   }
 
   get end(): Temporal.ZonedDateTime | Temporal.PlainDate {
@@ -56,7 +66,10 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   }
 
   set end(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
-    this._end = value
+    this._end =
+      value instanceof Temporal.ZonedDateTime
+        ? value.withTimeZone(this._originalTimezone as IANATimezone)
+        : value
   }
 
   get _isSingleDayTimed(): boolean {
@@ -158,8 +171,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   _getExternalEvent(): CalendarEventExternal {
     return {
       id: this.id,
-      start: this.start,
-      end: this.end,
+      start: this._start,
+      end: this._end,
       title: this.title,
       people: this.people,
       location: this.location,

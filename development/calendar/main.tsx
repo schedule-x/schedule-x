@@ -216,17 +216,17 @@ plugins: [
   // tz new york
   timezone: 'Europe/Berlin',
   events: [
-    /* {
+    {
       id: 123,
-      start: Temporal.ZonedDateTime.from('2025-08-11T14:00+02:00[Europe/Berlin]'),
-      end: Temporal.ZonedDateTime.from('2025-08-11T15:00+02:00[Europe/Berlin]'),
+      start: Temporal.ZonedDateTime.from('2025-08-11T14:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-08-11T15:00+09:00[Asia/Tokyo]'),
       title: 'test'
-    } */
-    ...seededEvents.map(event => ({
+    }
+    /* ...seededEvents.map(event => ({
       ...event,
       start: dateStringRegex.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
       end: dateStringRegex.test(event.end) ? Temporal.PlainDate.from(event.end) : Temporal.ZonedDateTime.from(event.end),
-    })),
+    })), */
 /*     {
       id: 1,
       title: 'weekly',
