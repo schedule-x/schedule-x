@@ -18,4 +18,5 @@ export const calendarHrHR: CalendarTranslations = {
     'Link do još {{n}} događaja na {{date}}',
   'Link to 1 more event on {{date}}': 'Link do još jednog događaja na {{date}}',
   CW: '{{week}}. tjedan',
+  View: 'Pregled',
 }

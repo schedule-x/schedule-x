@@ -7,9 +7,10 @@ import { createAgendaMonth } from '../create-agenda-month'
 import TimeUnitsBuilder from '@schedule-x/shared/src/utils/stateful/time-units/time-units.builder'
 import { MonthAgendaDay } from '../../../types/month-agenda'
 import { createBaseConfig } from '../../../../../__test__/utils'
+import 'temporal-polyfill/global'
 
 const assertDate = (agendaMonthDate: MonthAgendaDay, expectedDate: string) => {
-  expect(agendaMonthDate.date).toBe(expectedDate)
+  expect(agendaMonthDate.date).toEqual(Temporal.PlainDate.from(expectedDate))
   expect(agendaMonthDate.events.length).toBe(0)
 }
 
@@ -18,7 +19,10 @@ describe('createAgendaMonth', () => {
     const timeUnitsImpl = new TimeUnitsBuilder()
       .withConfig(createBaseConfig())
       .build()
-    const result = createAgendaMonth('2023-12-15', timeUnitsImpl)
+    const result = createAgendaMonth(
+      Temporal.ZonedDateTime.from('2023-12-15T00:00:00+01:00[Europe/Berlin]'),
+      timeUnitsImpl
+    )
 
     expect(result.weeks.length).toBe(5)
     assertDate(result.weeks[0][0], '2023-11-27')

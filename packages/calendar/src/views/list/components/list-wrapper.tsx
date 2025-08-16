@@ -46,8 +46,8 @@ export const ListWrapper: PreactViewComponent = ({
         acc: Record<string, CalendarEventInternal[]>,
         event: CalendarEventInternal
       ) => {
-        const startDate = dateFromDateTime(event.start)
-        const endDate = dateFromDateTime(event.end)
+        const startDate = dateFromDateTime(event.start.toString())
+        const endDate = dateFromDateTime(event.end.toString())
         let currentDate = startDate
 
         while (currentDate <= endDate) {
@@ -55,7 +55,10 @@ export const ListWrapper: PreactViewComponent = ({
             acc[currentDate] = []
           }
           acc[currentDate].push(event)
-          currentDate = addDays(currentDate, 1)
+          currentDate = addDays(
+            Temporal.PlainDate.from(currentDate),
+            1
+          ).toString()
         }
 
         return acc
@@ -66,7 +69,9 @@ export const ListWrapper: PreactViewComponent = ({
     const sortedDays = Object.entries(daysWithEventsMap)
       .map(([date, events]) => ({
         date,
-        events: events.sort((a, b) => a.start.localeCompare(b.start)),
+        events: events.sort((a, b) =>
+          a.start.toString().localeCompare(b.start.toString())
+        ),
       }))
       .sort((a, b) => a.date.localeCompare(b.date))
 
@@ -130,7 +135,9 @@ export const ListWrapper: PreactViewComponent = ({
                 $app.config.callbacks.onScrollDayIntoView &&
                 !blockOnScrollDayIntoViewCallback.current
               ) {
-                $app.config.callbacks.onScrollDayIntoView(date)
+                $app.config.callbacks.onScrollDayIntoView(
+                  Temporal.PlainDate.from(date)
+                )
               }
             }
           })
@@ -159,8 +166,8 @@ export const ListWrapper: PreactViewComponent = ({
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
-    const eventStartDate = dateFromDateTime(event.start)
-    const eventEndDate = dateFromDateTime(event.end)
+    const eventStartDate = dateFromDateTime(event.start.toString())
+    const eventEndDate = dateFromDateTime(event.end.toString())
     const isFirstDay = eventStartDate === dayDate
     const isLastDay = eventEndDate === dayDate
     const isMultiDay = eventStartDate !== eventEndDate
@@ -171,21 +178,36 @@ export const ListWrapper: PreactViewComponent = ({
       hour12: $app.config.locale.value === 'en-US',
     } as const
 
+    const startZDT = Temporal.ZonedDateTime.from({
+      year: event.start.year,
+      month: event.start.month,
+      day: event.start.day,
+      hour:
+        event.start instanceof Temporal.ZonedDateTime ? event.start.hour : 0,
+      minute:
+        event.start instanceof Temporal.ZonedDateTime ? event.start.minute : 0,
+      timeZone: $app.config.timezone.value,
+    })
+
+    const endZDT = Temporal.ZonedDateTime.from({
+      year: event.end.year,
+      month: event.end.month,
+      day: event.end.day,
+      hour: event.end instanceof Temporal.ZonedDateTime ? event.end.hour : 0,
+      minute:
+        event.end instanceof Temporal.ZonedDateTime ? event.end.minute : 0,
+      timeZone: $app.config.timezone.value,
+    })
+
     if (!isMultiDay) {
       return (
         <>
           <div className="sx__list-event-start-time">
-            {toJSDate(event.start).toLocaleTimeString(
-              $app.config.locale.value,
-              timeOptions
-            )}
+            {startZDT.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
           {event.end && (
             <div className="sx__list-event-end-time">
-              {toJSDate(event.end).toLocaleTimeString(
-                $app.config.locale.value,
-                timeOptions
-              )}
+              {endZDT.toLocaleString($app.config.locale.value, timeOptions)}
             </div>
           )}
         </>
@@ -196,10 +218,7 @@ export const ListWrapper: PreactViewComponent = ({
       return (
         <>
           <div className="sx__list-event-start-time">
-            {toJSDate(event.start).toLocaleTimeString(
-              $app.config.locale.value,
-              timeOptions
-            )}
+            {startZDT.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
           <div className="sx__list-event-arrow">→</div>
         </>
@@ -211,10 +230,7 @@ export const ListWrapper: PreactViewComponent = ({
         <>
           <div className="sx__list-event-arrow">←</div>
           <div className="sx__list-event-end-time">
-            {toJSDate(event.end).toLocaleTimeString(
-              $app.config.locale.value,
-              timeOptions
-            )}
+            {endZDT.toLocaleString($app.config.locale.value, timeOptions)}
           </div>
         </>
       )

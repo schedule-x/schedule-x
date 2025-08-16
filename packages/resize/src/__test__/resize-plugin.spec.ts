@@ -5,6 +5,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { createResizePlugin } from '../resize.plugin'
 import { vi } from 'vitest'
+import 'temporal-polyfill/global'
 
 describe('The resize plugin', () => {
   describe('Trying to use it before being initialized', () => {

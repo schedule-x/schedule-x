@@ -18,4 +18,5 @@ export const calendarCsCZ: CalendarTranslations = {
     'Odkaz na {{n}} dalších událostí dne {{date}}',
   'Link to 1 more event on {{date}}': 'Odkaz na 1 další událost dne {{date}}',
   CW: 'Týden {{week}}',
+  View: 'Zobrazení',
 }

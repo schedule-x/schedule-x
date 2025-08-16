@@ -10,16 +10,15 @@ import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/event
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { wasEventAddedInLastSecond } from '../../month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {
   gridRow: number
   calendarEvent: CalendarEventInternal
-  date: string
   isFirstWeek: boolean
   isLastWeek: boolean
+  date: string
 }
 
 export default function MonthGridEvent({
@@ -33,20 +32,21 @@ export default function MonthGridEvent({
   const hasOverflowLeft =
     isFirstWeek &&
     $app.calendarState.range.value?.start &&
-    dateFromDateTime(calendarEvent.start) <
-      dateFromDateTime($app.calendarState.range.value.start)
+    calendarEvent.start.toString() <
+      $app.calendarState.range.value.start.toString()
   const hasOverflowRight =
     isLastWeek &&
     $app.calendarState.range.value?.end &&
-    dateFromDateTime(calendarEvent.end) >
-      dateFromDateTime($app.calendarState.range.value.end)
+    calendarEvent.end.toString() > $app.calendarState.range.value.end.toString()
   const {
     createDragStartTimeout,
     setClickedEventIfNotDragging,
     setClickedEvent,
   } = useEventInteractions($app)
 
-  const hasStartDate = dateFromDateTime(calendarEvent.start) === date
+  const plainDate = Temporal.PlainDate.from(date).toString()
+  const hasStartDate =
+    dateFromDateTime(calendarEvent.start.toString()) === plainDate
   const nDays = calendarEvent._eventFragments[date]
 
   const eventCSSVariables = {
@@ -151,7 +151,7 @@ export default function MonthGridEvent({
     >
       {!customComponent && !hasCustomContent && (
         <>
-          {dateTimeStringRegex.test(calendarEvent.start) && (
+          {calendarEvent.start instanceof Temporal.ZonedDateTime && (
             <div className="sx__month-grid-event-time">
               {timeFn(calendarEvent.start, $app.config.locale.value)}
             </div>

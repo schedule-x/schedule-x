@@ -70,15 +70,23 @@ export default function CalendarWrapper({ $app }: props) {
     if ($app.calendarState.view.value === InternalViewName.List) return
 
     const newRangeStartIsLaterThanPrevious =
-      ($app.calendarState.range.value?.start || '') > previousRangeStart
-    setTransitionClass(
-      newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
-    )
+      ($app.calendarState.range.value?.start.toString() || '') >
+      previousRangeStart
 
-    setTimeout(() => {
-      setTransitionClass('')
-    }, 300) // CORRELATION ID: 3
-    setPreviousRangeStart($app.calendarState.range.value?.start || '')
+    // Use requestAnimationFrame to ensure smooth animation timing
+    requestAnimationFrame(() => {
+      setTransitionClass(
+        newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
+      )
+
+      setTimeout(() => {
+        setTransitionClass('')
+      }, 300) // CORRELATION ID: 3
+    })
+
+    setPreviousRangeStart(
+      $app.calendarState.range.value?.start.toString() || ''
+    )
   })
 
   useSignalEffect(() => {

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -17,10 +18,10 @@ describe('Forward backward navigation', () => {
   describe('When max date prevents navigating to later dates', () => {
     it('should disable the "next"-chevron button', () => {
       const $app = __createAppWithViews__({
-        minDate: '2024-01-01',
-        maxDate: '2024-03-31',
+        minDate: Temporal.PlainDate.from('2024-01-01'),
+        maxDate: Temporal.PlainDate.from('2024-03-31'),
         defaultView: 'month-grid',
-        selectedDate: '2024-03-31',
+        selectedDate: Temporal.PlainDate.from('2024-03-31'),
       })
       renderComponent($app)
 
@@ -36,10 +37,10 @@ describe('Forward backward navigation', () => {
   describe('When min date prevents navigating to earlier dates in month view', () => {
     it('should disable the "previous"-chevron button', () => {
       const $app = __createAppWithViews__({
-        minDate: '2024-01-01',
-        maxDate: '2024-03-31',
+        minDate: Temporal.PlainDate.from('2024-01-01'),
+        maxDate: Temporal.PlainDate.from('2024-03-31'),
         defaultView: 'month-grid',
-        selectedDate: '2024-01-01',
+        selectedDate: Temporal.PlainDate.from('2024-01-01'),
       })
       renderComponent($app)
 
@@ -55,9 +56,9 @@ describe('Forward backward navigation', () => {
   describe('When min date prevents navigating to earlier dates in week view', () => {
     it('should disable the "previous"-chevron button', async () => {
       const $app = __createAppWithViews__({
-        minDate: '2024-01-06',
+        minDate: Temporal.PlainDate.from('2024-01-06'),
         defaultView: 'week',
-        selectedDate: '2024-01-08',
+        selectedDate: Temporal.PlainDate.from('2024-01-08'),
       })
       renderComponent($app)
 
@@ -79,9 +80,9 @@ describe('Forward backward navigation', () => {
   describe('When max date prevents navigating to later dates in day view', () => {
     it('should disable the "next"-chevron button', async () => {
       const $app = __createAppWithViews__({
-        maxDate: '2024-03-31',
+        maxDate: Temporal.PlainDate.from('2024-03-31'),
         defaultView: 'day',
-        selectedDate: '2024-03-30',
+        selectedDate: Temporal.PlainDate.from('2024-03-30'),
       })
       renderComponent($app)
 

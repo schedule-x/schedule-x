@@ -13,12 +13,12 @@ type props = {
 export default function DateAxis({ week }: props) {
   const $app = useContext(AppContext)
 
-  const getClassNames = (date: Date) => {
+  const getClassNames = (date: Temporal.ZonedDateTime) => {
     const classNames = [
       'sx__week-grid__date',
-      getClassNameForWeekday(date.getDay()),
+      getClassNameForWeekday(date.dayOfWeek),
     ]
-    if (isToday(date)) {
+    if (isToday(date, $app.config.timezone.value)) {
       classNames.push('sx__week-grid__date--is-today')
     }
 
@@ -64,9 +64,7 @@ export default function DateAxis({ week }: props) {
                   {getDayNameShort(date, $app.config.locale.value)}
                 </div>
 
-                <div className="sx__week-grid__date-number">
-                  {date.getDate()}
-                </div>
+                <div className="sx__week-grid__date-number">{date.day}</div>
               </>
             )}
           </div>

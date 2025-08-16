@@ -22,8 +22,8 @@ export default class CalendarEventBuilder
   constructor(
     private _config: CalendarConfigInternal,
     private id: EventId,
-    private start: string,
-    private end: string
+    private start: Temporal.ZonedDateTime | Temporal.PlainDate,
+    private end: Temporal.ZonedDateTime | Temporal.PlainDate
   ) {}
 
   build(): CalendarEventInternal {

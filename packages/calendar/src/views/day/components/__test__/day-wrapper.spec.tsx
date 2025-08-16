@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -9,6 +10,15 @@ import { cleanup, render } from '@testing-library/preact'
 import { DayWrapper } from '../day-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 const renderComponent = ($app: CalendarAppSingleton) => {
   render(<DayWrapper $app={$app} id={'randomstring'} />)
@@ -26,13 +36,17 @@ describe('DayWrapper', () => {
     it('should render a date grid event but no time grid event', () => {
       const calendarEvent = {
         id: 1,
-        start: '2023-10-12 00:00',
-        end: '2023-10-13 00:00',
+        start: Temporal.ZonedDateTime.from(
+          '2023-10-12T00:00:00[Europe/Stockholm]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2023-10-13T00:00:00[Europe/Stockholm]'
+        ),
       }
       const $app = __createAppWithViews__({
         events: [calendarEvent],
         defaultView: InternalViewName.Day,
-        selectedDate: '2023-10-12',
+        selectedDate: Temporal.PlainDate.from('2023-10-12'),
       })
 
       renderComponent($app)
@@ -46,13 +60,18 @@ describe('DayWrapper', () => {
     it('should render a time grid event but no date grid event', () => {
       const calendarEvent = {
         id: 1,
-        start: '2023-10-12 00:00',
-        end: '2023-10-12 23:59',
+        start: Temporal.ZonedDateTime.from(
+          '2023-10-12T00:00:00[Europe/Stockholm]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2023-10-12T23:59:00[Europe/Stockholm]'
+        ),
       }
       const $app = __createAppWithViews__({
         events: [calendarEvent],
         defaultView: InternalViewName.Day,
-        selectedDate: '2023-10-12',
+        selectedDate: Temporal.PlainDate.from('2023-10-12'),
+        timezone: 'Europe/Stockholm',
       })
 
       renderComponent($app)

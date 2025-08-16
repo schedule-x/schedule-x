@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -15,57 +16,62 @@ import { createBaseConfig } from '../../../../__test__/utils'
 describe('calendar state', () => {
   describe('setting the range in a non-hybrid day', () => {
     const config = new CalendarConfigBuilder().build()
+    config.timezone.value = 'UTC'
     config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
-    const timeUnitsImpl = new TimeUnitsBuilder()
-      .withConfig(createBaseConfig())
-      .build()
+    const cfg = createBaseConfig()
+    cfg.timezone.value = 'UTC'
+    const timeUnitsImpl = new TimeUnitsBuilder().withConfig(cfg).build()
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.setView(InternalViewName.Week, '2023-09-13')
+      const testDate = Temporal.PlainDate.from('2023-09-13')
+      state.setView(InternalViewName.Week, testDate)
 
-      state.setRange('2023-09-13')
+      state.setRange(testDate)
 
       expect(state.range.value).toEqual({
-        start: '2023-09-11 00:00',
-        end: '2023-09-17 23:59',
+        start: Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-17T23:59:00.00+00:00[UTC]'),
       })
     })
 
     it('should set the range for the month', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.setView(InternalViewName.MonthGrid, '2023-09-13')
+      const testDate = Temporal.PlainDate.from('2023-09-13')
+      state.setView(InternalViewName.MonthGrid, testDate)
 
-      state.setRange('2023-09-13')
+      state.setRange(testDate)
 
       expect(state.range.value).toEqual({
-        start: '2023-08-28 00:00',
-        end: '2023-10-01 23:59',
+        start: Temporal.ZonedDateTime.from('2023-08-28T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-10-01T23:59:00.00+00:00[UTC]'),
       })
     })
 
     it('should set the range for the day', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.setView(InternalViewName.Day, '2023-09-13')
+      const testDate = Temporal.PlainDate.from('2023-09-13')
+      state.setView(InternalViewName.Day, testDate)
 
-      state.setRange('2023-09-13')
+      state.setRange(testDate)
 
       expect(state.range.value).toEqual({
-        start: '2023-09-13 00:00',
-        end: '2023-09-13 23:59',
+        start: Temporal.ZonedDateTime.from('2023-09-13T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-13T23:59:00.00+00:00[UTC]'),
       })
     })
 
     it('should not update the range if both start and end remain the same', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.setView(InternalViewName.Day, '2023-09-13')
+      const testDate = Temporal.PlainDate.from('2023-09-13')
+      state.setView(InternalViewName.Day, testDate)
       state.range.value = {
-        start: '2023-09-13 00:00',
-        end: '2023-09-13 23:59',
+        start: Temporal.ZonedDateTime.from('2023-09-13T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-13T23:59:00.00+00:00[UTC]'),
       }
       const originalRange = state.range.value
 
-      state.setRange('2023-09-13')
+      state.setRange(testDate)
 
       expect(state.range.value).toBe(originalRange) // checking object equality is wanted here
     })
@@ -77,45 +83,49 @@ describe('calendar state', () => {
         start: '08:00',
         end: '02:00',
       })
+      .withTimezone('UTC')
       .build()
     config.views.value.push(...[viewWeek, viewMonthGrid, viewDay])
-    const timeUnitsImpl = new TimeUnitsBuilder()
-      .withConfig(createBaseConfig())
-      .build()
+    const cfg = createBaseConfig()
+    cfg.timezone.value = 'UTC'
+    const timeUnitsImpl = new TimeUnitsBuilder().withConfig(cfg).build()
 
     it('should set the range for the week', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.setView(InternalViewName.Week, '2023-09-13')
+      const testDate = Temporal.PlainDate.from('2023-09-13')
+      state.setView(InternalViewName.Week, testDate)
 
-      state.setRange('2023-09-13')
+      state.setRange(testDate)
 
       expect(state.range.value).toEqual({
-        start: '2023-09-11 08:00',
-        end: '2023-09-18 02:00',
+        start: Temporal.ZonedDateTime.from('2023-09-11T08:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-18T02:00:00.00+00:00[UTC]'),
       })
     })
 
     it('should set the range for the month', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.setView(InternalViewName.MonthGrid, '2023-09-13')
+      const testDate = Temporal.PlainDate.from('2023-09-13')
+      state.setView(InternalViewName.MonthGrid, testDate)
 
-      state.setRange('2023-09-13')
+      state.setRange(testDate)
 
       expect(state.range.value).toEqual({
-        start: '2023-08-28 00:00',
-        end: '2023-10-01 23:59',
+        start: Temporal.ZonedDateTime.from('2023-08-28T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-10-01T23:59:00.00+00:00[UTC]'),
       })
     })
 
     it('should set the range for the day', () => {
       const state = createCalendarState(config, timeUnitsImpl)
-      state.setView(InternalViewName.Day, '2023-09-13')
+      const testDate = Temporal.PlainDate.from('2023-09-13')
+      state.setView(InternalViewName.Day, testDate)
 
-      state.setRange('2023-09-13')
+      state.setRange(testDate)
 
       expect(state.range.value).toEqual({
-        start: '2023-09-13 08:00',
-        end: '2023-09-14 02:00',
+        start: Temporal.ZonedDateTime.from('2023-09-13T08:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-14T02:00:00.00+00:00[UTC]'),
       })
     })
   })

@@ -18,4 +18,5 @@ export const calendarMkMK: CalendarTranslations = {
     'Линк до {{n}} повеќе настани на {{date}}',
   'Link to 1 more event on {{date}}': 'Линк до 1 повеќе настан на {{date}}',
   CW: 'Недела {{week}}',
+  View: 'Преглед',
 }

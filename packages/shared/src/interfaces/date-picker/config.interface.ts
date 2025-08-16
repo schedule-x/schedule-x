@@ -3,10 +3,11 @@ import { Placement } from './placement.enum'
 import { DatePickerListeners } from './listeners.interface'
 import { DatePickerStyle } from './style.interface'
 import { WeekDay } from '../../enums/time/week-day.enum'
+import { IANATimezone } from '../../utils/stateless/time/tzdb'
 
 export default interface DatePickerConfigInternal extends Config {
-  min: string
-  max: string
+  min: Temporal.PlainDate
+  max: Temporal.PlainDate
   placement: Placement
   listeners: DatePickerListeners
   style: DatePickerStyle
@@ -14,14 +15,19 @@ export default interface DatePickerConfigInternal extends Config {
   label?: string
   name?: string
   disabled?: boolean
+  hasPlaceholder?: boolean
 }
 
 export interface DatePickerConfigExternal
   extends Partial<
-    Omit<DatePickerConfigInternal, 'placement' | 'firstDayOfWeek' | 'locale'>
+    Omit<
+      DatePickerConfigInternal,
+      'placement' | 'firstDayOfWeek' | 'locale' | 'timezone'
+    >
   > {
-  selectedDate?: string
+  selectedDate?: Temporal.PlainDate
   placement?: Placement | string
   firstDayOfWeek?: WeekDay
   locale?: string
+  timezone?: IANATimezone
 }

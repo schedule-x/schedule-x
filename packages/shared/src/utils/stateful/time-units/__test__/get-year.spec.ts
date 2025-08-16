@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -19,20 +20,20 @@ describe('get year', () => {
       const result = underTest.getMonthsFor(year)
 
       expect(result.length).toBe(12)
-      result.forEach((date) => expect(date.getFullYear()).toBe(year))
+      result.forEach((date) => expect(date.year).toBe(year))
 
-      expect(result[0].getMonth()).toBe(Month.JANUARY)
-      expect(result[1].getMonth()).toBe(Month.FEBRUARY)
-      expect(result[2].getMonth()).toBe(Month.MARCH)
-      expect(result[3].getMonth()).toBe(Month.APRIL)
-      expect(result[4].getMonth()).toBe(Month.MAY)
-      expect(result[5].getMonth()).toBe(Month.JUNE)
-      expect(result[6].getMonth()).toBe(Month.JULY)
-      expect(result[7].getMonth()).toBe(Month.AUGUST)
-      expect(result[8].getMonth()).toBe(Month.SEPTEMBER)
-      expect(result[9].getMonth()).toBe(Month.OCTOBER)
-      expect(result[10].getMonth()).toBe(Month.NOVEMBER)
-      expect(result[11].getMonth()).toBe(Month.DECEMBER)
+      expect(result[0].month).toBe(Month.JANUARY)
+      expect(result[1].month).toBe(Month.FEBRUARY)
+      expect(result[2].month).toBe(Month.MARCH)
+      expect(result[3].month).toBe(Month.APRIL)
+      expect(result[4].month).toBe(Month.MAY)
+      expect(result[5].month).toBe(Month.JUNE)
+      expect(result[6].month).toBe(Month.JULY)
+      expect(result[7].month).toBe(Month.AUGUST)
+      expect(result[8].month).toBe(Month.SEPTEMBER)
+      expect(result[9].month).toBe(Month.OCTOBER)
+      expect(result[10].month).toBe(Month.NOVEMBER)
+      expect(result[11].month).toBe(Month.DECEMBER)
     }
   )
 

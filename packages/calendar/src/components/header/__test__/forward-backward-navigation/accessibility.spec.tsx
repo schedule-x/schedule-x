@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   describe,
@@ -11,7 +12,7 @@ import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal
 
 const getApp = (locale: string) =>
   __createAppWithViews__({
-    selectedDate: '2024-01-01',
+    selectedDate: Temporal.PlainDate.from('2024-01-01'),
     defaultView: InternalViewName.Week,
     locale,
   })
@@ -33,7 +34,9 @@ describe('ForwardBackwardNavigation', () => {
       leftChevron.focus()
       leftChevron.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
 
-      expect($app.calendarState.range.value?.start).toBe('2023-12-25 00:00')
+      expect($app.calendarState.range.value?.start).toEqual(
+        Temporal.ZonedDateTime.from('2023-12-25T00:00:00.000Z[UTC]')
+      )
       const navigation = document.querySelector(
         '.sx__forward-backward-navigation'
       )
@@ -53,7 +56,9 @@ describe('ForwardBackwardNavigation', () => {
       rightChevron.focus()
       rightChevron.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
 
-      expect($app.calendarState.range.value?.start).toBe('2024-01-08 00:00')
+      expect($app.calendarState.range.value?.start).toEqual(
+        Temporal.ZonedDateTime.from('2024-01-08T00:00:00.000Z[UTC]')
+      )
       const navigation = document.querySelector(
         '.sx__forward-backward-navigation'
       )

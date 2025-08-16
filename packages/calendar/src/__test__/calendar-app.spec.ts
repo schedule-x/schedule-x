@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -12,8 +13,8 @@ import CalendarApp from '../calendar.app'
 import { vi } from 'vitest'
 
 const sampleEventTime = {
-  start: '2020-01-01',
-  end: '2020-01-02',
+  start: Temporal.PlainDate.from('2020-01-01'),
+  end: Temporal.PlainDate.from('2020-01-02'),
 }
 
 describe('CalendarApp', () => {

@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -20,7 +21,7 @@ describe('CalendarApp', () => {
 
     beforeEach(() => {
       calendarApp = createCalendar({
-        selectedDate: '2025-03-17',
+        selectedDate: Temporal.PlainDate.from('2025-03-17'),
         views: [viewWeek],
       })
       customComponentFn = vi.fn()

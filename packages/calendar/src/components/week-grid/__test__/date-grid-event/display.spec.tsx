@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -16,7 +17,7 @@ describe('style attribute "display" of date grid event element', () => {
     cleanup()
   })
 
-  const selectedDate = '2024-10-01'
+  const selectedDate = Temporal.PlainDate.from('2024-10-01')
   const oneDayEventId = 'my-event-id'
   const oneDayEventTitle = 'My event'
 

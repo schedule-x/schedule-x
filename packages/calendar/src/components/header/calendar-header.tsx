@@ -113,6 +113,11 @@ export default function CalendarHeader() {
               <div data-ccid={headerContentRightPrependId} />
             )}
 
+            {$app.config.plugins.timezoneSelect &&
+              $app.config.plugins.timezoneSelect.isEnabled.value && (
+                <$app.config.plugins.timezoneSelect.ComponentFn $app={$app} />
+              )}
+
             {$app.config.views.value.length > 1 && (
               <ViewSelection
                 key={keyForRerenderingOnLocaleChange + '-view-selection'}

@@ -8,6 +8,7 @@ import {
 import { __createAppWithViews__ } from '../../../testing/__create-app-with-views__'
 import { getClickDateTime } from '../grid-click-to-datetime'
 import { cleanup } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 describe('Getting a date time from clicking the time grid', () => {
   describe('When there are 2400 time points per day', () => {
@@ -38,10 +39,12 @@ describe('Getting a date time from clicking the time grid', () => {
       const result = getClickDateTime(
         e as unknown as MouseEvent,
         $app,
-        '2020-01-01 00:00'
+        Temporal.ZonedDateTime.from('2020-01-01T00:00:00+01:00[Europe/Berlin]')
       )
 
-      expect(result).toBe('2020-01-01 01:00')
+      expect(result).toEqual(
+        Temporal.ZonedDateTime.from('2020-01-01T01:00:00+01:00[Europe/Berlin]')
+      )
     })
 
     it('should return the correct date time, 12 hours 30 minutes into day', () => {
@@ -51,9 +54,15 @@ describe('Getting a date time from clicking the time grid', () => {
       } as unknown as MouseEvent
       const $app = __createAppWithViews__()
 
-      const result = getClickDateTime(e, $app, '2020-01-01 00:00')
+      const result = getClickDateTime(
+        e,
+        $app,
+        Temporal.ZonedDateTime.from('2020-01-01T00:00:00+01:00[Europe/Berlin]')
+      )
 
-      expect(result).toBe('2020-01-01 12:30')
+      expect(result).toEqual(
+        Temporal.ZonedDateTime.from('2020-01-01T12:30:00+01:00[Europe/Berlin]')
+      )
     })
 
     it('should return the correct date time, 23 hours 59 minutes into day', () => {
@@ -63,9 +72,15 @@ describe('Getting a date time from clicking the time grid', () => {
       } as unknown as MouseEvent
       const $app = __createAppWithViews__()
 
-      const result = getClickDateTime(e, $app, '2020-01-01 00:00')
+      const result = getClickDateTime(
+        e,
+        $app,
+        Temporal.ZonedDateTime.from('2020-01-01T00:00:00+01:00[Europe/Berlin]')
+      )
 
-      expect(result).toBe('2020-01-01 23:59')
+      expect(result).toEqual(
+        Temporal.ZonedDateTime.from('2020-01-01T23:59:00+01:00[Europe/Berlin]')
+      )
     })
   })
 })

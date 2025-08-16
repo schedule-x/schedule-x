@@ -2,56 +2,72 @@ import DatePickerState from '@schedule-x/shared/src/interfaces/date-picker/date-
 import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/date-picker-view.enum'
 import { effect, signal } from '@preact/signals'
 import { toDateString as formatToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-format/to-date-string'
-import { toDateString as dateToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import { toLocalizedDateString } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
-import { toJSDate } from '@schedule-x/shared/src'
+
+import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+
+const getLocalizedDate = (
+  date: Temporal.ZonedDateTime | Temporal.PlainDate,
+  locale: string
+) => {
+  return toLocalizedDateString(date, locale)
+}
 
 export const createDatePickerState = (
   config: DatePickerConfigInternal,
-  selectedDateParam?: string
+  selectedDateParam?: Temporal.PlainDate
 ): DatePickerState => {
-  const currentDayDateString = dateToDateString(new Date())
   const initialSelectedDate =
-    typeof selectedDateParam === 'string'
+    selectedDateParam instanceof Temporal.PlainDate
       ? selectedDateParam
-      : currentDayDateString
+      : Temporal.Now.plainDateISO()
 
   const isOpen = signal(false)
   const isDisabled = signal(config.disabled || false)
   const datePickerView = signal(DatePickerView.MONTH_DAYS)
-  const selectedDate = signal(initialSelectedDate)
-  const datePickerDate = signal(initialSelectedDate || currentDayDateString)
+  const selectedDate = signal<Temporal.PlainDate>(initialSelectedDate)
+  const datePickerDate = signal<Temporal.PlainDate>(initialSelectedDate)
   const isDark = signal(config.style?.dark || false)
-
   const inputDisplayedValue = signal(
-    selectedDateParam
-      ? toLocalizedDateString(toJSDate(selectedDateParam), config.locale.value)
-      : ''
+    toLocalizedDateString(initialSelectedDate, config.locale.value)
   )
   const lastValidDisplayedValue = signal(inputDisplayedValue.value)
-  effect(() => {
+
+  const handleInput = (newInputValue: string) => {
     try {
-      const newValue = formatToDateString(
-        inputDisplayedValue.value,
-        config.locale.value
-      )
-      if (newValue < config.min || newValue > config.max) {
+      const newValue = formatToDateString(newInputValue, config.locale.value)
+      if (
+        newValue < config.min.toString() ||
+        newValue > config.max.toString()
+      ) {
         inputDisplayedValue.value = lastValidDisplayedValue.value
         return
       }
-
-      selectedDate.value = newValue
-      datePickerDate.value = newValue
+      const { year, month, date: day } = toIntegers(newValue)
+      const newPlainDate = Temporal.PlainDate.from({
+        year,
+        month: month + 1,
+        day,
+      })
+      selectedDate.value = newPlainDate
+      datePickerDate.value = newPlainDate
       lastValidDisplayedValue.value = inputDisplayedValue.value
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_e) {
       // Nothing to do here. We don't want to log errors when users are typing invalid formats
     }
+  }
+
+  effect(() => {
+    inputDisplayedValue.value = getLocalizedDate(
+      selectedDate.value,
+      config.locale.value
+    )
   })
 
   let wasInitialized = false
-  const handleOnChange = (selectedDate: string) => {
+  const handleOnChange = (selectedDate: Temporal.PlainDate) => {
     if (!wasInitialized) return (wasInitialized = true)
 
     config.listeners.onChange!(selectedDate)
@@ -69,6 +85,7 @@ export const createDatePickerState = (
     selectedDate,
     datePickerDate,
     inputDisplayedValue,
+    handleInput,
     isDark,
     open: () => (isOpen.value = true),
     close: () => (isOpen.value = false),

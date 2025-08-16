@@ -97,13 +97,13 @@ const calendar = createCalendar({
 | COUNT                                        | Number                                                                                                                                                                               | No       |
 | INTERVAL                                     | Number                                                                                                                                                                               | No       |
 | BYDAY - compatible with `DAILY` and `WEEKLY` | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
-| BYMONTHDAY  - compatible with `MONTHLY`      | Positive integer 1-31                                                                                                                                                                | No       |
+| BYMONTHDAY  - compatible with `MONTHLY`      | (Single) Positive integer 1-31. Does not support list of values, since such lists cannot be updated in a predictable way using drag & drop.                                          | No       |
 | UNTIL                                        | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No       |
 | WKST                                         | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
 
 ## `exdate`
 
-You can exclude certain dates or date-times from a recurrence set using the `exdate` rule. For example:
+You can exclude certain dates or date-times from a recurrence set using the `exdate` rule. The expected format is RFC5455 floating date (e.g. `20240101`) or datetime (e.g. `20240101T120000`). For example:
 
 ```js
 const recurringEventWithExclusions = {
@@ -115,8 +115,8 @@ const recurringEventWithExclusions = {
   // will create a recurrence set of 3 events: 2024-02-05 14:00, 2024-02-26 14:00, 2024-03-04 14:00
   rrule: 'FREQ=WEEKLY;COUNT=5',
   exdate: [
-    '2024-02-12 14:00',
-    '2024-02-19 14:00'
+    '20240212T140000',
+    '20240219T140000'
   ]
 }
 ```
