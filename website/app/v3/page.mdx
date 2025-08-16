@@ -1,6 +1,6 @@
 # v3 of Schedule-X is coming!
 
-v3 of Schedule-X is around the corner! 🥳
+v3 of Schedule-X is around the corner! You can expect a stable release at the end of August/beginning of September 2025. 🥳
 
 A bunch of [new features](https://github.com/schedule-x/schedule-x/issues?q=is%3Aissue%20state%3Aopen%20label%3Av3) are coming to the calendar. Most significantly,
 Schedule-X is moving away from its own custom date/datetime format, and adopting [Temporal API](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal).
@@ -8,7 +8,7 @@ Schedule-X is moving away from its own custom date/datetime format, and adopting
 import {Callout} from "nextra/components";
 
 <Callout type="info">
-  Not on a tight schedule? Consider hopping on v3 right away! It's not production-ready yet, but is planned to be so during Q3 of 2025.
+  Not shipping next week? Consider hopping on v3 right away! It's not production-ready yet, but is planned to be so very soon.
 </Callout>
 
 ## Reasoning
@@ -37,17 +37,45 @@ npm install @sx-premium/interactive-event-modal@beta
 
 There is a minimal but working example of how to use the new version here: https://github.com/schedule-x/v3-beta-example
 
-## When can I use it in production?
+The biggest change is basically this:
 
-A stable release of v3 is planned during Q3 of 2025. If you're on a tight schedule, you might want to stick with v2 for now, but for anyone who's not, you might want to consider hopping on v3 right away. That way you won't have to migrate to v3 later.
+```ts
+// v2 full day events
+{
+  start: "2025-08-16",
+  end: "2025-08-17",
+}
+
+// v3 full day events
+
+{
+  start: Temporal.PlainDate.from("2025-08-16"),
+  end: Temporal.PlainDate.from("2025-08-17"),
+}
+
+// v2 timed events
+
+{
+  start: "2025-08-16 10:00",
+  end: "2025-08-16 11:00",
+}
+
+// v3 timed events
+
+{
+  start: Temporal.ZonedDateTime.from('2025-08-16T10:00:00+02:00[Europe/Berlin]'),
+  end: Temporal.ZonedDateTime.from('2025-08-16T11:00:00+02:00[Europe/Berlin]'),
+}
+```
+
+Additionally, you can now set a `timezone` in the calendar configuration, and install a timezone select: https://www.npmjs.com/package/@schedule-x/timezone-select
 
 ## What's next?
 
 The current focus is to:
 
 1) Find testers for the beta. Please [open an issue](https://github.com/schedule-x/schedule-x/issues) if you run into any problems while using the beta versions. This would help a lot!
-2) Release a beta for the React and Vue integrations
-3) Fix all the [broken unit tests](https://github.com/schedule-x/schedule-x/issues/1133) in the open source repo (anyone is welcome to help with this!)
+2) ... nothing more for now ... We're almost there!
 
 ## Continued support for v2
 
