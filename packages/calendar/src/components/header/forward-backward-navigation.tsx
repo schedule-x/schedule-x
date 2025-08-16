@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'preact/hooks'
+import { useContext, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import Chevron from '@schedule-x/shared/src/components/buttons/chevron'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
@@ -19,7 +19,7 @@ export default function ForwardBackwardNavigation() {
       direction === 'forwards'
         ? currentView.backwardForwardUnits
         : -currentView.backwardForwardUnits
-    )
+    ) as Temporal.PlainDate
   }
 
   const [localizedRange, setLocalizedRange] = useState('')
@@ -35,10 +35,12 @@ export default function ForwardBackwardNavigation() {
     )
   })
 
-  const [rangeEndMinusOneRange, setRangeEndMinusOneRange] = useState('')
-  const [rangeStartPlusOneRange, setRangeStartPlusOneRange] = useState('')
+  const [rangeEndMinusOneRange, setRangeEndMinusOneRange] =
+    useState<Temporal.ZonedDateTime | null>(null)
+  const [rangeStartPlusOneRange, setRangeStartPlusOneRange] =
+    useState<Temporal.ZonedDateTime | null>(null)
 
-  useEffect(() => {
+  useSignalEffect(() => {
     const selectedView = $app.config.views.value.find(
       (view) => view.name === $app.calendarState.view.value
     )
@@ -49,10 +51,15 @@ export default function ForwardBackwardNavigation() {
         range: $app.calendarState.range,
         calendarConfig: $app.config,
         timeUnitsImpl: $app.timeUnitsImpl,
-        date: selectedView.backwardForwardFn(
-          $app.datePickerState.selectedDate.value,
-          -selectedView.backwardForwardUnits
-        ),
+        date: (() => {
+          const result = selectedView.backwardForwardFn(
+            $app.datePickerState.selectedDate.value,
+            -selectedView.backwardForwardUnits
+          )
+          return result instanceof Temporal.ZonedDateTime
+            ? result.toPlainDate()
+            : result
+        })(),
       }).end
     )
     setRangeStartPlusOneRange(
@@ -60,13 +67,18 @@ export default function ForwardBackwardNavigation() {
         range: $app.calendarState.range,
         calendarConfig: $app.config,
         timeUnitsImpl: $app.timeUnitsImpl,
-        date: selectedView.backwardForwardFn(
-          $app.datePickerState.selectedDate.value,
-          selectedView.backwardForwardUnits
-        ),
+        date: (() => {
+          const result = selectedView.backwardForwardFn(
+            $app.datePickerState.selectedDate.value,
+            selectedView.backwardForwardUnits
+          )
+          return result instanceof Temporal.ZonedDateTime
+            ? result.toPlainDate()
+            : result
+        })(),
       }).start
     )
-  }, [$app.datePickerState.selectedDate.value, $app.calendarState.view.value])
+  })
 
   return (
     <>
@@ -79,8 +91,8 @@ export default function ForwardBackwardNavigation() {
           disabled={
             !!(
               $app.config.minDate.value &&
-              dateFromDateTime(rangeEndMinusOneRange) <
-                $app.config.minDate.value
+              dateFromDateTime(rangeEndMinusOneRange?.toString() ?? '') <
+                $app.config.minDate.value.toString()
             )
           }
           onClick={() => navigate('backwards')}
@@ -92,8 +104,9 @@ export default function ForwardBackwardNavigation() {
           disabled={
             !!(
               $app.config.maxDate.value &&
-              dateFromDateTime(rangeStartPlusOneRange) >
-                $app.config.maxDate.value
+              rangeStartPlusOneRange &&
+              dateFromDateTime(rangeStartPlusOneRange.toString()) >
+                $app.config.maxDate.value.toString()
             )
           }
           onClick={() => navigate('forwards')}

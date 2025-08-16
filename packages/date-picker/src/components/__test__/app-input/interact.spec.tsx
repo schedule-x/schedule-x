@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -50,7 +51,7 @@ describe('date picker input', () => {
   })
 
   it('should not update selected date on entering a date without pressing enter', () => {
-    const selectedDate = '2021-01-01'
+    const selectedDate = Temporal.PlainDate.from('2021-01-01')
     const $app = createAppSingleton({ selectedDate: selectedDate })
     renderComponent($app)
     const inputElement = getInputElement()
@@ -62,16 +63,22 @@ describe('date picker input', () => {
   })
 
   it('should update selected date on entering a date and pressing enter', () => {
-    const $app = createAppSingleton({ selectedDate: '2021-01-01' })
+    const $app = createAppSingleton({
+      selectedDate: Temporal.PlainDate.from('2021-01-01'),
+    })
     renderComponent($app)
 
     setNewDateAndPressEnter('1/2/2021')
 
-    expect($app.datePickerState.selectedDate.value).toBe('2021-01-02')
+    expect($app.datePickerState.selectedDate.value).toEqual(
+      Temporal.PlainDate.from('2021-01-02')
+    )
   })
 
   it('should not update input upon externally firing change event', () => {
-    const $app = createAppSingleton({ selectedDate: '2021-01-01' })
+    const $app = createAppSingleton({
+      selectedDate: Temporal.PlainDate.from('2021-01-01'),
+    })
     renderComponent($app)
     const externalInput = document.createElement('input')
     document.body.appendChild(externalInput)

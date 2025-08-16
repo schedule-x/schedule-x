@@ -5,9 +5,10 @@ export const calendarLtLT: CalendarTranslations = {
   Month: 'Mėnuo',
   Week: 'Savaitė',
   Day: 'Diena',
+  List: 'Sąrašas',
   'Select View': 'Pasirinkite vaizdą',
-  events: 'įvykiai',
-  event: 'įvykis',
+  '+ {{n}} events': '+ {{n}} įvykiai',
+  '+ 1 event': '+ 1 įvykis',
   'No events': 'Įvykių nėra',
   'Next period': 'Kitas laikotarpis',
   'Previous period': 'Ankstesnis laikotarpis',
@@ -17,4 +18,5 @@ export const calendarLtLT: CalendarTranslations = {
     'Nuoroda į dar {{n}} įvykius {{date}}',
   'Link to 1 more event on {{date}}': 'Nuoroda į dar 1 vieną įvykį {{date}}',
   CW: '{{week}} savaitė',
+  View: 'Vaizdas',
 }

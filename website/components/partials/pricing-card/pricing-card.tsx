@@ -56,7 +56,7 @@ export default function PricingCard({ data, buttonClass, onSelectVariant, price,
       </ul>
 
       {licenseType && (
-        <button className={buttonClass + ' btn'} onClick={() => startCheckout(licenseType)}>{data.buttonText}</button>
+        <button className={buttonClass + ' btn'} onClick={() => startCheckout?.(licenseType)}>{data.buttonText}</button>
       )}
     </div>
   );

@@ -2,14 +2,13 @@ import { WeekWithDates } from '@schedule-x/shared/src/types/time'
 import { DATE_PICKER_WEEK } from '../constants/test-ids'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import {
   isSameMonth,
   isToday,
 } from '@schedule-x/shared/src/utils/stateless/time/comparison'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { addDays } from '@schedule-x/shared/src'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
+import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 type props = {
   week: WeekWithDates
@@ -19,37 +18,39 @@ export default function MonthViewWeek({ week }: props) {
   const $app = useContext(AppContext)
 
   type WeekDay = {
-    day: Date
+    day: Temporal.PlainDate
     classes: string[]
   }
 
   const weekDays: WeekDay[] = week.map((day) => {
     const classes = ['sx__date-picker__day']
-    if (isToday(day)) classes.push('sx__date-picker__day--today')
-    if (toDateString(day) === $app.datePickerState.selectedDate.value)
+    if (isToday(day, $app.config.timezone.value))
+      classes.push('sx__date-picker__day--today')
+    if (isSameDay(day, $app.datePickerState.selectedDate.value))
       classes.push('sx__date-picker__day--selected')
-    if (!isSameMonth(day, toJSDate($app.datePickerState.datePickerDate.value)))
+    if (!isSameMonth(day, $app.datePickerState.datePickerDate.value))
       classes.push('is-leading-or-trailing')
 
     return {
-      day,
+      day: day.toPlainDate(),
       classes,
     }
   })
 
-  const isDateSelectable = (date: Date) => {
-    const dateString = toDateString(date)
-
-    return dateString >= $app.config.min && dateString <= $app.config.max
+  const isDateSelectable = (date: Temporal.PlainDate) => {
+    return (
+      date.toString() >= $app.config.min.toString() &&
+      date.toString() <= $app.config.max.toString()
+    )
   }
 
-  const selectDate = (date: Date) => {
-    $app.datePickerState.selectedDate.value = toDateString(date)
+  const selectDate = (date: Temporal.PlainDate) => {
+    $app.datePickerState.selectedDate.value = date
     $app.datePickerState.close()
   }
 
   const hasFocus = (weekDay: WeekDay) =>
-    toDateString(weekDay.day) === $app.datePickerState.datePickerDate.value
+    isSameDay(weekDay.day, $app.datePickerState.datePickerDate.value)
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Enter') {
@@ -68,7 +69,7 @@ export default function MonthViewWeek({ week }: props) {
     $app.datePickerState.datePickerDate.value = addDays(
       $app.datePickerState.datePickerDate.value,
       keyMapDaysToAdd.get(event.key) || 0
-    )
+    ) as Temporal.PlainDate
   }
 
   return (
@@ -88,7 +89,7 @@ export default function MonthViewWeek({ week }: props) {
             onClick={() => selectDate(weekDay.day)}
             onKeyDown={handleKeyDown}
           >
-            {weekDay.day.getDate()}
+            {weekDay.day.day}
           </button>
         ))}
       </div>

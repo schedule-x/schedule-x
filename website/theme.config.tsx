@@ -1,11 +1,8 @@
 import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
-import Logo from './components/theme/logo'
 import { useRouter } from 'next/router'
 import CustomFooter from './components/theme/custom-footer'
 
-const config: DocsThemeConfig = {
-  logo: Logo,
+const config = {
   logoLink: false,
   project: {
     link: 'https://github.com/schedule-x/schedule-x',
@@ -27,12 +24,9 @@ const config: DocsThemeConfig = {
     }
   },
   darkMode: false,
+
   feedback: {
     useLink: () => 'https://github.com/schedule-x/schedule-x/issues/new/choose'
-  },
-
-  nextThemes: {
-    forcedTheme: 'light',
   },
 
   head: () => {
@@ -72,18 +66,18 @@ const config: DocsThemeConfig = {
       </>
     )
   },
-
+/* 
   banner: {
-    key: 'scheduling-assistant-plugin-1.0',
+    key: 'v3-beta-1',
     text: (
-      <a href="/docs/calendar/plugins/scheduling-assistant" target="_blank">
+      <a href="/v3" target="_blank">
         <span style={{ backgroundColor: '#f6e05e', color: '#000', borderRadius: '4px', padding: '2px 6px', marginRight: '5px', fontSize: '0.75rem' }}>
           NEW
         </span>
-        Scheduling Assistant ✨
+        v3 of Schedule-X is coming! 🥳
       </a>
     )
-  }
+  } */
 }
 
 export default config

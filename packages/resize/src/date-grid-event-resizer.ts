@@ -3,13 +3,12 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { getTimeGridDayWidth } from '@schedule-x/shared/src/utils/stateless/calendar/get-time-grid-day-width'
 import { addDays } from '@schedule-x/shared/src'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { updateEventsList } from './utils/stateless/update-events-list'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
 export class DateGridEventResizer {
   private readonly dayWidth: number = 0
-  private readonly originalEventEnd: string
+  private readonly originalEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   private readonly ORIGINAL_NDAYS: number
   private lastNDaysDiff = 0
 
@@ -33,15 +32,28 @@ export class DateGridEventResizer {
   setupEventListeners() {
     ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
       'mousemove',
-      this.handleMouseMove
+      this.handleMouseOrTouchMove
     )
-    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
+    document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
+    ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
+      'touchmove',
+      this.handleMouseOrTouchMove,
+      { passive: false }
+    )
+    document.addEventListener('touchend', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
   }
 
-  private handleMouseMove = (event: MouseEvent) => {
-    const xDifference = event.clientX - this.initialX
+  private handleMouseOrTouchMove = (event: UIEvent) => {
+    const { clientX } = getEventCoordinates(event)
+    const xDifference = clientX - this.initialX
     let lastNDaysDiff = Math.floor(xDifference / this.dayWidth)
     if (this.$app.config.direction === 'rtl') lastNDaysDiff *= -1
+
+    if (lastNDaysDiff === this.lastNDaysDiff) return
 
     this.lastNDaysDiff = lastNDaysDiff
     this.setNewTimeForEventEnd()
@@ -49,13 +61,18 @@ export class DateGridEventResizer {
 
   private setNewTimeForEventEnd() {
     const newEnd = addDays(this.originalEventEnd, this.lastNDaysDiff)
+    let rangeStart: Temporal.ZonedDateTime | Temporal.PlainDate = (
+      this.$app.calendarState.range.value as DateRange
+    ).start
+    if (newEnd instanceof Temporal.PlainDate) {
+      rangeStart = Temporal.PlainDate.from(rangeStart)
+    }
+
     if (
-      newEnd > (this.$app.calendarState.range.value as DateRange).end ||
-      newEnd < this.eventCopy.start ||
-      newEnd <
-        toDateString(
-          toJSDate((this.$app.calendarState.range.value as DateRange).start)
-        )
+      newEnd.toString() >
+        (this.$app.calendarState.range.value as DateRange).end.toString() ||
+      newEnd.toString() < this.eventCopy.start.toString() ||
+      newEnd.toString() < rangeStart.toString()
     )
       return
 
@@ -64,7 +81,7 @@ export class DateGridEventResizer {
     this.updateCopy(this.eventCopy)
   }
 
-  private handleMouseUp = async () => {
+  private handleMouseUpOrTouchEnd = async () => {
     const onBeforeEventUpdate =
       this.$app.config.callbacks.onBeforeEventUpdateAsync ||
       this.$app.config.callbacks.onBeforeEventUpdate
@@ -107,7 +124,11 @@ export class DateGridEventResizer {
     )
     ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
       'mousemove',
-      this.handleMouseMove
+      this.handleMouseOrTouchMove
+    )
+    ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
+      'touchmove',
+      this.handleMouseOrTouchMove
     )
   }
 }

@@ -1,0 +1,107 @@
+---
+title: "Schedule-X v3: Embracing the Future with Temporal API"
+date: "2025-08-29"
+author: "Tom Österlund"
+tags: ["v3", "temporal-api", "timezone", "release"]
+readTime: "5 min read"
+excerpt: "Discover how Schedule-X v3 leverages the Temporal API to provide better datetime handling, simplified timezone management, and support for non-Gregorian calendars."
+---
+
+# Schedule-X v3: Embracing the Future with Temporal API
+
+Schedule-X v3 is here, and brings about some big changes to the library. Most significantly, the library moves away from its own custom, floating date- and time format, to using [`Temporal`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal).
+
+This is an exciting development, because `Temporal` is just starting to land in browsers, and is likely to become the new standard for handling date and time in JavaScript.
+
+## A peek at the new API
+
+Starting from v3, a calendar can be installed like so:
+
+```bash copy
+npm i @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
+```
+
+Note, that the `temporal-polyfill` is not required if you know that your users are all in an environment that already supports `Temporal`.
+
+You can then set up a timezone-aware calendar, displaying all events according to London time, like so:
+
+```ts
+import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
+import '@schedule-x/theme-default/dist/index.css'
+import 'temporal-polyfill/global'
+
+const calendar = createCalendar({
+  views: [createViewMonthGrid()],
+  
+  timezone: 'Europe/London',
+
+  events: [
+    {
+      id: 1,
+      title: 'Coffee with John',
+      start: Temporal.ZonedDateTime.from('2023-12-04T10:05:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-12-04T10:35:00+01:00[Europe/Berlin]'),
+    },
+
+    {
+      id: 2,
+      title: 'Meeting with Jane',
+      start: Temporal.ZonedDateTime.from('2023-12-04T18:05:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2023-12-04T18:35:00+09:00[Asia/Tokyo]'),
+    },
+  ],
+})
+
+calendar.render(document.getElementById('calendar'))
+```
+
+Which will then result in the following:
+
+<img src="https://d19hgxvhjb2new.cloudfront.net/website/Bildschirmfoto%202025-08-29%20um%2007.22.25.png" alt="Calendar with events in London time and Tokyo time" style={{width: '100%', height: 'auto'}} />
+
+## `Temporal.PlainDate`
+
+Going forward, the library also supports the use of `Temporal.PlainDate`. Picture the use case, that you're building a calendar for a global company, where in all countries employees have a day off for New Years Eve and Day.
+
+Using timezone aware events for this, would quickly get quite cumbersome, since now you would need to have events starting at midnight in every timezone.
+
+With `Temporal.PlainDate`, you can simply set an event to occur on December 31st, and the calendar will take care of the rest.
+
+```ts
+const newYears = {
+    id: 3,
+    title: 'Holidays',
+    start: Temporal.PlainDate.from({ year: 2025, month: 12, day: 31 }),
+    end: Temporal.PlainDate.from({ year: 2026, month: 1, day: 1 }),
+}
+```
+
+## Non-Gregorian calendars
+
+Another huge perk of the new API, is that it will enable Schedule-X to better support use of non-Gregorian calendars. This is not yet supported, but is planned for release during the lifespan of v3.
+
+The idea is that you should be able to set up a calendar like so:
+
+```ts
+const calendar = createCalendar({
+  views: [createViewMonthGrid()],
+
+  locale: 'zh-CN',
+  
+  timezone: 'Asia/Shanghai',
+
+  calendarSystem: 'chinese',
+})
+
+calendar.render(document.getElementById('calendar'))
+```
+
+And with that, display an entirely Chinese calendar.
+
+## Some words on the `temporal-polyfill`
+
+This was a huge leap forward for Schedule-X. Admittedly, having to add new dependencies, like the `temporal-polyfill`, might seem like an odd choice to some people. Why not wait for `Temporal` to have landed in all browsers?
+
+Well, the simple answer is that Schedule-X aims to be a **modern solution to scheduling**, and migrating to a new standard like Temporal seemed like a no-brainer. If we wanted to wait for `Temporal` to have landed in enough browsers and user thus user devices, we would be waiting for multiple years. 
+
+Additionally, `temporal-polyfill` is developed and maintained by [Adam Shaw](https://arshaw.com/), the creator of FullCalendar, who has quite the track record in shipping open source software. So the added dependency seemed like a pretty great, and reliable, trade-off, for being able to migrate to Temporal.

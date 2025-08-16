@@ -5,9 +5,10 @@ export const calendarCaES: CalendarTranslations = {
   Month: 'Mes',
   Week: 'Setmana',
   Day: 'Dia',
+  List: 'Llista',
   'Select View': 'Selecciona una vista',
-  events: 'Esdeveniments',
-  event: 'Esdeveniment',
+  '+ {{n}} events': '+ {{n}} Esdeveniments',
+  '+ 1 event': '+ 1 Esdeveniment',
   'No events': 'Sense esdeveniments',
   'Next period': 'Següent període',
   'Previous period': 'Període anterior',
@@ -18,4 +19,5 @@ export const calendarCaES: CalendarTranslations = {
     'Enllaç a {{n}} esdeveniments més el {{date}}',
   'Link to 1 more event on {{date}}': 'Enllaç a 1 esdeveniment més el {{date}}',
   CW: 'Setmana {{week}}',
+  View: 'Vista',
 }

@@ -5,9 +5,10 @@ export const calendarPtBR: CalendarTranslations = {
   Month: 'Mês',
   Week: 'Semana',
   Day: 'Dia',
+  List: 'Lista',
   'Select View': 'Selecione uma visualização',
-  events: 'eventos',
-  event: 'evento',
+  '+ {{n}} events': '+ {{n}} eventos',
+  '+ 1 event': '+ 1 evento',
   'No events': 'Sem eventos',
   'Next period': 'Período seguinte',
   'Previous period': 'Período anterior',
@@ -17,4 +18,5 @@ export const calendarPtBR: CalendarTranslations = {
     'Link para mais {{n}} eventos em {{date}}',
   'Link to 1 more event on {{date}}': 'Link para mais 1 evento em {{date}}',
   CW: 'Semana {{week}}',
+  View: 'Visualização',
 }

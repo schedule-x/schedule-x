@@ -5,9 +5,10 @@ export const calendarMkMK: CalendarTranslations = {
   Month: 'Месец',
   Week: 'Недела',
   Day: 'Ден',
+  List: 'Листа',
   'Select View': 'Избери Преглед',
-  events: 'настани',
-  event: 'настан',
+  '+ {{n}} events': '+ {{n}} настани',
+  '+ 1 event': '+ 1 настан',
   'No events': 'Нема настани',
   'Next period': 'Следен период',
   'Previous period': 'Претходен период',
@@ -17,4 +18,5 @@ export const calendarMkMK: CalendarTranslations = {
     'Линк до {{n}} повеќе настани на {{date}}',
   'Link to 1 more event on {{date}}': 'Линк до 1 повеќе настан на {{date}}',
   CW: 'Недела {{week}}',
+  View: 'Преглед',
 }

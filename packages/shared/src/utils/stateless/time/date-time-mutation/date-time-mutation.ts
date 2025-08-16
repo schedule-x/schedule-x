@@ -1,39 +1,38 @@
 import { addMonths } from './adding'
-import { toDateString } from '../format-conversion/date-to-strings'
+import { __deprecated__jsDateToDateString } from '../format-conversion/date-to-strings'
 import { toJSDate } from '../format-conversion/format-conversion'
-import { timeFromDateTime } from '../format-conversion/string-to-string'
-import { doubleDigit } from './double-digit'
 
-export const setDateOfMonth = (dateString: string, date: number): string => {
-  dateString = dateString.slice(0, 8) + doubleDigit(date) + dateString.slice(10)
-
-  return dateString
+export const getFirstDayOPreviousMonth = (
+  date: Temporal.PlainDate
+): Temporal.PlainDate => {
+  return addMonths(date, -1).with({ day: 1 }) as Temporal.PlainDate
 }
 
-export const getFirstDayOPreviousMonth = (dateString: string): string => {
-  dateString = addMonths(dateString, -1)
-  return setDateOfMonth(dateString, 1)
-}
-
-export const getFirstDayOfNextMonth = (dateString: string): string => {
-  dateString = addMonths(dateString, 1)
-  return setDateOfMonth(dateString, 1)
+export const getFirstDayOfNextMonth = (
+  date: Temporal.PlainDate
+): Temporal.PlainDate => {
+  const nextMonth = addMonths(date, 1)
+  return nextMonth.with({ day: 1 }) as Temporal.PlainDate
 }
 
 export const setTimeInDateTimeString = (
   dateTimeString: string,
   newTime: string
 ): string => {
-  const dateCache = toDateString(toJSDate(dateTimeString))
+  const dateCache = __deprecated__jsDateToDateString(toJSDate(dateTimeString))
 
   return `${dateCache} ${newTime}`
 }
 
-export const setDateInDateTimeString = (
-  dateTimeString: string,
-  newDate: string
-): string => {
-  const timeCache = timeFromDateTime(dateTimeString)
+export const setDateInDateTime = (
+  dateTime: Temporal.ZonedDateTime,
+  newDate: Temporal.ZonedDateTime
+): Temporal.ZonedDateTime => {
+  const updatedDateTime = dateTime.with({
+    year: newDate.year,
+    month: newDate.month,
+    day: newDate.day,
+  })
 
-  return `${newDate} ${timeCache}`
+  return updatedDateTime
 }

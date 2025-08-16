@@ -15,6 +15,7 @@ import { AppContext } from '../../../../utils/stateful/app-context'
 import { getTestEvent } from './test-events'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { beforeEach, vi } from 'vitest'
+import 'temporal-polyfill/global'
 
 const renderComponent = ($app: CalendarAppSingleton, day: MonthDayType) => {
   render(
@@ -35,13 +36,13 @@ describe('MonthDay component', () => {
     const calendarEventInternal = new CalendarEventBuilder(
       $app.config,
       1,
-      '2020-01-01 00:00',
-      '2020-01-01 23:59'
+      Temporal.ZonedDateTime.from('2020-01-01T00:00:00.00+00:00[UTC]'),
+      Temporal.ZonedDateTime.from('2020-01-01T23:59:00.00+00:00[UTC]')
     )
       .withTitle(eventTitle)
       .build()
     const dayWithOneEvent: MonthDayType = {
-      date: '2020-01-01',
+      date: Temporal.PlainDate.from('2020-01-01'),
       events: {
         '0': calendarEventInternal,
       },
@@ -59,7 +60,7 @@ describe('MonthDay component', () => {
     const $app = __createAppWithViews__()
     const calendarEventInternal = getTestEvent($app)
     const dayWithOneEvent: MonthDayType = {
-      date: '2020-01-01',
+      date: Temporal.PlainDate.from('2020-01-01'),
       events: {
         '0': calendarEventInternal,
       },
@@ -78,7 +79,7 @@ describe('MonthDay component', () => {
   describe('displaying one more event than the limit', () => {
     const $app = __createAppWithViews__()
     const dayWithEventLimitPlus1: MonthDayType = {
-      date: '2020-01-01',
+      date: Temporal.PlainDate.from('2020-01-01'),
       events: {
         '0': getTestEvent($app),
         '1': getTestEvent($app),
@@ -109,7 +110,7 @@ describe('MonthDay component', () => {
       },
     })
     const dayWithEventLimitPlus2: MonthDayType = {
-      date: '2020-01-01',
+      date: Temporal.PlainDate.from('2020-01-01'),
       events: {
         '0': getTestEvent($app),
         '1': getTestEvent($app),
@@ -142,7 +143,8 @@ describe('MonthDay component', () => {
       )
 
       expect(onClickPlusEvents).toHaveBeenCalledWith(
-        dayWithEventLimitPlus2.date
+        Temporal.PlainDate.from(dayWithEventLimitPlus2.date),
+        expect.any(UIEvent)
       )
     })
 
@@ -182,7 +184,7 @@ describe('MonthDay component', () => {
       },
     })
     const day: MonthDayType = {
-      date: '2020-01-01',
+      date: Temporal.PlainDate.from('2020-01-01'),
       events: {
         '0': getTestEvent($app),
         '1': getTestEvent($app),
@@ -218,10 +220,10 @@ describe('MonthDay component', () => {
 
     beforeEach(() => {
       $app = __createAppWithViews__({
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
       })
       day = {
-        date: '2020-01-01',
+        date: Temporal.PlainDate.from('2020-01-01'),
         events: {},
         backgroundEvents: [],
       }
@@ -234,14 +236,14 @@ describe('MonthDay component', () => {
     })
 
     it('should have the class "is-leading-or-trailing" when day is in month previous to selected month', () => {
-      day.date = '2019-12-31'
+      day.date = Temporal.PlainDate.from('2019-12-31')
       renderComponent($app, day)
 
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
     })
 
     it('should have the class "is-leading-or-trailing" when day is in month after selected month', () => {
-      day.date = '2020-02-01'
+      day.date = Temporal.PlainDate.from('2020-02-01')
       renderComponent($app, day)
 
       expect(document.querySelector('.is-leading-or-trailing')).not.toBeNull()
@@ -250,17 +252,13 @@ describe('MonthDay component', () => {
 
   describe('getting the aria label for the more events button', () => {
     it.each([
-      [
-        'de-DE',
-        '+ 1 Ereignis',
-        'Link zu 1 weiteren Ereignis am 1. Januar 2020',
-      ],
+      ['de-DE', '+ 1 Ereignis', 'Link zu 1 weiterem Termin am 1. Januar 2020'],
       ['en-US', '+ 1 event', 'Link to 1 more event on January 1, 2020'],
       ['es-ES', '+ 1 evento', 'Enlace a 1 evento más el 1 de enero de 2020'],
       [
         'fr-FR',
         '+ 1 événement',
-        'Lien vers 1 autre événement le 1 janvier 2020',
+        'Lien vers 1 événement supplémentaire le 1 janvier 2020',
       ],
     ])(
       'should return the singular translation',
@@ -269,7 +267,7 @@ describe('MonthDay component', () => {
           locale: locale,
         })
         const day: MonthDayType = {
-          date: '2020-01-01',
+          date: Temporal.PlainDate.from('2020-01-01'),
           events: {
             '0': getTestEvent($app),
             '1': getTestEvent($app),
@@ -297,7 +295,7 @@ describe('MonthDay component', () => {
     it('should show correct number of extra events', () => {
       const $app = __createAppWithViews__()
       const day: MonthDayType = {
-        date: '2020-01-01',
+        date: Temporal.PlainDate.from('2020-01-01'),
         events: {
           '0': undefined,
           '1': undefined,

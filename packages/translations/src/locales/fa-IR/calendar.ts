@@ -5,9 +5,10 @@ export const calendarFaIR: CalendarTranslations = {
   Month: 'ماه',
   Week: 'هفته',
   Day: 'روز',
+  List: 'لیست',
   'Select View': 'انتخاب نما',
-  events: 'رویدادها',
-  event: 'رویداد',
+  '+ {{n}} events': '+ {{n}} رویدادها',
+  '+ 1 event': '+ 1 رویداد',
   'No events': 'رویدادی وجود ندارد',
   'Next period': 'دوره بعدی',
   'Previous period': 'دوره قبلی',
@@ -18,4 +19,5 @@ export const calendarFaIR: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'لینک به 1 رویداد بیشتر در تاریخ {{date}}',
   CW: 'هفته {{week}}',
+  View: 'نمایش',
 }

@@ -4,7 +4,7 @@ import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/
 export const getClickDateTime = (
   e: MouseEvent,
   $app: CalendarAppSingleton,
-  dayStartDateTime: string
+  dayStartDateTime: Temporal.ZonedDateTime
 ) => {
   if (!(e.target instanceof HTMLElement)) return
 

@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
+
+### Bug Fixes
+
+- event recurrence for background events ([#1110](https://github.com/schedule-x/schedule-x/issues/1110)) ([99644ac](https://github.com/schedule-x/schedule-x/commit/99644ac976450b5caabd8d9e2f91d3eae7e029cc))
+
+### Features
+
+- enable using exdate with background events ([#1124](https://github.com/schedule-x/schedule-x/issues/1124)) ([92d9b36](https://github.com/schedule-x/schedule-x/commit/92d9b36f7a320763759b9051f2a95765745bdd0f))
+
+# [2.35.0](https://github.com/schedule-x/schedule-x/compare/v2.34.0...v2.35.0) (2025-06-27)
+
+**Note:** Version bump only for package @schedule-x/event-recurrence
+
+# [2.34.0](https://github.com/schedule-x/schedule-x/compare/v2.33.0...v2.34.0) (2025-06-20)
+
+### Bug Fixes
+
+- **event-recurrence:** fix error for recurrence sets where no recurrences are within the range ([#1085](https://github.com/schedule-x/schedule-x/issues/1085)) ([02ef218](https://github.com/schedule-x/schedule-x/commit/02ef218c2f913280e40cc7293dea21bff4499c10))
+
+# [2.33.0](https://github.com/schedule-x/schedule-x/compare/v2.32.0...v2.33.0) (2025-06-16)
+
+**Note:** Version bump only for package @schedule-x/event-recurrence
+
 # [2.32.0](https://github.com/schedule-x/schedule-x/compare/v2.31.1...v2.32.0) (2025-05-31)
 
 **Note:** Version bump only for package @schedule-x/event-recurrence

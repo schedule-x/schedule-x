@@ -5,9 +5,10 @@ export const calendarSlSI: CalendarTranslations = {
   Month: 'Mesec',
   Week: 'Teden',
   Day: 'Dan',
+  List: 'Seznam',
   'Select View': 'Izberi pogled',
-  events: 'dogodki',
-  event: 'dogodek',
+  '+ {{n}} events': '+ {{n}} dogodki',
+  '+ 1 event': '+ 1 dogodek',
   'No events': 'Ni dogodkov',
   'Next period': 'Naslednji dogodek',
   'Previous period': 'Prejšnji dogodek',
@@ -18,4 +19,5 @@ export const calendarSlSI: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Povezava do še enega dogodka dne {{date}}',
   CW: 'Teden {{week}}',
+  View: 'Pogled',
 }

@@ -9,6 +9,7 @@ on:
 
 env:
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
 
 jobs:
   build_website:
@@ -19,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Install dependencies 🛠️
         working-directory: ./website
-        run: npm i
+        run: npm i --force
       - name: Build
         working-directory: ./website
         run: npm run build

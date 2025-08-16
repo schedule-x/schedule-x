@@ -5,9 +5,10 @@ export const calendarRoRO: CalendarTranslations = {
   Month: 'Lună',
   Week: 'Săptămână',
   Day: 'Zi',
+  List: 'Listă',
   'Select View': 'Selectează vizualizarea',
-  events: 'evenimente',
-  event: 'eveniment',
+  '+ {{n}} events': '+ {{n}} evenimente',
+  '+ 1 event': '+ 1 eveniment',
   'No events': 'Fără evenimente',
   'Next period': 'Perioada următoare',
   'Previous period': 'Perioada anterioară',
@@ -19,4 +20,5 @@ export const calendarRoRO: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Link către 1 eveniment suplimentar pe {{date}}',
   CW: 'Săptămâna {{week}}',
+  View: 'Vizualizare',
 }

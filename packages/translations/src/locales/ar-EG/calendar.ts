@@ -5,9 +5,10 @@ export const calendarArEG: CalendarTranslations = {
   Month: 'الشهر',
   Week: 'الأسبوع',
   Day: 'اليوم',
+  List: 'القائمة',
   'Select View': 'اختر العرض',
-  events: 'الأحداث',
-  event: 'حدث',
+  '+ {{n}} events': '+ {{n}} الأحداث',
+  '+ 1 event': '+ 1 حدث',
   'No events': 'لا توجد أحداث',
   'Next period': 'الفترة التالية',
   'Previous period': 'الفترة السابقة',
@@ -17,4 +18,5 @@ export const calendarArEG: CalendarTranslations = {
     'رابط إلى {{n}} أحداث أخرى في {{date}}',
   'Link to 1 more event on {{date}}': 'رابط إلى حدث آخر في {{date}}',
   CW: 'الأسبوع {{week}}',
+  View: 'عرض',
 }

@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
+
+### Bug Fixes
+
+- memory leak week view ([#1121](https://github.com/schedule-x/schedule-x/issues/1121)) ([fcfb7aa](https://github.com/schedule-x/schedule-x/commit/fcfb7aa423cd6b6e0aa1b7a4ecca32de82ab87f8))
+
+### Features
+
+- enable background events to be timed and multiple days long ([#1111](https://github.com/schedule-x/schedule-x/issues/1111)) ([fe658b2](https://github.com/schedule-x/schedule-x/commit/fe658b2deffdf07dc3f6ce0379f0c12bda9d0c7f))
+
+# [2.35.0](https://github.com/schedule-x/schedule-x/compare/v2.34.0...v2.35.0) (2025-06-27)
+
+### Bug Fixes
+
+- **calendar:** range heading after using list view ([#1099](https://github.com/schedule-x/schedule-x/issues/1099)) ([dbc08a3](https://github.com/schedule-x/schedule-x/commit/dbc08a32274f278d46cf893f09b132f7b982c59a))
+
+### Features
+
+- add list view ([#1097](https://github.com/schedule-x/schedule-x/issues/1097)) ([53aabde](https://github.com/schedule-x/schedule-x/commit/53aabde89b7349a55f4d8002e33a47d97f66b90a))
+- improve flexibility for translation key "+ x events" ([#1095](https://github.com/schedule-x/schedule-x/issues/1095)) ([fa25d7a](https://github.com/schedule-x/schedule-x/commit/fa25d7a4b9bc4339f00b821ac6aac132d1df9bbb))
+- **resize:** add compatibility for touch devices ([#1098](https://github.com/schedule-x/schedule-x/issues/1098)) ([927d9ae](https://github.com/schedule-x/schedule-x/commit/927d9ae801de7d521e2a801f3e1864f1758ccb62))
+
+# [2.34.0](https://github.com/schedule-x/schedule-x/compare/v2.33.0...v2.34.0) (2025-06-20)
+
+### Features
+
+- add optional UIEvent-param for callbacks ([#1083](https://github.com/schedule-x/schedule-x/issues/1083)) ([4ab30cc](https://github.com/schedule-x/schedule-x/commit/4ab30cc0e4ca9158de2226484360b665b5e2296e))
+- **calendar:** add to dependency array for header custom components ([#1086](https://github.com/schedule-x/schedule-x/issues/1086)) ([4e98e22](https://github.com/schedule-x/schedule-x/commit/4e98e220b92138c2e6fa8d42032e7038f6f4777c))
+
+# [2.33.0](https://github.com/schedule-x/schedule-x/compare/v2.32.0...v2.33.0) (2025-06-16)
+
+**Note:** Version bump only for package @schedule-x/calendar
+
 # [2.32.0](https://github.com/schedule-x/schedule-x/compare/v2.31.1...v2.32.0) (2025-05-31)
 
 ### Bug Fixes

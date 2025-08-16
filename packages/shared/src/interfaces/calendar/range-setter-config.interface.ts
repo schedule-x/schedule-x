@@ -4,7 +4,7 @@ import { DateRange } from '../../types/date-range'
 import { Signal } from '@preact/signals'
 
 export interface RangeSetterConfig {
-  date: string
+  date: Temporal.PlainDate
   timeUnitsImpl: TimeUnits
   calendarConfig: CalendarConfigInternal
   range: Signal<DateRange | null>

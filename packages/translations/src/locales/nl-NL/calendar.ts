@@ -5,9 +5,10 @@ export const calendarNlNL: CalendarTranslations = {
   Month: 'Maand',
   Week: 'Week',
   Day: 'Dag',
+  List: 'Lijst',
   'Select View': 'Kies weergave',
-  events: 'gebeurtenissen',
-  event: 'gebeurtenis',
+  '+ {{n}} events': '+ {{n}} gebeurtenissen',
+  '+ 1 event': '+ 1 gebeurtenis',
   'No events': 'Geen gebeurtenissen',
   'Next period': 'Volgende periode',
   'Previous period': 'Vorige periode',
@@ -18,4 +19,5 @@ export const calendarNlNL: CalendarTranslations = {
     'Link naar {{n}} meer evenementen op {{date}}',
   'Link to 1 more event on {{date}}': 'Link naar 1 meer evenement op {{date}}',
   CW: 'Week {{week}}',
+  View: 'Weergave',
 }

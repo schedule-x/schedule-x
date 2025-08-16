@@ -5,9 +5,10 @@ export const calendarSrLatnRS: CalendarTranslations = {
   Month: 'Mesec',
   Week: 'Nedelja',
   Day: 'Dan',
+  List: 'Lista',
   'Select View': 'Odaberite pregled',
-  events: 'Događaji',
-  event: 'Događaj',
+  '+ {{n}} events': '+ {{n}} Događaji',
+  '+ 1 event': '+ 1 Događaj',
   'No events': 'Nema događaja',
   'Next period': 'Naredni period',
   'Previous period': 'Prethodni period',
@@ -17,4 +18,5 @@ export const calendarSrLatnRS: CalendarTranslations = {
     'Link do još {{n}} događaja na {{date}}',
   'Link to 1 more event on {{date}}': 'Link do jednog događaja na {{date}}',
   CW: 'Nedelja {{week}}',
+  View: 'Pregled',
 }

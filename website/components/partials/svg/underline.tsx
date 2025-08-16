@@ -1,4 +1,4 @@
-export default function AppUnderline({ className }) {
+export default function AppUnderline({ className }: { className?: string }) {
   return (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" width="203" viewBox="0 0 273 64" fill="none">
       <path

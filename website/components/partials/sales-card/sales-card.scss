@@ -15,6 +15,7 @@
   border: 1px solid rgb(0 0 0 / 10%);
   text-align: center;
   align-items: start;
+  background-color: #fff;
 
   @include mixins.mobile-screens {
     grid-template-rows: auto;

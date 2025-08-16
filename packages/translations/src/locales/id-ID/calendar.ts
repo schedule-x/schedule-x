@@ -5,9 +5,10 @@ export const calendarIdID: CalendarTranslations = {
   Month: 'Bulan',
   Week: 'Minggu',
   Day: 'Hari',
+  List: 'Daftar',
   'Select View': 'Pilih tampilan',
-  events: 'Acara',
-  event: 'Acara',
+  '+ {{n}} events': '+ {{n}} Acara',
+  '+ 1 event': '+ 1 Acara',
   'No events': 'Tidak ada acara',
   'Next period': 'Periode selanjutnya',
   'Previous period': 'Periode sebelumnya',
@@ -18,4 +19,5 @@ export const calendarIdID: CalendarTranslations = {
     'Tautan ke {{n}} acara lainnya pada {{date}}',
   'Link to 1 more event on {{date}}': 'Tautan ke 1 acara lainnya pada {{date}}',
   CW: 'Minggu {{week}}',
+  View: 'Tampilan',
 }

@@ -5,9 +5,10 @@ export const calendarKoKR: CalendarTranslations = {
   Month: '월',
   Week: '주',
   Day: '일',
+  List: '목록',
   'Select View': '보기 선택',
-  events: '일정들',
-  event: '일정',
+  '+ {{n}} events': '+ {{n}} 일정들',
+  '+ 1 event': '+ 1 일정',
   'No events': '일정 없음',
   'Next period': '다음',
   'Previous period': '이전',
@@ -17,4 +18,5 @@ export const calendarKoKR: CalendarTranslations = {
     '{{date}}에 {{n}}개 이상의 이벤트로 이동',
   'Link to 1 more event on {{date}}': '{{date}}에 1개 이상의 이벤트로 이동',
   CW: '{{week}}주',
+  View: '보기',
 }

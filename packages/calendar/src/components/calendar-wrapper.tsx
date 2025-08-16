@@ -12,6 +12,7 @@ import {
   initPlugins,
 } from '../utils/stateless/plugins-lifecycle'
 import { useSignalEffect } from '@preact/signals'
+import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 
 type props = {
   $app: CalendarAppSingleton
@@ -65,16 +66,27 @@ export default function CalendarWrapper({ $app }: props) {
   const [transitionClass, setTransitionClass] = useState('')
 
   useSignalEffect(() => {
-    const newRangeStartIsLaterThanPrevious =
-      ($app.calendarState.range.value?.start || '') > previousRangeStart
-    setTransitionClass(
-      newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
-    )
+    // There is no reason to transition sideways, because the list view is expanded vertically, unlike the other views
+    if ($app.calendarState.view.value === InternalViewName.List) return
 
-    setTimeout(() => {
-      setTransitionClass('')
-    }, 300) // CORRELATION ID: 3
-    setPreviousRangeStart($app.calendarState.range.value?.start || '')
+    const newRangeStartIsLaterThanPrevious =
+      ($app.calendarState.range.value?.start.toString() || '') >
+      previousRangeStart
+
+    // Use requestAnimationFrame to ensure smooth animation timing
+    requestAnimationFrame(() => {
+      setTransitionClass(
+        newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
+      )
+
+      setTimeout(() => {
+        setTransitionClass('')
+      }, 300) // CORRELATION ID: 3
+    })
+
+    setPreviousRangeStart(
+      $app.calendarState.range.value?.start.toString() || ''
+    )
   })
 
   useSignalEffect(() => {

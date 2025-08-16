@@ -7,6 +7,7 @@ import {
 import { DatePickerView } from '@schedule-x/shared/src/interfaces/date-picker/date-picker-view.enum'
 import { createDatePickerState } from '../date-picker-state.impl'
 import { __createInternalConfig__ as config } from '../../../stateless/testing/factories/create-internal-config'
+import 'temporal-polyfill/global'
 
 describe('DatePickerStateImpl', () => {
   it('should set isOpen to true', () => {

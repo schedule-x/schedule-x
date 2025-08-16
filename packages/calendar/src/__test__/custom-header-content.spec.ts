@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -20,7 +21,7 @@ describe('CustomHeaderContent', () => {
 
     beforeEach(() => {
       calendarApp = createCalendar({
-        selectedDate: '2022-08-27',
+        selectedDate: Temporal.PlainDate.from('2022-08-27'),
         views: [viewMonthGrid],
         events: [],
       })
@@ -54,7 +55,7 @@ describe('CustomHeaderContent', () => {
 
     beforeEach(() => {
       calendarApp = createCalendar({
-        selectedDate: '2022-08-27',
+        selectedDate: Temporal.PlainDate.from('2022-08-27'),
         views: [viewMonthGrid],
         events: [],
       })

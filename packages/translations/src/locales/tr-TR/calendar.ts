@@ -5,9 +5,10 @@ export const calendarTrTR: CalendarTranslations = {
   Month: 'Aylık',
   Week: 'Haftalık',
   Day: 'Günlük',
+  List: 'Liste',
   'Select View': 'Görünüm Seç',
-  events: 'etkinlikler',
-  event: 'etkinlik',
+  '+ {{n}} events': '+ {{n}} etkinlikler',
+  '+ 1 event': '+ 1 etkinlik',
   'No events': 'Etkinlik yok',
   'Next period': 'Sonraki dönem',
   'Previous period': 'Önceki dönem',
@@ -17,4 +18,5 @@ export const calendarTrTR: CalendarTranslations = {
     '{{date}} tarihinde {{n}} etkinliğe bağlantı',
   'Link to 1 more event on {{date}}': '{{date}} tarihinde 1 etkinliğe bağlantı',
   CW: '{{week}}. Hafta',
+  View: 'Görünüm',
 }

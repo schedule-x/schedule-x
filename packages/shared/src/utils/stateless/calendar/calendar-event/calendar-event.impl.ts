@@ -4,11 +4,6 @@ import CalendarEventExternal, {
 } from '../../../../interfaces/calendar/calendar-event.interface'
 import { EventId } from '../../../../types/event-id'
 import CalendarConfigInternal from '../../../../interfaces/calendar/calendar-config'
-import {
-  dateStringRegex,
-  dateTimeStringRegex,
-} from '../../time/validation/regex'
-import { toJSDate } from '../../time/format-conversion/format-conversion'
 import { toDateString } from '../../time/format-conversion/date-to-strings'
 import { timePointsFromString } from '../../time/time-points/string-conversion'
 import {
@@ -17,6 +12,7 @@ import {
 } from '../../time/format-conversion/string-to-string'
 import { EventFragments } from '../../../../interfaces/calendar/event-fragments'
 import { DEFAULT_EVENT_COLOR_NAME } from '../../../../values'
+import { IANATimezone } from '../../time/tzdb'
 
 export default class CalendarEventImpl implements CalendarEventInternal {
   _previousConcurrentEvents: number | undefined
@@ -24,12 +20,13 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   _maxConcurrentEvents: number | undefined
   _nDaysInGrid: number | undefined
   _createdAt: Date | undefined
+  _originalTimezone: IANATimezone | undefined
 
   constructor(
     private _config: CalendarConfigInternal,
     public id: EventId,
-    public start: string,
-    public end: string,
+    private _start: Temporal.ZonedDateTime | Temporal.PlainDate,
+    private _end: Temporal.ZonedDateTime | Temporal.PlainDate,
     public title?: string,
     public people?: string[],
     public location?: string,
@@ -38,60 +35,113 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     public _options: CalendarEventOptions | undefined = undefined,
     public _customContent: CalendarEventInternal['_customContent'] = {},
     private _foreignProperties: Record<string, unknown> = {}
-  ) {}
+  ) {
+    this._originalTimezone =
+      this._start instanceof Temporal.ZonedDateTime
+        ? (this._start.timeZoneId as IANATimezone)
+        : undefined
+  }
+
+  get start(): Temporal.ZonedDateTime | Temporal.PlainDate {
+    if (this._start instanceof Temporal.PlainDate) {
+      return this._start
+    }
+
+    return this._start.withTimeZone(this._config.timezone.value)
+  }
+
+  set start(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
+    this._start =
+      value instanceof Temporal.ZonedDateTime
+        ? value.withTimeZone(this._originalTimezone as IANATimezone)
+        : value
+  }
+
+  get end(): Temporal.ZonedDateTime | Temporal.PlainDate {
+    if (this._end instanceof Temporal.PlainDate) {
+      return this._end
+    }
+
+    return this._end.withTimeZone(this._config.timezone.value)
+  }
+
+  set end(value: Temporal.ZonedDateTime | Temporal.PlainDate) {
+    this._end =
+      value instanceof Temporal.ZonedDateTime
+        ? value.withTimeZone(this._originalTimezone as IANATimezone)
+        : value
+  }
 
   get _isSingleDayTimed(): boolean {
-    return (
-      dateTimeStringRegex.test(this.start) &&
-      dateTimeStringRegex.test(this.end) &&
-      dateFromDateTime(this.start) === dateFromDateTime(this.end)
+    if (
+      this.start instanceof Temporal.PlainDate ||
+      this.end instanceof Temporal.PlainDate
     )
+      return false
+
+    const localStartDate = dateFromDateTime(this.start.toString())
+    const localEndDate = dateFromDateTime(this.end.toString())
+
+    return localStartDate === localEndDate
   }
 
   get _isSingleDayFullDay(): boolean {
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
+
     return (
-      dateStringRegex.test(this.start) &&
-      dateStringRegex.test(this.end) &&
-      this.start === this.end
+      startDate === endDate &&
+      this.start instanceof Temporal.PlainDate &&
+      this.end instanceof Temporal.PlainDate
     )
   }
 
   get _isMultiDayTimed(): boolean {
-    return (
-      dateTimeStringRegex.test(this.start) &&
-      dateTimeStringRegex.test(this.end) &&
-      dateFromDateTime(this.start) !== dateFromDateTime(this.end)
+    if (
+      this.start instanceof Temporal.PlainDate ||
+      this.end instanceof Temporal.PlainDate
     )
+      return false
+
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
+
+    return startDate !== endDate
   }
 
   get _isMultiDayFullDay(): boolean {
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
+
     return (
-      dateStringRegex.test(this.start) &&
-      dateStringRegex.test(this.end) &&
-      this.start !== this.end
+      this.start instanceof Temporal.PlainDate &&
+      this.end instanceof Temporal.PlainDate &&
+      startDate !== endDate
     )
   }
 
   get _isSingleHybridDayTimed(): boolean {
     if (!this._config.isHybridDay) return false
     if (
-      !dateTimeStringRegex.test(this.start) ||
-      !dateTimeStringRegex.test(this.end)
+      this.start instanceof Temporal.PlainDate ||
+      this.end instanceof Temporal.PlainDate
     )
       return false
 
-    const startDate = dateFromDateTime(this.start)
-    const endDate = dateFromDateTime(this.end)
+    const startDate = dateFromDateTime(this.start.toString())
+    const endDate = dateFromDateTime(this.end.toString())
     const endDateMinusOneDay = toDateString(
-      new Date(toJSDate(endDate).getTime() - 86400000)
+      Temporal.PlainDate.from(endDate).subtract({ days: 1 })
     )
     if (startDate !== endDate && startDate !== endDateMinusOneDay) return false
 
     const dayBoundaries = this._config.dayBoundaries.value
     const eventStartTimePoints = timePointsFromString(
-      timeFromDateTime(this.start)
+      timeFromDateTime(this.start.toString())
     )
-    const eventEndTimePoints = timePointsFromString(timeFromDateTime(this.end))
+    const eventEndTimePoints = timePointsFromString(
+      timeFromDateTime(this.end.toString())
+    )
 
     return (
       (eventStartTimePoints >= dayBoundaries.start &&
@@ -121,8 +171,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   _getExternalEvent(): CalendarEventExternal {
     return {
       id: this.id,
-      start: this.start,
-      end: this.end,
+      start: this._start,
+      end: this._end,
       title: this.title,
       people: this.people,
       location: this.location,

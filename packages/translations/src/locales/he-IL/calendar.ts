@@ -5,9 +5,10 @@ export const calendarHeIL: CalendarTranslations = {
   Month: 'חוֹדֶשׁ',
   Week: 'שָׁבוּעַ',
   Day: 'יוֹם',
+  List: 'רשימה',
   'Select View': 'בחר תצוגה',
-  events: 'אירועים',
-  event: 'אירוע',
+  '+ {{n}} events': '+ {{n}} אירועים',
+  '+ 1 event': '+ 1 אירוע',
   'No events': 'אין אירועים',
   'Next period': 'תקופה הבאה',
   'Previous period': 'תקופה קודמת',
@@ -17,4 +18,5 @@ export const calendarHeIL: CalendarTranslations = {
     'קישור לעוד {{n}} אירועים ב-{{date}}',
   'Link to 1 more event on {{date}}': 'קישור לאירוע נוסף ב-{{date}}',
   CW: '{{week}} שָׁבוּעַ',
+  View: 'תצוגה',
 }

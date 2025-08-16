@@ -5,9 +5,10 @@ export const calendarCsCZ: CalendarTranslations = {
   Month: 'Měsíc',
   Week: 'Týden',
   Day: 'Den',
+  List: 'Seznam',
   'Select View': 'Vyberte zobrazení',
-  events: 'události',
-  event: 'událost',
+  '+ {{n}} events': '+ {{n}} události',
+  '+ 1 event': '+ 1 událost',
   'No events': 'Žádné události',
   'Next period': 'Příští období',
   'Previous period': 'Předchozí období',
@@ -17,4 +18,5 @@ export const calendarCsCZ: CalendarTranslations = {
     'Odkaz na {{n}} dalších událostí dne {{date}}',
   'Link to 1 more event on {{date}}': 'Odkaz na 1 další událost dne {{date}}',
   CW: 'Týden {{week}}',
+  View: 'Zobrazení',
 }

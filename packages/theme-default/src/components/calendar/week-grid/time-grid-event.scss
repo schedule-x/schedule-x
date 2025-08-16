@@ -42,19 +42,13 @@
 }
 
 .sx__time-grid-event-resize-handle {
-  display: none;
-}
-
-/** Only display the resize handle on non-touch devices */
-@media (hover: hover) {
-  .sx__time-grid-event-resize-handle {
-    display: block;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    cursor: ns-resize;
-    height: clamp(10px, 20px, 50%);
-  }
+  display: block;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  cursor: ns-resize;
+  height: clamp(10px, 20px, 50%);
+  touch-action: none;
 }
 
 .sx__time-grid-event-title {
@@ -67,6 +61,24 @@
   display: flex;
   align-items: center;
   white-space: nowrap;
+}
+
+.sx__title-and-time-compact {
+  display: flex;
+  align-items: center;
+  gap: var(--sx-spacing-padding2);
+  
+  .sx__time-grid-event-title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .sx__time-grid-event-time {
+    flex-shrink: 0;
+  }
 }
 
 .sx__event-icon {

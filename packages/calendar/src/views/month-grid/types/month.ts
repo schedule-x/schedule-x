@@ -2,7 +2,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
 export type MonthDay = {
-  date: string
+  date: Temporal.PlainDate
   events: Record<string, CalendarEventInternal | 'blocker' | undefined>
   backgroundEvents: BackgroundEvent[]
 }

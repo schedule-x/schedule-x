@@ -1,10 +1,11 @@
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import { calendars } from './data/calendars';
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
 import { createInteractiveEventModal, rruleFields } from "@sx-premium/interactive-event-modal";
 import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
 import {createHourlyView, createConfig} from "@sx-premium/resource-scheduler";
 import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
+import 'temporal-polyfill/global'
 
 export default function ResourceCalendarWithCustomLabels() {
   const eventsService = createEventsServicePlugin()
@@ -68,44 +69,44 @@ export default function ResourceCalendarWithCustomLabels() {
 
   const calendarApp = useNextCalendarApp({
     callbacks: {
-      onDoubleClickDateTime: (dateTime: string) => {
+      onDoubleClickDateTime: (dateTime: Temporal.ZonedDateTime) => {
         interactiveEventModalPlugin.clickToCreate(dateTime, { calendarId: 'clients' })
       },
 
-      onDoubleClickDate: (date: string) => {
+      onDoubleClickDate: (date: Temporal.PlainDate) => {
         interactiveEventModalPlugin.clickToCreate(date, { calendarId: 'clients' })
       }
     },
     locale: 'en-US',
     views: [hourlyView],
-    selectedDate: '2024-05-06',
+    selectedDate: Temporal.PlainDate.from('2024-05-06'),
     events: [
       {
         id: 3,
         title: 'DB migration',
-        start: '2024-05-06 00:00',
-        end: '2024-05-06 03:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T00:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T03:00:00-04:00[America/New_York]'),
         resourceId: 'robert',
       },
       {
         id: 6,
         title: 'DB migration follow-up',
-        start: '2024-05-06 06:00',
-        end: '2024-05-06 09:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T06:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T09:00:00-04:00[America/New_York]'),
         resourceId: 'robert',
       },
       {
         id: 8,
         title: 'Manual testing',
-        start: '2024-05-06 08:00',
-        end: '2024-05-06 14:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T14:00:00-04:00[America/New_York]'),
         resourceId: 'trevor',
       },
       {
         id: 9,
         title: 'Customer support',
-        start: '2024-05-06 08:00',
-        end: '2024-05-06 13:55',
+        start: Temporal.ZonedDateTime.from('2024-05-06T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T13:55:00-04:00[America/New_York]'),
         resourceId: 'sheila',
       },
     ],

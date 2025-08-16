@@ -25,11 +25,11 @@ export const timeStringFromTimePoints = (timePoints: number): string => {
 }
 
 export const addTimePointsToDateTime = (
-  dateTimeString: string,
+  dateTime: Temporal.ZonedDateTime,
   pointsToAdd: number
-): string => {
+): Temporal.ZonedDateTime => {
   const minutesToAdd = Math.round(pointsToAdd / minuteTimePointMultiplier)
-  const jsDate = toJSDate(dateTimeString)
-  jsDate.setMinutes(jsDate.getMinutes() + minutesToAdd)
-  return toDateTimeString(jsDate)
+  const newDateTime = dateTime.add({ minutes: minutesToAdd })
+
+  return newDateTime
 }

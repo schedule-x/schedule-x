@@ -2,10 +2,10 @@ import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import ScrollControllerConfig from './interfaces/config'
-import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { effect } from '@preact/signals'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import { timePointsFromString } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 
 class ScrollControllerPlugin implements PluginBase<string> {
   name = PluginName.ScrollController
@@ -86,10 +86,11 @@ class ScrollControllerPlugin implements PluginBase<string> {
   private waitUntilGridDayExistsThenScroll() {
     this.observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        const gridDayExists = Array.from(mutation.addedNodes).find((node) => {
-          if (!(node instanceof HTMLElement)) return false
-          return node.classList.contains('sx__time-grid-day')
-        })
+        const gridDayExists =
+          this.$app?.elements.calendarWrapper?.querySelector(
+            '.sx__time-grid-day'
+          )
+
         if (
           mutation.type === 'childList' &&
           gridDayExists &&

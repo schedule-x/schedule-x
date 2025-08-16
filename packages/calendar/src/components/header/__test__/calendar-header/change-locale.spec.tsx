@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -18,7 +19,7 @@ describe('CalendarHeader', () => {
     it('should update the range heading', async () => {
       const calendarControlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
-        selectedDate: '2022-02-10',
+        selectedDate: Temporal.PlainDate.from('2022-02-10'),
         plugins: [calendarControlsPlugin],
       })
       calendarControlsPlugin.beforeRender($app)

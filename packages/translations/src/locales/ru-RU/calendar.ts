@@ -5,9 +5,10 @@ export const calendarRuRU: CalendarTranslations = {
   Month: 'Месяц',
   Week: 'Неделя',
   Day: 'День',
+  List: 'Список',
   'Select View': 'Выберите вид',
-  events: 'события',
-  event: 'событие',
+  '+ {{n}} events': '+ {{n}} события',
+  '+ 1 event': '+ 1 событие',
   'No events': 'Нет событий',
   'Next period': 'Следующий период',
   'Previous period': 'Прошлый период',
@@ -19,4 +20,5 @@ export const calendarRuRU: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Ссылка на 1 дополнительное событие на {{date}}',
   CW: 'Неделя {{week}}',
+  View: 'Вид',
 }

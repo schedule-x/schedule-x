@@ -5,9 +5,10 @@ export const calendarPlPL: CalendarTranslations = {
   Month: 'Miesiąc',
   Week: 'Tydzień',
   Day: 'Dzień',
+  List: 'Lista',
   'Select View': 'Wybierz widok',
-  events: 'wydarzenia',
-  event: 'wydarzenie',
+  '+ {{n}} events': '+ {{n}} wydarzenia',
+  '+ 1 event': '+ 1 wydarzenie',
   'No events': 'Brak wydarzeń',
   'Next period': 'Następny okres',
   'Previous period': 'Poprzedni okres',
@@ -18,4 +19,5 @@ export const calendarPlPL: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Link do 1 kolejnego wydarzenia w dniu {{date}}',
   CW: 'Tydzień {{week}}',
+  View: 'Widok',
 }

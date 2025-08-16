@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
+
+### Bug Fixes
+
+- event recurrence for background events ([#1110](https://github.com/schedule-x/schedule-x/issues/1110)) ([99644ac](https://github.com/schedule-x/schedule-x/commit/99644ac976450b5caabd8d9e2f91d3eae7e029cc))
+- memory leak week view ([#1121](https://github.com/schedule-x/schedule-x/issues/1121)) ([fcfb7aa](https://github.com/schedule-x/schedule-x/commit/fcfb7aa423cd6b6e0aa1b7a4ecca32de82ab87f8))
+
+### Features
+
+- enable background events to be timed and multiple days long ([#1111](https://github.com/schedule-x/schedule-x/issues/1111)) ([fe658b2](https://github.com/schedule-x/schedule-x/commit/fe658b2deffdf07dc3f6ce0379f0c12bda9d0c7f))
+- enable using exdate with background events ([#1124](https://github.com/schedule-x/schedule-x/issues/1124)) ([92d9b36](https://github.com/schedule-x/schedule-x/commit/92d9b36f7a320763759b9051f2a95765745bdd0f))
+
+# [2.35.0](https://github.com/schedule-x/schedule-x/compare/v2.34.0...v2.35.0) (2025-06-27)
+
+### Bug Fixes
+
+- **calendar:** range heading after using list view ([#1099](https://github.com/schedule-x/schedule-x/issues/1099)) ([dbc08a3](https://github.com/schedule-x/schedule-x/commit/dbc08a32274f278d46cf893f09b132f7b982c59a))
+
+### Features
+
+- add list view ([#1097](https://github.com/schedule-x/schedule-x/issues/1097)) ([53aabde](https://github.com/schedule-x/schedule-x/commit/53aabde89b7349a55f4d8002e33a47d97f66b90a))
+- improve flexibility for translation key "+ x events" ([#1095](https://github.com/schedule-x/schedule-x/issues/1095)) ([fa25d7a](https://github.com/schedule-x/schedule-x/commit/fa25d7a4b9bc4339f00b821ac6aac132d1df9bbb))
+- **resize:** add compatibility for touch devices ([#1098](https://github.com/schedule-x/schedule-x/issues/1098)) ([927d9ae](https://github.com/schedule-x/schedule-x/commit/927d9ae801de7d521e2a801f3e1864f1758ccb62))
+
+# [2.34.0](https://github.com/schedule-x/schedule-x/compare/v2.33.0...v2.34.0) (2025-06-20)
+
+### Bug Fixes
+
+- **event-recurrence:** fix error for recurrence sets where no recurrences are within the range ([#1085](https://github.com/schedule-x/schedule-x/issues/1085)) ([02ef218](https://github.com/schedule-x/schedule-x/commit/02ef218c2f913280e40cc7293dea21bff4499c10))
+
+### Features
+
+- add optional UIEvent-param for callbacks ([#1083](https://github.com/schedule-x/schedule-x/issues/1083)) ([4ab30cc](https://github.com/schedule-x/schedule-x/commit/4ab30cc0e4ca9158de2226484360b665b5e2296e))
+- **calendar:** add to dependency array for header custom components ([#1086](https://github.com/schedule-x/schedule-x/issues/1086)) ([4e98e22](https://github.com/schedule-x/schedule-x/commit/4e98e220b92138c2e6fa8d42032e7038f6f4777c))
+
+# [2.33.0](https://github.com/schedule-x/schedule-x/compare/v2.32.0...v2.33.0) (2025-06-16)
+
+### Features
+
+- **translations:** add translations for Arabic (ar-EG) ([#1072](https://github.com/schedule-x/schedule-x/issues/1072)) ([e7ea644](https://github.com/schedule-x/schedule-x/commit/e7ea64434de2e75087e685a19b58f40cfdd7f66f))
+
 # [2.32.0](https://github.com/schedule-x/schedule-x/compare/v2.31.1...v2.32.0) (2025-05-31)
 
 ### Bug Fixes

@@ -5,9 +5,10 @@ export const calendarEtEE: CalendarTranslations = {
   Month: 'Kuu',
   Week: 'Nädal',
   Day: 'Päev',
+  List: 'Nimekiri',
   'Select View': 'Vali vaade',
-  events: 'sündmused',
-  event: 'sündmus',
+  '+ {{n}} events': '+ {{n}} sündmused',
+  '+ 1 event': '+ 1 sündmus',
   'No events': 'Pole sündmusi',
   'Next period': 'Järgmine periood',
   'Previous period': 'Eelmine periood',
@@ -18,4 +19,5 @@ export const calendarEtEE: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Link ühele lisasündmusele kuupäeval {{date}}',
   CW: 'Nädala number {{week}}',
+  View: 'Vaade',
 }

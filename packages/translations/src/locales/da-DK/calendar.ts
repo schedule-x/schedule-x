@@ -5,9 +5,10 @@ export const calendarDaDK: CalendarTranslations = {
   Month: 'Måned',
   Week: 'Uge',
   Day: 'Dag',
+  List: 'Liste',
   'Select View': 'Vælg visning',
-  events: 'begivenheder',
-  event: 'begivenhed',
+  '+ {{n}} events': '+ {{n}} begivenheder',
+  '+ 1 event': '+ 1 begivenhed',
   'No events': 'Ingen begivenheder',
   'Next period': 'Næste periode',
   'Previous period': 'Forgående periode',
@@ -18,4 +19,5 @@ export const calendarDaDK: CalendarTranslations = {
     'Link til {{n}} flere begivenheder den {{date}}',
   'Link to 1 more event on {{date}}': 'Link til 1 mere begivenhed den {{date}}',
   CW: 'Uge {{week}}',
+  View: 'Visning',
 }

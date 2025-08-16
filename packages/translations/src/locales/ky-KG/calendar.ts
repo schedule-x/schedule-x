@@ -5,9 +5,10 @@ export const calendarKyKG: CalendarTranslations = {
   Month: 'Ай',
   Week: 'Апта',
   Day: 'Күн',
+  List: 'Тизме',
   'Select View': 'Көрүнүштү тандаңыз',
-  events: 'Окуялар',
-  event: 'Окуя',
+  '+ {{n}} events': '+ {{n}} Окуялар',
+  '+ 1 event': '+ 1 Окуя',
   'No events': 'Окуя жок',
   'Next period': 'Кийинки мезгил',
   'Previous period': 'Өткөн мезгил',
@@ -18,4 +19,5 @@ export const calendarKyKG: CalendarTranslations = {
     '{{date}} күнүндө {{n}} окуяга байланыш',
   'Link to 1 more event on {{date}}': '{{date}} күнүндө 1 окуяга байланыш',
   CW: 'Апта {{week}}',
+  View: 'Көрүнүш',
 }

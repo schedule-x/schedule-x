@@ -4,11 +4,12 @@ import { getTimePointsPerPixel } from '@schedule-x/shared/src/utils/stateless/ca
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { addTimePointsToDateTime } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { updateEventsList } from './utils/stateless/update-events-list'
+import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 
 export class TimeGridEventResizer {
-  private readonly originalEventEnd: string
+  private readonly originalEventEnd: Temporal.ZonedDateTime
   private lastIntervalDiff = 0
-  private lastValidEnd = ''
+  private lastValidEnd: Temporal.ZonedDateTime
 
   constructor(
     private $app: CalendarAppSingleton,
@@ -18,8 +19,8 @@ export class TimeGridEventResizer {
     private readonly CHANGE_THRESHOLD_IN_TIME_POINTS: number,
     private dayBoundariesDateTime: DayBoundariesDateTime
   ) {
-    this.originalEventEnd = this.eventCopy.end
-    this.lastValidEnd = this.eventCopy.end
+    this.originalEventEnd = this.eventCopy.end as Temporal.ZonedDateTime
+    this.lastValidEnd = this.eventCopy.end as Temporal.ZonedDateTime
     const calendarWrapper = this.$app.elements.calendarWrapper
     if (!calendarWrapper) return
 
@@ -30,13 +31,24 @@ export class TimeGridEventResizer {
   setupEventListeners() {
     ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
       'mousemove',
-      this.handleMouseMove
+      this.handleMouseOrTouchMove
     )
-    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
+    document.addEventListener('mouseup', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
+    ;(this.$app.elements.calendarWrapper as HTMLElement).addEventListener(
+      'touchmove',
+      this.handleMouseOrTouchMove,
+      { passive: false }
+    )
+    document.addEventListener('touchend', this.handleMouseUpOrTouchEnd, {
+      once: true,
+    })
   }
 
-  private handleMouseMove = (event: MouseEvent) => {
-    const pixelDiffY = event.clientY - this.initialY
+  private handleMouseOrTouchMove = (event: UIEvent) => {
+    const { clientY } = getEventCoordinates(event)
+    const pixelDiffY = clientY - this.initialY
     const timePointsDiffY = pixelDiffY * getTimePointsPerPixel(this.$app)
     const currentIntervalDiff = Math.round(
       timePointsDiffY / this.CHANGE_THRESHOLD_IN_TIME_POINTS
@@ -54,8 +66,8 @@ export class TimeGridEventResizer {
     const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
 
     if (
-      newEnd > this.dayBoundariesDateTime.end ||
-      newEnd <= this.eventCopy.start
+      newEnd.toString() > this.dayBoundariesDateTime.end.toString() ||
+      newEnd.toString() <= this.eventCopy.start.toString()
     )
       return
 
@@ -64,7 +76,7 @@ export class TimeGridEventResizer {
     this.updateCopy(this.eventCopy)
   }
 
-  private handleMouseUp = async () => {
+  private handleMouseUpOrTouchEnd = async () => {
     const onBeforeEventUpdate =
       this.$app.config.callbacks.onBeforeEventUpdateAsync ||
       this.$app.config.callbacks.onBeforeEventUpdate
@@ -110,7 +122,11 @@ export class TimeGridEventResizer {
     )
     ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
       'mousemove',
-      this.handleMouseMove
+      this.handleMouseOrTouchMove
+    )
+    ;(this.$app.elements.calendarWrapper as HTMLElement).removeEventListener(
+      'touchmove',
+      this.handleMouseOrTouchMove
     )
   }
 }

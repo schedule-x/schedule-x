@@ -5,9 +5,10 @@ export const calendarSkSK: CalendarTranslations = {
   Month: 'Mesiac',
   Week: 'Týždeň',
   Day: 'Deň',
+  List: 'Zoznam',
   'Select View': 'Vyberte zobrazenie',
-  events: 'udalosti',
-  event: 'udalosť',
+  '+ {{n}} events': '+ {{n}} udalosti',
+  '+ 1 event': '+ 1 udalosť',
   'No events': 'Žiadne udalosti',
   'Next period': 'Ďalšie obdobie',
   'Previous period': 'Predchádzajúce obdobie',
@@ -17,4 +18,5 @@ export const calendarSkSK: CalendarTranslations = {
     'Odkaz na {{n}} ďalších udalostí dňa {{date}}',
   'Link to 1 more event on {{date}}': 'Odkaz na 1 ďalšiu udalosť dňa {{date}}',
   CW: '{{week}}. týždeň',
+  View: 'Zobrazenie',
 }

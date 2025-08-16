@@ -1,0 +1,44 @@
+# Schedule-X & Temporal API
+
+Schedule-X uses the Temporal API to handle dates and times. If you are not yet familiar with this API or its background, here's a blog post that explains some of its benefits: https://docs.timetime.in/blog/js-dates-finally-fixed/
+
+Since Temporal only started becoming available in browsers in 2025, most users of Schedule-X will need to polyfill it. On the one hand, this adds a dependency to your project, but on the other hand, it allows Schedule-X to tap into date and time features that are not available in the native Date API. This made it possible to implement support for timezones with very little effort, which is something the community has requested repeatedly.
+
+## Polyfilling Temporal
+
+There are at least 2 well-maintained polyfills available for Temporal:
+
+- https://www.npmjs.com/package/temporal-polyfill
+- https://www.npmjs.com/package/@js-temporal/polyfill
+
+
+### Example
+
+```ts
+import 'temporal-polyfill/global'
+
+const date = Temporal.PlainDate.from('2025-01-01')
+console.log(date.toString())
+
+const calendar = createCalendar({
+    events: [
+        {
+            id: 1,
+            start: Temporal.PlainDate.from('2025-01-01'),
+            end: Temporal.PlainDate.from('2025-01-02'),
+        },
+        {
+            id: 2,
+            start: Temporal.ZonedDateTime.from('2025-01-01T12:00:00+01:00[Europe/Berlin]'),
+            end: Temporal.ZonedDateTime.from('2025-01-01T13:00:00+01:00[Europe/Berlin]'),
+        }
+   ] 
+})
+```
+
+
+## Browser support
+
+If you know **all of your users** well, and know that they are using a browser that supports Temporal, you do not need to polyfill it.
+
+You can check current browser support for Temporal here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal#browser_compatibility

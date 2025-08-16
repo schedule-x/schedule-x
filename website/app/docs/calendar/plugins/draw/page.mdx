@@ -1,0 +1,126 @@
+---
+title: 'Draw plugin'
+description: 'Plugin for drawing events in the Schedule-X calendar'
+---
+
+# Draw
+
+A plugin that enables your users to draw events directly onto the calendar. Compatible with week, day, and month views.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+<br />
+
+<video autoPlay loop playsInline muted id={'demo'} className="landingPageDemoVideo nx-mt-6" width={800}
+       height={250}>
+  <source src={'https://d19hgxvhjb2new.cloudfront.net/website/drawing_all_views.mp4'} type={'video/mp4'} />
+</video>
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
+
+```bash copy
+npm install @sx-premium/draw
+```
+
+## Usage
+
+### API
+
+#### `createDrawPlugin(config: { onFinishDrawing: (event: CalendarEvent) => void })`
+
+Create the plugin instance.
+
+#### `drawTimeGridEvent(dateTime: Temporal.ZonedDateTime, mouseDownEvent: MouseEvent, eventProperties: { [key: string]: any })`
+
+Create a new event in the time grid of the day- and week views.
+
+#### `drawDateGridEvent(date: Temporal.PlainDate, mouseDownEvent: MouseEvent, eventProperties: { [key: string]: any })`
+
+Create a new full-day event in the date grid of the day- and week view.
+
+#### `drawMonthGridEvent(date: Temporal.PlainDate, eventProperties: { [key: string]: any })`
+
+Create a new full-day event in the month grid view.
+
+### Example
+
+```js
+import {
+  createCalendar,
+  viewWeek,
+  viewMonthGrid,
+  viewDay,
+} from '@schedule-x/calendar'
+import { createDrawPlugin } from "@sx-premium/draw";
+const drawPlugin = createDrawPlugin({
+  onFinishDrawing: (event) => {
+    // do something, like saving the event to the server
+  },
+
+  // (Optional) callback that runs on mouseup after drawing an event, before calling onFinishDrawing
+  onBeforeFinishDrawing: (event) => {
+    // do something, like validating the event
+    // return false to remove the event, and true to keep it
+  },
+
+  // (Optional) async version of onBeforeFinishDrawing
+  onBeforeFinishDrawingAsync: async (event) => {
+    // do something, like validating the event
+    // return false to remove the event, and true to keep it
+  },
+
+  // (Optional) configure the intervals, in minutes, at which a time grid-event can be drawn. Valid values: 15, 30, 60
+  snapDuration: 30
+})
+
+const calendar = createCalendar({
+  callbacks: {
+    onMouseDownDateTime(dateTime, mouseDownEvent) {
+      drawPlugin.drawTimeGridEvent(dateTime, mouseDownEvent, {
+        title: 'Unknown event'
+      })
+    },
+
+    onMouseDownMonthGridDate(date, _mouseDownEvent) {
+      console.log(_mouseDownEvent)
+      drawPlugin.drawMonthGridEvent(date, {
+        title: 'Unknown event'
+      })
+    },
+
+    onMouseDownDateGridDate(date, mouseDownEvent) {
+      drawPlugin.drawDateGridEvent(date, mouseDownEvent, {
+        title: 'Unknown event'
+      })
+    }
+  },
+  views: [viewMonthGrid, viewWeek, viewDay],
+  plugins: [
+    drawPlugin
+  ]
+})
+```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.
+
+## Examples
+
+These can be added on request. Please let us know if you need an example for a specific framework.
+
+* Vue example: https://github.com/schedule-x/vue-examples/tree/main/draw
+* React example: https://github.com/schedule-x/react-examples/tree/main/draw
+* Svelte example: https://github.com/schedule-x/svelte-examples
+

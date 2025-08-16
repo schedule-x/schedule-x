@@ -71,7 +71,12 @@ export default function CalendarHeader() {
         $app,
       })
     }
-  }, [])
+  }, [
+    $app.datePickerState.selectedDate.value,
+    $app.calendarState.range.value,
+    $app.calendarState.isDark.value,
+    $app.calendarState.isCalendarSmall.value,
+  ])
 
   const keyForRerenderingOnLocaleChange = $app.config.locale.value
 
@@ -107,6 +112,11 @@ export default function CalendarHeader() {
             {headerContentRightPrependId && (
               <div data-ccid={headerContentRightPrependId} />
             )}
+
+            {$app.config.plugins.timezoneSelect &&
+              $app.config.plugins.timezoneSelect.isEnabled.value && (
+                <$app.config.plugins.timezoneSelect.ComponentFn $app={$app} />
+              )}
 
             {$app.config.views.value.length > 1 && (
               <ViewSelection

@@ -1,0 +1,254 @@
+// Blog-specific styles
+.blog-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+// Override Nextra's default container for blog pages
+.nextra-container {
+  max-width: 800px !important;
+  margin: 0 auto !important;
+  padding: 2rem 1rem !important;
+}
+
+// Blog post styles
+.blog-post {
+  line-height: 1.7;
+  max-width: 800px;
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    color: #2a2a2a;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    color: #374151;
+  }
+  
+  h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1.25rem 0 0.5rem;
+    color: #4b5563;
+  }
+  
+  p {
+    margin-bottom: 1.25rem;
+    color: #374151;
+  }
+  
+  ul, ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    
+    li {
+      margin-bottom: 0.5rem;
+      color: #374151;
+    }
+  }
+  
+  blockquote {
+    border-left: 4px solid #3b82f6;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #6b7280;
+    background-color: #f8fafc;
+    padding: 1rem;
+    border-radius: 0.375rem;
+  }
+  
+  code {
+    background-color: #f3f4f6;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-family: Monaco, Menlo, 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    color: #dc2626;
+  }
+  
+  pre {
+    background-color: #1f2937;
+    color: #f9fafb;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    
+    code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+    }
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #f9fafb;
+      font-weight: 600;
+    }
+  }
+}
+
+// Blog post header
+.blog-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e5e7eb;
+  
+  .blog-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+  }
+  
+  .blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+    
+    .blog-date {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .blog-tags {
+      display: flex;
+      
+      .tag {
+        background-color: #e5e7eb;
+        color: #374151;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
+// Blog list styles
+.blog-list {
+  .blog-item {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .blog-item-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      
+      a {
+        color: #1a1a1a;
+        text-decoration: none;
+        
+        &:hover {
+          color: #3b82f6;
+        }
+      }
+    }
+    
+    .blog-item-excerpt {
+      color: #6b7280;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    .blog-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// Responsive design
+@media (width <= 768px) {
+  .blog-container {
+    padding: 1rem;
+  }
+  
+  .blog-post {
+    h1 {
+      font-size: 2rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .blog-header {
+    .blog-title {
+      font-size: 2rem;
+    }
+    
+    .blog-meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+}

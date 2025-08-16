@@ -5,9 +5,10 @@ export const calendarUkUA: CalendarTranslations = {
   Month: 'Місяць',
   Week: 'Тиждень',
   Day: 'День',
+  List: 'Список',
   'Select View': 'Виберіть вигляд',
-  events: 'події',
-  event: 'подія',
+  '+ {{n}} events': '+ {{n}} події',
+  '+ 1 event': '+ 1 подія',
   'No events': 'Немає подій',
   'Next period': 'Наступний період',
   'Previous period': 'Минулий період',
@@ -19,4 +20,5 @@ export const calendarUkUA: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Посилання на 1 додаткову подію на {{date}}',
   CW: 'Тиждень {{week}}',
+  View: 'Вигляд',
 }

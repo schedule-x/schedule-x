@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+import 'temporal-polyfill/global'
 import {
   afterEach,
   describe,
@@ -10,6 +12,14 @@ import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { vi } from 'vitest'
 
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
+
 describe('TimeGridDay', () => {
   afterEach(() => {
     cleanup()
@@ -17,13 +27,13 @@ describe('TimeGridDay', () => {
 
   describe('a non-hybrid day', () => {
     const $app = __createAppWithViews__({
-      selectedDate: '2023-09-11',
+      selectedDate: Temporal.PlainDate.from('2023-09-11'),
     })
 
     it('renders an event at 00:00', () => {
       const eventTime = {
-        start: '2023-09-11 00:00',
-        end: '2023-09-11 01:00',
+        start: Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-11T01:00:00.00+00:00[UTC]'),
       }
       renderComponent(
         $app,
@@ -35,7 +45,7 @@ describe('TimeGridDay', () => {
             eventTime.end
           ).build(),
         ],
-        '2023-09-11'
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]')
       )
 
       expect(
@@ -47,8 +57,8 @@ describe('TimeGridDay', () => {
 
     it('renders an event at 18:00', () => {
       const eventTime = {
-        start: '2023-09-11 18:00',
-        end: '2023-09-11 19:00',
+        start: Temporal.ZonedDateTime.from('2023-09-11T18:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-11T19:00:00.00+00:00[UTC]'),
       }
       renderComponent(
         $app,
@@ -60,7 +70,7 @@ describe('TimeGridDay', () => {
             eventTime.end
           ).build(),
         ],
-        '2023-09-11'
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]')
       )
 
       expect(
@@ -73,14 +83,26 @@ describe('TimeGridDay', () => {
     it('fires onClickDateTime if the user clicks on the day', () => {
       const onClickDateTime = vi.fn()
       const $app = __createAppWithViews__({
-        selectedDate: '2023-09-11',
+        selectedDate: Temporal.PlainDate.from('2023-09-11'),
         callbacks: {
           onClickDateTime,
         },
       })
-      renderComponent($app, [], '2023-09-11')
+      renderComponent(
+        $app,
+        [],
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]')
+      )
 
-      const dayElement = document.querySelector('.sx__time-grid-day')
+      const dayElement = document.querySelector(
+        '.sx__time-grid-day'
+      ) as HTMLElement
+      Object.defineProperty(dayElement, 'getBoundingClientRect', {
+        value: () => ({
+          height: 100,
+          top: 10,
+        }),
+      })
       fireEvent.click(dayElement as Element)
 
       expect(onClickDateTime).toHaveBeenCalled()
@@ -89,19 +111,27 @@ describe('TimeGridDay', () => {
     it('does not fire onClickDateTime if the user clicks on a child element', () => {
       const onClickDateTime = vi.fn()
       const $app = __createAppWithViews__({
-        selectedDate: '2023-09-11',
+        selectedDate: Temporal.PlainDate.from('2023-09-11'),
         callbacks: {
           onClickDateTime,
         },
         events: [
           {
-            start: '2023-09-11 00:00',
-            end: '2023-09-11 01:00',
+            start: Temporal.ZonedDateTime.from(
+              '2023-09-11T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2023-09-11T01:00:00.00+00:00[UTC]'
+            ),
             id: '1',
           },
         ],
       })
-      renderComponent($app, $app.calendarEvents.list.value, '2023-09-11')
+      renderComponent(
+        $app,
+        $app.calendarEvents.list.value,
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]')
+      )
 
       const dayElement = document.querySelector('.sx__time-grid-day') as Element
       const eventElement = document.querySelector('.sx__event') as Element
@@ -114,7 +144,7 @@ describe('TimeGridDay', () => {
 
   describe('a hybrid day', () => {
     const $app = __createAppWithViews__({
-      selectedDate: '2023-09-11',
+      selectedDate: Temporal.PlainDate.from('2023-09-11'),
       dayBoundaries: {
         start: '18:00',
         end: '06:00',
@@ -123,8 +153,8 @@ describe('TimeGridDay', () => {
 
     it('renders an event at 00:00', () => {
       const eventTime = {
-        start: '2023-09-12 00:00',
-        end: '2023-09-12 01:00',
+        start: Temporal.ZonedDateTime.from('2023-09-12T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-09-12T01:00:00.00+00:00[UTC]'),
       }
       renderComponent(
         $app,
@@ -136,7 +166,7 @@ describe('TimeGridDay', () => {
             eventTime.end
           ).build(),
         ],
-        '2023-09-12'
+        Temporal.ZonedDateTime.from('2023-09-12T00:00:00.00+00:00[UTC]')
       )
 
       expect(
@@ -150,9 +180,13 @@ describe('TimeGridDay', () => {
   describe('rendering the week day class', () => {
     it('renders the week day class', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2023-09-11',
+        selectedDate: Temporal.PlainDate.from('2023-09-11'),
       })
-      renderComponent($app, [], '2023-09-11')
+      renderComponent(
+        $app,
+        [],
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]')
+      )
 
       expect(document.querySelector('.sx__time-grid-day')?.classList).toContain(
         'sx__monday'
@@ -163,15 +197,24 @@ describe('TimeGridDay', () => {
   describe('background events', () => {
     it('renders a full height background event for event that matches date', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2023-09-11',
+        selectedDate: Temporal.PlainDate.from('2023-09-11'),
       })
-      renderComponent($app, [], '2023-09-11', [
-        {
-          start: '2023-09-11',
-          end: '2023-09-11',
-          style: {},
-        },
-      ])
+      renderComponent(
+        $app,
+        [],
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]'),
+        [
+          {
+            start: Temporal.ZonedDateTime.from(
+              '2023-09-11T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2023-09-11T23:59:00.00+00:00[UTC]'
+            ),
+            style: {},
+          },
+        ]
+      )
 
       expect(
         document
@@ -187,15 +230,24 @@ describe('TimeGridDay', () => {
 
     it('renders a full height background event for event that starts before date and ends after', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2023-09-11',
+        selectedDate: Temporal.PlainDate.from('2023-09-11'),
       })
-      renderComponent($app, [], '2023-09-11', [
-        {
-          start: '2023-09-10',
-          end: '2023-09-12',
-          style: {},
-        },
-      ])
+      renderComponent(
+        $app,
+        [],
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]'),
+        [
+          {
+            start: Temporal.ZonedDateTime.from(
+              '2023-09-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2023-09-12T23:59:00.00+00:00[UTC]'
+            ),
+            style: {},
+          },
+        ]
+      )
 
       expect(
         document
@@ -211,23 +263,66 @@ describe('TimeGridDay', () => {
 
     it('does not render a background event, if the background event ends on the start time of the day', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2023-09-11',
+        selectedDate: Temporal.PlainDate.from('2023-09-11'),
         dayBoundaries: {
           start: '06:00',
           end: '23:00',
         },
+        timezone: 'UTC',
       })
-      renderComponent($app, [], '2023-09-11', [
-        {
-          start: '2023-09-11 05:00',
-          end: '2023-09-11 06:00',
-          style: {},
-        },
-      ])
+      renderComponent(
+        $app,
+        [],
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]'),
+        [
+          {
+            start: Temporal.ZonedDateTime.from(
+              '2023-09-11T05:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2023-09-11T06:00:00.00+00:00[UTC]'
+            ),
+            style: {},
+          },
+        ]
+      )
 
       expect(
         document.querySelector('.sx__time-grid-background-event')
       ).toBeNull()
+    })
+
+    it('should render a timed background event that starts on the previous day', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: Temporal.PlainDate.from('2023-09-11'),
+      })
+      renderComponent(
+        $app,
+        [],
+        Temporal.ZonedDateTime.from('2023-09-11T00:00:00.00+00:00[UTC]'),
+        [
+          {
+            start: Temporal.ZonedDateTime.from(
+              '2023-09-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2023-09-11T12:00:00.00+00:00[UTC]'
+            ),
+            style: {},
+          },
+        ]
+      )
+
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('top: 0%')
+      expect(
+        document
+          .querySelector('.sx__time-grid-background-event')
+          ?.attributes.getNamedItem('style')?.value
+      ).toContain('height: 50%')
     })
   })
 })

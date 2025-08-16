@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [2.35.0](https://github.com/schedule-x/schedule-x/compare/v2.34.0...v2.35.0) (2025-06-27)
+
+### Bug Fixes
+
+- **calendar:** range heading after using list view ([#1099](https://github.com/schedule-x/schedule-x/issues/1099)) ([dbc08a3](https://github.com/schedule-x/schedule-x/commit/dbc08a32274f278d46cf893f09b132f7b982c59a))
+
+### Features
+
+- add list view ([#1097](https://github.com/schedule-x/schedule-x/issues/1097)) ([53aabde](https://github.com/schedule-x/schedule-x/commit/53aabde89b7349a55f4d8002e33a47d97f66b90a))
+- **resize:** add compatibility for touch devices ([#1098](https://github.com/schedule-x/schedule-x/issues/1098)) ([927d9ae](https://github.com/schedule-x/schedule-x/commit/927d9ae801de7d521e2a801f3e1864f1758ccb62))
+
+# [2.34.0](https://github.com/schedule-x/schedule-x/compare/v2.33.0...v2.34.0) (2025-06-20)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
+# [2.33.0](https://github.com/schedule-x/schedule-x/compare/v2.32.0...v2.33.0) (2025-06-16)
+
+**Note:** Version bump only for package @schedule-x/theme-default
+
 # [2.32.0](https://github.com/schedule-x/schedule-x/compare/v2.31.1...v2.32.0) (2025-05-31)
 
 **Note:** Version bump only for package @schedule-x/theme-default

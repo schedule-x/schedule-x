@@ -5,9 +5,10 @@ export const calendarFiFI: CalendarTranslations = {
   Month: 'Kuukausi',
   Week: 'Viikko',
   Day: 'Päivä',
+  List: 'Lista',
   'Select View': 'Valitse näkymä',
-  events: 'tapahtumaa',
-  event: 'tapahtuma',
+  '+ {{n}} events': '+ {{n}} tapahtumaa',
+  '+ 1 event': '+ 1 tapahtuma',
   'No events': 'Ei tapahtumia',
   'Next period': 'Seuraava ajanjakso',
   'Previous period': 'Edellinen ajanjakso',
@@ -18,4 +19,5 @@ export const calendarFiFI: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Linkki 1 lisätapahtumaan päivämäärällä {{date}}',
   CW: 'Viikko {{week}}',
+  View: 'Näkymä',
 }

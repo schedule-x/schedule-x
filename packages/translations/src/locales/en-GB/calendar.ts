@@ -5,9 +5,10 @@ export const calendarEnGB: CalendarTranslations = {
   Month: 'Month',
   Week: 'Week',
   Day: 'Day',
+  List: 'List',
   'Select View': 'Select View',
-  events: 'events',
-  event: 'event',
+  '+ {{n}} events': '+ {{n}} events',
+  '+ 1 event': '+ 1 event',
   'No events': 'No events',
   'Next period': 'Next period',
   'Previous period': 'Previous period',
@@ -17,4 +18,5 @@ export const calendarEnGB: CalendarTranslations = {
     'Link to {{n}} more events on {{date}}',
   'Link to 1 more event on {{date}}': 'Link to 1 more event on {{date}}',
   CW: 'Week {{week}}',
+  View: 'View',
 }

@@ -4,7 +4,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { updateDraggedEvent } from './utils/stateless/update-dragged-event'
 import { testIfShouldAbort } from './utils/stateless/test-if-should-abort'
 
@@ -12,8 +11,8 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private allDayElements: NodeListOf<HTMLDivElement>
   private currentDragoverDate: string | undefined
   private eventNDays: number
-  private readonly originalStart: string
-  private readonly originalEnd: string
+  private readonly originalStart: Temporal.ZonedDateTime | Temporal.PlainDate
+  private readonly originalEnd: Temporal.ZonedDateTime | Temporal.PlainDate
 
   private readonly MONTH_DAY_CLASS_NAME = 'sx__month-grid-day'
   private readonly MONTH_DAY_SELECTOR = `.${this.MONTH_DAY_CLASS_NAME}`
@@ -38,6 +37,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
 
   private init() {
     document.addEventListener('dragend', this.handleDragEnd, { once: true })
+    document.addEventListener('mouseup', this.handleMouseUp, { once: true })
     this.allDayElements.forEach((el) => {
       el.addEventListener('dragover', this.handleDragOver)
     })
@@ -58,13 +58,16 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     if (this.currentDragoverDate === dayElement.dataset.date) return
 
     this.currentDragoverDate = dayElement.dataset.date as string
-    const newEndDate = addDays(this.currentDragoverDate, this.eventNDays - 1)
+    const newEndDate = addDays(
+      Temporal.PlainDate.from(this.currentDragoverDate),
+      this.eventNDays - 1
+    )
 
     this.allDayElements.forEach((el) => {
       const dayElementDate = el.dataset.date as string
       if (
         dayElementDate >= (this.currentDragoverDate as string) &&
-        dayElementDate <= newEndDate
+        dayElementDate <= newEndDate.toString()
       ) {
         el.classList.add(this.DAY_DRAGOVER_CLASS_NAME)
       } else {
@@ -74,6 +77,7 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   }
 
   private handleDragEnd = async () => {
+    document.removeEventListener('mouseup', this.handleMouseUp)
     this.allDayElements.forEach((el) => {
       el.removeEventListener('dragover', this.handleDragOver)
       el.classList.remove(this.DAY_DRAGOVER_CLASS_NAME)
@@ -94,6 +98,11 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
     this.updateCalendarEvent(updatedEvent)
   }
 
+  private handleMouseUp = async () => {
+    document.removeEventListener('dragend', this.handleDragEnd)
+    this.setCalendarEventPointerEventsTo('auto')
+  }
+
   private setCalendarEventPointerEventsTo = (
     pointerEvents: 'auto' | 'none'
   ) => {
@@ -111,8 +120,8 @@ export default class MonthGridDragHandlerImpl implements MonthGridDragHandler {
   private createUpdatedEvent = (): CalendarEventInternal => {
     const eventCopy = deepCloneEvent(this.calendarEvent, this.$app)
     const diffOldDateAndNewDate = calculateDaysDifference(
-      dateFromDateTime(this.calendarEvent.start),
-      dateFromDateTime(this.currentDragoverDate as string)
+      Temporal.PlainDate.from(this.calendarEvent.start),
+      Temporal.PlainDate.from(this.currentDragoverDate as string)
     )
     eventCopy.start = addDays(eventCopy.start, diffOldDateAndNewDate)
     eventCopy.end = addDays(eventCopy.end, diffOldDateAndNewDate)

@@ -1,10 +1,11 @@
-import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react/dist/index'
+import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import { calendars } from './data/calendars';
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
 import { createInteractiveEventModal, rruleFields } from "@sx-premium/interactive-event-modal";
 import {createDragToCreatePlugin} from "@sx-premium/drag-to-create";
 import {createHourlyView, createDailyView, createConfig} from "@sx-premium/resource-scheduler";
 import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
+import 'temporal-polyfill/global'
 
 export default function ResourceCalendar() {
   const eventsService = createEventsServicePlugin()
@@ -119,103 +120,104 @@ export default function ResourceCalendar() {
 
   const calendarApp = useNextCalendarApp({
     callbacks: {
-      onDoubleClickDateTime: (dateTime: string) => {
+      onDoubleClickDateTime: (dateTime: Temporal.ZonedDateTime) => {
         interactiveEventModalPlugin.clickToCreate(dateTime, { calendarId: 'clients' })
       },
 
-      onDoubleClickDate: (date: string) => {
+      onDoubleClickDate: (date: Temporal.PlainDate) => {
         interactiveEventModalPlugin.clickToCreate(date, { calendarId: 'clients' })
       }
     },
     locale: 'en-US',
     views: [hourlyView, dailyView],
-    selectedDate: '2024-05-06',
+    selectedDate: Temporal.PlainDate.from('2024-05-06'),
+    timezone: 'America/New_York',
     events: [
       {
         id: '1',
         title: 'Tom',
-        start: '2024-05-06 02:00',
-        end: '2024-05-06 07:55',
+        start: Temporal.ZonedDateTime.from('2024-05-06T02:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T07:55:00-04:00[America/New_York]'),
         resourceId: 'conveyor-belt-b',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '2',
         title: 'Deepak',
-        start: '2024-05-06 02:00',
-        end: '2024-05-06 07:55',
+        start: Temporal.ZonedDateTime.from('2024-05-06T02:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T07:55:00-04:00[America/New_York]'),
         resourceId: 'conveyor-belt-b',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '3',
         title: 'Tim',
-        start: '2024-05-06 00:00',
-        end: '2024-05-06 03:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T00:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T03:00:00-04:00[America/New_York]'),
         resourceId: 'welding',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '4',
         title: 'Zhao',
-        start: '2024-05-06 01:30',
-        end: '2024-05-06 03:30',
+        start: Temporal.ZonedDateTime.from('2024-05-06T01:30:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T03:30:00-04:00[America/New_York]'),
         resourceId: 'cnc',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '5',
         title: 'Ted',
-        start: '2024-05-06 00:00',
-        end: '2024-05-06 08:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T00:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T08:00:00-04:00[America/New_York]'),
         resourceId: 'supervision-1',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '6',
         title: 'Chen',
-        start: '2024-05-06 06:00',
-        end: '2024-05-06 09:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T06:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T09:00:00-04:00[America/New_York]'),
         resourceId: 'welding',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '7',
         title: 'Jane',
-        start: '2024-05-06 07:30',
-        end: '2024-05-06 09:30',
+        start: Temporal.ZonedDateTime.from('2024-05-06T07:30:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T09:30:00-04:00[America/New_York]'),
         resourceId: 'cnc',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '8',
         title: 'Marsha',
-        start: '2024-05-06 08:00',
-        end: '2024-05-06 14:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T14:00:00-04:00[America/New_York]'),
         resourceId: 'conveyor-belt-a-1',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '0',
         title: 'Jane',
-        start: '2024-05-06 08:00',
-        end: '2024-05-06 14:00',
+        start: Temporal.ZonedDateTime.from('2024-05-06T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T14:00:00-04:00[America/New_York]'),
         resourceId: 'conveyor-belt-a-2',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '9',
         title: 'Huang',
-        start: '2024-05-06 08:00',
-        end: '2024-05-06 13:55',
+        start: Temporal.ZonedDateTime.from('2024-05-06T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T13:55:00-04:00[America/New_York]'),
         resourceId: 'conveyor-belt-b',
         rrule: 'FREQ=DAILY;COUNT=5'
       },
       {
         id: '10',
         title: 'Freddy',
-        start: '2024-05-06 08:00',
-        end: '2024-05-06 13:55',
+        start: Temporal.ZonedDateTime.from('2024-05-06T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T13:55:00-04:00[America/New_York]'),
         resourceId: 'conveyor-belt-b',
         rrule: 'FREQ=DAILY;COUNT=5'
       },

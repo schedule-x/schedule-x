@@ -1,10 +1,12 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
   expect,
   beforeEach,
+  afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { afterEach, vi } from 'vitest'
+import { vi } from 'vitest'
 import { cleanup } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { stubInterface } from 'ts-sinon'
@@ -35,8 +37,8 @@ describe('DateGridEvent', () => {
           {
             id: eventId,
             title: 'My event',
-            start: '2024-10-01',
-            end: '2024-10-01',
+            start: Temporal.PlainDate.from('2024-10-01'),
+            end: Temporal.PlainDate.from('2024-10-01'),
           },
         ],
       })
@@ -68,8 +70,8 @@ describe('DateGridEvent', () => {
           {
             id: eventId,
             title: 'My event',
-            start: '2024-10-01',
-            end: '2024-10-01',
+            start: Temporal.PlainDate.from('2024-10-01'),
+            end: Temporal.PlainDate.from('2024-10-01'),
             _options: {
               disableDND: true,
             },
@@ -104,11 +106,11 @@ describe('DateGridEvent', () => {
           {
             id: eventId,
             title: 'My event',
-            start: '2024-10-01',
-            end: '2024-10-01',
+            start: Temporal.PlainDate.from('2024-10-01'),
+            end: Temporal.PlainDate.from('2024-10-01'),
           },
         ],
-        selectedDate: '2024-10-01',
+        selectedDate: Temporal.PlainDate.from('2024-10-01'),
       })
 
       renderComponent($app, eventId, 1)
@@ -141,14 +143,14 @@ describe('DateGridEvent', () => {
           {
             id: eventId,
             title: 'My event',
-            start: '2024-10-01',
-            end: '2024-10-01',
+            start: Temporal.PlainDate.from('2024-10-01'),
+            end: Temporal.PlainDate.from('2024-10-01'),
             _options: {
               disableResize: true,
             },
           },
         ],
-        selectedDate: '2024-10-01',
+        selectedDate: Temporal.PlainDate.from('2024-10-01'),
       })
 
       renderComponent($app, eventId, 1)

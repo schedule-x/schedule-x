@@ -1,7 +1,6 @@
 import CalendarControlsPlugin from '@schedule-x/shared/src/interfaces/calendar-controls/calendar-controls-plugin.interface'
 import { CalendarAppSingleton, View } from '@schedule-x/shared/src'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
-import { dateStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
@@ -15,6 +14,7 @@ import {
   timeStringFromTimePoints,
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
+import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name = PluginName.CalendarControls
@@ -28,10 +28,7 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app = $app
   }
 
-  setDate(date: string): void {
-    if (!dateStringRegex.test(date))
-      throw new Error('Invalid date. Expected format YYYY-MM-DD')
-
+  setDate(date: Temporal.PlainDate): void {
     this.$app.datePickerState.selectedDate.value = date
   }
 
@@ -87,19 +84,36 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     this.$app.config.calendars.value = calendars
   }
 
-  setMinDate(minDate: string | undefined) {
+  setMinDate(minDate: Temporal.PlainDate | undefined) {
     this.$app.config.minDate.value = minDate
+    if (minDate) {
+      this.$app.datePickerConfig.min = minDate
+    }
   }
 
-  setMaxDate(maxDate: string | undefined) {
+  setMaxDate(maxDate: Temporal.PlainDate | undefined) {
     this.$app.config.maxDate.value = maxDate
+    if (maxDate) {
+      this.$app.datePickerConfig.max = maxDate
+    }
   }
 
   setMonthGridOptions(monthGridOptions: MonthGridOptions) {
     this.$app.config.monthGridOptions.value = monthGridOptions
   }
 
-  getDate = (): string => this.$app.datePickerState.selectedDate.value
+  setTimezone(timezone: IANATimezone) {
+    this.$app.config.timezone.value = timezone
+
+    Object.values(this.$app.config.plugins).forEach((plugin) => {
+      if (plugin?.onTimezoneChange) {
+        plugin.onTimezoneChange(timezone)
+      }
+    })
+  }
+
+  getDate = (): Temporal.PlainDate =>
+    this.$app.datePickerState.selectedDate.value
 
   getView = (): string => this.$app.calendarState.view.value
 
@@ -119,9 +133,11 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   getCalendars = (): Record<string, CalendarType> =>
     this.$app.config.calendars.value
 
-  getMinDate = (): string | undefined => this.$app.config.minDate.value
+  getMinDate = (): Temporal.PlainDate | undefined =>
+    this.$app.config.minDate.value
 
-  getMaxDate = (): string | undefined => this.$app.config.maxDate.value
+  getMaxDate = (): Temporal.PlainDate | undefined =>
+    this.$app.config.maxDate.value
 
   getMonthGridOptions = (): MonthGridOptions =>
     this.$app.config.monthGridOptions.value

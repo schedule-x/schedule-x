@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -11,6 +12,15 @@ import CalendarApp from '../calendar.app'
 import { viewWeek } from '../views/week'
 import { spy } from 'sinon'
 import { getFirstEventElement } from './utils'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('CalendarApp', () => {
   afterEach(() => {
@@ -25,13 +35,17 @@ describe('CalendarApp', () => {
 
     const eventId = '1'
     const eventTitle = 'test title 123'
-    const eventStart = '2020-01-01 04:00'
-    const eventEnd = '2020-01-01 06:00'
+    const eventStart = Temporal.ZonedDateTime.from(
+      '2020-01-01T04:00:00.00+00:00[UTC]'
+    )
+    const eventEnd = Temporal.ZonedDateTime.from(
+      '2020-01-01T06:00:00.00+00:00[UTC]'
+    )
     const foreignPropertyValue = 'foreign property value'
 
     beforeEach(() => {
       calendarApp = createCalendar({
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
         views: [viewWeek],
         events: [
           {
@@ -59,8 +73,8 @@ describe('CalendarApp', () => {
         expect(elementCCID).toMatch(/^custom-time-grid-event-\w+$/)
         expect(callSecondArgument.calendarEvent.id).toBe(eventId)
         expect(callSecondArgument.calendarEvent.title).toBe(eventTitle)
-        expect(callSecondArgument.calendarEvent.start).toBe(eventStart)
-        expect(callSecondArgument.calendarEvent.end).toBe(eventEnd)
+        expect(callSecondArgument.calendarEvent.start).toEqual(eventStart)
+        expect(callSecondArgument.calendarEvent.end).toEqual(eventEnd)
         expect(callSecondArgument.calendarEvent.foreignProperty).toBe(
           foreignPropertyValue
         )

@@ -2,7 +2,6 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { useContext, useEffect, useMemo } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
-import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
 import {
@@ -24,7 +23,6 @@ import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-pl
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {
@@ -70,12 +68,25 @@ export default function DateGridEvent({
     })
   }
 
+  const rangeStartForComparison =
+    calendarEvent.start instanceof Temporal.ZonedDateTime
+      ? ($app.calendarState.range.value as DateRange).start.toString()
+      : Temporal.PlainDate.from({
+          year: ($app.calendarState.range.value as DateRange).start.year,
+          month: ($app.calendarState.range.value as DateRange).start.month,
+          day: ($app.calendarState.range.value as DateRange).start.day,
+        }).toString()
+  const rangeEndForComparison =
+    calendarEvent.end instanceof Temporal.ZonedDateTime
+      ? ($app.calendarState.range.value as DateRange).end.toString()
+      : Temporal.PlainDate.from({
+          year: ($app.calendarState.range.value as DateRange).end.year,
+          month: ($app.calendarState.range.value as DateRange).end.month,
+          day: ($app.calendarState.range.value as DateRange).end.day,
+        }).toString()
   const startsBeforeWeek =
-    dateFromDateTime(calendarEvent.start) <
-    dateFromDateTime(($app.calendarState.range.value as DateRange).start)
-  const endsAfterWeek =
-    dateFromDateTime(calendarEvent.end) >
-    dateFromDateTime(($app.calendarState.range.value as DateRange).end)
+    calendarEvent.start.toString() < rangeStartForComparison
+  const endsAfterWeek = calendarEvent.end.toString() > rangeEndForComparison
   const hasOverflowLeft = useMemo(() => {
     if ($app.config.direction === 'ltr') {
       return startsBeforeWeek
@@ -106,7 +117,7 @@ export default function DateGridEvent({
     })
   }, [calendarEvent, eventCopy])
 
-  const startResize = (mouseEvent: MouseEvent) => {
+  const startResize = (mouseEvent: MouseEvent | TouchEvent) => {
     mouseEvent.stopPropagation()
     const eventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(eventCopy)
@@ -212,7 +223,7 @@ export default function DateGridEvent({
 
             <span className="sx__date-grid-event-text">
               {calendarEvent.title} &nbsp;
-              {dateTimeStringRegex.test(calendarEvent.start) && (
+              {calendarEvent.start instanceof Temporal.ZonedDateTime && (
                 <span className="sx__date-grid-event-time">
                   {timeFn(calendarEvent.start, $app.config.locale.value)}
                 </span>
@@ -242,6 +253,7 @@ export default function DateGridEvent({
             <div
               className="sx__date-grid-event-resize-handle"
               onMouseDown={startResize}
+              onTouchStart={startResize}
             />
           )}
       </div>
