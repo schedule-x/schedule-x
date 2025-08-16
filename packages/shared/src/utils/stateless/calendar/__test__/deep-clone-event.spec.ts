@@ -147,4 +147,29 @@ describe('deep cloning an event', () => {
 
     expect(clonedEvent._getForeignProperties().key).toEqual('value')
   })
+
+  it('should use the original timezone of the event externally, but internally use the timezone of the calendar', () => {
+    const calendarEvent = new CalendarEventBuilder(
+      $app.config,
+      'id',
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+09:00[Asia/Tokyo]'),
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+09:00[Asia/Tokyo]')
+    ).build()
+
+    const clonedEvent = deepCloneEvent(calendarEvent, $app)
+
+    expect(clonedEvent._getExternalEvent().start).toEqual(
+      Temporal.ZonedDateTime.from('2020-02-17T10:34:00+09:00[Asia/Tokyo]')
+    )
+    expect(clonedEvent._getExternalEvent().end).toEqual(
+      Temporal.ZonedDateTime.from('2020-02-17T11:34:00+09:00[Asia/Tokyo]')
+    )
+    // same but adjusted for europe berlin timezone
+    expect(clonedEvent.start).toEqual(
+      Temporal.ZonedDateTime.from('2020-02-17T02:34:00+01:00[Europe/Berlin]')
+    )
+    expect(clonedEvent.end).toEqual(
+      Temporal.ZonedDateTime.from('2020-02-17T03:34:00+01:00[Europe/Berlin]')
+    )
+  })
 })
