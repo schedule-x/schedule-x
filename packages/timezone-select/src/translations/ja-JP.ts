@@ -2,7 +2,7 @@
 export const timezoneJaJP = {
   'Search timezones...': 'タイムゾーンを検索...',
   'Select Timezone': 'タイムゾーンを選択',
-
+  Timezone: 'タイムゾーン',
   // アフリカ
   'Africa/Abidjan': 'コートジボワール – アビジャン',
   'Africa/Accra': 'ガーナ – アクラ',

@@ -2,7 +2,8 @@
 export const timezoneEtEE = {
   'Search timezones...': 'Otsi aeguridadeid...',
   'Select Timezone': 'Vali aeguriduse',
-
+  Timezone: 'Aeguriduse',
+  
   // Aafrika
   'Africa/Abidjan': 'Elevandiluurannik – Abidjan',
   'Africa/Accra': 'Ghana – Accra',

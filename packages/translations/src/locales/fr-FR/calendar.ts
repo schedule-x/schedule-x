@@ -7,6 +7,8 @@ export const calendarFrFR: CalendarTranslations = {
   Day: 'Jour',
   List: 'Liste',
   'Select View': 'Sélectionner la vue',
+  View: 'Vue',
+
   '+ {{n}} events': '+ {{n}} événements',
   '+ 1 event': '+ 1 événement',
   'No events': 'Aucun événement',

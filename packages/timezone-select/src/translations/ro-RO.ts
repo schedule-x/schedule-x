@@ -2,6 +2,7 @@
 export const timezoneRoRO = {
   'Search timezones...': 'Caută fusuri orare...',
   'Select Timezone': 'Selectează fus orar',
+  Timezone: 'Fus orar',
 
   // Africa
   'Africa/Abidjan': 'Coasta de Fildeș – Abidjan',

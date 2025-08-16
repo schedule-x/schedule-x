@@ -2,6 +2,7 @@
 export const timezonePtBR = {
   'Search timezones...': 'Pesquisar fusos horários...',
   'Select Timezone': 'Selecionar fuso horário',
+  Timezone: 'Fuso horário',
 
   // África
   'Africa/Abidjan': 'Costa do Marfim – Abidjan',

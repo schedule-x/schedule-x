@@ -2,7 +2,7 @@
 export const timezoneLtLT = {
   'Search timezones...': 'Ieškoti laiko juostų...',
   'Select Timezone': 'Pasirinkti laiko juostą',
-
+  Timezone: 'Laiko juosta',
   // Afrika
   'Africa/Abidjan': 'Dramblio Kaulo Krantas – Abidžanas',
   'Africa/Accra': 'Gana – Akra',

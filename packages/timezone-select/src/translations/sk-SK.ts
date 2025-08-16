@@ -2,6 +2,7 @@
 export const timezoneSkSK = {
   'Search timezones...': 'Hľadať časové pásma...',
   'Select Timezone': 'Vybrať časové pásmo',
+  Timezone: 'Časové pásmo',
 
   // Afrika
   'Africa/Abidjan': 'Pobrežie Slonoviny – Abidžan',

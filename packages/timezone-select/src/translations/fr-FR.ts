@@ -2,6 +2,7 @@
 export const timezoneFrFR = {
   'Search timezones...': 'Rechercher des fuseaux horaires...',
   'Select Timezone': 'Sélectionner un fuseau horaire',
+  Timezone: 'Fuseau horaire',
 
   // Afrique
   'Africa/Abidjan': "Côte d'Ivoire – Abidjan",

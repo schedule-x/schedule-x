@@ -2,6 +2,7 @@
 export const timezoneZhTW = {
   'Search timezones...': '搜尋時區...',
   'Select Timezone': '選擇時區',
+  Timezone: '時區',
 
   // 非洲
   'Africa/Abidjan': '象牙海岸 – 阿比讓',

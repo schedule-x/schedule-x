@@ -2,6 +2,7 @@
 export const timezoneCsCZ = {
   'Search timezones...': 'Hledat časové pásma...',
   'Select Timezone': 'Vybrat časové pásmo',
+  Timezone: 'Časové pásmo',
 
   // Afrika
   'Africa/Abidjan': 'Pobřeží slonoviny – Abidžan',

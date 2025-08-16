@@ -2,6 +2,7 @@
 export const timezoneTrTR = {
   'Search timezones...': 'Saat dilimlerini arayın...',
   'Select Timezone': 'Saat dilimini seçin',
+  Timezone: 'Saat dilimi',
 
   // Afrika
   'Africa/Abidjan': 'Fildişi Sahili – Abidjan',

@@ -19,4 +19,5 @@ export const calendarDaDK: CalendarTranslations = {
     'Link til {{n}} flere begivenheder den {{date}}',
   'Link to 1 more event on {{date}}': 'Link til 1 mere begivenhed den {{date}}',
   CW: 'Uge {{week}}',
+  View: 'Visning',
 }

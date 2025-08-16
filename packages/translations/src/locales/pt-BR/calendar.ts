@@ -18,4 +18,5 @@ export const calendarPtBR: CalendarTranslations = {
     'Link para mais {{n}} eventos em {{date}}',
   'Link to 1 more event on {{date}}': 'Link para mais 1 evento em {{date}}',
   CW: 'Semana {{week}}',
+  View: 'Visualização',
 }

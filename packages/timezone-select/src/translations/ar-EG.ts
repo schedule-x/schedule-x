@@ -3,6 +3,7 @@ export const timezoneArEG = {
   // أفريقيا
   'Search timezones...': 'البحث عن المناطق الزمنية...',
   'Select Timezone': 'اختر المنطقة الزمنية',
+  Timezone: 'المنطقة الزمنية',
   'Africa/Abidjan': 'ساحل العاج – أبيدجان',
   'Africa/Accra': 'غانا – أكرا',
   'Africa/Addis_Ababa': 'إثيوبيا – أديس أبابا',

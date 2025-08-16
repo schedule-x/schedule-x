@@ -2,6 +2,7 @@
 export const timezoneDeDE = {
   'Search timezones...': 'Zeitzonen suchen...',
   'Select Timezone': 'Zeitzone auswählen',
+  Timezone: 'Zeitzone',
 
   // Afrika
   'Africa/Abidjan': 'Elfenbeinküste – Abidjan',

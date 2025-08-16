@@ -2,6 +2,7 @@
 export const timezoneSvSE = {
   'Search timezones...': 'Sök tidszoner...',
   'Select Timezone': 'Välj tidszon',
+  Timezone: 'Tidszon',
 
   // Afrika
   'Africa/Abidjan': 'Elfenbenskusten – Abidjan',

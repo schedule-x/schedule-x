@@ -18,4 +18,5 @@ export const calendarArEG: CalendarTranslations = {
     'رابط إلى {{n}} أحداث أخرى في {{date}}',
   'Link to 1 more event on {{date}}': 'رابط إلى حدث آخر في {{date}}',
   CW: 'الأسبوع {{week}}',
+  View: 'عرض',
 }

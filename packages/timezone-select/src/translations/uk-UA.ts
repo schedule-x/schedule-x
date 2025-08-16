@@ -2,6 +2,7 @@
 export const timezoneUkUA = {
   'Search timezones...': 'Пошук часових поясів...',
   'Select Timezone': 'Виберіть часовий пояс',
+  Timezone: 'Часовий пояс',
 
   // Африка
   'Africa/Abidjan': "Кот-д'Івуар – Абіджан",

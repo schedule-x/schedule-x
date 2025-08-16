@@ -2,6 +2,7 @@
 export const timezoneDaDK = {
   'Search timezones...': 'Søg efter tidszoner...',
   'Select Timezone': 'Vælg tidszone',
+  Timezone: 'Tidszone',
 
   // Afrika
   'Africa/Abidjan': 'Elfenbenskysten – Abidjan',
