@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/resize",
   "umdName": "SXResize",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.3",
   "description": "Resize events in the Schedule-X calendar",
   "author": {
     "name": "Tom Österlund",

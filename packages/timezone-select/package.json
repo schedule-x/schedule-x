@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/timezone-select",
   "umdName": "SXTimezoneSelect",
-  "version": "3.0.0-rc.2",
+  "version": "3.0.0-rc.3",
   "description": "Schedule-X timezone select plugin",
   "author": {
     "name": "Tom Österlund",
