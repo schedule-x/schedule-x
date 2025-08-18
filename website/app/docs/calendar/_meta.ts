@@ -28,6 +28,9 @@ const meta: MetaRecord = {
   language: {
     title: "Language"
   },
+  temporal: {
+    title: "Temporal API"
+  },
   'advanced': {
     title: "Advanced usage"
   },

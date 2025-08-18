@@ -19,22 +19,28 @@ import { Tabs } from 'nextra/components'
 <Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tabs.Tab>
     ```bash copy
-      npm install @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default
+      npm install @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      pnpm install @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      pnpm install @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      yarn add @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      yarn add @schedule-x/vue @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 </Tabs>
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Curious about the `temporal-polyfill` package? Read more [here](/docs/calendar/temporal).
+</Callout>
 
 If you're using a package manager that does not automatically
 download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
@@ -55,6 +61,7 @@ import {
   createViewWeek,
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
+import 'temporal-polyfill/global'
 
 // Do not use a ref here, as the calendar instance is not reactive, and doing so might cause issues
 // For updating events, use the events service plugin
@@ -169,6 +176,7 @@ import { ScheduleXCalendar } from '@schedule-x/vue'
 import { createCalendar, createViewWeek } from '@schedule-x/calendar'
 import CustomTimeGridEvent from './some-path/CustomTimeGridEvent.vue'
 import '@schedule-x/theme-default/dist/index.css'
+import 'temporal-polyfill/global'
 
 const viewWeek = createViewWeek()
 

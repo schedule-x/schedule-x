@@ -16,22 +16,28 @@ import { Tabs } from 'nextra/components'
 <Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tabs.Tab>
     ```bash copy
-      npm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default
+      npm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      pnpm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      pnpm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      yarn add @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      yarn add @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 </Tabs>
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Curious about the `temporal-polyfill` package? Read more [here](/docs/calendar/temporal).
+</Callout>
 
 ## Basic usage
 
@@ -44,6 +50,7 @@ import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from "@schedule-x/angular";
 import { createCalendar, createViewWeek } from "@schedule-x/calendar";
 import '@schedule-x/theme-default/dist/index.css' // can alternatively be added in your angular.json
+import 'temporal-polyfill/global'
 
 @Component({
   selector: 'app-root',
@@ -66,7 +73,6 @@ export class AppComponent {
     views: [createViewWeek()],
   })
 }
-
 ```
 
 ```html

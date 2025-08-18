@@ -17,22 +17,28 @@ import { Tabs } from 'nextra/components'
 <Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tabs.Tab>
     ```bash copy
-      npm install @schedule-x/svelte @schedule-x/calendar @schedule-x/theme-default
+      npm install @schedule-x/svelte @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      pnpm install @schedule-x/svelte @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      pnpm install @schedule-x/svelte @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      yarn add @schedule-x/svelte @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      yarn add @schedule-x/svelte @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 </Tabs>
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Curious about the `temporal-polyfill` package? Read more [here](/docs/calendar/temporal).
+</Callout>
 
 If you're using a package manager that does not automatically
 download peer dependencies, you will additionally need to install `@schedule-x/calendar`, `@preact/signals` and
@@ -51,6 +57,7 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 	import { ScheduleXCalendar } from '@schedule-x/svelte';
 	import { createCalendar, createViewDay, createViewWeek } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
+	import 'temporal-polyfill/global'
 
 	const calendarApp = createCalendar({
 		views: [createViewDay(), createViewWeek()],
@@ -154,6 +161,7 @@ can be customized:
 	import { createCalendar, createViewDay, createViewWeek } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
 	import TimeGridEvent from '$lib/TimeGridEvent.svelte';
+	import 'temporal-polyfill/global'
 
 	const calendarApp = createCalendar({
 		views: [createViewWeek(), createViewDay()],
@@ -161,8 +169,8 @@ can be customized:
 			{
 				id: '2',
 				title: 'Event 2',
-				start: '2024-07-06 02:00',
-				end: '2024-07-06 04:00',
+				start: Temporal.ZonedDateTime.from('2024-07-06T02:00:00+09:00[Asia/Tokyo]'),
+				end: Temporal.ZonedDateTime.from('2024-07-06T04:00:00+09:00[Asia/Tokyo]'),
 			},
 		]
 	})
