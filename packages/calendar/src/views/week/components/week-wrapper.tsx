@@ -3,7 +3,7 @@ import TimeGridDay from '../../../components/week-grid/time-grid-day'
 import TimeAxis from '../../../components/week-grid/time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import DateAxis from '../../../components/week-grid/date-axis'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../../utils/stateless/events/sort-events-for-week'
 import { createWeek } from '../../../utils/stateless/views/week/create-week'
 import { positionInTimeGrid } from '../../../utils/stateless/events/position-in-time-grid'
@@ -37,15 +37,46 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
       newWeek
     )
     Object.entries(newWeek).forEach(([date, day]) => {
+      const plainDate = Temporal.PlainDate.from(date)
+      const rangeStartDateTime = Temporal.ZonedDateTime.from({
+        year: plainDate.year,
+        month: plainDate.month,
+        day: plainDate.day,
+        hour:
+          $app.config.dayBoundaries.value.start === 0
+            ? 0
+            : $app.config.dayBoundaries.value.start / 100,
+        minute: 0,
+        second: 0,
+        timeZone: $app.config.timezone.value,
+      })
+      let rangeEndDateTime = Temporal.ZonedDateTime.from({
+        year: plainDate.year,
+        month: plainDate.month,
+        day: plainDate.day,
+        hour:
+          $app.config.dayBoundaries.value.end === 2400
+            ? 23
+            : $app.config.dayBoundaries.value.end / 100,
+        minute: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
+        second: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
+        timeZone: $app.config.timezone.value,
+      })
+      if ($app.config.isHybridDay) {
+        rangeEndDateTime = rangeEndDateTime.add({ days: 1 })
+      }
+
       day.backgroundEvents = filterByRange(
         $app.calendarEvents.backgroundEvents.value,
         {
-          start: date,
-          end: date,
-        }
+          start: rangeStartDateTime,
+          end: rangeEndDateTime,
+        },
+        $app.config.timezone.value
       )
     })
     newWeek = positionInTimeGrid(timeGridEvents, newWeek, $app)
+
     return newWeek
   })
 
@@ -56,9 +87,15 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-header">
             <div className="sx__week-header-content">
               <DateAxis
-                week={Object.values(week.value).map((day) =>
-                  toJSDate(day.date)
-                )}
+                week={Object.values(week.value).map((day) => {
+                  const plainDate = Temporal.PlainDate.from(day.date)
+                  return Temporal.ZonedDateTime.from({
+                    year: plainDate.year,
+                    month: plainDate.month,
+                    day: plainDate.day,
+                    timeZone: $app.config.timezone.value,
+                  })
+                })}
               />
 
               <div
@@ -82,14 +119,25 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
           <div className="sx__week-grid">
             <TimeAxis />
 
-            {Object.values(week.value).map((day) => (
-              <TimeGridDay
-                calendarEvents={day.timeGridEvents}
-                backgroundEvents={day.backgroundEvents}
-                date={day.date}
-                key={day.date}
-              />
-            ))}
+            {Object.values(week.value).map((day) => {
+              const { year, month, date } = toIntegers(day.date)
+
+              const zonedDateTime = Temporal.ZonedDateTime.from({
+                year,
+                month: month + 1,
+                day: date,
+                timeZone: $app.config.timezone.value,
+              })
+
+              return (
+                <TimeGridDay
+                  calendarEvents={day.timeGridEvents}
+                  backgroundEvents={day.backgroundEvents}
+                  date={zonedDateTime}
+                  key={day.date}
+                />
+              )
+            })}
           </div>
         </div>
       </AppContext.Provider>

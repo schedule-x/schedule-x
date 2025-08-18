@@ -1,6 +1,6 @@
 import { RRuleOptionsExternal } from './types/rrule-options'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
+import { sxDateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { addDays, addMinutes } from '@schedule-x/shared/src'
 import { getDurationInMinutes } from './utils/stateless/duration-in-minutes'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
@@ -23,8 +23,8 @@ export class RRuleUpdater {
     if (!this.rruleOptions.byday) return
 
     const daysDifference = calculateDaysDifference(
-      this.dtstartOld,
-      this.dtstartNew
+      Temporal.PlainDate.from(this.dtstartOld),
+      Temporal.PlainDate.from(this.dtstartNew)
     )
 
     const days = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU']
@@ -55,16 +55,20 @@ export class RRuleUpdater {
   updateUntil() {
     if (!this.rruleOptions.until) return
 
-    const isDateTime = dateTimeStringRegex.test(this.dtstartOld)
+    const dtstartOld = this.dtstartOld
+    const isDateTime = sxDateTimeStringRegex.test(dtstartOld)
     this.rruleOptionsNew.until = isDateTime
       ? addMinutes(
           this.rruleOptionsNew.until!,
           getDurationInMinutes(this.dtstartOld, this.dtstartNew)
-        )
+        ).toString()
       : addDays(
-          this.rruleOptionsNew.until!,
-          calculateDaysDifference(this.dtstartOld, this.dtstartNew)
-        )
+          Temporal.PlainDate.from(this.rruleOptionsNew.until!),
+          calculateDaysDifference(
+            Temporal.PlainDate.from(this.dtstartOld),
+            Temporal.PlainDate.from(this.dtstartNew)
+          )
+        ).toString()
   }
 
   getUpdatedRRuleOptions(): RRuleOptionsExternal {

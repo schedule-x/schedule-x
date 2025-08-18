@@ -18,4 +18,5 @@ export const calendarLtLT: CalendarTranslations = {
     'Nuoroda į dar {{n}} įvykius {{date}}',
   'Link to 1 more event on {{date}}': 'Nuoroda į dar 1 vieną įvykį {{date}}',
   CW: '{{week}} savaitė',
+  View: 'Vaizdas',
 }

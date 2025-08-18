@@ -6,9 +6,8 @@ import {
   getInlineStartRule,
   getWidthRule,
 } from '../../utils/stateless/events/event-styles'
-import { useContext, useEffect } from 'preact/hooks'
+import { useContext, useEffect, useRef, useState } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import UserIcon from '@schedule-x/shared/src/components/icons/user-icon'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pin-icon'
@@ -28,6 +27,7 @@ import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../utils/stateless/events/focus-modal'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
+import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 
 type props = {
   calendarEvent: CalendarEventInternal
@@ -43,6 +43,8 @@ export default function TimeGridEvent({
   setMouseDown,
 }: props) {
   const $app = useContext(AppContext)
+  const eventRef = useRef<HTMLDivElement>(null)
+  const [isCompact, setIsCompact] = useState(false)
 
   const {
     eventCopy,
@@ -56,16 +58,17 @@ export default function TimeGridEvent({
     $app.config.locale.value,
     { hour: 'numeric', minute: 'numeric' },
   ] as const
-  const getEventTime = (start: string, end: string) => {
-    const localizedStartTime = toJSDate(start).toLocaleTimeString(
-      ...localizeArgs
-    )
+  const getEventTime = (
+    start: Temporal.ZonedDateTime,
+    end: Temporal.ZonedDateTime
+  ) => {
+    const localizedStartTime = start.toLocaleString(...localizeArgs)
 
     if (start === end) {
       return localizedStartTime
     }
 
-    const localizedEndTime = toJSDate(end).toLocaleTimeString(...localizeArgs)
+    const localizedEndTime = end.toLocaleString(...localizeArgs)
     return `${localizedStartTime} – ${localizedEndTime}`
   }
 
@@ -112,6 +115,29 @@ export default function TimeGridEvent({
     customComponent(getElementByCCID(customComponentId), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
+  }, [calendarEvent, eventCopy])
+
+  // ResizeObserver to detect when event height changes
+  useEffect(() => {
+    if (!eventRef.current) return
+
+    const checkHeight = () => {
+      const element = eventRef.current
+      if (!element) return
+
+      const height = element.offsetHeight
+      const shouldBeCompact = height < 36
+      setIsCompact(shouldBeCompact)
+    }
+
+    checkHeight()
+
+    const resizeObserver = new ResizeObserver(checkHeight)
+    resizeObserver.observe(eventRef.current)
+
+    return () => {
+      resizeObserver.disconnect()
+    }
   }, [calendarEvent, eventCopy])
 
   const handleOnClick = (e: MouseEvent) => {
@@ -182,16 +208,17 @@ export default function TimeGridEvent({
 
   const realStartIsBeforeDayBoundaryStart =
     dayBoundariesDateTime &&
-    calendarEvent.start < dayBoundariesDateTime.start &&
-    calendarEvent.end >= dayBoundariesDateTime.start
+    calendarEvent.start.toString() < dayBoundariesDateTime.start.toString() &&
+    calendarEvent.end.toString() >= dayBoundariesDateTime.start.toString()
 
   const relativeStartWithinDayBoundary = realStartIsBeforeDayBoundaryStart
     ? dayBoundariesDateTime?.start
-    : calendarEvent.start
+    : (calendarEvent.start as Temporal.ZonedDateTime)
 
   return (
     <>
       <div
+        ref={eventRef}
         id={
           isCopy ? getTimeGridEventCopyElementId(calendarEvent.id) : undefined
         }
@@ -214,7 +241,7 @@ export default function TimeGridEvent({
           )}%`,
           height: `${getEventHeight(
             relativeStartWithinDayBoundary,
-            calendarEvent.end,
+            calendarEvent.end as Temporal.ZonedDateTime,
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
@@ -244,16 +271,38 @@ export default function TimeGridEvent({
         >
           {!customComponent && !hasCustomContent && (
             <Fragment>
-              {calendarEvent.title && (
+              {/* Compact layout - title and time inline */}
+              {isCompact && calendarEvent.title && (
+                <div className="sx__title-and-time-compact">
+                  <div className="sx__time-grid-event-title">
+                    {calendarEvent.title}
+                  </div>
+                  <div className="sx__time-grid-event-time">
+                    {timeFn(
+                      calendarEvent.start as Temporal.ZonedDateTime,
+                      $app.config.locale.value
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Regular layout - title and time separate */}
+              {!isCompact && calendarEvent.title && (
                 <div className="sx__time-grid-event-title">
                   {calendarEvent.title}
                 </div>
               )}
 
-              <div className="sx__time-grid-event-time">
-                <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
-                {getEventTime(calendarEvent.start, calendarEvent.end)}
-              </div>
+              {/* Show time in regular layout or when compact and no title */}
+              {(!isCompact || (isCompact && !calendarEvent.title)) && (
+                <div className="sx__time-grid-event-time">
+                  <TimeIcon strokeColor={eventCSSVariables.iconStroke} />
+                  {getEventTime(
+                    calendarEvent.start as Temporal.ZonedDateTime,
+                    calendarEvent.end as Temporal.ZonedDateTime
+                  )}
+                </div>
+              )}
 
               {calendarEvent.people && calendarEvent.people.length > 0 && (
                 <div className="sx__time-grid-event-people">

@@ -6,12 +6,11 @@ import CalendarConfigInternal from '@schedule-x/shared/src/interfaces/calendar/c
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 import { View } from '@schedule-x/shared/src/types/calendar/view'
 import EventColors from '../event-colors/event-colors'
-import { toDateString } from '@schedule-x/shared/src'
 
 export const createCalendarState = (
   calendarConfig: CalendarConfigInternal,
   timeUnitsImpl: TimeUnits,
-  selectedDate?: string
+  selectedDate?: Temporal.PlainDate
 ): CalendarState => {
   const _view = signal<ViewName>(
     calendarConfig.views.value.find(
@@ -28,20 +27,21 @@ export const createCalendarState = (
     null
 
   const callOnRangeUpdate = (_range: Signal<DateRange | null>) => {
+    const lastRange =
+      lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE
+    if (!_range.value) return
+    if (
+      lastRange?.start.toString() === _range.value.start.toString() &&
+      lastRange?.end.toString() === _range.value.end.toString()
+    )
+      return
+
     if (!wasInitialized) return (wasInitialized = true)
 
     if (calendarConfig.callbacks.onRangeUpdate && _range.value) {
       calendarConfig.callbacks.onRangeUpdate(_range.value)
     }
 
-    const lastRange =
-      lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE
-    if (!_range.value) return
-    if (
-      lastRange?.start === _range.value.start &&
-      lastRange?.end === _range.value.end
-    )
-      return
     Object.values(calendarConfig.plugins || {}).forEach((plugin) => {
       plugin?.onRangeUpdate?.(_range.value!)
       lastRangeEmitted__NEEDED_TO_PREVENT_RECURSION_IN_EVENT_RECURRENCE_PACKAGE_WHICH_CAUSES_RANGE_TO_UPDATE_AND_THUS_CAUSES_A_CYCLE =
@@ -55,7 +55,7 @@ export const createCalendarState = (
     }
   })
 
-  const setRange = (date: string) => {
+  const setRange = (date: Temporal.PlainDate) => {
     const selectedView = calendarConfig.views.value.find(
       (availableView) => availableView.name === _view.value
     )
@@ -66,8 +66,8 @@ export const createCalendarState = (
       timeUnitsImpl,
     })
     if (
-      newRange.start === range.value?.start &&
-      newRange.end === range.value?.end
+      newRange.start.toString() === range.value?.start.toString() &&
+      newRange.end.toString() === range.value?.end.toString()
     )
       return
 
@@ -75,7 +75,12 @@ export const createCalendarState = (
   }
 
   // one initial call for setting the range
-  setRange(selectedDate || toDateString(new Date()))
+  setRange(
+    selectedDate ||
+      Temporal.PlainDate.from(
+        Temporal.Now.plainDateISO(calendarConfig.timezone.value)
+      )
+  )
 
   const isCalendarSmall = signal<boolean | undefined>(undefined)
   const isDark = signal<boolean>(calendarConfig.isDark.value || false)
@@ -95,7 +100,7 @@ export const createCalendarState = (
     setRange,
     range,
     isCalendarSmall,
-    setView: (newView: ViewName, selectedDate: string) => {
+    setView: (newView: ViewName, selectedDate: Temporal.PlainDate) => {
       batch(() => {
         _view.value = newView
         setRange(selectedDate)

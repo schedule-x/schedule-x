@@ -5,10 +5,6 @@ import {
   rruleJSToString,
   rruleStringToJS,
 } from '../parsers/rrule/parse-rrule'
-import { dateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
-import { getDurationInMinutes } from '../rrule/utils/stateless/duration-in-minutes'
-import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import { addDays, addMinutes } from '@schedule-x/shared/src'
 import { RRule } from '../rrule/rrule'
 import { Recurrence } from '../types/recurrence'
 import { RRuleOptionsExternal } from '../rrule/types/rrule-options'
@@ -22,7 +18,7 @@ type RecurrenceSetOptions = {
 
 export class RecurrenceSet {
   private dtstart: string
-  private dtend: string
+  public dtend: string
   private rrule: RRuleOptionsExternal
   private exdate?: Map<string, boolean> | undefined
 
@@ -43,16 +39,14 @@ export class RecurrenceSet {
     return this.filterExdate(recurrences)
   }
 
-  updateDtstart(newDtstart: string) {
+  updateDtstartAndDtend(newDtstart: string, newDtend: string) {
     newDtstart = parseRFC5545ToSX(newDtstart)
     const oldDtstart = this.dtstart
     const rruleUpdater = new RRuleUpdater(this.rrule, oldDtstart, newDtstart)
 
     this.rrule = rruleUpdater.getUpdatedRRuleOptions()
     this.dtstart = newDtstart
-    this.dtend = dateTimeStringRegex.test(oldDtstart)
-      ? addMinutes(this.dtend!, getDurationInMinutes(oldDtstart, newDtstart))
-      : addDays(this.dtend!, calculateDaysDifference(oldDtstart, newDtstart))
+    this.dtend = newDtend
   }
 
   private mapExdate(exdate?: string[]): Map<string, boolean> | undefined {

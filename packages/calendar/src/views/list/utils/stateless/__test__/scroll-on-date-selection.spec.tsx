@@ -7,6 +7,7 @@ import {
 import { __createAppWithViews__ } from '../../../../../utils/stateless/testing/__create-app-with-views__'
 import { scrollOnDateSelection } from '../scroll-on-date-selection'
 import { vi } from 'vitest'
+import 'temporal-polyfill/global'
 
 describe('scrolling the list view on date selection', () => {
   describe('when a day element for the selected date is found', () => {
@@ -16,7 +17,8 @@ describe('scrolling the list view on date selection', () => {
 
     it('should scroll the day element into view', () => {
       const $app = __createAppWithViews__()
-      $app.datePickerState.selectedDate.value = '2023-10-01'
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2023-10-01')
       const wrapperRef = {
         current: document.createElement('div'),
       }

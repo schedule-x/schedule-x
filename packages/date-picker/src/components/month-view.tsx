@@ -3,7 +3,6 @@ import MonthViewHeader from './month-view-header'
 import DayNames from './day-names'
 import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { MonthWithDates } from '@schedule-x/shared/src/types/time'
 import MonthViewWeek from './month-view-week'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
@@ -18,13 +17,11 @@ export default function MonthView({ seatYearsView }: props) {
   const [month, setMonth] = useState<MonthWithDates>([])
 
   const renderMonth = () => {
-    const newDatePickerDate = toJSDate(
-      $app.datePickerState.datePickerDate.value
-    )
+    const newDatePickerDate = $app.datePickerState.datePickerDate.value
     setMonth(
       $app.timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
-        newDatePickerDate.getFullYear(),
-        newDatePickerDate.getMonth()
+        newDatePickerDate.year,
+        newDatePickerDate.month
       )
     )
   }

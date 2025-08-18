@@ -19,4 +19,5 @@ export const calendarSlSI: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'Povezava do še enega dogodka dne {{date}}',
   CW: 'Teden {{week}}',
+  View: 'Pogled',
 }

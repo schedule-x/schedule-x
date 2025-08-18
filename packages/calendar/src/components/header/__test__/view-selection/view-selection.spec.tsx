@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import { cleanup, screen, waitFor } from '@testing-library/preact'
 import {
   describe,
@@ -15,6 +16,16 @@ import { afterEach } from 'vitest'
 describe('ViewSelection', () => {
   afterEach(() => {
     cleanup()
+  })
+
+  it('should display the view label', async () => {
+    renderComponent()
+
+    await waitFor(() => {
+      const viewLabel = document.querySelector('.sx__view-selection-label')
+      expect(viewLabel).toBeTruthy()
+      expect(viewLabel?.textContent).toBe('View')
+    })
   })
 
   it('should close on click outside', async () => {
@@ -70,7 +81,10 @@ describe('ViewSelection', () => {
 
   it('should only display views compatible with a small calendar', async () => {
     const { $app } = renderComponent()
-    $app.calendarState.setView(InternalViewName.MonthAgenda, '2023-09-13')
+    $app.calendarState.setView(
+      InternalViewName.MonthAgenda,
+      Temporal.PlainDate.from('2023-09-13')
+    )
     $app.calendarState.isCalendarSmall.value = true
 
     openViewSelection()
@@ -87,7 +101,10 @@ describe('ViewSelection', () => {
 
   it('should only display views compatible with a large calendar', async () => {
     const { $app } = renderComponent()
-    $app.calendarState.setView(InternalViewName.MonthAgenda, '2023-09-13')
+    $app.calendarState.setView(
+      InternalViewName.MonthAgenda,
+      Temporal.PlainDate.from('2023-09-13')
+    )
     $app.calendarState.isCalendarSmall.value = false
 
     openViewSelection()

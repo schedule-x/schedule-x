@@ -18,4 +18,5 @@ export const calendarSrLatnRS: CalendarTranslations = {
     'Link do još {{n}} događaja na {{date}}',
   'Link to 1 more event on {{date}}': 'Link do jednog događaja na {{date}}',
   CW: 'Nedelja {{week}}',
+  View: 'Pregled',
 }

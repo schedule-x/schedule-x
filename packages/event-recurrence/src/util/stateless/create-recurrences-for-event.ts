@@ -1,6 +1,11 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { RecurrenceSet } from '../../../../recurrence/src'
-import { parseSXToRFC5545 } from '../../../../recurrence/src/parsers/rrule/parse-rrule'
+import {
+  parseRFC5545ToSX,
+  parseRFC5545ToTemporal,
+  parseSXToRFC5545,
+  parseTemporalToRFC5545,
+} from '../../../../recurrence/src/parsers/rrule/parse-rrule'
 import {
   AugmentedBackgroundEvent,
   AugmentedEvent,
@@ -20,32 +25,43 @@ export const createRecurrencesForEvent = (
   // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
   if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
     if (!rrule.endsWith(';')) rrule += ';'
-    rrule += `UNTIL=${parseSXToRFC5545(range.end)};`
+    rrule += `UNTIL=${parseTemporalToRFC5545(range.end)};`
   }
 
   const recurrenceSet = new RecurrenceSet({
-    dtstart: parseSXToRFC5545(calendarEvent.start),
-    dtend: parseSXToRFC5545(calendarEvent.end),
+    dtstart: parseTemporalToRFC5545(calendarEvent.start),
+    dtend: parseTemporalToRFC5545(calendarEvent.end),
     rrule,
     exdate,
   }).getRecurrences()
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
 
-  if (recurrenceSet[0].start === calendarEvent.start) {
+  if (
+    recurrenceSet[0].start ===
+    parseRFC5545ToSX(parseTemporalToRFC5545(calendarEvent.start))
+  ) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
   return recurrenceSet.map((recurrence) => {
     const eventCopy: AugmentedEvent = deepCloneEvent(calendarEvent, $app)
-    eventCopy.start = recurrence.start
-    eventCopy.end = recurrence.end
+    eventCopy.start = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.start),
+      $app.config.timezone.value
+    )
+    eventCopy.end = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.end),
+      $app.config.timezone.value
+    )
     eventCopy.isCopy = true
+
     return eventCopy
   })
 }
 
 export const createRecurrencesForBackgroundEvent = (
+  $app: CalendarAppSingleton,
   backgroundEvent: BackgroundEvent,
   rrule: string,
   range: DateRange,
@@ -54,26 +70,35 @@ export const createRecurrencesForBackgroundEvent = (
   // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
   if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
     if (!rrule.endsWith(';')) rrule += ';'
-    rrule += `UNTIL=${parseSXToRFC5545(range.end)};`
+    rrule += `UNTIL=${parseTemporalToRFC5545(range.end)};`
   }
 
   const recurrenceSet = new RecurrenceSet({
-    dtstart: parseSXToRFC5545(backgroundEvent.start),
-    dtend: parseSXToRFC5545(backgroundEvent.end),
+    dtstart: parseTemporalToRFC5545(backgroundEvent.start),
+    dtend: parseTemporalToRFC5545(backgroundEvent.end),
     rrule,
     exdate,
   }).getRecurrences()
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
 
-  if (recurrenceSet[0].start === backgroundEvent.start) {
+  if (
+    parseSXToRFC5545(recurrenceSet[0].start) ===
+    parseTemporalToRFC5545(backgroundEvent.start)
+  ) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
   return recurrenceSet.map((recurrence) => {
     const eventCopy: AugmentedBackgroundEvent = structuredClone(backgroundEvent)
-    eventCopy.start = recurrence.start
-    eventCopy.end = recurrence.end
+    eventCopy.start = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.start),
+      $app.config.timezone.value
+    )
+    eventCopy.end = parseRFC5545ToTemporal(
+      parseSXToRFC5545(recurrence.end),
+      $app.config.timezone.value
+    )
     eventCopy.isCopy = true
     return eventCopy
   })

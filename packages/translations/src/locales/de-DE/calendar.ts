@@ -7,6 +7,8 @@ export const calendarDeDE: CalendarTranslations = {
   Day: 'Tag',
   List: 'Liste',
   'Select View': 'Ansicht auswählen',
+  View: 'Ansicht',
+
   '+ {{n}} events': '+ {{n}} Ereignisse',
   '+ 1 event': '+ 1 Ereignis',
   'No events': 'Keine Ereignisse',

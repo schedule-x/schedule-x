@@ -1,11 +1,9 @@
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
-import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { Month, MonthWeek } from '../../types/month'
-import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 
-const createWeekForMonth = (week: MonthWeek, day: Date) => {
+const createWeekForMonth = (week: MonthWeek, day: Temporal.ZonedDateTime) => {
   week.push({
-    date: toDateString(day),
+    date: Temporal.ZonedDateTime.from(day.toString()).toPlainDate(),
     events: {},
     backgroundEvents: [],
   })
@@ -13,11 +11,13 @@ const createWeekForMonth = (week: MonthWeek, day: Date) => {
   return week
 }
 
-export const createMonth = (date: string, timeUnitsImpl: TimeUnits) => {
-  const { year, month: monthFromDate } = toIntegers(date)
+export const createMonth = (
+  date: Temporal.PlainDate,
+  timeUnitsImpl: TimeUnits
+) => {
   const monthWithDates = timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
-    year,
-    monthFromDate
+    date.year,
+    date.month
   )
   const month: Month = []
 

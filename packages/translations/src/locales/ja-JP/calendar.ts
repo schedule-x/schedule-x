@@ -7,6 +7,8 @@ export const calendarJaJP: CalendarTranslations = {
   Day: '日',
   List: 'リスト',
   'Select View': 'ビューを選択',
+  View: 'ビュー',
+
   '+ {{n}} events': '+ {{n}} イベント',
   '+ 1 event': '+ 1 イベント',
   'No events': 'イベントなし',

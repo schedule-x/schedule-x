@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -7,7 +8,7 @@ import { getClassNameForWeekday } from '../get-class-name-for-weekday'
 
 describe('getClassNameForWeekday', () => {
   it.each([
-    [0, 'sx__sunday'],
+    [7, 'sx__sunday'],
     [1, 'sx__monday'],
     [2, 'sx__tuesday'],
     [3, 'sx__wednesday'],

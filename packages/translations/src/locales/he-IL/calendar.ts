@@ -18,4 +18,5 @@ export const calendarHeIL: CalendarTranslations = {
     'קישור לעוד {{n}} אירועים ב-{{date}}',
   'Link to 1 more event on {{date}}': 'קישור לאירוע נוסף ב-{{date}}',
   CW: '{{week}} שָׁבוּעַ',
+  View: 'תצוגה',
 }

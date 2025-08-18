@@ -7,6 +7,8 @@ export const calendarEsES: CalendarTranslations = {
   Day: 'Día',
   List: 'Lista',
   'Select View': 'Seleccionar vista',
+  View: 'Vista',
+
   '+ {{n}} events': '+ {{n}} eventos',
   '+ 1 event': '+ 1 evento',
   'No events': 'No hay eventos',

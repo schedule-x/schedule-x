@@ -11,6 +11,7 @@ import DragAndDropPlugin from '@schedule-x/shared/src/interfaces/drag-and-drop/d
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { __createAppWithViews__ } from '../../../../../utils/stateless/testing/__create-app-with-views__'
 import { renderComponent } from './utils'
+import 'temporal-polyfill/global'
 
 describe('MonthGridEvent', () => {
   beforeEach(() => {
@@ -31,12 +32,12 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
           },
         ],
         plugins: [dragAndDropPlugin],
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
       })
 
       renderComponent($app, $app.calendarEvents.list.value[0])
@@ -61,12 +62,12 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
           },
         ],
         plugins: [dragAndDropPlugin],
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
       })
 
       renderComponent($app, $app.calendarEvents.list.value[0])
@@ -93,15 +94,15 @@ describe('MonthGridEvent', () => {
         events: [
           {
             id: '1234',
-            start: '2020-01-01',
-            end: '2020-01-02',
+            start: Temporal.PlainDate.from('2020-01-01'),
+            end: Temporal.PlainDate.from('2020-01-02'),
             _options: {
               disableDND: true,
             },
           },
         ],
         plugins: [dragAndDropPlugin],
-        selectedDate: '2020-01-01',
+        selectedDate: Temporal.PlainDate.from('2020-01-01'),
       })
 
       renderComponent($app, $app.calendarEvents.list.value[0])

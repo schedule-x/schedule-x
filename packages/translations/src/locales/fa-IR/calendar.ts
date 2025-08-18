@@ -19,4 +19,5 @@ export const calendarFaIR: CalendarTranslations = {
   'Link to 1 more event on {{date}}':
     'لینک به 1 رویداد بیشتر در تاریخ {{date}}',
   CW: 'هفته {{week}}',
+  View: 'نمایش',
 }

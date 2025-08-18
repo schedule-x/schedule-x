@@ -1,13 +1,23 @@
+import 'temporal-polyfill/global'
 import {
-  afterEach,
   describe,
-  expect,
   it,
+  expect,
+  afterEach,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { cleanup, screen } from '@testing-library/preact'
 import CalendarEventBuilder from '../../../../../../shared/src/utils/stateless/calendar/calendar-event/calendar-event.builder'
 import { renderComponent } from './utils'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('WeekDayEvent', () => {
   afterEach(() => {
@@ -24,14 +34,14 @@ describe('WeekDayEvent', () => {
       'should display the time for an event in %s locale',
       (locale: string, expectedTime: string) => {
         const $app = __createAppWithViews__({
-          selectedDate: '2020-12-01',
+          selectedDate: Temporal.PlainDate.from('2020-12-01'),
           locale,
         })
         const calendarEvent = new CalendarEventBuilder(
           $app.config,
           '1',
-          '2020-12-01 10:00',
-          '2020-12-01 11:00'
+          Temporal.ZonedDateTime.from('2020-12-01T10:00:00[UTC]'),
+          Temporal.ZonedDateTime.from('2020-12-01T11:00:00[UTC]')
         ).build()
         renderComponent($app, calendarEvent)
 

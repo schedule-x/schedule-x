@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   describe,
@@ -16,7 +17,7 @@ const getApp = (onRangeUpdate: () => void, defaultView: InternalViewName) =>
     callbacks: {
       onRangeUpdate: onRangeUpdate,
     },
-    selectedDate: '2023-01-01',
+    selectedDate: Temporal.PlainDate.from('2023-01-01'),
   })
 
 describe('ForwardBackwardNavigation', () => {
@@ -34,8 +35,8 @@ describe('ForwardBackwardNavigation', () => {
 
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
-        start: '2023-01-30 00:00',
-        end: '2023-03-05 23:59',
+        start: Temporal.ZonedDateTime.from('2023-01-30T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-03-05T23:59:00.00+00:00[UTC]'),
       })
     })
 
@@ -48,8 +49,8 @@ describe('ForwardBackwardNavigation', () => {
 
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
-        start: '2022-11-28 00:00',
-        end: '2023-01-01 23:59',
+        start: Temporal.ZonedDateTime.from('2022-11-28T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-01-01T23:59:00.00+00:00[UTC]'),
       })
     })
   })
@@ -64,8 +65,8 @@ describe('ForwardBackwardNavigation', () => {
 
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
-        start: '2023-01-02 00:00',
-        end: '2023-01-08 23:59',
+        start: Temporal.ZonedDateTime.from('2023-01-02T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-01-08T23:59:00.00+00:00[UTC]'),
       })
     })
 
@@ -78,8 +79,8 @@ describe('ForwardBackwardNavigation', () => {
 
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
-        start: '2022-12-19 00:00',
-        end: '2022-12-25 23:59',
+        start: Temporal.ZonedDateTime.from('2022-12-19T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2022-12-25T23:59:00.00+00:00[UTC]'),
       })
     })
   })
@@ -94,8 +95,8 @@ describe('ForwardBackwardNavigation', () => {
 
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
-        start: '2023-01-02 00:00',
-        end: '2023-01-02 23:59',
+        start: Temporal.ZonedDateTime.from('2023-01-02T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2023-01-02T23:59:00.00+00:00[UTC]'),
       })
     })
 
@@ -108,8 +109,8 @@ describe('ForwardBackwardNavigation', () => {
 
       expect(onRangeUpdate).toHaveBeenCalledTimes(1)
       expect(onRangeUpdate).toHaveBeenCalledWith({
-        start: '2022-12-31 00:00',
-        end: '2022-12-31 23:59',
+        start: Temporal.ZonedDateTime.from('2022-12-31T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2022-12-31T23:59:00.00+00:00[UTC]'),
       })
     })
   })

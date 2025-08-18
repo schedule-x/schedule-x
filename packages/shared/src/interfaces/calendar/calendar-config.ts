@@ -18,6 +18,8 @@ import { Signal } from '@preact/signals'
 import { WeekDay } from '../../enums/time/week-day.enum'
 import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
+import { IANATimezone } from '../../utils/stateless/time/tzdb'
+import TimezoneSelectPlugin from '../timezone-select/timezone-select-plugin'
 
 export type WeekOptions = {
   gridHeight: number
@@ -50,6 +52,7 @@ export type Plugins = {
   scrollController?: PluginBase<string>
   eventRecurrence?: EventRecurrencePlugin
   resize?: ResizePlugin
+  timezoneSelect?: TimezoneSelectPlugin
   [key: string]: PluginBase<string> | undefined
 }
 
@@ -66,8 +69,8 @@ export default interface CalendarConfigInternal extends Config {
   weekOptions: Signal<WeekOptions>
   calendars: Signal<Record<string, CalendarType>>
   isDark: Signal<boolean>
-  minDate: Signal<string | undefined>
-  maxDate: Signal<string | undefined>
+  minDate: Signal<Temporal.PlainDate | undefined>
+  maxDate: Signal<Temporal.PlainDate | undefined>
   monthGridOptions: Signal<MonthGridOptions>
   plugins: Plugins
   isResponsive: boolean
@@ -105,6 +108,7 @@ interface ReducedCalendarConfigInternal
     | 'translations'
     | 'showWeekNumbers'
     | 'direction'
+    | 'timezone'
   > {}
 
 export interface CalendarConfigExternal
@@ -114,17 +118,18 @@ export interface CalendarConfigExternal
   backgroundEvents?: BackgroundEvent[]
   dayBoundaries?: DayBoundariesExternal
   views: [View, ...View[]]
-  selectedDate?: string
+  selectedDate?: Temporal.PlainDate
   plugins?: PluginBase<string>[]
   calendars?: Record<string, CalendarType>
   weekOptions?: Partial<WeekOptions>
   isDark?: boolean
-  minDate?: string | undefined
-  maxDate?: string | undefined
+  minDate?: Temporal.PlainDate | undefined
+  maxDate?: Temporal.PlainDate | undefined
   monthGridOptions?: MonthGridOptions
   locale?: string
   firstDayOfWeek?: WeekDay
   skipValidation?: boolean
   translations?: Record<string, Language>
   showWeekNumbers?: boolean
+  timezone?: IANATimezone
 }

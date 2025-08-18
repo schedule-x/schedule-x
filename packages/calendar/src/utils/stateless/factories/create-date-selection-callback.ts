@@ -5,11 +5,14 @@ export const createDateSelectionCallback = (
   calendarState: CalendarState,
   config: CalendarConfigExternal
 ) => {
-  let lastEmittedDate: string | null = null
+  let lastEmittedDate: Temporal.PlainDate | null = null
 
-  return (date: string) => {
+  return (date: Temporal.PlainDate) => {
     calendarState.setRange(date)
-    if (config.callbacks?.onSelectedDateUpdate && date !== lastEmittedDate) {
+    if (
+      config.callbacks?.onSelectedDateUpdate &&
+      date.toString() !== lastEmittedDate?.toString()
+    ) {
       lastEmittedDate = date
       config.callbacks.onSelectedDateUpdate(date)
     }
