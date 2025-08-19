@@ -28,7 +28,7 @@ export const addTimePointsToDateTime = (
   dateTimeString: string,
   pointsToAdd: number
 ): string => {
-  const minutesToAdd = pointsToAdd / minuteTimePointMultiplier
+  const minutesToAdd = Math.round(pointsToAdd / minuteTimePointMultiplier)
   const jsDate = toJSDate(dateTimeString)
   jsDate.setMinutes(jsDate.getMinutes() + minutesToAdd)
   return toDateTimeString(jsDate)
