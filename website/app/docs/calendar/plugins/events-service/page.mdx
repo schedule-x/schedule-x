@@ -58,8 +58,8 @@ calendar.render(document.getElementById('calendar'))
 
 calendar.eventsService.add({
   title: 'Event 1',
-  start: '2024-04-20',
-  end: '2024-04-20',
+  start: Temporal.PlainDate.from('2024-04-20'),
+  end: Temporal.PlainDate.from('2024-04-20'),
   id: 1
 })
 
@@ -69,8 +69,8 @@ eventsServicePlugin.getAll() // [{ title: 'Event 1', start: '2024-04-20', end: '
 
 eventsServicePlugin.update({
   title: 'Real title',
-  start: '2024-04-20',
-  end: '2024-04-20',
+  start: Temporal.PlainDate.from('2024-04-20'),
+  end: Temporal.PlainDate.from('2024-04-20'),
   id: 1
 })
 

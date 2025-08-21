@@ -10,8 +10,8 @@ description: 'Learn how events work in the Schedule-X calendar.'
 | Property                     | Type                                                      | Description                                                | Required |
 |------------------------------|-----------------------------------------------------------|------------------------------------------------------------|----------|
 | `id`                         | `string` or `number`                                      | A unique identifier for the event.                         | Yes      |
-| `start`                      | `string`                                                  | The start time of the event.                               | Yes      |
-| `end`                        | `string`                                                  | The end time of the event.                                 | Yes      |
+| `start`                      | `Temporal.PlainDate` or `Temporal.ZonedDateTime`          | The start time of the event.                               | Yes      |
+| `end`                        | `Temporal.PlainDate` or `Temporal.ZonedDateTime`          | The end time of the event.                                 | Yes      |
 | `title`                      | `string`                                                  | The title of the event.                                    | No       |
 | `description`                | `string`                                                  | A description of the event.                                | No       |
 | `location`                   | `string`                                                  | The location of the event.                                 | No       |
@@ -31,7 +31,7 @@ you upon interacting with the events.
 
 ## Event time
 
-The timestamps of an event can have two different formats: `YYYY-MM-DD` or `YYYY-MM-DD HH:mm`. These cannot be mixed
+The timestamps of an event can have two different formats: `Temporal.PlainDate` or `Temporal.ZonedDateTime`. These cannot be mixed
 within the same event. For example:
 
 1. **Timed events** - Events that have a start and end time such as:
@@ -39,8 +39,8 @@ within the same event. For example:
 ```js
 const timedEvent = {
   id: 1,
-  start: '2025-10-01 20:15',
-  end: '2025-10-01 21:15',
+  start: Temporal.ZonedDateTime.from('2025-10-01T20:15:00+02:00[Europe/Berlin]'),
+  end: Temporal.ZonedDateTime.from('2025-10-01T21:15:00+02:00[Europe/Berlin]'),
 }
 ```
 
@@ -49,8 +49,8 @@ const timedEvent = {
 ```js
 const fullDayEvent = {
   id: 2,
-  start: '2025-10-01',
-  end: '2025-10-01',
+  start: Temporal.PlainDate.from('2025-10-01'),
+  end: Temporal.PlainDate.from('2025-10-01'),
 }
 ```
 
@@ -93,14 +93,14 @@ const calendar = createCalendar({
     {
       id: 1,
       title: 'Coffee with John',
-      start: '2023-11-04 10:05',
-      end: '2023-11-04 10:35',
+      start: Temporal.ZonedDateTime.from('2023-11-04T10:05:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-11-04T10:35:00+01:00[Europe/Berlin]'),
     },
     {
       id: 2,
       title: 'Ski trip',
-      start: '2023-12-04',
-      end: '2023-12-06',
+      start: Temporal.PlainDate.from('2023-12-04'),
+      end: Temporal.PlainDate.from('2023-12-06'),
     },
   ],
 })

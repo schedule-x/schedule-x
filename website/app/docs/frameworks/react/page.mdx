@@ -19,22 +19,28 @@ import { Tabs } from 'nextra/components'
 <Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tabs.Tab>
     ```bash copy
-      npm install @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service
+      npm install @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      pnpm install @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service @preact/signals preact
+      pnpm install @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      yarn add @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service @preact/signals preact
+      yarn add @schedule-x/react @schedule-x/calendar @schedule-x/theme-default @schedule-x/events-service @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 </Tabs>
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Curious about the `temporal-polyfill` package? Read more [here](/docs/calendar/temporal).
+</Callout>
 
 
 ## Basic usage
@@ -43,7 +49,6 @@ import { Tabs } from 'nextra/components'
 
 import ReactExample from '../../../../components/code-examples/react-calendar.mdx'
 import NextjsExample from '../../../../components/code-examples/nextjs-calendar.mdx'
-import {Callout} from "nextra/components";
 
 <Tabs items={['React', 'Next']}>
   <Tabs.Tab>

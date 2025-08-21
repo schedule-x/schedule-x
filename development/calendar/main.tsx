@@ -217,10 +217,32 @@ plugins: [
   timezone: 'Europe/Berlin',
   events: [
     {
-      id: 123,
-      start: Temporal.ZonedDateTime.from('2025-08-11T14:00+09:00[Asia/Tokyo]'),
-      end: Temporal.ZonedDateTime.from('2025-08-11T15:00+09:00[Asia/Tokyo]'),
-      title: 'test'
+      id: 'event1',
+      resourceId: 'janedoe',
+      start: Temporal.ZonedDateTime.from('2025-03-07T09:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T10:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 1'
+    },
+    {
+      id: 'event2',
+      resourceId: 'johnsmith',
+      start: Temporal.ZonedDateTime.from('2025-03-07T10:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T11:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 2'
+    },
+    {
+      id: 'event3',
+      resourceId: 'tedmosby',
+      start: Temporal.ZonedDateTime.from('2025-03-07T11:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T12:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 3'
+    },
+    {
+      id: 'event4',
+      resourceId: 'janedoe',
+      start: Temporal.ZonedDateTime.from('2025-03-07T17:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T18:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 4'
     }
     /* ...seededEvents.map(event => ({
       ...event,

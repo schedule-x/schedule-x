@@ -19,9 +19,9 @@ npm i @schedule-x/calendar-controls
 
 Change the calendar view.
 
-### `setDate(date: string)`
+### `setDate(date: Temporal.PlainDate)`
 
-Set the date of the calendar. Format: `YYYY-MM-DD`.
+Set the date of the calendar.
 
 ### `setFirstDayOfWeek(firstDayOfWeek: WeekDay): void`
 
@@ -63,11 +63,11 @@ Set the month grid options of the calendar.
 
 Get the name of the current view.
 
-### `getDate(): string`
+### `getDate(): Temporal.PlainDate`
 
 Get the currently selected date of the calendar.
 
-### `getRange(): { start: string, end: string }`
+### `getRange(): { start: Temporal.ZonedDateTime, end: Temporal.ZonedDateTime }`
 
 Get the currently visible time range of the calendar.
 
@@ -95,11 +95,11 @@ Get the week options of the calendar.
 
 Get the calendars of the calendar.
 
-### `getMinDate(): string|undefined`
+### `getMinDate(): Temporal.PlainDate|undefined`
 
 Get the current min date for the calendar navigation.
 
-### `getMaxDate(): string|undefined`
+### `getMaxDate(): Temporal.PlainDate|undefined`
 
 Get the current max date for the calendar navigation.
 
@@ -125,5 +125,5 @@ calendar.render(/** your calendar element */)
 calendarControls.setView('week')
 
 // Programmatically set the date
-calendarControls.setDate('2025-01-01')
+calendarControls.setDate(Temporal.PlainDate.from('2025-01-01'))
 ```

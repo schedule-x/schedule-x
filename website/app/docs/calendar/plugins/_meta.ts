@@ -46,9 +46,6 @@ const meta: MetaRecord = {
   "custom-plugins": {
     "title": "Custom Plugins"
   },
-  "ical": {
-    "title": "iCal"
-  },
   "community-plugins": {
     "title": "Community Plugins"
   }

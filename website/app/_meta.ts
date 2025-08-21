@@ -108,14 +108,6 @@ const meta: MetaRecord = {
       sidebar: false,
       toc: false
     }
-  },
-  v3: {
-    title: 'V3',
-    type: 'page',
-    theme: {
-      sidebar: true,
-      toc: true
-    }
   }
 }
 
