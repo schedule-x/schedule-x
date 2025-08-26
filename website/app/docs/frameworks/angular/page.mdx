@@ -9,6 +9,14 @@ This page offers documentation for using the Schedule-X calendar in Angular. For
 configuring the calendar, refer to the rest of the documentation. If you are using
 Schedule-X in an app with SSR, you need to make sure the component only renders in the browser.
 
+import {Callout} from "nextra/components";
+
+<Callout type="warning">
+  The Angular component is not yet migrated to v3 & Temporal API.
+
+  If you want to use the Temporal API with SX and Angular already, you can use the [vanilla JS component](/docs/calendar), or help us migrate the Angular component to v3.
+</Callout>
+
 ## Installing
 
 import { Tabs } from 'nextra/components'
@@ -16,28 +24,22 @@ import { Tabs } from 'nextra/components'
 <Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tabs.Tab>
     ```bash copy
-      npm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
+      npm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      pnpm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
+      pnpm install @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      yarn add @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
+      yarn add @schedule-x/angular @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
     ```
   </Tabs.Tab>
 </Tabs>
-
-import {Callout} from "nextra/components";
-
-<Callout type="info">
-  Curious about the `temporal-polyfill` package? Read more [here](/docs/calendar/temporal).
-</Callout>
 
 ## Basic usage
 
@@ -50,7 +52,6 @@ import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from "@schedule-x/angular";
 import { createCalendar, createViewWeek } from "@schedule-x/calendar";
 import '@schedule-x/theme-default/dist/index.css' // can alternatively be added in your angular.json
-import 'temporal-polyfill/global'
 
 @Component({
   selector: 'app-root',
@@ -66,13 +67,14 @@ export class AppComponent {
       {
         id: '1',
         title: 'Event 1',
-        start: Temporal.ZonedDateTime.from('2024-06-11T03:00:00+09:00[Asia/Tokyo]'),
-        end: Temporal.ZonedDateTime.from('2024-06-11T05:00:00+09:00[Asia/Tokyo]'),
+        start: '2024-06-11 03:00',
+        end: '2024-06-11 05:00',
       },
     ],
     views: [createViewWeek()],
   })
 }
+
 ```
 
 ```html
