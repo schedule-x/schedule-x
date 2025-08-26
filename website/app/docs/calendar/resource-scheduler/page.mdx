@@ -72,15 +72,15 @@ resourceConfig.dragAndDrop.value = true
 // optionally set the initially displayed columns of the hourly view
 // can be combined with `infiniteScroll.value = false` to achieve a scheduler with fixed columns
 resourceConfig.initialHours.value = new TimeUnits().getDayHoursBetween(
-  Temporal.ZonedDateTime.from('2025-03-07T08:00:00+09:00[Asia/Tokyo]'),
-  Temporal.ZonedDateTime.from('2025-03-08T02:00:00+09:00[Asia/Tokyo]')
+  Temporal.PlainDateTime.from('2025-03-07T08:00'),
+  Temporal.PlainDateTime.from('2025-03-07T19:00')
 )
 
 // optionally set the initially displayed days of the daily view
 // can be combined with `infiniteScroll.value = false` to achieve a scheduler with fixed columns
 resourceConfig.initialDays.value = new TimeUnits().getDaysBetween(
-  '2025-03-05',
-  '2025-03-20'
+  Temporal.PlainDate.from('2025-03-05'),
+  Temporal.PlainDate.from('2025-03-20')
 )
 
 resourceConfig.resources.value = [
@@ -236,31 +236,31 @@ export type ResourceViewConfig = {
   infiniteScroll: Signal<boolean>
 
   // callback that runs when the user scrolls the hourly view
-  onLazyLoadDate?: (dates: Date[]) => void
+  onLazyLoadDate?: (dates: Temporal.PlainDate[]) => void
 
   // callback that runs when the user scrolls the daily view
-  onLazyLoadMonth?: (dates: Date[]) => void
+  onLazyLoadMonth?: (dates: Temporal.PlainDate[]) => void
 
   // callback for detecting clicks in the hourly view
-  onClickDateTime: Signal<(datetime: string, resourceId: string) => void>
+  onClickDateTime: Signal<(datetime: Temporal.ZonedDateTime, resourceId: string) => void>
 
   // callback for detecting double clicks in the hourly view
-  onDoubleClickDateTime: Signal<(datetime: string, resourceId: string) => void>
+  onDoubleClickDateTime: Signal<(datetime: Temporal.ZonedDateTime, resourceId: string) => void>
 
   // callback for detecting clicks in the daily view
-  onClickDate: Signal<(date: string, resourceId: string) => void>
+  onClickDate: Signal<(date: Temporal.PlainDate, resourceId: string) => void>
 
   // callback for detecting double clicks in the daily view
-  onDoubleClickDate: Signal<(date: string, resourceId: string) => void>
+  onDoubleClickDate: Signal<(date: Temporal.PlainDate, resourceId: string) => void>
 
   // callback for detecting clicks on a resource
   onClickResource: Signal<(resourceId: string) => void>
 
   // Can be used to set the initially displayed hours of the hourly view
-  initialHours: Signal<Date[] | undefined>
+  initialHours: Signal<Temporal.PlainDateTime[] | undefined>
 
   // Can be used to set the initially displayed days of the daily view
-  initialDays: Signal<Date[] | undefined>
+  initialDays: Signal<Temporal.PlainDate[] | undefined>
 
   // Can be used to configure the snapping duration of drag & drop
   dragSnapping: Signal<15 | 30 | 60>

@@ -17,7 +17,8 @@ With v3 of the Schedule-X calendar, there were a few breaking changes to the API
 
 Additionally, there were some other breaking changes to the UI and plugins ecosystem:
 
-- v3 of the open source packages, now work together with v13 of the premium plugins. There was a jump from premium v3 -> v13, to make it abundantly clear that there is no numeric correlation between the two.
+- v3 of the open source packages, now work together with v13 of the premium plugins. There was a jump from premium v3 -> v13, to make it abundantly clear that there is no numeric correlation between the open source major version and the premium major version.
+- `ResourceViewConfig.onLazyLoadDate` and `ResourceViewConfig.onLazyLoadDate` for @sx-premium/resource-scheduler now expect `Temporal.PlainDate` instances, rather than strings.
 - Time grid events (in day- and week views), now reactively display title and time inline, if there is no vertical space to display them in two lines.
 - The view select element now features a chevron icon, to indicate that it is a dropdown.
 - The ical plugin is now deprecated. Since Schedule-X has migrated away from its own custom date-time format, it seems redundant to support another, older standardized format.
