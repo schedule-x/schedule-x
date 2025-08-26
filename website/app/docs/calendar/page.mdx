@@ -45,8 +45,14 @@ import {Cards} from 'nextra/components'
 We will start by downloading the calendar and its theme.
 
 ```bash copy
-npm i @schedule-x/calendar @schedule-x/theme-default
+npm i @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
 ```
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Curious about the `temporal-polyfill` package? Read more [here](/docs/calendar/temporal).
+</Callout>
 
 ## 2. Setup
 
@@ -61,6 +67,7 @@ Here we will start by only adding the config. The calendar is then rendered usin
 ```ts
 import { createCalendar, createViewMonthGrid } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
+import 'temporal-polyfill/global'
 
 const calendar = createCalendar({
   views: [createViewMonthGrid()],
@@ -68,8 +75,8 @@ const calendar = createCalendar({
     {
       id: 1,
       title: 'Coffee with John',
-      start: '2023-12-04 10:05',
-      end: '2023-12-04 10:35',
+      start: Temporal.ZonedDateTime.from('2023-12-04T10:05:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-12-04T10:35:00+01:00[Europe/Berlin]'),
     },
   ],
 })

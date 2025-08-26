@@ -8,6 +8,7 @@ import '../components/partials/card/card.scss'
 import '../components/partials/sales-card/sales-card.scss'
 
 import '@schedule-x/theme-default/dist/index.css'
+import '@schedule-x/timezone-select/index.css'
 import '@sx-premium/sidebar/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
 import '@sx-premium/drag-to-create/index.css'
@@ -61,12 +62,12 @@ import CustomFooter from '../components/theme/custom-footer'
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           footer={<CustomFooter />}
-          banner={<Banner key="v3-beta-1" storageKey="v3-beta-1" dismissible={false}>
-            <a href="/v3" target="_blank">
+          banner={<Banner key="v3-is-here" storageKey="v3-is-here" dismissible={false}>
+            <a href="/docs/calendar/major-version-migrations" target="_blank">
               <span style={{ backgroundColor: '#f6e05e', color: '#000', borderRadius: '4px', padding: '2px 6px', marginRight: '5px', fontSize: '0.75rem' }}>
               v3
               </span>
-              is coming! Temporal API, timezones, and more  🥳
+              is here! Temporal API, timezones, and more  🥳
             </a>
           </Banner>}
         >

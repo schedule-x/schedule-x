@@ -44,45 +44,45 @@ const calendar = createCalendar({
     {
       id: 123,
       title: 'Bi-Weekly Event Monday and Wednesday',
-      start: '2024-02-05 14:00',
-      end: '2024-02-05 15:00',
+      start: Temporal.ZonedDateTime.from('2024-02-05T14:00:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2024-02-05T15:00:00+01:00[Europe/Berlin]'),
       rrule: 'FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;UNTIL=20240229T235959'
     },
     {
       id: 456,
       title: 'Weekly Event on 4 occasions',
-      start: '2024-02-03',
-      end: '2024-02-03',
+      start: Temporal.PlainDate.from('2024-02-03'),
+      end: Temporal.PlainDate.from('2024-02-03'),
       rrule: 'FREQ=WEEKLY;COUNT=4'
     },
     {
       id: 789,
       title: 'Daily event 5 times',
-      start: '2024-02-05 12:00',
-      end: '2024-02-05 13:55',
+      start: Temporal.ZonedDateTime.from('2024-02-05T12:00:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2024-02-05T13:55:00+01:00[Europe/Berlin]'),
       rrule: 'FREQ=DAILY;COUNT=5',
       calendarId: 'personal',
     },
     {
       id: 121314,
       title: 'Daily event mo-fr 10 times',
-      start: '2024-02-05 12:00',
-      end: '2024-02-05 13:55',
+      start: Temporal.ZonedDateTime.from('2024-02-05T12:00:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2024-02-05T13:55:00+01:00[Europe/Berlin]'),
       rrule: 'FREQ=DAILY;COUNT=10;BYDAY=MO,TU,WE,TH,FR',
       calendarId: 'work',
     },
     {
       id: 141617,
       title: 'Monthly event on the 7th 5 times',
-      start: '2024-02-07 16:00',
-      end: '2024-02-07 17:55',
+      start: Temporal.ZonedDateTime.from('2024-02-07T16:00:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2024-02-07T17:55:00+01:00[Europe/Berlin]'),
       rrule: 'FREQ=MONTHLY;COUNT=5',
     },
     {
       rrule: 'FREQ=YEARLY;COUNT=5',
       title: 'Event on the 8th of February for 5 years',
-      start: '2024-02-08 16:00',
-      end: '2024-02-08 17:55',
+      start: Temporal.ZonedDateTime.from('2024-02-08T16:00:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2024-02-08T17:55:00+01:00[Europe/Berlin]'),
       id: 181920
     }
   ]
@@ -109,8 +109,8 @@ You can exclude certain dates or date-times from a recurrence set using the `exd
 const recurringEventWithExclusions = {
   id: 123,
   title: 'Weekly event',
-  start: '2024-02-05 14:00',
-  end: '2024-02-05 15:00',
+  start: Temporal.ZonedDateTime.from('2024-02-05T14:00:00+01:00[Europe/Berlin]'),
+  end: Temporal.ZonedDateTime.from('2024-02-05T15:00:00+01:00[Europe/Berlin]'),
 
   // will create a recurrence set of 3 events: 2024-02-05 14:00, 2024-02-26 14:00, 2024-03-04 14:00
   rrule: 'FREQ=WEEKLY;COUNT=5',
@@ -147,8 +147,8 @@ calendar.render(document.getElementById('calendar'));
 eventsServicePlugin.add({
   id: 1,
   title: 'New event',
-  start: '2024-02-05 14:00',
-  end: '2024-02-05 15:00',
+  start: Temporal.ZonedDateTime.from('2024-02-05T14:00:00+01:00[Europe/Berlin]'),
+  end: Temporal.ZonedDateTime.from('2024-02-05T15:00:00+01:00[Europe/Berlin]'),
   rrule: 'FREQ=WEEKLY;COUNT=3'
 });
 
@@ -156,8 +156,8 @@ eventsServicePlugin.add({
 eventsServicePlugin.update({
   id: 1,
   title: 'New event',
-  start: '2024-02-05 14:00',
-  end: '2024-02-05 15:00',
+  start: Temporal.ZonedDateTime.from('2024-02-05T14:00:00+01:00[Europe/Berlin]'),
+  end: Temporal.ZonedDateTime.from('2024-02-05T15:00:00+01:00[Europe/Berlin]'),
   rrule: 'FREQ=WEEKLY;COUNT=10'
 })
 
