@@ -28,6 +28,7 @@
         "@schedule-x/theme-default": "^3.0.0-rc.3",
         "@schedule-x/theme-shadcn": "^3.0.0-rc.3",
         "@schedule-x/timezone-select": "^3.0.0-rc.3",
+        "@schedule-x/translations": "^2.36.0",
         "@sx-premium/drag-to-create": "^13.0.0-rc.3",
         "@sx-premium/interactive-event-modal": "^13.0.0-rc.4",
         "@sx-premium/resource-scheduler": "^13.0.0-rc.4",
