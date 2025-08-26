@@ -17,8 +17,8 @@ import { effect } from '@preact/signals'
 import 'temporal-polyfill/global'
 
 export default function CalendarDemoPage() {
-  const [rangeStart, setRangeStart] = useState(Temporal.ZonedDateTime.from('2025-03-07T10:00:00+00:00[America/New_York]'))
-  const [rangeEnd, setRangeEnd] = useState(Temporal.ZonedDateTime.from('2025-03-07T12:00:00+00:00[America/New_York]'))
+  const [rangeStart, setRangeStart] = useState(Temporal.ZonedDateTime.from('2025-03-07T10:00:00-05:00[America/New_York]'))
+  const [rangeEnd, setRangeEnd] = useState(Temporal.ZonedDateTime.from('2025-03-07T12:00:00-05:00[America/New_York]'))
   const [open, setOpen] = useState(false);
   const [isSchedulingDisabled, setIsSchedulingDisabled] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -73,29 +73,29 @@ export default function CalendarDemoPage() {
       {
         id: 'event1',
         resourceId: 'janedoe',
-        start: Temporal.ZonedDateTime.from('2025-03-07T09:00:00+00:00[America/New_York]'),
-        end: Temporal.ZonedDateTime.from('2025-03-07T10:00:00+00:00[America/New_York]'),
+        start: Temporal.ZonedDateTime.from('2025-03-07T09:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T10:00:00-05:00[America/New_York]'),
         title: 'Event 1',
       },
       {
         id: 'event2',
         resourceId: 'johnsmith',
-        start: Temporal.ZonedDateTime.from('2025-03-07T10:00:00+00:00[America/New_York]'),
-        end: Temporal.ZonedDateTime.from('2025-03-07T11:00:00+00:00[America/New_York]'),
+        start: Temporal.ZonedDateTime.from('2025-03-07T10:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T11:00:00-05:00[America/New_York]'),
         title: 'Event 2',
       },
       {
         id: 'event3',
         resourceId: 'tedmosby',
-        start: Temporal.ZonedDateTime.from('2025-03-07T11:00:00+00:00[America/New_York]'),
-        end: Temporal.ZonedDateTime.from('2025-03-07T12:00:00+00:00[America/New_York]'),
+        start: Temporal.ZonedDateTime.from('2025-03-07T11:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T12:00:00-05:00[America/New_York]'),
         title: 'Event 3',
       },
       {
         id: 'event4',
         resourceId: 'janedoe',
-        start: Temporal.ZonedDateTime.from('2025-03-07T17:00:00+00:00[America/New_York]'),
-        end: Temporal.ZonedDateTime.from('2025-03-07T18:00:00+00:00[America/New_York]'),
+        start: Temporal.ZonedDateTime.from('2025-03-07T17:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T18:00:00-05:00[America/New_York]'),
         title: 'Event 4',
       }
     ],
