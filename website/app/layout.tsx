@@ -8,6 +8,7 @@ import '../components/partials/card/card.scss'
 import '../components/partials/sales-card/sales-card.scss'
 
 import '@schedule-x/theme-default/dist/index.css'
+import '@schedule-x/timezone-select/index.css'
 import '@sx-premium/sidebar/index.css'
 import '@sx-premium/interactive-event-modal/index.css'
 import '@sx-premium/drag-to-create/index.css'
