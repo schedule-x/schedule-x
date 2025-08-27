@@ -15,25 +15,7 @@ const meta: MetaRecord = {
     href: 'docs',
     title: 'Docs'
   },
-  demos: {
-    display: 'hidden',
-    title: 'Demos',
-    type: 'page',
-    theme: {
-      sidebar: false,
-      toc: false
-    }
-  },
-  premium: {
-    title: 'Premium',
-    type: 'page',
-    theme: {
-      layout: 'full',
-      sidebar: false,
-      toc: false,
-      timestamp: false,
-    }
-  },
+
   imprint: {
     display: 'hidden',
     title: 'Imprint',
@@ -43,14 +25,7 @@ const meta: MetaRecord = {
       toc: false
     }
   },
-  newsletter: {
-    display: 'hidden',
-    type: 'page',
-    theme: {
-      sidebar: false,
-      toc: false
-    }
-  },
+ 
   attributions: {
     display: 'hidden',
     title: 'Attributions',
@@ -73,15 +48,7 @@ const meta: MetaRecord = {
     display: 'hidden',
     title: 'Changelog for Schedule-X premium'
   },
-  'validate-license-key': {
-    display: 'hidden',
-    title: 'Imprint',
-    type: 'page',
-    theme: {
-      sidebar: false,
-      toc: false
-    }
-  },
+
   'affiliate-program': {
     display: 'hidden',
     title: 'Affiliate program',
