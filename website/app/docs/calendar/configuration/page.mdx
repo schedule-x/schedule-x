@@ -27,10 +27,11 @@ const config = {
   locale: 'zh-CN',
 
   /**
-   * Set which day is to be considered the starting day of the week. 0 = Sunday, 1 = Monday, (...other days) 6 = Saturday
+   * Set which day is to be considered the starting day of the week.
+   * Follows Temporal API for Gregorian calendar: 1 = Monday, 2 = Tuesday, (...other days) 7 = Sunday
    * Defaults to 1 (Monday)
    * */
-  firstDayOfWeek: 0,
+  firstDayOfWeek: 7, // 7 = Sunday
 
   /**
    * The preferred view to display when the calendar is first rendered.
@@ -40,10 +41,10 @@ const config = {
   defaultView: viewMonthGrid.name,
 
   /**
-   * The default date to display when the calendar is first rendered. Only accepts YYYY-MM-DD format.
+   * The default date to display when the calendar is first rendered. Only accepts Temporal.PlainDate format.
    * Defaults to the current date
    * */
-  selectedDate: '2023-12-24',
+  selectedDate: Temporal.PlainDate.from('2023-12-24'),
 
   /**
    * Render the calendar in dark mode.
@@ -65,8 +66,8 @@ const config = {
   /**
    * The minimum and maximum date that can be displayed
    * */
-  minDate: '2024-01-01',
-  maxDate: '2024-12-31',
+  minDate: Temporal.PlainDate.from('2024-01-01'),
+  maxDate: Temporal.PlainDate.from('2024-12-31'),
 
   weekOptions: {
     /**
@@ -178,56 +179,56 @@ const config = {
     /**
      * Is called when clicking a date in the month grid
      * */
-    onClickDate(date, e?: UIEvent) {
+    onClickDate(date: Temporal.PlainDate, e?: UIEvent) {
       console.log('onClickDate', date) // e.g. 2024-01-01
     },
 
     /**
      * Is called when clicking somewhere in the time grid of a week or day view
      * */
-    onClickDateTime(dateTime, e?: UIEvent) {
+    onClickDateTime(dateTime: Temporal.ZonedDateTime, e?: UIEvent) {
       console.log('onClickDateTime', dateTime) // e.g. 2024-01-01 12:37
     },
 
     /**
      * Is called when selecting a day in the month agenda
      * */
-    onClickAgendaDate(date, e?: UIEvent) {
+    onClickAgendaDate(date: Temporal.PlainDate, e?: UIEvent) {
       console.log('onClickAgendaDate', date) // e.g. 2024-01-01
     },
 
     /**
      * Is called when double-clicking a day in the month agenda
      * */
-    onDoubleClickAgendaDate(date, e?: UIEvent) {
+    onDoubleClickAgendaDate(date: Temporal.PlainDate, e?: UIEvent) {
       console.log('onDoubleClickAgendaDate', date) // e.g. 2024-01-01
     },
 
     /**
      * Is called when double-clicking a date in the month grid
      * */
-    onDoubleClickDate(date, e?: UIEvent) {
+    onDoubleClickDate(date: Temporal.PlainDate, e?: UIEvent) {
       console.log('onClickDate', date) // e.g. 2024-01-01
     },
 
     /**
      * Is called when double-clicking somewhere in the time grid of a week or day view
      * */
-    onDoubleClickDateTime(dateTime, e?: UIEvent) {
+    onDoubleClickDateTime(dateTime: Temporal.ZonedDateTime, e?: UIEvent) {
       console.log('onDoubleClickDateTime', dateTime) // e.g. 2024-01-01 12:37
     },
 
     /**
      * Is called when clicking the "+ N events" button of a month grid-day
      * */
-    onClickPlusEvents(date, e?: UIEvent) {
+    onClickPlusEvents(date: Temporal.PlainDate, e?: UIEvent) {
       console.log('onClickPlusEvents', date) // e.g. 2024-01-01
     },
 
     /**
      * Is called when the selected date is updated
      * */
-    onSelectedDateUpdate(date) {
+    onSelectedDateUpdate(date: Temporal.PlainDate) {
       console.log('onSelectedDateUpdate', date)
     },
 

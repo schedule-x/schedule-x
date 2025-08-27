@@ -2,10 +2,6 @@ import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../utils/stateful/app-context'
 import { toLocalizedMonth } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/date-time-localization'
 import {
-  toIntegers,
-  toJSDate,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import {
   getFirstDayOfNextMonth,
   getFirstDayOPreviousMonth,
 } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/date-time-mutation'
@@ -17,14 +13,12 @@ type props = {
 
 export default function MonthViewHeader({ setYearsView }: props) {
   const $app = useContext(AppContext)
-  const dateStringToLocalizedMonthName = (selectedDate: string) => {
-    const selectedDateJS = toJSDate(selectedDate)
-
-    return toLocalizedMonth(selectedDateJS, $app.config.locale.value)
+  const dateStringToLocalizedMonthName = (selectedDate: Temporal.PlainDate) => {
+    return toLocalizedMonth(selectedDate, $app.config.locale.value)
   }
 
-  const getYearFrom = (datePickerDate: string) => {
-    return toIntegers(datePickerDate).year
+  const getYearFrom = (datePickerDate: Temporal.PlainDate) => {
+    return datePickerDate.year
   }
 
   const [selectedDateMonthName, setSelectedDateMonthName] = useState(

@@ -6,18 +6,30 @@ export interface CalendarCallbacks {
   onEventClick?: (event: CalendarEventExternal, e: UIEvent) => void
   onDoubleClickEvent?: (event: CalendarEventExternal, e: UIEvent) => void
   onRangeUpdate?: (range: DateRange) => void
-  onSelectedDateUpdate?: (date: string) => void
-  onClickDate?: (date: string, e?: UIEvent) => void
-  onDoubleClickDate?: (date: string, e?: UIEvent) => void
-  onClickDateTime?: (dateTime: string, e?: UIEvent) => void
-  onDoubleClickDateTime?: (dateTime: string, e?: UIEvent) => void
-  onClickAgendaDate?: (date: string, e?: UIEvent) => void
-  onDoubleClickAgendaDate?: (date: string, e?: UIEvent) => void
-  onClickPlusEvents?: (date: string, e?: UIEvent) => void
-  onMouseDownDateTime?: (dateTime: string, mouseDownEvent: MouseEvent) => void
-  onMouseDownDateGridDate?: (date: string, mouseDownEvent: MouseEvent) => void
-  onMouseDownMonthGridDate?: (date: string, mouseDownEvent: MouseEvent) => void
-  onScrollDayIntoView?: (date: string) => void
+  onSelectedDateUpdate?: (date: Temporal.PlainDate) => void
+  onClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
+  onDoubleClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
+  onClickDateTime?: (dateTime: Temporal.ZonedDateTime, e?: UIEvent) => void
+  onDoubleClickDateTime?: (
+    dateTime: Temporal.ZonedDateTime,
+    e?: UIEvent
+  ) => void
+  onClickAgendaDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
+  onDoubleClickAgendaDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
+  onClickPlusEvents?: (date: Temporal.PlainDate, e?: UIEvent) => void
+  onMouseDownDateTime?: (
+    dateTime: Temporal.ZonedDateTime,
+    mouseDownEvent: MouseEvent
+  ) => void
+  onMouseDownDateGridDate?: (
+    date: Temporal.PlainDate,
+    mouseDownEvent: MouseEvent
+  ) => void
+  onMouseDownMonthGridDate?: (
+    date: Temporal.PlainDate,
+    mouseDownEvent: MouseEvent
+  ) => void
+  onScrollDayIntoView?: (date: Temporal.PlainDate) => void
 
   /**
    * Run a validator function before updating an event.

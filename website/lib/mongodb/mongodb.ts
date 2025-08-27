@@ -8,7 +8,7 @@ let clientPromise: Promise<MongoClient>
 
 // Extend the global type to include our MongoDB client promise
 declare global {
-  // eslint-disable-next-line no-var
+   
   var _mongoClientPromise: Promise<MongoClient> | undefined
 }
 

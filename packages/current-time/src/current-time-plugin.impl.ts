@@ -2,26 +2,18 @@ import CurrentTimePlugin, {
   CurrentTimePluginConfig,
 } from '@schedule-x/shared/src/interfaces/current-time/current-time-plugin.interface'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
-import {
-  toDateString,
-  toDateTimeString,
-} from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
+import { toDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
-import { addMinutes } from '@schedule-x/shared/src'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 
 class CurrentTimePluginImpl implements CurrentTimePlugin {
   name = 'currentTime'
   $app!: CalendarAppSingleton
   observer: MutationObserver | null = null
+  timeout: ReturnType<typeof setTimeout> | null = null
+  currentTimeIndicator: HTMLElement | null = null
 
-  constructor(private config: CurrentTimePluginConfig = {}) {
-    if (typeof config.timeZoneOffset === 'number') {
-      if (config.timeZoneOffset < -720 || config.timeZoneOffset > 840) {
-        throw new Error(`Invalid time zone offset: ` + config.timeZoneOffset)
-      }
-    }
-  }
+  constructor(private config: CurrentTimePluginConfig = {}) {}
 
   onRender($app: CalendarAppSingleton): void {
     this.$app = $app
@@ -46,16 +38,12 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   }
 
   private setIndicator(isRecursion = false) {
-    const todayDateString = toDateString(new Date())
-    let nowDateTimeString = toDateTimeString(new Date())
-
-    if (this.config.timeZoneOffset) {
-      nowDateTimeString = addMinutes(
-        nowDateTimeString,
-        this.config.timeZoneOffset
-      )
-    }
-
+    const todayDateString = toDateString(
+      Temporal.Now.plainDateISO(this.$app.config.timezone.value)
+    )
+    const nowDateTime = Temporal.Now.zonedDateTimeISO(
+      this.$app.config.timezone.value
+    )
     const todayElement = this.$app.elements.calendarWrapper!.querySelector(
       `[data-time-grid-date="${todayDateString}"]`
     )
@@ -68,22 +56,22 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
     if (existingIndicator && isRecursion) existingIndicator.remove()
 
     if (todayElement && !existingIndicator) {
-      const currentTimeIndicator = document.createElement('div')
-      currentTimeIndicator.classList.add('sx__current-time-indicator')
+      this.currentTimeIndicator = document.createElement('div')
+      this.currentTimeIndicator.classList.add('sx__current-time-indicator')
       const top =
         getYCoordinateInTimeGrid(
-          nowDateTimeString,
+          nowDateTime,
           this.$app.config.dayBoundaries.value,
           this.$app.config.timePointsPerDay
         ) + '%'
-      currentTimeIndicator.style.top = top
-      todayElement.appendChild(currentTimeIndicator)
+      this.currentTimeIndicator.style.top = top
+      todayElement.appendChild(this.currentTimeIndicator)
 
       if (this.config.fullWeekWidth) {
         this.createFullWidthIndicator(top)
       }
 
-      setTimeout(
+      this.timeout = setTimeout(
         this.setIndicator.bind(this, true),
         60000 - (Date.now() % 60000)
       )
@@ -112,6 +100,22 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
     if (this.observer) {
       this.observer.disconnect()
     }
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
+    if (this.currentTimeIndicator) {
+      this.currentTimeIndicator.remove()
+      this.currentTimeIndicator = null
+    }
+  }
+
+  onTimezoneChange(): void {
+    this.currentTimeIndicator?.remove()
+    this.currentTimeIndicator = null
+    if (this.timeout) {
+      clearTimeout(this.timeout)
+    }
+    this.setIndicator()
   }
 }
 

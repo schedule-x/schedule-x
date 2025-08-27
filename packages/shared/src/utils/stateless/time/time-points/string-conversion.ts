@@ -1,7 +1,5 @@
 import { InvalidTimeStringError } from '../../errors/invalid-time-string.error'
 import { timeStringRegex } from '../validation/regex'
-import { toJSDate } from '../format-conversion/format-conversion'
-import { toDateTimeString } from '../format-conversion/date-to-strings'
 import { doubleDigit } from '../date-time-mutation/double-digit'
 
 const minuteTimePointMultiplier = 1.6666666666666667 // 100 / 60
@@ -25,11 +23,11 @@ export const timeStringFromTimePoints = (timePoints: number): string => {
 }
 
 export const addTimePointsToDateTime = (
-  dateTimeString: string,
+  dateTime: Temporal.ZonedDateTime,
   pointsToAdd: number
-): string => {
-  const minutesToAdd = pointsToAdd / minuteTimePointMultiplier
-  const jsDate = toJSDate(dateTimeString)
-  jsDate.setMinutes(jsDate.getMinutes() + minutesToAdd)
-  return toDateTimeString(jsDate)
+): Temporal.ZonedDateTime => {
+  const minutesToAdd = Math.round(pointsToAdd / minuteTimePointMultiplier)
+  const newDateTime = dateTime.add({ minutes: minutesToAdd })
+
+  return newDateTime
 }

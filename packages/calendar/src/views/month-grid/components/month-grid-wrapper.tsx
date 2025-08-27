@@ -17,17 +17,38 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
       event._eventFragments = {}
     })
     const newMonth = createMonth(
-      $app.datePickerState.selectedDate.value,
+      Temporal.PlainDate.from($app.datePickerState.selectedDate.value),
       $app.timeUnitsImpl
     )
     newMonth.forEach((week) => {
       week.forEach((day) => {
+        const plainDate = Temporal.PlainDate.from(day.date)
+        const rangeStartDateTime = Temporal.ZonedDateTime.from({
+          year: plainDate.year,
+          month: plainDate.month,
+          day: plainDate.day,
+          hour: 0,
+          minute: 0,
+          second: 0,
+          timeZone: $app.config.timezone.value,
+        })
+        const rangeEndDateTime = Temporal.ZonedDateTime.from({
+          year: plainDate.year,
+          month: plainDate.month,
+          day: plainDate.day,
+          hour: 23,
+          minute: 59,
+          second: 59,
+          timeZone: $app.config.timezone.value,
+        })
+
         day.backgroundEvents = filterByRange(
           $app.calendarEvents.backgroundEvents.value,
           {
-            start: day.date,
-            end: day.date,
-          }
+            start: rangeStartDateTime,
+            end: rangeEndDateTime,
+          },
+          $app.config.timezone.value
         )
       })
     })

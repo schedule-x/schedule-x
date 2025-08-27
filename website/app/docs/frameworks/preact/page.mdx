@@ -16,22 +16,28 @@ import { Tabs } from 'nextra/components'
 <Tabs items={['npm', 'pnpm', 'yarn']}>
   <Tabs.Tab>
     ```bash copy
-      npm install @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default
+      npm install @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      pnpm install @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      pnpm install @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 
   <Tabs.Tab>
     ```bash copy
-      yarn add @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default @preact/signals preact
+      yarn add @schedule-x/preact @schedule-x/calendar @schedule-x/theme-default @preact/signals preact temporal-polyfill
     ```
   </Tabs.Tab>
 </Tabs>
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  Curious about the `temporal-polyfill` package? Read more [here](/docs/calendar/temporal).
+</Callout>
 
 ## Basic usage
 
@@ -46,10 +52,10 @@ import {
   createViewWeek,
 } from '@schedule-x/calendar'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import 'temporal-polyfill/global'
+import '@schedule-x/theme-default/dist/index.css'
 
 const dragAndDrop = createDragAndDropPlugin()
-
-import '@schedule-x/theme-default/dist/index.css'
 
 function CalendarApp() {
   const calendar = useCalendarApp({
@@ -63,8 +69,8 @@ function CalendarApp() {
       {
         id: '1',
         title: 'Event 1',
-        start: '2023-12-16',
-        end: '2023-12-16',
+        start: Temporal.PlainDate.from('2023-12-16'),
+        end: Temporal.PlainDate.from('2023-12-16'),
       },
     ],
     plugins: [dragAndDrop],

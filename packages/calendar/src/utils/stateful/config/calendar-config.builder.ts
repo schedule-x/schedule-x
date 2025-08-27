@@ -28,6 +28,8 @@ import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 
+import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
+
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
 {
@@ -52,6 +54,7 @@ export default class CalendarConfigBuilder
   minDate: string | undefined
   maxDate: string | undefined
   backgroundEvents: BackgroundEvent[] | undefined
+  timezone: string | undefined
 
   theme: string | undefined
   // TODO: Change for V3. Should only be configured from outside
@@ -60,6 +63,12 @@ export default class CalendarConfigBuilder
   showWeekNumbers: boolean | undefined
 
   build(): CalendarConfigInternal {
+    const minDate = this.minDate
+      ? Temporal.PlainDate.from(this.minDate)
+      : undefined
+    const maxDate = this.maxDate
+      ? Temporal.PlainDate.from(this.maxDate)
+      : undefined
     return new CalendarConfigImpl(
       this.locale || DEFAULT_LOCALE,
       typeof this.firstDayOfWeek === 'number'
@@ -75,12 +84,13 @@ export default class CalendarConfigBuilder
       this.isResponsive,
       this.callbacks,
       {},
-      this.minDate,
-      this.maxDate,
+      minDate,
+      maxDate,
       this.monthGridOptions,
       this.theme,
       this.translations,
-      this.showWeekNumbers
+      this.showWeekNumbers,
+      this.timezone as IANATimezone
     )
   }
 
@@ -200,6 +210,11 @@ export default class CalendarConfigBuilder
 
   withWeekNumbers(showWeekNumbers: boolean | undefined) {
     this.showWeekNumbers = showWeekNumbers
+    return this
+  }
+
+  withTimezone(timezone: string | undefined) {
+    this.timezone = timezone
     return this
   }
 }

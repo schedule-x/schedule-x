@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -12,6 +13,14 @@ import { renderComponent } from './utils'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { cleanup } from '@testing-library/preact'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('TimeGridEvent interactivity', () => {
   beforeEach(() => {
@@ -32,8 +41,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [dragAndDropPlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
             _options: {
               disableDND: true,
@@ -64,8 +77,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [resizePlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
             _options: {
               disableResize: true,
@@ -93,8 +110,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [dragAndDropPlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
           },
         ],
@@ -122,8 +143,12 @@ describe('TimeGridEvent interactivity', () => {
         plugins: [resizePlugin],
         events: [
           {
-            start: '2021-10-10 00:00',
-            end: '2021-10-10 01:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-10-10T00:00:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-10-10T01:00:00.00+00:00[UTC]'
+            ),
             id: 1,
           },
         ],

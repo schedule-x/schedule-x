@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   describe,
@@ -7,6 +8,15 @@ import {
 import { cleanup, waitFor } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { renderComponent } from './utils'
+import { vi } from 'vitest'
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('Week view', () => {
   afterEach(() => {
@@ -16,12 +26,16 @@ describe('Week view', () => {
   describe('a week with regular days', () => {
     it('renders one event at 12PM', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         events: [
           {
             id: 1,
-            start: '2021-01-01 12:00',
-            end: '2021-01-01 18:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -29,10 +43,10 @@ describe('Week view', () => {
 
       const renderedEvent = document.querySelector('.sx__time-grid-event')
       expect(renderedEvent?.attributes.getNamedItem('style')?.value).toContain(
-        'top: 50%'
+        'top: 45.83333333333333%'
       )
       expect(renderedEvent?.attributes.getNamedItem('style')?.value).toContain(
-        'height: 25%'
+        'height: 25.000000000000014%'
       )
     })
 
@@ -40,17 +54,25 @@ describe('Week view', () => {
 
     it('should render all events', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         events: [
           {
             id: 1,
-            start: '2021-01-01 12:00',
-            end: '2021-01-01 18:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
           },
           {
             id: 2,
-            start: '2021-01-01 14:00',
-            end: '2021-01-01 16:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
           },
         ],
       })
@@ -62,24 +84,36 @@ describe('Week view', () => {
 
     it('should filter based on the filter predicate when rendering week', () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         events: [
           {
             id: 1,
-            start: '2021-01-01 12:00',
-            end: '2021-01-01 18:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
           {
             id: 2,
-            start: '2021-01-01 14:00',
-            end: '2021-01-01 16:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event 2',
           },
           {
             id: 3,
-            start: '2021-01-01 14:00',
-            end: '2021-01-01 16:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
         ],
@@ -96,24 +130,36 @@ describe('Week view', () => {
 
     it('should rerender week when filter predicate changes', async () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         events: [
           {
             id: 1,
-            start: '2021-01-01 12:00',
-            end: '2021-01-01 18:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
           {
             id: 2,
-            start: '2021-01-01 14:00',
-            end: '2021-01-01 16:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event 2',
           },
           {
             id: 3,
-            start: '2021-01-01 14:00',
-            end: '2021-01-01 16:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T14:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T16:00:00[Europe/Stockholm]'
+            ),
             title: 'hello event',
           },
         ],
@@ -144,7 +190,7 @@ describe('Week view', () => {
       'should render %s days',
       (nDays) => {
         const $app = __createAppWithViews__({
-          selectedDate: '2021-01-01',
+          selectedDate: Temporal.PlainDate.from('2021-01-01'),
           events: [],
           weekOptions: {
             nDays: nDays,
@@ -161,7 +207,7 @@ describe('Week view', () => {
   describe('the is-selected class', () => {
     it('should have an is-selected class for the selected date', async () => {
       const $app = __createAppWithViews__({
-        selectedDate: '2024-07-20',
+        selectedDate: Temporal.PlainDate.from('2024-07-20'),
         events: [],
       })
       renderComponent($app)
@@ -173,7 +219,8 @@ describe('Week view', () => {
         '2024-07-20'
       )
 
-      $app.datePickerState.selectedDate.value = '2024-07-19'
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2024-07-19')
 
       await waitFor(() => {
         const selectedDayAfterChange = document.querySelector(

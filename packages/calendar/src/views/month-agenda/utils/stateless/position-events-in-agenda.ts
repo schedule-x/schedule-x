@@ -8,7 +8,7 @@ const getAllEventDates = (startDate: string, endDate: string): string[] => {
   const dates = [currentDate]
 
   while (currentDate < endDate) {
-    currentDate = addDays(currentDate, 1)
+    currentDate = addDays(Temporal.PlainDate.from(currentDate), 1).toString()
     dates.push(currentDate)
   }
 
@@ -19,8 +19,8 @@ const placeEventInDay =
   (allDaysMap: Record<string, MonthAgendaDay>) =>
   (event: CalendarEventInternal) => {
     getAllEventDates(
-      dateFromDateTime(event.start),
-      dateFromDateTime(event.end)
+      dateFromDateTime(event.start.toString()),
+      dateFromDateTime(event.end.toString())
     ).forEach((date) => {
       if (allDaysMap[date]) {
         allDaysMap[date].events.push(event)
@@ -35,7 +35,7 @@ export const positionEventsInAgenda = (
   const allDaysMap = agendaMonth.weeks.reduce(
     (acc, week) => {
       week.forEach((day) => {
-        acc[day.date] = day
+        acc[day.date.toString()] = day
       })
       return acc
     },

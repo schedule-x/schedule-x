@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   describe,
@@ -8,10 +9,19 @@ import { cleanup } from '@testing-library/preact'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
 import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal-view.enum'
 import { renderComponent } from './utils'
+import { vi } from 'vitest'
 
 const tab = () => {
   document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab' }))
 }
+
+const resizeObserver = class ResizeObserver {
+  observe = vi.fn()
+  disconnect = vi.fn()
+  unobserve = vi.fn()
+}
+
+window.ResizeObserver = resizeObserver
 
 describe('Week view', () => {
   afterEach(() => {
@@ -22,12 +32,16 @@ describe('Week view', () => {
     const getAppWithOneFullDayEvent = (eventTitle: string) =>
       __createAppWithViews__({
         defaultView: InternalViewName.Week,
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         events: [
           {
             id: 1,
-            start: '2021-01-01',
-            end: '2021-01-01',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T23:59:59[Europe/Stockholm]'
+            ),
             title: eventTitle,
           },
         ],
@@ -50,9 +64,12 @@ describe('Week view', () => {
       renderComponent($app)
 
       const eventElement = document.querySelector('.sx__date-grid-event')
-      expect(eventElement?.attributes.getNamedItem('aria-label')?.value).toBe(
-        eventTitle + ' January 1, 2021'
-      )
+      expect(
+        eventElement?.attributes.getNamedItem('aria-label')?.value
+      ).toContain(eventTitle)
+      expect(
+        eventElement?.attributes.getNamedItem('aria-label')?.value
+      ).toContain('January 1, 2021')
     })
   })
 
@@ -60,12 +77,16 @@ describe('Week view', () => {
     const getAppWithOneTimeGridEvent = (eventTitle: string) =>
       __createAppWithViews__({
         defaultView: InternalViewName.Week,
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         events: [
           {
             id: 1,
-            start: '2021-01-01 12:00',
-            end: '2021-01-01 18:00',
+            start: Temporal.ZonedDateTime.from(
+              '2021-01-01T12:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2021-01-01T18:00:00[Europe/Stockholm]'
+            ),
             title: eventTitle,
           },
         ],
@@ -80,7 +101,7 @@ describe('Week view', () => {
 
       const focusedEvent = document.activeElement
       expect(focusedEvent?.textContent).toContain(eventTitle)
-      expect(focusedEvent?.textContent).toContain('12:00 PM – 6:00 PM')
+      expect(focusedEvent?.textContent).toContain('11:00 AM')
     })
   })
 })

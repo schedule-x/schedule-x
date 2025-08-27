@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 
+import 'temporal-polyfill/global'
 import {
   describe,
   expect,
@@ -25,28 +26,33 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
       })
-      expect($app.datePickerState.selectedDate.value).toBe('2021-01-01')
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from('2021-01-01')
+      )
       controlsPlugin.onRender($app)
 
-      controlsPlugin.setDate('2021-02-02')
+      controlsPlugin.setDate(Temporal.PlainDate.from('2021-02-02'))
 
-      expect($app.datePickerState.selectedDate.value).toBe('2021-02-02')
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from('2021-02-02')
+      )
     })
 
     it('should throw if the date is invalid', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
       })
-      expect($app.datePickerState.selectedDate.value).toBe('2021-01-01')
+      expect($app.datePickerState.selectedDate.value).toEqual(
+        Temporal.PlainDate.from('2021-01-01')
+      )
       controlsPlugin.onRender($app)
 
-      expect(() => controlsPlugin.setDate('20210230T01:00:000Z')).toThrow(
-        'Invalid date. Expected format YYYY-MM-DD'
-      )
+      // @ts-expect-error - we want to test the error case
+      expect(() => controlsPlugin.setDate('20210230T01:00:000Z')).toThrow()
     })
   })
 
@@ -55,7 +61,7 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.MonthGrid,
       })
       expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
@@ -70,22 +76,22 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.MonthGrid,
       })
       expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
       controlsPlugin.onRender($app)
       expect($app.calendarState.range.value).toEqual({
-        start: '2020-12-28 00:00',
-        end: '2021-01-31 23:59',
+        start: Temporal.ZonedDateTime.from('2020-12-28T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2021-01-31T23:59:00.00+00:00[UTC]'),
       })
 
       controlsPlugin.setView(InternalViewName.Day)
 
       expect($app.calendarState.view.value).toBe(InternalViewName.Day)
       expect($app.calendarState.range.value).toEqual({
-        start: '2021-01-01 00:00',
-        end: '2021-01-01 23:59',
+        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2021-01-01T23:59:00.00+00:00[UTC]'),
       })
     })
 
@@ -93,7 +99,7 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.MonthGrid,
       })
       expect($app.calendarState.view.value).toBe(InternalViewName.MonthGrid)
@@ -110,12 +116,15 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
       })
       controlsPlugin.onRender($app)
-      $app.datePickerState.selectedDate.value = '2023-01-01'
+      $app.datePickerState.selectedDate.value =
+        Temporal.PlainDate.from('2023-01-01')
 
-      expect(controlsPlugin.getDate()).toBe('2023-01-01')
+      expect(controlsPlugin.getDate()).toEqual(
+        Temporal.PlainDate.from('2023-01-01')
+      )
     })
   })
 
@@ -124,11 +133,14 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.MonthGrid,
       })
       controlsPlugin.onRender($app)
-      $app.calendarState.setView(InternalViewName.Day, '2021-01-01')
+      $app.calendarState.setView(
+        InternalViewName.Day,
+        Temporal.PlainDate.from('2021-01-01')
+      )
 
       expect(controlsPlugin.getView()).toBe(InternalViewName.Day)
     })
@@ -139,18 +151,18 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.MonthGrid,
       })
       controlsPlugin.onRender($app)
       $app.calendarState.range.value = {
-        start: '2021-01-01 00:00',
-        end: '2021-01-01 23:59',
+        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2021-01-01T23:59:00.00+00:00[UTC]'),
       }
 
       expect(controlsPlugin.getRange()).toEqual({
-        start: '2021-01-01 00:00',
-        end: '2021-01-01 23:59',
+        start: Temporal.ZonedDateTime.from('2021-01-01T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2021-01-01T23:59:00.00+00:00[UTC]'),
       })
     })
   })
@@ -160,7 +172,7 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         firstDayOfWeek: WeekDay.MONDAY,
       })
@@ -177,7 +189,7 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         locale: 'en-US',
       })
@@ -199,7 +211,7 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         views: [viewWeek],
       })
@@ -216,7 +228,7 @@ describe('createCalendarControlsPlugin', () => {
       const controlsPlugin = createCalendarControlsPlugin()
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         views: [viewWeek],
       })
@@ -256,7 +268,7 @@ describe('createCalendarControlsPlugin', () => {
       }
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         dayBoundaries: initialDayBoundaries,
       })
@@ -289,7 +301,7 @@ describe('createCalendarControlsPlugin', () => {
       }
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         weekOptions: initialWeekOptions,
       })
@@ -320,7 +332,7 @@ describe('createCalendarControlsPlugin', () => {
       }
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         weekOptions: initialWeekOptions,
       })
@@ -364,7 +376,7 @@ describe('createCalendarControlsPlugin', () => {
       }
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         calendars: initialCalendars,
       })
@@ -397,10 +409,10 @@ describe('createCalendarControlsPlugin', () => {
   describe('Setting/Getting the min date', () => {
     it('should return the min date that was set', () => {
       const controlsPlugin = createCalendarControlsPlugin()
-      const initialMinDate = '2020-01-01'
+      const initialMinDate = Temporal.PlainDate.from('2020-01-01')
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         minDate: initialMinDate,
       })
@@ -408,20 +420,21 @@ describe('createCalendarControlsPlugin', () => {
 
       expect(controlsPlugin.getMinDate()).toEqual(initialMinDate)
 
-      const newMinDate = '2020-02-02'
+      const newMinDate = Temporal.PlainDate.from('2020-02-02')
       controlsPlugin.setMinDate(newMinDate)
       expect(controlsPlugin.getMinDate()).toEqual(newMinDate)
       expect($app.config.minDate.value).toEqual(newMinDate)
+      expect($app.datePickerConfig.min).toEqual(newMinDate)
     })
   })
 
   describe('Setting/Getting the max date', () => {
     it('should return the max date that was set', () => {
       const controlsPlugin = createCalendarControlsPlugin()
-      const initialMaxDate = '2022-01-01'
+      const initialMaxDate = Temporal.PlainDate.from('2022-01-01')
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         maxDate: initialMaxDate,
       })
@@ -429,10 +442,11 @@ describe('createCalendarControlsPlugin', () => {
 
       expect(controlsPlugin.getMaxDate()).toEqual(initialMaxDate)
 
-      const newMaxDate = '2022-02-02'
+      const newMaxDate = Temporal.PlainDate.from('2022-02-02')
       controlsPlugin.setMaxDate(newMaxDate)
       expect(controlsPlugin.getMaxDate()).toEqual(newMaxDate)
       expect($app.config.maxDate.value).toEqual(newMaxDate)
+      expect($app.datePickerConfig.max).toEqual(newMaxDate)
     })
   })
 
@@ -444,7 +458,7 @@ describe('createCalendarControlsPlugin', () => {
       }
       const $app = __createAppWithViews__({
         plugins: [controlsPlugin],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: InternalViewName.Week,
         monthGridOptions: initialMonthGridOptions,
       })

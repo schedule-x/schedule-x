@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   afterEach,
   describe,
@@ -48,7 +49,10 @@ describe('MonthAgendaDayNames', () => {
       .build()
 
     it('should list all days in English', () => {
-      const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
+      const agendaMonth = createAgendaMonth(
+        Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'),
+        timeUnitsImpl
+      )
       renderComponent(agendaMonth.weeks[0], $appWithEnglishLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
@@ -62,7 +66,10 @@ describe('MonthAgendaDayNames', () => {
     })
 
     it('should list all days in German', () => {
-      const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
+      const agendaMonth = createAgendaMonth(
+        Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'),
+        timeUnitsImpl
+      )
       renderComponent(agendaMonth.weeks[0], $appWithGermanLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
@@ -82,7 +89,10 @@ describe('MonthAgendaDayNames', () => {
       .build()
 
     it('should list all days in English', () => {
-      const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
+      const agendaMonth = createAgendaMonth(
+        Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'),
+        timeUnitsImpl
+      )
       renderComponent(agendaMonth.weeks[0], $appWithEnglishLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
@@ -96,7 +106,10 @@ describe('MonthAgendaDayNames', () => {
     })
 
     it('should list all days in German', () => {
-      const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
+      const agendaMonth = createAgendaMonth(
+        Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'),
+        timeUnitsImpl
+      )
       renderComponent(agendaMonth.weeks[0], $appWithGermanLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
@@ -110,7 +123,10 @@ describe('MonthAgendaDayNames', () => {
     })
 
     it('should list all days in Chinese', () => {
-      const agendaMonth = createAgendaMonth('2023-11-01', timeUnitsImpl)
+      const agendaMonth = createAgendaMonth(
+        Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'),
+        timeUnitsImpl
+      )
       renderComponent(agendaMonth.weeks[0], $appWithChineseLocale)
 
       expect(document.querySelectorAll(DAY_NAME_SELECTOR).length).toBe(7)
@@ -130,7 +146,10 @@ describe('MonthAgendaDayNames', () => {
       const timeUnits = new TimeUnitsBuilder()
         .withConfig(createBaseConfig())
         .build()
-      const agendaMonth = createAgendaMonth('2023-11-01', timeUnits)
+      const agendaMonth = createAgendaMonth(
+        Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'),
+        timeUnits
+      )
       const $app = __createAppWithViews__({ showWeekNumbers: true })
       renderComponent(agendaMonth.weeks[0], $app)
 
@@ -143,7 +162,10 @@ describe('MonthAgendaDayNames', () => {
       const timeUnits = new TimeUnitsBuilder()
         .withConfig(createBaseConfig())
         .build()
-      const agendaMonth = createAgendaMonth('2023-11-01', timeUnits)
+      const agendaMonth = createAgendaMonth(
+        Temporal.ZonedDateTime.from('2023-11-01T00:00:00.00+00:00[UTC]'),
+        timeUnits
+      )
       const $app = __createAppWithViews__({ showWeekNumbers: false })
       renderComponent(agendaMonth.weeks[0], $app)
 

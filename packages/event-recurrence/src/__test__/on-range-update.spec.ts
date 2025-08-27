@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -14,13 +15,13 @@ describe('limiting infinite events to the current calendar range', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Weekly event',
-        start: '2025-01-14 16:00',
-        end: '2025-01-14 17:00',
+        start: Temporal.ZonedDateTime.from('2025-01-14T16:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2025-01-14T17:00:00.00+00:00[UTC]'),
         rrule: 'FREQ=WEEKLY;BYDAY=TU;',
       }
       const $app = __createAppWithViews__({
         events: [eventWithRRule],
-        selectedDate: '2025-01-04',
+        selectedDate: Temporal.PlainDate.from('2025-01-04'),
         defaultView: 'month-grid',
       })
 
@@ -34,13 +35,13 @@ describe('limiting infinite events to the current calendar range', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Daily event',
-        start: '2025-01-14 16:00',
-        end: '2025-01-14 17:00',
+        start: Temporal.ZonedDateTime.from('2025-01-14T16:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2025-01-14T17:00:00.00+00:00[UTC]'),
         rrule: 'FREQ=DAILY;',
       }
       const $app = __createAppWithViews__({
         events: [eventWithRRule],
-        selectedDate: '2025-01-04',
+        selectedDate: Temporal.PlainDate.from('2025-01-04'),
         defaultView: 'month-grid',
       })
 
@@ -54,13 +55,13 @@ describe('limiting infinite events to the current calendar range', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Monthly event',
-        start: '2025-01-14 16:00',
-        end: '2025-01-14 17:00',
+        start: Temporal.ZonedDateTime.from('2025-01-14T16:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2025-01-14T17:00:00.00+00:00[UTC]'),
         rrule: 'FREQ=MONTHLY;',
       }
       const $app = __createAppWithViews__({
         events: [eventWithRRule],
-        selectedDate: '2025-01-04',
+        selectedDate: Temporal.PlainDate.from('2025-01-04'),
         defaultView: 'month-grid',
       })
 
@@ -76,13 +77,13 @@ describe('limiting infinite events to the current calendar range', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Daily event',
-        start: '2025-01-14 16:00',
-        end: '2025-01-14 17:00',
+        start: Temporal.ZonedDateTime.from('2025-01-14T16:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2025-01-14T17:00:00.00+00:00[UTC]'),
         rrule: 'FREQ=DAILY;',
       }
       const $app = __createAppWithViews__({
         events: [eventWithRRule],
-        selectedDate: '2025-01-14',
+        selectedDate: Temporal.PlainDate.from('2025-01-14'),
         defaultView: 'month-grid',
       })
 
@@ -93,8 +94,8 @@ describe('limiting infinite events to the current calendar range', () => {
       expect(events).toHaveLength(20)
 
       eventRecurrencePlugin.onRangeUpdate!({
-        start: '2025-01-13 00:00',
-        end: '2025-01-19 23:59',
+        start: Temporal.ZonedDateTime.from('2025-01-13T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2025-01-19T23:59:00.00+00:00[UTC]'),
       })
 
       events = $app.calendarEvents.list.value
@@ -107,8 +108,8 @@ describe('limiting infinite background events to the current calendar range', ()
   describe('when rendering the calendar in month view', () => {
     it('should limit an infinite background event with weekly frequency', () => {
       const backgroundEventWithRRule: BackgroundEvent = {
-        start: '2025-02-12',
-        end: '2025-02-12',
+        start: Temporal.PlainDate.from('2025-02-12'),
+        end: Temporal.PlainDate.from('2025-02-12'),
         rrule: 'FREQ=WEEKLY;BYDAY=WE,FR;INTERVAL=2;',
         style: {
           backgroundColor: 'red',
@@ -116,7 +117,7 @@ describe('limiting infinite background events to the current calendar range', ()
       }
       const $app = __createAppWithViews__({
         backgroundEvents: [backgroundEventWithRRule],
-        selectedDate: '2025-02-01',
+        selectedDate: Temporal.PlainDate.from('2025-02-01'),
         defaultView: 'month-grid',
       })
 
@@ -126,36 +127,37 @@ describe('limiting infinite background events to the current calendar range', ()
       const backgroundEvents = $app.calendarEvents.backgroundEvents.value
       expect(backgroundEvents).toHaveLength(4)
       const firstEvent = backgroundEvents[0]
-      expect(firstEvent.start).toBe('2025-02-12')
-      expect(firstEvent.end).toBe('2025-02-12')
+      expect(firstEvent.start).toEqual(Temporal.PlainDate.from('2025-02-12'))
+      expect(firstEvent.end).toEqual(Temporal.PlainDate.from('2025-02-12'))
       const secondEvent = backgroundEvents[1]
-      expect(secondEvent.start).toBe('2025-02-14')
-      expect(secondEvent.end).toBe('2025-02-14')
+      expect(secondEvent.start).toEqual(Temporal.PlainDate.from('2025-02-14'))
+      expect(secondEvent.end).toEqual(Temporal.PlainDate.from('2025-02-14'))
       const thirdEvent = backgroundEvents[2]
-      expect(thirdEvent.start).toBe('2025-02-26')
-      expect(thirdEvent.end).toBe('2025-02-26')
+      expect(thirdEvent.start).toEqual(Temporal.PlainDate.from('2025-02-26'))
+      expect(thirdEvent.end).toEqual(Temporal.PlainDate.from('2025-02-26'))
       const fourthEvent = backgroundEvents[3]
-      expect(fourthEvent.start).toBe('2025-02-28')
-      expect(fourthEvent.end).toBe('2025-02-28')
+      expect(fourthEvent.start).toEqual(Temporal.PlainDate.from('2025-02-28'))
+      expect(fourthEvent.end).toEqual(Temporal.PlainDate.from('2025-02-28'))
 
       eventRecurrencePlugin.onRangeUpdate!({
-        start: '2025-03-01 00:00',
-        end: '2025-03-31 23:59',
+        start: Temporal.ZonedDateTime.from('2025-03-01T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2025-03-31T23:59:00.00+00:00[UTC]'),
       })
 
       const updatedBackgroundEvents = $app.calendarEvents.backgroundEvents.value
       expect(updatedBackgroundEvents).toHaveLength(8)
       const fifthEvent = updatedBackgroundEvents[4]
-      expect(fifthEvent.start).toBe('2025-03-12')
-      expect(fifthEvent.end).toBe('2025-03-12')
+      expect(fifthEvent.start).toEqual(Temporal.PlainDate.from('2025-03-12'))
+      expect(fifthEvent.end).toEqual(Temporal.PlainDate.from('2025-03-12'))
       const sixthEvent = updatedBackgroundEvents[5]
-      expect(sixthEvent.start).toBe('2025-03-14')
-      expect(sixthEvent.end).toBe('2025-03-14')
+      expect(sixthEvent.start).toEqual(Temporal.PlainDate.from('2025-03-14'))
+      expect(sixthEvent.end).toEqual(Temporal.PlainDate.from('2025-03-14'))
       const seventhEvent = updatedBackgroundEvents[6]
-      expect(seventhEvent.start).toBe('2025-03-26')
-      expect(seventhEvent.end).toBe('2025-03-26')
+      expect(seventhEvent.start).toEqual(Temporal.PlainDate.from('2025-03-26'))
+      expect(seventhEvent.end).toEqual(Temporal.PlainDate.from('2025-03-26'))
       const eighthEvent = updatedBackgroundEvents[7]
-      expect(eighthEvent.start).toBe('2025-03-28')
+      expect(eighthEvent.start).toEqual(Temporal.PlainDate.from('2025-03-28'))
+      expect(eighthEvent.end).toEqual(Temporal.PlainDate.from('2025-03-28'))
     })
   })
 })

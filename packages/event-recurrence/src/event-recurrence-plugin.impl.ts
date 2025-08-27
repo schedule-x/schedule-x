@@ -56,8 +56,8 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   updateRecurrenceDND(
     eventId: EventId,
-    oldEventStart: string,
-    newEventStart: string
+    oldEventStart: Temporal.ZonedDateTime | Temporal.PlainDate,
+    newEventStart: Temporal.ZonedDateTime | Temporal.PlainDate
   ): void {
     const { updatedEvent, recurrenceSet } = new DndUpdater(
       this.$app as CalendarAppSingleton
@@ -71,8 +71,8 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
 
   updateRecurrenceOnResize(
     eventId: EventId,
-    oldEventEnd: string,
-    newEventEnd: string
+    oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate,
+    newEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   ): void {
     const updatedEvent = new ResizeUpdater(
       this.$app as CalendarAppSingleton
@@ -121,6 +121,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       if (rrule && this.range) {
         recurrencesToCreate.push(
           ...createRecurrencesForBackgroundEvent(
+            $app,
             event,
             rrule,
             this.range,

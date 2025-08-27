@@ -9,8 +9,8 @@ const createCalendarEvent = () => {
   const calendarEvent = stubInterface<CalendarEventInternal>()
   calendarEvent.id = '1'
   calendarEvent.title = 'test'
-  calendarEvent.start = '2023-10-07'
-  calendarEvent.end = '2023-10-08'
+  calendarEvent.start = Temporal.PlainDate.from('2023-10-07')
+  calendarEvent.end = Temporal.PlainDate.from('2023-10-08')
   calendarEvent._isMultiDayFullDay = true
   calendarEvent._isSingleDayFullDay = false
   calendarEvent._isSingleDayTimed = false
@@ -35,6 +35,7 @@ export const setup = (customComponentFn?: CustomComponentFn) => {
     eventModal: customComponentFn,
   }
   $app.config.locale = signal('en-US')
+  $app.config.timezone = signal('Europe/Stockholm')
   $app.calendarState.isDark = signal(false)
   return { $app, calendarEvent }
 }

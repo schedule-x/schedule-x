@@ -19,6 +19,7 @@ import { calendarDemoCode } from './__data__/calendar-code'
 import HeadingWithIcon from '../partials/heading-with-icon/heading-with-icon'
 import styles from './demo.module.scss'
 import { useTheme } from 'nextra-theme-docs'
+import 'temporal-polyfill/global'
 
 export default function CalendarDemoPage() {
   const { resolvedTheme } = useTheme()
@@ -32,51 +33,52 @@ export default function CalendarDemoPage() {
 
     const calendar = createCalendar({
       views: [viewMonthGrid, viewMonthAgenda, viewWeek, viewDay],
-      selectedDate: '2023-12-01',
+      selectedDate: Temporal.PlainDate.from('2023-12-01'),
       isDark: resolvedTheme === 'dark',
       defaultView: viewWeek.name,
+      timezone: 'America/New_York',
       events: [
         {
           id: 1,
           title: 'Coffee with John',
-          start: '2023-12-01',
-          end: '2023-12-01',
+          start: Temporal.PlainDate.from('2023-12-01'),
+          end: Temporal.PlainDate.from('2023-12-01'),
         },
         {
           id: 2,
           title: 'Breakfast with Sam',
           description: 'Discuss the new project',
           location: 'Starbucks',
-          start: '2023-11-29 05:00',
-          end: '2023-11-29 06:00',
+          start: Temporal.ZonedDateTime.from('2023-11-29T05:00:00+00:00[America/New_York]'),
+          end: Temporal.ZonedDateTime.from('2023-11-29T06:00:00+00:00[America/New_York]'),
         },
         {
           id: 3,
           title: 'Gym',
-          start: '2023-11-27 06:00',
-          end: '2023-11-27 07:00',
+          start: Temporal.ZonedDateTime.from('2023-11-27T06:00:00+00:00[America/New_York]'),
+          end: Temporal.ZonedDateTime.from('2023-11-27T07:00:00+00:00[America/New_York]'),
           calendarId: 'leisure',
         },
         {
           id: 4,
           title: 'Media fasting',
-          start: '2023-12-01',
-          end: '2023-12-03',
+          start: Temporal.PlainDate.from('2023-12-01'),
+          end: Temporal.PlainDate.from('2023-12-03'),
           calendarId: 'leisure',
         },
         {
           id: 5,
           title: 'Some appointment',
           people: ['John'],
-          start: '2023-12-03 03:00',
-          end: '2023-12-03 04:30',
+          start: Temporal.ZonedDateTime.from('2023-12-03T03:00:00+00:00[America/New_York]'),
+          end: Temporal.ZonedDateTime.from('2023-12-03T04:30:00+00:00[America/New_York]'),
         },
         {
           id: 6,
           title: 'Other appointment',
           people: ['Susan', 'Mike'],
-          start: '2023-12-03 03:00',
-          end: '2023-12-03 04:30',
+          start: Temporal.ZonedDateTime.from('2023-12-03T03:00:00+00:00[America/New_York]'),
+          end: Temporal.ZonedDateTime.from('2023-12-03T04:30:00+00:00[America/New_York]'),
           calendarId: 'leisure',
         },
       ],

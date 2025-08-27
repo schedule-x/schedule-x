@@ -19,4 +19,5 @@ export const calendarKyKG: CalendarTranslations = {
     '{{date}} күнүндө {{n}} окуяга байланыш',
   'Link to 1 more event on {{date}}': '{{date}} күнүндө 1 окуяга байланыш',
   CW: 'Апта {{week}}',
+  View: 'Көрүнүш',
 }

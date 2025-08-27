@@ -9,6 +9,7 @@ import {createEventRecurrencePlugin} from "@schedule-x/event-recurrence";
 import { useEffect } from 'react'
 import { randomStringId } from '@schedule-x/shared'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
+import 'temporal-polyfill/global'
 
 export default function DragToCreateCalendar() {
   const eventsService = createEventsServicePlugin()
@@ -17,14 +18,15 @@ export default function DragToCreateCalendar() {
 
   const calendarApp = useNextCalendarApp({
     views: [viewMonthGrid, viewMonthAgenda, viewWeek, viewDay],
-    selectedDate: '2024-05-06',
+    selectedDate: Temporal.PlainDate.from('2024-05-06'),
     defaultView: viewWeek.name,
+    timezone: 'America/New_York',
     events: [
       {
         id: 1,
         title: 'Weekly event',
-        start: '2024-05-11 10:00',
-        end: '2024-05-11 12:00',
+        start: Temporal.ZonedDateTime.from('2024-05-11T10:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-11T12:00:00-04:00[America/New_York]'),
         calendarId: 'personal',
         people: ['Ted Mosby', 'Barney Stinson'],
         rrule: 'FREQ=WEEKLY;UNTIL=20240701T235959'
@@ -32,36 +34,36 @@ export default function DragToCreateCalendar() {
       {
         id: 2,
         title: 'Event 2',
-        start: '2024-05-11 14:00',
-        end: '2024-05-11 16:00',
+        start: Temporal.ZonedDateTime.from('2024-05-11T14:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-11T16:00:00-04:00[America/New_York]'),
         calendarId: 'personal',
       },
       {
         id: 3,
         title: 'Event 3',
-        start: '2024-05-11 08:00',
-        end: '2024-05-11 09:00',
+        start: Temporal.ZonedDateTime.from('2024-05-11T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-11T09:00:00-04:00[America/New_York]'),
         calendarId: 'team',
       },
       {
         id: 4,
         title: 'Event 4',
-        start: '2024-05-11 10:00',
-        end: '2024-05-11 11:00',
+        start: Temporal.ZonedDateTime.from('2024-05-11T10:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-11T11:00:00-04:00[America/New_York]'),
         calendarId: 'team',
       },
       {
         id: 5,
         title: 'Event 5',
-        start: '2024-05-06 07:00',
-        end: '2024-05-06 09:10',
+        start: Temporal.ZonedDateTime.from('2024-05-06T07:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-06T09:10:00-04:00[America/New_York]'),
         calendarId: 'clients',
       },
       {
         id: 6,
         title: 'Event 6',
-        start: '2024-05-07',
-        end: '2024-05-07',
+        start: Temporal.PlainDate.from('2024-05-07'),
+        end: Temporal.PlainDate.from('2024-05-07'),
         calendarId: 'clients',
       }
     ],

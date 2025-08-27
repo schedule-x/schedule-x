@@ -9,6 +9,8 @@ import { positionEventsInAgenda } from '../utils/stateless/position-events-in-ag
 import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
 import MonthAgendaEvents from './month-agenda-events'
 
+import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
+
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
   const getMonth = () => {
     const filteredEvents = $app.calendarEvents.filterPredicate.value
@@ -19,7 +21,9 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
 
     return positionEventsInAgenda(
       createAgendaMonth(
-        $app.datePickerState.selectedDate.value,
+        $app.datePickerState.selectedDate.value.toZonedDateTime(
+          $app.config.timezone.value
+        ),
         $app.timeUnitsImpl
       ),
       filteredEvents.sort(sortEventsByStartAndEnd)
@@ -64,8 +68,8 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
             <MonthAgendaWeek
               key={index}
               week={week}
-              setActiveDate={(dateString: string) =>
-                ($app.datePickerState.selectedDate.value = dateString)
+              setActiveDate={(date: Temporal.PlainDate) =>
+                ($app.datePickerState.selectedDate.value = date)
               }
               activeDate={$app.datePickerState.selectedDate.value}
             />
@@ -77,8 +81,8 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
           events={
             agendaMonth.weeks
               .flat()
-              .find(
-                (day) => day.date === $app.datePickerState.selectedDate.value
+              .find((day) =>
+                isSameDay(day.date, $app.datePickerState.selectedDate.value)
               )?.events || []
           }
         />

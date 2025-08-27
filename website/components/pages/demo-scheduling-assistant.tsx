@@ -14,19 +14,20 @@ import {
 import { createSchedulingAssistant } from '@sx-premium/scheduling-assistant'
 import { useState } from 'react'
 import { effect } from '@preact/signals'
+import 'temporal-polyfill/global'
 
 export default function CalendarDemoPage() {
-  const [rangeStart, setRangeStart] = useState('2025-03-07 10:00')
-  const [rangeEnd, setRangeEnd] = useState('2025-03-07 12:00')
+  const [rangeStart, setRangeStart] = useState(Temporal.ZonedDateTime.from('2025-03-07T10:00:00-05:00[America/New_York]'))
+  const [rangeEnd, setRangeEnd] = useState(Temporal.ZonedDateTime.from('2025-03-07T12:00:00-05:00[America/New_York]'))
   const [open, setOpen] = useState(false);
   const [isSchedulingDisabled, setIsSchedulingDisabled] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const rConfig = useState(() => createConfig())[0];
-  rConfig.initialHours.value = new TimeUnits().getDayHoursBetween(
-    '2025-03-07 08:00',
-    '2025-03-07 19:00'
+  rConfig.initialHours.value = new TimeUnits().getDayHoursBetweenPlain(
+    Temporal.PlainDateTime.from('2025-03-07T08:00:00'),
+    Temporal.PlainDateTime.from('2025-03-07T19:00:00')
   )
   rConfig.infiniteScroll.value = false
   const hourlyView = useState(() => createHourlyView(rConfig))[0];
@@ -66,34 +67,35 @@ export default function CalendarDemoPage() {
   })
 
   const calendar = useNextCalendarApp({
-    selectedDate: '2025-03-07',
+    selectedDate: Temporal.PlainDate.from('2025-03-07'),
+    timezone: 'America/New_York',
     events: [
       {
         id: 'event1',
         resourceId: 'janedoe',
-        start: '2025-03-07 09:00',
-        end: '2025-03-07 10:00',
+        start: Temporal.ZonedDateTime.from('2025-03-07T09:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T10:00:00-05:00[America/New_York]'),
         title: 'Event 1',
       },
       {
         id: 'event2',
         resourceId: 'johnsmith',
-        start: '2025-03-07 10:00',
-        end: '2025-03-07 11:00',
+        start: Temporal.ZonedDateTime.from('2025-03-07T10:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T11:00:00-05:00[America/New_York]'),
         title: 'Event 2',
       },
       {
         id: 'event3',
         resourceId: 'tedmosby',
-        start: '2025-03-07 11:00',
-        end: '2025-03-07 12:00',
+        start: Temporal.ZonedDateTime.from('2025-03-07T11:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T12:00:00-05:00[America/New_York]'),
         title: 'Event 3',
       },
       {
         id: 'event4',
         resourceId: 'janedoe',
-        start: '2025-03-07 17:00',
-        end: '2025-03-07 18:00',
+        start: Temporal.ZonedDateTime.from('2025-03-07T17:00:00-05:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2025-03-07T18:00:00-05:00[America/New_York]'),
         title: 'Event 4',
       }
     ],
@@ -103,15 +105,17 @@ export default function CalendarDemoPage() {
     ],
   })
 
-  const getTime = (start: string, end: string) => {
-    const date = start.split(' ')[0]
-    const startTime = start.split(' ')[1]
-    const endTime = end.split(' ')[1]
+  const getTime = (start: Temporal.ZonedDateTime, end: Temporal.ZonedDateTime) => {
+    const startTime = start.toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+    const endTime = end.toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    })
 
-    return `${new Date(date).toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-    })}, ${startTime} - ${endTime}`
+    return `${startTime} - ${endTime}`
   }
 
 

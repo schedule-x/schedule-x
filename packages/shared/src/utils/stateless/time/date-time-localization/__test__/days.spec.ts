@@ -9,7 +9,7 @@ import {
   getOneLetterDayNames,
   getOneLetterOrShortDayNames,
 } from '../date-time-localization'
-import { Month } from '../../../../../enums/time/month.enum'
+import 'temporal-polyfill/global'
 import { createBaseConfig } from '@schedule-x/calendar/src/__test__/utils'
 
 describe('get localized day names', () => {
@@ -19,7 +19,7 @@ describe('get localized day names', () => {
 
   it('should get one letter day names in English', () => {
     const underTest = getOneLetterDayNames
-    const date = new Date(2023, Month.JANUARY, 1)
+    const date = Temporal.PlainDate.from('2023-01-01')
     const week = timeUnitsImpl.getWeekFor(date)
 
     const result = underTest(week, 'en-US')
@@ -35,7 +35,7 @@ describe('get localized day names', () => {
 
   it('should get one letter day names in German', () => {
     const underTest = getOneLetterDayNames
-    const date = new Date(2023, Month.JANUARY, 1)
+    const date = Temporal.PlainDate.from('2023-01-01')
     const week = timeUnitsImpl.getWeekFor(date)
 
     const result = underTest(week, 'de-DE')
@@ -54,7 +54,7 @@ describe('get localized day names', () => {
       .withConfig(createBaseConfig({ firstDayOfWeek: WeekDay.SUNDAY }))
       .build()
     const underTest = getOneLetterDayNames
-    const date = new Date(2023, Month.JANUARY, 1)
+    const date = Temporal.PlainDate.from('2023-01-01')
     const week = timeUnitsImplUS.getWeekFor(date)
 
     const result = underTest(week, 'en-US')
@@ -70,7 +70,7 @@ describe('get localized day names', () => {
 
   it('should get short day names in Chinese', () => {
     const underTest = getOneLetterOrShortDayNames
-    const date = new Date(2023, Month.JANUARY, 1)
+    const date = Temporal.PlainDate.from('2023-01-01')
     const week = timeUnitsImpl.getWeekFor(date)
 
     const result = underTest(week, 'zh-CN')
@@ -86,7 +86,7 @@ describe('get localized day names', () => {
 
   it('should get narrow day names in hebrew', () => {
     const underTest = getOneLetterOrShortDayNames
-    const date = new Date(2023, Month.JANUARY, 1)
+    const date = Temporal.PlainDate.from('2023-01-01')
     const week = timeUnitsImpl.getWeekFor(date)
 
     const result = underTest(week, 'he-IL')

@@ -8,3 +8,10 @@ export const getDurationInMinutes = (
   const dtEndJS = toJSDate(dtend)
   return (dtEndJS.getTime() - dtStartJS.getTime()) / 1000 / 60
 }
+
+export const getDurationInMinutesTemporal = (
+  dtstart: Temporal.ZonedDateTime,
+  dtend: Temporal.ZonedDateTime
+): number => {
+  return (dtend.epochMilliseconds - dtstart.epochMilliseconds) / 1000 / 60
+}

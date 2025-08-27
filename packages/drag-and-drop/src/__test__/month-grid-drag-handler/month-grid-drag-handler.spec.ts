@@ -11,6 +11,7 @@ import MonthGridDragHandlerImpl from '../../month-grid-drag-handler.impl'
 import { getEventWithId } from '../time-grid-drag-handler/utils'
 import { vi } from 'vitest'
 import { waitFor } from '@testing-library/preact'
+import 'temporal-polyfill/global'
 
 describe('MonthGridDragHandler', () => {
   describe('Dragging an event forwards', () => {
@@ -22,16 +23,16 @@ describe('MonthGridDragHandler', () => {
         events: [
           {
             id: '1',
-            start: '2021-01-01',
-            end: '2021-01-03',
+            start: Temporal.PlainDate.from('2021-01-01'),
+            end: Temporal.PlainDate.from('2021-01-03'),
           },
           {
             id: '2',
-            start: '2021-01-01',
-            end: '2021-01-01',
+            start: Temporal.PlainDate.from('2021-01-01'),
+            end: Temporal.PlainDate.from('2021-01-01'),
           },
         ],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: 'month-grid',
       })
       $app.elements.calendarWrapper = document.createElement('div')
@@ -49,8 +50,10 @@ describe('MonthGridDragHandler', () => {
       document.dispatchEvent(new MouseEvent('dragend'))
 
       await waitFor(() => {
-        expect(calendarEvent.start).toBe('2021-01-04')
-        expect(calendarEvent.end).toBe('2021-01-06')
+        expect(calendarEvent.start).toEqual(
+          Temporal.PlainDate.from('2021-01-04')
+        )
+        expect(calendarEvent.end).toEqual(Temporal.PlainDate.from('2021-01-06'))
       })
     })
 
@@ -110,11 +113,11 @@ describe('MonthGridDragHandler', () => {
         events: [
           {
             id: '1',
-            start: '2021-01-01',
-            end: '2021-01-03',
+            start: Temporal.PlainDate.from('2021-01-01'),
+            end: Temporal.PlainDate.from('2021-01-03'),
           },
         ],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: 'month-grid',
       })
       $app.elements.calendarWrapper = document.createElement('div')
@@ -130,8 +133,8 @@ describe('MonthGridDragHandler', () => {
       fourthOfJanuaryElement.dispatchEvent(new MouseEvent('dragover'))
       document.dispatchEvent(new MouseEvent('dragend'))
 
-      expect(calendarEvent.start).toBe('2021-01-01')
-      expect(calendarEvent.end).toBe('2021-01-03')
+      expect(calendarEvent.start).toEqual(Temporal.PlainDate.from('2021-01-01'))
+      expect(calendarEvent.end).toEqual(Temporal.PlainDate.from('2021-01-03'))
       expect($app.config.callbacks.onEventUpdate).not.toHaveBeenCalled()
     })
 
@@ -140,11 +143,11 @@ describe('MonthGridDragHandler', () => {
         events: [
           {
             id: '1',
-            start: '2021-01-01',
-            end: '2021-01-03',
+            start: Temporal.PlainDate.from('2021-01-01'),
+            end: Temporal.PlainDate.from('2021-01-03'),
           },
         ],
-        selectedDate: '2021-01-01',
+        selectedDate: Temporal.PlainDate.from('2021-01-01'),
         defaultView: 'month-grid',
       })
       $app.elements.calendarWrapper = document.createElement('div')
@@ -161,8 +164,10 @@ describe('MonthGridDragHandler', () => {
       document.dispatchEvent(new MouseEvent('dragend'))
 
       await waitFor(() => {
-        expect(calendarEvent.start).toBe('2021-01-04')
-        expect(calendarEvent.end).toBe('2021-01-06')
+        expect(calendarEvent.start).toEqual(
+          Temporal.PlainDate.from('2021-01-04')
+        )
+        expect(calendarEvent.end).toEqual(Temporal.PlainDate.from('2021-01-06'))
         expect($app.config.callbacks.onEventUpdate).toHaveBeenCalled()
       })
     })

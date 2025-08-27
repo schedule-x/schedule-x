@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import 'temporal-polyfill/global'
 import {
   describe,
   it,
@@ -7,6 +8,7 @@ import {
 import { createCalendar } from '../factory'
 import CalendarApp from '../calendar.app'
 import { viewMonthGrid } from '../views/month-grid'
+import { EventId } from '@schedule-x/shared/src/types/event-id'
 
 describe('The calendar factory', () => {
   it('should create a calendar app', () => {
@@ -33,154 +35,6 @@ describe('The calendar factory', () => {
     }).toThrow()
   })
 
-  describe('validating event start time', () => {
-    it('should throw an error if start time includes seconds', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01T00:00:00',
-              end: '2022-01-01T00:00:00',
-            },
-          ],
-        })
-      }).toThrow(
-        `[Schedule-X error]: Event start time 2022-01-01T00:00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
-    })
-
-    it('should throw an error if start time includes T as a separator', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01T00:00',
-              end: '2022-01-01T00:00',
-            },
-          ],
-        })
-      }).toThrow(
-        `[Schedule-X error]: Event start time 2022-01-01T00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
-    })
-
-    it('should not throw an error if start time is a date string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if start is a date time string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01 00:00',
-              end: '2022-01-01 00:00',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-  })
-
-  describe('validating event end time', () => {
-    it('should throw an error if end time includes seconds', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01T00:00:00',
-            },
-          ],
-        })
-      }).toThrow(
-        `[Schedule-X error]: Event end time 2022-01-01T00:00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
-    })
-
-    it('should throw an error if end time includes T as a separator', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01T00:00',
-            },
-          ],
-        })
-      }).toThrow(
-        `[Schedule-X error]: Event end time 2022-01-01T00:00 is not a valid time format. Please refer to the docs for more information.`
-      )
-    })
-
-    it('should not throw an error if end time is a date string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-
-    it('should not throw an error if end is a date time string', () => {
-      const underTest = createCalendar
-
-      expect(() => {
-        underTest({
-          views: [viewMonthGrid],
-          events: [
-            {
-              id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01 00:00',
-            },
-          ],
-        })
-      }).not.toThrow()
-    })
-  })
-
   describe('validating event ids', () => {
     it('should throw an error for decimal number', () => {
       const underTest = createCalendar
@@ -191,8 +45,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1.1,
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -210,8 +68,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: '1.1',
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -229,8 +91,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4c4d',
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -246,8 +112,12 @@ describe('The calendar factory', () => {
           events: [
             {
               id: 1,
-              start: '2022-01-01',
-              end: '2022-01-01',
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })
@@ -265,8 +135,12 @@ describe('The calendar factory', () => {
             events: [
               {
                 id: id as any,
-                start: '2022-01-01',
-                end: '2022-01-01',
+                start: Temporal.ZonedDateTime.from(
+                  '2022-01-01T00:00:00[Europe/Stockholm]'
+                ),
+                end: Temporal.ZonedDateTime.from(
+                  '2022-01-01T00:00:00[Europe/Stockholm]'
+                ),
               },
             ],
           })
@@ -287,9 +161,13 @@ describe('The calendar factory', () => {
           skipValidation: true,
           events: [
             {
-              id: 1,
-              start: '2022-01-01T00:00:00',
-              end: '2022-01-01T00:00:00',
+              id: null as unknown as EventId,
+              start: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
+              end: Temporal.ZonedDateTime.from(
+                '2022-01-01T00:00:00[Europe/Stockholm]'
+              ),
             },
           ],
         })

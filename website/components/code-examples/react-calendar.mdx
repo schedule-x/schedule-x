@@ -7,7 +7,7 @@ import {
   createViewWeek,
 } from '@schedule-x/calendar'
 import { createEventsServicePlugin } from '@schedule-x/events-service'
-
+import 'temporal-polyfill/global'
 import '@schedule-x/theme-default/dist/index.css'
 
 function CalendarApp() {
@@ -19,8 +19,8 @@ function CalendarApp() {
       {
         id: '1',
         title: 'Event 1',
-        start: '2023-12-16',
-        end: '2023-12-16',
+        start: Temporal.PlainDate.from('2023-12-16'),
+        end: Temporal.PlainDate.from('2023-12-16'),
       },
     ],
     plugins: [eventsService]

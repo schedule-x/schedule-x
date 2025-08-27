@@ -13,6 +13,9 @@ const meta: MetaRecord = {
   "event-modal": {
     "title": "Event Modal"
   },
+  "timezone-select": {
+    "title": "Timezone Select"
+  },
   "interactive-event-modal": {
     "title": "⭐ Interactive Event Modal"
   },
@@ -45,9 +48,6 @@ const meta: MetaRecord = {
   },
   "custom-plugins": {
     "title": "Custom Plugins"
-  },
-  "ical": {
-    "title": "iCal"
   },
   "community-plugins": {
     "title": "Community Plugins"
