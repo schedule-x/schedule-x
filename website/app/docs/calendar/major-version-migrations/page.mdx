@@ -12,16 +12,18 @@ With v3 of the Schedule-X calendar, there were a few breaking changes to the API
 - `start` and `end` properties of events now expect Temporal.ZonedDateTime or Temporal.PlainDate instances, rather than strings.
 - `selectedDate` of the calendar config now expects a `Temporal.PlainDate` instance, rather than a string.
 - `minDate` and `maxDate` of the calendar config now expect `Temporal.PlainDate` instances, rather than strings.
-- Callbacks that used to accept a date parameter of format `YYYY-MM-DD` in a date parameter now use instances of `Temporal.PlainDate` instead.
-- Callbacks that used to accept a date-time parameter of format `YYYY-MM-DD HH:MM` in a date-time parameter now use instances of `Temporal.ZonedDateTime` instead.
+- Callbacks that used to accept a date parameter of format `YYYY-MM-DD` now use instances of `Temporal.PlainDate` instead.
+- Callbacks that used to accept a date-time parameter of format `YYYY-MM-DD HH:MM` now use instances of `Temporal.ZonedDateTime` instead.
 
 Additionally, there were some other breaking changes to the UI and plugins ecosystem:
 
 - v3 of the open source packages, now work together with v13 of the premium plugins. There was a jump from premium v3 -> v13, to make it abundantly clear that there is no numeric correlation between the open source major version and the premium major version.
-- `ResourceViewConfig.onLazyLoadDate` and `ResourceViewConfig.onLazyLoadDate` for @sx-premium/resource-scheduler now expect `Temporal.PlainDate` instances, rather than strings.
+- `ResourceViewConfig.onLazyLoadDate` and `ResourceViewConfig.onLazyLoadMonth` for @sx-premium/resource-scheduler now expect `Temporal.PlainDate` instances, rather than strings.
 - Time grid events (in day- and week views), now reactively display title and time inline, if there is no vertical space to display them in two lines.
 - The view select element now features a chevron icon, to indicate that it is a dropdown.
 - The ical plugin is now deprecated. Since Schedule-X has migrated away from its own custom date-time format, it seems redundant to support another, older standardized format.
+
+The docs for v2 can still be found at https://v2.schedule-x.dev
 
 ## Migration from @sx-premium v2 to v3
 
