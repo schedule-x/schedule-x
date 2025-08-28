@@ -108,6 +108,15 @@ const meta: MetaRecord = {
       sidebar: false,
       toc: false
     }
+  },
+  blog: {
+    title: 'Blog',
+    type: 'page',
+    theme: {
+      sidebar: false,
+      toc: false,
+      timestamp: false,
+    }
   }
 }
 

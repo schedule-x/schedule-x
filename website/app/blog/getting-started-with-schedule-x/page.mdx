@@ -1,0 +1,232 @@
+---
+title: "Getting Started with Schedule-X: A Complete Guide"
+date: "2024-01-15"
+author: "Schedule-X Team"
+tags: ["tutorial", "react", "calendar"]
+readTime: "8 min read"
+excerpt: "Learn how to integrate Schedule-X into your React application and create beautiful, interactive calendars with ease."
+---
+
+import '../blog.scss'
+
+# Getting Started with Schedule-X: A Complete Guide
+
+Schedule-X is a powerful, feature-rich calendar component for React applications. Whether you're building a scheduling app, event management system, or just need a robust calendar solution, Schedule-X provides everything you need out of the box.
+
+## What is Schedule-X?
+
+Schedule-X is a modern, TypeScript-first calendar library that offers:
+
+- **Multiple View Types**: Month, week, day, and agenda views
+- **Drag & Drop**: Intuitive event management with drag and drop
+- **Recurring Events**: Support for complex recurring event patterns
+- **Timezone Support**: Full timezone awareness and conversion
+- **Customizable**: Extensive theming and styling options
+- **Accessible**: Built with accessibility in mind
+
+## Installation
+
+Getting started with Schedule-X is straightforward. First, install the core package:
+
+```bash
+npm install @schedule-x/calendar
+```
+
+For additional features, you might also want to install some plugins:
+
+```bash
+npm install @schedule-x/drag-and-drop @schedule-x/event-modal @schedule-x/current-time
+```
+
+## Basic Setup
+
+Here's a minimal example to get you started:
+
+```tsx
+import { createCalendar } from '@schedule-x/calendar'
+import '@schedule-x/theme-default/dist/index.css'
+
+function App() {
+  const calendar = createCalendar({
+    target: '#calendar',
+    events: [
+      {
+        id: '1',
+        title: 'Team Meeting',
+        start: '2024-01-15T10:00:00',
+        end: '2024-01-15T11:00:00',
+      }
+    ]
+  })
+
+  return <div id="calendar" />
+}
+
+export default App
+```
+
+## Adding Plugins
+
+Schedule-X uses a plugin architecture that makes it easy to add functionality:
+
+```tsx
+import { createCalendar } from '@schedule-x/calendar'
+import { dragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import { eventModalPlugin } from '@schedule-x/event-modal'
+import { currentTimePlugin } from '@schedule-x/current-time'
+
+const calendar = createCalendar({
+  target: '#calendar',
+  plugins: [
+    dragAndDropPlugin(),
+    eventModalPlugin(),
+    currentTimePlugin()
+  ],
+  events: [
+    {
+      id: '1',
+      title: 'Team Meeting',
+      start: '2024-01-15T10:00:00',
+      end: '2024-01-15T11:00:00',
+    }
+  ]
+})
+```
+
+## Event Management
+
+Events in Schedule-X are simple objects with a few required properties:
+
+```tsx
+const events = [
+  {
+    id: 'unique-id',
+    title: 'Event Title',
+    start: '2024-01-15T10:00:00',
+    end: '2024-01-15T11:00:00',
+    // Optional properties
+    description: 'Event description',
+    location: 'Meeting Room A',
+    color: '#3b82f6'
+  }
+]
+```
+
+### Adding Events Programmatically
+
+You can add events to your calendar at any time:
+
+```tsx
+calendar.addEvent({
+  id: 'new-event',
+  title: 'New Meeting',
+  start: '2024-01-16T14:00:00',
+  end: '2024-01-16T15:00:00',
+})
+```
+
+### Event Listeners
+
+Schedule-X provides various event listeners for handling user interactions:
+
+```tsx
+calendar.on('eventClick', (event) => {
+  console.log('Event clicked:', event)
+})
+
+calendar.on('dateClick', (date) => {
+  console.log('Date clicked:', date)
+})
+
+calendar.on('eventDrop', (event, newStart, newEnd) => {
+  console.log('Event dropped:', event, newStart, newEnd)
+})
+```
+
+## Customization
+
+### Themes
+
+Schedule-X comes with multiple themes out of the box:
+
+```tsx
+// Default theme (already imported)
+import '@schedule-x/theme-default/dist/index.css'
+
+// Shadcn theme
+import '@schedule-x/theme-shadcn/dist/index.css'
+```
+
+### Custom Styling
+
+You can customize the appearance using CSS variables:
+
+```css
+:root {
+  --sx-color-primary: #3b82f6;
+  --sx-color-secondary: #64748b;
+  --sx-border-radius: 8px;
+  --sx-font-family: 'Inter', sans-serif;
+}
+```
+
+## Advanced Features
+
+### Recurring Events
+
+Schedule-X supports complex recurring event patterns:
+
+```tsx
+const recurringEvent = {
+  id: 'recurring-1',
+  title: 'Weekly Standup',
+  start: '2024-01-15T09:00:00',
+  end: '2024-01-15T09:30:00',
+  rrule: 'FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR'
+}
+```
+
+### Timezone Support
+
+Handle events across different timezones:
+
+```tsx
+const calendar = createCalendar({
+  target: '#calendar',
+  timezone: 'America/New_York',
+  events: [
+    {
+      id: '1',
+      title: 'Global Meeting',
+      start: '2024-01-15T15:00:00Z', // UTC time
+      end: '2024-01-15T16:00:00Z',
+    }
+  ]
+})
+```
+
+## Best Practices
+
+1. **Always provide unique IDs**: Each event should have a unique identifier
+2. **Use ISO 8601 format**: For dates and times, use ISO 8601 format
+3. **Handle errors gracefully**: Wrap calendar operations in try-catch blocks
+4. **Optimize performance**: For large datasets, consider pagination or lazy loading
+5. **Test across browsers**: Ensure your implementation works across different browsers
+
+## Next Steps
+
+Now that you have the basics, you can explore:
+
+- [Advanced Calendar Features](/blog/advanced-calendar-features)
+- [Customizing Your Calendar](/blog/customizing-your-calendar)
+- [API Documentation](https://schedule-x.dev/docs)
+
+## Conclusion
+
+Schedule-X provides a robust foundation for building calendar applications. With its plugin architecture, extensive customization options, and comprehensive feature set, you can create powerful scheduling solutions that meet your specific needs.
+
+Start building your calendar application today with Schedule-X!
+
+---
+
+*Have questions or need help? Join our [Discord community](https://discord.gg/schedule-x) or check out our [documentation](https://schedule-x.dev/docs).*
