@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import './blog.scss'
 
 // This would typically come from a CMS or file system
 const blogPosts = [

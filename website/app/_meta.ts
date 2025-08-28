@@ -15,6 +15,11 @@ const meta: MetaRecord = {
     href: 'docs',
     title: 'Docs'
   },
+  blog: {
+    title: 'Blog',
+    type: 'page',
+    href: 'blog'
+  },
   demos: {
     display: 'hidden',
     title: 'Demos',
@@ -107,15 +112,6 @@ const meta: MetaRecord = {
     theme: {
       sidebar: false,
       toc: false
-    }
-  },
-  blog: {
-    title: 'Blog',
-    type: 'page',
-    theme: {
-      sidebar: false,
-      toc: false,
-      timestamp: false,
     }
   }
 }
