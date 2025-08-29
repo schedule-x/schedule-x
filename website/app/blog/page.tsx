@@ -6,7 +6,7 @@ const blogPosts = [
   {
     id: 'schedule-x-v3-temporal-api',
     title: 'Schedule-X v3: Embracing the Future with Temporal API',
-    excerpt: 'Discover how Schedule-X v3 leverages the Temporal API to provide better datetime handling, simplified timezone management, and support for non-Gregorian calendars.',
+    excerpt: 'Schedule-X is migrating to Temporal API, which brings with it some exciting new features and oppotunities for the library.',
     date: '2025-08-29',
     author: 'Tom Österlund',
     readTime: '5 min read'
