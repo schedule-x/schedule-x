@@ -15,6 +15,11 @@ const meta: MetaRecord = {
     href: 'docs',
     title: 'Docs'
   },
+  blog: {
+    title: 'Blog',
+    type: 'page',
+    href: 'blog'
+  },
   demos: {
     display: 'hidden',
     title: 'Demos',
