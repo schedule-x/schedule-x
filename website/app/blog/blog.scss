@@ -165,7 +165,6 @@
     
     .blog-tags {
       display: flex;
-      gap: 0.5rem;
       
       .tag {
         background-color: #e5e7eb;
@@ -174,6 +173,7 @@
         border-radius: 0.25rem;
         font-size: 0.75rem;
         font-weight: 500;
+        margin-right: 0.5rem;
       }
     }
   }

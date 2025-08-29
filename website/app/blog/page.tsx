@@ -4,22 +4,12 @@ import Link from 'next/link'
 // This would typically come from a CMS or file system
 const blogPosts = [
   {
-    id: 'getting-started-with-schedule-x',
-    title: 'Getting Started with Schedule-X: A Complete Guide',
-    excerpt: 'Learn how to integrate Schedule-X into your React application and create beautiful, interactive calendars with ease.',
-    date: '2024-01-15',
-    author: 'Schedule-X Team',
-    tags: ['tutorial', 'react', 'calendar'],
-    readTime: '8 min read'
-  },
-  {
-    id: 'advanced-calendar-features',
-    title: 'Advanced Calendar Features: Drag & Drop, Recurring Events, and More',
-    excerpt: 'Explore the powerful features of Schedule-X including drag and drop functionality, recurring events, and timezone support.',
-    date: '2024-01-10',
-    author: 'Schedule-X Team',
-    tags: ['features', 'drag-drop', 'recurring'],
-    readTime: '12 min read'
+    id: 'schedule-x-v3-temporal-api',
+    title: 'Schedule-X v3: Embracing the Future with Temporal API',
+    excerpt: 'Discover how Schedule-X v3 leverages the Temporal API to provide better datetime handling, simplified timezone management, and support for non-Gregorian calendars.',
+    date: '2025-08-29',
+    author: 'Tom Österlund',
+    readTime: '5 min read'
   }
 ]
 
@@ -58,13 +48,6 @@ export default function BlogPage() {
               <span className="blog-read-time">
                 ⏱️ {post.readTime}
               </span>
-              <div className="blog-tags">
-                {post.tags.map((tag) => (
-                  <span key={tag} className="tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </div>
           </article>
         ))}

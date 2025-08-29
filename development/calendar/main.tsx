@@ -214,8 +214,22 @@ plugins: [
   locale: 'en-US',
 
   // tz new york
-  timezone: 'Europe/Berlin',
+  timezone: 'Europe/London',
   events: [
+    {
+      id: 1,
+      title: 'Coffee with John',
+      start: Temporal.ZonedDateTime.from('2023-12-04T10:05:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-12-04T11:05:00+01:00[Europe/Berlin]'),
+    },
+
+    {
+      id: 2,
+      title: 'Meeting with Jane',
+      start: Temporal.ZonedDateTime.from('2023-12-04T18:05:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2023-12-04T19:05:00+09:00[Asia/Tokyo]'),
+    },
+
     {
       id: 'event1',
       resourceId: 'janedoe',

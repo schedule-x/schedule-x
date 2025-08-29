@@ -1,18 +1,8 @@
 import type { MetaRecord } from 'nextra'
 
 const meta: MetaRecord = {
-  'getting-started-with-schedule-x': {
-    title: 'Getting Started with Schedule-X',
-    type: 'page',
-    theme: {
-      layout: 'full',
-      sidebar: false,
-      toc: false,
-      timestamp: false,
-    }
-  },
-  'advanced-calendar-features': {
-    title: 'Advanced Calendar Features',
+  'schedule-x-v3-temporal-api': {
+    title: 'Schedule-X v3: Embracing the Future with Temporal API',
     type: 'page',
     theme: {
       layout: 'full',
