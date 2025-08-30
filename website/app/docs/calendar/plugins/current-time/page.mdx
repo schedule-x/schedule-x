@@ -40,3 +40,17 @@ createCurrentTimePlugin({
   timeZoneOffset: 120
 })
 ```
+
+## Methods
+
+### reload(): void
+
+Reloads the current time indicator. Can be useful, if you for example manually change the day boundaries of the calendar.
+
+```js
+import { createCurrentTimePlugin } from '@schedule-x/current-time'
+
+const currentTimePlugin = createCurrentTimePlugin()
+
+currentTimePlugin.reload()
+```
