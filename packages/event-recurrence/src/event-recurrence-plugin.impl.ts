@@ -138,6 +138,13 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     ]
   }
 
+  /**
+   * The "DTSTART" property value SHOULD match the pattern of the recurrence rule, if
+   * specified. The recurrence set generated with a "DTSTART" property value that
+   * doesn't match the pattern of the rule is undefined.
+   *
+   * https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.1
+   */
   private validateRrule(
     event: CalendarEventInternal | AugmentedBackgroundEvent,
     rrule: string
