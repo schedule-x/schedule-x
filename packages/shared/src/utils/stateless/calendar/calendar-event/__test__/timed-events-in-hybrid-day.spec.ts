@@ -126,6 +126,14 @@ describe('CalendarEventImpl', () => {
           '2020-01-03T01:00:00+01:00[Europe/Berlin]'
         ),
       },
+      {
+        start: Temporal.ZonedDateTime.from(
+          '2020-01-01T14:00:00+01:00[Europe/Berlin]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2020-01-02T15:00:00+01:00[Europe/Berlin]'
+        ),
+      },
     ])(
       'should not be classified as a single hybrid day event, only as multi day timed',
       (eventTime) => {
