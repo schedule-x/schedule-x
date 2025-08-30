@@ -37,6 +37,15 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
     })
   }
 
+  reload(): void {
+    if (this.currentTimeIndicator) {
+      this.currentTimeIndicator.remove()
+      this.currentTimeIndicator = null
+    }
+
+    this.setIndicator()
+  }
+
   private setIndicator(isRecursion = false) {
     const todayDateString = toDateString(
       Temporal.Now.plainDateISO(this.$app.config.timezone.value)
