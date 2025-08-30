@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useEffect, useState, useRef } from 'preact/hooks'
 import {
   IANA_TIMEZONES,
@@ -51,6 +52,9 @@ export default function TimezoneSelect({
   const [searchQuery, setSearchQuery] = useState('')
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const searchInputRef = useRef<HTMLInputElement>(null)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+  const itemsListRef = useRef<HTMLUListElement>(null)
+  const lastFocusedIndexRef = useRef(-1)
 
   const clickOutsideListener = (event: MouseEvent) => {
     const target = event.target
@@ -78,10 +82,49 @@ export default function TimezoneSelect({
     }
   }, [isOpen])
 
+  /**
+   * Auto-scroll to focused item
+   */
+  useEffect(() => {
+    if (focusedIndex >= 0 && focusedIndex !== lastFocusedIndexRef.current && itemsListRef.current) {
+      lastFocusedIndexRef.current = focusedIndex
+      
+      requestAnimationFrame(() => {
+        const focusedElement = itemsListRef.current?.querySelector(
+          `.sx__timezone-select-item:nth-child(${focusedIndex + 1})`
+        )
+        
+        if (focusedElement instanceof HTMLElement && itemsListRef.current) {
+          const container = itemsListRef.current
+          const containerRect = container.getBoundingClientRect()
+          const elementRect = focusedElement.getBoundingClientRect()
+          
+          const isFullyVisible = 
+            elementRect.top >= containerRect.top && 
+            elementRect.bottom <= containerRect.bottom
+          
+          if (!isFullyVisible) {
+            const elementTop = focusedElement.offsetTop
+            const elementHeight = focusedElement.offsetHeight
+            const containerHeight = container.clientHeight
+            
+            const scrollTop = elementTop - (containerHeight / 2) + (elementHeight / 2)
+            
+            container.scrollTo({
+              top: Math.max(0, scrollTop),
+              behavior: 'smooth'
+            })
+          }
+        }
+      })
+    }
+  }, [focusedIndex])
+
   const handleTimezoneSelect = (timezone: IANATimezone) => {
     setIsOpen(false)
     setSearchQuery('')
     setFocusedIndex(-1)
+    lastFocusedIndexRef.current = -1
     $app.config.timezone.value = timezone
     Object.values($app.config.plugins).forEach((plugin) => {
       if (typeof plugin?.onTimezoneChange === 'function') {
@@ -96,6 +139,7 @@ export default function TimezoneSelect({
       if (!isOpen) {
         setSearchQuery('')
         setFocusedIndex(-1)
+        lastFocusedIndexRef.current = -1
       }
     }
   }
@@ -127,6 +171,7 @@ export default function TimezoneSelect({
         setIsOpen(false)
         setSearchQuery('')
         setFocusedIndex(-1)
+        lastFocusedIndexRef.current = -1
         break
     }
   }
@@ -207,7 +252,7 @@ export default function TimezoneSelect({
         <img className="sx__timezone-select-chevron" src={chevronIcon} alt="" />
       </div>
       {isOpen && (
-        <div className="sx__timezone-select-dropdown">
+        <div className="sx__timezone-select-dropdown" ref={dropdownRef}>
           <div className="sx__timezone-select-search">
             <input
               ref={searchInputRef}
@@ -225,6 +270,7 @@ export default function TimezoneSelect({
           <ul
             data-testid="timezone-select-items"
             className="sx__timezone-select-items"
+            ref={itemsListRef}
           >
             {getFilteredTimezones().map((timezone, index) => (
               <li
