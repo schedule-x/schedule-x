@@ -42,10 +42,6 @@ const calendarControlsPlugin = createCalendarControlsPlugin()
 const scrollController = createScrollControllerPlugin({
   initialScroll: '01:00'
 })
-
-
-const currentTimePlugin = createCurrentTimePlugin()
-
 const calendar = createCalendar({
 plugins: [
   createEventRecurrencePlugin(),
@@ -55,7 +51,7 @@ plugins: [
   createResizePlugin(),
   calendarControlsPlugin,
   scrollController,
-  currentTimePlugin,
+  createCurrentTimePlugin(),
   createTimezoneSelectPlugin(),
 ],
 
@@ -295,8 +291,5 @@ timezoneSelect.addEventListener('change', (e) => {
 
 const doStuffButton = document.getElementById('do-stuff') as HTMLButtonElement
 doStuffButton.addEventListener('click', (e) => {
-  calendarControlsPlugin.setDayBoundaries({
-    start: '06:00',
-    end: '18:00',
-  })
+  scrollController.scrollTo('05:00')
 })
