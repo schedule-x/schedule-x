@@ -55,3 +55,24 @@ const calendar = createCalendar({
 ```
 
 Available values are `15` (default), `30` and `60`
+
+## Methods
+
+### setInterval(minutes: number)
+
+Set the interval, in minutes, for dragging events.
+
+```js
+import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+
+const dragAndDropPlugin = createDragAndDropPlugin()
+
+const calendar = createCalendar({
+  /* other configuration */
+  plugins: [
+    dragAndDropPlugin
+  ]
+})
+
+dragAndDropPlugin.setInterval(30)
+```
