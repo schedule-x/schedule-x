@@ -45,11 +45,15 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
 
   private validateInterval(minutes: number): number {
     if (minutes < 5) {
-      console.warn(`Interval must be at least 5 minutes. Setting to 5 minutes.`)
+      console.warn(
+        `[Schedule-X warning]: Drag and drop plugin Interval must be at least 5 minutes. Setting to 5 minutes.`
+      )
       return 5
     }
     if (minutes > 60) {
-      console.warn(`Interval cannot exceed 60 minutes. Setting to 60 minutes.`)
+      console.warn(
+        `[Schedule-X warning]: Drag and drop plugin Interval cannot exceed 60 minutes. Setting to 60 minutes.`
+      )
       return 60
     }
     return minutes
@@ -57,7 +61,6 @@ class DragAndDropPluginImpl implements DragAndDropPlugin {
 
   public setInterval(minutes: number) {
     this.minutesPerInterval = this.validateInterval(minutes)
-    return this
   }
 
   createDateGridDragHandler(

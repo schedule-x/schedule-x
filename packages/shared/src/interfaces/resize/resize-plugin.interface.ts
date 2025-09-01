@@ -16,4 +16,6 @@ export interface ResizePlugin extends PluginBase<string> {
     updateCopy: (newCopy: CalendarEventInternal | undefined) => void,
     uiEvent: MouseEvent | TouchEvent
   ): void
+
+  setInterval(minutes: number): void
 }
