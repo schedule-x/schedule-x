@@ -12,7 +12,9 @@ class ResizePluginImpl implements ResizePlugin {
   name = PluginName.Resize
   $app: CalendarAppSingleton | null = null
 
-  constructor(private minutesPerInterval: number) {}
+  constructor(private minutesPerInterval: number = 15) {
+    this.minutesPerInterval = this.validateInterval(minutesPerInterval)
+  }
 
   onRender($app: CalendarAppSingleton) {
     this.$app = $app
@@ -49,13 +51,31 @@ class ResizePluginImpl implements ResizePlugin {
   }
 
   private getTimePointsForIntervalConfig(): number {
-    if (this.minutesPerInterval === 60) return 100
-    if (this.minutesPerInterval === 30) return 50
-    return 25
+    return (100 * this.minutesPerInterval) / 60
   }
 
   private logError() {
     console.error('The calendar is not yet initialized. Cannot resize events.')
+  }
+
+  private validateInterval(minutes: number): number {
+    if (minutes < 5) {
+      console.warn(
+        `[Schedule-X warning]: Resize plugin Interval must be at least 5 minutes. Setting to 5 minutes.`
+      )
+      return 5
+    }
+    if (minutes > 60) {
+      console.warn(
+        `[Schedule-X warning]: Resize plugin Interval cannot exceed 60 minutes. Setting to 60 minutes.`
+      )
+      return 60
+    }
+    return minutes
+  }
+
+  public setInterval(minutes: number) {
+    this.minutesPerInterval = this.validateInterval(minutes)
   }
 }
 

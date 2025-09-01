@@ -3,29 +3,25 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { createResizePlugin } from '../resize.plugin'
-import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
+import { createDragAndDropPlugin } from '../drag-and-drop-plugin.impl'
 import { vi } from 'vitest'
 import 'temporal-polyfill/global'
 
-describe('The resize plugin', () => {
+describe('The drag and drop plugin', () => {
   describe('Constructor and minutesPerInterval validation', () => {
     it('should use default value of 15 minutes when no parameter is provided', () => {
-      const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
-      const plugin = createResizePlugin() as ResizePlugin
+      const plugin = createDragAndDropPlugin()
 
       // Test that the plugin is created without any console warnings
       expect(plugin).toBeDefined()
-      expect(consoleSpy).not.toHaveBeenCalled()
-
-      consoleSpy.mockRestore()
+      expect(plugin.name).toBe('dragAndDrop')
     })
 
     it('should accept valid minutesPerInterval values without warnings', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const plugin30 = createResizePlugin(30) as ResizePlugin
-      const plugin60 = createResizePlugin(60) as ResizePlugin
+      const plugin30 = createDragAndDropPlugin(30)
+      const plugin60 = createDragAndDropPlugin(60)
 
       expect(plugin30).toBeDefined()
       expect(plugin60).toBeDefined()
@@ -37,10 +33,10 @@ describe('The resize plugin', () => {
     it('should clamp values below 5 minutes to 5 minutes', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const plugin = createResizePlugin(3) as ResizePlugin
+      const plugin = createDragAndDropPlugin(3)
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        '[Schedule-X warning]: Resize plugin Interval must be at least 5 minutes. Setting to 5 minutes.'
+        '[Schedule-X warning]: Drag and drop plugin Interval must be at least 5 minutes. Setting to 5 minutes.'
       )
       expect(plugin).toBeDefined()
 
@@ -50,10 +46,10 @@ describe('The resize plugin', () => {
     it('should clamp values above 60 minutes to 60 minutes', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const plugin = createResizePlugin(90) as ResizePlugin
+      const plugin = createDragAndDropPlugin(90)
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        '[Schedule-X warning]: Resize plugin Interval cannot exceed 60 minutes. Setting to 60 minutes.'
+        '[Schedule-X warning]: Drag and drop plugin Interval cannot exceed 60 minutes. Setting to 60 minutes.'
       )
       expect(plugin).toBeDefined()
 
@@ -63,7 +59,7 @@ describe('The resize plugin', () => {
     it('should handle edge case of exactly 5 minutes', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const plugin = createResizePlugin(5) as ResizePlugin
+      const plugin = createDragAndDropPlugin(5)
 
       expect(plugin).toBeDefined()
       expect(consoleSpy).not.toHaveBeenCalled()
@@ -74,7 +70,7 @@ describe('The resize plugin', () => {
     it('should handle edge case of exactly 60 minutes', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const plugin = createResizePlugin(60) as ResizePlugin
+      const plugin = createDragAndDropPlugin(60)
 
       expect(plugin).toBeDefined()
       expect(consoleSpy).not.toHaveBeenCalled()
@@ -85,11 +81,11 @@ describe('The resize plugin', () => {
     it('should handle zero and negative values by clamping to 5 minutes', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
-      const pluginZero = createResizePlugin(0) as ResizePlugin
-      const pluginNegative = createResizePlugin(-10) as ResizePlugin
+      const pluginZero = createDragAndDropPlugin(0)
+      const pluginNegative = createDragAndDropPlugin(-10)
 
       expect(consoleSpy).toHaveBeenCalledWith(
-        '[Schedule-X warning]: Resize plugin Interval must be at least 5 minutes. Setting to 5 minutes.'
+        '[Schedule-X warning]: Drag and drop plugin Interval must be at least 5 minutes. Setting to 5 minutes.'
       )
       expect(pluginZero).toBeDefined()
       expect(pluginNegative).toBeDefined()
@@ -101,45 +97,28 @@ describe('The resize plugin', () => {
   describe('setInterval method', () => {
     it('should update minutesPerInterval with valid values', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
-      const plugin = createResizePlugin(15) as ResizePlugin
-
+      const plugin = createDragAndDropPlugin(15)
       plugin.setInterval(30)
+
       expect(consoleSpy).not.toHaveBeenCalled()
       consoleSpy.mockRestore()
     })
 
     it('should validate and clamp values when using setInterval', () => {
       const consoleSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
-      const plugin = createResizePlugin(15) as ResizePlugin
+      const plugin = createDragAndDropPlugin(15)
 
       plugin.setInterval(3)
       expect(consoleSpy).toHaveBeenCalledWith(
-        '[Schedule-X warning]: Resize plugin Interval must be at least 5 minutes. Setting to 5 minutes.'
+        '[Schedule-X warning]: Drag and drop plugin Interval must be at least 5 minutes. Setting to 5 minutes.'
       )
 
       plugin.setInterval(90)
       expect(consoleSpy).toHaveBeenCalledWith(
-        '[Schedule-X warning]: Resize plugin Interval cannot exceed 60 minutes. Setting to 60 minutes.'
+        '[Schedule-X warning]: Drag and drop plugin Interval cannot exceed 60 minutes. Setting to 60 minutes.'
       )
 
       consoleSpy.mockRestore()
-    })
-  })
-
-  describe('Trying to use it before being initialized', () => {
-    it('should log an error', () => {
-      const plugin = createResizePlugin() as ResizePlugin
-      const consoleSpy = vi.spyOn(console, 'error')
-
-      plugin.createDateGridEventResizer(
-        expect.any(Object),
-        expect.any(Object),
-        expect.any(Object)
-      )
-
-      expect(consoleSpy).toHaveBeenCalledWith(
-        'The calendar is not yet initialized. Cannot resize events.'
-      )
     })
   })
 })

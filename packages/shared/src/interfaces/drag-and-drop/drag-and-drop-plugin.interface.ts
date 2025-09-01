@@ -21,4 +21,6 @@ export default interface DragAndDropPlugin extends PluginBase<string> {
     calendarEvent: CalendarEventInternal,
     $app: CalendarAppSingleton
   ): MonthGridDragHandler
+
+  setInterval(minutes: number): void
 }
