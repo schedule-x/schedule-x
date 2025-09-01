@@ -110,6 +110,14 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
   }
 
   onTimezoneChange(): void {
+    this.resetIndicator()
+  }
+
+  onDayBoundariesChange(): void {
+    this.resetIndicator()
+  }
+
+  private resetIndicator(): void {
     this.currentTimeIndicator?.remove()
     this.currentTimeIndicator = null
     if (this.timeout) {
