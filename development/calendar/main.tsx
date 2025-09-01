@@ -218,11 +218,46 @@ plugins: [
   events: [
     {
       id: 1,
-      title: 'test',
-      start: Temporal.ZonedDateTime.from('2025-08-11T08:00:00.000+02:00[Europe/Berlin]'),
-      end: Temporal.ZonedDateTime.from('2025-08-12T12:00:00.000+02:00[Europe/Berlin]'),
+      title: 'Coffee with John',
+      start: Temporal.ZonedDateTime.from('2023-12-04T10:05:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2023-12-04T11:05:00+01:00[Europe/Berlin]'),
     },
 
+    {
+      id: 2,
+      title: 'Meeting with Jane',
+      start: Temporal.ZonedDateTime.from('2023-12-04T18:05:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2023-12-04T19:05:00+09:00[Asia/Tokyo]'),
+    },
+
+    {
+      id: 'event1',
+      resourceId: 'janedoe',
+      start: Temporal.ZonedDateTime.from('2025-03-07T09:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T10:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 1'
+    },
+    {
+      id: 'event2',
+      resourceId: 'johnsmith',
+      start: Temporal.ZonedDateTime.from('2025-03-07T10:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T11:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 2'
+    },
+    {
+      id: 'event3',
+      resourceId: 'tedmosby',
+      start: Temporal.ZonedDateTime.from('2025-03-07T11:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T12:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 3'
+    },
+    {
+      id: 'event4',
+      resourceId: 'janedoe',
+      start: Temporal.ZonedDateTime.from('2025-03-07T17:00:00+09:00[Asia/Tokyo]'),
+      end: Temporal.ZonedDateTime.from('2025-03-07T18:00:00+09:00[Asia/Tokyo]'),
+      title: 'Event 4'
+    }
     /* ...seededEvents.map(event => ({
       ...event,
       start: dateStringRegex.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
