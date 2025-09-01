@@ -79,8 +79,10 @@ export default class TimeGridDragHandlerImpl implements TimeGridDragHandler {
 
     const pointsToAdd =
       currentIntervalDiff > this.lastIntervalDiff
-        ? this.CHANGE_THRESHOLD_IN_TIME_POINTS
-        : -this.CHANGE_THRESHOLD_IN_TIME_POINTS
+        ? this.CHANGE_THRESHOLD_IN_TIME_POINTS *
+          (currentIntervalDiff - this.lastIntervalDiff)
+        : -this.CHANGE_THRESHOLD_IN_TIME_POINTS *
+          (this.lastIntervalDiff - currentIntervalDiff)
     this.setTimeForEventCopy(pointsToAdd)
     this.lastIntervalDiff = currentIntervalDiff
   }
