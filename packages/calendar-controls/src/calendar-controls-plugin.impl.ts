@@ -67,10 +67,22 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   }
 
   setDayBoundaries(dayBoundaries: DayBoundariesExternal) {
+    const newStart = timePointsFromString(dayBoundaries.start)
+    const newEnd = timePointsFromString(dayBoundaries.end)
+
     this.$app.config.dayBoundaries.value = {
-      start: timePointsFromString(dayBoundaries.start),
-      end: timePointsFromString(dayBoundaries.end),
+      start: newStart,
+      end: newEnd,
     }
+
+    Object.values(this.$app.config.plugins).forEach((plugin) => {
+      if (plugin?.onDayBoundariesChange) {
+        plugin.onDayBoundariesChange({
+          start: newStart,
+          end: newEnd,
+        })
+      }
+    })
   }
 
   setWeekOptions(weekOptions: Partial<WeekOptions>) {

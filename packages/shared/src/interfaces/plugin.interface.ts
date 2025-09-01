@@ -1,6 +1,7 @@
 import CalendarAppSingleton from './calendar/calendar-app-singleton'
 import { DateRange } from '../types/date-range'
 import { IANATimezone } from '../utils/stateless/time/tzdb'
+import { DayBoundariesInternal } from '../types/calendar/day-boundaries'
 
 export default interface PluginBase<Name extends string> {
   name: Name
@@ -30,6 +31,8 @@ export default interface PluginBase<Name extends string> {
   onRangeUpdate?: (range: DateRange) => void
 
   onTimezoneChange?: (timezone: IANATimezone) => void
+
+  onDayBoundariesChange?: (dayBoundaries: DayBoundariesInternal) => void
 
   destroy?(): void
 }
