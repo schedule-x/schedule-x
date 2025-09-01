@@ -143,10 +143,13 @@ export default class CalendarEventImpl implements CalendarEventInternal {
       timeFromDateTime(this.end.toString())
     )
 
+    const eventIsFullyInFirstDayOfBoundary =
+      eventEndTimePoints > eventStartTimePoints && startDate === endDate
+
     return (
       (eventStartTimePoints >= dayBoundaries.start &&
         (eventEndTimePoints <= dayBoundaries.end ||
-          eventEndTimePoints > eventStartTimePoints)) ||
+          eventIsFullyInFirstDayOfBoundary)) ||
       (eventStartTimePoints < dayBoundaries.end &&
         eventEndTimePoints <= dayBoundaries.end)
     )
