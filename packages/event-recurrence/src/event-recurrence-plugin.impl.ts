@@ -15,6 +15,7 @@ import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/de
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
+import { rruleStringToJS } from '@schedule-x/recurrence/src/parsers/rrule/parse-rrule'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -97,7 +98,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
         | string[]
         | undefined
 
-      if (rrule) {
+      if (rrule && this.validateRrule(event, rrule)) {
         recurrencesToCreate.push(
           ...this.createRecurrencesForEvent(event, rrule, exdate)
         )
@@ -118,7 +119,7 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       const rrule = event.rrule
       const exdate = event.exdate
 
-      if (rrule && this.range) {
+      if (rrule && this.range && this.validateRrule(event, rrule)) {
         recurrencesToCreate.push(
           ...createRecurrencesForBackgroundEvent(
             $app,
@@ -135,6 +136,37 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       ...$app.calendarEvents.backgroundEvents.value,
       ...recurrencesToCreate,
     ]
+  }
+
+  /**
+   * The "DTSTART" property value SHOULD match the pattern of the recurrence rule, if
+   * specified. The recurrence set generated with a "DTSTART" property value that
+   * doesn't match the pattern of the rule is undefined.
+   *
+   * https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.1
+   */
+  private validateRrule(
+    event: CalendarEventInternal | AugmentedBackgroundEvent,
+    rrule: string
+  ): boolean {
+    const rruleOptions = rruleStringToJS(rrule)
+
+    if (rruleOptions.bymonthday) {
+      if (event.start.day !== rruleOptions.bymonthday) {
+        if ('id' in event) {
+          console.warn(
+            `[Schedule-X warning]: Recurrence set could not be created for event with id ${event.id}, because rrule pattern doesn't match event.start`
+          )
+        } else {
+          console.warn(
+            `[Schedule-X warning]: Recurrence set could not be created for background event with start ${event.start.toString()}, because rrule pattern doesn't match event.start`
+          )
+        }
+        return false
+      }
+    }
+
+    return true
   }
 
   private createRecurrencesForEvent(
