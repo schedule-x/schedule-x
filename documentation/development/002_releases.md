@@ -18,3 +18,9 @@ When wanting to release a public beta (please only do so if you're trying to gat
 1) `nvm use`
 2) `npm run build`
 3) `node scripts/publish-beta.mjs`
+
+## Framework adapters
+
+The framework adapters, such as https://github.com/schedule-x/vue, get PRs opened automatically when new versions are released for the core repo. Typically this happens within the first few hours of a release.
+
+Our jobs as devs is merely to merge these PRs, and make sure the commit "type" is always "feat". The full commit message should then look something like this: `feat(deps): update schedule-x monorepo packages to v2.35.0`. This will ensure that semantic-release will automatically publish to npm once we merge.
