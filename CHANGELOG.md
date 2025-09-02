@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/schedule-x/schedule-x/compare/v3.0.0...v3.1.0) (2025-09-01)
+
+### Features
+
+- implement flexible time intervals for event resizing and drag-and-drop ([#1081](https://github.com/schedule-x/schedule-x/pull/1081))
+
+### Bug Fixes
+
+- calendar hangs rrule ([#1143](https://github.com/schedule-x/schedule-x/issues/1143))
+- hybrid day 2-day-event ([#1145](https://github.com/schedule-x/schedule-x/issues/1145))
+- auto-scrolling in tz select ([#1169](https://github.com/schedule-x/schedule-x/pull/1169))
+- sync current time when day boundaries change ([#1002](https://github.com/schedule-x/schedule-x/issues/1002))
+- reset monthly events pointer-events on mouseup ([#1125](https://github.com/schedule-x/schedule-x/issues/1125))
+
+# [3.0.0](https://github.com/schedule-x/schedule-x/compare/v2.36.0...v3.0.0) (2025-08-26)
+
+### Features
+
+- Temporal API ([#1133])(https://github.com/schedule-x/schedule-x/issues/1133))
+- Timezone select ([#1146](https://github.com/schedule-x/schedule-x/pull/1146))
+- consider tz for todays date ([#1132](https://github.com/schedule-x/schedule-x/issues/1132))
+- compact time grid events ([#1129](https://github.com/schedule-x/schedule-x/issues/1129))
+- dropdown arrows ([#577](https://github.com/schedule-x/schedule-x/issues/577))
+
 # [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
 
 ### Bug Fixes
