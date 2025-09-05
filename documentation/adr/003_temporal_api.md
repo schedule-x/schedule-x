@@ -12,7 +12,7 @@ More on the background for the migration: https://github.com/schedule-x/schedule
 
 Schedule-X compares times of events by first aligning the timezone of all timestamps to be compared, and then doing string comparisons like `event1.start.toString() < event2.start.toString()`. As long as all timestamps are in the same timezone, this will work just fine. However, it could be highly error prone, as soon as someone comes along who doesn't understand how `Temporal.ZonedDateTime` works, and hasn't yet seen how the `calendar-event.impl` class works internally to align all event timestamps to the currently used timezone.
 
-For this reason, the project should try to move in the direction of comparing timestamps like so: `event1.start.epochNanoseconds < event2.start.epochNanoseconds`.
+For this reason, the project should try to move in the direction of comparing timestamps like so: `event1.start.epochNanoseconds < event2.start.epochNanoseconds`, as long as we know we're only dealing with Temporal.ZonedDateTime (in week- and day views for example). For other views, string comparisons can still make sense, depending on the context.
 
 ### Verbose use of `temporal-polyfill/global` in tests
 

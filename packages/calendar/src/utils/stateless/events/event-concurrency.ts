@@ -18,7 +18,9 @@ export const handleEventConcurrency = (
       concurrentEventsCache.length &&
       (!nextEvent ||
         (concurrentEventsCache.every(
-          (e) => e.end.toString() <= nextEvent.start.toString()
+          (e) =>
+            (e.end as Temporal.ZonedDateTime).epochNanoseconds <=
+            (nextEvent.start as Temporal.ZonedDateTime).epochNanoseconds
         ) &&
           !areBothEventsZeroMinutes))
     ) {
@@ -33,8 +35,11 @@ export const handleEventConcurrency = (
               return true
 
             return (
-              cachedEvent.start.toString() <= currentEvent.start.toString() &&
-              cachedEvent.end.toString() > currentEvent.start.toString()
+              (cachedEvent.start as Temporal.ZonedDateTime).epochNanoseconds <=
+                (currentEvent.start as Temporal.ZonedDateTime)
+                  .epochNanoseconds &&
+              (cachedEvent.end as Temporal.ZonedDateTime).epochNanoseconds >
+                (currentEvent.start as Temporal.ZonedDateTime).epochNanoseconds
             )
           }
         ).length
@@ -45,8 +50,10 @@ export const handleEventConcurrency = (
               return true
 
             return (
-              cachedEvent.start.toString() < currentEvent.end.toString() &&
-              cachedEvent.end.toString() >= currentEvent.start.toString()
+              (cachedEvent.start as Temporal.ZonedDateTime).epochNanoseconds <
+                (currentEvent.end as Temporal.ZonedDateTime).epochNanoseconds &&
+              (cachedEvent.end as Temporal.ZonedDateTime).epochNanoseconds >=
+                (currentEvent.start as Temporal.ZonedDateTime).epochNanoseconds
             )
           }
         ).length
@@ -61,8 +68,11 @@ export const handleEventConcurrency = (
 
         concurrentEventsCache.forEach((cachedEvent) => {
           if (
-            (cachedEvent.end.toString() > currentEvent.start.toString() &&
-              cachedEvent.start.toString() < currentEvent.end.toString()) ||
+            ((cachedEvent.end as Temporal.ZonedDateTime).epochNanoseconds >
+              (currentEvent.start as Temporal.ZonedDateTime).epochNanoseconds &&
+              (cachedEvent.start as Temporal.ZonedDateTime).epochNanoseconds <
+                (currentEvent.end as Temporal.ZonedDateTime)
+                  .epochNanoseconds) ||
             areEvents0MinutesAndConcurrent(cachedEvent, currentEvent)
           ) {
             timePoints.push({
@@ -97,9 +107,13 @@ export const handleEventConcurrency = (
     }
 
     if (
-      (nextEvent && event.end.toString() > nextEvent.start.toString()) ||
+      (nextEvent &&
+        (event.end as Temporal.ZonedDateTime).epochNanoseconds >
+          (nextEvent.start as Temporal.ZonedDateTime).epochNanoseconds) ||
       concurrentEventsCache.some(
-        (e) => e.end.toString() > event.start.toString()
+        (e) =>
+          (e.end as Temporal.ZonedDateTime).epochNanoseconds >
+          (event.start as Temporal.ZonedDateTime).epochNanoseconds
       ) ||
       areBothEventsZeroMinutes
     ) {

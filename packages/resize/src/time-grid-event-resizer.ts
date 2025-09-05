@@ -63,11 +63,16 @@ export class TimeGridEventResizer {
   }
 
   private setNewTimeForEventEnd(pointsToAdd: number) {
-    const newEnd = addTimePointsToDateTime(this.originalEventEnd, pointsToAdd)
+    const newEnd = addTimePointsToDateTime(
+      this.originalEventEnd,
+      pointsToAdd
+    ) as Temporal.ZonedDateTime
 
     if (
-      newEnd.toString() > this.dayBoundariesDateTime.end.toString() ||
-      newEnd.toString() <= this.eventCopy.start.toString()
+      newEnd.epochNanoseconds >
+        this.dayBoundariesDateTime.end.epochNanoseconds ||
+      newEnd.epochNanoseconds <=
+        (this.eventCopy.start as Temporal.ZonedDateTime).epochNanoseconds
     )
       return
 

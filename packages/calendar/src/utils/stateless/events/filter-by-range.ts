@@ -33,14 +33,14 @@ export const filterByRange = (
     }
 
     const eventStartsInRange =
-      eventStart.toString() >= rangeStart.toString() &&
-      eventStart.toString() <= rangeEnd.toString()
+      eventStart.epochNanoseconds >= rangeStart.epochNanoseconds &&
+      eventStart.epochNanoseconds <= rangeEnd.epochNanoseconds
     const eventEndInRange =
-      eventEnd.toString() >= rangeStart.toString() &&
-      eventEnd.toString() <= rangeEnd.toString()
+      eventEnd.epochNanoseconds >= rangeStart.epochNanoseconds &&
+      eventEnd.epochNanoseconds <= rangeEnd.epochNanoseconds
     const eventStartBeforeAndEventEndAfterRange =
-      eventStart.toString() < rangeStart.toString() &&
-      eventEnd.toString() > rangeEnd.toString()
+      eventStart.epochNanoseconds < rangeStart.epochNanoseconds &&
+      eventEnd.epochNanoseconds > rangeEnd.epochNanoseconds
 
     return (
       eventStartsInRange ||
