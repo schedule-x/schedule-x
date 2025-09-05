@@ -17,8 +17,10 @@ export const positionInTimeGrid = (
     const range = $app.calendarState.range.value as DateRange
 
     if (
-      event.start.toString() >= range.start.toString() &&
-      event.end.toString() <= range.end.toString()
+      (event.start as Temporal.ZonedDateTime).epochNanoseconds >=
+        range.start.epochNanoseconds &&
+      (event.end as Temporal.ZonedDateTime).epochNanoseconds <=
+        range.end.epochNanoseconds
     ) {
       let date = dateFromDateTime(event.start.toString())
 
