@@ -22,6 +22,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   name?: string
   disabled?: boolean
   hasPlaceholder?: boolean
+  calendarSystem?: 'gregorian' | 'hebrew'
 
   build(): DatePickerConfigInternal {
     return new ConfigImpl(
@@ -37,7 +38,8 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
       this.label,
       this.name,
       this.disabled,
-      this.hasPlaceholder
+      this.hasPlaceholder,
+      this.calendarSystem
     )
   }
 
@@ -115,6 +117,12 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
 
   withHasPlaceholder(hasPlaceholder: boolean | undefined): ConfigBuilder {
     this.hasPlaceholder = hasPlaceholder
+
+    return this
+  }
+
+  withCalendarSystem(calendarSystem: 'gregorian' | 'hebrew' | undefined): ConfigBuilder {
+    this.calendarSystem = calendarSystem
 
     return this
   }

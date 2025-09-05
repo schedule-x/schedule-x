@@ -42,7 +42,7 @@ export default function YearsViewAccordion({
                 className="sx__date-picker__years-view-accordion__month"
                 onClick={(event) => handleClickOnMonth(event, month)}
               >
-                {toLocalizedMonth(month, $app.config.locale.value)}
+                {toLocalizedMonth(month, $app.config.locale.value, $app.config.calendarSystem.value)}
               </button>
             ))}
           </div>

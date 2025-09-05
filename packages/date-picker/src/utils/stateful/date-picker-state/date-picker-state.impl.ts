@@ -9,9 +9,10 @@ import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-c
 
 const getLocalizedDate = (
   date: Temporal.ZonedDateTime | Temporal.PlainDate,
-  locale: string
+  locale: string,
+  calendarSystem: 'gregorian' | 'hebrew'
 ) => {
-  return toLocalizedDateString(date, locale)
+  return toLocalizedDateString(date, locale, calendarSystem)
 }
 
 export const createDatePickerState = (
@@ -21,7 +22,7 @@ export const createDatePickerState = (
   const initialSelectedDate =
     selectedDateParam instanceof Temporal.PlainDate
       ? selectedDateParam
-      : Temporal.Now.plainDateISO()
+      : Temporal.Now.plainDateISO().withCalendar(config.calendarSystem.value || 'gregorian')
 
   const isOpen = signal(false)
   const isDisabled = signal(config.disabled || false)
@@ -30,7 +31,7 @@ export const createDatePickerState = (
   const datePickerDate = signal<Temporal.PlainDate>(initialSelectedDate)
   const isDark = signal(config.style?.dark || false)
   const inputDisplayedValue = signal(
-    toLocalizedDateString(initialSelectedDate, config.locale.value)
+    toLocalizedDateString(initialSelectedDate, config.locale.value, config.calendarSystem.value || 'gregorian')
   )
   const lastValidDisplayedValue = signal(inputDisplayedValue.value)
 
@@ -62,7 +63,8 @@ export const createDatePickerState = (
   effect(() => {
     inputDisplayedValue.value = getLocalizedDate(
       selectedDate.value,
-      config.locale.value
+      config.locale.value,
+      config.calendarSystem.value || 'gregorian'
     )
   })
 

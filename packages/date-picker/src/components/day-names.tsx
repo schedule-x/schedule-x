@@ -8,7 +8,7 @@ export default function DayNames() {
     $app.datePickerState.datePickerDate.value
   )
 
-  const dayNames = getOneLetterOrShortDayNames(aWeek, $app.config.locale.value)
+  const dayNames = getOneLetterOrShortDayNames(aWeek, $app.config.locale.value, $app.config.calendarSystem.value || 'gregorian')
 
   return (
     <div className="sx__date-picker__day-names">

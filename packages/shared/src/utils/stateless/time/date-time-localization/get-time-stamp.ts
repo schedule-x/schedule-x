@@ -4,12 +4,14 @@ import { toIntegers } from '../format-conversion/format-conversion'
 
 const dateFn = (
   dateTime: Temporal.ZonedDateTime | Temporal.PlainDate,
-  locale: string
+  locale: string,
+  calendarSystem: 'gregorian' | 'hebrew'
 ) => {
   return dateTime.toLocaleString(locale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+    calendar: calendarSystem
   })
 }
 

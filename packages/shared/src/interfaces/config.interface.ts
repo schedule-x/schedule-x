@@ -9,4 +9,5 @@ export default interface Config {
   locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
   timezone: Signal<IANATimezone>
+  calendarSystem: Signal<'gregorian' | 'hebrew'>
 }

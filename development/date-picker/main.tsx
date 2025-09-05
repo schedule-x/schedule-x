@@ -12,7 +12,8 @@ import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 
 const datePicker = createDatePicker({
   teleportTo: document.body,
-  locale: 'de-DE',
+  // locale: 'de-DE',
+  calendarSystem: 'hebrew',
   // disabled: true,
   // locale: 'fr-FR',
   hasPlaceholder: true,
@@ -20,6 +21,7 @@ const datePicker = createDatePicker({
     fullWidth: true,
     // dark: true,
   },
+  locale: 'he-IL',
   // locale: 'sv-SE',
   firstDayOfWeek: WeekDay.MONDAY,
   // selectedDate: Temporal.PlainDate.from('1991-07-13'),

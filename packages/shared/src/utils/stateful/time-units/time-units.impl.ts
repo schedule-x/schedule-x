@@ -45,6 +45,7 @@ export default class TimeUnitsImpl implements TimeUnits {
       year,
       month: month,
       day: 1,
+      calendar: this.config.calendarSystem.value || 'gregorian'
     })
     const monthWithDates = [this.getWeekForTemporal(firstDateOfMonth)]
 
@@ -97,11 +98,21 @@ export default class TimeUnitsImpl implements TimeUnits {
   getMonthsFor(year: number): Temporal.PlainDate[] {
     if (year === 0) throw new NoYearZeroError()
 
-    return Object.values(Month)
-      .filter((month) => !isNaN(Number(month)))
-      .map((month) =>
-        Temporal.PlainDate.from({ year, month: Number(month), day: 1 })
-      )
+    const firstOfYear = Temporal.PlainDate.from({
+      year,
+      month: 1,
+      day: 1,
+      calendar: this.config.calendarSystem.value || 'gregorian'
+    })
+
+    const months: Temporal.PlainDate[] = []
+    let currentDate = firstOfYear
+    while (currentDate.year === year) {
+      months.push(currentDate)
+      currentDate = currentDate.add({ months: 1 })
+    }
+
+    return months
   }
 
   private getWeekForTemporal(date: Temporal.PlainDate): Temporal.PlainDate[] {

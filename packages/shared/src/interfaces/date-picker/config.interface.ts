@@ -22,7 +22,7 @@ export interface DatePickerConfigExternal
   extends Partial<
     Omit<
       DatePickerConfigInternal,
-      'placement' | 'firstDayOfWeek' | 'locale' | 'timezone'
+      'placement' | 'firstDayOfWeek' | 'locale' | 'timezone' | 'calendarSystem'
     >
   > {
   selectedDate?: Temporal.PlainDate
@@ -30,4 +30,5 @@ export interface DatePickerConfigExternal
   firstDayOfWeek?: WeekDay
   locale?: string
   timezone?: IANATimezone
+  calendarSystem?: 'gregorian' | 'hebrew'
 }

@@ -38,6 +38,7 @@ export default function MonthViewWeek({ week }: props) {
   })
 
   const isDateSelectable = (date: Temporal.PlainDate) => {
+    console.log(date.withCalendar($app.config.calendarSystem.value).toString(), $app.config.min.toString(), $app.config.max.toString())
     return (
       date.toString() >= $app.config.min.toString() &&
       date.toString() <= $app.config.max.toString()
@@ -82,7 +83,8 @@ export default function MonthViewWeek({ week }: props) {
             disabled={!isDateSelectable(weekDay.day)}
             aria-label={getLocalizedDate(
               $app.datePickerState.datePickerDate.value,
-              $app.config.locale.value
+              $app.config.locale.value,
+              $app.config.calendarSystem.value || 'gregorian'
             )}
             className={weekDay.classes.join(' ')}
             data-focus={hasFocus(weekDay) ? 'true' : undefined}

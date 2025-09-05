@@ -14,7 +14,7 @@ type props = {
 export default function MonthViewHeader({ setYearsView }: props) {
   const $app = useContext(AppContext)
   const dateStringToLocalizedMonthName = (selectedDate: Temporal.PlainDate) => {
-    return toLocalizedMonth(selectedDate, $app.config.locale.value)
+    return toLocalizedMonth(selectedDate, $app.config.locale.value, $app.config.calendarSystem.value)
   }
 
   const getYearFrom = (datePickerDate: Temporal.PlainDate) => {
