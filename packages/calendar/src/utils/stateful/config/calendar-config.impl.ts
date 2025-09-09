@@ -35,6 +35,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   showWeekNumbers: Signal<boolean> = signal(false)
   direction: 'ltr' | 'rtl' = 'ltr'
   timezone: Signal<IANATimezone>
+  calendarSystem: Signal<'gregory' | 'hebrew'>
 
   constructor(
     locale: string = DEFAULT_LOCALE,
@@ -57,7 +58,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     theme: string | undefined = undefined,
     translations: Record<string, Language> = {},
     showWeekNumbers: boolean = false,
-    timezone: IANATimezone = 'UTC'
+    timezone: IANATimezone = 'UTC',
+    calendarSystem: 'gregory' | 'hebrew' = 'gregory'
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
@@ -74,6 +76,9 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.showWeekNumbers = signal(showWeekNumbers)
     this.direction = getDirection()
     this.timezone = signal(timezone)
+    this.calendarSystem = signal(calendarSystem)
+
+    console.log('calendarSystem', calendarSystem)
   }
 
   get isHybridDay(): boolean {

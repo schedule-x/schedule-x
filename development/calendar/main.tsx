@@ -213,15 +213,32 @@ plugins: [
   ],
   locale: 'en-US',
 
+  selectedDate: Temporal.PlainDate.from({
+    year: 5785,
+    month: 1,
+    day: 1,
+    calendar: 'hebrew',
+  }),
+
   // tz new york
   timezone: 'Europe/London',
+  calendarSystem: 'hebrew',
   events: [
     {
       id: 1,
       title: 'test',
-      start: Temporal.PlainDate.from('2025-08-08'),
-      end: Temporal.PlainDate.from('2025-08-08'),
-      rrule: 'FREQ=MONTHLY;COUNT=12;BYMONTHDAY=1',
+      start: Temporal.PlainDate.from({
+        year: 5785,
+        month: 1,
+        day: 1,
+        calendar: 'hebrew',
+      }),
+      end: Temporal.PlainDate.from({
+        year: 5785,
+        month: 1,
+        day: 1,
+        calendar: 'hebrew',
+      }),
     }
     /* ...seededEvents.map(event => ({
       ...event,

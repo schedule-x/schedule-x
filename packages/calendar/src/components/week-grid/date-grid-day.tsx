@@ -4,6 +4,7 @@ import { DATE_GRID_BLOCKER } from '../../constants'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import { useContext } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
+import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 type props = {
   calendarEvents: {
@@ -19,10 +20,18 @@ export default function DateGridDay({
   backgroundEvents,
 }: props) {
   const $app = useContext(AppContext)
+  const { year, month, date: day } = toIntegers(date)
+  const dateTemporal = Temporal.PlainDate.from({
+    year,
+    month: month + 1,
+    day,
+    calendar: $app.config.calendarSystem.value,
+  })
+  
   const dateStart = Temporal.ZonedDateTime.from({
-    year: Temporal.PlainDate.from(date).year,
-    month: Temporal.PlainDate.from(date).month,
-    day: Temporal.PlainDate.from(date).day,
+    year: dateTemporal.year,
+    month: dateTemporal.month,
+    day: dateTemporal.day,
     hour:
       $app.config.dayBoundaries.value.start === 0
         ? 0
@@ -30,11 +39,12 @@ export default function DateGridDay({
     minute: 0,
     second: 0,
     timeZone: $app.config.timezone.value,
+    calendar: $app.config.calendarSystem.value,
   })
   let dateEnd = Temporal.ZonedDateTime.from({
-    year: Temporal.PlainDate.from(date).year,
-    month: Temporal.PlainDate.from(date).month,
-    day: Temporal.PlainDate.from(date).day,
+    year: dateTemporal.year,
+    month: dateTemporal.month,
+    day: dateTemporal.day,
     hour:
       $app.config.dayBoundaries.value.end === 2400
         ? 23
@@ -42,6 +52,7 @@ export default function DateGridDay({
     minute: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
     second: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
     timeZone: $app.config.timezone.value,
+    calendar: $app.config.calendarSystem.value,
   })
   if ($app.config.isHybridDay) {
     dateEnd = dateEnd.add({ days: 1 })

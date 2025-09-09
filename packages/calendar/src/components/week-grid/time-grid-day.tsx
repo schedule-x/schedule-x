@@ -116,7 +116,7 @@ export default function TimeGridDay({
       onDblClick={(e) =>
         handleOnClick(e, $app.config.callbacks.onDoubleClickDateTime)
       }
-      aria-label={getLocalizedDate(date, $app.config.locale.value)}
+      aria-label={getLocalizedDate(date, $app.config.locale.value, $app.config.calendarSystem.value)}
       onMouseLeave={() => setMouseDownOnChild(false)}
       onMouseUp={handlePointerUp}
       onTouchEnd={handlePointerUp}

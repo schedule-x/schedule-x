@@ -3,7 +3,6 @@ import TimeGridDay from '../../../components/week-grid/time-grid-day'
 import TimeAxis from '../../../components/week-grid/time-axis'
 import { AppContext } from '../../../utils/stateful/app-context'
 import DateAxis from '../../../components/week-grid/date-axis'
-import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { sortEventsForWeekView } from '../../../utils/stateless/events/sort-events-for-week'
 import { createWeek } from '../../../utils/stateless/views/week/create-week'
 import { positionInTimeGrid } from '../../../utils/stateless/events/position-in-time-grid'
@@ -37,11 +36,10 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
       newWeek
     )
     Object.entries(newWeek).forEach(([date, day]) => {
-      const plainDate = Temporal.PlainDate.from(date)
       const rangeStartDateTime = Temporal.ZonedDateTime.from({
-        year: plainDate.year,
-        month: plainDate.month,
-        day: plainDate.day,
+        year: day.dateTemporal.year,
+        month: day.dateTemporal.month,
+        day: day.dateTemporal.day,
         hour:
           $app.config.dayBoundaries.value.start === 0
             ? 0
@@ -49,11 +47,12 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
         minute: 0,
         second: 0,
         timeZone: $app.config.timezone.value,
+        calendar: $app.config.calendarSystem.value,
       })
       let rangeEndDateTime = Temporal.ZonedDateTime.from({
-        year: plainDate.year,
-        month: plainDate.month,
-        day: plainDate.day,
+        year: day.dateTemporal.year,
+        month: day.dateTemporal.month,
+        day: day.dateTemporal.day,
         hour:
           $app.config.dayBoundaries.value.end === 2400
             ? 23
@@ -61,6 +60,7 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
         minute: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
         second: $app.config.dayBoundaries.value.end === 2400 ? 59 : 0,
         timeZone: $app.config.timezone.value,
+        calendar: $app.config.calendarSystem.value,
       })
       if ($app.config.isHybridDay) {
         rangeEndDateTime = rangeEndDateTime.add({ days: 1 })
@@ -88,11 +88,10 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
             <div className="sx__week-header-content">
               <DateAxis
                 week={Object.values(week.value).map((day) => {
-                  const plainDate = Temporal.PlainDate.from(day.date)
                   return Temporal.ZonedDateTime.from({
-                    year: plainDate.year,
-                    month: plainDate.month,
-                    day: plainDate.day,
+                    year: day.dateTemporal.year,
+                    month: day.dateTemporal.month,
+                    day: day.dateTemporal.day,
                     timeZone: $app.config.timezone.value,
                   })
                 })}
@@ -120,13 +119,12 @@ export const WeekWrapper: PreactViewComponent = ({ $app, id }) => {
             <TimeAxis />
 
             {Object.values(week.value).map((day) => {
-              const { year, month, date } = toIntegers(day.date)
-
               const zonedDateTime = Temporal.ZonedDateTime.from({
-                year,
-                month: month + 1,
-                day: date,
+                year: day.dateTemporal.year,
+                month: day.dateTemporal.month,
+                day: day.dateTemporal.day,
                 timeZone: $app.config.timezone.value,
+                calendar: $app.config.calendarSystem.value,
               })
 
               return (

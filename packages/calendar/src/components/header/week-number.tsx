@@ -8,10 +8,7 @@ export default function WeekNumber() {
   return (
     <div className="sx__calendar-header__week-number">
       {$app.translate('CW', {
-        week: getWeekNumber(
-          $app.datePickerState.selectedDate.value,
-          $app.config.firstDayOfWeek.value
-        ),
+        week: $app.datePickerState.selectedDate.value.weekOfYear || 0,
       })}
     </div>
   )

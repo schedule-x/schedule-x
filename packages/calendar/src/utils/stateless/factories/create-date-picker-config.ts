@@ -30,5 +30,6 @@ export const createDatePickerConfig = (
     .withStyle(config.datePicker?.style)
     .withPlacement(placement)
     .withListeners({ onChange: dateSelectionCallback })
+    .withCalendarSystem(config.calendarSystem)
     .build()
 }

@@ -15,7 +15,7 @@ export class ConfigImpl implements DatePickerConfigInternal {
   locale: Signal<string>
   firstDayOfWeek: Signal<WeekDay>
   timezone: Signal<IANATimezone>
-  calendarSystem: Signal<'gregorian' | 'hebrew'>
+  calendarSystem: Signal<'gregory' | 'hebrew'>
 
   constructor(
     locale: string = DEFAULT_LOCALE,
@@ -31,7 +31,7 @@ export class ConfigImpl implements DatePickerConfigInternal {
     public name?: string,
     public disabled?: boolean,
     public hasPlaceholder?: boolean,
-    calendarSystem?: 'gregorian' | 'hebrew'
+    calendarSystem?: 'gregory' | 'hebrew'
   ) {
     this.min = this.min || Temporal.PlainDate.from({
       year: 1970,
@@ -46,6 +46,6 @@ export class ConfigImpl implements DatePickerConfigInternal {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
     this.timezone = signal(timezone)
-    this.calendarSystem = signal(calendarSystem || 'gregorian')
+    this.calendarSystem = signal(calendarSystem || 'gregory')
   }
 }

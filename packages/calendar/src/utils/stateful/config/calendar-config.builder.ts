@@ -55,7 +55,7 @@ export default class CalendarConfigBuilder
   maxDate: string | undefined
   backgroundEvents: BackgroundEvent[] | undefined
   timezone: string | undefined
-
+  calendarSystem: 'gregory' | 'hebrew' | undefined
   theme: string | undefined
   // TODO: Change for V3. Should only be configured from outside
   translations: Record<string, Language> | undefined
@@ -90,7 +90,8 @@ export default class CalendarConfigBuilder
       this.theme,
       this.translations,
       this.showWeekNumbers,
-      this.timezone as IANATimezone
+      this.timezone as IANATimezone,
+      this.calendarSystem
     )
   }
 
@@ -215,6 +216,11 @@ export default class CalendarConfigBuilder
 
   withTimezone(timezone: string | undefined) {
     this.timezone = timezone
+    return this
+  }
+
+  withCalendarSystem(calendarSystem: 'gregory' | 'hebrew' | undefined) {
+    this.calendarSystem = calendarSystem
     return this
   }
 }

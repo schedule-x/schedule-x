@@ -10,7 +10,7 @@ import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-c
 const getLocalizedDate = (
   date: Temporal.ZonedDateTime | Temporal.PlainDate,
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ) => {
   return toLocalizedDateString(date, locale, calendarSystem)
 }

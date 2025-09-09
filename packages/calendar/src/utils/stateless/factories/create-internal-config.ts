@@ -27,5 +27,6 @@ export const createInternalConfig = (
     .withTranslations(config.translations || translations)
     .withWeekNumbers(config.showWeekNumbers)
     .withTimezone(config.timezone)
+    .withCalendarSystem(config.calendarSystem)
     .build()
 }

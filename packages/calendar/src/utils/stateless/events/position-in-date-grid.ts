@@ -18,11 +18,13 @@ export const positionInDateGrid = (
   week: Week
 ) => {
   const weekDates = Object.keys(week).sort()
+  console.log(weekDates.map((date) => week[date].date))
   const firstDateOfWeek = weekDates[0]
   const lastDateOfWeek = weekDates[weekDates.length - 1]
   const occupiedLevels = new Set<number>()
 
   for (const event of sortedDateGridEvents) {
+    console.log(event.start.toString())
     const eventOriginalStartDate = dateFromDateTime(event.start.toString())
     const eventOriginalEndDate = dateFromDateTime(event.end.toString())
 

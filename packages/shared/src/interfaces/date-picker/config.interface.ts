@@ -30,5 +30,5 @@ export interface DatePickerConfigExternal
   firstDayOfWeek?: WeekDay
   locale?: string
   timezone?: IANATimezone
-  calendarSystem?: 'gregorian' | 'hebrew'
+  calendarSystem?: 'gregory' | 'hebrew'
 }

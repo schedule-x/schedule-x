@@ -1,7 +1,7 @@
 export const toLocalizedMonth = (
   date: Temporal.ZonedDateTime | Temporal.PlainDate,
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ): string => {
   return date.toLocaleString(locale, { month: 'long', calendar: calendarSystem })
 }
@@ -17,7 +17,7 @@ export const toLocalizedDate = (date: Date, locale: string): string => {
 export const toLocalizedDateString = (
   date: Temporal.ZonedDateTime | Temporal.PlainDate,
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ): string => {
   return date.toLocaleString(locale, {
     month: 'numeric',
@@ -30,7 +30,7 @@ export const toLocalizedDateString = (
 export const getOneLetterDayNames = (
   week: Temporal.ZonedDateTime[] | Temporal.PlainDate[],
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ): string[] => {
   return week.map((date) => {
     return date.toLocaleString(locale, { weekday: 'short', calendar: calendarSystem }).charAt(0)
@@ -40,7 +40,7 @@ export const getOneLetterDayNames = (
 export const getDayNameShort = (
   date: Temporal.ZonedDateTime | Temporal.PlainDate,
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ) => {
   if (locale === 'he-IL') {
     return date.toLocaleString(locale, { weekday: 'narrow', calendar: calendarSystem })
@@ -52,7 +52,7 @@ export const getDayNameShort = (
 export const getDayNamesShort = (
   week: Temporal.ZonedDateTime[] | Temporal.PlainDate[],
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ): string[] => {
   return week.map((date) => getDayNameShort(date, locale, calendarSystem))
 }
@@ -60,7 +60,7 @@ export const getDayNamesShort = (
 export const getOneLetterOrShortDayNames = (
   week: Temporal.ZonedDateTime[] | Temporal.PlainDate[],
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ): string[] => {
   if (['zh-cn', 'zh-tw', 'ca-es', 'he-il'].includes(locale.toLowerCase())) {
     return getDayNamesShort(week, locale, calendarSystem)

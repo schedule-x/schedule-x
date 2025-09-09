@@ -22,7 +22,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   name?: string
   disabled?: boolean
   hasPlaceholder?: boolean
-  calendarSystem?: 'gregorian' | 'hebrew'
+  calendarSystem?: 'gregory' | 'hebrew'
 
   build(): DatePickerConfigInternal {
     return new ConfigImpl(
@@ -121,7 +121,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
     return this
   }
 
-  withCalendarSystem(calendarSystem: 'gregorian' | 'hebrew' | undefined): ConfigBuilder {
+  withCalendarSystem(calendarSystem: 'gregory' | 'hebrew' | undefined): ConfigBuilder {
     this.calendarSystem = calendarSystem
 
     return this

@@ -38,7 +38,6 @@ export default function MonthViewWeek({ week }: props) {
   })
 
   const isDateSelectable = (date: Temporal.PlainDate) => {
-    console.log(date.withCalendar($app.config.calendarSystem.value).toString(), $app.config.min.toString(), $app.config.max.toString())
     return (
       date.toString() >= $app.config.min.toString() &&
       date.toString() <= $app.config.max.toString()

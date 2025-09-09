@@ -4,6 +4,7 @@ import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/back
 
 type WeekDay = {
   date: string
+  dateTemporal: Temporal.PlainDate
   timeGridEvents: CalendarEventInternal[]
   dateGridEvents: {
     [key: string]: CalendarEventInternal | typeof DATE_GRID_BLOCKER | undefined

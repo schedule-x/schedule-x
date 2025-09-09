@@ -8,6 +8,7 @@ const createOneDay = (week: Week, date: Temporal.ZonedDateTime) => {
   const dateString = toDateString(date)
   week[dateString] = {
     date: dateString,
+    dateTemporal: date.toPlainDate(),
     timeGridEvents: [],
     dateGridEvents: {},
     backgroundEvents: [],

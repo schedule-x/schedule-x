@@ -109,6 +109,7 @@ interface ReducedCalendarConfigInternal
     | 'showWeekNumbers'
     | 'direction'
     | 'timezone'
+    | 'calendarSystem'
   > {}
 
 export interface CalendarConfigExternal
@@ -132,4 +133,5 @@ export interface CalendarConfigExternal
   translations?: Record<string, Language>
   showWeekNumbers?: boolean
   timezone?: IANATimezone
+  calendarSystem?: 'gregory' | 'hebrew'
 }

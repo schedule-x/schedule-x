@@ -5,7 +5,7 @@ import { toIntegers } from '../format-conversion/format-conversion'
 const dateFn = (
   dateTime: Temporal.ZonedDateTime | Temporal.PlainDate,
   locale: string,
-  calendarSystem: 'gregorian' | 'hebrew'
+  calendarSystem: 'gregory' | 'hebrew'
 ) => {
   return dateTime.toLocaleString(locale, {
     day: 'numeric',
