@@ -1,7 +1,7 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import TimeIcon from '@schedule-x/shared/src/components/icons/time-icon'
 import { getTimeStamp } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
-import { useContext, useEffect } from 'preact/hooks'
+import { useContext, useEffect, useRef } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
@@ -28,16 +28,24 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
   }
 
   const customComponent = $app.config._customComponentFns.monthAgendaEvent
-  const customComponentId = customComponent
-    ? 'custom-month-agenda-event-' + randomStringId()
-    : undefined
+  const customComponentId = useRef(
+    customComponent
+      ? 'custom-month-agenda-event-' + randomStringId()
+      : undefined
+  )
 
   useEffect(() => {
     if (!customComponent) return
 
-    customComponent(getElementByCCID(customComponentId), {
+    customComponent(getElementByCCID(customComponentId.current), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
+
+    return () => {
+      $app.config._destroyCustomComponentInstanceCallback?.(
+        customComponentId.current as string
+      )
+    }
   }, [calendarEvent])
 
   const onClick = (e: MouseEvent) => {
@@ -70,7 +78,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
   return (
     <div
       className={classNames.join(' ')}
-      data-ccid={customComponentId}
+      data-ccid={customComponentId.current}
       data-event-id={calendarEvent.id}
       style={{
         backgroundColor: customComponent

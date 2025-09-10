@@ -1,5 +1,5 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
-import { useContext, useEffect, useMemo } from 'preact/hooks'
+import { useContext, useEffect, useMemo, useRef } from 'preact/hooks'
 import { AppContext } from '../../utils/stateful/app-context'
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { DateRange } from '@schedule-x/shared/src/types/date-range'
@@ -104,17 +104,25 @@ export default function DateGridEvent({
   const overflowStyles = { backgroundColor: eventCSSVariables.backgroundColor }
 
   const customComponent = $app.config._customComponentFns.dateGridEvent
-  let customComponentId = customComponent
-    ? 'custom-date-grid-event-' + randomStringId() // needs a unique string to support event recurrence
-    : undefined
-  if (isCopy && customComponentId) customComponentId += '-copy'
+  const customComponentId = useRef(
+    customComponent
+      ? 'custom-date-grid-event-' + randomStringId() // needs a unique string to support event recurrence
+      : undefined
+  )
+  if (isCopy && customComponentId.current) customComponentId.current += '-copy'
 
   useEffect(() => {
     if (!customComponent) return
 
-    customComponent(getElementByCCID(customComponentId), {
+    customComponent(getElementByCCID(customComponentId.current), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
+
+    return () => {
+      $app.config._destroyCustomComponentInstanceCallback?.(
+        customComponentId.current as string
+      )
+    }
   }, [calendarEvent, eventCopy])
 
   const startResize = (mouseEvent: MouseEvent | TouchEvent) => {
@@ -175,7 +183,7 @@ export default function DateGridEvent({
           )
         }
         role="button"
-        data-ccid={customComponentId}
+        data-ccid={customComponentId.current}
         data-event-id={calendarEvent.id}
         onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
         onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}

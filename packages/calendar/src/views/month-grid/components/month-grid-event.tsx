@@ -2,7 +2,7 @@ import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calenda
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
 import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useContext, useEffect } from 'preact/hooks'
+import { useContext, useEffect, useRef } from 'preact/hooks'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
@@ -73,17 +73,25 @@ export default function MonthGridEvent({
   }
 
   const customComponent = $app.config._customComponentFns.monthGridEvent
-  const customComponentId = customComponent
-    ? 'custom-month-grid-event-' + randomStringId() // needs a unique string to support event recurrence
-    : undefined
+  const customComponentId = useRef(
+    customComponent
+      ? 'custom-month-grid-event-' + randomStringId() // needs a unique string to support event recurrence
+      : undefined
+  )
 
   useEffect(() => {
     if (!customComponent) return
 
-    customComponent(getElementByCCID(customComponentId), {
+    customComponent(getElementByCCID(customComponentId.current), {
       calendarEvent: calendarEvent._getExternalEvent(),
       hasStartDate,
     })
+
+    return () => {
+      $app.config._destroyCustomComponentInstanceCallback?.(
+        customComponentId.current as string
+      )
+    }
   }, [calendarEvent])
 
   const handleOnClick = (e: MouseEvent) => {
@@ -125,7 +133,7 @@ export default function MonthGridEvent({
     <div
       draggable={!!$app.config.plugins.dragAndDrop}
       data-event-id={calendarEvent.id}
-      data-ccid={customComponentId}
+      data-ccid={customComponentId.current}
       onMouseDown={(e) => createDragStartTimeout(handleStartDrag, e)}
       onMouseUp={(e) => setClickedEventIfNotDragging(calendarEvent, e)}
       onTouchStart={(e) => createDragStartTimeout(handleStartDrag, e)}
