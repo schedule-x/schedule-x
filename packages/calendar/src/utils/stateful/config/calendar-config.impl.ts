@@ -35,6 +35,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   showWeekNumbers: Signal<boolean> = signal(false)
   direction: 'ltr' | 'rtl' = 'ltr'
   timezone: Signal<IANATimezone>
+  _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
 
   constructor(
     locale: string = DEFAULT_LOCALE,

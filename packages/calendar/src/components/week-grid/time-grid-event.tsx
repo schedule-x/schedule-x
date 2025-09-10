@@ -107,14 +107,20 @@ export default function TimeGridEvent({
   }
 
   const customComponent = $app.config._customComponentFns.timeGridEvent
-  const customComponentId = getCCID(customComponent, isCopy)
+  const customComponentId = useRef(getCCID(customComponent, isCopy))
 
   useEffect(() => {
     if (!customComponent) return
 
-    customComponent(getElementByCCID(customComponentId), {
+    customComponent(getElementByCCID(customComponentId.current), {
       calendarEvent: calendarEvent._getExternalEvent(),
     })
+
+    return () => {
+      $app.config._destroyCustomComponentInstance?.(
+        customComponentId.current as string
+      )
+    }
   }, [calendarEvent, eventCopy])
 
   // ResizeObserver to detect when event height changes
@@ -266,7 +272,7 @@ export default function TimeGridEvent({
         }}
       >
         <div
-          data-ccid={customComponentId}
+          data-ccid={customComponentId.current}
           className="sx__time-grid-event-inner"
         >
           {!customComponent && !hasCustomContent && (

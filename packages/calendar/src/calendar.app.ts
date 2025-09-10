@@ -62,4 +62,8 @@ export default class CalendarApp {
   _setCustomComponentFn(fnId: keyof CustomComponentFns, fn: CustomComponentFn) {
     this.$app.config._customComponentFns[fnId] = fn
   }
+
+  _setDestroyCustomComponentInstance(cb: (ccid: string) => void) {
+    this.$app.config._destroyCustomComponentInstance = cb
+  }
 }
