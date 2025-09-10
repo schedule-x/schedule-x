@@ -42,7 +42,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     })
 
     return () => {
-      $app.config._destroyCustomComponentInstanceCallback?.(
+      $app.config._destroyCustomComponentInstance?.(
         customComponentId.current as string
       )
     }

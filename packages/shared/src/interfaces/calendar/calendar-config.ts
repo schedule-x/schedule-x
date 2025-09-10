@@ -77,7 +77,7 @@ export default interface CalendarConfigInternal extends Config {
   showWeekNumbers: Signal<boolean>
   callbacks: CalendarCallbacks
   _customComponentFns: CustomComponentFns
-  _destroyCustomComponentInstanceCallback: ((ccid: string) => void) | undefined
+  _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
   translations: Signal<Record<string, Language>>
   direction: 'ltr' | 'rtl'
 

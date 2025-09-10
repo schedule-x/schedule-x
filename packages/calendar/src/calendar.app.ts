@@ -63,7 +63,7 @@ export default class CalendarApp {
     this.$app.config._customComponentFns[fnId] = fn
   }
 
-  _setDestroyCustomComponentInstanceCallback(cb: (ccid: string) => void) {
-    this.$app.config._destroyCustomComponentInstanceCallback = cb
+  _setDestroyCustomComponentInstance(cb: (ccid: string) => void) {
+    this.$app.config._destroyCustomComponentInstance = cb
   }
 }
