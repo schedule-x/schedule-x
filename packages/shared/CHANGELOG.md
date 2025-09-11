@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.1](https://github.com/schedule-x/schedule-x/compare/v3.1.0...v3.1.1) (2025-09-11)
+
+### Bug Fixes
+
+- add callback for adapters to destroy element references ([#1187](https://github.com/schedule-x/schedule-x/issues/1187)) ([1e36d80](https://github.com/schedule-x/schedule-x/commit/1e36d804914708992cd5db6c114f9fd0475a8596))
+
 # [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
 
 ### Features
