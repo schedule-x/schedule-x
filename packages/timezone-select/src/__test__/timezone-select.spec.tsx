@@ -114,6 +114,30 @@ describe('TimezoneSelectPlugin', () => {
     })
   })
 
+  it('should have title attribute with full timezone information', async () => {
+    renderComponent('Europe/Berlin')
+
+    await waitFor(() => {
+      const timezoneSelect = document.querySelector(
+        '.sx__timezone-select-selected-item'
+      )
+      expect(timezoneSelect).toBeTruthy()
+      expect(timezoneSelect?.getAttribute('title')).toBe('GMT+02:00 Germany – Berlin')
+    })
+  })
+
+  it('should have title attribute with UTC timezone information', async () => {
+    renderComponent('UTC')
+
+    await waitFor(() => {
+      const timezoneSelect = document.querySelector(
+        '.sx__timezone-select-selected-item'
+      )
+      expect(timezoneSelect).toBeTruthy()
+      expect(timezoneSelect?.getAttribute('title')).toBe('GMT+00:00 Coordinated Universal Time')
+    })
+  })
+
   describe('interacting with the select via clicks', () => {
     it('should open dropdown and select a timezone', async () => {
       renderComponent('Europe/Berlin')
