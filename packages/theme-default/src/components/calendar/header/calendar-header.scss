@@ -26,9 +26,6 @@
 
 .sx__forward-backward-navigation {
   height: 45px;
-  display: flex;
-  align-items: center;
-  gap: var(--sx-spacing-padding2);
 
   .sx__is-calendar-small &,
   .is-list-view & {
