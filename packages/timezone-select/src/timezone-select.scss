@@ -29,6 +29,7 @@
 .sx__timezone-select-selected-item {
   height: 100%;
   width: fit-content;
+  max-width: 320px;
   padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
   cursor: pointer;
   border-radius: var(--sx-rounding-extra-small);
@@ -50,11 +51,17 @@
     font-size: var(--sx-font-extra-small);
     margin-right: var(--sx-spacing-padding2);
     color: var(--sx-color-neutral);
+    flex-shrink: 0;
   }
 
   .timezone-name {
     color: var(--sx-color-on-surface-variant);
     font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
   }
 }
 

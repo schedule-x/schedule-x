@@ -4,6 +4,7 @@
   align-items: flex-start;
   padding: var(--sx-spacing-padding4);
   gap: var(--sx-spacing-padding4);
+  flex-wrap: wrap;
 
   .sx__date-input {
     padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
@@ -19,6 +20,8 @@
   display: flex;
   align-items: center;
   gap: var(--sx-spacing-padding4);
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .sx__forward-backward-navigation {

@@ -1,5 +1,9 @@
 .sx__range-heading {
   font-size: clamp(16px, 1.25rem, 24px);
+  max-width: 12.5rem; /* 200px with a browser using standard font size */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   .sx__is-calendar-small & {
     font-size: 16px;

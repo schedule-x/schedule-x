@@ -244,6 +244,10 @@ export default function TimezoneSelect({
         role="button"
         aria-describedby={timezoneLabelId}
         aria-label={$app.translate('Select Timezone')}
+        title={(() => {
+          const { offset, name } = getTimezoneDisplayParts($app.config.timezone.value)
+          return `${offset} ${name}`
+        })()}
         className="sx__timezone-select-selected-item sx__ripple"
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={handleSelectedTimezoneKeyDown}
