@@ -59,7 +59,7 @@ export default function TimeAxis() {
   }, [gridSteps])
   useEffect(() => {
     if (hourCustomComponentFn && hourCCIDs.length) {
-      gridSteps.forEach((hour, idx) => {
+      gridSteps.forEach((gridStep, idx) => {
         const el = document.querySelector(`[data-ccid="${hourCCIDs[idx]}"]`)
         if (!(el instanceof HTMLElement)) {
           return console.warn(
@@ -67,7 +67,7 @@ export default function TimeAxis() {
           )
         }
 
-        hourCustomComponentFn(el, { hour })
+        hourCustomComponentFn(el, { hour: gridStep.hour, gridStep })
       })
     }
   }, [gridSteps, hourCCIDs])
