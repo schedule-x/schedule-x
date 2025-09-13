@@ -27,6 +27,7 @@ export type WeekOptions = {
   eventWidth: number
   timeAxisFormatOptions: Intl.DateTimeFormatOptions
   eventOverlap: boolean
+  gridStep: 60 | 30 | 15
 }
 
 export type MonthGridOptions = {

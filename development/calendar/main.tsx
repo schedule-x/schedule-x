@@ -186,6 +186,9 @@ plugins: [
     start: '06:00',
     end: '03:00',
   },
+  weekOptions: {
+    gridStep: 15,
+  },
   backgroundEvents: [
     {
       title: 'Out of office',

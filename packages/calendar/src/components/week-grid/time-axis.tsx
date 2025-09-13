@@ -7,16 +7,43 @@ import { randomStringId } from '@schedule-x/shared/src'
 export default function TimeAxis() {
   const $app = useContext(AppContext)
 
-  const [hours, setHours] = useState<number[]>([])
+  const [gridSteps, setGridSteps] = useState<
+    { hour: number; minute: number }[]
+  >([])
+
   useSignalEffect(() => {
-    setHours(
-      getTimeAxisHours($app.config.dayBoundaries.value, $app.config.isHybridDay)
+    const hourSteps = getTimeAxisHours(
+      $app.config.dayBoundaries.value,
+      $app.config.isHybridDay
     )
-    const hoursPerDay = $app.config.timePointsPerDay / 100
-    const pixelsPerHour = $app.config.weekOptions.value.gridHeight / hoursPerDay
+
+    const result: { hour: number; minute: number }[] = []
+
+    hourSteps.forEach((hour) => {
+      if ($app.config.weekOptions.value.gridStep === 60) {
+        result.push({ hour: hour, minute: 0 })
+      }
+      if ($app.config.weekOptions.value.gridStep === 30) {
+        result.push({ hour: hour, minute: 0 }, { hour: hour, minute: 30 })
+      }
+      if ($app.config.weekOptions.value.gridStep === 15) {
+        result.push(
+          { hour: hour, minute: 0 },
+          { hour: hour, minute: 15 },
+          { hour: hour, minute: 30 },
+          { hour: hour, minute: 45 }
+        )
+      }
+    })
+
+    setGridSteps(result)
+
+    const pixelsPerGridStep = $app.config.weekOptions.value.gridHeight / result.length
+
+    // TODO v4: rename --sx-week-grid-hour-height to --sx-week-grid-grid-step-height
     document.documentElement.style.setProperty(
       '--sx-week-grid-hour-height',
-      `${pixelsPerHour}px`
+      `${pixelsPerGridStep}px`
     )
   })
 
@@ -29,11 +56,11 @@ export default function TimeAxis() {
   const hourCCIDs = useMemo(() => {
     if (!hourCustomComponentFn) return []
 
-    return hours.map(() => `custom-week-grid-hour-${randomStringId()}`)
-  }, [hours])
+    return gridSteps.map(() => `custom-week-grid-hour-${randomStringId()}`)
+  }, [gridSteps])
   useEffect(() => {
     if (hourCustomComponentFn && hourCCIDs.length) {
-      hours.forEach((hour, idx) => {
+      gridSteps.forEach((gridStep, idx) => {
         const el = document.querySelector(`[data-ccid="${hourCCIDs[idx]}"]`)
         if (!(el instanceof HTMLElement)) {
           return console.warn(
@@ -41,15 +68,15 @@ export default function TimeAxis() {
           )
         }
 
-        hourCustomComponentFn(el, { hour })
+        hourCustomComponentFn(el, { hour: gridStep.hour, gridStep })
       })
     }
-  }, [hours, hourCCIDs])
+  }, [gridSteps, hourCCIDs])
 
   return (
     <>
       <div className="sx__week-grid__time-axis">
-        {hours.map((hour, index) => (
+        {gridSteps.map((gridStep, index) => (
           <div className="sx__week-grid__hour">
             {hourCustomComponentFn && hourCCIDs.length && (
               <div data-ccid={hourCCIDs[index]} />
@@ -57,7 +84,9 @@ export default function TimeAxis() {
 
             {!hourCustomComponentFn && (
               <span className="sx__week-grid__hour-text">
-                {formatter.format(new Date(0, 0, 0, hour))}
+                {formatter.format(
+                  new Date(0, 0, 0, gridStep.hour, gridStep.minute)
+                )}
               </span>
             )}
           </div>
