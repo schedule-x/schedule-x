@@ -180,8 +180,8 @@ plugins: [
       },
     },
   },
-  minDate: Temporal.PlainDate.from('2023-08-01'),
-  maxDate: Temporal.PlainDate.from('2028-08-01'),
+  minDate: Temporal.PlainDate.from('2025-08-13'),
+  maxDate: Temporal.PlainDate.from('2025-09-14'),
   dayBoundaries: {
     start: '06:00',
     end: '03:00',
@@ -218,10 +218,33 @@ plugins: [
   events: [
     {
       id: 1,
-      title: 'test',
-      start: Temporal.PlainDate.from('2025-08-08'),
-      end: Temporal.PlainDate.from('2025-08-08'),
-      rrule: 'FREQ=MONTHLY;COUNT=12;BYMONTHDAY=1',
+      title: 'On Min Boundary',
+      start: Temporal.ZonedDateTime.from('2025-08-13T09:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-08-13T10:00[Europe/Berlin]')
+    },
+    {
+      id: 2,
+      title: 'On Max Boundary',
+      start: Temporal.ZonedDateTime.from('2025-09-14T14:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-09-14T15:30[Europe/Berlin]')
+    },
+    {
+      id: 3,
+      title: 'Before Min',
+      start: Temporal.ZonedDateTime.from('2025-08-10T12:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-08-10T13:00[Europe/Berlin]')
+    },
+    {
+      id: 4,
+      title: 'After Max',
+      start: Temporal.ZonedDateTime.from('2025-09-20T08:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-09-20T09:00[Europe/Berlin]')
+    },
+    {
+      id: 5,
+      title: 'Inside Range',
+      start: Temporal.ZonedDateTime.from('2025-09-05T16:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2025-09-05T17:30[Europe/Berlin]')
     }
     /* ...seededEvents.map(event => ({
       ...event,
