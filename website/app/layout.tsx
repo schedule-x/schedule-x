@@ -33,6 +33,7 @@ import CustomFooter from '../components/theme/custom-footer'
 
   const navbar = (
     <Navbar
+      chatLink={'https://discord.gg/GyJQAxRgNF'}
       logo={<Logo />}
       // ... Your additional navbar options
     />
