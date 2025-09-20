@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/schedule-x/schedule-x/compare/v3.1.2...v3.2.0) (2025-09-20)
+
+### Bug Fixes
+
+- add discord icon ([#1193](https://github.com/schedule-x/schedule-x/issues/1193)) ([14f68df](https://github.com/schedule-x/schedule-x/commit/14f68df241d19caaef7f94ab3016f39912544a88))
+- min max Date ([#1194](https://github.com/schedule-x/schedule-x/issues/1194)) ([6fd2f8f](https://github.com/schedule-x/schedule-x/commit/6fd2f8fd43d3cdbd499c11a6739346740ac9ec79))
+
+### Features
+
+- add gridStep ([#1188](https://github.com/schedule-x/schedule-x/issues/1188)) ([bc62d6b](https://github.com/schedule-x/schedule-x/commit/bc62d6b0e3cbb0c6aee2d486a2258c7dd7803096))
+
 ## [3.1.2](https://github.com/schedule-x/schedule-x/compare/v3.1.1...v3.1.2) (2025-09-12)
 
 ### Bug Fixes
