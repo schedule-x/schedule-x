@@ -40,6 +40,13 @@ export const ListWrapper: PreactViewComponent = ({
   const blockOnScrollDayIntoViewCallback = useRef(false)
   const blockTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  const minDate = $app.config.minDate.value
+    ? dateFromDateTime($app.config.minDate.value.toString())
+    : null
+  const maxDate = $app.config.maxDate.value
+    ? dateFromDateTime($app.config.maxDate.value.toString())
+    : null
+
   const updateDaysWithEvents = (events: CalendarEventInternal[]) => {
     const daysWithEventsMap = events.reduce(
       (
@@ -94,8 +101,17 @@ export const ListWrapper: PreactViewComponent = ({
      *
      * Open to any ideas for how to improve this and make do without a timeout.
      * */
+
+    const filteredEvents = $app.calendarEvents.list.value.filter((event) => {
+      const startDate = dateFromDateTime(event.start.toString())
+      const endDate = dateFromDateTime(event.end.toString())
+      if (minDate && endDate < minDate) return false
+      if (maxDate && startDate > maxDate) return false
+      return true
+    })
+
     blockOnScrollDayIntoViewCallback.current = true
-    updateDaysWithEvents($app.calendarEvents.list.value)
+    updateDaysWithEvents(filteredEvents)
   }, [$app.calendarEvents.list.value])
 
   useEffect(() => {
