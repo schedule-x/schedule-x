@@ -296,6 +296,7 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 7,
         eventWidth: 100,
         gridHeight: 200,
+        gridStep: 15,
         timeAxisFormatOptions: { hour: 'numeric' },
         eventOverlap: true,
       }
@@ -313,6 +314,7 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 3,
         eventWidth: 200,
         gridHeight: 300,
+        gridStep: 30,
         timeAxisFormatOptions: { hour: '2-digit' },
         eventOverlap: false,
       }
@@ -327,6 +329,7 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 7,
         eventWidth: 100,
         gridHeight: 200,
+        gridStep: 30,
         timeAxisFormatOptions: { hour: 'numeric' },
         eventOverlap: true,
       }
@@ -349,6 +352,7 @@ describe('createCalendarControlsPlugin', () => {
         nDays: 3,
         eventWidth: 200,
         gridHeight: 200,
+        gridStep: 30,
         timeAxisFormatOptions: { hour: 'numeric' },
         eventOverlap: true,
       })

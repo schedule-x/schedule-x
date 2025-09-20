@@ -44,6 +44,7 @@ export default class CalendarConfigBuilder
     eventWidth: 100,
     timeAxisFormatOptions: { hour: 'numeric' },
     eventOverlap: true,
+    gridStep: 60,
   }
   monthGridOptions: MonthGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined
@@ -136,11 +137,20 @@ export default class CalendarConfigBuilder
   }
 
   withWeekOptions(
-    weekOptions: Partial<WeekOptions> | undefined
+    userDefinedWeekOptions: Partial<WeekOptions> | undefined
   ): CalendarConfigBuilder {
     this.weekOptions = {
       ...this.weekOptions,
-      ...weekOptions,
+      ...userDefinedWeekOptions,
+    }
+    if (
+      this.weekOptions.gridStep !== 60 &&
+      userDefinedWeekOptions?.timeAxisFormatOptions === undefined
+    ) {
+      this.weekOptions.timeAxisFormatOptions = {
+        hour: 'numeric',
+        minute: 'numeric',
+      }
     }
     return this
   }
