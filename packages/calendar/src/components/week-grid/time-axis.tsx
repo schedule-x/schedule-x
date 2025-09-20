@@ -38,7 +38,8 @@ export default function TimeAxis() {
 
     setGridSteps(result)
 
-    const pixelsPerGridStep = $app.config.weekOptions.value.gridHeight / result.length
+    const pixelsPerGridStep =
+      $app.config.weekOptions.value.gridHeight / result.length
 
     // TODO v4: rename --sx-week-grid-hour-height to --sx-week-grid-grid-step-height
     document.documentElement.style.setProperty(
