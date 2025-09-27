@@ -27,6 +27,26 @@ const CookieConsent = () => {
       gtag('js', new Date());
       gtag('config', 'AW-16716598695');
     `;
+    const uetTag = document.createElement('script');
+    uetTag.innerHTML = `
+        (function(w,d,t,r,u)
+      {
+        var f,n,i;
+        w[u]=w[u]||[],f=function()
+        {
+          var o={ti:"97205819", enableAutoSpaTracking: true};
+          o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
+        },
+        n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function()
+        {
+          var s=this.readyState;
+          s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
+        },
+        i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)
+      })
+      (window,document,"script","//bat.bing.com/bat.js","uetq");
+    `
+
     document.head.appendChild(gtagHandler);
     const gTagManagerScript = document.createElement('script');
     gTagManagerScript.innerHTML = `
@@ -37,6 +57,7 @@ const CookieConsent = () => {
       })(window,document,'script','dataLayer','GTM-NFBLZ8FC');
     `;
     document.head.appendChild(gTagManagerScript);
+    document.head.appendChild(uetTag);
   }
 
   const handleAccept = () => {

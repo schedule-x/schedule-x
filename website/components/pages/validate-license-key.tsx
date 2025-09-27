@@ -43,7 +43,7 @@ export default function ValidateLicenseKeyPage() {
 
               <p>
                 Enter your license key to validate it. In return, you will get an access token for the
-                Schedule-X private registry. If you run into any problems, please contact us at tom@schedule-x.dev.
+                Schedule-X private registry. If you run into any problems, please contact us at support@schedule-x.dev.
               </p>
 
               <input
@@ -81,7 +81,7 @@ export default function ValidateLicenseKeyPage() {
                 Something went wrong 🤔
               </h1>
 
-              <p>There was an error validating your license key. Please try again or contact us at tom@schedule-x.dev, and we will get in touch as soon as possible.</p>
+              <p>There was an error validating your license key. Please try again or contact us at support@schedule-x.dev, and we will get in touch as soon as possible.</p>
             </>
           )}
         </section>

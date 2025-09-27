@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
 
     if (alreadyUsedKey) {
       return NextResponse.json({
-        message: "Key already used. If you can't find your token, please contact support at tom@schedule-x.dev",
+        message: "Key already used. If you can't find your token, please contact support at support@schedule-x.dev",
         status: 400,
       }, { status: 400 });
     }
