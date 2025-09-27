@@ -42,3 +42,62 @@ const calendar = createCalendar({
 If you know **all of your users** well, and know that they are using a browser that supports Temporal, you do not need to polyfill it.
 
 You can check current browser support for Temporal here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal#browser_compatibility
+
+## Converting different date and time formats to Temporal
+
+### RFC 9557
+
+If you are setting up a new application, consider saving strings compatibe with [RFC 9557](https://datatracker.ietf.org/doc/rfc9557/) in your DB. These are likely the future of date and time formats on the internet anyway.
+
+If you do, you can simply convert them to the appropriate Temporal object like so:
+
+```ts
+const plainDate = Temporal.PlainDate.from('1996-12-19')
+const zonedDateTime = Temporal.ZonedDateTime.from('1996-12-19T16:39:57-08:00[America/Los_Angeles]')
+```
+
+### Old custom Schedule-X date and time formats
+
+Schedule-X used to have its own custom date and time formats. These are not compatible with Temporal, but you can convert them to Temporal like so:
+
+```ts
+const oldDateString = '2025-01-01'
+const plainDate = Temporal.PlainDate.from(oldDateString)
+
+function convertOldDateTimeStringToZonedDateTime(dateString: string): Temporal.ZonedDateTime {
+    const [date, time] = dateString.split(' ')
+    const [year, month, day] = date.split('-')
+    const [hour, minute] = time.split(':')
+    return Temporal.ZonedDateTime.from({
+        year: parseInt(year),
+        month: parseInt(month),
+        day: parseInt(day),
+        hour: parseInt(hour),
+        minute: parseInt(minute),
+        timeZone: 'UTC',
+    })
+}
+
+const oldDateTimeString = '2025-01-01 12:00'
+const zonedDateTime = convertOldDateTimeStringToZonedDateTime(oldDateTimeString)
+```
+
+### JS Date
+
+If you are using a JS Date object, you can first convert it to a Temporal.Instant, and then convert it to a Temporal.ZonedDateTime:
+
+```ts
+function dateToZonedDateTime(date, timeZone = "UTC") {
+  // Convert JS Date → Instant
+  // This is basically the Temporal equivalent of a JS Date
+  // i.e. a plain point in time represented by a number of milliseconds since the Unix epoch
+  const instant = Temporal.Instant.fromEpochMilliseconds(date.getTime());
+
+  // Convert Instant → ZonedDateTime
+  return instant.toZonedDateTimeISO(timeZone);
+}
+
+const jsDate = new Date('2025-01-01T12:00:00Z')
+const zonedDateTime = dateToZonedDateTime(jsDate, 'Europe/Berlin')
+```
+
