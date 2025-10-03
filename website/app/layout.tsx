@@ -61,7 +61,7 @@ import CustomFooter from '../components/theme/custom-footer'
           }}
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
+          docsRepositoryBase="https://github.com/schedule-x/schedule-x/tree/main/website"
           footer={<CustomFooter />}
           banner={<Banner key="v3-is-here" storageKey="v3-is-here" dismissible={false}>
             <a href="/docs/calendar/major-version-migrations" target="_blank">
