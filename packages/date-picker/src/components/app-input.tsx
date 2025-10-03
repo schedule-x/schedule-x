@@ -3,6 +3,7 @@ import { AppContext } from '../utils/stateful/app-context'
 import chevronIcon from '@schedule-x/shared/src/assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/events'
+import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 
 export default function AppInput() {
   const datePickerInputId = randomStringId()
@@ -63,12 +64,31 @@ export default function AppInput() {
     }
   }, [])
 
+  function checkPosition(): void {
+    const inputWrapperEl = document.getElementById(inputWrapperId)
+    if (inputWrapperEl instanceof HTMLElement) {
+      const rect = inputWrapperEl.getBoundingClientRect()
+      const viewportCenterX = window.innerWidth / 2
+      const isMoreOnLeftSide = rect.x + rect.width / 2 <= viewportCenterX
+      const prefersTop = $app.config.placement?.includes('top')
+      $app.config.placement = prefersTop
+        ? isMoreOnLeftSide
+          ? Placement.TOP_START
+          : Placement.TOP_END
+        : isMoreOnLeftSide
+          ? Placement.BOTTOM_START
+          : Placement.BOTTOM_END
+    }
+  }
+
   const handleClick = () => {
+    checkPosition()
     $app.datePickerState.open()
   }
 
   const handleButtonKeyDown = (keyboardEvent: KeyboardEvent) => {
     if (isKeyEnterOrSpace(keyboardEvent)) {
+      checkPosition()
       keyboardEvent.preventDefault()
       $app.datePickerState.open()
 
@@ -108,7 +128,7 @@ export default function AppInput() {
           tabIndex={$app.datePickerState.isDisabled.value ? -1 : 0}
           aria-label={$app.translate('Choose Date')}
           onKeyDown={handleButtonKeyDown}
-          onClick={() => $app.datePickerState.open()}
+          onClick={handleClick}
           className="sx__date-input-chevron-wrapper"
         >
           <img className="sx__date-input-chevron" src={chevronIcon} alt="" />
