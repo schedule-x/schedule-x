@@ -88,13 +88,11 @@ export default function AppPopup() {
     if (inputWrapperEl === undefined || !(inputRect instanceof DOMRect))
       return undefined
 
-    const placement = getDynamicPlacement()
-
     return {
-      top: placement.includes('bottom')
+      top: $app.config.placement.includes('bottom')
         ? inputRect.height + inputRect.y + 1 // 1px border
         : inputRect.y - remSize - popupHeight, // subtract remsize to leave room for label text
-      left: placement.includes('start')
+      left: $app.config.placement.includes('start')
         ? inputRect.x
         : inputRect.x + inputRect.width - popupWidth,
       width: popupWidth,

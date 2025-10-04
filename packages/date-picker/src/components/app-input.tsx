@@ -108,7 +108,7 @@ export default function AppInput() {
           tabIndex={$app.datePickerState.isDisabled.value ? -1 : 0}
           aria-label={$app.translate('Choose Date')}
           onKeyDown={handleButtonKeyDown}
-          onClick={handleClick}
+          onClick={() => $app.datePickerState.open()}
           className="sx__date-input-chevron-wrapper"
         >
           <img className="sx__date-input-chevron" src={chevronIcon} alt="" />
