@@ -263,7 +263,7 @@ describe('RRule', () => {
     it('should return the last Friday of each month in Q1 2026', () => {
       const rrule = new RRule(
         {
-          freq: 'MONTHLY',
+          freq: RRuleFreq.MONTHLY,
           byday: ['-1FR'],
           count: 3,
         },

@@ -80,7 +80,7 @@ describe('RRule', () => {
     it('should return Memorial Day (last Monday of May) for multiple years', () => {
       const rrule = new RRule(
         {
-          freq: 'YEARLY',
+          freq: RRuleFreq.YEARLY,
           byday: ['-1MO'],
           bymonth: 5,
           count: 5,

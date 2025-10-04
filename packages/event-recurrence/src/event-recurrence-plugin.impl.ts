@@ -16,6 +16,7 @@ import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
 import { rruleStringToJS } from '@schedule-x/recurrence/src/parsers/rrule/parse-rrule'
+import { parseBydaySpec } from '@schedule-x/recurrence/src/rrule/utils/stateless/weekday-utils'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -151,18 +152,31 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   ): boolean {
     const rruleOptions = rruleStringToJS(rrule)
 
+    const logValidationFailure = (message: string) => {
+      if ('id' in event) {
+        console.warn(
+          `[Schedule-X warning]: Recurrence set could not be created for event with id ${event.id}, because ${message}`
+        )
+      } else {
+        console.warn(
+          `[Schedule-X warning]: Recurrence set could not be created for background event with start ${event.start.toString()}, because ${message}`
+        )
+      }
+    }
+
     if (rruleOptions.bymonthday) {
       if (event.start.day !== rruleOptions.bymonthday) {
-        if ('id' in event) {
-          console.warn(
-            `[Schedule-X warning]: Recurrence set could not be created for event with id ${event.id}, because rrule pattern doesn't match event.start`
-          )
-        } else {
-          console.warn(
-            `[Schedule-X warning]: Recurrence set could not be created for background event with start ${event.start.toString()}, because rrule pattern doesn't match event.start`
-          )
-        }
+        logValidationFailure("rrule pattern doesn't match event.start")
         return false
+      }
+    }
+
+    if (rruleOptions.byday && rruleOptions.byday.length > 0) {
+      for (const daySpec of rruleOptions.byday) {
+        if (!parseBydaySpec(daySpec)) {
+          logValidationFailure(`rrule contains invalid BYDAY value ${daySpec}`)
+          return false
+        }
       }
     }
 

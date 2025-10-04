@@ -13,21 +13,27 @@ export const parseBydaySpec = (daySpec: string): ParsedBydaySpec | null => {
 
   const [, positionStr, dayCode] = match
 
-  // Validate position if specified
-  if (positionStr) {
-    const position = parseInt(positionStr)
-    // RFC 5545 allows positions from -366 to -1 and 1 to 366
-    if (position === 0 || position > 366 || position < -366) {
+  let position: number | undefined
+  if (positionStr === '') {
+    position = undefined
+  } else {
+    // Use Number for strict parsing so malformed specs (e.g. "1X") produce NaN
+    const parsedPosition = Number(positionStr)
+    if (Number.isNaN(parsedPosition)) {
       return null
     }
+    // RFC 5545 allows positions from -366 to -1 and 1 to 366
+    if (parsedPosition === 0 || parsedPosition > 366 || parsedPosition < -366) {
+      return null
+    }
+    position = parsedPosition
   }
 
-  // Validate day code
   const weekday = getJSDayFromByday(dayCode)
   if (weekday === undefined) return null
 
   return {
-    position: positionStr ? parseInt(positionStr) : undefined,
+    position,
     weekday,
     dayCode,
   }
