@@ -29,16 +29,18 @@ export class RRule {
 
     const actualDTEND = dtend || dtstart /* RFC5545: #1 */
 
-    if (this.isDateTime(this.dtstart)) {
+    if (this.isDateTime(this.dtstart) && this.isDateTime(actualDTEND)) {
       this.durationInMinutes = getDurationInMinutesTemporal(
-        this.dtstart as Temporal.ZonedDateTime,
-        actualDTEND as Temporal.ZonedDateTime
+        this.dtstart,
+        actualDTEND
       )
+    } else if (
+      !this.isDateTime(this.dtstart) &&
+      !this.isDateTime(actualDTEND)
+    ) {
+      this.durationInDays = calculateDaysDifference(this.dtstart, actualDTEND)
     } else {
-      this.durationInDays = calculateDaysDifference(
-        this.dtstart as Temporal.PlainDate,
-        actualDTEND as Temporal.PlainDate
-      )
+      throw new Error('DTSTART and DTEND must share the same Temporal type')
     }
   }
 
@@ -84,20 +86,38 @@ export class RRule {
   private getRecurrenceBasedOnStartDates(
     date: Temporal.ZonedDateTime | Temporal.PlainDate
   ): Recurrence {
+    if (this.isDateTime(date)) {
+      const duration = this.durationInMinutes
+      if (duration === undefined) {
+        throw new Error('Missing duration in minutes for timed recurrence')
+      }
+      const end = addMinutesToTemporal(date, duration)
+      if (!(end instanceof Temporal.ZonedDateTime)) {
+        throw new Error('Expected ZonedDateTime end for timed recurrence')
+      }
+      return {
+        start: date,
+        end,
+      }
+    }
+
+    const duration = this.durationInDays
+    if (duration === undefined) {
+      throw new Error('Missing duration in days for all-day recurrence')
+    }
+    const end = addDays(date, duration)
+    if (!(end instanceof Temporal.PlainDate)) {
+      throw new Error('Expected PlainDate end for all-day recurrence')
+    }
     return {
       start: date,
-      end: this.isDateTime(date)
-        ? addMinutesToTemporal(
-            date as Temporal.ZonedDateTime,
-            this.durationInMinutes!
-          )
-        : addDays(date as Temporal.PlainDate, this.durationInDays!),
+      end,
     }
   }
 
   private isDateTime(
     date: Temporal.ZonedDateTime | Temporal.PlainDate
-  ): boolean {
+  ): date is Temporal.ZonedDateTime {
     return date instanceof Temporal.ZonedDateTime
   }
 }

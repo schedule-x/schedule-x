@@ -1,8 +1,9 @@
 import { RRuleOptionsExternal } from './types/rrule-options'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { getDurationInMinutesTemporal } from './utils/stateless/duration-in-minutes'
-import { addMinutesToTemporal } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import {
+  applyTemporalShift,
+  deriveTemporalShift,
+} from './utils/stateless/temporal-shift'
 
 export class RRuleUpdater {
   private rruleOptionsNew: RRuleOptionsExternal
@@ -60,24 +61,13 @@ export class RRuleUpdater {
   }
 
   updateUntil() {
-    if (!this.rruleOptions.until) return
+    if (!this.rruleOptions.until || !this.rruleOptionsNew.until) return
 
-    const isDateTime = this.dtstartOld instanceof Temporal.ZonedDateTime
-    this.rruleOptionsNew.until = isDateTime
-      ? addMinutesToTemporal(
-          this.rruleOptionsNew.until as Temporal.ZonedDateTime,
-          getDurationInMinutesTemporal(
-            this.dtstartOld as Temporal.ZonedDateTime,
-            this.dtstartNew as Temporal.ZonedDateTime
-          )
-        )
-      : addDays(
-          this.rruleOptionsNew.until as Temporal.PlainDate,
-          calculateDaysDifference(
-            this.dtstartOld as Temporal.PlainDate,
-            this.dtstartNew as Temporal.PlainDate
-          )
-        )
+    const shift = deriveTemporalShift(this.dtstartOld, this.dtstartNew)
+    this.rruleOptionsNew.until = applyTemporalShift(
+      this.rruleOptionsNew.until,
+      shift
+    )
   }
 
   getUpdatedRRuleOptions(): RRuleOptionsExternal {

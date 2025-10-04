@@ -39,10 +39,10 @@ export class RecurrenceSet {
         this.dtstart instanceof Temporal.ZonedDateTime &&
         this.rrule.until instanceof Temporal.PlainDate
       ) {
-        // Convert PlainDate to ZonedDateTime
+        // Convert PlainDate to ZonedDateTime matching previous end-of-day behaviour
         this.rrule.until = this.rrule.until.toZonedDateTime({
           timeZone: this.timezone,
-          plainTime: Temporal.PlainTime.from('23:59:59'),
+          plainTime: Temporal.PlainTime.from('23:59'),
         })
       } else if (
         this.dtstart instanceof Temporal.PlainDate &&
