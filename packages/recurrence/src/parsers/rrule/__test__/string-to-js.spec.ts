@@ -15,6 +15,7 @@ describe('Parsing an rrule from string to JS', () => {
       expect(result).toEqual({
         freq: 'WEEKLY',
         until: date('2021-01-15'),
+        untilHasUtcDesignator: false,
       })
     })
   })
@@ -30,6 +31,7 @@ describe('Parsing an rrule from string to JS', () => {
         until: date('2021-01-15'),
         byday: ['MO', 'WE'],
         interval: 2,
+        untilHasUtcDesignator: false,
       })
     })
   })

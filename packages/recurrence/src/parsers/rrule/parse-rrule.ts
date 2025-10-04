@@ -22,8 +22,10 @@ export const rruleStringToJS = (
     if (key === 'FREQ') rruleOptions.freq = value as RRuleFreq
     if (key === 'BYDAY') rruleOptions.byday = value.split(',')
     if (key === 'BYMONTHDAY') rruleOptions.bymonthday = Number(value)
-    if (key === 'UNTIL')
+    if (key === 'UNTIL') {
       rruleOptions.until = parseRFC5545ToTemporal(value, timezone)
+      rruleOptions.untilHasUtcDesignator = value.endsWith('Z')
+    }
     if (key === 'COUNT') rruleOptions.count = Number(value)
     if (key === 'INTERVAL') rruleOptions.interval = Number(value)
     if (key === 'WKST') {
@@ -41,7 +43,9 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   let rrule = `FREQ=${rruleOptions.freq}`
 
   if (rruleOptions.until)
-    rrule += `;UNTIL=${parseTemporalToRFC5545(rruleOptions.until)}`
+    rrule += `;UNTIL=${parseTemporalToRFC5545(rruleOptions.until, {
+      includeUtcDesignator: rruleOptions.untilHasUtcDesignator,
+    })}`
   if (rruleOptions.count) rrule += `;COUNT=${rruleOptions.count}`
   if (rruleOptions.interval) rrule += `;INTERVAL=${rruleOptions.interval}`
   if (rruleOptions.byday) rrule += `;BYDAY=${rruleOptions.byday.join(',')}`
@@ -52,7 +56,8 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
 }
 
 export const parseTemporalToRFC5545 = (
-  dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate
+  dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate,
+  options: { includeUtcDesignator?: boolean } = {}
 ): string => {
   const year = dateOrDatetime.year.toString().padStart(4, '0')
   const month = dateOrDatetime.month.toString().padStart(2, '0')
@@ -63,7 +68,9 @@ export const parseTemporalToRFC5545 = (
     const minute = dateOrDatetime.minute.toString().padStart(2, '0')
     const second = dateOrDatetime.second.toString().padStart(2, '0')
 
-    return `${year}${month}${day}T${hour}${minute}${second}`
+    const base = `${year}${month}${day}T${hour}${minute}${second}`
+
+    return options.includeUtcDesignator ? `${base}Z` : base
   }
 
   if (dateOrDatetime instanceof Temporal.PlainDate) {

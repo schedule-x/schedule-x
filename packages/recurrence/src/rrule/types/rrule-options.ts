@@ -6,6 +6,7 @@ export interface RRuleOptions {
   freq: RRuleFreq
   interval: number
   until?: Temporal.ZonedDateTime | Temporal.PlainDate
+  untilHasUtcDesignator?: boolean
   count?: number
   byday?: string[]
   bymonthday?: number

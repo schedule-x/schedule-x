@@ -6,7 +6,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { rruleJSToString } from '../parse-rrule'
 import { RRuleFreq } from '../../../rrule/enums/rrule-freq'
-import { date } from '../../../__test__/test-utils'
+import { date, datetime } from '../../../__test__/test-utils'
 
 describe('Parsing an rrule from js to string', () => {
   describe('With freq and until', () => {
@@ -54,6 +54,29 @@ describe('Parsing an rrule from js to string', () => {
       })
 
       expect(result).toEqual('FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,WE;WKST=SU')
+    })
+  })
+
+  describe('With freq and UTC until datetime', () => {
+    it('should preserve the Z designator', () => {
+      const result = rruleJSToString({
+        freq: RRuleFreq.WEEKLY,
+        until: datetime('2024-02-28 15:00', 'UTC'),
+        untilHasUtcDesignator: true,
+      })
+
+      expect(result).toEqual('FREQ=WEEKLY;UNTIL=20240228T150000Z')
+    })
+  })
+
+  describe('With freq and non-UTC until datetime', () => {
+    it('should omit the Z designator', () => {
+      const result = rruleJSToString({
+        freq: RRuleFreq.WEEKLY,
+        until: datetime('2024-02-28 15:00', 'Europe/Berlin'),
+      })
+
+      expect(result).toEqual('FREQ=WEEKLY;UNTIL=20240228T150000')
     })
   })
 })
