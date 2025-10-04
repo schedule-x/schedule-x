@@ -5,7 +5,7 @@ export type RFC5455Weekday = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA'
 export interface RRuleOptions {
   freq: RRuleFreq
   interval: number
-  until?: string
+  until?: Temporal.ZonedDateTime | Temporal.PlainDate
   count?: number
   byday?: string[]
   bymonthday?: number

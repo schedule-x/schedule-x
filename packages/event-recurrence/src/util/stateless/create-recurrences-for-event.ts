@@ -1,11 +1,10 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { RecurrenceSet } from '../../../../recurrence/src'
 import {
-  parseRFC5545ToSX,
-  parseRFC5545ToTemporal,
-  parseSXToRFC5545,
   parseTemporalToRFC5545,
+  parseRFC5545ToTemporal,
 } from '../../../../recurrence/src/parsers/rrule/parse-rrule'
+import { compareTemporalDates } from '../../../../recurrence/src/rrule/utils/stateless/iterator-utils'
 import {
   AugmentedBackgroundEvent,
   AugmentedEvent,
@@ -22,38 +21,49 @@ export const createRecurrencesForEvent = (
   range: DateRange,
   exdate?: string[] | undefined
 ) => {
-  // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
+  // Parse exdate strings to Temporal objects matching the event's date type
+  const parsedExdate = exdate?.map((dateStr) =>
+    parseRFC5545ToTemporal(dateStr, $app.config.timezone.value)
+  )
+
+  // if there is no count or until in the rrule, set an until date to range.end
+  // Ensure the UNTIL type matches the event's start type
   if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
     if (!rrule.endsWith(';')) rrule += ';'
-    rrule += `UNTIL=${parseTemporalToRFC5545(range.end)};`
+    // Convert range.end to match the type of calendarEvent.start if needed
+    let until: Temporal.ZonedDateTime | Temporal.PlainDate = range.end
+    if (
+      calendarEvent.start instanceof Temporal.PlainDate &&
+      range.end instanceof Temporal.ZonedDateTime
+    ) {
+      until = range.end.toPlainDate()
+    } else if (
+      calendarEvent.start instanceof Temporal.ZonedDateTime &&
+      range.end instanceof Temporal.PlainDate
+    ) {
+      until = range.end.toZonedDateTime($app.config.timezone.value)
+    }
+    rrule += `UNTIL=${parseTemporalToRFC5545(until)};`
   }
 
   const recurrenceSet = new RecurrenceSet({
-    dtstart: parseTemporalToRFC5545(calendarEvent.start),
-    dtend: parseTemporalToRFC5545(calendarEvent.end),
+    dtstart: calendarEvent.start,
+    dtend: calendarEvent.end,
     rrule,
-    exdate,
+    exdate: parsedExdate,
+    timezone: $app.config.timezone.value,
   }).getRecurrences()
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
 
-  if (
-    recurrenceSet[0].start ===
-    parseRFC5545ToSX(parseTemporalToRFC5545(calendarEvent.start))
-  ) {
+  if (compareTemporalDates(recurrenceSet[0].start, calendarEvent.start) === 0) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
   return recurrenceSet.map((recurrence) => {
     const eventCopy: AugmentedEvent = deepCloneEvent(calendarEvent, $app)
-    eventCopy.start = parseRFC5545ToTemporal(
-      parseSXToRFC5545(recurrence.start),
-      $app.config.timezone.value
-    )
-    eventCopy.end = parseRFC5545ToTemporal(
-      parseSXToRFC5545(recurrence.end),
-      $app.config.timezone.value
-    )
+    eventCopy.start = recurrence.start
+    eventCopy.end = recurrence.end
     eventCopy.isCopy = true
 
     return eventCopy
@@ -67,38 +77,51 @@ export const createRecurrencesForBackgroundEvent = (
   range: DateRange,
   exdate?: string[] | undefined
 ) => {
-  // if there is no count or until in the rrule, set an until date to range.end but in rfc string format
+  // Parse exdate strings to Temporal objects matching the event's date type
+  const parsedExdate = exdate?.map((dateStr) =>
+    parseRFC5545ToTemporal(dateStr, $app.config.timezone.value)
+  )
+
+  // if there is no count or until in the rrule, set an until date to range.end
+  // Ensure the UNTIL type matches the event's start type
   if (!rrule.includes('COUNT') && !rrule.includes('UNTIL')) {
     if (!rrule.endsWith(';')) rrule += ';'
-    rrule += `UNTIL=${parseTemporalToRFC5545(range.end)};`
+    // Convert range.end to match the type of backgroundEvent.start if needed
+    let until: Temporal.ZonedDateTime | Temporal.PlainDate = range.end
+    if (
+      backgroundEvent.start instanceof Temporal.PlainDate &&
+      range.end instanceof Temporal.ZonedDateTime
+    ) {
+      until = range.end.toPlainDate()
+    } else if (
+      backgroundEvent.start instanceof Temporal.ZonedDateTime &&
+      range.end instanceof Temporal.PlainDate
+    ) {
+      until = range.end.toZonedDateTime($app.config.timezone.value)
+    }
+    rrule += `UNTIL=${parseTemporalToRFC5545(until)};`
   }
 
   const recurrenceSet = new RecurrenceSet({
-    dtstart: parseTemporalToRFC5545(backgroundEvent.start),
-    dtend: parseTemporalToRFC5545(backgroundEvent.end),
+    dtstart: backgroundEvent.start,
+    dtend: backgroundEvent.end,
     rrule,
-    exdate,
+    exdate: parsedExdate,
+    timezone: $app.config.timezone.value,
   }).getRecurrences()
 
   if (!recurrenceSet || recurrenceSet.length === 0) return []
 
   if (
-    parseSXToRFC5545(recurrenceSet[0].start) ===
-    parseTemporalToRFC5545(backgroundEvent.start)
+    compareTemporalDates(recurrenceSet[0].start, backgroundEvent.start) === 0
   ) {
     recurrenceSet.splice(0, 1) // skip the first occurrence because this is the original event
   }
 
   return recurrenceSet.map((recurrence) => {
     const eventCopy: AugmentedBackgroundEvent = structuredClone(backgroundEvent)
-    eventCopy.start = parseRFC5545ToTemporal(
-      parseSXToRFC5545(recurrence.start),
-      $app.config.timezone.value
-    )
-    eventCopy.end = parseRFC5545ToTemporal(
-      parseSXToRFC5545(recurrence.end),
-      $app.config.timezone.value
-    )
+    eventCopy.start = recurrence.start
+    eventCopy.end = recurrence.end
     eventCopy.isCopy = true
     return eventCopy
   })

@@ -2,10 +2,6 @@ import { addDays, CalendarAppSingleton } from '@schedule-x/shared/src'
 import { RecurrenceSet } from '../../../../recurrence/src'
 import { getDurationInMinutesTemporal } from '../../../../recurrence/src/rrule/utils/stateless/duration-in-minutes'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import {
-  parseRFC5545ToTemporal,
-  parseTemporalToRFC5545,
-} from '../../../../recurrence/src/parsers/rrule/parse-rrule'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
 import { addMinutesToTemporal } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
@@ -28,58 +24,50 @@ export class DndUpdater {
       )
 
     const recurrenceSet = new RecurrenceSet({
-      dtstart: parseTemporalToRFC5545(eventToUpdate.start),
-      dtend: parseTemporalToRFC5545(eventToUpdate.end),
+      dtstart: eventToUpdate.start,
+      dtend: eventToUpdate.end,
       rrule: eventToUpdate._getForeignProperties().rrule as string,
+      timezone: this.$app!.config.timezone.value,
     })
 
     const newDtStart =
       oldEventStart instanceof Temporal.ZonedDateTime
         ? addMinutesToTemporal(
-            eventToUpdate.start,
+            eventToUpdate.start as Temporal.ZonedDateTime,
             getDurationInMinutesTemporal(
               oldEventStart,
               newEventStart as Temporal.ZonedDateTime
             )
           )
         : addDays(
-            eventToUpdate.start,
+            eventToUpdate.start as Temporal.PlainDate,
             calculateDaysDifference(
-              Temporal.PlainDate.from(oldEventStart),
-              Temporal.PlainDate.from(newEventStart)
+              oldEventStart as Temporal.PlainDate,
+              newEventStart as Temporal.PlainDate
             )
           )
 
     const newDtEnd =
       oldEventStart instanceof Temporal.ZonedDateTime
         ? addMinutesToTemporal(
-            eventToUpdate.end,
+            eventToUpdate.end as Temporal.ZonedDateTime,
             getDurationInMinutesTemporal(
               oldEventStart,
               newEventStart as Temporal.ZonedDateTime
             )
           )
         : addDays(
-            eventToUpdate.end,
+            eventToUpdate.end as Temporal.PlainDate,
             calculateDaysDifference(
-              Temporal.PlainDate.from(oldEventStart),
-              Temporal.PlainDate.from(newEventStart)
+              oldEventStart as Temporal.PlainDate,
+              newEventStart as Temporal.PlainDate
             )
           )
 
     // Update the original event
-    recurrenceSet.updateDtstartAndDtend(
-      parseTemporalToRFC5545(newDtStart),
-      parseTemporalToRFC5545(newDtEnd)
-    )
-    eventToUpdate.start = parseRFC5545ToTemporal(
-      recurrenceSet.getDtstart(),
-      this.$app!.config.timezone.value
-    )
-    eventToUpdate.end = parseRFC5545ToTemporal(
-      recurrenceSet.getDtend(),
-      this.$app!.config.timezone.value
-    )
+    recurrenceSet.updateDtstartAndDtend(newDtStart, newDtEnd)
+    eventToUpdate.start = recurrenceSet.getDtstart()
+    eventToUpdate.end = recurrenceSet.getDtend()
     eventToUpdate._getForeignProperties().rrule = recurrenceSet.getRrule()
 
     return { updatedEvent: eventToUpdate, recurrenceSet }
