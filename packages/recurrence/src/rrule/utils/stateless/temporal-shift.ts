@@ -1,12 +1,9 @@
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import {
-  addDays,
-  addMinutesToTemporal,
-} from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { getDurationInMinutesTemporal } from './duration-in-minutes'
+import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { getTemporalDuration } from './temporal-duration'
 
 export type TemporalShift =
-  | { kind: 'timed'; minutes: number }
+  | { kind: 'timed'; duration: Temporal.Duration }
   | { kind: 'date'; days: number }
 
 export const deriveTemporalShift = (
@@ -19,7 +16,7 @@ export const deriveTemporalShift = (
   ) {
     return {
       kind: 'timed',
-      minutes: getDurationInMinutesTemporal(from, to),
+      duration: getTemporalDuration(from, to),
     }
   }
 
@@ -45,12 +42,7 @@ export const applyTemporalShift = <
       )
     }
 
-    const result = addMinutesToTemporal(value, shift.minutes)
-    if (!(result instanceof Temporal.ZonedDateTime)) {
-      throw new Error('Timed temporal shift must return a ZonedDateTime value')
-    }
-
-    return result as T
+    return value.add(shift.duration) as T
   }
 
   if (!(value instanceof Temporal.PlainDate)) {

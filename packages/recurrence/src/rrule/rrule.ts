@@ -1,20 +1,17 @@
 import { RRuleOptions, RRuleOptionsExternal } from './types/rrule-options'
-import { getDurationInMinutesTemporal } from './utils/stateless/duration-in-minutes'
+import { getTemporalDuration } from './utils/stateless/temporal-duration'
 import { weeklyIteratorResult } from './utils/stateless/weekly-iterator'
 import { RRuleFreq } from './enums/rrule-freq'
 import { Recurrence } from '../types/recurrence'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import {
-  addMinutesToTemporal,
-  addDays,
-} from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { dailyIteratorResult } from './utils/stateless/daily-iterator'
 import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
 import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
 
 export class RRule {
   private options: RRuleOptions
-  private durationInMinutes: number | undefined
+  private duration: Temporal.Duration | undefined
   private durationInDays: number | undefined
 
   constructor(
@@ -30,10 +27,7 @@ export class RRule {
     const actualDTEND = dtend || dtstart /* RFC5545: #1 */
 
     if (this.isDateTime(this.dtstart) && this.isDateTime(actualDTEND)) {
-      this.durationInMinutes = getDurationInMinutesTemporal(
-        this.dtstart,
-        actualDTEND
-      )
+      this.duration = getTemporalDuration(this.dtstart, actualDTEND)
     } else if (
       !this.isDateTime(this.dtstart) &&
       !this.isDateTime(actualDTEND)
@@ -87,14 +81,11 @@ export class RRule {
     date: Temporal.ZonedDateTime | Temporal.PlainDate
   ): Recurrence {
     if (this.isDateTime(date)) {
-      const duration = this.durationInMinutes
-      if (duration === undefined) {
-        throw new Error('Missing duration in minutes for timed recurrence')
+      const duration = this.duration
+      if (!duration) {
+        throw new Error('Missing duration for timed recurrence')
       }
-      const end = addMinutesToTemporal(date, duration)
-      if (!(end instanceof Temporal.ZonedDateTime)) {
-        throw new Error('Expected ZonedDateTime end for timed recurrence')
-      }
+      const end = date.add(duration)
       return {
         start: date,
         end,
