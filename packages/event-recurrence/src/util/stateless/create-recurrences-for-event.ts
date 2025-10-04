@@ -32,16 +32,9 @@ export const createRecurrencesForEvent = (
     if (!rrule.endsWith(';')) rrule += ';'
     // Convert range.end to match the type of calendarEvent.start if needed
     let until: Temporal.ZonedDateTime | Temporal.PlainDate = range.end
-    if (
-      calendarEvent.start instanceof Temporal.PlainDate &&
-      range.end instanceof Temporal.ZonedDateTime
-    ) {
-      until = range.end.toPlainDate()
-    } else if (
-      calendarEvent.start instanceof Temporal.ZonedDateTime &&
-      range.end instanceof Temporal.PlainDate
-    ) {
-      until = range.end.toZonedDateTime($app.config.timezone.value)
+    if (calendarEvent.start instanceof Temporal.PlainDate) {
+      // range.end is typed as ZonedDateTime; convert to PlainDate when the event is all-day
+      until = (range.end as Temporal.ZonedDateTime).toPlainDate()
     }
     rrule += `UNTIL=${parseTemporalToRFC5545(until)};`
   }
@@ -88,16 +81,8 @@ export const createRecurrencesForBackgroundEvent = (
     if (!rrule.endsWith(';')) rrule += ';'
     // Convert range.end to match the type of backgroundEvent.start if needed
     let until: Temporal.ZonedDateTime | Temporal.PlainDate = range.end
-    if (
-      backgroundEvent.start instanceof Temporal.PlainDate &&
-      range.end instanceof Temporal.ZonedDateTime
-    ) {
-      until = range.end.toPlainDate()
-    } else if (
-      backgroundEvent.start instanceof Temporal.ZonedDateTime &&
-      range.end instanceof Temporal.PlainDate
-    ) {
-      until = range.end.toZonedDateTime($app.config.timezone.value)
+    if (backgroundEvent.start instanceof Temporal.PlainDate) {
+      until = (range.end as Temporal.ZonedDateTime).toPlainDate()
     }
     rrule += `UNTIL=${parseTemporalToRFC5545(until)};`
   }
