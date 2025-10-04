@@ -13,12 +13,12 @@ This plugin enables you to create recurring events according to the [iCalendar s
 that
 this plugin only offers a partial implementation of the specification. There are 2 reasons for this:
 
-1. Some rules just haven't been implemented yet. If there is a rule that you would like to see implemented, and you
-think this rule could be updated
-in a predictable way using drag & drop or resize, please open an issue on GitHub.
-2. Some iCalendar rules don't make sense in an interactive calendar. Consider for example `FREQ=MONTHLY;BYDAY=1SU,4TH;
-COUNT=20` where dragging one occurrence might offset the other occurrences in a non-symmetrical way, which might not
-have been intended when creating the rule.
+1. Some rules just haven't been implemented yet. If there is a rule that you would like to see implemented, please open
+an issue on GitHub.
+2. Some iCalendar rules are supported for display purposes but cannot be updated via drag & drop. For example, events
+using `BYDAY` with `MONTHLY` or `YEARLY` frequencies are fully supported, but cannot be updated by dragging. If you need
+to update such events programmatically, you can disable drag & drop for those specific events or handle updates through
+the events service.
 
 If you need an almost full implementation of the iCalendar spec, you can use the [rrule](https://www.npmjs.com/package/rrule)
 library instead of this plugin. Here's an [example](https://github.com/schedule-x/react-examples/blob/main/rrulejs/src/App.tsx) of how to do so. However, this only works if you're merely using the calendar to display events.
@@ -79,6 +79,13 @@ const calendar = createCalendar({
       rrule: 'FREQ=MONTHLY;COUNT=5',
     },
     {
+      id: 151618,
+      title: 'Monthly event on the 1st Monday 12 times',
+      start: Temporal.ZonedDateTime.from('2024-08-05T04:00:00+01:00[Europe/Berlin]'),
+      end: Temporal.ZonedDateTime.from('2024-08-05T06:00:00+01:00[Europe/Berlin]'),
+      rrule: 'FREQ=MONTHLY;BYDAY=1MO;COUNT=12',
+    },
+    {
       rrule: 'FREQ=YEARLY;COUNT=5',
       title: 'Event on the 8th of February for 5 years',
       start: Temporal.ZonedDateTime.from('2024-02-08T16:00:00+01:00[Europe/Berlin]'),
@@ -96,7 +103,7 @@ const calendar = createCalendar({
 | FREQ                                         | `DAILY`, `WEEKLY`, `MONTHLY` or `YEARLY`                                                                                                                                             | Yes      |
 | COUNT                                        | Number                                                                                                                                                                               | No       |
 | INTERVAL                                     | Number                                                                                                                                                                               | No       |
-| BYDAY - compatible with `DAILY` and `WEEKLY` | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
+| BYDAY - compatible with all frequencies      | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`. Can optionally be prefixed with a position (e.g., `1MO` for first Monday, `-1FR` for last Friday) but can't be updated using drag & drop.  | No       |
 | BYMONTHDAY  - compatible with `MONTHLY`      | (Single) Positive integer 1-31. Does not support list of values, since such lists cannot be updated in a predictable way using drag & drop.                                          | No       |
 | UNTIL                                        | Floating [date](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.4), for example `20240101` or [date-time](https://www.rfc-editor.org/rfc/rfc5545#section-3.3.5) `20240101T120000` | No       |
 | WKST                                         | `MO`, `TU`, `WE`, `TH`, `FR`, `SA`, `SU`                                                                                                                                             | No       |
