@@ -4,6 +4,8 @@ import MonthView from './month-view'
 import YearsView from './years-view'
 import { AppContext } from '../utils/stateful/app-context'
 import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
+import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
+import { getInputWrapperElement } from './__test__/app-input/utils'
 
 const POPUP_CLASS_NAME = 'sx__date-picker-popup'
 
@@ -14,6 +16,24 @@ export default function AppPopup() {
     DatePickerView.MONTH_DAYS
   )
 
+  const getDynamicPlacement = (): Placement => {
+    const inputWrapperEl = getInputWrapperElement()
+    if (inputWrapperEl) {
+      const rect = inputWrapperEl.getBoundingClientRect()
+      const viewportCenterX = window.innerWidth / 2
+      const isMoreOnLeftSide = rect.x + rect.width / 2 <= viewportCenterX
+      const prefersTop = $app.config.placement?.includes('top')
+      return prefersTop
+        ? isMoreOnLeftSide
+          ? Placement.TOP_START
+          : Placement.TOP_END
+        : isMoreOnLeftSide
+          ? Placement.BOTTOM_START
+          : Placement.BOTTOM_END
+    }
+    return Placement.BOTTOM_END
+  }
+
   const classList = useMemo(() => {
     const returnValue = [
       POPUP_CLASS_NAME,
@@ -21,7 +41,8 @@ export default function AppPopup() {
       $app.config.teleportTo ? 'is-teleported' : '',
     ]
     if ($app.config.placement && !$app.config.teleportTo) {
-      returnValue.push($app.config.placement)
+      const placement = getDynamicPlacement()
+      returnValue.push(placement)
     }
 
     return returnValue
@@ -29,6 +50,7 @@ export default function AppPopup() {
     $app.datePickerState.isDark.value,
     $app.config.placement,
     $app.config.teleportTo,
+    $app.datePickerState.inputWrapperElement.value,
   ])
 
   const clickOutsideListener = (event: Event) => {
@@ -66,11 +88,13 @@ export default function AppPopup() {
     if (inputWrapperEl === undefined || !(inputRect instanceof DOMRect))
       return undefined
 
+    const placement = getDynamicPlacement()
+
     return {
-      top: $app.config.placement.includes('bottom')
+      top: placement.includes('bottom')
         ? inputRect.height + inputRect.y + 1 // 1px border
         : inputRect.y - remSize - popupHeight, // subtract remsize to leave room for label text
-      left: $app.config.placement.includes('start')
+      left: placement.includes('start')
         ? inputRect.x
         : inputRect.x + inputRect.width - popupWidth,
       width: popupWidth,

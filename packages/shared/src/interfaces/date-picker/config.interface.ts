@@ -8,7 +8,7 @@ import { IANATimezone } from '../../utils/stateless/time/tzdb'
 export default interface DatePickerConfigInternal extends Config {
   min: Temporal.PlainDate
   max: Temporal.PlainDate
-  placement: Placement
+  placement: Placement | (() => Placement)
   listeners: DatePickerListeners
   style: DatePickerStyle
   teleportTo?: HTMLElement
