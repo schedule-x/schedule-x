@@ -51,15 +51,6 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   return rrule
 }
 
-export const parseSXToRFC5545 = (datetime: string): string => {
-  datetime = datetime.replace(/-/g, '')
-  datetime = datetime.replace(/:/g, '')
-  datetime = datetime.replace(' ', 'T')
-  if (/T\d{4}$/.test(datetime)) datetime += '00' // add seconds if not present
-
-  return datetime
-}
-
 export const parseTemporalToRFC5545 = (
   dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate
 ): string => {
@@ -140,12 +131,4 @@ export const parseRFC5545ToTemporal = (
   }
 
   throw new Error(`Invalid RFC5545 format: ${dateOrDatetime}`)
-}
-
-export const parseRFC5545ToSX = (datetime: string): string => {
-  datetime = datetime.replace('T', ' ')
-  datetime = datetime.replace(/^(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')
-  datetime = datetime.replace(/(\d{2})(\d{2})(\d{2})$/, '$1:$2')
-
-  return datetime
 }

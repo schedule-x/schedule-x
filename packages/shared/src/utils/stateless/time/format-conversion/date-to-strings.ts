@@ -17,23 +17,3 @@ export const toDateTimeString = (date: Temporal.ZonedDateTime): string => {
 export const jsDateToTimeString = (date: Date): string => {
   return `${doubleDigit(date.getHours())}:${doubleDigit(date.getMinutes())}`
 }
-
-/**
- * @deprecated
- *
- * was kept during Temporal migration, to reduce risk in recurrence package, which internally still uses non-Temporal formats
- */
-export const __deprecated__jsDateToDateString = (date: Date): string => {
-  return `${date.getFullYear()}-${doubleDigit(
-    date.getMonth() + 1
-  )}-${doubleDigit(date.getDate())}`
-}
-
-/**
- * @deprecated
- *
- * was kept during Temporal migration, to reduce risk in recurrence package, which internally still uses non-Temporal formats
- */
-export const __deprecated__jsDatetToDateTimeString = (date: Date): string => {
-  return `${__deprecated__jsDateToDateString(date)} ${jsDateToTimeString(date)}`
-}
