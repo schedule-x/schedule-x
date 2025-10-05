@@ -23,7 +23,7 @@ const datePicker = createDatePicker({
   // locale: 'sv-SE',
   firstDayOfWeek: WeekDay.MONDAY,
   // selectedDate: Temporal.PlainDate.from('1991-07-13'),
-  // placement: 'top-end',
+  placement: 'bottom-start',
   // min: '2021-03-01',
   // max: '2021-03-31',
   // listeners: {

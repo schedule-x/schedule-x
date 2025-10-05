@@ -1,5 +1,5 @@
 import Config from '../config.interface'
-import { Placement } from './placement.enum'
+import { DynamicPlacement, Placement } from './placement.enum'
 import { DatePickerListeners } from './listeners.interface'
 import { DatePickerStyle } from './style.interface'
 import { WeekDay } from '../../enums/time/week-day.enum'
@@ -8,7 +8,7 @@ import { IANATimezone } from '../../utils/stateless/time/tzdb'
 export default interface DatePickerConfigInternal extends Config {
   min: Temporal.PlainDate
   max: Temporal.PlainDate
-  placement: Placement | (() => Placement)
+  placement: DynamicPlacement
   listeners: DatePickerListeners
   style: DatePickerStyle
   teleportTo?: HTMLElement

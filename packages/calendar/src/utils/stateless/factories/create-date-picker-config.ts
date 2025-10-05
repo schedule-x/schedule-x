@@ -1,23 +1,25 @@
 import { CalendarConfigExternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import { ConfigBuilder as DatePickerConfigBuilder } from '@schedule-x/date-picker/src/utils/stateful/config/config.builder'
 import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
-import { getDirection } from '../get-direction'
 
 export const createDatePickerConfig = (
   config: CalendarConfigExternal,
   dateSelectionCallback: (date: Temporal.PlainDate) => void
 ) => {
-  const isRtl = getDirection() === 'rtl'
   let teleportTo: HTMLElement | undefined
   if (config.datePicker?.teleportTo) {
     teleportTo = config.datePicker.teleportTo
-  } else if (isRtl) {
-    teleportTo = document.body
   }
 
-  let placement = Placement.BOTTOM_END
-  if (isRtl) {
-    placement = Placement.BOTTOM_START
+  const dynamicPlacement = (datePickerWrapper: HTMLDivElement): Placement => {
+    console.log(datePickerWrapper)
+    if (datePickerWrapper) {
+      const rect = datePickerWrapper.getBoundingClientRect()
+      const viewportCenterX = window.innerWidth / 2
+      const isMoreOnLeftSide = rect.x + rect.width / 2 <= viewportCenterX
+      return isMoreOnLeftSide ? Placement.BOTTOM_START : Placement.BOTTOM_END
+    }
+    return Placement.BOTTOM_END
   }
 
   return new DatePickerConfigBuilder()
@@ -28,7 +30,7 @@ export const createDatePickerConfig = (
     .withMax(config.maxDate)
     .withTeleportTo(teleportTo)
     .withStyle(config.datePicker?.style)
-    .withPlacement(placement)
+    .withPlacement(dynamicPlacement)
     .withListeners({ onChange: dateSelectionCallback })
     .build()
 }

@@ -4,35 +4,19 @@ import MonthView from './month-view'
 import YearsView from './years-view'
 import { AppContext } from '../utils/stateful/app-context'
 import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom/scrolling'
-import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
-import { getInputWrapperElement } from './__test__/app-input/utils'
 
 const POPUP_CLASS_NAME = 'sx__date-picker-popup'
 
-export default function AppPopup() {
+type Props = {
+  wrapperEl: HTMLDivElement | null
+}
+
+export default function AppPopup({ wrapperEl }: Props) {
   const $app = useContext(AppContext)
 
   const [datePickerView, setDatePickerView] = useState<DatePickerView>(
     DatePickerView.MONTH_DAYS
   )
-
-  const getDynamicPlacement = (): Placement => {
-    const inputWrapperEl = getInputWrapperElement()
-    if (inputWrapperEl) {
-      const rect = inputWrapperEl.getBoundingClientRect()
-      const viewportCenterX = window.innerWidth / 2
-      const isMoreOnLeftSide = rect.x + rect.width / 2 <= viewportCenterX
-      const prefersTop = $app.config.placement?.includes('top')
-      return prefersTop
-        ? isMoreOnLeftSide
-          ? Placement.TOP_START
-          : Placement.TOP_END
-        : isMoreOnLeftSide
-          ? Placement.BOTTOM_START
-          : Placement.BOTTOM_END
-    }
-    return Placement.BOTTOM_END
-  }
 
   const classList = useMemo(() => {
     const returnValue = [
@@ -40,8 +24,11 @@ export default function AppPopup() {
       $app.datePickerState.isDark.value ? 'is-dark' : '',
       $app.config.teleportTo ? 'is-teleported' : '',
     ]
-    if ($app.config.placement && !$app.config.teleportTo) {
-      const placement = getDynamicPlacement()
+    if ($app.config.placement && !$app.config.teleportTo && wrapperEl) {
+      const placement =
+        typeof $app.config.placement === 'function'
+          ? $app.config.placement(wrapperEl)
+          : $app.config.placement
       returnValue.push(placement)
     }
 
@@ -50,7 +37,6 @@ export default function AppPopup() {
     $app.datePickerState.isDark.value,
     $app.config.placement,
     $app.config.teleportTo,
-    $app.datePickerState.inputWrapperElement.value,
   ])
 
   const clickOutsideListener = (event: Event) => {
@@ -87,6 +73,13 @@ export default function AppPopup() {
     const inputRect = inputWrapperEl?.getBoundingClientRect()
     if (inputWrapperEl === undefined || !(inputRect instanceof DOMRect))
       return undefined
+
+    // const resolvedPlacement =
+    //   typeof $app.config.placement === 'function'
+    //     ? (wrapperEl ? $app.config.placement(wrapperEl) : undefined)
+    //     : $app.config.placement
+
+    // if (!resolvedPlacement) return undefined
 
     return {
       top: $app.config.placement.includes('bottom')
