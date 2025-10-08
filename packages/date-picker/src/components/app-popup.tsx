@@ -26,7 +26,7 @@ export default function AppPopup({ wrapperEl }: Props) {
     ]
     if ($app.config.placement && !$app.config.teleportTo && wrapperEl) {
       const placement =
-        typeof $app.config.placement === 'function'
+        $app.config.placement instanceof Function
           ? $app.config.placement(wrapperEl)
           : $app.config.placement
       returnValue.push(placement)
