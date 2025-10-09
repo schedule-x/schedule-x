@@ -74,18 +74,20 @@ export default function AppPopup({ wrapperEl }: Props) {
     if (inputWrapperEl === undefined || !(inputRect instanceof DOMRect))
       return undefined
 
-    // const resolvedPlacement =
-    //   typeof $app.config.placement === 'function'
-    //     ? (wrapperEl ? $app.config.placement(wrapperEl) : undefined)
-    //     : $app.config.placement
+    const resolvedPlacement =
+      typeof $app.config.placement === 'function'
+        ? wrapperEl
+          ? $app.config.placement(wrapperEl)
+          : 'bottom-end'
+        : $app.config.placement
 
-    // if (!resolvedPlacement) return undefined
+    if (!resolvedPlacement) return undefined
 
     return {
-      top: $app.config.placement.includes('bottom')
+      top: resolvedPlacement.includes('bottom')
         ? inputRect.height + inputRect.y + 1 // 1px border
         : inputRect.y - remSize - popupHeight, // subtract remsize to leave room for label text
-      left: $app.config.placement.includes('start')
+      left: resolvedPlacement.includes('start')
         ? inputRect.x
         : inputRect.x + inputRect.width - popupWidth,
       width: popupWidth,
