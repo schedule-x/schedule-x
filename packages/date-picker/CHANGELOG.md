@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/schedule-x/schedule-x/compare/v3.2.0...v3.3.0) (2025-10-12)
+
+### Bug Fixes
+
+- date picker popup overflow ([#1208](https://github.com/schedule-x/schedule-x/issues/1208)) ([be38007](https://github.com/schedule-x/schedule-x/commit/be38007fdcf88d05b9e6aaee2e2c439b3311a11b))
+
 # [3.2.0](https://github.com/schedule-x/schedule-x/compare/v3.1.2...v3.2.0) (2025-09-20)
 
 **Note:** Version bump only for package @schedule-x/date-picker
