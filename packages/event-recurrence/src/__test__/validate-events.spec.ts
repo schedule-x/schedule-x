@@ -4,8 +4,12 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
+import type CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { createEventsServicePlugin } from '../events-service-plugin.impl'
 import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless/testing/__create-app-with-views__'
+
+const toExternalEvent = (event: { id: string; start: string; end: string }) =>
+  event as unknown as CalendarEventExternal
 
 describe('validating events when adding them', () => {
   describe('when adding valid events with .set', () => {
@@ -50,7 +54,7 @@ describe('validating events when adding them', () => {
       const $app = __createAppWithViews__()
       eventsService.beforeRender($app)
 
-      expect(() => eventsService.set([event])).toThrow()
+      expect(() => eventsService.set([toExternalEvent(event)])).toThrow()
     })
   })
 
@@ -96,7 +100,7 @@ describe('validating events when adding them', () => {
       const $app = __createAppWithViews__()
       eventsService.beforeRender($app)
 
-      expect(() => eventsService.add(event)).toThrow()
+      expect(() => eventsService.add(toExternalEvent(event))).toThrow()
     })
   })
 
@@ -142,7 +146,7 @@ describe('validating events when adding them', () => {
       const $app = __createAppWithViews__()
       eventsService.beforeRender($app)
 
-      expect(() => eventsService.update(event)).toThrow()
+      expect(() => eventsService.update(toExternalEvent(event))).toThrow()
     })
   })
 })

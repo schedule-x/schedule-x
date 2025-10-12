@@ -9,6 +9,7 @@ export interface RRuleOptions {
   count?: number
   byday?: string[]
   bymonthday?: number
+  bymonth?: number
   wkst?: RFC5455Weekday
 }
 

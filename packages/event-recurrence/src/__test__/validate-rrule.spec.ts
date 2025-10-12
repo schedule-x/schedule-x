@@ -246,4 +246,46 @@ describe('validateRrule', () => {
       })
     })
   })
+
+  describe('BYDAY validation', () => {
+    it('should return false and log warning when BYDAY contains invalid position', () => {
+      const eventWithRRule: CalendarEventExternal = {
+        id: 'invalid-position',
+        title: 'Monthly event',
+        start: Temporal.PlainDate.from('2025-01-06'),
+        end: Temporal.PlainDate.from('2025-01-06'),
+        rrule: 'FREQ=MONTHLY;BYDAY=0MO;COUNT=2',
+      }
+      const $app = __createAppWithViews__({
+        events: [eventWithRRule],
+      })
+
+      createEventRecurrencePlugin().beforeRender!($app)
+
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        '[Schedule-X warning]: Recurrence set could not be created for event with id invalid-position, because rrule contains invalid BYDAY value 0MO'
+      )
+      expect($app.calendarEvents.list.value).toHaveLength(1)
+    })
+
+    it('should return false and log warning when BYDAY contains invalid weekday', () => {
+      const backgroundEvent: BackgroundEvent = {
+        title: 'Monthly background event',
+        start: Temporal.PlainDate.from('2025-01-06'),
+        end: Temporal.PlainDate.from('2025-01-06'),
+        rrule: 'FREQ=MONTHLY;BYDAY=1XY;COUNT=2',
+        style: { backgroundColor: 'red' },
+      }
+      const $app = __createAppWithViews__({
+        backgroundEvents: [backgroundEvent],
+      })
+
+      createEventRecurrencePlugin().beforeRender!($app)
+
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        '[Schedule-X warning]: Recurrence set could not be created for background event with start 2025-01-06, because rrule contains invalid BYDAY value 1XY'
+      )
+      expect($app.calendarEvents.backgroundEvents.value).toHaveLength(1)
+    })
+  })
 })
