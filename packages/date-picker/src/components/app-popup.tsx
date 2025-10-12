@@ -7,7 +7,11 @@ import { getScrollableParents } from '@schedule-x/shared/src/utils/stateless/dom
 
 const POPUP_CLASS_NAME = 'sx__date-picker-popup'
 
-export default function AppPopup() {
+type Props = {
+  wrapperEl: HTMLDivElement | null
+}
+
+export default function AppPopup({ wrapperEl }: Props) {
   const $app = useContext(AppContext)
 
   const [datePickerView, setDatePickerView] = useState<DatePickerView>(
@@ -20,8 +24,12 @@ export default function AppPopup() {
       $app.datePickerState.isDark.value ? 'is-dark' : '',
       $app.config.teleportTo ? 'is-teleported' : '',
     ]
-    if ($app.config.placement && !$app.config.teleportTo) {
-      returnValue.push($app.config.placement)
+    if ($app.config.placement && !$app.config.teleportTo && wrapperEl) {
+      const placement =
+        $app.config.placement instanceof Function
+          ? $app.config.placement(wrapperEl)
+          : $app.config.placement
+      returnValue.push(placement)
     }
 
     return returnValue
@@ -66,11 +74,20 @@ export default function AppPopup() {
     if (inputWrapperEl === undefined || !(inputRect instanceof DOMRect))
       return undefined
 
+    const resolvedPlacement =
+      typeof $app.config.placement === 'function'
+        ? wrapperEl
+          ? $app.config.placement(wrapperEl)
+          : 'bottom-end'
+        : $app.config.placement
+
+    if (!resolvedPlacement) return undefined
+
     return {
-      top: $app.config.placement.includes('bottom')
+      top: resolvedPlacement.includes('bottom')
         ? inputRect.height + inputRect.y + 1 // 1px border
         : inputRect.y - remSize - popupHeight, // subtract remsize to leave room for label text
-      left: $app.config.placement.includes('start')
+      left: resolvedPlacement.includes('start')
         ? inputRect.x
         : inputRect.x + inputRect.width - popupWidth,
       width: popupWidth,

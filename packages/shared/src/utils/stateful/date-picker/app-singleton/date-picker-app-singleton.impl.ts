@@ -11,6 +11,7 @@ export default class DatePickerAppSingletonImpl
     public datePickerState: DatePickerState,
     public config: DatePickerConfigInternal,
     public timeUnitsImpl: TimeUnits,
-    public translate: TranslateFn
+    public translate: TranslateFn,
+    public elements = {}
   ) {}
 }

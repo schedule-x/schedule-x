@@ -17,9 +17,11 @@ export const renderComponent = (
       onEscapeKeyDown,
     },
   })
+  const DatePickerWrapper = document.createElement('div')
+  app.elements = { DatePickerWrapper }
   const { container } = render(
     <AppContext.Provider value={app}>
-      <AppPopup />
+      <AppPopup wrapperEl={DatePickerWrapper} />
     </AppContext.Provider>
   )
 

@@ -2,7 +2,7 @@ import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import { ConfigImpl } from './config.impl'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
-import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
+import { DynamicPlacement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
 
@@ -14,7 +14,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
   timezone: IANATimezone | undefined
   min: Temporal.PlainDate | undefined
   max: Temporal.PlainDate | undefined
-  placement: Placement | undefined
+  placement: DynamicPlacement | undefined
   listeners: DatePickerListeners | undefined
   style: DatePickerStyle | undefined
   teleportTo?: HTMLElement
@@ -71,7 +71,7 @@ export class ConfigBuilder implements Builder<DatePickerConfigInternal> {
     return this
   }
 
-  withPlacement(placement: Placement | undefined): ConfigBuilder {
+  withPlacement(placement: DynamicPlacement | undefined): ConfigBuilder {
     this.placement = placement
 
     return this

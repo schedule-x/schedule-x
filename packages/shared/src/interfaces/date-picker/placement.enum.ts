@@ -4,3 +4,7 @@ export enum Placement {
   BOTTOM_START = 'bottom-start',
   BOTTOM_END = 'bottom-end',
 }
+
+export type DynamicPlacement =
+  | Placement
+  | ((calendarWrapper: HTMLDivElement) => Placement)

@@ -4,7 +4,10 @@ import {
   DEFAULT_LOCALE,
 } from '@schedule-x/shared/src/values'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
-import { Placement } from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
+import {
+  DynamicPlacement,
+  Placement,
+} from '@schedule-x/shared/src/interfaces/date-picker/placement.enum'
 import { DatePickerListeners } from '@schedule-x/shared/src/interfaces/date-picker/listeners.interface'
 import { DatePickerStyle } from '@schedule-x/shared/src/interfaces/date-picker/style.interface'
 import { signal, Signal } from '@preact/signals'
@@ -30,7 +33,7 @@ export class ConfigImpl implements DatePickerConfigInternal {
       month: 11,
       day: 31,
     }),
-    public placement: Placement = Placement.BOTTOM_START,
+    public placement: DynamicPlacement = Placement.BOTTOM_START,
     public listeners: DatePickerListeners = {},
     public style: DatePickerStyle = {},
     public teleportTo?: HTMLElement,

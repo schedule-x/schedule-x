@@ -18,6 +18,24 @@
     transform: translateX(0);
   }
 
+  &.bottom-end[dir="rtl"] {
+    right: auto;
+    left: 0;
+    transform: translateX(0);
+  }
+
+  &.bottom-start {
+    left: 0;
+    right: auto;
+    transform: translateX(0);
+  }
+
+  &.bottom-start[dir="rtl"] {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+  }
+
   &.top-start {
     inset: auto auto $top-placement-bottom-value 0;
     transform: translateX(0);
