@@ -12,7 +12,6 @@ export const createDatePickerConfig = (
   }
 
   const dynamicPlacement = (datePickerWrapper: HTMLDivElement): Placement => {
-    console.log(datePickerWrapper)
     if (datePickerWrapper) {
       const rect = datePickerWrapper.getBoundingClientRect()
       const viewportCenterX = window.innerWidth / 2
