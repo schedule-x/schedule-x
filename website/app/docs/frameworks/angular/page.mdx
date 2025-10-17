@@ -10,14 +10,6 @@ This page offers documentation for using the Schedule-X calendar in Angular. For
 configuring the calendar, refer to the rest of the documentation. If you are using
 Schedule-X in an app with SSR, you need to make sure the component only renders in the browser.
 
-import {Callout} from "nextra/components";
-
-<Callout type="warning">
-  The Angular component is not yet migrated to v3 & Temporal API.
-
-  If you want to use the Temporal API with SX and Angular already, you can use the [vanilla JS component](/docs/calendar), or help us migrate the Angular component to v3.
-</Callout>
-
 ## Installing
 
 import { Tabs } from 'nextra/components'
@@ -53,6 +45,7 @@ import { RouterOutlet } from '@angular/router';
 import { CalendarComponent } from "@schedule-x/angular";
 import { createCalendar, createViewWeek } from "@schedule-x/calendar";
 import '@schedule-x/theme-default/dist/index.css' // can alternatively be added in your angular.json
+import 'temporal-polyfill/global';
 
 @Component({
   selector: 'app-root',
@@ -68,8 +61,9 @@ export class AppComponent {
       {
         id: '1',
         title: 'Event 1',
-        start: '2024-06-11 03:00',
-        end: '2024-06-11 05:00',
+        start: Temporal.Now.zonedDateTimeISO(),
+        end: Temporal.Now.zonedDateTimeISO().add({ hours: 1 }),
+
       },
     ],
     views: [createViewWeek()],
