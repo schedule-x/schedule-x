@@ -232,6 +232,10 @@ export type ResourceViewConfig = {
   // should resizing be enabled
   resize: Signal<boolean>
 
+  // can be used to set the day boundaries of the hourly view
+  // start and end can be integers between 0 and 23, representing the hour of the day
+  dayBoundaries: Signal<{ start: number, end: number }>
+
   // should infinite scroll be enabled
   infiniteScroll: Signal<boolean>
 
