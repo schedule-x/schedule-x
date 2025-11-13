@@ -16,6 +16,9 @@ const meta: MetaRecord = {
   "timezone-select": {
     "title": "Timezone Select"
   },
+  "ical": {
+    "title": "ICalendar"
+  },
   "interactive-event-modal": {
     "title": "⭐ Interactive Event Modal"
   },

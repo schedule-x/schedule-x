@@ -21,7 +21,7 @@ Additionally, there were some other breaking changes to the UI and plugins ecosy
 - `ResourceViewConfig.onLazyLoadDate` and `ResourceViewConfig.onLazyLoadMonth` for @sx-premium/resource-scheduler now expect `Temporal.PlainDate` instances, rather than strings.
 - Time grid events (in day- and week views), now reactively display title and time inline, if there is no vertical space to display them in two lines.
 - The view select element now features a chevron icon, to indicate that it is a dropdown.
-- The ical plugin is now deprecated. Since Schedule-X has migrated away from its own custom date-time format, it seems redundant to support another, older standardized format.
+- The iCalendar plugin returned in v3.2 with Temporal support, but it assumes all timestamps are UTC. Keep the calendar timezone at `UTC` to preserve the legacy behaviour or pre-process the events if you need timezone-aware rendering.
 
 The docs for v2 can still be found at https://v2.schedule-x.dev
 
