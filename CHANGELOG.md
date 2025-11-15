@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/schedule-x/schedule-x/compare/v3.3.0...v3.4.0) (2025-11-15)
+
+### Features
+
+- ical v3 ([#1221](https://github.com/schedule-x/schedule-x/issues/1221)) ([c0cee73](https://github.com/schedule-x/schedule-x/commit/c0cee731effd4b92ab9b7c3e0320d29f6d2076e1))
+- **translations:** add Norwegian Bokmål translations ([#1217](https://github.com/schedule-x/schedule-x/issues/1217)) ([1421352](https://github.com/schedule-x/schedule-x/commit/14213523e3ac0471cfdb641b18c8b82c54075c5a))
+
 # [3.3.0](https://github.com/schedule-x/schedule-x/compare/v3.2.0...v3.3.0) (2025-10-12)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/schedule-x/schedule-x/compare/v3.3.0...v3.4.0) (2025-11-15)
+
+### Features
+
+- ical v3 ([#1221](https://github.com/schedule-x/schedule-x/issues/1221)) ([c0cee73](https://github.com/schedule-x/schedule-x/commit/c0cee731effd4b92ab9b7c3e0320d29f6d2076e1))
+
 # [2.36.0](https://github.com/schedule-x/schedule-x/compare/v2.35.0...v2.36.0) (2025-07-09)
 
 **Note:** Version bump only for package @schedule-x/ical
