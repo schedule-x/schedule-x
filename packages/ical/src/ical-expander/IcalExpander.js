@@ -45,8 +45,10 @@ export class IcalExpander {
     }
 
     function getTimes(eventOrOccurrence) {
-      const startTime = eventOrOccurrence.startDate.toJSDate().getTime()
-      let endTime = eventOrOccurrence.endDate.toJSDate().getTime()
+      // [Schedule-X edit] This has been modified to use the Unix time instead of the JS date time
+      const toMs = (icalTime) => icalTime.toUnixTime() * 1000
+      const startTime = toMs(eventOrOccurrence.startDate)
+      let endTime = toMs(eventOrOccurrence.endDate)
 
       // If it is an all day event, the end date is set to 00:00 of the next day
       // So we need to make it be 23:59:59 to compare correctly with the given range
