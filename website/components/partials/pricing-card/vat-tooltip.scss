@@ -1,0 +1,64 @@
+.vat-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15em;
+  cursor: help;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: #696363;
+  margin-top: 0.5rem;
+}
+
+.vat-asterisk {
+  color: #6750a4;
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: baseline;
+}
+
+.vat-text {
+  line-height: 1;
+}
+
+.vat-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.5rem;
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  width: 280px;
+  max-width: calc(100vw - 2rem);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  pointer-events: none;
+  white-space: normal;
+  word-wrap: break-word;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #1a1a1a;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  @media (width <= 400px) {
+    width: 240px;
+    font-size: 0.8125rem;
+    padding: 0.625rem 0.875rem;
+  }
+}
+

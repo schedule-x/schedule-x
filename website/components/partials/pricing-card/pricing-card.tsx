@@ -1,5 +1,7 @@
 import AppCheckmark from "./checkmark";
 import AppDropdown from "../app-dropdown/app-dropdown";
+import VatTooltip from "./vat-tooltip";
+import "./vat-tooltip.scss";
 
 export type ProductVariant = {
   label: string;
@@ -26,6 +28,8 @@ type props = {
 }
 
 export default function PricingCard({ data, buttonClass, onSelectVariant, price, isPriceYearly, startCheckout, licenseType }: props) {
+  const showVatTooltip = licenseType === 'yearly' || licenseType === 'lifetime';
+
   return (
     <div className="pricing-card">
       <h3 className="heading-font">
@@ -38,13 +42,19 @@ export default function PricingCard({ data, buttonClass, onSelectVariant, price,
         <AppDropdown onSelect={onSelectVariant} items={data.variants} selectedItem={data.variants[0]} />
       )}
 
-      <h4 className="pricing-card-price">
-        €{price}
+      <div className="pricing-card-price-wrapper">
+        <h4 className="pricing-card-price">
+          €{price}
 
-        {isPriceYearly && (
-          <span className="pricing-card-price-period">/ year</span>
+          {isPriceYearly && (
+            <span className="pricing-card-price-period">/ year</span>
+          )}
+        </h4>
+        
+        {showVatTooltip && (
+          <VatTooltip />
         )}
-      </h4>
+      </div>
 
       <ul className="pricing-card-features">
         {data.features.map((feature, index) => (

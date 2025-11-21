@@ -10,7 +10,7 @@
     "price"
     "features"
     "button";
-  grid-template-rows: auto 60px 60px 75px 100px auto;
+  grid-template-rows: auto 60px 60px auto 100px auto;
   background-color: #fff;
   border-radius: 1rem;
   padding: 2rem;
@@ -33,11 +33,18 @@
     margin-bottom: 1rem;
   }
 
-  .pricing-card-price {
+  .pricing-card-price-wrapper {
     grid-area: price;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .pricing-card-price {
     font-size: 2rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin: 0;
   }
 
   .pricing-card-price-period {
@@ -45,6 +52,7 @@
     font-size: 1.25rem;
     color: #696363;
   }
+
 
   .app-dropdown {
     grid-area: developers;
