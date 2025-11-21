@@ -5,7 +5,7 @@ description: 'Add a current time indicator to the calendar.'
 
 # Current time indicator
 
-This plugin adds a current time indicator to the calendar. It will automatically update every minute.
+This plugin adds a current time indicator to the calendar, according to the timezone of the calendar. This defaults to UTC if not configured otherwise. It will automatically update every minute.
 
 ![Current time indicator](../../../../../assets/current-time.png)
 
@@ -35,8 +35,5 @@ const calendar = createCalendar({
 createCurrentTimePlugin({
   // Whether the indicator should be displayed in the full width of the week. Defaults to false
   fullWeekWidth: true,
-
-  // Time zone offset in minutes. Can be any offset valid according to UTC (-720 to 840)
-  timeZoneOffset: 120
 })
 ```
