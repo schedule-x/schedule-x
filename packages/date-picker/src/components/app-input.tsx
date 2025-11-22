@@ -109,7 +109,7 @@ export default function AppInput() {
           aria-label={$app.translate('Choose Date')}
           onKeyDown={handleButtonKeyDown}
           onClick={() => $app.datePickerState.open()}
-          className="sx__date-input-chevron-wrapper"
+          className="sx__button sx__date-input-chevron-wrapper"
         >
           <img className="sx__date-input-chevron" src={chevronIcon} alt="" />
         </button>

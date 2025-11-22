@@ -180,14 +180,13 @@ plugins: [
       },
     },
   },
-  minDate: Temporal.PlainDate.from('2025-08-13'),
-  maxDate: Temporal.PlainDate.from('2025-09-14'),
   dayBoundaries: {
     start: '06:00',
     end: '03:00',
   },
   weekOptions: {
-    gridStep: 15,
+    gridStep: 30,
+    gridHeight: 2000,
   },
   backgroundEvents: [
     {

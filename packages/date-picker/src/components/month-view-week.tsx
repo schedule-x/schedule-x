@@ -84,7 +84,7 @@ export default function MonthViewWeek({ week }: props) {
               $app.datePickerState.datePickerDate.value,
               $app.config.locale.value
             )}
-            className={weekDay.classes.join(' ')}
+            className={`sx__button ${weekDay.classes.join(' ')}`}
             data-focus={hasFocus(weekDay) ? 'true' : undefined}
             onClick={() => selectDate(weekDay.day)}
             onKeyDown={handleKeyDown}

@@ -29,7 +29,7 @@ export default function YearsViewAccordion({
       <li className={isExpanded ? 'sx__is-expanded' : ''}>
         <button
           type="button"
-          className="sx__date-picker__years-accordion__expand-button sx__ripple--wide"
+          className="sx__button sx__date-picker__years-accordion__expand-button sx__ripple--wide"
           onClick={() => expand(year)}
         >
           {year}
@@ -39,7 +39,7 @@ export default function YearsViewAccordion({
             {yearWithDates.map((month) => (
               <button
                 type="button"
-                className="sx__date-picker__years-view-accordion__month"
+                className="sx__button sx__date-picker__years-view-accordion__month"
                 onClick={(event) => handleClickOnMonth(event, month)}
               >
                 {toLocalizedMonth(month, $app.config.locale.value)}
