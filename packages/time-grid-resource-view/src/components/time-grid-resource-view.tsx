@@ -12,6 +12,7 @@ import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-c
 import TimeGridResourceDay from './time-grid-resource-day'
 import TimeAxis from './time-axis'
 import DateAxis from './date-axis'
+import ResourceAxis from './resource-axis'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
 export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
@@ -119,6 +120,11 @@ export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
             {/* Date grid will be implemented later */}
           </div>
 
+          <ResourceAxis
+            weekDates={weekDates}
+            sortedResources={sortedResources}
+          />
+
           <div className="sx__week-header-border" />
         </div>
       </div>
@@ -147,15 +153,21 @@ export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
                 minWidth: 0,
               }}
             >
-              {sortedResources.map((resource) => {
+              {sortedResources.map((resource, resourceIndex) => {
                 const resourceWeek = week.value.weekByResource?.[resource.id]
                 const resourceDay = resourceWeek?.[date]
+                const isLastResource =
+                  resourceIndex === sortedResources.length - 1
+                const isLastDay =
+                  weekDates.indexOf(date) === weekDates.length - 1
+                const isLastResourceInLastDay = isLastResource && isLastDay
 
                 return (
                   <div
                     key={`${date}-${resource.id}`}
                     className="sx__time-grid-resource-column"
                     data-resource-id={resource.id}
+                    data-is-last-resource-in-last-day={isLastResourceInLastDay}
                     style={{
                       flex: 1,
                       display: 'flex',
@@ -163,18 +175,6 @@ export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
                       minWidth: 0,
                     }}
                   >
-                    <div
-                      className="sx__time-grid-resource-header"
-                      style={{
-                        padding: '8px',
-                        borderBottom: '1px solid #e2e8f0',
-                        borderRight: '1px solid #e2e8f0',
-                        fontWeight: 600,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {resource.label}
-                    </div>
                     <div style={{ flex: 1, minHeight: 0 }}>
                       <TimeGridResourceDay
                         calendarEvents={resourceDay?.timeGridEvents || []}

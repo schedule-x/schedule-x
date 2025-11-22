@@ -7,6 +7,7 @@ import '@fontsource/open-sans/700-italic.css'
 import '@fontsource/roboto-condensed'
 import { createCalendar } from '@schedule-x/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
+import '../../packages/time-grid-resource-view/src/styles/index.scss'
 import '../app.css'
 import { createViewTimeGridResource } from '../../packages/time-grid-resource-view/src/view-factory'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
@@ -163,12 +164,33 @@ const calendar = createCalendar({
       end: Temporal.ZonedDateTime.from('2025-11-21T10:30[Europe/London]'),
       resourceId: 'room-a',
     },
-    // Full day event
+    // Full day events
     {
       id: 20,
       title: 'Full Day Event',
       start: Temporal.PlainDate.from('2025-11-22'),
       end: Temporal.PlainDate.from('2025-11-22'),
+      resourceId: 'room-b',
+    },
+    {
+      id: 21,
+      title: 'Conference Day 1',
+      start: Temporal.PlainDate.from('2025-11-17'),
+      end: Temporal.PlainDate.from('2025-11-17'),
+      resourceId: 'room-a',
+    },
+    {
+      id: 22,
+      title: 'Training Session',
+      start: Temporal.PlainDate.from('2025-11-19'),
+      end: Temporal.PlainDate.from('2025-11-19'),
+      resourceId: 'room-a',
+    },
+    {
+      id: 23,
+      title: 'Maintenance Day',
+      start: Temporal.PlainDate.from('2025-11-21'),
+      end: Temporal.PlainDate.from('2025-11-21'),
       resourceId: 'room-b',
     },
   ],

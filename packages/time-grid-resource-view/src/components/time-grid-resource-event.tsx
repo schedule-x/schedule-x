@@ -53,6 +53,12 @@ export default function TimeGridResourceEvent({
   )
   const borderRule = getBorderRule(calendarEvent)
 
+  const eventCSSVariables = {
+    borderInlineStart: `4px solid var(--sx-color-${calendarEvent._color})`,
+    textColor: `var(--sx-color-on-${calendarEvent._color}-container)`,
+    backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
+  } as const
+
   const handleMouseDown = (e: MouseEvent) => {
     setMouseDown(true)
     if (
@@ -89,9 +95,12 @@ export default function TimeGridResourceEvent({
         height: `${height}%`,
         left: `${leftRule}%`,
         width: `${widthRule}%`,
-        borderLeft: borderRule,
-        backgroundColor: `var(--sx-color-${calendarEvent._color}-container)`,
-        color: `var(--sx-color-on-${calendarEvent._color}-container)`,
+        borderTop: borderRule,
+        borderInlineEnd: borderRule,
+        borderBottom: borderRule,
+        borderInlineStart: eventCSSVariables.borderInlineStart,
+        backgroundColor: eventCSSVariables.backgroundColor,
+        color: eventCSSVariables.textColor,
       }}
       onMouseDown={handleMouseDown}
       onClick={handleClick}
