@@ -13,7 +13,7 @@ export default function TodayButton() {
   return (
     <button
       type="button"
-      className={'sx__today-button sx__ripple'}
+      className={'sx__button sx__today-button sx__ripple'}
       onClick={setToday}
     >
       {$app.translate('Today')}

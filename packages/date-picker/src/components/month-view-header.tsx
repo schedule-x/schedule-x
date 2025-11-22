@@ -63,7 +63,7 @@ export default function MonthViewHeader({ setYearsView }: props) {
 
         <button
           type="button"
-          className="sx__date-picker__month-view-header__month-year"
+          className="sx__button sx__date-picker__month-view-header__month-year"
           onClick={(event) => handleOpenYearsView(event)}
         >
           {selectedDateMonthName + ' ' + datePickerYear}

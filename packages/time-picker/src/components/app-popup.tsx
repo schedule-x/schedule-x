@@ -164,7 +164,7 @@ export default function AppPopup() {
           <div className="sx__time-picker-12-hour-switches">
             <button
               type="button"
-              className={`sx__time-picker-12-hour-switch${$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
+              className={`sx__button sx__time-picker-12-hour-switch${$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
               onClick={() => ($app.timePickerState.isAM.value = true)}
             >
               {$app.translate('AM')}
@@ -172,7 +172,7 @@ export default function AppPopup() {
 
             <button
               type="button"
-              className={`sx__time-picker-12-hour-switch${!$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
+              className={`sx__button sx__time-picker-12-hour-switch${!$app.timePickerState.isAM.value ? ' is-selected' : ''}`}
               onClick={() => ($app.timePickerState.isAM.value = false)}
             >
               {$app.translate('PM')}
@@ -184,7 +184,7 @@ export default function AppPopup() {
       <div class="sx__time-picker-actions">
         <button
           type="button"
-          class="sx__time-picker-action sx__ripple sx__button-cancel"
+          class="sx__button sx__time-picker-action sx__ripple sx__button-cancel"
           onClick={() => ($app.timePickerState.isOpen.value = false)}
         >
           {$app.translate('Cancel')}
@@ -193,7 +193,7 @@ export default function AppPopup() {
         <button
           ref={OKButtonRef}
           type="button"
-          class="sx__time-picker-action sx__ripple sx__button-accept"
+          class="sx__button sx__time-picker-action sx__ripple sx__button-accept"
           onClick={handleAccept}
         >
           {$app.translate('OK')}
