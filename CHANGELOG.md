@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.2](https://github.com/schedule-x/schedule-x/compare/v3.4.1...v3.4.2) (2025-11-22)
+
+### Bug Fixes
+
+- lower specificity for button styles ([#1228](https://github.com/schedule-x/schedule-x/issues/1228)) ([0088053](https://github.com/schedule-x/schedule-x/commit/008805323253b67f5ccf2fa8e79199d9acf770d9))
+
 ## [3.4.1](https://github.com/schedule-x/schedule-x/compare/v3.4.0...v3.4.1) (2025-11-22)
 
 ### Bug Fixes
