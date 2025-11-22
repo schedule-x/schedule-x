@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.1](https://github.com/schedule-x/schedule-x/compare/v3.4.0...v3.4.1) (2025-11-22)
+
+### Bug Fixes
+
+- scope button styles ([#1227](https://github.com/schedule-x/schedule-x/issues/1227)) ([c27010e](https://github.com/schedule-x/schedule-x/commit/c27010eabd05f881e7b8ac0b329fb13db09aaf5b))
+
 # [3.4.0](https://github.com/schedule-x/schedule-x/compare/v3.3.0...v3.4.0) (2025-11-15)
 
 **Note:** Version bump only for package @schedule-x/date-picker
