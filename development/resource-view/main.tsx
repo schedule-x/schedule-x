@@ -27,6 +27,9 @@ const calendar = createCalendar({
   ],
   locale: 'en-US',
   timezone: 'Europe/London',
+  weekOptions: {
+    nDays: 5,
+  },
   events: [
     // Room A events (week of Nov 22, 2025)
     {
