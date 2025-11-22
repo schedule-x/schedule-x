@@ -44,3 +44,61 @@
     display: none;
   }
 }
+
+.sx__date-grid-resource {
+  padding-left: calc(var(--sx-calendar-week-grid-padding-left) + 1px);
+  display: flex;
+}
+
+.sx__date-grid-resource-day {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+.sx__date-grid-resource-column {
+  flex: 1;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--sx-color-outline-variant);
+    z-index: 1;
+  }
+
+  // Hide border for the last resource in the last day
+  &[data-is-last-resource-in-last-day='true']::before {
+    display: none;
+  }
+
+  // Match the date grid day styling from the normal week view
+  .sx__date-grid-day {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-gap: 2px;
+  }
+
+  // Match the date grid event styling from the normal week view
+  .sx__date-grid-event {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: var(--sx-spacing-padding1);
+    border-radius: var(--sx-rounding-extra-small);
+    font-size: clamp(12px, var(--sx-font-extra-small), 14px);
+    font-weight: 600;
+    user-select: none;
+    height: 20px;
+  }
+
+  .sx__date-grid-event-text {
+    width: calc(100% - var(--sx-spacing-padding1) * 2);
+  }
+}

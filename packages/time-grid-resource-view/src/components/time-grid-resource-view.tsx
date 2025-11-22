@@ -5,6 +5,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { createWeek } from '../utils/create-week'
 import { sortEventsForTimeGrid } from '../utils/sort-events'
 import { positionInTimeGrid } from '../utils/position-in-time-grid'
+import { positionInDateGridResource } from '../utils/position-in-date-grid-resource'
 import { sortEventsByStartAndEnd } from '../utils/sort-by-start-date'
 import { Week } from '../types/week'
 import { Resource } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -13,6 +14,7 @@ import TimeGridResourceDay from './time-grid-resource-day'
 import TimeAxis from './time-axis'
 import DateAxis from './date-axis'
 import ResourceAxis from './resource-axis'
+import DateGridResource from './date-grid-resource'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 
 export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
@@ -66,10 +68,16 @@ export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
       // Create a week structure for this resource
       const resourceWeek = createWeek($app)
 
+      // Position date grid events for this resource (full-day and multi-day)
+      const weekWithDateGrid = positionInDateGridResource(
+        dateGridEvents,
+        resourceWeek
+      )
+
       // Position time grid events for this resource
       const positionedWeek = positionInTimeGrid(
         timeGridEvents,
-        resourceWeek,
+        weekWithDateGrid,
         $app
       )
 
@@ -116,13 +124,16 @@ export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
             $app={$app}
           />
 
-          <div className="sx__date-grid">
-            {/* Date grid will be implemented later */}
-          </div>
-
           <ResourceAxis
             weekDates={weekDates}
             sortedResources={sortedResources}
+          />
+
+          <DateGridResource
+            weekDates={weekDates}
+            sortedResources={sortedResources}
+            weekByResource={week.value.weekByResource || {}}
+            $app={$app}
           />
 
           <div className="sx__week-header-border" />

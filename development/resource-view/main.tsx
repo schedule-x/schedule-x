@@ -193,6 +193,56 @@ const calendar = createCalendar({
       end: Temporal.PlainDate.from('2025-11-21'),
       resourceId: 'room-b',
     },
+    // More full day events to create stacks
+    {
+      id: 24,
+      title: 'Workshop A',
+      start: Temporal.PlainDate.from('2025-11-17'),
+      end: Temporal.PlainDate.from('2025-11-17'),
+      resourceId: 'room-a',
+    },
+    {
+      id: 25,
+      title: 'Team Meeting',
+      start: Temporal.PlainDate.from('2025-11-17'),
+      end: Temporal.PlainDate.from('2025-11-17'),
+      resourceId: 'room-a',
+    },
+    {
+      id: 26,
+      title: 'Client Presentation',
+      start: Temporal.PlainDate.from('2025-11-19'),
+      end: Temporal.PlainDate.from('2025-11-19'),
+      resourceId: 'room-a',
+    },
+    {
+      id: 27,
+      title: 'All Hands',
+      start: Temporal.PlainDate.from('2025-11-19'),
+      end: Temporal.PlainDate.from('2025-11-19'),
+      resourceId: 'room-a',
+    },
+    {
+      id: 28,
+      title: 'Board Meeting',
+      start: Temporal.PlainDate.from('2025-11-20'),
+      end: Temporal.PlainDate.from('2025-11-20'),
+      resourceId: 'room-b',
+    },
+    {
+      id: 29,
+      title: 'Strategy Session',
+      start: Temporal.PlainDate.from('2025-11-20'),
+      end: Temporal.PlainDate.from('2025-11-20'),
+      resourceId: 'room-b',
+    },
+    {
+      id: 30,
+      title: 'Review Meeting',
+      start: Temporal.PlainDate.from('2025-11-20'),
+      end: Temporal.PlainDate.from('2025-11-20'),
+      resourceId: 'room-b',
+    },
   ],
 })
 
