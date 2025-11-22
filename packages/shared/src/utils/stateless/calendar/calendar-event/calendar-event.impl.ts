@@ -187,4 +187,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
   }
 
   _eventFragments: EventFragments = {}
+
+  get _resourceId(): string | undefined {
+    return this._foreignProperties.resourceId as string | undefined
+  }
 }

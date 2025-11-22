@@ -53,4 +53,8 @@ export interface CalendarEventInternal extends CalendarEventExternal {
   _originalTimezone: IANATimezone | undefined
   _getForeignProperties(): Record<string, unknown>
   _getExternalEvent(): CalendarEventExternal
+
+  // Utility getter for accessing resourceId from foreign properties without creating so much noise in the code
+  // alternative to event.getForeignProperties().resourceId as string | undefined
+  _resourceId: string | undefined
 }

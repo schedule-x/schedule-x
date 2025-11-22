@@ -5,4 +5,5 @@ export enum InternalViewName {
   MonthGrid = 'month-grid',
   MonthAgenda = 'month-agenda',
   List = 'list',
+  TimeGridResource = 'time-grid-resource',
 }

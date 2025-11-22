@@ -47,6 +47,12 @@ export type CalendarType = {
   darkColors?: ColorDefinition
 }
 
+export type Resource = {
+  id: string
+  label: string
+  ordering?: number
+}
+
 export type Plugins = {
   dragAndDrop?: DragAndDropPlugin
   eventModal?: EventModalPlugin
@@ -81,6 +87,7 @@ export default interface CalendarConfigInternal extends Config {
   _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
   translations: Signal<Record<string, Language>>
   direction: 'ltr' | 'rtl'
+  resources: Signal<Resource[]>
 
   // Getters
   isHybridDay: boolean
@@ -111,6 +118,7 @@ interface ReducedCalendarConfigInternal
     | 'showWeekNumbers'
     | 'direction'
     | 'timezone'
+    | 'resources'
   > {}
 
 export interface CalendarConfigExternal
@@ -134,4 +142,5 @@ export interface CalendarConfigExternal
   translations?: Record<string, Language>
   showWeekNumbers?: boolean
   timezone?: IANATimezone
+  resources?: Resource[]
 }

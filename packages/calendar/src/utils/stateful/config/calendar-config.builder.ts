@@ -4,6 +4,7 @@ import CalendarConfigInternal, {
   MonthGridOptions,
   Plugins,
   WeekOptions,
+  Resource,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
@@ -62,6 +63,7 @@ export default class CalendarConfigBuilder
   translations: Record<string, Language> | undefined
 
   showWeekNumbers: boolean | undefined
+  resources: Resource[] | undefined
 
   build(): CalendarConfigInternal {
     const minDate = this.minDate
@@ -91,7 +93,8 @@ export default class CalendarConfigBuilder
       this.theme,
       this.translations,
       this.showWeekNumbers,
-      this.timezone as IANATimezone
+      this.timezone as IANATimezone,
+      this.resources
     )
   }
 
@@ -225,6 +228,11 @@ export default class CalendarConfigBuilder
 
   withTimezone(timezone: string | undefined) {
     this.timezone = timezone
+    return this
+  }
+
+  withResources(resources: Resource[] | undefined) {
+    this.resources = resources
     return this
   }
 }
