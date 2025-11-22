@@ -169,16 +169,13 @@ export const TimeGridResourceView: PreactViewComponent = ({ $app, id }) => {
                 const resourceDay = resourceWeek?.[date]
                 const isLastResource =
                   resourceIndex === sortedResources.length - 1
-                const isLastDay =
-                  weekDates.indexOf(date) === weekDates.length - 1
-                const isLastResourceInLastDay = isLastResource && isLastDay
 
                 return (
                   <div
                     key={`${date}-${resource.id}`}
                     className="sx__time-grid-resource-column"
                     data-resource-id={resource.id}
-                    data-is-last-resource-in-last-day={isLastResourceInLastDay}
+                    data-is-last-resource={isLastResource}
                     style={{
                       flex: 1,
                       display: 'flex',
