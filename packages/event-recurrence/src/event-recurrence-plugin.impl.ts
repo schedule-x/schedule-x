@@ -116,17 +116,31 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     const recurrencesToCreate: AugmentedBackgroundEvent[] = []
     const $app = this.$app as CalendarAppSingleton
 
+    if (!this.range) return
+
     $app.calendarEvents.backgroundEvents.value.forEach((event) => {
       const rrule = event.rrule
       const exdate = event.exdate
 
-      if (rrule && this.range && this.validateRrule(event, rrule)) {
+      if (rrule && this.validateRrule(event, rrule)) {
+        let rangeToUse = this.range!
+
+        // For infinite recurring events, ensure minimum expansion
+        if (this.isInfiniteRecurringEvent(rrule)) {
+          rangeToUse = this.getExpandedRangeForInfiniteEvent(
+            this.range!,
+            rrule,
+            event.start,
+            $app
+          )
+        }
+
         recurrencesToCreate.push(
           ...createRecurrencesForBackgroundEvent(
             $app,
             event,
             rrule,
-            this.range,
+            rangeToUse,
             exdate
           )
         )
@@ -183,6 +197,51 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     return true
   }
 
+  private isInfiniteRecurringEvent(rrule: string): boolean {
+    return !rrule.includes('COUNT') && !rrule.includes('UNTIL')
+  }
+
+  private isYearlyEvent(rrule: string): boolean {
+    return rrule.includes('FREQ=YEARLY')
+  }
+
+  /***
+   * This is a "hack" to ensure that enough event recurrences are created for infinite recurring events when displayed in list view.
+   * If there would only be one occurrence of the event initially, and no other events following it, the list view wouldn't know of any further events it needs to display.
+   */
+  private getExpandedRangeForInfiniteEvent(
+    range: DateRange,
+    rrule: string,
+    eventStart: Temporal.ZonedDateTime | Temporal.PlainDate,
+    $app: CalendarAppSingleton
+  ): DateRange {
+    const isYearly = this.isYearlyEvent(rrule)
+    const minExpansionYears = isYearly ? 10 : 1
+
+    // Convert event start to ZonedDateTime if needed
+    const eventStartZDT =
+      eventStart instanceof Temporal.ZonedDateTime
+        ? eventStart
+        : eventStart.toZonedDateTime({
+            timeZone: $app.config.timezone.value,
+            plainTime: Temporal.PlainTime.from({ hour: 0, minute: 0 }),
+          })
+
+    // Calculate minimum end date: event start + minimum expansion years
+    const minEndDate = eventStartZDT.add({ years: minExpansionYears })
+
+    // Use the later of: current range end or minimum end date
+    const endDate =
+      minEndDate.epochNanoseconds > range.end.epochNanoseconds
+        ? minEndDate
+        : range.end
+
+    return {
+      start: range.start,
+      end: endDate,
+    }
+  }
+
   private createRecurrencesForEvent(
     calendarEvent: CalendarEventInternal,
     rrule: string,
@@ -195,11 +254,24 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
       return []
     }
 
+    const $app = this.$app as CalendarAppSingleton
+    let rangeToUse = this.range
+
+    // For infinite recurring events, ensure minimum expansion
+    if (this.isInfiniteRecurringEvent(rrule)) {
+      rangeToUse = this.getExpandedRangeForInfiniteEvent(
+        this.range,
+        rrule,
+        calendarEvent.start,
+        $app
+      )
+    }
+
     return createRecurrencesForEvent(
-      this.$app as CalendarAppSingleton,
+      $app,
       calendarEvent,
       rrule,
-      this.range,
+      rangeToUse,
       exdate
     )
   }

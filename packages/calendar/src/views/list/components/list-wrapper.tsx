@@ -13,6 +13,10 @@ import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invo
 import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import {
+  expandInfiniteRecurringEventsIfNeeded,
+  checkAndExpandInfiniteRecurringEvents,
+} from '../utils/stateless/expand-infinite-recurring-events'
 
 interface DayWithEvents {
   date: string
@@ -39,6 +43,9 @@ export const ListWrapper: PreactViewComponent = ({
    * */
   const blockOnScrollDayIntoViewCallback = useRef(false)
   const blockTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const lastRangeExpansionRef = useRef<string | null>(null)
+  const isExpandingRangeRef = useRef(false)
+  const scrollPositionBeforeExpansionRef = useRef<number | null>(null)
 
   const minDate = $app.config.minDate.value
     ? dateFromDateTime($app.config.minDate.value.toString())
@@ -95,13 +102,6 @@ export const ListWrapper: PreactViewComponent = ({
   }
 
   useEffect(() => {
-    /**
-     * onScrollDayIntoView can never be allowed to be called as a side effect of events changing.
-     * Otherwise, implementers will have to write custom logic to prevent infinite recursion.
-     *
-     * Open to any ideas for how to improve this and make do without a timeout.
-     * */
-
     const filteredEvents = $app.calendarEvents.list.value.filter((event) => {
       const startDate = dateFromDateTime(event.start.toString())
       const endDate = dateFromDateTime(event.end.toString())
@@ -110,8 +110,27 @@ export const ListWrapper: PreactViewComponent = ({
       return true
     })
 
+    /**
+     * onScrollDayIntoView can never be allowed to be called as a side effect of events changing.
+     * Otherwise, implementers will have to write custom logic to prevent infinite recursion.
+     *
+     * Open to any ideas for how to improve this and make do without a timeout.
+     * */
     blockOnScrollDayIntoViewCallback.current = true
     updateDaysWithEvents(filteredEvents)
+
+    // After updating days, check if we need to expand infinite recurring events
+    // This handles the case where the user is already at the bottom
+    nextTick(() => {
+      expandInfiniteRecurringEventsIfNeeded({
+        $app,
+        wrapperRef,
+        filteredEvents,
+        lastRangeExpansionRef,
+        isExpandingRangeRef,
+        scrollPositionBeforeExpansionRef,
+      })
+    })
   }, [$app.calendarEvents.list.value])
 
   useEffect(() => {
@@ -136,34 +155,68 @@ export const ListWrapper: PreactViewComponent = ({
     useState<IntersectionObserver | null>(null)
 
   useEffect(() => {
-    if (!wrapperRef.current || !$app.config.callbacks.onScrollDayIntoView)
-      return
+    if (!wrapperRef.current) return
 
-    const _observer =
-      interSectionObserver ||
-      new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const date = entry.target.getAttribute('data-date')
-              if (
-                date &&
-                $app.config.callbacks.onScrollDayIntoView &&
-                !blockOnScrollDayIntoViewCallback.current
-              ) {
-                $app.config.callbacks.onScrollDayIntoView(
-                  Temporal.PlainDate.from(date)
-                )
-              }
+    // Disconnect existing observer to set up a new one with updated elements
+    if (interSectionObserver) {
+      interSectionObserver.disconnect()
+    }
+
+    const _observer = new IntersectionObserver(
+      (entries) => {
+        // Track which days are currently visible
+        const visibleDates = new Set<string>()
+
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0) {
+            const date = entry.target.getAttribute('data-date')
+            if (date) {
+              visibleDates.add(date)
             }
+          }
+        })
+
+        // Call onScrollDayIntoView callback if provided
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0) {
+            const date = entry.target.getAttribute('data-date')
+            if (
+              date &&
+              $app.config.callbacks.onScrollDayIntoView &&
+              !blockOnScrollDayIntoViewCallback.current
+            ) {
+              $app.config.callbacks.onScrollDayIntoView(
+                Temporal.PlainDate.from(date)
+              )
+            }
+          }
+        })
+
+        // If we have infinite recurring events, check if we need to expand
+        if (visibleDates.size > 0 && daysWithEvents.length > 0) {
+          checkAndExpandInfiniteRecurringEvents({
+            $app,
+            wrapperRef,
+            filteredEvents: $app.calendarEvents.list.value.filter((event) => {
+              const startDate = dateFromDateTime(event.start.toString())
+              const endDate = dateFromDateTime(event.end.toString())
+              if (minDate && endDate < minDate) return false
+              if (maxDate && startDate > maxDate) return false
+              return true
+            }),
+            visibleDates,
+            lastRangeExpansionRef,
+            isExpandingRangeRef,
+            scrollPositionBeforeExpansionRef,
           })
-        },
-        {
-          root: wrapperRef.current,
-          rootMargin: '0px',
-          threshold: 0.1,
         }
-      )
+      },
+      {
+        root: wrapperRef.current,
+        rootMargin: '0px',
+        threshold: [0, 0.1, 1.0],
+      }
+    )
 
     const dayElements = wrapperRef.current.querySelectorAll('.sx__list-day')
     dayElements.forEach((dayElement) => {
@@ -178,7 +231,26 @@ export const ListWrapper: PreactViewComponent = ({
   }, [daysWithEvents])
 
   useEffect(() => {
-    scrollOnDateSelection($app, wrapperRef)
+    // If we're expanding the range for infinite recurring events, restore scroll position
+    // instead of scrolling to selected date
+    if (
+      isExpandingRangeRef.current &&
+      scrollPositionBeforeExpansionRef.current !== null
+    ) {
+      nextTick(() => {
+        if (
+          wrapperRef.current &&
+          scrollPositionBeforeExpansionRef.current !== null
+        ) {
+          wrapperRef.current.scrollTop =
+            scrollPositionBeforeExpansionRef.current
+          scrollPositionBeforeExpansionRef.current = null
+          isExpandingRangeRef.current = false
+        }
+      })
+    } else {
+      scrollOnDateSelection($app, wrapperRef)
+    }
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
 
   const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
