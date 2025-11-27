@@ -37,6 +37,7 @@ const createCalendarEvent = (
     _isSingleDayFullDay: false,
     _isSingleDayTimed: true,
     _isMultiDayTimed: false,
+    _getForeignProperties: () => ({ rrule: undefined }),
     ...overrides,
   } as CalendarEventInternal
 }
@@ -56,6 +57,7 @@ const createMultiDayEvent = (
     _isSingleDayFullDay: false,
     _isSingleDayTimed: false,
     _isMultiDayTimed: true,
+    _getForeignProperties: () => ({ rrule: undefined }),
     ...overrides,
   } as CalendarEventInternal
 }

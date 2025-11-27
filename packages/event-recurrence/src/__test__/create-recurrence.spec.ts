@@ -111,7 +111,7 @@ describe('Creating recurrences for events', () => {
   })
 
   describe('for one monthly event', () => {
-    it('should not add recurrence if event start is the only recurrence within the range', () => {
+    it('should expand infinite monthly event to at least 1 year even if only one occurrence in current range', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Monthly event',
@@ -131,7 +131,8 @@ describe('Creating recurrences for events', () => {
       createEventRecurrencePlugin().beforeRender!($app)
 
       const events = $app.calendarEvents.list.value
-      expect(events).toHaveLength(1)
+      // Should expand to at least 1 year (12+ months) even though only one occurrence in the current month range
+      expect(events.length).toBeGreaterThanOrEqual(12)
       expect(events[0].start).toEqual(
         Temporal.ZonedDateTime.from('2024-02-05T16:00:00+01:00[Europe/Berlin]')
       )
@@ -140,7 +141,7 @@ describe('Creating recurrences for events', () => {
       )
     })
 
-    it('should create recurrence in the month following the event start', () => {
+    it('should expand infinite monthly event to at least 1 year when viewing following month', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Monthly event',
@@ -161,7 +162,8 @@ describe('Creating recurrences for events', () => {
       createEventRecurrencePlugin().beforeRender!($app)
 
       const events = $app.calendarEvents.list.value
-      expect(events).toHaveLength(2)
+      // Should expand to at least 1 year (12+ months)
+      expect(events.length).toBeGreaterThanOrEqual(12)
       expect(events[0].start).toEqual(
         Temporal.ZonedDateTime.from('2024-02-05T16:00:00+01:00[Europe/Berlin]')
       )

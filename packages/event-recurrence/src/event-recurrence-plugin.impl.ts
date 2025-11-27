@@ -205,6 +205,10 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     return rrule.includes('FREQ=YEARLY')
   }
 
+  /***
+   * This is a "hack" to ensure that enough event recurrences are created for infinite recurring events when displayed in list view.
+   * If there would only be one occurrence of the event initially, and no other events following it, the list view wouldn't know of any further events it needs to display.
+   */
   private getExpandedRangeForInfiniteEvent(
     range: DateRange,
     rrule: string,

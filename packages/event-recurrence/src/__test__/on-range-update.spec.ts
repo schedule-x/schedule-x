@@ -9,9 +9,9 @@ import { __createAppWithViews__ } from '@schedule-x/calendar/src/utils/stateless
 import { createEventRecurrencePlugin } from '../event-recurrence-plugin.impl'
 import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 
-describe('limiting infinite events to the current calendar range', () => {
+describe('expanding infinite events beyond the current calendar range', () => {
   describe('when rendering the calendar in month view', () => {
-    it('should limit an infinite event with weekly frequency', () => {
+    it('should expand an infinite event with weekly frequency to at least 1 year', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Weekly event',
@@ -28,10 +28,11 @@ describe('limiting infinite events to the current calendar range', () => {
       createEventRecurrencePlugin().beforeRender!($app)
 
       const events = $app.calendarEvents.list.value
-      expect(events).toHaveLength(3)
+      // Should expand beyond the month range - at least 1 year (52+ weeks)
+      expect(events.length).toBeGreaterThanOrEqual(50)
     })
 
-    it('should limit an infinite event with daily frequency', () => {
+    it('should expand an infinite event with daily frequency to at least 1 year', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Daily event',
@@ -48,10 +49,11 @@ describe('limiting infinite events to the current calendar range', () => {
       createEventRecurrencePlugin().beforeRender!($app)
 
       const events = $app.calendarEvents.list.value
-      expect(events).toHaveLength(20)
+      // Should expand beyond the month range - at least 1 year (365+ days)
+      expect(events.length).toBeGreaterThanOrEqual(365)
     })
 
-    it('should limit an infinite event with monthly frequency', () => {
+    it('should expand an infinite event with monthly frequency to at least 1 year', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Monthly event',
@@ -68,12 +70,13 @@ describe('limiting infinite events to the current calendar range', () => {
       createEventRecurrencePlugin().beforeRender!($app)
 
       const events = $app.calendarEvents.list.value
-      expect(events).toHaveLength(1)
+      // Should expand beyond the month range - at least 1 year (12+ months)
+      expect(events.length).toBeGreaterThanOrEqual(12)
     })
   })
 
   describe('updating from month-view to week view', () => {
-    it('should limit an infinite event with daily frequency', () => {
+    it('should still expand an infinite event with daily frequency when range updates', () => {
       const eventWithRRule: CalendarEventExternal = {
         id: '1',
         title: 'Daily event',
@@ -91,7 +94,8 @@ describe('limiting infinite events to the current calendar range', () => {
       eventRecurrencePlugin.beforeRender!($app)
 
       let events = $app.calendarEvents.list.value
-      expect(events).toHaveLength(20)
+      // Should be expanded to at least 1 year
+      expect(events.length).toBeGreaterThanOrEqual(365)
 
       eventRecurrencePlugin.onRangeUpdate!({
         start: Temporal.ZonedDateTime.from('2025-01-13T00:00:00.00+00:00[UTC]'),
@@ -99,14 +103,15 @@ describe('limiting infinite events to the current calendar range', () => {
       })
 
       events = $app.calendarEvents.list.value
-      expect(events).toHaveLength(6)
+      // Should still be expanded to at least 1 year (infinite events are expanded based on event start, not range)
+      expect(events.length).toBeGreaterThanOrEqual(365)
     })
   })
 })
 
-describe('limiting infinite background events to the current calendar range', () => {
+describe('expanding infinite background events beyond the current calendar range', () => {
   describe('when rendering the calendar in month view', () => {
-    it('should limit an infinite background event with weekly frequency', () => {
+    it('should expand an infinite background event with weekly frequency to at least 1 year', () => {
       const backgroundEventWithRRule: BackgroundEvent = {
         start: Temporal.PlainDate.from('2025-02-12'),
         end: Temporal.PlainDate.from('2025-02-12'),
@@ -125,7 +130,8 @@ describe('limiting infinite background events to the current calendar range', ()
       eventRecurrencePlugin.beforeRender!($app)
 
       const backgroundEvents = $app.calendarEvents.backgroundEvents.value
-      expect(backgroundEvents).toHaveLength(4)
+      // Should expand beyond the month range - at least 1 year (52+ weeks / 2 interval = 26+ occurrences, with 2 days per week = 52+ events)
+      expect(backgroundEvents.length).toBeGreaterThanOrEqual(50)
       const firstEvent = backgroundEvents[0]
       expect(firstEvent.start).toEqual(Temporal.PlainDate.from('2025-02-12'))
       expect(firstEvent.end).toEqual(Temporal.PlainDate.from('2025-02-12'))
@@ -145,7 +151,8 @@ describe('limiting infinite background events to the current calendar range', ()
       })
 
       const updatedBackgroundEvents = $app.calendarEvents.backgroundEvents.value
-      expect(updatedBackgroundEvents).toHaveLength(8)
+      // Should still be expanded beyond the month range
+      expect(updatedBackgroundEvents.length).toBeGreaterThanOrEqual(8)
       const fifthEvent = updatedBackgroundEvents[4]
       expect(fifthEvent.start).toEqual(Temporal.PlainDate.from('2025-03-12'))
       expect(fifthEvent.end).toEqual(Temporal.PlainDate.from('2025-03-12'))
