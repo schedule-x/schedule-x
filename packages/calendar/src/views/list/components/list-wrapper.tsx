@@ -378,30 +378,38 @@ export const ListWrapper: PreactViewComponent = ({
                 </div>
               </div>
               <div className="sx__list-day-events">
-                {day.events.map((event) => (
-                  <div
-                    key={event.id}
-                    className="sx__event sx__list-event"
-                    onClick={(e) => handleEventClick(e, event)}
-                    onDblClick={(e) => handleEventDoubleClick(e, event)}
-                    onKeyDown={(e) => handleEventKeyDown(e, event)}
-                    tabIndex={0}
-                    role="button"
-                  >
+                {day.events.map((event) => {
+                  const classNames = ['sx__event', 'sx__list-event']
+                  if (event._options?.additionalClasses) {
+                    classNames.push(...event._options.additionalClasses)
+                  }
+                  return (
                     <div
-                      className={`sx__list-event-color-line`}
-                      style={{
-                        backgroundColor: `var(--sx-color-${event._color})`,
-                      }}
-                    />
-                    <div className="sx__list-event-content">
-                      <div className="sx__list-event-title">{event.title}</div>
-                      <div className="sx__list-event-times">
-                        {renderEventTimes(event, day.date)}
+                      key={event.id}
+                      className={classNames.join(' ')}
+                      onClick={(e) => handleEventClick(e, event)}
+                      onDblClick={(e) => handleEventDoubleClick(e, event)}
+                      onKeyDown={(e) => handleEventKeyDown(e, event)}
+                      tabIndex={0}
+                      role="button"
+                    >
+                      <div
+                        className={`sx__list-event-color-line`}
+                        style={{
+                          backgroundColor: `var(--sx-color-${event._color})`,
+                        }}
+                      />
+                      <div className="sx__list-event-content">
+                        <div className="sx__list-event-title">
+                          {event.title}
+                        </div>
+                        <div className="sx__list-event-times">
+                          {renderEventTimes(event, day.date)}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
               <div className="sx__list-day-margin" />
             </div>
