@@ -400,4 +400,26 @@ describe('ListWrapper', () => {
       expect(mockEventModal.calendarEventElement.value).toBe(eventElement)
     })
   })
+
+  describe('additional classes', () => {
+    it('should add additional classes to list events', () => {
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]'),
+        {
+          _options: {
+            additionalClasses: ['custom-class', 'another-class'],
+          },
+        }
+      )
+      const { $app } = setup([event])
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      const eventElement = document.querySelector('.sx__list-event')
+      expect(eventElement).toBeTruthy()
+      expect(eventElement?.classList.contains('custom-class')).toBe(true)
+      expect(eventElement?.classList.contains('another-class')).toBe(true)
+    })
+  })
 })
