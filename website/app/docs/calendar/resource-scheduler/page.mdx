@@ -242,6 +242,9 @@ export type ResourceViewConfig = {
   // callback that runs when the user scrolls the hourly view
   onLazyLoadDate?: (dates: Temporal.PlainDate[]) => void
 
+  // Can be used to debounce the lazy load date callback with any number of milliseconds. Defaults to 0.
+  lazyLoadDateDebounce: Signal<number>
+
   // callback that runs when the user scrolls the daily view
   onLazyLoadMonth?: (dates: Temporal.PlainDate[]) => void
 
@@ -271,6 +274,9 @@ export type ResourceViewConfig = {
 
   // Can be used to configure the snapping duration of resizing
   resizeSnapping: Signal<15 | 30 | 60>
+
+  // Can be used to highlight the current day in both daily and hourly view. Defaults to false.
+  highlightToday: signal(true),
 }
 ```
 
