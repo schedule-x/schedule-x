@@ -21,7 +21,7 @@ import 'swiper/css';
 import '@fontsource-variable/podkova';
 
 import { Layout, Navbar } from 'nextra-theme-docs'
-import { Banner, Head } from 'nextra/components'
+import { Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import React from "react";
