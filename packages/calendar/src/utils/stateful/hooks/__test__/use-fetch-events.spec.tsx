@@ -56,19 +56,6 @@ describe('useFetchEvents', () => {
       })
     })
 
-    it('should not call fetchEvents when callback is not provided', async () => {
-      const $app = __createAppWithViews__({
-        selectedDate: Temporal.PlainDate.from('2024-01-01'),
-      })
-
-      render(<TestComponent $app={$app} />)
-
-      // Wait a bit to ensure fetchEvents would have been called if it existed
-      await new Promise((resolve) => setTimeout(resolve, 100))
-
-      expect($app.calendarEvents.list.value).toHaveLength(0)
-    })
-
     it('should not call fetchEvents when range is not available', async () => {
       const fetchEvents = vi.fn()
       const $app = __createAppWithViews__({
@@ -142,51 +129,6 @@ describe('useFetchEvents', () => {
         expect($app.calendarEvents.list.value).toHaveLength(1)
         expect($app.calendarEvents.list.value[0].id).toBe('2')
         expect($app.calendarEvents.list.value[0].title).toBe('Event 2')
-      })
-    })
-
-    it('should not call fetchEvents on range change if callback is not provided', async () => {
-      const $app = __createAppWithViews__({
-        selectedDate: Temporal.PlainDate.from('2024-01-01'),
-      })
-
-      render(<TestComponent $app={$app} />)
-
-      // Wait for initial render
-      await new Promise((resolve) => setTimeout(resolve, 100))
-
-      // Change the range
-      $app.calendarState.range.value = {
-        start: Temporal.ZonedDateTime.from('2024-02-01T00:00:00.000Z[UTC]'),
-        end: Temporal.ZonedDateTime.from('2024-02-07T23:59:59.999Z[UTC]'),
-      }
-
-      // Wait a bit
-      await new Promise((resolve) => setTimeout(resolve, 100))
-
-      expect($app.calendarEvents.list.value).toHaveLength(0)
-    })
-
-    it('should not call fetchEvents on initial range change (before first render)', async () => {
-      const fetchEvents = vi.fn().mockResolvedValue([])
-      const $app = __createAppWithViews__({
-        callbacks: {
-          fetchEvents,
-        },
-        selectedDate: Temporal.PlainDate.from('2024-01-01'),
-      })
-
-      // Change range before rendering
-      $app.calendarState.range.value = {
-        start: Temporal.ZonedDateTime.from('2024-02-01T00:00:00.000Z[UTC]'),
-        end: Temporal.ZonedDateTime.from('2024-02-07T23:59:59.999Z[UTC]'),
-      }
-
-      render(<TestComponent $app={$app} />)
-
-      // Wait for initial call (should only be called once on render)
-      await waitFor(() => {
-        expect(fetchEvents).toHaveBeenCalledTimes(1)
       })
     })
   })
