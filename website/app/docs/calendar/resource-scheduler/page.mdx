@@ -275,8 +275,11 @@ export type ResourceViewConfig = {
   // Can be used to configure the snapping duration of resizing
   resizeSnapping: Signal<15 | 30 | 60>
 
-  // Can be used to highlight the current day in both daily and hourly view. Defaults to false.
-  highlightToday: signal(true),
+  // Dictates whether the current day should be highlighted in both daily and hourly view. Defaults to true.
+  highlightToday: signal(false),
+
+  // Can be used to configure the format of the day names in daily view. Defaults to 'short'. Disable day names by setting to false.
+  dayNameFormat: Signal<false | 'short' | 'long' | 'narrow' | ((date: Temporal.PlainDate, locale: string) => string)>
 }
 ```
 
