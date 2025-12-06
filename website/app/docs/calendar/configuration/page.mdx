@@ -103,6 +103,14 @@ const config = {
      * Defaults to true. Set to false to disable overlapping.
      */
     eventOverlap: true,
+
+    /**
+     * The granularity of the time grid in minutes for week and day views.
+     * Can be 60 (hourly), 30 (half-hourly), or 15 (quarter-hourly).
+     * When set to 30 or 15, the timeAxisFormatOptions will automatically include minutes.
+     * Defaults to 60
+     */
+    gridStep: 30,
   },
 
   monthGridOptions: {
