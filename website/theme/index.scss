@@ -161,6 +161,13 @@ body {
   user-select: none;
 }
 
+.sx__month-grid-day__header-date {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 // Testimonials Section
 .testimonials-section {
   margin: 6rem 0;
