@@ -132,10 +132,9 @@ export default function PremiumPage() {
                 <Link href={'/docs/calendar/plugins/draw'}>
                   DOCS
                 </Link>
-
-                <button disabled={true} style={{ color: 'gray' }}>
-                  DEMO (coming soon)
-                </button>
+                <Link href={'/demos/draw'}>
+                  DEMO
+                </Link>
               </div>
             </div>
 

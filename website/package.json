@@ -30,6 +30,7 @@
         "@schedule-x/timezone-select": "^3.1.2",
         "@schedule-x/translations": "^3.1.2",
         "@sx-premium/drag-to-create": "^13.1.2",
+        "@sx-premium/draw": "^13.3.0",
         "@sx-premium/interactive-event-modal": "^13.1.2 ",
         "@sx-premium/resource-scheduler": "^13.1.2",
         "@sx-premium/scheduling-assistant": "^13.1.2",
