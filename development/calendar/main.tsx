@@ -119,6 +119,18 @@ plugins: [
       console.log('onDoubleClickDate', date.toString())
     },
 
+    async fetchEvents(range) {
+      console.log('fetchEvents', range.start.toString(), range.end.toString())
+      return Promise.resolve([
+        {
+          id:1,
+          title: 'Event 1',
+          start: Temporal.ZonedDateTime.from('2025-12-06T15:00[Europe/Berlin]'),
+          end: Temporal.ZonedDateTime.from('2025-12-06T16:00[Europe/Berlin]'),
+        }
+      ])
+    },
+
     onRangeUpdate(range) {
       console.log('onRangeUpdate', range.start.toString(), range.end.toString())
       /* console.log(range.start.toString())

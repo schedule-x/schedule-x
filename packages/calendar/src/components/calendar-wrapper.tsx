@@ -7,6 +7,7 @@ import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/r
 import { setWrapperElement } from '../utils/stateless/dom/set-wrapper-element'
 import { handleWindowResize } from '../utils/stateless/dom/handle-window-resize'
 import useWrapperClasses from '../utils/stateful/hooks/use-wrapper-classes'
+import useFetchEvents from '../utils/stateful/hooks/use-fetch-events'
 import {
   destroyPlugins,
   initPlugins,
@@ -21,6 +22,8 @@ type props = {
 export default function CalendarWrapper({ $app }: props) {
   const calendarId = randomStringId()
   const viewContainerId = randomStringId()
+
+  useFetchEvents($app)
 
   useEffect(() => {
     setWrapperElement($app, calendarId)
