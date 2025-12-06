@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://github.com/schedule-x/schedule-x/compare/v3.4.2...v3.5.0) (2025-12-06)
+
+### Bug Fixes
+
+- **calendar:** additional classes for list view events ([#1242](https://github.com/schedule-x/schedule-x/issues/1242)) ([a086e02](https://github.com/schedule-x/schedule-x/commit/a086e02954b406f4e7b6752021ea8c544205bd04))
+- **calendar:** expand infinite recurrences in list view ([#1232](https://github.com/schedule-x/schedule-x/issues/1232)) ([7ef23a7](https://github.com/schedule-x/schedule-x/commit/7ef23a730307dd81b0e1f6650ce848e91f837aca))
+
+### Features
+
+- **calendar:** fetchEvents callback ([#1243](https://github.com/schedule-x/schedule-x/issues/1243)) ([cd620a1](https://github.com/schedule-x/schedule-x/commit/cd620a11e86eab49641757fb2a8b940a566cb0ba))
+
 ## [3.4.2](https://github.com/schedule-x/schedule-x/compare/v3.4.1...v3.4.2) (2025-11-22)
 
 ### Bug Fixes

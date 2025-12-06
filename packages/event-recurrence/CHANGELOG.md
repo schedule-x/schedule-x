@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://github.com/schedule-x/schedule-x/compare/v3.4.2...v3.5.0) (2025-12-06)
+
+### Bug Fixes
+
+- **calendar:** expand infinite recurrences in list view ([#1232](https://github.com/schedule-x/schedule-x/issues/1232)) ([7ef23a7](https://github.com/schedule-x/schedule-x/commit/7ef23a730307dd81b0e1f6650ce848e91f837aca))
+
 ## [3.4.2](https://github.com/schedule-x/schedule-x/compare/v3.4.1...v3.4.2) (2025-11-22)
 
 **Note:** Version bump only for package @schedule-x/event-recurrence
