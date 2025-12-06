@@ -63,14 +63,14 @@ import CustomFooter from '../components/theme/custom-footer'
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/schedule-x/schedule-x/tree/main/website"
           footer={<CustomFooter />}
-          banner={<Banner key="v3-is-here" storageKey="v3-is-here" dismissible={false}>
+          /* banner={<Banner key="v3-is-here" storageKey="v3-is-here" dismissible={false}>
             <a href="/docs/calendar/major-version-migrations" target="_blank">
               <span style={{ backgroundColor: '#f6e05e', color: '#000', borderRadius: '4px', padding: '2px 6px', marginRight: '5px', fontSize: '0.75rem' }}>
               v3
               </span>
               is here! Temporal API, timezones, and more  🥳
             </a>
-          </Banner>}
+          </Banner>} */
         >
           {children}
         </Layout>
