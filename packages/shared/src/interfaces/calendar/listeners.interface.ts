@@ -6,6 +6,15 @@ export interface CalendarCallbacks {
   onEventClick?: (event: CalendarEventExternal, e: UIEvent) => void
   onDoubleClickEvent?: (event: CalendarEventExternal, e: UIEvent) => void
   onRangeUpdate?: (range: DateRange) => void
+  /**
+   * Fetch events for the given date range.
+   * This callback is called every time onRangeUpdate runs, and also once on render.
+   * The returned events will be converted to internal events and set as $app.calendarEvents.list.value
+   *
+   * @param range The date range to fetch events for
+   * @returns Promise resolving to an array of calendar events
+   * */
+  fetchEvents?: (range: DateRange) => Promise<CalendarEventExternal[]>
   onSelectedDateUpdate?: (date: Temporal.PlainDate) => void
   onClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
   onDoubleClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void

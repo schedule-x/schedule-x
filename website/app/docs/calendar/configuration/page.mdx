@@ -145,6 +145,17 @@ const config = {
     },
 
     /**
+     * Fetch events for the given date range.
+     * This callback is called every time onRangeUpdate runs, and also once on render.
+     * The returned events will be converted to internal events and set as $app.calendarEvents.list.value
+     * */
+    async fetchEvents(range) {
+      const events = await fetch(`/api/events?start=${range.start}&end=${range.end}`)
+        .then((res) => res.json())
+      return events
+    },
+
+    /**
      * Is called when an event is updated through drag and drop, resizing or the interactive event modal
      * */
     onEventUpdate(updatedEvent) {
