@@ -119,4 +119,30 @@ describe('MonthAgendaEvent', () => {
       ).not.toContain('is-event-new')
     })
   })
+
+  describe('adding additional classes', () => {
+    it('should add the additional class to the event', () => {
+      const $app = __createAppWithViews__({
+        events: [
+          {
+            id: '123',
+            title: 'Test Event',
+            start: Temporal.ZonedDateTime.from(
+              '1999-03-12T14:45:00.00+00:00[UTC]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '1999-03-12T15:45:00.00+00:00[UTC]'
+            ),
+            _options: {
+              additionalClasses: ['test-class', 'test-class-2'],
+            },
+          },
+        ],
+      })
+      renderComponent($app, $app.calendarEvents.list.value[0])
+
+      expect(document.querySelector('.test-class')).toBeTruthy()
+      expect(document.querySelector('.test-class-2')).toBeTruthy()
+    })
+  })
 })
