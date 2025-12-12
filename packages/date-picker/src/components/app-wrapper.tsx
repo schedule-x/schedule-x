@@ -15,8 +15,13 @@ export default function AppWrapper({ $app }: props) {
   const elementRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (elementRef && elementRef.current instanceof HTMLDivElement)
+    if (
+      elementRef?.current &&
+      typeof HTMLElement !== 'undefined' &&
+      elementRef.current instanceof HTMLElement
+    ) {
       $app.elements = { DatePickerWrapper: elementRef.current }
+    }
   }, [])
 
   useEffect(() => {

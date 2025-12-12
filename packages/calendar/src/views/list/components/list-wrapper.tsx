@@ -14,9 +14,21 @@ import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/event
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
 import { focusModal } from '../../../utils/stateless/events/focus-modal'
 import {
-  expandInfiniteRecurringEventsIfNeeded,
   checkAndExpandInfiniteRecurringEvents,
+  expandInfiniteRecurringEventsIfNeeded,
 } from '../utils/stateless/expand-infinite-recurring-events'
+import ListEvent from './list-event'
+import { randomStringId } from '@schedule-x/shared/src'
+import { getElementByCCID } from '../../../utils/stateless/dom/getters'
+
+export interface EventInstanceInfo {
+  isFirstDay: boolean
+  isLastDay: boolean
+  isMultiDay: boolean
+  startLocaleString: string
+  endLocaleString?: string
+  forDayOf: string
+}
 
 interface DayWithEvents {
   date: string
@@ -29,6 +41,57 @@ interface ListWrapperProps {
   onScrollDayIntoView?: (date: string) => void
 }
 
+const getEventInstanceInfo = (
+  event: CalendarEventInternal,
+  forDayOf: string,
+  locale: string,
+  timeZone: string
+): EventInstanceInfo => {
+  const eventStartDate = dateFromDateTime(event.start.toString())
+  const eventEndDate = dateFromDateTime(event.end.toString())
+  const isFirstDay = eventStartDate === forDayOf
+  const isLastDay = eventEndDate === forDayOf
+  const isMultiDay = eventStartDate !== eventEndDate
+
+  const timeOptions = {
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: locale === 'en-US',
+  } as const
+
+  const startZDT = Temporal.ZonedDateTime.from({
+    year: event.start.year,
+    month: event.start.month,
+    day: event.start.day,
+    hour: event.start instanceof Temporal.ZonedDateTime ? event.start.hour : 0,
+    minute:
+      event.start instanceof Temporal.ZonedDateTime ? event.start.minute : 0,
+    timeZone,
+  })
+
+  const endZDT = Temporal.ZonedDateTime.from({
+    year: event.end.year,
+    month: event.end.month,
+    day: event.end.day,
+    hour: event.end instanceof Temporal.ZonedDateTime ? event.end.hour : 0,
+    minute: event.end instanceof Temporal.ZonedDateTime ? event.end.minute : 0,
+    timeZone,
+  })
+
+  const startLocaleString = startZDT.toLocaleString(locale, timeOptions)
+  const endLocaleString = event.end
+    ? endZDT.toLocaleString(locale, timeOptions)
+    : undefined
+  return {
+    isFirstDay,
+    isLastDay,
+    isMultiDay,
+    startLocaleString,
+    endLocaleString,
+    forDayOf,
+  }
+}
+
 export const ListWrapper: PreactViewComponent = ({
   $app,
   id,
@@ -36,6 +99,17 @@ export const ListWrapper: PreactViewComponent = ({
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
   const { setClickedEvent } = useEventInteractions($app)
+
+  const listDayHeaderCustomComponentFn =
+    $app.config._customComponentFns.listDayHeader
+  const listNoEventsCustomComponentFn =
+    $app.config._customComponentFns.listNoEvents
+  const listNoEventsCCID = useRef(
+    listNoEventsCustomComponentFn
+      ? 'custom-list-no-events-' + randomStringId()
+      : undefined
+  )
+  const dayHeaderCCIDsRef = useRef<Record<string, string>>({})
 
   /**
    * "hack" for preventing the onScrollDayIntoView callback from being called just after events have changed
@@ -253,80 +327,6 @@ export const ListWrapper: PreactViewComponent = ({
     }
   }, [daysWithEvents, $app.datePickerState.selectedDate.value])
 
-  const renderEventTimes = (event: CalendarEventInternal, dayDate: string) => {
-    const eventStartDate = dateFromDateTime(event.start.toString())
-    const eventEndDate = dateFromDateTime(event.end.toString())
-    const isFirstDay = eventStartDate === dayDate
-    const isLastDay = eventEndDate === dayDate
-    const isMultiDay = eventStartDate !== eventEndDate
-
-    const timeOptions = {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: $app.config.locale.value === 'en-US',
-    } as const
-
-    const startZDT = Temporal.ZonedDateTime.from({
-      year: event.start.year,
-      month: event.start.month,
-      day: event.start.day,
-      hour:
-        event.start instanceof Temporal.ZonedDateTime ? event.start.hour : 0,
-      minute:
-        event.start instanceof Temporal.ZonedDateTime ? event.start.minute : 0,
-      timeZone: $app.config.timezone.value,
-    })
-
-    const endZDT = Temporal.ZonedDateTime.from({
-      year: event.end.year,
-      month: event.end.month,
-      day: event.end.day,
-      hour: event.end instanceof Temporal.ZonedDateTime ? event.end.hour : 0,
-      minute:
-        event.end instanceof Temporal.ZonedDateTime ? event.end.minute : 0,
-      timeZone: $app.config.timezone.value,
-    })
-
-    if (!isMultiDay) {
-      return (
-        <>
-          <div className="sx__list-event-start-time">
-            {startZDT.toLocaleString($app.config.locale.value, timeOptions)}
-          </div>
-          {event.end && (
-            <div className="sx__list-event-end-time">
-              {endZDT.toLocaleString($app.config.locale.value, timeOptions)}
-            </div>
-          )}
-        </>
-      )
-    }
-
-    if (isFirstDay) {
-      return (
-        <>
-          <div className="sx__list-event-start-time">
-            {startZDT.toLocaleString($app.config.locale.value, timeOptions)}
-          </div>
-          <div className="sx__list-event-arrow">→</div>
-        </>
-      )
-    }
-
-    if (isLastDay) {
-      return (
-        <>
-          <div className="sx__list-event-arrow">←</div>
-          <div className="sx__list-event-end-time">
-            {endZDT.toLocaleString($app.config.locale.value, timeOptions)}
-          </div>
-        </>
-      )
-    }
-
-    return <div className="sx__list-event-arrow">↔</div>
-  }
-
   const handleEventClick = (e: MouseEvent, event: CalendarEventInternal) => {
     setClickedEvent(e, event)
     invokeOnEventClickCallback($app, event, e)
@@ -339,6 +339,45 @@ export const ListWrapper: PreactViewComponent = ({
     setClickedEvent(e, event)
     invokeOnEventDoubleClickCallback($app, event, e)
   }
+
+  useEffect(() => {
+    if (!listNoEventsCustomComponentFn || daysWithEvents.length > 0) return
+
+    const el = getElementByCCID(listNoEventsCCID.current)
+    if (!el) return
+
+    listNoEventsCustomComponentFn(el, {
+      $app,
+    })
+
+    return () => {
+      $app.config._destroyCustomComponentInstance?.(
+        listNoEventsCCID.current as string
+      )
+    }
+  }, [daysWithEvents.length, listNoEventsCustomComponentFn])
+
+  useEffect(() => {
+    if (!listDayHeaderCustomComponentFn) return
+
+    daysWithEvents.forEach((day) => {
+      const ccid = dayHeaderCCIDsRef.current[day.date]
+      if (!ccid) return
+
+      const el = getElementByCCID(ccid)
+      if (!el) return
+
+      listDayHeaderCustomComponentFn(el, {
+        date: day.date,
+      })
+    })
+
+    return () => {
+      Object.values(dayHeaderCCIDsRef.current).forEach((ccid) => {
+        $app.config._destroyCustomComponentInstance?.(ccid)
+      })
+    }
+  }, [daysWithEvents, listDayHeaderCustomComponentFn])
 
   const handleEventKeyDown = (
     e: KeyboardEvent,
@@ -353,67 +392,66 @@ export const ListWrapper: PreactViewComponent = ({
       })
     }
   }
-
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__list-wrapper" ref={wrapperRef}>
         {daysWithEvents.length === 0 ? (
-          <div className="sx__list-no-events">
-            {$app.translate('No events')}
-          </div>
-        ) : (
-          daysWithEvents.map((day) => (
-            <div key={day.date} className="sx__list-day" data-date={day.date}>
-              <div className="sx__list-day-header">
-                <div className="sx__list-day-date">
-                  {toJSDate(day.date).toLocaleDateString(
-                    $app.config.locale.value,
-                    {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    }
-                  )}
-                </div>
-              </div>
-              <div className="sx__list-day-events">
-                {day.events.map((event) => {
-                  const classNames = ['sx__event', 'sx__list-event']
-                  if (event._options?.additionalClasses) {
-                    classNames.push(...event._options.additionalClasses)
-                  }
-                  return (
-                    <div
-                      key={event.id}
-                      className={classNames.join(' ')}
-                      onClick={(e) => handleEventClick(e, event)}
-                      onDblClick={(e) => handleEventDoubleClick(e, event)}
-                      onKeyDown={(e) => handleEventKeyDown(e, event)}
-                      tabIndex={0}
-                      role="button"
-                    >
-                      <div
-                        className={`sx__list-event-color-line`}
-                        style={{
-                          backgroundColor: `var(--sx-color-${event._color})`,
-                        }}
-                      />
-                      <div className="sx__list-event-content">
-                        <div className="sx__list-event-title">
-                          {event.title}
-                        </div>
-                        <div className="sx__list-event-times">
-                          {renderEventTimes(event, day.date)}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-              <div className="sx__list-day-margin" />
+          listNoEventsCustomComponentFn ? (
+            <div data-ccid={listNoEventsCCID.current} />
+          ) : (
+            <div className="sx__list-no-events">
+              {$app.translate('No events')}
             </div>
-          ))
+          )
+        ) : (
+          daysWithEvents.map((day) => {
+            if (!dayHeaderCCIDsRef.current[day.date]) {
+              dayHeaderCCIDsRef.current[day.date] =
+                `custom-list-day-header-${randomStringId()}`
+            }
+            const dayHeaderCCID = dayHeaderCCIDsRef.current[day.date]
+
+            return (
+              <div key={day.date} className="sx__list-day" data-date={day.date}>
+                {listDayHeaderCustomComponentFn ? (
+                  <div data-ccid={dayHeaderCCID} />
+                ) : (
+                  <div className="sx__list-day-header">
+                    <div className="sx__list-day-date">
+                      {toJSDate(day.date).toLocaleDateString(
+                        $app.config.locale.value,
+                        {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        }
+                      )}
+                    </div>
+                  </div>
+                )}
+                <div className="sx__list-day-events">
+                  {day.events.map((event) => (
+                    <ListEvent
+                      key={event.id}
+                      calendarEvent={event}
+                      dayDate={day.date}
+                      eventInstanceInfo={getEventInstanceInfo(
+                        event,
+                        day.date,
+                        $app.config.locale.value,
+                        $app.config.timezone.value
+                      )}
+                      onEventClick={handleEventClick}
+                      onEventDoubleClick={handleEventDoubleClick}
+                      onEventKeyDown={handleEventKeyDown}
+                    />
+                  ))}
+                </div>
+                <div className="sx__list-day-margin" />
+              </div>
+            )
+          })
         )}
       </div>
     </AppContext.Provider>
