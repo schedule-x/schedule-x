@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.1](https://github.com/schedule-x/schedule-x/compare/v3.5.0...v3.5.1) (2025-12-16)
+
+### Bug Fixes
+
+- **calendar:** add optional classes to month agenda events ([#1250](https://github.com/schedule-x/schedule-x/issues/1250)) ([390b513](https://github.com/schedule-x/schedule-x/commit/390b5137e345cf3094762c0034353fc2d37ca608))
+
 # [3.5.0](https://github.com/schedule-x/schedule-x/compare/v3.4.2...v3.5.0) (2025-12-06)
 
 ### Bug Fixes

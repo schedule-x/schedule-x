@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.5.1](https://github.com/schedule-x/schedule-x/compare/v3.5.0...v3.5.1) (2025-12-16)
+
+**Note:** Version bump only for package @schedule-x/translations
+
 # [3.5.0](https://github.com/schedule-x/schedule-x/compare/v3.4.2...v3.5.0) (2025-12-06)
 
 **Note:** Version bump only for package @schedule-x/translations
