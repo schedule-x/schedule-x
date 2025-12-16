@@ -72,7 +72,9 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
   const hasCustomContent = calendarEvent._customContent?.monthAgenda
 
   const classNames = ['sx__event', 'sx__month-agenda-event']
-
+  if (calendarEvent._options?.additionalClasses) {
+    classNames.push(...calendarEvent._options.additionalClasses)
+  }
   if (wasEventAddedInLastSecond(calendarEvent)) classNames.push('is-event-new')
 
   return (
