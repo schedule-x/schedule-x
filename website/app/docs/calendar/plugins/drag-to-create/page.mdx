@@ -54,6 +54,7 @@ Configuration object for the plugin. Added as the first parameter to the `create
 | Property                | Type                                    | Default |
 |------------------------|-----------------------------------------|---------|
 | `onAddEvent`           | `(event: CalendarEvent) => void`        | -       |
+| `onAddEventAsync`      | `(event: CalendarEvent) => Promise<void>` | -       |
 | `onBeforeAddEvent`     | `(event: CalendarEvent) => boolean`     | -       |
 | `onBeforeAddEventAsync`| `(event: CalendarEvent) => Promise<boolean>` | -       |
 | `snapDuration`         | `15 \| 30 \| 60`                        | 30      |

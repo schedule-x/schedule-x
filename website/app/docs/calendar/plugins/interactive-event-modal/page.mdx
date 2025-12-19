@@ -69,6 +69,11 @@ const eventModal = createInteractiveEventModal({
     console.log(event)
   },
 
+  // Optional: async callback for when an event is added. If added, it takes precedence over the onAddEvent callback.
+  onAddEventAsync: async (event) => {
+    console.log(event)
+  },
+
   // (Optional): callback for when an event is updated
   onDeleteEvent: (eventId) => {
     console.log(eventId)
