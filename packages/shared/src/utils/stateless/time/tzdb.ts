@@ -566,4 +566,4 @@ export const IANA_TIMEZONES = [
   'Zulu',
 ] as const
 
-export type IANATimezone = (typeof IANA_TIMEZONES)[number]
+export type IANATimezone = (typeof IANA_TIMEZONES)[number] | string
