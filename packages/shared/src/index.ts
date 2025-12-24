@@ -36,6 +36,6 @@ export type { CustomComponentName } from './interfaces/calendar/custom-component
 export {
   addDays,
   addMonths,
-  __deprecated__addMinutes as addMinutes,
+  addMinutesToTemporal,
 } from './utils/stateless/time/date-time-mutation/adding'
 export type { DateRange } from './types/date-range'

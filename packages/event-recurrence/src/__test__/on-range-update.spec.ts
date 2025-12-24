@@ -113,8 +113,8 @@ describe('expanding infinite background events beyond the current calendar range
   describe('when rendering the calendar in month view', () => {
     it('should expand an infinite background event with weekly frequency to at least 1 year', () => {
       const backgroundEventWithRRule: BackgroundEvent = {
-        start: Temporal.PlainDate.from('2025-02-12'),
-        end: Temporal.PlainDate.from('2025-02-12'),
+        start: Temporal.ZonedDateTime.from('2025-02-12T00:00:00.00+00:00[UTC]'),
+        end: Temporal.ZonedDateTime.from('2025-02-12T23:59:00.00+00:00[UTC]'),
         rrule: 'FREQ=WEEKLY;BYDAY=WE,FR;INTERVAL=2;',
         style: {
           backgroundColor: 'red',
@@ -133,17 +133,33 @@ describe('expanding infinite background events beyond the current calendar range
       // Should expand beyond the month range - at least 1 year (52+ weeks / 2 interval = 26+ occurrences, with 2 days per week = 52+ events)
       expect(backgroundEvents.length).toBeGreaterThanOrEqual(50)
       const firstEvent = backgroundEvents[0]
-      expect(firstEvent.start).toEqual(Temporal.PlainDate.from('2025-02-12'))
-      expect(firstEvent.end).toEqual(Temporal.PlainDate.from('2025-02-12'))
+      expect(firstEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-12T00:00:00.00+00:00[UTC]')
+      )
+      expect(firstEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-12T23:59:00.00+00:00[UTC]')
+      )
       const secondEvent = backgroundEvents[1]
-      expect(secondEvent.start).toEqual(Temporal.PlainDate.from('2025-02-14'))
-      expect(secondEvent.end).toEqual(Temporal.PlainDate.from('2025-02-14'))
+      expect(secondEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-14T00:00:00.00+00:00[UTC]')
+      )
+      expect(secondEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-14T23:59:00.00+00:00[UTC]')
+      )
       const thirdEvent = backgroundEvents[2]
-      expect(thirdEvent.start).toEqual(Temporal.PlainDate.from('2025-02-26'))
-      expect(thirdEvent.end).toEqual(Temporal.PlainDate.from('2025-02-26'))
+      expect(thirdEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-26T00:00:00.00+00:00[UTC]')
+      )
+      expect(thirdEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-26T23:59:00.00+00:00[UTC]')
+      )
       const fourthEvent = backgroundEvents[3]
-      expect(fourthEvent.start).toEqual(Temporal.PlainDate.from('2025-02-28'))
-      expect(fourthEvent.end).toEqual(Temporal.PlainDate.from('2025-02-28'))
+      expect(fourthEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-28T00:00:00.00+00:00[UTC]')
+      )
+      expect(fourthEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-02-28T23:59:00.00+00:00[UTC]')
+      )
 
       eventRecurrencePlugin.onRangeUpdate!({
         start: Temporal.ZonedDateTime.from('2025-03-01T00:00:00.00+00:00[UTC]'),
@@ -154,17 +170,33 @@ describe('expanding infinite background events beyond the current calendar range
       // Should still be expanded beyond the month range
       expect(updatedBackgroundEvents.length).toBeGreaterThanOrEqual(8)
       const fifthEvent = updatedBackgroundEvents[4]
-      expect(fifthEvent.start).toEqual(Temporal.PlainDate.from('2025-03-12'))
-      expect(fifthEvent.end).toEqual(Temporal.PlainDate.from('2025-03-12'))
+      expect(fifthEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-12T00:00:00.00+00:00[UTC]')
+      )
+      expect(fifthEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-12T23:59:00.00+00:00[UTC]')
+      )
       const sixthEvent = updatedBackgroundEvents[5]
-      expect(sixthEvent.start).toEqual(Temporal.PlainDate.from('2025-03-14'))
-      expect(sixthEvent.end).toEqual(Temporal.PlainDate.from('2025-03-14'))
+      expect(sixthEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-14T00:00:00.00+00:00[UTC]')
+      )
+      expect(sixthEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-14T23:59:00.00+00:00[UTC]')
+      )
       const seventhEvent = updatedBackgroundEvents[6]
-      expect(seventhEvent.start).toEqual(Temporal.PlainDate.from('2025-03-26'))
-      expect(seventhEvent.end).toEqual(Temporal.PlainDate.from('2025-03-26'))
+      expect(seventhEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-26T00:00:00.00+00:00[UTC]')
+      )
+      expect(seventhEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-26T23:59:00.00+00:00[UTC]')
+      )
       const eighthEvent = updatedBackgroundEvents[7]
-      expect(eighthEvent.start).toEqual(Temporal.PlainDate.from('2025-03-28'))
-      expect(eighthEvent.end).toEqual(Temporal.PlainDate.from('2025-03-28'))
+      expect(eighthEvent.start).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-28T00:00:00.00+00:00[UTC]')
+      )
+      expect(eighthEvent.end).toEqual(
+        Temporal.ZonedDateTime.from('2025-03-28T23:59:00.00+00:00[UTC]')
+      )
     })
   })
 })
