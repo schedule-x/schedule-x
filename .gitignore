@@ -30,3 +30,4 @@ cypress/snapshots/linux/diff
 cypress/screenshots
 cypress/snapshots/mac/diff
 cypress/snapshots/mac/actual
+.npmrc
