@@ -6,9 +6,7 @@ import { rangeToString } from './range-to-string'
 
 export default function useFetchEvents($app: CalendarAppSingleton) {
   const hasCalledFetchEventsOnRenderRef = useRef(false)
-  const initialRangeRef = useRef<string | null>(
-    rangeToString($app.calendarState.range.value)
-  )
+  const lastFetchedRangeRef = useRef<string | null>(null)
 
   const fetchAndSetEvents = async () => {
     if (
@@ -17,6 +15,16 @@ export default function useFetchEvents($app: CalendarAppSingleton) {
     ) {
       return
     }
+
+    const currentRangeString = rangeToString($app.calendarState.range.value)
+
+    // Skip if we're already fetching for this range
+    if (currentRangeString === lastFetchedRangeRef.current) {
+      return
+    }
+
+    // Mark this range as being fetched (before async call)
+    lastFetchedRangeRef.current = currentRangeString
 
     const events = await $app.config.callbacks.fetchEvents(
       $app.calendarState.range.value
@@ -45,12 +53,6 @@ export default function useFetchEvents($app: CalendarAppSingleton) {
       !$app.calendarState.range.value ||
       !hasCalledFetchEventsOnRenderRef.current
     ) {
-      return
-    }
-
-    // Skip if this is the initial range (already handled in useEffect)
-    const currentRangeString = rangeToString($app.calendarState.range.value)
-    if (currentRangeString === initialRangeRef.current) {
       return
     }
 

@@ -258,5 +258,90 @@ describe('useFetchEvents', () => {
         expect($app.calendarEvents.list.value[0].title).toBe('New Event')
       })
     })
+
+    it('should call fetchEvents when navigating back to the initial range', async () => {
+      const initialEvents: CalendarEventExternal[] = [
+        {
+          id: '1',
+          title: 'Initial Event',
+          start: Temporal.ZonedDateTime.from('2024-01-01T10:00:00.000Z[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-01-01T11:00:00.000Z[UTC]'),
+        },
+      ]
+
+      const differentEvents: CalendarEventExternal[] = [
+        {
+          id: '2',
+          title: 'Different Event',
+          start: Temporal.ZonedDateTime.from('2024-02-01T10:00:00.000Z[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-02-01T11:00:00.000Z[UTC]'),
+        },
+      ]
+
+      const backToInitialEvents: CalendarEventExternal[] = [
+        {
+          id: '3',
+          title: 'Back to Initial Event',
+          start: Temporal.ZonedDateTime.from('2024-01-01T12:00:00.000Z[UTC]'),
+          end: Temporal.ZonedDateTime.from('2024-01-01T13:00:00.000Z[UTC]'),
+        },
+      ]
+
+      const initialRange = {
+        start: Temporal.ZonedDateTime.from('2024-01-01T00:00:00.000Z[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-07T23:59:59.999Z[UTC]'),
+      }
+
+      const fetchEvents = vi
+        .fn()
+        .mockResolvedValueOnce(initialEvents)
+        .mockResolvedValueOnce(differentEvents)
+        .mockResolvedValueOnce(backToInitialEvents)
+
+      const $app = __createAppWithViews__({
+        callbacks: {
+          fetchEvents,
+        },
+        selectedDate: Temporal.PlainDate.from('2024-01-01'),
+      })
+
+      // Set initial range
+      $app.calendarState.range.value = initialRange
+
+      render(<TestComponent $app={$app} />)
+
+      // Wait for initial call
+      await waitFor(() => {
+        expect(fetchEvents).toHaveBeenCalledTimes(1)
+        expect($app.calendarEvents.list.value).toHaveLength(1)
+        expect($app.calendarEvents.list.value[0].id).toBe('1')
+      })
+
+      // Navigate to a different range
+      $app.calendarState.range.value = {
+        start: Temporal.ZonedDateTime.from('2024-02-01T00:00:00.000Z[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-02-07T23:59:59.999Z[UTC]'),
+      }
+
+      // Wait for second call
+      await waitFor(() => {
+        expect(fetchEvents).toHaveBeenCalledTimes(2)
+        expect($app.calendarEvents.list.value).toHaveLength(1)
+        expect($app.calendarEvents.list.value[0].id).toBe('2')
+      })
+
+      // Navigate back to the initial range
+      $app.calendarState.range.value = initialRange
+
+      // Wait for third call (this is the bug fix - should be called even though it's the initial range)
+      await waitFor(() => {
+        expect(fetchEvents).toHaveBeenCalledTimes(3)
+        expect($app.calendarEvents.list.value).toHaveLength(1)
+        expect($app.calendarEvents.list.value[0].id).toBe('3')
+        expect($app.calendarEvents.list.value[0].title).toBe(
+          'Back to Initial Event'
+        )
+      })
+    })
   })
 })

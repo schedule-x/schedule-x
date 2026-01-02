@@ -9,7 +9,7 @@ import {
 import { createCalendar } from '@schedule-x/calendar/src/factory'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createTimezoneSelectPlugin, translations as timezoneSelectTranslations } from '../'
-import { afterEach } from 'vitest'
+import { afterEach, vi } from 'vitest'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { stubInterface } from 'ts-sinon'
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
@@ -91,39 +91,57 @@ describe('TimezoneSelectPlugin', () => {
   })
 
   it('should display current timezone', async () => {
-    const timezoneSelectPlugin = createTimezoneSelectPlugin()
-    const calendar = createCalendar({
-      selectedDate: Temporal.PlainDate.from('2024-01-15'),
-      views: [createViewWeek()],
-      plugins: [timezoneSelectPlugin],
-      timezone: 'America/New_York' as IANATimezone,
-    })
+    // Mock Temporal.Now.instant() to return a summer date (July 15, 2024) when DST is active
+    const summerDate = Temporal.ZonedDateTime.from('2024-07-15T12:00:00-04:00[America/New_York]')
+    const summerInstant = summerDate.toInstant()
+    const instantSpy = vi.spyOn(Temporal.Now, 'instant').mockReturnValue(summerInstant)
 
-    calendar.render(calendarContainer)
+    try {
+      const timezoneSelectPlugin = createTimezoneSelectPlugin()
+      const calendar = createCalendar({
+        selectedDate: Temporal.PlainDate.from('2024-07-15'),
+        views: [createViewWeek()],
+        plugins: [timezoneSelectPlugin],
+        timezone: 'America/New_York' as IANATimezone,
+      })
 
-    await waitFor(() => {
-      const timezoneSelect = document.querySelector(
-        '.sx__timezone-select-selected-item'
-      )
-      const gmtPart = timezoneSelect?.querySelector('.gmt-part')
-      const timezoneName = timezoneSelect?.querySelector('.timezone-name')
+      calendar.render(calendarContainer)
 
-      // Should display GMT part and timezone name separately
-      expect(gmtPart?.textContent).toBe('GMT-04:00')
-      expect(timezoneName?.textContent).toBe('America/New_York')
-    })
+      await waitFor(() => {
+        const timezoneSelect = document.querySelector(
+          '.sx__timezone-select-selected-item'
+        )
+        const gmtPart = timezoneSelect?.querySelector('.gmt-part')
+        const timezoneName = timezoneSelect?.querySelector('.timezone-name')
+
+        // Should display GMT part and timezone name separately
+        expect(gmtPart?.textContent).toBe('GMT-04:00')
+        expect(timezoneName?.textContent).toBe('America/New_York')
+      })
+    } finally {
+      instantSpy.mockRestore()
+    }
   })
 
   it('should have title attribute with full timezone information', async () => {
-    renderComponent('Europe/Berlin')
+    // Mock Temporal.Now.instant() to return a summer date (July 15, 2024) when DST is active
+    const summerDate = Temporal.ZonedDateTime.from('2024-07-15T12:00:00+02:00[Europe/Berlin]')
+    const summerInstant = summerDate.toInstant()
+    const instantSpy = vi.spyOn(Temporal.Now, 'instant').mockReturnValue(summerInstant)
 
-    await waitFor(() => {
-      const timezoneSelect = document.querySelector(
-        '.sx__timezone-select-selected-item'
-      )
-      expect(timezoneSelect).toBeTruthy()
-      expect(timezoneSelect?.getAttribute('title')).toBe('GMT+02:00 Germany – Berlin')
-    })
+    try {
+      renderComponent('Europe/Berlin')
+
+      await waitFor(() => {
+        const timezoneSelect = document.querySelector(
+          '.sx__timezone-select-selected-item'
+        )
+        expect(timezoneSelect).toBeTruthy()
+        expect(timezoneSelect?.getAttribute('title')).toBe('GMT+02:00 Germany – Berlin')
+      })
+    } finally {
+      instantSpy.mockRestore()
+    }
   })
 
   it('should have title attribute with UTC timezone information', async () => {
