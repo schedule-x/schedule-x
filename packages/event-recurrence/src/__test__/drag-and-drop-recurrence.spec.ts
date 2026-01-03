@@ -46,7 +46,7 @@ describe('Drag and drop recurring events', () => {
         Temporal.ZonedDateTime.from('2024-02-05T19:00:00+03:00[Europe/Moscow]')
       )
       expect(updatedEvent._getForeignProperties().rrule).toEqual(
-        'FREQ=WEEKLY;UNTIL=20240302T015900;BYDAY=MO'
+        'FREQ=WEEKLY;UNTIL=20240302T015959;BYDAY=MO'
       )
     })
   })
@@ -89,7 +89,7 @@ describe('Drag and drop recurring events', () => {
         Temporal.ZonedDateTime.from('2024-02-01T17:00:00+03:00[Europe/Moscow]')
       )
       expect(updatedEvent._getForeignProperties().rrule).toEqual(
-        'FREQ=WEEKLY;UNTIL=20240226T235900;BYDAY=TH,FR'
+        'FREQ=WEEKLY;UNTIL=20240226T235959;BYDAY=TH,FR'
       )
     })
   })
