@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { useEffect, useState, useRef } from 'preact/hooks'
 import {
-  IANA_TIMEZONES,
   IANATimezone,
 } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { getOffsetForTimezone } from '@schedule-x/shared/src/utils/stateless/time/get-offset-for-timezone'
@@ -9,6 +8,7 @@ import { isKeyEnterOrSpace } from '@schedule-x/shared/src/utils/stateless/dom/ev
 import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import chevronIcon from '@schedule-x/shared/src/assets/chevron-input.svg'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
+import {timeZonesNames} from '@vvo/tzdb'
 
 export default function TimezoneSelect({
   $app,
@@ -31,8 +31,15 @@ export default function TimezoneSelect({
       
       return sign * (hours * 60 + (minutes || 0))
     }
-    
-    IANA_TIMEZONES.forEach(timezone => {
+
+    /**
+     * As of the end of 2025, there are 3 ways to get a list of timezones:
+     * 1) `Intl.Locale.prototype.getTimeZones()`: 👎 not well supported in browsers yet
+     * 2) `Intl.supportedValuesOf("timeZone")`: 👎 doesn't include some common things like UTC and shortcuts
+     * 3) Just get the IANA list at the current moment: 👍 we use that via peer dep `@vvo/tzdb`, plus the user can get
+     *    the newest version by updating the peer dep themselves
+     */
+    timeZonesNames.forEach(timezone => {
       try {
         const offset = getOffsetForTimezone(timezone)
         const minutes = parseOffsetToMinutes(offset)
@@ -43,7 +50,7 @@ export default function TimezoneSelect({
       }
     })
     
-    return [...IANA_TIMEZONES].sort((a, b) => {
+    return [...timeZonesNames].sort((a, b) => {
       const offsetA = timezoneOffsetMap.get(a) ?? 0
       const offsetB = timezoneOffsetMap.get(b) ?? 0
       return offsetA - offsetB
