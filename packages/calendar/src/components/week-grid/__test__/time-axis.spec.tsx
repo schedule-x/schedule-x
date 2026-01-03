@@ -102,4 +102,58 @@ describe('TimeAxis', () => {
       })
     })
   })
+
+  describe('displaying time axis with gridStep 120', () => {
+    it('should display grid steps every 2 hours', () => {
+      renderComponent(
+        __createAppWithViews__({
+          locale: 'de-DE',
+          weekOptions: {
+            gridStep: 120,
+            timeAxisFormatOptions: {
+              hour12: false,
+              hour: '2-digit',
+              minute: '2-digit',
+            },
+          },
+        })
+      )
+      // Should display hours: 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22
+      for (let hour = 0; hour < 24; ++hour) {
+        const query = hour.toString().padStart(2, '0') + ':00'
+        if (hour % 2 === 0) {
+          expect(screen.getByText(query)).not.toBeNull()
+        } else {
+          expect(screen.queryByText(query)).toBeNull()
+        }
+      }
+    })
+  })
+
+  describe('displaying time axis with gridStep 180', () => {
+    it('should display grid steps every 3 hours', () => {
+      renderComponent(
+        __createAppWithViews__({
+          locale: 'de-DE',
+          weekOptions: {
+            gridStep: 180,
+            timeAxisFormatOptions: {
+              hour12: false,
+              hour: '2-digit',
+              minute: '2-digit',
+            },
+          },
+        })
+      )
+      // Should display hours: 0, 3, 6, 9, 12, 15, 18, 21
+      for (let hour = 0; hour < 24; ++hour) {
+        const query = hour.toString().padStart(2, '0') + ':00'
+        if (hour % 3 === 0) {
+          expect(screen.getByText(query)).not.toBeNull()
+        } else {
+          expect(screen.queryByText(query)).toBeNull()
+        }
+      }
+    })
+  })
 })

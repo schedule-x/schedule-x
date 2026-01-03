@@ -20,13 +20,19 @@ export default function TimeAxis() {
     const result: { hour: number; minute: number }[] = []
 
     hourSteps.forEach((hour) => {
-      if ($app.config.weekOptions.value.gridStep === 60) {
+      if ($app.config.weekOptions.value.gridStep === 180) {
+        if (hour % 3 === 0) {
+          result.push({ hour: hour, minute: 0 })
+        }
+      } else if ($app.config.weekOptions.value.gridStep === 120) {
+        if (hour % 2 === 0) {
+          result.push({ hour: hour, minute: 0 })
+        }
+      } else if ($app.config.weekOptions.value.gridStep === 60) {
         result.push({ hour: hour, minute: 0 })
-      }
-      if ($app.config.weekOptions.value.gridStep === 30) {
+      } else if ($app.config.weekOptions.value.gridStep === 30) {
         result.push({ hour: hour, minute: 0 }, { hour: hour, minute: 30 })
-      }
-      if ($app.config.weekOptions.value.gridStep === 15) {
+      } else if ($app.config.weekOptions.value.gridStep === 15) {
         result.push(
           { hour: hour, minute: 0 },
           { hour: hour, minute: 15 },
