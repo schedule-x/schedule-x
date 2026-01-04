@@ -8,6 +8,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import babel from '@rollup/plugin-babel'
 import image from '@rollup/plugin-image'
+import json from '@rollup/plugin-image'
 import ts from 'rollup-plugin-ts'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -52,6 +53,7 @@ async function build(commandLineArgs) {
         exclude: 'node_modules/**',
       }),
       image(),
+      json(),
     ]
 
     config.push({
