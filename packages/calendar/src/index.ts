@@ -35,6 +35,7 @@ import DateGridDay from './components/week-grid/date-grid-day'
 import { Week } from './types/week'
 import { sortEventsForWeekView } from './utils/stateless/events/sort-events-for-week'
 import { AppContext } from './utils/stateful/app-context'
+import type { EventInstanceInfo } from './views/list/components/list-wrapper'
 
 export type {
   CalendarConfig,
@@ -48,6 +49,7 @@ export type {
   MonthGridOptions,
   PluginBase,
   Week,
+  EventInstanceInfo,
 }
 
 export {
