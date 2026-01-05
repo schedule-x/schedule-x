@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/schedule-x/schedule-x/compare/v3.5.1...v3.6.0) (2026-01-05)
+
+### Bug Fixes
+
+- **calendar:** fetch events going back to initial range ([#1270](https://github.com/schedule-x/schedule-x/issues/1270)) ([c2e8f1e](https://github.com/schedule-x/schedule-x/commit/c2e8f1efcf11a383d5a93d8a7f58c414bea39a0a))
+- concurrency multi event ([#1272](https://github.com/schedule-x/schedule-x/issues/1272)) ([8df03b9](https://github.com/schedule-x/schedule-x/commit/8df03b91dcfda7e01af7812d3686d7d8f7bb4278))
+
+### Features
+
+- **calendar:** enable 180 and 120 for gridStep option ([#1271](https://github.com/schedule-x/schedule-x/issues/1271)) ([89bf9f9](https://github.com/schedule-x/schedule-x/commit/89bf9f9363e37639789de1ad422f1e781ac22a7c))
+
 ## [3.5.1](https://github.com/schedule-x/schedule-x/compare/v3.5.0...v3.5.1) (2025-12-16)
 
 ### Bug Fixes

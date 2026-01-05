@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/schedule-x/schedule-x/compare/v3.5.1...v3.6.0) (2026-01-05)
+
+### Bug Fixes
+
+- **calendar:** fetch events going back to initial range ([#1270](https://github.com/schedule-x/schedule-x/issues/1270)) ([c2e8f1e](https://github.com/schedule-x/schedule-x/commit/c2e8f1efcf11a383d5a93d8a7f58c414bea39a0a))
+
 ## [3.5.1](https://github.com/schedule-x/schedule-x/compare/v3.5.0...v3.5.1) (2025-12-16)
 
 **Note:** Version bump only for package @schedule-x/timezone-select
