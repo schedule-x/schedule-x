@@ -14,14 +14,23 @@ export const handleEventConcurrency = (
       nextEvent
     )
 
+    const everyConcurrentEventEndsBeforeNextEvent =
+      nextEvent &&
+      concurrentEventsCache.every(
+        (e) =>
+          (e.end as Temporal.ZonedDateTime).epochNanoseconds <=
+          (nextEvent.start as Temporal.ZonedDateTime).epochNanoseconds
+      )
+    const currentEventOverlapsWithNextEvent =
+      nextEvent &&
+      (event.end as Temporal.ZonedDateTime).epochNanoseconds >
+        (nextEvent.start as Temporal.ZonedDateTime).epochNanoseconds
+
     if (
       concurrentEventsCache.length &&
       (!nextEvent ||
-        (concurrentEventsCache.every(
-          (e) =>
-            (e.end as Temporal.ZonedDateTime).epochNanoseconds <=
-            (nextEvent.start as Temporal.ZonedDateTime).epochNanoseconds
-        ) &&
+        (everyConcurrentEventEndsBeforeNextEvent &&
+          !currentEventOverlapsWithNextEvent &&
           !areBothEventsZeroMinutes))
     ) {
       concurrentEventsCache.push(event)
