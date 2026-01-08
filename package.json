@@ -72,7 +72,7 @@
     "sass": "^1.72.0",
     "sinon": "^21.0.0",
     "stylelint": "^16.2.1",
-    "stylelint-config-standard-scss": "^14.0.0",
+    "stylelint-config-standard-scss": "^16.0.0",
     "temporal-polyfill": "^0.3.0",
     "ts-sinon": "^2.0.2",
     "tsx": "^4.7.0",
