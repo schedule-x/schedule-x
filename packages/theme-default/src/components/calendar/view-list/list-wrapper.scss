@@ -5,6 +5,8 @@
   overflow-y: auto;
   position: relative;
   scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
 }
 
 .sx__list-day {
@@ -49,7 +51,7 @@
 .sx__list-event-color-line {
   width: 3px;
   height: 24px;
-  border-radius:2px;
+  border-radius: 2px;
   flex-shrink: 0;
 }
 
@@ -100,11 +102,10 @@
 }
 
 .sx__list-no-events {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: var(--sx-spacing-padding4);
   color: var(--sx-color-neutral);
   font-size: var(--sx-font-extra-small);
   text-align: center;
+  align-self: center;
+  justify-self: center;
 }
