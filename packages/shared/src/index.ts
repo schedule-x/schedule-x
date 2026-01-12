@@ -3,6 +3,7 @@ import type CalendarEvent from './interfaces/calendar/calendar-event.interface'
 import type { CalendarEventInternal } from './interfaces/calendar/calendar-event.interface'
 import type EventModalPlugin from './interfaces/event-modal/event-modal.plugin'
 import type TimezoneSelectPlugin from './interfaces/timezone-select/timezone-select-plugin'
+import type CalendarConfigInternal from './interfaces/calendar/calendar-config'
 import TimeIcon from './components/icons/time-icon'
 import UserIcon from './components/icons/user-icon'
 import DescriptionIcon from './components/icons/description-icon'
@@ -36,9 +37,9 @@ export {
 } from './utils/stateless/time/format-conversion/string-to-string'
 export type {
   CalendarConfigExternal,
-  CalendarConfigInternal,
   ResourceGridOptions,
 } from './interfaces/calendar/calendar-config'
+export type { CalendarConfigInternal }
 export type {
   CalendarEvent,
   EventModalPlugin,
