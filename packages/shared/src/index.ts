@@ -55,7 +55,11 @@ export {
   addMonths,
   __deprecated__addMinutes as addMinutes,
 } from './utils/stateless/time/date-time-mutation/adding'
-export { timeStringFromTimePoints } from './utils/stateless/time/time-points/string-conversion'
+export {
+  timeStringFromTimePoints,
+  addTimePointsToDateTime,
+  timePointsFromString,
+} from './utils/stateless/time/time-points/string-conversion'
 export { timePointToPercentage } from './utils/stateless/time/interpolation/time-point-to-grid-percentage'
 export { getYCoordinateInTimeGrid } from './utils/stateless/calendar/get-y-coordinate-in-time-grid'
 export type { DateRange } from './types/date-range'
