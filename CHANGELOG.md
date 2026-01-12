@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.1](https://github.com/schedule-x/schedule-x/compare/v3.7.0...v3.7.1) (2026-01-12)
+
+### Bug Fixes
+
+- add missing export for resource view ([9111372](https://github.com/schedule-x/schedule-x/commit/91113726d0f3489d22c2067ae44c43b33c619e75))
+
 # [3.7.0](https://github.com/schedule-x/schedule-x/compare/v3.6.0...v3.7.0) (2026-01-12)
 
 ### Features
