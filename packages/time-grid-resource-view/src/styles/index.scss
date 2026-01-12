@@ -1,0 +1,7 @@
+@import 'resource-wrapper';
+@import 'resource-header';
+@import 'resource-date-grid';
+
+:root {
+  --sx-resource-view-total-columns: 8;
+}

@@ -1,0 +1,68 @@
+.sx__resource-date-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--sx-resource-view-total-columns), 1fr);
+  margin-left: var(--sx-calendar-week-grid-padding-left);
+  min-height: 2rem;
+  border-bottom: 1px solid var(--sx-color-neutral-variant);
+}
+
+.sx__resource-date-grid-day {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 2px;
+  border-inline-start: 1px solid var(--sx-color-neutral-variant);
+  min-width: 0; /* Allow flex children to shrink below content size */
+  overflow: hidden;
+
+  &:first-child {
+    border-inline-start: none;
+  }
+}
+
+.sx__resource-date-grid-event {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid var(--sx-color-primary);
+    outline-offset: 1px;
+  }
+}
+
+.sx__resource-date-grid-event__content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sx__resource-date-grid-event__time {
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.sx__resource-date-grid-event__title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sx__resource-time-grid-day {
+  position: relative;
+  border-inline-start: 1px solid var(--sx-color-neutral-variant);
+  height: 100%;
+
+  &:first-child {
+    border-inline-start: none;
+  }
+}

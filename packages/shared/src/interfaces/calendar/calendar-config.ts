@@ -20,6 +20,7 @@ import { BackgroundEvent } from './background-event'
 import { Language } from '../../types/translations/language.translations'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
 import TimezoneSelectPlugin from '../timezone-select/timezone-select-plugin'
+import { Resource } from '../../types/calendar/resource'
 
 export type WeekOptions = {
   gridHeight: number
@@ -62,6 +63,10 @@ export type CustomComponentFn = (
   props: Record<string, unknown>
 ) => void
 
+export type ResourceGridOptions = {
+  nDays: number
+}
+
 export default interface CalendarConfigInternal extends Config {
   theme: string | undefined
   defaultView: ViewName
@@ -81,6 +86,8 @@ export default interface CalendarConfigInternal extends Config {
   _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
   translations: Signal<Record<string, Language>>
   direction: 'ltr' | 'rtl'
+  resources: Signal<Resource[]>
+  resourceGridOptions: Signal<ResourceGridOptions>
 
   // Getters
   isHybridDay: boolean
@@ -111,6 +118,8 @@ interface ReducedCalendarConfigInternal
     | 'showWeekNumbers'
     | 'direction'
     | 'timezone'
+    | 'resources'
+    | 'resourceGridOptions'
   > {}
 
 export interface CalendarConfigExternal
@@ -134,4 +143,6 @@ export interface CalendarConfigExternal
   translations?: Record<string, Language>
   showWeekNumbers?: boolean
   timezone?: IANATimezone
+  resources?: Resource[]
+  resourceGridOptions?: Partial<ResourceGridOptions>
 }

@@ -2,7 +2,9 @@ import CalendarConfigInternal, {
   CalendarType,
   MonthGridOptions,
   WeekOptions,
+  ResourceGridOptions,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
+import { Resource } from '@schedule-x/shared/src/types/calendar/resource'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
 import {
   DEFAULT_FIRST_DAY_OF_WEEK,
@@ -35,6 +37,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   showWeekNumbers: Signal<boolean> = signal(false)
   direction: 'ltr' | 'rtl' = 'ltr'
   timezone: Signal<IANATimezone>
+  resources: Signal<Resource[]>
+  resourceGridOptions: Signal<ResourceGridOptions>
   _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
 
   constructor(
@@ -58,7 +62,9 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     theme: string | undefined = undefined,
     translations: Record<string, Language> = {},
     showWeekNumbers: boolean = false,
-    timezone: IANATimezone = 'UTC'
+    timezone: IANATimezone = 'UTC',
+    resources: Resource[] = [],
+    resourceGridOptions: ResourceGridOptions = { nDays: 7 }
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
@@ -75,6 +81,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.showWeekNumbers = signal(showWeekNumbers)
     this.direction = getDirection()
     this.timezone = signal(timezone)
+    this.resources = signal(resources)
+    this.resourceGridOptions = signal(resourceGridOptions)
   }
 
   get isHybridDay(): boolean {
