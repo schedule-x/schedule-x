@@ -26,5 +26,6 @@ export const externalEventToInternal = (
     .withOptions(_options)
     .withForeignProperties(foreignProperties)
     .withCustomContent(event._customContent)
+    .withResourceId(event.resourceId)
     .build()
 }

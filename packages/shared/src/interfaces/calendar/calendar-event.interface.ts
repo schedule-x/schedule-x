@@ -17,6 +17,7 @@ export default interface CalendarEventExternal {
   location?: string
   description?: string
   calendarId?: string
+  resourceId?: string
 
   _customContent?: {
     timeGrid?: string

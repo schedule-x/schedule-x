@@ -1,0 +1,25 @@
+.sx__resource-header {
+  display: grid;
+  grid-template-columns: repeat(var(--sx-resource-view-total-columns), 1fr);
+  margin-left: var(--sx-calendar-week-grid-padding-left);
+  border-bottom: 1px solid var(--sx-color-neutral-variant);
+}
+
+.sx__resource-header__resource {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--sx-color-on-surface);
+  border-inline-start: 1px solid var(--sx-color-neutral-variant);
+  background-color: var(--sx-color-surface-container);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+
+  &:first-child {
+    border-inline-start: none;
+  }
+}

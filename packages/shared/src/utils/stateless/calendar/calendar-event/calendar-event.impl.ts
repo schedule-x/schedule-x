@@ -34,7 +34,8 @@ export default class CalendarEventImpl implements CalendarEventInternal {
     public calendarId?: string,
     public _options: CalendarEventOptions | undefined = undefined,
     public _customContent: CalendarEventInternal['_customContent'] = {},
-    private _foreignProperties: Record<string, unknown> = {}
+    private _foreignProperties: Record<string, unknown> = {},
+    public resourceId?: string
   ) {
     this._originalTimezone =
       this._start instanceof Temporal.ZonedDateTime
@@ -181,6 +182,7 @@ export default class CalendarEventImpl implements CalendarEventInternal {
       location: this.location,
       description: this.description,
       calendarId: this.calendarId,
+      resourceId: this.resourceId,
       _options: this._options,
       ...this._getForeignProperties(),
     }

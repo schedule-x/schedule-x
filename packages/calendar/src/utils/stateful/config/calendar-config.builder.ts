@@ -4,6 +4,7 @@ import CalendarConfigInternal, {
   MonthGridOptions,
   Plugins,
   WeekOptions,
+  ResourceGridOptions,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import CalendarConfigImpl from './calendar-config.impl'
 import { WeekDay } from '@schedule-x/shared/src/enums/time/week-day.enum'
@@ -29,6 +30,7 @@ import { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/back
 import { Language } from '@schedule-x/shared/src/types/translations/language.translations'
 
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
+import { Resource } from '@schedule-x/shared/src/types/calendar/resource'
 
 export default class CalendarConfigBuilder
   implements Builder<CalendarConfigInternal>
@@ -63,6 +65,11 @@ export default class CalendarConfigBuilder
 
   showWeekNumbers: boolean | undefined
 
+  resources: Resource[] = []
+  resourceGridOptions: ResourceGridOptions = {
+    nDays: 7,
+  }
+
   build(): CalendarConfigInternal {
     const minDate = this.minDate
       ? Temporal.PlainDate.from(this.minDate)
@@ -91,7 +98,9 @@ export default class CalendarConfigBuilder
       this.theme,
       this.translations,
       this.showWeekNumbers,
-      this.timezone as IANATimezone
+      this.timezone as IANATimezone,
+      this.resources,
+      this.resourceGridOptions
     )
   }
 
@@ -225,6 +234,23 @@ export default class CalendarConfigBuilder
 
   withTimezone(timezone: string | undefined) {
     this.timezone = timezone
+    return this
+  }
+
+  withResources(resources: Resource[] | undefined): CalendarConfigBuilder {
+    if (resources) {
+      this.resources = resources
+    }
+    return this
+  }
+
+  withResourceGridOptions(
+    resourceGridOptions: Partial<ResourceGridOptions> | undefined
+  ): CalendarConfigBuilder {
+    this.resourceGridOptions = {
+      ...this.resourceGridOptions,
+      ...resourceGridOptions,
+    }
     return this
   }
 }
