@@ -1,7 +1,7 @@
 {
   "name": "@schedule-x/time-grid-resource-view",
   "umdName": "SXTimeGridResourceView",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "publishConfig": {
     "access": "public"
   },
