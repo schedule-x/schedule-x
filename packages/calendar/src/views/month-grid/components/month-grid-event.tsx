@@ -1,6 +1,6 @@
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
+import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { useContext, useEffect, useRef } from 'preact/hooks'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'

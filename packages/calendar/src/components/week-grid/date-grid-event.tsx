@@ -8,7 +8,7 @@ import {
   getBorderRadius,
   getWidthToSubtract,
 } from '../../utils/stateless/events/date-grid-event-styles'
-import useEventInteractions from '../../utils/stateful/hooks/use-event-interactions'
+import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
 import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'

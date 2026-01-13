@@ -10,7 +10,6 @@ import {
   createCalendar,
 } from '@schedule-x/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
-import '../../packages/time-grid-resource-view/src/styles/index.scss'
 import '../app.css'
 import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
@@ -27,13 +26,11 @@ import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
 import { createViewList } from '@schedule-x/calendar/src/views/list'
-import { createViewTimeGridResourceView } from '../../packages/time-grid-resource-view/src'
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb.ts'
 import '../../packages/timezone-select/src/timezone-select.scss'
 
-import { dateStringRegex } from '@schedule-x/shared/src'
 import { createCurrentTimePlugin } from '../../packages/current-time/src'
 import { createTimezoneSelectPlugin, translations as timezoneSelectTranslations } from '../../packages/timezone-select/src'
 
@@ -68,7 +65,7 @@ plugins: [
     end: '06:00'
   }, */
   firstDayOfWeek: 1,
-  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList(), createViewTimeGridResourceView()],
+  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
   defaultView: 'resource-view',
   
   resources: [
