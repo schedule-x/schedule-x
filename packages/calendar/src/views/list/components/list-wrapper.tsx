@@ -8,7 +8,7 @@ import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preac
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { scrollOnDateSelection } from '../utils/stateless/scroll-on-date-selection'
-import useEventInteractions from '../../../utils/stateful/hooks/use-event-interactions'
+import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
 import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
 import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'

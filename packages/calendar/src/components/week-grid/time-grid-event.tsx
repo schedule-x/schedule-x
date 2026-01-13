@@ -14,7 +14,7 @@ import LocationPinIcon from '@schedule-x/shared/src/components/icons/location-pi
 import { deepCloneEvent } from '@schedule-x/shared/src/utils/stateless/calendar/deep-clone-event'
 import { DayBoundariesDateTime } from '@schedule-x/shared/src/types/day-boundaries-date-time'
 import { getTimeGridEventCopyElementId } from '@schedule-x/shared/src/utils/stateless/strings/selector-generators'
-import useEventInteractions from '../../utils/stateful/hooks/use-event-interactions'
+import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
 import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/strings/concatenate-people'
 import { Fragment } from 'preact'
 import { getCCID } from './time-grid-event-utils'
