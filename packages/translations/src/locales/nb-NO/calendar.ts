@@ -21,4 +21,3 @@ export const calendarNbNO: CalendarTranslations = {
   'Link to 1 more event on {{date}}': 'Lenke til 1 hendelse til på {{date}}',
   CW: 'Uke {{week}}',
 }
-

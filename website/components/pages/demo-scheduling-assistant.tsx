@@ -32,7 +32,7 @@ export default function CalendarDemoPage() {
   rConfig.infiniteScroll.value = false
   const hourlyView = useState(() => createHourlyView(rConfig))[0];
 
-  rConfig.resources.value = [
+  const resources = [
     {
       id: 'janedoe',
       label: 'Jane Doe',
@@ -67,6 +67,7 @@ export default function CalendarDemoPage() {
   })
 
   const calendar = useNextCalendarApp({
+    resources,
     selectedDate: Temporal.PlainDate.from('2025-03-07'),
     timezone: 'America/New_York',
     events: [
@@ -176,7 +177,7 @@ export default function CalendarDemoPage() {
           <br/>
 
           <strong>Participants:</strong>
-          {rConfig.resources.value.map((resource) => (
+          {resources.map((resource) => (
             <div key={resource.id}>{resource.label}</div>
           ))}
         </Modal.Body>

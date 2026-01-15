@@ -17,62 +17,61 @@ import '../../packages/theme-shadcn/src/index.scss'
 import './app.css'
 import { calendars } from "./calendars.ts";
 import { createEventModalPlugin } from '@schedule-x/event-modal'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
 const calendar = createCalendar({
-  selectedDate: '2024-05-06',
+  selectedDate: Temporal.PlainDate.from('2024-05-06'),
   theme: 'shadcn',
   events: [
     {
       id: 1,
       title: 'Event 1',
-      start: '2024-05-11 10:00',
-      end: '2024-05-11 12:00',
+      start: Temporal.ZonedDateTime.from('2024-05-11T10:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-11T12:00:00-04:00[America/New_York]'),
       calendarId: 'internal',
       rrule: 'FREQ=WEEKLY;BYDAY=MO,WE,FR;COUNT=10'
     },
     {
       id: 2,
       title: 'Event 2',
-      start: '2024-05-11 14:00',
-      end: '2024-05-11 16:00',
+      start: Temporal.ZonedDateTime.from('2024-05-11T14:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-11T16:00:00-04:00[America/New_York]'),
       calendarId: 'internal',
     },
     {
       id: 3,
       title: 'Event 3',
-      start: '2024-05-11 08:00',
-      end: '2024-05-11 09:00',
+      start: Temporal.ZonedDateTime.from('2024-05-11T08:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-11T09:00:00-04:00[America/New_York]'),
       calendarId: 'teamBuilding',
     },
     {
       id: 4,
       title: 'Event 4',
-      start: '2024-05-11 10:00',
-      end: '2024-05-11 11:00',
+      start: Temporal.ZonedDateTime.from('2024-05-11T10:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-11T11:00:00-04:00[America/New_York]'),
       calendarId: 'clients',
     },
     {
       id: 5,
       title: 'Event 5',
-      start: '2024-05-06 07:00',
-      end: '2024-05-06 09:10',
+      start: Temporal.ZonedDateTime.from('2024-05-06T07:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-06T09:10:00-04:00[America/New_York]'),
       calendarId: 'management',
     },
     {
       id: 6,
       title: 'Event 6',
-      start: '2024-05-07',
-      end: '2024-05-07',
+      start: Temporal.ZonedDateTime.from('2024-05-07T00:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-07T00:00:00-04:00[America/New_York]') ,
       calendarId: 'teamBuilding',
     },
     {
       id: 7,
       title: 'Event 7',
-      start: '2024-05-08',
-      end: '2024-05-08',
+      start: Temporal.ZonedDateTime.from('2024-05-08T00:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-08T00:00:00-04:00[America/New_York]'),
       calendarId: 'teamBuilding',
     }
   ],

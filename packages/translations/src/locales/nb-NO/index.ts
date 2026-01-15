@@ -8,4 +8,3 @@ export const nbNO: Language = {
   ...calendarNbNO,
   ...timePickerNbNO,
 }
-

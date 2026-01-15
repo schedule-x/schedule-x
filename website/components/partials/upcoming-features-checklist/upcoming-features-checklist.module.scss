@@ -1,0 +1,61 @@
+.checklist {
+  list-style: none;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.checklistItem {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.125rem 0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+  transition: color 0.2s ease;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  &.checked {
+    color: #10b981;
+  }
+}
+
+.label {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #374151;
+  font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+  .checklist {
+    background: #1f2937;
+    border-color: #374151;
+  }
+  
+  .checkbox {
+    color: #9ca3af;
+  }
+  
+  .label {
+    color: #e5e7eb;
+  }
+}
+

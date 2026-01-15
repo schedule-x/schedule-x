@@ -2,10 +2,10 @@
 
 import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek, viewList } from '@schedule-x/calendar'
 import { seededEvents } from './data/seeded-events'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
-import { createResizePlugin } from '@schedule-x/resize'
+import { createResizePlugin } from '@sx-premium/resize'
 import 'temporal-polyfill/global'
 import { createTimezoneSelectPlugin, translations as timezoneTranslations } from '@schedule-x/timezone-select'
 import { translations, mergeLocales } from '@schedule-x/translations'

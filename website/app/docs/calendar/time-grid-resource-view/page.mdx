@@ -1,0 +1,179 @@
+---
+title: 'Time Grid Resource View'
+description: 'Learn how to use the Schedule-X time grid resource view.'
+---
+
+# Time Grid Resource View
+
+A view for displaying resources (people, rooms, equipment etc.) alongside regular calendar views. This view displays resources as columns, with each column showing the events for that resource within the current week.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium feature which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+## Features & demo
+import FeaturesList from "../../../../components/partials/features-list/features-list";
+
+<FeaturesList features={[
+  'Week view with resources as columns',
+  'Resource-specific event display',
+]} />
+
+[Go to Demo](/demos/time-grid-resource-view)
+
+### Upcoming features
+
+This view just got released (January 15, 2026). Below follows a checklist with next upcoming features.
+
+import UpcomingFeaturesChecklist from "../../../../components/partials/upcoming-features-checklist/upcoming-features-checklist";
+
+<UpcomingFeaturesChecklist features={[
+  { label: 'Displaying events in resources', checked: true },
+  'Event modal compatibility (January 2026)',
+  'Resize (January 2026)',
+  'Drag-and-drop (February 2026)',
+  'Draw (February 2026)',
+]} />
+
+## Installation
+
+### 1. Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2. Install
+
+
+```bash copy
+npm install @sx-premium/time-grid-resource-view @schedule-x/calendar @schedule-x/theme-default
+```
+
+## Usage
+
+```js
+import { createCalendar } from '@schedule-x/calendar'
+import { createViewTimeGridResource } from "@sx-premium/time-grid-resource-view";
+
+import '@schedule-x/theme-default/dist/index.css'
+import '@sx-premium/time-grid-resource-view/index.css'
+
+const resources = [
+  {
+    id: 'room-1',
+    label: 'Conference Room A',
+    colorName: 'room-a',
+    lightColors: {
+      main: '#1c7df9',
+      container: '#d2e7ff',
+      onContainer: '#002859',
+    },
+    darkColors: {
+      main: '#c0dfff',
+      onContainer: '#dee6ff',
+      container: '#426aa2',
+    },
+  },
+  {
+    id: 'room-2',
+    label: 'Meeting Room B',
+    colorName: 'room-b',
+    lightColors: {
+      main: '#f91c45',
+      container: '#ffd2dc',
+      onContainer: '#59000d',
+    },
+    darkColors: {
+      main: '#ffc0cc',
+      onContainer: '#ffdee6',
+      container: '#a24258',
+    },
+  },
+]
+
+const calendar = createCalendar({
+  resources,
+  views: [createViewTimeGridResource()],
+  events: [
+    {
+      id: '1',
+      title: 'Team standup',
+      start: Temporal.ZonedDateTime.from('2024-05-06T09:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-06T09:30:00-04:00[America/New_York]'),
+      resourceId: 'room-1',
+    },
+    {
+      id: '2',
+      title: 'Client presentation',
+      start: Temporal.ZonedDateTime.from('2024-05-06T10:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-06T12:00:00-04:00[America/New_York]'),
+      resourceId: 'room-1',
+    },
+    {
+      id: '3',
+      title: 'Product review',
+      start: Temporal.ZonedDateTime.from('2024-05-06T09:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-06T10:30:00-04:00[America/New_York]'),
+      resourceId: 'room-2',
+    },
+    {
+      id: '4',
+      title: 'Design workshop',
+      start: Temporal.ZonedDateTime.from('2024-05-06T13:00:00-04:00[America/New_York]'),
+      end: Temporal.ZonedDateTime.from('2024-05-06T15:00:00-04:00[America/New_York]'),
+      resourceId: 'room-2',
+    },
+  ],
+})
+
+calendar.render(document.getElementById('your-calendar-wrapper'))
+```
+
+
+## API
+
+### Resource
+
+Resources are defined using the same structure as in the [resource scheduler](/docs/calendar/resource-scheduler). Each resource requires an `id` and can have a `label`, custom colors, and other properties.
+
+```ts
+export type Resource = {
+  id: string
+  label?: string
+  labelHTML?: string
+  colorName?: string
+  lightColors?: ColorDefinition
+  darkColors?: ColorDefinition
+}
+```
+
+### ColorDefinition
+
+```ts
+export type ColorDefinition = {
+  main: string
+  container: string
+  onContainer: string
+}
+```
+
+### Events with resources
+
+To associate an event with a resource, add a `resourceId` property to the event object that matches the `id` of a resource.
+
+```ts
+{
+  id: '1',
+  title: 'Team meeting',
+  start: Temporal.ZonedDateTime.from('2024-05-06T09:00:00-04:00[America/New_York]'),
+  end: Temporal.ZonedDateTime.from('2024-05-06T10:00:00-04:00[America/New_York]'),
+  resourceId: 'room-1', // matches resource id
+}
+```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.
+

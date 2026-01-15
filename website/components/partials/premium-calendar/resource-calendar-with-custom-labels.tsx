@@ -40,7 +40,7 @@ export default function ResourceCalendarWithCustomLabels() {
 
   rConfig.resourceHeight.value = 100
 
-  rConfig.resources.value = [
+  const resources = [
     {
       id: 'trevor',
       labelHTML: `<div style="display: flex; align-items: center; gap: 20px; font-size: 20px; margin: 0 auto;"><img style="width: 60px; height: 60px; border-radius: 100%; object-fit: cover" src="https://d19hgxvhjb2new.cloudfront.net/website/trevor_resource_view.jpg" alt="image of man">Trevor</div>`,
@@ -68,6 +68,7 @@ export default function ResourceCalendarWithCustomLabels() {
   ]
 
   const calendarApp = useNextCalendarApp({
+    resources,
     callbacks: {
       onDoubleClickDateTime: (dateTime: Temporal.ZonedDateTime) => {
         interactiveEventModalPlugin.clickToCreate(dateTime, { calendarId: 'clients' })
