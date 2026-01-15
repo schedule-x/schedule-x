@@ -8,16 +8,16 @@ import CalendarAppSingleton from '../calendar/calendar-app-singleton'
 import { CalendarEventInternal } from '../calendar/calendar-event.interface'
 
 export default interface DragAndDropPlugin extends PluginBase<string> {
-  createTimeGridDragHandler(
+  startTimeGridDrag(
     dependencies: DragHandlerDependencies,
     dayBoundariesDateTime: DayBoundariesDateTime
   ): TimeGridDragHandler
 
-  createDateGridDragHandler(
+  startDateGridDrag(
     dependencies: DragHandlerDependencies
   ): DateGridDragHandler
 
-  createMonthGridDragHandler(
+  startMonthGridDrag(
     calendarEvent: CalendarEventInternal,
     $app: CalendarAppSingleton
   ): MonthGridDragHandler

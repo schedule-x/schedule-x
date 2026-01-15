@@ -60,7 +60,7 @@ export default function DateGridEvent({
     const newEventCopy = deepCloneEvent(calendarEvent, $app)
     updateCopy(newEventCopy)
 
-    $app.config.plugins.dragAndDrop.createDateGridDragHandler({
+    $app.config.plugins.dragAndDrop.startDateGridDrag({
       eventCoordinates: getEventCoordinates(uiEvent),
       eventCopy: newEventCopy,
       updateCopy,

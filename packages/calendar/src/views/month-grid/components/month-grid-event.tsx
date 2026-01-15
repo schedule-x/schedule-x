@@ -66,7 +66,7 @@ export default function MonthGridEvent({
     if (!$app.config.plugins.dragAndDrop || calendarEvent._options?.disableDND)
       return
 
-    $app.config.plugins.dragAndDrop.createMonthGridDragHandler(
+    $app.config.plugins.dragAndDrop.startMonthGridDrag(
       calendarEvent,
       $app
     )
