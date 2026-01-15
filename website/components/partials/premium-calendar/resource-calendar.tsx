@@ -39,7 +39,7 @@ export default function ResourceCalendar() {
   const hourlyView = createHourlyView(rConfig);
   const dailyView = createDailyView(rConfig);
 
-  rConfig.resources.value = [
+  const resources = [
     {
       id: 'conveyor-belt-a',
       label: 'Conveyor Belt A',
@@ -119,6 +119,7 @@ export default function ResourceCalendar() {
   ]
 
   const calendarApp = useNextCalendarApp({
+    resources,
     callbacks: {
       onDoubleClickDateTime: (dateTime: Temporal.ZonedDateTime) => {
         interactiveEventModalPlugin.clickToCreate(dateTime, { calendarId: 'clients' })
