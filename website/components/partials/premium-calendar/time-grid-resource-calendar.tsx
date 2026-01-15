@@ -1,7 +1,7 @@
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import { calendars } from './data/calendars';
 import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
-import { createViewTimeGridResourceView } from "@sx-premium/time-grid-resource-view";
+import { createViewTimeGridResource } from "@sx-premium/time-grid-resource-view";
 import 'temporal-polyfill/global'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller';
 
@@ -43,7 +43,7 @@ export default function TimeGridResourceCalendar() {
 
   const calendarApp = useNextCalendarApp({
     locale: 'en-US',
-    views: [createViewTimeGridResourceView()],
+    views: [createViewTimeGridResource()],
     selectedDate: Temporal.PlainDate.from('2024-05-06'),
     timezone: 'America/New_York',
     resources,

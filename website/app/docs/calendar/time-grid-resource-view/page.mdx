@@ -55,7 +55,7 @@ npm install @sx-premium/time-grid-resource-view @schedule-x/calendar @schedule-x
 
 ```js
 import { createCalendar } from '@schedule-x/calendar'
-import { createViewTimeGridResourceView } from "@sx-premium/time-grid-resource-view";
+import { createViewTimeGridResource } from "@sx-premium/time-grid-resource-view";
 
 import '@schedule-x/theme-default/dist/index.css'
 import '@sx-premium/time-grid-resource-view/index.css'
@@ -95,7 +95,7 @@ const resources = [
 
 const calendar = createCalendar({
   resources,
-  views: [createViewTimeGridResourceView()],
+  views: [createViewTimeGridResource()],
   events: [
     {
       id: '1',

@@ -33,7 +33,7 @@
         "@sx-premium/draw": "^15.0.2",
         "@sx-premium/interactive-event-modal": "^15.0.2",
         "@sx-premium/resource-scheduler": "^15.0.2",
-        "@sx-premium/time-grid-resource-view": "^15.0.3",
+        "@sx-premium/time-grid-resource-view": "^15.0.4",
         "@sx-premium/scheduling-assistant": "^15.0.2",
         "@sx-premium/sidebar": "^15.0.2",
         "@tailwindcss/postcss": "^4.1.10",
