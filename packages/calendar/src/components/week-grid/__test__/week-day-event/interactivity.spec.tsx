@@ -35,8 +35,8 @@ describe('TimeGridEvent interactivity', () => {
     it('should not start dragging', () => {
       const dragAndDropPlugin = stubInterface<DragAndDropPlugin>()
       dragAndDropPlugin.name = PluginName.DragAndDrop
-      dragAndDropPlugin.createTimeGridDragHandler =
-        vi.fn() as unknown as typeof dragAndDropPlugin.createTimeGridDragHandler
+      dragAndDropPlugin.startTimeGridDrag =
+        vi.fn() as unknown as typeof dragAndDropPlugin.startTimeGridDrag
       const $app = __createAppWithViews__({
         plugins: [dragAndDropPlugin],
         events: [
@@ -63,7 +63,7 @@ describe('TimeGridEvent interactivity', () => {
 
       vi.advanceTimersByTime(1000)
 
-      expect(dragAndDropPlugin.createTimeGridDragHandler).not.toHaveBeenCalled()
+      expect(dragAndDropPlugin.startTimeGridDrag).not.toHaveBeenCalled()
     })
   })
 
@@ -104,8 +104,8 @@ describe('TimeGridEvent interactivity', () => {
     it('should start dragging', () => {
       const dragAndDropPlugin = stubInterface<DragAndDropPlugin>()
       dragAndDropPlugin.name = PluginName.DragAndDrop
-      dragAndDropPlugin.createTimeGridDragHandler =
-        vi.fn() as unknown as typeof dragAndDropPlugin.createTimeGridDragHandler
+      dragAndDropPlugin.startTimeGridDrag =
+        vi.fn() as unknown as typeof dragAndDropPlugin.startTimeGridDrag
       const $app = __createAppWithViews__({
         plugins: [dragAndDropPlugin],
         events: [
@@ -129,7 +129,7 @@ describe('TimeGridEvent interactivity', () => {
 
       vi.advanceTimersByTime(1000)
 
-      expect(dragAndDropPlugin.createTimeGridDragHandler).toHaveBeenCalled()
+      expect(dragAndDropPlugin.startTimeGridDrag).toHaveBeenCalled()
     })
   })
 
