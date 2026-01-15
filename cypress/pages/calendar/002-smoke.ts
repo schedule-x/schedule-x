@@ -1,3 +1,4 @@
+import 'temporal-polyfill/global'
 import '@fontsource/open-sans'
 import '@fontsource/open-sans/300.css'
 import '@fontsource/open-sans/500-italic.css'
@@ -16,7 +17,6 @@ import '../index.css'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { smokeTestEvents } from './__data__/smoke-data.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller'
-import 'temporal-polyfill/global'
 
 const calendarElement = document.getElementById('calendar') as HTMLElement
 
