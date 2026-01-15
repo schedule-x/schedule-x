@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.1](https://github.com/schedule-x/schedule-x/compare/v4.0.0...v4.0.1) (2026-01-15)
+
+### Bug Fixes
+
+- dnd interface ([#1277](https://github.com/schedule-x/schedule-x/issues/1277)) ([0982bba](https://github.com/schedule-x/schedule-x/commit/0982bba116b61d8ed1de89e713b5d63a5a7d5de9))
+
 # [4.0.0](https://github.com/schedule-x/schedule-x/compare/v3.7.3...v4.0.0) (2026-01-15)
 
 **Note:** Version bump only for package @schedule-x/calendar
