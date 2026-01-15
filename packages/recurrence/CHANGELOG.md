@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/schedule-x/schedule-x/compare/v3.7.3...v4.0.0) (2026-01-15)
+
+**Note:** Version bump only for package @schedule-x/recurrence
+
 ## [3.7.3](https://github.com/schedule-x/schedule-x/compare/v3.7.2...v3.7.3) (2026-01-14)
 
 **Note:** Version bump only for package @schedule-x/recurrence
