@@ -30,6 +30,12 @@ const meta: MetaRecord = {
       layout: 'default',
       sidebar: false,
     }
+  },
+  'time-grid-resource-view': {
+    theme: {
+      layout: 'default',
+      sidebar: false,
+    }
   }
 }
 

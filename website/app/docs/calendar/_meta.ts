@@ -22,6 +22,9 @@ const meta: MetaRecord = {
   'resource-scheduler': {
     title: "⭐ Resource scheduler"
   },
+  'time-grid-resource-view': {
+    title: "⭐ Time grid resource view"
+  },
   theme: {
     title: "Theme"
   },

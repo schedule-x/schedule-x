@@ -13,9 +13,7 @@ export default interface DragAndDropPlugin extends PluginBase<string> {
     dayBoundariesDateTime: DayBoundariesDateTime
   ): TimeGridDragHandler
 
-  startDateGridDrag(
-    dependencies: DragHandlerDependencies
-  ): DateGridDragHandler
+  startDateGridDrag(dependencies: DragHandlerDependencies): DateGridDragHandler
 
   startMonthGridDrag(
     calendarEvent: CalendarEventInternal,

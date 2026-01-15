@@ -7,4 +7,3 @@ export const datePickerNbNO: DatePickerTranslations = {
   'Previous month': 'Forrige måned',
   'Choose Date': 'Velg dato',
 }
-

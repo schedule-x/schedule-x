@@ -8,4 +8,3 @@ export const timePickerNbNO: TimePickerTranslations = {
   OK: 'OK',
   'Select time': 'Velg tid',
 }
-

@@ -11,11 +11,9 @@ import {
 } from '@schedule-x/calendar/src'
 import '../../packages/theme-default/src/calendar.scss'
 import '../app.css'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
 import { seededEvents } from '../data/seeded-events.ts'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller/src'
-import { createResizePlugin } from '../../packages/resize/src'
 import {
   createEventRecurrencePlugin,
   createEventsServicePlugin,

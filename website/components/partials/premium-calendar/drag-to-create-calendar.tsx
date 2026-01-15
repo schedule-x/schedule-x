@@ -1,5 +1,5 @@
 import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek } from '@schedule-x/calendar'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
 import { ScheduleXCalendar, useNextCalendarApp } from '@schedule-x/react'
 import { calendars } from './data/calendars'
 import { createScrollControllerPlugin } from "@schedule-x/scroll-controller";
