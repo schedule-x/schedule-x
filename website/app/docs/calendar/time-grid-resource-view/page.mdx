@@ -19,10 +19,23 @@ import FeaturesList from "../../../../components/partials/features-list/features
 <FeaturesList features={[
   'Week view with resources as columns',
   'Resource-specific event display',
-  'Compatible with other calendar views',
 ]} />
 
 [Go to Demo](/demos/time-grid-resource-view)
+
+### Upcoming features
+
+This view just got released (January 15, 2026). Below follows a checklist with next upcoming features.
+
+import UpcomingFeaturesChecklist from "../../../../components/partials/upcoming-features-checklist/upcoming-features-checklist";
+
+<UpcomingFeaturesChecklist features={[
+  { label: 'Displaying events in resources', checked: true },
+  'Event modal compatibility (January 2026)',
+  'Resize (January 2026)',
+  'Drag-and-drop (February 2026)',
+  'Draw (February 2026)',
+]} />
 
 ## Installation
 
@@ -45,6 +58,7 @@ import { createCalendar } from '@schedule-x/calendar'
 import { createViewTimeGridResourceView } from "@sx-premium/time-grid-resource-view";
 
 import '@schedule-x/theme-default/dist/index.css'
+import '@sx-premium/time-grid-resource-view/index.css'
 
 const resources = [
   {

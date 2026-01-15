@@ -48,6 +48,7 @@ export default function TimeGridResourceCalendar() {
     timezone: 'America/New_York',
     resources,
     events: [
+      // Monday (2024-05-06)
       {
         id: '1',
         title: 'Team standup',
@@ -90,11 +91,148 @@ export default function TimeGridResourceCalendar() {
         end: Temporal.ZonedDateTime.from('2024-05-06T11:30:00-04:00[America/New_York]'),
         resourceId: 'room-2',
       },
+      // Tuesday (2024-05-07)
+      {
+        id: '7',
+        title: 'Morning sync',
+        start: Temporal.ZonedDateTime.from('2024-05-07T08:30:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-07T09:00:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '8',
+        title: 'Code review',
+        start: Temporal.ZonedDateTime.from('2024-05-07T10:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-07T11:30:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '9',
+        title: 'Training session',
+        start: Temporal.ZonedDateTime.from('2024-05-07T09:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-07T12:00:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
+      {
+        id: '10',
+        title: 'Team lunch',
+        start: Temporal.ZonedDateTime.from('2024-05-07T12:30:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-07T13:30:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '11',
+        title: 'Project kickoff',
+        start: Temporal.ZonedDateTime.from('2024-05-07T14:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-07T16:00:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
+      // Wednesday (2024-05-08)
+      {
+        id: '12',
+        title: 'Daily standup',
+        start: Temporal.ZonedDateTime.from('2024-05-08T09:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-08T09:15:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '13',
+        title: 'Architecture discussion',
+        start: Temporal.ZonedDateTime.from('2024-05-08T10:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-08T11:00:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '14',
+        title: 'UX workshop',
+        start: Temporal.ZonedDateTime.from('2024-05-08T09:30:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-08T11:30:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
+      {
+        id: '15',
+        title: 'Client call',
+        start: Temporal.ZonedDateTime.from('2024-05-08T13:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-08T14:00:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '16',
+        title: 'Retrospective',
+        start: Temporal.ZonedDateTime.from('2024-05-08T15:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-08T16:30:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
+      // Thursday (2024-05-09)
+      {
+        id: '17',
+        title: 'Planning meeting',
+        start: Temporal.ZonedDateTime.from('2024-05-09T08:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-09T09:30:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '18',
+        title: 'Design review',
+        start: Temporal.ZonedDateTime.from('2024-05-09T10:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-09T11:00:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
+      {
+        id: '19',
+        title: 'All hands',
+        start: Temporal.ZonedDateTime.from('2024-05-09T11:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-09T12:00:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '20',
+        title: 'Technical deep dive',
+        start: Temporal.ZonedDateTime.from('2024-05-09T13:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-09T15:00:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
+      {
+        id: '21',
+        title: 'Q&A session',
+        start: Temporal.ZonedDateTime.from('2024-05-09T15:30:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-09T16:30:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      // Friday (2024-05-10)
+      {
+        id: '22',
+        title: 'Week review',
+        start: Temporal.ZonedDateTime.from('2024-05-10T09:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-10T10:00:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '23',
+        title: 'Demo day prep',
+        start: Temporal.ZonedDateTime.from('2024-05-10T10:30:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-10T12:00:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
+      {
+        id: '24',
+        title: 'Sprint demo',
+        start: Temporal.ZonedDateTime.from('2024-05-10T14:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-10T15:30:00-04:00[America/New_York]'),
+        resourceId: 'room-1',
+      },
+      {
+        id: '25',
+        title: 'Team building',
+        start: Temporal.ZonedDateTime.from('2024-05-10T15:00:00-04:00[America/New_York]'),
+        end: Temporal.ZonedDateTime.from('2024-05-10T17:00:00-04:00[America/New_York]'),
+        resourceId: 'room-2',
+      },
     ],
     calendars: calendars,
     plugins: [
       eventsService,
-      createScrollControllerPlugin({ initialScroll: '07:00' }),
+      createScrollControllerPlugin({ initialScroll: '08:00' }),
     ],
   })
 

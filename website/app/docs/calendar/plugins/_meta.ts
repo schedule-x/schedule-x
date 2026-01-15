@@ -5,10 +5,10 @@ const meta: MetaRecord = {
     title: 'Overview',
   },
   "drag-and-drop": {
-    "title": "Drag and Drop"
+    "title": "⭐ Drag and Drop"
   },
   "resize": {
-    "title": "Resize"
+    "title": "⭐ Resize"
   },
   "event-modal": {
     "title": "Event Modal"
