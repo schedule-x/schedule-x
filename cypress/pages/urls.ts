@@ -7,7 +7,6 @@ export const cypressPageUrls = Object.freeze({
     screenshots: '/cypress/pages/date-picker/100-screenshots.html',
   },
   calendar: {
-    dragAndDrop: '/cypress/pages/calendar/001-drag-and-drop.html',
     smoke: '/cypress/pages/calendar/002-smoke.html',
     darkMode: '/cypress/pages/calendar/003-dark-mode.html',
     updateEvents: '/cypress/pages/calendar/004-update-events.html',

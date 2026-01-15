@@ -8,16 +8,31 @@ description: 'Plugin for resizing events in the week- and day views.'
 Resize events in the time grid by dragging their bottom edge, and fullday/multiple-day events by dragging their right
 edge.
 
-## Install
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+<br />
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
 
 ```bash copy
-npm i @schedule-x/resize
+npm i @sx-premium/resize
 ```
 
 ## Usage
 
 ```js
-import { createResizePlugin } from '@schedule-x/resize'
+import { createResizePlugin } from '@sx-premium/resize'
 
 const calendar = createCalendar({
   /* other configuration */
@@ -44,7 +59,7 @@ const calendar = createCalendar({
 You can configure the length, in minutes, of the intervals that are used when resizing:
 
 ```js
-import { createResizePlugin } from '@schedule-x/resize'
+import { createResizePlugin } from '@sx-premium/resize'
 
 const calendar = createCalendar({
   /* other configuration */
@@ -63,7 +78,7 @@ Available values are `15` (default), `30` and `60`
 Set the interval, in minutes, for resizing events.
 
 ```js
-import { createResizePlugin } from '@schedule-x/resize'
+import { createResizePlugin } from '@sx-premium/resize'
 
 const resizePlugin = createResizePlugin()
 
@@ -76,3 +91,7 @@ const calendar = createCalendar({
 
 resizePlugin.setInterval(30)
 ```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.

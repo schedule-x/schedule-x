@@ -4,7 +4,11 @@ import { SNAPSHOT_FAULT_TOLERANCE } from '../../../libs/e2e-testing/src/index.ts
 
 describe('Calendar Smoke Test', {
   viewportHeight: 800,
-  viewportWidth: 1280
+  viewportWidth: 1280,
+  retries: {
+    runMode: 2,  // retry up to 2 times in CI
+    openMode: 0  // no retries in interactive mode
+  }
 }, () => {
   const calendarHeader = createCalendarHeaderPageObject()
 

@@ -16,7 +16,7 @@ const meta: MetaRecord = {
     title: 'Docs'
   },
   blog: {
-    title: 'Blog',
+    title: 'News',
     type: 'page',
     href: 'blog'
   },

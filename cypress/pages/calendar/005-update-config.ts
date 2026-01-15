@@ -13,7 +13,6 @@ import {
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 import '../index.css'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import {createCalendarControlsPlugin} from "@schedule-x/calendar-controls";
 import 'temporal-polyfill/global'
@@ -26,7 +25,7 @@ const calendar = createCalendar({
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
-  plugins: [createDragAndDropPlugin(), createEventModalPlugin(), calendarControls],
+  plugins: [createEventModalPlugin(), calendarControls],
   events: [],
   timezone: 'America/New_York',
 })
