@@ -13,7 +13,6 @@ import {
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 import '../index.css'
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
 import { smokeTestEvents } from './__data__/smoke-data.ts'
 import 'temporal-polyfill/global'
@@ -26,7 +25,7 @@ const calendar = createCalendar({
   locale: 'en-US',
   views: [viewWeek, viewMonthGrid, viewMonthAgenda, viewDay],
   defaultView: 'week',
-  plugins: [createDragAndDropPlugin(), createEventModalPlugin()],
+  plugins: [createEventModalPlugin()],
   events: smokeTestEvents,
   timezone: 'America/New_York',
 })
