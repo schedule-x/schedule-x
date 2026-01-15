@@ -28,8 +28,8 @@ describe('DateGridEvent', () => {
     it('should start dragging', () => {
       const dndPlugin = stubInterface<DragAndDropPlugin>()
       dndPlugin.name = PluginName.DragAndDrop
-      dndPlugin.createDateGridDragHandler =
-        vi.fn() as unknown as typeof dndPlugin.createDateGridDragHandler
+      dndPlugin.startDateGridDrag =
+        vi.fn() as unknown as typeof dndPlugin.startDateGridDrag
       const eventId = 'my-event-id'
       const $app = __createAppWithViews__({
         plugins: [dndPlugin],
@@ -50,10 +50,10 @@ describe('DateGridEvent', () => {
       const mouseDownEvent = new MouseEvent('mousedown')
       eventEl.dispatchEvent(mouseDownEvent)
 
-      expect(dndPlugin.createDateGridDragHandler).not.toHaveBeenCalled()
+      expect(dndPlugin.startDateGridDrag).not.toHaveBeenCalled()
       vi.advanceTimersByTime(1000)
 
-      expect(dndPlugin.createDateGridDragHandler).toHaveBeenCalled()
+      expect(dndPlugin.startDateGridDrag).toHaveBeenCalled()
     })
   })
 
@@ -61,8 +61,8 @@ describe('DateGridEvent', () => {
     it('should not start dragging', () => {
       const dndPlugin = stubInterface<DragAndDropPlugin>()
       dndPlugin.name = PluginName.DragAndDrop
-      dndPlugin.createDateGridDragHandler =
-        vi.fn() as unknown as typeof dndPlugin.createDateGridDragHandler
+      dndPlugin.startDateGridDrag =
+        vi.fn() as unknown as typeof dndPlugin.startDateGridDrag
       const eventId = 'my-event-id'
       const $app = __createAppWithViews__({
         plugins: [dndPlugin],
@@ -86,10 +86,10 @@ describe('DateGridEvent', () => {
       const mouseDownEvent = new MouseEvent('mousedown')
       eventEl.dispatchEvent(mouseDownEvent)
 
-      expect(dndPlugin.createDateGridDragHandler).not.toHaveBeenCalled()
+      expect(dndPlugin.startDateGridDrag).not.toHaveBeenCalled()
       vi.advanceTimersByTime(1000)
 
-      expect(dndPlugin.createDateGridDragHandler).not.toHaveBeenCalled()
+      expect(dndPlugin.startDateGridDrag).not.toHaveBeenCalled()
     })
   })
 

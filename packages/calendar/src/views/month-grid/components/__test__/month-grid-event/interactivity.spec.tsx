@@ -26,8 +26,8 @@ describe('MonthGridEvent', () => {
     it('should start a drag action on mousedown and hold', () => {
       const dragAndDropPlugin = stubInterface<DragAndDropPlugin>()
       dragAndDropPlugin.name = PluginName.DragAndDrop
-      dragAndDropPlugin.createMonthGridDragHandler =
-        vi.fn() as unknown as typeof dragAndDropPlugin.createMonthGridDragHandler
+      dragAndDropPlugin.startMonthGridDrag =
+        vi.fn() as unknown as typeof dragAndDropPlugin.startMonthGridDrag
       const $app = __createAppWithViews__({
         events: [
           {
@@ -50,14 +50,14 @@ describe('MonthGridEvent', () => {
 
       vi.advanceTimersByTime(500)
 
-      expect(dragAndDropPlugin.createMonthGridDragHandler).toBeCalled()
+      expect(dragAndDropPlugin.startMonthGridDrag).toBeCalled()
     })
 
     it('should start a drag action on touchstart and hold', () => {
       const dragAndDropPlugin = stubInterface<DragAndDropPlugin>()
       dragAndDropPlugin.name = PluginName.DragAndDrop
-      dragAndDropPlugin.createMonthGridDragHandler =
-        vi.fn() as unknown as typeof dragAndDropPlugin.createMonthGridDragHandler
+      dragAndDropPlugin.startMonthGridDrag =
+        vi.fn() as unknown as typeof dragAndDropPlugin.startMonthGridDrag
       const $app = __createAppWithViews__({
         events: [
           {
@@ -80,7 +80,7 @@ describe('MonthGridEvent', () => {
 
       vi.advanceTimersByTime(500)
 
-      expect(dragAndDropPlugin.createMonthGridDragHandler).toBeCalled()
+      expect(dragAndDropPlugin.startMonthGridDrag).toBeCalled()
     })
   })
 
@@ -88,8 +88,8 @@ describe('MonthGridEvent', () => {
     it('should not start a drag action on mousedown and hold', () => {
       const dragAndDropPlugin = stubInterface<DragAndDropPlugin>()
       dragAndDropPlugin.name = PluginName.DragAndDrop
-      dragAndDropPlugin.createMonthGridDragHandler =
-        vi.fn() as unknown as typeof dragAndDropPlugin.createMonthGridDragHandler
+      dragAndDropPlugin.startMonthGridDrag =
+        vi.fn() as unknown as typeof dragAndDropPlugin.startMonthGridDrag
       const $app = __createAppWithViews__({
         events: [
           {
@@ -115,7 +115,7 @@ describe('MonthGridEvent', () => {
 
       vi.advanceTimersByTime(500)
 
-      expect(dragAndDropPlugin.createMonthGridDragHandler).not.toBeCalled()
+      expect(dragAndDropPlugin.startMonthGridDrag).not.toBeCalled()
     })
   })
 })
