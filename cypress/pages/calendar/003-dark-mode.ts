@@ -28,6 +28,7 @@ const calendar = createCalendar({
   plugins: [createEventModalPlugin()],
   events: smokeTestEvents,
   timezone: 'America/New_York',
+  skipValidation: true,
 })
 
 calendar.render(calendarElement)
