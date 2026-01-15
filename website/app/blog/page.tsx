@@ -4,6 +4,14 @@ import Link from 'next/link'
 // This would typically come from a CMS or file system
 const blogPosts = [
   {
+    id: 'schedule-x-v4',
+    title: "Schedule-X v4: What's New",
+    excerpt: 'Schedule-X v4 brings a new Time Grid Resource View to Schedule-X Premium and moves @schedule-x/drag-and-drop and @schedule-x/resize to Premium as part of a clearer free vs premium split.',
+    date: '2026-01-15',
+    author: 'Tom Österlund',
+    readTime: '4 min read'
+  },
+  {
     id: 'schedule-x-v3-temporal-api',
     title: 'Schedule-X v3: Embracing the Future with Temporal API',
     excerpt: 'Schedule-X is migrating to Temporal API, which brings with it some exciting new features and oppotunities for the library.',

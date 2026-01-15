@@ -7,16 +7,31 @@ description: 'Update event time and date using a classical drag and drop.'
 
 Update event time and date using a classical drag and drop. Available in all views except the month agenda- and list views.
 
-## Install
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+<br />
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/calendar/installing-premium)
+
+
+### 2.2 Install
 
 ```bash copy
-npm i @schedule-x/drag-and-drop
+npm i @sx-premium/drag-and-drop
 ```
 
 ## Usage
 
 ```js
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
 
 const calendar = createCalendar({
   /* other configuration */
@@ -43,7 +58,7 @@ const calendar = createCalendar({
 You can configure the length, in minutes, of the intervals that are used when dragging:
 
 ```js
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
 
 const calendar = createCalendar({
   /* other configuration */
@@ -75,7 +90,7 @@ If you need to allow users to modify such events, consider:
 Set the interval, in minutes, for dragging events.
 
 ```js
-import { createDragAndDropPlugin } from '@schedule-x/drag-and-drop'
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
 
 const dragAndDropPlugin = createDragAndDropPlugin()
 
@@ -88,3 +103,7 @@ const calendar = createCalendar({
 
 dragAndDropPlugin.setInterval(30)
 ```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.

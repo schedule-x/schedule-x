@@ -83,7 +83,7 @@ resourceConfig.initialDays.value = new TimeUnits().getDaysBetween(
   Temporal.PlainDate.from('2025-03-20')
 )
 
-resourceConfig.resources.value = [
+const resources = [
   {
     label: 'Room 100',
     id: '1',
@@ -168,6 +168,7 @@ const interactiveEventModal = createInteractiveEventModal({
 })
 
 const calendar = createCalendar({
+  resources,
   translations: mergeLocales(
     translations,
     modalTranslations,
@@ -216,9 +217,6 @@ export type ResourceViewConfig = {
 
   // width of a column in the daily view
   dayWidth: Signal<number>
-
-  // list of resources you want to display
-  resources: Signal<Resource[]>
 
   // height of a resource row
   resourceHeight: Signal<number>

@@ -5,6 +5,18 @@ description: 'Learn how to migrate between major versions of the Schedule-X cale
 
 # Migrating between major versions
 
+## Migration from v3 to v4
+
+With v4 of the Schedule-X calendar, there were a few breaking changes to the API, especially:
+
+`@schedule-x/drag-and-drop` moved to `@sx-premium/drag-and-drop`
+`@schedule-x/resize` moved to `@sx-premium/resize`
+
+Additionally, anyone premium users should migrate their premium plugins to version `^15.0.0`.
+
+For the old resource scheduler plugin, the `resources` config option moved from the `rConfig` object, to the main calendar config, see plugin documentation for more details.
+
+
 ## Premium v13 to v14
 
 With v14 of the premium plugins, there were a couple of minor breaking changes to the API:
