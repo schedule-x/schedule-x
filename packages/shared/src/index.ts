@@ -25,15 +25,21 @@ export { getTimePointsPerPixel } from './utils/stateless/calendar/time-points-pe
 export { getTimeGridDayWidth } from './utils/stateless/calendar/get-time-grid-day-width'
 export { getTimeGridEventCopyElementId } from './utils/stateless/strings/selector-generators'
 export { getEventCoordinates } from './utils/stateless/dom/get-event-coordinates'
+export { isUIEventTouchEvent } from './utils/stateless/dom/is-touch-event'
 export { concatenatePeople } from './utils/stateless/strings/concatenate-people'
 export {
   getTimeStamp,
   getLocalizedDate,
+  timeFn,
 } from './utils/stateless/time/date-time-localization/get-time-stamp'
 export { getDayNameShort } from './utils/stateless/time/date-time-localization/date-time-localization'
 export { isToday } from './utils/stateless/time/comparison'
 export { TimeIcon, UserIcon, DescriptionIcon, LocationPinIcon }
 export { randomStringId } from './utils/stateless/strings/random'
+export { nextTick } from './utils/stateless/next-tick'
+export { focusModal } from './utils/stateless/events/focus-modal'
+export { invokeOnEventClickCallback } from './utils/stateless/events/invoke-on-event-click-callback'
+export { invokeOnEventDoubleClickCallback } from './utils/stateless/events/invoke-on-event-double-click-callback'
 export {
   toTimeString,
   toDateTimeString,

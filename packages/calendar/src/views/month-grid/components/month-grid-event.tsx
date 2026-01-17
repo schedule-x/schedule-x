@@ -5,11 +5,13 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import { useContext, useEffect, useRef } from 'preact/hooks'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
-import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
-import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
+import {
+  invokeOnEventClickCallback,
+  invokeOnEventDoubleClickCallback,
+} from '@schedule-x/shared/src'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
-import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import { focusModal } from '@schedule-x/shared/src/utils/stateless/events/focus-modal'
 import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 import { wasEventAddedInLastSecond } from '../../month-agenda/utils/stateless/was-event-added-in-last-second'
 

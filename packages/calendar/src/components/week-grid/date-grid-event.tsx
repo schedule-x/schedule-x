@@ -11,8 +11,10 @@ import {
 import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
-import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
-import { invokeOnEventDoubleClickCallback } from '../../utils/stateless/events/invoke-on-event-double-click-callback'
+import {
+  invokeOnEventClickCallback,
+  invokeOnEventDoubleClickCallback,
+} from '@schedule-x/shared/src'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import {
@@ -22,7 +24,7 @@ import {
 import { ResizePlugin } from '@schedule-x/shared/src/interfaces/resize/resize-plugin.interface'
 import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
-import { focusModal } from '../../utils/stateless/events/focus-modal'
+import { focusModal } from '@schedule-x/shared/src/utils/stateless/events/focus-modal'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 
 type props = {

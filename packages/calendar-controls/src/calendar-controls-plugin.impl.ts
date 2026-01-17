@@ -15,6 +15,7 @@ import {
 } from '@schedule-x/shared/src/utils/stateless/time/time-points/string-conversion'
 import { definePlugin } from '@schedule-x/shared/src/utils/stateless/calendar/define-plugin'
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
+import { Resource } from '@schedule-x/shared/src/types/calendar/resource'
 
 class CalendarControlsPluginImpl implements CalendarControlsPlugin {
   name = PluginName.CalendarControls
@@ -124,6 +125,10 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
     })
   }
 
+  setResources(resources: Resource[]) {
+    this.$app.config.resources.value = resources
+  }
+
   getDate = (): Temporal.PlainDate =>
     this.$app.datePickerState.selectedDate.value
 
@@ -153,6 +158,8 @@ class CalendarControlsPluginImpl implements CalendarControlsPlugin {
 
   getMonthGridOptions = (): MonthGridOptions =>
     this.$app.config.monthGridOptions.value
+
+  getResources = (): Resource[] => this.$app.config.resources.value
 
   getRange = (): DateRange | null => this.$app.calendarState.range.value
 }

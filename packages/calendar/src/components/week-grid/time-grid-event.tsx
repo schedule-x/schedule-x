@@ -19,13 +19,15 @@ import { concatenatePeople } from '@schedule-x/shared/src/utils/stateless/string
 import { Fragment } from 'preact'
 import { getCCID } from './time-grid-event-utils'
 import { getElementByCCID } from '../../utils/stateless/dom/getters'
-import { invokeOnEventClickCallback } from '../../utils/stateless/events/invoke-on-event-click-callback'
-import { invokeOnEventDoubleClickCallback } from '../../utils/stateless/events/invoke-on-event-double-click-callback'
+import {
+  invokeOnEventClickCallback,
+  invokeOnEventDoubleClickCallback,
+} from '@schedule-x/shared/src'
 import { getEventCoordinates } from '@schedule-x/shared/src/utils/stateless/dom/get-event-coordinates'
 import { isUIEventTouchEvent } from '@schedule-x/shared/src/utils/stateless/dom/is-touch-event'
 import { getYCoordinateInTimeGrid } from '@schedule-x/shared/src/utils/stateless/calendar/get-y-coordinate-in-time-grid'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
-import { focusModal } from '../../utils/stateless/events/focus-modal'
+import { focusModal } from '@schedule-x/shared/src/utils/stateless/events/focus-modal'
 import { wasEventAddedInLastSecond } from '../../views/month-agenda/utils/stateless/was-event-added-in-last-second'
 import { timeFn } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
 

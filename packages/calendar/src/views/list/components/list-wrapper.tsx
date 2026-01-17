@@ -9,10 +9,12 @@ import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-m
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { scrollOnDateSelection } from '../utils/stateless/scroll-on-date-selection'
 import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
-import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
-import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
+import {
+  invokeOnEventClickCallback,
+  invokeOnEventDoubleClickCallback,
+} from '@schedule-x/shared/src'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
-import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import { focusModal } from '@schedule-x/shared/src/utils/stateless/events/focus-modal'
 import {
   expandInfiniteRecurringEventsIfNeeded,
   checkAndExpandInfiniteRecurringEvents,
