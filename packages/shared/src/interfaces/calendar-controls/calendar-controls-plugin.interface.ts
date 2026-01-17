@@ -10,6 +10,7 @@ import {
   WeekOptions,
 } from '../calendar/calendar-config'
 import { IANATimezone } from '../../utils/stateless/time/tzdb'
+import { Resource } from '../../types/calendar/resource'
 
 export default interface CalendarControlsPlugin extends PluginBase<string> {
   onRender($app: CalendarAppSingleton): void
@@ -25,6 +26,7 @@ export default interface CalendarControlsPlugin extends PluginBase<string> {
   setMaxDate(maxDate: Temporal.PlainDate | undefined): void
   setMonthGridOptions(monthGridOptions: MonthGridOptions): void
   setTimezone(timezone: IANATimezone): void
+  setResources(resources: Resource[]): void
   getDate(): Temporal.PlainDate
   getView(): string
   getFirstDayOfWeek(): WeekDay
@@ -36,5 +38,6 @@ export default interface CalendarControlsPlugin extends PluginBase<string> {
   getMinDate(): Temporal.PlainDate | undefined
   getMaxDate(): Temporal.PlainDate | undefined
   getMonthGridOptions(): MonthGridOptions
+  getResources(): Resource[]
   getRange(): DateRange | null
 }

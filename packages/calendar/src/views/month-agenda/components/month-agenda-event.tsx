@@ -6,10 +6,12 @@ import { AppContext } from '../../../utils/stateful/app-context'
 import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
 import { getElementByCCID } from '../../../utils/stateless/dom/getters'
 import { Fragment } from 'preact'
-import { invokeOnEventClickCallback } from '../../../utils/stateless/events/invoke-on-event-click-callback'
-import { invokeOnEventDoubleClickCallback } from '../../../utils/stateless/events/invoke-on-event-double-click-callback'
+import {
+  invokeOnEventClickCallback,
+  invokeOnEventDoubleClickCallback,
+} from '@schedule-x/shared/src'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
-import { focusModal } from '../../../utils/stateless/events/focus-modal'
+import { focusModal } from '@schedule-x/shared/src/utils/stateless/events/focus-modal'
 import { randomStringId } from '@schedule-x/shared/src'
 import { wasEventAddedInLastSecond } from '../utils/stateless/was-event-added-in-last-second'
 

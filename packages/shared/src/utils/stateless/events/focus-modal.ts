@@ -1,4 +1,4 @@
-import { CalendarAppSingleton } from '@schedule-x/shared/src'
+import CalendarAppSingleton from '../../../interfaces/calendar/calendar-app-singleton'
 
 export const focusModal = ($app: CalendarAppSingleton) => {
   const calendarWrapper = $app.elements.calendarWrapper
