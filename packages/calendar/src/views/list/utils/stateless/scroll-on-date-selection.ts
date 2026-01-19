@@ -12,7 +12,10 @@ export const scrollOnDateSelection = (
     `.sx__list-day[data-date="${selectedDate}"]`
   )
 
-  if (selectedDayElement instanceof HTMLElement) {
+  if (
+    typeof HTMLElement !== 'undefined' &&
+    selectedDayElement instanceof HTMLElement
+  ) {
     requestAnimationFrame(() => {
       selectedDayElement.scrollIntoView({
         behavior: 'instant',
