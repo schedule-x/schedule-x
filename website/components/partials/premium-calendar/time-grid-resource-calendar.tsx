@@ -4,6 +4,10 @@ import { createEventsServicePlugin } from "@schedule-x/event-recurrence";
 import { createViewTimeGridResource } from "@sx-premium/time-grid-resource-view";
 import 'temporal-polyfill/global'
 import { createScrollControllerPlugin } from '@schedule-x/scroll-controller';
+import { createResizePlugin } from '@sx-premium/resize';
+import { createEventModalPlugin } from '@schedule-x/event-modal';
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop';
+import { createDrawPlugin } from '@sx-premium/draw';
 
 export default function TimeGridResourceCalendar() {
   const eventsService = createEventsServicePlugin()
@@ -233,6 +237,15 @@ export default function TimeGridResourceCalendar() {
     plugins: [
       eventsService,
       createScrollControllerPlugin({ initialScroll: '08:00' }),
+      createDragAndDropPlugin(),
+      createResizePlugin(),
+      createEventModalPlugin(),
+      createDrawPlugin({
+        onFinishDrawing: (event) => {
+          console.log('Event drawn:', event)
+        },
+        snapDuration: 30,
+      }),
     ],
   })
 
