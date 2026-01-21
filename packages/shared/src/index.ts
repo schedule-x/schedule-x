@@ -81,7 +81,7 @@ export type { CustomComponentName } from './interfaces/calendar/custom-component
 export {
   addDays,
   addMonths,
-  __deprecated__addMinutes as addMinutes,
+  addMinutesToTemporal,
 } from './utils/stateless/time/date-time-mutation/adding'
 export { setDateInDateTime } from './utils/stateless/time/date-time-mutation/date-time-mutation'
 export { calculateDaysDifference } from './utils/stateless/time/days-difference'
