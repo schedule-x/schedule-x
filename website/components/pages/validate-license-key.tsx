@@ -6,7 +6,7 @@ import styles from './validate-license-key.module.scss'
 export default function ValidateLicenseKeyPage() {
   const [licenseKey, setLicenseKey] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [hasError, setHasError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const [accessToken, setAccessToken] = useState('')
 
   const validateLicenseKey = async () => {
@@ -23,11 +23,12 @@ export default function ValidateLicenseKeyPage() {
         if (data.status === 200) {
           setAccessToken(data.token)
         } else {
-          setHasError(true)
+          setErrorMessage(data.message || 'An unknown error occurred')
         }
-      }).catch(() => {
+      }).catch((e) => {
+        console.error(e)
         setIsLoading(false)
-        setHasError(true)
+        setErrorMessage(e instanceof Error ? e.message : 'An unknown error occurred')
       })
   }
 
@@ -35,7 +36,7 @@ export default function ValidateLicenseKeyPage() {
     <>
       <div className={styles.licenseKeyPage}>
         <section className={'validateLicenseKeyPage validateLicenseKeyPage__form'}>
-          {!isLoading && !accessToken && !hasError && (
+          {!isLoading && !accessToken && !errorMessage && (
             <Fragment>
               <h1>
                 Validate your license key 🔑
@@ -75,13 +76,14 @@ export default function ValidateLicenseKeyPage() {
             </Fragment>
           )}
 
-          {hasError && (
+          {errorMessage && (
             <>
               <h1>
                 Something went wrong 🤔
               </h1>
 
-              <p>There was an error validating your license key. Please try again or contact us at support@schedule-x.dev, and we will get in touch as soon as possible.</p>
+              <p>{errorMessage}</p>
+              <p>Please try again or contact us at support@schedule-x.dev, and we will get in touch as soon as possible.</p>
             </>
           )}
         </section>

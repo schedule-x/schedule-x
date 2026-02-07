@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     const client = await clientPromise;
     const db = client.db(process.env.MONGO_DB_NAME);
     const parsedBody = await request.json();
-    const alreadyUsedKey = await db.collection(LICENSE_KEY_COLLECTION_NAME).findOne({
+    /* const alreadyUsedKey = await db.collection(LICENSE_KEY_COLLECTION_NAME).findOne({
       key: parsedBody.key,
     });
 
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
         message: "Key already used. If you can't find your token, please contact support at support@schedule-x.dev",
         status: 400,
       }, { status: 400 });
-    }
+    } */
 
     const response = await validateLicense(parsedBody.key)
 
@@ -72,8 +72,9 @@ export async function POST(request: NextRequest) {
     });
   } catch (e) {
     console.error(e);
+    const message = e instanceof Error ? e.message : "Internal server error";
     return NextResponse.json({
-      message: "Internal server error",
+      message,
       status: 500,
     }, { status: 500 });
   }
