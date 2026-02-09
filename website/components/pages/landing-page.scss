@@ -96,6 +96,24 @@ $heading-width: 900px;
   }
 }
 
+.landingPageFullStackGradient {
+  // More vibrant than the hero gradient, but without the huge glow.
+  // Start should not be too light (the original issue), so we start on a deeper purple.
+  background: linear-gradient(90deg, #5b3aa6 0%, #6750a4 35%, #0057b7 100%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  // tiny lift for readability on the soft card background
+  text-shadow: 0 6px 18px rgba(103, 80, 164, 0.18);
+  white-space: nowrap;
+
+  .dark & {
+    background: linear-gradient(90deg, #c4a7ff 0%, #d0bcff 45%, #7dd3fc 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 10px 24px rgba(208, 188, 255, 0.12);
+  }
+}
+
 .landingPage h2 {
   max-width: calc(#{$heading-width} - 150px);
   font-size: 1.75rem;
@@ -331,4 +349,130 @@ $heading-width: 900px;
 
 .landingPageDemoVideo {
   border-radius: 10px;
+}
+
+.landingPageFullStackSection {
+  width: 100%;
+  max-width: 1100px;
+  margin: 2rem auto 5rem;
+
+  @include mixins.smaller-screens {
+    margin: 1.5rem auto 4rem;
+  }
+}
+
+.landingPageFullStackInner {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.5rem;
+  padding: 2.5rem;
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(103, 80, 164, 0.08), rgba(103, 80, 164, 0.03));
+  box-shadow: 0 0 20px rgb(0 0 0 / 6%);
+  border: 1px solid rgba(103, 80, 164, 0.18);
+
+  .dark & {
+    background: linear-gradient(180deg, rgba(208, 188, 255, 0.10), rgba(208, 188, 255, 0.03));
+    border-color: rgba(208, 188, 255, 0.22);
+  }
+
+  @include mixins.smaller-screens {
+    grid-template-columns: 1fr;
+    padding: 1.75rem;
+    gap: 1.5rem;
+  }
+}
+
+.landingPageFullStackCopy {
+  h3 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin: 0.5rem 0 1rem;
+    color: #002c61;
+
+    .dark & {
+      color: #d0bcff;
+    }
+
+    @include mixins.smaller-screens {
+      font-size: 2rem;
+    }
+  }
+}
+
+.landingPageFullStackEyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sx-color-primary);
+  margin: 0;
+}
+
+.landingPageFullStackSubtext {
+  font-size: 1.125rem;
+  color: #8290ac;
+  margin: 0 0 1.5rem;
+  max-width: 48ch;
+
+  .dark & {
+    color: #e1daf1;
+  }
+}
+
+.landingPageFullStackFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.landingPageFullStackFeatures li {
+  position: relative;
+  padding: 1rem 1rem 1rem 2.25rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(0, 44, 97, 0.08);
+
+  .dark & {
+    background: rgba(0, 0, 0, 0.15);
+    border-color: rgba(208, 188, 255, 0.15);
+  }
+}
+
+.landingPageFullStackFeatures li::before {
+  content: '✓';
+  position: absolute;
+  left: 0.9rem;
+  top: 1rem;
+  font-weight: 900;
+  color: #6750a4;
+
+  .dark & {
+    color: #d0bcff;
+  }
+}
+
+.landingPageFullStackFeatureTitle {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #002c61;
+  margin-bottom: 0.25rem;
+
+  .dark & {
+    color: #d0bcff;
+  }
+}
+
+.landingPageFullStackFeatureDesc {
+  display: block;
+  font-size: 0.95rem;
+  color: #8290ac;
+
+  .dark & {
+    color: #e1daf1;
+  }
 }

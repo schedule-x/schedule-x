@@ -143,6 +143,41 @@ export default function LandingPage() {
             </video>
           </div>
         </section>
+
+        <section className={'landingPageFullStackSection'}>
+          <div className={'landingPageFullStackInner'}>
+            <div className={'landingPageFullStackCopy'}>
+              <p className={'landingPageFullStackEyebrow'}>End-to-end</p>
+              <h3>
+                Looking for a <span className={'landingPageFullStackGradient'}>full stack</span> calendar solution?
+              </h3>
+              <p className={'landingPageFullStackSubtext'}>
+                If you need more than UI components, BuildCalendar helps you ship a complete calendar product—fast.
+              </p>
+
+              <Link href={'https://buildcalendar.com'} target="_blank" rel="noopener noreferrer">
+                <button className={'landingPageAction buttonPrimary'}>
+                  Explore BuildCalendar →
+                </button>
+              </Link>
+            </div>
+
+            <ul className={'landingPageFullStackFeatures'}>
+              <li>
+                <span className={'landingPageFullStackFeatureTitle'}>Schedule-X integration</span>
+                <span className={'landingPageFullStackFeatureDesc'}>Production-ready calendar UI out of the box.</span>
+              </li>
+              <li>
+                <span className={'landingPageFullStackFeatureTitle'}>Database persistence</span>
+                <span className={'landingPageFullStackFeatureDesc'}>Store events, users, and permissions server-side.</span>
+              </li>
+              <li>
+                <span className={'landingPageFullStackFeatureTitle'}>Google Calendar sync</span>
+                <span className={'landingPageFullStackFeatureDesc'}>Two-way sync so events stay consistent.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
       </div>
     </>
   )
