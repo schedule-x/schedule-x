@@ -1,16 +1,15 @@
 @use '../../../theme/mixins' as mixins;
 
 // create a sexy looking white bg card with a slight shadow
-.pricing-card {
+.pricing-card-new {
   display: grid;
   grid-template-areas:
     "title"
     "description"
-    "developers"
     "price"
     "features"
     "button";
-  grid-template-rows: auto 60px 60px auto 100px auto;
+  grid-template-rows: auto 60px auto 100px auto;
   background-color: #fff;
   border-radius: 1rem;
   padding: 2rem;
@@ -27,13 +26,13 @@
     margin-bottom: 0.5rem;
   }
 
-  .pricing-card-description {
+  .pricing-card-new-description {
     grid-area: description;
     color: rgb(13 13 13 / 40%);
     margin-bottom: 1rem;
   }
 
-  .pricing-card-price-wrapper {
+  .pricing-card-new-price-wrapper {
     grid-area: price;
     display: flex;
     flex-direction: column;
@@ -41,23 +40,25 @@
     margin-bottom: 1rem;
   }
 
-  .pricing-card-price {
+  .pricing-card-new-starting-text {
+    font-size: 0.875rem;
+    color: rgba(13, 13, 13, 60%);
+    margin: 0 0 0.25rem;
+  }
+
+  .pricing-card-new-price {
     font-size: 2rem;
     font-weight: 600;
     margin: 0;
   }
 
-  .pricing-card-price-period {
+  .pricing-card-new-price-period {
     margin-left: 0.25em;
     font-size: 1.25rem;
     color: #696363;
   }
 
-  .app-dropdown {
-    grid-area: developers;
-  }
-
-  .pricing-card-features {
+  .pricing-card-new-features {
     grid-area: features;
     list-style: none;
     padding: 0;

@@ -31,6 +31,7 @@ import Script from 'next/script'
 import CookieConsent from '../components/CookieConsent'
 import Logo from '../components/theme/logo'
 import CustomFooter from '../components/theme/custom-footer'
+import AbTestInit from '../components/ab-test-init/ab-test-init'
 
   const navbar = (
     <Navbar
@@ -86,6 +87,7 @@ import CustomFooter from '../components/theme/custom-footer'
 
         <Script src="https://lmsqueezy.com/affiliate.js" defer/>
         <CookieConsent />
+        <AbTestInit />
       </body>
       </html>
     )
