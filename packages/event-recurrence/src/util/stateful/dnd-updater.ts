@@ -1,13 +1,11 @@
-import { addDays, CalendarAppSingleton } from '@schedule-x/shared/src'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { RecurrenceSet } from '../../../../recurrence/src'
-import { getDurationInMinutesTemporal } from '../../../../recurrence/src/rrule/utils/stateless/duration-in-minutes'
-import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import {
-  parseRFC5545ToTemporal,
-  parseTemporalToRFC5545,
-} from '../../../../recurrence/src/parsers/rrule/parse-rrule'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
-import { addMinutesToTemporal } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import {
+  applyTemporalShift,
+  deriveTemporalShift,
+  expectZonedDateTime,
+} from '@schedule-x/recurrence/src/rrule/utils/stateless/temporal-shift'
 
 export class DndUpdater {
   constructor(private $app: CalendarAppSingleton) {}
@@ -28,58 +26,45 @@ export class DndUpdater {
       )
 
     const recurrenceSet = new RecurrenceSet({
-      dtstart: parseTemporalToRFC5545(eventToUpdate.start),
-      dtend: parseTemporalToRFC5545(eventToUpdate.end),
+      dtstart: eventToUpdate.start,
+      dtend: eventToUpdate.end,
       rrule: eventToUpdate._getForeignProperties().rrule as string,
+      timezone: this.$app!.config.timezone.value,
     })
 
-    const newDtStart =
-      oldEventStart instanceof Temporal.ZonedDateTime
-        ? addMinutesToTemporal(
-            eventToUpdate.start,
-            getDurationInMinutesTemporal(
-              oldEventStart,
-              newEventStart as Temporal.ZonedDateTime
-            )
-          )
-        : addDays(
-            eventToUpdate.start,
-            calculateDaysDifference(
-              Temporal.PlainDate.from(oldEventStart),
-              Temporal.PlainDate.from(newEventStart)
-            )
-          )
+    const isAllDayEvent =
+      eventToUpdate.start instanceof Temporal.PlainDate &&
+      eventToUpdate.end instanceof Temporal.PlainDate
+    const isTimedEvent =
+      eventToUpdate.start instanceof Temporal.ZonedDateTime &&
+      eventToUpdate.end instanceof Temporal.ZonedDateTime
 
-    const newDtEnd =
-      oldEventStart instanceof Temporal.ZonedDateTime
-        ? addMinutesToTemporal(
-            eventToUpdate.end,
-            getDurationInMinutesTemporal(
-              oldEventStart,
-              newEventStart as Temporal.ZonedDateTime
-            )
+    if (!isAllDayEvent && !isTimedEvent) {
+      throw new Error('Unsupported Temporal type for recurrence update')
+    }
+
+    const shift = isAllDayEvent
+      ? deriveTemporalShift(
+          Temporal.PlainDate.from(oldEventStart),
+          Temporal.PlainDate.from(newEventStart)
+        )
+      : deriveTemporalShift(
+          expectZonedDateTime(
+            oldEventStart,
+            'Expected ZonedDateTime input for timed recurrence update'
+          ),
+          expectZonedDateTime(
+            newEventStart,
+            'Expected ZonedDateTime input for timed recurrence update'
           )
-        : addDays(
-            eventToUpdate.end,
-            calculateDaysDifference(
-              Temporal.PlainDate.from(oldEventStart),
-              Temporal.PlainDate.from(newEventStart)
-            )
-          )
+        )
+    const newDtStart = applyTemporalShift(eventToUpdate.start, shift)
+    const newDtEnd = applyTemporalShift(eventToUpdate.end, shift)
 
     // Update the original event
-    recurrenceSet.updateDtstartAndDtend(
-      parseTemporalToRFC5545(newDtStart),
-      parseTemporalToRFC5545(newDtEnd)
-    )
-    eventToUpdate.start = parseRFC5545ToTemporal(
-      recurrenceSet.getDtstart(),
-      this.$app!.config.timezone.value
-    )
-    eventToUpdate.end = parseRFC5545ToTemporal(
-      recurrenceSet.getDtend(),
-      this.$app!.config.timezone.value
-    )
+    recurrenceSet.updateDtstartAndDtend(newDtStart, newDtEnd)
+    eventToUpdate.start = recurrenceSet.getDtstart()
+    eventToUpdate.end = recurrenceSet.getDtend()
     eventToUpdate._getForeignProperties().rrule = recurrenceSet.getRrule()
 
     return { updatedEvent: eventToUpdate, recurrenceSet }

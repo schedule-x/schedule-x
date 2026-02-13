@@ -1,25 +1,23 @@
 import { RRuleOptions, RRuleOptionsExternal } from './types/rrule-options'
-import { getDurationInMinutes } from './utils/stateless/duration-in-minutes'
+import { getTemporalDuration } from './utils/stateless/temporal-duration'
 import { weeklyIteratorResult } from './utils/stateless/weekly-iterator'
 import { RRuleFreq } from './enums/rrule-freq'
 import { Recurrence } from '../types/recurrence'
-import { sxDateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import { addMinutes } from '@schedule-x/shared/src'
+import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import { dailyIteratorResult } from './utils/stateless/daily-iterator'
 import { monthlyIteratorResult } from './utils/stateless/monthly-iterators'
 import { yearlyIteratorResult } from './utils/stateless/yearly-iterator'
-import { __deprecated__addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
 export class RRule {
   private options: RRuleOptions
-  private durationInMinutes: number | undefined
+  private duration: Temporal.Duration | undefined
   private durationInDays: number | undefined
 
   constructor(
     options: RRuleOptionsExternal,
-    private dtstart: string,
-    dtend?: string
+    private dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
+    dtend?: Temporal.ZonedDateTime | Temporal.PlainDate
   ) {
     this.options = {
       ...options,
@@ -28,13 +26,15 @@ export class RRule {
 
     const actualDTEND = dtend || dtstart /* RFC5545: #1 */
 
-    if (this.isDateTime) {
-      this.durationInMinutes = getDurationInMinutes(this.dtstart, actualDTEND)
+    if (this.isDateTime(this.dtstart) && this.isDateTime(actualDTEND)) {
+      this.duration = getTemporalDuration(this.dtstart, actualDTEND)
+    } else if (
+      !this.isDateTime(this.dtstart) &&
+      !this.isDateTime(actualDTEND)
+    ) {
+      this.durationInDays = calculateDaysDifference(this.dtstart, actualDTEND)
     } else {
-      this.durationInDays = calculateDaysDifference(
-        Temporal.PlainDate.from(this.dtstart),
-        Temporal.PlainDate.from(actualDTEND)
-      )
+      throw new Error('DTSTART and DTEND must share the same Temporal type')
     }
   }
 
@@ -77,16 +77,38 @@ export class RRule {
     )
   }
 
-  private getRecurrenceBasedOnStartDates(date: string) {
+  private getRecurrenceBasedOnStartDates(
+    date: Temporal.ZonedDateTime | Temporal.PlainDate
+  ): Recurrence {
+    if (this.isDateTime(date)) {
+      const duration = this.duration
+      if (!duration) {
+        throw new Error('Missing duration for timed recurrence')
+      }
+      const end = date.add(duration)
+      return {
+        start: date,
+        end,
+      }
+    }
+
+    const duration = this.durationInDays
+    if (duration === undefined) {
+      throw new Error('Missing duration in days for all-day recurrence')
+    }
+    const end = addDays(date, duration)
+    if (!(end instanceof Temporal.PlainDate)) {
+      throw new Error('Expected PlainDate end for all-day recurrence')
+    }
     return {
       start: date,
-      end: this.isDateTime
-        ? addMinutes(date, this.durationInMinutes!)
-        : __deprecated__addDaysToDateOrDateTime(date, this.durationInDays!),
+      end,
     }
   }
 
-  private get isDateTime() {
-    return sxDateTimeStringRegex.test(this.dtstart)
+  private isDateTime(
+    date: Temporal.ZonedDateTime | Temporal.PlainDate
+  ): date is Temporal.ZonedDateTime {
+    return date instanceof Temporal.ZonedDateTime
   }
 }
