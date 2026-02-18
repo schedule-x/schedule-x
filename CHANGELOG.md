@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/schedule-x/schedule-x/compare/v4.1.0...v4.2.0) (2026-02-18)
+
+### Features
+
+- **calendar:** add readonly to calendar type ([#1290](https://github.com/schedule-x/schedule-x/issues/1290)) ([167b1ef](https://github.com/schedule-x/schedule-x/commit/167b1ef3350c9b4346c10ee85e0661af4029e3e4))
+
 # [4.1.0](https://github.com/schedule-x/schedule-x/compare/v4.0.1...v4.1.0) (2026-01-17)
 
 ### Features
