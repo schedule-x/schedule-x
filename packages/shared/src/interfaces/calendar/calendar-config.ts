@@ -46,6 +46,7 @@ export type CalendarType = {
   label?: string
   lightColors?: ColorDefinition
   darkColors?: ColorDefinition
+  readonly?: boolean
 }
 
 export type Plugins = {
