@@ -76,6 +76,9 @@ export default function CalendarHeader() {
     $app.calendarState.range.value,
     $app.calendarState.isDark.value,
     $app.calendarState.isCalendarSmall.value,
+    $app.calendarState.range.value,
+    $app.calendarState.view.value,
+    $app.calendarState.isCalendarSmall.value,
   ])
 
   const keyForRerenderingOnLocaleChange = $app.config.locale.value
