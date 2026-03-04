@@ -49,14 +49,14 @@ export const getInlineStartRule = (
   eventWidth: number
 ) => {
   if (
-    !calendarEvent._totalConcurrentEvents ||
-    !calendarEvent._previousConcurrentEvents
+    !calendarEvent._maxConcurrentEvents ||
+    calendarEvent._previousConcurrentEvents === undefined
   )
     return 0
 
   return (
-    ((calendarEvent._previousConcurrentEvents || 0) /
-      (calendarEvent._totalConcurrentEvents || 0)) *
+    (calendarEvent._previousConcurrentEvents /
+      calendarEvent._maxConcurrentEvents) *
     eventWidth
   )
 }
