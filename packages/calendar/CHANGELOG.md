@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/schedule-x/schedule-x/compare/v4.2.0...v4.3.0) (2026-03-04)
+
+### Bug Fixes
+
+- **calendar:** add deps for header slot ([#1292](https://github.com/schedule-x/schedule-x/issues/1292)) ([bf788d0](https://github.com/schedule-x/schedule-x/commit/bf788d0c8dda09c87eb666a072ce8285fca10a46))
+
+### Features
+
+- **calendar:** use greedy coloring algorithm for event concurrency ([#1293](https://github.com/schedule-x/schedule-x/issues/1293)) ([b29310f](https://github.com/schedule-x/schedule-x/commit/b29310f2bba704d260d9b5934464190646fbd607))
+
+### Reverts
+
+- Revert "docs: update premium changelog" ([a16a91d](https://github.com/schedule-x/schedule-x/commit/a16a91d1a0a39202e96aa8cab025f7e3e019d5c8))
+
 # [4.2.0](https://github.com/schedule-x/schedule-x/compare/v4.1.0...v4.2.0) (2026-02-18)
 
 **Note:** Version bump only for package @schedule-x/calendar

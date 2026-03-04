@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/schedule-x/schedule-x/compare/v4.2.0...v4.3.0) (2026-03-04)
+
+**Note:** Version bump only for package @schedule-x/time-picker
+
 # [4.2.0](https://github.com/schedule-x/schedule-x/compare/v4.1.0...v4.2.0) (2026-02-18)
 
 **Note:** Version bump only for package @schedule-x/time-picker
