@@ -253,6 +253,7 @@ export default function TimeGridEvent({
             $app.config.dayBoundaries.value,
             $app.config.timePointsPerDay
           )}%`,
+          zIndex: calendarEvent._previousConcurrentEvents ?? 0,
           insetInlineStart: `${insetInlineStart}%`,
           width: `${getWidthRule(
             insetInlineStart,
