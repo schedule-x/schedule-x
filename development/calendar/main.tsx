@@ -40,15 +40,17 @@ const scrollController = createScrollControllerPlugin({
   initialScroll: '01:00'
 })
 const calendar = createCalendar({
-  plugins: [
-    createEventRecurrencePlugin(),
-    eventsServicePlugin,
-    createEventModalPlugin(),
-    calendarControlsPlugin,
-    scrollController,
-    createCurrentTimePlugin(),
-    createTimezoneSelectPlugin(),
-  ],
+plugins: [
+  createEventRecurrencePlugin(),
+  eventsServicePlugin,
+  createDragAndDropPlugin(),
+  createEventModalPlugin(),
+  createResizePlugin(),
+  calendarControlsPlugin,
+  scrollController,
+  createCurrentTimePlugin(),
+  createTimezoneSelectPlugin(),
+],
 
   translations: mergeLocales(
     translations,
@@ -62,7 +64,7 @@ const calendar = createCalendar({
   }, */
   firstDayOfWeek: 1,
   views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
-  defaultView: 'week',
+  defaultView: 'resource-view',
   
   resources: [
     { id: 'room-a', name: 'Room A' },
@@ -603,86 +605,6 @@ const calendar = createCalendar({
       start: Temporal.ZonedDateTime.from('2026-01-05T14:30[Europe/London]'),
       end: Temporal.ZonedDateTime.from('2026-01-05T15:30[Europe/London]'),
       resourceId: 'room-b',
-    },
-
-    // --- BUG REPRO: 4-event cascade (simplest case) ---
-    // Each event overlaps the next, but non-adjacent events DON'T overlap.
-    // B and C both compute _previousConcurrentEvents=1, _totalConcurrentEvents=3,
-    // so both get left=33%. During 10:00-10:30, B and C occupy the same position
-    // and one is completely hidden behind the other.
-    {
-      id: 901,
-      title: 'Meeting A',
-      start: Temporal.ZonedDateTime.from('2026-03-03T08:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T09:30[Europe/London]'),
-      calendarId: 'personal',
-    },
-    {
-      id: 902,
-      title: 'Meeting B (HIDDEN)',
-      start: Temporal.ZonedDateTime.from('2026-03-03T09:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T10:30[Europe/London]'),
-      calendarId: 'work',
-    },
-    {
-      id: 903,
-      title: 'Meeting C (HIDES B)',
-      start: Temporal.ZonedDateTime.from('2026-03-03T10:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T11:30[Europe/London]'),
-      calendarId: 'school',
-    },
-    {
-      id: 904,
-      title: 'Meeting D',
-      start: Temporal.ZonedDateTime.from('2026-03-03T11:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T12:30[Europe/London]'),
-      calendarId: 'leisure',
-    },
-
-    // --- BUG REPRO: 6-event cascade (worse — 4 events stacked at same offset) ---
-    // E, F, G, H all compute prev=1, total=3 → left=33%.
-    // During overlapping windows, multiple events are completely hidden.
-    {
-      id: 905,
-      title: 'Chain E',
-      start: Temporal.ZonedDateTime.from('2026-03-03T13:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T14:30[Europe/London]'),
-      calendarId: 'personal',
-    },
-    {
-      id: 906,
-      title: 'Chain F (hidden)',
-      start: Temporal.ZonedDateTime.from('2026-03-03T14:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T15:30[Europe/London]'),
-      calendarId: 'work',
-    },
-    {
-      id: 907,
-      title: 'Chain G (hidden)',
-      start: Temporal.ZonedDateTime.from('2026-03-03T15:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T16:30[Europe/London]'),
-      calendarId: 'school',
-    },
-    {
-      id: 908,
-      title: 'Chain H (hidden)',
-      start: Temporal.ZonedDateTime.from('2026-03-03T16:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T17:30[Europe/London]'),
-      calendarId: 'leisure',
-    },
-    {
-      id: 909,
-      title: 'Chain I (hidden)',
-      start: Temporal.ZonedDateTime.from('2026-03-03T17:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T18:30[Europe/London]'),
-      calendarId: 'personal',
-    },
-    {
-      id: 910,
-      title: 'Chain J',
-      start: Temporal.ZonedDateTime.from('2026-03-03T18:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-03-03T19:30[Europe/London]'),
-      calendarId: 'work',
     },
   ],
 })

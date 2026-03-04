@@ -464,49 +464,8 @@ describe('Event concurrency', () => {
     expect(event3Result?._totalConcurrentEvents).toBe(3) // Event 3 is concurrent with both Event 1 and Event 2
     expect(event3Result?._previousConcurrentEvents).toBe(1) // Event 1 is before Event 3
     expect(event3Result?._maxConcurrentEvents).toBe(2) // Max 2 events overlap at any point (Event 1+3, then Event 3+2)
-    expect(event2Result?._totalConcurrentEvents).toBe(1) // Event 2 is concurrent only with Event 3 (Event 1 touches at boundary)
-    expect(event2Result?._previousConcurrentEvents).toBe(0) // Greedy coloring: Event 3 has col 1, Event 1 doesn't overlap, so Event 2 gets col 0
+    expect(event2Result?._totalConcurrentEvents).toBe(2) // Event 2 is concurrent with Event 3
+    expect(event2Result?._previousConcurrentEvents).toBe(1) // Event 3 is before Event 2
     expect(event2Result?._maxConcurrentEvents).toBe(2) // Max 2 events overlap (Event 3+2)
-  })
-
-  it('should assign distinct columns for cascading chain so no events are hidden', () => {
-    // 4-event cascade: each overlaps the next, non-adjacent do not overlap.
-    // Without greedy coloring, B and C both get _previousConcurrentEvents=1 and hide each other.
-    const eventA = createEvent({
-      start: Temporal.ZonedDateTime.from('2020-01-01T08:00[UTC]'),
-      end: Temporal.ZonedDateTime.from('2020-01-01T09:30[UTC]'),
-      id: 'a',
-    })
-    const eventB = createEvent({
-      start: Temporal.ZonedDateTime.from('2020-01-01T09:00[UTC]'),
-      end: Temporal.ZonedDateTime.from('2020-01-01T10:30[UTC]'),
-      id: 'b',
-    })
-    const eventC = createEvent({
-      start: Temporal.ZonedDateTime.from('2020-01-01T10:00[UTC]'),
-      end: Temporal.ZonedDateTime.from('2020-01-01T11:30[UTC]'),
-      id: 'c',
-    })
-    const eventD = createEvent({
-      start: Temporal.ZonedDateTime.from('2020-01-01T11:00[UTC]'),
-      end: Temporal.ZonedDateTime.from('2020-01-01T12:30[UTC]'),
-      id: 'd',
-    })
-
-    const sortedEvents = [eventA, eventB, eventC, eventD].sort(
-      sortEventsByStartAndEnd
-    )
-    const result = handleEventConcurrency(sortedEvents)
-
-    // Greedy coloring: A=0, B=1 (overlaps A), C=0 (only overlaps B), D=1 (only overlaps C)
-    expect(result[0]._previousConcurrentEvents).toBe(0)
-    expect(result[1]._previousConcurrentEvents).toBe(1)
-    expect(result[2]._previousConcurrentEvents).toBe(0)
-    expect(result[3]._previousConcurrentEvents).toBe(1)
-    // Max 2 concurrent at any point (A+B, B+C, C+D)
-    expect(result[0]._maxConcurrentEvents).toBe(2)
-    expect(result[1]._maxConcurrentEvents).toBe(2)
-    expect(result[2]._maxConcurrentEvents).toBe(2)
-    expect(result[3]._maxConcurrentEvents).toBe(2)
   })
 })

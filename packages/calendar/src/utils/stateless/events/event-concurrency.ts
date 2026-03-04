@@ -37,23 +37,21 @@ export const handleEventConcurrency = (
 
       for (let ii = 0; ii < concurrentEventsCache.length; ii++) {
         const currentEvent = concurrentEventsCache[ii]
-        // Greedy interval coloring: assign smallest column not taken by overlapping previous events
-        const takenColumns = new Set<number>()
-        for (let j = 0; j < ii; j++) {
-          const cachedEvent = concurrentEventsCache[j]
-          const overlaps =
-            areEvents0MinutesAndConcurrent(cachedEvent, currentEvent) ||
-            ((cachedEvent.start as Temporal.ZonedDateTime).epochNanoseconds <=
-              (currentEvent.start as Temporal.ZonedDateTime).epochNanoseconds &&
+        const NpreviousConcurrentEvents = concurrentEventsCache.filter(
+          (cachedEvent, index) => {
+            if (cachedEvent === currentEvent || index > ii) return false
+            if (areEvents0MinutesAndConcurrent(cachedEvent, currentEvent))
+              return true
+
+            return (
+              (cachedEvent.start as Temporal.ZonedDateTime).epochNanoseconds <=
+                (currentEvent.start as Temporal.ZonedDateTime)
+                  .epochNanoseconds &&
               (cachedEvent.end as Temporal.ZonedDateTime).epochNanoseconds >
-                (currentEvent.start as Temporal.ZonedDateTime).epochNanoseconds)
-          if (overlaps && cachedEvent._previousConcurrentEvents !== undefined) {
-            takenColumns.add(cachedEvent._previousConcurrentEvents)
+                (currentEvent.start as Temporal.ZonedDateTime).epochNanoseconds
+            )
           }
-        }
-        let column = 0
-        while (takenColumns.has(column)) column++
-        const NpreviousConcurrentEvents = column
+        ).length
         const NupcomingConcurrentEvents = concurrentEventsCache.filter(
           (cachedEvent, index) => {
             if (cachedEvent === currentEvent || index < ii) return false

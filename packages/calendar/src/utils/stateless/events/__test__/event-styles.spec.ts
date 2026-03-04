@@ -34,7 +34,7 @@ describe('Event styles', () => {
   describe('getting the left rule', () => {
     it('should place an event to the left of a day if there are no concurrent events', () => {
       const calendarEvent = stubInterface<CalendarEventInternal>()
-      calendarEvent._maxConcurrentEvents = undefined
+      calendarEvent._totalConcurrentEvents = undefined
       calendarEvent._previousConcurrentEvents = undefined
 
       const result = getInlineStartRule(calendarEvent, 100)
@@ -44,7 +44,7 @@ describe('Event styles', () => {
 
     it('should place ab event to the left of a day if there are concurrent events, but the event is the first one', () => {
       const calendarEvent = stubInterface<CalendarEventInternal>()
-      calendarEvent._maxConcurrentEvents = 2
+      calendarEvent._totalConcurrentEvents = 2
       calendarEvent._previousConcurrentEvents = 0
 
       const result = getInlineStartRule(calendarEvent, 100)
@@ -54,7 +54,7 @@ describe('Event styles', () => {
 
     it('should place the event at 50% of the day if there are concurrent events and the event is the second one of two', () => {
       const calendarEvent = stubInterface<CalendarEventInternal>()
-      calendarEvent._maxConcurrentEvents = 2
+      calendarEvent._totalConcurrentEvents = 2
       calendarEvent._previousConcurrentEvents = 1
 
       const result = getInlineStartRule(calendarEvent, 100)
@@ -64,7 +64,7 @@ describe('Event styles', () => {
 
     it('should place the event at 50% of the day if there are concurrent events and the event is the third one of four', () => {
       const calendarEvent = stubInterface<CalendarEventInternal>()
-      calendarEvent._maxConcurrentEvents = 4
+      calendarEvent._totalConcurrentEvents = 4
       calendarEvent._previousConcurrentEvents = 2
 
       const result = getInlineStartRule(calendarEvent, 100)
@@ -74,7 +74,7 @@ describe('Event styles', () => {
 
     it('should place the event at 45% of the day if the event is the second of two, and dayWidth is 90', () => {
       const calendarEvent = stubInterface<CalendarEventInternal>()
-      calendarEvent._maxConcurrentEvents = 2
+      calendarEvent._totalConcurrentEvents = 2
       calendarEvent._previousConcurrentEvents = 1
 
       const result = getInlineStartRule(calendarEvent, 90)

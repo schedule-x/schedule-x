@@ -142,32 +142,6 @@ describe('TimeGridEvent', () => {
     })
   })
 
-  describe('z-index based on column', () => {
-    it('should set z-index from _previousConcurrentEvents so higher columns render on top', () => {
-      const $app = __createAppWithViews__({
-        events: [
-          {
-            id: '1',
-            title: 'Event 1',
-            start: Temporal.ZonedDateTime.from(
-              '2020-01-01T08:00:00[Europe/Stockholm]'
-            ),
-            end: Temporal.ZonedDateTime.from(
-              '2020-01-01T09:30:00[Europe/Stockholm]'
-            ),
-          },
-        ],
-      })
-      const event = $app.calendarEvents.list.value[0]
-      event._previousConcurrentEvents = 2
-      event._maxConcurrentEvents = 3
-      renderComponent($app, event)
-
-      const el = document.querySelector('.sx__time-grid-event') as HTMLElement
-      expect(el.style.zIndex).toBe('2')
-    })
-  })
-
   describe('rendering custom content', () => {
     it('should render custom markup but no default markup', () => {
       const $app = __createAppWithViews__({
