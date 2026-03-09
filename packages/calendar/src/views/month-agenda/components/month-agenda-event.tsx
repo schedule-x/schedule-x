@@ -17,9 +17,15 @@ import { wasEventAddedInLastSecond } from '../utils/stateless/was-event-added-in
 
 type props = {
   calendarEvent: CalendarEventInternal
+  customComponentKey?: string
+  customContentKey?: string
 }
 
-export default function MonthAgendaEvent({ calendarEvent }: props) {
+export default function MonthAgendaEvent({
+  calendarEvent,
+  customComponentKey = 'monthAgendaEvent',
+  customContentKey = 'monthAgenda',
+}: props) {
   const $app = useContext(AppContext)
   const { setClickedEvent } = useEventInteractions($app)
 
@@ -29,7 +35,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     borderInlineStart: `4px solid var(--sx-color-${calendarEvent._color})`,
   }
 
-  const customComponent = $app.config._customComponentFns.monthAgendaEvent
+  const customComponent = $app.config._customComponentFns[customComponentKey]
   const customComponentId = useRef(
     customComponent
       ? 'custom-month-agenda-event-' + randomStringId()
@@ -71,7 +77,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
     }
   }
 
-  const hasCustomContent = calendarEvent._customContent?.monthAgenda
+  const hasCustomContent = calendarEvent._customContent?.[customContentKey]
 
   const classNames = ['sx__event', 'sx__month-agenda-event']
   if (calendarEvent._options?.additionalClasses) {
@@ -123,7 +129,7 @@ export default function MonthAgendaEvent({ calendarEvent }: props) {
       {hasCustomContent && (
         <div
           dangerouslySetInnerHTML={{
-            __html: calendarEvent._customContent?.monthAgenda || '',
+            __html: calendarEvent._customContent?.[customContentKey] || '',
           }}
         />
       )}

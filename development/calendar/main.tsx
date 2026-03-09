@@ -23,6 +23,7 @@ import { createViewMonthGrid } from '@schedule-x/calendar/src/views/month-grid'
 import { createViewWeek } from '@schedule-x/calendar/src/views/week'
 import { createViewDay } from '@schedule-x/calendar/src/views/day'
 import { createViewMonthAgenda } from '@schedule-x/calendar/src/views/month-agenda'
+import { createViewWeekAgenda } from '@schedule-x/calendar/src/views/week-agenda'
 import { createViewList } from '@schedule-x/calendar/src/views/list'
 import { mergeLocales } from '@schedule-x/translations/src/utils/merge-locales.ts'
 import { translations } from '@schedule-x/translations/src'
@@ -55,13 +56,13 @@ const calendar = createCalendar({
     timezoneSelectTranslations
   ),
 
-  showWeekNumbers: true,
+  showWeekNumbers: false,
   /* dayBoundaries: {
     start: '20:00',
     end: '06:00'
   }, */
   firstDayOfWeek: 1,
-  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewList()],
+  views: [createViewMonthGrid(), createViewWeek(), createViewDay(), createViewMonthAgenda(), createViewWeekAgenda(), createViewList()],
   defaultView: 'week',
   
   resources: [
@@ -194,6 +195,12 @@ const calendar = createCalendar({
   // tz new york
   timezone: 'Europe/London',
   events: [
+    ...seededEvents.map(event => ({
+      ...event,
+      // we need to convert to either ZonedDateTime or PlainDate, depending on the type of the start and end properties
+      start: /^\d{4}-\d{2}-\d{2}$/.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
+      end: /^\d{4}-\d{2}-\d{2}$/.test(event.end) ? Temporal.PlainDate.from(event.end) : Temporal.ZonedDateTime.from(event.end),
+    })),
 
     // --- BUG REPRO: 4-event cascade (simplest case) ---
     // Each event overlaps the next, but non-adjacent events DON'T overlap.
