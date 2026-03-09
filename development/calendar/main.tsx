@@ -187,423 +187,13 @@ const calendar = createCalendar({
   weekOptions: {
     gridStep: 30,
     gridHeight: 2000,
+    eventOverlap: false,
   },
-  backgroundEvents: [
-    {
-      title: 'Out of office',
-      start: Temporal.ZonedDateTime.from('2025-08-08T00:00:00.000+02:00[Europe/Berlin]'),
-      end: Temporal.ZonedDateTime.from('2025-08-09T12:00:00.000+02:00[Europe/Berlin]'),
-      style: {
-        // create tilted 5px thick gray lines
-        backgroundImage: 'repeating-linear-gradient(45deg, #ccc, #ccc 5px, transparent 5px, transparent 10px)',
-        opacity: 0.5,
-      },
-      // rrule: 'FREQ=WEEKLY',
-      // exdate: ['20250714T000000', '20250728T000000']
-    },
-
-    // PlainDate
-    {
-      title: 'Out of office 2',
-      start: Temporal.PlainDate.from('2025-07-09'),
-      end: Temporal.PlainDate.from('2025-07-10'),
-      style: {
-        backgroundImage: 'repeating-linear-gradient(45deg, #e3a, #e3a 5px, transparent 5px, transparent 10px)',
-        opacity: 0.5,
-      },
-    },
-  ],
   locale: 'en-US',
 
   // tz new york
   timezone: 'Europe/London',
   events: [
-    // Resource View test events - January 5, 2026 (Monday) - Week start
-    {
-      id: 101,
-      title: 'Full Day Conference',
-      start: Temporal.PlainDate.from('2026-01-05'),
-      end: Temporal.PlainDate.from('2026-01-05'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 1011,
-      title: 'VIP Meeting',
-      start: Temporal.PlainDate.from('2026-01-05'),
-      end: Temporal.PlainDate.from('2026-01-05'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 1012,
-      title: 'Team Offsite',
-      start: Temporal.PlainDate.from('2026-01-05'),
-      end: Temporal.PlainDate.from('2026-01-05'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 102,
-      title: 'Morning Standup',
-      start: Temporal.ZonedDateTime.from('2026-01-05T09:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T09:30[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 103,
-      title: 'Team Meeting',
-      start: Temporal.ZonedDateTime.from('2026-01-05T10:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T11:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 104,
-      title: 'Client Presentation',
-      start: Temporal.ZonedDateTime.from('2026-01-05T11:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T12:30[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 105,
-      title: 'Lunch Break',
-      start: Temporal.ZonedDateTime.from('2026-01-05T12:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T13:30[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 106,
-      title: 'Design Review',
-      start: Temporal.ZonedDateTime.from('2026-01-05T14:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T15:30[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 107,
-      title: 'Code Review',
-      start: Temporal.ZonedDateTime.from('2026-01-05T15:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T16:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 108,
-      title: 'Evening Event',
-      start: Temporal.ZonedDateTime.from('2026-01-05T18:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T20:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 109,
-      title: 'Room C Opening',
-      start: Temporal.ZonedDateTime.from('2026-01-05T09:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T10:30[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 110,
-      title: 'Room C Setup',
-      start: Temporal.ZonedDateTime.from('2026-01-05T14:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T16:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 111,
-      title: 'Room C Training',
-      start: Temporal.ZonedDateTime.from('2026-01-05T17:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T19:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    
-    // January 6, 2026 (Tuesday)
-    {
-      id: 201,
-      title: 'Multi-Day Event',
-      start: Temporal.PlainDate.from('2026-01-06'),
-      end: Temporal.PlainDate.from('2026-01-07'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 2011,
-      title: 'Board Meeting',
-      start: Temporal.PlainDate.from('2026-01-06'),
-      end: Temporal.PlainDate.from('2026-01-06'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 2012,
-      title: 'Customer Visit',
-      start: Temporal.PlainDate.from('2026-01-06'),
-      end: Temporal.PlainDate.from('2026-01-06'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 2013,
-      title: 'Product Launch',
-      start: Temporal.PlainDate.from('2026-01-06'),
-      end: Temporal.PlainDate.from('2026-01-06'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 202,
-      title: 'Early Morning Session',
-      start: Temporal.ZonedDateTime.from('2026-01-06T07:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T08:30[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 203,
-      title: 'Workshop Part 1',
-      start: Temporal.ZonedDateTime.from('2026-01-06T09:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T10:30[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 204,
-      title: 'Workshop Part 2',
-      start: Temporal.ZonedDateTime.from('2026-01-06T10:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T12:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 205,
-      title: 'Planning Meeting',
-      start: Temporal.ZonedDateTime.from('2026-01-06T13:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T14:30[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 206,
-      title: 'Training Session',
-      start: Temporal.ZonedDateTime.from('2026-01-06T15:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T17:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 207,
-      title: 'Q&A Session',
-      start: Temporal.ZonedDateTime.from('2026-01-06T16:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T17:30[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 208,
-      title: 'Room C Workshop',
-      start: Temporal.ZonedDateTime.from('2026-01-06T08:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T12:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 209,
-      title: 'Room C Lunch',
-      start: Temporal.ZonedDateTime.from('2026-01-06T12:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T13:30[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 210,
-      title: 'Room C Afternoon',
-      start: Temporal.ZonedDateTime.from('2026-01-06T14:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-06T17:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    
-    // January 7, 2026 (Wednesday)
-    {
-      id: 301,
-      title: 'Full Day Maintenance',
-      start: Temporal.PlainDate.from('2026-01-07'),
-      end: Temporal.PlainDate.from('2026-01-07'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 3011,
-      title: 'System Upgrade',
-      start: Temporal.PlainDate.from('2026-01-07'),
-      end: Temporal.PlainDate.from('2026-01-07'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 3012,
-      title: 'Security Audit',
-      start: Temporal.PlainDate.from('2026-01-07'),
-      end: Temporal.PlainDate.from('2026-01-07'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 3013,
-      title: 'Room C Conference',
-      start: Temporal.PlainDate.from('2026-01-07'),
-      end: Temporal.PlainDate.from('2026-01-07'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 3014,
-      title: 'Room C Event',
-      start: Temporal.PlainDate.from('2026-01-07'),
-      end: Temporal.PlainDate.from('2026-01-07'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 302,
-      title: 'Sprint Planning',
-      start: Temporal.ZonedDateTime.from('2026-01-07T09:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-07T11:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 303,
-      title: 'Short Meeting',
-      start: Temporal.ZonedDateTime.from('2026-01-07T11:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-07T12:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 304,
-      title: 'Long Workshop',
-      start: Temporal.ZonedDateTime.from('2026-01-07T13:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-07T18:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 305,
-      title: 'Afternoon Break',
-      start: Temporal.ZonedDateTime.from('2026-01-07T15:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-07T15:15[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 306,
-      title: 'Room C Morning',
-      start: Temporal.ZonedDateTime.from('2026-01-07T09:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-07T11:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 307,
-      title: 'Room C Session',
-      start: Temporal.ZonedDateTime.from('2026-01-07T13:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-07T15:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    
-    // January 8, 2026 (Thursday)
-    {
-      id: 401,
-      title: 'All Day Event',
-      start: Temporal.PlainDate.from('2026-01-08'),
-      end: Temporal.PlainDate.from('2026-01-08'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 402,
-      title: 'Morning Training',
-      start: Temporal.ZonedDateTime.from('2026-01-08T08:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-08T10:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 403,
-      title: 'Mid-Morning Session',
-      start: Temporal.ZonedDateTime.from('2026-01-08T10:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-08T12:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 404,
-      title: 'Project Review',
-      start: Temporal.ZonedDateTime.from('2026-01-08T13:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-08T15:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 405,
-      title: 'Final Presentation',
-      start: Temporal.ZonedDateTime.from('2026-01-08T15:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-08T17:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 406,
-      title: 'Wrap Up Meeting',
-      start: Temporal.ZonedDateTime.from('2026-01-08T17:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-08T18:30[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 407,
-      title: 'Room C Review',
-      start: Temporal.ZonedDateTime.from('2026-01-08T10:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-08T12:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 408,
-      title: 'Room C Planning',
-      start: Temporal.ZonedDateTime.from('2026-01-08T15:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-08T17:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    
-    // January 9, 2026 (Friday)
-    {
-      id: 501,
-      title: 'Weekly Review',
-      start: Temporal.ZonedDateTime.from('2026-01-09T09:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-09T10:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    {
-      id: 502,
-      title: 'Demo Session',
-      start: Temporal.ZonedDateTime.from('2026-01-09T14:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-09T16:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 503,
-      title: 'Room C Friday',
-      start: Temporal.ZonedDateTime.from('2026-01-09T11:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-09T13:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    {
-      id: 504,
-      title: 'Room C Demo',
-      start: Temporal.ZonedDateTime.from('2026-01-09T16:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-09T18:00[Europe/London]'),
-      resourceId: 'room-c',
-    },
-    
-    // January 10, 2026 (Saturday)
-    {
-      id: 601,
-      title: 'Weekend Workshop',
-      start: Temporal.ZonedDateTime.from('2026-01-10T10:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-10T12:00[Europe/London]'),
-      resourceId: 'room-a',
-    },
-    
-    // January 11, 2026 (Sunday)
-    {
-      id: 701,
-      title: 'Sunday Planning',
-      start: Temporal.ZonedDateTime.from('2026-01-11T11:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-11T13:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    
-    // Overlapping events on same day/resource (Jan 5)
-    {
-      id: 801,
-      title: 'Concurrent Event A',
-      start: Temporal.ZonedDateTime.from('2026-01-05T14:00[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T15:00[Europe/London]'),
-      resourceId: 'room-b',
-    },
-    {
-      id: 802,
-      title: 'Concurrent Event B',
-      start: Temporal.ZonedDateTime.from('2026-01-05T14:30[Europe/London]'),
-      end: Temporal.ZonedDateTime.from('2026-01-05T15:30[Europe/London]'),
-      resourceId: 'room-b',
-    },
 
     // --- BUG REPRO: 4-event cascade (simplest case) ---
     // Each event overlaps the next, but non-adjacent events DON'T overlap.
@@ -684,6 +274,45 @@ const calendar = createCalendar({
       end: Temporal.ZonedDateTime.from('2026-03-03T19:30[Europe/London]'),
       calendarId: 'work',
     },
+
+
+    // bug repro: 4 events, no overlap
+    {
+      id: 911,
+      title: 'Event 14:00-15:30',
+      start: Temporal.ZonedDateTime.from('2026-03-09T14:00[Europe/London]'),
+      end: Temporal.ZonedDateTime.from('2026-03-09T15:30[Europe/London]'),
+      calendarId: 'personal',
+    },
+    {
+      id: 912,
+      title: 'Event 14:00-14:50',
+      start: Temporal.ZonedDateTime.from('2026-03-09T14:00[Europe/London]'),
+      end: Temporal.ZonedDateTime.from('2026-03-09T14:50[Europe/London]'),
+      calendarId: 'work',
+    },
+    {
+      id: 913,
+      title: 'Event 14:30-15:30',
+      start: Temporal.ZonedDateTime.from('2026-03-09T14:30[Europe/London]'),
+      end: Temporal.ZonedDateTime.from('2026-03-09T15:30[Europe/London]'),
+      calendarId: 'work',
+    },
+    {
+      id: 914,
+      title: 'Event 15:00-16:00',
+      start: Temporal.ZonedDateTime.from('2026-03-09T15:00[Europe/London]'),
+      end: Temporal.ZonedDateTime.from('2026-03-09T16:00[Europe/London]'),
+      calendarId: 'work',
+    },
+    {
+      id: 915,
+      title: 'Event 15:00-16:00',
+      start: Temporal.ZonedDateTime.from('2026-03-09T15:00[Europe/London]'),
+      end: Temporal.ZonedDateTime.from('2026-03-09T16:00[Europe/London]'),
+      calendarId: 'work',
+    },
+    
   ],
 })
 calendar.render(calendarElement)
