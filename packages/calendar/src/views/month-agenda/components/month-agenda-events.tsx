@@ -5,16 +5,27 @@ import { AppContext } from '../../../utils/stateful/app-context'
 
 type props = {
   events: CalendarEventInternal[]
+  customComponentKey?: string
+  customContentKey?: string
 }
 
-export default function MonthAgendaEvents({ events }: props) {
+export default function MonthAgendaEvents({
+  events,
+  customComponentKey,
+  customContentKey,
+}: props) {
   const $app = useContext(AppContext)
 
   return (
     <div className="sx__month-agenda-events">
       {events.length ? (
         events.map((event) => (
-          <MonthAgendaEvent calendarEvent={event} key={event.id} />
+          <MonthAgendaEvent
+            calendarEvent={event}
+            customComponentKey={customComponentKey}
+            customContentKey={customContentKey}
+            key={event.id}
+          />
         ))
       ) : (
         <div className="sx__month-agenda-events__empty">

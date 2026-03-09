@@ -14,7 +14,10 @@ export default function RangeHeading() {
   const [currentHeading, setCurrentHeading] = useState<string>('' as string)
 
   useSignalEffect(() => {
-    if ($app.calendarState.view.value === InternalViewName.Week) {
+    if (
+      $app.calendarState.view.value === InternalViewName.Week ||
+      $app.calendarState.view.value === InternalViewName.WeekAgenda
+    ) {
       setCurrentHeading(
         getMonthAndYearForDateRange(
           $app,
