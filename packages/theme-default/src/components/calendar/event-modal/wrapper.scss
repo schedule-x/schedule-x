@@ -7,7 +7,7 @@
   max-width: 100%;
   height: fit-content;
   background-color: var(--sx-color-background);
-  z-index: 2;
+  z-index: var(--sx-z-index-event-modal);
 
   &.is-open {
     animation: slide-sideways;
