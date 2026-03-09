@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.1](https://github.com/schedule-x/schedule-x/compare/v4.3.0...v4.3.1) (2026-03-09)
+
+### Bug Fixes
+
+- **calendar:** event concurrency improvement ([#1295](https://github.com/schedule-x/schedule-x/issues/1295)) ([cbd0b1a](https://github.com/schedule-x/schedule-x/commit/cbd0b1a1f6db9e9d530035970c4c97530fd0dd25))
+- **theme-default:** fix z-index in weekly ([#1296](https://github.com/schedule-x/schedule-x/issues/1296)) ([593130c](https://github.com/schedule-x/schedule-x/commit/593130c084c9f6e538ccd622cd0d8422f157d767))
+
 # [4.3.0](https://github.com/schedule-x/schedule-x/compare/v4.2.0...v4.3.0) (2026-03-04)
 
 ### Bug Fixes
