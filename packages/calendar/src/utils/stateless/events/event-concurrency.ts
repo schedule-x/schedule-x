@@ -35,6 +35,7 @@ export const handleEventConcurrency = (
     ) {
       concurrentEventsCache.push(event)
 
+      let maxColumnInBatch = 0
       for (let ii = 0; ii < concurrentEventsCache.length; ii++) {
         const currentEvent = concurrentEventsCache[ii]
         // Greedy interval coloring: assign smallest column not taken by overlapping previous events
@@ -53,6 +54,7 @@ export const handleEventConcurrency = (
         }
         let column = 0
         while (takenColumns.has(column)) column++
+        maxColumnInBatch = Math.max(maxColumnInBatch, column)
         const NpreviousConcurrentEvents = column
         const NupcomingConcurrentEvents = concurrentEventsCache.filter(
           (cachedEvent, index) => {
@@ -72,46 +74,10 @@ export const handleEventConcurrency = (
         currentEvent._totalConcurrentEvents =
           NpreviousConcurrentEvents + NupcomingConcurrentEvents + 1
         currentEvent._previousConcurrentEvents = NpreviousConcurrentEvents
+      }
 
-        // TODO v3: try to use _maxConcurrentEvents for both overlap/no overlap mode, and remove _totalConcurrentEvents
-        let maxOverlappingEvents = 0
-        const timePoints: { time: string; type: 'start' | 'end' }[] = []
-
-        concurrentEventsCache.forEach((cachedEvent) => {
-          if (
-            ((cachedEvent.end as Temporal.ZonedDateTime).epochNanoseconds >
-              (currentEvent.start as Temporal.ZonedDateTime).epochNanoseconds &&
-              (cachedEvent.start as Temporal.ZonedDateTime).epochNanoseconds <
-                (currentEvent.end as Temporal.ZonedDateTime)
-                  .epochNanoseconds) ||
-            areEvents0MinutesAndConcurrent(cachedEvent, currentEvent)
-          ) {
-            timePoints.push({
-              time: cachedEvent.start.toString(),
-              type: 'start',
-            })
-            timePoints.push({ time: cachedEvent.end.toString(), type: 'end' })
-          }
-        })
-
-        timePoints.sort(
-          (a, b) => a.time.localeCompare(b.time) || (a.type === 'end' ? -1 : 1)
-        )
-
-        let currentOverlap = 0
-        timePoints.forEach((point) => {
-          if (point.type === 'start') {
-            currentOverlap++
-            maxOverlappingEvents = Math.max(
-              maxOverlappingEvents,
-              currentOverlap
-            )
-          } else {
-            currentOverlap--
-          }
-        })
-
-        currentEvent._maxConcurrentEvents = maxOverlappingEvents
+      for (const evt of concurrentEventsCache) {
+        evt._maxConcurrentEvents = maxColumnInBatch + 1
       }
       concurrentEventsCache = []
       return handleEventConcurrency(sortedEvents, concurrentEventsCache, i + 1)

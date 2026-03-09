@@ -159,10 +159,10 @@ describe('Event concurrency', () => {
       expect(result[2]._maxConcurrentEvents).toBe(3)
       expect(result[3]._totalConcurrentEvents).toBe(2)
       expect(result[3]._previousConcurrentEvents).toBe(1)
-      expect(result[3]._maxConcurrentEvents).toBe(2)
+      expect(result[3]._maxConcurrentEvents).toBe(3)
       expect(result[4]._totalConcurrentEvents).toBe(2)
       expect(result[4]._previousConcurrentEvents).toBe(1)
-      expect(result[4]._maxConcurrentEvents).toBe(2)
+      expect(result[4]._maxConcurrentEvents).toBe(3)
     })
 
     it('should have 3 concurrent events where 1 and 2 start at the same time', () => {
@@ -241,10 +241,10 @@ describe('Event concurrency', () => {
       expect(result[2]._maxConcurrentEvents).toBe(3)
       expect(result[3]._totalConcurrentEvents).toBe(2)
       expect(result[3]._previousConcurrentEvents).toBe(1)
-      expect(result[3]._maxConcurrentEvents).toBe(2)
+      expect(result[3]._maxConcurrentEvents).toBe(3)
       expect(result[4]._totalConcurrentEvents).toBe(2)
       expect(result[4]._previousConcurrentEvents).toBe(1)
-      expect(result[4]._maxConcurrentEvents).toBe(2)
+      expect(result[4]._maxConcurrentEvents).toBe(3)
     })
 
     it('should have two concurrent events, where 2 starts after 1, and also ends after 1', () => {
