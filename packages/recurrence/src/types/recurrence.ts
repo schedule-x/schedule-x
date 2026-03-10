@@ -1,4 +1,4 @@
 export type Recurrence = {
-  start: string
-  end: string
+  start: Temporal.ZonedDateTime | Temporal.PlainDate
+  end: Temporal.ZonedDateTime | Temporal.PlainDate
 }
