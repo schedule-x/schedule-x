@@ -3,6 +3,7 @@ import { viewWeek, createViewWeek } from './views/week'
 import { viewMonthGrid, createViewMonthGrid } from './views/month-grid'
 import { viewDay, createViewDay } from './views/day'
 import { viewMonthAgenda, createViewMonthAgenda } from './views/month-agenda'
+import { viewWeekAgenda, createViewWeekAgenda } from './views/week-agenda'
 import { viewList, createViewList } from './views/list'
 import type { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import type { CalendarType } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -56,6 +57,7 @@ export {
   viewMonthGrid,
   viewDay,
   viewMonthAgenda,
+  viewWeekAgenda,
   viewList,
   CalendarApp,
   toDateString,
@@ -71,6 +73,7 @@ export {
   createViewMonthGrid,
   createViewDay,
   createViewMonthAgenda,
+  createViewWeekAgenda,
   createViewList,
   TimeGridDay,
   TimeAxis,
