@@ -194,6 +194,14 @@ const calendar = createCalendar({
   // tz new york
   timezone: 'Europe/London',
   events: [
+    // bug repro: event with same start and end time
+    {
+      id: 900,
+      title: 'No end event',
+      start: Temporal.ZonedDateTime.from('2026-03-25T08:00[Europe/London]'),
+      end: Temporal.ZonedDateTime.from('2026-03-25T08:00[Europe/London]'),
+      calendarId: 'personal',
+    },
 
     // --- BUG REPRO: 4-event cascade (simplest case) ---
     // Each event overlaps the next, but non-adjacent events DON'T overlap.

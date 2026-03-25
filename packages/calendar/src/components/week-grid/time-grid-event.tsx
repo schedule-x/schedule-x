@@ -66,7 +66,7 @@ export default function TimeGridEvent({
   ) => {
     const localizedStartTime = start.toLocaleString(...localizeArgs)
 
-    if (start === end) {
+    if (Temporal.ZonedDateTime.compare(start, end) === 0) {
       return localizedStartTime
     }
 
