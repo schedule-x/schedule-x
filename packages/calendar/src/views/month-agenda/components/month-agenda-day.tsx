@@ -1,9 +1,10 @@
 import { MonthAgendaDay as MonthAgendaDayType } from '../types/month-agenda'
-import { useContext } from 'preact/hooks'
+import { useContext, useEffect, useState } from 'preact/hooks'
 import { AppContext } from '../../../utils/stateful/app-context'
 import { getLocalizedDate } from '@schedule-x/shared/src/utils/stateless/time/date-time-localization/get-time-stamp'
-import { addDays } from '@schedule-x/shared/src'
+import { addDays, randomStringId } from '@schedule-x/shared/src'
 import { getClassNameForWeekday } from '../../../utils/stateless/get-class-name-for-weekday'
+import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 
 type props = {
   day: MonthAgendaDayType
@@ -17,6 +18,28 @@ export default function MonthAgendaDay({
   setActiveDate,
 }: props) {
   const $app = useContext(AppContext)
+  const monthAgendaDateDotsCustomComponent =
+    $app.config._customComponentFns.monthAgendaDateDots
+  const monthAgendaDateDotsCCID = useState(
+    monthAgendaDateDotsCustomComponent ? randomStringId() : ''
+  )[0]
+  useEffect(() => {
+    if (!monthAgendaDateDotsCustomComponent) return
+
+    const dotsEl = document.querySelector(
+      `[data-ccid="${monthAgendaDateDotsCCID}"]`
+    )
+    if (!(dotsEl instanceof HTMLElement)) return
+
+    monthAgendaDateDotsCustomComponent(dotsEl, {
+      date: toJSDate(day.date.toString()).getDate(),
+      jsDate: toJSDate(day.date.toString()),
+      events: day.events
+        .slice(0, 3)
+        .map((calendarEvent) => calendarEvent._getExternalEvent()),
+    })
+  }, [day])
+
   const monthSelected = $app.datePickerState.selectedDate.value.month
   const monthOfDay = day.date.month
   const dayClasses = [
@@ -81,12 +104,19 @@ export default function MonthAgendaDay({
       <div>{day.date.day}</div>
 
       <div className="sx__month-agenda-day__event-icons">
-        {day.events.slice(0, 3).map((event) => (
-          <div
-            style={{ backgroundColor: `var(--sx-color-${event._color})` }}
-            className="sx__month-agenda-day__event-icon"
-          />
-        ))}
+        {monthAgendaDateDotsCustomComponent ? (
+          <div data-ccid={monthAgendaDateDotsCCID} />
+        ) : (
+          <>
+            {day.events.slice(0, 3).map((event) => (
+              <div
+                key={event.id}
+                style={{ backgroundColor: `var(--sx-color-${event._color})` }}
+                className="sx__month-agenda-day__event-icon"
+              />
+            ))}
+          </>
+        )}
       </div>
     </button>
   )
