@@ -2,11 +2,9 @@
 
 .sx__time-grid-event {
   width: calc(100% - 10px);
-  padding: var(--sx-spacing-padding1);
   position: absolute;
-  border-radius: var(--sx-rounding-extra-small);
-  font-size: var(--sx-font-extra-small);
-  overflow: hidden;
+  padding: 1px;
+  box-sizing: border-box;
   -webkit-user-select: none;
   user-select: none;
 
@@ -18,6 +16,15 @@
   }
 
   @include events.is-event-new;
+}
+
+.sx__time-grid-event-content {
+  height: 100%;
+  border-radius: var(--sx-rounding-extra-small);
+  font-size: var(--sx-font-extra-small);
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: var(--sx-spacing-padding1);
 }
 
 [data-has-dnd='true'] {
