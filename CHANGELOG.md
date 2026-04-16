@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.4.0](https://github.com/schedule-x/schedule-x/compare/v4.3.1...v4.4.0) (2026-04-09)
+
+### Features
+
+- **calendar:** custom component for agenda dots ([#1309](https://github.com/schedule-x/schedule-x/issues/1309)) ([592ac03](https://github.com/schedule-x/schedule-x/commit/592ac03b4eb057579342ec7b4d9a9146459e9053))
+
 ## [4.3.1](https://github.com/schedule-x/schedule-x/compare/v4.3.0...v4.3.1) (2026-03-09)
 
 ### Bug Fixes
