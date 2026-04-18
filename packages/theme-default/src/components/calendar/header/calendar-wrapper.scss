@@ -62,12 +62,3 @@
     opacity: 1;
   }
 }
-
-.sx__no-animations {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0s !important;
-    transition-duration: 0s !important;
-  }
-}

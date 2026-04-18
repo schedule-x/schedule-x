@@ -19,7 +19,6 @@ export default function useWrapperClasses($app: CalendarAppSingleton) {
       classes.push('sx__is-calendar-small')
     if ($app.calendarState.isDark.value) classes.push('is-dark')
     if ($app.config.theme === 'shadcn') classes.push('is-shadcn')
-    if ($app.config.skipAnimations) classes.push('sx__no-animations')
     classes.push(getClassForView($app))
 
     setWrapperClasses(classes)
