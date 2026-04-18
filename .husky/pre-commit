@@ -1,5 +1,4 @@
 
-git rev-parse --verify main > /dev/null 2>&1 || git branch main refs/remotes/origin/main 2>/dev/null || true
 npm run format:changed
 npm run lint:all
 git add .
