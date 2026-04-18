@@ -69,7 +69,7 @@ export default class CalendarConfigBuilder
   resourceGridOptions: ResourceGridOptions = {
     nDays: 7,
   }
-  skipAnimations: boolean | undefined = false
+  skipAnimations = false
 
   build(): CalendarConfigInternal {
     const minDate = this.minDate
@@ -259,7 +259,7 @@ export default class CalendarConfigBuilder
   withSkipAnimations(
     skipAnimations: boolean | undefined
   ): CalendarConfigBuilder {
-    this.skipAnimations = skipAnimations
+    this.skipAnimations = skipAnimations ?? false
     return this
   }
 }
