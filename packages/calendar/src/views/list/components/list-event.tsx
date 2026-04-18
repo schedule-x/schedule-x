@@ -133,7 +133,6 @@ export default function ListEvent({
 
   return (
     <div
-      key={calendarEvent.id}
       className={classNames.join(' ')}
       data-ccid={customComponentId.current}
       data-event-id={calendarEvent.id}

@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useEffect, useMemo, useRef, useState } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -345,16 +345,13 @@ export const ListWrapper: PreactViewComponent = ({
     }
   }, [daysWithEvents])
 
-  const dayHeaderCCIDs = useState(() =>
-    daysWithEvents.map(() =>
-      listDayHeaderCustomComponent ? randomStringId() : ''
-    )
-  )[0]
-
-  // Keep dayHeaderCCIDs in sync with daysWithEvents length
-  while (dayHeaderCCIDs.length < daysWithEvents.length) {
-    dayHeaderCCIDs.push(listDayHeaderCustomComponent ? randomStringId() : '')
-  }
+  const dayHeaderCCIDs = useMemo(
+    () =>
+      daysWithEvents.map(() =>
+        listDayHeaderCustomComponent ? randomStringId() : ''
+      ),
+    [daysWithEvents]
+  )
 
   useEffect(() => {
     if (!listDayHeaderCustomComponent) return
