@@ -23,7 +23,9 @@ describe('validating the config', () => {
           validateConfig({
             selectedDate: selectedDate as unknown,
           } as CalendarConfigExternal)
-        ).toThrowError()
+        ).toThrowError(
+          '[Schedule-X error]: selectedDate must be a temporal plain date'
+        )
       }
     )
 

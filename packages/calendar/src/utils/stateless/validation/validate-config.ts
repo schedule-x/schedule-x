@@ -6,7 +6,7 @@ export const validateConfig = (config: CalendarConfigExternal) => {
     !(config.selectedDate instanceof Temporal.PlainDate)
   ) {
     throw new Error(
-      '[Schedule-X error]: selectedDate must have the format YYYY-MM-DD'
+      '[Schedule-X error]: selectedDate must be a temporal plain date'
     )
   }
 
