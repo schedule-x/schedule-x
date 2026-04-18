@@ -37,6 +37,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   showWeekNumbers: Signal<boolean> = signal(false)
   direction: 'ltr' | 'rtl' = 'ltr'
   timezone: Signal<IANATimezone>
+  skipAnimations: boolean
   resources: Signal<Resource[]>
   resourceGridOptions: Signal<ResourceGridOptions>
   _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
@@ -64,7 +65,8 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     showWeekNumbers: boolean = false,
     timezone: IANATimezone = 'UTC',
     resources: Resource[] = [],
-    resourceGridOptions: ResourceGridOptions = { nDays: 7 }
+    resourceGridOptions: ResourceGridOptions = { nDays: 7 },
+    skipAnimations: boolean = false
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
@@ -83,6 +85,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.timezone = signal(timezone)
     this.resources = signal(resources)
     this.resourceGridOptions = signal(resourceGridOptions)
+    this.skipAnimations = skipAnimations
   }
 
   get isHybridDay(): boolean {

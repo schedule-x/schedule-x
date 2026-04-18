@@ -29,5 +29,6 @@ export const createInternalConfig = (
     .withTimezone(config.timezone)
     .withResources(config.resources)
     .withResourceGridOptions(config.resourceGridOptions)
+    .withSkipAnimations(config.skipAnimations)
     .build()
 }

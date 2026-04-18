@@ -69,6 +69,7 @@ export default class CalendarConfigBuilder
   resourceGridOptions: ResourceGridOptions = {
     nDays: 7,
   }
+  skipAnimations: boolean | undefined = false
 
   build(): CalendarConfigInternal {
     const minDate = this.minDate
@@ -100,7 +101,8 @@ export default class CalendarConfigBuilder
       this.showWeekNumbers,
       this.timezone as IANATimezone,
       this.resources,
-      this.resourceGridOptions
+      this.resourceGridOptions,
+      this.skipAnimations
     )
   }
 
@@ -251,6 +253,13 @@ export default class CalendarConfigBuilder
       ...this.resourceGridOptions,
       ...resourceGridOptions,
     }
+    return this
+  }
+
+  withSkipAnimations(
+    skipAnimations: boolean | undefined
+  ): CalendarConfigBuilder {
+    this.skipAnimations = skipAnimations
     return this
   }
 }

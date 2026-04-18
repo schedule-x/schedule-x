@@ -87,6 +87,7 @@ export default interface CalendarConfigInternal extends Config {
   _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
   translations: Signal<Record<string, Language>>
   direction: 'ltr' | 'rtl'
+  skipAnimations: boolean
   resources: Signal<Resource[]>
   resourceGridOptions: Signal<ResourceGridOptions>
 
