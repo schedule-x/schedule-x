@@ -141,7 +141,7 @@ export default function ViewSelection() {
           className="sx__view-selection-items"
         >
           {availableViews.map((view) => (
-            <li>
+            <li key={view.name}>
               <button
                 type="button"
                 aria-label={
