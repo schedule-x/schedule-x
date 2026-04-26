@@ -90,9 +90,9 @@ export default function TimezoneSelect({
       lastFocusedIndexRef.current = focusedIndex
       
       requestAnimationFrame(() => {
-        const focusedElement = itemsListRef.current?.querySelector(
-          `.sx__timezone-select-item:nth-child(${focusedIndex + 1})`
-        )
+        const focusedElement = itemsListRef.current?.querySelectorAll(
+          '.sx__timezone-select-item'
+        )?.[focusedIndex]
         
         if (focusedElement instanceof HTMLElement && itemsListRef.current) {
           const container = itemsListRef.current
@@ -277,29 +277,30 @@ export default function TimezoneSelect({
             ref={itemsListRef}
           >
             {getFilteredTimezones().map((timezone, index) => (
-              <li
-                key={timezone}
-                aria-label={
-                  $app.translate('Select Timezone') +
-                  ' ' +
-                  (() => {
-                    const { offset, name } = getTimezoneDisplayParts(timezone)
-                    return `${offset} ${name}`
-                  })()
-                }
-                tabIndex={-1}
-                role="button"
-                onClick={() => handleTimezoneSelect(timezone)}
-                onMouseEnter={() => setFocusedIndex(index)}
-                className={
-                  'sx__timezone-select-item' +
-                  (timezone === $app.config.timezone.value
-                    ? ' is-selected'
-                    : '') +
-                  (index === focusedIndex ? ' is-focused' : '')
-                }
-              >
-                {renderTimezoneDisplay(timezone)}
+              <li key={timezone}>
+                <button
+                  type="button"
+                  tabIndex={-1}
+                  aria-label={
+                    $app.translate('Select Timezone') +
+                    ' ' +
+                    (() => {
+                      const { offset, name } = getTimezoneDisplayParts(timezone)
+                      return `${offset} ${name}`
+                    })()
+                  }
+                  onClick={() => handleTimezoneSelect(timezone)}
+                  onMouseEnter={() => setFocusedIndex(index)}
+                  className={
+                    'sx__timezone-select-item' +
+                    (timezone === $app.config.timezone.value
+                      ? ' is-selected'
+                      : '') +
+                    (index === focusedIndex ? ' is-focused' : '')
+                  }
+                >
+                  {renderTimezoneDisplay(timezone)}
+                </button>
               </li>
             ))}
           </ul>

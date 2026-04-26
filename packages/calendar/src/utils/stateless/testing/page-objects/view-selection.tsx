@@ -1,8 +1,5 @@
 import { screen } from '@testing-library/preact'
-import {
-  assertIsButton,
-  assertIsLI,
-} from '../../../../../../../libs/assertions/src'
+import { assertIsButton } from '../../../../../../../libs/assertions/src'
 
 export function queryDropdown() {
   return screen.queryByTestId('view-selection-items')
@@ -26,8 +23,9 @@ export const getViewSelectionElement = () => {
 }
 
 export const getViewOptionN = (n: number) => {
-  const el = document.querySelector(`.sx__view-selection-item:nth-child(${n})`)
-  assertIsLI(el)
+  const els = document.querySelectorAll('.sx__view-selection-item')
+  const el = els[n - 1]
+  assertIsButton(el)
 
   return el
 }

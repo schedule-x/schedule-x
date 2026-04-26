@@ -69,6 +69,10 @@
 }
 
 .sx__view-selection-item {
+  display: block;
+  width: 100%;
+  text-align: inherit;
+  background-color: inherit;
   padding: var(--sx-spacing-padding4) var(--sx-spacing-padding6);
   cursor: pointer;
 

@@ -141,24 +141,26 @@ export default function ViewSelection() {
           className="sx__view-selection-items"
         >
           {availableViews.map((view) => (
-            <li
-              aria-label={
-                $app.translate('Select View') + ' ' + $app.translate(view.label)
-              }
-              tabIndex={-1}
-              role="button"
-              onKeyDown={(keyboardEvent) =>
-                navigateUpOrDown(keyboardEvent, view.name)
-              }
-              onClick={() => handleClickOnSelectionItem(view.name)}
-              className={
-                'sx__view-selection-item' +
-                (view.name === $app.calendarState.view.value
-                  ? ' is-selected'
-                  : '')
-              }
-            >
-              {$app.translate(view.label)}
+            <li>
+              <button
+                type="button"
+                aria-label={
+                  $app.translate('Select View') + ' ' + $app.translate(view.label)
+                }
+                tabIndex={-1}
+                onKeyDown={(keyboardEvent) =>
+                  navigateUpOrDown(keyboardEvent, view.name)
+                }
+                onClick={() => handleClickOnSelectionItem(view.name)}
+                className={
+                  'sx__view-selection-item' +
+                  (view.name === $app.calendarState.view.value
+                    ? ' is-selected'
+                    : '')
+                }
+              >
+                {$app.translate(view.label)}
+              </button>
             </li>
           ))}
         </ul>
