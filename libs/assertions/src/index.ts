@@ -1,1 +1,6 @@
-export { assertIsDIV, assertIsLI, assertElementType } from './assertions/dom'
+export {
+  assertIsDIV,
+  assertIsLI,
+  assertIsButton,
+  assertElementType,
+} from './assertions/dom'

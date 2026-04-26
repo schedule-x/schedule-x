@@ -76,6 +76,7 @@ export default function ViewSelection() {
 
   const handleSelectedViewKeyDown = (keyboardEvent: KeyboardEvent) => {
     if (isKeyEnterOrSpace(keyboardEvent)) {
+      keyboardEvent.preventDefault()
       setIsOpen(!isOpen)
     }
 
@@ -122,10 +123,9 @@ export default function ViewSelection() {
       >
         {$app.translate('View')}
       </label>
-      <div
+      <button
         id={viewSelectId}
-        tabIndex={0}
-        role="button"
+        type="button"
         aria-describedby={viewLabelId}
         aria-label={$app.translate('Select View')}
         className="sx__view-selection-selected-item sx__ripple"
@@ -134,7 +134,7 @@ export default function ViewSelection() {
       >
         {selectedViewLabel}
         <img className="sx__view-selection-chevron" src={chevronIcon} alt="" />
-      </div>
+      </button>
       {isOpen && (
         <ul
           data-testid="view-selection-items"

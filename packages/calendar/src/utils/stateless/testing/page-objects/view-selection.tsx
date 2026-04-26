@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/preact'
 import {
-  assertIsDIV,
+  assertIsButton,
   assertIsLI,
 } from '../../../../../../../libs/assertions/src'
 
@@ -20,7 +20,7 @@ export const openViewSelection = () => {
 
 export const getViewSelectionElement = () => {
   const el = document.querySelector('.sx__view-selection-selected-item')
-  assertIsDIV(el)
+  assertIsButton(el)
 
   return el
 }

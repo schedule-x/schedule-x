@@ -135,6 +135,7 @@ export default function TimezoneSelect({
 
   const handleSelectedTimezoneKeyDown = (keyboardEvent: KeyboardEvent) => {
     if (isKeyEnterOrSpace(keyboardEvent)) {
+      keyboardEvent.preventDefault()
       setIsOpen(!isOpen)
       if (!isOpen) {
         setSearchQuery('')
@@ -238,10 +239,9 @@ export default function TimezoneSelect({
       >
         {$app.translate('Timezone')}
       </label>
-      <div
+      <button
         id={timezoneSelectId}
-        tabIndex={0}
-        role="button"
+        type="button"
         aria-describedby={timezoneLabelId}
         aria-label={$app.translate('Select Timezone')}
         title={(() => {
@@ -254,7 +254,7 @@ export default function TimezoneSelect({
       >
         {renderTimezoneDisplay($app.config.timezone.value)}
         <img className="sx__timezone-select-chevron" src={chevronIcon} alt="" />
-      </div>
+      </button>
       {isOpen && (
         <div className="sx__timezone-select-dropdown" ref={dropdownRef}>
           <div className="sx__timezone-select-search">
