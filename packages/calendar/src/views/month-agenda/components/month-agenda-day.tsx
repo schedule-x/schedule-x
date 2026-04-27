@@ -37,7 +37,7 @@ export default function MonthAgendaDay({
       date: toJSDate(day.date.toString()).getDate(),
       jsDate: toJSDate(day.date.toString()),
       events: day.events
-        .slice(0, 3)
+        .slice(0, $app.config.monthAgendaOptions.value.nEventIndicatorsPerDay)
         .map((calendarEvent) => calendarEvent._getExternalEvent()),
     })
   }, [day])
@@ -108,13 +108,18 @@ export default function MonthAgendaDay({
           <div data-ccid={monthAgendaDateDotsCCID} />
         ) : (
           <>
-            {day.events.slice(0, 3).map((event) => (
-              <div
-                key={event.id}
-                style={{ backgroundColor: `var(--sx-color-${event._color})` }}
-                className="sx__month-agenda-day__event-icon"
-              />
-            ))}
+            {day.events
+              .slice(
+                0,
+                $app.config.monthAgendaOptions.value.nEventIndicatorsPerDay
+              )
+              .map((event) => (
+                <div
+                  key={event.id}
+                  style={{ backgroundColor: `var(--sx-color-${event._color})` }}
+                  className="sx__month-agenda-day__event-icon"
+                />
+              ))}
           </>
         )}
       </div>

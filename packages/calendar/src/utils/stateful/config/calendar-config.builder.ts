@@ -2,6 +2,7 @@ import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarConfigInternal, {
   CalendarType,
   MonthGridOptions,
+  MonthAgendaOptions,
   Plugins,
   WeekOptions,
   ResourceGridOptions,
@@ -49,6 +50,7 @@ export default class CalendarConfigBuilder
     gridStep: 60,
   }
   monthGridOptions: MonthGridOptions | undefined
+  monthAgendaOptions: MonthAgendaOptions | undefined
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
   isDark: boolean | undefined = false
@@ -96,6 +98,7 @@ export default class CalendarConfigBuilder
       minDate,
       maxDate,
       this.monthGridOptions,
+      this.monthAgendaOptions,
       this.theme,
       this.translations,
       this.showWeekNumbers,
@@ -216,6 +219,13 @@ export default class CalendarConfigBuilder
     monthOptions: MonthGridOptions | undefined
   ): CalendarConfigBuilder {
     this.monthGridOptions = monthOptions
+    return this
+  }
+
+  withMonthAgendaOptions(
+    monthAgendaOptions: MonthAgendaOptions | undefined
+  ): CalendarConfigBuilder {
+    this.monthAgendaOptions = monthAgendaOptions
     return this
   }
 

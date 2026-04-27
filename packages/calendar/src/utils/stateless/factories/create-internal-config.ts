@@ -22,6 +22,7 @@ export const createInternalConfig = (
     .withMinDate(config.minDate ? config.minDate.toString() : undefined)
     .withMaxDate(config.maxDate ? config.maxDate.toString() : undefined)
     .withMonthGridOptions(config.monthGridOptions)
+    .withMonthAgendaOptions(config.monthAgendaOptions)
     .withBackgroundEvents(config.backgroundEvents)
     .withTheme(config.theme)
     .withTranslations(config.translations || translations)

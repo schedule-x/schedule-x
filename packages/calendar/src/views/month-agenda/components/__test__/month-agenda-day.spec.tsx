@@ -238,6 +238,76 @@ describe('MonthAgendaDay', () => {
 
       expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(3)
     })
+
+    it('should display 5 event icons when nEventIndicatorsPerDay is set to 5', () => {
+      const $app = __createAppWithViews__({
+        monthAgendaOptions: {
+          nEventIndicatorsPerDay: 5,
+        },
+        events: [
+          {
+            id: 1,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 2,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 3,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 4,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 5,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+          {
+            id: 6,
+            start: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+            end: Temporal.ZonedDateTime.from(
+              '2020-01-01T00:00:00[Europe/Stockholm]'
+            ),
+          },
+        ],
+      })
+      renderComponent($app, {
+        date: Temporal.PlainDate.from('2020-01-01'),
+        events: $app.calendarEvents.list.value,
+      })
+
+      expect(document.querySelectorAll(EVENT_ICON_SELECTOR).length).toBe(5)
+    })
   })
 
   describe('setting classes for leading and trailing dates', () => {

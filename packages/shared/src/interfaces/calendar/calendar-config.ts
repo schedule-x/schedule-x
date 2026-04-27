@@ -35,6 +35,10 @@ export type MonthGridOptions = {
   nEventsPerDay: number
 }
 
+export type MonthAgendaOptions = {
+  nEventIndicatorsPerDay: number
+}
+
 export type ColorDefinition = {
   main: string
   container: string
@@ -79,6 +83,7 @@ export default interface CalendarConfigInternal extends Config {
   minDate: Signal<Temporal.PlainDate | undefined>
   maxDate: Signal<Temporal.PlainDate | undefined>
   monthGridOptions: Signal<MonthGridOptions>
+  monthAgendaOptions: Signal<MonthAgendaOptions>
   plugins: Plugins
   isResponsive: boolean
   showWeekNumbers: Signal<boolean>
@@ -114,6 +119,7 @@ interface ReducedCalendarConfigInternal
     | 'minDate'
     | 'maxDate'
     | 'monthGridOptions'
+    | 'monthAgendaOptions'
     | 'locale'
     | 'firstDayOfWeek'
     | 'translations'
@@ -139,6 +145,7 @@ export interface CalendarConfigExternal
   minDate?: Temporal.PlainDate | undefined
   maxDate?: Temporal.PlainDate | undefined
   monthGridOptions?: MonthGridOptions
+  monthAgendaOptions?: MonthAgendaOptions
   locale?: string
   firstDayOfWeek?: WeekDay
   skipValidation?: boolean

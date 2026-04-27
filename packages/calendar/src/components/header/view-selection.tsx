@@ -145,7 +145,9 @@ export default function ViewSelection() {
               <button
                 type="button"
                 aria-label={
-                  $app.translate('Select View') + ' ' + $app.translate(view.label)
+                  $app.translate('Select View') +
+                  ' ' +
+                  $app.translate(view.label)
                 }
                 tabIndex={-1}
                 onKeyDown={(keyboardEvent) =>
