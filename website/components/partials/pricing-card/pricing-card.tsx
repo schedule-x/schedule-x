@@ -25,10 +25,14 @@ type props = {
   isPriceYearly?: boolean;
   startCheckout?: (licenseType: LicenseType) => void;
   licenseType?: LicenseType;
+  defaultVariantId?: number;
 }
 
-export default function PricingCard({ data, buttonClass, onSelectVariant, price, isPriceYearly, startCheckout, licenseType }: props) {
+export default function PricingCard({ data, buttonClass, onSelectVariant, price, isPriceYearly, startCheckout, licenseType, defaultVariantId }: props) {
   const showVatTooltip = licenseType === 'yearly' || licenseType === 'lifetime';
+  const defaultVariant =
+    (defaultVariantId !== undefined && data.variants?.find((v) => v.id === defaultVariantId)) ||
+    data.variants?.[0];
 
   return (
     <div className="pricing-card">
@@ -39,7 +43,7 @@ export default function PricingCard({ data, buttonClass, onSelectVariant, price,
       <p className="pricing-card-description">{data.description}</p>
 
       {data.variants && data.variants.length && (
-        <AppDropdown onSelect={onSelectVariant} items={data.variants} selectedItem={data.variants[0]} />
+        <AppDropdown onSelect={onSelectVariant} items={data.variants} selectedItem={defaultVariant} />
       )}
 
       <div className="pricing-card-price-wrapper">
