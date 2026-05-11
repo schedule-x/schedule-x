@@ -41,7 +41,7 @@ Set the available views for the calendar. The views to be set must include the c
 
 ### `setDayBoundaries(dayBoundaries: DayBoundariesExternal): void`
 
-Set the day boundaries of the calendar.
+Set the day boundaries of the calendar. Both `start` and `end` must be whole hours in the format `HH:00` (e.g. `06:00`, `18:00`). Half-hours such as `08:30` are not supported.
 
 ### `setWeekOptions(weekOptions: WeekOptions): void`
 

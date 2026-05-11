@@ -73,7 +73,7 @@ export const validateConfig = (config: CalendarConfigExternal) => {
     )
     if (startFormatIsInvalid || endFormatIsInvalid) {
       throw new Error(
-        '[Schedule-X error]: dayBoundaries must be an object with "start"- and "end" properties, each with the format HH:mm'
+        '[Schedule-X error]: dayBoundaries must be an object with "start"- and "end" properties, each as a whole hour in the format HH:00 (e.g. 08:00, 19:00)'
       )
     }
   }
