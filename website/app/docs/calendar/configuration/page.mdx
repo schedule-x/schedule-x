@@ -59,7 +59,9 @@ const config = {
   isDark: true,
 
   /**
-   * Decides which hours should be displayed in the week and day grids. Only full hours are allowed; 01:30, for example, is not allowed.
+   * Decides which hours should be displayed in the week and day grids.
+   * Both start and end must be whole hours in the format HH:00 (e.g. 06:00, 18:00).
+   * Half-hours such as 08:30 are not supported.
    * Defaults to midnight - midnight (a full day)
    * Can also be set to a "hybrid" day, such as { start: '06:00', end: '03:00' }, meaning each day starts at 6am but
    * extends into the next day until 3am.
