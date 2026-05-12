@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/schedule-x/schedule-x/compare/v4.5.0...v4.6.0) (2026-05-12)
+
+**Note:** Version bump only for package @schedule-x/current-time
+
 # [4.5.0](https://github.com/schedule-x/schedule-x/compare/v4.4.0...v4.5.0) (2026-04-16)
 
 **Note:** Version bump only for package @schedule-x/current-time

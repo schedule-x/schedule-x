@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/schedule-x/schedule-x/compare/v4.5.0...v4.6.0) (2026-05-12)
+
+### Bug Fixes
+
+- A11y - convert view-selector and timezone-select triggers from div to button ([#1319](https://github.com/schedule-x/schedule-x/issues/1319)) ([0eb4a99](https://github.com/schedule-x/schedule-x/commit/0eb4a991775466f63c2878cb459e372307840ad7))
+- **calendar:** `onClickPlusEvents` override behavior ([#1324](https://github.com/schedule-x/schedule-x/issues/1324)) ([81334a1](https://github.com/schedule-x/schedule-x/commit/81334a11a9dd5ea8410c47e836a42289a116a5e9))
+- correct dayBoundaries error message to reflect HH:00 (whole hours only) constraint ([#1325](https://github.com/schedule-x/schedule-x/issues/1325)) ([130d4cd](https://github.com/schedule-x/schedule-x/commit/130d4cda0dd304f69798832c110166ec32449a43))
+- improve selectedDate validation error message to indicate type requirement ([#1313](https://github.com/schedule-x/schedule-x/issues/1313)) ([81ce18e](https://github.com/schedule-x/schedule-x/commit/81ce18e40f16ad535a0d934088d205091079763b))
+
+### Features
+
+- add monthAgendaOptions.nEventIndicatorsPerDay configuration option ([#1320](https://github.com/schedule-x/schedule-x/issues/1320)) ([20707d8](https://github.com/schedule-x/schedule-x/commit/20707d89b782c273a76fa70d110d1adc4480d12a))
+- add skipAnimations config option to disable all calendar animations ([#1311](https://github.com/schedule-x/schedule-x/issues/1311)) ([22f35dc](https://github.com/schedule-x/schedule-x/commit/22f35dc529b4a908af47a86f76c79eb79be5adcf))
+
 # [4.5.0](https://github.com/schedule-x/schedule-x/compare/v4.4.0...v4.5.0) (2026-04-16)
 
 ### Features
