@@ -3,44 +3,61 @@ import { AppContext } from '../../utils/stateful/app-context'
 import { getTimeAxisHours } from '../../utils/stateless/time/time-axis/time-axis'
 import { useSignalEffect } from '@preact/signals'
 import { randomStringId } from '@schedule-x/shared/src'
+import { DayBoundariesInternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
+
+const computeGridSteps = (
+  dayBoundaries: DayBoundariesInternal,
+  isHybridDay: boolean,
+  gridStep: number
+): { hour: number; minute: number }[] => {
+  const hourSteps = getTimeAxisHours(dayBoundaries, isHybridDay)
+  const result: { hour: number; minute: number }[] = []
+
+  hourSteps.forEach((hour) => {
+    if (gridStep === 180) {
+      if (hour % 3 === 0) {
+        result.push({ hour: hour, minute: 0 })
+      }
+    } else if (gridStep === 120) {
+      if (hour % 2 === 0) {
+        result.push({ hour: hour, minute: 0 })
+      }
+    } else if (gridStep === 60) {
+      result.push({ hour: hour, minute: 0 })
+    } else if (gridStep === 30) {
+      result.push({ hour: hour, minute: 0 }, { hour: hour, minute: 30 })
+    } else if (gridStep === 15) {
+      result.push(
+        { hour: hour, minute: 0 },
+        { hour: hour, minute: 15 },
+        { hour: hour, minute: 30 },
+        { hour: hour, minute: 45 }
+      )
+    }
+  })
+
+  return result
+}
 
 export default function TimeAxis() {
   const $app = useContext(AppContext)
 
   const [gridSteps, setGridSteps] = useState<
     { hour: number; minute: number }[]
-  >([])
+  >(() =>
+    computeGridSteps(
+      $app.config.dayBoundaries.value,
+      $app.config.isHybridDay,
+      $app.config.weekOptions.value.gridStep
+    )
+  )
 
   useSignalEffect(() => {
-    const hourSteps = getTimeAxisHours(
+    const result = computeGridSteps(
       $app.config.dayBoundaries.value,
-      $app.config.isHybridDay
+      $app.config.isHybridDay,
+      $app.config.weekOptions.value.gridStep
     )
-
-    const result: { hour: number; minute: number }[] = []
-
-    hourSteps.forEach((hour) => {
-      if ($app.config.weekOptions.value.gridStep === 180) {
-        if (hour % 3 === 0) {
-          result.push({ hour: hour, minute: 0 })
-        }
-      } else if ($app.config.weekOptions.value.gridStep === 120) {
-        if (hour % 2 === 0) {
-          result.push({ hour: hour, minute: 0 })
-        }
-      } else if ($app.config.weekOptions.value.gridStep === 60) {
-        result.push({ hour: hour, minute: 0 })
-      } else if ($app.config.weekOptions.value.gridStep === 30) {
-        result.push({ hour: hour, minute: 0 }, { hour: hour, minute: 30 })
-      } else if ($app.config.weekOptions.value.gridStep === 15) {
-        result.push(
-          { hour: hour, minute: 0 },
-          { hour: hour, minute: 15 },
-          { hour: hour, minute: 30 },
-          { hour: hour, minute: 45 }
-        )
-      }
-    })
 
     setGridSteps(result)
 
