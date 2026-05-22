@@ -13,6 +13,7 @@ import useFetchEvents from '../use-fetch-events'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src/event-recurrence-plugin.impl'
+import { AugmentedEvent } from '@schedule-x/event-recurrence/src/types/augmented-event'
 
 const TestComponent = ({ $app }: { $app: CalendarAppSingleton }) => {
   useFetchEvents($app)
@@ -377,7 +378,7 @@ describe('useFetchEvents', () => {
         )
         expect(original).toBeDefined()
         const copies = $app.calendarEvents.list.value.filter(
-          (e) => e.id === '1' && (e as any).isCopy
+          (e) => e.id === '1' && (e as AugmentedEvent).isCopy
         )
         expect(copies.length).toBe(2)
       })
