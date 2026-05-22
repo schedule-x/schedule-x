@@ -12,6 +12,7 @@ import { __createAppWithViews__ } from '../../../stateless/testing/__create-app-
 import useFetchEvents from '../use-fetch-events'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import CalendarEventExternal from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
+import { createEventRecurrencePlugin } from '@schedule-x/event-recurrence/src/event-recurrence-plugin.impl'
 
 const TestComponent = ({ $app }: { $app: CalendarAppSingleton }) => {
   useFetchEvents($app)
@@ -341,6 +342,44 @@ describe('useFetchEvents', () => {
         expect($app.calendarEvents.list.value[0].title).toBe(
           'Back to Initial Event'
         )
+      })
+    })
+  })
+
+  describe('with event-recurrence plugin', () => {
+    it('should create recurrences for events with rrule fetched via fetchEvents', async () => {
+      const eventWithRRule: CalendarEventExternal = {
+        id: '1',
+        title: 'Recurring Event',
+        start: Temporal.ZonedDateTime.from('2024-01-01T10:00:00.000Z[UTC]'),
+        end: Temporal.ZonedDateTime.from('2024-01-01T11:00:00.000Z[UTC]'),
+        rrule: 'FREQ=DAILY;COUNT=3',
+      }
+
+      const fetchEvents = vi.fn().mockResolvedValue([eventWithRRule])
+      const eventRecurrencePlugin = createEventRecurrencePlugin()
+
+      const $app = __createAppWithViews__({
+        callbacks: { fetchEvents },
+        selectedDate: Temporal.PlainDate.from('2024-01-01'),
+        plugins: [eventRecurrencePlugin],
+      })
+
+      eventRecurrencePlugin.beforeRender!($app)
+
+      render(<TestComponent $app={$app} />)
+
+      await waitFor(() => {
+        // Original event plus 2 copies (COUNT=3 total occurrences)
+        expect($app.calendarEvents.list.value.length).toBeGreaterThanOrEqual(3)
+        const original = $app.calendarEvents.list.value.find(
+          (e) => e.id === '1'
+        )
+        expect(original).toBeDefined()
+        const copies = $app.calendarEvents.list.value.filter(
+          (e) => e.id === '1' && (e as any).isCopy
+        )
+        expect(copies.length).toBe(2)
       })
     })
   })
