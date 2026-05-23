@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { AppContext } from '../../../utils/stateful/app-context'
-import { useEffect, useRef, useState } from 'preact/hooks'
+import { useEffect, useMemo, useRef, useState } from 'preact/hooks'
 import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { dateFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
@@ -8,17 +8,13 @@ import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preac
 import { addDays } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { scrollOnDateSelection } from '../utils/stateless/scroll-on-date-selection'
-import useEventInteractions from '@schedule-x/shared/src/utils/stateful/calendar/use-event-interactions'
-import {
-  invokeOnEventClickCallback,
-  invokeOnEventDoubleClickCallback,
-} from '@schedule-x/shared/src'
 import { nextTick } from '@schedule-x/shared/src/utils/stateless/next-tick'
-import { focusModal } from '@schedule-x/shared/src/utils/stateless/events/focus-modal'
 import {
   expandInfiniteRecurringEventsIfNeeded,
   checkAndExpandInfiniteRecurringEvents,
 } from '../utils/stateless/expand-infinite-recurring-events'
+import ListEvent from './list-event'
+import { randomStringId } from '@schedule-x/shared/src/utils/stateless/strings/random'
 
 interface DayWithEvents {
   date: string
@@ -37,7 +33,6 @@ export const ListWrapper: PreactViewComponent = ({
 }: ListWrapperProps) => {
   const [daysWithEvents, setDaysWithEvents] = useState<DayWithEvents[]>([])
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const { setClickedEvent } = useEventInteractions($app)
 
   /**
    * "hack" for preventing the onScrollDayIntoView callback from being called just after events have changed
@@ -329,89 +324,103 @@ export const ListWrapper: PreactViewComponent = ({
     return <div className="sx__list-event-arrow">↔</div>
   }
 
-  const handleEventClick = (e: MouseEvent, event: CalendarEventInternal) => {
-    setClickedEvent(e, event)
-    invokeOnEventClickCallback($app, event, e)
-  }
+  const listDayHeaderCustomComponent =
+    $app.config._customComponentFns.listDayHeader
+  const listNoEventsCustomComponent =
+    $app.config._customComponentFns.listNoEvents
 
-  const handleEventDoubleClick = (
-    e: MouseEvent,
-    event: CalendarEventInternal
-  ) => {
-    setClickedEvent(e, event)
-    invokeOnEventDoubleClickCallback($app, event, e)
-  }
+  const noEventsCCID = useState(
+    listNoEventsCustomComponent ? randomStringId() : ''
+  )[0]
+  useEffect(() => {
+    if (!listNoEventsCustomComponent || daysWithEvents.length > 0) return
 
-  const handleEventKeyDown = (
-    e: KeyboardEvent,
-    event: CalendarEventInternal
-  ) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.stopPropagation()
-      setClickedEvent(e, event)
-      invokeOnEventClickCallback($app, event, e)
-      nextTick(() => {
-        focusModal($app)
+    const el = document.querySelector(`[data-ccid="${noEventsCCID}"]`)
+    if (!(el instanceof HTMLElement)) return
+
+    listNoEventsCustomComponent(el, {})
+
+    return () => {
+      $app.config._destroyCustomComponentInstance?.(noEventsCCID)
+    }
+  }, [daysWithEvents])
+
+  const dayHeaderCCIDs = useMemo(
+    () =>
+      daysWithEvents.map(() =>
+        listDayHeaderCustomComponent ? randomStringId() : ''
+      ),
+    [daysWithEvents]
+  )
+
+  useEffect(() => {
+    if (!listDayHeaderCustomComponent) return
+
+    daysWithEvents.forEach((day, idx) => {
+      const ccid = dayHeaderCCIDs[idx]
+      if (!ccid) return
+
+      const el = document.querySelector(`[data-ccid="${ccid}"]`)
+      if (!(el instanceof HTMLElement)) return
+
+      listDayHeaderCustomComponent(el, {
+        date: day.date,
+        jsDate: toJSDate(day.date),
+      })
+    })
+
+    return () => {
+      dayHeaderCCIDs.forEach((ccid) => {
+        if (ccid) {
+          $app.config._destroyCustomComponentInstance?.(ccid)
+        }
       })
     }
-  }
+  }, [daysWithEvents])
 
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__list-wrapper" ref={wrapperRef}>
         {daysWithEvents.length === 0 ? (
-          <div className="sx__list-no-events">
-            {$app.translate('No events')}
-          </div>
+          listNoEventsCustomComponent ? (
+            <div className="sx__list-no-events" data-ccid={noEventsCCID} />
+          ) : (
+            <div className="sx__list-no-events">
+              {$app.translate('No events')}
+            </div>
+          )
         ) : (
-          daysWithEvents.map((day) => (
+          daysWithEvents.map((day, dayIndex) => (
             <div key={day.date} className="sx__list-day" data-date={day.date}>
-              <div className="sx__list-day-header">
-                <div className="sx__list-day-date">
-                  {toJSDate(day.date).toLocaleDateString(
-                    $app.config.locale.value,
-                    {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    }
-                  )}
+              {listDayHeaderCustomComponent ? (
+                <div
+                  className="sx__list-day-header"
+                  data-ccid={dayHeaderCCIDs[dayIndex]}
+                />
+              ) : (
+                <div className="sx__list-day-header">
+                  <div className="sx__list-day-date">
+                    {toJSDate(day.date).toLocaleDateString(
+                      $app.config.locale.value,
+                      {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      }
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
               <div className="sx__list-day-events">
-                {day.events.map((event) => {
-                  const classNames = ['sx__event', 'sx__list-event']
-                  if (event._options?.additionalClasses) {
-                    classNames.push(...event._options.additionalClasses)
-                  }
-                  return (
-                    <div
-                      key={event.id}
-                      className={classNames.join(' ')}
-                      onClick={(e) => handleEventClick(e, event)}
-                      onDblClick={(e) => handleEventDoubleClick(e, event)}
-                      onKeyDown={(e) => handleEventKeyDown(e, event)}
-                      tabIndex={0}
-                      role="button"
-                    >
-                      <div
-                        className={`sx__list-event-color-line`}
-                        style={{
-                          backgroundColor: `var(--sx-color-${event._color})`,
-                        }}
-                      />
-                      <div className="sx__list-event-content">
-                        <div className="sx__list-event-title">
-                          {event.title}
-                        </div>
-                        <div className="sx__list-event-times">
-                          {renderEventTimes(event, day.date)}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
+                {day.events.map((event) => (
+                  <ListEvent
+                    key={event.id}
+                    calendarEvent={event}
+                    dayDate={day.date}
+                    renderEventTimes={renderEventTimes}
+                  />
+                ))}
               </div>
               <div className="sx__list-day-margin" />
             </div>

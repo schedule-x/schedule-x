@@ -18,6 +18,9 @@ export type CustomComponentName =
   | 'weekGridHour'
   | 'monthGridDayName'
   | 'monthGridDate'
+  | 'listEvent'
+  | 'listDayHeader'
+  | 'listNoEvents'
   | string
 
 export type CustomComponentFns = {

@@ -27,7 +27,7 @@ const createCalendarEvent = (
   end: Temporal.ZonedDateTime | Temporal.PlainDate,
   overrides: Partial<CalendarEventInternal> = {}
 ) => {
-  return {
+  const event = {
     id: '1',
     title: 'Test Event',
     start,
@@ -38,8 +38,15 @@ const createCalendarEvent = (
     _isSingleDayTimed: true,
     _isMultiDayTimed: false,
     _getForeignProperties: () => ({ rrule: undefined }),
+    _getExternalEvent: () => ({
+      id: overrides.id || '1',
+      title: overrides.title || 'Test Event',
+      start,
+      end,
+    }),
     ...overrides,
   } as CalendarEventInternal
+  return event
 }
 
 const createMultiDayEvent = (
@@ -58,6 +65,12 @@ const createMultiDayEvent = (
     _isSingleDayTimed: false,
     _isMultiDayTimed: true,
     _getForeignProperties: () => ({ rrule: undefined }),
+    _getExternalEvent: () => ({
+      id: overrides.id || '2',
+      title: overrides.title || 'Multi Day Event',
+      start,
+      end,
+    }),
     ...overrides,
   } as CalendarEventInternal
 }
@@ -422,6 +435,144 @@ describe('ListWrapper', () => {
       expect(eventElement).toBeTruthy()
       expect(eventElement?.classList.contains('custom-class')).toBe(true)
       expect(eventElement?.classList.contains('another-class')).toBe(true)
+    })
+  })
+
+  describe('custom component: listEvent', () => {
+    it('should call the custom component function with calendarEvent and eventInstanceInfo', () => {
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
+      const { $app } = setup([event])
+      const customComponentFn = vi.fn()
+      $app.config._customComponentFns.listEvent = customComponentFn
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      expect(customComponentFn).toHaveBeenCalledTimes(1)
+      const call = customComponentFn.mock.calls[0]
+      const el = call[0]
+      const props = call[1]
+      expect(el).toBeInstanceOf(HTMLDivElement)
+      expect(props.calendarEvent.id).toBe('1')
+      expect(props.calendarEvent.title).toBe('Test Event')
+      expect(props.eventInstanceInfo.isFirstDay).toBe(true)
+      expect(props.eventInstanceInfo.isLastDay).toBe(true)
+      expect(props.eventInstanceInfo.isMultiDay).toBe(false)
+      expect(props.eventInstanceInfo.forDayOf).toBe('2023-10-07')
+      expect(typeof props.eventInstanceInfo.startLocaleString).toBe('string')
+      expect(typeof props.eventInstanceInfo.endLocaleString).toBe('string')
+    })
+
+    it('should not render default markup when custom component is set', () => {
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
+      const { $app } = setup([event])
+      $app.config._customComponentFns.listEvent = vi.fn()
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      const eventEl = document.querySelector('.sx__list-event')
+      expect(eventEl).toBeTruthy()
+      expect(eventEl?.querySelector('.sx__list-event-color-line')).toBeFalsy()
+      expect(eventEl?.querySelector('.sx__list-event-content')).toBeFalsy()
+    })
+
+    it('should provide correct eventInstanceInfo for multi-day event', () => {
+      const event = createMultiDayEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-09T11:00:00+02:00[Europe/Paris]')
+      )
+      const { $app } = setup([event])
+      const customComponentFn = vi.fn()
+      $app.config._customComponentFns.listEvent = customComponentFn
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      // Should be called 3 times (3 days)
+      expect(customComponentFn).toHaveBeenCalledTimes(3)
+
+      // First day
+      const firstDayProps = customComponentFn.mock.calls[0][1]
+      expect(firstDayProps.eventInstanceInfo.isFirstDay).toBe(true)
+      expect(firstDayProps.eventInstanceInfo.isLastDay).toBe(false)
+      expect(firstDayProps.eventInstanceInfo.isMultiDay).toBe(true)
+      expect(firstDayProps.eventInstanceInfo.forDayOf).toBe('2023-10-07')
+
+      // Middle day
+      const middleDayProps = customComponentFn.mock.calls[1][1]
+      expect(middleDayProps.eventInstanceInfo.isFirstDay).toBe(false)
+      expect(middleDayProps.eventInstanceInfo.isLastDay).toBe(false)
+      expect(middleDayProps.eventInstanceInfo.isMultiDay).toBe(true)
+      expect(middleDayProps.eventInstanceInfo.forDayOf).toBe('2023-10-08')
+
+      // Last day
+      const lastDayProps = customComponentFn.mock.calls[2][1]
+      expect(lastDayProps.eventInstanceInfo.isFirstDay).toBe(false)
+      expect(lastDayProps.eventInstanceInfo.isLastDay).toBe(true)
+      expect(lastDayProps.eventInstanceInfo.isMultiDay).toBe(true)
+      expect(lastDayProps.eventInstanceInfo.forDayOf).toBe('2023-10-09')
+    })
+  })
+
+  describe('custom component: listDayHeader', () => {
+    it('should call the custom component function with date info', () => {
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
+      const { $app } = setup([event])
+      const customComponentFn = vi.fn()
+      $app.config._customComponentFns.listDayHeader = customComponentFn
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      expect(customComponentFn).toHaveBeenCalledTimes(1)
+      const call = customComponentFn.mock.calls[0]
+      expect(call[0]).toBeInstanceOf(HTMLDivElement)
+      expect(call[1].date).toBe('2023-10-07')
+      expect(call[1].jsDate).toBeInstanceOf(Date)
+    })
+
+    it('should not render default day header markup', () => {
+      const event = createCalendarEvent(
+        Temporal.ZonedDateTime.from('2023-10-07T10:00:00+02:00[Europe/Paris]'),
+        Temporal.ZonedDateTime.from('2023-10-07T11:00:00+02:00[Europe/Paris]')
+      )
+      const { $app } = setup([event])
+      $app.config._customComponentFns.listDayHeader = vi.fn()
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      expect(
+        document.querySelector('.sx__list-day-header .sx__list-day-date')
+      ).toBeFalsy()
+    })
+  })
+
+  describe('custom component: listNoEvents', () => {
+    it('should call the custom component function when no events', () => {
+      const { $app } = setup([])
+      const customComponentFn = vi.fn()
+      $app.config._customComponentFns.listNoEvents = customComponentFn
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      expect(customComponentFn).toHaveBeenCalled()
+      const call = customComponentFn.mock.calls[0]
+      expect(call[0]).toBeInstanceOf(HTMLDivElement)
+    })
+
+    it('should not render default no events text', () => {
+      const { $app } = setup([])
+      $app.config._customComponentFns.listNoEvents = vi.fn()
+
+      render(<ListWrapper $app={$app} id="test-list" />)
+
+      expect(screen.queryByText('No events')).toBeFalsy()
     })
   })
 })
