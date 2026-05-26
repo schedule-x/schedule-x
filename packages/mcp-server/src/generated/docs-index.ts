@@ -12,20 +12,16 @@ export const docsIndex: DocsIndex = {
       url: 'https://schedule-x.dev/docs/ai/mcp',
       sourcePath: 'website/app/docs/ai/mcp/page.mdx',
       section: 'ai',
-      headings: ['MCP server', 'Install', 'Tools', 'Data source', 'Transport'],
+      headings: ['MCP server', 'Install', 'Tools'],
       codeBlocks: [
         {
           language: 'json',
           content:
             '{\n  "mcpServers": {\n    "schedule-x": {\n      "command": "npx",\n      "args": ["-y", "@schedule-x/mcp"]\n    }\n  }\n}',
         },
-        {
-          language: 'bash',
-          content: 'npm run generate:docs-index --workspace @schedule-x/mcp',
-        },
       ],
       content:
-        'MCP server The Schedule-X MCP server gives AI coding tools access to a generated snapshot of the Schedule-X docs, plugin guidance, starter code and basic validation tools. Install Use the server through npx in any MCP client that supports local stdio servers: Tools Tool Purpose ---------------------------- ---------------------------------------------------------------- search docs Search the generated Schedule-X docs index. get doc Read one docs entry by id. list plugins List known plugins, package names, docs URLs and premium flags. get plugin setup Get install and docs guidance for one plugin. get starter Generate starter install commands and code. validate event Check event objects for common Schedule-X mistakes. validate calendar config Check calendar config objects for common setup mistakes. explain temporal usage Explain when to use Temporal.PlainDate or Temporal.ZonedDateTime . Data source The MCP server does not fetch live docs at runtime. During package build, it generates a docs index from website/app/docs/ / .mdx and bundles that snapshot into the npm package. This keeps local MCP usage fast, private and available without network access. To update the bundled docs snapshot locally: Transport The first version runs as a local stdio server. Stdio means your AI coding tool starts @schedule-x/mcp as a local process and communicates with it over standard input and output. The server code is structured around shared tool registration, so a future remote Streamable HTTP transport can reuse the same tools without changing the docs index or validation logic.',
+        'MCP server The Schedule-X MCP server gives AI coding tools access to a generated snapshot of the Schedule-X docs, plugin guidance, starter code and basic validation tools. Install Use the server through npx in any MCP client that supports local stdio servers: Tools Tool Purpose ---------------------------- ---------------------------------------------------------------- search docs Search the generated Schedule-X docs index. get doc Read one docs entry by id. list plugins List known plugins, package names, docs URLs and premium flags. get plugin setup Get install and docs guidance for one plugin. get starter Generate starter install commands and code. validate event Check event objects for common Schedule-X mistakes. validate calendar config Check calendar config objects for common setup mistakes. explain temporal usage Explain when to use Temporal.PlainDate or Temporal.ZonedDateTime .',
     },
     {
       id: 'calendar',
@@ -37,6 +33,7 @@ export const docsIndex: DocsIndex = {
       section: 'calendar',
       headings: [
         'Getting Started',
+        'Coding with AI',
         '1. Install',
         '2. Setup',
         'Configuration object',
@@ -71,7 +68,7 @@ export const docsIndex: DocsIndex = {
         },
       ],
       content:
-        "Getting Started If you are using any of the following frameworks, you can start by checking out their respective setup guides: 1. Install We will start by downloading the calendar and its theme. Curious about the temporal-polyfill package? Read more here. 2. Setup After downloading and importing our dependencies, we can create an instance of the calendar using the createCalendar function. This function takes two arguments: 1) The configuration object 2) An array of plugins Here we will start by only adding the config. The calendar is then rendered using the render method. Configuration object As a bare minimum, the configuration object needs two things: 1. A list of views. Currently available views are month grid , week , day and month agenda . 2. A list of events. Style & theme CSS of wrapping element You will need to decide on the styles of the element wrapping the calendar. This will depend on your use case. For many use cases, something like this should suffice: Theme The calendar renders to light mode by default. If you want, you can either override this default through configuration, or set the theme programmatically: Usage over CDN For testing purposes, or if you're in a setup that predates modern build tools, you can use the calendar over a CDN like this:",
+        "Getting Started If you are using any of the following frameworks, you can start by checking out their respective setup guides: Coding with AI If you use an AI coding agent, you can connect it to the Schedule-X MCP server. This lets your agent search the docs, generate starter code and validate common Schedule-X setup details without you having to manually rummage through every page made for humans. 1. Install We will start by downloading the calendar and its theme. Curious about the temporal-polyfill package? Read more here. 2. Setup After downloading and importing our dependencies, we can create an instance of the calendar using the createCalendar function. This function takes two arguments: 1) The configuration object 2) An array of plugins Here we will start by only adding the config. The calendar is then rendered using the render method. Configuration object As a bare minimum, the configuration object needs two things: 1. A list of views. Currently available views are month grid , week , day and month agenda . 2. A list of events. Style & theme CSS of wrapping element You will need to decide on the styles of the element wrapping the calendar. This will depend on your use case. For many use cases, something like this should suffice: Theme The calendar renders to light mode by default. If you want, you can either override this default through configuration, or set the theme programmatically: Usage over CDN For testing purposes, or if you're in a setup that predates modern build tools, you can use the calendar over a CDN like this:",
     },
     {
       id: 'calendar-advanced-background-events',
