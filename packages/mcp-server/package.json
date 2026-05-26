@@ -1,0 +1,48 @@
+{
+  "name": "@schedule-x/mcp",
+  "version": "4.6.0",
+  "description": "MCP server for Schedule-X documentation, starter guidance, and integration validation",
+  "author": {
+    "name": "Tom Österlund",
+    "email": "tom@schedule-x.dev",
+    "url": "https://github.com/tomosterlund"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "schedule-x-mcp": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "DEVELOPMENT.md"
+  ],
+  "scripts": {
+    "build": "npm run generate:docs-index && tsc -p tsconfig.json",
+    "generate:docs-index": "node scripts/generate-docs-index.mjs",
+    "local:config": "node scripts/print-local-config.mjs",
+    "start": "node dist/cli.js",
+    "test": "npm run build && node dist/smoke-test.js",
+    "format": "prettier . --write"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.7.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schedule-x/schedule-x",
+    "directory": "packages/mcp-server"
+  },
+  "homepage": "https://schedule-x.dev"
+}

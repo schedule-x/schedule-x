@@ -7,6 +7,9 @@ const meta: MetaRecord = {
   frameworks: {
     title: 'Frameworks',
   },
+  ai: {
+    title: 'AI',
+  },
 }
 
 export default meta

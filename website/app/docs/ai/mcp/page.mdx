@@ -1,0 +1,57 @@
+---
+title: 'MCP server'
+description: 'Use the Schedule-X MCP server in coding agents and AI coding tools.'
+---
+
+# MCP server
+
+The Schedule-X MCP server gives AI coding tools access to a generated snapshot of the Schedule-X docs, plugin guidance,
+starter code and basic validation tools.
+
+## Install
+
+Use the server through `npx` in any MCP client that supports local stdio servers:
+
+```json copy
+{
+  "mcpServers": {
+    "schedule-x": {
+      "command": "npx",
+      "args": ["-y", "@schedule-x/mcp"]
+    }
+  }
+}
+```
+
+## Tools
+
+| Tool                       | Purpose                                                        |
+|----------------------------|----------------------------------------------------------------|
+| `search_docs`              | Search the generated Schedule-X docs index.                    |
+| `get_doc`                  | Read one docs entry by id.                                     |
+| `list_plugins`             | List known plugins, package names, docs URLs and premium flags. |
+| `get_plugin_setup`         | Get install and docs guidance for one plugin.                  |
+| `get_starter`              | Generate starter install commands and code.                    |
+| `validate_event`           | Check event objects for common Schedule-X mistakes.            |
+| `validate_calendar_config` | Check calendar config objects for common setup mistakes.       |
+| `explain_temporal_usage`   | Explain when to use `Temporal.PlainDate` or `Temporal.ZonedDateTime`. |
+
+## Data source
+
+The MCP server does not fetch live docs at runtime. During package build, it generates a docs index from
+`website/app/docs/**/*.mdx` and bundles that snapshot into the npm package. This keeps local MCP usage fast, private and
+available without network access.
+
+To update the bundled docs snapshot locally:
+
+```bash copy
+npm run generate:docs-index --workspace @schedule-x/mcp
+```
+
+## Transport
+
+The first version runs as a local stdio server. Stdio means your AI coding tool starts `@schedule-x/mcp` as a local
+process and communicates with it over standard input and output.
+
+The server code is structured around shared tool registration, so a future remote Streamable HTTP transport can reuse the
+same tools without changing the docs index or validation logic.

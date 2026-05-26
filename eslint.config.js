@@ -9,7 +9,16 @@ export default defineConfig([
   {languageOptions: {globals: globals.browser}},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  globalIgnores(['node_modules', '**/dist/**', '**/seeded-events.ts', '**/.next', '**/next.config.js', '**/coverage/**', 'website/public/**']),
+  globalIgnores([
+    'node_modules',
+    '**/dist/**',
+    '**/seeded-events.ts',
+    '**/.next',
+    '**/next.config.js',
+    '**/coverage/**',
+    'website/public/**',
+    'packages/mcp-server/src/generated/**',
+  ]),
   {
     plugins: {
       boundaries,
