@@ -1,0 +1,104 @@
+---
+title: Auth Flow
+description: Understand organization API tokens, frontend tokens, and permissions.
+---
+
+# Auth Flow
+
+Schedule-X Cloud uses two credentials in customer integrations: an organization API token for your backend and a frontend token for browser sessions.
+
+| Credential | Audience | Used for | Browser safe |
+| --- | --- | --- | --- |
+| Organization API token | Your backend | Creating users, calendars, and frontend tokens | No |
+| Frontend token | Browser session for one organization user | Loading Schedule-X config and persisting events | Yes, short-lived |
+
+## Get Access
+
+Get an organization API token by emailing [tom@schedule-x.dev](mailto:tom@schedule-x.dev).
+
+Store the values as backend environment variables:
+
+```bash
+SCHEDULE_X_ORGANIZATION_ID=<organization-id>
+SCHEDULE_X_ORG_API_TOKEN=sx_org_...
+```
+
+The organization API token can create users, create calendars, list organization resources, and issue frontend tokens. Treat it like a password.
+
+## User Authentication Model
+
+Schedule-X Cloud does not replace your app login. Your application authenticates users first, then your backend maps that app user to a Schedule-X Cloud user.
+
+The recommended flow is:
+
+1. User signs in to your application.
+2. Your backend finds or creates the Cloud user for that app user.
+3. Your backend issues a frontend token for the Cloud `userId`.
+4. Your browser code uses that frontend token with `ScheduleXBrowserClient`.
+
+Creating a Cloud user:
+
+```http
+POST /v1/orgs/{organizationId}/users
+X-ScheduleX-Api-Key: sx_org_...
+Content-Type: application/json
+
+{
+  "email": "ada@example.com",
+  "displayName": "Ada Lovelace",
+  "role": "Member"
+}
+```
+
+Issuing the user frontend token:
+
+```http
+POST /v1/orgs/{organizationId}/auth/frontend-token
+X-ScheduleX-Org-Token: sx_org_...
+Content-Type: application/json
+
+{
+  "userId": "..."
+}
+```
+
+## Frontend Token Exchange
+
+Response:
+
+```json
+{
+  "token": "sx_front_...",
+  "organizationId": "...",
+  "userId": "...",
+  "expiresAt": "2026-06-03T12:00:00Z"
+}
+```
+
+Browser requests send the token as a bearer token:
+
+```http
+GET /v1/schedule-x/config
+Authorization: Bearer sx_front_...
+```
+
+The API resolves the organization and user from the token, so browser code does not need to send an organization id for default config and event routes.
+
+## Permission Model
+
+- A valid organization API token can access server-side organization routes for its own organization.
+- A valid organization API token can only issue frontend tokens for users in its own organization.
+- A valid frontend token can load Schedule-X config for its own organization.
+- Frontend tokens cannot read another organization through `/v1/orgs/{organizationId}/schedule-x/config`.
+- Browser event writes require the token user to have `Owner`, `Admin`, or `Member` membership in the organization.
+- `Viewer` users can be represented in memberships, but event write access is rejected.
+- Frontend tokens expire according to `SCHEDULEX_FRONTEND_TOKEN_TTL_MINUTES`.
+- Named organization API tokens can expire or be revoked.
+
+## Token Handling Rules
+
+- Keep `SCHEDULE_X_ORG_API_TOKEN` on the server.
+- Do not store frontend tokens in long-lived browser storage unless your app has a specific reason.
+- Reissue frontend tokens from your backend when they expire.
+- Use HTTPS in production.
+- If an organization API token is exposed, revoke it and request or create a replacement.

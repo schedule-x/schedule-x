@@ -1,0 +1,150 @@
+---
+title: Quickstart
+description: Create the minimum end-to-end Schedule-X Cloud integration.
+---
+
+# Quickstart
+
+This guide creates the minimum end-to-end cloud integration: backend token exchange, Cloud users, calendars, browser config loading, and event creation.
+
+## 1. Get An Organization API Token
+
+Email [tom@schedule-x.dev](mailto:tom@schedule-x.dev) and ask for a Schedule-X Cloud organization API token. For now, this is the way to get production access.
+
+You will receive:
+
+```bash
+SCHEDULE_X_ORGANIZATION_ID=<organization-id>
+SCHEDULE_X_ORG_API_TOKEN=sx_org_...
+```
+
+Store `SCHEDULE_X_ORG_API_TOKEN` only on your backend. Never expose it in browser code, mobile clients, logs, analytics events, or public repos.
+
+## 2. Install The SDK
+
+```bash
+npm install @schedule-x-cloud/sdk temporal-polyfill
+```
+
+Use your package manager of choice. The examples use TypeScript, but every step also has an HTTP equivalent in [Core Workflows](/docs/cloud/core-workflows).
+
+## 3. Create Or Find A Cloud User
+
+Your app user and the Schedule-X Cloud user are separate records. After a person signs in to your application, create a Cloud user once and store the returned `id` next to your own user record.
+
+```ts
+import { ScheduleXServerClient } from '@schedule-x-cloud/sdk'
+
+const serverClient = new ScheduleXServerClient({
+  apiKey: process.env.SCHEDULE_X_ORG_API_TOKEN!,
+})
+
+export async function createCloudUser() {
+  return serverClient.users.create(process.env.SCHEDULE_X_ORGANIZATION_ID!, {
+    email: 'ada@example.com',
+    displayName: 'Ada Lovelace',
+    role: 'Member',
+  })
+}
+```
+
+The `role` can be `Owner`, `Admin`, `Member`, or `Viewer`. Browser event writes require `Owner`, `Admin`, or `Member`.
+
+## 4. Create A Calendar
+
+Create at least one calendar before loading Schedule-X in the browser:
+
+```ts
+const calendar = await serverClient.calendars.create(
+  process.env.SCHEDULE_X_ORGANIZATION_ID!,
+  {
+    name: 'Work',
+    slug: 'work',
+    colorName: 'work',
+    lightMainColor: '#2563eb',
+    lightContainerColor: '#dbeafe',
+    lightOnContainerColor: '#172554',
+  }
+)
+```
+
+Event requests can use the calendar `id` or `slug` as `calendarId`. Calendar slugs must be unique inside the organization, and `colorName` is used when mapping calendars into Schedule-X config.
+
+## 5. Issue A Frontend Token
+
+When your authenticated app user opens a calendar page, your backend exchanges the organization API token for a short-lived frontend token:
+
+```ts
+export async function createScheduleXFrontendToken(cloudUserId: string) {
+  return serverClient.auth.createFrontendToken({
+    organizationApiToken: process.env.SCHEDULE_X_ORG_API_TOKEN!,
+    organizationId: process.env.SCHEDULE_X_ORGANIZATION_ID!,
+    userId: cloudUserId,
+  })
+}
+```
+
+Return only the frontend token response to the browser:
+
+```json
+{
+  "token": "sx_front_...",
+  "organizationId": "...",
+  "userId": "...",
+  "expiresAt": "2026-06-03T12:00:00Z"
+}
+```
+
+## 6. Load Calendars And Events In The Browser
+
+Browser code uses only the frontend token:
+
+```ts
+import 'temporal-polyfill/global'
+import { ScheduleXBrowserClient } from '@schedule-x-cloud/sdk'
+
+const client = new ScheduleXBrowserClient({
+  token: frontendToken.token,
+})
+
+const config = await client.scheduleX.getCalendarAppConfig({
+  from: '2026-06-01T00:00:00+00:00',
+  to: '2026-07-01T00:00:00+00:00',
+  calendarIds: ['work'],
+})
+```
+
+`getCalendarAppConfig()` returns a Schedule-X-ready config:
+
+```json
+{
+  "calendars": {
+    "work": {
+      "colorName": "work",
+      "lightColors": {
+        "main": "#2563eb",
+        "container": "#dbeafe",
+        "onContainer": "#172554"
+      }
+    }
+  },
+  "events": []
+}
+```
+
+## 7. Create An Event
+
+Create events from the browser with the same `ScheduleXBrowserClient`:
+
+```ts
+const event = await client.events.create({
+  calendarId: calendar.id,
+  title: 'Planning',
+  start: '2026-06-10T09:00:00+02:00',
+  end: '2026-06-10T10:00:00+02:00',
+  timeZone: 'Europe/Berlin',
+  people: ['ada@example.com'],
+})
+```
+
+The frontend token decides which organization and user are writing. The API rejects writes when the token user is not a writable member of the organization.

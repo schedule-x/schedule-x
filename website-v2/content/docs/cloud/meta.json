@@ -1,0 +1,14 @@
+{
+  "title": "Cloud",
+  "description": "Hosted backend, sync, SDK, and API docs",
+  "root": true,
+  "pages": [
+    "index",
+    "quickstart",
+    "auth-flow",
+    "core-workflows",
+    "google-calendar-sync",
+    "sdk",
+    "api-reference"
+  ]
+}

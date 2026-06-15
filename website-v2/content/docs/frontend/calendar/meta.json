@@ -1,0 +1,20 @@
+{
+  "title": "Calendar",
+  "pages": [
+    "index",
+    "configuration",
+    "views",
+    "events",
+    "calendars",
+    "plugins",
+    "resource-scheduler",
+    "time-grid-resource-view",
+    "theme",
+    "language",
+    "temporal",
+    "advanced",
+    "major-version-migrations",
+    "installing-premium",
+    "custom-components"
+  ]
+}

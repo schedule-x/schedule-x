@@ -1,0 +1,109 @@
+---
+title: 'Drag and drop plugin'
+description: 'Update event time and date using a classical drag and drop.'
+---
+
+# Drag and Drop
+
+Update event time and date using a classical drag and drop. Available in all views except the month agenda- and list views.
+
+import {Callout} from "nextra/components";
+
+<Callout type="info">
+  This is a premium plugin which requires an active license to be used. Learn more at [Schedule-X premium](/premium).
+</Callout>
+
+<br />
+
+## 2. Installation
+
+### 2.1 Set up premium auth (only once)
+
+Follow the [instructions for setting up an `.npmrc`](/docs/frontend/calendar/installing-premium)
+
+
+### 2.2 Install
+
+```bash copy
+npm i @sx-premium/drag-and-drop
+```
+
+## Usage
+
+```js
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
+
+const calendar = createCalendar({
+  /* other configuration */
+  plugins: [
+    createDragAndDropPlugin()
+  ],
+
+  callbacks: {
+    onEventUpdate(updatedEvent) {
+      console.log('onEventUpdate', updatedEvent)
+    },
+
+    // (Optionally) run your validation or side effects
+    // return false to stop the update, and true to allow it
+    onBeforeEventUpdate(oldEvent, newEvent, $app) {
+      return false
+    }
+  }
+})
+```
+
+## Configuration
+
+You can configure the length, in minutes, of the intervals that are used when dragging:
+
+```js
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
+
+const calendar = createCalendar({
+  /* other configuration */
+
+  plugins: [
+    createDragAndDropPlugin(30) // drag with 30 minutes intervals
+  ]
+})
+```
+
+Available values are `15` (default), `30` and `60`
+
+## Limitations with recurring events
+
+When using the [event recurrence plugin](/docs/frontend/calendar/plugins/recurrence), most recurring events can be updated via drag and drop. However, **events with `BYDAY` rules cannot be updated by dragging**. This includes events like:
+
+- `FREQ=MONTHLY;BYDAY=1MO` (first Monday of each month)
+- `FREQ=YEARLY;BYDAY=-1FR` (last Friday of each year)
+
+If you need to allow users to modify such events, consider:
+- Disabling drag and drop for these specific events using the `onBeforeEventUpdate` callback
+- Providing alternative UI (like the [interactive event modal](/docs/frontend/calendar/plugins/interactive-event-modal)) for editing
+- Updating events programmatically through the events service
+
+## Methods
+
+### setInterval(minutes: number)
+
+Set the interval, in minutes, for dragging events.
+
+```js
+import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
+
+const dragAndDropPlugin = createDragAndDropPlugin()
+
+const calendar = createCalendar({
+  /* other configuration */
+  plugins: [
+    dragAndDropPlugin
+  ]
+})
+
+dragAndDropPlugin.setInterval(30)
+```
+
+## Changelog
+
+See [changelog](/premium-changelog) page.

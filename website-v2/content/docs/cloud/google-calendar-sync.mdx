@@ -1,0 +1,44 @@
+---
+title: Google Calendar Sync
+description: Connect Google accounts and sync provider calendars.
+---
+
+# Google Calendar Sync
+
+Schedule-X Cloud can connect Google Calendar accounts so users can sync provider calendars into the Schedule-X data model.
+
+## Overview
+
+Your app remains responsible for user authentication. Schedule-X Cloud handles the calendar-side provider connection and sync workflows.
+
+The high-level flow:
+
+1. Authenticate the user in your app.
+2. Map that user to a Schedule-X Cloud user.
+3. Start a Google connection flow for that Cloud user.
+4. Sync selected provider calendars into Schedule-X Cloud.
+5. Load Schedule-X-ready config in the browser.
+
+## Why Cloud Handles This
+
+Calendar provider sync tends to involve OAuth, refresh tokens, provider-specific calendar IDs, rate limits, event mapping, and recurring sync jobs. Schedule-X Cloud centralizes those calendar concerns so your app can keep using a clean Schedule-X client integration.
+
+## Browser Experience
+
+After sync is configured, the browser still uses the same frontend token flow:
+
+```ts
+const config = await client.scheduleX.getCalendarAppConfig({
+  from: '2026-06-01T00:00:00+00:00',
+  to: '2026-07-01T00:00:00+00:00',
+})
+```
+
+The returned config can include calendars and events originating from provider sync.
+
+## Security
+
+- Keep provider secrets and organization API tokens server-side.
+- Use short-lived frontend tokens for browser calendar access.
+- Reissue frontend tokens when they expire.
+- Use HTTPS in production.

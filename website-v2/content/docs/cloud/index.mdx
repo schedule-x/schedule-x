@@ -1,0 +1,36 @@
+---
+title: Schedule-X Cloud
+description: Hosted backend services for Schedule-X calendars.
+---
+
+# Schedule-X Cloud
+
+Schedule-X Cloud is a hosted backend for Schedule-X calendars. Use it to create users, calendars, and events, sync Google Calendar accounts, then load Schedule-X-ready config in your frontend.
+
+API base URL:
+
+```txt
+https://cloud.schedule-x.com
+```
+
+To get an organization API token, email [tom@schedule-x.dev](mailto:tom@schedule-x.dev).
+
+## Basic Flow
+
+Keep the organization API token on your backend. Your backend creates users and calendars, then issues short-lived frontend tokens for signed-in users. The browser uses a frontend token to load config and write events.
+
+1. Request an organization API token.
+2. Store it as a backend secret.
+3. Create or map a Cloud user for each app user.
+4. Create calendars.
+5. Issue a frontend token for the current user.
+6. Load Schedule-X config in the browser.
+
+## Docs
+
+- [Quickstart](/docs/cloud/quickstart) is the shortest path to a working integration.
+- [Auth Flow](/docs/cloud/auth-flow) explains organization API tokens and frontend tokens.
+- [Core Workflows](/docs/cloud/core-workflows) shows users, calendars, config loading, and events.
+- [Google Calendar Sync](/docs/cloud/google-calendar-sync) shows how users connect Google accounts and sync provider calendars.
+- [TypeScript SDK](/docs/cloud/sdk) covers the backend client, browser client, and calendar preset.
+- [API Reference](/docs/cloud/api-reference) lists endpoint shapes and error responses.

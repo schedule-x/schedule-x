@@ -1,0 +1,74 @@
+---
+title: TypeScript SDK
+description: Use the Schedule-X Cloud SDK from backend and browser code.
+---
+
+# TypeScript SDK
+
+Install the SDK:
+
+```bash
+npm install @schedule-x-cloud/sdk temporal-polyfill
+```
+
+## Server Client
+
+Use `ScheduleXServerClient` only on your backend. It uses the organization API token.
+
+```ts
+import { ScheduleXServerClient } from '@schedule-x-cloud/sdk'
+
+export const serverClient = new ScheduleXServerClient({
+  apiKey: process.env.SCHEDULE_X_ORG_API_TOKEN!,
+})
+```
+
+Typical server operations:
+
+- Create users.
+- Create and list calendars.
+- Issue frontend tokens.
+- Run server-side event workflows.
+
+## Browser Client
+
+Use `ScheduleXBrowserClient` with a frontend token returned from your backend.
+
+```ts
+import 'temporal-polyfill/global'
+import { ScheduleXBrowserClient } from '@schedule-x-cloud/sdk'
+
+const client = new ScheduleXBrowserClient({
+  token: frontendToken.token,
+})
+```
+
+Typical browser operations:
+
+- Load Schedule-X-ready config.
+- Create events.
+- Update and delete events when the token user has write access.
+
+## Calendar App Config
+
+The browser client can return config shaped for Schedule-X:
+
+```ts
+const config = await client.scheduleX.getCalendarAppConfig({
+  from: '2026-06-01T00:00:00+00:00',
+  to: '2026-07-01T00:00:00+00:00',
+  calendarIds: ['work'],
+})
+```
+
+Pass the returned `calendars` and `events` into your Schedule-X frontend setup.
+
+## Custom Base URL
+
+The default API base URL is:
+
+```txt
+https://cloud.schedule-x.com
+```
+
+Only pass a custom `baseUrl` if you need to target a different deployment.

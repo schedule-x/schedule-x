@@ -1,0 +1,146 @@
+---
+title: Core Workflows
+description: Backend and browser workflows for users, calendars, config, and events.
+---
+
+# Core Workflows
+
+These workflows are the building blocks most applications need after receiving an organization API token.
+
+Default API base URL:
+
+```txt
+https://cloud.schedule-x.com
+```
+
+The SDK uses this URL automatically. Pass `baseUrl` only if you need to target another deployment.
+
+Required backend environment:
+
+```bash
+SCHEDULE_X_ORGANIZATION_ID=<organization-id>
+SCHEDULE_X_ORG_API_TOKEN=sx_org_...
+```
+
+## Authenticate Backend Requests
+
+Server-to-server organization routes accept the organization API token as the SDK `apiKey`, which sends the `X-ScheduleX-Api-Key` header.
+
+```ts
+import { ScheduleXServerClient } from '@schedule-x-cloud/sdk'
+
+const serverClient = new ScheduleXServerClient({
+  apiKey: process.env.SCHEDULE_X_ORG_API_TOKEN!,
+})
+```
+
+Equivalent HTTP:
+
+```http
+GET /v1/orgs/{organizationId}/calendars
+X-ScheduleX-Api-Key: sx_org_...
+```
+
+## Create And Authenticate Users
+
+Create a Cloud user when your own application creates or first sees a user. Store the returned `id` in your database.
+
+```ts
+const cloudUser = await serverClient.users.create(
+  process.env.SCHEDULE_X_ORGANIZATION_ID!,
+  {
+    email: 'ada@example.com',
+    displayName: 'Ada Lovelace',
+    role: 'Member',
+  }
+)
+```
+
+Cloud user authentication happens by issuing a frontend token for that `userId` after the user has authenticated with your application:
+
+```ts
+const frontendToken = await serverClient.auth.createFrontendToken({
+  organizationApiToken: process.env.SCHEDULE_X_ORG_API_TOKEN!,
+  organizationId: process.env.SCHEDULE_X_ORGANIZATION_ID!,
+  userId: cloudUser.id,
+})
+```
+
+Send the returned `token`, `expiresAt`, `organizationId`, and `userId` to the browser. Do not send the organization API token.
+
+## Create Calendars
+
+Calendars belong to an organization. Events can reference a calendar by its `id` or `slug`.
+
+```ts
+const workCalendar = await serverClient.calendars.create(
+  process.env.SCHEDULE_X_ORGANIZATION_ID!,
+  {
+    name: 'Work',
+    slug: 'work',
+    colorName: 'work',
+    lightMainColor: '#2563eb',
+    lightContainerColor: '#dbeafe',
+    lightOnContainerColor: '#172554',
+  }
+)
+```
+
+Required fields are `name`, `slug`, and `colorName`. Color values are optional but recommended so Schedule-X can render the calendar immediately.
+
+## Load Calendars
+
+Backend code can list calendars with the organization token:
+
+```ts
+const calendars = await serverClient.calendars.list(
+  process.env.SCHEDULE_X_ORGANIZATION_ID!
+)
+```
+
+Browser code should usually load the Schedule-X-ready config instead:
+
+```ts
+import { ScheduleXBrowserClient } from '@schedule-x-cloud/sdk'
+
+const browserClient = new ScheduleXBrowserClient({
+  token: frontendToken.token,
+})
+
+const config = await browserClient.scheduleX.getCalendarAppConfig({
+  from: '2026-06-01T00:00:00+00:00',
+  to: '2026-07-01T00:00:00+00:00',
+  calendarIds: ['work'],
+})
+```
+
+## Create Events
+
+Browser writes use the frontend token:
+
+```ts
+await browserClient.events.create({
+  calendarId: 'work',
+  title: 'Planning',
+  start: '2026-06-10T09:00:00+02:00',
+  end: '2026-06-10T10:00:00+02:00',
+  timeZone: 'Europe/Berlin',
+  people: ['ada@example.com'],
+})
+```
+
+Server writes can use the server client when event creation should happen in backend jobs or webhooks.
+
+## Update And Delete Events
+
+Use the event `id` returned by create/list operations:
+
+```ts
+await browserClient.events.update(event.id, {
+  title: 'Updated planning',
+})
+
+await browserClient.events.delete(event.id)
+```
+
+The API validates organization, membership, and token scope before applying writes.

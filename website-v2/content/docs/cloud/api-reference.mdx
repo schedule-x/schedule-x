@@ -1,0 +1,152 @@
+---
+title: API Reference
+description: HTTP endpoints and request conventions for Schedule-X Cloud.
+---
+
+# API Reference
+
+Default API base URL:
+
+```txt
+https://cloud.schedule-x.com
+```
+
+Prefer the TypeScript SDK for application code. Use HTTP directly when integrating from another runtime.
+
+## Authentication Headers
+
+Server-to-server organization routes:
+
+```http
+X-ScheduleX-Api-Key: sx_org_...
+```
+
+Frontend token routes:
+
+```http
+Authorization: Bearer sx_front_...
+```
+
+Some auth exchange routes use:
+
+```http
+X-ScheduleX-Org-Token: sx_org_...
+```
+
+## Users
+
+Create a Cloud user:
+
+```http
+POST /v1/orgs/{organizationId}/users
+Content-Type: application/json
+X-ScheduleX-Api-Key: sx_org_...
+
+{
+  "email": "ada@example.com",
+  "displayName": "Ada Lovelace",
+  "role": "Member"
+}
+```
+
+## Frontend Tokens
+
+Issue a frontend token for a Cloud user:
+
+```http
+POST /v1/orgs/{organizationId}/auth/frontend-token
+Content-Type: application/json
+X-ScheduleX-Org-Token: sx_org_...
+
+{
+  "userId": "..."
+}
+```
+
+Response:
+
+```json
+{
+  "token": "sx_front_...",
+  "organizationId": "...",
+  "userId": "...",
+  "expiresAt": "2026-06-03T12:00:00Z"
+}
+```
+
+## Calendars
+
+List calendars:
+
+```http
+GET /v1/orgs/{organizationId}/calendars
+X-ScheduleX-Api-Key: sx_org_...
+```
+
+Create a calendar:
+
+```http
+POST /v1/orgs/{organizationId}/calendars
+Content-Type: application/json
+X-ScheduleX-Api-Key: sx_org_...
+
+{
+  "name": "Work",
+  "slug": "work",
+  "colorName": "work",
+  "lightMainColor": "#2563eb",
+  "lightContainerColor": "#dbeafe",
+  "lightOnContainerColor": "#172554"
+}
+```
+
+## Schedule-X Config
+
+Load browser-safe config with a frontend token:
+
+```http
+GET /v1/schedule-x/config?from=2026-06-01T00:00:00%2B00:00&to=2026-07-01T00:00:00%2B00:00
+Authorization: Bearer sx_front_...
+```
+
+## Events
+
+Create an event:
+
+```http
+POST /v1/events
+Authorization: Bearer sx_front_...
+Content-Type: application/json
+
+{
+  "calendarId": "work",
+  "title": "Planning",
+  "start": "2026-06-10T09:00:00+02:00",
+  "end": "2026-06-10T10:00:00+02:00",
+  "timeZone": "Europe/Berlin",
+  "people": ["ada@example.com"]
+}
+```
+
+Update an event:
+
+```http
+PATCH /v1/events/{eventId}
+Authorization: Bearer sx_front_...
+Content-Type: application/json
+
+{
+  "title": "Updated planning"
+}
+```
+
+Delete an event:
+
+```http
+DELETE /v1/events/{eventId}
+Authorization: Bearer sx_front_...
+```
+
+## Errors
+
+The API rejects requests when credentials are missing, expired, scoped to another organization, or when a frontend token user does not have write permissions.

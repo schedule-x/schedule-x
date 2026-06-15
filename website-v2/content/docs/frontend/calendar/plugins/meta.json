@@ -1,0 +1,23 @@
+{
+  "title": "Plugins",
+  "pages": [
+    "index",
+    "drag-and-drop",
+    "resize",
+    "event-modal",
+    "events-service",
+    "calendar-controls",
+    "current-time",
+    "scroll-controller",
+    "timezone-select",
+    "ical",
+    "recurrence",
+    "drag-to-create",
+    "draw",
+    "interactive-event-modal",
+    "scheduling-assistant",
+    "sidebar",
+    "community-plugins",
+    "custom-plugins"
+  ]
+}

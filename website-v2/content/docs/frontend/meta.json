@@ -1,0 +1,6 @@
+{
+  "title": "UI",
+  "description": "Standalone Schedule-X calendar UI docs",
+  "root": true,
+  "pages": ["index", "calendar", "frameworks", "ai"]
+}
