@@ -1,10 +1,10 @@
-import { MonthAgenda } from '../../types/month-agenda'
+import { Agenda } from '../../types/month-agenda'
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 
 export const createAgendaMonth = (
   date: Temporal.ZonedDateTime,
   timeUnitsImpl: TimeUnits
-): MonthAgenda => {
+): Agenda => {
   const monthWithDates = timeUnitsImpl.getMonthWithTrailingAndLeadingDays(
     date.year,
     date.month

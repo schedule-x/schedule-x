@@ -2,6 +2,7 @@
 import { useCalendarApp, ScheduleXCalendar } from '@schedule-x/react'
 import {
   createViewDay,
+  createViewWeekAgenda,
   createViewMonthAgenda,
   createViewMonthGrid,
   createViewWeek,
@@ -14,7 +15,7 @@ function CalendarApp() {
   const eventsService = useState(() => createEventsServicePlugin())[0]
 
   const calendar = useCalendarApp({
-    views: [createViewDay(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
+    views: [createViewDay(), createViewWeekAgenda(), createViewWeek(), createViewMonthGrid(), createViewMonthAgenda()],
     events: [
       {
         id: '1',

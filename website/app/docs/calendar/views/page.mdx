@@ -6,7 +6,7 @@ description: 'Learn about the different views available in the Schedule-X calend
 # Calendar views
 
 The views are the most basic building blocks of the calendar. There are
-currently 5 views available, as listed below, but first:
+currently 6 views available, as listed below, but first:
 
 ## A note on screen sizes
 
@@ -27,6 +27,7 @@ large screens.
 | Day                                                          | Yes           | Yes           |
 | Month grid                                                   | Yes           | No            |
 | Month agenda                                                 | No            | Yes           |
+| Week agenda                                                  | No            | Yes           |
 | Week                                                         | Yes           | No            |
 | List                                                         | Yes           | Yes           |
 | [Resource view (premium)](/docs/calendar/resource-scheduler) | Yes           | Yes           |
@@ -36,6 +37,7 @@ large screens.
 ```ts
 import {
   createViewDay,
+  createViewWeekAgenda,
   createViewMonthAgenda,
   createViewMonthGrid,
   createViewWeek,
@@ -45,7 +47,7 @@ import {
 import '@schedule-x/theme-default/dist/index.css'
 
 const calendar = createCalendar({
-  views: [createViewDay(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek(), createViewList()],
+  views: [createViewDay(), createViewWeekAgenda(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek(), createViewList()],
 
   events: [],
 })
@@ -57,14 +59,14 @@ calendar.render(document.getElementById('calendar'))
 
 The strategy for loading events will differ slightly depending on the view.
 
-### Day, Week and Month views
+### Day, Week and Agenda views
 
 When a user navigates to new days, weeks or months, the calendar will invoke `onRangeUpdate`, which
 you can use to load the events for the new range.
 
 ```ts 
 const calendar = createCalendar({
-  views: [createViewDay(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek()],
+  views: [createViewDay(), createViewWeekAgenda(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek()],
  
   events: [],
 

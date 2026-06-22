@@ -5,6 +5,8 @@ export type CustomComponentName =
   | 'dateGridEvent'
   | 'monthGridEvent'
   | 'monthAgendaEvent'
+  | 'monthAgendaDateDots'
+  | 'weekAgendaEvent'
   | 'eventModal'
   | 'headerContentLeftPrepend'
   | 'headerContentLeftAppend'

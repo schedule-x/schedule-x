@@ -32,6 +32,15 @@ export default function useFetchEvents($app: CalendarAppSingleton) {
     $app.calendarEvents.list.value = events.map((event) =>
       externalEventToInternal(event, $app.config)
     )
+
+    // After setting events, trigger the event-recurrence plugin (if present) to create
+    // recurrences for the fetched events. The plugin's onRangeUpdate runs synchronously
+    // when the range changes but before fetchEvents resolves, so without this call,
+    // events with rrule would be displayed without recurrences.
+    const currentRange = $app.calendarState.range.value
+    if (currentRange) {
+      $app.config.plugins.eventRecurrence?.onRangeUpdate?.(currentRange)
+    }
   }
 
   useEffect(() => {

@@ -56,6 +56,7 @@ import { ScheduleXCalendar } from '@schedule-x/vue'
 import {
   createCalendar,
   createViewDay,
+  createViewWeekAgenda,
   createViewMonthAgenda,
   createViewMonthGrid,
   createViewWeek,
@@ -69,6 +70,7 @@ const calendarApp = createCalendar({
   selectedDate: Temporal.PlainDate.from('2023-12-19'),
   views: [
     createViewDay(),
+    createViewWeekAgenda(),
     createViewWeek(),
     createViewMonthGrid(),
     createViewMonthAgenda(),
@@ -143,6 +145,8 @@ control over the rendering in parts of the UI. Currently, these components can b
 | `monthGridDayName`          | Replaces day names like "Mon", "Tue" in month grid                  | `day` (0-6, like in JS-dates)   |
 | `monthGridDate`             | Replaces date of month in month grid                                | `date`, `jsDate`                |
 | `monthAgendaEvent`          | The component for events used in the month agenda view              | `calendarEvent`                 |
+| `weekAgendaEvent`           | The component for events used in the week agenda view               | `calendarEvent`                 |
+| `monthAgendaDateDots`       | Replaces the date dots in the month agenda view                     | `date`, `jsDate`, `events`      |
 | `eventModal`                | The component for the modal that opens when clicking an event       | `calendarEvent`                 |
 | `headerContentLeftPrepend`  | Prepends content to the left part of the header                     | `$app`                          |
 | `headerContentLeftAppend`   | Appends content to the left part of the header                      | `$app`                          |

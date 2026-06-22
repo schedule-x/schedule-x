@@ -53,9 +53,9 @@ describe('ViewSelection', () => {
         new KeyboardEvent('keydown', { key: 'Enter' })
       )
 
-      let viewOption1!: HTMLLIElement
-      let viewOption2!: HTMLLIElement
-      let viewOption3!: HTMLLIElement
+      let viewOption1!: HTMLButtonElement
+      let viewOption2!: HTMLButtonElement
+      let viewOption3!: HTMLButtonElement
       vi.runAllTimers()
       await waitFor(() => {
         viewOption1 = getViewOptionN(1)

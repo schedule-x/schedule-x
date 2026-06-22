@@ -148,6 +148,50 @@ describe('MonthDay component', () => {
       )
     })
 
+    it('should not navigate to day view when clicking on the more events button if callback exists', async () => {
+      renderComponent($app, dayWithEventLimitPlus2)
+      expect($app.calendarState.view.value).toBe(InternalViewName.Week)
+
+      const moreEventsButton = document.querySelector(
+        '.sx__month-grid-day__events-more'
+      )
+      moreEventsButton?.dispatchEvent(
+        new MouseEvent('click', { bubbles: true })
+      )
+
+      await waitFor(() => {
+        expect($app.calendarState.view.value).toBe(InternalViewName.Week)
+      })
+    })
+
+    it('should not propagate click to the day, when clicking on the more events button', () => {
+      renderComponent($app, dayWithEventLimitPlus2)
+      const moreEventsButton = document.querySelector(
+        '.sx__month-grid-day__events-more'
+      )
+      moreEventsButton?.dispatchEvent(
+        new MouseEvent('click', { bubbles: true })
+      )
+
+      expect(onClickDate).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('clicking "+ N events" without callback', () => {
+    const $app = __createAppWithViews__()
+    const dayWithEventLimitPlus2: MonthDayType = {
+      date: Temporal.PlainDate.from('2020-01-01'),
+      events: {
+        '0': getTestEvent($app),
+        '1': getTestEvent($app),
+        '2': getTestEvent($app),
+        '3': getTestEvent($app),
+        '4': getTestEvent($app),
+        '5': getTestEvent($app),
+      },
+      backgroundEvents: [],
+    }
+
     it('should navigate to day view when clicking on the more events button', async () => {
       renderComponent($app, dayWithEventLimitPlus2)
       expect($app.calendarState.view.value).toBe(InternalViewName.Week)
@@ -162,18 +206,6 @@ describe('MonthDay component', () => {
       await waitFor(() => {
         expect($app.calendarState.view.value).toBe(InternalViewName.Day)
       })
-    })
-
-    it('should not propagate click to the day, when clicking on the more events button', () => {
-      renderComponent($app, dayWithEventLimitPlus2)
-      const moreEventsButton = document.querySelector(
-        '.sx__month-grid-day__events-more'
-      )
-      moreEventsButton?.dispatchEvent(
-        new MouseEvent('click', { bubbles: true })
-      )
-
-      expect(onClickDate).not.toHaveBeenCalled()
     })
   })
 

@@ -50,7 +50,9 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 
 ```svelte
 <div>
-	<ScheduleXCalendar calendarApp="{calendarApp}" />
+	{#if calendarApp}
+		<ScheduleXCalendar calendarApp={calendarApp} />
+	{/if}
 </div>
 
 <script lang="ts">
@@ -58,24 +60,28 @@ download peer dependencies, you will additionally need to install `@schedule-x/c
 	import { createCalendar, createViewDay, createViewWeek } from '@schedule-x/calendar';
 	import '@schedule-x/theme-default/dist/index.css';
 	import 'temporal-polyfill/global'
-
-	const calendarApp = createCalendar({
-		views: [createViewDay(), createViewWeek()],
-		events: [
-			{
-				id: '1',
-				title: 'Event 1',
-				start: Temporal.PlainDate.from('2024-07-06'),
-				end: Temporal.PlainDate.from('2024-07-06'),
-			},
-			{
-				id: '2',
-				title: 'Event 2',
-				start: Temporal.ZonedDateTime.from('2024-07-06T02:00:00+09:00[Asia/Tokyo]'),
-				end: Temporal.ZonedDateTime.from('2024-07-06T04:00:00+09:00[Asia/Tokyo]'),
-			},
-		]
-	})
+	import { onMount } from 'svelte';
+ 
+	let calendarApp = $state();
+	onMount(() => {
+		calendarApp = createCalendar({
+			views: [createViewDay(), createViewWeek()],
+			events: [
+				{
+					id: '1',
+					title: 'Event 1',
+					start: Temporal.PlainDate.from('2024-07-06'),
+					end: Temporal.PlainDate.from('2024-07-06'),
+				},
+				{
+					id: '2',
+					title: 'Event 2',
+					start: Temporal.ZonedDateTime.from('2024-07-06T02:00:00+09:00[Asia/Tokyo]'),
+					end: Temporal.ZonedDateTime.from('2024-07-06T04:00:00+09:00[Asia/Tokyo]'),
+				},
+			]
+		});
+	});
 </script>
 ```
 
@@ -126,6 +132,8 @@ can be customized:
 | `monthGridDayName`          | Replaces day names like "Mon", "Tue" in month grid                  | `day` (0-6, like in JS-dates)   |
 | `monthGridDate`             | Replaces date of month in month grid                                | `date`, `jsDate`                |
 | `monthAgendaEvent`          | The component for events used in the month agenda view              | `calendarEvent`                 |
+| `weekAgendaEvent`           | The component for events used in the week agenda view               | `calendarEvent`                 |
+| `monthAgendaDateDots`       | Replaces the date dots in the month agenda view                     | `date`, `jsDate`, `events`      |
 | `eventModal`                | The component for the modal that opens when clicking an event       | `calendarEvent`                 |
 | `headerContentLeftPrepend`  | Prepends content to the left part of the header                     | `$app`                          |
 | `headerContentLeftAppend`   | Appends content to the left part of the header                      | `$app`                          |

@@ -27,6 +27,7 @@
 }
 
 .sx__timezone-select-selected-item {
+  background-color: inherit;
   height: 100%;
   width: fit-content;
   max-width: 320px;
@@ -143,6 +144,10 @@
 }
 
 .sx__timezone-select-item {
+  display: block;
+  width: 100%;
+  text-align: inherit;
+  background-color: inherit;
   padding: var(--sx-spacing-padding4) var(--sx-spacing-padding6);
   cursor: pointer;
   white-space: nowrap;

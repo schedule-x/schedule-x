@@ -1,6 +1,7 @@
 import CalendarConfigInternal, {
   CalendarType,
   MonthGridOptions,
+  MonthAgendaOptions,
   WeekOptions,
   ResourceGridOptions,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -31,12 +32,14 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   minDate: Signal<Temporal.PlainDate | undefined>
   maxDate: Signal<Temporal.PlainDate | undefined>
   monthGridOptions: Signal<MonthGridOptions>
+  monthAgendaOptions: Signal<MonthAgendaOptions>
   locale: Signal<string> = signal(DEFAULT_LOCALE)
   theme: string | undefined
   translations: Signal<Record<string, Language>>
   showWeekNumbers: Signal<boolean> = signal(false)
   direction: 'ltr' | 'rtl' = 'ltr'
   timezone: Signal<IANATimezone>
+  skipAnimations: boolean
   resources: Signal<Resource[]>
   resourceGridOptions: Signal<ResourceGridOptions>
   _destroyCustomComponentInstance: ((ccid: string) => void) | undefined
@@ -59,12 +62,16 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     monthGridOptions: MonthGridOptions = {
       nEventsPerDay: 4,
     },
+    monthAgendaOptions: MonthAgendaOptions = {
+      nEventIndicatorsPerDay: 3,
+    },
     theme: string | undefined = undefined,
     translations: Record<string, Language> = {},
     showWeekNumbers: boolean = false,
     timezone: IANATimezone = 'UTC',
     resources: Resource[] = [],
-    resourceGridOptions: ResourceGridOptions = { nDays: 7 }
+    resourceGridOptions: ResourceGridOptions = { nDays: 7 },
+    skipAnimations: boolean = false
   ) {
     this.locale = signal(locale)
     this.firstDayOfWeek = signal(firstDayOfWeek)
@@ -76,6 +83,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.minDate = signal(minDate)
     this.maxDate = signal(maxDate)
     this.monthGridOptions = signal(monthGridOptions)
+    this.monthAgendaOptions = signal(monthAgendaOptions)
     this.theme = theme
     this.translations = signal(translations)
     this.showWeekNumbers = signal(showWeekNumbers)
@@ -83,6 +91,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.timezone = signal(timezone)
     this.resources = signal(resources)
     this.resourceGridOptions = signal(resourceGridOptions)
+    this.skipAnimations = skipAnimations
   }
 
   get isHybridDay(): boolean {

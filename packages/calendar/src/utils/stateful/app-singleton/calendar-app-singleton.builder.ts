@@ -9,9 +9,7 @@ import CalendarState from '@schedule-x/shared/src/interfaces/calendar/calendar-s
 import DatePickerConfigInternal from '@schedule-x/shared/src/interfaces/date-picker/config.interface'
 import CalendarEvents from '@schedule-x/shared/src/interfaces/calendar/calendar-events.interface'
 
-export default class CalendarAppSingletonBuilder
-  implements Builder<CalendarAppSingleton>
-{
+export default class CalendarAppSingletonBuilder implements Builder<CalendarAppSingleton> {
   private config: CalendarConfigInternal | undefined
   private timeUnitsImpl: TimeUnits | undefined
   private datePickerState: DatePickerState | undefined

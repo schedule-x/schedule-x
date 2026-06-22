@@ -2,6 +2,7 @@ import Builder from '@schedule-x/shared/src/interfaces/builder.interface'
 import CalendarConfigInternal, {
   CalendarType,
   MonthGridOptions,
+  MonthAgendaOptions,
   Plugins,
   WeekOptions,
   ResourceGridOptions,
@@ -32,9 +33,7 @@ import { Language } from '@schedule-x/shared/src/types/translations/language.tra
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { Resource } from '@schedule-x/shared/src/types/calendar/resource'
 
-export default class CalendarConfigBuilder
-  implements Builder<CalendarConfigInternal>
-{
+export default class CalendarConfigBuilder implements Builder<CalendarConfigInternal> {
   locale: string | undefined
   firstDayOfWeek: WeekDay | undefined
   defaultView: ViewName | undefined
@@ -49,6 +48,7 @@ export default class CalendarConfigBuilder
     gridStep: 60,
   }
   monthGridOptions: MonthGridOptions | undefined
+  monthAgendaOptions: MonthAgendaOptions | undefined
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
   isDark: boolean | undefined = false
@@ -69,6 +69,7 @@ export default class CalendarConfigBuilder
   resourceGridOptions: ResourceGridOptions = {
     nDays: 7,
   }
+  skipAnimations = false
 
   build(): CalendarConfigInternal {
     const minDate = this.minDate
@@ -95,12 +96,14 @@ export default class CalendarConfigBuilder
       minDate,
       maxDate,
       this.monthGridOptions,
+      this.monthAgendaOptions,
       this.theme,
       this.translations,
       this.showWeekNumbers,
       this.timezone as IANATimezone,
       this.resources,
-      this.resourceGridOptions
+      this.resourceGridOptions,
+      this.skipAnimations
     )
   }
 
@@ -217,6 +220,13 @@ export default class CalendarConfigBuilder
     return this
   }
 
+  withMonthAgendaOptions(
+    monthAgendaOptions: MonthAgendaOptions | undefined
+  ): CalendarConfigBuilder {
+    this.monthAgendaOptions = monthAgendaOptions
+    return this
+  }
+
   withBackgroundEvents(backgroundEvents: BackgroundEvent[] | undefined) {
     this.backgroundEvents = backgroundEvents
     return this
@@ -251,6 +261,13 @@ export default class CalendarConfigBuilder
       ...this.resourceGridOptions,
       ...resourceGridOptions,
     }
+    return this
+  }
+
+  withSkipAnimations(
+    skipAnimations: boolean | undefined
+  ): CalendarConfigBuilder {
+    this.skipAnimations = skipAnimations ?? false
     return this
   }
 }

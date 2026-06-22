@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/schedule-x/schedule-x/compare/v4.5.0...v4.6.0) (2026-05-12)
+
+### Bug Fixes
+
+- A11y - convert view-selector and timezone-select triggers from div to button ([#1319](https://github.com/schedule-x/schedule-x/issues/1319)) ([0eb4a99](https://github.com/schedule-x/schedule-x/commit/0eb4a991775466f63c2878cb459e372307840ad7))
+
+# [4.5.0](https://github.com/schedule-x/schedule-x/compare/v4.4.0...v4.5.0) (2026-04-16)
+
+**Note:** Version bump only for package @schedule-x/assertions
+
+# [4.4.0](https://github.com/schedule-x/schedule-x/compare/v4.3.1...v4.4.0) (2026-04-09)
+
+**Note:** Version bump only for package @schedule-x/assertions
+
 ## [4.3.1](https://github.com/schedule-x/schedule-x/compare/v4.3.0...v4.3.1) (2026-03-09)
 
 **Note:** Version bump only for package @schedule-x/assertions

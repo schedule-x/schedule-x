@@ -14,6 +14,14 @@ export function assertIsLI(
   }
 }
 
+export function assertIsButton(
+  element: Element | unknown
+): asserts element is HTMLButtonElement {
+  if (!(element instanceof HTMLButtonElement)) {
+    throw new Error('Element is not a <button>')
+  }
+}
+
 export function assertElementType<T extends Element>(
   element: Element | unknown,
   type: typeof Element

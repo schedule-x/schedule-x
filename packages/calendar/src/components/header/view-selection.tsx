@@ -76,6 +76,7 @@ export default function ViewSelection() {
 
   const handleSelectedViewKeyDown = (keyboardEvent: KeyboardEvent) => {
     if (isKeyEnterOrSpace(keyboardEvent)) {
+      keyboardEvent.preventDefault()
       setIsOpen(!isOpen)
     }
 
@@ -122,10 +123,9 @@ export default function ViewSelection() {
       >
         {$app.translate('View')}
       </label>
-      <div
+      <button
         id={viewSelectId}
-        tabIndex={0}
-        role="button"
+        type="button"
         aria-describedby={viewLabelId}
         aria-label={$app.translate('Select View')}
         className="sx__view-selection-selected-item sx__ripple"
@@ -134,31 +134,35 @@ export default function ViewSelection() {
       >
         {selectedViewLabel}
         <img className="sx__view-selection-chevron" src={chevronIcon} alt="" />
-      </div>
+      </button>
       {isOpen && (
         <ul
           data-testid="view-selection-items"
           className="sx__view-selection-items"
         >
           {availableViews.map((view) => (
-            <li
-              aria-label={
-                $app.translate('Select View') + ' ' + $app.translate(view.label)
-              }
-              tabIndex={-1}
-              role="button"
-              onKeyDown={(keyboardEvent) =>
-                navigateUpOrDown(keyboardEvent, view.name)
-              }
-              onClick={() => handleClickOnSelectionItem(view.name)}
-              className={
-                'sx__view-selection-item' +
-                (view.name === $app.calendarState.view.value
-                  ? ' is-selected'
-                  : '')
-              }
-            >
-              {$app.translate(view.label)}
+            <li key={view.name}>
+              <button
+                type="button"
+                aria-label={
+                  $app.translate('Select View') +
+                  ' ' +
+                  $app.translate(view.label)
+                }
+                tabIndex={-1}
+                onKeyDown={(keyboardEvent) =>
+                  navigateUpOrDown(keyboardEvent, view.name)
+                }
+                onClick={() => handleClickOnSelectionItem(view.name)}
+                className={
+                  'sx__view-selection-item' +
+                  (view.name === $app.calendarState.view.value
+                    ? ' is-selected'
+                    : '')
+                }
+              >
+                {$app.translate(view.label)}
+              </button>
             </li>
           ))}
         </ul>

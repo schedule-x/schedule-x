@@ -1,44 +1,17 @@
 import { PreactViewComponent } from '@schedule-x/shared/src/types/calendar/preact-view-component'
-import { useEffect, useState } from 'preact/hooks'
-import { MonthAgenda } from '../types/month-agenda'
+import { useEffect } from 'preact/hooks'
 import { createAgendaMonth } from '../utils/stateless/create-agenda-month'
 import MonthAgendaWeek from './month-agenda-week'
 import MonthAgendaDayNames from './month-agenda-day-names'
 import { AppContext } from '../../../utils/stateful/app-context'
-import { positionEventsInAgenda } from '../utils/stateless/position-events-in-agenda'
-import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
 import MonthAgendaEvents from './month-agenda-events'
+import { useAgenda } from '../hooks/use-agenda'
 
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
-  const getMonth = () => {
-    const filteredEvents = $app.calendarEvents.filterPredicate.value
-      ? $app.calendarEvents.list.value.filter(
-          $app.calendarEvents.filterPredicate.value
-        )
-      : $app.calendarEvents.list.value
-
-    return positionEventsInAgenda(
-      createAgendaMonth(
-        $app.datePickerState.selectedDate.value.toZonedDateTime(
-          $app.config.timezone.value
-        ),
-        $app.timeUnitsImpl
-      ),
-      filteredEvents.sort(sortEventsByStartAndEnd)
-    )
-  }
-
-  const [agendaMonth, setAgendaMonth] = useState<MonthAgenda>(getMonth())
-
-  useEffect(() => {
-    setAgendaMonth(getMonth())
-  }, [
-    $app.datePickerState.selectedDate.value,
-    $app.calendarEvents.list.value,
-    $app.calendarEvents.filterPredicate.value,
-  ])
+  const agenda = useAgenda($app, createAgendaMonth)
+  const selectedMonth = $app.datePickerState.selectedDate.value.month
 
   useEffect(() => {
     const observer = new MutationObserver((mutations) => {
@@ -61,10 +34,10 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
   return (
     <AppContext.Provider value={$app}>
       <div id={id} className="sx__month-agenda-wrapper">
-        <MonthAgendaDayNames week={agendaMonth.weeks[0]} />
+        <MonthAgendaDayNames week={agenda.weeks[0]} />
 
         <div className="sx__month-agenda-weeks">
-          {agendaMonth.weeks.map((week, index) => (
+          {agenda.weeks.map((week, index) => (
             <MonthAgendaWeek
               key={index}
               week={week}
@@ -72,6 +45,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
                 ($app.datePickerState.selectedDate.value = date)
               }
               activeDate={$app.datePickerState.selectedDate.value}
+              isLeadingOrTrailing={(date) => date.month !== selectedMonth}
             />
           ))}
         </div>
@@ -79,7 +53,7 @@ export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
         <MonthAgendaEvents
           key={$app.datePickerState.selectedDate.value}
           events={
-            agendaMonth.weeks
+            agenda.weeks
               .flat()
               .find((day) =>
                 isSameDay(day.date, $app.datePickerState.selectedDate.value)

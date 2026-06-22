@@ -41,6 +41,7 @@ $heading-width: 900px;
   img {
     filter: grayscale(100%);
     transition: all 0.2s ease;
+    object-fit: contain;
 
     &:hover {
       filter: grayscale(0%);
@@ -63,6 +64,12 @@ $heading-width: 900px;
   overflow: visible;
 }
 
+.marquee-wrapper .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+}
 
 .landingPage h1 {
   max-width: $heading-width;

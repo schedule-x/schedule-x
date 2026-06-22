@@ -18,6 +18,12 @@ import UserIcon from './components/icons/user-icon'
 import DescriptionIcon from './components/icons/description-icon'
 import LocationPinIcon from './components/icons/location-pin-icon'
 import PluginBase from './interfaces/plugin.interface'
+import type DatePickerConfigInternal from './interfaces/date-picker/config.interface'
+import type DatePickerState from './interfaces/date-picker/date-picker-state.interface'
+import type TimeUnits from './utils/stateful/time-units/time-units.interface'
+import type CalendarElements from './interfaces/calendar/calendar-elements.interface'
+import type CalendarControlsPlugin from './interfaces/calendar-controls/calendar-controls-plugin.interface'
+import type CurrentTimePlugin from './interfaces/current-time/current-time-plugin.interface'
 
 export { definePlugin } from './utils/stateless/calendar/define-plugin'
 export { deepCloneEvent } from './utils/stateless/calendar/deep-clone-event'
@@ -69,6 +75,7 @@ export type { View, ViewConfig } from './types/calendar/view'
 export type { CalendarAppSingleton, PluginBase }
 export type { CalendarState }
 export type { CalendarEvents }
+export type { CalendarElements }
 export type { DragAndDropPlugin }
 export type { TimeGridDragHandler }
 export type { DateGridDragHandler }
@@ -76,6 +83,14 @@ export type { MonthGridDragHandler }
 export type { DragHandlerDependencies }
 export type { ResizePlugin }
 export type { EventCoordinates }
+export type { DatePickerConfigInternal }
+export type { DatePickerState }
+export type { TimeUnits }
+export type { TranslateFn } from './types/translations'
+export type { EventRecurrencePlugin } from './interfaces/event-recurrence/event-recurrence-plugin.interface'
+export type { EventsService } from './interfaces/events-service/events-service.interface'
+export type { CalendarControlsPlugin }
+export type { CurrentTimePlugin }
 export type { CustomComponentFns as CustomComponents } from './interfaces/calendar/custom-component-fns'
 export type { CustomComponentName } from './interfaces/calendar/custom-component-fns'
 export {

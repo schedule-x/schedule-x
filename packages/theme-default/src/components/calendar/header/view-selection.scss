@@ -23,6 +23,7 @@
 }
 
 .sx__view-selection-selected-item {
+  background-color: inherit;
   height: 100%;
   width: fit-content;
   padding: var(--sx-spacing-padding3) var(--sx-spacing-padding4);
@@ -68,6 +69,10 @@
 }
 
 .sx__view-selection-item {
+  display: block;
+  width: 100%;
+  text-align: inherit;
+  background-color: inherit;
   padding: var(--sx-spacing-padding4) var(--sx-spacing-padding6);
   cursor: pointer;
 

@@ -19,6 +19,10 @@ jobs:
         with:
           # Fetching the full history is required to determine the changed packages
           fetch-depth: 0
+      - name: Set up Node.js 🟩
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v2.0
         with:
@@ -37,6 +41,10 @@ jobs:
         with:
           # Fetching the full history is required to determine the changed packages
           fetch-depth: 0
+      - name: Set up Node.js 🟩
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v2.0
         with:
@@ -55,6 +63,10 @@ jobs:
         with:
           # Fetching the full history is required to determine the changed packages
           fetch-depth: 0
+      - name: Set up Node.js 🟩
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       - name: Set Timezone 🌍🌎🌏
         uses: szenius/set-timezone@v2.0
         with:

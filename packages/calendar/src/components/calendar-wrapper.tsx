@@ -71,21 +71,19 @@ export default function CalendarWrapper({ $app }: props) {
   useSignalEffect(() => {
     // There is no reason to transition sideways, because the list view is expanded vertically, unlike the other views
     if ($app.calendarState.view.value === InternalViewName.List) return
+    if ($app.config.skipAnimations) return
 
     const newRangeStartIsLaterThanPrevious =
       ($app.calendarState.range.value?.start.toString() || '') >
       previousRangeStart
 
-    // Use requestAnimationFrame to ensure smooth animation timing
-    requestAnimationFrame(() => {
-      setTransitionClass(
-        newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
-      )
+    setTransitionClass(
+      newRangeStartIsLaterThanPrevious ? 'sx__slide-left' : 'sx__slide-right'
+    )
 
-      setTimeout(() => {
-        setTransitionClass('')
-      }, 300) // CORRELATION ID: 3
-    })
+    setTimeout(() => {
+      setTransitionClass('')
+    }, 300) // CORRELATION ID: 3
 
     setPreviousRangeStart(
       $app.calendarState.range.value?.start.toString() || ''
