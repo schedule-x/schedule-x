@@ -33,9 +33,7 @@ import { Language } from '@schedule-x/shared/src/types/translations/language.tra
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 import { Resource } from '@schedule-x/shared/src/types/calendar/resource'
 
-export default class CalendarConfigBuilder
-  implements Builder<CalendarConfigInternal>
-{
+export default class CalendarConfigBuilder implements Builder<CalendarConfigInternal> {
   locale: string | undefined
   firstDayOfWeek: WeekDay | undefined
   defaultView: ViewName | undefined

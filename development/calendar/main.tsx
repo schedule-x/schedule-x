@@ -201,6 +201,14 @@ const calendar = createCalendar({
       start: /^\d{4}-\d{2}-\d{2}$/.test(event.start) ? Temporal.PlainDate.from(event.start) : Temporal.ZonedDateTime.from(event.start),
       end: /^\d{4}-\d{2}-\d{2}$/.test(event.end) ? Temporal.PlainDate.from(event.end) : Temporal.ZonedDateTime.from(event.end),
     })),
+    // bug repro: event with same start and end time
+    {
+      id: 900,
+      title: 'No end event',
+      start: Temporal.ZonedDateTime.from('2026-03-25T08:00[Europe/London]'),
+      end: Temporal.ZonedDateTime.from('2026-03-25T08:00[Europe/London]'),
+      calendarId: 'personal',
+    },
 
     // --- BUG REPRO: 4-event cascade (simplest case) ---
     // Each event overlaps the next, but non-adjacent events DON'T overlap.
