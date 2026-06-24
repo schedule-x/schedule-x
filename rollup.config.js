@@ -21,6 +21,7 @@ async function getSortedPackages(scope, ignore) {
     '@schedule-x/theme-shadcn',
     '@schedule-x/eslint-config',
     '@schedule-x/prettier-config',
+    '@schedule-x/mcp',
   ]
   filtered = filtered.filter((pkg) => !nonTSPackages.includes(pkg.name))
 
