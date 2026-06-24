@@ -22,7 +22,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^4.1.10",
-    "temporal-polyfill": "^0.3.2",
+    "temporal-polyfill": "0.3.0",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
