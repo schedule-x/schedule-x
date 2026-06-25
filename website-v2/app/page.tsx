@@ -126,12 +126,12 @@ export default function HomePage() {
         <section className="sx-hero">
           <div className="sx-hero-content">
             <h1>
-              Calendar infrastructure from API to UI.
+              Calendar infrastructure, from API to UI.
             </h1>
             <p className="sx-hero-copy">
               Hosted users, calendars, events, provider sync, short-lived
-              browser tokens, and a polished Schedule-X interface your product
-              can own.
+              browser tokens, and a polished Schedule-X interface that belongs
+              inside your product.
             </p>
             <div className="sx-hero-actions">
               <Link className="sx-button sx-button-primary" href="/docs/cloud/quickstart">
@@ -161,7 +161,14 @@ export default function HomePage() {
         </section>
 
         <section className="sx-capability-section" aria-label="Schedule-X product areas">
-          <h2>Explore our features</h2>
+          <h2>Build the calendar layer once.</h2>
+          <div className="sx-layer-flow" aria-label="Schedule-X product flow">
+            <span>Cloud API</span>
+            <ArrowRight aria-hidden="true" size={16} />
+            <span>Browser token</span>
+            <ArrowRight aria-hidden="true" size={16} />
+            <span>Schedule-X UI</span>
+          </div>
           <div className="sx-capability-grid">
             {capabilities.map((capability) => {
               const Icon = capability.icon
@@ -226,7 +233,7 @@ export default function HomePage() {
         <section className="sx-testimonials-section">
           <div className="sx-testimonials-copy">
             <span>Developer feedback</span>
-            <h2>Trusted where calendar UI has to feel native.</h2>
+            <h2>Trusted when calendar UI has to feel native.</h2>
           </div>
           <div className="sx-testimonials-grid">
             {testimonials.map((testimonial) => (
@@ -244,8 +251,8 @@ export default function HomePage() {
         <section className="sx-section sx-system-section">
           <div className="sx-system-intro">
             <span>Product path</span>
-            <h2>How do you want to build?</h2>
-            <p>Two ways to ship calendar features.</p>
+            <h2>Choose your calendar layer.</h2>
+            <p>Two paths for shipping calendar features.</p>
           </div>
 
           <div className="sx-system-builder">
