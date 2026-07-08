@@ -4,11 +4,31 @@ import {
   it,
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
-import { getInlineStartRule, getWidthRule } from '../event-styles'
+import {
+  getEventHeight,
+  getInlineStartRule,
+  getWidthRule,
+} from '../event-styles'
 import { stubInterface } from 'ts-sinon'
 import { CalendarEventInternal } from '@schedule-x/shared'
 
 describe('Event styles', () => {
+  describe('getting the event height', () => {
+    it('should give zero-minute events a height when start and end are the same point in time', () => {
+      const eventHeight = getEventHeight(
+        Temporal.ZonedDateTime.from('2020-01-01T10:00:00[Europe/Stockholm]'),
+        Temporal.ZonedDateTime.from('2020-01-01T10:00:00[Europe/Stockholm]'),
+        {
+          start: 0,
+          end: 2400,
+        },
+        2400
+      )
+
+      expect(eventHeight).toBeCloseTo(2.0833333333333335)
+    })
+  })
+
   describe('getting the event width', () => {
     it.each([
       [0, 100, 2, false, 50],

@@ -119,7 +119,7 @@ describe('TimeGridEvent', () => {
       expect(eventTime?.textContent).toStrictEqual('11:00 PM')
     })
 
-    it('should only show start time if end time is the same', () => {
+    it('should only show start time if end time is the same point in time', () => {
       const $app = __createAppWithViews__({
         events: [
           {
@@ -138,7 +138,7 @@ describe('TimeGridEvent', () => {
       renderComponent($app, $app.calendarEvents.list.value[0])
 
       const eventTime = document.querySelector('.sx__time-grid-event-time')
-      expect(eventTime?.lastChild?.textContent).toStrictEqual('11:00 PM')
+      expect(eventTime?.textContent).toStrictEqual('11:00 PM')
     })
   })
 

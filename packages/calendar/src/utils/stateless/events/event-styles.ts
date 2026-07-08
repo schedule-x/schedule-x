@@ -13,7 +13,7 @@ export const getEventHeight = (
   dayBoundaries: DayBoundariesInternal,
   pointsPerDay: number
 ) => {
-  if (start === end) {
+  if (Temporal.ZonedDateTime.compare(start, end) === 0) {
     return (
       timePointToPercentage(
         pointsPerDay,
