@@ -287,5 +287,87 @@ describe('validateRrule', () => {
       )
       expect($app.calendarEvents.backgroundEvents.value).toHaveLength(1)
     })
+
+    describe('DTSTART weekday mismatch with BYDAY', () => {
+      it('should log a warning when DTSTART day does not match BYDAY weekdays for a regular event', () => {
+        // 2025-09-09 is a Tuesday, but BYDAY=MO,WE,FR
+        const eventWithRRule: CalendarEventExternal = {
+          id: 'byday-mismatch',
+          title: 'Weekly event',
+          start: Temporal.PlainDate.from('2025-09-09'),
+          end: Temporal.PlainDate.from('2025-09-09'),
+          rrule: 'FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20251220',
+        }
+        const $app = __createAppWithViews__({
+          events: [eventWithRRule],
+        })
+
+        createEventRecurrencePlugin().beforeRender!($app)
+
+        expect(consoleWarnSpy).toHaveBeenCalledWith(
+          "[Schedule-X warning]: Recurrence set could not be created for event with id byday-mismatch, because rrule BYDAY doesn't include the weekday of event.start"
+        )
+        expect($app.calendarEvents.list.value).toHaveLength(1)
+      })
+
+      it('should log a warning when DTSTART day does not match BYDAY weekdays for a background event', () => {
+        // 2025-09-09 is a Tuesday, but BYDAY=MO,WE,FR
+        const backgroundEvent: BackgroundEvent = {
+          title: 'Weekly background event',
+          start: Temporal.PlainDate.from('2025-09-09'),
+          end: Temporal.PlainDate.from('2025-09-09'),
+          rrule: 'FREQ=WEEKLY;BYDAY=MO,WE,FR;UNTIL=20251220',
+          style: { backgroundColor: 'red' },
+        }
+        const $app = __createAppWithViews__({
+          backgroundEvents: [backgroundEvent],
+        })
+
+        createEventRecurrencePlugin().beforeRender!($app)
+
+        expect(consoleWarnSpy).toHaveBeenCalledWith(
+          "[Schedule-X warning]: Recurrence set could not be created for background event with start 2025-09-09, because rrule BYDAY doesn't include the weekday of event.start"
+        )
+        expect($app.calendarEvents.backgroundEvents.value).toHaveLength(1)
+      })
+
+      it('should not log a warning when DTSTART day matches BYDAY weekdays', () => {
+        // 2025-09-10 is a Wednesday, BYDAY=MO,WE,FR includes Wednesday
+        const eventWithRRule: CalendarEventExternal = {
+          id: 'byday-match',
+          title: 'Weekly event',
+          start: Temporal.PlainDate.from('2025-09-10'),
+          end: Temporal.PlainDate.from('2025-09-10'),
+          rrule: 'FREQ=WEEKLY;BYDAY=MO,WE,FR;COUNT=5',
+        }
+        const $app = __createAppWithViews__({
+          events: [eventWithRRule],
+        })
+
+        createEventRecurrencePlugin().beforeRender!($app)
+
+        expect(consoleWarnSpy).not.toHaveBeenCalled()
+        expect($app.calendarEvents.list.value.length).toBeGreaterThan(1)
+      })
+
+      it('should not log a warning when BYDAY uses positional specs (e.g. 1MO)', () => {
+        // 2025-01-06 is the first Monday, BYDAY=1MO with position - skip weekday check
+        const eventWithRRule: CalendarEventExternal = {
+          id: 'byday-positional',
+          title: 'Monthly event',
+          start: Temporal.PlainDate.from('2025-01-06'),
+          end: Temporal.PlainDate.from('2025-01-06'),
+          rrule: 'FREQ=MONTHLY;BYDAY=1MO;COUNT=3',
+        }
+        const $app = __createAppWithViews__({
+          events: [eventWithRRule],
+        })
+
+        createEventRecurrencePlugin().beforeRender!($app)
+
+        expect(consoleWarnSpy).not.toHaveBeenCalled()
+        expect($app.calendarEvents.list.value.length).toBeGreaterThan(1)
+      })
+    })
   })
 })
