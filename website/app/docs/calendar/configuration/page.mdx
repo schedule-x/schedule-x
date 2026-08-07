@@ -120,29 +120,6 @@ const config = {
      * Number of events to display in a day cell before the "+ N events" button is shown
      * */
     nEventsPerDay: 8,
-
-    /**
-     * Optional custom comparator for ordering events within a month-grid day cell.
-     * When set, it fully replaces the default month-grid sorting.
-     * The library's default comparators (sortEventsForMonthGrid, sortEventsByStartAndEnd)
-     * are exported from "@schedule-x/calendar", so you can reuse them as a fallback.
-     * */
-    sortEvents: (a, b) =>
-      Number(b.calendarId === 'work') - Number(a.calendarId === 'work') ||
-      sortEventsForMonthGrid(a, b),
-  },
-
-  monthAgendaOptions: {
-    /**
-     * Number of event indicators (dots) to display per day in the month-agenda grid
-     * */
-    nEventIndicatorsPerDay: 3,
-
-    /**
-     * Optional custom comparator for ordering the events listed for the selected day
-     * in the month-agenda view. When set, it fully replaces the default sorting.
-     * */
-    sortEvents: (a, b) => sortEventsByStartAndEnd(a, b),
   },
 
   /**
