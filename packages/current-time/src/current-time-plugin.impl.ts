@@ -50,10 +50,15 @@ class CurrentTimePluginImpl implements CurrentTimePlugin {
 
     if (!todayElement) return
 
+    if (isRecursion) {
+      this.$app.elements.calendarWrapper!.querySelectorAll(
+        '.sx__current-time-indicator'
+      ).forEach((el) => el.remove())
+    }
+
     const existingIndicator = todayElement.querySelector(
       '.sx__current-time-indicator'
     )
-    if (existingIndicator && isRecursion) existingIndicator.remove()
 
     if (todayElement && !existingIndicator) {
       this.currentTimeIndicator = document.createElement('div')
