@@ -130,6 +130,33 @@ describe('TimeAxis', () => {
     })
   })
 
+  describe('displaying time axis with gridStep 10', () => {
+    it('should display grid steps every 10 minutes', () => {
+      renderComponent(
+        __createAppWithViews__({
+          locale: 'de-DE',
+          dayBoundaries: { start: '00:00', end: '02:00' },
+          weekOptions: {
+            gridStep: 10,
+            timeAxisFormatOptions: {
+              hour12: false,
+              hour: '2-digit',
+              minute: '2-digit',
+            },
+          },
+        })
+      )
+      // Should display: 00:00, 00:10, 00:20, 00:30, 00:40, 00:50, 01:00, 01:10, ...
+      const expectedTimes = [
+        '00:00', '00:10', '00:20', '00:30', '00:40', '00:50',
+        '01:00', '01:10', '01:20', '01:30', '01:40', '01:50',
+      ]
+      for (const time of expectedTimes) {
+        expect(screen.getByText(time)).not.toBeNull()
+      }
+    })
+  })
+
   describe('displaying time axis with gridStep 180', () => {
     it('should display grid steps every 3 hours', () => {
       renderComponent(

@@ -33,6 +33,15 @@ const computeGridSteps = (
         { hour: hour, minute: 30 },
         { hour: hour, minute: 45 }
       )
+    } else if (gridStep === 10) {
+      result.push(
+        { hour: hour, minute: 0 },
+        { hour: hour, minute: 10 },
+        { hour: hour, minute: 20 },
+        { hour: hour, minute: 30 },
+        { hour: hour, minute: 40 },
+        { hour: hour, minute: 50 }
+      )
     }
   })
 
