@@ -3,7 +3,6 @@
 [![Build Status](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml)
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true)](https://discord.gg/yHbT3C4M8w)
 [![npm](https://img.shields.io/npm/dm/@schedule-x/calendar)](https://www.npmjs.com/package/@schedule-x/calendar)
-[![X](https://img.shields.io/twitter/url?url=https://x.com/ScheduleX_&label=Follow%20on%20X)](https://x.com/ScheduleX_)
 
 # The modern JavaScript event calendar
 
@@ -23,12 +22,6 @@ Website for documentation and demo: https://schedule-x.dev/
 For bug reports and feature requests, please use the issue tracker of this repository.
 
 For any other questions or comments, feel free to join the chat on Discord: https://discord.gg/yHbT3C4M8w
-
-## Sponsoring
-
-The longevity and success of this project benefits from financial support, mainly to cover compute- and DNS costs.
-
-Sponsor today, and get mentioned in the README or on the project website: https://opencollective.com/schedule-x
 
 ## License
 
