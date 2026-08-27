@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.7.0](https://github.com/schedule-x/schedule-x/compare/v4.6.1...v4.7.0) (2026-08-27)
+
+### Bug Fixes
+
+- **current-time:** remove stale indicator from previous day after midnight ([#1349](https://github.com/schedule-x/schedule-x/issues/1349)) ([99e3714](https://github.com/schedule-x/schedule-x/commit/99e37149ea6f0bdfd663cec1e8a116abacace313))
+- **docs:** correct `resourceEvent` custom component prop name across all framework adapter docs ([#1342](https://github.com/schedule-x/schedule-x/issues/1342)) ([b02936b](https://github.com/schedule-x/schedule-x/commit/b02936b6d78a89acd8d2cf5f8d9512a7b9457531))
+
+### Features
+
+- **calendar:** support view-specific headers ([#1351](https://github.com/schedule-x/schedule-x/issues/1351)) ([0e2adbe](https://github.com/schedule-x/schedule-x/commit/0e2adbe1d3eb47c10420e132de9bfbfeae92142f))
+
 ## [4.6.1](https://github.com/schedule-x/schedule-x/compare/v4.6.0...v4.6.1) (2026-07-08)
 
 ### Bug Fixes

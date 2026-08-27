@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.7.0](https://github.com/schedule-x/schedule-x/compare/v4.6.1...v4.7.0) (2026-08-27)
+
+### Bug Fixes
+
+- **current-time:** remove stale indicator from previous day after midnight ([#1349](https://github.com/schedule-x/schedule-x/issues/1349)) ([99e3714](https://github.com/schedule-x/schedule-x/commit/99e37149ea6f0bdfd663cec1e8a116abacace313))
+
 ## [4.6.1](https://github.com/schedule-x/schedule-x/compare/v4.6.0...v4.6.1) (2026-07-08)
 
 **Note:** Version bump only for package @schedule-x/current-time

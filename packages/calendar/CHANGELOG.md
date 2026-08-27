@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.7.0](https://github.com/schedule-x/schedule-x/compare/v4.6.1...v4.7.0) (2026-08-27)
+
+### Features
+
+- **calendar:** support view-specific headers ([#1351](https://github.com/schedule-x/schedule-x/issues/1351)) ([0e2adbe](https://github.com/schedule-x/schedule-x/commit/0e2adbe1d3eb47c10420e132de9bfbfeae92142f))
+
 ## [4.6.1](https://github.com/schedule-x/schedule-x/compare/v4.6.0...v4.6.1) (2026-07-08)
 
 ### Bug Fixes

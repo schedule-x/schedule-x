@@ -1,6 +1,6 @@
 {
   "name": "@schedule-x/mcp",
-  "version": "4.6.1",
+  "version": "4.7.0",
   "description": "MCP server for Schedule-X documentation, starter guidance, and integration validation",
   "author": {
     "name": "Tom Österlund",
