@@ -12,6 +12,9 @@ import { vi } from 'vitest'
 import { stubInterface } from 'ts-sinon'
 import PluginBase from '@schedule-x/shared/src/interfaces/plugin.interface'
 import { PluginName } from '@schedule-x/shared/src/enums/plugin-name.enum'
+import { createPreactView } from '@schedule-x/shared/src/utils/stateful/preact-view/preact-view'
+import { addMonths } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import { setRangeForMonth } from '../../utils/stateless/time/range/set-range'
 
 const CALENDAR_WRAPPER_SELECTOR = '.sx__calendar-wrapper'
 const SMALL_CALENDAR_CLASS = 'sx__is-calendar-small'
@@ -82,6 +85,38 @@ describe('CalendarWrapper', () => {
             ?.classList.contains('is-dark')
         ).toBe(false)
       })
+    })
+  })
+
+  describe('view-specific header', () => {
+    it('renders the active view header with the app singleton', async () => {
+      const HeaderComponent = vi.fn(({ $app }) => (
+        <div data-testid="view-header">{$app.config.locale.value}</div>
+      ))
+      const view = createPreactView({
+        name: 'custom-view',
+        label: 'Custom view',
+        Component: () => <div />,
+        HeaderComponent,
+        setDateRange: setRangeForMonth,
+        hasSmallScreenCompat: true,
+        hasWideScreenCompat: true,
+        backwardForwardFn: addMonths,
+        backwardForwardUnits: 1,
+      })
+      const $app = __createAppWithViews__({ views: [view] })
+
+      renderComponent($app)
+
+      await waitFor(() => {
+        expect(
+          document.querySelector('[data-testid="view-header"]')?.textContent
+        ).toBe($app.config.locale.value)
+      })
+      expect(HeaderComponent).toHaveBeenCalledWith(
+        expect.objectContaining({ $app }),
+        expect.anything()
+      )
     })
   })
 

@@ -12,10 +12,12 @@ import { DateRange } from '../../../types/date-range'
 
 class PreactView implements View {
   private randomId = randomStringId()
+  private headerElement?: HTMLElement
 
   public name: string
   public label: string
   public Component: PreactViewComponent
+  public HeaderComponent?: PreactViewComponent
   public setDateRange: (config: RangeSetterConfig) => DateRange
   public hasSmallScreenCompat: boolean
   public hasWideScreenCompat: boolean
@@ -26,6 +28,7 @@ class PreactView implements View {
     this.name = config.name
     this.label = config.label
     this.Component = config.Component
+    this.HeaderComponent = config.HeaderComponent
     this.setDateRange = config.setDateRange
     this.hasSmallScreenCompat = config.hasSmallScreenCompat
     this.hasWideScreenCompat = config.hasWideScreenCompat
@@ -45,6 +48,26 @@ class PreactView implements View {
     if (el) {
       el.remove()
     }
+  }
+
+  renderHeader(onElement: HTMLElement, $app: CalendarAppSingleton): void {
+    if (!this.HeaderComponent) return
+
+    this.headerElement = onElement
+    renderPreact(
+      createElement(this.HeaderComponent, {
+        $app,
+        id: `${this.randomId}-header`,
+      }),
+      onElement
+    )
+  }
+
+  destroyHeader(): void {
+    if (!this.headerElement) return
+
+    renderPreact(null, this.headerElement)
+    this.headerElement = undefined
   }
 }
 

@@ -40,6 +40,12 @@ export type ViewConfig<FrameworkComponent = PreactViewComponent> = {
   Component: FrameworkComponent
 
   /**
+   * An optional component that replaces the default calendar header while this
+   * view is active. It receives the same app singleton as the view component.
+   * */
+  HeaderComponent?: FrameworkComponent
+
+  /**
    * function that is called when the user clicks the backward/forward button
    * */
   backwardForwardFn: typeof addDays | typeof addMonths
@@ -57,4 +63,6 @@ export type View<FrameworkComponent = PreactViewComponent> =
   ViewConfig<FrameworkComponent> & {
     render(onElement: HTMLElement, $app: CalendarAppSingleton): void
     destroy(): void
+    renderHeader?(onElement: HTMLElement, $app: CalendarAppSingleton): void
+    destroyHeader?(): void
   }

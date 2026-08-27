@@ -1,4 +1,4 @@
-import CalendarHeader from './header/calendar-header'
+import ViewHeader from './header/view-header'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import { AppContext } from '../utils/stateful/app-context'
 import { useEffect, useState } from 'preact/hooks'
@@ -99,7 +99,7 @@ export default function CalendarWrapper({ $app }: props) {
       <div className={wrapperClasses.join(' ')} id={calendarId}>
         <div className={'sx__calendar'}>
           <AppContext.Provider value={$app}>
-            <CalendarHeader />
+            <ViewHeader $app={$app} view={currentView} />
 
             <div
               className={['sx__view-container', transitionClass].join(' ')}

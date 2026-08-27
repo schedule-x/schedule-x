@@ -12,7 +12,7 @@ import { viewWeek } from '../../views/week'
 import { viewDay } from '../../views/day'
 import WeekNumber from './week-number'
 
-export default function CalendarHeader() {
+export default function DefaultHeader() {
   const $app = useContext(AppContext)
 
   const datePickerAppSingleton = new DatePickerAppSingletonBuilder()
