@@ -163,6 +163,21 @@ const gantt = createGanttView({
   resizable: true,
   progressEditable: true,
 
+  // Task colors
+  colorName: 'primary',
+  showTaskColorPickers: true,
+  taskColorPalette: [
+    'red',
+    'pink',
+    'purple',
+    'blue',
+    'cyan',
+    'green',
+    'yellow',
+    'orange',
+    'gray',
+  ],
+
   onTaskClick(task, event) {},
   onTaskDoubleClick(task, event) {},
   onTaskUpdate(task, scheduledTasks) {},
@@ -171,6 +186,36 @@ const gantt = createGanttView({
   taskEditor: {}, // or false
   projectEditor: {}, // or false
 })
+```
+
+### Task colors
+
+`colorName` sets the default color for every task in the Gantt chart and defaults to `primary`. A task's own optional `colorName` takes precedence over the Gantt-wide value.
+
+The built-in task editor shows a color picker by default. Set `showTaskColorPickers` to `false` to hide it. The picker includes a **Default** option that removes the task-level override and returns the task to the Gantt-wide color.
+
+The standard palette contains `red`, `pink`, `purple`, `blue`, `cyan`, `green`, `yellow`, `orange`, and `gray`. Replace `taskColorPalette` to offer a different set of colors. Entries can be color-name strings or objects with a custom label:
+
+```ts copy
+const gantt = createGanttView({
+  project,
+  colorName: 'brand',
+  taskColorPalette: [
+    'blue',
+    'green',
+    { colorName: 'brand', label: 'Brand color' },
+  ],
+})
+```
+
+The standard color names have built-in fallbacks. A custom color name uses Schedule-X color tokens. Define all three tokens before using the name:
+
+```css copy
+:root {
+  --sx-color-brand: #6750a4;
+  --sx-color-brand-container: #eadfff;
+  --sx-color-on-brand-container: #2f176c;
+}
 ```
 
 ### Custom task bars
