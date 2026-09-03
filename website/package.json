@@ -31,7 +31,7 @@
         "@schedule-x/translations": "^4.0.1",
         "@sx-premium/drag-to-create": "^15.1.1",
         "@sx-premium/draw": "^15.1.1",
-        "@sx-premium/gantt-chart": "^15.6.0",
+        "@sx-premium/gantt-chart": "^15.7.1",
         "@sx-premium/interactive-event-modal": "^15.1.1",
         "@sx-premium/resource-scheduler": "^15.1.1",
         "@sx-premium/time-grid-resource-view": "^15.1.1",
