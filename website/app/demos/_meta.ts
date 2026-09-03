@@ -3,7 +3,7 @@ import type { MetaRecord } from 'nextra'
 const meta: MetaRecord = {
   'gantt-chart': {
     theme: {
-      layout: 'default',
+      layout: 'full',
       sidebar: false,
     },
   },
