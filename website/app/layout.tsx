@@ -23,7 +23,7 @@ import 'swiper/css'
 import '@fontsource-variable/podkova'
 
 import { Layout, Navbar } from 'nextra-theme-docs'
-import { Head } from 'nextra/components'
+import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import React from 'react'
@@ -39,6 +39,14 @@ const navbar = (
     logo={<Logo />}
     // ... Your additional navbar options
   />
+)
+
+const banner = (
+  <Banner storageKey="gantt-chart-launch">
+    <a href="/docs/calendar/gantt-chart">
+      🎉 The Gantt chart has landed. Explore the documentation and live demo →
+    </a>
+  </Banner>
 )
 
 export default async function RootLayout({
@@ -65,18 +73,11 @@ export default async function RootLayout({
           nextThemes={{
             forcedTheme: 'light',
           }}
+          banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/schedule-x/schedule-x/tree/main/website"
           footer={<CustomFooter />}
-          /* banner={<Banner key="v3-is-here" storageKey="v3-is-here" dismissible={false}>
-            <a href="/docs/calendar/major-version-migrations" target="_blank">
-              <span style={{ backgroundColor: '#f6e05e', color: '#000', borderRadius: '4px', padding: '2px 6px', marginRight: '5px', fontSize: '0.75rem' }}>
-              v3
-              </span>
-              is here! Temporal API, timezones, and more  🥳
-            </a>
-          </Banner>} */
         >
           {children}
         </Layout>
