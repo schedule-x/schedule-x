@@ -2,6 +2,13 @@
   padding: 1.5rem;
 }
 
+.ganttDemoPageWrapper {
+  width: min(calc(100vw - 2rem), 112rem);
+  max-width: none;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
 .demoSubheading {
   font-size: 2rem;
   font-weight: 700;
