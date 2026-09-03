@@ -412,4 +412,68 @@ describe('MonthAgendaWrapper', () => {
       ).toHaveLength(4)
     })
   })
+
+  describe('custom event sorting', () => {
+    const getAgendaTitles = () =>
+      Array.from(
+        document.querySelectorAll('.sx__month-agenda-event__title')
+      ).map((el) => el.textContent)
+
+    const sameDayEvents = [
+      {
+        id: 1,
+        title: 'A',
+        start: Temporal.ZonedDateTime.from(
+          '2027-01-27T09:00:00[Europe/Stockholm]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2027-01-27T10:00:00[Europe/Stockholm]'
+        ),
+      },
+      {
+        id: 2,
+        title: 'B',
+        start: Temporal.ZonedDateTime.from(
+          '2027-01-27T09:00:00[Europe/Stockholm]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2027-01-27T10:00:00[Europe/Stockholm]'
+        ),
+      },
+      {
+        id: 3,
+        title: 'C',
+        start: Temporal.ZonedDateTime.from(
+          '2027-01-27T09:00:00[Europe/Stockholm]'
+        ),
+        end: Temporal.ZonedDateTime.from(
+          '2027-01-27T10:00:00[Europe/Stockholm]'
+        ),
+      },
+    ]
+
+    it('keeps the default order when monthAgendaOptions.sortEvents is not set', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: Temporal.PlainDate.from('2027-01-27'),
+        events: sameDayEvents,
+      })
+      renderComponent($app)
+
+      expect(getAgendaTitles()).toEqual(['A', 'B', 'C'])
+    })
+
+    it('uses monthAgendaOptions.sortEvents to order the selected day events', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: Temporal.PlainDate.from('2027-01-27'),
+        events: sameDayEvents,
+        monthAgendaOptions: {
+          nEventIndicatorsPerDay: 3,
+          sortEvents: (a, b) => String(b.title).localeCompare(String(a.title)),
+        },
+      })
+      renderComponent($app)
+
+      expect(getAgendaTitles()).toEqual(['C', 'B', 'A'])
+    })
+  })
 })

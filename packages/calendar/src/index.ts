@@ -35,6 +35,10 @@ import TimeAxis from './components/week-grid/time-axis'
 import DateGridDay from './components/week-grid/date-grid-day'
 import { Week } from './types/week'
 import { sortEventsForWeekView } from './utils/stateless/events/sort-events-for-week'
+import {
+  sortEventsForMonthGrid,
+  sortEventsByStartAndEnd,
+} from './utils/stateless/events/sort-by-start-date'
 import { AppContext } from './utils/stateful/app-context'
 
 export type {
@@ -79,5 +83,7 @@ export {
   TimeAxis,
   DateGridDay,
   sortEventsForWeekView,
+  sortEventsForMonthGrid,
+  sortEventsByStartAndEnd,
   AppContext,
 }
