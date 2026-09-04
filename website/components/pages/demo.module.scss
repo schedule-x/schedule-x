@@ -3,9 +3,10 @@
 }
 
 .ganttDemoPageWrapper {
-  width: min(calc(100vw - 2rem), 112rem);
+  width: 100vw;
   max-width: none;
   margin-left: 50%;
+  padding: 1rem;
   transform: translateX(-50%);
 }
 
