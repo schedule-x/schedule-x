@@ -1,0 +1,336 @@
+---
+title: 'Gantt chart'
+description: 'Learn how to create and configure a Schedule-X Gantt chart.'
+---
+
+# Gantt chart
+
+Display and edit project tasks, milestones, dependencies, progress, constraints, and business calendars in a Schedule-X view.
+
+import { Callout } from 'nextra/components'
+
+<Callout type="info">
+  The Gantt chart is a premium feature and requires an active license. See
+  [Installing premium packages](/docs/calendar/installing-premium).
+</Callout>
+
+[Try the interactive demo](/demos/gantt-chart)
+
+## Installation
+
+```bash copy
+npm install @sx-premium/gantt-chart @schedule-x/calendar @schedule-x/theme-default temporal-polyfill
+```
+
+## Quick start
+
+Gantt tasks use a project model and are separate from Schedule-X calendar events.
+
+```ts copy
+import 'temporal-polyfill/global'
+import { createCalendar } from '@schedule-x/calendar'
+import { createGanttView } from '@sx-premium/gantt-chart'
+
+import '@schedule-x/theme-default/dist/calendar.css'
+import '@sx-premium/gantt-chart/index.css'
+
+const gantt = createGanttView({
+  project: {
+    start: Temporal.PlainDate.from('2026-09-01'),
+    tasks: [
+      { id: 'release', title: 'Release', kind: 'summary' },
+      {
+        id: 'design',
+        parentId: 'release',
+        title: 'Design',
+        duration: 5,
+        progress: 60,
+      },
+      {
+        id: 'build',
+        parentId: 'release',
+        title: 'Build',
+        duration: 8,
+        dependencies: [{ taskId: 'design' }],
+      },
+      {
+        id: 'launch',
+        parentId: 'release',
+        title: 'Launch',
+        kind: 'milestone',
+        dependencies: [{ taskId: 'build' }],
+      },
+    ],
+  },
+})
+
+const calendar = createCalendar({
+  views: [gantt],
+  defaultView: gantt.name,
+})
+
+calendar.render(document.getElementById('calendar'))
+```
+
+The Gantt view supplies its own header with the visible date range, date picker, Today button, project settings, and Add task action.
+
+## Project model
+
+```ts
+type GanttProject = {
+  start: Temporal.PlainDate
+  tasks: GanttTask[]
+  durationMode?: 'calendar-days' | 'business-days'
+  businessCalendar?: GanttBusinessCalendar
+  calendars?: Record<string, GanttBusinessCalendar>
+}
+
+type GanttBusinessCalendar = {
+  workingWeekdays?: number[]
+  holidays?: Temporal.PlainDate[]
+}
+```
+
+`start` is the earliest date from which the project is scheduled. `durationMode` defaults to `calendar-days`. In business-day mode, weekdays use Temporal's `1` (Monday) through `7` (Sunday) numbering.
+
+### Tasks
+
+All tasks require `id` and `title`, and can optionally use `parentId` and `colorName`.
+
+```ts
+type GanttActivity = {
+  kind?: 'activity'
+  id: string | number
+  title: string
+  duration: number
+  parentId?: string | number
+  colorName?: string
+  calendarId?: string
+  dependencies?: GanttDependency[]
+  constraint?: GanttConstraint
+  progress?: number
+}
+
+type GanttMilestone = Omit<GanttActivity, 'kind' | 'duration'> & {
+  kind: 'milestone'
+}
+
+type GanttSummary = Pick<
+  GanttActivity,
+  'id' | 'title' | 'parentId' | 'colorName'
+> & {
+  kind: 'summary'
+}
+```
+
+- Activities have a duration of at least one day.
+- Milestones have zero duration.
+- Summary dates and progress are calculated from their descendants.
+
+### Dependencies and constraints
+
+Dependencies are declared on the successor task. Finish-to-start with zero lag is the default.
+
+```ts
+type GanttDependency = {
+  taskId: string | number
+  type?:
+    | 'finish-to-start'
+    | 'start-to-start'
+    | 'finish-to-finish'
+    | 'start-to-finish'
+  lag?: number
+  lagMode?: 'calendar-days' | 'business-days'
+}
+
+type GanttConstraint = {
+  type: 'start-no-earlier-than' | 'must-start-on'
+  date: Temporal.PlainDate
+}
+```
+
+## View configuration
+
+```ts
+const gantt = createGanttView({
+  project,
+
+  // Layout defaults
+  dayWidth: 44,
+  rowHeight: 48,
+  taskListWidth: 280,
+
+  // Interaction defaults
+  draggable: true,
+  resizable: true,
+  progressEditable: true,
+
+  // Task colors
+  colorName: 'primary',
+  showTaskColorPickers: true,
+  taskColorPalette: [
+    'red',
+    'pink',
+    'purple',
+    'blue',
+    'cyan',
+    'green',
+    'yellow',
+    'orange',
+    'gray',
+  ],
+
+  onTaskClick(task, event) {},
+  onTaskDoubleClick(task, event) {},
+  onTaskUpdate(task, scheduledTasks) {},
+  onProjectChange(change, project, scheduledTasks) {},
+
+  taskEditor: {}, // or false
+  projectEditor: {}, // or false
+})
+```
+
+### Task colors
+
+`colorName` sets the default color for every task in the Gantt chart and defaults to `primary`. A task's own optional `colorName` takes precedence over the Gantt-wide value.
+
+The built-in task editor shows a color picker by default. Set `showTaskColorPickers` to `false` to hide it. The picker includes a **Default** option that removes the task-level override and returns the task to the Gantt-wide color.
+
+The standard palette contains `red`, `pink`, `purple`, `blue`, `cyan`, `green`, `yellow`, `orange`, and `gray`. Replace `taskColorPalette` to offer a different set of colors. Entries can be color-name strings or objects with a custom label:
+
+```ts copy
+const gantt = createGanttView({
+  project,
+  colorName: 'brand',
+  taskColorPalette: [
+    'blue',
+    'green',
+    { colorName: 'brand', label: 'Brand color' },
+  ],
+})
+```
+
+The standard color names have built-in fallbacks. A custom color name uses Schedule-X color tokens. Define all three tokens before using the name:
+
+```css copy
+:root {
+  --sx-color-brand: #6750a4;
+  --sx-color-brand-container: #eadfff;
+  --sx-color-on-brand-container: #2f176c;
+}
+```
+
+### Custom task bars
+
+Use `customTaskBar` to render task-bar content. It receives the target element, the scheduled task, and the Schedule-X app singleton.
+
+```ts
+const gantt = createGanttView({
+  project,
+  customTaskBar(element, { task, $app }) {
+    element.textContent = `${task.title} · ${task.progress ?? 0}%`
+  },
+})
+```
+
+## Editors
+
+The built-in task and project editors are enabled by default. Set either option to `false` to disable it.
+
+```ts
+const gantt = createGanttView({
+  project,
+  taskEditor: {
+    openOnDoubleClick: true,
+    openOnGridDoubleClick: true,
+    createTaskId: () => crypto.randomUUID(),
+    onBeforeSave: async ({ action, task, project }) => true,
+    onBeforeDelete: async ({ task, descendants, project }) => true,
+    customTaskEditor(element, props) {
+      // Render an editor and use props.setTask(), save(),
+      // deleteTask(), and close().
+    },
+  },
+  projectEditor: {
+    onBeforeSave: async ({ project }) => true,
+  },
+})
+```
+
+Returning `false` from a `onBefore*` callback cancels the action.
+
+## Updating the project
+
+`createGanttView` returns the normal Schedule-X view plus an imperative project API.
+
+```ts
+gantt.setProject(project)
+gantt.getProject()
+
+gantt.setTasks(tasks)
+gantt.getTasks()
+gantt.getTask(taskId)
+
+gantt.addTask(task)
+gantt.addTasks(tasks)
+gantt.updateTask(task)
+gantt.updateTasks(tasks)
+gantt.removeTask(taskId)
+gantt.removeTasks(taskIds)
+
+gantt.openTaskEditor(taskId)
+gantt.openTaskEditor({ parentId, kind: 'activity', start })
+gantt.closeTaskEditor()
+gantt.openProjectEditor()
+gantt.closeProjectEditor()
+```
+
+All mutations reschedule the project before updating the view. Invalid projects throw an error and are not applied.
+
+## Change callbacks
+
+`onTaskUpdate` is the narrow callback for user-driven changes such as dragging, resizing, and progress editing.
+
+`onProjectChange` receives the complete updated project and scheduled tasks. Its `change` value is one of:
+
+```ts
+type GanttProjectChange =
+  | { type: 'task-added'; task: GanttTask }
+  | { type: 'task-updated'; task: GanttTask; previousTask: GanttTask }
+  | { type: 'tasks-removed'; tasks: GanttTask[] }
+  | { type: 'project-updated'; previousProject: GanttProject }
+```
+
+## Scheduling and interaction
+
+- Activities are scheduled from durations, dependencies, lag, constraints, and calendars.
+- Summary dates and duration-weighted progress are derived from their descendants.
+- Activities and milestones can be dragged; summary tasks cannot.
+- Dragging changes a scheduling constraint rather than writing calculated dates onto a task.
+- Activities resize from the finish edge and keep a minimum duration of one day.
+- Progress is clamped to `0–100` and pointer editing uses whole percentages.
+- Named calendars override the project business calendar for tasks with a matching `calendarId`.
+
+## Validation and V1 limitations
+
+The scheduler rejects duplicate task IDs, missing parent or dependency references, hierarchy and dependency cycles, invalid durations, lag or progress, dependencies on summary tasks, unknown calendars, and impossible constraints.
+
+V1 does not include manual scheduling, baselines, critical-path calculation, resource leveling, summary dragging or resizing, start-edge resizing, or per-task interaction permissions.
+
+## Advanced exports
+
+The package also exports lower-level helpers for custom integrations:
+
+```ts
+import {
+  scheduleGanttProject,
+  flattenTasks,
+  getTaskBarGeometry,
+  getDependencyPath,
+  normalizeDependencies,
+  planGanttTaskDrag,
+  planGanttTaskResize,
+  getGanttTaskProgress,
+  planGanttTaskProgress,
+} from '@sx-premium/gantt-chart'
+```
