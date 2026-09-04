@@ -2,12 +2,20 @@
   padding: 1.5rem;
 }
 
-.ganttDemoPageWrapper {
-  width: 100vw;
-  max-width: none;
-  margin-left: 50%;
+.ganttDemoPageWrapper.ganttDemoPageWrapper {
+  --gantt-demo-max-width: 1450px;
+  --gantt-demo-half-max-width: 725px;
+
+  width: min(100vw, var(--gantt-demo-max-width));
+  max-width: var(--gantt-demo-max-width);
+  margin-left: calc(50% - min(50vw, var(--gantt-demo-half-max-width)));
   padding: 1rem;
-  transform: translateX(-50%);
+  overflow-x: auto;
+}
+
+.ganttDemoPageWrapper
+  [class~='sx__calendar-wrapper'][class~='is-gantt-view'] {
+  box-shadow: none;
 }
 
 .demoSubheading {
