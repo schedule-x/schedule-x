@@ -11,7 +11,12 @@ in-depth understanding and are therefore documented in separate pages.
 ## Options in the calendar config
 
 ```ts
-import { createCalendar, viewMonthGrid } from '@schedule-x/calendar'
+import {
+  createCalendar,
+  sortEventsByStartAndEnd,
+  sortEventsForMonthGrid,
+  viewMonthGrid,
+} from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
 const config = {
@@ -120,6 +125,27 @@ const config = {
      * Number of events to display in a day cell before the "+ N events" button is shown
      * */
     nEventsPerDay: 8,
+
+    /**
+     * Optional comparator for ordering events within each day cell.
+     * When omitted, events use the default month-grid sorting.
+     * */
+    sortEvents: (a, b) =>
+      Number(b.calendarId === 'work') - Number(a.calendarId === 'work') ||
+      sortEventsForMonthGrid(a, b),
+  },
+
+  monthAgendaOptions: {
+    /**
+     * Number of event indicators to display in a day cell.
+     * */
+    nEventIndicatorsPerDay: 3,
+
+    /**
+     * Optional comparator for ordering the selected day's events.
+     * When omitted, events are sorted by their start and end times.
+     * */
+    sortEvents: (a, b) => sortEventsByStartAndEnd(a, b),
   },
 
   /**
