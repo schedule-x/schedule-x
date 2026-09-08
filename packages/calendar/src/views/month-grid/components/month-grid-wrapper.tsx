@@ -57,9 +57,9 @@ export const MonthGridWrapper: PreactViewComponent = ({ $app, id }) => {
           $app.calendarEvents.filterPredicate.value
         )
       : $app.calendarEvents.list.value
-    setMonth(
-      positionInMonth(newMonth, filteredEvents.sort(sortEventsForMonthGrid))
-    )
+    const sortEvents =
+      $app.config.monthGridOptions.value.sortEvents ?? sortEventsForMonthGrid
+    setMonth(positionInMonth(newMonth, filteredEvents.sort(sortEvents)))
   })
 
   return (

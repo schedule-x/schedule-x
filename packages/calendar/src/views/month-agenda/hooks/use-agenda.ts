@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks'
 import { Agenda } from '../types/month-agenda'
 import { positionEventsInAgenda } from '../utils/stateless/position-events-in-agenda'
 import { sortEventsByStartAndEnd } from '../../../utils/stateless/events/sort-by-start-date'
+import { CalendarEventInternal } from '@schedule-x/shared/src/interfaces/calendar/calendar-event.interface'
 import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/calendar-app-singleton'
 import TimeUnits from '@schedule-x/shared/src/utils/stateful/time-units/time-units.interface'
 
@@ -12,7 +13,11 @@ type CreateGridFn = (
 
 export function useAgenda(
   $app: CalendarAppSingleton,
-  createGrid: CreateGridFn
+  createGrid: CreateGridFn,
+  sortEvents: (
+    a: CalendarEventInternal,
+    b: CalendarEventInternal
+  ) => number = sortEventsByStartAndEnd
 ): Agenda {
   const getAgenda = () => {
     const filteredEvents = $app.calendarEvents.filterPredicate.value
@@ -28,7 +33,7 @@ export function useAgenda(
         ),
         $app.timeUnitsImpl
       ),
-      filteredEvents.sort(sortEventsByStartAndEnd)
+      filteredEvents.sort(sortEvents)
     )
   }
 

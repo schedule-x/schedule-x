@@ -2,7 +2,9 @@ import Config from '../config.interface'
 import { DatePickerConfigExternal } from '../date-picker/config.interface'
 import { ViewName } from '../../types/calendar/view-name'
 import { View } from '../../types/calendar/view'
-import CalendarEventExternal from './calendar-event.interface'
+import CalendarEventExternal, {
+  CalendarEventInternal,
+} from './calendar-event.interface'
 import {
   DayBoundariesExternal,
   DayBoundariesInternal,
@@ -33,10 +35,20 @@ export type WeekOptions = {
 
 export type MonthGridOptions = {
   nEventsPerDay: number
+  /**
+   * Custom comparator for events within a month-grid day cell.
+   * When set, it replaces the default month-grid sorting entirely.
+   */
+  sortEvents?: (a: CalendarEventInternal, b: CalendarEventInternal) => number
 }
 
 export type MonthAgendaOptions = {
   nEventIndicatorsPerDay: number
+  /**
+   * Custom comparator for the events listed for the selected day in the
+   * month-agenda view. When set, it replaces the default sorting entirely.
+   */
+  sortEvents?: (a: CalendarEventInternal, b: CalendarEventInternal) => number
 }
 
 export type ColorDefinition = {

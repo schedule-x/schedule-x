@@ -10,7 +10,11 @@ import { useAgenda } from '../hooks/use-agenda'
 import { isSameDay } from '@schedule-x/shared/src/utils/stateless/time/comparison'
 
 export const MonthAgendaWrapper: PreactViewComponent = ({ $app, id }) => {
-  const agenda = useAgenda($app, createAgendaMonth)
+  const agenda = useAgenda(
+    $app,
+    createAgendaMonth,
+    $app.config.monthAgendaOptions.value.sortEvents
+  )
   const selectedMonth = $app.datePickerState.selectedDate.value.month
 
   useEffect(() => {

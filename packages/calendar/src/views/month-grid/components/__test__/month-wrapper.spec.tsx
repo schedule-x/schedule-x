@@ -8,6 +8,7 @@ import CalendarAppSingleton from '@schedule-x/shared/src/interfaces/calendar/cal
 import { cleanup, render, waitFor } from '@testing-library/preact'
 import { MonthGridWrapper } from '../month-grid-wrapper'
 import { __createAppWithViews__ } from '../../../../utils/stateless/testing/__create-app-with-views__'
+import { sortEventsForMonthGrid } from '../../../../utils/stateless/events/sort-by-start-date'
 import { afterEach } from 'vitest'
 import 'temporal-polyfill/global'
 
@@ -242,6 +243,56 @@ describe('MonthWrapper', () => {
       expect(weekNumbers[3].textContent).toBe('12')
       expect(weekNumbers[4].textContent).toBe('13')
       expect(weekNumbers[5].textContent).toBe('14')
+    })
+  })
+
+  describe('custom event sorting', () => {
+    // all events start on 2023-10-10; a later end makes a multi-day event
+    const makeEvent = (id: string, title: string, end: string) => ({
+      id,
+      title,
+      start: Temporal.PlainDate.from('2023-10-10'),
+      end: Temporal.PlainDate.from(end),
+    })
+    const events = [
+      makeEvent('c', 'C', '2023-10-10'),
+      makeEvent('b', 'B', '2023-10-12'),
+      makeEvent('a', 'A', '2023-10-10'),
+    ]
+
+    const titles = () => {
+      const cell = document.querySelector('[data-date="2023-10-10"]')
+      return Array.from(
+        cell?.querySelectorAll('.sx__month-grid-event-title') ?? []
+      ).map((el) => el.textContent)
+    }
+
+    it('keeps the default order when monthGridOptions.sortEvents is not set', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: Temporal.PlainDate.from('2023-10-01'),
+        events,
+      })
+      renderComponent($app)
+
+      // default sorting floats the multi-day event (B) to the top
+      expect(titles()).toEqual(['B', 'C', 'A'])
+    })
+
+    it('uses monthGridOptions.sortEvents to order events within a day cell', () => {
+      const $app = __createAppWithViews__({
+        selectedDate: Temporal.PlainDate.from('2023-10-01'),
+        events,
+        monthGridOptions: {
+          nEventsPerDay: 4,
+          sortEvents: (a, b) =>
+            String(a.title).localeCompare(String(b.title)) ||
+            sortEventsForMonthGrid(a, b),
+        },
+      })
+      renderComponent($app)
+
+      // custom comparator overrides the default multi-day float
+      expect(titles()).toEqual(['A', 'B', 'C'])
     })
   })
 })
