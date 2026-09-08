@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.8.0](https://github.com/schedule-x/schedule-x/compare/v4.7.0...v4.8.0) (2026-09-08)
+
+### Features
+
+- **calendar:** configurable event sorting for month views ([#1347](https://github.com/schedule-x/schedule-x/issues/1347)) ([8040f6c](https://github.com/schedule-x/schedule-x/commit/8040f6c38dbbc30b3758c0539785942fb5a5c8ec))
+
 # [4.7.0](https://github.com/schedule-x/schedule-x/compare/v4.6.1...v4.7.0) (2026-08-27)
 
 ### Features
