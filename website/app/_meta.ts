@@ -74,10 +74,6 @@ const meta: MetaRecord = {
       toc: false
     }
   },
-  'premium-changelog': {
-    display: 'hidden',
-    title: 'Changelog for Schedule-X premium'
-  },
   'validate-license-key': {
     display: 'hidden',
     title: 'Imprint',

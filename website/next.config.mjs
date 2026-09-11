@@ -7,5 +7,13 @@ const withNextra = nextra({
 
 // Export the final Next.js config with Nextra included
 export default withNextra({
-  // ... Add regular Next.js options here
+  async redirects() {
+    return [
+      {
+        source: '/premium-changelog',
+        destination: 'https://github.com/schedule-x/premium-changelog',
+        permanent: true,
+      },
+    ]
+  },
 })
