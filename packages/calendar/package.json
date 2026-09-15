@@ -31,7 +31,7 @@
   "peerDependencies": {
     "@preact/signals": "^2.0.2",
     "preact": "^10.19.2",
-    "temporal-polyfill": "0.3.0"
+    "temporal-polyfill": "^0.3.0"
   },
   "repository": {
     "type": "git",
