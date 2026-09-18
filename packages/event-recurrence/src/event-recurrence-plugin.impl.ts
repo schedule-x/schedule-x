@@ -16,7 +16,7 @@ import { DateRange } from '@schedule-x/shared/src/types/date-range'
 import { AugmentedBackgroundEvent } from './types/augmented-event'
 import { batch } from '@preact/signals'
 import { rruleStringToJS } from '@schedule-x/recurrence/src/parsers/rrule/parse-rrule'
-import { parseBydaySpec } from '@schedule-x/recurrence/src/rrule/utils/stateless/weekday-utils'
+import { parseBydaySpec, ParsedBydaySpec } from '@schedule-x/recurrence/src/rrule/utils/stateless/weekday-utils'
 
 class EventRecurrencePluginImpl implements EventRecurrencePlugin {
   name: string = PluginName.EventRecurrence
@@ -186,9 +186,28 @@ class EventRecurrencePluginImpl implements EventRecurrencePlugin {
     }
 
     if (rruleOptions.byday && rruleOptions.byday.length > 0) {
+      const parsedBydaySpecs: ParsedBydaySpec[] = []
       for (const daySpec of rruleOptions.byday) {
-        if (!parseBydaySpec(daySpec)) {
+        const parsed = parseBydaySpec(daySpec)
+        if (!parsed) {
           logValidationFailure(`rrule contains invalid BYDAY value ${daySpec}`)
+          return false
+        }
+        parsedBydaySpecs.push(parsed)
+      }
+
+      const allWithoutPosition = parsedBydaySpecs.every(
+        (s) => s.position === undefined
+      )
+      if (allWithoutPosition) {
+        // Temporal dayOfWeek: 1=Mon ... 6=Sat, 7=Sun (ISO 8601)
+        // parseBydaySpec weekday: 1=Mon ... 6=Sat, 0=Sun (JS day format)
+        const eventDayOfWeekJS = event.start.dayOfWeek % 7
+        const bydayWeekdays = parsedBydaySpecs.map((s) => s.weekday)
+        if (!bydayWeekdays.includes(eventDayOfWeekJS)) {
+          logValidationFailure(
+            "rrule BYDAY doesn't include the weekday of event.start"
+          )
           return false
         }
       }
