@@ -6,9 +6,10 @@
   grid-template-areas:
     "title"
     "description"
+    "highlight"
     "features"
     "button";
-  grid-template-rows: 1fr 1fr 219px 1fr;
+  grid-template-rows: auto 60px 1fr 100px auto;
   border-radius: 1rem;
   padding: 2rem;
   width: 300px;
@@ -33,6 +34,16 @@
     grid-area: description;
     color: rgb(13 13 13 / 40%);
     margin-bottom: 1rem;
+  }
+
+  .sales-card-highlight {
+    grid-area: highlight;
+    align-self: center;
+    margin: 0;
+    color: #6750a4;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
   }
 
   .sales-card-features {
@@ -62,9 +73,13 @@
 
   .btn-area {
     grid-area: button;
+    display: block;
+    width: 100%;
   }
 
   .btn {
+    display: block;
+    width: 100%;
     background: linear-gradient(to right, #6750a4 50%, #8c6fb7 100%);
     color: #fff;
     padding: 0.75rem 1.5rem;
@@ -74,6 +89,7 @@
     box-shadow: 0 0 10px rgb(0 0 0 / 10%);
     cursor: pointer;
     margin-top: 1rem;
+    white-space: nowrap;
 
     &:hover {
       transform: translateY(-2px);

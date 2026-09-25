@@ -174,18 +174,17 @@ export default function AppCheckout() {
 
             <SalesCard
               data={{
-                title: 'Enterprise',
-                description: 'All products, plus service and custom plugins',
+                title: 'Cloud',
+                description: 'Premium packages with a fully managed calendar backend',
+                highlight: 'End-to-End calendar in a few lines of code',
                 features: [
-                  'All products',
-                  'Service Level Agreement',
-                  'Custom-made plugins',
-                  'Private chat support',
-                  'Prioritized issue processing',
+                  'All Premium packages',
+                  'Fully managed backend',
+                  'Google Calendar sync',
                 ],
-                buttonText: 'Get in touch'
+                buttonText: 'Explore Cloud →'
               }}
-              buttonLink={'https://docs.google.com/forms/d/e/1FAIpQLSfE0G6RCUbnzbEUCMGEKcfUGx6XprAPU_IGRxNZ2UajizU7SA/viewform?usp=sf_link'}
+              buttonLink={'https://cloud.schedule-x.com/'}
               buttonClass={'black'}
             />
           </div>
