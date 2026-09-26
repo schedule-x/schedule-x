@@ -26,7 +26,6 @@ export default function LandingPage() {
     <>
       <div className={'landingPage page-wrapper'}>
         <section className="landingHero" aria-labelledby="landing-hero-title">
-          <p className="pageEyebrow">Open-source calendar UI for developers</p>
           <h1 id="landing-hero-title">
             The modern JavaScript event calendar
           </h1>
