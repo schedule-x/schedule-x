@@ -15,6 +15,7 @@ import TextValuePropDevs from '../components/partials/landing-page/text-value-pr
 import TextValuePropPremium from '../components/partials/landing-page/text-value-prop-premium'
 import LogoSlide from '../components/partials/landing-page/logo-slide'
 import Testimonials from '../components/partials/testimonials/testimonials'
+import CloudPromotion from '../components/partials/cloud-promotion/cloud-promotion'
 
 export const metadata: Metadata = {
   title: 'Modern JavaScript Event Calendar',
@@ -143,6 +144,8 @@ export default function LandingPage() {
             </video>
           </div>
         </section>
+
+        <CloudPromotion />
 
       </div>
     </>

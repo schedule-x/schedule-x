@@ -4,6 +4,7 @@ type props = {
   data: {
     title: string;
     description: string;
+    highlight: string;
     features: string[];
     buttonText: string;
   };
@@ -20,6 +21,8 @@ export default function SalesCard({ data, buttonClass, buttonLink, buttonCallbac
       </h3>
 
       <p className="sales-card-description">{data.description}</p>
+
+      <p className="sales-card-highlight">{data.highlight}</p>
 
       <ul className="sales-card-features">
         {data.features.map((feature, index) => (
