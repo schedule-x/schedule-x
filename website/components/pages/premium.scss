@@ -414,6 +414,8 @@ html {
   }
 }
 
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity -- This redesign overrides the legacy Premium-page rules above. */
+
 /* Editorial system shared with Schedule-X Cloud. */
 .premiumPage {
   max-width: none;

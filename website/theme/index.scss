@@ -42,6 +42,8 @@ html {
   }
 }
 
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity -- These marketing rules intentionally override the legacy theme below. */
+
 /* Marketing surfaces use the same restrained editorial styling as Cloud. */
 .landingPage .testimonials-section {
   width: 100%;

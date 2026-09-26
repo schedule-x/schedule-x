@@ -700,6 +700,8 @@ $heading-width: 900px;
   border-radius: 10px;
 }
 
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity -- This redesign overrides the legacy landing-page rules above. */
+
 /* Shared with the Schedule-X Cloud marketing site. */
 .landingPage {
   max-width: none;
