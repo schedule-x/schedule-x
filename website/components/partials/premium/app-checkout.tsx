@@ -3,7 +3,6 @@
 
 import { ProductVariant } from "../pricing-card/pricing-card"
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import PricingCard from "../pricing-card/pricing-card"
 import SalesCard from "../sales-card/sales-card"
@@ -123,11 +122,8 @@ export default function AppCheckout() {
     return (
         <section style={{ position: 'relative' }} id={'pricing'}
                  className={'landingPageSection premiumPage__pricing'}>
-          <Image className={'sectionImage'} src={'/images/website_section_fade_inclined.svg'} alt={'hello'}
-                 width={1400}
-                 height={479}/>
-
-          <h2 className={'premiumSectionHeading heading-font'}>Pricing</h2>
+          <p className="pageEyebrow">Simple pricing</p>
+          <h2 className={'premiumSectionHeading'}>Choose how you want to ship.</h2>
 
           <div className={'premiumPageCards'}>
             <PricingCard

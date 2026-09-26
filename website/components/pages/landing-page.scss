@@ -699,3 +699,351 @@ $heading-width: 900px;
 .landingPageDemoVideo {
   border-radius: 10px;
 }
+
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity -- This redesign overrides the legacy landing-page rules above. */
+
+/* Shared with the Schedule-X Cloud marketing site. */
+.landingPage {
+  max-width: none;
+  color: #171717;
+  overflow: hidden;
+
+  .pageEyebrow {
+    margin: 0 0 1.5rem;
+    color: #60636b;
+    font: 0.6875rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+}
+
+.landingHero {
+  width: 100%;
+  padding: 5.25rem 1.5rem 4rem;
+  text-align: center;
+
+  h1 {
+    max-width: 1100px;
+    margin: 0 auto 1.75rem;
+    color: #171717;
+    font-size: clamp(3.5rem, 6.75vw, 5.5rem);
+    font-weight: 600;
+    letter-spacing: -0.055em;
+    line-height: 1.02;
+  }
+
+  h2 {
+    max-width: 720px;
+    margin: 0 auto 1.875rem;
+    color: #55585f;
+    font-size: 1.1875rem;
+    font-weight: 400;
+    line-height: 1.6;
+    text-wrap: pretty;
+  }
+}
+
+.landingPageActions {
+  align-items: center;
+  justify-content: center;
+  gap: 1.875rem;
+  margin: 0;
+}
+
+.landingPageAction {
+  display: inline-flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #171717;
+  border-radius: 2px;
+  box-shadow: none;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.buttonPrimary {
+  background: #171717;
+  color: #fff;
+
+  &:hover {
+    background: #6750a4;
+    border-color: #6750a4;
+  }
+}
+
+.landingTextLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-bottom: 1px solid #aeb0b5;
+  color: #171717;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.6;
+
+  &:hover {
+    border-color: #171717;
+  }
+}
+
+.platformStrip {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1.125rem 1.5rem;
+  border-block: 1px solid #e5e5e7;
+  color: #5e6168;
+  font: 0.6875rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+
+  span + span::before {
+    width: 4px;
+    height: 4px;
+    display: inline-block;
+    margin-right: 2rem;
+    background: #7a7d83;
+    content: '';
+    vertical-align: middle;
+  }
+}
+
+.calendarShowcase {
+  width: 100%;
+  max-width: 1240px;
+  border-inline: 1px solid #e5e5e7;
+
+  .sx-react-calendar-wrapper {
+    width: 100%;
+    max-width: none;
+    height: 610px;
+    margin: 0;
+
+    .sx__calendar {
+      border: 0;
+      border-radius: 0;
+    }
+  }
+}
+
+.calendarShowcase__topline,
+.calendarShowcase__caption {
+  min-height: 3.25rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #e5e5e7;
+  color: #72757c;
+  font: 0.625rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.calendarShowcase__caption {
+  border-block: 1px solid #e5e5e7;
+
+  a {
+    color: #171717;
+    font-weight: 700;
+  }
+}
+
+.marquee-wrapper {
+  max-width: 1240px;
+  margin: 4.5rem 0 2rem;
+  padding: 0 1.5rem;
+}
+
+.landingPageSection {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 6rem max(1.5rem, calc((100% - 1160px) / 2));
+  border-top: 1px solid #e5e5e7;
+}
+
+.features-heading {
+  max-width: 760px;
+  margin-bottom: 3rem;
+
+  .featuresText {
+    margin-bottom: 1rem;
+    color: #60636b;
+    font: 0.6875rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    margin-bottom: 1.5rem;
+    color: #171717;
+    font-size: clamp(2.5rem, 4vw, 3.25rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+  }
+
+  p {
+    max-width: 670px;
+    margin-bottom: 0;
+    color: #666a72;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+.landingPageCards {
+  width: 100%;
+  max-width: 1160px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border: 1px solid #cfd1d5;
+
+  + .landingPageCards {
+    border-top: 0;
+  }
+
+  .landing-page-card + .landing-page-card {
+    border-left: 1px solid #cfd1d5;
+  }
+}
+
+.premiumLandingSection {
+  background: #f4f5f6;
+
+  .features-heading {
+    max-width: 1000px;
+    margin-bottom: 0;
+  }
+
+  ul {
+    width: 100%;
+    max-width: 720px;
+    margin: 2rem 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #cacdd2;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 0;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid #cacdd2;
+      color: #52555b;
+      font-size: 0.875rem;
+    }
+  }
+
+  .landingPageDemoVideo {
+    width: 100%;
+    margin-top: 1rem;
+    border: 1px solid #cacdd2;
+    border-radius: 0;
+  }
+}
+
+.comparisonStatus {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid currentcolor;
+  border-radius: 2px;
+  font: 700 0.75rem/1 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  &.isNegative {
+    background: #fff6f5;
+    color: #9a4b45;
+  }
+
+  &.isPositive {
+    background: #edf5f2;
+    color: #26735c;
+  }
+}
+
+.cloudSection {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 7rem max(1.5rem, calc((100% - 1180px) / 2)) 6rem;
+  border-top: 1px solid #e5e5e7;
+}
+
+.cloudSectionCapabilities {
+  li,
+  span {
+    border-radius: 2px;
+  }
+}
+
+.cloudIntegrationPanel {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (width <= 800px) {
+  .landingHero {
+    padding: 3.25rem 1.5rem 2.75rem;
+
+    h1 {
+      font-size: clamp(2.75rem, 11vw, 4rem);
+    }
+
+    h2 {
+      font-size: 1rem;
+    }
+  }
+
+  .platformStrip {
+    gap: 0.75rem 1.25rem;
+    font-size: 0.5625rem;
+
+    span + span::before {
+      margin-right: 1.25rem;
+    }
+  }
+
+  .calendarShowcase {
+    border-inline: 0;
+
+    .sx-react-calendar-wrapper {
+      height: 520px;
+    }
+  }
+
+  .landingPageSection {
+    padding-block: 4rem;
+  }
+
+  .cloudSection {
+    padding-top: 5rem;
+  }
+
+  .landingPageCards {
+    grid-template-columns: 1fr;
+
+    .landing-page-card + .landing-page-card {
+      border-top: 1px solid #cfd1d5;
+      border-left: 0;
+    }
+  }
+
+  .calendarShowcase__topline,
+  .calendarShowcase__caption {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

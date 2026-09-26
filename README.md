@@ -1,4 +1,10 @@
-![Schedule-X](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-logo.png)
+<p align="center">
+  <img
+    src="https://cloud.schedule-x.com/_astro/schedule-x-cloud-logo-light.Bc3xEzXS.png"
+    alt="Schedule-X"
+    width="648"
+  />
+</p>
 
 [![Build Status](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml)
 [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg?sanitize=true)](https://discord.gg/yHbT3C4M8w)

@@ -1,7 +1,5 @@
 import '@schedule-x/theme-default/dist/index.css'
-import AppUnderline from '../../components/partials/svg/underline'
 import Link from 'next/link'
-import Image from 'next/image'
 import ModalIcon from '../../components/partials/icons/modal-icon'
 import SidebarIcon from '../../components/partials/icons/sidebar-icon'
 import DragIcon from '../../components/partials/icons/drag-icon'
@@ -13,7 +11,7 @@ import FAQ from '../../components/partials/premium/faq'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Schedule-X | Material Design Event Calendar',
+  title: 'Schedule-X Premium | Advanced Calendar Components',
   description:
     'Premium components for Schedule-X. Resource scheduler, event modal with form, drag-and-drop event creation and more.',
 }
@@ -23,57 +21,62 @@ export default function PremiumPage() {
     <>
       <div className={'premiumPage page-wrapper'}>
         <section className={'premiumPage__heroAndDemo'}>
+          <p className="pageEyebrow">Schedule-X Premium</p>
           <h1>
-            Ship even faster with
-            <div className="headingGradient">
-              <AppUnderline className="app-underline" />
-              Premium
-            </div>
+            Build the advanced calendar.<br />Skip the advanced calendar work.
           </h1>
 
           <h2 className={'heroSubHeading'}>
-            Don't waste time building event forms, a resource view,
-            drag-to-create, or event drawing. Someone already built all that for
-            you.
+            Add polished scheduling workflows—resource views, event forms,
+            drag-to-create, drawing, and Gantt—without turning them into a
+            multi-month engineering project.
           </h2>
 
           <div className={'premiumPageActions'}>
-            <Link href={'#pricing'}>
-              <button className={'premiumPageAction buttonPrimary'}>
-                Pricing →
-              </button>
+            <Link className="premiumPageAction buttonPrimary" href={'#pricing'}>
+              <span>See pricing</span><span aria-hidden="true">→</span>
+            </Link>
+            <Link className="premiumTextLink" href={'/docs/calendar/installing-premium'}>
+              Read the docs <span aria-hidden="true">→</span>
             </Link>
           </div>
 
-          <video
-            autoPlay
-            loop
-            playsInline
-            muted
-            id={'demo'}
-            className="premiumPageDemoVideo"
-            width={1000}
-            height={390}
-          >
-            <source
-              src={
-                'https://d19hgxvhjb2new.cloudfront.net/website/premium-demo.mp4'
-              }
-              type={'video/mp4'}
-            />
-          </video>
+          <div className="premiumCapabilityStrip" aria-label="Premium features">
+            <span>Gantt chart</span>
+            <span>Event forms</span>
+            <span>Resource views</span>
+            <span>Drag-to-create</span>
+          </div>
+
+          <div className="premiumDemoFrame">
+            <div className="premiumDemoFrame__topline">
+              <span>Premium in action</span>
+              <span>Interactive scheduling workflows</span>
+            </div>
+            <video
+              autoPlay
+              loop
+              playsInline
+              muted
+              id={'demo'}
+              className="premiumPageDemoVideo"
+              width={1000}
+              height={390}
+            >
+              <source
+                src={'https://d19hgxvhjb2new.cloudfront.net/website/premium-demo.mp4'}
+                type={'video/mp4'}
+              />
+            </video>
+          </div>
         </section>
 
         <section className={'premiumFeatures landingPageSection'}>
-          <Image
-            className={'sectionImage'}
-            src={'/images/website_section_fade_pink_boxes.svg'}
-            alt={''}
-            width={1400}
-            height={479}
-          />
-
-          <h2 className={'premiumSectionHeading heading-font'}>Features</h2>
+          <div className="premiumSectionIntro">
+            <p className="pageEyebrow">Everything included</p>
+            <h2 className={'premiumSectionHeading'}>Complex interactions. Ready to install.</h2>
+            <p>Premium components share the same API and design language as the open-source calendar, so your product stays coherent as it grows.</p>
+          </div>
 
           <div className="features-grid">
             <div className="premium-feature">

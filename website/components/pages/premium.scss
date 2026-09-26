@@ -414,3 +414,467 @@ html {
   }
 }
 
+/* stylelint-disable no-duplicate-selectors, no-descending-specificity -- This redesign overrides the legacy Premium-page rules above. */
+
+/* Editorial system shared with Schedule-X Cloud. */
+.premiumPage {
+  max-width: none;
+  color: #171717;
+  overflow: hidden;
+
+  .pageEyebrow {
+    margin: 0 0 1.5rem;
+    color: #60636b;
+    font: 0.6875rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    text-transform: uppercase;
+  }
+
+  .buttonPrimary {
+    border-color: #171717;
+    background: #171717;
+    color: #fff;
+
+    &:hover {
+      border-color: #6750a4;
+      background: #6750a4;
+    }
+  }
+}
+
+.premiumPage__heroAndDemo {
+  min-height: 0;
+  padding: 5.25rem 0 0;
+
+  > .pageEyebrow,
+  > h1,
+  > .heroSubHeading,
+  > .premiumPageActions {
+    padding-inline: 1.5rem;
+  }
+}
+
+.premiumPage h1 {
+  max-width: 1160px;
+  margin: 0 auto 1.75rem;
+  color: #171717;
+  font-size: clamp(3.5rem, 6.75vw, 5.5rem);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+}
+
+.premiumPage .heroSubHeading {
+  max-width: 720px;
+  margin: 0 auto 1.875rem;
+  color: #55585f;
+  font-size: 1.1875rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.premiumPageActions {
+  align-items: center;
+  justify-content: center;
+  gap: 1.875rem;
+  margin-bottom: 4rem;
+}
+
+.premiumPageAction {
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #171717;
+  border-radius: 2px;
+  box-shadow: none;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.premiumTextLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-bottom: 1px solid #aeb0b5;
+  color: #171717;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.6;
+
+  &:hover {
+    border-color: #171717;
+  }
+}
+
+.premiumCapabilityStrip {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1.125rem 1.5rem;
+  border-block: 1px solid #e5e5e7;
+  color: #5e6168;
+  font: 0.6875rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+
+  span + span::before {
+    width: 4px;
+    height: 4px;
+    display: inline-block;
+    margin-right: 2rem;
+    background: #7a7d83;
+    content: '';
+    vertical-align: middle;
+  }
+}
+
+.premiumDemoFrame {
+  width: 100%;
+  max-width: 1240px;
+  border-inline: 1px solid #e5e5e7;
+}
+
+.premiumDemoFrame__topline {
+  min-height: 3.25rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #e5e5e7;
+  color: #72757c;
+  font: 0.625rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-transform: uppercase;
+}
+
+.premiumPageDemoVideo {
+  width: 100%;
+  max-width: none;
+  display: block;
+  margin: 0;
+  border-radius: 0;
+}
+
+.premiumFeatures.landingPageSection {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 6rem max(1.5rem, calc((100% - 1160px) / 2));
+  align-items: stretch;
+  border-top: 1px solid #e5e5e7;
+  background: #f7f8f9;
+}
+
+.premiumSectionIntro {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+  text-align: center;
+
+  .pageEyebrow {
+    margin-bottom: 1rem;
+  }
+
+  > p:last-child {
+    max-width: 670px;
+    margin: 0 auto;
+    color: #666a72;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+.premiumSectionHeading {
+  margin: 0 0 1.5rem;
+  color: #171717;
+  font-size: clamp(2.5rem, 4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  text-align: center;
+}
+
+.features-grid {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  align-items: stretch;
+  border: 1px solid #cfd1d5;
+  background: #fff;
+}
+
+.premium-feature {
+  width: auto;
+  min-height: 235px;
+  padding: 1.75rem;
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'icon title'
+    'icon description'
+    'icon links';
+  align-content: start;
+  column-gap: 1rem;
+  border-radius: 0;
+  border-right: 1px solid #cfd1d5;
+  border-bottom: 1px solid #cfd1d5;
+
+  &:nth-child(3n) {
+    border-right: 0;
+  }
+
+  &:nth-last-child(-n + 3) {
+    border-bottom: 0;
+  }
+
+  h3 {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+    color: #171717;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  .description {
+    color: #666a72;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+
+  .links {
+    gap: 1.25rem;
+    margin-top: 1rem;
+    font: 0.6875rem/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.premiumPage__pricing.landingPageSection {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 6rem max(1.5rem, calc((100% - 1160px) / 2));
+  border-top: 1px solid #e0e2e5;
+  background: #fff;
+
+  .sectionImage {
+    display: none;
+  }
+}
+
+.premiumPageCards {
+  width: 100%;
+  max-width: 1160px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 0 2rem;
+  border: 1px solid #cacdd2;
+}
+
+.premiumPage {
+  .pricing-card,
+  .sales-card {
+    width: auto;
+    min-width: 0;
+    min-height: 510px;
+    padding: 1.875rem;
+    border: 0;
+    border-right: 1px solid #cacdd2;
+    border-radius: 0;
+    text-align: left;
+    box-shadow: none;
+
+    h3 {
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid #dadce0;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
+    .pricing-card-description,
+    .sales-card-description {
+      color: #686b71;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+    }
+
+    .pricing-card-price-wrapper {
+      align-items: flex-start;
+    }
+
+    .pricing-card-price {
+      color: #171717;
+      font-size: 3rem;
+      letter-spacing: -0.04em;
+    }
+
+    .pricing-card-price-period {
+      color: #73767c;
+      font-size: 0.75rem;
+      letter-spacing: 0;
+    }
+
+    .pricing-card-features,
+    .sales-card-features {
+      li {
+        color: #52555b;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+      }
+    }
+
+    .btn {
+      min-height: 3rem;
+      border: 1px solid #171717;
+      border-radius: 2px;
+      background: #171717;
+      box-shadow: none;
+      font-size: 0.8125rem;
+
+      &:hover {
+        transform: none;
+        background: #6750a4;
+        border-color: #6750a4;
+      }
+    }
+  }
+
+  .sales-card {
+    border-right: 0;
+    background: #171717;
+    color: #fff;
+
+    h3 {
+      border-color: #3c3c3c;
+    }
+
+    .sales-card-description,
+    .sales-card-features li {
+      color: #c8c9cc;
+    }
+
+    .sales-card-highlight {
+      color: #fff;
+      font-size: 1.45rem;
+      font-weight: 500;
+    }
+
+    .btn.black {
+      border-color: #fff;
+      background: #fff;
+      color: #171717;
+    }
+  }
+}
+
+.faq {
+  margin: 0;
+  padding: 6rem 1.5rem;
+  border-top: 1px solid #e5e5e7;
+
+  .premiumSectionHeading {
+    margin-bottom: 3rem;
+    font-family: inherit;
+  }
+
+  .rs-panel-group {
+    border: 1px solid #cacdd2;
+    border-radius: 0;
+  }
+
+  .rs-panel {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .rs-panel + .rs-panel {
+    border-top: 1px solid #cacdd2;
+  }
+
+  .rs-panel-btn {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+@media (width <= 800px) {
+  .premiumPage__heroAndDemo {
+    padding-top: 3.25rem;
+  }
+
+  .premiumPage h1 {
+    font-size: clamp(2.75rem, 11vw, 4rem);
+  }
+
+  .premiumPage .heroSubHeading {
+    font-size: 1rem;
+  }
+
+  .premiumCapabilityStrip {
+    gap: 0.75rem 1.25rem;
+    font-size: 0.5625rem;
+
+    span + span::before {
+      margin-right: 1.25rem;
+    }
+  }
+
+  .premiumDemoFrame {
+    border-inline: 0;
+  }
+
+  .premiumDemoFrame__topline {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .premiumFeatures.landingPageSection,
+  .premiumPage__pricing.landingPageSection {
+    padding-block: 4rem;
+  }
+
+  .features-grid,
+  .premiumPageCards {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-feature,
+  .premium-feature:nth-child(3n),
+  .premium-feature:nth-last-child(-n + 3) {
+    border-right: 0;
+    border-bottom: 1px solid #cfd1d5;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  .premiumPage .pricing-card,
+  .premiumPage .sales-card {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid #cacdd2;
+  }
+
+  .premiumPage .sales-card {
+    border-bottom: 0;
+  }
+}

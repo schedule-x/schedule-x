@@ -51,3 +51,41 @@
     }
   }
 }
+
+.landingPage .landing-page-card {
+  width: auto;
+  min-height: 220px;
+  padding: 1.75rem;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'icon title'
+    'icon description';
+  align-content: start;
+  column-gap: 1rem;
+  background: #fff;
+
+  .landing-page-card-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0;
+    padding: 0.55rem;
+    border-radius: 2px;
+    background: #6750a4;
+  }
+
+  h2 {
+    margin: 0 0 0.75rem;
+    color: #171717;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+
+  p {
+    margin: 0;
+    color: #666a72;
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+}
