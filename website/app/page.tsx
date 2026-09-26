@@ -61,8 +61,7 @@ export default function LandingPage() {
           </div>
           <AppCalendar/>
           <div className="calendarShowcase__caption">
-            <span>A production-ready calendar, running directly in the browser.</span>
-            <Link href="/demos/calendar">Open full demo →</Link>
+            <span>Try dragging or resizing an event</span>
           </div>
         </section>
 
