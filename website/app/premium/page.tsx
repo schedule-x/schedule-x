@@ -73,7 +73,6 @@ export default function PremiumPage() {
 
         <section className={'premiumFeatures landingPageSection'}>
           <div className="premiumSectionIntro">
-            <p className="pageEyebrow">Everything included</p>
             <h2 className={'premiumSectionHeading'}>Complex interactions. Ready to install.</h2>
             <p>Premium components share the same API and design language as the open-source calendar, so your product stays coherent as it grows.</p>
           </div>

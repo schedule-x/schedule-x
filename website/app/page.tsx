@@ -143,7 +143,7 @@ export default function LandingPage() {
                 <span className="comparisonStatus isNegative" aria-label="Not included">×</span>
               </li>
               <li>
-                <span>Install and configure Schedule-X premium ~1 hour</span>
+                <span>Install and configure Schedule-X premium ~30 minutes</span>
                 <span className="comparisonStatus isPositive" aria-label="Included">✓</span>
               </li>
             </ul>

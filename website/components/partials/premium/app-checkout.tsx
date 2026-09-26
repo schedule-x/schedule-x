@@ -122,7 +122,6 @@ export default function AppCheckout() {
     return (
         <section style={{ position: 'relative' }} id={'pricing'}
                  className={'landingPageSection premiumPage__pricing'}>
-          <p className="pageEyebrow">Simple pricing</p>
           <h2 className={'premiumSectionHeading'}>Choose how you want to ship.</h2>
 
           <div className={'premiumPageCards'}>
