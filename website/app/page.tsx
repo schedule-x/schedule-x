@@ -26,7 +26,6 @@ export default function LandingPage() {
     <>
       <div className={'landingPage page-wrapper'}>
         <section className="landingHero" aria-labelledby="landing-hero-title">
-          <p className="pageEyebrow">Open-source calendar UI for developers</p>
           <h1 id="landing-hero-title">
             The modern JavaScript event calendar
           </h1>
@@ -62,8 +61,7 @@ export default function LandingPage() {
           </div>
           <AppCalendar/>
           <div className="calendarShowcase__caption">
-            <span>A production-ready calendar, running directly in the browser.</span>
-            <Link href="/demos/calendar">Open full demo →</Link>
+            <span>Try dragging or resizing an event</span>
           </div>
         </section>
 
@@ -143,7 +141,7 @@ export default function LandingPage() {
                 <span className="comparisonStatus isNegative" aria-label="Not included">×</span>
               </li>
               <li>
-                <span>Install and configure Schedule-X premium ~1 hour</span>
+                <span>Install and configure Schedule-X premium ~30 minutes</span>
                 <span className="comparisonStatus isPositive" aria-label="Included">✓</span>
               </li>
             </ul>

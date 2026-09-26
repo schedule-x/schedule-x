@@ -824,6 +824,7 @@ $heading-width: 900px;
     height: 610px;
     margin: 0;
 
+    .sx__calendar-wrapper,
     .sx__calendar {
       border: 0;
       border-radius: 0;
@@ -847,11 +848,6 @@ $heading-width: 900px;
 
 .calendarShowcase__caption {
   border-block: 1px solid #e5e5e7;
-
-  a {
-    color: #171717;
-    font-weight: 700;
-  }
 }
 
 .marquee-wrapper {
