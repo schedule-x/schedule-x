@@ -5,7 +5,8 @@ import {Accordion} from 'rsuite';
 export default function FAQ() {
     return <>
     <section className={'faq'}>
-          <h2 className={'premiumSectionHeading heading-font'}>FAQ</h2>
+          <p className="pageEyebrow">Questions, answered</p>
+          <h2 className={'premiumSectionHeading'}>Before you get started.</h2>
 
           <Accordion style={{ width: '100%', maxWidth: '950px' }}>
             <Accordion.Panel header="Can I use the license commercially?" defaultExpanded>

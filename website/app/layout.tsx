@@ -66,7 +66,16 @@ export default async function RootLayout({
       <Head
       // ... Your additional head options
       >
-        {/* Your additional tags should be passed as `children` of `<Head>` element */}
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="120x120"
+          href="https://cloud.schedule-x.com/favicon.png"
+        />
+        <link
+          rel="apple-touch-icon"
+          href="https://cloud.schedule-x.com/favicon.png"
+        />
       </Head>
       <body>
         <Layout

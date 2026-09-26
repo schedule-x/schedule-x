@@ -42,12 +42,138 @@ html {
   }
 }
 
+/* Marketing surfaces use the same restrained editorial styling as Cloud. */
+.landingPage .testimonials-section {
+  width: 100%;
+  margin: 0;
+  padding: 6rem max(1.5rem, calc((100% - 1160px) / 2));
+  border-top: 1px solid #e5e5e7;
+  background: #f7f8f9;
+
+  &::before {
+    display: none;
+  }
+}
+
+.landingPage .testimonials-container {
+  max-width: 1160px;
+  padding: 0;
+}
+
+.landingPage .testimonials-heading {
+  margin-bottom: 1.25rem;
+  color: #171717;
+  font-size: clamp(2.5rem, 4vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+
+  &::after {
+    display: none;
+  }
+}
+
+.landingPage .testimonials-subtitle {
+  max-width: 650px;
+  margin-bottom: 3rem;
+  color: #666a72;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.landingPage .testimonials-grid {
+  max-width: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid #cfd1d5;
+}
+
+.landingPage .testimonial-card {
+  min-height: 310px;
+  padding: 2rem;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #fff;
+
+  &::before {
+    display: none;
+  }
+
+  + .testimonial-card {
+    border-left: 1px solid #cfd1d5;
+  }
+
+  &:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.landingPage .testimonial-name {
+  color: #171717;
+}
+
+.landingPage .testimonial-content,
+.landingPage .testimonial-role {
+  color: #666a72;
+}
+
+@media (width <= 768px) {
+  .scheduleXBrand__logo {
+    width: 138px;
+  }
+
+  .landingPage .testimonials-section {
+    padding-block: 4rem;
+  }
+
+  .landingPage .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landingPage .testimonial-card + .testimonial-card {
+    border-top: 1px solid #cfd1d5;
+    border-left: 0;
+  }
+}
+
 body {
   background-color: #fff;
+  color: #171717;
 }
 
 .nextra-navbar {
   background-color: #fff;
+  border-bottom: 1px solid #e2e4e9;
+  box-shadow: none;
+}
+
+.nextra-navbar-blur {
+  background: rgb(255 255 255 / 96%);
+  backdrop-filter: none;
+}
+
+.scheduleXBrand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.scheduleXBrand__logo {
+  width: 166px;
+  height: auto;
+  display: block;
+}
+
+@media (width <= 768px) {
+  .scheduleXBrand__logo {
+    width: 138px;
+  }
+}
+
+.nextra-navbar a,
+.nextra-navbar button {
+  border-radius: 2px;
 }
 
 .nextra-sidebar-footer {

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
@@ -59,14 +58,6 @@ function CodeSnippet({ lines }: { lines: ReactNode[] }) {
 export default function CloudPromotion() {
   return (
     <section className={'cloudSection'} aria-labelledby={'cloud-section-heading'}>
-      <Image
-        className={'sectionImage'}
-        src={'/images/website_section_fade_inclined.svg'}
-        alt={''}
-        width={1400}
-        height={479}
-      />
-
       <div className={'features-heading cloudSectionHeading'}>
         <div className={'featuresText'}>Schedule-X Cloud</div>
 
