@@ -131,9 +131,11 @@ export default function CloudPromotion() {
 
         <div className={'cloudIntegrationResult'}>
           <span className={'cloudResultIcon'} aria-hidden={'true'}>✓</span>
-          <div>
+          <div className={'cloudIntegrationResultCopy'}>
             <strong>Calendar connected</strong>
-            <span>Premium UI, managed data, and Google Calendar stay in sync.</span>
+            <span className={'cloudIntegrationResultDescription'}>
+              Premium UI, managed data, and Google Calendar stay in sync.
+            </span>
           </div>
         </div>
       </div>
