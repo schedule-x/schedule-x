@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarPlPL: CalendarTranslations = {
   Today: 'Dzisiaj',
   Month: 'Miesiąc',
+  Year: 'Rok',
   Week: 'Tydzień',
   Day: 'Dzień',
   List: 'Lista',

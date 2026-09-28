@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarLtLT: CalendarTranslations = {
   Today: 'Šiandien',
   Month: 'Mėnuo',
+  Year: 'Metai',
   Week: 'Savaitė',
   Day: 'Diena',
   List: 'Sąrašas',

@@ -2,6 +2,7 @@ import CalendarConfigInternal, {
   CalendarType,
   MonthGridOptions,
   MonthAgendaOptions,
+  YearGridOptions,
   WeekOptions,
   ResourceGridOptions,
 } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
@@ -33,6 +34,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
   maxDate: Signal<Temporal.PlainDate | undefined>
   monthGridOptions: Signal<MonthGridOptions>
   monthAgendaOptions: Signal<MonthAgendaOptions>
+  yearGridOptions: Signal<YearGridOptions>
   locale: Signal<string> = signal(DEFAULT_LOCALE)
   theme: string | undefined
   translations: Signal<Record<string, Language>>
@@ -65,6 +67,9 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     monthAgendaOptions: MonthAgendaOptions = {
       nEventIndicatorsPerDay: 3,
     },
+    yearGridOptions: YearGridOptions = {
+      nEventIndicatorsPerDay: 3,
+    },
     theme: string | undefined = undefined,
     translations: Record<string, Language> = {},
     showWeekNumbers: boolean = false,
@@ -84,6 +89,7 @@ export default class CalendarConfigImpl implements CalendarConfigInternal {
     this.maxDate = signal(maxDate)
     this.monthGridOptions = signal(monthGridOptions)
     this.monthAgendaOptions = signal(monthAgendaOptions)
+    this.yearGridOptions = signal(yearGridOptions)
     this.theme = theme
     this.translations = signal(translations)
     this.showWeekNumbers = signal(showWeekNumbers)

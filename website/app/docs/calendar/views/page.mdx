@@ -6,7 +6,7 @@ description: 'Learn about the different views available in the Schedule-X calend
 # Calendar views
 
 The views are the most basic building blocks of the calendar. There are
-currently 6 views available, as listed below, but first:
+currently 7 views available, as listed below, but first:
 
 ## A note on screen sizes
 
@@ -23,9 +23,10 @@ large screens.
 ## The available views
 
 | View name                                                    | Large screens | Small screens |
-|--------------------------------------------------------------|---------------|---------------|
+| ------------------------------------------------------------ | ------------- | ------------- |
 | Day                                                          | Yes           | Yes           |
 | Month grid                                                   | Yes           | No            |
+| Year grid                                                    | Yes           | Yes           |
 | Month agenda                                                 | No            | Yes           |
 | Week agenda                                                  | No            | Yes           |
 | Week                                                         | Yes           | No            |
@@ -42,12 +43,21 @@ import {
   createViewMonthGrid,
   createViewWeek,
   createViewList,
-  createCalendar
+  createViewYearGrid,
+  createCalendar,
 } from '@schedule-x/calendar'
 import '@schedule-x/theme-default/dist/index.css'
 
 const calendar = createCalendar({
-  views: [createViewDay(), createViewWeekAgenda(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek(), createViewList()],
+  views: [
+    createViewDay(),
+    createViewWeekAgenda(),
+    createViewMonthAgenda(),
+    createViewMonthGrid(),
+    createViewWeek(),
+    createViewList(),
+    createViewYearGrid(),
+  ],
 
   events: [],
 })
@@ -55,28 +65,41 @@ const calendar = createCalendar({
 calendar.render(document.getElementById('calendar'))
 ```
 
+### Year grid interactions
+
+Clicking a date with events opens a compact list of the events on that day. If the [event modal plugin](/docs/calendar/plugins/event-modal) is configured, clicking an event in that list opens its event modal.
+
+Double-clicking a date opens the day view when `createViewDay()` is included in `views`. You can replace that behavior with the `onDoubleClickYearGridDate` callback.
+
 ## Loading events
 
 The strategy for loading events will differ slightly depending on the view.
 
-### Day, Week and Agenda views
+### Day, Week, Month, Year and Agenda views
 
-When a user navigates to new days, weeks or months, the calendar will invoke `onRangeUpdate`, which
+When a user navigates to new days, weeks, months or years, the calendar will invoke `onRangeUpdate`, which
 you can use to load the events for the new range.
 
-```ts 
+```ts
 const calendar = createCalendar({
-  views: [createViewDay(), createViewWeekAgenda(), createViewMonthAgenda(), createViewMonthGrid(), createViewWeek()],
- 
+  views: [
+    createViewDay(),
+    createViewWeekAgenda(),
+    createViewMonthAgenda(),
+    createViewMonthGrid(),
+    createViewWeek(),
+    createViewYearGrid(),
+  ],
+
   events: [],
 
   callbacks: {
     onRangeUpdate: ({ start, end }) => {
       // Load events for the new range
-    }
-  }
+    },
+  },
 })
- 
+
 calendar.render(document.getElementById('calendar'))
 ```
 
@@ -86,18 +109,18 @@ The list view is a bit different. When a user scrolls through the list, the cale
 You can then use this callback as a hint for when to load more events. For example, if you start by loading all events for January 2026,
 you can then use this callback to load events for February 2026, when the user reaches one of the last days of January.
 
-```ts 
+```ts
 const calendar = createCalendar({
   views: [createViewList()],
- 
+
   events: [],
 
   callbacks: {
     onScrollDayIntoView: (date) => {
       // Load events for the new range
-    }
-  }
+    },
+  },
 })
- 
+
 calendar.render(document.getElementById('calendar'))
 ```

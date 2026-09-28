@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarRoRO: CalendarTranslations = {
   Today: 'Astăzi',
   Month: 'Lună',
+  Year: 'An',
   Week: 'Săptămână',
   Day: 'Zi',
   List: 'Listă',

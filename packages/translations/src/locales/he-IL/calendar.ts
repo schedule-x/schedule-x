@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarHeIL: CalendarTranslations = {
   Today: 'הַיוֹם',
   Month: 'חוֹדֶשׁ',
+  Year: 'שנה',
   Week: 'שָׁבוּעַ',
   Day: 'יוֹם',
   List: 'רשימה',

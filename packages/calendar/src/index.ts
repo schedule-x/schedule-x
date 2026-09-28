@@ -5,11 +5,13 @@ import { viewDay, createViewDay } from './views/day'
 import { viewMonthAgenda, createViewMonthAgenda } from './views/month-agenda'
 import { viewWeekAgenda, createViewWeekAgenda } from './views/week-agenda'
 import { viewList, createViewList } from './views/list'
+import { viewYearGrid, createViewYearGrid } from './views/year-grid'
 import type { BackgroundEvent } from '@schedule-x/shared/src/interfaces/calendar/background-event'
 import type { CalendarType } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import type { DayBoundariesExternal } from '@schedule-x/shared/src/types/calendar/day-boundaries'
 import type { WeekOptions } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import type { MonthGridOptions } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
+import type { YearGridOptions } from '@schedule-x/shared/src/interfaces/calendar/calendar-config'
 import {
   CalendarConfigExternal as CalendarConfig,
   CustomComponentFn,
@@ -28,6 +30,7 @@ import {
   setRangeForWeek,
   setRangeForMonth,
   setRangeForDay,
+  setRangeForYear,
 } from './utils/stateless/time/range/set-range'
 import { externalEventToInternal } from '@schedule-x/shared/src/utils/stateless/calendar/external-event-to-internal'
 import TimeGridDay from './components/week-grid/time-grid-day'
@@ -51,6 +54,7 @@ export type {
   DayBoundariesExternal,
   WeekOptions,
   MonthGridOptions,
+  YearGridOptions,
   PluginBase,
   Week,
 }
@@ -63,6 +67,7 @@ export {
   viewMonthAgenda,
   viewWeekAgenda,
   viewList,
+  viewYearGrid,
   CalendarApp,
   toDateString,
   toTimeString,
@@ -72,6 +77,7 @@ export {
   setRangeForDay,
   setRangeForWeek,
   setRangeForMonth,
+  setRangeForYear,
   externalEventToInternal,
   createViewWeek,
   createViewMonthGrid,
@@ -79,6 +85,7 @@ export {
   createViewMonthAgenda,
   createViewWeekAgenda,
   createViewList,
+  createViewYearGrid,
   TimeGridDay,
   TimeAxis,
   DateGridDay,

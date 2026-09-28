@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarFaIR: CalendarTranslations = {
   Today: 'امروز',
   Month: 'ماه',
+  Year: 'سال',
   Week: 'هفته',
   Day: 'روز',
   List: 'لیست',

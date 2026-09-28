@@ -3,6 +3,7 @@ import CalendarConfigInternal, {
   CalendarType,
   MonthGridOptions,
   MonthAgendaOptions,
+  YearGridOptions,
   Plugins,
   WeekOptions,
   ResourceGridOptions,
@@ -51,6 +52,7 @@ export default class CalendarConfigBuilder
   }
   monthGridOptions: MonthGridOptions | undefined
   monthAgendaOptions: MonthAgendaOptions | undefined
+  yearGridOptions: YearGridOptions | undefined
   calendars: Record<string, CalendarType> | undefined
   plugins: Plugins = {}
   isDark: boolean | undefined = false
@@ -99,6 +101,7 @@ export default class CalendarConfigBuilder
       maxDate,
       this.monthGridOptions,
       this.monthAgendaOptions,
+      this.yearGridOptions,
       this.theme,
       this.translations,
       this.showWeekNumbers,
@@ -226,6 +229,13 @@ export default class CalendarConfigBuilder
     monthAgendaOptions: MonthAgendaOptions | undefined
   ): CalendarConfigBuilder {
     this.monthAgendaOptions = monthAgendaOptions
+    return this
+  }
+
+  withYearGridOptions(
+    yearGridOptions: YearGridOptions | undefined
+  ): CalendarConfigBuilder {
+    this.yearGridOptions = yearGridOptions
     return this
   }
 

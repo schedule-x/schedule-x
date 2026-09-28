@@ -18,6 +18,11 @@ export interface CalendarCallbacks {
   onSelectedDateUpdate?: (date: Temporal.PlainDate) => void
   onClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
   onDoubleClickDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
+  /**
+   * Overrides the year-grid's default double-click behavior of opening the
+   * configured day view.
+   */
+  onDoubleClickYearGridDate?: (date: Temporal.PlainDate, e?: UIEvent) => void
   onClickDateTime?: (dateTime: Temporal.ZonedDateTime, e?: UIEvent) => void
   onDoubleClickDateTime?: (
     dateTime: Temporal.ZonedDateTime,

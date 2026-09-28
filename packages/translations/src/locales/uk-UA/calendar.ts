@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarUkUA: CalendarTranslations = {
   Today: 'Сьогодні',
   Month: 'Місяць',
+  Year: 'Рік',
   Week: 'Тиждень',
   Day: 'День',
   List: 'Список',

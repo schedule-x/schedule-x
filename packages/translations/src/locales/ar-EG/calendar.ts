@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarArEG: CalendarTranslations = {
   Today: 'اليوم',
   Month: 'الشهر',
+  Year: 'السنة',
   Week: 'الأسبوع',
   Day: 'اليوم',
   List: 'القائمة',

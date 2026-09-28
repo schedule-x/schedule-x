@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarIdID: CalendarTranslations = {
   Today: 'Hari Ini',
   Month: 'Bulan',
+  Year: 'Tahun',
   Week: 'Minggu',
   Day: 'Hari',
   List: 'Daftar',

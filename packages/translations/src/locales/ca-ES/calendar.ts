@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarCaES: CalendarTranslations = {
   Today: 'Avui',
   Month: 'Mes',
+  Year: 'Any',
   Week: 'Setmana',
   Day: 'Dia',
   List: 'Llista',
