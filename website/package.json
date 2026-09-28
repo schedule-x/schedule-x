@@ -17,7 +17,7 @@
         "@fontsource-variable/podkova": "^5.1.0",
         "@gitbeaker/rest": "^42.0.0",
         "@lemonsqueezy/lemonsqueezy.js": "^4.0.0",
-        "@schedule-x/calendar": "^4.7.0",
+        "@schedule-x/calendar": "^4.9.0",
         "@schedule-x/date-picker": "^4.7.0",
         "@sx-premium/drag-and-drop": "^15.7.2",
         "@schedule-x/event-modal": "^4.0.1",
