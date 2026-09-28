@@ -5,6 +5,7 @@ import '@fontsource/open-sans/700.css'
 import {
   createCalendar,
   createViewDay,
+  createViewMonthGrid,
   createViewYearGrid,
 } from '@schedule-x/calendar/src'
 import { createEventModalPlugin } from '@schedule-x/event-modal/src'
@@ -12,7 +13,7 @@ import '../../packages/theme-default/src/calendar.scss'
 import './year-view.css'
 
 const calendar = createCalendar({
-  views: [createViewYearGrid(), createViewDay()],
+  views: [createViewYearGrid(), createViewMonthGrid(), createViewDay()],
   defaultView: 'year-grid',
   selectedDate: Temporal.PlainDate.from('2026-09-28'),
   firstDayOfWeek: 1,

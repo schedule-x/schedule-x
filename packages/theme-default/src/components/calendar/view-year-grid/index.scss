@@ -4,6 +4,7 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1px;
   min-height: 100%;
+  border-top: var(--sx-border);
   background-color: var(--sx-color-outline-variant);
 
   .sx__is-calendar-small & {
