@@ -1,6 +1,18 @@
 import { SNAPSHOT_FAULT_TOLERANCE } from '../../../libs/e2e-testing/src/index.ts'
 import { cypressPageUrls } from '../../pages/urls.ts'
 
+const waitForFontsAndPaint = () => {
+  cy.document().then((document) => document.fonts.ready)
+  cy.window().then(
+    (window) =>
+      new Cypress.Promise<void>((resolve) => {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => resolve())
+        })
+      })
+  )
+}
+
 describe(
   'Calendar year grid',
   {
@@ -10,6 +22,8 @@ describe(
   () => {
     beforeEach(() => {
       cy.visit(cypressPageUrls.calendar.yearGrid)
+      cy.get('.sx__year-grid-day').should('have.length', 366)
+      waitForFontsAndPaint()
     })
 
     it('renders the year view', () => {
