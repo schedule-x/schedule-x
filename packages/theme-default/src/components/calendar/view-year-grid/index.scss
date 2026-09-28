@@ -59,7 +59,7 @@
   }
 
   &.is-selected {
-    box-shadow: inset 0 0 0 2px var(--sx-color-primary);
+    box-shadow: 0 0 0 2px var(--sx-color-primary);
   }
 
   &.sx__is-today {
@@ -75,7 +75,7 @@
 
 .sx__year-grid-day__event-icons {
   position: absolute;
-  bottom: var(--sx-spacing-padding1);
+  bottom: 2px;
   display: flex;
   gap: 2px;
 }
