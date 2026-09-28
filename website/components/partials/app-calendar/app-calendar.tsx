@@ -1,6 +1,6 @@
 'use client'
 
-import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek, viewList } from '@schedule-x/calendar'
+import { viewDay, viewMonthAgenda, viewMonthGrid, viewWeek, viewList, viewYearGrid } from '@schedule-x/calendar'
 import { seededEvents } from './data/seeded-events'
 import { createDragAndDropPlugin } from '@sx-premium/drag-and-drop'
 import { createEventModalPlugin } from '@schedule-x/event-modal'
@@ -12,7 +12,7 @@ import { translations, mergeLocales } from '@schedule-x/translations'
 
 export default function AppCalendar() {
   const calendarApp = useNextCalendarApp({
-    views: [viewWeek, viewMonthAgenda, viewDay, viewMonthGrid, viewList],
+    views: [viewWeek, viewMonthAgenda, viewDay, viewMonthGrid, viewList, viewYearGrid],
     defaultView: viewWeek.name,
     timezone: 'America/New_York',
     events: seededEvents.map(event => ({
