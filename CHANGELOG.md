@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.8.1](https://github.com/schedule-x/schedule-x/compare/v4.8.0...v4.8.1) (2026-09-28)
+
+### Bug Fixes
+
+- **calendar:** reset view selection button styles ([#1370](https://github.com/schedule-x/schedule-x/issues/1370)) ([d782e12](https://github.com/schedule-x/schedule-x/commit/d782e12886e013cbed85576139cac7c0caa0916a))
+- **deps:** replace dependency framer-motion with motion ^12.0.0 ([#1346](https://github.com/schedule-x/schedule-x/issues/1346)) ([b740c7c](https://github.com/schedule-x/schedule-x/commit/b740c7cadf33c4ef5846130f26ca14b496ef0fb2))
+- **website:** polish landing and premium pages ([#1366](https://github.com/schedule-x/schedule-x/issues/1366)) ([58f90fb](https://github.com/schedule-x/schedule-x/commit/58f90fb85efcaaaa026149dc6957c94aa5a06fa4))
+
+### Features
+
+- **website:** align marketing pages with Cloud ([#1365](https://github.com/schedule-x/schedule-x/issues/1365)) ([5dadfb2](https://github.com/schedule-x/schedule-x/commit/5dadfb2df9523caaf53d6ce5c30fda8b3bb90ca2))
+- **website:** promote Schedule-X Cloud ([#1364](https://github.com/schedule-x/schedule-x/issues/1364)) ([1148357](https://github.com/schedule-x/schedule-x/commit/1148357102d41fdadc465d3dea10c07dfe2af1b4))
+
 # [4.8.0](https://github.com/schedule-x/schedule-x/compare/v4.7.0...v4.8.0) (2026-09-08)
 
 ### Bug Fixes

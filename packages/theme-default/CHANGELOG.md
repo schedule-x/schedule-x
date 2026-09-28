@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.8.1](https://github.com/schedule-x/schedule-x/compare/v4.8.0...v4.8.1) (2026-09-28)
+
+### Bug Fixes
+
+- **calendar:** reset view selection button styles ([#1370](https://github.com/schedule-x/schedule-x/issues/1370)) ([d782e12](https://github.com/schedule-x/schedule-x/commit/d782e12886e013cbed85576139cac7c0caa0916a))
+
 # [4.8.0](https://github.com/schedule-x/schedule-x/compare/v4.7.0...v4.8.0) (2026-09-08)
 
 **Note:** Version bump only for package @schedule-x/theme-default
