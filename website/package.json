@@ -25,7 +25,7 @@
         "@schedule-x/react": "^4.0.0",
         "@sx-premium/resize": "^15.7.2",
         "@schedule-x/scroll-controller": "^4.0.1",
-        "@schedule-x/theme-default": "^4.7.0",
+        "@schedule-x/theme-default": "^4.9.0",
         "@schedule-x/theme-shadcn": "^4.0.0",
         "@schedule-x/timezone-select": "^4.0.1",
         "@schedule-x/translations": "^4.0.1",
