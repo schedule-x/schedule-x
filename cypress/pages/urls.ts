@@ -13,8 +13,9 @@ export const cypressPageUrls = Object.freeze({
     updateConfig: '/cypress/pages/calendar/005-update-config.html',
     rtlDirection: '/cypress/pages/calendar/006-rtl-direction.html',
     listView: '/cypress/pages/calendar/007-list-view.html',
+    yearGrid: '/cypress/pages/calendar/008-year-grid.html',
   },
   timePicker: {
     placement: '/cypress/pages/time-picker/001-popup-placement.html',
-  }
+  },
 })
