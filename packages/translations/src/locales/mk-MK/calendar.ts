@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarMkMK: CalendarTranslations = {
   Today: 'Денес',
   Month: 'Месец',
+  Year: 'Година',
   Week: 'Недела',
   Day: 'Ден',
   List: 'Листа',

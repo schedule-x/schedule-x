@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarKyKG: CalendarTranslations = {
   Today: 'Бүгүн',
   Month: 'Ай',
+  Year: 'Жыл',
   Week: 'Апта',
   Day: 'Күн',
   List: 'Тизме',

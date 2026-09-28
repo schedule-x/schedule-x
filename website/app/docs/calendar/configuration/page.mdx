@@ -148,10 +148,17 @@ const config = {
     sortEvents: (a, b) => sortEventsByStartAndEnd(a, b),
   },
 
+  yearGridOptions: {
+    /**
+     * Number of event indicators to display in a day cell.
+     * */
+    nEventIndicatorsPerDay: 3,
+  },
+
   /**
-    * Display week numbers. Not 100% according to ISO 8601, which considers a week to start on Monday and end on Sunday.
-    * Since Schedule-X enables you to configure the first day of the week, the week numbers are calculated based on that.
-    * */
+   * Display week numbers. Not 100% according to ISO 8601, which considers a week to start on Monday and end on Sunday.
+   * Since Schedule-X enables you to configure the first day of the week, the week numbers are calculated based on that.
+   * */
   showWeekNumbers: true,
 
   /**
@@ -192,8 +199,9 @@ const config = {
      * The returned events will be converted to internal events and set as $app.calendarEvents.list.value
      * */
     async fetchEvents(range) {
-      const events = await fetch(`/api/events?start=${range.start}&end=${range.end}`)
-        .then((res) => res.json())
+      const events = await fetch(
+        `/api/events?start=${range.start}&end=${range.end}`
+      ).then((res) => res.json())
       return events
     },
 
@@ -205,11 +213,11 @@ const config = {
     },
 
     /**
-      * Is called before an event is updated by drag & drop or resizing.
-      * If you return false, the update will be aborted,
-      * and the event will be reset to its original position.
-      * If you return true, the event will be updated.
-      * */
+     * Is called before an event is updated by drag & drop or resizing.
+     * If you return false, the update will be aborted,
+     * and the event will be reset to its original position.
+     * If you return true, the event will be updated.
+     * */
     onBeforeEventUpdate(oldEvent, newEvent, $app) {
       // run your validation or side effects
       return false
@@ -268,6 +276,14 @@ const config = {
      * */
     onDoubleClickDate(date: Temporal.PlainDate, e?: UIEvent) {
       console.log('onClickDate', date) // e.g. 2024-01-01
+    },
+
+    /**
+     * Overrides the year grid's default behavior of opening the day view.
+     * Only runs in the year grid.
+     * */
+    onDoubleClickYearGridDate(date: Temporal.PlainDate, e?: UIEvent) {
+      console.log('onDoubleClickYearGridDate', date) // e.g. 2024-01-01
     },
 
     /**

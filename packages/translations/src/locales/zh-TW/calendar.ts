@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarZhTW: CalendarTranslations = {
   Today: '今天',
   Month: '月',
+  Year: '年',
   Week: '周',
   Day: '日',
   List: '列表',

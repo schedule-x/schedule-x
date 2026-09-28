@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarSrRS: CalendarTranslations = {
   Today: 'Данас',
   Month: 'Месец',
+  Year: 'Година',
   Week: 'Недеља',
   Day: 'Дан',
   List: 'Листа',

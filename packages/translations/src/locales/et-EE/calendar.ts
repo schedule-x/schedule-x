@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarEtEE: CalendarTranslations = {
   Today: 'Täna',
   Month: 'Kuu',
+  Year: 'Aasta',
   Week: 'Nädal',
   Day: 'Päev',
   List: 'Nimekiri',

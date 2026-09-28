@@ -1,0 +1,16 @@
+:root {
+  font-family: 'Open Sans', sans-serif;
+  background: #f5f2f7;
+}
+
+body {
+  margin: 0;
+  padding: clamp(12px, 3vw, 40px);
+}
+
+#year-view {
+  width: min(1400px, 100%);
+  height: calc(100vh - clamp(24px, 6vw, 80px));
+  min-height: 640px;
+  margin-inline: auto;
+}

@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarJaJP: CalendarTranslations = {
   Today: '今日',
   Month: '月',
+  Year: '年',
   Week: '週',
   Day: '日',
   List: 'リスト',

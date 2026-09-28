@@ -43,3 +43,9 @@ export const getMonthAndYearForSelectedDate = ($app: CalendarAppSingleton) => {
 
   return `${dateMonth} ${dateYear}`
 }
+
+export const getYearForSelectedDate = ($app: CalendarAppSingleton) => {
+  return $app.datePickerState.selectedDate.value.toLocaleString(
+    ...getLocaleStringYearArgs($app)
+  )
+}

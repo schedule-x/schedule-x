@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarFiFI: CalendarTranslations = {
   Today: 'Tänään',
   Month: 'Kuukausi',
+  Year: 'Vuosi',
   Week: 'Viikko',
   Day: 'Päivä',
   List: 'Lista',

@@ -5,6 +5,7 @@ import { InternalViewName } from '@schedule-x/shared/src/enums/calendar/internal
 import {
   getMonthAndYearForSelectedDate,
   getMonthAndYearForDateRange,
+  getYearForSelectedDate,
 } from '../../utils/stateless/range-heading'
 import { useSignalEffect } from '@preact/signals'
 
@@ -33,6 +34,10 @@ export default function RangeHeading() {
       $app.calendarState.view.value === InternalViewName.MonthAgenda
     ) {
       setCurrentHeading(getMonthAndYearForSelectedDate($app))
+    }
+
+    if ($app.calendarState.view.value === InternalViewName.YearGrid) {
+      setCurrentHeading(getYearForSelectedDate($app))
     }
   })
 

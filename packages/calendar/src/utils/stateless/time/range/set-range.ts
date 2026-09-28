@@ -77,6 +77,24 @@ export const setRangeForMonth = (config: RangeSetterConfig): DateRange => {
   }
 }
 
+export const setRangeForYear = (config: RangeSetterConfig): DateRange => {
+  const firstDay = Temporal.PlainDate.from({
+    year: config.date.year,
+    month: 1,
+    day: 1,
+  }).toZonedDateTime(config.calendarConfig.timezone.value)
+  const lastDay = Temporal.PlainDate.from({
+    year: config.date.year,
+    month: 12,
+    day: 31,
+  }).toZonedDateTime(config.calendarConfig.timezone.value)
+
+  return {
+    start: firstDay,
+    end: lastDay.with({ hour: 23, minute: 59 }),
+  }
+}
+
 export const setRangeForDay = (config: RangeSetterConfig): DateRange => {
   let date = config.date as Temporal.ZonedDateTime | Temporal.PlainDate
   if (date instanceof Temporal.PlainDate) {

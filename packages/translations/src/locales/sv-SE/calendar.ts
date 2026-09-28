@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarSvSE: CalendarTranslations = {
   Today: 'Idag',
   Month: 'Månad',
+  Year: 'År',
   Week: 'Vecka',
   Day: 'Dag',
   List: 'Lista',

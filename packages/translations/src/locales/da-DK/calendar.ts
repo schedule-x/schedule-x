@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarDaDK: CalendarTranslations = {
   Today: 'I dag',
   Month: 'Måned',
+  Year: 'År',
   Week: 'Uge',
   Day: 'Dag',
   List: 'Liste',

@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarTrTR: CalendarTranslations = {
   Today: 'Bugün',
   Month: 'Aylık',
+  Year: 'Yıl',
   Week: 'Haftalık',
   Day: 'Günlük',
   List: 'Liste',

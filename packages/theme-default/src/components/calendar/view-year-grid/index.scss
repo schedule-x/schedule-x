@@ -1,0 +1,150 @@
+.sx__year-grid-wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  min-height: 100%;
+  border-top: var(--sx-border);
+  background-color: var(--sx-color-outline-variant);
+
+  .sx__is-calendar-small & {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sx__year-grid-month {
+  min-width: 0;
+  padding: var(--sx-spacing-padding4);
+  background-color: var(--sx-color-background);
+}
+
+.sx__year-grid-month__heading {
+  margin: 0 0 var(--sx-spacing-padding4);
+  font-size: var(--sx-font-small);
+  font-weight: 700;
+}
+
+.sx__year-grid-month__weekdays,
+.sx__year-grid-month__days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(1.5rem, 1fr));
+  text-align: center;
+}
+
+.sx__year-grid-month__weekdays {
+  margin-bottom: var(--sx-spacing-padding1);
+  color: var(--sx-color-neutral);
+  font-size: 0.625rem;
+  font-weight: 700;
+}
+
+.sx__year-grid-month__days {
+  row-gap: var(--sx-spacing-padding1);
+}
+
+.sx__year-grid-day {
+  position: relative;
+  display: flex;
+  aspect-ratio: 1.25;
+  min-width: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sx-rounding-small);
+  color: var(--sx-internal-color-text);
+  font-size: var(--sx-font-extra-small);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--sx-color-surface-container-high);
+  }
+
+  &.is-selected {
+    box-shadow: 0 0 0 2px var(--sx-color-primary);
+  }
+
+  &.sx__is-today {
+    color: var(--sx-color-on-primary);
+    background-color: var(--sx-color-primary);
+    font-weight: 700;
+  }
+
+  &:disabled {
+    opacity: 0.38;
+  }
+}
+
+.sx__year-grid-day__event-icons {
+  position: absolute;
+  bottom: 2px;
+  display: flex;
+  gap: 2px;
+}
+
+.sx__year-grid-day__event-icon {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  filter: brightness(1.35);
+
+  .is-dark & {
+    filter: none;
+  }
+
+  .sx__year-grid-day.sx__is-today & {
+    background-color: currentcolor !important;
+  }
+}
+
+.sx__year-grid-day-events-modal {
+  position: absolute;
+  z-index: 2;
+  width: min(20rem, calc(100% - 16px));
+  max-height: 250px;
+  padding: var(--sx-spacing-padding6);
+  border-radius: var(--sx-rounding-small);
+  background-color: var(--sx-color-background);
+  box-shadow:
+    0 24px 38px 3px rgb(0 0 0 / 14%),
+    0 9px 46px 8px rgb(0 0 0 / 12%),
+    0 11px 15px -7px rgb(0 0 0 / 20%);
+  transition: opacity 0.1s ease-out;
+
+  .is-dark & {
+    background-color: var(--sx-color-surface-container-high);
+  }
+}
+
+.sx__year-grid-day-events-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--sx-spacing-padding2);
+}
+
+.sx__year-grid-day-events-modal__date {
+  font-size: var(--sx-font-large);
+  line-height: 2rem;
+}
+
+.sx__year-grid-day-events-modal__close {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--sx-rounding-extra-small);
+  color: var(--sx-color-neutral);
+  font-size: var(--sx-font-large);
+  line-height: 1;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--sx-color-surface-container-high);
+  }
+}
+
+.sx__year-grid-day-events-modal__events {
+  max-height: 10rem;
+  overflow-y: auto;
+
+  .sx__month-agenda-event {
+    cursor: pointer;
+  }
+}

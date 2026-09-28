@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarKoKR: CalendarTranslations = {
   Today: '오늘',
   Month: '월',
+  Year: '년',
   Week: '주',
   Day: '일',
   List: '목록',

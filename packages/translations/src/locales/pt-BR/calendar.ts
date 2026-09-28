@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarPtBR: CalendarTranslations = {
   Today: 'Hoje',
   Month: 'Mês',
+  Year: 'Ano',
   Week: 'Semana',
   Day: 'Dia',
   List: 'Lista',

@@ -10,9 +10,24 @@ import { screen } from '@testing-library/preact'
 import { viewMonthGrid } from '../../../../views/month-grid'
 import { viewWeek } from '../../../../views/week'
 import { viewDay } from '../../../../views/day'
+import { viewYearGrid } from '../../../../views/year-grid'
 
 describe('RangeHeading', () => {
   describe('displaying the localized range heading', () => {
+    it('should display only the year in year-grid view', () => {
+      const $app = createCalendarAppSingleton(
+        {
+          locale: 'en-US',
+          selectedDate: Temporal.PlainDate.from('2026-09-28'),
+          views: [viewYearGrid],
+        },
+        []
+      )
+      renderComponent($app)
+
+      expect(screen.queryByText('2026')).toBeTruthy()
+    })
+
     it.each([
       ['en-US', '2020-01-01', 'December 2019 – January 2020'],
       ['en-US', '2020-01-10', 'January 2020'],

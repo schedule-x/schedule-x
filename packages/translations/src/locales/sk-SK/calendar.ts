@@ -3,6 +3,7 @@ import { CalendarTranslations } from '@schedule-x/shared/src/types/translations/
 export const calendarSkSK: CalendarTranslations = {
   Today: 'Dnes',
   Month: 'Mesiac',
+  Year: 'Rok',
   Week: 'Týždeň',
   Day: 'Deň',
   List: 'Zoznam',
