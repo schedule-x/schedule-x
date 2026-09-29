@@ -31,13 +31,36 @@ describe(
     })
 
     it('renders the day events modal', () => {
-      cy.get('[data-date="2024-09-24"]').click()
+      cy.get('.sx__view-container').scrollTo(0, 1, { duration: 0 })
+      cy.get('[data-date="2024-09-24"]').click({ scrollBehavior: false })
       cy.get('.sx__year-grid-day-events-modal').should('be.visible')
 
       cy.compareSnapshot(
         'calendar-year-grid__day-events-modal',
         SNAPSHOT_FAULT_TOLERANCE
       )
+    })
+
+    it('preserves the scroll position when opening the day events modal', () => {
+      cy.get('#calendar').invoke('css', 'height', '600px')
+      cy.get('.sx__view-container')
+        .invoke('css', 'scroll-behavior', 'auto')
+        .scrollTo('bottom', { duration: 0 })
+        .should(($viewContainer) => {
+          expect($viewContainer[0].scrollTop).to.be.greaterThan(0)
+        })
+        .then(($viewContainer) => {
+          const scrollTopBeforeClick = $viewContainer[0].scrollTop
+
+          cy.get('[data-date="2024-09-24"]')
+            .should('be.visible')
+            .click({ scrollBehavior: false })
+          cy.get('.sx__year-grid-day-events-modal').should('be.visible')
+          cy.wait(400)
+          cy.then(() => {
+            expect($viewContainer[0].scrollTop).to.equal(scrollTopBeforeClick)
+          })
+        })
     })
   }
 )
