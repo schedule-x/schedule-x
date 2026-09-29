@@ -71,7 +71,7 @@ export default function YearGridDayEventsModal({
 
   useLayoutEffect(() => {
     updatePosition()
-    modalRef.current?.focus()
+    modalRef.current?.focus({ preventScroll: true })
   }, [day.date])
 
   useEffect(() => {
