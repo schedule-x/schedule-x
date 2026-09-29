@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.1](https://github.com/schedule-x/schedule-x/compare/v4.9.0...v4.9.1) (2026-09-29)
+
+### Bug Fixes
+
+- **calendar:** preserve year grid scroll on date click ([#1374](https://github.com/schedule-x/schedule-x/issues/1374)) ([fd81008](https://github.com/schedule-x/schedule-x/commit/fd810083b27208084add1045a1ce2b79066495f4))
+
 # [4.9.0](https://github.com/schedule-x/schedule-x/compare/v4.8.1...v4.9.0) (2026-09-28)
 
 ### Features
