@@ -145,10 +145,13 @@ body {
   color: #171717;
 }
 
-.nextra-navbar {
+header.nextra-navbar {
   background-color: #fff;
   border-bottom: 1px solid #e2e4e9;
   box-shadow: none;
+
+  // Keep the site navigation above Schedule-X's sticky headers and popups (100-102).
+  z-index: 103;
 }
 
 .nextra-navbar-blur {
