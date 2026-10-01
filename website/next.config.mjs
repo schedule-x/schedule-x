@@ -12,17 +12,17 @@ export default withNextra({
     return [
       {
         source: '/favicon.ico',
-        destination: 'https://cloud.schedule-x.com/favicon.png',
+        destination: '/favicon.png',
         permanent: false,
       },
       {
         source: '/icon.png',
-        destination: 'https://cloud.schedule-x.com/favicon.png',
+        destination: '/favicon.png',
         permanent: false,
       },
       {
         source: '/apple-icon.png',
-        destination: 'https://cloud.schedule-x.com/favicon.png',
+        destination: '/favicon.png',
         permanent: false,
       },
       {

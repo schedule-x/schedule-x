@@ -70,12 +70,9 @@ export default async function RootLayout({
           rel="icon"
           type="image/png"
           sizes="120x120"
-          href="https://cloud.schedule-x.com/favicon.png"
+          href="/favicon.png"
         />
-        <link
-          rel="apple-touch-icon"
-          href="https://cloud.schedule-x.com/favicon.png"
-        />
+        <link rel="apple-touch-icon" href="/favicon.png" />
       </Head>
       <body>
         <Layout
