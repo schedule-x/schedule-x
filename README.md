@@ -1,9 +1,12 @@
 <p align="center">
-  <img
-    src="https://cloud.schedule-x.com/_astro/schedule-x-cloud-logo-light.Bc3xEzXS.png"
-    alt="Schedule-X"
-    width="648"
-  />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="website/public/images/brand/schedule-x-logo-dark.png">
+    <img
+      src="website/public/images/brand/schedule-x-logo-light.png"
+      alt="Schedule-X"
+      width="648"
+    />
+  </picture>
 </p>
 
 [![Build Status](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml/badge.svg)](https://github.com/schedule-x/schedule-x/actions/workflows/build-library.yml)
