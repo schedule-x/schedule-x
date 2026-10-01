@@ -3,9 +3,9 @@ export default function Logo() {
     <span className="scheduleXBrand">
       <img
         className="scheduleXBrand__logo"
-        src="https://cloud.schedule-x.com/_astro/schedule-x-cloud-logo-light.Bc3xEzXS.png"
-        width="166"
-        height="48"
+        src="/images/brand/schedule-x-logo-light.png"
+        width="1296"
+        height="218"
         alt="Schedule-X"
       />
     </span>

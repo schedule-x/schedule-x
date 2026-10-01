@@ -1,4 +1,4 @@
-![Schedule-X](https://schedule-x.s3.eu-west-1.amazonaws.com/schedule-x-logo.png)
+![Schedule-X](https://raw.githubusercontent.com/schedule-x/schedule-x/main/website/public/images/brand/schedule-x-logo-light.png)
 
 # @schedule-x/calendar-controls
 
