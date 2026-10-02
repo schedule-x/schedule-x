@@ -96,6 +96,12 @@ export default async function RootLayout({
           defer
         />
 
+        <Script
+          data-domain="schedule-x.dev"
+          src="https://light.schedule-x.com/tracker.js"
+          defer
+        />
+
         <Script>
           {`window.lemonSqueezyAffiliateConfig = { store: "schedule-x" };`}
         </Script>
