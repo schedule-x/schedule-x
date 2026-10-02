@@ -1,10 +1,11 @@
-import { addDays, CalendarAppSingleton } from '@schedule-x/shared/src'
+import { CalendarAppSingleton } from '@schedule-x/shared/src'
 import { AugmentedEvent } from '../../types/augmented-event'
-import { getDurationInMinutesTemporal } from '@schedule-x/recurrence/src/rrule/utils/stateless/duration-in-minutes'
-import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
 import { EventId } from '@schedule-x/shared/src/types/event-id'
-
-import { addMinutesToTemporal } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
+import {
+  applyTemporalShift,
+  deriveTemporalShift,
+  expectZonedDateTime,
+} from '@schedule-x/recurrence/src/rrule/utils/stateless/temporal-shift'
 
 export class ResizeUpdater {
   constructor(private $app: CalendarAppSingleton) {}
@@ -34,18 +35,23 @@ export class ResizeUpdater {
     eventToUpdate: AugmentedEvent,
     oldEventEnd: Temporal.ZonedDateTime | Temporal.PlainDate
   ) {
-    return newEventEnd instanceof Temporal.ZonedDateTime
-      ? addMinutesToTemporal(
-          eventToUpdate.end,
-          getDurationInMinutesTemporal(
-            oldEventEnd as Temporal.ZonedDateTime,
-            newEventEnd as Temporal.ZonedDateTime
+    const isAllDayEvent = eventToUpdate.end instanceof Temporal.PlainDate
+    const shift = isAllDayEvent
+      ? deriveTemporalShift(
+          Temporal.PlainDate.from(oldEventEnd),
+          Temporal.PlainDate.from(newEventEnd)
+        )
+      : deriveTemporalShift(
+          expectZonedDateTime(
+            oldEventEnd,
+            'Expected ZonedDateTime input for timed recurrence resize'
+          ),
+          expectZonedDateTime(
+            newEventEnd,
+            'Expected ZonedDateTime input for timed recurrence resize'
           )
         )
-      : addDays(
-          eventToUpdate.end,
-          calculateDaysDifference(oldEventEnd, newEventEnd)
-        )
+    return applyTemporalShift(eventToUpdate.end, shift)
   }
 
   private deleteAllCopiesForEvent(eventId: EventId) {

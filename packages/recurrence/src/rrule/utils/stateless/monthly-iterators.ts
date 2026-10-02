@@ -1,13 +1,17 @@
 import { RRuleOptions } from '../../types/rrule-options'
-import { isCountReached, isDatePastUntil } from './iterator-utils'
-import { toIntegers } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { __deprecated__addMonthsToDateOrDatetime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
-import { formatDateTimeFromString } from './date-formatting'
+import {
+  isCountReached,
+  isDatePastUntil,
+  compareTemporalDates,
+} from './iterator-utils'
 import { parseBydaySpec, getWeekdayOccurrencesInMonth } from './weekday-utils'
 
-const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
+const monthlyIteratorBymonthday = (
+  dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
+  options: RRuleOptions
+) => {
   let currentDate = dtstart
-  const allDateTimes: string[] = []
+  const allDateTimes: (Temporal.ZonedDateTime | Temporal.PlainDate)[] = []
 
   return {
     next() {
@@ -25,38 +29,32 @@ const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      const nextCurrentDateCandidate = __deprecated__addMonthsToDateOrDatetime(
-        currentDate,
-        options.interval
-      )
+      const nextCurrentDateCandidate = currentDate.add({
+        months: options.interval,
+      })
       let currentIntervalCandidate = options.interval
-      let { date: nextMonthDateCandidate } = toIntegers(
-        nextCurrentDateCandidate
-      )
+      let nextMonthDateCandidate = nextCurrentDateCandidate.day
 
       while (nextMonthDateCandidate !== options.bymonthday) {
         currentIntervalCandidate += options.interval
-        nextMonthDateCandidate = toIntegers(
-          __deprecated__addMonthsToDateOrDatetime(
-            currentDate,
-            currentIntervalCandidate
-          )
-        ).date
+        nextMonthDateCandidate = currentDate.add({
+          months: currentIntervalCandidate,
+        }).day
       }
 
-      currentDate = __deprecated__addMonthsToDateOrDatetime(
-        currentDate,
-        currentIntervalCandidate
-      )
+      currentDate = currentDate.add({ months: currentIntervalCandidate })
 
       return { done: false, value: allDateTimes }
     },
   }
 }
 
-const monthlyIteratorByday = (dtstart: string, options: RRuleOptions) => {
+const monthlyIteratorByday = (
+  dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
+  options: RRuleOptions
+) => {
   let currentDate = dtstart
-  const allDateTimes: string[] = []
+  const allDateTimes: (Temporal.ZonedDateTime | Temporal.PlainDate)[] = []
 
   return {
     next() {
@@ -70,7 +68,7 @@ const monthlyIteratorByday = (dtstart: string, options: RRuleOptions) => {
         )
         for (const candidate of candidates) {
           if (
-            candidate >= dtstart &&
+            compareTemporalDates(candidate, dtstart) >= 0 &&
             !isDatePastUntil(candidate, options.until)
           ) {
             allDateTimes.push(candidate)
@@ -88,10 +86,7 @@ const monthlyIteratorByday = (dtstart: string, options: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      currentDate = __deprecated__addMonthsToDateOrDatetime(
-        currentDate,
-        options.interval
-      )
+      currentDate = currentDate.add({ months: options.interval })
 
       return { done: false, value: allDateTimes }
     },
@@ -99,11 +94,12 @@ const monthlyIteratorByday = (dtstart: string, options: RRuleOptions) => {
 }
 
 const getMonthlyBydayCandidates = (
-  dateTime: string,
+  dateTime: Temporal.ZonedDateTime | Temporal.PlainDate,
   byday: string[]
-): string[] => {
-  const candidates: string[] = []
-  const { year, month } = toIntegers(dateTime)
+): (Temporal.ZonedDateTime | Temporal.PlainDate)[] => {
+  const candidates: (Temporal.ZonedDateTime | Temporal.PlainDate)[] = []
+  const year = dateTime.year
+  const month = dateTime.month
 
   // Group byday specs by weekday for efficient processing
   const weekdaySpecs = new Map<number, number[]>()
@@ -126,25 +122,36 @@ const getMonthlyBydayCandidates = (
 
   // Process each weekday only once
   for (const [weekday, positions] of weekdaySpecs) {
-    const occurrences = getWeekdayOccurrencesInMonth(year, month, weekday)
+    // getWeekdayOccurrencesInMonth expects JS Date month (0-based), but Temporal uses 1-based
+    const occurrences = getWeekdayOccurrencesInMonth(year, month - 1, weekday)
 
     if (positions.includes(-999)) {
       // Add all occurrences
       for (const day of occurrences) {
-        candidates.push(formatDateTimeFromString(dateTime, year, month, day))
+        candidates.push(
+          dateTime instanceof Temporal.ZonedDateTime
+            ? dateTime.with({ day })
+            : dateTime.with({ day })
+        )
       }
     } else {
       // Add specific positions
       for (const position of positions) {
         if (position > 0 && position <= occurrences.length) {
           const day = occurrences[position - 1]
-          candidates.push(formatDateTimeFromString(dateTime, year, month, day))
+          candidates.push(
+            dateTime instanceof Temporal.ZonedDateTime
+              ? dateTime.with({ day })
+              : dateTime.with({ day })
+          )
         } else if (position < 0) {
           const index = occurrences.length + position
           if (index >= 0 && index < occurrences.length) {
             const day = occurrences[index]
             candidates.push(
-              formatDateTimeFromString(dateTime, year, month, day)
+              dateTime instanceof Temporal.ZonedDateTime
+                ? dateTime.with({ day })
+                : dateTime.with({ day })
             )
           }
         }
@@ -152,11 +159,11 @@ const getMonthlyBydayCandidates = (
     }
   }
 
-  return candidates.sort()
+  return candidates.sort((a, b) => compareTemporalDates(a, b))
 }
 
 export const monthlyIteratorResult = (
-  dtstart: string,
+  dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
   options: RRuleOptions
 ) => {
   if (options.byday && options.byday.length > 0) {
@@ -170,7 +177,7 @@ export const monthlyIteratorResult = (
     return result.value
   } else {
     if (!options.bymonthday) {
-      options.bymonthday = toIntegers(dtstart).date
+      options.bymonthday = dtstart.day
     }
 
     const monthlyIter = monthlyIteratorBymonthday(dtstart, options)

@@ -7,7 +7,10 @@ import { rfc5455Weekdays } from '../../utils/weekdays'
 
 import { IANATimezone } from '@schedule-x/shared/src/utils/stateless/time/tzdb'
 
-export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
+export const rruleStringToJS = (
+  rrule: string,
+  timezone: IANATimezone = 'UTC'
+): RRuleOptionsExternal => {
   const rruleOptions: RRuleOptionsExternal = {
     freq: RRuleFreq.WEEKLY,
   }
@@ -19,7 +22,10 @@ export const rruleStringToJS = (rrule: string): RRuleOptionsExternal => {
     if (key === 'FREQ') rruleOptions.freq = value as RRuleFreq
     if (key === 'BYDAY') rruleOptions.byday = value.split(',')
     if (key === 'BYMONTHDAY') rruleOptions.bymonthday = Number(value)
-    if (key === 'UNTIL') rruleOptions.until = parseRFC5545ToSX(value)
+    if (key === 'UNTIL') {
+      rruleOptions.until = parseRFC5545ToTemporal(value, timezone)
+      rruleOptions.untilHasUtcDesignator = value.endsWith('Z')
+    }
     if (key === 'COUNT') rruleOptions.count = Number(value)
     if (key === 'INTERVAL') rruleOptions.interval = Number(value)
     if (key === 'WKST') {
@@ -37,7 +43,9 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   let rrule = `FREQ=${rruleOptions.freq}`
 
   if (rruleOptions.until)
-    rrule += `;UNTIL=${parseSXToRFC5545(rruleOptions.until)}`
+    rrule += `;UNTIL=${parseTemporalToRFC5545(rruleOptions.until, {
+      includeUtcDesignator: rruleOptions.untilHasUtcDesignator,
+    })}`
   if (rruleOptions.count) rrule += `;COUNT=${rruleOptions.count}`
   if (rruleOptions.interval) rrule += `;INTERVAL=${rruleOptions.interval}`
   if (rruleOptions.byday) rrule += `;BYDAY=${rruleOptions.byday.join(',')}`
@@ -47,17 +55,9 @@ export const rruleJSToString = (rruleOptions: RRuleOptionsExternal): string => {
   return rrule
 }
 
-export const parseSXToRFC5545 = (datetime: string): string => {
-  datetime = datetime.replace(/-/g, '')
-  datetime = datetime.replace(/:/g, '')
-  datetime = datetime.replace(' ', 'T')
-  if (/T\d{4}$/.test(datetime)) datetime += '00' // add seconds if not present
-
-  return datetime
-}
-
 export const parseTemporalToRFC5545 = (
-  dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate
+  dateOrDatetime: Temporal.ZonedDateTime | Temporal.PlainDate,
+  options: { includeUtcDesignator?: boolean } = {}
 ): string => {
   const year = dateOrDatetime.year.toString().padStart(4, '0')
   const month = dateOrDatetime.month.toString().padStart(2, '0')
@@ -68,7 +68,9 @@ export const parseTemporalToRFC5545 = (
     const minute = dateOrDatetime.minute.toString().padStart(2, '0')
     const second = dateOrDatetime.second.toString().padStart(2, '0')
 
-    return `${year}${month}${day}T${hour}${minute}${second}`
+    const base = `${year}${month}${day}T${hour}${minute}${second}`
+
+    return options.includeUtcDesignator ? `${base}Z` : base
   }
 
   if (dateOrDatetime instanceof Temporal.PlainDate) {
@@ -82,6 +84,26 @@ export const parseRFC5545ToTemporal = (
   dateOrDatetime: string,
   timezone: IANATimezone
 ): Temporal.ZonedDateTime | Temporal.PlainDate => {
+  if (dateOrDatetime.length === 16 && dateOrDatetime.endsWith('Z')) {
+    // given YYYYMMDDThhmmssZ format (UTC)
+    const year = dateOrDatetime.substring(0, 4)
+    const month = dateOrDatetime.substring(4, 6)
+    const day = dateOrDatetime.substring(6, 8)
+    const hour = dateOrDatetime.substring(9, 11)
+    const minute = dateOrDatetime.substring(11, 13)
+    const second = dateOrDatetime.substring(13, 15)
+
+    return Temporal.ZonedDateTime.from({
+      year: parseInt(year),
+      month: parseInt(month),
+      day: parseInt(day),
+      hour: parseInt(hour),
+      minute: parseInt(minute),
+      second: parseInt(second),
+      timeZone: 'UTC',
+    })
+  }
+
   if (dateOrDatetime.length === 15) {
     // given YYYYMMDDThhmmss format
     const year = dateOrDatetime.substring(0, 4)
@@ -116,12 +138,4 @@ export const parseRFC5545ToTemporal = (
   }
 
   throw new Error(`Invalid RFC5545 format: ${dateOrDatetime}`)
-}
-
-export const parseRFC5545ToSX = (datetime: string): string => {
-  datetime = datetime.replace('T', ' ')
-  datetime = datetime.replace(/^(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')
-  datetime = datetime.replace(/(\d{2})(\d{2})(\d{2})$/, '$1:$2')
-
-  return datetime
 }

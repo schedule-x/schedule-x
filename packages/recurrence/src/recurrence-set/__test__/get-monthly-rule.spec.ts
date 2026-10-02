@@ -5,6 +5,7 @@ import {
   expect,
 } from '@schedule-x/shared/src/utils/stateless/testing/unit/unit-testing-library.impl'
 import { RecurrenceSet } from '../recurrence-set'
+import { datetime, recurrence } from '../../__test__/test-utils'
 
 describe('Getting monthly recurrences', () => {
   describe('Using FREQ and COUNT', () => {
@@ -12,92 +13,51 @@ describe('Getting monthly recurrences', () => {
       const expectedNumberOfRecurrences = 10
       const rset = new RecurrenceSet({
         rrule: `FREQ=MONTHLY;COUNT=${expectedNumberOfRecurrences}`,
-        dtstart: '20240101T103000',
-        dtend: '20240101T113000',
+        dtstart: datetime('2024-01-01 10:30'),
+        dtend: datetime('2024-01-01 11:30'),
       })
 
       const recurrences = rset.getRecurrences()
 
       expect(recurrences).toHaveLength(expectedNumberOfRecurrences)
       expect(recurrences).toEqual([
-        {
-          start: '2024-01-01 10:30',
-          end: '2024-01-01 11:30',
-        },
-        {
-          start: '2024-02-01 10:30',
-          end: '2024-02-01 11:30',
-        },
-        {
-          start: '2024-03-01 10:30',
-          end: '2024-03-01 11:30',
-        },
-        {
-          start: '2024-04-01 10:30',
-          end: '2024-04-01 11:30',
-        },
-        {
-          start: '2024-05-01 10:30',
-          end: '2024-05-01 11:30',
-        },
-        {
-          start: '2024-06-01 10:30',
-          end: '2024-06-01 11:30',
-        },
-        {
-          start: '2024-07-01 10:30',
-          end: '2024-07-01 11:30',
-        },
-        {
-          start: '2024-08-01 10:30',
-          end: '2024-08-01 11:30',
-        },
-        {
-          start: '2024-09-01 10:30',
-          end: '2024-09-01 11:30',
-        },
-        {
-          start: '2024-10-01 10:30',
-          end: '2024-10-01 11:30',
-        },
+        recurrence(datetime('2024-01-01 10:30'), datetime('2024-01-01 11:30')),
+        recurrence(datetime('2024-02-01 10:30'), datetime('2024-02-01 11:30')),
+        recurrence(datetime('2024-03-01 10:30'), datetime('2024-03-01 11:30')),
+        recurrence(datetime('2024-04-01 10:30'), datetime('2024-04-01 11:30')),
+        recurrence(datetime('2024-05-01 10:30'), datetime('2024-05-01 11:30')),
+        recurrence(datetime('2024-06-01 10:30'), datetime('2024-06-01 11:30')),
+        recurrence(datetime('2024-07-01 10:30'), datetime('2024-07-01 11:30')),
+        recurrence(datetime('2024-08-01 10:30'), datetime('2024-08-01 11:30')),
+        recurrence(datetime('2024-09-01 10:30'), datetime('2024-09-01 11:30')),
+        recurrence(datetime('2024-10-01 10:30'), datetime('2024-10-01 11:30')),
       ])
     })
   })
   it('should exclude datetimes specified in exdate', () => {
-    const exdate = ['20250601T103000', '20250701T103000', '20250801T103000']
+    const exdate = [
+      datetime('2025-06-01 10:30'),
+      datetime('2025-07-01 10:30'),
+      datetime('2025-08-01 10:30'),
+    ]
     const rset = new RecurrenceSet({
       rrule: 'FREQ=MONTHLY;COUNT=5',
-      dtstart: '20250501T103000',
-      dtend: '20250501T113000',
+      dtstart: datetime('2025-05-01 10:30'),
+      dtend: datetime('2025-05-01 11:30'),
       exdate,
     })
 
     const recurrences = rset.getRecurrences()
 
     const excludedFormattedDates = [
-      {
-        start: '2025-06-01 10:30',
-        end: '2025-06-01 11:30',
-      },
-      {
-        start: '2025-07-01 10:30',
-        end: '2025-07-01 11:30',
-      },
-      {
-        start: '2025-08-01 10:30',
-        end: '2025-08-01 11:30',
-      },
+      recurrence(datetime('2025-06-01 10:30'), datetime('2025-06-01 11:30')),
+      recurrence(datetime('2025-07-01 10:30'), datetime('2025-07-01 11:30')),
+      recurrence(datetime('2025-08-01 10:30'), datetime('2025-08-01 11:30')),
     ]
 
     expect(recurrences).toEqual([
-      {
-        start: '2025-05-01 10:30',
-        end: '2025-05-01 11:30',
-      },
-      {
-        start: '2025-09-01 10:30',
-        end: '2025-09-01 11:30',
-      },
+      recurrence(datetime('2025-05-01 10:30'), datetime('2025-05-01 11:30')),
+      recurrence(datetime('2025-09-01 10:30'), datetime('2025-09-01 11:30')),
     ])
     expect(recurrences).toHaveLength(2)
     expect(recurrences).toEqual(
