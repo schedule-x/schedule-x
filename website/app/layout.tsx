@@ -1,5 +1,6 @@
 import '../theme/index.scss'
 import '../components/pages/landing-page.scss'
+import '../components/pages/setup-wizard.scss'
 import '../components/pages/calendar-demo.scss'
 import '../components/partials/card/card.scss'
 

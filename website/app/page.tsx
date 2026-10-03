@@ -17,8 +17,9 @@ import Testimonials from '../components/partials/testimonials/testimonials'
 import CloudPromotion from '../components/partials/cloud-promotion/cloud-promotion'
 
 export const metadata: Metadata = {
-  title: 'Modern JavaScript Event Calendar',
-  description: 'Modern JavaScript Event calendar for React, Angular, Vue and plain JS. Modern alternative to Fullcalendar. Drag & drop, dark mode, event resizing and more.',
+  title: 'The Calendar Framework for the Modern Web',
+  description:
+    'A modern JavaScript event calendar with responsive views, advanced interactions, framework integrations, and an optional hosted cloud backend.',
 }
 
 export default function LandingPage() {
@@ -27,17 +28,19 @@ export default function LandingPage() {
       <div className={'landingPage page-wrapper'}>
         <section className="landingHero" aria-labelledby="landing-hero-title">
           <h1 id="landing-hero-title">
-            The modern JavaScript event calendar
+            The calendar framework for the modern web
           </h1>
 
           <h2>
-            A modern JavaScript event calendar with the views, interactions,
-            and framework integrations you need to move from prototype to production.
+            A modern event calendar with the views, interactions, framework
+            integrations, and cloud backend you need to move from prototype to
+            production.
           </h2>
 
           <div className={'landingPageActions'}>
-            <Link className="landingPageAction buttonPrimary" href={'/docs/calendar'}>
-              <span>Get started</span><span aria-hidden="true">→</span>
+            <Link className="landingPageAction buttonPrimary" href={'/setup'}>
+              <span>Find my setup</span>
+              <span aria-hidden="true">→</span>
             </Link>
 
             <Link className="landingTextLink" href={'https://github.com/schedule-x/schedule-x'} target="_blank">
