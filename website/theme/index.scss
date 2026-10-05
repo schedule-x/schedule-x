@@ -203,6 +203,10 @@ header.nextra-navbar {
   }
 }
 
+.headerSetupAction__mobileLabel {
+  display: none;
+}
+
 @media (width <= 420px) {
   .scheduleXBrand__logo {
     width: 112px;
@@ -213,6 +217,14 @@ header.nextra-navbar {
     gap: 0.625rem;
     padding: 0.5rem 0.625rem;
     font-size: 0.6875rem;
+  }
+
+  .headerSetupAction__fullLabel {
+    display: none;
+  }
+
+  .headerSetupAction__mobileLabel {
+    display: inline;
   }
 }
 

@@ -38,7 +38,8 @@ import CustomFooter from '../components/theme/custom-footer'
 const navbar = (
   <Navbar logo={<Logo />}>
     <Link className="headerSetupAction" href="/setup">
-      <span>Find my setup</span>
+      <span className="headerSetupAction__fullLabel">Find my setup</span>
+      <span className="headerSetupAction__mobileLabel">Setup</span>
       <span aria-hidden="true">→</span>
     </Link>
   </Navbar>

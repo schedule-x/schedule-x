@@ -361,8 +361,16 @@
   }
 
   .setupToolbar {
-    flex-wrap: wrap;
+    gap: 0.625rem;
     margin-bottom: 1.25rem;
+  }
+
+  .setupProgress {
+    gap: 0.625rem;
+  }
+
+  .setupProgress__track {
+    width: 4.5rem;
   }
 
   .setupIntro {
