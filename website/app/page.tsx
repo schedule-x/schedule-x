@@ -15,6 +15,8 @@ import TextValuePropPremium from '../components/partials/landing-page/text-value
 import LogoSlide from '../components/partials/landing-page/logo-slide'
 import Testimonials from '../components/partials/testimonials/testimonials'
 import CloudPromotion from '../components/partials/cloud-promotion/cloud-promotion'
+import { setupAnalyticsEvents } from './setup/setup-analytics-contract'
+import { SetupAnalyticsLink } from './setup/setup-analytics'
 
 export const metadata: Metadata = {
   title: 'The Calendar Framework for the Modern Web',
@@ -38,10 +40,16 @@ export default function LandingPage() {
           </h2>
 
           <div className={'landingPageActions'}>
-            <Link className="landingPageAction buttonPrimary" href={'/setup'}>
+            <SetupAnalyticsLink
+              className="landingPageAction buttonPrimary"
+              href={'/setup'}
+              analyticsEvent={setupAnalyticsEvents.entryClicked}
+              analyticsProperties={{ entry_point: 'landing_hero' }}
+              startsNewFlow
+            >
               <span>Find my setup</span>
               <span aria-hidden="true">→</span>
-            </Link>
+            </SetupAnalyticsLink>
 
             <Link className="landingTextLink" href={'https://github.com/schedule-x/schedule-x'} target="_blank">
               View on GitHub <span aria-hidden="true">→</span>
