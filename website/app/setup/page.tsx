@@ -1,6 +1,11 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
-import { cloudCode, coreCode, premiumCode } from './setup-code'
+import {
+  setupAnalyticsEvents,
+  type BackendNeed,
+  type UiNeed,
+} from './setup-analytics-contract'
+import { SetupAnalyticsLink, SetupAnalyticsView } from './setup-analytics'
+import { SetupRecommendation } from './setup-recommendation'
 
 export const metadata: Metadata = {
   title: 'Find Your Schedule-X Setup',
@@ -8,8 +13,6 @@ export const metadata: Metadata = {
     'Answer two questions and get the Schedule-X setup that matches your calendar.',
 }
 
-type UiNeed = 'display' | 'interactive'
-type BackendNeed = 'cloud' | 'frontend'
 type SearchParams = Promise<Record<string, string | string[] | undefined>>
 
 const getValue = (value: string | string[] | undefined) =>
@@ -32,13 +35,33 @@ function Progress({ step }: { step: 1 | 2 }) {
   )
 }
 
-function SetupToolbar({ step, docsHref }: { step: 1 | 2; docsHref: string }) {
+function SetupToolbar({
+  step,
+  docsHref,
+  docsDestination,
+  ui,
+}: {
+  step: 1 | 2
+  docsHref: string
+  docsDestination: 'docs_calendar' | 'docs_premium'
+  ui?: UiNeed
+}) {
   return (
     <div className="setupToolbar">
       <Progress step={step} />
-      <Link className="setupDocsLink" href={docsHref}>
+      <SetupAnalyticsLink
+        className="setupDocsLink"
+        href={docsHref}
+        analyticsEvent={setupAnalyticsEvents.navigationClicked}
+        analyticsProperties={{
+          surface: step === 1 ? 'ui_question' : 'backend_question',
+          action_id: 'skip_to_docs',
+          destination_id: docsDestination,
+          ...(ui ? { ui_need: ui } : {}),
+        }}
+      >
         Skip to docs →
-      </Link>
+      </SetupAnalyticsLink>
     </div>
   )
 }
@@ -46,14 +69,27 @@ function SetupToolbar({ step, docsHref }: { step: 1 | 2; docsHref: string }) {
 function UiQuestion() {
   return (
     <main className="setupWizard page-wrapper">
+      <SetupAnalyticsView
+        event={setupAnalyticsEvents.stepViewed}
+        properties={{ step_id: 'ui' }}
+      />
       <section className="setupQuestion" aria-labelledby="setup-ui-title">
-        <SetupToolbar step={1} docsHref="/docs/calendar" />
+        <SetupToolbar
+          step={1}
+          docsHref="/docs/calendar"
+          docsDestination="docs_calendar"
+        />
         <h1 id="setup-ui-title">What should your calendar do?</h1>
         <p className="setupIntro">
           First, tell us how people will use the calendar.
         </p>
         <div className="setupChoices">
-          <Link className="setupChoice" href="/setup?ui=display">
+          <SetupAnalyticsLink
+            className="setupChoice"
+            href="/setup?ui=display"
+            analyticsEvent={setupAnalyticsEvents.uiSelected}
+            analyticsProperties={{ ui_need: 'display' }}
+          >
             <span className="setupChoice__number">01</span>
             <span className="setupChoice__icon" aria-hidden="true">
               ◫
@@ -64,8 +100,13 @@ function UiQuestion() {
               dark mode, and 100+ configuration options.
             </span>
             <b>Choose display only →</b>
-          </Link>
-          <Link className="setupChoice" href="/setup?ui=interactive">
+          </SetupAnalyticsLink>
+          <SetupAnalyticsLink
+            className="setupChoice"
+            href="/setup?ui=interactive"
+            analyticsEvent={setupAnalyticsEvents.uiSelected}
+            analyticsProperties={{ ui_need: 'interactive' }}
+          >
             <span className="setupChoice__number">02</span>
             <span className="setupChoice__icon isWarm" aria-hidden="true">
               ↕
@@ -76,7 +117,7 @@ function UiQuestion() {
               drawing, or add resource views and Gantt charts.
             </span>
             <b>Choose interactive calendar →</b>
-          </Link>
+          </SetupAnalyticsLink>
         </div>
         <p className="setupPrivacy">
           No signup or email required to see your recommendation.
@@ -96,11 +137,32 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
 
   return (
     <main className="setupWizard page-wrapper">
+      <SetupAnalyticsView
+        event={setupAnalyticsEvents.stepViewed}
+        properties={{ step_id: 'backend', ui_need: ui }}
+      />
       <section className="setupQuestion" aria-labelledby="setup-backend-title">
-        <SetupToolbar step={2} docsHref={docsHref} />
-        <Link className="setupPrevious" href="/setup">
+        <SetupToolbar
+          step={2}
+          docsHref={docsHref}
+          docsDestination={
+            ui === 'interactive' ? 'docs_premium' : 'docs_calendar'
+          }
+          ui={ui}
+        />
+        <SetupAnalyticsLink
+          className="setupPrevious"
+          href="/setup"
+          analyticsEvent={setupAnalyticsEvents.navigationClicked}
+          analyticsProperties={{
+            surface: 'backend_question',
+            action_id: 'back_to_ui',
+            destination_id: 'setup_ui',
+            ui_need: ui,
+          }}
+        >
           ← Back to UI choice <span>· {selectedLabel}</span>
-        </Link>
+        </SetupAnalyticsLink>
         <h1 id="setup-backend-title">
           Should we handle the calendar backend too?
         </h1>
@@ -109,9 +171,14 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
           calendar data and manage synchronization.
         </p>
         <div className="setupChoices">
-          <Link
+          <SetupAnalyticsLink
             className="setupChoice"
             href={`/setup?ui=${ui}&backend=frontend`}
+            analyticsEvent={setupAnalyticsEvents.backendSelected}
+            analyticsProperties={{
+              ui_need: ui,
+              backend_need: 'frontend',
+            }}
           >
             <span className="setupChoice__number">01</span>
             <span className="setupChoice__icon" aria-hidden="true">
@@ -123,8 +190,13 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
               synchronization myself.
             </span>
             <b>Keep my setup frontend-only →</b>
-          </Link>
-          <Link className="setupChoice" href={`/setup?ui=${ui}&backend=cloud`}>
+          </SetupAnalyticsLink>
+          <SetupAnalyticsLink
+            className="setupChoice"
+            href={`/setup?ui=${ui}&backend=cloud`}
+            analyticsEvent={setupAnalyticsEvents.backendSelected}
+            analyticsProperties={{ ui_need: ui, backend_need: 'cloud' }}
+          >
             <span className="setupChoice__number">02</span>
             <span className="setupChoice__icon isCloud" aria-hidden="true">
               ↻
@@ -136,126 +208,7 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
               already handled.
             </span>
             <b>Show me the end-to-end setup →</b>
-          </Link>
-        </div>
-      </section>
-    </main>
-  )
-}
-
-type Recommendation = {
-  accent: 'core' | 'premium' | 'cloud'
-  name: string
-  reason: string
-  tags: string[]
-  codeLabel: string
-  code: string
-  primaryHref: string
-  primaryLabel: string
-  secondaryHref: string
-  secondaryLabel: string
-  docsHref: string
-}
-
-function getRecommendation(ui: UiNeed, backend: BackendNeed): Recommendation {
-  if (backend === 'cloud') {
-    return {
-      accent: 'cloud',
-      name: 'Cloud',
-      reason:
-        'You want Schedule-X to host calendar data and manage synchronization. Cloud combines the right calendar UI with the complete backend and provider-sync layer.',
-      tags: ['Hosted data', 'Recurring events', 'Google sync'],
-      codeLabel: 'schedule-x-cloud / quickstart',
-      code: cloudCode,
-      primaryHref: 'https://cloud.schedule-x.com/console/signup',
-      primaryLabel: 'Start building free',
-      secondaryHref:
-        'https://cloud.schedule-x.com/quickstart/with-calendar-sync/',
-      secondaryLabel: 'Read the Cloud quickstart',
-      docsHref: 'https://cloud.schedule-x.com/quickstart/',
-    }
-  }
-
-  if (ui === 'interactive') {
-    return {
-      accent: 'premium',
-      name: 'Premium',
-      reason:
-        'You want users to plan and edit, but you’ll manage event storage yourself. Premium adds advanced interactions without requiring Schedule-X Cloud.',
-      tags: ['Plan and edit', 'Frontend only', 'Your backend'],
-      codeLabel: 'schedule-x-premium / interactive calendar',
-      code: premiumCode,
-      primaryHref: '/premium?product=frontend#pricing',
-      primaryLabel: 'Start 14-day trial',
-      secondaryHref: '/demos/modal-and-sidebar',
-      secondaryLabel: 'Preview an interactive demo',
-      docsHref: '/docs/calendar/installing-premium',
-    }
-  }
-
-  return {
-    accent: 'core',
-    name: 'Open Source',
-    reason:
-      'You only need to display events and you’ll manage the data yourself. The open-source calendar gives you the complete frontend without a paid license or hosted backend.',
-    tags: ['Display events', 'Frontend only', 'MIT licensed'],
-    codeLabel: 'schedule-x / calendar',
-    code: coreCode,
-    primaryHref: '/docs/calendar',
-    primaryLabel: 'Open the docs',
-    secondaryHref: 'https://github.com/schedule-x/schedule-x',
-    secondaryLabel: 'View the repository',
-    docsHref: '/docs/calendar',
-  }
-}
-
-function Recommendation({ ui, backend }: { ui: UiNeed; backend: BackendNeed }) {
-  const result = getRecommendation(ui, backend)
-
-  return (
-    <main
-      className={`setupWizard setupResult is-${result.accent} page-wrapper`}
-    >
-      <div className="setupHeader">
-        <span>Your setup</span>
-        <Link href={result.docsHref}>Docs →</Link>
-      </div>
-      <section
-        className="setupResult__body"
-        aria-labelledby="setup-result-title"
-      >
-        <div className="setupResult__copy">
-          <p className="setupResult__eyebrow">Your recommended setup</p>
-          <h1 id="setup-result-title">
-            Schedule-X <span>{result.name}</span>
-          </h1>
-          <p className="setupResult__reason">{result.reason}</p>
-          <ul className="setupTags" aria-label="Selected requirements">
-            {result.tags.map((tag) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>
-          <div className="setupResult__actions">
-            <Link className="setupPrimaryAction" href={result.primaryHref}>
-              {result.primaryLabel} →
-            </Link>
-            <Link className="setupSecondaryAction" href={result.secondaryHref}>
-              {result.secondaryLabel} ↗
-            </Link>
-          </div>
-        </div>
-        <div className="setupCodeArea">
-          <div className="setupCode">
-            <div className="setupCode__header">
-              <span>{result.codeLabel}</span>
-              <span className="setupCode__dots" aria-hidden="true">
-                ● ● ●
-              </span>
-            </div>
-            <pre>
-              <code>{result.code}</code>
-            </pre>
-          </div>
+          </SetupAnalyticsLink>
         </div>
       </section>
     </main>
@@ -273,5 +226,5 @@ export default async function SetupPage({
 
   if (!ui) return <UiQuestion />
   if (!backend) return <BackendQuestion ui={ui} />
-  return <Recommendation ui={ui} backend={backend} />
+  return <SetupRecommendation ui={ui} backend={backend} />
 }

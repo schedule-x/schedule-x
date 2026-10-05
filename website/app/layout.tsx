@@ -29,19 +29,26 @@ import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import React from 'react'
 
-import Link from 'next/link'
 import Script from 'next/script'
 import CookieConsent from '../components/CookieConsent'
 import Logo from '../components/theme/logo'
 import CustomFooter from '../components/theme/custom-footer'
+import { setupAnalyticsEvents } from './setup/setup-analytics-contract'
+import { SetupAnalyticsLink } from './setup/setup-analytics'
 
 const navbar = (
   <Navbar logo={<Logo />}>
-    <Link className="headerSetupAction" href="/setup">
+    <SetupAnalyticsLink
+      className="headerSetupAction"
+      href="/setup"
+      analyticsEvent={setupAnalyticsEvents.entryClicked}
+      analyticsProperties={{ entry_point: 'site_header' }}
+      startsNewFlow
+    >
       <span className="headerSetupAction__fullLabel">Find my setup</span>
       <span className="headerSetupAction__mobileLabel">Setup</span>
       <span aria-hidden="true">→</span>
-    </Link>
+    </SetupAnalyticsLink>
   </Navbar>
 )
 
