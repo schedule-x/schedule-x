@@ -134,7 +134,7 @@ export default function AppCheckout() {
                 description: 'License for one year, with support and updates',
                 variants: yearlyVariants,
                 features: [
-                  'All products',
+                  'All Premium frontend packages',
                   'Email support',
                   'Prioritized issue processing',
                 ],
@@ -155,7 +155,7 @@ export default function AppCheckout() {
                 description: 'Perpetual license, with 1 year of support and updates',
                 variants: lifetimeVariants,
                 features: [
-                  'All products',
+                  'All Premium frontend packages',
                   'Email support',
                   'Prioritized issue processing',
                 ],
