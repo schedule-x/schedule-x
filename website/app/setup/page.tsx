@@ -185,7 +185,7 @@ function getRecommendation(ui: UiNeed, backend: BackendNeed): Recommendation {
       tags: ['Plan and edit', 'Frontend only', 'Your backend'],
       codeLabel: 'schedule-x-premium / interactive calendar',
       code: premiumCode,
-      primaryHref: '/premium#pricing',
+      primaryHref: '/premium?product=frontend#pricing',
       primaryLabel: 'Start 14-day trial',
       secondaryHref: '/demos/modal-and-sidebar',
       secondaryLabel: 'Preview an interactive demo',

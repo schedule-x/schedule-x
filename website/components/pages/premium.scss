@@ -686,6 +686,14 @@ html {
   gap: 0;
   margin: 0 0 2rem;
   border: 1px solid #cacdd2;
+
+  &--frontend {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .pricing-card:last-child {
+      border-right: 0;
+    }
+  }
 }
 
 .premiumPage {
@@ -852,7 +860,8 @@ html {
   }
 
   .features-grid,
-  .premiumPageCards {
+  .premiumPageCards,
+  .premiumPageCards--frontend {
     grid-template-columns: 1fr;
   }
 
