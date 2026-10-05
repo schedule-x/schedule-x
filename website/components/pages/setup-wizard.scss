@@ -142,7 +142,7 @@
     letter-spacing: -0.035em;
   }
 
-  > span:not(.setupChoice__number, .setupChoice__icon) {
+  > .setupChoice__description {
     max-width: 440px;
     color: #626771;
     line-height: 1.55;
@@ -326,7 +326,7 @@
     Consolas,
     monospace;
 
-  span:last-child {
+  .setupCode__dots {
     color: #666a72;
     letter-spacing: 0.25rem;
   }
@@ -396,7 +396,7 @@
     }
 
     > strong,
-    > span:not(.setupChoice__number, .setupChoice__icon),
+    > .setupChoice__description,
     > b {
       grid-column: 2;
     }
@@ -406,7 +406,7 @@
       font-size: 1.125rem;
     }
 
-    > span:not(.setupChoice__number, .setupChoice__icon) {
+    > .setupChoice__description {
       margin-bottom: 0.5625rem;
       font-size: 0.8125rem;
     }

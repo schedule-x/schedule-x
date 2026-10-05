@@ -59,7 +59,7 @@ function UiQuestion() {
               ◫
             </span>
             <strong>Only display calendar events</strong>
-            <span>
+            <span className="setupChoice__description">
               Show events in responsive views, with support for localization,
               dark mode, and 100+ configuration options.
             </span>
@@ -71,7 +71,7 @@ function UiQuestion() {
               ↕
             </span>
             <strong>Let users plan and edit</strong>
-            <span>
+            <span className="setupChoice__description">
               Add interactive features like event drag &amp; drop, resizing,
               drawing, or add resource views and Gantt charts.
             </span>
@@ -118,7 +118,7 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
               ⌁
             </span>
             <strong>No, frontend only</strong>
-            <span>
+            <span className="setupChoice__description">
               I’ll store events and build any backend integration or
               synchronization myself.
             </span>
@@ -130,7 +130,7 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
               ↻
             </span>
             <strong>Yes, handle it for me</strong>
-            <span>
+            <span className="setupChoice__description">
               Ship your end-to-end calendar today—with hosted events,
               recurrence, real-time updates, and two-way Google Calendar sync
               already handled.
@@ -248,7 +248,9 @@ function Recommendation({ ui, backend }: { ui: UiNeed; backend: BackendNeed }) {
           <div className="setupCode">
             <div className="setupCode__header">
               <span>{result.codeLabel}</span>
-              <span aria-hidden="true">● ● ●</span>
+              <span className="setupCode__dots" aria-hidden="true">
+                ● ● ●
+              </span>
             </div>
             <pre>
               <code>{result.code}</code>
