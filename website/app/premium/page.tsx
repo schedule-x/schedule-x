@@ -16,7 +16,19 @@ export const metadata: Metadata = {
     'Premium components for Schedule-X. Resource scheduler, event modal with form, drag-and-drop event creation and more.',
 }
 
-export default function PremiumPage() {
+type SearchParams = Promise<Record<string, string | string[] | undefined>>
+
+const getValue = (value: string | string[] | undefined) =>
+  Array.isArray(value) ? value[0] : value
+
+export default async function PremiumPage({
+  searchParams,
+}: {
+  searchParams: SearchParams
+}) {
+  const params = await searchParams
+  const frontendOnly = getValue(params.product) === 'frontend'
+
   return (
     <>
       <div className={'premiumPage page-wrapper'}>
@@ -175,7 +187,7 @@ export default function PremiumPage() {
           </div>
         </section>
 
-        <AppCheckout />
+        <AppCheckout frontendOnly={frontendOnly} />
 
         <FAQ />
       </div>

@@ -8,7 +8,7 @@ import PricingCard from "../pricing-card/pricing-card"
 import SalesCard from "../sales-card/sales-card"
 import { LicenseType } from "../pricing-card/pricing-card"
 
-export default function AppCheckout() {
+export default function AppCheckout({ frontendOnly = false }: { frontendOnly?: boolean }) {
     const [selectedVariantYearly, setSelectedVariantYearly] = useState<number>(421689)
     const [selectedVariantLifetime, setSelectedVariantLifetime] = useState<number>(614719)
 
@@ -124,7 +124,7 @@ export default function AppCheckout() {
                  className={'landingPageSection premiumPage__pricing'}>
           <h2 className={'premiumSectionHeading'}>Choose how you want to ship.</h2>
 
-          <div className={'premiumPageCards'}>
+          <div className={`premiumPageCards${frontendOnly ? ' premiumPageCards--frontend' : ''}`}>
             <PricingCard
               startCheckout={startCheckoutForLicense}
               price={yearlyPrice}
@@ -134,7 +134,7 @@ export default function AppCheckout() {
                 description: 'License for one year, with support and updates',
                 variants: yearlyVariants,
                 features: [
-                  'All products',
+                  'All Premium frontend packages',
                   'Email support',
                   'Prioritized issue processing',
                 ],
@@ -155,7 +155,7 @@ export default function AppCheckout() {
                 description: 'Perpetual license, with 1 year of support and updates',
                 variants: lifetimeVariants,
                 features: [
-                  'All products',
+                  'All Premium frontend packages',
                   'Email support',
                   'Prioritized issue processing',
                 ],
@@ -167,21 +167,23 @@ export default function AppCheckout() {
               defaultVariantId={selectedVariantLifetime}
             />
 
-            <SalesCard
-              data={{
-                title: 'Cloud',
-                description: 'Premium packages with a fully managed calendar backend',
-                highlight: 'End-to-End calendar in a few lines of code',
-                features: [
-                  'All Premium packages',
-                  'Fully managed backend',
-                  'Google Calendar sync',
-                ],
-                buttonText: 'Explore Cloud →'
-              }}
-              buttonLink={'https://cloud.schedule-x.com/'}
-              buttonClass={'black'}
-            />
+            {!frontendOnly && (
+              <SalesCard
+                data={{
+                  title: 'Cloud',
+                  description: 'Premium packages with a fully managed calendar backend',
+                  highlight: 'End-to-End calendar in a few lines of code',
+                  features: [
+                    'All Premium packages',
+                    'Fully managed backend',
+                    'Google Calendar sync',
+                  ],
+                  buttonText: 'Explore Cloud →'
+                }}
+                buttonLink={'https://cloud.schedule-x.com/'}
+                buttonClass={'black'}
+              />
+            )}
           </div>
 
           <p style={{ color: 'gray', margin: '0 2rem', textAlign: 'center' }}>The following&nbsp;

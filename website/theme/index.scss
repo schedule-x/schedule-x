@@ -181,6 +181,53 @@ header.nextra-navbar {
   border-radius: 2px;
 }
 
+.headerSetupAction {
+  min-height: 2.5rem;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #171717;
+  background: #171717;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus-visible {
+    border-color: #6750a4;
+    background: #6750a4;
+    color: #fff;
+  }
+}
+
+.headerSetupAction__mobileLabel {
+  display: none;
+}
+
+@media (width <= 420px) {
+  .scheduleXBrand__logo {
+    width: 112px;
+  }
+
+  .headerSetupAction {
+    min-height: 2.25rem;
+    gap: 0.625rem;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.6875rem;
+  }
+
+  .headerSetupAction__fullLabel {
+    display: none;
+  }
+
+  .headerSetupAction__mobileLabel {
+    display: inline;
+  }
+}
+
 .nextra-sidebar-footer {
   display: none;
 }
