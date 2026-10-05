@@ -1,6 +1,6 @@
-.setupWizard {
+.page-wrapper.setupWizard {
   max-width: none;
-  min-height: calc(100svh - var(--nextra-navbar-height) + 8rem);
+  min-height: calc(100svh + 4rem);
   color: #171717;
 }
 
@@ -95,7 +95,7 @@
 .setupPrevious {
   display: inline-flex;
   gap: 0.35rem;
-  margin-bottom: 0.3125rem;
+  margin-bottom: 1rem;
   color: #575c65;
   font-size: 0.8125rem;
   font-weight: 650;
@@ -108,7 +108,7 @@
 
 .setupIntro {
   max-width: 720px;
-  margin: 1rem 0 1.25rem;
+  margin: 0.75rem 0;
   color: #626771;
   font-size: 1.125rem;
   line-height: 1.55;
@@ -190,8 +190,8 @@
   font-size: 0.8125rem;
 }
 
-.setupResult {
-  min-height: calc(100svh - var(--nextra-navbar-height) + 8rem);
+.page-wrapper.setupResult {
+  min-height: calc(100svh + 4rem);
 }
 
 .setupResult__body {
@@ -366,7 +366,7 @@
   }
 
   .setupIntro {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-size: 0.9375rem;
   }
 
