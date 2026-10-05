@@ -32,11 +32,26 @@ function Progress({ step }: { step: 1 | 2 }) {
   )
 }
 
-function SetupHeader({ label, docsHref }: { label: string; docsHref: string }) {
+function SetupToolbar({
+  step,
+  docsHref,
+  previousLabel,
+}: {
+  step: 1 | 2
+  docsHref: string
+  previousLabel?: string
+}) {
   return (
-    <div className="setupHeader">
-      <span>{label}</span>
-      <Link href={docsHref}>Skip to docs →</Link>
+    <div className="setupToolbar">
+      <Progress step={step} />
+      {previousLabel && (
+        <Link className="setupPrevious" href="/setup">
+          ← You chose: {previousLabel}
+        </Link>
+      )}
+      <Link className="setupDocsLink" href={docsHref}>
+        Skip to docs →
+      </Link>
     </div>
   )
 }
@@ -44,9 +59,8 @@ function SetupHeader({ label, docsHref }: { label: string; docsHref: string }) {
 function UiQuestion() {
   return (
     <main className="setupWizard page-wrapper">
-      <SetupHeader label="UI" docsHref="/docs/calendar" />
       <section className="setupQuestion" aria-labelledby="setup-ui-title">
-        <Progress step={1} />
+        <SetupToolbar step={1} docsHref="/docs/calendar" />
         <h1 id="setup-ui-title">What should your calendar do?</h1>
         <p className="setupIntro">
           First, tell us how people will use the calendar.
@@ -95,12 +109,12 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
 
   return (
     <main className="setupWizard page-wrapper">
-      <SetupHeader label="Backend" docsHref={docsHref} />
       <section className="setupQuestion" aria-labelledby="setup-backend-title">
-        <Progress step={2} />
-        <Link className="setupPrevious" href="/setup">
-          ← You chose: {selectedLabel}
-        </Link>
+        <SetupToolbar
+          step={2}
+          docsHref={docsHref}
+          previousLabel={selectedLabel}
+        />
         <h1 id="setup-backend-title">
           Should we handle the calendar backend too?
         </h1>

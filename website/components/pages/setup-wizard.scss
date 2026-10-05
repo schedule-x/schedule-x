@@ -1,6 +1,6 @@
 .setupWizard {
   max-width: none;
-  min-height: calc(100svh - var(--nextra-navbar-height) + 4rem);
+  min-height: calc(100svh - var(--nextra-navbar-height) + 8rem);
   color: #171717;
 }
 
@@ -35,13 +35,13 @@
 .setupQuestion {
   width: min(1120px, calc(100% - 3rem));
   margin: 0 auto;
-  padding: 4rem 0 5rem;
+  padding: 1.75rem 0 4rem;
 
   h1 {
     max-width: 900px;
     margin: 0;
     color: #171717;
-    font-size: clamp(3.25rem, 5vw, 4.25rem);
+    font-size: clamp(3.25rem, 4.5vw, 4rem);
     font-weight: 600;
     letter-spacing: -0.055em;
     line-height: 1.02;
@@ -53,10 +53,26 @@
   display: flex;
   align-items: center;
   gap: 0.875rem;
-  margin-bottom: 2rem;
   color: #666a72;
   font-size: 0.8125rem;
   font-weight: 650;
+}
+
+.setupToolbar {
+  min-height: 2.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.setupDocsLink {
+  margin-left: auto;
+  border-bottom: 1px solid #aeb0b5;
+  color: #34373d;
+  font-size: 0.875rem;
+  font-weight: 650;
+  white-space: nowrap;
 }
 
 .setupProgress__track {
@@ -74,7 +90,6 @@
 
 .setupPrevious {
   display: inline-flex;
-  margin-bottom: 1.625rem;
   padding: 0.5rem 0.6875rem;
   border: 1px solid #dfe1e6;
   color: #575c65;
@@ -84,7 +99,7 @@
 
 .setupIntro {
   max-width: 720px;
-  margin: 1.125rem 0 2.25rem;
+  margin: 1rem 0 1.25rem;
   color: #626771;
   font-size: 1.125rem;
   line-height: 1.55;
@@ -167,7 +182,7 @@
 }
 
 .setupResult {
-  min-height: calc(100svh - var(--nextra-navbar-height) + 4rem);
+  min-height: calc(100svh - var(--nextra-navbar-height) + 8rem);
 }
 
 .setupResult__body {
@@ -329,11 +344,21 @@
   }
 
   .setupQuestion {
-    padding: 2.125rem 0 2.625rem;
+    padding: 1.5rem 0 2.625rem;
 
     h1 {
       font-size: 2.375rem;
     }
+  }
+
+  .setupToolbar {
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .setupPrevious {
+    order: 3;
+    flex-basis: 100%;
   }
 
   .setupIntro {
