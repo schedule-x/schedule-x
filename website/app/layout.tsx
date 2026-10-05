@@ -29,17 +29,19 @@ import { getPageMap } from 'nextra/page-map'
 import 'nextra-theme-docs/style.css'
 import React from 'react'
 
+import Link from 'next/link'
 import Script from 'next/script'
 import CookieConsent from '../components/CookieConsent'
 import Logo from '../components/theme/logo'
 import CustomFooter from '../components/theme/custom-footer'
 
 const navbar = (
-  <Navbar
-    chatLink={'https://discord.gg/GyJQAxRgNF'}
-    logo={<Logo />}
-    // ... Your additional navbar options
-  />
+  <Navbar logo={<Logo />}>
+    <Link className="headerSetupAction" href="/setup">
+      <span>Find my setup</span>
+      <span aria-hidden="true">→</span>
+    </Link>
+  </Navbar>
 )
 
 const banner = (
