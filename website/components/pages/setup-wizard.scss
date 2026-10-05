@@ -35,7 +35,7 @@
 .setupQuestion {
   width: min(1120px, calc(100% - 3rem));
   margin: 0 auto;
-  padding: 1.75rem 0 4rem;
+  padding: 1.5rem 0 4rem;
 
   h1 {
     max-width: 900px;
@@ -66,6 +66,10 @@
   margin-bottom: 1.5rem;
 }
 
+.setupToolbar:has(+ .setupPrevious) {
+  margin-bottom: 0;
+}
+
 .setupDocsLink {
   margin-left: auto;
   border-bottom: 1px solid #aeb0b5;
@@ -90,11 +94,16 @@
 
 .setupPrevious {
   display: inline-flex;
-  padding: 0.5rem 0.6875rem;
-  border: 1px solid #dfe1e6;
+  gap: 0.35rem;
+  margin-bottom: 0.3125rem;
   color: #575c65;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 650;
+
+  span {
+    color: #777c85;
+    font-weight: 500;
+  }
 }
 
 .setupIntro {
@@ -354,11 +363,6 @@
   .setupToolbar {
     flex-wrap: wrap;
     margin-bottom: 1.25rem;
-  }
-
-  .setupPrevious {
-    order: 3;
-    flex-basis: 100%;
   }
 
   .setupIntro {

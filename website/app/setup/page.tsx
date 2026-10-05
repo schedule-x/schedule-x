@@ -32,23 +32,10 @@ function Progress({ step }: { step: 1 | 2 }) {
   )
 }
 
-function SetupToolbar({
-  step,
-  docsHref,
-  previousLabel,
-}: {
-  step: 1 | 2
-  docsHref: string
-  previousLabel?: string
-}) {
+function SetupToolbar({ step, docsHref }: { step: 1 | 2; docsHref: string }) {
   return (
     <div className="setupToolbar">
       <Progress step={step} />
-      {previousLabel && (
-        <Link className="setupPrevious" href="/setup">
-          ← You chose: {previousLabel}
-        </Link>
-      )}
       <Link className="setupDocsLink" href={docsHref}>
         Skip to docs →
       </Link>
@@ -110,11 +97,10 @@ function BackendQuestion({ ui }: { ui: UiNeed }) {
   return (
     <main className="setupWizard page-wrapper">
       <section className="setupQuestion" aria-labelledby="setup-backend-title">
-        <SetupToolbar
-          step={2}
-          docsHref={docsHref}
-          previousLabel={selectedLabel}
-        />
+        <SetupToolbar step={2} docsHref={docsHref} />
+        <Link className="setupPrevious" href="/setup">
+          ← Back to UI choice <span>· {selectedLabel}</span>
+        </Link>
         <h1 id="setup-backend-title">
           Should we handle the calendar backend too?
         </h1>
