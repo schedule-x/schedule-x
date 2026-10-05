@@ -1,5 +1,6 @@
 .setupWizard {
   max-width: none;
+  min-height: calc(100svh - var(--nextra-navbar-height) + 4rem);
   color: #171717;
 }
 
@@ -166,7 +167,7 @@
 }
 
 .setupResult {
-  min-height: calc(100vh - var(--nextra-navbar-height));
+  min-height: calc(100svh - var(--nextra-navbar-height) + 4rem);
 }
 
 .setupResult__body {
