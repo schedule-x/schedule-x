@@ -261,23 +261,27 @@ export default function TimeGridEvent({
             calendarEvent._maxConcurrentEvents,
             $app.config.weekOptions.value.eventOverlap
           )}%`,
-          backgroundColor: customComponent
-            ? undefined
-            : eventCSSVariables.backgroundColor,
-          color: customComponent ? undefined : eventCSSVariables.textColor,
-          borderTop: borderRule,
-          borderInlineEnd: borderRule,
-          borderBottom: borderRule,
-          borderInlineStart: customComponent
-            ? undefined
-            : eventCSSVariables.borderInlineStart,
-          padding: customComponent ? '0' : undefined,
         }}
       >
         <div
-          data-ccid={customComponentId.current}
-          className="sx__time-grid-event-inner"
+          className="sx__time-grid-event-content"
+          style={{
+            backgroundColor: customComponent
+              ? undefined
+              : eventCSSVariables.backgroundColor,
+            color: customComponent ? undefined : eventCSSVariables.textColor,
+            borderTop: borderRule,
+            borderInlineEnd: borderRule,
+            borderBottom: borderRule,
+            borderInlineStart: customComponent
+              ? undefined
+              : eventCSSVariables.borderInlineStart,
+          }}
         >
+          <div
+            data-ccid={customComponentId.current}
+            className="sx__time-grid-event-inner"
+          >
           {!customComponent && !hasCustomContent && (
             <Fragment>
               {/* Compact layout - title and time inline */}
@@ -345,6 +349,7 @@ export default function TimeGridEvent({
                 onTouchStart={startResize}
               />
             )}
+        </div>
         </div>
       </div>
 
