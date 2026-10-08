@@ -1,17 +1,17 @@
 import { RRuleOptionsExternal } from './types/rrule-options'
 import { calculateDaysDifference } from '@schedule-x/shared/src/utils/stateless/time/days-difference'
-import { sxDateTimeStringRegex } from '@schedule-x/shared/src/utils/stateless/time/validation/regex'
-import { addDays, addMinutes } from '@schedule-x/shared/src'
-import { getDurationInMinutes } from './utils/stateless/duration-in-minutes'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
+import {
+  applyTemporalShift,
+  deriveTemporalShift,
+} from './utils/stateless/temporal-shift'
 
 export class RRuleUpdater {
   private rruleOptionsNew: RRuleOptionsExternal
 
   constructor(
     private readonly rruleOptions: RRuleOptionsExternal,
-    private readonly dtstartOld: string,
-    private readonly dtstartNew: string
+    private readonly dtstartOld: Temporal.ZonedDateTime | Temporal.PlainDate,
+    private readonly dtstartNew: Temporal.ZonedDateTime | Temporal.PlainDate
   ) {
     this.rruleOptionsNew = { ...rruleOptions }
     this.updateByDay()
@@ -23,8 +23,12 @@ export class RRuleUpdater {
     if (!this.rruleOptions.byday) return
 
     const daysDifference = calculateDaysDifference(
-      Temporal.PlainDate.from(this.dtstartOld),
-      Temporal.PlainDate.from(this.dtstartNew)
+      this.dtstartOld instanceof Temporal.ZonedDateTime
+        ? Temporal.PlainDate.from(this.dtstartOld.toPlainDate())
+        : this.dtstartOld,
+      this.dtstartNew instanceof Temporal.ZonedDateTime
+        ? Temporal.PlainDate.from(this.dtstartNew.toPlainDate())
+        : this.dtstartNew
     )
 
     const days = ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU']
@@ -47,28 +51,23 @@ export class RRuleUpdater {
   }
 
   updateByMonthDay() {
-    if (!this.rruleOptions.bymonthday) return
-
-    this.rruleOptionsNew.bymonthday = toJSDate(this.dtstartNew).getDate()
+    // For MONTHLY frequency, always set bymonthday unless there's a byday rule
+    if (this.rruleOptions.freq === 'MONTHLY' && !this.rruleOptions.byday) {
+      this.rruleOptionsNew.bymonthday = this.dtstartNew.day
+    } else if (this.rruleOptions.bymonthday) {
+      // For other frequencies, only update if it already exists
+      this.rruleOptionsNew.bymonthday = this.dtstartNew.day
+    }
   }
 
   updateUntil() {
-    if (!this.rruleOptions.until) return
+    if (!this.rruleOptions.until || !this.rruleOptionsNew.until) return
 
-    const dtstartOld = this.dtstartOld
-    const isDateTime = sxDateTimeStringRegex.test(dtstartOld)
-    this.rruleOptionsNew.until = isDateTime
-      ? addMinutes(
-          this.rruleOptionsNew.until!,
-          getDurationInMinutes(this.dtstartOld, this.dtstartNew)
-        ).toString()
-      : addDays(
-          Temporal.PlainDate.from(this.rruleOptionsNew.until!),
-          calculateDaysDifference(
-            Temporal.PlainDate.from(this.dtstartOld),
-            Temporal.PlainDate.from(this.dtstartNew)
-          )
-        ).toString()
+    const shift = deriveTemporalShift(this.dtstartOld, this.dtstartNew)
+    this.rruleOptionsNew.until = applyTemporalShift(
+      this.rruleOptionsNew.until,
+      shift
+    )
   }
 
   getUpdatedRRuleOptions(): RRuleOptionsExternal {
