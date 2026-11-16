@@ -2,8 +2,10 @@ name: Build
 on:
   pull_request:
     paths:
+      - '.github/workflows/build-library.yml'
       - 'packages/**'
       - 'rollup.config.js'
+      - 'scripts/test-calendar-declarations/**'
       - 'tsconfig.json'
       - 'package.json'
       - 'package-lock.json'
@@ -26,3 +28,5 @@ jobs:
         run: npm i
       - name: Build
         run: npm run build
+      - name: Check calendar declarations in a consumer project
+        run: npx tsc -p scripts/test-calendar-declarations
