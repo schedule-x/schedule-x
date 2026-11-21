@@ -5,49 +5,56 @@ import { __deprecated__addMonthsToDateOrDatetime } from '@schedule-x/shared/src/
 import { formatDateTimeFromString } from './date-formatting'
 import { parseBydaySpec, getWeekdayOccurrencesInMonth } from './weekday-utils'
 
+const getBymonthdayCandidate = (
+  dateTime: string,
+  year: number,
+  month: number,
+  bymonthday: number
+): string | undefined => {
+  const daysInMonth = new Date(year, month + 1, 0).getDate()
+  const day = bymonthday > 0 ? bymonthday : daysInMonth + bymonthday + 1
+
+  if (day < 1 || day > daysInMonth) return undefined
+
+  return formatDateTimeFromString(dateTime, year, month, day)
+}
+
 const monthlyIteratorBymonthday = (dtstart: string, options: RRuleOptions) => {
-  let currentDate = dtstart
+  const { year: startYear, month: startMonth } = toIntegers(dtstart)
+  let monthsFromStart = 0
   const allDateTimes: string[] = []
 
   return {
     next() {
-      if (
-        !isCountReached(allDateTimes.length, options.count) &&
-        !isDatePastUntil(currentDate, options.until)
-      ) {
-        allDateTimes.push(currentDate)
-      }
+      const monthIndex = startMonth + monthsFromStart
+      const year = startYear + Math.floor(monthIndex / 12)
+      const month = ((monthIndex % 12) + 12) % 12
+      const firstOfMonth = formatDateTimeFromString(dtstart, year, month, 1)
 
-      if (
-        isDatePastUntil(currentDate, options.until) ||
-        isCountReached(allDateTimes.length, options.count)
-      ) {
+      if (isDatePastUntil(firstOfMonth, options.until)) {
         return { done: true, value: allDateTimes }
       }
 
-      const nextCurrentDateCandidate = __deprecated__addMonthsToDateOrDatetime(
-        currentDate,
-        options.interval
+      // months that do not have the given day (e.g. the 31st) are skipped
+      const candidate = getBymonthdayCandidate(
+        dtstart,
+        year,
+        month,
+        options.bymonthday!
       )
-      let currentIntervalCandidate = options.interval
-      let { date: nextMonthDateCandidate } = toIntegers(
-        nextCurrentDateCandidate
-      )
-
-      while (nextMonthDateCandidate !== options.bymonthday) {
-        currentIntervalCandidate += options.interval
-        nextMonthDateCandidate = toIntegers(
-          __deprecated__addMonthsToDateOrDatetime(
-            currentDate,
-            currentIntervalCandidate
-          )
-        ).date
+      if (
+        candidate &&
+        candidate >= dtstart &&
+        !isDatePastUntil(candidate, options.until)
+      ) {
+        allDateTimes.push(candidate)
       }
 
-      currentDate = __deprecated__addMonthsToDateOrDatetime(
-        currentDate,
-        currentIntervalCandidate
-      )
+      if (isCountReached(allDateTimes.length, options.count)) {
+        return { done: true, value: allDateTimes }
+      }
+
+      monthsFromStart += options.interval
 
       return { done: false, value: allDateTimes }
     },

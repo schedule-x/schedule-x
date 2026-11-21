@@ -291,5 +291,60 @@ describe('RRule', () => {
       expect(recurrences).toHaveLength(3)
       expect(recurrences).toEqual(expectedRecurrences)
     })
+    it('should return a BYMONTHDAY that is not the day of the start date', () => {
+      const rrule = new RRule(
+        {
+          freq: RRuleFreq.MONTHLY,
+          bymonthday: 2,
+          count: 3,
+        },
+        '2026-01-01 10:00',
+        '2026-01-01 11:00'
+      )
+
+      expect(rrule.getRecurrences()).toEqual([
+        { start: '2026-01-02 10:00', end: '2026-01-02 11:00' },
+        { start: '2026-02-02 10:00', end: '2026-02-02 11:00' },
+        { start: '2026-03-02 10:00', end: '2026-03-02 11:00' },
+      ])
+    })
+
+    it('should return the last day of every month for BYMONTHDAY=-1', () => {
+      const rrule = new RRule(
+        {
+          freq: RRuleFreq.MONTHLY,
+          bymonthday: -1,
+          count: 3,
+        },
+        '2026-01-30',
+        '2026-01-30'
+      )
+
+      expect(rrule.getRecurrences()).toEqual([
+        { start: '2026-01-31', end: '2026-01-31' },
+        { start: '2026-02-28', end: '2026-02-28' },
+        { start: '2026-03-31', end: '2026-03-31' },
+      ])
+    })
+
+    it('should skip months without the 31st', () => {
+      const rrule = new RRule(
+        {
+          freq: RRuleFreq.MONTHLY,
+          bymonthday: 31,
+          until: '2026-08-31',
+        },
+        '2026-01-31',
+        '2026-01-31'
+      )
+
+      expect(rrule.getRecurrences().map((r) => r.start)).toEqual([
+        '2026-01-31',
+        '2026-03-31',
+        '2026-05-31',
+        '2026-07-31',
+        '2026-08-31',
+      ])
+    })
   })
 })
