@@ -26,15 +26,16 @@ export default function EventModal({ $app }: EventModalProps) {
 
   const [eventWrapperStyle, setEventWrapperStyle] = useState('sx__event-modal')
 
+  const getModalElement = () =>
+    $app.elements.calendarWrapper?.querySelector(
+      '.sx__event-modal'
+    ) as HTMLElement | null
+
   const callSetPosition = () => {
     setPosition(
       $app.elements.calendarWrapper?.getBoundingClientRect() as DOMRect,
       $app.config.plugins.eventModal?.calendarEventDOMRect.value as DOMRect,
-      (
-        $app.elements.calendarWrapper?.querySelector(
-          '.sx__event-modal'
-        ) as HTMLElement
-      ).clientHeight
+      getModalElement()?.clientHeight
     )
   }
 
@@ -73,7 +74,21 @@ export default function EventModal({ $app }: EventModalProps) {
 
     document.addEventListener('click', clickOutsideListener)
 
+    /**
+     * A custom modal component can render its content after the first
+     * position calculation, e.g. when a framework adapter mounts it
+     * asynchronously. Recalculate the position whenever the modal's size
+     * changes, so the vertical anchoring uses the real height.
+     */
+    let resizeObserver: ResizeObserver | undefined
+    const modalElement = getModalElement()
+    if (modalElement && typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => callSetPosition())
+      resizeObserver.observe(modalElement)
+    }
+
     return () => {
+      resizeObserver?.disconnect()
       document.removeEventListener('click', clickOutsideListener)
       scrollableAncestors.forEach((el) =>
         el.removeEventListener('scroll', scrollListener)
