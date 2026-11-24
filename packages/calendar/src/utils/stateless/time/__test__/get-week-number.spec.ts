@@ -8,6 +8,7 @@ import { getWeekNumber } from '../get-week-number'
 
 describe('getWeekNumber', () => {
   it.each([
+    [Temporal.ZonedDateTime.from('2020-12-28T00:00:00[UTC]'), 53],
     [Temporal.ZonedDateTime.from('2024-12-29T00:00:00[UTC]'), 52],
     [Temporal.ZonedDateTime.from('2024-12-30T00:00:00[UTC]'), 1],
     [Temporal.ZonedDateTime.from('2024-12-31T00:00:00[UTC]'), 1],
@@ -16,8 +17,13 @@ describe('getWeekNumber', () => {
     [Temporal.ZonedDateTime.from('2025-09-01T00:00:00[UTC]'), 36],
     [Temporal.ZonedDateTime.from('2025-12-28T00:00:00[UTC]'), 52],
     [Temporal.ZonedDateTime.from('2025-12-29T00:00:00[UTC]'), 1],
+    [Temporal.ZonedDateTime.from('2026-12-28T00:00:00[UTC]'), 53],
+    [Temporal.ZonedDateTime.from('2027-01-04T00:00:00[UTC]'), 1],
+    [Temporal.ZonedDateTime.from('2027-12-27T00:00:00[UTC]'), 52],
+    [Temporal.ZonedDateTime.from('2028-01-03T00:00:00[UTC]'), 1],
+    [Temporal.ZonedDateTime.from('2029-12-31T00:00:00[UTC]'), 1],
   ])(
-    `should return the correct week number for German weeks`,
+    `should return the correct ISO week number for Monday-based weeks`,
     (date, expected) => {
       expect(getWeekNumber(date, 1)).toBe(expected)
     }
