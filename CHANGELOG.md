@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.2](https://github.com/schedule-x/schedule-x/compare/v4.9.1...v4.9.2) (2026-11-25)
+
+### Bug Fixes
+
+- **calendar:** use ISO week numbers for Monday weeks ([#1396](https://github.com/schedule-x/schedule-x/issues/1396)) ([017ec6e](https://github.com/schedule-x/schedule-x/commit/017ec6e1d74e88f90984276a84f735298b7d425e))
+- **website:** keep navbar above calendar ([#1375](https://github.com/schedule-x/schedule-x/issues/1375)) ([7afa467](https://github.com/schedule-x/schedule-x/commit/7afa467d012f598194f53149728b841502b43c00))
+- **website:** serve logo assets locally ([#1377](https://github.com/schedule-x/schedule-x/issues/1377)) ([c5e38b8](https://github.com/schedule-x/schedule-x/commit/c5e38b8a79e735ed605d60b3faa3c08c7657d1f4))
+
+### Features
+
+- **calendar:** add year grid view ([#1371](https://github.com/schedule-x/schedule-x/issues/1371)) ([44c8321](https://github.com/schedule-x/schedule-x/commit/44c8321a1854009c2b629cc94b962c0fdb67c99b))
+- **website:** add Light Analytics tracker ([#1378](https://github.com/schedule-x/schedule-x/issues/1378)) ([b115a4e](https://github.com/schedule-x/schedule-x/commit/b115a4ee05214c07681666ea88ae2907ea6c0763))
+- **website:** instrument setup recommendation funnel ([#1380](https://github.com/schedule-x/schedule-x/issues/1380)) ([816d772](https://github.com/schedule-x/schedule-x/commit/816d7725aeab0123f01df9c07eb1d3f5de534ab9))
+
 ## [4.9.1](https://github.com/schedule-x/schedule-x/compare/v4.9.0...v4.9.1) (2026-09-29)
 
 ### Bug Fixes

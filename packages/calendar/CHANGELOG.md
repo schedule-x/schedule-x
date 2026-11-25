@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.9.2](https://github.com/schedule-x/schedule-x/compare/v4.9.1...v4.9.2) (2026-11-25)
+
+### Bug Fixes
+
+- **calendar:** use ISO week numbers for Monday weeks ([#1396](https://github.com/schedule-x/schedule-x/issues/1396)) ([017ec6e](https://github.com/schedule-x/schedule-x/commit/017ec6e1d74e88f90984276a84f735298b7d425e))
+
 ## [4.9.1](https://github.com/schedule-x/schedule-x/compare/v4.9.0...v4.9.1) (2026-09-29)
 
 ### Bug Fixes
