@@ -112,6 +112,81 @@ describe('EventModal', () => {
     })
   })
 
+  describe('Repositioning when the modal size changes', () => {
+    const appDOMRect = new DOMRect(0, 0, 1200, 800)
+    const eventDOMRect = new DOMRect(100, 700, 200, 50)
+
+    const stubResizeObserver = () => {
+      const observed: Element[] = []
+      let callback: ResizeObserverCallback = () => {}
+      const disconnect = vi.fn()
+      vi.stubGlobal(
+        'ResizeObserver',
+        class {
+          constructor(cb: ResizeObserverCallback) {
+            callback = cb
+          }
+          observe(el: Element) {
+            observed.push(el)
+          }
+          unobserve() {}
+          disconnect = disconnect
+        }
+      )
+      return {
+        observed,
+        disconnect,
+        resize: () => callback([], {} as ResizeObserver),
+      }
+    }
+
+    const setupWithRects = () => {
+      const { $app } = setup(vi.fn())
+      $app.elements.calendarWrapper!.getBoundingClientRect = () => appDOMRect
+      $app.config.plugins.eventModal!.calendarEventDOMRect.value = eventDOMRect
+      const modalEl = $app.elements.calendarWrapper!.querySelector(
+        '.sx__event-modal'
+      ) as HTMLElement
+      return { $app, modalEl }
+    }
+
+    it('should observe the modal element', () => {
+      const { observed } = stubResizeObserver()
+      const { $app, modalEl } = setupWithRects()
+
+      render(<EventModal $app={$app} />)
+
+      expect(observed).toEqual([modalEl])
+      vi.unstubAllGlobals()
+    })
+
+    it('should anchor upwards once the real height of a custom modal is known', () => {
+      const { resize } = stubResizeObserver()
+      const { $app, modalEl } = setupWithRects()
+      render(<EventModal $app={$app} />)
+
+      // the custom content renders later and gives the modal its real height
+      Object.defineProperty(modalEl, 'clientHeight', { value: 300 })
+      resize()
+
+      expect(
+        document.documentElement.style.getPropertyValue('--sx-event-modal-top')
+      ).toBe(`${eventDOMRect.bottom - 300}px`)
+      vi.unstubAllGlobals()
+    })
+
+    it('should disconnect the observer when the modal unmounts', () => {
+      const { disconnect } = stubResizeObserver()
+      const { $app } = setupWithRects()
+      const { unmount } = render(<EventModal $app={$app} />)
+
+      unmount()
+
+      expect(disconnect).toHaveBeenCalledOnce()
+      vi.unstubAllGlobals()
+    })
+  })
+
   describe('Closing the modal', () => {
     it('should reset calendar event and its dom react', () => {
       const modalPlugin = createEventModalPlugin()
