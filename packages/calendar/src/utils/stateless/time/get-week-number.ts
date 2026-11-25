@@ -8,6 +8,17 @@ export const getWeekNumber = (
       ? d.toZonedDateTime('UTC')
       : d.toInstant().toZonedDateTimeISO('UTC')
 
+  // Monday-based weeks follow ISO 8601 week-numbering rules.
+  if (firstDayOfWeek === 1) {
+    const weekOfYear = zonedDate.withCalendar('iso8601').weekOfYear
+
+    if (weekOfYear === undefined) {
+      throw new Error('ISO 8601 calendar did not provide a week number')
+    }
+
+    return weekOfYear
+  }
+
   // Adjust the date to the nearest desired first day of the week
   const dayOffset = (zonedDate.dayOfWeek - firstDayOfWeek + 7) % 7
   const adjustedDate = zonedDate.subtract({ days: dayOffset - 3 })
