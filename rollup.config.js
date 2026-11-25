@@ -13,6 +13,37 @@ import ts from 'rollup-plugin-ts'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+function calendarTemporalDeclarations() {
+  return {
+    name: 'calendar-temporal-declarations',
+    generateBundle: {
+      order: 'post',
+      handler(_options, bundle) {
+        for (const output of Object.values(bundle)) {
+          if (output.type !== 'asset' || !output.fileName.endsWith('.d.ts')) continue
+
+          // Keep Temporal local to the declaration bundle. Consumers with a
+          // global Temporal keep its instance types, including native types
+          // that differ from the polyfill's.
+          output.source += `
+import type { Temporal as TemporalPolyfill } from 'temporal-polyfill';
+
+type CalendarTemporalInstance<Name extends string, Fallback> =
+    typeof globalThis extends { Temporal: Record<Name, { prototype: infer Instance }> }
+        ? Instance
+        : Fallback;
+
+declare namespace Temporal {
+    type PlainDate = CalendarTemporalInstance<'PlainDate', TemporalPolyfill.PlainDate>;
+    type ZonedDateTime = CalendarTemporalInstance<'ZonedDateTime', TemporalPolyfill.ZonedDateTime>;
+}
+`
+        }
+      },
+    },
+  }
+}
+
 async function getSortedPackages(scope, ignore) {
   const packages = await Project.getPackages(__dirname || process.cwd())
   let filtered = filterPackages(packages, scope, ignore, true)
@@ -87,6 +118,7 @@ async function build(commandLineArgs) {
         ts({
           tsconfig: `${basePath}/tsconfig.json`,
         }),
+        ...(name === '@schedule-x/calendar' ? [calendarTemporalDeclarations()] : []),
       ],
       external: ['preact', 'preact/hooks', 'preact/compat', '@preact/signals', 'preact/src/jsx', 'rrule', 'preact/jsx-runtime', 'temporal-polyfill'],
     })
