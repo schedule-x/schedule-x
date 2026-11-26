@@ -1,18 +1,21 @@
 import { getWeekForDate } from './get-week-for-date'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
-import { __deprecated__jsDateToDateString } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/date-to-strings'
 import { RRuleOptions } from '../../types/rrule-options'
 import { getJSDayFromByday } from './byday-jsday-map'
-import { timeFromDateTime } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/string-to-string'
-import { isCountReached, isDatePastUntil } from './iterator-utils'
+import {
+  isCountReached,
+  isDatePastUntil,
+  compareTemporalDates,
+} from './iterator-utils'
 
-const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
-  const timeInDtstart = timeFromDateTime(dtstart)
+const weeklyIterator = (
+  dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
+  rruleOptions: RRuleOptions
+) => {
   const weekDaysJS = rruleOptions.byday?.map(getJSDayFromByday) || [
-    toJSDate(dtstart).getDay(),
+    dtstart.dayOfWeek % 7,
   ]
   let currentDate = dtstart
-  const allDateTimes: string[] = []
+  const allDateTimes: (Temporal.ZonedDateTime | Temporal.PlainDate)[] = []
   const firstDayOfWeek = (
     rruleOptions.wkst
       ? ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].indexOf(rruleOptions.wkst)
@@ -22,18 +25,13 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
   return {
     next() {
       const week = getWeekForDate(currentDate, firstDayOfWeek)
-      const candidatesDates = week
-        .filter((date) => weekDaysJS.includes(toJSDate(date).getDay()))
-        .map((date) => {
-          if (timeInDtstart) {
-            return `${date} ${timeInDtstart}`
-          }
+      const candidatesDates = week.filter((date) =>
+        weekDaysJS.includes(date.dayOfWeek % 7)
+      )
 
-          return date
-        })
       candidatesDates.forEach((candidate) => {
         if (
-          candidate >= dtstart &&
+          compareTemporalDates(candidate, dtstart) >= 0 &&
           !isCountReached(allDateTimes.length, rruleOptions.count) &&
           !isDatePastUntil(candidate, rruleOptions.until)
         ) {
@@ -48,9 +46,7 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      const nextDateJS = toJSDate(currentDate)
-      nextDateJS.setDate(nextDateJS.getDate() + 7 * rruleOptions.interval)
-      currentDate = __deprecated__jsDateToDateString(nextDateJS)
+      currentDate = currentDate.add({ days: 7 * rruleOptions.interval })
 
       return { done: false, value: allDateTimes }
     },
@@ -58,7 +54,7 @@ const weeklyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
 }
 
 export const weeklyIteratorResult = (
-  dtstart: string,
+  dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
   rruleOptions: RRuleOptions
 ) => {
   const weeklyIter = weeklyIterator(dtstart, rruleOptions)

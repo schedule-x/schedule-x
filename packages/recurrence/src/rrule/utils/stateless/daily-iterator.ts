@@ -1,12 +1,13 @@
 import { RRuleOptions } from '../../types/rrule-options'
 import { getJSDayFromByday } from './byday-jsday-map'
-import { toJSDate } from '@schedule-x/shared/src/utils/stateless/time/format-conversion/format-conversion'
 import { isCountReached, isDatePastUntil } from './iterator-utils'
-import { __deprecated__addDaysToDateOrDateTime } from '@schedule-x/shared/src/utils/stateless/time/date-time-mutation/adding'
 
-const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
+const dailyIterator = (
+  dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
+  rruleOptions: RRuleOptions
+) => {
   let currentDate = dtstart
-  const allDateTimes: string[] = []
+  const allDateTimes: (Temporal.ZonedDateTime | Temporal.PlainDate)[] = []
   const bydayNumbers: number[] | undefined =
     rruleOptions.byday?.map(getJSDayFromByday) || undefined
 
@@ -17,7 +18,10 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         !isDatePastUntil(currentDate, rruleOptions.until)
       ) {
         if (bydayNumbers) {
-          const dayOfWeek = toJSDate(currentDate).getDay()
+          const dayOfWeek =
+            currentDate instanceof Temporal.ZonedDateTime
+              ? currentDate.dayOfWeek % 7
+              : currentDate.dayOfWeek % 7
           if (bydayNumbers.includes(dayOfWeek)) {
             allDateTimes.push(currentDate)
           }
@@ -33,10 +37,7 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
         return { done: true, value: allDateTimes }
       }
 
-      currentDate = __deprecated__addDaysToDateOrDateTime(
-        currentDate,
-        rruleOptions.interval
-      )
+      currentDate = currentDate.add({ days: rruleOptions.interval })
 
       return { done: false, value: allDateTimes }
     },
@@ -44,7 +45,7 @@ const dailyIterator = (dtstart: string, rruleOptions: RRuleOptions) => {
 }
 
 export const dailyIteratorResult = (
-  dtstart: string,
+  dtstart: Temporal.ZonedDateTime | Temporal.PlainDate,
   rruleOptions: RRuleOptions
 ) => {
   const dailyIter = dailyIterator(dtstart, rruleOptions)
