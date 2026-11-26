@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # Fetching the full history is required to determine the changed packages
           fetch-depth: 0
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # Fetching the full history is required to determine the changed packages
           fetch-depth: 0
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ✅
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # Fetching the full history is required to determine the changed packages
           fetch-depth: 0
